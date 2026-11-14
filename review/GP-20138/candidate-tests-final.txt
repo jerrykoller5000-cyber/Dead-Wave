@@ -1,0 +1,16 @@
+✔ ordinary path remains a single UTF8 path write (7.1935ms)
+✔ UNKNOWN fallback preserves Unicode bytes and truncates old tail (4.1824ms)
+✔ UNKNOWN fallback writes empty content without stale bytes (2.1483ms)
+✔ EACCES propagates and never opens a fallback descriptor (3.0627ms)
+✔ fallback descriptor is closed if fd write fails; error propagates (3.3314ms)
+✔ both named call sites use helper with original content expression (0.1961ms)
+✔ rewrite retains a Unicode tail appended since its caller read (5.0512ms)
+✔ rewrite rejects an altered prefix before attempting any write (3.8171ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 102.7132

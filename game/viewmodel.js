@@ -1424,7 +1424,10 @@ export function createViewmodel(ctx) {
       // CE-2 (J103): through a reload the view's slide or handle is the view's own: his body's rack (mirrored from his gun
       // by mirrorParts) moved it with no hand on it in a tactical reload and doubled the empty reload's (0.196 for 0.07)
       if (gun.work && gun.workBase && ur != null && !AK) gun.work.position.z = gun.workBase.z;
-      if (gun.work && rk && ur != null) {
+      // CD-14 (the paired pistol's overtravel, GT-20104: the main gun's slide .2056 at u .88 against the pair's .13): in the
+      // pair the slide is not reset to its base above, so it already carries the body's mirrored rack; adding the view's own
+      // rack on top doubled it. The pair keeps the body's stroke, like the left gun.
+      if (gun.work && rk && ur != null && !AK) {
         // CE-11 (J151 note 2, Jerry 13 Nov: "The chamber and barrel on reload need to look more realistic"): on an empty
         // reload with Rr.lockBack the slide is locked back from the start (the last round fired it there), the support hand
         // pulls it the last few mm off the stop over [0]-[1] and lets it run home at [2]
@@ -1505,8 +1508,10 @@ export function createViewmodel(ctx) {
     twistToward(arms.r, WR, eR);
     // GB-301 (J18): the firing hand leaves the grip onto the sniper's bolt knob (after each shot and on reload work).
     // Gun frame stays put (unlike 3P where the gun is parented to the hand). Support stays on the forend.
-    // CL-325 (J72/J88): a gun's own firing-hand pose in the view (VM_SOCKETS gripPose, fitted to the view gun), or tried live
-    const gripP = (info.tune[gun.key] && info.tune[gun.key].poseR) || (VM_FIT[gun.key] && VM_FIT[gun.key].r && VM_FIT[gun.key].r.pose) || (VM_SOCKETS[gun.key] && VM_SOCKETS[gun.key].gripPose) || sockets.poseR;
+    // CD-14 (J153 notes 1, 3: the firing thumbs in the pair sat across the grip's back, out in the air or pressed flat as a lump):
+    // a pair's firing hand has no support hand over it, so its thumb has its own place on the frame (VM_FIT[key].pair.pose)
+    // CL-325 (J72/J88): a gun's own firing-hand pose in the view (VM_SOCKETS gripPose, fitted to the view gun), or tried live (info.tune[key].poseR)
+    const gripP = (info.tune[gun.key] && info.tune[gun.key].poseR) || (AK && VM_FIT[gun.key] && VM_FIT[gun.key].pair && VM_FIT[gun.key].pair.pose) || (VM_FIT[gun.key] && VM_FIT[gun.key].r && VM_FIT[gun.key].r.pose) || (VM_SOCKETS[gun.key] && VM_SOCKETS[gun.key].gripPose) || sockets.poseR;
     let poseR = gripP;
     const boltW = (!AK && gun.bolt && (st.boltHand || 0) > 0.001) ? clamp(st.boltHand, 0, 1) : 0;
     if (boltW > 0) {
@@ -2067,11 +2072,19 @@ export function createViewmodel(ctx) {
     warmGroup.name = 'vm-warmup';
     warmGroup.position.set(0, 0, -0.6);
     space.add(warmGroup);
+    const heatEntries = [];
     const keys = Array.isArray(onlyKeys) ? onlyKeys : Object.keys(VM_POSES);
     for (const k of keys) {
       const src = weaponMeshes[k];
       if (!src || !VM_POSES[k]) continue;
-      takeGunCopy(gunCache, k, src, warmGroup);
+      const warmed = takeGunCopy(gunCache, k, src, warmGroup);
+      heatEntries.push({key:k, root:warmed.root, source:src, viewCopy:true, hand:0});
+      // GP-20133: the second gun owns distinct material records; warm those actual cached copies too.
+      const off = ['pistol', 'uzi', 'revolver'].includes(k) && ctx.offhand ? ctx.offhand(k) : null;
+      if (off) {
+        const paired = takeGunCopy(gun2Cache, k, off, warmGroup);
+        heatEntries.push({key:k, root:paired.root, source:off, viewCopy:true, hand:1});
+      }
     }
     const bl = bladeCopy(), gr = grenadeCopy();
     const prevRootVis = root.visible;
@@ -2124,7 +2137,7 @@ export function createViewmodel(ctx) {
       dropGun();
       setEyeHide(false, null);
     };
-    return { ready, readySync, restore };
+    return { ready, readySync, restore, heatEntries };
   }
   function warmBgGun(key) {
     const src = weaponMeshes[key];
@@ -2160,6 +2173,7 @@ export function createViewmodel(ctx) {
     let cleaned = false;
     return {
       meshes,
+      heatEntries: entries.map(g => ({key:g.key, root:g.root, source:g.src, viewCopy:true, hand:g.src === off ? 1 : 0})),
       cleanup: () => {
         if (cleaned) return;
         cleaned = true;

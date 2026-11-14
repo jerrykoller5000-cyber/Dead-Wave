@@ -33,56 +33,49 @@
     const vp = (o, P, i, v) => (o.isSkinnedMesh && o.getVertexPosition ? o.getVertexPosition(i, v) : v.fromBufferAttribute(P, i)).applyMatrix4(o.matrixWorld);
     const allTris = (meshes) => { const t = []; const a = V(), b = V(), c = V(); for (const o of meshes) { const g = o.geometry, P = g && g.attributes && g.attributes.position; if (!P) continue; const idx = g.index ? g.index.array : null, n = idx ? idx.length : P.count; for (let i = 0; i + 2 < n; i += 3) { vp(o, P, idx ? idx[i] : i, a); vp(o, P, idx ? idx[i + 1] : i + 1, b); vp(o, P, idx ? idx[i + 2] : i + 2, c); t.push(a.x, a.y, a.z, b.x, b.y, b.z, c.x, c.y, c.z); } } return new Float32Array(t); };
     const rayHit = (t, o, d, far) => { let best = Infinity; for (let i = 0; i < t.length; i += 9) { const e1x = t[i + 3] - t[i], e1y = t[i + 4] - t[i + 1], e1z = t[i + 5] - t[i + 2], e2x = t[i + 6] - t[i], e2y = t[i + 7] - t[i + 1], e2z = t[i + 8] - t[i + 2]; const px = d.y * e2z - d.z * e2y, py = d.z * e2x - d.x * e2z, pz = d.x * e2y - d.y * e2x, det = e1x * px + e1y * py + e1z * pz; if (Math.abs(det) < 1e-12) continue; const inv = 1 / det, sx = o.x - t[i], sy = o.y - t[i + 1], sz = o.z - t[i + 2], u = (sx * px + sy * py + sz * pz) * inv; if (u < 0 || u > 1) continue; const qx = sy * e1z - sz * e1y, qy = sz * e1x - sx * e1z, qz = sx * e1y - sy * e1x, v = (d.x * qx + d.y * qy + d.z * qz) * inv; if (v < 0 || u + v > 1) continue; const tt = (e2x * qx + e2y * qy + e2z * qz) * inv; if (tt > 0 && tt < far && tt < best) best = tt; } return best; };
+    // CC-350 (J153 notes 20, 38, D-181): the handguns ride by station (rig.placeStation), vertical, muzzle down, the flat of the gun
+    // on him, the grip back, never on its side: the base pistol on the belt at 4 o'clock on the gun hand's side ('hip+', just
+    // behind the hip bone), the next at 8 o'clock ('hip-'), a third and an Uzi flat on the pack's sides ('pack+'/'pack-'). (The
+    // GB-148 / CL-160 / CC-347 rows here measured the pack and small-of-the-back holsters this replaced; the seating against his
+    // body and the legs and arms through them are tcc347's.)
     const SCEN = [['m4', 'ak', 'uzi', 'revolver'], ['ak', 'm4', 'revolver', 'pistol'], ['minigun', 'm4', 'uzi', 'revolver'], ['shotgun', 'aa12', 'revolver', null]];
-    let seen = 0, pistolSeen = 0;
+    let seen = 0, onPack = 0;
     for (const [a, b, c, d] of SCEN) {
       T.carryDbg({ loadout: { primary: [a, b], secondary: [c, d] }, inHand: null, akimbo: false });
       marine.updateMatrixWorld(true);
-      const torso = ud.torsoG, inv = new THREE.Matrix4().copy(torso.matrixWorld).invert(), tp = ud.torsoPivotY || 0.7;
-      const spots = [...rig.holsters, ...rig.pairs];
-      const skip = new Set([ud.weaponMount, ud.armLG, ud.armRG, ud.headG].filter(Boolean)); for (const s of [...rig.slings, ...spots, rig.hip, rig.hipPair]) skip.add(s.g);
-      // GB-276: his body only (see t189): skip effect meshes (the chapel halo: opacity 0, name chapel-glow).
-      const isEffect = (o) => { const mt = Array.isArray(o.material) ? o.material[0] : o.material; return o.name === 'chapel-glow' || !!(o.userData && (o.userData.effect || o.userData.halo)) || !!(mt && (mt.opacity === 0 || mt.visible === false || (mt.transparent && mt.opacity < 0.5))); };
-      const body = []; marine.traverse((o) => { if (!o.isMesh || !o.visible || o.isInstancedMesh || isEffect(o)) return; for (let q = o; q; q = q.parent) { if (skip.has(q) || !q.visible) return; } body.push(o); });
-      let bodyT = null;
-      for (const sp of spots) {
-        if (!sp.gun || !sp.g.visible) continue;
-        const side = sp.g.position.x >= 0 ? 1 : -1, tag = [a, b, c, d].join('/') + ' ' + sp.kind + (side > 0 ? '+' : '-');
-        const fit = rig.packFit && rig.packFit[sp.kind], low = !!(sp.onHips && rig.lowFit && rig.lowFit[sp.kind]);   // CC-347: the low row on his belt
-        // GB-190: since GP-19894 two handgun kinds ride in two rows (applyCarryPlan: the shorter +0.27 m, the taller -0.02 m; GB-276).
-        if (!low && (!fit || ![0, 0.27, -0.02].some((row) => Math.abs(sp.g.position.y - (fit.y - tp + row)) < 1e-6))) continue;   // CL-160: the pistol rides there too
-        const home = low ? sp.g.parent : torso, hinv = low ? new THREE.Matrix4().copy(home.matrixWorld).invert() : inv;
-        if (sp.kind === 'pistol') pistolSeen++; else seen++;
-        const P = sp.g.position;
-        // GB-177: GP-19920's clearCarryPack (ui/marine-kit-fit.js) now fits the gun's nearest surface to the pack's back face
-        // (z -0.345, the pack ends at -0.333), not its origin; so check that surface: on the pack, not floating behind it.
-        const sb = new THREE.Box3(), sinv = new THREE.Matrix4().copy(sp.g.parent.matrixWorld).invert();
-        sp.gun.traverseVisible((o) => { const pa = o.geometry && o.geometry.attributes && o.geometry.attributes.position; if (!o.isMesh || !pa) return; const sm = new THREE.Matrix4().multiplyMatrices(sinv, o.matrixWorld); for (let q = 0; q < pa.count; q++) sb.expandByPoint(V(pa.getX(q), pa.getY(q), pa.getZ(q)).applyMatrix4(sm)); });
-        if (low) ok(Math.abs(P.x) <= 0.13, tag + ': in on his belt at the back (x ' + P.x.toFixed(3) + ', on his hips)');
-        else ok(Math.abs(P.x) <= 0.13 && sb.max.z >= -0.36 && sb.max.z <= -0.333, tag + ': in beside the pack (x ' + P.x.toFixed(3) + ', front surface z ' + sb.max.z.toFixed(3) + ', origin z ' + P.z.toFixed(3) + ')');
-        // Grip = the gun's -y; muzzle = its -z or +z: the grip points in (toward his spine), the barrel down.
+      ok(rig.hip.station === 'hip+', [a, b, c, d].join('/') + ': the base pistol on the gun hand\'s hip (' + rig.hip.station + ')');
+      for (const sp of [rig.hip, rig.hipPair, ...rig.holsters, ...rig.pairs]) {
+        if (!sp || !sp.gun || !sp.g.visible || !sp.station) continue;
+        const kind = sp.kind, side = sp.station.endsWith('+') ? 1 : -1, tag = [a, b, c, d].join('/') + ' ' + kind + ' at ' + sp.station;
+        const home = sp.g.parent, P = sp.g.position;
         const gq = sp.gun.getWorldQuaternion(new THREE.Quaternion()), tq = home.getWorldQuaternion(new THREE.Quaternion()).invert();
-        const grip = V(0, -1, 0).applyQuaternion(gq).applyQuaternion(tq), barrel = V(0, 0, 1).applyQuaternion(gq).applyQuaternion(tq);
-        ok(grip.x * side < -0.9 && Math.abs(barrel.y) > 0.95, tag + ': grip turned in (' + grip.x.toFixed(2) + ' along his side-to-side), barrel upright (' + barrel.y.toFixed(2) + ')');
-        // Real renderer: the outline at that height and the air to the pack in front of it.
-        // GB-220: the whole stowed copy (GB-200 folds its still parts into one mesh on the copy's root, outside children[0]), a folded mesh sampled denser.
-        const pts = []; sp.gun.updateMatrixWorld(true);
-        sp.gun.traverse((o) => { if (!o.isMesh || !o.geometry || !o.geometry.attributes.position) return; for (let q = o; q && q !== sp.gun; q = q.parent) if (!q.visible) return; const pa = o.geometry.attributes.position, st = Math.max(1, Math.floor(pa.count / Math.max(80, Math.min(1200, pa.count / 20)))); for (let i = 0; i < pa.count; i += st) pts.push(vp(o, pa, i, V())); });
-        const loc = pts.map((p) => p.clone().applyMatrix4(hinv));
-        const y0 = Math.min(...loc.map((p) => p.y)) - 0.02, y1 = Math.max(...loc.map((p) => p.y)) + 0.02;
-        const bodyPts = []; for (const o of body) { const pa = o.geometry && o.geometry.attributes.position; if (!pa) continue; for (let i = 0; i < pa.count; i++) { const q = vp(o, pa, i, V()).applyMatrix4(hinv); if (q.y >= y0 && q.y <= y1) bodyPts.push(q.x * side); } }   // (in its own frame: the torso's, or the hips' for the low row)
-        const outline = Math.max(...bodyPts), far = Math.max(...loc.map((p) => p.x * side));
-        realOk(far - outline <= 0.01, tag + ': inside his outline (' + ((far - outline) * 100).toFixed(1) + ' cm past it)');
-        if (!bodyT) bodyT = allTris(body);
-        const dir = V(0, 0, 1).transformDirection(home.matrixWorld);
-        let minClear = Infinity, maxPen = 0, hits = 0;
-        for (const p of pts) { const g = rayHit(bodyT, p.clone().addScaledVector(dir, -0.25), dir, 0.6) - 0.25; if (g === Infinity) continue; hits++; minClear = Math.min(minClear, g); maxPen = Math.max(maxPen, -g); }
-        const spotKey = tag.split(' ').pop(), PACK_BAR = { 'revolver+': 0.094, 'revolver-': 0.082, 'pistol+': 0.050 }, airBar = low ? 0.015 : (PACK_BAR[spotKey] || 0.015);   // GB-220 (Claude, D-87): air as the before shots show it (qa/2026-10-23-GB-220/before/stow-*-back.png) + 1 cm, until '1.x: measure the drawn stows'
-        realOk(hits >= 5 && minClear <= airBar && maxPen <= 0.015, tag + (low ? ': snug on his seat (air bar ' : ': snug on the pack (air bar ') + airBar + ' m from the GB-220 before shots), air ' + (hits ? Math.max(0, minClear).toFixed(3) : '?') + ' m, clipping ' + maxPen.toFixed(3) + ' m (' + hits + ' of ' + pts.length + ' points over the pack)');
+        const grip = V(0, -1, 0).applyQuaternion(gq).applyQuaternion(tq), barrel = V(0, 0, 1).applyQuaternion(gq).applyQuaternion(tq), flat = V(1, 0, 0).applyQuaternion(gq).applyQuaternion(tq);
+        if (sp.station.startsWith('hip')) {
+          seen++;
+          ok(P.z <= -0.07 && Math.abs(P.x) >= 0.1 && Math.abs(P.x) <= 0.22 && P.x * side > 0, tag + ': on his belt just behind the hip bone (x ' + P.x.toFixed(3) + ', z ' + P.z.toFixed(3) + ')');
+          const n = V(side * rig.hipFit.n[0], 0, rig.hipFit.n[1]);
+          ok(barrel.y < -0.95 && Math.abs(flat.dot(n)) > 0.9 && grip.z < -0.25, tag + ': vertical, muzzle down (' + barrel.y.toFixed(2) + '), its flat on his hip (' + Math.abs(flat.dot(n)).toFixed(2) + '), the grip back (' + grip.z.toFixed(2) + ')');
+        } else if (sp.station.startsWith('pack')) {
+          seen++; onPack++;
+          ok(Math.abs(P.x) >= 0.13 && Math.abs(P.x) <= 0.22 && P.z <= -0.15 && P.z >= -0.32, tag + ': on the pack\'s side (x ' + P.x.toFixed(3) + ', z ' + P.z.toFixed(3) + ')');
+          ok(barrel.y < -0.95 && Math.abs(flat.x) > 0.9 && grip.z < -0.9, tag + ': vertical, muzzle down (' + barrel.y.toFixed(2) + '), its flat on the pack (' + Math.abs(flat.x).toFixed(2) + '), the grip back (' + grip.z.toFixed(2) + ')');
+        }
+        // never on its side: whatever the station, the barrel stands upright
+        ok(Math.abs(barrel.y) > 0.95, tag + ': upright, not on its side (barrel ' + barrel.y.toFixed(2) + ')');
+        if (sp.station.startsWith('hip')) {   // real renderer: inside his outline at that height (<= 1 cm past it)
+          const hinv = new THREE.Matrix4().copy(home.matrixWorld).invert();
+          const skip = new Set([ud.weaponMount, ud.armLG, ud.armRG, ud.headG].filter(Boolean)); for (const s2 of [...rig.slings, ...rig.holsters, ...rig.pairs, rig.hip, rig.hipPair]) skip.add(s2.g);
+          const body = []; marine.traverse((o) => { if (!o.isMesh || !o.visible || o.isInstancedMesh) return; for (let q = o; q; q = q.parent) { if (skip.has(q) || !q.visible) return; } body.push(o); });
+          const pts = []; sp.gun.updateMatrixWorld(true); sp.gun.traverse((o) => { if (!o.isMesh || !o.geometry || !o.geometry.attributes.position) return; const pa = o.geometry.attributes.position, st = Math.max(1, Math.floor(pa.count / 400)); for (let i = 0; i < pa.count; i += st) pts.push(V(pa.getX(i), pa.getY(i), pa.getZ(i)).applyMatrix4(o.matrixWorld).applyMatrix4(hinv)); });
+          const y0 = Math.min(...pts.map((p) => p.y)) - 0.02, y1 = Math.max(...pts.map((p) => p.y)) + 0.02;
+          const bodyX = []; for (const o of body) { const pa = o.geometry && o.geometry.attributes.position; if (!pa) continue; for (let i = 0; i < pa.count; i += 2) { const q = vp(o, pa, i, V()).applyMatrix4(hinv); if (q.y >= y0 && q.y <= y1) bodyX.push(q.x * side); } }
+          const outline = Math.max(...bodyX), far = Math.max(...pts.map((p) => p.x * side));
+          realOk(far - outline <= 0.01, tag + ': inside his outline (' + ((far - outline) * 100).toFixed(1) + ' cm past it)');
+        }
       }
     }
-    ok(seen >= 6, 'revolvers on the pack checked: ' + seen);
-    ok(pistolSeen >= 1, 'and pistols on the pack (CL-160): ' + pistolSeen);
+    ok(seen >= 9, 'handguns checked at their stations: ' + seen);
+    ok(onPack >= 1, 'and one on the pack\'s side: ' + onPack);
     // The wheel's tick.
     const A = T.AudioSys || window.AudioSys;
     const G = await import(new URL('../../core/gunsynth.js', location.href).href);

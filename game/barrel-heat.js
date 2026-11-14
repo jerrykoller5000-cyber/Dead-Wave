@@ -423,8 +423,10 @@ export function applyGlowToNode(T, targetNode, glow, clearOtherNode = null, opts
           if (isVmCopy && m.userData && m.userData.vm281 && !worldClonedThisFrame) {
             m.userData._barrelHeatIsolated = true;
           } else {
+            // Keep factory Texture/Node references: Material.clone serializes userData to JSON.
+            const sourceData = m.userData;
             m = m.clone();
-            m.userData = m.userData ? { ...m.userData } : {};
+            m.userData = sourceData ? { ...sourceData } : {};
             m.userData._barrelHeatIsolated = true;
             if (Array.isArray(obj.material)) obj.material[i] = m;
             else obj.material = m;
@@ -861,6 +863,51 @@ export function createBarrelHeat(ctx = {}) {
     }
   }
 
+  // GP-20133: stage the actual heat materials and every pooled smoke material for the loader.
+  // Compile returned meshes in the live render target, then cleanup and compile the cold state.
+  // Stage world roots before creating/syncing their view copies, then stage those view roots.
+  // Heat, ammo, transforms and simulation are untouched; prepared material instances stay cached.
+  function primeVisuals(entries = null) {
+    const list = entries || Object.entries(weaponMeshes || {}).map(([key, root]) => ({key, root}));
+    const meshes = [], seen = new Set(), roots = [];
+    const addMeshes = root => root?.traverse?.(o => {
+      if ((o.isMesh || o.isSprite) && !seen.has(o)) { seen.add(o); meshes.push(o); }
+    });
+    const smoke = wisps.map(w => ({w, visible:w.mesh.visible, opacity:w.mat.opacity}));
+    const groupVisible = wispGroup?.visible;
+    for (const entry of list) {
+      const {root, key, source = null, viewCopy = false, hand = 0} = entry || {};
+      if (!root || !key) continue;
+      const parts = findGunHeatParts(root, key, source), usePackedFinish = pairedFinishes.has(key);
+      const glow = getHeatGlow(1, 1);
+      for (const kind of ['barrel', 'suppressor']) {
+        const part = parts[kind];
+        if (!part) continue;
+        applyGlowToNode(T, part, glow, null, {kind, isVmCopy:viewCopy, usePackedFinish});
+        addMeshes(part);
+      }
+      roots.push({root, key, source, viewCopy, hand, wasPainted:painted.has(root)});
+      painted.add(root);
+    }
+    if (wispGroup) wispGroup.visible = true;
+    for (const {w} of smoke) { w.mesh.visible = true; w.mat.opacity = .35; addMeshes(w.mesh); }
+    let cleaned = false;
+    return {
+      meshes,
+      cleanup() {
+        if (cleaned) return;
+        cleaned = true;
+        for (const {root, key, source, viewCopy, hand, wasPainted} of roots) {
+          const heat = getHeat(key, hand), glow = heat > GLOW_HEAT_THRESHOLD ? getHeatGlow(heat, 1) : _coldGlow;
+          paint(root, key, source, glow, root.userData?.suppressed, viewCopy);
+          if (!wasPainted && !glow.intensity) painted.delete(root);
+        }
+        for (const {w, visible, opacity} of smoke) { w.mesh.visible = visible; w.mat.opacity = opacity; }
+        if (wispGroup) wispGroup.visible = groupVisible;
+      }
+    };
+  }
+
   function reset() {
     for (let hand = 0; hand < 2; hand++) {
       const table = heatByHand[hand];
@@ -895,6 +942,7 @@ export function createBarrelHeat(ctx = {}) {
     addShot,
     getHeatGlow,
     findGunHeatParts,
+    primeVisuals,
     update,
     reset,
     dispose,

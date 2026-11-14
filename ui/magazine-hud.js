@@ -1,13 +1,13 @@
 // GP-79: HUD projection of the per-gun magazine inventory.
 export function ammoReserveUnit(weapon, hasMagazine) {
-  if (weapon === 'revolver') return 'loaders';
+  if (weapon === 'revolver') return 'rounds';
   if (weapon === 'shotgun') return 'shells';
   if (weapon === 'launcher') return 'rounds';
   return hasMagazine ? 'mags' : 'rounds';
 }
 
 export function magazineHudItems(snapshot) {
-  if (!snapshot) return [];
+  if (!snapshot || snapshot.reserveKind === 'rounds') return [];
   return snapshot.spare.map(rounds => ({
     rounds,
     size: snapshot.size,
@@ -27,6 +27,7 @@ export function createMagazineHud({ammo, text}) {
   observer?.observe(ammo,{box:'border-box'});
   return {
     render(weapon,snapshot) {
+      if (weapon === 'revolver' || weapon === 'launcher' || snapshot?.reserveKind === 'rounds') snapshot = null;
       const next=snapshot?weapon+':'+snapshot.size+':'+snapshot.spare.join(','):'';
       if(next===signature)return;signature=next;root.replaceChildren();root.hidden=!snapshot;
       if(!snapshot){root.removeAttribute('aria-label');measure();return;}

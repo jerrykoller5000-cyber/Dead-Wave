@@ -1,0 +1,98 @@
+✔ ordinary path remains a single UTF8 path write (4.614ms)
+✖ UNKNOWN fallback preserves Unicode bytes and truncates old tail (2.2946ms)
+✖ UNKNOWN fallback writes empty content without stale bytes (0.9303ms)
+✔ EACCES propagates and never opens a fallback descriptor (2.3686ms)
+✖ fallback descriptor is closed if fd write fails; error propagates (1.4551ms)
+✖ both named call sites use helper with original content expression (4.6959ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 2
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 98.536
+
+✖ failing tests:
+
+test at review\GP-20138\io-fallback.test.mjs:5:1
+✖ UNKNOWN fallback preserves Unicode bytes and truncates old tail (2.2946ms)
+  Error: injected UNKNOWN
+      at Object.writeFileSync (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20138/io-fallback.test.mjs:3:267)
+      at Object.writeCrewUtf8 [as fn] (evalmachine.<anonymous>:1:38)
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20138/io-fallback.test.mjs:5:134)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    code: 'UNKNOWN'
+  }
+
+test at review\GP-20138\io-fallback.test.mjs:6:1
+✖ UNKNOWN fallback writes empty content without stale bytes (0.9303ms)
+  Error: injected UNKNOWN
+      at Object.writeFileSync (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20138/io-fallback.test.mjs:3:267)
+      at Object.writeCrewUtf8 [as fn] (evalmachine.<anonymous>:1:38)
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20138/io-fallback.test.mjs:6:100)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    code: 'UNKNOWN'
+  }
+
+test at review\GP-20138\io-fallback.test.mjs:8:1
+✖ fallback descriptor is closed if fd write fails; error propagates (1.4551ms)
+  AssertionError [ERR_ASSERTION]: The validation function is expected to return "true". Received false
+  
+  Caught error:
+  
+  Error: injected UNKNOWN
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20138/io-fallback.test.mjs:8:132)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: injected UNKNOWN
+        at Object.writeFileSync (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20138/io-fallback.test.mjs:3:267)
+        at Object.writeCrewUtf8 [as fn] (evalmachine.<anonymous>:1:38)
+        at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20138/io-fallback.test.mjs:8:145
+        at getActual (node:assert:611:5)
+        at strict.throws (node:assert:759:24)
+        at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20138/io-fallback.test.mjs:8:132)
+        at Test.runInAsyncScope (node:async_hooks:214:14)
+        at Test.run (node:internal/test_runner/test:1106:25)
+        at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+        at Test.postRun (node:internal/test_runner/test:1235:19),
+    operator: 'throws',
+    diff: 'simple'
+  }
+
+test at review\GP-20138\io-fallback.test.mjs:9:1
+✖ both named call sites use helper with original content expression (4.6959ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(source.includes("writeCrewUtf8(statusPath(agent), head.join('\\n') + '\\n\\n' + body + '\\n');"))
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20138/io-fallback.test.mjs:9:79)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

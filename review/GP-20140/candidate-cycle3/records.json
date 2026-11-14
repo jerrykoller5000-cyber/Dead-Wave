@@ -1,0 +1,751 @@
+{
+  "stage": "candidate-cycle3",
+  "indexHash": "63e42fd70dc2c84dff26ecfe42f25369965b8753c3f840a4a52f0518e94c74d9",
+  "moduleHash": "bbb5785c1ab48e7a83afcbf4533b4356a72da3863a8615024d959125027130d6",
+  "rows": [],
+  "contact": "INFO smoking pinch: solved 1.8 cm, sampled 1.8 cm, wrist miss 0.0 cm; shoulder target/actual 22.9/22.9 cm; hand offset 16.3 cm\nPASS the cigarette is lit and visible\nPASS the filter meets the lips (0.00 cm error)\nPASS the ember points forward, away from the face (7.5 cm from lips)\nPASS the completed runtime frame keeps the fingertip pinch outside the face (1.8 cm from lips)\nPASS the palm clears the face (10.5 cm from lips)",
+  "cycle": {
+    "samples": 121,
+    "maxPinchGapMm": 0.9943670886532463,
+    "maxHandDepthMm": 0,
+    "bad": [],
+    "badCount": 0,
+    "rows": [
+      {
+        "time": 0.008333333333333333,
+        "draw": 1,
+        "gap": 0.0003806577698292092,
+        "limits": {
+          "table": {
+            "wrist": {
+              "flex": 1.3089969389957472,
+              "ext": 1.2217304763960306,
+              "radial": 0.3490658503988659,
+              "ulnar": 0.6108652381980153
+            },
+            "twist": 1.4835298641951802,
+            "elbow": [
+              0,
+              2.6179938779914944
+            ]
+          },
+          "exceptions": [
+            "support-foregrip"
+          ],
+          "hits": {
+            "wrist": 79,
+            "elbow": 723,
+            "elbowStraight": 257,
+            "elbowFold": 466
+          },
+          "r": {
+            "ok": true,
+            "flex": -0.7847518137372487,
+            "dev": -0.4681852603396729,
+            "twist": 0.7677842024267421,
+            "roll": -0.009145265825470903,
+            "over": 0.9999998688259848,
+            "exception": null,
+            "elbow": 2.2153690134491626,
+            "last": {
+              "flex": 1.0540387367931531e-15,
+              "dev": 1.1932331961737173,
+              "twist": -1.008203078868321,
+              "roll": -0.009145265825470903,
+              "over": 11.68519401687439,
+              "exception": null,
+              "held": {
+                "flex": 1.7346266462352848e-16,
+                "dev": 0.34906582414059145,
+                "twist": -1.008203078868321
+              }
+            }
+          },
+          "l": {
+            "ok": true,
+            "flex": 0,
+            "dev": 0,
+            "twist": 0,
+            "roll": 0,
+            "over": 0,
+            "exception": null,
+            "elbow": 1.2331003917953856,
+            "last": {
+              "flex": 0.0007609080176976571,
+              "dev": 0.0001830199294875368,
+              "twist": 0.0008473251640694776,
+              "roll": 0,
+              "over": 6.128037398070569e-7,
+              "exception": null,
+              "held": null
+            }
+          },
+          "elbowIK": {
+            "r": 2.216147035247763,
+            "l": 1.2316811430379155
+          }
+        }
+      },
+      {
+        "time": 1.0083333333333322,
+        "draw": 1,
+        "gap": 0.0006577428430653033,
+        "limits": {
+          "table": {
+            "wrist": {
+              "flex": 1.3089969389957472,
+              "ext": 1.2217304763960306,
+              "radial": 0.3490658503988659,
+              "ulnar": 0.6108652381980153
+            },
+            "twist": 1.4835298641951802,
+            "elbow": [
+              0,
+              2.6179938779914944
+            ]
+          },
+          "exceptions": [
+            "support-foregrip"
+          ],
+          "hits": {
+            "wrist": 79,
+            "elbow": 888,
+            "elbowStraight": 257,
+            "elbowFold": 631
+          },
+          "r": {
+            "ok": true,
+            "flex": -0.7861040116733268,
+            "dev": -0.46761782077011455,
+            "twist": 0.7447019234394578,
+            "roll": -0.009145265825470903,
+            "over": 0.9999999098375159,
+            "exception": null,
+            "elbow": 2.2400733507816355,
+            "last": {
+              "flex": 1.0540387367931531e-15,
+              "dev": 1.1932331961737173,
+              "twist": -1.008203078868321,
+              "roll": -0.009145265825470903,
+              "over": 11.68519401687439,
+              "exception": null,
+              "held": {
+                "flex": 1.7346266462352848e-16,
+                "dev": 0.34906582414059145,
+                "twist": -1.008203078868321
+              }
+            }
+          },
+          "l": {
+            "ok": true,
+            "flex": 0,
+            "dev": 0,
+            "twist": 0,
+            "roll": 0,
+            "over": 0,
+            "exception": null,
+            "elbow": 1.2429972847070934,
+            "last": {
+              "flex": 0.0007609080176976571,
+              "dev": 0.0001830199294875368,
+              "twist": 0.0008473251640694776,
+              "roll": 0,
+              "over": 6.128037398070569e-7,
+              "exception": null,
+              "held": null
+            }
+          },
+          "elbowIK": {
+            "r": 2.2408921818089835,
+            "l": 1.2416228361835655
+          }
+        }
+      },
+      {
+        "time": 2.008333333333329,
+        "draw": 0.7734178240740792,
+        "gap": 2.914335439641036e-15,
+        "limits": {
+          "table": {
+            "wrist": {
+              "flex": 1.3089969389957472,
+              "ext": 1.2217304763960306,
+              "radial": 0.3490658503988659,
+              "ulnar": 0.6108652381980153
+            },
+            "twist": 1.4835298641951802,
+            "elbow": [
+              0,
+              2.6179938779914944
+            ]
+          },
+          "exceptions": [
+            "support-foregrip"
+          ],
+          "hits": {
+            "wrist": 79,
+            "elbow": 963,
+            "elbowStraight": 257,
+            "elbowFold": 706
+          },
+          "r": {
+            "ok": true,
+            "flex": -0.6886759510073951,
+            "dev": -0.5045668212413853,
+            "twist": 0.9687500891990245,
+            "roll": -0.009145265825470903,
+            "over": 0.9999999443474632,
+            "exception": null,
+            "elbow": 2.41444494601809,
+            "last": {
+              "flex": 1.0540387367931531e-15,
+              "dev": 1.1932331961737173,
+              "twist": -1.008203078868321,
+              "roll": -0.009145265825470903,
+              "over": 11.68519401687439,
+              "exception": null,
+              "held": {
+                "flex": 1.7346266462352848e-16,
+                "dev": 0.34906582414059145,
+                "twist": -1.008203078868321
+              }
+            }
+          },
+          "l": {
+            "ok": true,
+            "flex": 0,
+            "dev": 0,
+            "twist": 0,
+            "roll": 0,
+            "over": 0,
+            "exception": null,
+            "elbow": 1.2565616663159755,
+            "last": {
+              "flex": 0.0007609080176976571,
+              "dev": 0.0001830199294875368,
+              "twist": 0.0008473251640694776,
+              "roll": 0,
+              "over": 6.128037398070569e-7,
+              "exception": null,
+              "held": null
+            }
+          },
+          "elbowIK": {
+            "r": 2.4156086135749724,
+            "l": 1.255248130442261
+          }
+        }
+      },
+      {
+        "time": 3.0083333333333253,
+        "draw": 0,
+        "gap": 5.190292640122607e-15,
+        "limits": {
+          "table": {
+            "wrist": {
+              "flex": 1.3089969389957472,
+              "ext": 1.2217304763960306,
+              "radial": 0.3490658503988659,
+              "ulnar": 0.6108652381980153
+            },
+            "twist": 1.4835298641951802,
+            "elbow": [
+              0,
+              2.6179938779914944
+            ]
+          },
+          "exceptions": [
+            "support-foregrip"
+          ],
+          "hits": {
+            "wrist": 79,
+            "elbow": 1141,
+            "elbowStraight": 277,
+            "elbowFold": 864
+          },
+          "r": {
+            "ok": true,
+            "flex": -0.38027953631854033,
+            "dev": -0.5805197036118658,
+            "twist": 0.06087533874188633,
+            "roll": -0.009145265825470903,
+            "over": 0.999999781535405,
+            "exception": null,
+            "elbow": 1.8684764711567368,
+            "last": {
+              "flex": 1.0540387367931531e-15,
+              "dev": 1.1932331961737173,
+              "twist": -1.008203078868321,
+              "roll": -0.009145265825470903,
+              "over": 11.68519401687439,
+              "exception": null,
+              "held": {
+                "flex": 1.7346266462352848e-16,
+                "dev": 0.34906582414059145,
+                "twist": -1.008203078868321
+              }
+            }
+          },
+          "l": {
+            "ok": true,
+            "flex": 0,
+            "dev": 0,
+            "twist": 0,
+            "roll": 0,
+            "over": 0,
+            "exception": null,
+            "elbow": 1.2607949791215374,
+            "last": {
+              "flex": 0.0007609080176976571,
+              "dev": 0.0001830199294875368,
+              "twist": 0.0008473251640694776,
+              "roll": 0,
+              "over": 6.128037398070569e-7,
+              "exception": null,
+              "held": null
+            }
+          },
+          "elbowIK": {
+            "r": 1.868793943121848,
+            "l": 1.2595003418930613
+          }
+        }
+      },
+      {
+        "time": 4.008333333333322,
+        "draw": 0,
+        "gap": 2.864983164645778e-14,
+        "limits": {
+          "table": {
+            "wrist": {
+              "flex": 1.3089969389957472,
+              "ext": 1.2217304763960306,
+              "radial": 0.3490658503988659,
+              "ulnar": 0.6108652381980153
+            },
+            "twist": 1.4835298641951802,
+            "elbow": [
+              0,
+              2.6179938779914944
+            ]
+          },
+          "exceptions": [
+            "support-foregrip"
+          ],
+          "hits": {
+            "wrist": 79,
+            "elbow": 1180,
+            "elbowStraight": 306,
+            "elbowFold": 874
+          },
+          "r": {
+            "ok": true,
+            "flex": -0.8671116378958337,
+            "dev": 0.24590396710443588,
+            "twist": -0.6392865787047254,
+            "roll": -0.009145265825470903,
+            "over": 0.9999997040994542,
+            "exception": null,
+            "elbow": 1.8985560942985489,
+            "last": {
+              "flex": 1.0540387367931531e-15,
+              "dev": 1.1932331961737173,
+              "twist": -1.008203078868321,
+              "roll": -0.009145265825470903,
+              "over": 11.68519401687439,
+              "exception": null,
+              "held": {
+                "flex": 1.7346266462352848e-16,
+                "dev": 0.34906582414059145,
+                "twist": -1.008203078868321
+              }
+            }
+          },
+          "l": {
+            "ok": true,
+            "flex": 0,
+            "dev": 0,
+            "twist": 0,
+            "roll": 0,
+            "over": 0,
+            "exception": null,
+            "elbow": 1.245644621181831,
+            "last": {
+              "flex": 0.0007609080176976571,
+              "dev": 0.0001830199294875368,
+              "twist": 0.0008473251640694776,
+              "roll": 0,
+              "over": 6.128037398070569e-7,
+              "exception": null,
+              "held": null
+            }
+          },
+          "elbowIK": {
+            "r": 1.8989079539022047,
+            "l": 1.2442821045612749
+          }
+        }
+      },
+      {
+        "time": 5.008333333333372,
+        "draw": 0,
+        "gap": 5.10702591327572e-15,
+        "limits": {
+          "table": {
+            "wrist": {
+              "flex": 1.3089969389957472,
+              "ext": 1.2217304763960306,
+              "radial": 0.3490658503988659,
+              "ulnar": 0.6108652381980153
+            },
+            "twist": 1.4835298641951802,
+            "elbow": [
+              0,
+              2.6179938779914944
+            ]
+          },
+          "exceptions": [
+            "support-foregrip"
+          ],
+          "hits": {
+            "wrist": 79,
+            "elbow": 1206,
+            "elbowStraight": 323,
+            "elbowFold": 883
+          },
+          "r": {
+            "ok": true,
+            "flex": -0.535435818163595,
+            "dev": 0.31375716119879865,
+            "twist": -0.1724633096226785,
+            "roll": -0.009145265825470903,
+            "over": 0.9999998136912768,
+            "exception": null,
+            "elbow": 1.9685075055709493,
+            "last": {
+              "flex": 1.0540387367931531e-15,
+              "dev": 1.1932331961737173,
+              "twist": -1.008203078868321,
+              "roll": -0.009145265825470903,
+              "over": 11.68519401687439,
+              "exception": null,
+              "held": {
+                "flex": 1.7346266462352848e-16,
+                "dev": 0.34906582414059145,
+                "twist": -1.008203078868321
+              }
+            }
+          },
+          "l": {
+            "ok": true,
+            "flex": 0,
+            "dev": 0,
+            "twist": 0,
+            "roll": 0,
+            "over": 0,
+            "exception": null,
+            "elbow": 1.22429721927476,
+            "last": {
+              "flex": 0.0007609080176976571,
+              "dev": 0.0001830199294875368,
+              "twist": 0.0008473251640694776,
+              "roll": 0,
+              "over": 6.128037398070569e-7,
+              "exception": null,
+              "held": null
+            }
+          },
+          "elbowIK": {
+            "r": 1.9689422403193206,
+            "l": 1.2228378572145713
+          }
+        }
+      },
+      {
+        "time": 6.008333333333422,
+        "draw": 0,
+        "gap": 2.7755575615628914e-16,
+        "limits": {
+          "table": {
+            "wrist": {
+              "flex": 1.3089969389957472,
+              "ext": 1.2217304763960306,
+              "radial": 0.3490658503988659,
+              "ulnar": 0.6108652381980153
+            },
+            "twist": 1.4835298641951802,
+            "elbow": [
+              0,
+              2.6179938779914944
+            ]
+          },
+          "exceptions": [
+            "support-foregrip"
+          ],
+          "hits": {
+            "wrist": 79,
+            "elbow": 1249,
+            "elbowStraight": 329,
+            "elbowFold": 920
+          },
+          "r": {
+            "ok": true,
+            "flex": -0.3763803176460925,
+            "dev": 0.3320883677557876,
+            "twist": -3.787383420151246e-18,
+            "roll": -0.009145265825470903,
+            "over": 0.9999997759254305,
+            "exception": null,
+            "elbow": 1.9850249056329243,
+            "last": {
+              "flex": 1.0540387367931531e-15,
+              "dev": 1.1932331961737173,
+              "twist": -1.008203078868321,
+              "roll": -0.009145265825470903,
+              "over": 11.68519401687439,
+              "exception": null,
+              "held": {
+                "flex": 1.7346266462352848e-16,
+                "dev": 0.34906582414059145,
+                "twist": -1.008203078868321
+              }
+            }
+          },
+          "l": {
+            "ok": true,
+            "flex": 0,
+            "dev": 0,
+            "twist": 0,
+            "roll": 0,
+            "over": 0,
+            "exception": null,
+            "elbow": 1.214987898927587,
+            "last": {
+              "flex": 0.0007609080176976571,
+              "dev": 0.0001830199294875368,
+              "twist": 0.0008473251640694776,
+              "roll": 0,
+              "over": 6.128037398070569e-7,
+              "exception": null,
+              "held": null
+            }
+          },
+          "elbowIK": {
+            "r": 1.9854798961967457,
+            "l": 1.213485836798019
+          }
+        }
+      },
+      {
+        "time": 7.008333333333471,
+        "draw": 0.2055844907408633,
+        "gap": 3.83026943495679e-15,
+        "limits": {
+          "table": {
+            "wrist": {
+              "flex": 1.3089969389957472,
+              "ext": 1.2217304763960306,
+              "radial": 0.3490658503988659,
+              "ulnar": 0.6108652381980153
+            },
+            "twist": 1.4835298641951802,
+            "elbow": [
+              0,
+              2.6179938779914944
+            ]
+          },
+          "exceptions": [
+            "support-foregrip"
+          ],
+          "hits": {
+            "wrist": 79,
+            "elbow": 1331,
+            "elbowStraight": 346,
+            "elbowFold": 985
+          },
+          "r": {
+            "ok": true,
+            "flex": -0.5722667290814064,
+            "dev": 0.308404136648543,
+            "twist": -0.24251335950417222,
+            "roll": -0.009145265825470903,
+            "over": 0.9999996436864372,
+            "exception": null,
+            "elbow": 2.0898560963960398,
+            "last": {
+              "flex": 1.0540387367931531e-15,
+              "dev": 1.1932331961737173,
+              "twist": -1.008203078868321,
+              "roll": -0.009145265825470903,
+              "over": 11.68519401687439,
+              "exception": null,
+              "held": {
+                "flex": 1.7346266462352848e-16,
+                "dev": 0.34906582414059145,
+                "twist": -1.008203078868321
+              }
+            }
+          },
+          "l": {
+            "ok": true,
+            "flex": 0,
+            "dev": 0,
+            "twist": 0,
+            "roll": 0,
+            "over": 0,
+            "exception": null,
+            "elbow": 1.217290360435719,
+            "last": {
+              "flex": 0.0007609080176976571,
+              "dev": 0.0001830199294875368,
+              "twist": 0.0008473251640694776,
+              "roll": 0,
+              "over": 6.128037398070569e-7,
+              "exception": null,
+              "held": null
+            }
+          },
+          "elbowIK": {
+            "r": 2.0904473618242934,
+            "l": 1.215798886633934
+          }
+        }
+      },
+      {
+        "time": 8.00833333333352,
+        "draw": 1,
+        "gap": 0.0005046294409366436,
+        "limits": {
+          "table": {
+            "wrist": {
+              "flex": 1.3089969389957472,
+              "ext": 1.2217304763960306,
+              "radial": 0.3490658503988659,
+              "ulnar": 0.6108652381980153
+            },
+            "twist": 1.4835298641951802,
+            "elbow": [
+              0,
+              2.6179938779914944
+            ]
+          },
+          "exceptions": [
+            "support-foregrip"
+          ],
+          "hits": {
+            "wrist": 79,
+            "elbow": 1663,
+            "elbowStraight": 349,
+            "elbowFold": 1314
+          },
+          "r": {
+            "ok": true,
+            "flex": -0.9351411046660595,
+            "dev": -0.39310821272126834,
+            "twist": 0.9895037780037218,
+            "roll": -0.009145265825470903,
+            "over": 0.9999998635403231,
+            "exception": null,
+            "elbow": 2.007051588125374,
+            "last": {
+              "flex": 1.0540387367931531e-15,
+              "dev": 1.1932331961737173,
+              "twist": -1.008203078868321,
+              "roll": -0.009145265825470903,
+              "over": 11.68519401687439,
+              "exception": null,
+              "held": {
+                "flex": 1.7346266462352848e-16,
+                "dev": 0.34906582414059145,
+                "twist": -1.008203078868321
+              }
+            }
+          },
+          "l": {
+            "ok": true,
+            "flex": 0,
+            "dev": 0,
+            "twist": 0,
+            "roll": 0,
+            "over": 0,
+            "exception": null,
+            "elbow": 1.225167403312377,
+            "last": {
+              "flex": 0.0007609080176976571,
+              "dev": 0.0001830199294875368,
+              "twist": 0.0008473251640694776,
+              "roll": 0,
+              "over": 6.128037398070569e-7,
+              "exception": null,
+              "held": null
+            }
+          },
+          "elbowIK": {
+            "r": 2.0075340558285735,
+            "l": 1.2237120177383036
+          }
+        }
+      }
+    ]
+  },
+  "uniqueFrames": 0,
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 285 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 5ms pools 5195ms compile 789ms warm frame 106ms | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:285"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 56ms | trees 212ms | player+weapons+zombie types 1241ms | foliage scattered 2278ms | POIs+minimap+foliage chunks 3767ms | contact shading + rest of setup 3968ms | post + pools + compile + warm frame 10071ms | ready 10075ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 306 variants after 13 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:285 a-fresh:285 a-flash:288 a-faded:289 a-kill-generic:296 a-kill-melee:299 a-kill-explosive:303 a-fx:306 a-corpse:306"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 374 shader variants compiled after 35 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:285 a-fresh:285 a-flash:288 a-faded:289 a-kill-generic:296 a-kill-melee:299 a-kill-explosive:303 a-fx:306 a-corpse:306 fresh:362 burning:364 flash:364 faded:364 tree-fade:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 kill-melee:364 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:367 kill-melee:367 kill-explosive:367 kill-chainsaw:367 kill-pellet:367 kill-generic:367 effects:372 corpses:372 corpses2:372"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 374 variants | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:285 a-fresh:285 a-flash:288 a-faded:289 a-kill-generic:296 a-kill-melee:299 a-kill-explosive:303 a-fx:306 a-corpse:306 fresh:362 burning:364 flash:364 faded:364 tree-fade:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 kill-melee:364 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:367 kill-melee:367 kill-explosive:367 kill-chainsaw:367 kill-pellet:367 kill-generic:367 effects:372 corpses:372 corpses2:372"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":19.12,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.49,\"frames\":6,\"over50\":3,\"over100\":0,\"worst\":100},\"loading\":{\"at\":0.49,\"seconds\":18.63,\"frames\":343,\"over50\":53,\"over100\":21,\"worst\":3450},\"menu\":{\"at\":19.12,\"seconds\":8.14,\"frames\":10,\"over50\":1,\"over100\":1,\"worst\":7767}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":25,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":88,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ]
+}

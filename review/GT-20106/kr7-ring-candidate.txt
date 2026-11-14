@@ -1,0 +1,40 @@
+  const M = 40, pos = [], idx = [];
+  const ring = (z, k = 1) => {
+    const [w0, d] = along(z), w = w0 * k, yc = (F.top + d) / 2, hh = (F.top - d) / 2 * k;
+    // GT-20106/J153-12: a continuous U channel clears the barrel; the original external palm swell stays put.
+    const radius = .018, boreY = -.005;
+    const a = Math.acos(Math.pow(radius / w, F.n / 2));
+    const roof = yc + Math.pow(Math.sin(a), 2 / F.n) * hh;
+    pos.push(radius, roof, z, radius, boreY, z);
+    for (let i = 1; i <= 10; i++) {
+      const t = -i * Math.PI / 10;
+      pos.push(radius * Math.cos(t), boreY + radius * Math.sin(t), z);
+    }
+    pos.push(-radius, roof, z);
+    for (let i = 1; i < 28; i++) {
+      const t = Math.PI - a + i / 28 * (Math.PI + 2 * a), c = Math.cos(t), s = Math.sin(t);
+      pos.push(Math.sign(c) * Math.pow(Math.abs(c), 2 / F.n) * w,
+        yc + Math.sign(s) * Math.pow(Math.abs(s), 2 / F.n) * hh, z);
+    }
+  };
+  ring(F.z0 - .002, .82); ring(F.z0 - .0005, .96);
+  for (const z of zs) ring(z);
+  ring(F.z1 + .003, .9); ring(F.z1 + .005, .7);
+  const R = pos.length / 3 / M;
+  for (let r = 0; r < R - 1; r++) for (let i = 0; i < M; i++) {
+    const a = r * M + i, b = r * M + (i + 1) % M, c = (r + 1) * M + i, e = (r + 1) * M + (i + 1) % M;
+    idx.push(a, b, c, b, e, c);   // outward; CF-9 had the whole loft wound inward
+  }
+  for (const [r, back] of [[0, true], [R - 1, false]]) {
+    const profile = [], base = pos.length / 3;
+    for (let i = 0; i < M; i++) {
+      const p = pos.slice((r * M + i) * 3, (r * M + i) * 3 + 3);
+      profile.push(new T.Vector2(p[0], p[1])); pos.push(...p);   // hard end-face normals
+    }
+    for (const tri of T.ShapeUtils.triangulateShape(profile, [])) {
+      const [a, b, c] = tri.map(i => profile[i]);
+      const positive = (b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x) > 0;
+      const order = positive !== back ? tri : [tri[0], tri[2], tri[1]];
+      idx.push(...order.map(i => base + i));
+    }
+  }

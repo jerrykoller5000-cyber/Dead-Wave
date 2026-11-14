@@ -727,10 +727,23 @@ export function buildTrainingGround(T, opts = {}) {
     const pos = [], uv = [], idx = [];
     const inZone = new Set(paintCells.map(([a, b]) => a + ',' + b));
     const inset = 0.035;   // a hair of bare floor between squares: the lattice still reads through the paint
+    const paintEdge = (gx, gz, dx, dz) => {
+      const nx = gx + dx, nz = gz + dz;
+      return nx >= minGX && nx <= maxGX && nz >= minGZ && nz <= maxGZ && !inZone.has(nx + ',' + nz);
+    };
     for (const [gx, gz] of paintCells) {
       const rect = trainingBorderPaintRect(paintGrid,gx,gz,isTrainingBorderCell(paintGrid,gx,gz)?medicalPaint:null,inset);
       if (!rect) continue;
-      const x0=rect.x0-O.x,x1=rect.x1-O.x,z0=rect.z0-O.z,z1=rect.z1-O.z;
+      let x0=rect.x0-O.x,x1=rect.x1-O.x,z0=rect.z0-O.z,z1=rect.z1-O.z;
+      // GP-20139: opaque yellow edging covers these strips. Do not leave a second,
+      // coplanar striped face beneath it: different depth offsets still zip on WebGPU.
+      // A 10-micrometre seam prevents Float32 bake rounding from recreating overlap.
+      const trim = .10001;
+      if (paintEdge(gx,gz,-1,0)) x0 += trim;
+      if (paintEdge(gx,gz,1,0)) x1 -= trim;
+      if (paintEdge(gx,gz,0,-1)) z0 += trim;
+      if (paintEdge(gx,gz,0,1)) z1 -= trim;
+      if (x1 <= x0 || z1 <= z0) continue;
       const k = pos.length / 3;
       for (const [x, z] of [[x0, z0], [x1, z0], [x1, z1], [x0, z1]]) { pos.push(x, 0.001, z); uv.push((x + O.x) / PERIOD, -(z + O.z) / PERIOD); }
       idx.push(k, k + 2, k + 1, k, k + 3, k + 2);
@@ -751,7 +764,7 @@ export function buildTrainingGround(T, opts = {}) {
       const cx=(rect.x0+rect.x1)/2-O.x,cz=(rect.z0+rect.z1)/2-O.z,w=rect.x1-rect.x0,d=rect.z1-rect.z0;
       for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
         const ngx = gx + dx, ngz = gz + dz;
-        if (inZone.has(ngx + ',' + ngz) || ngx < minGX || ngx > maxGX || ngz < minGZ || ngz > maxGZ) continue;
+        if (!paintEdge(gx, gz, dx, dz)) continue;
         const e = add(new T.PlaneGeometry(dx ? Math.min(.1,w) : w, dx ? d : Math.min(.1,d)), edgeMat, cx + dx * Math.max(0,w/2-.05), 0.001, cz + dz * Math.max(0,d/2-.05));
         e.rotation.x = -Math.PI / 2; e.receiveShadow = true;
       }

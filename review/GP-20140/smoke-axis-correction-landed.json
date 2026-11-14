@@ -1,0 +1,18 @@
+{
+  "before": "7ec5143b5ba5192bd43714c98752aec3e7f0b7761ce446c35c0e921225ba73d0",
+  "after": "7dd982e35c3e5a2ee4c3ae40be9bc903664c9b959adb5144d15a134f62cbf665",
+  "hunks": [
+    {
+      "before": "  const headQ=new THREE.Quaternion(),handQ=new THREE.Quaternion(),cigQ=new THREE.Quaternion(),",
+      "after": "  const handCigQ=new THREE.Quaternion();\n  const headQ=new THREE.Quaternion(),handQ=new THREE.Quaternion(),cigQ=new THREE.Quaternion(),"
+    },
+    {
+      "before": "    axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ);\n    pinchTarget.copy(target).add(axis);",
+      "after": "    // Keep the cigarette's seated axis in the hand, through every bounded wrist\n    // turn. Holding it head-facing on the lowered path cut it through a finger.\n    handCigQ.copy(handQ).invert().multiply(cigQ);\n    axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ);\n    pinchTarget.copy(target).add(axis);"
+    },
+    {
+      "before": "      marine.updateWorldMatrix(true,true);\n      pointOnHand(wr,'indexTip',pinch);",
+      "after": "      marine.updateWorldMatrix(true,true);\n      wr.getWorldQuaternion(parentQ);cigQ.copy(parentQ).multiply(handCigQ);\n      pinchTarget.copy(target).add(axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ));\n      pointOnHand(wr,'indexTip',pinch);"
+    }
+  ]
+}

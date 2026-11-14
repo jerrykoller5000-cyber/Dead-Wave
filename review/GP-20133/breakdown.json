@@ -1,0 +1,375 @@
+{
+  "sourceSha256": "ffdccc856e3536de3a752a18c1aa7e4eeafecfe4c0a3b92a2f8b5d57357c4294",
+  "sourceUnchanged": true,
+  "errors": [],
+  "rows": [
+    {
+      "weapon": "uzi",
+      "pair": false,
+      "shots": 32,
+      "idleMeanMs": 18.104,
+      "fireMeanMs": 22.823,
+      "deltaPercent": 26.063,
+      "perShotInclusiveMs": {
+        "beginWeaponShot": 0.013,
+        "spawnProjectile": 0.019,
+        "spawnCasing": 0.122,
+        "triggerMuzzleFlash": 0.028,
+        "sound.fireWeapon": 0.334,
+        "updateAmmoHud": 0.175,
+        "tryFire": 0.869,
+        "trainingTraceExact": 0.666,
+        "trainingRound": 1,
+        "updateProjectiles": 3.138,
+        "updateCasings": 0.206,
+        "updateSmoke": 0.009,
+        "impacts.add": 0.047,
+        "spawnEmbers": 0.003,
+        "sound.trainingCue": 0.172,
+        "spawnDust": 0.006
+      },
+      "phases": [
+        {
+          "k": "r:render",
+          "avg": 9.95,
+          "max": 37.8
+        },
+        {
+          "k": "m:hold",
+          "avg": 3.813,
+          "max": 8.4
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.34,
+          "max": 3.4
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.975,
+          "max": 3.6
+        },
+        {
+          "k": "viewmodel",
+          "avg": 0.964,
+          "max": 6.5
+        },
+        {
+          "k": "projectiles",
+          "avg": 0.878,
+          "max": 2.9
+        },
+        {
+          "k": "aim+climb",
+          "avg": 0.806,
+          "max": 2.4
+        },
+        {
+          "k": "m:hold2+arms",
+          "avg": 0.785,
+          "max": 6.4
+        },
+        {
+          "k": "effects",
+          "avg": 0.685,
+          "max": 2.8
+        },
+        {
+          "k": "m:fire",
+          "avg": 0.242,
+          "max": 3.9
+        },
+        {
+          "k": "r:rigSkin",
+          "avg": 0.236,
+          "max": 0.6
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.208,
+          "max": 0.9
+        }
+      ],
+      "gpuMeanMs": 1.09,
+      "newPipelines": 0,
+      "newNodeBuilds": 2,
+      "newRenderObjects": 54
+    },
+    {
+      "weapon": "ak",
+      "pair": false,
+      "shots": 30,
+      "idleMeanMs": 21.302,
+      "fireMeanMs": 26.063,
+      "deltaPercent": 22.351,
+      "perShotInclusiveMs": {
+        "beginWeaponShot": 0.003,
+        "spawnProjectile": 0.023,
+        "spawnCasing": 0.117,
+        "triggerMuzzleFlash": 0.03,
+        "sound.fireWeapon": 0.337,
+        "updateAmmoHud": 0.137,
+        "tryFire": 0.81,
+        "trainingTraceExact": 0.683,
+        "trainingRound": 1.013,
+        "updateProjectiles": 2.74,
+        "updateCasings": 0.23,
+        "updateSmoke": 0.013,
+        "impacts.add": 0.05,
+        "spawnEmbers": 0.007,
+        "sound.trainingCue": 0.197,
+        "spawnDust": 0.02
+      },
+      "phases": [
+        {
+          "k": "r:render",
+          "avg": 11.136,
+          "max": 19.7
+        },
+        {
+          "k": "m:hold",
+          "avg": 5.038,
+          "max": 10.7
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.659,
+          "max": 5
+        },
+        {
+          "k": "m:pose",
+          "avg": 1.232,
+          "max": 2.9
+        },
+        {
+          "k": "viewmodel",
+          "avg": 1.049,
+          "max": 6
+        },
+        {
+          "k": "aim+climb",
+          "avg": 0.989,
+          "max": 2.4
+        },
+        {
+          "k": "m:hold2+arms",
+          "avg": 0.947,
+          "max": 13
+        },
+        {
+          "k": "effects",
+          "avg": 0.634,
+          "max": 2.2
+        },
+        {
+          "k": "projectiles",
+          "avg": 0.586,
+          "max": 3
+        },
+        {
+          "k": "r:rigSkin",
+          "avg": 0.26,
+          "max": 0.7
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.228,
+          "max": 1.4
+        },
+        {
+          "k": "w:rest",
+          "avg": 0.195,
+          "max": 0.7
+        }
+      ],
+      "gpuMeanMs": 0.28,
+      "newPipelines": 0,
+      "newNodeBuilds": 0,
+      "newRenderObjects": 30
+    },
+    {
+      "weapon": "minigun",
+      "pair": false,
+      "shots": 300,
+      "idleMeanMs": 22.094,
+      "fireMeanMs": 25.677,
+      "deltaPercent": 16.215,
+      "perShotInclusiveMs": {
+        "tryFire": 0.597,
+        "updateProjectiles": 2.095,
+        "updateCasings": 0.175,
+        "updateSmoke": 0.007,
+        "beginWeaponShot": 0.004,
+        "spawnProjectile": 0.02,
+        "spawnCasing": 0.079,
+        "triggerMuzzleFlash": 0.021,
+        "sound.fireWeapon": 0.248,
+        "updateAmmoHud": 0.127,
+        "trainingTraceExact": 0.587,
+        "trainingRound": 0.858,
+        "impacts.add": 0.037,
+        "spawnEmbers": 0,
+        "sound.trainingCue": 0.169,
+        "spawnDust": 0.014
+      },
+      "phases": [
+        {
+          "k": "r:render",
+          "avg": 11.3,
+          "max": 70.7
+        },
+        {
+          "k": "m:hold",
+          "avg": 3.656,
+          "max": 14.3
+        },
+        {
+          "k": "m:pose",
+          "avg": 1.474,
+          "max": 6
+        },
+        {
+          "k": "r:matrices",
+          "avg": 1.45,
+          "max": 5
+        },
+        {
+          "k": "m:hold2+arms",
+          "avg": 1.213,
+          "max": 9.2
+        },
+        {
+          "k": "aim+climb",
+          "avg": 0.814,
+          "max": 3
+        },
+        {
+          "k": "viewmodel",
+          "avg": 0.802,
+          "max": 3.5
+        },
+        {
+          "k": "projectiles",
+          "avg": 0.796,
+          "max": 3.3
+        },
+        {
+          "k": "effects",
+          "avg": 0.684,
+          "max": 3.8
+        },
+        {
+          "k": "r:rigSkin",
+          "avg": 0.243,
+          "max": 0.9
+        },
+        {
+          "k": "m:fire",
+          "avg": 0.237,
+          "max": 3.3
+        },
+        {
+          "k": "w:rest",
+          "avg": 0.19,
+          "max": 0.9
+        }
+      ],
+      "gpuMeanMs": 1.047,
+      "newPipelines": 2,
+      "newNodeBuilds": 2,
+      "newRenderObjects": 343
+    },
+    {
+      "weapon": "pistol",
+      "pair": true,
+      "shots": 24,
+      "idleMeanMs": 16.623,
+      "fireMeanMs": 18.686,
+      "deltaPercent": 12.411,
+      "perShotInclusiveMs": {
+        "beginWeaponShot": 0.008,
+        "spawnProjectile": 0.008,
+        "spawnCasing": 0.05,
+        "triggerMuzzleFlash": 0.017,
+        "sound.fireWeapon": 0.3,
+        "updateAmmoHud": 0.125,
+        "tryFire": 0.583,
+        "trainingTraceExact": 0.429,
+        "trainingRound": 0.521,
+        "updateProjectiles": 1.317,
+        "updateCasings": 0.046,
+        "updateSmoke": 0.008,
+        "impacts.add": 0.017,
+        "spawnEmbers": 0,
+        "sound.trainingCue": 0.033,
+        "spawnDust": 0.004
+      },
+      "phases": [
+        {
+          "k": "r:render",
+          "avg": 7.873,
+          "max": 12
+        },
+        {
+          "k": "m:hold",
+          "avg": 3.155,
+          "max": 5.8
+        },
+        {
+          "k": "m:hold2+arms",
+          "avg": 0.983,
+          "max": 3.9
+        },
+        {
+          "k": "r:matrices",
+          "avg": 0.923,
+          "max": 1.8
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.762,
+          "max": 3.1
+        },
+        {
+          "k": "projectiles",
+          "avg": 0.675,
+          "max": 1.4
+        },
+        {
+          "k": "aim+climb",
+          "avg": 0.638,
+          "max": 1.2
+        },
+        {
+          "k": "effects",
+          "avg": 0.592,
+          "max": 1.4
+        },
+        {
+          "k": "viewmodel",
+          "avg": 0.561,
+          "max": 1
+        },
+        {
+          "k": "m:fire",
+          "avg": 0.23,
+          "max": 2.3
+        },
+        {
+          "k": "r:rigSkin",
+          "avg": 0.147,
+          "max": 0.3
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.127,
+          "max": 0.4
+        }
+      ],
+      "gpuMeanMs": 0.912,
+      "newPipelines": 0,
+      "newNodeBuilds": 0,
+      "newRenderObjects": 31
+    }
+  ]
+}

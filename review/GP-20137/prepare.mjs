@@ -1,0 +1,7 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const p='index.html',s=fs.readFileSync(p,'utf8'),patches=[
+ ['vy: dir.y * spd, // straight at the cursor: a 40 mm, not a lob','vy: dir.y * spd, // same muzzle aim and speed; gravity bends the flight'],
+ ["direct: true // no gravity; the mortar's shell is the one that arcs","gravity: 16 // GP-20137 / J153-25: existing world gravity, launcher-only exact integration"],
+ ['if (!g.direct) g.vy -= 16 * dt; // the 40 mm flies the aim; grenades and mortar shells still fall','const launcherGravity = g.originWeapon === \'launcher\' ? (g.gravity || 0) : 0;\n        if (!g.direct && !launcherGravity) g.vy -= 16 * dt; // preserve hand-grenade and mortar integration'],
+ ['g.pos.y += g.vy * dt;\n        g.pos.z += g.vz * dt;','g.pos.y += g.vy * dt - 0.5 * launcherGravity * dt * dt;\n        g.pos.z += g.vz * dt;\n        if (launcherGravity) g.vy -= launcherGravity * dt;']
+].map(([a,b])=>[a.replaceAll('\n','\r\n'),b.replaceAll('\n','\r\n')]);let next=s;for(const[a,b]of patches){assert.equal(next.split(a).length,2,a);next=next.replace(a,b);}fs.writeFileSync('review/GP-20137/index-candidate.html.txt',next);fs.writeFileSync('review/GP-20137/proposed-patches.json',JSON.stringify(patches,null,2));console.log('Prepared four bounded launcher changes; production untouched');

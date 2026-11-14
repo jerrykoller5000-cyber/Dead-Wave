@@ -1,0 +1,34 @@
+[
+  {
+    "before": "export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground, ignite })",
+    "after": "export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground, ignite, setForearmRoll })"
+  },
+  {
+    "before": "  let pinchWarm=false;",
+    "after": "  let pinchWarm=false,posedIdle=false;"
+  },
+  {
+    "before": "    hand.set(smokePose).update();",
+    "after": "    hand.set(smokePose).update();posedIdle=true;"
+  },
+  {
+    "before": "    let miss=Infinity,iterations=0;",
+    "after": "    let miss=Infinity,iterations=0,solvedRoll=0;"
+  },
+  {
+    "before": "      twistQ.setFromAxisAngle(axis,forearmRoll);",
+    "after": "      solvedRoll=forearmRoll;twistQ.setFromAxisAngle(axis,forearmRoll);"
+  },
+  {
+    "before": "      clampWrist(wr.quaternion,1,forearmRoll);\n      clampWrist(wr.quaternion,1,0);",
+    "after": "      clampWrist(wr.quaternion,1,-forearmRoll);"
+  },
+  {
+    "before": "    lastPinchWant.copy(want);",
+    "after": "    setForearmRoll?.('R',solvedRoll);\n    lastPinchWant.copy(want);"
+  },
+  {
+    "before": "  function hide() { pinchWarm=false;root.visible = false;",
+    "after": "  function hide() { pinchWarm=false;if(posedIdle){setForearmRoll?.('R',0);setForearmRoll?.('L',0);posedIdle=false;}root.visible = false;"
+  }
+]

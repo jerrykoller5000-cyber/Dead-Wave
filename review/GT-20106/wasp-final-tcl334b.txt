@@ -1,0 +1,5 @@
+ok    tcl334b    5 pass   0 fail  39.7s  (real renderer)
+    INFO pistol the hands into each other: 0.0 mm
+    INFO revolver the hands into each other: 0.0 mm
+    INFO uzi the hands into each other: 0.0 mm
+1 checks: 5 pass, 0 fail (real renderer)

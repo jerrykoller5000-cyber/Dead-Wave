@@ -11,7 +11,7 @@
 //    narrows to the Aim FOV;
 //  - the cursor on open ground: the round flies at chest height over that spot. The cursor just in front of a still
 //    zombie's feet: the raw ground point under it would put the round into the dirt short of it (as before CL-247);
-//    the round now meets the zombie;
+//    the round now meets the zombie; (CB-333, J153 note 39, D-181: both gone: the round goes to the crosshair's point)
 //  - just off a zombie (a few pixels, the cursor's ray missing it), the assist puts the round on its middle; well off,
 //    it does not.
 (async () => {
@@ -122,7 +122,8 @@
     // Open ground.
     await aimAgain(() => pointNdc(0.1, -0.3));
     const gp = groundAt(0.1, -0.3), sa = T.shotAimDbg();
-    ok(T.aimKindDbg() === 'ground' && Math.abs(sa.y - T.sampleHeight(sa.x, sa.z) - T.AIM_CHEST) < 0.02, 'the cursor on open ground: the round goes at chest height over it (' + T.aimKindDbg() + ', ' + (sa.y - T.sampleHeight(sa.x, sa.z)).toFixed(2) + ' m up)');
+    // CB-333 (J153 note 39, D-181): the chest-height lift is gone; the round goes to the crosshair's own point.
+    ok(T.aimKindDbg() === 'ground' && Math.abs(sa.y - T.sampleHeight(sa.x, sa.z)) < 0.02, 'the cursor on open ground: the round goes to that point on the ground (CB-333; was ' + T.AIM_CHEST + ' m over it) (' + T.aimKindDbg() + ', ' + (sa.y - T.sampleHeight(sa.x, sa.z)).toFixed(2) + ' m up)');
     // A still zombie 11 m up the screen, the cursor on the ground just in front of its feet.
     const B1 = basis(), fw = new THREE.Vector3(B1.f.x, 0, B1.f.z).normalize();
     const still = (x, zz) => { const z = T.spawnZombie(x, zz, 'shambler', true, true); if (z) { z.riseT = 0; z.hp = z.maxHp = 1e6; z.speed = z.baseSpeed = 0; } return z; };
@@ -134,7 +135,7 @@
       await aimAgain(() => pointWorld(front));
       const kind = T.aimKindDbg(), now = trace(zf), raw = trace(zf, T.aimTarget.clone().set(front.x, front.y, front.z));
       ok(raw === 'ground', 'before CL-247 the round went at the ground point under the cursor, into the dirt short of it (' + raw + ')');
-      ok(now === 'zombie', 'now it meets the zombie (' + now + ', aim ' + kind + ')');
+      ok(now === raw, 'CB-333 (J153 note 39): the round goes where the crosshair is, the ground just in front of it (' + now + ', aim ' + kind + '; CL-247 had lifted it into the zombie)');
       // The assist: the cursor beside its middle (a point off to the screen's right of it, put on screen again each time
       // as the view slides), stepping out until the game's own pick misses the body.
       const H = zf.hitH || 1.45, mid = new THREE.Vector3(zp.x, zp.y + H * 0.56, zp.z);

@@ -1,0 +1,10 @@
+Command: node tools/tests/run-all.mjs t337 t182 t310 --jobs 1 --no-retry --all-fails --agent chatgpt --task GP-20139
+Index source SHA256: d8f4c277514f3b3efeab1f3247beafa98bb4302ea5d3689394134c27e2fe96d3
+check-players: 316 player.position reads, all in the allowed places
+ok    t182    36 pass   0 fail  86.4s
+ok    t310     5 pass   0 fail  56.0s
+ok    t337     6 pass   0 fail  70.7s
+
+3 checks: 47 pass, 0 fail
+
+Exit: {"code":0,"signal":null}

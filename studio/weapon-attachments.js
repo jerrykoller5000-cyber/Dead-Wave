@@ -4,6 +4,7 @@
 // all originate at their actual front windows.
 import {bindModelArtwork} from './weapon-model-hooks.js';
 import {createLightSwitch} from './weapon-light-switch.js';
+import {weaponDetail} from './weapon-detail.js';
 
 const MOUNTS = Object.freeze({
   pistol:   { kind: 'guard', x: 0, y: -0.035, z: 0.202, length: 0.16, width: 0.045, height: 0.034 },
@@ -58,17 +59,38 @@ export function attachLaserLight(gun, kind, ctx) {
   const L = spec.length;
   let light, laser;
   if (spec.kind === 'dualTube') {
-    // Pump shotgun: a two-tube cluster on a clamp around barrel and magazine.
-    box(0.088, 0.010, 0.033, gunDark, -0.027, 0.001, -0.034, 'barrelMagazineClamp');
-    box(0.044, 0.065, 0.035, gunDark, -0.019, 0.001, -0.034);
-    box(0.038, 0.052, 0.034, metal, 0, 0, -0.033, 'sideRail');
-    for (const [y, r] of [[0.019, 0.019], [-0.020, 0.012]]) {
-      cyl(r, L, body, 0, y, 0, y > 0 ? 'lightTube' : 'laserTube');
-      for (const z of [-0.045, 0, 0.041]) cyl(r * 1.10, 0.007, gunDark, 0, y, z);
+    // GT-20106/J153-34: split barrel/tube clamp, bevelled dual-optic housing.
+    // Optical axes and the existing rear switch datum stay unchanged.
+    const W = weaponDetail(ctx);
+    const clampShape = new THREE.Shape();
+    const clampOutline = [[-.086,-.030],[-.080,-.039],[-.052,-.039],[-.045,-.032],
+      [-.018,-.032],[-.018,.032],[-.045,.032],[-.052,.039],[-.080,.039],[-.086,.030]];
+    clampOutline.forEach(([x,y],i)=>i?clampShape.lineTo(x,y):clampShape.moveTo(x,y));
+    clampShape.closePath();
+    // Hole radii include the edge bevel and polygon apothem: clear the actual
+    // 15.5mm barrel and14.5mm magazine tube, rather than sinking a ring into either.
+    for (const [y,r] of [[.018,.0168],[-.018,.0158]]) {
+      const hole = new THREE.Path(); hole.absarc(-.066,y,r,0,Math.PI*2,true);
+      clampShape.holes.push(hole);
     }
-    light = window(0, 0.019, L / 2 + 0.003, 0.014, 'light');
-    laser = window(0, -0.020, L / 2 + 0.003, 0.007, 'laser');
-    cyl(0.006, 0.010, gunMid, 0.018, -0.020, -0.014, 'windageDial'); // seated against the side rail
+    put(new THREE.ExtrudeGeometry(clampShape,{depth:.014,steps:1,curveSegments:8,
+      bevelEnabled:true,bevelSize:.0007,bevelThickness:.001,bevelSegments:1}),
+      gunDark,0,0,-.041,'barrelMagazineClamp');
+    W.chamferBox(unit,.012,.060,.030,.0015,metal,-.018,0,-.034).name='sideRail';
+    W.fasteners(unit,gunMid,'hex',[.018,-.018].map(y=>({x:-.033,y,z:-.026,axis:'z',side:1,r:.003})));
+    W.chamferBox(unit,.048,.074,.116,.002,body,0,.003,-.016).name='moduleShell';
+    W.chamferBox(unit,.049,.075,.006,.001,body,0,.003,-.077).name='rearCap';
+    for (const [y,r] of [[.019,.019],[-.020,.012]]) {
+      cyl(r,L,body,0,y,0,y>0?'lightTube':'laserTube');
+      cyl(r*1.10,.016,metal,0,y,L/2-.009,y>0?'lightHead':'laserHead');
+    }
+    W.fasteners(unit,gunMid,'torx',[-.058,.020].flatMap(z=>[-.022,.028].map(y=>({x:.024,y,z,axis:'x',side:1,r:.0022}))));
+    W.serrations(unit,gunDark,{x:.0243,y:.003,z:-.024,axis:'x',side:1,along:'z',count:5,pitch:.006,w:.017,depth:.0006});
+    light = window(0,.019,L/2+.003,.014,'light');
+    laser = window(0,-.020,L/2+.003,.007,'laser');
+    const windage = put(new THREE.CylinderGeometry(.006,.006,.006,12),metal,.027,-.020,-.005,'windageDial');
+    windage.rotation.z = -Math.PI/2;
+    bindModelArtwork(gun,'controls','laserWindage',windage);
   } else if (spec.kind === 'tube') {
     // A cantilever shoe on the shroud's right collar carries the lamp and
     // the smaller laser pod. Both front windows have their own bore axis.

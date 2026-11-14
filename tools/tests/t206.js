@@ -1,6 +1,6 @@
 // t206 - GB-134 (Jerry's playthrough 1, 2026-10-06): the grenade's arc. Hold G: an arc grows from a
 //  short lob (a tap) to the longest throw, to where the ground first takes it; letting go throws that throw.
-//  The 40 mm launcher draws no arc and the round flies the cursor (Jerry, 2026-10-09). The flight maths is in game/arcs.test.mjs.
+//  The 40 mm launcher draws no arc; J153-25 supersedes its old straight-flight requirement with gravity. The flight maths is in game/arcs.test.mjs.
 //  CU-97 (Jerry, 2026-10-09): the longest throw at 1.6 s (was 3 s); the grenade's arc is one simple line, not the
 //  mortar's dots; and it leaves his hand at the top of his throw, a moment after G comes up (t225 has the throw itself).
 (async () => {
@@ -56,7 +56,7 @@
     ok(held && !D().charging && D().last.charge > 0.1 && D().n === n0 - 3, 'G down holds, G up throws (held ' + f2(D().last.charge) + ' s)');
     { const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 1.7 && Date.now() - w0 < 15000) await wait(50); }   // GB-202 sweep: game time (the 0.6 s cooldown and the throw swing run on it)
     ok(T.startGrenadeCharge() === false && !D().charging, 'none left: G does not start a hold');
-    // (4) The 40 mm draws no arc. The round leaves along the cursor and stays on that line.
+    // (4) J153-25: the 40 mm draws no preview arc; it leaves along the cursor, then falls under gravity.
     const take = async (w) => {
       for (let i = 0; i < 16 && T.getCurrentWeapon() !== w; i++) T.setWeapon(i);
       await until(() => T.getCurrentWeapon() === w && T.getSwapDbg().swapT <= 0, 3000);
@@ -72,21 +72,23 @@
     await wait(200);
     ok(!D().launcher, 'the launcher draws no arc');
     T.setMouseFireDbg(true); await wait(40); T.setMouseFireDbg(false);
-    const sh = T.grenadesInFlight.find((q) => q.direct);
+    const sh = T.grenadesInFlight.find((q) => q.originWeapon === 'launcher');
     const aim = T.aimTarget;
     const toAim = sh ? { x: aim.x - sh.pos.x, y: aim.y - sh.pos.y, z: aim.z - sh.pos.z } : null;
     const spd0 = sh ? Math.hypot(sh.vx, sh.vy, sh.vz) : 0;
     const aimL = toAim ? Math.hypot(toAim.x, toAim.y, toAim.z) : 1;
     const dot = sh ? (sh.vx * toAim.x + sh.vy * toAim.y + sh.vz * toAim.z) / ((spd0 * aimL) || 1) : 0;
     ok(!!sh && dot > 0.98, 'the shell leaves along the cursor (' + dot.toFixed(3) + ')');
-    const vy0 = sh ? sh.vy : 0, o = sh ? { x: sh.pos.x, y: sh.pos.y, z: sh.pos.z } : null;
+    const age0 = sh ? sh.age : 0, vy0 = sh ? sh.vy : 0, o = sh ? { x: sh.pos.x, y: sh.pos.y, z: sh.pos.z } : null;
     const dir = sh ? { x: sh.vx / spd0, y: sh.vy / spd0, z: sh.vz / spd0 } : null;
     await wait(220);
     if (sh && T.grenadesInFlight.includes(sh)) {
-      const wx = sh.pos.x - o.x, wy = sh.pos.y - o.y, wz = sh.pos.z - o.z;
-      const along = wx * dir.x + wy * dir.y + wz * dir.z;
-      const off = Math.hypot(wx - dir.x * along, wy - dir.y * along, wz - dir.z * along);
-      ok(off < 0.35 && Math.abs(sh.vy - vy0) < 0.4, 'it stays on that line (' + f2(off) + ' m off, vy ' + f2(sh.vy - vy0) + ')');
+      const elapsed = sh.age - age0;
+      const ex = o.x + dir.x * spd0 * elapsed, ez = o.z + dir.z * spd0 * elapsed;
+      const ey = o.y + vy0 * elapsed - 8 * elapsed * elapsed;
+      const err = Math.hypot(sh.pos.x-ex, sh.pos.y-ey, sh.pos.z-ez);
+      ok(sh.gravity === 16 && elapsed > 0 && err < 1e-5 && Math.abs(sh.vy-(vy0-16*elapsed)) < 1e-5,
+        'launcher follows constant gravity16, exact ballistic position/velocity (' + err.toExponential(2) + ' m error)');
     } else ok(false, 'the shell was gone before the line could be read');
     ok(await take('pistol'), 'pistol in hand');
     await wait(150);

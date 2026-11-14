@@ -52,7 +52,7 @@ export const VM = Object.freeze({
   // both guns down and turned down out of the view and back up (metres, radians).
   akimbo: {
     pistol: { at: [0.19, -0.155, -0.46], yaw: 0.032, pitch: 0.02, roll: 0.07 },     // MW (Jerry's refs, 3 Nov): low, nearly upright, muzzles nearly ahead
-    revolver: { at: [0.23, -0.165, -0.54], yaw: 0.038, pitch: 0.025, roll: 0.05 },  // Warzone: further out, turned in (the outer sides show)
+    revolver: { at: [0.19, -0.14, -0.45], yaw: 0.038, pitch: 0.025, roll: 0.05 },  // Warzone: turned in (the outer sides show); CD-14 (J153 note 7: the pair looked much smaller than the single, the same model at .554, 27% further out): in to the single's distance (was [0.23, -0.165, -0.54])
     uzi: { at: [0.20, -0.13, -0.40], yaw: 0.033, pitch: 0.04, roll: 0 },           // GB-294 J11: less inward than MW3 0.40
     // The forearms up from below behind the grips (the refs; the cloud look, 3 Nov: the body's hold has them out flat to
     // the sides, and run on along the hand they still came in flat from the sides, by perspective): each hand first turns

@@ -1,0 +1,16 @@
+{
+  "result": {
+    "nativeScale": 0.7233191680486456,
+    "boxMetres": 0.08000000150006258,
+    "boxWidthMetres": 0.036165958941347054,
+    "liveMetres": 0.07100000232458116,
+    "roundBack": -0.03377868161596018,
+    "roundFront": 0.06437992589906447,
+    "innerBack": -0.035999999105930325,
+    "innerFront": 0.06660124725103378,
+    "visibleLoaded": true,
+    "visibleEmpty": false,
+    "vertices": 399
+  },
+  "errors": []
+}

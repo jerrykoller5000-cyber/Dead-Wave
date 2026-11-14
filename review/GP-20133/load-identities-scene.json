@@ -1,0 +1,1539 @@
+{
+  "variant": "scene",
+  "scope": "Diagnostic title warm-stage timing, source modifications in memory only; first draw builder counts, actual menu time, High",
+  "sourceSha256": "9c4758cad5ea2b3cf3943b46cd0d03af4fa20c6b4ec8a7bda24152e4a0dde500",
+  "loaderReadyMs": 13584,
+  "menuWallMs": 20118,
+  "profile": [
+    {
+      "phase": "ensure-viewmodel",
+      "t": 6705.700000017881,
+      "ms": 1.100000023841858
+    },
+    {
+      "phase": "begin-fire-warm",
+      "t": 6705.9000000059605
+    },
+    {
+      "phase": "world-prime",
+      "t": 6710.300000011921
+    },
+    {
+      "phase": "view-copies",
+      "t": 6757.700000017881
+    },
+    {
+      "phase": "view-ready",
+      "t": 6792.700000017881
+    },
+    {
+      "phase": "view-heat",
+      "t": 6793.0999999940395
+    },
+    {
+      "phase": "hot-compile",
+      "t": 10587.09999999404
+    },
+    {
+      "phase": "before-draw",
+      "tag": "fire-hot",
+      "t": 10587.59999999404,
+      "nodes": 207
+    },
+    {
+      "phase": "draw-builders",
+      "tag": "fire-hot",
+      "builders": [
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "NodeMaterial",
+          "materialName": "PostProcessing",
+          "visible": true,
+          "attributes": [
+            "position",
+            "uv"
+          ]
+        },
+        {
+          "name": "balaclava-hem",
+          "type": "Mesh",
+          "geo": "TubeGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "wear:mask",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv",
+            "color"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "wear:cap",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv",
+            "color"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BoxGeometry",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BoxGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv"
+          ]
+        },
+        {
+          "name": "hq-designation",
+          "type": "Mesh",
+          "geo": "PlaneGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "PlaneGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BoxGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv"
+          ]
+        },
+        {
+          "name": "hq-damaged-screen",
+          "type": "Mesh",
+          "geo": "PlaneGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv"
+          ]
+        },
+        {
+          "name": "teleprinter-visor",
+          "type": "Mesh",
+          "geo": "BoxGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "PlaneGeometry",
+          "mat": "MeshStandardMaterial",
+          "materialName": "",
+          "visible": true,
+          "attributes": [
+            "position",
+            "normal",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "NodeMaterial",
+          "materialName": "Bloom_highPass",
+          "visible": true,
+          "attributes": [
+            "position",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "NodeMaterial",
+          "materialName": "Bloom_separable",
+          "visible": true,
+          "attributes": [
+            "position",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "NodeMaterial",
+          "materialName": "Bloom_separable",
+          "visible": true,
+          "attributes": [
+            "position",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "NodeMaterial",
+          "materialName": "Bloom_separable",
+          "visible": true,
+          "attributes": [
+            "position",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "NodeMaterial",
+          "materialName": "Bloom_separable",
+          "visible": true,
+          "attributes": [
+            "position",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "NodeMaterial",
+          "materialName": "Bloom_separable",
+          "visible": true,
+          "attributes": [
+            "position",
+            "uv"
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "geo": "BufferGeometry",
+          "mat": "NodeMaterial",
+          "materialName": "Bloom_comp",
+          "visible": true,
+          "attributes": [
+            "position",
+            "uv"
+          ]
+        }
+      ]
+    },
+    {
+      "phase": "after-draw",
+      "tag": "fire-hot",
+      "t": 10883.09999999404,
+      "nodes": 229
+    },
+    {
+      "phase": "hot-draw",
+      "t": 10883.09999999404
+    },
+    {
+      "phase": "hot-gpu-done",
+      "t": 11133.5
+    },
+    {
+      "phase": "cold-compile",
+      "t": 11256.800000011921
+    },
+    {
+      "phase": "before-draw",
+      "tag": "fire-cold",
+      "t": 11256.800000011921,
+      "nodes": 229
+    },
+    {
+      "phase": "draw-builders",
+      "tag": "fire-cold",
+      "builders": []
+    },
+    {
+      "phase": "after-draw",
+      "tag": "fire-cold",
+      "t": 11272.90000000596,
+      "nodes": 229
+    },
+    {
+      "phase": "cold-draw",
+      "t": 11272.90000000596
+    },
+    {
+      "phase": "cold-gpu-done",
+      "t": 11293.90000000596
+    },
+    {
+      "phase": "before-draw",
+      "tag": "fire-pool-falling-leaves",
+      "t": 11342.40000000596,
+      "nodes": 231
+    },
+    {
+      "phase": "draw-builders",
+      "tag": "fire-pool-falling-leaves",
+      "builders": []
+    },
+    {
+      "phase": "after-draw",
+      "tag": "fire-pool-falling-leaves",
+      "t": 11354.40000000596,
+      "nodes": 231
+    }
+  ],
+  "opening": {
+    "v": 1,
+    "at": "2026-11-13T22:04:40.437Z",
+    "url": "/index.html?debug=1&__gameTestToken=792b97f2-441c-4467-8237-99bab267dbe3",
+    "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "cores": 24,
+    "mem": 32,
+    "screen": [
+      2560,
+      1440,
+      1
+    ],
+    "marks": [
+      [
+        90,
+        "gate-mode",
+        "all"
+      ],
+      [
+        90,
+        "gate-compile"
+      ],
+      [
+        90,
+        "gate-warm"
+      ],
+      [
+        305,
+        "phase-loading"
+      ],
+      [
+        509,
+        "module-start"
+      ],
+      [
+        620,
+        "phase-loading"
+      ],
+      [
+        893,
+        "renderer",
+        "WebGPU / high"
+      ],
+      [
+        5780,
+        "gpu-gate-wait"
+      ],
+      [
+        5780,
+        "gpu-gate-open"
+      ],
+      [
+        5787,
+        "post-done"
+      ],
+      [
+        11381,
+        "pools-done"
+      ],
+      [
+        12214,
+        "compile-async-done"
+      ],
+      [
+        12214,
+        "warm-gate-open"
+      ],
+      [
+        12340,
+        "warm-load-done"
+      ],
+      [
+        12346,
+        "loop-start"
+      ],
+      [
+        12350,
+        "warm-setA"
+      ],
+      [
+        13339,
+        "warm-setA-done"
+      ],
+      [
+        13436,
+        "warm-fight"
+      ],
+      [
+        17777,
+        "warm-live"
+      ],
+      [
+        19394,
+        "warm-live-end",
+        76
+      ],
+      [
+        19396,
+        "warm-done"
+      ],
+      [
+        19399,
+        "menu-camera"
+      ],
+      [
+        19528,
+        "title-release"
+      ],
+      [
+        19528,
+        "opening-ready"
+      ],
+      [
+        19894,
+        "phase-menu"
+      ],
+      [
+        19894,
+        "opening-complete"
+      ]
+    ],
+    "segments": [
+      [
+        0,
+        "boot"
+      ],
+      [
+        510,
+        "loading"
+      ],
+      [
+        19895,
+        "menu"
+      ]
+    ],
+    "load": [
+      [
+        509,
+        "terrain",
+        "begin"
+      ],
+      [
+        1678,
+        "terrain",
+        "end"
+      ],
+      [
+        1679,
+        "rocks",
+        "begin"
+      ],
+      [
+        1742,
+        "rocks",
+        "end"
+      ],
+      [
+        1743,
+        "trees",
+        "begin"
+      ],
+      [
+        1915,
+        "trees",
+        "end"
+      ],
+      [
+        1915,
+        "actors",
+        "begin"
+      ],
+      [
+        2938,
+        "actors",
+        "end"
+      ],
+      [
+        2938,
+        "foliage",
+        "begin"
+      ],
+      [
+        4007,
+        "foliage",
+        "end"
+      ],
+      [
+        4007,
+        "pois",
+        "begin"
+      ],
+      [
+        5544,
+        "pois",
+        "end"
+      ],
+      [
+        5544,
+        "setup",
+        "begin"
+      ],
+      [
+        5773,
+        "setup",
+        "end"
+      ],
+      [
+        5773,
+        "compile",
+        "begin"
+      ],
+      [
+        12341,
+        "compile",
+        "end"
+      ],
+      [
+        12341,
+        "loop",
+        "begin"
+      ],
+      [
+        12345,
+        "loop",
+        "end"
+      ],
+      [
+        12345,
+        "warmup",
+        "begin"
+      ],
+      [
+        13339,
+        "warmup",
+        "end"
+      ]
+    ],
+    "loaf": [
+      [
+        29,
+        128,
+        14,
+        "boot",
+        ""
+      ],
+      [
+        158,
+        61,
+        8,
+        "boot",
+        ""
+      ],
+      [
+        220,
+        69,
+        0,
+        "boot",
+        ""
+      ],
+      [
+        413,
+        52,
+        0,
+        "boot",
+        ""
+      ],
+      [
+        295,
+        70,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        525,
+        95,
+        44,
+        "loading",
+        "IdleRequestCallback @ heron.js:25359 94ms"
+      ],
+      [
+        620,
+        215,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        877,
+        803,
+        738,
+        "loading",
+        ""
+      ],
+      [
+        1681,
+        63,
+        12,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 61ms"
+      ],
+      [
+        1744,
+        172,
+        121,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 171ms"
+      ],
+      [
+        1916,
+        1044,
+        971,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 1020ms"
+      ],
+      [
+        2961,
+        453,
+        402,
+        "loading",
+        "warmDressView @ index.html?debug=1&__gameTestToken=792b9:1703531 452ms"
+      ],
+      [
+        3414,
+        594,
+        494,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 527ms"
+      ],
+      [
+        4008,
+        1552,
+        1486,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 1535ms"
+      ],
+      [
+        5561,
+        214,
+        162,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 211ms"
+      ],
+      [
+        5785,
+        325,
+        273,
+        "loading",
+        "import.then @ index.html?debug=1&__gameTestToken=792b9:64368 322ms"
+      ],
+      [
+        6222,
+        64,
+        13,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 63ms"
+      ],
+      [
+        6285,
+        53,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 37ms"
+      ],
+      [
+        6385,
+        69,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 41ms"
+      ],
+      [
+        6454,
+        61,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 39ms"
+      ],
+      [
+        6534,
+        53,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 48ms"
+      ],
+      [
+        6587,
+        57,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 34ms"
+      ],
+      [
+        6703,
+        56,
+        3,
+        "loading",
+        "import.then @ index.html?debug=1&__gameTestToken=792b9:4141728 53ms"
+      ],
+      [
+        6779,
+        3756,
+        3691,
+        "loading",
+        "check @ viewmodel.js:156775 3741ms"
+      ],
+      [
+        10579,
+        305,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        11131,
+        125,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        11290,
+        51,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        11433,
+        399,
+        333,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 382ms"
+      ],
+      [
+        11941,
+        66,
+        12,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 62ms"
+      ],
+      [
+        12112,
+        84,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        12213,
+        129,
+        78,
+        "loading",
+        ""
+      ],
+      [
+        12346,
+        221,
+        171,
+        "loading",
+        "update @ three.webgpu.js:600902 219ms"
+      ],
+      [
+        12569,
+        98,
+        48,
+        "loading",
+        "update @ three.webgpu.js:600902 97ms"
+      ],
+      [
+        12668,
+        63,
+        12,
+        "loading",
+        "update @ three.webgpu.js:600902 62ms"
+      ],
+      [
+        12731,
+        146,
+        96,
+        "loading",
+        "update @ three.webgpu.js:600902 145ms"
+      ],
+      [
+        12878,
+        98,
+        46,
+        "loading",
+        "update @ three.webgpu.js:600902 95ms"
+      ],
+      [
+        12975,
+        273,
+        45,
+        "loading",
+        "update @ three.webgpu.js:600902 94ms"
+      ],
+      [
+        13248,
+        72,
+        21,
+        "loading",
+        "update @ three.webgpu.js:600902 70ms"
+      ],
+      [
+        13347,
+        73,
+        0,
+        "loading",
+        "update @ three.webgpu.js:600902 18ms"
+      ],
+      [
+        13436,
+        144,
+        94,
+        "loading",
+        "update @ three.webgpu.js:600902 143ms"
+      ],
+      [
+        13581,
+        126,
+        76,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 126ms"
+      ],
+      [
+        13707,
+        69,
+        19,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 69ms"
+      ],
+      [
+        13806,
+        67,
+        16,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 66ms"
+      ],
+      [
+        13873,
+        104,
+        50,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 100ms"
+      ],
+      [
+        13981,
+        80,
+        29,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 79ms"
+      ],
+      [
+        14114,
+        60,
+        0,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 47ms"
+      ],
+      [
+        14177,
+        192,
+        141,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 191ms"
+      ],
+      [
+        14502,
+        91,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        14635,
+        173,
+        113,
+        "loading",
+        "run @ loader.js:8002 162ms"
+      ],
+      [
+        15079,
+        77,
+        0,
+        "loading",
+        "run @ loader.js:8002 47ms"
+      ],
+      [
+        15180,
+        89,
+        39,
+        "loading",
+        "run @ loader.js:8002 47ms"
+      ],
+      [
+        15279,
+        98,
+        34,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 42ms"
+      ],
+      [
+        15399,
+        83,
+        32,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        15507,
+        95,
+        45,
+        "loading",
+        "run @ loader.js:8002 48ms"
+      ],
+      [
+        15614,
+        99,
+        35,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        15750,
+        81,
+        31,
+        "loading",
+        "run @ loader.js:8002 42ms"
+      ],
+      [
+        15865,
+        83,
+        33,
+        "loading",
+        "run @ loader.js:8002 44ms"
+      ],
+      [
+        15983,
+        80,
+        30,
+        "loading",
+        "run @ loader.js:8002 41ms"
+      ],
+      [
+        16119,
+        61,
+        3,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 53ms"
+      ],
+      [
+        16260,
+        72,
+        0,
+        "loading",
+        "run @ loader.js:8002 44ms"
+      ],
+      [
+        16369,
+        86,
+        36,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        16490,
+        87,
+        35,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        16602,
+        103,
+        52,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 57ms"
+      ],
+      [
+        16755,
+        88,
+        36,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 43ms"
+      ],
+      [
+        16888,
+        87,
+        37,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 43ms"
+      ],
+      [
+        16997,
+        105,
+        37,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 44ms"
+      ],
+      [
+        17138,
+        84,
+        34,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        17258,
+        88,
+        35,
+        "loading",
+        "run @ loader.js:8002 45ms"
+      ],
+      [
+        17475,
+        90,
+        0,
+        "loading",
+        "run @ loader.js:8002 46ms"
+      ],
+      [
+        17587,
+        84,
+        34,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        17680,
+        94,
+        31,
+        "loading",
+        "run @ loader.js:8002 42ms"
+      ],
+      [
+        17774,
+        71,
+        20,
+        "loading",
+        "update @ three.webgpu.js:600902 67ms"
+      ]
+    ],
+    "gaps": [
+      [
+        92,
+        53,
+        "boot"
+      ],
+      [
+        145,
+        133,
+        "boot"
+      ],
+      [
+        295,
+        67,
+        "boot"
+      ],
+      [
+        412,
+        50,
+        "boot"
+      ],
+      [
+        528,
+        300,
+        "loading"
+      ],
+      [
+        845,
+        50,
+        "loading"
+      ],
+      [
+        895,
+        783,
+        "loading"
+      ],
+      [
+        1728,
+        183,
+        "loading"
+      ],
+      [
+        1912,
+        1033,
+        "loading"
+      ],
+      [
+        2945,
+        467,
+        "loading"
+      ],
+      [
+        3412,
+        583,
+        "loading"
+      ],
+      [
+        3995,
+        1550,
+        "loading"
+      ],
+      [
+        5545,
+        217,
+        "loading"
+      ],
+      [
+        5778,
+        67,
+        "loading"
+      ],
+      [
+        5845,
+        250,
+        "loading"
+      ],
+      [
+        6212,
+        67,
+        "loading"
+      ],
+      [
+        6378,
+        67,
+        "loading"
+      ],
+      [
+        6445,
+        67,
+        "loading"
+      ],
+      [
+        6795,
+        3733,
+        "loading"
+      ],
+      [
+        10595,
+        283,
+        "loading"
+      ],
+      [
+        11145,
+        100,
+        "loading"
+      ],
+      [
+        11395,
+        134,
+        "loading"
+      ],
+      [
+        11528,
+        300,
+        "loading"
+      ],
+      [
+        12128,
+        67,
+        "loading"
+      ],
+      [
+        12228,
+        100,
+        "loading"
+      ],
+      [
+        12345,
+        217,
+        "loading"
+      ],
+      [
+        12562,
+        100,
+        "loading"
+      ],
+      [
+        12661,
+        67,
+        "loading"
+      ],
+      [
+        12728,
+        133,
+        "loading"
+      ],
+      [
+        12862,
+        200,
+        "loading"
+      ],
+      [
+        13062,
+        183,
+        "loading"
+      ],
+      [
+        13245,
+        67,
+        "loading"
+      ],
+      [
+        13312,
+        83,
+        "loading"
+      ],
+      [
+        13428,
+        150,
+        "loading"
+      ],
+      [
+        13595,
+        100,
+        "loading"
+      ],
+      [
+        13695,
+        67,
+        "loading"
+      ],
+      [
+        13811,
+        50,
+        "loading"
+      ],
+      [
+        13878,
+        83,
+        "loading"
+      ],
+      [
+        13995,
+        50,
+        "loading"
+      ],
+      [
+        14178,
+        183,
+        "loading"
+      ],
+      [
+        14512,
+        67,
+        "loading"
+      ],
+      [
+        14645,
+        150,
+        "loading"
+      ],
+      [
+        15095,
+        50,
+        "loading"
+      ],
+      [
+        15195,
+        67,
+        "loading"
+      ],
+      [
+        15295,
+        67,
+        "loading"
+      ],
+      [
+        15412,
+        67,
+        "loading"
+      ],
+      [
+        15511,
+        83,
+        "loading"
+      ],
+      [
+        15628,
+        83,
+        "loading"
+      ],
+      [
+        15761,
+        67,
+        "loading"
+      ],
+      [
+        15878,
+        67,
+        "loading"
+      ],
+      [
+        15995,
+        67,
+        "loading"
+      ],
+      [
+        16261,
+        67,
+        "loading"
+      ],
+      [
+        16378,
+        67,
+        "loading"
+      ],
+      [
+        16495,
+        67,
+        "loading"
+      ],
+      [
+        16612,
+        83,
+        "loading"
+      ],
+      [
+        16762,
+        67,
+        "loading"
+      ],
+      [
+        16895,
+        67,
+        "loading"
+      ],
+      [
+        17011,
+        83,
+        "loading"
+      ],
+      [
+        17145,
+        67,
+        "loading"
+      ],
+      [
+        17261,
+        83,
+        "loading"
+      ],
+      [
+        17478,
+        83,
+        "loading"
+      ],
+      [
+        17595,
+        67,
+        "loading"
+      ],
+      [
+        17695,
+        67,
+        "loading"
+      ],
+      [
+        17762,
+        67,
+        "loading"
+      ],
+      [
+        18545,
+        50,
+        "loading"
+      ],
+      [
+        20045,
+        84,
+        "menu"
+      ]
+    ],
+    "drops": [],
+    "stats": {
+      "boot": {
+        "ms": 509.5,
+        "frames": 6,
+        "over33": 5,
+        "over50": 4,
+        "over100": 1,
+        "worst": 133
+      },
+      "loading": {
+        "ms": 19385.59999999404,
+        "frames": 344,
+        "over33": 99,
+        "over50": 61,
+        "over100": 21,
+        "worst": 3733
+      },
+      "menu": {
+        "ms": 0,
+        "frames": 8,
+        "over33": 4,
+        "over50": 1,
+        "over100": 0,
+        "worst": 84
+      }
+    },
+    "videos": {
+      "caracal@loading": {
+        "frames": 4,
+        "dropped": 0
+      }
+    },
+    "summary": null
+  },
+  "warm": {
+    "trace": [
+      "fire-hot:229",
+      "fire-cold:229",
+      "fire-resources:100/8",
+      "fire-pool-falling-leaves:231",
+      "fire-leaf-resources:1",
+      "fire-clean:231",
+      "load:286",
+      "a-fresh:286",
+      "a-flash:289",
+      "a-faded:290",
+      "a-kill-generic:297",
+      "a-kill-melee:300",
+      "a-kill-explosive:304",
+      "a-fx:307",
+      "a-corpse:307",
+      "fresh:362",
+      "burning:364",
+      "flash:364",
+      "faded:364",
+      "tree-fade:364",
+      "kill-explosive:364",
+      "kill-chainsaw:364",
+      "kill-pellet:364",
+      "kill-generic:364",
+      "kill-melee:364",
+      "kill-explosive:366",
+      "kill-chainsaw:366",
+      "kill-pellet:366",
+      "kill-generic:367",
+      "kill-melee:367",
+      "kill-explosive:367",
+      "kill-chainsaw:367",
+      "kill-pellet:367",
+      "kill-generic:367",
+      "effects:372",
+      "corpses:372",
+      "corpses2:372"
+    ]
+  },
+  "errors": []
+}

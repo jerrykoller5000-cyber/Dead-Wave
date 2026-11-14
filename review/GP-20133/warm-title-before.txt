@@ -1,0 +1,69 @@
+    async function warmEffectPools() {
+      const px = player.position.x, py = player.position.y + 1, pz = player.position.z;
+      try {   // CL-117: a chute (one fading, the transparent variant) and the aircraft
+        const c1 = airborne.chute(), c2 = airborne.chute(), pl = makeCargoPlane();
+        airborne.prepare(c1); airborne.prepare(c2); airborne.fade(c2, 0.5);
+        for (const o of [c1, c2, pl]) { o.position.set(px, py + 6, pz); o.visible = false; scene.add(o); }
+        _warmAirborne = [c1, c2, pl];
+      } catch (_) {}
+      try {
+        spawnMote(px, py, pz, dustMat, { vx: 0, vy: 0, vz: 0, grav: 0, drag: 0, life: 1, scale: 1 });
+        spawnMote(px, py, pz, splashMat, { vx: 0, vy: 0, vz: 0, grav: 0, drag: 0, life: 1, scale: 1 });
+        spawnMote(px, py, pz, emberMat, { vx: 0, vy: 0, vz: 0, grav: 0, drag: 0, life: 1, scale: 1 });
+        spawnMote(px, py, pz, acidMoteMat, { vx: 0, vy: 0, vz: 0, grav: 0, drag: 0, life: 1, scale: 1 });
+        spawnBlood(px, py, pz, 1, 0, 2, 1);
+        spawnChunks(px, py, pz, 0x555555, 2, 1);
+        spawnGibBurst(px, py, pz, 0x8a7a60, 0x88ff44, 1, 0, 'pellet');
+        spawnRipple(px, py, pz, 1, 1);
+        spawnProjectile(false, new THREE.Vector3(px, py, pz), new THREE.Vector3(0, 0, 1), 0, 0.5);
+        // GB-171: warm the pools with the real meshes. A placeholder ball built here went back into the pool and every
+        // later throw reused it, so a thrown grenade (and a mortar round) never showed its model. The shotgun shell's
+        // builder is inline at its one use, so its pool fills on the first shot.
+        for (const [kind, build] of [['grenade', () => makeFragGrenade({ THREE, r: 0.11 })], ['mortar', makeMortarRoundMesh]]) {
+          const m = acquireProjectileMesh(kind, build);
+          releaseProjectileMesh(m);
+        }
+        // Bodies for the pools, built now rather than mid-wave. Building one is thirty
+        // meshes and thirty materials that are then merged and thrown away - a burst of
+        // garbage that, on the real GPU, lined up with 50–180ms collector pauses when a
+        // wave spawned. A common type gets several, the rarer ones one each.
+        let _poolT = performance.now();
+        const POOL_DEPTH = { shambler: 8, feral: 6, brute: 4, spitter: 3, military: 3, bomber: 2, leaper: 3, spider: 2, demon: 2, colossus: 1, guardian: 1 };
+        for (const key of Object.keys(ZOMBIE_TYPES)) {
+          const n = POOL_DEPTH[key] || 1;
+          for (let i = 0; i < n; i++) {
+            if (performance.now() - _poolT > 24) { await yieldToBrowser(); _poolT = performance.now(); }   // CL-195: ~25 ms a body on Jerry's machine; the title keeps painting
+            const m = makeZombieMesh(key);
+            m.visible = false;
+            m.position.set(px, py - 50, pz);
+            scene.add(m);
+            _warmZombies.push({ key, mesh: m });
+            if (!_warmSkinAnchors.length) for (const skin of m.userData.skinMeshes || []) {
+              if (!skin.geometry.attributes.zGlow || !skin.material.map) continue;
+              // GP-19949: a kept render object holds the flashed skin's node-build cache
+              // after pre-roll bodies are cleared. Geometry and skeleton stay shared.
+              const anchor = skin.clone();
+              anchor.material = skin.material.clone();
+              THREE.MeshStandardMaterial.prototype.copy.call(anchor.material, skin.material);
+              if (anchor.material.emissive) anchor.material.emissive.setHex(0xa2c4be);
+              anchor.material.emissiveIntensity = 0.65;
+              anchor.position.set(px, py, pz);
+              anchor.frustumCulled = false;
+              scene.add(anchor);
+              _warmSkinAnchors.push(anchor);
+              break;
+            }
+          }
+        }
+        // Brass, which is transparent metal and shared by every gun.
+        try { spawnCasing('pistol'); } catch (e) {}
+        // One flame blob in each of the stream's colours, and one of steam.
+        for (const mat of [...FLAME_STAGES.map((st) => st[1]), flameEdgeMat, flameSteamMat]) {
+          spawnFlameBlob(px, py, pz, { x: 0, y: 0, z: 1 }, 0);
+          const blob = flameParticles[flameParticles.length - 1];
+          if (blob) { blob.mesh.material = mat; blob.mesh.position.set(px, py, pz); }
+        }
+      } catch (err) {
+        console.info('Grave Shift: effect warm-up skipped a step.', err);
+      }
+    }

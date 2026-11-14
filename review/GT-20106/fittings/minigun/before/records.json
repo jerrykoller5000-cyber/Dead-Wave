@@ -1,0 +1,3434 @@
+{
+  "phase": "before",
+  "start": {
+    "studio/weapon-heavy.js": "93fa84991466767123271b4b683dd84ac51f0d11aed0d38d50ad3666114836e3",
+    "studio/weapon-sidearms.js": "529017944e86c818c4d74303d0d97344e3f164df87ad280ec202e942cfa0c093",
+    "studio/weapon-longarms.js": "5c7882531e7840a8a418c90ea2f4f76e7f71d57b0a05177d7a4c24cc88c5f7b7",
+    "studio/weapon-casings.js": "cb52591967fdf3ef30d6e46e583eff7adc06482f11a634769275450e41fb23c8",
+    "studio/weapon-attachments.js": "e82ec1f65ce0afce33b17a34efb0ad991381b7d8def6e6d8ae43e58735d2fcc9",
+    "game/viewmodel.js": "a81d0a67b625fae826dfb4df265a4b75bd5b25850a94f06c2bc0e3f50fec13b0",
+    "game/viewmodel-poses.js": "2d69a764204632f84ad7aba0353aafc64644301a2e166fc5c78d71827ebb85d1",
+    "game/viewmodel-fit.js": "f1dac3893c06c12cc261f4823f3355e0a25f2836259bc89d674f4e3c8c486e78",
+    "studio/hand-contacts.js": "0dd1bc329916581ece0c6fa9a179daa80e0800c6abee8eb99a6fea03a86daa89",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "index.html": "fc77e63592f6a1450754266212bc2b963f201778a0bb65599ba28e8b8c7377b2"
+  },
+  "end": {
+    "studio/weapon-heavy.js": "93fa84991466767123271b4b683dd84ac51f0d11aed0d38d50ad3666114836e3",
+    "studio/weapon-sidearms.js": "529017944e86c818c4d74303d0d97344e3f164df87ad280ec202e942cfa0c093",
+    "studio/weapon-longarms.js": "5c7882531e7840a8a418c90ea2f4f76e7f71d57b0a05177d7a4c24cc88c5f7b7",
+    "studio/weapon-casings.js": "cb52591967fdf3ef30d6e46e583eff7adc06482f11a634769275450e41fb23c8",
+    "studio/weapon-attachments.js": "e82ec1f65ce0afce33b17a34efb0ad991381b7d8def6e6d8ae43e58735d2fcc9",
+    "game/viewmodel.js": "a81d0a67b625fae826dfb4df265a4b75bd5b25850a94f06c2bc0e3f50fec13b0",
+    "game/viewmodel-poses.js": "2d69a764204632f84ad7aba0353aafc64644301a2e166fc5c78d71827ebb85d1",
+    "game/viewmodel-fit.js": "f1dac3893c06c12cc261f4823f3355e0a25f2836259bc89d674f4e3c8c486e78",
+    "studio/hand-contacts.js": "0dd1bc329916581ece0c6fa9a179daa80e0800c6abee8eb99a6fea03a86daa89",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "index.html": "fc77e63592f6a1450754266212bc2b963f201778a0bb65599ba28e8b8c7377b2"
+  },
+  "changed": [],
+  "records": [
+    {
+      "name": "hip",
+      "ext": false,
+      "light": "noon",
+      "file": "hip-noon.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.008244944720949865,
+          -198.5769628370331,
+          -640.5605768633699
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.8758047456118181,
+        -0.0790513930885354,
+        -0.033420425108373134,
+        0,
+        -0.08078405325771545,
+        0.8750070705641734,
+        0.04729231651971783,
+        0,
+        0.028982482690706662,
+        0.05013485527363615,
+        -0.8780925418107242,
+        0,
+        -0.1884117065343496,
+        -0.3355380653608526,
+        -0.7390629066525187,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 641,
+        "renderFrame": 641
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "hip",
+      "ext": false,
+      "light": "overcast",
+      "file": "hip-overcast.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.008244944720949865,
+          -198.5769628370331,
+          -640.5605768633699
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.8758047456118181,
+        -0.0790513930885354,
+        -0.033420425108373134,
+        0,
+        -0.08078405325771545,
+        0.8750070705641734,
+        0.04729231651971783,
+        0,
+        0.028982482690706662,
+        0.05013485527363615,
+        -0.8780925418107242,
+        0,
+        -0.1884117065343496,
+        -0.3355380653608526,
+        -0.7390629066525187,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 663,
+        "renderFrame": 663
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "hip",
+      "ext": false,
+      "light": "dusk",
+      "file": "hip-dusk.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.008244944720949865,
+          -198.5769628370331,
+          -640.5605768633699
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.8758047456118181,
+        -0.0790513930885354,
+        -0.033420425108373134,
+        0,
+        -0.08078405325771545,
+        0.8750070705641734,
+        0.04729231651971783,
+        0,
+        0.028982482690706662,
+        0.05013485527363615,
+        -0.8780925418107242,
+        0,
+        -0.1884117065343496,
+        -0.3355380653608526,
+        -0.7390629066525187,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 685,
+        "renderFrame": 685
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "hip",
+      "ext": false,
+      "light": "night",
+      "file": "hip-night.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.008244944720949865,
+          -198.5769628370331,
+          -640.5605768633699
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.8758047456118181,
+        -0.0790513930885354,
+        -0.033420425108373134,
+        0,
+        -0.08078405325771545,
+        0.8750070705641734,
+        0.04729231651971783,
+        0,
+        0.028982482690706662,
+        0.05013485527363615,
+        -0.8780925418107242,
+        0,
+        -0.1884117065343496,
+        -0.3355380653608526,
+        -0.7390629066525187,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 2.1627982159605303
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 706,
+        "renderFrame": 706
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-side-standard",
+      "ext": false,
+      "light": "noon",
+      "file": "drum-side-standard-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.011250788477373848,
+          -198.57950953495,
+          -640.5532410246358
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5756497907422231,
+          0.3359171917947402,
+          0.244728363702578
+        ],
+        "q": [
+          0.061842156026951,
+          0.5630551607007489,
+          0.042308495245247206,
+          0.8230154463776942
+        ]
+      },
+      "gun": [
+        -0.8758047456117363,
+        -0.07905021327750181,
+        -0.033423215650841,
+        0,
+        -0.08078405325770792,
+        0.875005400570746,
+        0.047323204783518556,
+        0,
+        0.02898248269070396,
+        0.05016585245471766,
+        -0.8780907714719897,
+        0,
+        -0.1884117065343505,
+        -0.3355126820113202,
+        -0.7390618946788801,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 737,
+        "renderFrame": 737
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-side-standard",
+      "ext": false,
+      "light": "overcast",
+      "file": "drum-side-standard-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.011250788477373848,
+          -198.57950953495,
+          -640.5532410246358
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5756497907422231,
+          0.3359171917947402,
+          0.244728363702578
+        ],
+        "q": [
+          0.061842156026951,
+          0.5630551607007489,
+          0.042308495245247206,
+          0.8230154463776942
+        ]
+      },
+      "gun": [
+        -0.8758047456117363,
+        -0.07905021327750181,
+        -0.033423215650841,
+        0,
+        -0.08078405325770792,
+        0.875005400570746,
+        0.047323204783518556,
+        0,
+        0.02898248269070396,
+        0.05016585245471766,
+        -0.8780907714719897,
+        0,
+        -0.1884117065343505,
+        -0.3355126820113202,
+        -0.7390618946788801,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 758,
+        "renderFrame": 758
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-side-standard",
+      "ext": false,
+      "light": "dusk",
+      "file": "drum-side-standard-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.011250788477373848,
+          -198.57950953495,
+          -640.5532410246358
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5756497907422231,
+          0.3359171917947402,
+          0.244728363702578
+        ],
+        "q": [
+          0.061842156026951,
+          0.5630551607007489,
+          0.042308495245247206,
+          0.8230154463776942
+        ]
+      },
+      "gun": [
+        -0.8758047456117363,
+        -0.07905021327750181,
+        -0.033423215650841,
+        0,
+        -0.08078405325770792,
+        0.875005400570746,
+        0.047323204783518556,
+        0,
+        0.02898248269070396,
+        0.05016585245471766,
+        -0.8780907714719897,
+        0,
+        -0.1884117065343505,
+        -0.3355126820113202,
+        -0.7390618946788801,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 778,
+        "renderFrame": 778
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-side-standard",
+      "ext": false,
+      "light": "night",
+      "file": "drum-side-standard-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.011250788477373848,
+          -198.57950953495,
+          -640.5532410246358
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5756497907422231,
+          0.3359171917947402,
+          0.244728363702578
+        ],
+        "q": [
+          0.061842156026951,
+          0.5630551607007489,
+          0.042308495245247206,
+          0.8230154463776942
+        ]
+      },
+      "gun": [
+        -0.8758047456117363,
+        -0.07905021327750181,
+        -0.033423215650841,
+        0,
+        -0.08078405325770792,
+        0.875005400570746,
+        0.047323204783518556,
+        0,
+        0.02898248269070396,
+        0.05016585245471766,
+        -0.8780907714719897,
+        0,
+        -0.1884117065343505,
+        -0.3355126820113202,
+        -0.7390618946788801,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 0.8576969243620528
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 798,
+        "renderFrame": 798
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-back-standard",
+      "ext": false,
+      "light": "noon",
+      "file": "drum-back-standard-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.0018441885507056999,
+          -198.58041488164827,
+          -640.551798835522
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.48090427426404414,
+          0.21215121224601774,
+          0.36391352591612014
+        ],
+        "q": [
+          0.14869156426260063,
+          -0.0987123949919223,
+          -0.014918919342160731,
+          0.9838313410528056
+        ]
+      },
+      "gun": [
+        -0.8758047456116439,
+        -0.07904725581359343,
+        -0.03343020957158234,
+        0,
+        -0.08078405325769941,
+        0.8750012101750808,
+        0.04740062163027845,
+        0,
+        0.02898248269070091,
+        0.05024354227181797,
+        -0.8780863295579766,
+        0,
+        -0.18841170653435152,
+        -0.33544906235879585,
+        -0.739059356561703,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 831,
+        "renderFrame": 831
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-back-standard",
+      "ext": false,
+      "light": "overcast",
+      "file": "drum-back-standard-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.0018441885507056999,
+          -198.58041488164827,
+          -640.551798835522
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.48090427426404414,
+          0.21215121224601774,
+          0.36391352591612014
+        ],
+        "q": [
+          0.14869156426260063,
+          -0.0987123949919223,
+          -0.014918919342160731,
+          0.9838313410528056
+        ]
+      },
+      "gun": [
+        -0.8758047456116439,
+        -0.07904725581359343,
+        -0.03343020957158234,
+        0,
+        -0.08078405325769941,
+        0.8750012101750808,
+        0.04740062163027845,
+        0,
+        0.02898248269070091,
+        0.05024354227181797,
+        -0.8780863295579766,
+        0,
+        -0.18841170653435152,
+        -0.33544906235879585,
+        -0.739059356561703,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 851,
+        "renderFrame": 851
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-back-standard",
+      "ext": false,
+      "light": "dusk",
+      "file": "drum-back-standard-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.0018441885507056999,
+          -198.58041488164827,
+          -640.551798835522
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.48090427426404414,
+          0.21215121224601774,
+          0.36391352591612014
+        ],
+        "q": [
+          0.14869156426260063,
+          -0.0987123949919223,
+          -0.014918919342160731,
+          0.9838313410528056
+        ]
+      },
+      "gun": [
+        -0.8758047456116439,
+        -0.07904725581359343,
+        -0.03343020957158234,
+        0,
+        -0.08078405325769941,
+        0.8750012101750808,
+        0.04740062163027845,
+        0,
+        0.02898248269070091,
+        0.05024354227181797,
+        -0.8780863295579766,
+        0,
+        -0.18841170653435152,
+        -0.33544906235879585,
+        -0.739059356561703,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 873,
+        "renderFrame": 873
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-back-standard",
+      "ext": false,
+      "light": "night",
+      "file": "drum-back-standard-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.0018441885507056999,
+          -198.58041488164827,
+          -640.551798835522
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.48090427426404414,
+          0.21215121224601774,
+          0.36391352591612014
+        ],
+        "q": [
+          0.14869156426260063,
+          -0.0987123949919223,
+          -0.014918919342160731,
+          0.9838313410528056
+        ]
+      },
+      "gun": [
+        -0.8758047456116439,
+        -0.07904725581359343,
+        -0.03343020957158234,
+        0,
+        -0.08078405325769941,
+        0.8750012101750808,
+        0.04740062163027845,
+        0,
+        0.02898248269070091,
+        0.05024354227181797,
+        -0.8780863295579766,
+        0,
+        -0.18841170653435152,
+        -0.33544906235879585,
+        -0.739059356561703,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 0.8576969243617962
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 894,
+        "renderFrame": 894
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-below-standard",
+      "ext": false,
+      "light": "noon",
+      "file": "drum-below-standard-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.004858313102517355,
+          -198.5788736604834,
+          -640.5576513767489
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.3015176373922833,
+          0.8752420040965075,
+          -0.36703352585906923
+        ],
+        "q": [
+          -0.4415801631371558,
+          0.34174674649032766,
+          -0.18669709850368066,
+          0.8083070667743452
+        ]
+      },
+      "gun": [
+        -0.8758047456115468,
+        -0.07904257266179404,
+        -0.033441280936336255,
+        0,
+        -0.08078405325769043,
+        0.8749945624607388,
+        0.04752317753225626,
+        0,
+        0.028982482690697687,
+        0.05036653026076664,
+        -0.878079283621894,
+        0,
+        -0.18841170653435257,
+        -0.33534834814818076,
+        -0.7390553334257356,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 924,
+        "renderFrame": 924
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-below-standard",
+      "ext": false,
+      "light": "overcast",
+      "file": "drum-below-standard-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.004858313102517355,
+          -198.5788736604834,
+          -640.5576513767489
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.3015176373922833,
+          0.8752420040965075,
+          -0.36703352585906923
+        ],
+        "q": [
+          -0.4415801631371558,
+          0.34174674649032766,
+          -0.18669709850368066,
+          0.8083070667743452
+        ]
+      },
+      "gun": [
+        -0.8758047456115468,
+        -0.07904257266179404,
+        -0.033441280936336255,
+        0,
+        -0.08078405325769043,
+        0.8749945624607388,
+        0.04752317753225626,
+        0,
+        0.028982482690697687,
+        0.05036653026076664,
+        -0.878079283621894,
+        0,
+        -0.18841170653435257,
+        -0.33534834814818076,
+        -0.7390553334257356,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 947,
+        "renderFrame": 947
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-below-standard",
+      "ext": false,
+      "light": "dusk",
+      "file": "drum-below-standard-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.004858313102517355,
+          -198.5788736604834,
+          -640.5576513767489
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.3015176373922833,
+          0.8752420040965075,
+          -0.36703352585906923
+        ],
+        "q": [
+          -0.4415801631371558,
+          0.34174674649032766,
+          -0.18669709850368066,
+          0.8083070667743452
+        ]
+      },
+      "gun": [
+        -0.8758047456115468,
+        -0.07904257266179404,
+        -0.033441280936336255,
+        0,
+        -0.08078405325769043,
+        0.8749945624607388,
+        0.04752317753225626,
+        0,
+        0.028982482690697687,
+        0.05036653026076664,
+        -0.878079283621894,
+        0,
+        -0.18841170653435257,
+        -0.33534834814818076,
+        -0.7390553334257356,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 970,
+        "renderFrame": 970
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-below-standard",
+      "ext": false,
+      "light": "night",
+      "file": "drum-below-standard-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.004858313102517355,
+          -198.5788736604834,
+          -640.5576513767489
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.3015176373922833,
+          0.8752420040965075,
+          -0.36703352585906923
+        ],
+        "q": [
+          -0.4415801631371558,
+          0.34174674649032766,
+          -0.18669709850368066,
+          0.8083070667743452
+        ]
+      },
+      "gun": [
+        -0.8758047456115468,
+        -0.07904257266179404,
+        -0.033441280936336255,
+        0,
+        -0.08078405325769043,
+        0.8749945624607388,
+        0.04752317753225626,
+        0,
+        0.028982482690697687,
+        0.05036653026076664,
+        -0.878079283621894,
+        0,
+        -0.18841170653435257,
+        -0.33534834814818076,
+        -0.7390553334257356,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 0.9049864603628546
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 992,
+        "renderFrame": 992
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-side-extended",
+      "ext": true,
+      "light": "noon",
+      "file": "drum-side-extended-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.000039769642930116066,
+          -198.5791454762577,
+          -640.5537921240698
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5756747981354704,
+          0.3356145245477275,
+          0.24469245279719987
+        ],
+        "q": [
+          0.061842156026951,
+          0.5630551607007489,
+          0.042308495245247206,
+          0.8230154463776942
+        ]
+      },
+      "gun": [
+        -0.8758047456114585,
+        -0.07903624617707773,
+        -0.03345623041965191,
+        0,
+        -0.08078405325768231,
+        0.8749855582943813,
+        0.04768867281375736,
+        0,
+        0.028982482690694762,
+        0.05053260893437049,
+        -0.8780697416097297,
+        0,
+        -0.18841170653435355,
+        -0.3352123468155451,
+        -0.7390498907394578,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1024,
+        "renderFrame": 1024
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-side-extended",
+      "ext": true,
+      "light": "overcast",
+      "file": "drum-side-extended-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.000039769642930116066,
+          -198.5791454762577,
+          -640.5537921240698
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5756747981354704,
+          0.3356145245477275,
+          0.24469245279719987
+        ],
+        "q": [
+          0.061842156026951,
+          0.5630551607007489,
+          0.042308495245247206,
+          0.8230154463776942
+        ]
+      },
+      "gun": [
+        -0.8758047456114585,
+        -0.07903624617707773,
+        -0.03345623041965191,
+        0,
+        -0.08078405325768231,
+        0.8749855582943813,
+        0.04768867281375736,
+        0,
+        0.028982482690694762,
+        0.05053260893437049,
+        -0.8780697416097297,
+        0,
+        -0.18841170653435355,
+        -0.3352123468155451,
+        -0.7390498907394578,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1043,
+        "renderFrame": 1043
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-side-extended",
+      "ext": true,
+      "light": "dusk",
+      "file": "drum-side-extended-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.000039769642930116066,
+          -198.5791454762577,
+          -640.5537921240698
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5756747981354704,
+          0.3356145245477275,
+          0.24469245279719987
+        ],
+        "q": [
+          0.061842156026951,
+          0.5630551607007489,
+          0.042308495245247206,
+          0.8230154463776942
+        ]
+      },
+      "gun": [
+        -0.8758047456114585,
+        -0.07903624617707773,
+        -0.03345623041965191,
+        0,
+        -0.08078405325768231,
+        0.8749855582943813,
+        0.04768867281375736,
+        0,
+        0.028982482690694762,
+        0.05053260893437049,
+        -0.8780697416097297,
+        0,
+        -0.18841170653435355,
+        -0.3352123468155451,
+        -0.7390498907394578,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1063,
+        "renderFrame": 1063
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-side-extended",
+      "ext": true,
+      "light": "night",
+      "file": "drum-side-extended-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.000039769642930116066,
+          -198.5791454762577,
+          -640.5537921240698
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5756747981354704,
+          0.3356145245477275,
+          0.24469245279719987
+        ],
+        "q": [
+          0.061842156026951,
+          0.5630551607007489,
+          0.042308495245247206,
+          0.8230154463776942
+        ]
+      },
+      "gun": [
+        -0.8758047456114585,
+        -0.07903624617707773,
+        -0.03345623041965191,
+        0,
+        -0.08078405325768231,
+        0.8749855582943813,
+        0.04768867281375736,
+        0,
+        0.028982482690694762,
+        0.05053260893437049,
+        -0.8780697416097297,
+        0,
+        -0.18841170653435355,
+        -0.3352123468155451,
+        -0.7390498907394578,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 0.8576969243620475
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1083,
+        "renderFrame": 1083
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-back-extended",
+      "ext": true,
+      "light": "noon",
+      "file": "drum-back-extended-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.004070574235241921,
+          -198.57897989371995,
+          -640.556363874812
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.48091146643987476,
+          0.2117477224714458,
+          0.3638258507723059
+        ],
+        "q": [
+          0.14869156426260063,
+          -0.0987123949919223,
+          -0.014918919342160731,
+          0.9838313410528056
+        ]
+      },
+      "gun": [
+        -0.8758047456113623,
+        -0.07902838774581049,
+        -0.033474788930666716,
+        0,
+        -0.08078405325767345,
+        0.8749743358304837,
+        0.047894137180897384,
+        0,
+        0.028982482690691584,
+        0.05073879745657229,
+        -0.8780578512426062,
+        0,
+        -0.1884117065343546,
+        -0.3350434990207529,
+        -0.7390431176198559,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1114,
+        "renderFrame": 1114
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-back-extended",
+      "ext": true,
+      "light": "overcast",
+      "file": "drum-back-extended-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.004070574235241921,
+          -198.57897989371995,
+          -640.556363874812
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.48091146643987476,
+          0.2117477224714458,
+          0.3638258507723059
+        ],
+        "q": [
+          0.14869156426260063,
+          -0.0987123949919223,
+          -0.014918919342160731,
+          0.9838313410528056
+        ]
+      },
+      "gun": [
+        -0.8758047456113623,
+        -0.07902838774581049,
+        -0.033474788930666716,
+        0,
+        -0.08078405325767345,
+        0.8749743358304837,
+        0.047894137180897384,
+        0,
+        0.028982482690691584,
+        0.05073879745657229,
+        -0.8780578512426062,
+        0,
+        -0.1884117065343546,
+        -0.3350434990207529,
+        -0.7390431176198559,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1135,
+        "renderFrame": 1135
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-back-extended",
+      "ext": true,
+      "light": "dusk",
+      "file": "drum-back-extended-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.004070574235241921,
+          -198.57897989371995,
+          -640.556363874812
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.48091146643987476,
+          0.2117477224714458,
+          0.3638258507723059
+        ],
+        "q": [
+          0.14869156426260063,
+          -0.0987123949919223,
+          -0.014918919342160731,
+          0.9838313410528056
+        ]
+      },
+      "gun": [
+        -0.8758047456113623,
+        -0.07902838774581049,
+        -0.033474788930666716,
+        0,
+        -0.08078405325767345,
+        0.8749743358304837,
+        0.047894137180897384,
+        0,
+        0.028982482690691584,
+        0.05073879745657229,
+        -0.8780578512426062,
+        0,
+        -0.1884117065343546,
+        -0.3350434990207529,
+        -0.7390431176198559,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1157,
+        "renderFrame": 1157
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-back-extended",
+      "ext": true,
+      "light": "night",
+      "file": "drum-back-extended-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.004070574235241921,
+          -198.57897989371995,
+          -640.556363874812
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.48091146643987476,
+          0.2117477224714458,
+          0.3638258507723059
+        ],
+        "q": [
+          0.14869156426260063,
+          -0.0987123949919223,
+          -0.014918919342160731,
+          0.9838313410528056
+        ]
+      },
+      "gun": [
+        -0.8758047456113623,
+        -0.07902838774581049,
+        -0.033474788930666716,
+        0,
+        -0.08078405325767345,
+        0.8749743358304837,
+        0.047894137180897384,
+        0,
+        0.028982482690691584,
+        0.05073879745657229,
+        -0.8780578512426062,
+        0,
+        -0.1884117065343546,
+        -0.3350434990207529,
+        -0.7390431176198559,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 0.8576969243620475
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1177,
+        "renderFrame": 1177
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-below-extended",
+      "ext": true,
+      "light": "noon",
+      "file": "drum-below-extended-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.005723175749577415,
+          -198.5799501423523,
+          -640.5549929745576
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.30154984481568103,
+          0.8749923681753601,
+          -0.36658684683948284
+        ],
+        "q": [
+          -0.4415801631371558,
+          0.34174674649032766,
+          -0.18669709850368066,
+          0.8083070667743452
+        ]
+      },
+      "gun": [
+        -0.8758047456112761,
+        -0.07901913593852442,
+        -0.03349662250410336,
+        0,
+        -0.08078405325766548,
+        0.8749610697035308,
+        0.04813588309567329,
+        0,
+        0.02898248269068873,
+        0.05098139521106359,
+        -0.8780437990432498,
+        0,
+        -0.18841170653435554,
+        -0.3348448348082584,
+        -0.7390351258429042,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1208,
+        "renderFrame": 1208
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-below-extended",
+      "ext": true,
+      "light": "overcast",
+      "file": "drum-below-extended-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.005723175749577415,
+          -198.5799501423523,
+          -640.5549929745576
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.30154984481568103,
+          0.8749923681753601,
+          -0.36658684683948284
+        ],
+        "q": [
+          -0.4415801631371558,
+          0.34174674649032766,
+          -0.18669709850368066,
+          0.8083070667743452
+        ]
+      },
+      "gun": [
+        -0.8758047456112761,
+        -0.07901913593852442,
+        -0.03349662250410336,
+        0,
+        -0.08078405325766548,
+        0.8749610697035308,
+        0.04813588309567329,
+        0,
+        0.02898248269068873,
+        0.05098139521106359,
+        -0.8780437990432498,
+        0,
+        -0.18841170653435554,
+        -0.3348448348082584,
+        -0.7390351258429042,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1232,
+        "renderFrame": 1232
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-below-extended",
+      "ext": true,
+      "light": "dusk",
+      "file": "drum-below-extended-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.005723175749577415,
+          -198.5799501423523,
+          -640.5549929745576
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.30154984481568103,
+          0.8749923681753601,
+          -0.36658684683948284
+        ],
+        "q": [
+          -0.4415801631371558,
+          0.34174674649032766,
+          -0.18669709850368066,
+          0.8083070667743452
+        ]
+      },
+      "gun": [
+        -0.8758047456112761,
+        -0.07901913593852442,
+        -0.03349662250410336,
+        0,
+        -0.08078405325766548,
+        0.8749610697035308,
+        0.04813588309567329,
+        0,
+        0.02898248269068873,
+        0.05098139521106359,
+        -0.8780437990432498,
+        0,
+        -0.18841170653435554,
+        -0.3348448348082584,
+        -0.7390351258429042,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1253,
+        "renderFrame": 1253
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-below-extended",
+      "ext": true,
+      "light": "night",
+      "file": "drum-below-extended-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.005723175749577415,
+          -198.5799501423523,
+          -640.5549929745576
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.30154984481568103,
+          0.8749923681753601,
+          -0.36658684683948284
+        ],
+        "q": [
+          -0.4415801631371558,
+          0.34174674649032766,
+          -0.18669709850368066,
+          0.8083070667743452
+        ]
+      },
+      "gun": [
+        -0.8758047456112761,
+        -0.07901913593852442,
+        -0.03349662250410336,
+        0,
+        -0.08078405325766548,
+        0.8749610697035308,
+        0.04813588309567329,
+        0,
+        0.02898248269068873,
+        0.05098139521106359,
+        -0.8780437990432498,
+        0,
+        -0.18841170653435554,
+        -0.3348448348082584,
+        -0.7390351258429042,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 0.9049864603625913
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1277,
+        "renderFrame": 1277
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-front-standard",
+      "ext": false,
+      "light": "noon",
+      "file": "drum-front-standard-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.00829647362339086,
+          -198.57699344856567,
+          -640.5604933425744
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.8126526255478193,
+          0.442534438004428,
+          -0.610542116474132
+        ],
+        "q": [
+          0.059650325989853537,
+          -0.6034851166734961,
+          -0.04534644022724452,
+          0.7938458621934097
+        ]
+      },
+      "gun": [
+        -0.8758047456118138,
+        -0.079051393088535,
+        -0.03342042510837296,
+        0,
+        -0.08078405325771504,
+        0.8750070705641689,
+        0.047292316519717596,
+        0,
+        0.028982482690706513,
+        0.0501348552736359,
+        -0.8780925418107197,
+        0,
+        -0.18841170653434966,
+        -0.33553806536085273,
+        -0.7390629066525172,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 643,
+        "renderFrame": 643
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "laserVisible": false,
+      "laserAim": null,
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-front-standard",
+      "ext": false,
+      "light": "overcast",
+      "file": "drum-front-standard-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.00829647362339086,
+          -198.57699344856567,
+          -640.5604933425744
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.8126526255478193,
+          0.442534438004428,
+          -0.610542116474132
+        ],
+        "q": [
+          0.059650325989853537,
+          -0.6034851166734961,
+          -0.04534644022724452,
+          0.7938458621934097
+        ]
+      },
+      "gun": [
+        -0.8758047456118138,
+        -0.079051393088535,
+        -0.03342042510837296,
+        0,
+        -0.08078405325771504,
+        0.8750070705641689,
+        0.047292316519717596,
+        0,
+        0.028982482690706513,
+        0.0501348552736359,
+        -0.8780925418107197,
+        0,
+        -0.18841170653434966,
+        -0.33553806536085273,
+        -0.7390629066525172,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 665,
+        "renderFrame": 665
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "laserVisible": false,
+      "laserAim": null,
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-front-standard",
+      "ext": false,
+      "light": "dusk",
+      "file": "drum-front-standard-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.00829647362339086,
+          -198.57699344856567,
+          -640.5604933425744
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.8126526255478193,
+          0.442534438004428,
+          -0.610542116474132
+        ],
+        "q": [
+          0.059650325989853537,
+          -0.6034851166734961,
+          -0.04534644022724452,
+          0.7938458621934097
+        ]
+      },
+      "gun": [
+        -0.8758047456118138,
+        -0.079051393088535,
+        -0.03342042510837296,
+        0,
+        -0.08078405325771504,
+        0.8750070705641689,
+        0.047292316519717596,
+        0,
+        0.028982482690706513,
+        0.0501348552736359,
+        -0.8780925418107197,
+        0,
+        -0.18841170653434966,
+        -0.33553806536085273,
+        -0.7390629066525172,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 687,
+        "renderFrame": 687
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "laserVisible": false,
+      "laserAim": null,
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-front-standard",
+      "ext": false,
+      "light": "night",
+      "file": "drum-front-standard-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.00829647362339086,
+          -198.57699344856567,
+          -640.5604933425744
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.8126526255478193,
+          0.442534438004428,
+          -0.610542116474132
+        ],
+        "q": [
+          0.059650325989853537,
+          -0.6034851166734961,
+          -0.04534644022724452,
+          0.7938458621934097
+        ]
+      },
+      "gun": [
+        -0.8758047456118138,
+        -0.079051393088535,
+        -0.03342042510837296,
+        0,
+        -0.08078405325771504,
+        0.8750070705641689,
+        0.047292316519717596,
+        0,
+        0.028982482690706513,
+        0.0501348552736359,
+        -0.8780925418107197,
+        0,
+        -0.18841170653434966,
+        -0.33553806536085273,
+        -0.7390629066525172,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 1.2174939750337528
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 708,
+        "renderFrame": 708
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "laserVisible": false,
+      "laserAim": null,
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-front-extended",
+      "ext": true,
+      "light": "noon",
+      "file": "drum-front-extended-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.011060460395751743,
+          -198.57951009916124,
+          -640.5533456226866
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.8126548130829645,
+          0.44250889033661506,
+          -0.6105453634357807
+        ],
+        "q": [
+          0.059650325989853537,
+          -0.6034851166734961,
+          -0.04534644022724452,
+          0.7938458621934097
+        ]
+      },
+      "gun": [
+        -0.8758047456117302,
+        -0.07905021327750125,
+        -0.03342321565084076,
+        0,
+        -0.08078405325770735,
+        0.8750054005707399,
+        0.04732320478351822,
+        0,
+        0.028982482690703755,
+        0.05016585245471731,
+        -0.8780907714719834,
+        0,
+        -0.18841170653435058,
+        -0.3355126820113203,
+        -0.7390618946788781,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 741,
+        "renderFrame": 741
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "laserVisible": false,
+      "laserAim": null,
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-front-extended",
+      "ext": true,
+      "light": "overcast",
+      "file": "drum-front-extended-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.011060460395751743,
+          -198.57951009916124,
+          -640.5533456226866
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.8126548130829645,
+          0.44250889033661506,
+          -0.6105453634357807
+        ],
+        "q": [
+          0.059650325989853537,
+          -0.6034851166734961,
+          -0.04534644022724452,
+          0.7938458621934097
+        ]
+      },
+      "gun": [
+        -0.8758047456117302,
+        -0.07905021327750125,
+        -0.03342321565084076,
+        0,
+        -0.08078405325770735,
+        0.8750054005707399,
+        0.04732320478351822,
+        0,
+        0.028982482690703755,
+        0.05016585245471731,
+        -0.8780907714719834,
+        0,
+        -0.18841170653435058,
+        -0.3355126820113203,
+        -0.7390618946788781,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 763,
+        "renderFrame": 763
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "laserVisible": false,
+      "laserAim": null,
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-front-extended",
+      "ext": true,
+      "light": "dusk",
+      "file": "drum-front-extended-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.011060460395751743,
+          -198.57951009916124,
+          -640.5533456226866
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.8126548130829645,
+          0.44250889033661506,
+          -0.6105453634357807
+        ],
+        "q": [
+          0.059650325989853537,
+          -0.6034851166734961,
+          -0.04534644022724452,
+          0.7938458621934097
+        ]
+      },
+      "gun": [
+        -0.8758047456117302,
+        -0.07905021327750125,
+        -0.03342321565084076,
+        0,
+        -0.08078405325770735,
+        0.8750054005707399,
+        0.04732320478351822,
+        0,
+        0.028982482690703755,
+        0.05016585245471731,
+        -0.8780907714719834,
+        0,
+        -0.18841170653435058,
+        -0.3355126820113203,
+        -0.7390618946788781,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 787,
+        "renderFrame": 787
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "laserVisible": false,
+      "laserAim": null,
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "drum-front-extended",
+      "ext": true,
+      "light": "night",
+      "file": "drum-front-extended-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.011060460395751743,
+          -198.57951009916124,
+          -640.5533456226866
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.8126548130829645,
+          0.44250889033661506,
+          -0.6105453634357807
+        ],
+        "q": [
+          0.059650325989853537,
+          -0.6034851166734961,
+          -0.04534644022724452,
+          0.7938458621934097
+        ]
+      },
+      "gun": [
+        -0.8758047456117302,
+        -0.07905021327750125,
+        -0.03342321565084076,
+        0,
+        -0.08078405325770735,
+        0.8750054005707399,
+        0.04732320478351822,
+        0,
+        0.028982482690703755,
+        0.05016585245471731,
+        -0.8780907714719834,
+        0,
+        -0.18841170653435058,
+        -0.3355126820113203,
+        -0.7390618946788781,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 1.2174939750334826
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 807,
+        "renderFrame": 807
+      },
+      "viewKey": "minigun",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        0.7,
+        0.7,
+        0.7
+      ],
+      "ammo": 60,
+      "srcScale": [
+        0.88,
+        0.88,
+        0.88
+      ],
+      "laserVisible": false,
+      "laserAim": null,
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    }
+  ],
+  "errors": [],
+  "mode": "Native eye hip/aim/reload plus explicitly rotated eye-space inspection; native four light presets and task lamp at night; after reuses recorded camera/view-space/exposure exactly."
+}

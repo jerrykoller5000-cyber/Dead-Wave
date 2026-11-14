@@ -1,0 +1,410 @@
+{
+  "stage": "before-lit",
+  "indexHash": "51426e3c9f9532fe725592a2e6672326c29ca33e9b9639e3249e33e600872a97",
+  "rows": [
+    {
+      "weapon": "pistol",
+      "setup": {
+        "weapon": "pistol",
+        "vmKey": "pistol",
+        "active": true,
+        "laser": false,
+        "flashlight": false,
+        "press": {
+          "t": -1,
+          "at": 0,
+          "total": 0,
+          "flip": false
+        },
+        "contact": null,
+        "padGapMm": 144.36873737085207,
+        "times": {
+          "at": 0.195,
+          "total": 0.51
+        }
+      },
+      "rows": [
+        {
+          "label": "key",
+          "state": {
+            "weapon": "pistol",
+            "vmKey": "pistol",
+            "active": true,
+            "laser": true,
+            "flashlight": false,
+            "press": {
+              "t": -1,
+              "at": 0,
+              "total": 0,
+              "flip": false
+            },
+            "contact": null,
+            "padGapMm": 144.36873737085207,
+            "times": {
+              "at": 0.195,
+              "total": 0.51
+            }
+          }
+        },
+        {
+          "label": "reach",
+          "state": {
+            "weapon": "pistol",
+            "vmKey": "pistol",
+            "active": true,
+            "laser": true,
+            "flashlight": false,
+            "press": {
+              "t": -1,
+              "at": 0,
+              "total": 0,
+              "flip": false
+            },
+            "contact": null,
+            "padGapMm": 144.36939737110842,
+            "times": {
+              "at": 0.195,
+              "total": 0.51
+            }
+          },
+          "file": "pistol-reach.png"
+        },
+        {
+          "label": "contact",
+          "state": {
+            "weapon": "pistol",
+            "vmKey": "pistol",
+            "active": true,
+            "laser": true,
+            "flashlight": false,
+            "press": {
+              "t": -1,
+              "at": 0,
+              "total": 0,
+              "flip": false
+            },
+            "contact": null,
+            "padGapMm": 144.36923157322002,
+            "times": {
+              "at": 0.195,
+              "total": 0.51
+            }
+          },
+          "file": "pistol-contact.png"
+        },
+        {
+          "label": "home",
+          "state": {
+            "weapon": "pistol",
+            "vmKey": "pistol",
+            "active": true,
+            "laser": true,
+            "flashlight": false,
+            "press": {
+              "t": -1,
+              "at": 0,
+              "total": 0,
+              "flip": false
+            },
+            "contact": null,
+            "padGapMm": 144.3637182872729,
+            "times": {
+              "at": 0.195,
+              "total": 0.51
+            }
+          },
+          "file": "pistol-home.png"
+        }
+      ]
+    },
+    {
+      "weapon": "m4",
+      "setup": {
+        "weapon": "m4",
+        "vmKey": "m4",
+        "active": true,
+        "laser": false,
+        "flashlight": false,
+        "press": {
+          "t": -1,
+          "at": 0,
+          "total": 0,
+          "flip": false
+        },
+        "contact": null,
+        "padGapMm": 217.05716320108667,
+        "times": {
+          "at": 0.195,
+          "total": 0.51
+        }
+      },
+      "rows": [
+        {
+          "label": "key",
+          "state": {
+            "weapon": "m4",
+            "vmKey": "m4",
+            "active": true,
+            "laser": true,
+            "flashlight": false,
+            "press": {
+              "t": -1,
+              "at": 0,
+              "total": 0,
+              "flip": false
+            },
+            "contact": null,
+            "padGapMm": 217.05716320108667,
+            "times": {
+              "at": 0.195,
+              "total": 0.51
+            }
+          }
+        },
+        {
+          "label": "reach",
+          "state": {
+            "weapon": "m4",
+            "vmKey": "m4",
+            "active": true,
+            "laser": true,
+            "flashlight": false,
+            "press": {
+              "t": -1,
+              "at": 0,
+              "total": 0,
+              "flip": false
+            },
+            "contact": null,
+            "padGapMm": 217.0571632009824,
+            "times": {
+              "at": 0.195,
+              "total": 0.51
+            }
+          },
+          "file": "m4-reach.png"
+        },
+        {
+          "label": "contact",
+          "state": {
+            "weapon": "m4",
+            "vmKey": "m4",
+            "active": true,
+            "laser": true,
+            "flashlight": false,
+            "press": {
+              "t": -1,
+              "at": 0,
+              "total": 0,
+              "flip": false
+            },
+            "contact": null,
+            "padGapMm": 217.0571632008985,
+            "times": {
+              "at": 0.195,
+              "total": 0.51
+            }
+          },
+          "file": "m4-contact.png"
+        },
+        {
+          "label": "home",
+          "state": {
+            "weapon": "m4",
+            "vmKey": "m4",
+            "active": true,
+            "laser": true,
+            "flashlight": false,
+            "press": {
+              "t": -1,
+              "at": 0,
+              "total": 0,
+              "flip": false
+            },
+            "contact": null,
+            "padGapMm": 217.0571632010663,
+            "times": {
+              "at": 0.195,
+              "total": 0.51
+            }
+          },
+          "file": "m4-home.png"
+        }
+      ]
+    },
+    {
+      "weapon": "sniper",
+      "setup": {
+        "weapon": "sniper",
+        "vmKey": "sniper",
+        "active": true,
+        "laser": false,
+        "flashlight": false,
+        "press": {
+          "t": -1,
+          "at": 0,
+          "total": 0,
+          "flip": false
+        },
+        "contact": null,
+        "padGapMm": 178.10301865617183,
+        "times": {
+          "at": 0.195,
+          "total": 0.51
+        }
+      },
+      "rows": [
+        {
+          "label": "key",
+          "state": {
+            "weapon": "sniper",
+            "vmKey": "sniper",
+            "active": true,
+            "laser": true,
+            "flashlight": false,
+            "press": {
+              "t": -1,
+              "at": 0,
+              "total": 0,
+              "flip": false
+            },
+            "contact": null,
+            "padGapMm": 178.10301865617183,
+            "times": {
+              "at": 0.195,
+              "total": 0.51
+            }
+          }
+        },
+        {
+          "label": "reach",
+          "state": {
+            "weapon": "sniper",
+            "vmKey": "sniper",
+            "active": true,
+            "laser": true,
+            "flashlight": false,
+            "press": {
+              "t": -1,
+              "at": 0,
+              "total": 0,
+              "flip": false
+            },
+            "contact": null,
+            "padGapMm": 178.1155472711973,
+            "times": {
+              "at": 0.195,
+              "total": 0.51
+            }
+          },
+          "file": "sniper-reach.png"
+        },
+        {
+          "label": "contact",
+          "state": {
+            "weapon": "sniper",
+            "vmKey": "sniper",
+            "active": true,
+            "laser": true,
+            "flashlight": false,
+            "press": {
+              "t": -1,
+              "at": 0,
+              "total": 0,
+              "flip": false
+            },
+            "contact": null,
+            "padGapMm": 178.12939235943247,
+            "times": {
+              "at": 0.195,
+              "total": 0.51
+            }
+          },
+          "file": "sniper-contact.png"
+        },
+        {
+          "label": "home",
+          "state": {
+            "weapon": "sniper",
+            "vmKey": "sniper",
+            "active": true,
+            "laser": true,
+            "flashlight": false,
+            "press": {
+              "t": -1,
+              "at": 0,
+              "total": 0,
+              "flip": false
+            },
+            "contact": null,
+            "padGapMm": 178.15077891454547,
+            "times": {
+              "at": 0.195,
+              "total": 0.51
+            }
+          },
+          "file": "sniper-home.png"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 285 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 7ms pools 5257ms compile 813ms warm frame 116ms | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1 fire-clean:232 load:285"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 55ms | trees 219ms | player+weapons+zombie types 1323ms | foliage scattered 2375ms | POIs+minimap+foliage chunks 3885ms | contact shading + rest of setup 4092ms | post + pools + compile + warm frame 10291ms | ready 10295ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 306 variants after 13 warm frames | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1 fire-clean:232 load:285 a-fresh:285 a-flash:288 a-faded:289 a-kill-generic:296 a-kill-melee:299 a-kill-explosive:303 a-fx:306 a-corpse:306"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 374 shader variants compiled after 35 warm frames | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1 fire-clean:232 load:285 a-fresh:285 a-flash:288 a-faded:289 a-kill-generic:296 a-kill-melee:299 a-kill-explosive:303 a-fx:306 a-corpse:306 fresh:362 burning:364 flash:364 faded:364 tree-fade:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 kill-melee:364 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:367 kill-melee:367 kill-explosive:367 kill-chainsaw:367 kill-pellet:367 kill-generic:367 effects:372 corpses:372 corpses2:372"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 374 variants | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1 fire-clean:232 load:285 a-fresh:285 a-flash:288 a-faded:289 a-kill-generic:296 a-kill-melee:299 a-kill-explosive:303 a-fx:306 a-corpse:306 fresh:362 burning:364 flash:364 faded:364 tree-fade:364 kill-explosive:364 kill-chainsaw:364 kill-pellet:364 kill-generic:364 kill-melee:364 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:367 kill-melee:367 kill-explosive:367 kill-chainsaw:367 kill-pellet:367 kill-generic:367 effects:372 corpses:372 corpses2:372"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":19.15,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.48,\"frames\":6,\"over50\":3,\"over100\":1,\"worst\":133},\"loading\":{\"at\":0.48,\"seconds\":18.67,\"frames\":340,\"over50\":50,\"over100\":20,\"worst\":3483},\"menu\":{\"at\":19.15,\"seconds\":7.9,\"frames\":1,\"over50\":0,\"over100\":0,\"worst\":17}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":23,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":79,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    }
+  ]
+}

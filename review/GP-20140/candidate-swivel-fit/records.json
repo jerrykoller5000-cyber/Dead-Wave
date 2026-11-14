@@ -1,0 +1,155 @@
+{
+  "stage": "candidate-swivel-fit",
+  "indexHash": "faca8dba6a8bcba1a7ca70d944f9412d9f886ad21437ec0753a50bbeca9e49ec",
+  "moduleHash": "bd0ab5eca190036cb8449639735bd861c7d2a81ba74eb1aacc8bc2c21682198b",
+  "rows": [],
+  "fit": {
+    "rows": [
+      {
+        "swivel": -1.2,
+        "minForward": 0.7666852248139444,
+        "maxLipMm": 0.9057085974431277,
+        "bad": 0,
+        "iterations": 702
+      },
+      {
+        "swivel": -0.9,
+        "minForward": 0.8316018111344738,
+        "maxLipMm": 0.722777177784904,
+        "bad": 0,
+        "iterations": 690
+      },
+      {
+        "swivel": -0.6,
+        "minForward": 0.8506603876978925,
+        "maxLipMm": 0.9447567385659909,
+        "bad": 0,
+        "iterations": 599
+      },
+      {
+        "swivel": -0.3,
+        "minForward": 0.8139780141927182,
+        "maxLipMm": 0.9967399832507499,
+        "bad": 0,
+        "iterations": 714
+      },
+      {
+        "swivel": 0,
+        "minForward": 0.5964832144018162,
+        "maxLipMm": 0.9949811018195834,
+        "bad": 0,
+        "iterations": 597
+      },
+      {
+        "swivel": 0.3,
+        "minForward": 0.3570773356940159,
+        "maxLipMm": 7.0342748814787415,
+        "bad": 0,
+        "iterations": 1128
+      },
+      {
+        "swivel": 0.6,
+        "minForward": 0.2117771958989003,
+        "maxLipMm": 194.0553848289174,
+        "bad": 0,
+        "iterations": 1368
+      },
+      {
+        "swivel": 0.9,
+        "minForward": 0.18608157247813784,
+        "maxLipMm": 210.44928228685163,
+        "bad": 0,
+        "iterations": 1380
+      },
+      {
+        "swivel": 1.2,
+        "minForward": 0.18454192399030145,
+        "maxLipMm": 265.81796153637197,
+        "bad": 0,
+        "iterations": 1380
+      }
+    ],
+    "best": [
+      {
+        "swivel": -0.3,
+        "minForward": 0.8139780141927182,
+        "maxLipMm": 0.9967399832507499,
+        "bad": 0,
+        "iterations": 714
+      },
+      {
+        "swivel": -0.6,
+        "minForward": 0.8506603876978925,
+        "maxLipMm": 0.9447567385659909,
+        "bad": 0,
+        "iterations": 599
+      },
+      {
+        "swivel": -0.9,
+        "minForward": 0.8316018111344738,
+        "maxLipMm": 0.722777177784904,
+        "bad": 0,
+        "iterations": 690
+      }
+    ]
+  },
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 286 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 10ms pools 5551ms compile 876ms warm frame 120ms | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 58ms | trees 218ms | player+weapons+zombie types 1286ms | foliage scattered 2376ms | POIs+minimap+foliage chunks 3986ms | contact shading + rest of setup 4227ms | post + pools + compile + warm frame 10795ms | ready 10799ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 305 variants after 13 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:302 a-fx:305 a-corpse:305"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 373 shader variants compiled after 35 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:302 a-fx:305 a-corpse:305 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 373 variants | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:286 a-fresh:286 a-flash:289 a-faded:290 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:302 a-fx:305 a-corpse:305 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":20.07,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.47,\"frames\":7,\"over50\":1,\"over100\":1,\"worst\":217},\"loading\":{\"at\":0.47,\"seconds\":19.6,\"frames\":346,\"over50\":58,\"over100\":22,\"worst\":3633},\"menu\":{\"at\":20.07,\"seconds\":8.13,\"frames\":13,\"over50\":1,\"over100\":1,\"worst\":7667}},\"videos\":{\"caracal@boot\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":29,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":75,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    }
+  ]
+}

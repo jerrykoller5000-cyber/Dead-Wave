@@ -1,0 +1,6 @@
+[
+  {
+    "before": "const SMOKE_ROLL=-3, SMOKE_PITCH=-1, SMOKE_YAW=-.45;",
+    "after": "const SMOKE_ROLL=-3.1, SMOKE_PITCH=-.8, SMOKE_YAW=.3;"
+  }
+]

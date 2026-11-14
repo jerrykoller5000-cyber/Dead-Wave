@@ -1,0 +1,7 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import{spawn}from'node:child_process';
+if(!process.env.DW_GAME_TEST_TOKEN)throw Error('Use crew slot');
+const label=process.argv[2]||'before',file='review/GP-20137/'+label+'-trajectory-regressions.txt';if(fs.existsSync(file))throw Error('Evidence exists');
+const selected=process.argv.slice(3),tests=selected.length?selected:['t206','t225'];const args=['tools/tests/run-all.mjs',...tests,'--jobs','1','--no-retry','--all-fails','--agent','chatgpt','--task','GP-20137'];
+fs.writeFileSync(file,'Command: node '+args.join(' ')+String.fromCharCode(10));fs.appendFileSync(file,'Index source SHA256: '+crypto.createHash('sha256').update(fs.readFileSync('index.html')).digest('hex')+String.fromCharCode(10));const child=spawn(process.execPath,args,{stdio:['ignore','pipe','pipe']});
+for(const [stream,target]of [[child.stdout,process.stdout],[child.stderr,process.stderr]]){stream.setEncoding('utf8');stream.on('data',text=>{target.write(text);fs.appendFileSync(file,text)});}
+const result=await new Promise((resolve,reject)=>{child.once('error',reject);child.once('exit',(code,signal)=>resolve({code,signal}));});fs.appendFileSync(file,String.fromCharCode(10)+'Exit: '+JSON.stringify(result)+String.fromCharCode(10));process.exitCode=result.code??1;

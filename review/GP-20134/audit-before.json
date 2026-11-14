@@ -1,0 +1,341 @@
+{
+  "label": "audit-before",
+  "rows": [
+    {
+      "sel": "[data-buy-build=\"m240\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 607.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 50000,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": false,
+          "mortar": false
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49740,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": false
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 260
+    },
+    {
+      "sel": "[data-buy-build=\"mortar\"]",
+      "keyboard": false,
+      "point": {
+        "x": 565.28125,
+        "y": 603.359375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 49740,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": false
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49620,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 120
+    },
+    {
+      "sel": "[data-buy-build-ammo=\"m240\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 607.234375,
+        "text": "Ammo · $48",
+        "hit": true
+      },
+      "before": {
+        "cash": 49620,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49572,
+        "belt": 300,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 300,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 48
+    },
+    {
+      "sel": "[data-buy-build-ammo=\"m240\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 607.234375,
+        "text": "Ammo · $48",
+        "hit": true
+      },
+      "before": {
+        "cash": 49572,
+        "belt": 300,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 300,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49524,
+        "belt": 600,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 600,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 48
+    },
+    {
+      "sel": "[data-buy-build-ammo=\"m240\"]",
+      "keyboard": true,
+      "point": {
+        "x": 411.53125,
+        "y": 607.234375,
+        "text": "Ammo · $48",
+        "hit": true
+      },
+      "before": {
+        "cash": 49524,
+        "belt": 600,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 600,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49524,
+        "belt": 600,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 600,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 0
+    }
+  ],
+  "failure": "AssertionError [ERR_ASSERTION]: one activation must buy: [data-buy-build-ammo=\"m240\"]\n    at activate (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20134/audit.mjs:17:1264)\n    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20134/audit.mjs:19:54"
+}

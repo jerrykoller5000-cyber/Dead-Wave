@@ -1,0 +1,50 @@
+loadtime: headed (real GPU), tab in front, cache warm
+loadtime: http://127.0.0.1:33764/index.html?debug=1
+
+run 1: visibility=visible  TT at 11.6s  title at 18.7s
+   terrain+water+sky built                  0 ms  (+     0)
+   rocks                                   58 ms  (+    58)
+   trees                                  218 ms  (+   160)
+   player+weapons+zombie types           1202 ms  (+   984)
+   foliage scattered                     2201 ms  (+   999)
+   POIs+minimap+foliage chunks           3627 ms  (+  1426)
+   contact shading + rest of setup       3825 ms  (+   198)
+   post + pools + compile + warm frame    9745 ms  (+  5920)
+   ready                                 9749 ms  (+     4)
+   log: Grave Shift warm-up: 285 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 8ms pools 5026ms compile 773ms war
+   log: Grave Shift load: terrain+water+sky built 0ms | rocks 58ms | trees 218ms | player+weapons+zombie types 1202ms | foliage scattered 2201ms | POIs+minimap+foliage 
+   log: Grave Shift first minute: 306 variants after 13 warm frames | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1
+   log: Grave Shift pre-roll: 373 shader variants compiled after 35 warm frames | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf
+   log: Grave Shift title: menu up after 35 warm frames, 373 variants | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources
+
+title screen: best 18.7s, worst 18.7s, mean 18.7s over 1 run(s)
+budget (AGENTS.md rule 12): 15 s cold, 5 s warm — OVER the cold budget.
+bench: http://127.0.0.1:12727/index.html?debug=1
+bench: scenario training for 8s
+
+bench: ready 11151 ms
+bench: training light on entry {"time":0.5,"lightsOff":false,"room":true,"active":true,"wake":false,"hidden":570,"blackout":true,"fogNear":190,"fogFar":640,"background":"87b7ff","sun":1.73,"hemi":0.68,"ambient":0.04,"pointOn":4,"pointAll":27,"pool":1,"standIns":23,"brightness":1,"exposure":1,"graded":false,"danger":0}
+bench: training light {"time":0.5,"lightsOff":false,"room":true,"active":true,"wake":false,"hidden":570,"blackout":false,"fogNear":190,"fogFar":640,"background":"87b7ff","sun":1.73,"hemi":0.68,"ambient":0.04,"pointOn":4,"pointAll":27,"pool":1,"standIns":23,"brightness":1,"exposure":1,"graded":false,"danger":0}
+bench: training fight {"made":50,"alive":50}
+bench: first person {"first":true,"w":0.9,"weapon":"minigun","asked":"minigun","issued":true,"unarmed":false,"vm":true,"vmFn":true}
+bench: profiler on, GPU timestamps on
+fps    56.7   (mean of last 7 s)
+low    39.8   (1% low, same windows)
+worst  33.3 ms
+hitch  0   (frames over 50 ms, whole run)
+draws  273
+tris   300683
+whole run: tick 16.79 ms over 8 s; frame (last 10 s) - that = 0.84 ms (two windows)   gpu 0.28 ms
+  r:render                             7.72 ms   worst 16.0
+  zombies                              2.31 ms   worst 6.7
+  m:hold                               1.78 ms   worst 4.7
+  r:matrices                           1.69 ms   worst 4.0
+  m:pose                               0.93 ms   worst 2.5
+  aim+climb                            0.61 ms   worst 1.5
+  viewmodel                            0.37 ms   worst 1.2
+  effects                              0.32 ms   worst 0.7
+  r:rigSkin                            0.17 ms   worst 0.7
+  w:rest                               0.14 ms   worst 0.5
+  drops+hud                            0.13 ms   worst 0.8
+  daynight                             0.09 ms   worst 0.3
+{"scenario":"training","seconds":8,"fps":56.7,"low":39.8,"worst":33.3,"hitches":0,"draws":273,"triangles":300683,"zombies":50,"gfx":"high","windows":7,"viewmodelMs":0.37,"fp":{"first":true,"w":0.9,"weapon":"minigun","asked":"minigun","issued":true,"unarmed":false,"vm":true,"vmFn":true},"prof":{"frames":467,"frameMs":17.64,"tickMs":16.79,"outsideMs":0.84,"last10":null,"top":[{"k":"r:render","avg":7.72,"max":16},{"k":"zombies","avg":2.31,"max":6.7},{"k":"m:hold","avg":1.78,"max":4.7},{"k":"r:matrices","avg":1.69,"max":4},{"k":"m:pose","avg":0.93,"max":2.5},{"k":"aim+climb","avg":0.61,"max":1.5},{"k":"viewmodel","avg":0.37,"max":1.2},{"k":"effects","avg":0.32,"max":0.7},{"k":"r:rigSkin","avg":0.17,"max":0.7},{"k":"w:rest","avg":0.14,"max":0.5},{"k":"drops+hud","avg":0.13,"max":0.8},{"k":"daynight","avg":0.09,"max":0.3}],"spikes":[{"frame":68,"ms":26.6,"top":["r:render 14.3","m:hold 3.6","r:matrices 2.7","zombies 2.1"],"heapMB":966.4,"freedMB":-1.3,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":35647.1,"t1":35674.3},{"frame":75,"ms":25.7,"top":["r:render 9.9","zombies 4.5","r:matrices 3.0","m:hold 2.6"],"heapMB":977,"freedMB":-1.4,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":35782.6,"t1":35809.3},{"frame":90,"ms":26.6,"top":["r:render 12.7","zombies 5.3","m:hold 2.0","m:pose 1.9"],"heapMB":967.4,"freedMB":-1.7,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":36063,"t1":36091.1},{"frame":110,"ms":25.3,"top":["r:render 7.4","m:hold 4.7","zombies 4.6","m:pose 2.5"],"heapMB":971.6,"freedMB":-1.9,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":36454.4,"t1":36480.6},{"frame":379,"ms":32.3,"top":["r:render 16.0","zombies 4.7","r:matrices 4.0","m:hold 2.2"],"heapMB":964.6,"freedMB":31.2,"newPipelines":0,"newTextures":0,"newGeometries":0,"newBuilds":0,"sunShadow":0,"newRenderObjects":0,"t0":41129.8,"t1":41163.2}],"spikeCauses":{"spikes":5,"pipelines":0,"builds":0,"uploads":0,"sunShadow":0,"gc":1,"code":4},"gpuMs":0.28,"gpuSamples":162,"pipelines":{"made":0,"released":0,"withNewShaders":0,"top":[],"first":[]},"builds":{"made":0,"top":[],"zombieAndEcho":[]},"renderObjects":{"made":15,"perFrame":0.03,"top":[{"k":"zombie-skin < Group < Scene | MeshStandardNodeMaterial | scene","n":15,"frames":[18,46,70]}],"spikes":[{"frame":68,"n":0,"top":[]},{"frame":75,"n":0,"top":[]},{"frame":90,"n":0,"top":[]},{"frame":110,"n":0,"top":[]},{"frame":379,"n":0,"top":[]}]},"gc":null},"light":{"time":0.5,"lightsOff":false,"room":true,"active":true,"wake":false,"hidden":570,"blackout":false,"fogNear":190,"fogFar":640,"background":"87b7ff","sun":1.73,"hemi":0.68,"ambient":0.04,"pointOn":4,"pointAll":27,"pool":1,"standIns":23,"brightness":1,"exposure":1,"graded":false,"danger":0}}

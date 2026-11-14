@@ -1,0 +1,6 @@
+[
+  {
+    "before": "      solveArm: (side, target, hand) => solveArmIK(marine.userData['arm' + side + 'G'], marine.userData['elbow' + side + 'G'],\n        hand || (side === 'R' ? _HAND_R : _HAND_L), target, side === 'R' ? _POLE_R : _POLE_L, 1),",
+    "after": "      solveArm: (side, target, hand) => {\n        if (side === 'R') handRollR = 0; else handRollL = 0;\n        solveArmIK(marine.userData['arm' + side + 'G'], marine.userData['elbow' + side + 'G'],\n          hand || (side === 'R' ? _HAND_R : _HAND_L), target, side === 'R' ? _POLE_R : _POLE_L, 1);\n      },\n      setForearmRoll: (side, angle) => { if (side === 'R') handRollR = angle; else handRollL = angle; },"
+  }
+]

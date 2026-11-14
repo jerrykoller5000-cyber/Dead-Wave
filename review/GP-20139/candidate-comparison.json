@@ -1,0 +1,149 @@
+{
+  "method": "RGB channel range across3frames; dx -.002,0,+.002m camera+target translated together. Fixed thresholds16/24/32/48/64/96; stationary triplet control.",
+  "rows": [
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "region": "full",
+      "before": 16203,
+      "after": 14675,
+      "delta": -1528,
+      "percent": -9.43035240387583
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "region": "lower-half",
+      "before": 3863,
+      "after": 2908,
+      "delta": -955,
+      "percent": -24.721718871343512
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "region": "full",
+      "before": 15531,
+      "after": 13274,
+      "delta": -2257,
+      "percent": -14.532225870838966
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "region": "lower-half",
+      "before": 3984,
+      "after": 2271,
+      "delta": -1713,
+      "percent": -42.99698795180723
+    },
+    {
+      "view": "jerryA",
+      "light": "overcast",
+      "region": "full",
+      "before": 14862,
+      "after": 13347,
+      "delta": -1515,
+      "percent": -10.19378280177634
+    },
+    {
+      "view": "jerryA",
+      "light": "overcast",
+      "region": "lower-half",
+      "before": 3661,
+      "after": 2713,
+      "delta": -948,
+      "percent": -25.894564326686698
+    },
+    {
+      "view": "jerryB",
+      "light": "overcast",
+      "region": "full",
+      "before": 14406,
+      "after": 12162,
+      "delta": -2244,
+      "percent": -15.576842982090799
+    },
+    {
+      "view": "jerryB",
+      "light": "overcast",
+      "region": "lower-half",
+      "before": 3897,
+      "after": 2187,
+      "delta": -1710,
+      "percent": -43.87990762124711
+    },
+    {
+      "view": "jerryA",
+      "light": "dusk",
+      "region": "full",
+      "before": 7454,
+      "after": 5989,
+      "delta": -1465,
+      "percent": -19.653877112959485
+    },
+    {
+      "view": "jerryA",
+      "light": "dusk",
+      "region": "lower-half",
+      "before": 2582,
+      "after": 1657,
+      "delta": -925,
+      "percent": -35.82494190549961
+    },
+    {
+      "view": "jerryB",
+      "light": "dusk",
+      "region": "full",
+      "before": 6982,
+      "after": 4798,
+      "delta": -2184,
+      "percent": -31.28043540532799
+    },
+    {
+      "view": "jerryB",
+      "light": "dusk",
+      "region": "lower-half",
+      "before": 2868,
+      "after": 1179,
+      "delta": -1689,
+      "percent": -58.89121338912133
+    },
+    {
+      "view": "jerryA",
+      "light": "night",
+      "region": "full",
+      "before": 9822,
+      "after": 8141,
+      "delta": -1681,
+      "percent": -17.11464060272857
+    },
+    {
+      "view": "jerryA",
+      "light": "night",
+      "region": "lower-half",
+      "before": 3667,
+      "after": 2544,
+      "delta": -1123,
+      "percent": -30.624488682847016
+    },
+    {
+      "view": "jerryB",
+      "light": "night",
+      "region": "full",
+      "before": 9155,
+      "after": 6577,
+      "delta": -2578,
+      "percent": -28.159475696340795
+    },
+    {
+      "view": "jerryB",
+      "light": "night",
+      "region": "lower-half",
+      "before": 3748,
+      "after": 1726,
+      "delta": -2022,
+      "percent": -53.94877267876201
+    }
+  ]
+}

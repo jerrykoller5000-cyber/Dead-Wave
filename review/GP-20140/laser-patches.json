@@ -1,0 +1,22 @@
+[
+  {
+    "before": "let lightPress = { t: -1, at: 0, total: 0, flip: false };",
+    "after": "let lightPress = { t: -1, at: 0, total: 0, flip: false, kind: 'flashlight' };"
+  },
+  {
+    "before": "lightPress = { t: 0, at: lp.at, total: lp.total, flip: true };",
+    "after": "lightPress = { t: 0, at: lp.at, total: lp.total, flip: true, kind: 'flashlight' };"
+  },
+  {
+    "before": "lightPress.flip = false; flipFlashlight();",
+    "after": "lightPress.flip = false; if (lightPress.kind === 'laser') flipLasers(); else flipFlashlight();"
+  },
+  {
+    "before": "    function toggleLasers() {\r\n      if (gameStarted && mortarMounted?.type !== 'm240' && !needGear('laserLight', dwText('gear.laserLight.name'))) return;\r\n      lasersEnabled = !lasersEnabled;",
+    "after": "    function toggleLasers(now = false) {   // GP-20140: same physical module press as the flashlight\r\n      if (gameStarted && mortarMounted?.type !== 'm240' && !needGear('laserLight', dwText('gear.laserLight.name'))) return;\r\n      if (lightPress.t >= 0 && !now) return;\r\n      const lp = now || mortarMounted ? null : viewmodel?.lightPressTimes?.(currentWeapon);\r\n      if (lp) { lightPress = { t: 0, at: lp.at, total: lp.total, flip: true, kind: 'laser' }; return; }\r\n      flipLasers();\r\n    }\r\n    function flipLasers() {\r\n      lasersEnabled = !lasersEnabled;"
+  },
+  {
+    "before": "const lp = now || mortarMounted ? null : viewmodel?.lightPressTimes?.(currentWeapon);\r\n      if (lp) { lightPress = { t: 0, at: lp.at, total: lp.total, flip: true, kind: 'laser' };",
+    "after": "const lp = now || mortarMounted || !laserLightFitted[currentWeapon] ? null : viewmodel?.lightPressTimes?.(currentWeapon);\r\n      if (lp) { lightPress = { t: 0, at: lp.at, total: lp.total, flip: true, kind: 'laser' };"
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "before": "cf75871c8995f35b0ef844540bc21bf53fbc33d3ce7bfca0dd9f88429ade306b",
+  "after": "60b2c664ac60bc022c14ee7be829ef8202256693effa6cbb1544639e349b4058",
+  "edits": [
+    {
+      "a": "        const cap = reserveCap(c);\r\n        const target = magazineSupplyTarget(c), loose = isLooseRoundWeapon(target) && magazineStore[target];",
+      "b": "        const cap = looseReserveCapacity(c);\r\n        const target = magazineSupplyTarget(c), loose = isLooseRoundWeapon(target) && magazineStore[target];"
+    },
+    {
+      "a": "    function ammoRestockPlan(w) {",
+      "b": "    function looseReserveCapacity(calibre) {\r\n      const target = magazineSupplyTarget(calibre);\r\n      // Preserve the revolver's existing carried-round budget, without exposing loader groups.\r\n      return isLooseRoundWeapon(target) && magazineStore[target] ? magazineCap(target) : reserveCap(calibre);\r\n    }\r\n    function ammoRestockPlan(w) {"
+    },
+    {
+      "a": "capacity: key === 'chainsaw' ? sawFuelMax() : reserveCap(key), quantity: AMMO_PACK[key].n,",
+      "b": "capacity: key === 'chainsaw' ? sawFuelMax() : looseReserveCapacity(key), quantity: AMMO_PACK[key].n,"
+    }
+  ],
+  "outsideReverseIdentical": true,
+  "reason": "Align round restock quotes/purchase guard with the existing revolver magazine-store round budget; avoid charging for a zero-round overflow pack"
+}

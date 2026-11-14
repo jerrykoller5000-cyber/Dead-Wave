@@ -1,0 +1,448 @@
+{
+  "label": "feedback-preview",
+  "rows": [
+    {
+      "kind": "m240",
+      "hold": 80,
+      "point": {
+        "x": 411.53125,
+        "y": 600.234375,
+        "disabled": false,
+        "text": "Pack of 300 · $48 Cash",
+        "hit": "<button class=\"armory-offer-ammo\" type=\"button\" data-buy-build-ammo=\"m240\">Pack of 300 · $48 Cash</button>"
+      },
+      "before": {
+        "cash": 999999,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "connected": true,
+      "after": {
+        "cash": 999999,
+        "belt": 300,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "stock": "300 / 1260 carried"
+    },
+    {
+      "kind": "m240",
+      "hold": 250,
+      "point": {
+        "x": 411.53125,
+        "y": 600.234375,
+        "disabled": false,
+        "text": "Pack of 300 · $48 Cash",
+        "hit": "<button class=\"armory-offer-ammo\" type=\"button\" data-buy-build-ammo=\"m240\">Pack of 300 · $48 Cash</button>"
+      },
+      "before": {
+        "cash": 999999,
+        "belt": 300,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "connected": true,
+      "after": {
+        "cash": 999999,
+        "belt": 600,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "stock": "600 / 1260 carried"
+    },
+    {
+      "kind": "m240",
+      "hold": 600,
+      "point": {
+        "x": 411.53125,
+        "y": 600.234375,
+        "disabled": false,
+        "text": "Pack of 300 · $48 Cash",
+        "hit": "<button class=\"armory-offer-ammo\" type=\"button\" data-buy-build-ammo=\"m240\">Pack of 300 · $48 Cash</button>"
+      },
+      "before": {
+        "cash": 999999,
+        "belt": 600,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "connected": true,
+      "after": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "stock": "900 / 1260 carried"
+    },
+    {
+      "kind": "mortar",
+      "hold": 80,
+      "point": {
+        "x": 565.28125,
+        "y": 606.0625,
+        "disabled": false,
+        "text": "Pack of 4 · $34 Cash",
+        "hit": "<button class=\"armory-offer-ammo\" type=\"button\" data-buy-build-ammo=\"mortar\">Pack of 4 · $34 Cash</button>"
+      },
+      "before": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "connected": true,
+      "after": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 4,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "stock": "4 / 22 carried"
+    },
+    {
+      "kind": "mortar",
+      "hold": 250,
+      "point": {
+        "x": 565.28125,
+        "y": 606.0625,
+        "disabled": false,
+        "text": "Pack of 4 · $34 Cash",
+        "hit": "<button class=\"armory-offer-ammo\" type=\"button\" data-buy-build-ammo=\"mortar\">Pack of 4 · $34 Cash</button>"
+      },
+      "before": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 4,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "connected": true,
+      "after": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 8,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "stock": "8 / 22 carried"
+    },
+    {
+      "kind": "mortar",
+      "hold": 600,
+      "point": {
+        "x": 565.28125,
+        "y": 606.0625,
+        "disabled": false,
+        "text": "Pack of 4 · $34 Cash",
+        "hit": "<button class=\"armory-offer-ammo\" type=\"button\" data-buy-build-ammo=\"mortar\">Pack of 4 · $34 Cash</button>"
+      },
+      "before": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 8,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "connected": true,
+      "after": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "stock": "12 / 22 carried"
+    }
+  ],
+  "events": [
+    {
+      "type": "pointerdown",
+      "id": 1,
+      "text": "Pack of 300 · $48 Cash",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 37228.69999998808
+    },
+    {
+      "type": "mousedown",
+      "id": 1,
+      "text": "Pack of 300 · $48 Cash",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 37228.89999997616
+    },
+    {
+      "type": "mouseup",
+      "id": 1,
+      "text": "Pack of 300 · $48 Cash",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 37322.19999998808
+    },
+    {
+      "type": "click",
+      "id": 1,
+      "text": "Pack of 300 · $48 Cash",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 37322.19999998808
+    },
+    {
+      "type": "pointerdown",
+      "id": 2,
+      "text": "Pack of 300 · $48 Cash",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 37711.39999997616
+    },
+    {
+      "type": "mousedown",
+      "id": 2,
+      "text": "Pack of 300 · $48 Cash",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 37711.39999997616
+    },
+    {
+      "type": "mouseup",
+      "id": 2,
+      "text": "Pack of 300 · $48 Cash",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 37981.09999999404
+    },
+    {
+      "type": "click",
+      "id": 2,
+      "text": "Pack of 300 · $48 Cash",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 37981.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 3,
+      "text": "Pack of 300 · $48 Cash",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 38345.5
+    },
+    {
+      "type": "mousedown",
+      "id": 3,
+      "text": "Pack of 300 · $48 Cash",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 38345.59999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 3,
+      "text": "Pack of 300 · $48 Cash",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 38962.5
+    },
+    {
+      "type": "click",
+      "id": 3,
+      "text": "Pack of 300 · $48 Cash",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 38962.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 4,
+      "text": "Pack of 4 · $34 Cash",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 39345.29999998212
+    },
+    {
+      "type": "mousedown",
+      "id": 4,
+      "text": "Pack of 4 · $34 Cash",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 39345.39999997616
+    },
+    {
+      "type": "mouseup",
+      "id": 4,
+      "text": "Pack of 4 · $34 Cash",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 39446
+    },
+    {
+      "type": "click",
+      "id": 4,
+      "text": "Pack of 4 · $34 Cash",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 39446
+    },
+    {
+      "type": "pointerdown",
+      "id": 5,
+      "text": "Pack of 4 · $34 Cash",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 39827.79999998212
+    },
+    {
+      "type": "mousedown",
+      "id": 5,
+      "text": "Pack of 4 · $34 Cash",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 39827.89999997616
+    },
+    {
+      "type": "mouseup",
+      "id": 5,
+      "text": "Pack of 4 · $34 Cash",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 40095.59999999404
+    },
+    {
+      "type": "click",
+      "id": 5,
+      "text": "Pack of 4 · $34 Cash",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 40095.59999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 6,
+      "text": "Pack of 4 · $34 Cash",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 40478.79999998212
+    },
+    {
+      "type": "mousedown",
+      "id": 6,
+      "text": "Pack of 4 · $34 Cash",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 40478.79999998212
+    },
+    {
+      "type": "mouseup",
+      "id": 6,
+      "text": "Pack of 4 · $34 Cash",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 41097
+    },
+    {
+      "type": "click",
+      "id": 6,
+      "text": "Pack of 4 · $34 Cash",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 41097
+    }
+  ],
+  "mutations": [
+    {
+      "time": 37325.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37325.19999998808,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37983.89999997616,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37983.89999997616,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38965.19999998808,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38965.19999998808,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 39448.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 39448.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 40098.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 40098.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 41099.79999998212,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 41099.79999998212,
+      "removed": "armory-item armory-offer"
+    }
+  ],
+  "errors": []
+}

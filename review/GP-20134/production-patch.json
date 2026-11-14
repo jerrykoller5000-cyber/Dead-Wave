@@ -1,0 +1,36 @@
+{
+  "approval": "Director response 2026-11-13 under GP-20134 native purchases succeed but stock feedback is missing",
+  "proof": [
+    {
+      "file": "index.html",
+      "before": "f7cb0bc50446202615f2a6542ff36d64549dcd62bf92e8abd38b8746e9ae50d7",
+      "after": "c681d0646529853ea23b3b01b0bb2e3adac6800bbd10fbf97b8d32d1baac6da3"
+    },
+    {
+      "file": "ui/armory.js",
+      "before": "4cf264ea52ac347d3efa491c70d961cf3adb42c38ae4ed2cd6ec00090d6802c1",
+      "after": "dfdb9f739ef55f15a3fa2c58ceec5f10471c98ad7f6a8d921ad42c0b80fe0efe"
+    },
+    {
+      "file": "ui/armory.css",
+      "before": "bd26d283902b21019ba997b8326d287575a12e38453015691726cee6c0e5b26b",
+      "after": "5892c85e85733413dadf46fc14398f35509233ecf90e7d56af68d8efc01f7ca6"
+    }
+  ],
+  "indexChanges": [
+    {
+      "old": "ammo: { price: AMMO_PACK[calibre].cost, full: (reserveAmmo[calibre] | 0) >= reserveCap(calibre),",
+      "next": "ammo: { current: reserveAmmo[calibre] | 0, capacity: reserveCap(calibre), quantity: AMMO_PACK[calibre].n, price: AMMO_PACK[calibre].cost, full: (reserveAmmo[calibre] | 0) >= reserveCap(calibre),"
+    }
+  ],
+  "uiChanges": [
+    {
+      "old": "      if (plan.owned && plan.ammo) {",
+      "next": "      if (plan.owned && plan.ammo) {\n        if (Number.isFinite(plan.ammo.current) && Number.isFinite(plan.ammo.capacity)) {\n          const stock = el('small', 'armory-build-ammo-stock', text('shop.carried', { count:plan.ammo.current, capacity:plan.ammo.capacity }));\n          stock.dataset.buildAmmoStock = plan.kind; stock.setAttribute('aria-live', 'polite'); item.append(stock);\n        }"
+    },
+    {
+      "old": "const refill = el('button', 'armory-offer-ammo', t('armory.ammoPack', { price: plan.ammo.price }, 'Ammo · ${price}'));",
+      "next": "const refill = el('button', 'armory-offer-ammo', plan.ammo.full ? t('armory.ammoFull', {}, 'Ammo full') : Number.isFinite(plan.ammo.quantity) ? text('armory.typed.pack', { count:plan.ammo.quantity, price:plan.ammo.price }) : t('armory.ammoPack', { price:plan.ammo.price }, 'Ammo · ${price}'));"
+    }
+  ]
+}

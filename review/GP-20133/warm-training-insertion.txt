@@ -1,0 +1,8 @@
+          // GP-20133: the camo/keeper stage above is restored; prime the player's actual finish last.
+          try {
+            const {warmWeaponFire} = await import('./game/fire-warmup.js');
+            const receipt = await warmWeaponFire({THREE, scene, heat:barrelHeat, guns:weaponMeshes, offhand:offhandMeshes,
+              viewmodel:ensureViewmodel() ? viewmodel : null, furniture:gunFurniture, compile:compileForLiveTarget,
+              draw:tag => warmFrame('training-' + tag), settle:() => renderer.backend?.device?.queue?.onSubmittedWorkDone?.()});
+            _warmStats.trace.push('training-fire-resources:' + receipt.meshes + '/' + receipt.viewRecords);
+          } catch (e) { console.info('Grave Shift: Training fire resource warm-up skipped.', e); }

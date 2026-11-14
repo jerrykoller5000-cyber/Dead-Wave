@@ -1,0 +1,62 @@
+    function updateAmmoHud() {
+      if (!(reloading && reloadWeapon === 'revolver')) {   // CL-326: the chambers as the count stands (a pair: half each, the right gun the odd one; CE-6: each gun's live rounds its own magazine's, so the gun that fired shows it)
+        const a = ammoByWeapon.revolver | 0, pair = !!(dualActive && pairInLoadout('revolver')), mR = pair && magazineStore.revolver && magazineStore.revolver.loaded && magazineStore.revolver.loaded[0], aR = pair ? (mR ? Math.min(a, mR.rounds | 0) : Math.ceil(a / 2)) : a, sR = pair ? Math.ceil(revolverSpent / 2) : revolverSpent;
+        revolverChambers(weaponMeshes.revolver, aR, sR);
+        if (offhandMeshes.revolver) revolverChambers(offhandMeshes.revolver, pair ? a - aR : 6, pair ? revolverSpent - sR : 0);
+      }
+      const st = WEAPON_STATS[currentWeapon];
+      const ammo = ammoByWeapon[currentWeapon];
+      if (grenadeChipsEl) grenadeChipsEl.innerHTML = '<span class="gchip">G×' + grenades + '</span><span class="gchip">H×' + medkits + '</span>';
+      if (ammoWeaponEl) ammoWeaponEl.textContent = st.name;
+      const mg = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null;   // GB-138: on the Watchman, its belt
+      const carriedMg = mortarCarried?.kind === 'm240' ? mortarCarried : null;
+      const typedAmmo = typeof ammoTypeState === 'function' ? ammoTypeState(currentWeapon) : null;
+      magazineHud.render(currentWeapon, !mortarMounted && !mortarCarried && isMagazineWeapon(currentWeapon) && magazineStore[currentWeapon] ? magazineSnapshot(magazineStore, currentWeapon) : null);
+      if (mg) {
+        const belt = mg.belt | 0, res = reserveAmmo['7.62 belt'] | 0, feeding = mg.feedT > 0;
+        if (ammoWeaponEl) ammoWeaponEl.textContent = BUILD_NAMES.m240;
+        if (ammoCountEl) ammoCountEl.textContent = feeding ? '\u2026' : String(belt);
+        if (ammoDetailEl) ammoDetailEl.textContent = feeding ? sayText('m240.reloading') : sayText('m240.ammo', {belt, max: mg.beltMax | 0, reserve: res});
+        if (belt <= 0 && !feeding) ammoEl.classList.add('empty'); else ammoEl.classList.remove('empty');
+      } else if (carriedMg) {
+        ammoEl.classList.remove('empty');
+        if (ammoWeaponEl) ammoWeaponEl.textContent = BUILD_NAMES.m240;
+        if (ammoCountEl) ammoCountEl.textContent = String(carriedMg.belt | 0);
+        if (ammoDetailEl) ammoDetailEl.textContent = sayText('m240.carriedAmmo', {belt: carriedMg.belt | 0});
+      } else if (typedAmmo) {
+        const loaded = Math.max(0, typedAmmo.inGun | 0);
+        const type = sayText('ammo.type.' + typedAmmo.loaded + '.tag', {}, typedAmmo.types?.[typedAmmo.loaded]?.tag || typedAmmo.loaded);
+        const reserve = Math.max(0, typedAmmo.carried?.[typedAmmo.loaded] | 0);
+        if (ammoWeaponEl) ammoWeaponEl.textContent = st.name + ' · ' + sayText('hud.ammo.typeHint');
+        if (ammoCountEl) ammoCountEl.textContent = String(loaded);
+        if (ammoDetailEl) ammoDetailEl.textContent = typedAmmo.switching
+          ? ammoHudTag(currentWeapon)
+          : reloading ? sayText('hud.ammo.typedReloading', {type, reserve})
+          : sayText('hud.ammo.typed', {loaded, capacity: magSize(currentWeapon), type, reserve});
+        if (loaded <= 0 && !reloading && !typedAmmo.switching) ammoEl.classList.add('empty');
+        else ammoEl.classList.remove('empty');
+      } else if (reloading) {
+        ammoEl.classList.remove('empty');
+        if (ammoCountEl) ammoCountEl.textContent = '…';
+        if (ammoDetailEl) ammoDetailEl.textContent = 'Reloading';
+      } else if (st.melee) {
+        const running = AudioSys.isChainsawRunning && AudioSys.isChainsawRunning();
+        const fuel = Math.max(0, Math.ceil(sawFuel));
+        if (ammoCountEl) ammoCountEl.textContent = fuel + 's';
+        if (ammoDetailEl) ammoDetailEl.textContent = 'Gas ' + fuel + ' / ' + Math.round(sawFuelMax()) + (running ? ' · Running' : (fuel <= 0 ? ' · EMPTY' : ''));
+        if (ammoDetailEl && (sawOverheat || sawHeat > 0.05)) ammoDetailEl.textContent += sawOverheat ? ' \u00b7 OVERHEAT' : ' \u00b7 Heat ' + Math.round(sawHeat * 100) + '%';   // GB-52
+        if (fuel <= 0) ammoEl.classList.add('empty'); else ammoEl.classList.remove('empty');
+      } else {
+        // Loaded / reserve. The reserve is what the kiosk sells; the magazine is what
+        // the reload pulls out of it.
+        const ammoLabel = Number.isFinite(ammo) ? Math.ceil(ammo) : '∞';
+        const res = reserveOf(currentWeapon);
+        if (ammoCountEl) ammoCountEl.textContent = String(ammoLabel);
+        const mode = selectorGun(currentWeapon) ? ('  ·  ' + (weaponIsAuto(currentWeapon) ? 'AUTO' : 'SEMI')) : '';
+        const loadTag = ammoHasTypes(currentWeapon) ? '  ·  ' + ammoHudTag(currentWeapon) : '';   // CB-294: the type in the gun, or the change as it runs
+        if (ammoDetailEl) ammoDetailEl.textContent = ammoLabel + ' / ' + magSize(currentWeapon) + '  ·  ' + res + ' ' + sayText('ammo.unit.' + (currentWeapon === 'launcher' ? 'grenades' : currentWeapon === 'flamer' ? 'fuel' : 'bullets')) + mode + loadTag;
+        if (Number.isFinite(ammo) && ammo <= 0) ammoEl.classList.add('empty');
+        else ammoEl.classList.remove('empty');
+      }
+      updateReloadPrompt();
+    }

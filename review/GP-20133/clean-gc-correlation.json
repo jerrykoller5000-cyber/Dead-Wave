@@ -1,0 +1,43 @@
+{
+  "scope": "GC-only diagnostic; not the untraced acceptance run, no claim that earlier66.6ms spike repeated.",
+  "phases": [
+    {
+      "fire": false,
+      "firstFrame": 33334.7,
+      "frames": 245,
+      "worst": 33.400000000001455,
+      "major": [],
+      "scavenges": 5,
+      "longs": []
+    },
+    {
+      "fire": true,
+      "firstFrame": 40051.3,
+      "frames": 1100,
+      "worst": 50,
+      "major": [
+        {
+          "name": "V8.GC_MARK_COMPACTOR",
+          "start": 43092.7159999907,
+          "end": 43109.203999996185,
+          "ms": 16.488
+        }
+      ],
+      "scavenges": 22,
+      "longs": [
+        {
+          "start": 51901.1,
+          "end": 51951.1,
+          "ms": 50,
+          "gc": []
+        },
+        {
+          "start": 57334.3,
+          "end": 57384.3,
+          "ms": 50,
+          "gc": []
+        }
+      ]
+    }
+  ]
+}

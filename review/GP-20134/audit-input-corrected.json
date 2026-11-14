@@ -1,0 +1,7403 @@
+{
+  "label": "audit-input-corrected",
+  "rows": [
+    {
+      "sel": "[data-buy-build=\"m240\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 607.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 50000,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": false,
+          "mortar": false
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49740,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": false
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 260
+    },
+    {
+      "sel": "[data-buy-build=\"mortar\"]",
+      "keyboard": false,
+      "point": {
+        "x": 565.28125,
+        "y": 603.359375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 49740,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": false
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49620,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 120
+    },
+    {
+      "sel": "[data-buy-build-ammo=\"m240\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 607.234375,
+        "text": "Ammo · $48",
+        "hit": true
+      },
+      "before": {
+        "cash": 49620,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49572,
+        "belt": 300,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 300,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 48
+    },
+    {
+      "sel": "[data-buy-build-ammo=\"m240\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 607.234375,
+        "text": "Ammo · $48",
+        "hit": true
+      },
+      "before": {
+        "cash": 49572,
+        "belt": 300,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 300,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49524,
+        "belt": 600,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 600,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 48
+    },
+    {
+      "sel": "[data-buy-build-ammo=\"m240\"]",
+      "keyboard": true,
+      "point": {
+        "x": 411.53125,
+        "y": 607.234375,
+        "text": "Ammo · $48",
+        "hit": true
+      },
+      "before": {
+        "cash": 49524,
+        "belt": 600,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 600,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49476,
+        "belt": 900,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 48
+    },
+    {
+      "sel": "[data-buy-build-ammo=\"mortar\"]",
+      "keyboard": false,
+      "point": {
+        "x": 565.28125,
+        "y": 607.234375,
+        "text": "Ammo · $34",
+        "hit": true
+      },
+      "before": {
+        "cash": 49476,
+        "belt": 900,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49442,
+        "belt": 900,
+        "shells": 4,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 4
+        }
+      },
+      "spent": 34
+    },
+    {
+      "sel": "[data-buy-build-ammo=\"mortar\"]",
+      "keyboard": false,
+      "point": {
+        "x": 565.28125,
+        "y": 607.234375,
+        "text": "Ammo · $34",
+        "hit": true
+      },
+      "before": {
+        "cash": 49442,
+        "belt": 900,
+        "shells": 4,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 4
+        }
+      },
+      "after": {
+        "cash": 49408,
+        "belt": 900,
+        "shells": 8,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 8
+        }
+      },
+      "spent": 34
+    },
+    {
+      "sel": "[data-buy-build-ammo=\"mortar\"]",
+      "keyboard": true,
+      "point": {
+        "x": 565.28125,
+        "y": 607.234375,
+        "text": "Ammo · $34",
+        "hit": true
+      },
+      "before": {
+        "cash": 49408,
+        "belt": 900,
+        "shells": 8,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 8
+        }
+      },
+      "after": {
+        "cash": 49374,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "spent": 34
+    },
+    {
+      "sel": "[data-buy-gun=\"uzi\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 49374,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 49299,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "spent": 75
+    },
+    {
+      "sel": "[data-buy-gun=\"shotgun\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 360.125,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 49299,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 49189,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "spent": 110
+    },
+    {
+      "sel": "[data-buy-gun=\"revolver\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 360.125,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 49189,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 49044,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 48,
+          ".338": 0,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "spent": 145
+    },
+    {
+      "sel": "[data-buy-gun=\"m4\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 360.125,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 49044,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 48,
+          ".338": 0,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 48864,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 0,
+          ".44": 48,
+          ".338": 0,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "spent": 180
+    },
+    {
+      "sel": "[data-buy-gun=\"chainsaw\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 360.015625,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 48864,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 0,
+          ".44": 48,
+          ".338": 0,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 48674,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 0,
+          ".44": 48,
+          ".338": 0,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "spent": 190
+    },
+    {
+      "sel": "[data-buy-gun=\"ak\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 360.015625,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 48674,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 0,
+          ".44": 48,
+          ".338": 0,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 48429,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 0,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "spent": 245
+    },
+    {
+      "sel": "[data-buy-gun=\"sniper\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 360.015625,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 48429,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 0,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 48109,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "spent": 320
+    },
+    {
+      "sel": "[data-buy-gun=\"flamer\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 359.90625,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 48109,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 0,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 47769,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 340
+    },
+    {
+      "sel": "[data-buy-gun=\"launcher\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 396.90625,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 47769,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 0,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 47289,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 480
+    },
+    {
+      "sel": "[data-buy-gun=\"aa12\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 396.90625,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 47289,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 46639,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 650
+    },
+    {
+      "sel": "[data-buy-gun=\"minigun\"]",
+      "keyboard": false,
+      "point": {
+        "x": 411.53125,
+        "y": 397.796875,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 46639,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 45789,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 850
+    },
+    {
+      "sel": "li[data-mod=\"ext\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 45789,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 45744,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 45
+    },
+    {
+      "sel": "li[data-mod=\"suppressor\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 45744,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 45704,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 40
+    },
+    {
+      "sel": "li[data-mod=\"optic:rmr\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 45704,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 45629,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 75
+    },
+    {
+      "sel": "li[data-mod=\"laserLight\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 378.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 45629,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 45539,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 90
+    },
+    {
+      "sel": "li[data-mod=\"auto\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 435.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 45539,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 45469,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 70
+    },
+    {
+      "sel": "li[data-mod=\"pair\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 499.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 45469,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 45349,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 120
+    },
+    {
+      "sel": "li[data-mod=\"ext\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 45349,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 45279,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 70
+    },
+    {
+      "sel": "li[data-mod=\"heavy\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 45279,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 45209,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 70
+    },
+    {
+      "sel": "li[data-mod=\"suppressor\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 45209,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 45149,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 60
+    },
+    {
+      "sel": "li[data-mod=\"optic:rmr\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 45149,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 45074,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 75
+    },
+    {
+      "sel": "li[data-mod=\"pair\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 430.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 45074,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 44919,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 155
+    },
+    {
+      "sel": "li[data-mod=\"ext\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.765625,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 44919,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 44839,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 80
+    },
+    {
+      "sel": "li[data-mod=\"suppressor\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.265625,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 44839,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 44764,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 75
+    },
+    {
+      "sel": "li[data-mod=\"optic:prism\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 392.265625,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 44764,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 44649,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 115
+    },
+    {
+      "sel": "li[data-mod=\"optic:rmr\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 449.265625,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 44649,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 44574,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 75
+    },
+    {
+      "sel": "li[data-mod=\"optic:prism\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 44574,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 44459,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 115
+    },
+    {
+      "sel": "li[data-mod=\"optic:rmr\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 44459,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 44384,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 75
+    },
+    {
+      "sel": "li[data-mod=\"pair\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 430.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 44384,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 44199,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 185
+    },
+    {
+      "sel": "li[data-mod=\"ext\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 44199,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 44104,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 95
+    },
+    {
+      "sel": "li[data-mod=\"heavy\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 44104,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 44009,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 95
+    },
+    {
+      "sel": "li[data-mod=\"suppressor\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 44009,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 43924,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 85
+    },
+    {
+      "sel": "li[data-mod=\"optic:acog\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 43924,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 43774,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 150
+    },
+    {
+      "sel": "li[data-mod=\"optic:prism\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 43774,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 43659,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 115
+    },
+    {
+      "sel": "li[data-mod=\"optic:rmr\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 379.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 43659,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 43584,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 75
+    },
+    {
+      "sel": "li[data-mod=\"tank\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 43584,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 43499,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 85
+    },
+    {
+      "sel": "li[data-mod=\"ext\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 43499,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 43399,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 100
+    },
+    {
+      "sel": "li[data-mod=\"heavy\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 43399,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 43299,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 100
+    },
+    {
+      "sel": "li[data-mod=\"suppressor\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 43299,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 43209,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 90
+    },
+    {
+      "sel": "li[data-mod=\"optic:acog\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 43209,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 43059,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 150
+    },
+    {
+      "sel": "li[data-mod=\"optic:prism\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 43059,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 42944,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 115
+    },
+    {
+      "sel": "li[data-mod=\"optic:rmr\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 379.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 42944,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 42869,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 75
+    },
+    {
+      "sel": "li[data-mod=\"ext\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 42869,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 42779,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 90
+    },
+    {
+      "sel": "li[data-mod=\"suppressor\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 42779,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 42684,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 95
+    },
+    {
+      "sel": "li[data-mod=\"ext\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 42684,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 42594,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 90
+    },
+    {
+      "sel": "li[data-mod=\"optic:rmr\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 42594,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 42519,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 75
+    },
+    {
+      "sel": "li[data-mod=\"ext\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 42519,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 42389,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 130
+    },
+    {
+      "sel": "li[data-mod=\"optic:rmr\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 42389,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 42314,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 75
+    },
+    {
+      "sel": "li[data-mod=\"ext\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 42314,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 42174,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 140
+    },
+    {
+      "sel": "li[data-mod=\"heavy\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 360.234375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 42174,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 42034,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 140
+    },
+    {
+      "sel": "li[data-mod=\"optic:rmr\"] button",
+      "keyboard": false,
+      "point": {
+        "x": 1175.390625,
+        "y": 359.734375,
+        "text": "Buy",
+        "hit": true
+      },
+      "before": {
+        "cash": 42034,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "after": {
+        "cash": 41959,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 50,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 40,
+          "12ga": 154,
+          "40mm": 25,
+          "7.62 belt": 900,
+          "Fuel": 300,
+          "60mm": 12
+        }
+      },
+      "spent": 75
+    },
+    {
+      "sel": "[data-restock-all] button",
+      "keyboard": false,
+      "point": {
+        "x": 1146.71875,
+        "y": 227.453125,
+        "text": "Restock $2093",
+        "hit": true
+      },
+      "before": {
+        "cash": 41959,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 39866,
+        "belt": 1260,
+        "shells": 22,
+        "cif": true,
+        "shop": false,
+        "phase": "prep",
+        "owned": {
+          "pistol": true,
+          "uzi": true,
+          "shotgun": true,
+          "revolver": true,
+          "m4": true,
+          "chainsaw": true,
+          "ak": true,
+          "sniper": true,
+          "flamer": true,
+          "launcher": true,
+          "aa12": true,
+          "minigun": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 252,
+          "9mm": 288,
+          "5.56mm": 240,
+          "7.62mm": 240,
+          ".44": 48,
+          ".338": 56,
+          "12ga": 231,
+          "40mm": 25,
+          "7.62 belt": 1260,
+          "Fuel": 450,
+          "60mm": 22
+        }
+      },
+      "spent": 2093
+    }
+  ],
+  "events": [
+    {
+      "type": "pointerdown",
+      "id": 1,
+      "text": "Buy",
+      "data": {
+        "buyBuild": "m240"
+      },
+      "time": 30910.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 1,
+      "text": "Buy",
+      "data": {
+        "buyBuild": "m240"
+      },
+      "time": 30911
+    },
+    {
+      "type": "mouseup",
+      "id": 1,
+      "text": "Buy",
+      "data": {
+        "buyBuild": "m240"
+      },
+      "time": 30950
+    },
+    {
+      "type": "click",
+      "id": 1,
+      "text": "Buy",
+      "data": {
+        "buyBuild": "m240"
+      },
+      "time": 30950.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 2,
+      "text": "Buy",
+      "data": {
+        "buyBuild": "mortar"
+      },
+      "time": 31048.70000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 2,
+      "text": "Buy",
+      "data": {
+        "buyBuild": "mortar"
+      },
+      "time": 31048.80000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 2,
+      "text": "Buy",
+      "data": {
+        "buyBuild": "mortar"
+      },
+      "time": 31083.70000001788
+    },
+    {
+      "type": "click",
+      "id": 2,
+      "text": "Buy",
+      "data": {
+        "buyBuild": "mortar"
+      },
+      "time": 31083.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 3,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 31160.20000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 3,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 31160.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 3,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 31192.70000001788
+    },
+    {
+      "type": "click",
+      "id": 3,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 31192.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 4,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 31278.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 4,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 31279
+    },
+    {
+      "type": "mouseup",
+      "id": 4,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 31331.5
+    },
+    {
+      "type": "click",
+      "id": 4,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 31331.70000001788
+    },
+    {
+      "type": "click",
+      "id": 5,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 31410.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 6,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 31492.30000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 6,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 31492.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 6,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 31523.30000001192
+    },
+    {
+      "type": "click",
+      "id": 6,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 31523.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 7,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 31593.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 7,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 31593.20000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 7,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 31640.90000000596
+    },
+    {
+      "type": "click",
+      "id": 7,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 31641
+    },
+    {
+      "type": "click",
+      "id": 8,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 31725.90000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 9,
+      "text": "Buy",
+      "data": {
+        "buyGun": "uzi"
+      },
+      "time": 31811.70000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 9,
+      "text": "Buy",
+      "data": {
+        "buyGun": "uzi"
+      },
+      "time": 31811.70000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 9,
+      "text": "Buy",
+      "data": {
+        "buyGun": "uzi"
+      },
+      "time": 31844.70000001788
+    },
+    {
+      "type": "click",
+      "id": 9,
+      "text": "Buy",
+      "data": {
+        "buyGun": "uzi"
+      },
+      "time": 31844.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 10,
+      "text": "Buy",
+      "data": {
+        "buyGun": "shotgun"
+      },
+      "time": 31982.70000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 10,
+      "text": "Buy",
+      "data": {
+        "buyGun": "shotgun"
+      },
+      "time": 31982.70000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 10,
+      "text": "Buy",
+      "data": {
+        "buyGun": "shotgun"
+      },
+      "time": 32016.59999999404
+    },
+    {
+      "type": "click",
+      "id": 10,
+      "text": "Buy",
+      "data": {
+        "buyGun": "shotgun"
+      },
+      "time": 32016.59999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 11,
+      "text": "Buy",
+      "data": {
+        "buyGun": "revolver"
+      },
+      "time": 32144.59999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 11,
+      "text": "Buy",
+      "data": {
+        "buyGun": "revolver"
+      },
+      "time": 32144.70000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 11,
+      "text": "Buy",
+      "data": {
+        "buyGun": "revolver"
+      },
+      "time": 32235.80000001192
+    },
+    {
+      "type": "click",
+      "id": 11,
+      "text": "Buy",
+      "data": {
+        "buyGun": "revolver"
+      },
+      "time": 32235.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 12,
+      "text": "Buy",
+      "data": {
+        "buyGun": "m4"
+      },
+      "time": 32357.80000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 12,
+      "text": "Buy",
+      "data": {
+        "buyGun": "m4"
+      },
+      "time": 32357.80000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 12,
+      "text": "Buy",
+      "data": {
+        "buyGun": "m4"
+      },
+      "time": 32399.70000001788
+    },
+    {
+      "type": "click",
+      "id": 12,
+      "text": "Buy",
+      "data": {
+        "buyGun": "m4"
+      },
+      "time": 32399.70000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 13,
+      "text": "Buy",
+      "data": {
+        "buyGun": "chainsaw"
+      },
+      "time": 32643.20000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 13,
+      "text": "Buy",
+      "data": {
+        "buyGun": "chainsaw"
+      },
+      "time": 32643.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 13,
+      "text": "Buy",
+      "data": {
+        "buyGun": "chainsaw"
+      },
+      "time": 32677.80000001192
+    },
+    {
+      "type": "click",
+      "id": 13,
+      "text": "Buy",
+      "data": {
+        "buyGun": "chainsaw"
+      },
+      "time": 32677.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 14,
+      "text": "Buy",
+      "data": {
+        "buyGun": "ak"
+      },
+      "time": 32760.20000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 14,
+      "text": "Buy",
+      "data": {
+        "buyGun": "ak"
+      },
+      "time": 32760.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 14,
+      "text": "Buy",
+      "data": {
+        "buyGun": "ak"
+      },
+      "time": 32865.30000001192
+    },
+    {
+      "type": "click",
+      "id": 14,
+      "text": "Buy",
+      "data": {
+        "buyGun": "ak"
+      },
+      "time": 32865.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 15,
+      "text": "Buy",
+      "data": {
+        "buyGun": "sniper"
+      },
+      "time": 32947.70000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 15,
+      "text": "Buy",
+      "data": {
+        "buyGun": "sniper"
+      },
+      "time": 32947.70000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 15,
+      "text": "Buy",
+      "data": {
+        "buyGun": "sniper"
+      },
+      "time": 33066.09999999404
+    },
+    {
+      "type": "click",
+      "id": 15,
+      "text": "Buy",
+      "data": {
+        "buyGun": "sniper"
+      },
+      "time": 33066.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 16,
+      "text": "Buy",
+      "data": {
+        "buyGun": "flamer"
+      },
+      "time": 33175.40000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 16,
+      "text": "Buy",
+      "data": {
+        "buyGun": "flamer"
+      },
+      "time": 33175.5
+    },
+    {
+      "type": "mouseup",
+      "id": 16,
+      "text": "Buy",
+      "data": {
+        "buyGun": "flamer"
+      },
+      "time": 33216.59999999404
+    },
+    {
+      "type": "click",
+      "id": 16,
+      "text": "Buy",
+      "data": {
+        "buyGun": "flamer"
+      },
+      "time": 33216.70000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 17,
+      "text": "Buy",
+      "data": {
+        "buyGun": "launcher"
+      },
+      "time": 33297.5
+    },
+    {
+      "type": "mousedown",
+      "id": 17,
+      "text": "Buy",
+      "data": {
+        "buyGun": "launcher"
+      },
+      "time": 33297.5
+    },
+    {
+      "type": "mouseup",
+      "id": 17,
+      "text": "Buy",
+      "data": {
+        "buyGun": "launcher"
+      },
+      "time": 33367
+    },
+    {
+      "type": "click",
+      "id": 17,
+      "text": "Buy",
+      "data": {
+        "buyGun": "launcher"
+      },
+      "time": 33367
+    },
+    {
+      "type": "pointerdown",
+      "id": 18,
+      "text": "Buy",
+      "data": {
+        "buyGun": "aa12"
+      },
+      "time": 33473.59999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 18,
+      "text": "Buy",
+      "data": {
+        "buyGun": "aa12"
+      },
+      "time": 33473.59999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 18,
+      "text": "Buy",
+      "data": {
+        "buyGun": "aa12"
+      },
+      "time": 33510.09999999404
+    },
+    {
+      "type": "click",
+      "id": 18,
+      "text": "Buy",
+      "data": {
+        "buyGun": "aa12"
+      },
+      "time": 33510.20000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 19,
+      "text": "Buy",
+      "data": {
+        "buyGun": "minigun"
+      },
+      "time": 33596.20000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 19,
+      "text": "Buy",
+      "data": {
+        "buyGun": "minigun"
+      },
+      "time": 33596.20000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 19,
+      "text": "Buy",
+      "data": {
+        "buyGun": "minigun"
+      },
+      "time": 33640.30000001192
+    },
+    {
+      "type": "click",
+      "id": 19,
+      "text": "Buy",
+      "data": {
+        "buyGun": "minigun"
+      },
+      "time": 33640.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 20,
+      "text": "Buy",
+      "data": {},
+      "time": 33784.40000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 20,
+      "text": "Buy",
+      "data": {},
+      "time": 33784.40000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 20,
+      "text": "Buy",
+      "data": {},
+      "time": 33824.20000001788
+    },
+    {
+      "type": "click",
+      "id": 20,
+      "text": "Buy",
+      "data": {},
+      "time": 33824.20000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 21,
+      "text": "Buy",
+      "data": {},
+      "time": 33894.40000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 21,
+      "text": "Buy",
+      "data": {},
+      "time": 33894.40000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 21,
+      "text": "Buy",
+      "data": {},
+      "time": 33933.5
+    },
+    {
+      "type": "click",
+      "id": 21,
+      "text": "Buy",
+      "data": {},
+      "time": 33933.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 22,
+      "text": "Buy",
+      "data": {},
+      "time": 34015.30000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 22,
+      "text": "Buy",
+      "data": {},
+      "time": 34015.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 22,
+      "text": "Buy",
+      "data": {},
+      "time": 34049.70000001788
+    },
+    {
+      "type": "click",
+      "id": 22,
+      "text": "Buy",
+      "data": {},
+      "time": 34049.70000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 23,
+      "text": "Buy",
+      "data": {},
+      "time": 34175.30000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 23,
+      "text": "Buy",
+      "data": {},
+      "time": 34175.40000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 23,
+      "text": "Buy",
+      "data": {},
+      "time": 34223.80000001192
+    },
+    {
+      "type": "click",
+      "id": 23,
+      "text": "Buy",
+      "data": {},
+      "time": 34223.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 24,
+      "text": "Buy",
+      "data": {},
+      "time": 34310.20000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 24,
+      "text": "Buy",
+      "data": {},
+      "time": 34310.20000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 24,
+      "text": "Buy",
+      "data": {},
+      "time": 34343.70000001788
+    },
+    {
+      "type": "click",
+      "id": 24,
+      "text": "Buy",
+      "data": {},
+      "time": 34343.70000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 25,
+      "text": "Buy",
+      "data": {},
+      "time": 34427.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 25,
+      "text": "Buy",
+      "data": {},
+      "time": 34427.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 25,
+      "text": "Buy",
+      "data": {},
+      "time": 34458.70000001788
+    },
+    {
+      "type": "click",
+      "id": 25,
+      "text": "Buy",
+      "data": {},
+      "time": 34458.70000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 26,
+      "text": "Buy",
+      "data": {},
+      "time": 34550.30000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 26,
+      "text": "Buy",
+      "data": {},
+      "time": 34550.40000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 26,
+      "text": "Buy",
+      "data": {},
+      "time": 34583.59999999404
+    },
+    {
+      "type": "click",
+      "id": 26,
+      "text": "Buy",
+      "data": {},
+      "time": 34583.59999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 27,
+      "text": "Buy",
+      "data": {},
+      "time": 34664.80000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 27,
+      "text": "Buy",
+      "data": {},
+      "time": 34664.80000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 27,
+      "text": "Buy",
+      "data": {},
+      "time": 34700.30000001192
+    },
+    {
+      "type": "click",
+      "id": 27,
+      "text": "Buy",
+      "data": {},
+      "time": 34700.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 28,
+      "text": "Buy",
+      "data": {},
+      "time": 34794.80000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 28,
+      "text": "Buy",
+      "data": {},
+      "time": 34794.80000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 28,
+      "text": "Buy",
+      "data": {},
+      "time": 34833.09999999404
+    },
+    {
+      "type": "click",
+      "id": 28,
+      "text": "Buy",
+      "data": {},
+      "time": 34833.20000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 29,
+      "text": "Buy",
+      "data": {},
+      "time": 34928.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 29,
+      "text": "Buy",
+      "data": {},
+      "time": 34928.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 29,
+      "text": "Buy",
+      "data": {},
+      "time": 34966.40000000596
+    },
+    {
+      "type": "click",
+      "id": 29,
+      "text": "Buy",
+      "data": {},
+      "time": 34966.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 30,
+      "text": "Buy",
+      "data": {},
+      "time": 35064.30000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 30,
+      "text": "Buy",
+      "data": {},
+      "time": 35064.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 30,
+      "text": "Buy",
+      "data": {},
+      "time": 35126
+    },
+    {
+      "type": "click",
+      "id": 30,
+      "text": "Buy",
+      "data": {},
+      "time": 35126
+    },
+    {
+      "type": "pointerdown",
+      "id": 31,
+      "text": "Buy",
+      "data": {},
+      "time": 35228.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 31,
+      "text": "Buy",
+      "data": {},
+      "time": 35228.90000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 31,
+      "text": "Buy",
+      "data": {},
+      "time": 35263.80000001192
+    },
+    {
+      "type": "click",
+      "id": 31,
+      "text": "Buy",
+      "data": {},
+      "time": 35263.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 32,
+      "text": "Buy",
+      "data": {},
+      "time": 35362.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 32,
+      "text": "Buy",
+      "data": {},
+      "time": 35362.20000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 32,
+      "text": "Buy",
+      "data": {},
+      "time": 35408.30000001192
+    },
+    {
+      "type": "click",
+      "id": 32,
+      "text": "Buy",
+      "data": {},
+      "time": 35408.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 33,
+      "text": "Buy",
+      "data": {},
+      "time": 35495.20000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 33,
+      "text": "Buy",
+      "data": {},
+      "time": 35495.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 33,
+      "text": "Buy",
+      "data": {},
+      "time": 35533.20000001788
+    },
+    {
+      "type": "click",
+      "id": 33,
+      "text": "Buy",
+      "data": {},
+      "time": 35533.20000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 34,
+      "text": "Buy",
+      "data": {},
+      "time": 35628.59999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 34,
+      "text": "Buy",
+      "data": {},
+      "time": 35628.59999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 34,
+      "text": "Buy",
+      "data": {},
+      "time": 35666.30000001192
+    },
+    {
+      "type": "click",
+      "id": 34,
+      "text": "Buy",
+      "data": {},
+      "time": 35666.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 35,
+      "text": "Buy",
+      "data": {},
+      "time": 35777
+    },
+    {
+      "type": "mousedown",
+      "id": 35,
+      "text": "Buy",
+      "data": {},
+      "time": 35777
+    },
+    {
+      "type": "mouseup",
+      "id": 35,
+      "text": "Buy",
+      "data": {},
+      "time": 35828.20000001788
+    },
+    {
+      "type": "click",
+      "id": 35,
+      "text": "Buy",
+      "data": {},
+      "time": 35828.20000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 36,
+      "text": "Buy",
+      "data": {},
+      "time": 35930.70000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 36,
+      "text": "Buy",
+      "data": {},
+      "time": 35930.70000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 36,
+      "text": "Buy",
+      "data": {},
+      "time": 35979.5
+    },
+    {
+      "type": "click",
+      "id": 36,
+      "text": "Buy",
+      "data": {},
+      "time": 35979.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 37,
+      "text": "Buy",
+      "data": {},
+      "time": 36061.40000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 37,
+      "text": "Buy",
+      "data": {},
+      "time": 36061.40000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 37,
+      "text": "Buy",
+      "data": {},
+      "time": 36097.80000001192
+    },
+    {
+      "type": "click",
+      "id": 37,
+      "text": "Buy",
+      "data": {},
+      "time": 36097.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 38,
+      "text": "Buy",
+      "data": {},
+      "time": 36213
+    },
+    {
+      "type": "mousedown",
+      "id": 38,
+      "text": "Buy",
+      "data": {},
+      "time": 36213
+    },
+    {
+      "type": "mouseup",
+      "id": 38,
+      "text": "Buy",
+      "data": {},
+      "time": 36246.30000001192
+    },
+    {
+      "type": "click",
+      "id": 38,
+      "text": "Buy",
+      "data": {},
+      "time": 36246.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 39,
+      "text": "Buy",
+      "data": {},
+      "time": 36328.20000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 39,
+      "text": "Buy",
+      "data": {},
+      "time": 36328.20000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 39,
+      "text": "Buy",
+      "data": {},
+      "time": 36361.59999999404
+    },
+    {
+      "type": "click",
+      "id": 39,
+      "text": "Buy",
+      "data": {},
+      "time": 36361.59999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 40,
+      "text": "Buy",
+      "data": {},
+      "time": 36459.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 40,
+      "text": "Buy",
+      "data": {},
+      "time": 36459.90000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 40,
+      "text": "Buy",
+      "data": {},
+      "time": 36492.30000001192
+    },
+    {
+      "type": "click",
+      "id": 40,
+      "text": "Buy",
+      "data": {},
+      "time": 36492.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 41,
+      "text": "Buy",
+      "data": {},
+      "time": 36580.5
+    },
+    {
+      "type": "mousedown",
+      "id": 41,
+      "text": "Buy",
+      "data": {},
+      "time": 36580.5
+    },
+    {
+      "type": "mouseup",
+      "id": 41,
+      "text": "Buy",
+      "data": {},
+      "time": 36613.70000001788
+    },
+    {
+      "type": "click",
+      "id": 41,
+      "text": "Buy",
+      "data": {},
+      "time": 36613.70000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 42,
+      "text": "Buy",
+      "data": {},
+      "time": 36694.30000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 42,
+      "text": "Buy",
+      "data": {},
+      "time": 36694.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 42,
+      "text": "Buy",
+      "data": {},
+      "time": 36733.59999999404
+    },
+    {
+      "type": "click",
+      "id": 42,
+      "text": "Buy",
+      "data": {},
+      "time": 36733.70000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 43,
+      "text": "Buy",
+      "data": {},
+      "time": 36825.5
+    },
+    {
+      "type": "mousedown",
+      "id": 43,
+      "text": "Buy",
+      "data": {},
+      "time": 36825.5
+    },
+    {
+      "type": "mouseup",
+      "id": 43,
+      "text": "Buy",
+      "data": {},
+      "time": 36859.5
+    },
+    {
+      "type": "click",
+      "id": 43,
+      "text": "Buy",
+      "data": {},
+      "time": 36859.59999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 44,
+      "text": "Buy",
+      "data": {},
+      "time": 36960.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 44,
+      "text": "Buy",
+      "data": {},
+      "time": 36960.90000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 44,
+      "text": "Buy",
+      "data": {},
+      "time": 37008.40000000596
+    },
+    {
+      "type": "click",
+      "id": 44,
+      "text": "Buy",
+      "data": {},
+      "time": 37008.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 45,
+      "text": "Buy",
+      "data": {},
+      "time": 37113.20000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 45,
+      "text": "Buy",
+      "data": {},
+      "time": 37113.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 45,
+      "text": "Buy",
+      "data": {},
+      "time": 37160.70000001788
+    },
+    {
+      "type": "click",
+      "id": 45,
+      "text": "Buy",
+      "data": {},
+      "time": 37160.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 46,
+      "text": "Buy",
+      "data": {},
+      "time": 37245.70000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 46,
+      "text": "Buy",
+      "data": {},
+      "time": 37245.70000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 46,
+      "text": "Buy",
+      "data": {},
+      "time": 37283.40000000596
+    },
+    {
+      "type": "click",
+      "id": 46,
+      "text": "Buy",
+      "data": {},
+      "time": 37283.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 47,
+      "text": "Buy",
+      "data": {},
+      "time": 37361.40000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 47,
+      "text": "Buy",
+      "data": {},
+      "time": 37361.40000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 47,
+      "text": "Buy",
+      "data": {},
+      "time": 37408.30000001192
+    },
+    {
+      "type": "click",
+      "id": 47,
+      "text": "Buy",
+      "data": {},
+      "time": 37408.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 48,
+      "text": "Buy",
+      "data": {},
+      "time": 37481.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 48,
+      "text": "Buy",
+      "data": {},
+      "time": 37481.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 48,
+      "text": "Buy",
+      "data": {},
+      "time": 37522.90000000596
+    },
+    {
+      "type": "click",
+      "id": 48,
+      "text": "Buy",
+      "data": {},
+      "time": 37522.90000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 49,
+      "text": "Buy",
+      "data": {},
+      "time": 37611.70000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 49,
+      "text": "Buy",
+      "data": {},
+      "time": 37611.70000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 49,
+      "text": "Buy",
+      "data": {},
+      "time": 37661.20000001788
+    },
+    {
+      "type": "click",
+      "id": 49,
+      "text": "Buy",
+      "data": {},
+      "time": 37661.20000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 50,
+      "text": "Buy",
+      "data": {},
+      "time": 37745.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 50,
+      "text": "Buy",
+      "data": {},
+      "time": 37746.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 50,
+      "text": "Buy",
+      "data": {},
+      "time": 37781.70000001788
+    },
+    {
+      "type": "click",
+      "id": 50,
+      "text": "Buy",
+      "data": {},
+      "time": 37781.70000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 51,
+      "text": "Buy",
+      "data": {},
+      "time": 37876
+    },
+    {
+      "type": "mousedown",
+      "id": 51,
+      "text": "Buy",
+      "data": {},
+      "time": 37876
+    },
+    {
+      "type": "mouseup",
+      "id": 51,
+      "text": "Buy",
+      "data": {},
+      "time": 37928.5
+    },
+    {
+      "type": "click",
+      "id": 51,
+      "text": "Buy",
+      "data": {},
+      "time": 37928.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 52,
+      "text": "Buy",
+      "data": {},
+      "time": 38027.30000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 52,
+      "text": "Buy",
+      "data": {},
+      "time": 38027.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 52,
+      "text": "Buy",
+      "data": {},
+      "time": 38076.80000001192
+    },
+    {
+      "type": "click",
+      "id": 52,
+      "text": "Buy",
+      "data": {},
+      "time": 38076.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 53,
+      "text": "Buy",
+      "data": {},
+      "time": 38183.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 53,
+      "text": "Buy",
+      "data": {},
+      "time": 38184
+    },
+    {
+      "type": "mouseup",
+      "id": 53,
+      "text": "Buy",
+      "data": {},
+      "time": 38231.70000001788
+    },
+    {
+      "type": "click",
+      "id": 53,
+      "text": "Buy",
+      "data": {},
+      "time": 38231.70000001788
+    },
+    {
+      "type": "pointerdown",
+      "id": 54,
+      "text": "Buy",
+      "data": {},
+      "time": 38347.70000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 54,
+      "text": "Buy",
+      "data": {},
+      "time": 38347.70000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 54,
+      "text": "Buy",
+      "data": {},
+      "time": 38388.59999999404
+    },
+    {
+      "type": "click",
+      "id": 54,
+      "text": "Buy",
+      "data": {},
+      "time": 38388.59999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 55,
+      "text": "Buy",
+      "data": {},
+      "time": 38511.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 55,
+      "text": "Buy",
+      "data": {},
+      "time": 38511.20000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 55,
+      "text": "Buy",
+      "data": {},
+      "time": 38579.80000001192
+    },
+    {
+      "type": "click",
+      "id": 55,
+      "text": "Buy",
+      "data": {},
+      "time": 38579.90000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 56,
+      "text": "Buy",
+      "data": {},
+      "time": 38662.5
+    },
+    {
+      "type": "mousedown",
+      "id": 56,
+      "text": "Buy",
+      "data": {},
+      "time": 38662.59999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 56,
+      "text": "Buy",
+      "data": {},
+      "time": 38708.09999999404
+    },
+    {
+      "type": "click",
+      "id": 56,
+      "text": "Buy",
+      "data": {},
+      "time": 38708.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 57,
+      "text": "Buy",
+      "data": {},
+      "time": 38849.5
+    },
+    {
+      "type": "mousedown",
+      "id": 57,
+      "text": "Buy",
+      "data": {},
+      "time": 38849.5
+    },
+    {
+      "type": "mouseup",
+      "id": 57,
+      "text": "Buy",
+      "data": {},
+      "time": 38891.30000001192
+    },
+    {
+      "type": "click",
+      "id": 57,
+      "text": "Buy",
+      "data": {},
+      "time": 38891.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 58,
+      "text": "Buy",
+      "data": {},
+      "time": 38976.30000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 58,
+      "text": "Buy",
+      "data": {},
+      "time": 38976.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 58,
+      "text": "Buy",
+      "data": {},
+      "time": 39027.90000000596
+    },
+    {
+      "type": "click",
+      "id": 58,
+      "text": "Buy",
+      "data": {},
+      "time": 39027.90000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 59,
+      "text": "Buy",
+      "data": {},
+      "time": 39111.20000001788
+    },
+    {
+      "type": "mousedown",
+      "id": 59,
+      "text": "Buy",
+      "data": {},
+      "time": 39111.20000001788
+    },
+    {
+      "type": "mouseup",
+      "id": 59,
+      "text": "Buy",
+      "data": {},
+      "time": 39151.5
+    },
+    {
+      "type": "click",
+      "id": 59,
+      "text": "Buy",
+      "data": {},
+      "time": 39151.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 60,
+      "text": "Restock $2093",
+      "data": {},
+      "time": 39288
+    },
+    {
+      "type": "mousedown",
+      "id": 60,
+      "text": "Restock $2093",
+      "data": {},
+      "time": 39288
+    },
+    {
+      "type": "mouseup",
+      "id": 60,
+      "text": "Restock $2093",
+      "data": {},
+      "time": 39337.5
+    },
+    {
+      "type": "click",
+      "id": 60,
+      "text": "Restock $2093",
+      "data": {},
+      "time": 39337.5
+    }
+  ],
+  "mutations": [
+    {
+      "time": 31086,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31196.70000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31196.70000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31334.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31334.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31412.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31412.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31525.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31525.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31643.70000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31643.70000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31728,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31728,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31855.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 31855.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 32020.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 32020.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 32239.30000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 32239.30000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 32404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 32404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 32680.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 32680.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 32868.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 32868.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33070.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33070.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33219.80000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33219.80000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33373.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33373.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33513,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33513,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33643.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33643.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33777.30000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33777.30000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33829,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33829,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33937.80000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 33937.80000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34059,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34059,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34228,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34228,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34347.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34347.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34462.20000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34462.20000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34534.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34534.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34588.20000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34588.30000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34705,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34705,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34838.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34838.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34977.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34977.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35131.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35131.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35212,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35212,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35269.30000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35269.30000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35412.70000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35412.70000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35541.70000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35541.70000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35673.20000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35673.20000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35762.80000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35762.80000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35839.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35839.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35987.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35987.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36103.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36103.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36195.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36195.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36250.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36250.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36366.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36366.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36496.70000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36496.70000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36622.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36622.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36739.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36739.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36866.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36866.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36945.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36945.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37013,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37013,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37095.30000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37095.30000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37167.20000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37167.20000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37288.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37288.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37412.80000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37412.80000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37530.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37530.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37666.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37666.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37787.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37787.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37862.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37862.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37933.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37933.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38082.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38082.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38176,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38176,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38236,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38236,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38333.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38333.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38394.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38394.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38464.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38464.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38584.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38584.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38714.20000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38714.20000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38796.80000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38796.80000001192,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38896.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 38896.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 39031.70000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 39031.70000001788,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 39159.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 39159.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 39246.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 39246.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 39356.09999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 39356.09999999404,
+      "removed": "armory-item armory-offer"
+    }
+  ],
+  "errors": []
+}

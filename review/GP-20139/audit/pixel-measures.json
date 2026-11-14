@@ -1,0 +1,203 @@
+{
+  "metric": "max per-channel RGB range across3rawframes at camera dx=-.002,0,+.002m; no registration; edge shimmer included; sensitivity curve fixed before comparisons",
+  "rows": [
+    {
+      "view": "southA",
+      "variant": "normal",
+      "pixels": 921600,
+      "gt16": 37961,
+      "gt24": 30165,
+      "gt32": 21757,
+      "gt48": 13250,
+      "gt64": 7827,
+      "gt96": 3446
+    },
+    {
+      "view": "southA",
+      "variant": "no-paint",
+      "pixels": 921600,
+      "gt16": 30095,
+      "gt24": 26866,
+      "gt32": 20306,
+      "gt48": 10327,
+      "gt64": 6173,
+      "gt96": 1283
+    },
+    {
+      "view": "southA",
+      "variant": "no-offset",
+      "pixels": 921600,
+      "gt16": 37961,
+      "gt24": 30165,
+      "gt32": 21757,
+      "gt48": 13250,
+      "gt64": 7827,
+      "gt96": 3446
+    },
+    {
+      "view": "southA",
+      "variant": "raised-10mm",
+      "pixels": 921600,
+      "gt16": 35057,
+      "gt24": 27277,
+      "gt32": 18610,
+      "gt48": 10160,
+      "gt64": 6323,
+      "gt96": 2305
+    },
+    {
+      "view": "southA",
+      "variant": "aniso16",
+      "pixels": 921600,
+      "gt16": 37961,
+      "gt24": 30165,
+      "gt32": 21757,
+      "gt48": 13250,
+      "gt64": 7827,
+      "gt96": 3446
+    },
+    {
+      "view": "southA",
+      "variant": "no-depth-test",
+      "pixels": 921600,
+      "gt16": 34820,
+      "gt24": 27112,
+      "gt32": 18558,
+      "gt48": 10129,
+      "gt64": 6271,
+      "gt96": 2183
+    },
+    {
+      "view": "eastA",
+      "variant": "normal",
+      "pixels": 921600,
+      "gt16": 36318,
+      "gt24": 22585,
+      "gt32": 17619,
+      "gt48": 8592,
+      "gt64": 5390,
+      "gt96": 3336
+    },
+    {
+      "view": "eastA",
+      "variant": "no-paint",
+      "pixels": 921600,
+      "gt16": 32701,
+      "gt24": 20890,
+      "gt32": 17691,
+      "gt48": 7109,
+      "gt64": 4627,
+      "gt96": 947
+    },
+    {
+      "view": "eastA",
+      "variant": "no-offset",
+      "pixels": 921600,
+      "gt16": 36318,
+      "gt24": 22585,
+      "gt32": 17619,
+      "gt48": 8592,
+      "gt64": 5390,
+      "gt96": 3336
+    },
+    {
+      "view": "eastA",
+      "variant": "raised-10mm",
+      "pixels": 921600,
+      "gt16": 33285,
+      "gt24": 20037,
+      "gt32": 14831,
+      "gt48": 6515,
+      "gt64": 3422,
+      "gt96": 1918
+    },
+    {
+      "view": "eastA",
+      "variant": "aniso16",
+      "pixels": 921600,
+      "gt16": 36318,
+      "gt24": 22585,
+      "gt32": 17619,
+      "gt48": 8592,
+      "gt64": 5390,
+      "gt96": 3336
+    },
+    {
+      "view": "eastA",
+      "variant": "no-depth-test",
+      "pixels": 921600,
+      "gt16": 33050,
+      "gt24": 19849,
+      "gt32": 14875,
+      "gt48": 6343,
+      "gt64": 3379,
+      "gt96": 2034
+    },
+    {
+      "view": "medicalA",
+      "variant": "normal",
+      "pixels": 921600,
+      "gt16": 23829,
+      "gt24": 14100,
+      "gt32": 7970,
+      "gt48": 2647,
+      "gt64": 1032,
+      "gt96": 369
+    },
+    {
+      "view": "medicalA",
+      "variant": "no-paint",
+      "pixels": 921600,
+      "gt16": 23238,
+      "gt24": 13780,
+      "gt32": 7661,
+      "gt48": 1969,
+      "gt64": 484,
+      "gt96": 14
+    },
+    {
+      "view": "medicalA",
+      "variant": "no-offset",
+      "pixels": 921600,
+      "gt16": 23829,
+      "gt24": 14100,
+      "gt32": 7970,
+      "gt48": 2647,
+      "gt64": 1032,
+      "gt96": 369
+    },
+    {
+      "view": "medicalA",
+      "variant": "raised-10mm",
+      "pixels": 921600,
+      "gt16": 22840,
+      "gt24": 13267,
+      "gt32": 7218,
+      "gt48": 1990,
+      "gt64": 512,
+      "gt96": 51
+    },
+    {
+      "view": "medicalA",
+      "variant": "aniso16",
+      "pixels": 921600,
+      "gt16": 23829,
+      "gt24": 14100,
+      "gt32": 7970,
+      "gt48": 2647,
+      "gt64": 1032,
+      "gt96": 369
+    },
+    {
+      "view": "medicalA",
+      "variant": "no-depth-test",
+      "pixels": 921600,
+      "gt16": 22775,
+      "gt24": 13259,
+      "gt32": 7193,
+      "gt48": 1962,
+      "gt64": 502,
+      "gt96": 49
+    }
+  ]
+}

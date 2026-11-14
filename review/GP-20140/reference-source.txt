@@ -1,0 +1,10 @@
+CMU Graphics Lab motion capture database, subject79 clip28: drinking and smoking.
+Source: http://mocap.cs.cmu.edu/subjects/79/79_28.mpg
+Catalogue: https://mocap.cs.cmu.edu/search.php
+Terms: http://mocap.cs.cmu.edu/ : free for all uses; may include in commercial products, may not resell data directly even converted.
+Credit: The data used in this project was obtained from mocap.cs.cmu.edu. The database was created with funding from NSF EIA-0196217.
+Review reference only: no motion data imported or retargeted. Finger details cannot be inferred from this body-only reference.
+
+Smoking-specific reference: CMU subject80 clip28 http://mocap.cs.cmu.edu/subjects/80/80_28.mpg (same terms). Inspected reference-80-sheet.png at0.5s intervals: hand rises separately from shoulder, settles beside mouth, lowers to chest, short forward ash gesture; free hand remains low. Body reference only; no finger/ember/exhale detail established by footage. Subject79 clip28 is drinking (both hands raised), retained as diagnostic, not cigarette pose authority.
+
+Director ruling (2026-11-14): no asset import and no assets licence append. All 71 downloaded video/sheet/frame files moved without overwrite into _DELETE ME/GP-20140-reference/ (gitignored); exact paths and SHA256 are in reference-moved.json. Reference is look-only; the game contains authored timing/contact code and no captured or retargeted motion/media.

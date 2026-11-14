@@ -1,0 +1,49 @@
+✔ one cell around all four walls is reserved, interior and range are not border cells (1.2759ms)
+✔ layout joins medical enclosure, recesses both stations and preserves the gate approach (1.4728ms)
+✔ medical corners have matching returns and paint reaches both edges without entering the enclosure (0.5281ms)
+✔ coil clearance trims crossing and terminal pillar joints in either direction (0.3524ms)
+✔ razor ribbon also breaks in front of each wall pillar, retaining the physical fence seal (39.1082ms)
+✔ fences stop swept movement but door and station openings remain usable (18.5137ms)
+✔ six batched meshes, stable geometry, and camera cutaway keep collision intact (19.9976ms)
+✔ faded foreground fence does not trap camera aim, but rounds still hit it; old shell rule survives (20.7137ms)
+{"overlapSquareMetres":0,"pairs":0}
+✔ opaque yellow border and striped paint have no shared visible area (23.4594ms)
+✔ CJ1 depth layers, paint elevation, and world-aligned UVs remain (1.2474ms)
+✔ clampToRects: inside stays, outside goes to the nearest edge of the nearest room (1.2689ms)
+✔ segmentBox: where a round first meets a box (0.2207ms)
+✖ the build: two rooms past the map, five targets downrange, every station on a wall facing in (672.6291ms)
+✔ CL-143: the build room is a hangar, and building stays five squares clear of the zombie gate (672.0009ms)
+✔ CL-144: the plates are twice the size, and a hit scores by its ring and the lane (606.4109ms)
+✔ GP-20102: target backing stays behind the plate and clear of its base through either fall (547.6198ms)
+✔ CL-146: the door has a keypad each side, and nothing in the hangar touches the shared wall (669.3025ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 16
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3351.0363
+
+✖ failing tests:
+
+test at world\training.test.mjs:26:1
+✖ the build: two rooms past the map, five targets downrange, every station on a wall facing in (672.6291ms)
+  AssertionError [ERR_ASSERTION]: he starts inside, behind the line
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/world/training.test.mjs:52:10)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -44,6 +44,9 @@ export function exceptionOver(id, joint) {
 }
 
 const wrapA = (a) => Math.atan2(Math.sin(a), Math.cos(a));
+// CE-12 (GP-20133): module scratch for wristAngles/clampWrist/shoulderAngles (the hold calls them tens of times a frame)
+const _wD = [0, 0, 0], _shR = [0, 0, 0], _cwA = { flex: 0, dev: 0, twist: 0 }, _cwG = { flex: 0, dev: 0, twist: 0 };
+const _cwT0 = { x: 0, y: 0, z: 0, w: 1 }, _cwS = { x: 0, y: 0, z: 0, w: 1 }, _cwSw = { x: 0, y: 0, z: 0, w: 1 }, _cwT = { x: 0, y: 0, z: 0, w: 1 };
 function qmul(a, b, out) {
   const x = a.w * b.x + a.x * b.w + a.y * b.z - a.z * b.y;
   const y = a.w * b.y - a.x * b.z + a.y * b.w + a.z * b.x;
@@ -57,11 +60,14 @@ function qnorm(q) { const l = Math.hypot(q.x, q.y, q.z, q.w) || 1; q.x /= l; q.y
 // Bent toward the palm, the forearm leans toward the palm seen from the hand; bent toward the thumb (radial), it leans
 // toward the thumb's edge (the hand's +x * side): the thumb's side of the hand comes up toward the forearm's.
 // The turn is split as q = twist * swing: the swing bends the hand off the forearm's line, the twist turns it about it.
-export function wristAngles(q, side = 1) {
+// out (optional, CE-12/GP-20133): an object to fill instead of a new one (the hold calls this tens of times a frame).
+export function wristAngles(q, side = 1, out = null) {
   const tw = 2 * Math.atan2(q.y, q.w);
-  const d = invRot(q, [0, 1, 0]);
+  const d = rotInto(-q.x, -q.y, -q.z, q.w, 0, 1, 0, _wD);   // invRot(q, [0, 1, 0]), no garbage
   // dev as the lean out of the forearm's flexion plane (asin), so a bend past 90 deg toward the palm still reads no sideways bend
-  return { flex: Math.atan2(d[2], d[1]), dev: Math.asin(Math.max(-1, Math.min(1, d[0] * side))), twist: wrapA(tw) };
+  const flex = Math.atan2(d[2], d[1]), dev = Math.asin(Math.max(-1, Math.min(1, d[0] * side))), twist = wrapA(tw);
+  if (!out) return { flex, dev, twist };
+  out.flex = flex; out.dev = dev; out.twist = twist; return out;
 }
 
 // Where a wrist's bend sits against the ellipse (1 on its edge), with `over` added to each of its four limits.
@@ -76,7 +82,7 @@ export function wristOver(flex, dev, over = 0) {
 // that applies to this hand now, or null. Returns what it found and what it did, for the checks.
 export function clampWrist(q, side = 1, roll = 0, exception = null) {
   qnorm(q);
-  const a = wristAngles(q, side);
+  const a = wristAngles(q, side, _cwA);
   const oW = exceptionOver(exception, 'wrist'), oT = exceptionOver(exception, 'twist');
   const tMax = ARM_LIMITS.twist + oT;
   // the twist left at the wrist: what keeps roll + twist inside +-tMax (the forearm's own roll is never undone here)
@@ -88,21 +94,21 @@ export function clampWrist(q, side = 1, roll = 0, exception = null) {
   if (changed) {
     // q = t * s: the twist t about the forearm's line (+y), the swing s about a line across it. The swing's angle is cut
     // back (by halves, 24 steps) until the bend sits on the ellipse; the twist is set to what is allowed.
-    const t0 = { x: 0, y: -Math.sin(a.twist / 2), z: 0, w: Math.cos(a.twist / 2) };   // the inverse of q's own twist
-    const s = qnorm(qmul(t0, q, { x: 0, y: 0, z: 0, w: 1 }));
+    const t0 = _cwT0; t0.x = 0; t0.y = -Math.sin(a.twist / 2); t0.z = 0; t0.w = Math.cos(a.twist / 2);   // the inverse of q's own twist
+    const s = qnorm(qmul(t0, q, _cwS));
     if (s.w < 0) { s.x = -s.x; s.y = -s.y; s.z = -s.z; s.w = -s.w; }
     const sAng = 2 * Math.acos(Math.min(1, s.w)), sl = Math.hypot(s.x, s.y, s.z);
-    const ax = sl < 1e-9 ? [1, 0, 0] : [s.x / sl, s.y / sl, s.z / sl];
-    const swingAt = (k) => { const h = k * sAng / 2, sn = Math.sin(h); return { x: ax[0] * sn, y: ax[1] * sn, z: ax[2] * sn, w: Math.cos(h) }; };
+    const ax0 = sl < 1e-9 ? 1 : s.x / sl, ax1 = sl < 1e-9 ? 0 : s.y / sl, ax2 = sl < 1e-9 ? 0 : s.z / sl;
+    const swingAt = (k) => { const h = k * sAng / 2, sn = Math.sin(h), o = _cwSw; o.x = ax0 * sn; o.y = ax1 * sn; o.z = ax2 * sn; o.w = Math.cos(h); return o; };   // into one scratch
     let k = 1;
     if (e > 1) {
       let lo = 0, hi = 1;
-      for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2, g = wristAngles(swingAt(m), side); if (wristOver(g.flex, g.dev, oW) > 1) hi = m; else lo = m; }
+      for (let i = 0; i < 24; i++) { const m = (lo + hi) / 2, g = wristAngles(swingAt(m), side, _cwG); if (wristOver(g.flex, g.dev, oW) > 1) hi = m; else lo = m; }
       k = lo;
     }
-    const sw = swingAt(k), g = wristAngles(sw, side);
+    const sw = swingAt(k), g = wristAngles(sw, side, _cwG);
     flex = g.flex; dev = g.dev;
-    const t = { x: 0, y: Math.sin(twist / 2), z: 0, w: Math.cos(twist / 2) };
+    const t = _cwT; t.x = 0; t.y = Math.sin(twist / 2); t.z = 0; t.w = Math.cos(twist / 2);
     qmul(t, sw, q); qnorm(q);
   }
   return { flex: a.flex, dev: a.dev, twist: a.twist, roll, over: e, exception: exception || null,
@@ -147,6 +153,12 @@ function rot(q, v) {
   return [v[0] + w * tx + (y * tz - z * ty), v[1] + w * ty + (z * tx - x * tz), v[2] + w * tz + (x * ty - y * tx)];
 }
 function invRot(q, v) { return rot({ x: -q.x, y: -q.y, z: -q.z, w: q.w }, v); }
+// CE-12 (GP-20133, the Director's loan: allocation only, the same numbers): rot's maths on plain numbers into out (an array)
+function rotInto(x, y, z, w, v0, v1, v2, out) {
+  const tx = 2 * (y * v2 - z * v1), ty = 2 * (z * v0 - x * v2), tz = 2 * (x * v1 - y * v0);
+  out[0] = v0 + w * tx + (y * tz - z * ty); out[1] = v1 + w * ty + (z * tx - x * tz); out[2] = v2 + w * tz + (x * ty - y * tx);
+  return out;
+}
 // A limb joint (the shoulder, the hip): where the limb (-y at rest) points, as flex (forward of hanging, +) and abd (out to
 // its side, +), measured as angles in the planes they turn in; and its turn about its own line (the swing-twist twist).
 // Flex past 90 deg (an arm raised) is read on the full circle, so a raised arm reads 90..180, never wraps.
@@ -178,7 +190,7 @@ export function hingeAngle(q) { return 2 * Math.atan2(q.x, q.w); }   // a hinge 
 // elbow (bending forward at the side, up with the arm raised forward), about 90 deg either way. It is read from the hinge,
 // not the forearm, so the forearm's own roll onto a grip (index.html CL-122, CB-289's twist) does not count here, and a
 // straight elbow still has its turn. An arm straight up has none (null).
-export function shoulderAngles(u, hinge, side = 1) {
+export function shoulderAngles(u, hinge, side = 1, out = null) {   // out (optional, GP-20133): filled instead of a new object
   const ul = Math.hypot(u[0], u[1], u[2]) || 1;
   const ux = u[0] / ul, uy = u[1] / ul, uz = u[2] / ul;
   const cl = (v) => Math.max(-1, Math.min(1, v));
@@ -186,14 +198,17 @@ export function shoulderAngles(u, hinge, side = 1) {
   let turn = null;
   if (uy < 0.97) {
     // the hinge at no turn: (1, 0, 0) carried by the shortest swing from hanging (0, -1, 0) to u
-    const ax = [-uz, 0, ux], al = Math.hypot(ax[0], ax[2]), ang = Math.acos(cl(-uy));
-    const r = al < 1e-9 ? [1, 0, 0] : rot(fromAxisAngle([ax[0] / al, 0, ax[2] / al], ang), [1, 0, 0]);
+    const ax0 = -uz, ax2 = ux, al = Math.hypot(ax0, ax2), ang = Math.acos(cl(-uy));
+    let r;
+    if (al < 1e-9) { r = _shR; r[0] = 1; r[1] = 0; r[2] = 0; }
+    else { const sn = Math.sin(ang / 2); r = rotInto((ax0 / al) * sn, 0 * sn, (ax2 / al) * sn, Math.cos(ang / 2), 1, 0, 0, _shR); }   // rot(fromAxisAngle(...), [1, 0, 0])
     const rd = r[0] * ux + r[1] * uy + r[2] * uz, hd = hinge[0] * ux + hinge[1] * uy + hinge[2] * uz;
-    const rp = [r[0] - rd * ux, r[1] - rd * uy, r[2] - rd * uz], hp = [hinge[0] - hd * ux, hinge[1] - hd * uy, hinge[2] - hd * uz];
-    const cx = rp[1] * hp[2] - rp[2] * hp[1], cy = rp[2] * hp[0] - rp[0] * hp[2], cz = rp[0] * hp[1] - rp[1] * hp[0];
-    turn = Math.atan2(cx * ux + cy * uy + cz * uz, rp[0] * hp[0] + rp[1] * hp[1] + rp[2] * hp[2]) * side;
+    const rp0 = r[0] - rd * ux, rp1 = r[1] - rd * uy, rp2 = r[2] - rd * uz, hp0 = hinge[0] - hd * ux, hp1 = hinge[1] - hd * uy, hp2 = hinge[2] - hd * uz;
+    const cx = rp1 * hp2 - rp2 * hp1, cy = rp2 * hp0 - rp0 * hp2, cz = rp0 * hp1 - rp1 * hp0;
+    turn = Math.atan2(cx * ux + cy * uy + cz * uz, rp0 * hp0 + rp1 * hp1 + rp2 * hp2) * side;
   }
-  return { back, across, turn };
+  if (!out) return { back, across, turn };
+  out.back = back; out.across = across; out.turn = turn; return out;
 }
 // How far past its row a shoulder reading is (radians summed over its three, 0 inside).
 export function shoulderPast(a, row = BODY_LIMITS.shoulder) {

@@ -1,0 +1,19 @@
+{
+  "scope": "Matched diagnostic native allocation sampling,300minigun rounds; no FPS acceptance claim. Production warm bridge also landed between runs; direct sleeve attribution and exact geometry parity isolate scalar rewrite.",
+  "rows": [
+    {
+      "phase": "before",
+      "totalMB": 883.7208061218262,
+      "sleeveMB": 394.0739555358887,
+      "sleeveSelfMB": 303.190975189209
+    },
+    {
+      "phase": "after",
+      "totalMB": 490.0394592285156,
+      "sleeveMB": 0.01564788818359375,
+      "sleeveSelfMB": 0.01564788818359375
+    }
+  ],
+  "sleeveReductionPercent": 99.99602920011237,
+  "totalReductionPercent": 44.54815866800348
+}

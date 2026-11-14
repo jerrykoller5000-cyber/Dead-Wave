@@ -2,47 +2,35 @@
 
 state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: CC-348 note 42 option A: the sniper bolt's root in a raceway cut in the rear bridge, the body back to the root, the rail from z -0.14
-touching: studio/weapon-longarms.js (makeSniperModel: rear bridge, cladding, rail base/rail, the bolt's root/stem/body; squareCladding + new racewayLathe helpers), review/CC-348/
-since: 2026-11-13T10:03Z
+task: CC-352 pack handgun stations to the pack's back-face low corners (Director's pick b), re-sweep
+touching: studio/marine-carry.js, index.html (carry part)
+since: 2026-11-14T04:06Z
 next: CC-348 J151 P3 (D-179), notes 11, 20, 42, 44 (the pump and the snip
 blocked-on: —
-last-report: handoffs/2026-11-13-claude3-CC-347b.md
+last-report: handoffs/2026-11-14-claude3-CC-351.md
 
 ## Notes
 
-### Session 4 (fresh, 00:50Z-03:40Z 13 Nov, Opus 5.5)
-- CC-347 part 1 LANDED 02:07Z, for review (handoffs/2026-11-13-claude3-CC-347.md): Jerry's cage (J142, J151 note 8) = trainingWarmCompile's finally
-  re-applied the carry plan BEFORE its warmVis restore, which switched the warm's stand-in straps/bands/holsters/pairs/hip-pair shell back on
-  with no guns. Moved the carry restore after warmVis + carryVisSnap/carryVisHeld self-check in updateCarriedGear. tcc347 (new) 11/0, before 9/2.
-  NEVER probe the rig with TT.carryDbg first: it re-applies the plan and hides the bug (review/CC-347/probe3.mjs does it right).
-- CC-347 part 2 OPEN (asked the Director): seat the real gear: the low pack holster (revolver/pistol 'lower' in placeSecondary) is a big open
-  shell hanging below the pack over his seat (~15 cm air); slings loop off his sides. Audit: review/CC-347/audit-loadouts-before.json, probe.mjs.
-- CC-348 notes 11/20/44 LANDED 03:25Z for review: shotgun look 1.4, pump r .034/.036; SUPPRESSOR.m4 r .0335 len .232; sniper cheekFinish
-  painted 'furniture'. Claude 1 asked to refit the pump hands. The GW-4 can already paints in 3P (told Claude 7: likely the 1P copy).
-- CC-348 note 42 OPEN (sniper bolt): asked the Director (options A/B/C, my pick A: a raceway slot in the rear bridge's +x side, the rail
-  base/rail start moved to z -0.14, root trimmed, bolt body lengthened back to the root; nothing past the receiver's end: the stock's strut
-  and cheek riser sit in the bolt's path behind it). Side views: review/CC-348/probe4.mjs (bolt states closed/lifted/back).
-- CC-349 (Jerry's J152, unarmed hands like his reference) LANDED 03:25Z, checked out done: UNARMED_ARMS x .05 z .045 elbow -.18 + HANG_LOOSE.
-- Cloud copy: /home/claude/tt (rebuild: tar on the PC WITHOUT qa/ and tools/*/png (1.5 GB otherwise), assets minus soundtrack; then
-  assets/intro + assets/disclaimer minus mp4/webm, or the load hangs). Slot: kill a stuck probe by its Chrome PID first, then node.
-  Probes must close their server (server.close) or node never exits and holds the slot. His right side is +x (armLG is on -x).
+### Session 13 (fresh, 00:53Z- 14 Nov, Opus 5.5): CC-350 p2, KR-7 stud, CC-351
+- Cloud tree /home/claude/tt from repo5 (00:58Z PC); repl: review/CC-350/repl.mjs through the cloud slot
+  (node tools/game-test-slot.mjs run claude3 CC-350 -- node review/CC-350/repl.mjs). In-page module swap for quick looks:
+  await import('/studio/marine-carry.js?v=<new>') then re-seat (probe reseat.js); index uses the boot-time module.
+- Director picked (b) for two bulky slung guns: tight stack (PAIR_CARRY.mode 'stack'); the saw lies on its BOTTOM (CARRY_FACE).
+  Bulky+thin: thin first flat on the pack, the bulky one on it. Pair limits: lowest .66 (mid-thigh), slide to the tightest air.
+- tcc347 strap rows fixed (FRONT_NB 2 cm, no chest lift over the shoulder, strap above the 40 mm bandolier: BAND_ABOVE).
+- tcc347's 10 holster rows (pistol shell lowest third 4.2) were red on the untouched tree too (the bigger pistol, GT-20106):
+  HIP_FIT y .87 / splay .1 / n [.36,-.933] in index (patch review/CC-350p2/cc350p2_pairs.py, md5-free exact-text patch).
+- KR-7 front ring on GT-20106's stud (+x only: SLING_STUD_SIDE/SLING_WRAP, the strap wraps the handguard top when +x faces out).
+- CC-351: PGB shoulder patch + right placeholder and the chest flag patch (shirt + carrier) removed in marine-body.js.
 
-### Session 11 (fresh, 16:17Z-, Opus 5.5)
-- CC-344 part 2 LANDED 18:18Z, accepted (handoffs/2026-11-12-claude3-CC-344b.md): mag pouches up 5 cm onto the belt + the trouser
-  leg kept under the band and the pouches (marine-cloth liveCloth `under`); tcc344 legs 0, tcc341 belt 0. The WIP's red was the
-  pouch 'keep behind' exit (cloth wrapped round the pouch side). Left in tcc344: armed sleeves 4.1-4.3 into kit (queue item 2) and
-  the unarmed 2.8 (CB-314, Claude 2: it is a webMat band in index.html, told him). tcc341's gloves 10.6/vest 4.4 reds are NOT mine
-  (on the untouched tree since ~12:38Z, the third-person hold): sent to the Director.
-- CC-346 (J149) checked in 18:23Z: audit posted (Claude outputs/CC-346/audit.md); GW-4 first, then KR-7, sniper, Breacher, pump.
-- CC-346 GW-4 LANDED 19:23Z (handoffs/2026-11-12-claude3-CC-346-gw4.md; merged onto Claude 6's CF-2 sniper safety, md5 30dfeba8):
-  forwardAssist + portCover controls, selector on its axle, trigger/hammer pins, catch/latch ribs; t333/t229/t38 as before.
-- CC-346 narrowed by the Director (19:20Z): GW-4 only (done, in review); KR-7 -> Claude 6, Breacher -> ChatGPT 2.
-- NEXT (fresh session): queue item 2, CC-344's remaining kit-vs-limb rows in my files: tcc344 armed sleeves 3.9-4.3 mm into kit
-  (stand armed/aim/reload, y ~1.03-1.12); the unarmed 2.8 is Claude 2's CB-314 (a webMat band in index.html). Then standby.
-- Checks per gun: cloud tests t333 tgt20076 t217 t228 t229 t38 (baseline first; tgt20076's sling rows are noisy); sheet: review/CC-346/
-  capture.mjs <ak|aa12> before|after (CC346_HEADLESS=1, through tools/game-test-slot.mjs run) + sheet.py; it needs review/GT-20076/
-  {visibility-camera,display-depth,visibility-buffer}.mjs and review/GT-20097/finish.mjs in the cloud copy.
+- 03:00Z LANDED + checked out: CC-350 p2 (handoffs/2026-11-14-claude3-CC-350p2.md) and CC-351 (…-CC-351.md); review request sent
+  with the 4-light sheets (review/CC-350/sheet-cc350p2-*.jpg, review/CC-351/sheet-cc351-patches.jpg).
+- CC-352 (IN, open): note-20 3P clipping sweep. Probe = cloud /home/claude/sweep*.js (gun triangles hashed vs sleeve/arm/hand/leg/
+  seat/boot/held-gun vertices, 6 stances x 5 frames; rebuild it if the cloud box is gone). Result: all clear except the pack-side
+  handgun stations (Uzi first) brushed by the sleeve in run/crouch; moving them 2-3.5 cm back / 5-8 cm down didn't clear it.
+  Asked the Director (a) thigh first, (b) pack BACK-face low corners [my pick], (c) leave. Do his pick, then re-sweep with
+  CE-12 part 2 when Claude 5 lands it.
+- Pending reviews: CC-350 p2 + CC-351 (Director). Open on tgt20076: flamer slot2 rear ring 1 pair (pre-existing).
 
 ### This VM's quirks (session 3)
 - The PC mount refuses writing over some existing files (EINVAL on open with O_CREAT, sometimes on ftruncate): crew.mjs fails

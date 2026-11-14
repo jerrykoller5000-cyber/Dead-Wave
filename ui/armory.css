@@ -66,6 +66,9 @@
 #cif .armory-offer { min-width:0; padding:4px 6px 8px; gap:3px; border:1px solid #cbdcb72a; background:#ffffff08; }
 #cif .armory-offer .armory-pic { height:56px; margin:0; }
 #cif .armory-offer small { min-height:22px; }
+/* GP-20135: keep the emplacement controls on matching rows, including wrapped mobile names. */
+#cif .armory-offer[data-offer-build] { align-content:start; }
+@media (max-width:600px) { #cif .armory-offer[data-offer-build] .armory-name { min-height:2lh; } }
 #cif .armory-offer-buy, #cif .armory-offer-ammo { min-width:0; padding:7px 6px; border:0; border-radius:2px;
   background:var(--accent-2); color:var(--accent-2-ink); font:700 11px var(--font-hud); text-transform:uppercase; cursor:pointer; }
 #cif .armory-offer-ammo { background:#3a4230; color:#e8e2c8; }
@@ -249,3 +252,8 @@
   #cif #armoryPanel .armory-catalogue { margin:10px 8px 0; }
   #cif #armoryPanel #shop.armory-inline .card { padding:0; }
 }
+
+/* GP-20134: a successful one-pack purchase answers the click even with unlimited Cash. */
+#cif .armory-offer-ammo.just-bought { animation:armory-ammo-bought .45s ease-out; }
+@keyframes armory-ammo-bought { from { filter:brightness(1.65); } to { filter:brightness(1); } }
+@media (prefers-reduced-motion:reduce) { #cif .armory-offer-ammo.just-bought { animation:none; } }

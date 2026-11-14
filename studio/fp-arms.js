@@ -201,13 +201,14 @@ export function buildViewArm(T, side, mats) {
   // the wrist's joint, as a loose sleeve is pushed by the bent hand; a bend past half the wrist's range left the hand through
   // the sleeve's side (5 mm). q: the wrist group's turn (the hand on the forearm). The rest is read from whatever geometry
   // the mesh has when first bent (the WebGPU mirror's twin, game/vm-flip.js).
-  const give = { q: [0, 0, 0, 1], rest: new Map() };
+  const give = { q: [0, 0, 0, 1], rest: new Map(), end: sleeveEnd(L) };
   arm.bendSleeve = (q) => {
     const g0 = give.q; if (Math.abs(q.x - g0[0]) + Math.abs(q.y - g0[1]) + Math.abs(q.z - g0[2]) + Math.abs(q.w - g0[3]) < 0.002) return;
-    give.q = [q.x, q.y, q.z, q.w];
-    const E = sleeveEnd(L), yA = -0.19, P = L.wrist, ang0 = 2 * Math.acos(Math.min(1, Math.abs(q.w))), sh = Math.sqrt(Math.max(0, 1 - q.w * q.w)), sg = q.w >= 0 ? 1 : -1;
-    const k = sh > 1e-6 ? [sg * q.x / sh, sg * q.y / sh, sg * q.z / sh] : [1, 0, 0];
-    for (const m of [meshes.fore, meshes.cuff]) {
+    g0[0] = q.x; g0[1] = q.y; g0[2] = q.z; g0[3] = q.w;
+    const E = give.end, yA = -0.19, P = L.wrist, ang0 = 2 * Math.acos(Math.min(1, Math.abs(q.w))), sh = Math.sqrt(Math.max(0, 1 - q.w * q.w)), sg = q.w >= 0 ? 1 : -1;
+    const kx = sh > 1e-6 ? sg * q.x / sh : 1, ky = sh > 1e-6 ? sg * q.y / sh : 0, kz = sh > 1e-6 ? sg * q.z / sh : 0;
+    for (let part = 0; part < 2; part++) {
+      const m = part ? meshes.cuff : meshes.fore;
       const g = m.geometry, pa = g.attributes.position, na = g.attributes.normal;
       let R = give.rest.get(g);
       if (!R) {
@@ -217,9 +218,20 @@ export function buildViewArm(T, side, mats) {
       }
       for (let j = 0; j < R.idx.length; j++) {
         const a = ang0 * R.w[j], c = Math.cos(a), sn = Math.sin(a), t1 = 1 - c;
-        const rot = (x, y, z) => { const d = k[0] * x + k[1] * y + k[2] * z; return [x * c + (k[1] * z - k[2] * y) * sn + k[0] * d * t1, y * c + (k[2] * x - k[0] * z) * sn + k[1] * d * t1, z * c + (k[0] * y - k[1] * x) * sn + k[2] * d * t1]; };
-        const e = rot(R.p0[j * 3] - P[0], R.p0[j * 3 + 1] - P[1], R.p0[j * 3 + 2] - P[2]), nn = rot(R.n0[j * 3], R.n0[j * 3 + 1], R.n0[j * 3 + 2]);
-        pa.setXYZ(R.idx[j], P[0] + e[0], P[1] + e[1], P[2] + e[2]); if (na) na.setXYZ(R.idx[j], nn[0], nn[1], nn[2]);
+        // GP-20133: identical Rodrigues operations, with no per-vertex closure or result arrays.
+        const x = R.p0[j * 3] - P[0], y = R.p0[j * 3 + 1] - P[1], z = R.p0[j * 3 + 2] - P[2];
+        const d = kx * x + ky * y + kz * z;
+        pa.setXYZ(R.idx[j],
+          P[0] + (x * c + (ky * z - kz * y) * sn + kx * d * t1),
+          P[1] + (y * c + (kz * x - kx * z) * sn + ky * d * t1),
+          P[2] + (z * c + (kx * y - ky * x) * sn + kz * d * t1));
+        if (na) {
+          const nx = R.n0[j * 3], ny = R.n0[j * 3 + 1], nz = R.n0[j * 3 + 2], nd = kx * nx + ky * ny + kz * nz;
+          na.setXYZ(R.idx[j],
+            nx * c + (ky * nz - kz * ny) * sn + kx * nd * t1,
+            ny * c + (kz * nx - kx * nz) * sn + ky * nd * t1,
+            nz * c + (kx * ny - ky * nx) * sn + kz * nd * t1);
+        }
       }
       pa.needsUpdate = true; if (na) na.needsUpdate = true;
     }

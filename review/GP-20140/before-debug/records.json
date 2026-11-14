@@ -1,0 +1,595 @@
+{
+  "stage": "before-debug",
+  "indexHash": "63e42fd70dc2c84dff26ecfe42f25369965b8753c3f840a4a52f0518e94c74d9",
+  "moduleHash": "0cafbdb071d02bb0c10782b29e562bb2cc292a7495de23828380f728e9e03aa3",
+  "rows": [
+    {
+      "view": "detail",
+      "time": 1,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "detail-noon-1.png",
+      "actual": {
+        "camera": [
+          0.65,
+          -198.4981202798726,
+          -639.47
+        ],
+        "fov": 36,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.0462511258661565,
+            -198.67166301101426,
+            -640.5525876862828
+          ],
+          "mouth": [
+            0.04231392474109011,
+            -198.67259030770444,
+            -640.5706658557548
+          ],
+          "draw": 1,
+          "wristTarget": [
+            0.08256908304192895,
+            -198.80930480472617,
+            -640.4704537448542
+          ],
+          "wristActual": [
+            0.08176399967916854,
+            -198.8084944761148,
+            -640.4710722763961
+          ],
+          "targetReach": 0.232097149324617,
+          "actualReach": 0.23209714932469322,
+          "handOffset": 0.1631832592425657
+        },
+        "ember": 16736549,
+        "emberPosition": [
+          0.06800933643772114,
+          -198.67512437606018,
+          -640.4999132968393
+        ]
+      }
+    },
+    {
+      "view": "detail",
+      "time": 2.5,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "detail-noon-2.5.png",
+      "actual": {
+        "camera": [
+          0.65,
+          -198.4981202798726,
+          -639.47
+        ],
+        "fov": 36,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.04259504435928637,
+            -198.72070914768133,
+            -640.5229577763041
+          ],
+          "mouth": [
+            0.06654122200270443,
+            -198.73312612613324,
+            -640.560680159586
+          ],
+          "draw": 0.8737997256515773,
+          "wristTarget": [
+            0.10751546094993465,
+            -198.86584626096865,
+            -640.4555123118907
+          ],
+          "wristActual": [
+            0.09876172966524147,
+            -198.85994948823958,
+            -640.4590343289628
+          ],
+          "targetReach": 0.23758780295910778,
+          "actualReach": 0.23758780295898516,
+          "handOffset": 0.16318325924256566
+        },
+        "ember": 16736549,
+        "emberPosition": [
+          0.09122784084922693,
+          -198.73293912977908,
+          -640.4906102829028
+        ]
+      }
+    },
+    {
+      "view": "detail",
+      "time": 3.5,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "detail-noon-3.5.png",
+      "actual": {
+        "camera": [
+          0.65,
+          -198.4981202798726,
+          -639.47
+        ],
+        "fov": 36,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.3038476945132014,
+            -199.3070464687503,
+            -640.3856615829054
+          ],
+          "mouth": [
+            0.28,
+            -199.17812027987262,
+            -640.47
+          ],
+          "draw": 0,
+          "wristTarget": [
+            0.3097579622219688,
+            -199.30984325887908,
+            -640.3599213048636
+          ],
+          "wristActual": [
+            0.1803114988781575,
+            -199.20178800171917,
+            -640.3686839628336
+          ],
+          "targetReach": 0.5950029881188746,
+          "actualReach": 0.4949909089030229,
+          "handOffset": 0.16318325924256552
+        },
+        "ember": 16736549,
+        "emberPosition": [
+          0.2972917440615178,
+          -199.17727727793516,
+          -640.3984565050396
+        ]
+      }
+    },
+    {
+      "view": "detail",
+      "time": 5.25,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "detail-noon-5.25.png",
+      "actual": {
+        "camera": [
+          0.65,
+          -198.4981202798726,
+          -639.47
+        ],
+        "fov": 36,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.29587173090472424,
+            -199.30996683076302,
+            -640.3828715568904
+          ],
+          "mouth": [
+            0.28,
+            -199.17812027987262,
+            -640.47
+          ],
+          "draw": 0,
+          "wristTarget": [
+            0.2776735991314016,
+            -199.3121185899239,
+            -640.3586768694329
+          ],
+          "wristActual": [
+            0.16398918141968036,
+            -199.2138900500413,
+            -640.3851124148742
+          ],
+          "targetReach": 0.5896927314349001,
+          "actualReach": 0.49499090890303327,
+          "handOffset": 0.1631832592425657
+        },
+        "ember": 16736549,
+        "emberPosition": [
+          0.2779408524421591,
+          -199.1787323136577,
+          -640.397619370808
+        ]
+      }
+    },
+    {
+      "view": "detail",
+      "time": 7.5,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "detail-noon-7.5.png",
+      "actual": {
+        "camera": [
+          0.65,
+          -198.4981202798726,
+          -639.47
+        ],
+        "fov": 36,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            -0.013726581143717907,
+            -198.91489278120525,
+            -640.3952223602831
+          ],
+          "mouth": [
+            0.09861787372054776,
+            -198.86423569929192,
+            -640.5244507412358
+          ],
+          "draw": 0.6238425925925928,
+          "wristTarget": [
+            0.07324088166941772,
+            -199.00284578990141,
+            -640.4219956306139
+          ],
+          "wristActual": [
+            0.10494858876708574,
+            -199.02378275337384,
+            -640.4214512394966
+          ],
+          "targetReach": 0.3434347212713902,
+          "actualReach": 0.3434347212713697,
+          "handOffset": 0.16318325924256566
+        },
+        "ember": 16736549,
+        "emberPosition": [
+          0.08225589850428995,
+          -198.86784753279568,
+          -640.4555848857575
+        ]
+      }
+    },
+    {
+      "view": "gameplay",
+      "time": 1,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "gameplay-noon-1.png",
+      "actual": {
+        "camera": [
+          1.4,
+          -198.29812027987262,
+          -643.6700000000001
+        ],
+        "fov": 50,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.0462511258661565,
+            -198.67166301101426,
+            -640.5525876862828
+          ],
+          "mouth": [
+            0.04231392474109011,
+            -198.67259030770444,
+            -640.5706658557548
+          ],
+          "draw": 1,
+          "wristTarget": [
+            0.08256908304192895,
+            -198.80930480472617,
+            -640.4704537448542
+          ],
+          "wristActual": [
+            0.08176399967916854,
+            -198.8084944761148,
+            -640.4710722763961
+          ],
+          "targetReach": 0.232097149324617,
+          "actualReach": 0.23209714932469322,
+          "handOffset": 0.1631832592425657
+        },
+        "ember": 16736549,
+        "emberPosition": [
+          0.06800933643772114,
+          -198.67512437606018,
+          -640.4999132968393
+        ]
+      }
+    },
+    {
+      "view": "gameplay",
+      "time": 2.5,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "gameplay-noon-2.5.png",
+      "actual": {
+        "camera": [
+          1.4,
+          -198.29812027987262,
+          -643.6700000000001
+        ],
+        "fov": 50,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.04259504435928637,
+            -198.72070914768133,
+            -640.5229577763041
+          ],
+          "mouth": [
+            0.06654122200270443,
+            -198.73312612613324,
+            -640.560680159586
+          ],
+          "draw": 0.8737997256515773,
+          "wristTarget": [
+            0.10751546094993465,
+            -198.86584626096865,
+            -640.4555123118907
+          ],
+          "wristActual": [
+            0.09876172966524147,
+            -198.85994948823958,
+            -640.4590343289628
+          ],
+          "targetReach": 0.23758780295910778,
+          "actualReach": 0.23758780295898516,
+          "handOffset": 0.16318325924256566
+        },
+        "ember": 16736549,
+        "emberPosition": [
+          0.09122784084922693,
+          -198.73293912977908,
+          -640.4906102829028
+        ]
+      }
+    },
+    {
+      "view": "gameplay",
+      "time": 3.5,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "gameplay-noon-3.5.png",
+      "actual": {
+        "camera": [
+          1.4,
+          -198.29812027987262,
+          -643.6700000000001
+        ],
+        "fov": 50,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.3038476945132014,
+            -199.3070464687503,
+            -640.3856615829054
+          ],
+          "mouth": [
+            0.28,
+            -199.17812027987262,
+            -640.47
+          ],
+          "draw": 0,
+          "wristTarget": [
+            0.3097579622219688,
+            -199.30984325887908,
+            -640.3599213048636
+          ],
+          "wristActual": [
+            0.1803114988781575,
+            -199.20178800171917,
+            -640.3686839628336
+          ],
+          "targetReach": 0.5950029881188746,
+          "actualReach": 0.4949909089030229,
+          "handOffset": 0.16318325924256552
+        },
+        "ember": 16736549,
+        "emberPosition": [
+          0.2972917440615178,
+          -199.17727727793516,
+          -640.3984565050396
+        ]
+      }
+    },
+    {
+      "view": "gameplay",
+      "time": 5.25,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "gameplay-noon-5.25.png",
+      "actual": {
+        "camera": [
+          1.4,
+          -198.29812027987262,
+          -643.6700000000001
+        ],
+        "fov": 50,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.29587173090472424,
+            -199.30996683076302,
+            -640.3828715568904
+          ],
+          "mouth": [
+            0.28,
+            -199.17812027987262,
+            -640.47
+          ],
+          "draw": 0,
+          "wristTarget": [
+            0.2776735991314016,
+            -199.3121185899239,
+            -640.3586768694329
+          ],
+          "wristActual": [
+            0.16398918141968036,
+            -199.2138900500413,
+            -640.3851124148742
+          ],
+          "targetReach": 0.5896927314349001,
+          "actualReach": 0.49499090890303327,
+          "handOffset": 0.1631832592425657
+        },
+        "ember": 16736549,
+        "emberPosition": [
+          0.2779408524421591,
+          -199.1787323136577,
+          -640.397619370808
+        ]
+      }
+    },
+    {
+      "view": "gameplay",
+      "time": 7.5,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "gameplay-noon-7.5.png",
+      "actual": {
+        "camera": [
+          1.4,
+          -198.29812027987262,
+          -643.6700000000001
+        ],
+        "fov": 50,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            -0.013726581143717907,
+            -198.91489278120525,
+            -640.3952223602831
+          ],
+          "mouth": [
+            0.09861787372054776,
+            -198.86423569929192,
+            -640.5244507412358
+          ],
+          "draw": 0.6238425925925928,
+          "wristTarget": [
+            0.07324088166941772,
+            -199.00284578990141,
+            -640.4219956306139
+          ],
+          "wristActual": [
+            0.10494858876708574,
+            -199.02378275337384,
+            -640.4214512394966
+          ],
+          "targetReach": 0.3434347212713902,
+          "actualReach": 0.3434347212713697,
+          "handOffset": 0.16318325924256566
+        },
+        "ember": 16736549,
+        "emberPosition": [
+          0.08225589850428995,
+          -198.86784753279568,
+          -640.4555848857575
+        ]
+      }
+    }
+  ],
+  "setup": {
+    "position": [
+      0,
+      -0.6981202798725842,
+      0
+    ],
+    "renderer": "WebGPURenderer"
+  },
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 285 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 8ms pools 6209ms compile 938ms warm frame 126ms | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:285"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 59ms | trees 230ms | player+weapons+zombie types 1271ms | foliage scattered 2536ms | POIs+minimap+foliage chunks 4166ms | contact shading + rest of setup 4411ms | post + pools + compile + warm frame 11704ms | ready 11707ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 307 variants after 13 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:285 a-fresh:285 a-flash:288 a-faded:290 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:304 a-fx:307 a-corpse:307"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 374 shader variants compiled after 35 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:285 a-fresh:285 a-flash:288 a-faded:290 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:304 a-fx:307 a-corpse:307 fresh:363 burning:365 flash:365 faded:365 tree-fade:365 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:365 kill-melee:365 kill-explosive:367 kill-chainsaw:367 kill-pellet:367 kill-generic:368 kill-melee:368 kill-explosive:368 kill-chainsaw:368 kill-pellet:368 kill-generic:368 effects:373 corpses:373 corpses2:373"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 374 variants | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:285 a-fresh:285 a-flash:288 a-faded:290 a-kill-generic:297 a-kill-melee:300 a-kill-explosive:304 a-fx:307 a-corpse:307 fresh:363 burning:365 flash:365 faded:365 tree-fade:365 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:365 kill-melee:365 kill-explosive:367 kill-chainsaw:367 kill-pellet:367 kill-generic:368 kill-melee:368 kill-explosive:368 kill-chainsaw:368 kill-pellet:368 kill-generic:368 effects:373 corpses:373 corpses2:373"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":23.66,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.57,\"frames\":7,\"over50\":4,\"over100\":1,\"worst\":117},\"loading\":{\"at\":0.57,\"seconds\":23.09,\"frames\":366,\"over50\":65,\"over100\":39,\"worst\":4150},\"menu\":{\"at\":23.66,\"seconds\":9.74,\"frames\":5,\"over50\":1,\"over100\":1,\"worst\":9467}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":45,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":75,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    }
+  ],
+  "uniqueFrames": 10,
+  "errors": []
+}

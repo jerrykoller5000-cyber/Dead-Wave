@@ -1,0 +1,43 @@
+{
+  "scope": "exclusive production perfSamples clock; zero zombies; actual continuous pack + complete smoking cycle; same shell snapshot",
+  "before": {
+    "fps": 60.00063158555798,
+    "frame": {
+      "n": 570,
+      "mean": 16.666491228080634,
+      "p50": 16.69999998807907,
+      "p95": 16.900000005960464,
+      "worst": 27.700000017881393
+    },
+    "pose": {
+      "n": 811,
+      "mean": 1.283600493328492,
+      "p50": 1.2000000178813934,
+      "p95": 2,
+      "worst": 4
+    },
+    "builders": 1,
+    "pipelines": 0,
+    "errors": []
+  },
+  "after": {
+    "fps": 60.003789712996856,
+    "frame": {
+      "n": 570,
+      "mean": 16.665614035098177,
+      "p50": 16.69999998807907,
+      "p95": 16.80000001192093,
+      "worst": 17.30000001192093
+    },
+    "pose": {
+      "n": 811,
+      "mean": 2.248828607591836,
+      "p50": 1.4000000059604645,
+      "p95": 4.100000023841858,
+      "worst": 6.600000023841858
+    },
+    "builders": 1,
+    "pipelines": 0,
+    "errors": []
+  }
+}

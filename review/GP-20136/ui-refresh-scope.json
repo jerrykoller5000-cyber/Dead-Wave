@@ -1,0 +1,6 @@
+{
+  "before": "      else if (Object.hasOwn(gun, 'rounds')) armory.revise(gun.id, gun);",
+  "after": "      else if ((gun.kind === 'revolver' || gun.kind === 'launcher') && Object.hasOwn(gun, 'rounds')) armory.revise(gun.id, gun);",
+  "scope": "Narrow new live reserve refresh to the two requested loose-round guns; actual native loose-round paths unchanged, ordinary magazine input records preserve prior behavior",
+  "outsideReverseIdentical": true
+}

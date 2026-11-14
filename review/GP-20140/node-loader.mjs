@@ -1,0 +1,3 @@
+import {pathToFileURL} from 'node:url';import fs from 'node:fs';
+export async function resolve(s,c,next){if(s==='three')return{url:pathToFileURL(process.cwd()+'/vendor/three/three.core.js').href,shortCircuit:true};return next(s,c);}
+export async function load(u,c,next){if((process.env.SMOKE_CANDIDATE||process.env.SMOKE_ROLL_CANDIDATE)&&u===pathToFileURL(process.cwd()+'/studio/marine-idle.js').href)return{format:'module',source:fs.readFileSync(process.env.SMOKE_ROLL_CANDIDATE?'review/GP-20140/marine-idle-roll-candidate.js.txt':'review/GP-20140/marine-idle-candidate.js.txt','utf8'),shortCircuit:true};return next(u,c);}

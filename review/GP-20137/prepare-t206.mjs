@@ -1,0 +1,8 @@
+import fs from 'node:fs';import assert from 'node:assert/strict';
+const source=fs.readFileSync('tools/tests/t206.js','utf8');let next=source.replace('The 40 mm launcher draws no arc and the round flies the cursor (Jerry, 2026-10-09).','The 40 mm launcher draws no arc; J153-25 supersedes its old straight-flight requirement with gravity.').replace('// (4) The 40 mm draws no arc. The round leaves along the cursor and stays on that line.','// (4) J153-25: the 40 mm draws no preview arc; it leaves along the cursor, then falls under gravity.').replace('const sh = T.grenadesInFlight.find((q) => q.direct);',"const sh = T.grenadesInFlight.find((q) => q.originWeapon === 'launcher');").replace('const vy0 = sh ? sh.vy : 0, o = sh ?','const age0 = sh ? sh.age : 0, vy0 = sh ? sh.vy : 0, o = sh ?');
+const a=next.indexOf('      const wx = sh.pos.x - o.x'),b=next.indexOf('\n    } else ok(false',a);assert(a>0&&b>a);next=next.slice(0,a)+`      const elapsed = sh.age - age0;
+      const ex = o.x + dir.x * spd0 * elapsed, ez = o.z + dir.z * spd0 * elapsed;
+      const ey = o.y + vy0 * elapsed - 8 * elapsed * elapsed;
+      const err = Math.hypot(sh.pos.x-ex, sh.pos.y-ey, sh.pos.z-ez);
+      ok(sh.gravity === 16 && elapsed > 0 && err < 1e-5 && Math.abs(sh.vy-(vy0-16*elapsed)) < 1e-5,
+        'launcher follows constant gravity16, exact ballistic position/velocity (' + err.toExponential(2) + ' m error)');`+next.slice(b);assert.notEqual(source,next);fs.writeFileSync('review/GP-20137/t206-proposed.js',next);console.log('t206 proposal ready; official test unchanged');

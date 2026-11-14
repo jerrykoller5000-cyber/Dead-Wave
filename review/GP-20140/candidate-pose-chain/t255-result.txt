@@ -1,0 +1,6 @@
+INFO smoking pinch: solved 1.9 cm, sampled 1.9 cm, wrist miss 0.0 cm; shoulder target/actual 19.8/19.8 cm; hand offset 16.3 cm
+PASS the cigarette is lit and visible
+PASS the filter meets the lips (0.00 cm error)
+PASS the ember points forward, away from the face (7.5 cm from lips)
+PASS the completed runtime frame keeps the fingertip pinch outside the face (1.9 cm from lips)
+PASS the palm clears the face (10.1 cm from lips)

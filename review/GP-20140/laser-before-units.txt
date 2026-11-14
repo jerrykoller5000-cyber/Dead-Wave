@@ -1,0 +1,78 @@
+✖ laser and click wait until the physical digit contact, then flip once (21.6432ms)
+✔ flashlight still flips its own circuit at contact (17.7767ms)
+✖ repeated or cross-circuit input cannot replace an in-flight press (24.6543ms)
+✖ second press after return can switch laser back off (24.0656ms)
+✔ mounted mortar retains the approved immediate path (20.32ms)
+✔ missing equipment makes no change or press (21.4873ms)
+✔ debug/immediate and unavailable-press fallbacks retain existing behavior (25.0386ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 4
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 263.4687
+
+✖ failing tests:
+
+test at review\GP-20140\laser-wiring.test.mjs:3:1
+✖ laser and click wait until the physical digit contact, then flip once (21.6432ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(!f.lasersEnabled)
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20140/laser-wiring.test.mjs:3:115)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.start (node:internal/test_runner/test:1003:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at review\GP-20140\laser-wiring.test.mjs:5:1
+✖ repeated or cross-circuit input cannot replace an in-flight press (24.6543ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20140/laser-wiring.test.mjs:5:216)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at review\GP-20140\laser-wiring.test.mjs:6:1
+✖ second press after return can switch laser back off (24.0656ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(f.lasersEnabled)
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20140/laser-wiring.test.mjs:6:127)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

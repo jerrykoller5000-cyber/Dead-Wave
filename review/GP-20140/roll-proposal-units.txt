@@ -1,0 +1,18 @@
+(node:30484) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./review/GP-20140/node-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ bored after 5s, pack after 25s, each lit cigarette lasts 60s (0.7388ms)
+✔ movement cancels immediately and drops only one lit cigarette (0.1557ms)
+✔ pause freezes the cigarette; death, menus and reset remove it without fire (0.5377ms)
+✔ frame-rate independent timing across repeated cigarettes (6.7102ms)
+✔ props show extraction and smoking, emitted smoke and landing fire, all clear on reset (9.0195ms)
+✔ cigarette, pack, lighter and spark remain hidden before and after the smoke phases (1.3605ms)
+✔ long sessions keep discarded cigarette objects bounded (5.8925ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 148.8913

@@ -1,0 +1,216 @@
+{
+  "beforeHash": "fed0a5e010bc8fa4628bfd106c3b586c2399b2df20883f623b9f5bd942ddd2cf",
+  "afterHash": "5cd3a20a35722a54e272d012e4ab2e1b005a9109bc712bea5edd635b034d10fc",
+  "sameIndex": false,
+  "count": 40,
+  "beforeErrors": [],
+  "afterErrors": [],
+  "uniqueBefore": 40,
+  "uniqueAfter": 40,
+  "maxCameraMetres": 0.0003899861329072816,
+  "maxQuaternionDistance": 0.00005696296307628875,
+  "rows": [
+    {
+      "file": "detail-noon-1.png",
+      "cameraDistance": 0.00010182710317963029,
+      "quaternionDistance": 0
+    },
+    {
+      "file": "detail-overcast-1.png",
+      "cameraDistance": 0.00010182710317963029,
+      "quaternionDistance": 0
+    },
+    {
+      "file": "detail-dusk-1.png",
+      "cameraDistance": 0.00010182710317963029,
+      "quaternionDistance": 0
+    },
+    {
+      "file": "detail-night-1.png",
+      "cameraDistance": 0.00010182710317963029,
+      "quaternionDistance": 0
+    },
+    {
+      "file": "gameplay-noon-1.png",
+      "cameraDistance": 0.00010182710317963029,
+      "quaternionDistance": 0
+    },
+    {
+      "file": "gameplay-overcast-1.png",
+      "cameraDistance": 0.00010182710317963029,
+      "quaternionDistance": 0
+    },
+    {
+      "file": "gameplay-dusk-1.png",
+      "cameraDistance": 0.00010182710317963029,
+      "quaternionDistance": 0
+    },
+    {
+      "file": "gameplay-night-1.png",
+      "cameraDistance": 0.00010182710317963029,
+      "quaternionDistance": 0
+    },
+    {
+      "file": "detail-noon-2.5.png",
+      "cameraDistance": 0.0001994439026882743,
+      "quaternionDistance": 0.000025229169681150714
+    },
+    {
+      "file": "detail-overcast-2.5.png",
+      "cameraDistance": 0.0001994439026882743,
+      "quaternionDistance": 0.000025229169681150714
+    },
+    {
+      "file": "detail-dusk-2.5.png",
+      "cameraDistance": 0.0001994439026882743,
+      "quaternionDistance": 0.000025229169681150714
+    },
+    {
+      "file": "detail-night-2.5.png",
+      "cameraDistance": 0.0001994439026882743,
+      "quaternionDistance": 0.000025229169681150714
+    },
+    {
+      "file": "gameplay-noon-2.5.png",
+      "cameraDistance": 0.00025087946446021136,
+      "quaternionDistance": 0.000025229169671469818
+    },
+    {
+      "file": "gameplay-overcast-2.5.png",
+      "cameraDistance": 0.00025087946446021136,
+      "quaternionDistance": 0.000025229169671469818
+    },
+    {
+      "file": "gameplay-dusk-2.5.png",
+      "cameraDistance": 0.00025087946446021136,
+      "quaternionDistance": 0.000025229169671469818
+    },
+    {
+      "file": "gameplay-night-2.5.png",
+      "cameraDistance": 0.00025087946446021136,
+      "quaternionDistance": 0.000025229169671469818
+    },
+    {
+      "file": "detail-noon-3.5.png",
+      "cameraDistance": 0.00018049724036498088,
+      "quaternionDistance": 5.7882606296219e-7
+    },
+    {
+      "file": "detail-overcast-3.5.png",
+      "cameraDistance": 0.00018049724036498088,
+      "quaternionDistance": 5.7882606296219e-7
+    },
+    {
+      "file": "detail-dusk-3.5.png",
+      "cameraDistance": 0.00018049724036498088,
+      "quaternionDistance": 5.7882606296219e-7
+    },
+    {
+      "file": "detail-night-3.5.png",
+      "cameraDistance": 0.00018049724036498088,
+      "quaternionDistance": 5.7882606296219e-7
+    },
+    {
+      "file": "gameplay-noon-3.5.png",
+      "cameraDistance": 0.00018053101082772337,
+      "quaternionDistance": 5.788260565753419e-7
+    },
+    {
+      "file": "gameplay-overcast-3.5.png",
+      "cameraDistance": 0.00018053101082772337,
+      "quaternionDistance": 5.788260565753419e-7
+    },
+    {
+      "file": "gameplay-dusk-3.5.png",
+      "cameraDistance": 0.00018053101082772337,
+      "quaternionDistance": 5.788260565753419e-7
+    },
+    {
+      "file": "gameplay-night-3.5.png",
+      "cameraDistance": 0.00018053101082772337,
+      "quaternionDistance": 5.788260565753419e-7
+    },
+    {
+      "file": "detail-noon-5.25.png",
+      "cameraDistance": 0.0002534599704433347,
+      "quaternionDistance": 4.586395001141436e-8
+    },
+    {
+      "file": "detail-overcast-5.25.png",
+      "cameraDistance": 0.0002534599704433347,
+      "quaternionDistance": 4.586395001141436e-8
+    },
+    {
+      "file": "detail-dusk-5.25.png",
+      "cameraDistance": 0.0002534599704433347,
+      "quaternionDistance": 4.586395001141436e-8
+    },
+    {
+      "file": "detail-night-5.25.png",
+      "cameraDistance": 0.0002534599704433347,
+      "quaternionDistance": 4.586395001141436e-8
+    },
+    {
+      "file": "gameplay-noon-5.25.png",
+      "cameraDistance": 0.0002534601214466622,
+      "quaternionDistance": 4.5864001337499255e-8
+    },
+    {
+      "file": "gameplay-overcast-5.25.png",
+      "cameraDistance": 0.0002534601214466622,
+      "quaternionDistance": 4.5864001337499255e-8
+    },
+    {
+      "file": "gameplay-dusk-5.25.png",
+      "cameraDistance": 0.0002534601214466622,
+      "quaternionDistance": 4.5864001337499255e-8
+    },
+    {
+      "file": "gameplay-night-5.25.png",
+      "cameraDistance": 0.0002534601214466622,
+      "quaternionDistance": 4.5864001337499255e-8
+    },
+    {
+      "file": "detail-noon-7.5.png",
+      "cameraDistance": 0.00018442253177425498,
+      "quaternionDistance": 0.00005696296305979791
+    },
+    {
+      "file": "detail-overcast-7.5.png",
+      "cameraDistance": 0.00018442253177425498,
+      "quaternionDistance": 0.00005696296305979791
+    },
+    {
+      "file": "detail-dusk-7.5.png",
+      "cameraDistance": 0.00018442253177425498,
+      "quaternionDistance": 0.00005696296305979791
+    },
+    {
+      "file": "detail-night-7.5.png",
+      "cameraDistance": 0.00018442253177425498,
+      "quaternionDistance": 0.00005696296305979791
+    },
+    {
+      "file": "gameplay-noon-7.5.png",
+      "cameraDistance": 0.0003899861329072816,
+      "quaternionDistance": 0.00005696296307628875
+    },
+    {
+      "file": "gameplay-overcast-7.5.png",
+      "cameraDistance": 0.0003899861329072816,
+      "quaternionDistance": 0.00005696296307628875
+    },
+    {
+      "file": "gameplay-dusk-7.5.png",
+      "cameraDistance": 0.0003899861329072816,
+      "quaternionDistance": 0.00005696296307628875
+    },
+    {
+      "file": "gameplay-night-7.5.png",
+      "cameraDistance": 0.0003899861329072816,
+      "quaternionDistance": 0.00005696296307628875
+    }
+  ],
+  "beforeIndexIsExactApprovedCallbackReverse": true,
+  "indexDifference": "Only approved createMarineIdle solveArm/setForearmRoll callback reversed in before fixture; all other shell code identical."
+}

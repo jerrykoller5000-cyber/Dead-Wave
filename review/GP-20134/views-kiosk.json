@@ -1,0 +1,6189 @@
+{
+  "label": "views-kiosk",
+  "rows": [
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 885.328125,
+        "y": 358.375,
+        "text": "Buy — 120 Cash",
+        "hit": true
+      },
+      "before": {
+        "cash": 50000,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49880,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 120,
+      "name": "Field Intel",
+      "tab": "supplies"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 909,
+        "y": 432.640625,
+        "text": "$35",
+        "hit": true
+      },
+      "before": {
+        "cash": 49880,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49845,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 1,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 35,
+      "name": "MedPen0 / 3 carried",
+      "tab": "supplies"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 909,
+        "y": 432.640625,
+        "text": "$35",
+        "hit": true
+      },
+      "before": {
+        "cash": 49845,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 1,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49810,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 2,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 35,
+      "name": "MedPen1 / 3 carried",
+      "tab": "supplies"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 909,
+        "y": 432.640625,
+        "text": "$35",
+        "hit": true
+      },
+      "before": {
+        "cash": 49810,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 2,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49775,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 3,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 35,
+      "name": "MedPen2 / 3 carried",
+      "tab": "supplies"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 387.734375,
+        "text": "$60",
+        "hit": true
+      },
+      "before": {
+        "cash": 50000,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49940,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 60,
+      "name": "Gate blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.765625,
+        "text": "$25",
+        "hit": true
+      },
+      "before": {
+        "cash": 49940,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49915,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 25,
+      "name": "Wall blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.78125,
+        "text": "$45",
+        "hit": true
+      },
+      "before": {
+        "cash": 49915,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49870,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 45,
+      "name": "Window blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.796875,
+        "text": "$55",
+        "hit": true
+      },
+      "before": {
+        "cash": 49870,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49815,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 55,
+      "name": "Door blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.8125,
+        "text": "$20",
+        "hit": true
+      },
+      "before": {
+        "cash": 49815,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49795,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 20,
+      "name": "Sandbag wall blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.828125,
+        "text": "$60",
+        "hit": true
+      },
+      "before": {
+        "cash": 49795,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49735,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 60,
+      "name": "Platform blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.84375,
+        "text": "$70",
+        "hit": true
+      },
+      "before": {
+        "cash": 49735,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49665,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 70,
+      "name": "Floor blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.859375,
+        "text": "$50",
+        "hit": true
+      },
+      "before": {
+        "cash": 49665,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49615,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 50,
+      "name": "Structural pillar blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.875,
+        "text": "$65",
+        "hit": true
+      },
+      "before": {
+        "cash": 49615,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49550,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 65,
+      "name": "Stairs blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.890625,
+        "text": "$35",
+        "hit": true
+      },
+      "before": {
+        "cash": 49550,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49515,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 35,
+      "name": "Barbed wire blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.90625,
+        "text": "$40",
+        "hit": true
+      },
+      "before": {
+        "cash": 49515,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49475,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 40,
+      "name": "Railing blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.921875,
+        "text": "$30",
+        "hit": true
+      },
+      "before": {
+        "cash": 49475,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49445,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 30,
+      "name": "Spike trap blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.9375,
+        "text": "$40",
+        "hit": true
+      },
+      "before": {
+        "cash": 49445,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49405,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 40,
+      "name": "Fuel drum blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.953125,
+        "text": "$45",
+        "hit": true
+      },
+      "before": {
+        "cash": 49405,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49360,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 45,
+      "name": "Land mine blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.96875,
+        "text": "$70",
+        "hit": true
+      },
+      "before": {
+        "cash": 49360,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49290,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 70,
+      "name": "Decoy beacon blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.984375,
+        "text": "$55",
+        "hit": true
+      },
+      "before": {
+        "cash": 49290,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49235,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 55,
+      "name": "Light turret blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396,
+        "text": "$75",
+        "hit": true
+      },
+      "before": {
+        "cash": 49235,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49160,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 75,
+      "name": "Flame turret blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.015625,
+        "text": "$110",
+        "hit": true
+      },
+      "before": {
+        "cash": 49160,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 49050,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 110,
+      "name": "Heavy turret blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.03125,
+        "text": "$140",
+        "hit": true
+      },
+      "before": {
+        "cash": 49050,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 48910,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 140,
+      "name": "Reinforced wood wall blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.046875,
+        "text": "$300",
+        "hit": true
+      },
+      "before": {
+        "cash": 48910,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 48610,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 300,
+      "name": "Stone wall blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.0625,
+        "text": "$520",
+        "hit": true
+      },
+      "before": {
+        "cash": 48610,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 48090,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 520,
+      "name": "Reinforced stone wall blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.078125,
+        "text": "$800",
+        "hit": true
+      },
+      "before": {
+        "cash": 48090,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 47290,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 800,
+      "name": "Steel wall blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.09375,
+        "text": "$110",
+        "hit": true
+      },
+      "before": {
+        "cash": 47290,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 47180,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 110,
+      "name": "Reinforced wood door blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.109375,
+        "text": "$240",
+        "hit": true
+      },
+      "before": {
+        "cash": 47180,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 46940,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 240,
+      "name": "Iron door blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.125,
+        "text": "$400",
+        "hit": true
+      },
+      "before": {
+        "cash": 46940,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 46540,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 400,
+      "name": "Reinforced iron door blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.140625,
+        "text": "$620",
+        "hit": true
+      },
+      "before": {
+        "cash": 46540,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 45920,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 620,
+      "name": "Steel door blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.15625,
+        "text": "$240",
+        "hit": true
+      },
+      "before": {
+        "cash": 45920,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 45680,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 240,
+      "name": "Stone floor blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.171875,
+        "text": "$560",
+        "hit": true
+      },
+      "before": {
+        "cash": 45680,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 45120,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 560,
+      "name": "Steel floor blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.1875,
+        "text": "$260",
+        "hit": true
+      },
+      "before": {
+        "cash": 45120,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 44860,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 260,
+      "name": "Light turret Mk II blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.203125,
+        "text": "$600",
+        "hit": true
+      },
+      "before": {
+        "cash": 44860,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 44260,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 600,
+      "name": "Light turret Mk III blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.21875,
+        "text": "$300",
+        "hit": true
+      },
+      "before": {
+        "cash": 44260,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 43960,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 300,
+      "name": "Flame turret Mk II blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.234375,
+        "text": "$680",
+        "hit": true
+      },
+      "before": {
+        "cash": 43960,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 43280,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 680,
+      "name": "Flame turret Mk III blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.25,
+        "text": "$380",
+        "hit": true
+      },
+      "before": {
+        "cash": 43280,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 42900,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 380,
+      "name": "Heavy turret Mk II blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.265625,
+        "text": "$850",
+        "hit": true
+      },
+      "before": {
+        "cash": 42900,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 42050,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 850,
+      "name": "Heavy turret Mk III blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.28125,
+        "text": "$220",
+        "hit": true
+      },
+      "before": {
+        "cash": 42050,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 41830,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 220,
+      "name": "Iron gate blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.296875,
+        "text": "$500",
+        "hit": true
+      },
+      "before": {
+        "cash": 41830,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 41330,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 500,
+      "name": "Steel gate blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.3125,
+        "text": "$160",
+        "hit": true
+      },
+      "before": {
+        "cash": 41330,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 41170,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 160,
+      "name": "Steel mesh window blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.328125,
+        "text": "$100",
+        "hit": true
+      },
+      "before": {
+        "cash": 41170,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 41070,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 100,
+      "name": "Braced barricade blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.34375,
+        "text": "$220",
+        "hit": true
+      },
+      "before": {
+        "cash": 41070,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 40850,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 220,
+      "name": "Czech hedgehog blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.359375,
+        "text": "$110",
+        "hit": true
+      },
+      "before": {
+        "cash": 40850,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 40740,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 110,
+      "name": "Double-stacked sandbags blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.375,
+        "text": "$240",
+        "hit": true
+      },
+      "before": {
+        "cash": 40740,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 40500,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 240,
+      "name": "Gabion wall blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 396.390625,
+        "text": "$120",
+        "hit": true
+      },
+      "before": {
+        "cash": 40500,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 40380,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 120,
+      "name": "Concertina wire blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.40625,
+        "text": "$280",
+        "hit": true
+      },
+      "before": {
+        "cash": 40380,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 40100,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 280,
+      "name": "Razor wire blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.421875,
+        "text": "$100",
+        "hit": true
+      },
+      "before": {
+        "cash": 40100,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 40000,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 100,
+      "name": "Mesh railing blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.4375,
+        "text": "$230",
+        "hit": true
+      },
+      "before": {
+        "cash": 40000,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 39770,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 230,
+      "name": "Armoured parapet blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.453125,
+        "text": "$180",
+        "hit": true
+      },
+      "before": {
+        "cash": 39770,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 39590,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 180,
+      "name": "Plated platform blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.46875,
+        "text": "$400",
+        "hit": true
+      },
+      "before": {
+        "cash": 39590,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 39190,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 400,
+      "name": "Gun emplacement blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.484375,
+        "text": "$200",
+        "hit": true
+      },
+      "before": {
+        "cash": 39190,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 38990,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 200,
+      "name": "Concrete pillar blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.5,
+        "text": "$450",
+        "hit": true
+      },
+      "before": {
+        "cash": 38990,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 38540,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 450,
+      "name": "Steel column blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.515625,
+        "text": "$160",
+        "hit": true
+      },
+      "before": {
+        "cash": 38540,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 38380,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 160,
+      "name": "Steel stairs blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.53125,
+        "text": "$420",
+        "hit": true
+      },
+      "before": {
+        "cash": 38380,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 37960,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 420,
+      "name": "Retractable stairs blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.546875,
+        "text": "$220",
+        "hit": true
+      },
+      "before": {
+        "cash": 37960,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 37740,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 220,
+      "name": "Resetting spikes blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 395.5625,
+        "text": "$500",
+        "hit": true
+      },
+      "before": {
+        "cash": 37740,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 37240,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 500,
+      "name": "Steel spike bed blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 434.578125,
+        "text": "$200",
+        "hit": true
+      },
+      "before": {
+        "cash": 37240,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 37040,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 200,
+      "name": "Frag mine blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 434.59375,
+        "text": "$460",
+        "hit": true
+      },
+      "before": {
+        "cash": 37040,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 36580,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 460,
+      "name": "Bounding mine blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 509.609375,
+        "text": "$180",
+        "hit": true
+      },
+      "before": {
+        "cash": 36580,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 36400,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 180,
+      "name": "Siren beacon blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 509.625,
+        "text": "$420",
+        "hit": true
+      },
+      "before": {
+        "cash": 36400,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 35980,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 420,
+      "name": "Shock beacon blueprint",
+      "tab": "builds"
+    },
+    {
+      "sel": "#shopList .perk button:not(:disabled)",
+      "keyboard": false,
+      "point": {
+        "x": 894,
+        "y": 584.640625,
+        "text": "$240",
+        "hit": true
+      },
+      "before": {
+        "cash": 35980,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "after": {
+        "cash": 35740,
+        "belt": 0,
+        "shells": 0,
+        "cif": false,
+        "shop": true,
+        "phase": "prep",
+        "medkits": 0,
+        "owned": {
+          "pistol": true
+        },
+        "builds": {
+          "m240": true,
+          "mortar": true
+        },
+        "reserve": {
+          ".45": 0,
+          "9mm": 0,
+          "5.56mm": 0,
+          "7.62mm": 0,
+          ".44": 0,
+          ".338": 0,
+          "12ga": 0,
+          "40mm": 0,
+          "7.62 belt": 0,
+          "Fuel": 0,
+          "60mm": 0
+        }
+      },
+      "spent": 240,
+      "name": "Napalm drum blueprint",
+      "tab": "builds"
+    }
+  ],
+  "layouts": [
+    {
+      "id": "tp-day-1280",
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "tp-day-390",
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "tp-night-1280",
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "tp-night-390",
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "fp-day-1280",
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "fp-day-390",
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "fp-night-1280",
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "fp-night-390",
+      "overflow": false,
+      "hit": true
+    }
+  ],
+  "events": [
+    {
+      "type": "pointerdown",
+      "id": 1,
+      "text": "Buy — 120 Cash",
+      "data": {},
+      "time": 33424.59999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 1,
+      "text": "Buy — 120 Cash",
+      "data": {},
+      "time": 33424.80000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 1,
+      "text": "Buy — 120 Cash",
+      "data": {},
+      "time": 33465.69999998808
+    },
+    {
+      "type": "click",
+      "id": 1,
+      "text": "Buy — 120 Cash",
+      "data": {},
+      "time": 33465.69999998808
+    },
+    {
+      "type": "pointerdown",
+      "id": 2,
+      "text": "$35",
+      "data": {},
+      "time": 33543.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 2,
+      "text": "$35",
+      "data": {},
+      "time": 33543.19999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 2,
+      "text": "$35",
+      "data": {},
+      "time": 33574.19999998808
+    },
+    {
+      "type": "click",
+      "id": 2,
+      "text": "$35",
+      "data": {},
+      "time": 33574.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 3,
+      "text": "$35",
+      "data": {},
+      "time": 33659.5
+    },
+    {
+      "type": "mousedown",
+      "id": 3,
+      "text": "$35",
+      "data": {},
+      "time": 33659.59999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 3,
+      "text": "$35",
+      "data": {},
+      "time": 33705.80000001192
+    },
+    {
+      "type": "click",
+      "id": 3,
+      "text": "$35",
+      "data": {},
+      "time": 33705.90000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 4,
+      "text": "$35",
+      "data": {},
+      "time": 33793.30000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 4,
+      "text": "$35",
+      "data": {},
+      "time": 33793.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 4,
+      "text": "$35",
+      "data": {},
+      "time": 33840.19999998808
+    },
+    {
+      "type": "click",
+      "id": 4,
+      "text": "$35",
+      "data": {},
+      "time": 33840.19999998808
+    },
+    {
+      "type": "pointerdown",
+      "id": 5,
+      "text": "$60",
+      "data": {},
+      "time": 33948.5
+    },
+    {
+      "type": "mousedown",
+      "id": 5,
+      "text": "$60",
+      "data": {},
+      "time": 33948.5
+    },
+    {
+      "type": "mouseup",
+      "id": 5,
+      "text": "$60",
+      "data": {},
+      "time": 33990
+    },
+    {
+      "type": "click",
+      "id": 5,
+      "text": "$60",
+      "data": {},
+      "time": 33990.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 6,
+      "text": "$25",
+      "data": {},
+      "time": 34076.5
+    },
+    {
+      "type": "mousedown",
+      "id": 6,
+      "text": "$25",
+      "data": {},
+      "time": 34076.5
+    },
+    {
+      "type": "mouseup",
+      "id": 6,
+      "text": "$25",
+      "data": {},
+      "time": 34123.5
+    },
+    {
+      "type": "click",
+      "id": 6,
+      "text": "$25",
+      "data": {},
+      "time": 34123.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 7,
+      "text": "$45",
+      "data": {},
+      "time": 34194.80000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 7,
+      "text": "$45",
+      "data": {},
+      "time": 34194.90000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 7,
+      "text": "$45",
+      "data": {},
+      "time": 34239.40000000596
+    },
+    {
+      "type": "click",
+      "id": 7,
+      "text": "$45",
+      "data": {},
+      "time": 34239.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 8,
+      "text": "$55",
+      "data": {},
+      "time": 34326
+    },
+    {
+      "type": "mousedown",
+      "id": 8,
+      "text": "$55",
+      "data": {},
+      "time": 34326.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 8,
+      "text": "$55",
+      "data": {},
+      "time": 34373.90000000596
+    },
+    {
+      "type": "click",
+      "id": 8,
+      "text": "$55",
+      "data": {},
+      "time": 34373.90000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 9,
+      "text": "$20",
+      "data": {},
+      "time": 34446.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 9,
+      "text": "$20",
+      "data": {},
+      "time": 34446.90000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 9,
+      "text": "$20",
+      "data": {},
+      "time": 34489.80000001192
+    },
+    {
+      "type": "click",
+      "id": 9,
+      "text": "$20",
+      "data": {},
+      "time": 34489.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 10,
+      "text": "$60",
+      "data": {},
+      "time": 34575.5
+    },
+    {
+      "type": "mousedown",
+      "id": 10,
+      "text": "$60",
+      "data": {},
+      "time": 34575.5
+    },
+    {
+      "type": "mouseup",
+      "id": 10,
+      "text": "$60",
+      "data": {},
+      "time": 34623.09999999404
+    },
+    {
+      "type": "click",
+      "id": 10,
+      "text": "$60",
+      "data": {},
+      "time": 34623.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 11,
+      "text": "$70",
+      "data": {},
+      "time": 34708.69999998808
+    },
+    {
+      "type": "mousedown",
+      "id": 11,
+      "text": "$70",
+      "data": {},
+      "time": 34708.69999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 11,
+      "text": "$70",
+      "data": {},
+      "time": 34756.30000001192
+    },
+    {
+      "type": "click",
+      "id": 11,
+      "text": "$70",
+      "data": {},
+      "time": 34756.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 12,
+      "text": "$50",
+      "data": {},
+      "time": 34843.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 12,
+      "text": "$50",
+      "data": {},
+      "time": 34843.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 12,
+      "text": "$50",
+      "data": {},
+      "time": 34890.59999999404
+    },
+    {
+      "type": "click",
+      "id": 12,
+      "text": "$50",
+      "data": {},
+      "time": 34890.59999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 13,
+      "text": "$65",
+      "data": {},
+      "time": 34976.40000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 13,
+      "text": "$65",
+      "data": {},
+      "time": 34976.40000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 13,
+      "text": "$65",
+      "data": {},
+      "time": 35022.59999999404
+    },
+    {
+      "type": "click",
+      "id": 13,
+      "text": "$65",
+      "data": {},
+      "time": 35022.59999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 14,
+      "text": "$35",
+      "data": {},
+      "time": 35096.30000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 14,
+      "text": "$35",
+      "data": {},
+      "time": 35096.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 14,
+      "text": "$35",
+      "data": {},
+      "time": 35127.80000001192
+    },
+    {
+      "type": "click",
+      "id": 14,
+      "text": "$35",
+      "data": {},
+      "time": 35127.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 15,
+      "text": "$40",
+      "data": {},
+      "time": 35210.40000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 15,
+      "text": "$40",
+      "data": {},
+      "time": 35210.5
+    },
+    {
+      "type": "mouseup",
+      "id": 15,
+      "text": "$40",
+      "data": {},
+      "time": 35256.40000000596
+    },
+    {
+      "type": "click",
+      "id": 15,
+      "text": "$40",
+      "data": {},
+      "time": 35256.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 16,
+      "text": "$30",
+      "data": {},
+      "time": 35343.5
+    },
+    {
+      "type": "mousedown",
+      "id": 16,
+      "text": "$30",
+      "data": {},
+      "time": 35343.59999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 16,
+      "text": "$30",
+      "data": {},
+      "time": 35376.19999998808
+    },
+    {
+      "type": "click",
+      "id": 16,
+      "text": "$30",
+      "data": {},
+      "time": 35376.19999998808
+    },
+    {
+      "type": "pointerdown",
+      "id": 17,
+      "text": "$40",
+      "data": {},
+      "time": 35460.40000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 17,
+      "text": "$40",
+      "data": {},
+      "time": 35460.40000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 17,
+      "text": "$40",
+      "data": {},
+      "time": 35512.90000000596
+    },
+    {
+      "type": "click",
+      "id": 17,
+      "text": "$40",
+      "data": {},
+      "time": 35512.90000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 18,
+      "text": "$45",
+      "data": {},
+      "time": 35599.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 18,
+      "text": "$45",
+      "data": {},
+      "time": 35599.19999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 18,
+      "text": "$45",
+      "data": {},
+      "time": 35642.40000000596
+    },
+    {
+      "type": "click",
+      "id": 18,
+      "text": "$45",
+      "data": {},
+      "time": 35642.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 19,
+      "text": "$70",
+      "data": {},
+      "time": 35726.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 19,
+      "text": "$70",
+      "data": {},
+      "time": 35726.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 19,
+      "text": "$70",
+      "data": {},
+      "time": 35776.19999998808
+    },
+    {
+      "type": "click",
+      "id": 19,
+      "text": "$70",
+      "data": {},
+      "time": 35776.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 20,
+      "text": "$55",
+      "data": {},
+      "time": 35861.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 20,
+      "text": "$55",
+      "data": {},
+      "time": 35861.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 20,
+      "text": "$55",
+      "data": {},
+      "time": 35906.59999999404
+    },
+    {
+      "type": "click",
+      "id": 20,
+      "text": "$55",
+      "data": {},
+      "time": 35906.69999998808
+    },
+    {
+      "type": "pointerdown",
+      "id": 21,
+      "text": "$75",
+      "data": {},
+      "time": 35978.80000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 21,
+      "text": "$75",
+      "data": {},
+      "time": 35978.80000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 21,
+      "text": "$75",
+      "data": {},
+      "time": 36022.80000001192
+    },
+    {
+      "type": "click",
+      "id": 21,
+      "text": "$75",
+      "data": {},
+      "time": 36022.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 22,
+      "text": "$110",
+      "data": {},
+      "time": 36111.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 22,
+      "text": "$110",
+      "data": {},
+      "time": 36112
+    },
+    {
+      "type": "mouseup",
+      "id": 22,
+      "text": "$110",
+      "data": {},
+      "time": 36144.5
+    },
+    {
+      "type": "click",
+      "id": 22,
+      "text": "$110",
+      "data": {},
+      "time": 36144.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 23,
+      "text": "$140",
+      "data": {},
+      "time": 36229.19999998808
+    },
+    {
+      "type": "mousedown",
+      "id": 23,
+      "text": "$140",
+      "data": {},
+      "time": 36229.19999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 23,
+      "text": "$140",
+      "data": {},
+      "time": 36273.5
+    },
+    {
+      "type": "click",
+      "id": 23,
+      "text": "$140",
+      "data": {},
+      "time": 36273.59999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 24,
+      "text": "$300",
+      "data": {},
+      "time": 36359.69999998808
+    },
+    {
+      "type": "mousedown",
+      "id": 24,
+      "text": "$300",
+      "data": {},
+      "time": 36359.69999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 24,
+      "text": "$300",
+      "data": {},
+      "time": 36407.40000000596
+    },
+    {
+      "type": "click",
+      "id": 24,
+      "text": "$300",
+      "data": {},
+      "time": 36407.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 25,
+      "text": "$520",
+      "data": {},
+      "time": 36494.59999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 25,
+      "text": "$520",
+      "data": {},
+      "time": 36494.69999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 25,
+      "text": "$520",
+      "data": {},
+      "time": 36540.09999999404
+    },
+    {
+      "type": "click",
+      "id": 25,
+      "text": "$520",
+      "data": {},
+      "time": 36540.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 26,
+      "text": "$800",
+      "data": {},
+      "time": 36628.59999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 26,
+      "text": "$800",
+      "data": {},
+      "time": 36628.59999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 26,
+      "text": "$800",
+      "data": {},
+      "time": 36665.40000000596
+    },
+    {
+      "type": "click",
+      "id": 26,
+      "text": "$800",
+      "data": {},
+      "time": 36665.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 27,
+      "text": "$110",
+      "data": {},
+      "time": 36766.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 27,
+      "text": "$110",
+      "data": {},
+      "time": 36766.19999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 27,
+      "text": "$110",
+      "data": {},
+      "time": 36807.5
+    },
+    {
+      "type": "click",
+      "id": 27,
+      "text": "$110",
+      "data": {},
+      "time": 36807.59999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 28,
+      "text": "$240",
+      "data": {},
+      "time": 36898.19999998808
+    },
+    {
+      "type": "mousedown",
+      "id": 28,
+      "text": "$240",
+      "data": {},
+      "time": 36898.19999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 28,
+      "text": "$240",
+      "data": {},
+      "time": 36931.80000001192
+    },
+    {
+      "type": "click",
+      "id": 28,
+      "text": "$240",
+      "data": {},
+      "time": 36931.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 29,
+      "text": "$400",
+      "data": {},
+      "time": 37025.59999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 29,
+      "text": "$400",
+      "data": {},
+      "time": 37025.59999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 29,
+      "text": "$400",
+      "data": {},
+      "time": 37073.5
+    },
+    {
+      "type": "click",
+      "id": 29,
+      "text": "$400",
+      "data": {},
+      "time": 37073.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 30,
+      "text": "$620",
+      "data": {},
+      "time": 37161.19999998808
+    },
+    {
+      "type": "mousedown",
+      "id": 30,
+      "text": "$620",
+      "data": {},
+      "time": 37161.19999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 30,
+      "text": "$620",
+      "data": {},
+      "time": 37207.30000001192
+    },
+    {
+      "type": "click",
+      "id": 30,
+      "text": "$620",
+      "data": {},
+      "time": 37207.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 31,
+      "text": "$240",
+      "data": {},
+      "time": 37291.59999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 31,
+      "text": "$240",
+      "data": {},
+      "time": 37291.69999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 31,
+      "text": "$240",
+      "data": {},
+      "time": 37340.90000000596
+    },
+    {
+      "type": "click",
+      "id": 31,
+      "text": "$240",
+      "data": {},
+      "time": 37340.90000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 32,
+      "text": "$560",
+      "data": {},
+      "time": 37427.19999998808
+    },
+    {
+      "type": "mousedown",
+      "id": 32,
+      "text": "$560",
+      "data": {},
+      "time": 37427.19999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 32,
+      "text": "$560",
+      "data": {},
+      "time": 37474.09999999404
+    },
+    {
+      "type": "click",
+      "id": 32,
+      "text": "$560",
+      "data": {},
+      "time": 37474.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 33,
+      "text": "$260",
+      "data": {},
+      "time": 37545.19999998808
+    },
+    {
+      "type": "mousedown",
+      "id": 33,
+      "text": "$260",
+      "data": {},
+      "time": 37545.19999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 33,
+      "text": "$260",
+      "data": {},
+      "time": 37582.40000000596
+    },
+    {
+      "type": "click",
+      "id": 33,
+      "text": "$260",
+      "data": {},
+      "time": 37582.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 34,
+      "text": "$600",
+      "data": {},
+      "time": 37661.59999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 34,
+      "text": "$600",
+      "data": {},
+      "time": 37661.69999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 34,
+      "text": "$600",
+      "data": {},
+      "time": 37696
+    },
+    {
+      "type": "click",
+      "id": 34,
+      "text": "$600",
+      "data": {},
+      "time": 37696.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 35,
+      "text": "$300",
+      "data": {},
+      "time": 37780.40000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 35,
+      "text": "$300",
+      "data": {},
+      "time": 37780.5
+    },
+    {
+      "type": "mouseup",
+      "id": 35,
+      "text": "$300",
+      "data": {},
+      "time": 37869.5
+    },
+    {
+      "type": "click",
+      "id": 35,
+      "text": "$300",
+      "data": {},
+      "time": 37869.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 36,
+      "text": "$680",
+      "data": {},
+      "time": 37992.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 36,
+      "text": "$680",
+      "data": {},
+      "time": 37992.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 36,
+      "text": "$680",
+      "data": {},
+      "time": 38035.80000001192
+    },
+    {
+      "type": "click",
+      "id": 36,
+      "text": "$680",
+      "data": {},
+      "time": 38035.80000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 37,
+      "text": "$380",
+      "data": {},
+      "time": 38132.59999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 37,
+      "text": "$380",
+      "data": {},
+      "time": 38132.69999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 37,
+      "text": "$380",
+      "data": {},
+      "time": 38172.5
+    },
+    {
+      "type": "click",
+      "id": 37,
+      "text": "$380",
+      "data": {},
+      "time": 38172.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 38,
+      "text": "$850",
+      "data": {},
+      "time": 38261.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 38,
+      "text": "$850",
+      "data": {},
+      "time": 38261.90000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 38,
+      "text": "$850",
+      "data": {},
+      "time": 38311.40000000596
+    },
+    {
+      "type": "click",
+      "id": 38,
+      "text": "$850",
+      "data": {},
+      "time": 38311.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 39,
+      "text": "$220",
+      "data": {},
+      "time": 38394
+    },
+    {
+      "type": "mousedown",
+      "id": 39,
+      "text": "$220",
+      "data": {},
+      "time": 38394
+    },
+    {
+      "type": "mouseup",
+      "id": 39,
+      "text": "$220",
+      "data": {},
+      "time": 38437.19999998808
+    },
+    {
+      "type": "click",
+      "id": 39,
+      "text": "$220",
+      "data": {},
+      "time": 38437.19999998808
+    },
+    {
+      "type": "pointerdown",
+      "id": 40,
+      "text": "$500",
+      "data": {},
+      "time": 38528.40000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 40,
+      "text": "$500",
+      "data": {},
+      "time": 38528.40000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 40,
+      "text": "$500",
+      "data": {},
+      "time": 38572
+    },
+    {
+      "type": "click",
+      "id": 40,
+      "text": "$500",
+      "data": {},
+      "time": 38572
+    },
+    {
+      "type": "pointerdown",
+      "id": 41,
+      "text": "$160",
+      "data": {},
+      "time": 38661.59999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 41,
+      "text": "$160",
+      "data": {},
+      "time": 38661.59999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 41,
+      "text": "$160",
+      "data": {},
+      "time": 38709.30000001192
+    },
+    {
+      "type": "click",
+      "id": 41,
+      "text": "$160",
+      "data": {},
+      "time": 38709.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 42,
+      "text": "$100",
+      "data": {},
+      "time": 38792
+    },
+    {
+      "type": "mousedown",
+      "id": 42,
+      "text": "$100",
+      "data": {},
+      "time": 38792.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 42,
+      "text": "$100",
+      "data": {},
+      "time": 38831.80000001192
+    },
+    {
+      "type": "click",
+      "id": 42,
+      "text": "$100",
+      "data": {},
+      "time": 38831.90000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 43,
+      "text": "$220",
+      "data": {},
+      "time": 38910
+    },
+    {
+      "type": "mousedown",
+      "id": 43,
+      "text": "$220",
+      "data": {},
+      "time": 38910
+    },
+    {
+      "type": "mouseup",
+      "id": 43,
+      "text": "$220",
+      "data": {},
+      "time": 38957.80000001192
+    },
+    {
+      "type": "click",
+      "id": 43,
+      "text": "$220",
+      "data": {},
+      "time": 38957.90000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 44,
+      "text": "$110",
+      "data": {},
+      "time": 39043.69999998808
+    },
+    {
+      "type": "mousedown",
+      "id": 44,
+      "text": "$110",
+      "data": {},
+      "time": 39043.69999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 44,
+      "text": "$110",
+      "data": {},
+      "time": 39089.69999998808
+    },
+    {
+      "type": "click",
+      "id": 44,
+      "text": "$110",
+      "data": {},
+      "time": 39089.69999998808
+    },
+    {
+      "type": "pointerdown",
+      "id": 45,
+      "text": "$240",
+      "data": {},
+      "time": 39176.80000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 45,
+      "text": "$240",
+      "data": {},
+      "time": 39176.80000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 45,
+      "text": "$240",
+      "data": {},
+      "time": 39215.19999998808
+    },
+    {
+      "type": "click",
+      "id": 45,
+      "text": "$240",
+      "data": {},
+      "time": 39215.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 46,
+      "text": "$120",
+      "data": {},
+      "time": 39309.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 46,
+      "text": "$120",
+      "data": {},
+      "time": 39309.19999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 46,
+      "text": "$120",
+      "data": {},
+      "time": 39357.09999999404
+    },
+    {
+      "type": "click",
+      "id": 46,
+      "text": "$120",
+      "data": {},
+      "time": 39357.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 47,
+      "text": "$280",
+      "data": {},
+      "time": 39444.69999998808
+    },
+    {
+      "type": "mousedown",
+      "id": 47,
+      "text": "$280",
+      "data": {},
+      "time": 39444.69999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 47,
+      "text": "$280",
+      "data": {},
+      "time": 39489.09999999404
+    },
+    {
+      "type": "click",
+      "id": 47,
+      "text": "$280",
+      "data": {},
+      "time": 39489.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 48,
+      "text": "$100",
+      "data": {},
+      "time": 39574.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 48,
+      "text": "$100",
+      "data": {},
+      "time": 39574.90000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 48,
+      "text": "$100",
+      "data": {},
+      "time": 39623.69999998808
+    },
+    {
+      "type": "click",
+      "id": 48,
+      "text": "$100",
+      "data": {},
+      "time": 39623.69999998808
+    },
+    {
+      "type": "pointerdown",
+      "id": 49,
+      "text": "$230",
+      "data": {},
+      "time": 39711
+    },
+    {
+      "type": "mousedown",
+      "id": 49,
+      "text": "$230",
+      "data": {},
+      "time": 39711
+    },
+    {
+      "type": "mouseup",
+      "id": 49,
+      "text": "$230",
+      "data": {},
+      "time": 39758.59999999404
+    },
+    {
+      "type": "click",
+      "id": 49,
+      "text": "$230",
+      "data": {},
+      "time": 39758.59999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 50,
+      "text": "$180",
+      "data": {},
+      "time": 39843.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 50,
+      "text": "$180",
+      "data": {},
+      "time": 39843.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 50,
+      "text": "$180",
+      "data": {},
+      "time": 39891.30000001192
+    },
+    {
+      "type": "click",
+      "id": 50,
+      "text": "$180",
+      "data": {},
+      "time": 39891.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 51,
+      "text": "$400",
+      "data": {},
+      "time": 39974.40000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 51,
+      "text": "$400",
+      "data": {},
+      "time": 39974.40000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 51,
+      "text": "$400",
+      "data": {},
+      "time": 40015.09999999404
+    },
+    {
+      "type": "click",
+      "id": 51,
+      "text": "$400",
+      "data": {},
+      "time": 40015.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 52,
+      "text": "$200",
+      "data": {},
+      "time": 40113.30000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 52,
+      "text": "$200",
+      "data": {},
+      "time": 40113.40000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 52,
+      "text": "$200",
+      "data": {},
+      "time": 40149
+    },
+    {
+      "type": "click",
+      "id": 52,
+      "text": "$200",
+      "data": {},
+      "time": 40149.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 53,
+      "text": "$450",
+      "data": {},
+      "time": 40243.80000001192
+    },
+    {
+      "type": "mousedown",
+      "id": 53,
+      "text": "$450",
+      "data": {},
+      "time": 40243.90000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 53,
+      "text": "$450",
+      "data": {},
+      "time": 40290.30000001192
+    },
+    {
+      "type": "click",
+      "id": 53,
+      "text": "$450",
+      "data": {},
+      "time": 40290.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 54,
+      "text": "$160",
+      "data": {},
+      "time": 40374.5
+    },
+    {
+      "type": "mousedown",
+      "id": 54,
+      "text": "$160",
+      "data": {},
+      "time": 40374.59999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 54,
+      "text": "$160",
+      "data": {},
+      "time": 40415.40000000596
+    },
+    {
+      "type": "click",
+      "id": 54,
+      "text": "$160",
+      "data": {},
+      "time": 40415.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 55,
+      "text": "$420",
+      "data": {},
+      "time": 40508.19999998808
+    },
+    {
+      "type": "mousedown",
+      "id": 55,
+      "text": "$420",
+      "data": {},
+      "time": 40508.30000001192
+    },
+    {
+      "type": "mouseup",
+      "id": 55,
+      "text": "$420",
+      "data": {},
+      "time": 40548.30000001192
+    },
+    {
+      "type": "click",
+      "id": 55,
+      "text": "$420",
+      "data": {},
+      "time": 40548.30000001192
+    },
+    {
+      "type": "pointerdown",
+      "id": 56,
+      "text": "$220",
+      "data": {},
+      "time": 40644.5
+    },
+    {
+      "type": "mousedown",
+      "id": 56,
+      "text": "$220",
+      "data": {},
+      "time": 40644.5
+    },
+    {
+      "type": "mouseup",
+      "id": 56,
+      "text": "$220",
+      "data": {},
+      "time": 40682.19999998808
+    },
+    {
+      "type": "click",
+      "id": 56,
+      "text": "$220",
+      "data": {},
+      "time": 40682.19999998808
+    },
+    {
+      "type": "pointerdown",
+      "id": 57,
+      "text": "$500",
+      "data": {},
+      "time": 40777.5
+    },
+    {
+      "type": "mousedown",
+      "id": 57,
+      "text": "$500",
+      "data": {},
+      "time": 40777.5
+    },
+    {
+      "type": "mouseup",
+      "id": 57,
+      "text": "$500",
+      "data": {},
+      "time": 40824.40000000596
+    },
+    {
+      "type": "click",
+      "id": 57,
+      "text": "$500",
+      "data": {},
+      "time": 40824.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 58,
+      "text": "$200",
+      "data": {},
+      "time": 40908
+    },
+    {
+      "type": "mousedown",
+      "id": 58,
+      "text": "$200",
+      "data": {},
+      "time": 40908
+    },
+    {
+      "type": "mouseup",
+      "id": 58,
+      "text": "$200",
+      "data": {},
+      "time": 40958.5
+    },
+    {
+      "type": "click",
+      "id": 58,
+      "text": "$200",
+      "data": {},
+      "time": 40958.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 59,
+      "text": "$460",
+      "data": {},
+      "time": 41041.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 59,
+      "text": "$460",
+      "data": {},
+      "time": 41041.90000000596
+    },
+    {
+      "type": "mouseup",
+      "id": 59,
+      "text": "$460",
+      "data": {},
+      "time": 41090.40000000596
+    },
+    {
+      "type": "click",
+      "id": 59,
+      "text": "$460",
+      "data": {},
+      "time": 41090.40000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 60,
+      "text": "$180",
+      "data": {},
+      "time": 41175.69999998808
+    },
+    {
+      "type": "mousedown",
+      "id": 60,
+      "text": "$180",
+      "data": {},
+      "time": 41175.69999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 60,
+      "text": "$180",
+      "data": {},
+      "time": 41215.59999999404
+    },
+    {
+      "type": "click",
+      "id": 60,
+      "text": "$180",
+      "data": {},
+      "time": 41215.69999998808
+    },
+    {
+      "type": "pointerdown",
+      "id": 61,
+      "text": "$420",
+      "data": {},
+      "time": 41307.5
+    },
+    {
+      "type": "mousedown",
+      "id": 61,
+      "text": "$420",
+      "data": {},
+      "time": 41307.59999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 61,
+      "text": "$420",
+      "data": {},
+      "time": 41355.69999998808
+    },
+    {
+      "type": "click",
+      "id": 61,
+      "text": "$420",
+      "data": {},
+      "time": 41355.69999998808
+    },
+    {
+      "type": "pointerdown",
+      "id": 62,
+      "text": "$240",
+      "data": {},
+      "time": 41444
+    },
+    {
+      "type": "mousedown",
+      "id": 62,
+      "text": "$240",
+      "data": {},
+      "time": 41444
+    },
+    {
+      "type": "mouseup",
+      "id": 62,
+      "text": "$240",
+      "data": {},
+      "time": 41488.80000001192
+    },
+    {
+      "type": "click",
+      "id": 62,
+      "text": "$240",
+      "data": {},
+      "time": 41488.80000001192
+    }
+  ],
+  "mutations": [],
+  "errors": []
+}

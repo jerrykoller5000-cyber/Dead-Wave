@@ -1,0 +1,7 @@
+{
+  "command": "node crew/crew.mjs standby chatgpt --minutes 1",
+  "exit": 0,
+  "initial": "STANDBY ChatGPT: nothing for you right now; looking every 20 s until 00:41Z.",
+  "final": "Nothing new after 1 min. Run it again: node crew/crew.mjs standby chatgpt --minutes 1",
+  "condition": "actual idle card exercised writeStatus through normal unwrapped CLI"
+}

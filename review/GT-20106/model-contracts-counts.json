@@ -1,0 +1,3761 @@
+{
+  "rows": [
+    {
+      "key": "minigun",
+      "meshes": 29,
+      "pieces": [
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:minigun",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "minigun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:minigun",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "minigun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "minigun-default-reflex",
+          "mat": "gunPaint:minigun",
+          "type": "MeshStandardMaterial",
+          "role": "optic shell",
+          "paint": "minigun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "minigun-default-reflex",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "minigun-default-reflex",
+          "mat": "gunPaint:minigun",
+          "type": "MeshStandardMaterial",
+          "role": "optic shell",
+          "paint": "minigun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "minigun-default-reflex",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "minigun-default-reflex",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 4,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-trigger",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "heatParts-barrel",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "minigun drum shell",
+          "parent": "",
+          "mat": "gunPaint:minigun",
+          "type": "MeshStandardMaterial",
+          "role": "magazine",
+          "paint": "minigun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 3,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "minigun-safety",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "minigun-power-switch",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "minigun-drum-latch",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "sideRailClamp",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:minigun",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "minigun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "moduleShell",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:minigun",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "minigun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:minigun",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "minigun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:minigun",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "minigun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:minigun",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "minigun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:minigun",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "minigun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 3,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        }
+      ],
+      "controls": [
+        {
+          "key": "trigger",
+          "name": "controls-trigger",
+          "exists": true
+        },
+        {
+          "key": "lightSwitch",
+          "name": "controls-lightSwitch-minigun",
+          "exists": true
+        },
+        {
+          "key": "safety",
+          "name": "minigun-safety",
+          "exists": true
+        },
+        {
+          "key": "powerSwitch",
+          "name": "minigun-power-switch",
+          "exists": true
+        },
+        {
+          "key": "drumLatch",
+          "name": "minigun-drum-latch",
+          "exists": true
+        }
+      ],
+      "triggerPin": [
+        0,
+        0.049,
+        -0.308
+      ],
+      "declaredHeat": [
+        "barrel"
+      ],
+      "barrel": "heatParts-barrel",
+      "barrelResolved": true,
+      "suppressorResolved": false,
+      "paintRoles": [
+        "furniture",
+        "light shell",
+        "magazine",
+        "optic shell",
+        "rail",
+        "receiver"
+      ]
+    },
+    {
+      "key": "m4",
+      "meshes": 37,
+      "pieces": [
+        {
+          "name": "",
+          "parent": "recoil-bolt",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "role": null,
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "recoil-bolt",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "role": null,
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "work",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 4,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "GW-4 rear face",
+          "parent": "",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-trigger",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 7,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "GW-4 rear collar",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "m4-default-holo",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "m4-default-holo",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "optic shell",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "m4-default-holo",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "m4-default-holo",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 11,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 5,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "suppressor shell",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "suppressor shell",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "moduleShell",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "topPlate",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-selector",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-boltCatch",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-magRelease",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-forwardAssist",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-portCover",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "heatParts-barrel",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:m4",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "m4",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 24,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        }
+      ],
+      "controls": [
+        {
+          "key": "trigger",
+          "name": "controls-trigger",
+          "exists": true
+        },
+        {
+          "key": "lightSwitch",
+          "name": "controls-lightSwitch-m4",
+          "exists": true
+        },
+        {
+          "key": "selector",
+          "name": "controls-selector",
+          "exists": true
+        },
+        {
+          "key": "boltCatch",
+          "name": "controls-boltCatch",
+          "exists": true
+        },
+        {
+          "key": "magRelease",
+          "name": "controls-magRelease",
+          "exists": true
+        },
+        {
+          "key": "chargingHandle",
+          "name": "work",
+          "exists": true
+        },
+        {
+          "key": "forwardAssist",
+          "name": "controls-forwardAssist",
+          "exists": true
+        },
+        {
+          "key": "portCover",
+          "name": "controls-portCover",
+          "exists": true
+        }
+      ],
+      "triggerPin": [
+        0,
+        -0.05,
+        -0.049
+      ],
+      "declaredHeat": [
+        "barrel",
+        "suppressor"
+      ],
+      "barrel": "heatParts-barrel",
+      "barrelResolved": true,
+      "suppressorResolved": true,
+      "paintRoles": [
+        "furniture",
+        "light shell",
+        "optic shell",
+        "rail",
+        "receiver",
+        "suppressor shell"
+      ]
+    },
+    {
+      "key": "ak",
+      "meshes": 29,
+      "pieces": [
+        {
+          "name": "",
+          "parent": "recoil-bolt",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "recoil-bolt",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "work",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-trigger",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "gunPaint:ak",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "ak",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 5,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:ak",
+          "type": "MeshStandardMaterial",
+          "role": "magazine",
+          "paint": "ak",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "magazine top round",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:ak",
+          "type": "MeshStandardMaterial",
+          "role": "magazine",
+          "paint": "ak",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:ak",
+          "type": "MeshStandardMaterial",
+          "role": "magazine",
+          "paint": "ak",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "gunPaint:ak",
+          "type": "MeshStandardMaterial",
+          "role": "suppressor shell",
+          "paint": "ak",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "gunPaint:ak",
+          "type": "MeshStandardMaterial",
+          "role": "suppressor shell",
+          "paint": "ak",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "railClamp",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:ak",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "ak",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "moduleShell",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:ak",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "ak",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "KR-7 furniture wood",
+          "mat": "KR-7 walnut",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "KR-7 furniture wood",
+          "mat": "KR-7 grip stipple",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "KR-7 furniture synthetic",
+          "mat": "gunPaint:ak",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "ak",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-selector",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-magRelease",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "heatParts-barrel",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:ak",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "ak",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "KR-7 tritium",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 21,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        }
+      ],
+      "controls": [
+        {
+          "key": "trigger",
+          "name": "controls-trigger",
+          "exists": true
+        },
+        {
+          "key": "lightSwitch",
+          "name": "controls-lightSwitch-ak",
+          "exists": true
+        },
+        {
+          "key": "selector",
+          "name": "controls-selector",
+          "exists": true
+        },
+        {
+          "key": "magRelease",
+          "name": "controls-magRelease",
+          "exists": true
+        },
+        {
+          "key": "chargingHandle",
+          "name": "work",
+          "exists": true
+        }
+      ],
+      "triggerPin": [
+        0,
+        -0.03,
+        -0.032
+      ],
+      "declaredHeat": [
+        "barrel",
+        "suppressor"
+      ],
+      "barrel": "heatParts-barrel",
+      "barrelResolved": true,
+      "suppressorResolved": true,
+      "paintRoles": [
+        "furniture",
+        "light shell",
+        "magazine",
+        "receiver",
+        "suppressor shell"
+      ]
+    },
+    {
+      "key": "aa12",
+      "meshes": 27,
+      "pieces": [
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:aa12",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "aa12",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "recoil-bolt",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "recoil-bolt",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "recoil-bolt",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "work",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "gunPaint:aa12",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "aa12",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-trigger",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-magRelease",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-drumLatchLeft",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-drumLatchRight",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "magazineBody",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 35,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "magazine top round",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "heatParts-barrel",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:aa12",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "aa12",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:aa12",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "aa12",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 5,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-selector",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:aa12",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "aa12",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:aa12",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "aa12",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:aa12",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "aa12",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:aa12",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "aa12",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 59,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        }
+      ],
+      "controls": [
+        {
+          "key": "trigger",
+          "name": "controls-trigger",
+          "exists": true
+        },
+        {
+          "key": "lightSwitch",
+          "name": "controls-lightSwitch-aa12",
+          "exists": true
+        },
+        {
+          "key": "selector",
+          "name": "controls-selector",
+          "exists": true
+        },
+        {
+          "key": "magRelease",
+          "name": "controls-magRelease",
+          "exists": true
+        },
+        {
+          "key": "drumLatchLeft",
+          "name": "controls-drumLatchLeft",
+          "exists": true
+        },
+        {
+          "key": "drumLatchRight",
+          "name": "controls-drumLatchRight",
+          "exists": true
+        },
+        {
+          "key": "chargingHandle",
+          "name": "work",
+          "exists": true
+        }
+      ],
+      "triggerPin": [
+        0,
+        -0.088,
+        -0.066
+      ],
+      "declaredHeat": [
+        "barrel"
+      ],
+      "barrel": "heatParts-barrel",
+      "barrelResolved": true,
+      "suppressorResolved": false,
+      "paintRoles": [
+        "furniture",
+        "light shell",
+        "rail",
+        "receiver"
+      ]
+    },
+    {
+      "key": "pistol",
+      "meshes": 22,
+      "pieces": [
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "controls-extractor",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:pistol",
+          "type": "MeshStandardMaterial",
+          "role": "slide",
+          "paint": "pistol",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 5,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "pistol magazine top round",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 3,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 3,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "pistol-barrel",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 4,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-takedown",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "gunPaint:pistol",
+          "type": "MeshStandardMaterial",
+          "role": "suppressor shell",
+          "paint": "pistol",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "gunPaint:pistol",
+          "type": "MeshStandardMaterial",
+          "role": "suppressor shell",
+          "paint": "pistol",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:pistol",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "pistol",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 3,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-trigger",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-magRelease",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-slideStop",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:pistol",
+          "type": "MeshStandardMaterial",
+          "role": "frame",
+          "paint": "pistol",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 6,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        }
+      ],
+      "controls": [
+        {
+          "key": "lightSwitch",
+          "name": "controls-lightSwitch-pistol",
+          "exists": true
+        },
+        {
+          "key": "trigger",
+          "name": "controls-trigger",
+          "exists": true
+        },
+        {
+          "key": "magRelease",
+          "name": "controls-magRelease",
+          "exists": true
+        },
+        {
+          "key": "slideStop",
+          "name": "controls-slideStop",
+          "exists": true
+        },
+        {
+          "key": "takedown",
+          "name": "controls-takedown",
+          "exists": true
+        },
+        {
+          "key": "extractor",
+          "name": "controls-extractor",
+          "exists": true
+        }
+      ],
+      "triggerPin": [
+        0,
+        -0.014,
+        0.0725
+      ],
+      "declaredHeat": [
+        "barrel",
+        "suppressor"
+      ],
+      "barrel": "pistol-barrel",
+      "barrelResolved": true,
+      "suppressorResolved": true,
+      "paintRoles": [
+        "frame",
+        "light shell",
+        "slide",
+        "suppressor shell"
+      ]
+    },
+    {
+      "key": "uzi",
+      "meshes": 27,
+      "pieces": [
+        {
+          "name": "",
+          "parent": "work",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "controls-safety",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-trigger",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-magRelease",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-selector",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "magazine top round",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "heatParts-barrel",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "recoil-bolt",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "recoil-bolt",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "gunPaint:uzi",
+          "type": "MeshStandardMaterial",
+          "role": "suppressor shell",
+          "paint": "uzi",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "gunPaint:uzi",
+          "type": "MeshStandardMaterial",
+          "role": "suppressor shell",
+          "paint": "uzi",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "railClamp",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:uzi",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "uzi",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "moduleShell",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:uzi",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "uzi",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:uzi",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "uzi",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:uzi",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "uzi",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:uzi",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "uzi",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:uzi",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "uzi",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:uzi",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "uzi",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:uzi",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "uzi",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 9,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        }
+      ],
+      "controls": [
+        {
+          "key": "trigger",
+          "name": "controls-trigger",
+          "exists": true
+        },
+        {
+          "key": "lightSwitch",
+          "name": "controls-lightSwitch-uzi",
+          "exists": true
+        },
+        {
+          "key": "magRelease",
+          "name": "controls-magRelease",
+          "exists": true
+        },
+        {
+          "key": "selector",
+          "name": "controls-selector",
+          "exists": true
+        },
+        {
+          "key": "safety",
+          "name": "controls-safety",
+          "exists": true
+        },
+        {
+          "key": "chargingHandle",
+          "name": "work",
+          "exists": true
+        }
+      ],
+      "triggerPin": [
+        0,
+        -0.038,
+        0.052000000000000005
+      ],
+      "declaredHeat": [
+        "barrel",
+        "suppressor"
+      ],
+      "barrel": "heatParts-barrel",
+      "barrelResolved": true,
+      "suppressorResolved": true,
+      "paintRoles": [
+        "furniture",
+        "light shell",
+        "rail",
+        "receiver",
+        "suppressor shell"
+      ]
+    },
+    {
+      "key": "shotgun",
+      "meshes": 26,
+      "pieces": [
+        {
+          "name": "shotgun receiver",
+          "parent": "",
+          "mat": "gunPaint:shotgun",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "shotgun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "shotgun-bolt",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "shotgun-bolt",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "shotgun-bolt",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "shotgun lifter",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "shotgun-slide-lock",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "shotgun trigger",
+          "parent": "controls-trigger",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-pump",
+          "mat": "gunPaint:shotgun",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "shotgun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-pump",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "heatParts-barrel",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 6,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "shotgun reload shell",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "gunPaint:shotgun",
+          "type": "MeshStandardMaterial",
+          "role": "suppressor shell",
+          "paint": "shotgun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "gunPaint:shotgun",
+          "type": "MeshStandardMaterial",
+          "role": "suppressor shell",
+          "paint": "shotgun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "windageDial",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:shotgun",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "shotgun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-safety",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:shotgun",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "shotgun",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 9,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        }
+      ],
+      "controls": [
+        {
+          "key": "trigger",
+          "name": "controls-trigger",
+          "exists": true
+        },
+        {
+          "key": "laserWindage",
+          "name": "windageDial",
+          "exists": true
+        },
+        {
+          "key": "lightSwitch",
+          "name": "controls-lightSwitch-shotgun",
+          "exists": true
+        },
+        {
+          "key": "safety",
+          "name": "controls-safety",
+          "exists": true
+        },
+        {
+          "key": "slideRelease",
+          "name": "shotgun-slide-lock",
+          "exists": true
+        },
+        {
+          "key": "pump",
+          "name": "controls-pump",
+          "exists": true
+        }
+      ],
+      "triggerPin": [
+        0,
+        -0.044,
+        0.033
+      ],
+      "declaredHeat": [
+        "barrel",
+        "suppressor"
+      ],
+      "barrel": "heatParts-barrel",
+      "barrelResolved": true,
+      "suppressorResolved": true,
+      "paintRoles": [
+        "furniture",
+        "light shell",
+        "receiver",
+        "suppressor shell"
+      ]
+    },
+    {
+      "key": "revolver",
+      "meshes": 26,
+      "pieces": [
+        {
+          "name": "",
+          "parent": "revolver-crane",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "heatParts-barrel",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "revolver-trigger",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "revolver-chamber-layer-0",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "rm": true,
+          "instances": 6,
+          "visible": true
+        },
+        {
+          "name": "revolver-visible-tips",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": 6,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-ejector",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "speedloader",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "revolver-live-reload-instances",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": 0,
+          "visible": false
+        },
+        {
+          "name": "revolver-spent-instances",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": 0,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "controls-hammer",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 3,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "railClamp",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:revolver",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "revolver",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "moduleShell",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:revolver",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "revolver",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:revolver",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "revolver",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:revolver",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "revolver",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:revolver",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "revolver",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-cylinderRelease",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "revolver-sight-dot",
+          "parent": "",
+          "mat": "Revolver green front sight",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:revolver",
+          "type": "MeshStandardMaterial",
+          "role": "frame",
+          "paint": "revolver",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "Revolver walnut",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "Revolver walnut inset",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 17,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        }
+      ],
+      "controls": [
+        {
+          "key": "lightSwitch",
+          "name": "controls-lightSwitch-revolver",
+          "exists": true
+        },
+        {
+          "key": "trigger",
+          "name": "revolver-trigger",
+          "exists": true
+        },
+        {
+          "key": "hammer",
+          "name": "controls-hammer",
+          "exists": true
+        },
+        {
+          "key": "cylinderRelease",
+          "name": "controls-cylinderRelease",
+          "exists": true
+        },
+        {
+          "key": "ejector",
+          "name": "controls-ejector",
+          "exists": true
+        }
+      ],
+      "triggerPin": [
+        0,
+        -0.008,
+        0.036
+      ],
+      "declaredHeat": [
+        "barrel"
+      ],
+      "barrel": "heatParts-barrel",
+      "barrelResolved": true,
+      "suppressorResolved": false,
+      "paintRoles": [
+        "frame",
+        "light shell",
+        "rail"
+      ]
+    },
+    {
+      "key": "sniper",
+      "meshes": 38,
+      "pieces": [
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-trigger",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "Sniper .308 magazine body",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "magazine top round",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "sniper-safety",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 18,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "suppressor shell",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "suppressor shell",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "suppressor",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "moduleShell",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "topPlate",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-magRelease",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "heatParts-barrel",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "scope rail bridge",
+          "parent": "optic.nx8",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "optic shell",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "NX8 tapered optical housing",
+          "parent": "optic.nx8",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "optic shell",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "50 mm objective lens",
+          "parent": "optic.nx8",
+          "mat": "",
+          "type": "MeshPhysicalMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "ocular lens",
+          "parent": "optic.nx8",
+          "mat": "",
+          "type": "MeshPhysicalMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "optic.nx8",
+          "mat": "gunPaint:sniper",
+          "type": "MeshStandardMaterial",
+          "role": "optic shell",
+          "paint": "sniper",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "optic.nx8",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 26,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 44,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        }
+      ],
+      "controls": [
+        {
+          "key": "trigger",
+          "name": "controls-trigger",
+          "exists": true
+        },
+        {
+          "key": "lightSwitch",
+          "name": "controls-lightSwitch-sniper",
+          "exists": true
+        },
+        {
+          "key": "magRelease",
+          "name": "controls-magRelease",
+          "exists": true
+        },
+        {
+          "key": "safety",
+          "name": "sniper-safety",
+          "exists": true
+        }
+      ],
+      "triggerPin": [
+        0,
+        -0.05,
+        -0.05
+      ],
+      "declaredHeat": [
+        "barrel",
+        "suppressor"
+      ],
+      "barrel": "heatParts-barrel",
+      "barrelResolved": true,
+      "suppressorResolved": true,
+      "paintRoles": [
+        "furniture",
+        "light shell",
+        "optic shell",
+        "rail",
+        "receiver",
+        "suppressor shell"
+      ]
+    },
+    {
+      "key": "launcher",
+      "meshes": 26,
+      "pieces": [
+        {
+          "name": "",
+          "parent": "launcher-iron-leaf",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "launcher-safety",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "launcher-stock-release",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "gunPaint:launcher",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "launcher",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fp-stock",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 3,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-trigger",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-drumLatch",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "launcher-loaded-inserts",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": 6,
+          "visible": true
+        },
+        {
+          "name": "launcher-spent-inserts",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": 6,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 3,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "moduleShell",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:launcher",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "launcher",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "topPlate",
+          "parent": "laserLightUnit",
+          "mat": "gunPaint:launcher",
+          "type": "MeshStandardMaterial",
+          "role": "light shell",
+          "paint": "launcher",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "laserLightUnit",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "heatParts-barrel",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:launcher",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "launcher",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:launcher",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "launcher",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:launcher",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "launcher",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:launcher",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "launcher",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:launcher",
+          "type": "MeshStandardMaterial",
+          "role": "rail",
+          "paint": "launcher",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 4,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        }
+      ],
+      "controls": [
+        {
+          "key": "stockRelease",
+          "name": "launcher-stock-release",
+          "exists": true
+        },
+        {
+          "key": "trigger",
+          "name": "controls-trigger",
+          "exists": true
+        },
+        {
+          "key": "safety",
+          "name": "launcher-safety",
+          "exists": true
+        },
+        {
+          "key": "drumLatch",
+          "name": "controls-drumLatch",
+          "exists": true
+        },
+        {
+          "key": "lightSwitch",
+          "name": "controls-lightSwitch-launcher",
+          "exists": true
+        }
+      ],
+      "triggerPin": [
+        0,
+        -0.06,
+        0.016
+      ],
+      "declaredHeat": [
+        "barrel"
+      ],
+      "barrel": "heatParts-barrel",
+      "barrelResolved": true,
+      "suppressorResolved": false,
+      "paintRoles": [
+        "furniture",
+        "light shell",
+        "rail",
+        "receiver"
+      ]
+    },
+    {
+      "key": "flamer",
+      "meshes": 18,
+      "pieces": [
+        {
+          "name": "flamerNozzle",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "flamer-valve",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:flamer",
+          "type": "MeshStandardMaterial",
+          "role": "tank",
+          "paint": "flamer",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 3,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fuel-gauge-needle",
+          "mat": "flamer gauge tritium",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "fuel-gauge-needle",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-trigger",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "flamer-safety",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 3,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "flamer-igniter",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:flamer",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "flamer",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:flamer",
+          "type": "MeshStandardMaterial",
+          "role": "receiver",
+          "paint": "flamer",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "flamer gauge tritium",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:flamer",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "flamer",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 8,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshBasicMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        }
+      ],
+      "controls": [
+        {
+          "key": "trigger",
+          "name": "controls-trigger",
+          "exists": true
+        },
+        {
+          "key": "safety",
+          "name": "flamer-safety",
+          "exists": true
+        },
+        {
+          "key": "igniter",
+          "name": "flamer-igniter",
+          "exists": true
+        },
+        {
+          "key": "valve",
+          "name": "flamer-valve",
+          "exists": true
+        }
+      ],
+      "triggerPin": [
+        0,
+        -0.034,
+        -0.094
+      ],
+      "declaredHeat": [
+        "barrel"
+      ],
+      "barrel": "flamerNozzle",
+      "barrelResolved": true,
+      "suppressorResolved": false,
+      "paintRoles": [
+        "furniture",
+        "receiver",
+        "tank"
+      ]
+    },
+    {
+      "key": "chainsaw",
+      "meshes": 13,
+      "pieces": [
+        {
+          "name": "",
+          "parent": "",
+          "mat": "chainsaw exhaust shield",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "controls-trigger",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "chainsaw-throttle-lock",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "chainsaw-stop-switch",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "chainsaw-chain-brake",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 2,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "chainsaw link finish",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": 42,
+          "visible": true
+        },
+        {
+          "name": "chainsaw-chain-blur",
+          "parent": "",
+          "mat": "chainsaw chain blur",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": false
+        },
+        {
+          "name": "",
+          "parent": "saw-blood-overlay",
+          "mat": "",
+          "type": "MeshStandardMaterial",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "gunPaint:chainsaw",
+          "type": "MeshStandardMaterial",
+          "role": "furniture",
+          "paint": "chainsaw",
+          "rm": false,
+          "instances": null,
+          "visible": true
+        },
+        {
+          "name": "",
+          "parent": "",
+          "mat": "fold-static",
+          "type": "MeshStandardNodeMaterial",
+          "folded": 11,
+          "rm": true,
+          "instances": null,
+          "visible": true
+        }
+      ],
+      "controls": [
+        {
+          "key": "trigger",
+          "name": "controls-trigger",
+          "exists": true
+        },
+        {
+          "key": "throttleLock",
+          "name": "chainsaw-throttle-lock",
+          "exists": true
+        },
+        {
+          "key": "chainBrake",
+          "name": "chainsaw-chain-brake",
+          "exists": true
+        },
+        {
+          "key": "stopSwitch",
+          "name": "chainsaw-stop-switch",
+          "exists": true
+        }
+      ],
+      "triggerPin": [
+        0,
+        0.062,
+        -0.395
+      ],
+      "declaredHeat": [],
+      "barrel": null,
+      "barrelResolved": false,
+      "suppressorResolved": false,
+      "paintRoles": [
+        "furniture"
+      ]
+    }
+  ],
+  "errors": []
+}

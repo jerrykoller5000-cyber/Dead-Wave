@@ -1,0 +1,59 @@
+{
+  "scope": "Instrumented diagnostic only; production clock reconstruction from firstTick and raw frame intervals; aligned by user timing sync.",
+  "notReproduced": "Original uninstrumented368.6ms first-mag frame did not recur; no cause assigned to that original event.",
+  "spikes": [
+    {
+      "begin": 51061.79999998212,
+      "end": 51115.59999999404,
+      "ms": 53.80000001192093,
+      "gc": [],
+      "cpu": [
+        {
+          "ms": 50.837,
+          "cpuMs": 50.445
+        },
+        {
+          "ms": 0.075,
+          "cpuMs": 0.074
+        },
+        {
+          "ms": 0.038,
+          "cpuMs": 0.037
+        },
+        {
+          "ms": 0.018,
+          "cpuMs": 0.015
+        },
+        {
+          "ms": 40.704,
+          "cpuMs": 40.124
+        }
+      ]
+    },
+    {
+      "begin": 56132.5,
+      "end": 56189.29999998212,
+      "ms": 56.79999998211861,
+      "gc": [],
+      "cpu": [
+        {
+          "ms": 53.781,
+          "cpuMs": 49.109
+        },
+        {
+          "ms": 0.073,
+          "cpuMs": 0.071
+        },
+        {
+          "ms": 0.023,
+          "cpuMs": 0.021
+        },
+        {
+          "ms": 0.012,
+          "cpuMs": 0.011
+        }
+      ]
+    }
+  ],
+  "largestMainGcMs": 3.026
+}

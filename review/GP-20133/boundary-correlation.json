@@ -1,0 +1,172 @@
+{
+  "scope": "Whole-step/render+GC diagnostic, not acceptance. Inclusive spans are not additive.",
+  "phases": [
+    {
+      "fire": false,
+      "worst": 33.400000000001455,
+      "longs": [],
+      "largestSpans": [
+        {
+          "name": "render",
+          "start": 38605.20000001788,
+          "end": 38621.90000000596,
+          "shadowBefore": false,
+          "redrawBefore": 0,
+          "redrawAfter": 0,
+          "skinBuilds": 1,
+          "draws": 540,
+          "ms": 16.69999998807907
+        },
+        {
+          "name": "render",
+          "start": 38871.90000000596,
+          "end": 38888.30000001192,
+          "shadowBefore": false,
+          "redrawBefore": 0,
+          "redrawAfter": 0,
+          "skinBuilds": 1,
+          "draws": 540,
+          "ms": 16.400000005960464
+        },
+        {
+          "name": "render",
+          "start": 35731.59999999404,
+          "end": 35747.30000001192,
+          "shadowBefore": false,
+          "redrawBefore": 0,
+          "redrawAfter": 0,
+          "skinBuilds": 1,
+          "draws": 544,
+          "ms": 15.700000017881393
+        },
+        {
+          "name": "render",
+          "start": 38631.09999999404,
+          "end": 38646.70000001788,
+          "shadowBefore": false,
+          "redrawBefore": 0,
+          "redrawAfter": 0,
+          "skinBuilds": 1,
+          "draws": 540,
+          "ms": 15.600000023841858
+        }
+      ],
+      "pipelines": 0,
+      "builders": 0
+    },
+    {
+      "fire": true,
+      "worst": 66.5,
+      "longs": [
+        {
+          "start": 57283.2,
+          "end": 57333,
+          "ms": 49.80000000000291,
+          "boundaries": [
+            {
+              "name": "render",
+              "start": 57294.20000001788,
+              "end": 57308.80000001192,
+              "shadowBefore": false,
+              "redrawBefore": 0,
+              "redrawAfter": 0,
+              "skinBuilds": 1,
+              "draws": 645,
+              "ms": 14.599999994039536
+            },
+            {
+              "name": "render",
+              "start": 57318.80000001192,
+              "end": 57332.90000000596,
+              "shadowBefore": false,
+              "redrawBefore": 0,
+              "redrawAfter": 0,
+              "skinBuilds": 1,
+              "draws": 641,
+              "ms": 14.099999994039536
+            }
+          ],
+          "gc": []
+        },
+        {
+          "start": 60783.1,
+          "end": 60849.6,
+          "ms": 66.5,
+          "boundaries": [
+            {
+              "name": "render",
+              "start": 60785.59999999404,
+              "end": 60798.40000000596,
+              "shadowBefore": false,
+              "redrawBefore": 0,
+              "redrawAfter": 0,
+              "skinBuilds": 1,
+              "draws": 637,
+              "ms": 12.800000011920929
+            },
+            {
+              "name": "render",
+              "start": 60805,
+              "end": 60817.09999999404,
+              "shadowBefore": false,
+              "redrawBefore": 0,
+              "redrawAfter": 0,
+              "skinBuilds": 1,
+              "draws": 634,
+              "ms": 12.099999994039536
+            }
+          ],
+          "gc": []
+        }
+      ],
+      "largestSpans": [
+        {
+          "name": "render",
+          "start": 46472.70000001788,
+          "end": 46494.20000001788,
+          "shadowBefore": false,
+          "redrawBefore": 0,
+          "redrawAfter": 0,
+          "skinBuilds": 1,
+          "draws": 568,
+          "ms": 21.5
+        },
+        {
+          "name": "render",
+          "start": 46149.5,
+          "end": 46168.90000000596,
+          "shadowBefore": false,
+          "redrawBefore": 0,
+          "redrawAfter": 0,
+          "skinBuilds": 1,
+          "draws": 572,
+          "ms": 19.400000005960464
+        },
+        {
+          "name": "render",
+          "start": 50723.90000000596,
+          "end": 50741.5,
+          "shadowBefore": false,
+          "redrawBefore": 0,
+          "redrawAfter": 0,
+          "skinBuilds": 1,
+          "draws": 591,
+          "ms": 17.599999994039536
+        },
+        {
+          "name": "render",
+          "start": 58823.59999999404,
+          "end": 58840.20000001788,
+          "shadowBefore": false,
+          "redrawBefore": 0,
+          "redrawAfter": 0,
+          "skinBuilds": 1,
+          "draws": 625,
+          "ms": 16.600000023841858
+        }
+      ],
+      "pipelines": 0,
+      "builders": 0
+    }
+  ]
+}

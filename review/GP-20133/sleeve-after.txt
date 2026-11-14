@@ -1,0 +1,35 @@
+  const give = { q: [0, 0, 0, 1], rest: new Map(), end: sleeveEnd(L) };
+  arm.bendSleeve = (q) => {
+    const g0 = give.q; if (Math.abs(q.x - g0[0]) + Math.abs(q.y - g0[1]) + Math.abs(q.z - g0[2]) + Math.abs(q.w - g0[3]) < 0.002) return;
+    g0[0] = q.x; g0[1] = q.y; g0[2] = q.z; g0[3] = q.w;
+    const E = give.end, yA = -0.19, P = L.wrist, ang0 = 2 * Math.acos(Math.min(1, Math.abs(q.w))), sh = Math.sqrt(Math.max(0, 1 - q.w * q.w)), sg = q.w >= 0 ? 1 : -1;
+    const kx = sh > 1e-6 ? sg * q.x / sh : 1, ky = sh > 1e-6 ? sg * q.y / sh : 0, kz = sh > 1e-6 ? sg * q.z / sh : 0;
+    for (let part = 0; part < 2; part++) {
+      const m = part ? meshes.cuff : meshes.fore;
+      const g = m.geometry, pa = g.attributes.position, na = g.attributes.normal;
+      let R = give.rest.get(g);
+      if (!R) {
+        const idx = [], w = [], p0 = [], n0 = [];
+        for (let i = 0; i < pa.count; i++) { const y = pa.getY(i); if (y >= yA) continue; const t = Math.min(1, (yA - y) / (yA - E.y)); idx.push(i); w.push(SLEEVE_GIVE * t * t * (3 - 2 * t)); p0.push(pa.getX(i), y, pa.getZ(i)); n0.push(na ? na.getX(i) : 0, na ? na.getY(i) : 0, na ? na.getZ(i) : 0); }
+        give.rest.set(g, R = { idx, w, p0, n0 });
+      }
+      for (let j = 0; j < R.idx.length; j++) {
+        const a = ang0 * R.w[j], c = Math.cos(a), sn = Math.sin(a), t1 = 1 - c;
+        // GP-20133: identical Rodrigues operations, with no per-vertex closure or result arrays.
+        const x = R.p0[j * 3] - P[0], y = R.p0[j * 3 + 1] - P[1], z = R.p0[j * 3 + 2] - P[2];
+        const d = kx * x + ky * y + kz * z;
+        pa.setXYZ(R.idx[j],
+          P[0] + (x * c + (ky * z - kz * y) * sn + kx * d * t1),
+          P[1] + (y * c + (kz * x - kx * z) * sn + ky * d * t1),
+          P[2] + (z * c + (kx * y - ky * x) * sn + kz * d * t1));
+        if (na) {
+          const nx = R.n0[j * 3], ny = R.n0[j * 3 + 1], nz = R.n0[j * 3 + 2], nd = kx * nx + ky * ny + kz * nz;
+          na.setXYZ(R.idx[j],
+            nx * c + (ky * nz - kz * ny) * sn + kx * nd * t1,
+            ny * c + (kz * nx - kx * nz) * sn + ky * nd * t1,
+            nz * c + (kx * ny - ky * nx) * sn + kz * nd * t1);
+        }
+      }
+      pa.needsUpdate = true; if (na) na.needsUpdate = true;
+    }
+  };

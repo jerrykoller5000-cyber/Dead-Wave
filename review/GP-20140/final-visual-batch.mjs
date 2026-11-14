@@ -1,0 +1,1 @@
+import {spawnSync} from 'node:child_process';for(const [file,stage] of [['smoking-live-native.mjs','before-final'],['smoking-live-native.mjs','after-final'],['smoking-inspector-native.mjs','after-final-bare-pose-inspect']]){const r=spawnSync(process.execPath,['review/GP-20140/'+file,stage],{stdio:'inherit',env:process.env});if(r.status!==0)process.exit(r.status||1);}

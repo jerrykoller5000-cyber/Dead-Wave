@@ -1,0 +1,23 @@
+  const give = { q: [0, 0, 0, 1], rest: new Map() };
+  arm.bendSleeve = (q) => {
+    const g0 = give.q; if (Math.abs(q.x - g0[0]) + Math.abs(q.y - g0[1]) + Math.abs(q.z - g0[2]) + Math.abs(q.w - g0[3]) < 0.002) return;
+    give.q = [q.x, q.y, q.z, q.w];
+    const E = sleeveEnd(L), yA = -0.19, P = L.wrist, ang0 = 2 * Math.acos(Math.min(1, Math.abs(q.w))), sh = Math.sqrt(Math.max(0, 1 - q.w * q.w)), sg = q.w >= 0 ? 1 : -1;
+    const k = sh > 1e-6 ? [sg * q.x / sh, sg * q.y / sh, sg * q.z / sh] : [1, 0, 0];
+    for (const m of [meshes.fore, meshes.cuff]) {
+      const g = m.geometry, pa = g.attributes.position, na = g.attributes.normal;
+      let R = give.rest.get(g);
+      if (!R) {
+        const idx = [], w = [], p0 = [], n0 = [];
+        for (let i = 0; i < pa.count; i++) { const y = pa.getY(i); if (y >= yA) continue; const t = Math.min(1, (yA - y) / (yA - E.y)); idx.push(i); w.push(SLEEVE_GIVE * t * t * (3 - 2 * t)); p0.push(pa.getX(i), y, pa.getZ(i)); n0.push(na ? na.getX(i) : 0, na ? na.getY(i) : 0, na ? na.getZ(i) : 0); }
+        give.rest.set(g, R = { idx, w, p0, n0 });
+      }
+      for (let j = 0; j < R.idx.length; j++) {
+        const a = ang0 * R.w[j], c = Math.cos(a), sn = Math.sin(a), t1 = 1 - c;
+        const rot = (x, y, z) => { const d = k[0] * x + k[1] * y + k[2] * z; return [x * c + (k[1] * z - k[2] * y) * sn + k[0] * d * t1, y * c + (k[2] * x - k[0] * z) * sn + k[1] * d * t1, z * c + (k[0] * y - k[1] * x) * sn + k[2] * d * t1]; };
+        const e = rot(R.p0[j * 3] - P[0], R.p0[j * 3 + 1] - P[1], R.p0[j * 3 + 2] - P[2]), nn = rot(R.n0[j * 3], R.n0[j * 3 + 1], R.n0[j * 3 + 2]);
+        pa.setXYZ(R.idx[j], P[0] + e[0], P[1] + e[1], P[2] + e[2]); if (na) na.setXYZ(R.idx[j], nn[0], nn[1], nn[2]);
+      }
+      pa.needsUpdate = true; if (na) na.needsUpdate = true;
+    }
+  };

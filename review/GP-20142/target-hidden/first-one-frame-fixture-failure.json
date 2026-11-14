@@ -1,0 +1,89 @@
+{
+  "indexHash": "5cd3a20a35722a54e272d012e4ab2e1b005a9109bc712bea5edd635b034d10fc",
+  "metric": "Same RGB channel range across three frames, thresholds16/24/32/48/64/96; actual KeyD walking at60Hz. Fixed observer isolates shadow from geometry translation; following observer translates by actual player displacement. One initial shadow refresh per fixture reset; ordinary redraw cadence retained during triplet. Fixed four-light environments bypass Training danger dim only. Before is old exact continuous follow formula inside same caller; after is live function, unchanged.",
+  "views": {
+    "jerryA": [
+      -12,
+      1.35,
+      -2,
+      -10,
+      0.08,
+      1,
+      40
+    ]
+  },
+  "rows": [],
+  "setup": {
+    "origin": {
+      "x": 0,
+      "y": -200,
+      "z": -640
+    },
+    "renderer": "WebGPURenderer",
+    "hooked": 4326,
+    "shadowSize": [
+      2048,
+      2048
+    ]
+  },
+  "failure": "TypeError: Cannot read properties of undefined (reading 'actual')\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20142/target-hidden-native.mjs:28:553",
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 284 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 7ms pools 5508ms compile 832ms warm frame 116ms | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 75ms | trees 249ms | player+weapons+zombie types 1359ms | foliage scattered 2479ms | POIs+minimap+foliage chunks 4031ms | contact shading + rest of setup 4258ms | post + pools + compile + warm frame 10730ms | ready 10734ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 303 variants after 13 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 371 shader variants compiled after 35 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:359 burning:360 flash:360 faded:360 tree-fade:360 kill-explosive:360 kill-chainsaw:360 kill-pellet:360 kill-generic:360 kill-melee:360 kill-explosive:362 kill-chainsaw:362 kill-pellet:362 kill-generic:363 kill-melee:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 effects:369 corpses:369 corpses2:369"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 371 variants | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:359 burning:360 flash:360 faded:360 tree-fade:360 kill-explosive:360 kill-chainsaw:360 kill-pellet:360 kill-generic:360 kill-melee:360 kill-explosive:362 kill-chainsaw:362 kill-pellet:362 kill-generic:363 kill-melee:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 effects:369 corpses:369 corpses2:369"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":19.98,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.56,\"frames\":8,\"over50\":4,\"over100\":0,\"worst\":100},\"loading\":{\"at\":0.56,\"seconds\":19.42,\"frames\":349,\"over50\":53,\"over100\":21,\"worst\":3650},\"menu\":{\"at\":19.98,\"seconds\":7.71,\"frames\":4,\"over50\":0,\"over100\":0,\"worst\":17}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":28,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":79,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    }
+  ]
+}

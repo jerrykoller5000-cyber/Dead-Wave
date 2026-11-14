@@ -1,0 +1,45 @@
+{
+  "file": "studio/marine-idle.js",
+  "before": "e9a15d08c66558f5533678d9a1c8b503f3e0cc071444d06b5ace58c985e5be30",
+  "after": "8a989ae8227d9b449f4cb323d0547e4f8751fa5e87b87bd28c984c7a67ac6cb3",
+  "candidate": "9e9554fa7a794db58a2f8614781d9aacbd60c5bcf006c1d8aff3484c87045dda",
+  "normalizedEqual": true,
+  "patches": [
+    {
+      "before": "const SMOKE_ROLL=-3, SMOKE_PITCH=-1, SMOKE_YAW=-.45;",
+      "after": "const SMOKE_ROLL=-3.1, SMOKE_PITCH=-.8, SMOKE_YAW=.3;"
+    },
+    {
+      "before": "  const smokePose={f:[[.46,.58,.26,.08],[.5,.64,.3,-.08],[.96,1.08,.72,-.04],[1.08,1.16,.82,-.08]],t:[.7,-.08,.42]};",
+      "after": "  const SMOKE_GRIPS = {\"glove\":{\"pose\":{\"f\":[[0.24,0.12,0.08,0.08],[0.16,0.24,0.1,0.13],[0.96,1.08,0.72,-0.04],[1.08,1.16,0.82,-0.08]],\"t\":[0.7,-0.08,0.42]},\"weight\":0.61},\"bare\":{\"pose\":{\"f\":[[0.24,0.24,0.08,0.08],[0.16,0.24,0.1,0.13],[0.96,1.08,0.72,-0.04],[1.08,1.16,0.82,-0.08]],\"t\":[0.7,-0.08,0.42]},\"weight\":0.6}};"
+    },
+    {
+      "before": "    hand.set(smokePose).update();posedIdle=true;",
+      "after": "    const grip=SMOKE_GRIPS[u.dress?.picked?.gloves===false?'bare':'glove'],weight=grip.weight;\n    hand.set(grip.pose).update();posedIdle=true;"
+    },
+    {
+      "before": "    offset.copy(pinch).add(middle).multiplyScalar(.5).sub(wr.position);",
+      "after": "    offset.copy(pinch).multiplyScalar(weight).addScaledVector(middle,1-weight).sub(wr.position);"
+    },
+    {
+      "before": "pointOnHand(wr,'indexTip',pinch);pointOnHand(wr,'middleTip',middle);pinch.add(middle).multiplyScalar(.5);",
+      "after": "pointOnHand(wr,'indexTip',pinch);pointOnHand(wr,'middleTip',middle);pinch.multiplyScalar(weight).addScaledVector(middle,1-weight);"
+    },
+    {
+      "before": "    // Off the lips the cigarette belongs to the actual fingertip pinch, even\n    // when a bounded joint cannot reach the planned path exactly.\n    if(draw<.999)tip.copy(pinch).sub(axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ));\n    else tip.copy(target);",
+      "after": "    // The paper belongs to the actual grip, at the lips as well as in travel.\n    // The solve brings that rigid contact to the mouth within its tolerance.\n    tip.copy(pinch).sub(axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ));"
+    },
+    {
+      "before": "cig.userData.pinchIterations=iterations;",
+      "after": "cig.userData.pinchIterations=iterations;cig.userData.pinchWeight=weight;"
+    },
+    {
+      "before": "    cigQ.setFromAxisAngle(local.set(0,0,1),roll).premultiply(headQ);",
+      "after": "    const swivel=Number.isFinite(cig.userData.smokeSwivel)?cig.userData.smokeSwivel:-.6;\n    cigQ.setFromAxisAngle(local.set(0,0,1),roll+swivel).premultiply(headQ);"
+    },
+    {
+      "before": ".premultiply(twistQ.setFromAxisAngle(axis.set(0,1,0),yaw)).premultiply(headQ);",
+      "after": ".premultiply(twistQ.setFromAxisAngle(axis.set(0,1,0),yaw))\n      .premultiply(twistQ.setFromAxisAngle(axis.set(0,0,1),swivel)).premultiply(headQ);"
+    }
+  ]
+}

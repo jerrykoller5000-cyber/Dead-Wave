@@ -1,0 +1,5816 @@
+{
+  "scope": "All failed and passed series retained. Source unchanged; no game fix claimed. Screenshot ABBA shows a strong observer association and recovery, not isolated driver mechanism.",
+  "runs": [
+    {
+      "dir": "post-c5-clock",
+      "weapon": "pistol",
+      "indexUnchanged": true,
+      "modulesUnchanged": null,
+      "indexHash": "5cd3a20a35722a54e272d012e4ab2e1b005a9109bc712bea5edd635b034d10fc",
+      "errors": [],
+      "failure": null,
+      "menuMs": 20086,
+      "newOutdoorRippleNodes": [],
+      "phases": [
+        {
+          "pass": 0,
+          "fire": false,
+          "screenshots": true,
+          "n": 271,
+          "mean": 16.654243542369443,
+          "p95": 17.5,
+          "worst": 18.900000005960464,
+          "ammo": [
+            24,
+            24
+          ],
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "screenshots": true,
+          "n": 46,
+          "mean": 18.030434782738272,
+          "p95": 23.600000023841858,
+          "worst": 25.700000017881393,
+          "ammo": [
+            24,
+            0
+          ],
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 8.263306807467497,
+          "within10": true
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "screenshots": true,
+          "n": 270,
+          "mean": 16.66629629631837,
+          "p95": 16.900000005960464,
+          "worst": 25.799999982118607,
+          "ammo": [
+            24,
+            24
+          ],
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "screenshots": true,
+          "n": 45,
+          "mean": 18.78666666679912,
+          "p95": 25.5,
+          "worst": 36.20000001788139,
+          "ammo": [
+            24,
+            0
+          ],
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 12.722504945199752,
+          "within10": false
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "screenshots": true,
+          "n": 268,
+          "mean": 16.832089552238806,
+          "p95": 20.099999994039536,
+          "worst": 27.600000023841858,
+          "ammo": [
+            24,
+            24
+          ],
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "screenshots": true,
+          "n": 40,
+          "mean": 21.242500000447034,
+          "p95": 30.099999994039536,
+          "worst": 35.69999998807907,
+          "ammo": [
+            24,
+            0
+          ],
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 26.20239415029495,
+          "within10": false
+        }
+      ]
+    },
+    {
+      "dir": "accumulation",
+      "weapon": "pistol",
+      "indexUnchanged": true,
+      "modulesUnchanged": true,
+      "indexHash": "5cd3a20a35722a54e272d012e4ab2e1b005a9109bc712bea5edd635b034d10fc",
+      "errors": [],
+      "failure": null,
+      "menuMs": 18807,
+      "newOutdoorRippleNodes": [],
+      "phases": [
+        {
+          "pass": 0,
+          "fire": false,
+          "screenshots": false,
+          "n": 270,
+          "mean": 16.666296296207992,
+          "p95": 16.80000001192093,
+          "worst": 19.200000017881393,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 242,
+          "trianglePeak": 183647,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5621,
+            "visibleMeshes": 542,
+            "visibleGeometries": 494,
+            "visibleMaterials": 351,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 0,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5622,
+            "visibleMeshes": 543,
+            "visibleGeometries": 494,
+            "visibleMaterials": 352,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 0,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "screenshots": false,
+          "n": 47,
+          "mean": 17.4957446811047,
+          "p95": 21.69999998807907,
+          "worst": 24,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 271,
+          "trianglePeak": 192977,
+          "renderSamples": 47,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5623,
+            "visibleMeshes": 544,
+            "visibleGeometries": 494,
+            "visibleMaterials": 353,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 0,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5658,
+            "visibleMeshes": 580,
+            "visibleGeometries": 497,
+            "visibleMaterials": 386,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 7,
+            "impactMarks": 20,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 4,
+            "effectLights": 0,
+            "heat": 0.1964647505984284,
+            "wisps": 7,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 4.97680090498227,
+          "within10": true
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "screenshots": false,
+          "n": 270,
+          "mean": 16.666296296207992,
+          "p95": 16.900000005960464,
+          "worst": 19,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183695,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5659,
+            "visibleMeshes": 547,
+            "visibleGeometries": 496,
+            "visibleMaterials": 355,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.0868336868565228,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5661,
+            "visibleMeshes": 549,
+            "visibleGeometries": 496,
+            "visibleMaterials": 357,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "screenshots": false,
+          "n": 47,
+          "mean": 17.051063829914053,
+          "p95": 22.19999998807907,
+          "worst": 23.700000017881393,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 270,
+          "trianglePeak": 188903,
+          "renderSamples": 47,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5661,
+            "visibleMeshes": 549,
+            "visibleGeometries": 496,
+            "visibleMaterials": 357,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5661,
+            "visibleMeshes": 586,
+            "visibleGeometries": 497,
+            "visibleMaterials": 386,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 1,
+            "impactMarks": 38,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 10,
+            "effectLights": 0,
+            "heat": 0.2035640720659734,
+            "wisps": 5,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 2.308656505726492,
+          "within10": true
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "screenshots": false,
+          "n": 271,
+          "mean": 16.65129151291513,
+          "p95": 17.19999998807907,
+          "worst": 22.400000005960464,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183743,
+          "renderSamples": 271,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5662,
+            "visibleMeshes": 551,
+            "visibleGeometries": 497,
+            "visibleMaterials": 359,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.0933963744356892,
+            "wisps": 1,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5664,
+            "visibleMeshes": 551,
+            "visibleGeometries": 495,
+            "visibleMaterials": 360,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 44,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "screenshots": false,
+          "n": 45,
+          "mean": 17.971111110846202,
+          "p95": 24.69999998807907,
+          "worst": 26.5,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 271,
+          "trianglePeak": 192515,
+          "renderSamples": 45,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5665,
+            "visibleMeshes": 552,
+            "visibleGeometries": 495,
+            "visibleMaterials": 361,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5665,
+            "visibleMeshes": 591,
+            "visibleGeometries": 497,
+            "visibleMaterials": 391,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 0,
+            "impactMarks": 38,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 10,
+            "effectLights": 0,
+            "heat": 0.20360153601329561,
+            "wisps": 5,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 7.926229607519564,
+          "within10": true
+        },
+        {
+          "pass": 3,
+          "fire": false,
+          "screenshots": false,
+          "n": 270,
+          "mean": 16.66629629631837,
+          "p95": 17.099999994039536,
+          "worst": 20.099999994039536,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183789,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5666,
+            "visibleMeshes": 554,
+            "visibleGeometries": 496,
+            "visibleMaterials": 362,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.09291754152614512,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5668,
+            "visibleMeshes": 556,
+            "visibleGeometries": 496,
+            "visibleMaterials": 364,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 3,
+          "fire": true,
+          "screenshots": false,
+          "n": 47,
+          "mean": 16.68723404280683,
+          "p95": 19.5,
+          "worst": 22.5,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 270,
+          "trianglePeak": 192573,
+          "renderSamples": 47,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5669,
+            "visibleMeshes": 557,
+            "visibleGeometries": 496,
+            "visibleMaterials": 365,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5669,
+            "visibleMeshes": 591,
+            "visibleGeometries": 497,
+            "visibleMaterials": 397,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 8,
+            "impactMarks": 44,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 4,
+            "effectLights": 0,
+            "heat": 0.19639899756000384,
+            "wisps": 7,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 0.12562927069215135,
+          "within10": true
+        },
+        {
+          "pass": 4,
+          "fire": false,
+          "screenshots": false,
+          "n": 270,
+          "mean": 16.66629629631837,
+          "p95": 17.099999994039536,
+          "worst": 19,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183837,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5671,
+            "visibleMeshes": 559,
+            "visibleGeometries": 496,
+            "visibleMaterials": 367,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.08815306829953405,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5672,
+            "visibleMeshes": 560,
+            "visibleGeometries": 496,
+            "visibleMaterials": 368,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 46,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 4,
+          "fire": true,
+          "screenshots": false,
+          "n": 47,
+          "mean": 16.693617021149777,
+          "p95": 18.900000005960464,
+          "worst": 21.099999994039536,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 272,
+          "trianglePeak": 189069,
+          "renderSamples": 47,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5673,
+            "visibleMeshes": 561,
+            "visibleGeometries": 496,
+            "visibleMaterials": 369,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5673,
+            "visibleMeshes": 599,
+            "visibleGeometries": 497,
+            "visibleMaterials": 399,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 0,
+            "impactMarks": 38,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 10,
+            "effectLights": 0,
+            "heat": 0.20450836374956885,
+            "wisps": 5,
+            "geometries": 3876,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 0.16392799183246876,
+          "within10": true
+        }
+      ]
+    },
+    {
+      "dir": "accumulation",
+      "weapon": "ak",
+      "indexUnchanged": true,
+      "modulesUnchanged": true,
+      "indexHash": "5cd3a20a35722a54e272d012e4ab2e1b005a9109bc712bea5edd635b034d10fc",
+      "errors": [],
+      "failure": null,
+      "menuMs": 19996,
+      "newOutdoorRippleNodes": [],
+      "phases": [
+        {
+          "pass": 0,
+          "fire": false,
+          "screenshots": false,
+          "n": 270,
+          "mean": 16.667407407473636,
+          "p95": 16.899999976158142,
+          "worst": 17.30000001192093,
+          "ammo": [
+            30,
+            30
+          ],
+          "drawPeak": 234,
+          "trianglePeak": 170689,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5677,
+            "visibleMeshes": 556,
+            "visibleGeometries": 527,
+            "visibleMaterials": 362,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 0,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5678,
+            "visibleMeshes": 557,
+            "visibleGeometries": 527,
+            "visibleMaterials": 363,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 0,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "screenshots": false,
+          "n": 204,
+          "mean": 16.67745098033372,
+          "p95": 18.19999998807907,
+          "worst": 22.900000005960464,
+          "ammo": [
+            30,
+            0
+          ],
+          "drawPeak": 258,
+          "trianglePeak": 171527,
+          "renderSamples": 204,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5679,
+            "visibleMeshes": 558,
+            "visibleGeometries": 527,
+            "visibleMaterials": 364,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 0,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5702,
+            "visibleMeshes": 587,
+            "visibleGeometries": 528,
+            "visibleMaterials": 392,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 18,
+            "settledCases": 11,
+            "impactMarks": 27,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 3,
+            "effectLights": 0,
+            "heat": 0.23026449555439005,
+            "wisps": 9,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 0.06025875899320354,
+          "within10": true
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "screenshots": false,
+          "n": 270,
+          "mean": 16.66703703701496,
+          "p95": 17,
+          "worst": 24.5,
+          "ammo": [
+            30,
+            30
+          ],
+          "drawPeak": 249,
+          "trianglePeak": 170777,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5703,
+            "visibleMeshes": 568,
+            "visibleGeometries": 529,
+            "visibleMaterials": 374,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 30,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.1162847412095114,
+            "wisps": 7,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5704,
+            "visibleMeshes": 562,
+            "visibleGeometries": 528,
+            "visibleMaterials": 368,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 30,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "screenshots": false,
+          "n": 204,
+          "mean": 16.670588235206463,
+          "p95": 17.599999994039536,
+          "worst": 22.600000023841858,
+          "ammo": [
+            30,
+            0
+          ],
+          "drawPeak": 259,
+          "trianglePeak": 171589,
+          "renderSamples": 204,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5705,
+            "visibleMeshes": 563,
+            "visibleGeometries": 528,
+            "visibleMaterials": 369,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 30,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5706,
+            "visibleMeshes": 592,
+            "visibleGeometries": 529,
+            "visibleMaterials": 397,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 18,
+            "settledCases": 11,
+            "impactMarks": 58,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 3,
+            "effectLights": 0,
+            "heat": 0.22961132513754298,
+            "wisps": 9,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 0.021306715666469245,
+          "within10": true
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "screenshots": false,
+          "n": 270,
+          "mean": 16.667407407363257,
+          "p95": 17,
+          "worst": 21.799999982118607,
+          "ammo": [
+            30,
+            30
+          ],
+          "drawPeak": 249,
+          "trianglePeak": 170837,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5707,
+            "visibleMeshes": 572,
+            "visibleGeometries": 529,
+            "visibleMaterials": 378,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 55,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.11577929871533627,
+            "wisps": 7,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5709,
+            "visibleMeshes": 567,
+            "visibleGeometries": 528,
+            "visibleMaterials": 373,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 30,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "screenshots": false,
+          "n": 204,
+          "mean": 16.666666666666668,
+          "p95": 17.599999994039536,
+          "worst": 22.200000017881393,
+          "ammo": [
+            30,
+            0
+          ],
+          "drawPeak": 259,
+          "trianglePeak": 171647,
+          "renderSamples": 204,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5710,
+            "visibleMeshes": 568,
+            "visibleGeometries": 528,
+            "visibleMaterials": 374,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 30,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5711,
+            "visibleMeshes": 596,
+            "visibleGeometries": 529,
+            "visibleMaterials": 401,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 17,
+            "settledCases": 10,
+            "impactMarks": 57,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 3,
+            "effectLights": 0,
+            "heat": 0.23022730110435566,
+            "wisps": 9,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": -0.00444424665747567,
+          "within10": true
+        },
+        {
+          "pass": 3,
+          "fire": false,
+          "screenshots": false,
+          "n": 270,
+          "mean": 16.66629629631837,
+          "p95": 16.899999976158142,
+          "worst": 17.400000005960464,
+          "ammo": [
+            30,
+            30
+          ],
+          "drawPeak": 249,
+          "trianglePeak": 170897,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5712,
+            "visibleMeshes": 577,
+            "visibleGeometries": 529,
+            "visibleMaterials": 383,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 56,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.11673832164697441,
+            "wisps": 7,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5714,
+            "visibleMeshes": 572,
+            "visibleGeometries": 528,
+            "visibleMaterials": 378,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 30,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 3,
+          "fire": true,
+          "screenshots": false,
+          "n": 204,
+          "mean": 16.673039215744712,
+          "p95": 18.5,
+          "worst": 23.599999994039536,
+          "ammo": [
+            30,
+            0
+          ],
+          "drawPeak": 259,
+          "trianglePeak": 171707,
+          "renderSamples": 204,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5714,
+            "visibleMeshes": 572,
+            "visibleGeometries": 528,
+            "visibleMaterials": 378,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 30,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5716,
+            "visibleMeshes": 603,
+            "visibleGeometries": 529,
+            "visibleMaterials": 408,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 19,
+            "settledCases": 13,
+            "impactMarks": 57,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 3,
+            "effectLights": 0,
+            "heat": 0.23023216086157194,
+            "wisps": 9,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 0.04045841563389274,
+          "within10": true
+        },
+        {
+          "pass": 4,
+          "fire": false,
+          "screenshots": false,
+          "n": 270,
+          "mean": 16.66629629631837,
+          "p95": 16.900000005960464,
+          "worst": 22.900000005960464,
+          "ammo": [
+            30,
+            30
+          ],
+          "drawPeak": 249,
+          "trianglePeak": 170957,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5717,
+            "visibleMeshes": 582,
+            "visibleGeometries": 529,
+            "visibleMaterials": 388,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 56,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.11625704024432838,
+            "wisps": 7,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5718,
+            "visibleMeshes": 576,
+            "visibleGeometries": 528,
+            "visibleMaterials": 382,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 30,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3857,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 4,
+          "fire": true,
+          "screenshots": false,
+          "n": 204,
+          "mean": 16.666666666666668,
+          "p95": 17.099999994039536,
+          "worst": 21.69999998807907,
+          "ammo": [
+            30,
+            0
+          ],
+          "drawPeak": 259,
+          "trianglePeak": 171731,
+          "renderSamples": 204,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "nodes": 5719,
+            "visibleMeshes": 577,
+            "visibleGeometries": 528,
+            "visibleMaterials": 383,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 30,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3856,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "nodes": 5720,
+            "visibleMeshes": 605,
+            "visibleGeometries": 529,
+            "visibleMaterials": 410,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 17,
+            "settledCases": 11,
+            "impactMarks": 58,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 3,
+            "effectLights": 0,
+            "heat": 0.22967256590579124,
+            "wisps": 9,
+            "geometries": 3856,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 0.0022222714735953275,
+          "within10": true
+        }
+      ]
+    },
+    {
+      "dir": "accumulation-abba",
+      "weapon": "pistol",
+      "indexUnchanged": true,
+      "modulesUnchanged": true,
+      "indexHash": "5cd3a20a35722a54e272d012e4ab2e1b005a9109bc712bea5edd635b034d10fc",
+      "errors": [],
+      "failure": null,
+      "menuMs": 18794,
+      "newOutdoorRippleNodes": [
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -135.84439996386646,
+            -3.36,
+            -103.42338136160978
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -133.8602173560881,
+            -3.36,
+            -104.5681110073696
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -136.08346238580998,
+            -3.36,
+            -110.56585978219519
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -134.03659581057727,
+            -3.36,
+            -108.5649250483606
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -132.1879310396267,
+            -3.36,
+            -105.6306382330018
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -133.14351662289118,
+            -3.36,
+            -107.82449449946871
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -132.406221867993,
+            -3.36,
+            -110.58485065144487
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -135.64075612167363,
+            -3.36,
+            -104.1043644576217
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -136.67261838159757,
+            -3.36,
+            -109.91728514677379
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -132.7363327017869,
+            -3.36,
+            -105.97354602420236
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -135.05604695252842,
+            -3.36,
+            -108.99661371721886
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -134.74956256988224,
+            -3.36,
+            -109.20810484709219
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -134.7629049801617,
+            -3.36,
+            -103.41815209883498
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -135.24995176349768,
+            -3.36,
+            -110.55072008899879
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -132.8841753896908,
+            -3.36,
+            -103.64126063475851
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -132.41370050287804,
+            -3.36,
+            -107.5823319522664
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -134.96211706888863,
+            -3.36,
+            -105.99796296659625
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -135.50077091398416,
+            -3.36,
+            -109.99638007276226
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -131.22233456205578,
+            -3.36,
+            -106.1284921946586
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -136.2755069378298,
+            -3.36,
+            -106.36994665338425
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -135.82794442240848,
+            -3.36,
+            -103.70888019816485
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -136.93677474512953,
+            -3.36,
+            -109.03020323511446
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -130.62858552741818,
+            -3.36,
+            -104.39325642398326
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -137.0238497954444,
+            -3.36,
+            -106.80572329844581
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -136.11652422958286,
+            -3.36,
+            -106.5898052632343
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -134.6563627085183,
+            -3.36,
+            -107.31416172402677
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -133.99812640142628,
+            -3.36,
+            -105.70756236317102
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -134.74007455290993,
+            -3.36,
+            -109.291039781156
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -130.68402728878428,
+            -3.36,
+            -108.6679178727325
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -130.8336371868383,
+            -3.36,
+            -109.97496127894847
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -136.16930473676183,
+            -3.36,
+            -109.74563056726474
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -134.50274710183731,
+            -3.36,
+            -105.01927307707956
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -133.40203653225907,
+            -3.36,
+            -104.05195830701851
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -130.82821434292708,
+            -3.36,
+            -110.51132119296817
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -135.90759561158484,
+            -3.36,
+            -107.10685929436004
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -137.16481384747894,
+            -3.36,
+            -103.72465804563835
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -134.45993788080523,
+            -3.36,
+            -108.9058024905622
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -134.30487861360888,
+            -3.36,
+            -108.25633552240906
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -132.39203604435315,
+            -3.36,
+            -104.62817602067953
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -130.36850379362005,
+            -3.36,
+            -109.7400792779168
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -135.00968978846214,
+            -3.36,
+            -109.33608693593415
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -133.64118052870035,
+            -3.36,
+            -103.70419769569999
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -132.76984496109654,
+            -3.36,
+            -105.75719109961065
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -134.73304277404677,
+            -3.36,
+            -109.77200313622598
+          ]
+        },
+        {
+          "name": "",
+          "type": "Mesh",
+          "path": [
+            "Mesh",
+            "Scene"
+          ],
+          "visible": true,
+          "geo": "RingGeometry",
+          "material": "MeshBasicMaterial",
+          "opacity": 0.55,
+          "position": [
+            -133.95493655701867,
+            -3.36,
+            -108.64241722576553
+          ]
+        }
+      ],
+      "phases": [
+        {
+          "pass": 0,
+          "fire": false,
+          "screenshots": false,
+          "n": 271,
+          "mean": 16.65793357926981,
+          "p95": 16.80000001192093,
+          "worst": 17.5,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 242,
+          "trianglePeak": 183647,
+          "renderSamples": 271,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [],
+            "camera": [
+              0.007807887659136775,
+              -198.64720925905598,
+              -640.5599596199017
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5612,
+            "visibleMeshes": 542,
+            "visibleGeometries": 494,
+            "visibleMaterials": 351,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 0,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -135.84439996386646,
+                  -3.36,
+                  -103.42338136160978
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -133.8602173560881,
+                  -3.36,
+                  -104.5681110073696
+                ]
+              }
+            ],
+            "camera": [
+              0.009123617265391995,
+              -198.65139883417365,
+              -640.550456604071
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5614,
+            "visibleMeshes": 544,
+            "visibleGeometries": 494,
+            "visibleMaterials": 353,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 0,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "screenshots": false,
+          "n": 46,
+          "mean": 17.421739130564358,
+          "p95": 21.899999976158142,
+          "worst": 25.599999994039536,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 272,
+          "trianglePeak": 193009,
+          "renderSamples": 46,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -136.08346238580998,
+                  -3.36,
+                  -110.56585978219519
+                ]
+              }
+            ],
+            "camera": [
+              0.005275700426658305,
+              -198.64700305557443,
+              -640.5622078622998
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5615,
+            "visibleMeshes": 545,
+            "visibleGeometries": 494,
+            "visibleMaterials": 354,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 0,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": false,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  5.770115791814706,
+                  -194.89594504180502,
+                  -609.1822590363358
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 0.9207144928094534,
+                "position": [
+                  -1.9179920277329234,
+                  -199.98,
+                  -640.855617791859
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  2.0739495672781305,
+                  -196.7821029213955,
+                  -615.1834609855746
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 0.8230664132541282,
+                "position": [
+                  -3.0408293066545573,
+                  -199.98,
+                  -640.888888743795
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": false,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  2.5213321467543706,
+                  -195.11380174200562,
+                  -609.6701291152805
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -2.100996850037689,
+                  -199.98,
+                  -641.3462840206184
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": false,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  1.7347406297194514,
+                  -195.64644180467477,
+                  -609.8016109904502
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 0.992058806027156,
+                "position": [
+                  -2.9234919122229774,
+                  -199.98,
+                  -641.1796967474328
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": false,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  -0.5275780718898332,
+                  -194.83898977145356,
+                  -612.0609098830678
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -2.5367173345714997,
+                  -199.98,
+                  -640.8482983575218
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": false,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  0.9072683488614633,
+                  -194.87645349479834,
+                  -609.3227063739429
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -1.8401502441744304,
+                  -199.96847749977528,
+                  -640.8064978385198
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": false,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  1.0067500297215861,
+                  -194.47300618216542,
+                  -611.524728681424
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -2.128301608503539,
+                  -199.98,
+                  -641.0022059463821
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  2.5997150299701284,
+                  -194.37900413435352,
+                  -612.9039874941395
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -3.0495743632085075,
+                  -199.84206616301495,
+                  -640.8891100193742
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -1.8697355992283806,
+                  -199.8505532175723,
+                  -640.7773329917009
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  2.910030585985542,
+                  -197.01719163104158,
+                  -617.7346123114037
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -1.8472673150856382,
+                  -199.8405861105848,
+                  -641.2363078211304
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": false,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  1.2866009366900257,
+                  -195.1218671057527,
+                  -612.0280843883141
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -1.5256047798879049,
+                  -199.84091124772257,
+                  -641.1383268633738
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": false,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  3.712307211474763,
+                  -195.75456940033982,
+                  -609.7126469254279
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -2.5338871124937836,
+                  -199.83906819181774,
+                  -640.8148587898665
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -2.146422999693014,
+                  -199.87441079265506,
+                  -640.9371214852943
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -1.620004355868229,
+                  -199.872197112996,
+                  -640.9276908911656
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": false,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  3.2995782387221717,
+                  -196.51550446628497,
+                  -610.0338028056344
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -2.0512237497373937,
+                  -199.94112161404158,
+                  -641.0952131355181
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -1.4278540487982496,
+                  -199.425763826193,
+                  -640.7759192583128
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -1.8683113740288884,
+                  -199.37299866030347,
+                  -640.9111982459883
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -1.982272277348672,
+                  -199.42744695047747,
+                  -640.609817371731
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -0.943906054554256,
+                  -199.37162763610388,
+                  -640.824265807347
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -1.7625193888949016,
+                  -199.03866898233073,
+                  -640.5886735078965
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -1.16407745023046,
+                  -198.8852163173854,
+                  -640.7515520520307
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -0.9494145629232412,
+                  -198.5885299257317,
+                  -640.6071520602139
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "LatheGeometry",
+                "material": "MeshStandardMaterial",
+                "opacity": 1,
+                "position": [
+                  -0.9006131904845103,
+                  -199.06818566612722,
+                  -640.5972252644568
+                ]
+              }
+            ],
+            "camera": [
+              0.0000447469887551334,
+              -198.63845021155504,
+              -640.6137498416479
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5650,
+            "visibleMeshes": 580,
+            "visibleGeometries": 497,
+            "visibleMaterials": 387,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 7,
+            "impactMarks": 21,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 3,
+            "effectLights": 0,
+            "heat": 0.1958076628232046,
+            "wisps": 7,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 4.585235903720242,
+          "within10": true
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "screenshots": false,
+          "n": 270,
+          "mean": 16.664444444466522,
+          "p95": 16.900000005960464,
+          "worst": 17.69999998807907,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183695,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -134.03659581057727,
+                  -3.36,
+                  -108.5649250483606
+                ]
+              }
+            ],
+            "camera": [
+              0.0011364806610607325,
+              -198.65150306452114,
+              -640.5510358131652
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5651,
+            "visibleMeshes": 548,
+            "visibleGeometries": 496,
+            "visibleMaterials": 356,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.0868343621291337,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -132.1879310396267,
+                  -3.36,
+                  -105.6306382330018
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -133.14351662289118,
+                  -3.36,
+                  -107.82449449946871
+                ]
+              }
+            ],
+            "camera": [
+              0.012889398232513666,
+              -198.64993714981978,
+              -640.5539543558529
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5653,
+            "visibleMeshes": 550,
+            "visibleGeometries": 496,
+            "visibleMaterials": 358,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "screenshots": false,
+          "n": 47,
+          "mean": 16.663829786980404,
+          "p95": 18.80000001192093,
+          "worst": 23.5,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 271,
+          "trianglePeak": 188893,
+          "renderSamples": 47,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -132.406221867993,
+                  -3.36,
+                  -110.58485065144487
+                ]
+              }
+            ],
+            "camera": [
+              0.018235305460879484,
+              -198.65097343738822,
+              -640.5558148636201
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5654,
+            "visibleMeshes": 551,
+            "visibleGeometries": 496,
+            "visibleMaterials": 359,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [],
+            "camera": [
+              0.010933188298886494,
+              -198.63480264147734,
+              -640.6576586609659
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5654,
+            "visibleMeshes": 590,
+            "visibleGeometries": 497,
+            "visibleMaterials": 388,
+            "lights": 36,
+            "activeLights": 16,
+            "visibleLights": 14,
+            "cases": 24,
+            "settledCases": 0,
+            "impactMarks": 36,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 12,
+            "effectLights": 0,
+            "heat": 0.2050226199158994,
+            "wisps": 5,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": -0.0036884367082601344,
+          "within10": true
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "screenshots": false,
+          "n": 270,
+          "mean": 16.66703703701496,
+          "p95": 17,
+          "worst": 18.69999998807907,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183743,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -135.64075612167363,
+                  -3.36,
+                  -104.1043644576217
+                ]
+              }
+            ],
+            "camera": [
+              0.011694817770322134,
+              -198.64829400740842,
+              -640.5574062278627
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5655,
+            "visibleMeshes": 552,
+            "visibleGeometries": 496,
+            "visibleMaterials": 360,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.0950959646197437,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -136.67261838159757,
+                  -3.36,
+                  -109.91728514677379
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -132.7363327017869,
+                  -3.36,
+                  -105.97354602420236
+                ]
+              }
+            ],
+            "camera": [
+              -0.003787280339467653,
+              -198.64877074158247,
+              -640.554776223
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5657,
+            "visibleMeshes": 553,
+            "visibleGeometries": 495,
+            "visibleMaterials": 362,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 45,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "screenshots": false,
+          "n": 47,
+          "mean": 17.17446808548684,
+          "p95": 21.599999994039536,
+          "worst": 24.19999998807907,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 273,
+          "trianglePeak": 193063,
+          "renderSamples": 47,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [],
+            "camera": [
+              -0.0031441066047339108,
+              -198.64679661798172,
+              -640.562163123581
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5657,
+            "visibleMeshes": 553,
+            "visibleGeometries": 495,
+            "visibleMaterials": 362,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [],
+            "camera": [
+              -0.007359097087469294,
+              -198.6336598679795,
+              -640.6590886734059
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5657,
+            "visibleMeshes": 593,
+            "visibleGeometries": 497,
+            "visibleMaterials": 392,
+            "lights": 36,
+            "activeLights": 16,
+            "visibleLights": 14,
+            "cases": 24,
+            "settledCases": 1,
+            "impactMarks": 37,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 11,
+            "effectLights": 0,
+            "heat": 0.20428651003745102,
+            "wisps": 5,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 3.044518634865656,
+          "within10": true
+        },
+        {
+          "pass": 3,
+          "fire": false,
+          "screenshots": true,
+          "n": 270,
+          "mean": 16.66703703701496,
+          "p95": 16.900000005960464,
+          "worst": 19.100000023841858,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183789,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -135.05604695252842,
+                  -3.36,
+                  -108.99661371721886
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -134.74956256988224,
+                  -3.36,
+                  -109.20810484709219
+                ]
+              }
+            ],
+            "camera": [
+              0.011842534281431805,
+              -198.6496911874368,
+              -640.5553051538909
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5659,
+            "visibleMeshes": 556,
+            "visibleGeometries": 496,
+            "visibleMaterials": 364,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.09452275687143478,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -134.7629049801617,
+                  -3.36,
+                  -103.41815209883498
+                ]
+              }
+            ],
+            "camera": [
+              0.010105718540961487,
+              -198.65176684378065,
+              -640.5499388039186
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5660,
+            "visibleMeshes": 557,
+            "visibleGeometries": 496,
+            "visibleMaterials": 365,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 3,
+          "fire": true,
+          "screenshots": true,
+          "n": 45,
+          "mean": 17.908888889021345,
+          "p95": 24.19999998807907,
+          "worst": 30.099999994039536,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 273,
+          "trianglePeak": 192567,
+          "renderSamples": 45,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -135.24995176349768,
+                  -3.36,
+                  -110.55072008899879
+                ]
+              }
+            ],
+            "camera": [
+              0.004586906717380125,
+              -198.6495597117201,
+              -640.5574249105426
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5661,
+            "visibleMeshes": 558,
+            "visibleGeometries": 496,
+            "visibleMaterials": 366,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [],
+            "camera": [
+              -0.0026947508957237813,
+              -198.63908760261742,
+              -640.6111737399392
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5661,
+            "visibleMeshes": 591,
+            "visibleGeometries": 497,
+            "visibleMaterials": 398,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 8,
+            "impactMarks": 46,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 3,
+            "effectLights": 0,
+            "heat": 0.19538916613780252,
+            "wisps": 7,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 7.450945535480713,
+          "within10": true
+        },
+        {
+          "pass": 4,
+          "fire": false,
+          "screenshots": true,
+          "n": 270,
+          "mean": 16.666666666666668,
+          "p95": 17.69999998807907,
+          "worst": 21.200000017881393,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183837,
+          "renderSamples": 270,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -132.8841753896908,
+                  -3.36,
+                  -103.64126063475851
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -132.41370050287804,
+                  -3.36,
+                  -107.5823319522664
+                ]
+              }
+            ],
+            "camera": [
+              0.008581054947801033,
+              -198.6515355968621,
+              -640.5505834495312
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5663,
+            "visibleMeshes": 560,
+            "visibleGeometries": 496,
+            "visibleMaterials": 368,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.0822414935583044,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -134.96211706888863,
+                  -3.36,
+                  -105.99796296659625
+                ]
+              }
+            ],
+            "camera": [
+              0.015273863822779232,
+              -198.6475700188091,
+              -640.5587618572733
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5664,
+            "visibleMeshes": 561,
+            "visibleGeometries": 496,
+            "visibleMaterials": 369,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 37,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 4,
+          "fire": true,
+          "screenshots": true,
+          "n": 39,
+          "mean": 21.243589743589745,
+          "p95": 32.599999994039536,
+          "worst": 42.900000005960464,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 273,
+          "trianglePeak": 188465,
+          "renderSamples": 39,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -135.50077091398416,
+                  -3.36,
+                  -109.99638007276226
+                ]
+              }
+            ],
+            "camera": [
+              0.011884178137639955,
+              -198.65036489238983,
+              -640.5549761411795
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5665,
+            "visibleMeshes": 562,
+            "visibleGeometries": 496,
+            "visibleMaterials": 370,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [],
+            "camera": [
+              0.0032344298372491776,
+              -198.64280729955127,
+              -640.5982630605565
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5665,
+            "visibleMeshes": 595,
+            "visibleGeometries": 497,
+            "visibleMaterials": 402,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 10,
+            "impactMarks": 45,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 3,
+            "effectLights": 0,
+            "heat": 0.19485314737756,
+            "wisps": 8,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 27.46153846153845,
+          "within10": false
+        },
+        {
+          "pass": 5,
+          "fire": false,
+          "screenshots": true,
+          "n": 263,
+          "mean": 17.149429657840003,
+          "p95": 23,
+          "worst": 30.69999998807907,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183885,
+          "renderSamples": 263,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -131.22233456205578,
+                  -3.36,
+                  -106.1284921946586
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -136.2755069378298,
+                  -3.36,
+                  -106.36994665338425
+                ]
+              }
+            ],
+            "camera": [
+              -0.003086164699918147,
+              -198.6478331219809,
+              -640.5564635371732
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5667,
+            "visibleMeshes": 564,
+            "visibleGeometries": 496,
+            "visibleMaterials": 372,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.07948987751140084,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -135.82794442240848,
+                  -3.36,
+                  -103.70888019816485
+                ]
+              }
+            ],
+            "camera": [
+              0.0054392135112471375,
+              -198.64943162626173,
+              -640.5565754195765
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5668,
+            "visibleMeshes": 564,
+            "visibleGeometries": 495,
+            "visibleMaterials": 373,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3852,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 5,
+          "fire": true,
+          "screenshots": true,
+          "n": 33,
+          "mean": 25.215151515873995,
+          "p95": 36.80000001192093,
+          "worst": 39.89999997615814,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 271,
+          "trianglePeak": 189053,
+          "renderSamples": 33,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -136.93677474512953,
+                  -3.36,
+                  -109.03020323511446
+                ]
+              }
+            ],
+            "camera": [
+              0.010202640829859881,
+              -198.64755005663474,
+              -640.5581188940548
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5669,
+            "visibleMeshes": 565,
+            "visibleGeometries": 495,
+            "visibleMaterials": 374,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [],
+            "camera": [
+              0.007248477089591335,
+              -198.64000612551183,
+              -640.6052048908293
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5669,
+            "visibleMeshes": 598,
+            "visibleGeometries": 496,
+            "visibleMaterials": 406,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 8,
+            "impactMarks": 46,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 3,
+            "effectLights": 0,
+            "heat": 0.19436708273900039,
+            "wisps": 8,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 47.0320122532278,
+          "within10": false
+        },
+        {
+          "pass": 6,
+          "fire": false,
+          "screenshots": true,
+          "n": 205,
+          "mean": 22.008780487863028,
+          "p95": 37.69999998807907,
+          "worst": 46.099999994039536,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 243,
+          "trianglePeak": 183903,
+          "renderSamples": 205,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -130.62858552741818,
+                  -3.36,
+                  -104.39325642398326
+                ]
+              }
+            ],
+            "camera": [
+              0.012695089047758366,
+              -198.64984455509895,
+              -640.5553835584011
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5670,
+            "visibleMeshes": 566,
+            "visibleGeometries": 495,
+            "visibleMaterials": 375,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.0798548733500341,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -137.0238497954444,
+                  -3.36,
+                  -106.80572329844581
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -136.11652422958286,
+                  -3.36,
+                  -106.5898052632343
+                ]
+              }
+            ],
+            "camera": [
+              0.007828641957758543,
+              -198.65036121678705,
+              -640.5561895824808
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5672,
+            "visibleMeshes": 568,
+            "visibleGeometries": 495,
+            "visibleMaterials": 377,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 6,
+          "fire": true,
+          "screenshots": true,
+          "n": 31,
+          "mean": 25.56129032277292,
+          "p95": 40.599999994039536,
+          "worst": 41.400000005960464,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 271,
+          "trianglePeak": 192651,
+          "renderSamples": 31,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [],
+            "camera": [
+              0.00680784167494321,
+              -198.6511099323595,
+              -640.5508206745598
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5672,
+            "visibleMeshes": 568,
+            "visibleGeometries": 495,
+            "visibleMaterials": 377,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -134.6563627085183,
+                  -3.36,
+                  -107.31416172402677
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": false,
+                "geo": "CylinderGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 1,
+                "position": [
+                  3.7262968398563276,
+                  -195.0742343544034,
+                  -609.5033892720558
+                ]
+              }
+            ],
+            "camera": [
+              -0.002752181727148083,
+              -198.6346374121876,
+              -640.6493794934355
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5674,
+            "visibleMeshes": 607,
+            "visibleGeometries": 497,
+            "visibleMaterials": 408,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 5,
+            "impactMarks": 41,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 9,
+            "effectLights": 0,
+            "heat": 0.20154835026879772,
+            "wisps": 5,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 16.14132976095135,
+          "within10": false
+        },
+        {
+          "pass": 7,
+          "fire": false,
+          "screenshots": true,
+          "n": 198,
+          "mean": 22.78181818187839,
+          "p95": 34.29999998211861,
+          "worst": 51.900000005960464,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183905,
+          "renderSamples": 198,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -133.99812640142628,
+                  -3.36,
+                  -105.70756236317102
+                ]
+              }
+            ],
+            "camera": [
+              0.004290952560768067,
+              -198.65048956789627,
+              -640.5540965120513
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5675,
+            "visibleMeshes": 571,
+            "visibleGeometries": 496,
+            "visibleMaterials": 379,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.08688264157687495,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -134.74007455290993,
+                  -3.36,
+                  -109.291039781156
+                ]
+              }
+            ],
+            "camera": [
+              0.00686767948900303,
+              -198.6465063507747,
+              -640.5634074931439
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5676,
+            "visibleMeshes": 572,
+            "visibleGeometries": 496,
+            "visibleMaterials": 380,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 28,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 7,
+          "fire": true,
+          "screenshots": true,
+          "n": 30,
+          "mean": 27.2,
+          "p95": 40.599999994039536,
+          "worst": 41.599999994039536,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 271,
+          "trianglePeak": 188513,
+          "renderSamples": 30,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -130.68402728878428,
+                  -3.36,
+                  -108.6679178727325
+                ]
+              }
+            ],
+            "camera": [
+              0.01117349235631401,
+              -198.65071592688145,
+              -640.5522799769276
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5677,
+            "visibleMeshes": 573,
+            "visibleGeometries": 496,
+            "visibleMaterials": 381,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -130.8336371868383,
+                  -3.36,
+                  -109.97496127894847
+                ]
+              }
+            ],
+            "camera": [
+              0.0056731302816559505,
+              -198.63531454968705,
+              -640.6561931638286
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5678,
+            "visibleMeshes": 611,
+            "visibleGeometries": 497,
+            "visibleMaterials": 411,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 1,
+            "impactMarks": 39,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 10,
+            "effectLights": 0,
+            "heat": 0.20274142622460328,
+            "wisps": 5,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 19.39345570598934,
+          "within10": false
+        },
+        {
+          "pass": 8,
+          "fire": false,
+          "screenshots": true,
+          "n": 174,
+          "mean": 25.909770114839763,
+          "p95": 39.900000005960464,
+          "worst": 48.900000005960464,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183905,
+          "renderSamples": 174,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -136.16930473676183,
+                  -3.36,
+                  -109.74563056726474
+                ]
+              }
+            ],
+            "camera": [
+              0.006826853130537715,
+              -198.64669087717664,
+              -640.5624020368463
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5679,
+            "visibleMeshes": 575,
+            "visibleGeometries": 496,
+            "visibleMaterials": 383,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.08599273249653083,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -134.50274710183731,
+                  -3.36,
+                  -105.01927307707956
+                ]
+              }
+            ],
+            "camera": [
+              0.0003546334664168676,
+              -198.6498814265505,
+              -640.555561306866
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5680,
+            "visibleMeshes": 575,
+            "visibleGeometries": 495,
+            "visibleMaterials": 384,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 28,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 8,
+          "fire": true,
+          "screenshots": true,
+          "n": 24,
+          "mean": 34.27499999975165,
+          "p95": 43.29999998211861,
+          "worst": 44.5,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 271,
+          "trianglePeak": 192669,
+          "renderSamples": 24,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -133.40203653225907,
+                  -3.36,
+                  -104.05195830701851
+                ]
+              }
+            ],
+            "camera": [
+              0.0032667944521097216,
+              -198.64727591368523,
+              -640.5591697702087
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5681,
+            "visibleMeshes": 576,
+            "visibleGeometries": 495,
+            "visibleMaterials": 385,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [],
+            "camera": [
+              0.00007296640294691519,
+              -198.63367742946937,
+              -640.6530884566637
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5681,
+            "visibleMeshes": 615,
+            "visibleGeometries": 497,
+            "visibleMaterials": 415,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 2,
+            "impactMarks": 39,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 10,
+            "effectLights": 0,
+            "heat": 0.202821915989212,
+            "wisps": 5,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 32.286005811069394,
+          "within10": false
+        },
+        {
+          "pass": 9,
+          "fire": false,
+          "screenshots": false,
+          "n": 198,
+          "mean": 22.818181818181817,
+          "p95": 35.5,
+          "worst": 48.400000005960464,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183905,
+          "renderSamples": 198,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -130.82821434292708,
+                  -3.36,
+                  -110.51132119296817
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -135.90759561158484,
+                  -3.36,
+                  -107.10685929436004
+                ]
+              }
+            ],
+            "camera": [
+              0.018980926269525477,
+              -198.6500302870315,
+              -640.5577459618711
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5683,
+            "visibleMeshes": 579,
+            "visibleGeometries": 496,
+            "visibleMaterials": 387,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.08714573905976461,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -137.16481384747894,
+                  -3.36,
+                  -103.72465804563835
+                ]
+              }
+            ],
+            "camera": [
+              0.008496097379432304,
+              -198.6502601200737,
+              -640.5541424274028
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5684,
+            "visibleMeshes": 580,
+            "visibleGeometries": 496,
+            "visibleMaterials": 388,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 31,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 9,
+          "fire": true,
+          "screenshots": false,
+          "n": 33,
+          "mean": 26.984848484848484,
+          "p95": 42.69999998807907,
+          "worst": 45.80000001192093,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 274,
+          "trianglePeak": 193251,
+          "renderSamples": 33,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -134.45993788080523,
+                  -3.36,
+                  -108.9058024905622
+                ]
+              }
+            ],
+            "camera": [
+              0.00040830659908730493,
+              -198.65108938303342,
+              -640.5529146092293
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5685,
+            "visibleMeshes": 581,
+            "visibleGeometries": 496,
+            "visibleMaterials": 389,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [],
+            "camera": [
+              -0.007689518057816119,
+              -198.63944298850816,
+              -640.6138339626704
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5685,
+            "visibleMeshes": 617,
+            "visibleGeometries": 497,
+            "visibleMaterials": 423,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 8,
+            "impactMarks": 45,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 4,
+            "effectLights": 0,
+            "heat": 0.1942420464544704,
+            "wisps": 9,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 18.26029216467464,
+          "within10": false
+        },
+        {
+          "pass": 10,
+          "fire": false,
+          "screenshots": false,
+          "n": 219,
+          "mean": 20.56438356161662,
+          "p95": 31.30000001192093,
+          "worst": 41.70000001788139,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183907,
+          "renderSamples": 219,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -134.30487861360888,
+                  -3.36,
+                  -108.25633552240906
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -132.39203604435315,
+                  -3.36,
+                  -104.62817602067953
+                ]
+              }
+            ],
+            "camera": [
+              -0.0009029504016195055,
+              -198.64908185586043,
+              -640.5578835237335
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5687,
+            "visibleMeshes": 583,
+            "visibleGeometries": 496,
+            "visibleMaterials": 391,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.08433286465025418,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -130.36850379362005,
+                  -3.36,
+                  -109.7400792779168
+                ]
+              }
+            ],
+            "camera": [
+              0.014472030335001692,
+              -198.6476130916569,
+              -640.5583556804328
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5688,
+            "visibleMeshes": 584,
+            "visibleGeometries": 496,
+            "visibleMaterials": 392,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 34,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 10,
+          "fire": true,
+          "screenshots": false,
+          "n": 42,
+          "mean": 19.919047618905704,
+          "p95": 32.599999994039536,
+          "worst": 40.900000005960464,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 273,
+          "trianglePeak": 189105,
+          "renderSamples": 42,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -135.00968978846214,
+                  -3.36,
+                  -109.33608693593415
+                ]
+              }
+            ],
+            "camera": [
+              0.014779140180970611,
+              -198.6483480252458,
+              -640.5593163723677
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5689,
+            "visibleMeshes": 585,
+            "visibleGeometries": 496,
+            "visibleMaterials": 393,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [],
+            "camera": [
+              0.00573950934184137,
+              -198.6400036075678,
+              -640.6169683527391
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5689,
+            "visibleMeshes": 620,
+            "visibleGeometries": 497,
+            "visibleMaterials": 426,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 8,
+            "impactMarks": 44,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 4,
+            "effectLights": 0,
+            "heat": 0.19516964311121648,
+            "wisps": 9,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": -3.138124421659949,
+          "within10": true
+        },
+        {
+          "pass": 11,
+          "fire": false,
+          "screenshots": false,
+          "n": 261,
+          "mean": 17.29386973175509,
+          "p95": 23.19999998807907,
+          "worst": 30.599999994039536,
+          "ammo": [
+            24,
+            24
+          ],
+          "drawPeak": 244,
+          "trianglePeak": 183907,
+          "renderSamples": 261,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -133.64118052870035,
+                  -3.36,
+                  -103.70419769569999
+                ]
+              },
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -132.76984496109654,
+                  -3.36,
+                  -105.75719109961065
+                ]
+              }
+            ],
+            "camera": [
+              0.003986033705408003,
+              -198.64711657767995,
+              -640.5614577098157
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5691,
+            "visibleMeshes": 587,
+            "visibleGeometries": 496,
+            "visibleMaterials": 395,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 48,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0.08643473783876315,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -134.73304277404677,
+                  -3.36,
+                  -109.77200313622598
+                ]
+              }
+            ],
+            "camera": [
+              0.009406079259012864,
+              -198.6519436001265,
+              -640.549998804748
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5692,
+            "visibleMeshes": 587,
+            "visibleGeometries": 495,
+            "visibleMaterials": 396,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 39,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          }
+        },
+        {
+          "pass": 11,
+          "fire": true,
+          "screenshots": false,
+          "n": 41,
+          "mean": 18.934146341754168,
+          "p95": 26.599999994039536,
+          "worst": 29.700000017881393,
+          "ammo": [
+            24,
+            0
+          ],
+          "drawPeak": 272,
+          "trianglePeak": 193249,
+          "renderSamples": 41,
+          "builders": 0,
+          "pipelines": 0,
+          "before": {
+            "newObjects": [],
+            "camera": [
+              0.011492833503401384,
+              -198.64802240556955,
+              -640.5599286418426
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5692,
+            "visibleMeshes": 587,
+            "visibleGeometries": 495,
+            "visibleMaterials": 396,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 0,
+            "settledCases": 0,
+            "impactMarks": 24,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 0,
+            "effectLights": 0,
+            "heat": 0,
+            "wisps": 0,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "after": {
+            "newObjects": [
+              {
+                "name": "",
+                "type": "Mesh",
+                "path": [
+                  "Mesh",
+                  "Scene"
+                ],
+                "visible": true,
+                "geo": "RingGeometry",
+                "material": "MeshBasicMaterial",
+                "opacity": 0.55,
+                "position": [
+                  -133.95493655701867,
+                  -3.36,
+                  -108.64241722576553
+                ]
+              }
+            ],
+            "camera": [
+              0.009221798979106624,
+              -198.63752684380222,
+              -640.6215000335776
+            ],
+            "cameraQ": [
+              0,
+              0.9994423909830973,
+              0,
+              -0.03339022470708644
+            ],
+            "fov": 59.99999999999999,
+            "nodes": 5693,
+            "visibleMeshes": 622,
+            "visibleGeometries": 497,
+            "visibleMaterials": 429,
+            "lights": 36,
+            "activeLights": 15,
+            "visibleLights": 13,
+            "cases": 24,
+            "settledCases": 7,
+            "impactMarks": 45,
+            "charMarks": 0,
+            "smoke": 0,
+            "droppedMags": 0,
+            "projectiles": 3,
+            "effectLights": 0,
+            "heat": 0.19674533212343207,
+            "wisps": 7,
+            "geometries": 3851,
+            "textures": 189,
+            "bgWarming": false,
+            "warming": false
+          },
+          "overIdlePercent": 9.484728608699955,
+          "within10": true
+        }
+      ]
+    }
+  ]
+}

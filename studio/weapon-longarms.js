@@ -536,12 +536,14 @@ export function makeM4Model(ctx) {
   defaultSight.name = 'm4-default-holo';
   for (const part of gun.children.slice(holoStart, -1)) defaultSight.add(part);
   gun.userData.defaultSight = defaultSight;
-  // Magazine: a polymer STANAG with its curve, the ribs down each side, the witness windows, the floorplate; 24 mm in the
-  // 32 mm well (GB-260: a real mag fills about 0.9 of its well). The group, curve, rake and feed top are untouched.
+  // Magazine: polymer STANAG. GT-20106/J153-35: its upper front wall fills the
+  // well's barrel-side gap; root, rear wall, width and lower curve stay fixed.
   const mag = K.group(0, -0.16, 0.05);
   const magOutline = [[-.046,.108], ...profileCurve([-.046,.03],[-.04,-.05],[-.01,-.104],5),
-    ...profileCurve([.086,-.096],[.054,-.04],[.046,.03],5), [.046,.108]];
-  K.slab(magOutline, 0.036, finish.magazine, { bevel: 0.004, parent: mag });
+    ...profileCurve([.086,-.096],[.054,-.04],[.046,.03],5), [.046,.108]]
+    .map(([z,y]) => [z > 0 ? z + .014 * THREE.MathUtils.smoothstep(y,-.06,.03) : z,y]);
+  const magBody = K.slab(magOutline, 0.036, finish.magazine, { bevel: 0.004, parent: mag });
+  magBody.name = 'GW-4 magazine body';
   const bandHalfWidth = .0195, bandHalfLength = .041, bandBevel = .001;
   const bandCentreZ = y => .011 - y * .15;
   // In the rounded box's middle row the 45-degree end facet recedes in both X and Z.
@@ -817,30 +819,45 @@ function akForeEndGeometry(T) {
   const zs = [];
   for (let z = F.z0; z < F.z1 - 1e-6; z += 0.008) zs.push(z);
   zs.push(F.z1);
-  const M = 36, pos = [], idx = [];
+  const M = 40, pos = [], idx = [];
   const ring = (z, k = 1) => {
-    const [w, d] = along(z), yc = (F.top + d) / 2, hh = (F.top - d) / 2;
-    for (let i = 0; i < M; i++) {
-      const a = i / M * Math.PI * 2, c = Math.cos(a), s = Math.sin(a);
-      const x = Math.sign(c) * Math.pow(Math.abs(c), 2 / F.n) * w * k;
-      const y = yc + Math.sign(s) * Math.pow(Math.abs(s), 2 / F.n) * hh * k;
-      pos.push(x, Math.min(F.top, y), z);
+    const [w0, d] = along(z), w = w0 * k, yc = (F.top + d) / 2, hh = (F.top - d) / 2 * k;
+    // GT-20106/J153-12: a continuous U channel clears the barrel; the original external palm swell stays put.
+    const radius = .018, boreY = -.005;
+    const a = Math.acos(Math.pow(radius / w, F.n / 2));
+    const roof = yc + Math.pow(Math.sin(a), 2 / F.n) * hh;
+    pos.push(radius, roof, z, radius, boreY, z);
+    for (let i = 1; i <= 10; i++) {
+      const t = -i * Math.PI / 10;
+      pos.push(radius * Math.cos(t), boreY + radius * Math.sin(t), z);
+    }
+    pos.push(-radius, roof, z);
+    for (let i = 1; i < 28; i++) {
+      const t = Math.PI - a + i / 28 * (Math.PI + 2 * a), c = Math.cos(t), s = Math.sin(t);
+      pos.push(Math.sign(c) * Math.pow(Math.abs(c), 2 / F.n) * w,
+        yc + Math.sign(s) * Math.pow(Math.abs(s), 2 / F.n) * hh, z);
     }
   };
-  // the ends: a short rounded shoulder (two inset rings) so the faces meet the bands without a sharp lip
-  ring(F.z0 - 0.002, 0.82); ring(F.z0, 0.96);
+  ring(F.z0 - .002, .82); ring(F.z0 - .0005, .96);
   for (const z of zs) ring(z);
-  ring(F.z1 + 0.003, 0.9); ring(F.z1 + 0.005, 0.7);
+  ring(F.z1 + .003, .9); ring(F.z1 + .005, .7);
   const R = pos.length / 3 / M;
   for (let r = 0; r < R - 1; r++) for (let i = 0; i < M; i++) {
     const a = r * M + i, b = r * M + (i + 1) % M, c = (r + 1) * M + i, e = (r + 1) * M + (i + 1) % M;
-    idx.push(a, c, b, b, c, e);
+    idx.push(a, b, c, b, e, c);   // outward; CF-9 had the whole loft wound inward
   }
   for (const [r, back] of [[0, true], [R - 1, false]]) {
-    const z = pos[(r * M) * 3 + 2], cen = pos.length / 3;
-    let cy = 0; for (let i = 0; i < M; i++) cy += pos[(r * M + i) * 3 + 1]; cy /= M;
-    pos.push(0, cy, z);
-    for (let i = 0; i < M; i++) { const a = r * M + i, b = r * M + (i + 1) % M; if (back) idx.push(cen, a, b); else idx.push(cen, b, a); }
+    const profile = [], base = pos.length / 3;
+    for (let i = 0; i < M; i++) {
+      const p = pos.slice((r * M + i) * 3, (r * M + i) * 3 + 3);
+      profile.push(new T.Vector2(p[0], p[1])); pos.push(...p);   // hard end-face normals
+    }
+    for (const tri of T.ShapeUtils.triangulateShape(profile, [])) {
+      const [a, b, c] = tri.map(i => profile[i]);
+      const positive = (b.x-a.x)*(c.y-a.y)-(b.y-a.y)*(c.x-a.x) > 0;
+      const order = positive !== back ? tri : [tri[0], tri[2], tri[1]];
+      idx.push(...order.map(i => base + i));
+    }
   }
   let g = new T.BufferGeometry();
   g.setAttribute('position', new T.Float32BufferAttribute(pos, 3));
@@ -967,6 +984,10 @@ export function makeAkModel(ctx) {
   K.box(0.022, 0.004, 0.064, gunDark, 0, 0.068, 0.196);                                       // the leaf
   K.box(0.024, 0.006, 0.01, gunMid, 0, 0.069, 0.182);                                         // the slider
   for (const sx of [-1, 1]) K.box(0.004, 0.004, 0.008, gunAccent, sx * 0.005, 0.072, 0.218);   // GB-259: the U notch's ears, their tops the sight line
+  // GT-20106/J153-14: recessed tritium faces on the existing irons; no sight datum moves.
+  const sightLume = new THREE.MeshStandardMaterial({ color: 0x243e26, emissive: 0x85ef84, emissiveIntensity: 2.2, roughness: .65, metalness: 0, toneMapped: false });
+  sightLume.name = 'KR-7 tritium';
+  for (const sx of [-1, 1]) K.cyl(.00135, .00135, .00018, sightLume, sx * .005, .072, .21385, null, 12, 'z').name = 'KR-7 rear tritium ' + sx;
   // Right side (+x in the mirrored view): the long safety lever in its notches, the charging handle on the carrier.
   // CL-318 (J27: "the safety needs to look more realistic and like an AK-47 safety"): the stamped selector lever: its
   // hub on the axle above and behind the trigger, the long flat blade running forward along the receiver's side to the
@@ -1001,7 +1022,7 @@ export function makeAkModel(ctx) {
   // Grip centre line is still gripOutline(-0.1, -0.14, 0.19, ..., 0.34): the palm stays at the hold.
   // CL-318 (J27: the guard squeezed between the grip and the magazine; the grip shortened): the guard a real loop from
   // the mag release's rear to the grip's front, 36 units long; the grip 3 units back and 2.5 shorter.
-  K.slab(gunBand([[0.002, -0.028], [0.0, -0.072], [-0.016, -0.084], [-0.06, -0.084], [-0.076, -0.068], [-0.074, -0.04]], 0.0055), 0.022, gunDark, { bevel: 0.003 });
+  K.slab(gunBand([[0.002, -0.028], [0.0, -0.072], [-0.016, -0.084], [-0.06, -0.084], [-0.076, -0.068], [-0.074, -0.04]], 0.0055), 0.022, gunDark, { bevel: 0.003 }).name = 'KR-7 trigger guard';
   // CF-9 (J151 note 26, screenshot 03): the guard's rear tang carried back to the grip's front face, so no light shows
   // through the slit between the guard's rear leg and the grip; it stops at the guard's rear corner (the middle finger's
   // place on the grip below stays clear). Narrower than both, bedded 0.5 mm into the grip.
@@ -1074,6 +1095,9 @@ export function makeAkModel(ctx) {
     D.screw(gun, 0.032, -0.004, z, { axis: 'x', side: 1, r: 0.0025, kind: 'slot' });
   }
   K.box(0.012, 0.008, 0.014, gunDark, 0.03, 0.014, 0.512, 0, 0, 0, null, 0.001);   // the front band's latch
+  // GT-20106/CC-350: an outboard sling stud rooted in the steel retainer, clear of the wood.
+  K.lathe([[0, 0], [.004, 0], [.004, .015], [.005, .015], [.005, .017], [0, .017]], gunMid,
+    { x: .031, y: -.012, z: .512, ry: Math.PI / 2, seg: 10 }).name = 'KR-7 front sling stud';
   K.lathe([[0, 0.42], [0.0095, 0.42], [0.0095, 0.61], [0, 0.61]], gunDark, { y: 0.021, seg: 10 });   // the gas tube on to the gas block
   K.lathe([[0, 0.24], [0.0095, 0.24], [0.0095, 0.43], [0, 0.43]], gunAccent, { y: 0.021, seg: 10 });
   for (const sx of [-1, 1]) for (const z of [0.275, 0.325, 0.375, 0.425]) K.box(0.003, 0.006, 0.014, gunDark, sx * 0.0095, 0.021, z, 0, 0, 0, null, 0.001);   // the tube's vent holes' lips
@@ -1091,6 +1115,7 @@ export function makeAkModel(ctx) {
   K.tor(0.018, 0.0045, gunDark, 0, 0.062, 0.723, 0, 0, 0, null, Math.PI, 10);                          // the hood
   for (const sx of [-1, 1]) K.box(0.005, 0.028, 0.01, gunDark, sx * 0.018, 0.048, 0.723);           // its ears
   K.box(0.005, 0.038, 0.005, gunDark, 0, 0.0555, 0.723);                                                  // the post: its tip at 0.0745
+  K.cyl(.0019, .0019, .00018, sightLume, 0, .071, .72035, null, 16, 'z').name = 'KR-7 front tritium';
   // Windage drum through the block, and a threaded post base below the existing sight tip.
   K.cyl(0.009, 0.009, 0.032, gunMid, 0, 0.038, 0.723, null, 12, 'x');
   K.cyl(0.004, 0.004, 0.008, gunAccent, 0, 0.043, 0.723, null, 10, 'y');
@@ -1101,7 +1126,10 @@ export function makeAkModel(ctx) {
   K.box(0.008, 0.004, 0.007, gunAccent, 0, 0.01, 0.759, 0, 0, 0, null, 0.001);   // the detent nose
   // Banana mag: the deep curve, three pressed ribs down each side, the floorplate; 27 mm across now, its top at the well.
   const mag = K.group(0, -0.04, 0.04);
-  const magB = profileCurve([-0.046, 0.012], [-0.04, -0.13], [0.052, -0.258], 7), magF = profileCurve([0.056, 0.012], [0.066, -0.11], [0.156, -0.232], 7);
+  // GT-20106/J153-15: relieve only the rear upper neck; the feed root, front wall and lower hand-contact body stay fixed.
+  const magB = profileCurve([-0.046, 0.012], [-0.04, -0.13], [0.052, -0.258], 7).map(([z, y]) =>
+    [z + .022 * Math.max(0, Math.min(1, (y + .09) / .102)), y]);
+  const magF = profileCurve([0.056, 0.012], [0.066, -0.11], [0.156, -0.232], 7);
   const backBorder = gunBand(magB, .002), frontBorder = gunBand(magF, .002);
   // The centre paint ends at the inner edges of the two dark border graphics.
   // CF-9 (J151 note 25, "The KR-7 magazine should get camo"): its body, ribs, borders and floorplate carry the paint
@@ -1117,10 +1145,10 @@ export function makeAkModel(ctx) {
   }
   magPaint.push(K.slab(backBorder, 0.035, gunDark, { bevel: 0.001, parent: mag }));
   magPaint.push(K.slab(frontBorder, 0.035, gunDark, { bevel: 0.001, parent: mag }));
-  K.box(0.036, 0.018, 0.1, gunDark, 0, -0.01, 0.007, 0, 0, 0, mag, 0.002);                                // the well's lips
+  K.box(0.036, 0.018, 0.086, gunDark, 0, -0.01, 0.014, 0, 0, 0, mag, 0.002);                                // the well's lips
   // The front lug seats first; the rear locking lug catches when the magazine rocks back into the well.
   K.box(0.018, 0.009, 0.018, gunDark, 0, 0.01, 0.06, 0, 0, 0, mag, 0.001);
-  K.box(0.022, 0.007, 0.012, gunDark, 0, 0.009, -0.057, 0, 0, 0, mag, 0.001);
+  K.box(0.022, 0.004, 0.012, gunDark, 0, 0.019, -0.029, 0, 0, 0, mag, 0.001);
   magPaint.push(K.slab([[0.048, -0.254], [0.16, -0.226], [0.164, -0.241], [0.05, -0.271]], 0.038, gunDark, { bevel: 0.003, parent: mag }));   // the floorplate
   // The top prop follows this specific magazine into the support hand. Its
   // visibility belongs to the ammo count of the magazine being displayed.
@@ -1131,11 +1159,11 @@ export function makeAkModel(ctx) {
   topRound.name = 'magazine top round';
   topRound.scale.setScalar(1 / metresPerLocalUnit);
   topRound.rotation.x = Math.PI/2;
-  topRound.position.set(.001, .012 + roundArt.boundingBox.max.z / metresPerLocalUnit, .004);
+  topRound.position.set(.001, .012 + roundArt.boundingBox.max.z / metresPerLocalUnit, .016);
   topRound.visible = false;
   mag.add(topRound);
   for (const side of [-1,1]) {
-    K.slab([[-.038,.012],[-.035,.019],[-.029,.022],[.011,.020],[.022,.015],[.026,.012]],
+    K.slab([[-.024,.012],[-.021,.019],[-.015,.022],[.011,.020],[.022,.015],[.026,.012]],
       .003, gunDark, {x:side*.0115,bevel:.0008,segs:2,parent:mag});
   }
   gun.userData.magazineTopRound = topRound;
@@ -2056,6 +2084,30 @@ function pumpSlingRim(T, side, band) {
   return geometry;
 }
 
+// GT-20106/J153-33: one continuous tube/band surface, same radius and length.
+// The mount collar, front cap/bore and rear barrel clamp stay as issued.
+function closePumpSuppressorBands(gun, K, tubeMaterial) {
+  const can = gun.userData.suppressor;
+  if (!can) return;
+  const r = .060, L = .360;
+  const parts = can.children.filter(mesh => {
+    const p = mesh.geometry?.parameters;
+    return p && ((Math.abs(p.radiusTop-r)<1e-8 && Math.abs(p.height-(L-.04))<1e-8) ||
+      (Math.abs(p.radiusTop-(r+.0012))<1e-8 && Math.abs(p.height-.005)<1e-8));
+  });
+  if (parts.length !== 6) return; // legacy minimal inspector fixture has no separate bands
+  const profile = [[0,.030],[r,.030]];
+  for (let i=0;i<5;i++) {
+    const z = .050 + i*(L-.080)/4;
+    profile.push([r,z-.003],[r+.0012,z-.0025],[r+.0012,z+.0025],[r,z+.003]);
+  }
+  profile.push([r,L-.010],[0,L-.010]);
+  for (const part of parts) can.remove(part);
+  // Same14 angular samples/phase as the replaced cylinders, preserving the envelope.
+  const shell = K.lathe(profile,tubeMaterial,{parent:can,seg:14,phase:-Math.PI/2});
+  shell.name = 'pump continuous suppressor tube and bands';
+}
+
 export function makeShotgunModel(ctx) {
   const { THREE, gunKit, gunBand, gunEffects, gunSuppressor, finishGun, profileCurve, gunBody, gunMid, gunDark, gunAccent, gunPoly, gunRubber, brassMat } = ctx;
   const gun = new THREE.Group();
@@ -2295,13 +2347,14 @@ export function makeShotgunModel(ctx) {
     reloadShell: { restPos: [0.0, -0.034, 0.12], restRot: [Math.PI / 2, 0, 0], visibleAtRest: false }
   });
   gunSuppressor(gun, K, 'shotgun');   // CL-95
+  closePumpSuppressorBands(gun, K, gunDark);
   attachLaserLight(gun, 'shotgun', ctx);
   gun.userData.partFinish = true;
   gun.traverse(mesh => {
     if (!mesh.isMesh) return;
     if (mesh.material === finish.receiver) markPaintSurface(mesh, 'receiver');
     else if (mesh.material === finish.furniture) markPaintSurface(mesh, 'furniture');
-    else if (mesh.parent === gun.userData.laserLightUnit && ['lightTube', 'laserTube', 'sideRail'].includes(mesh.name)) {
+    else if (mesh.parent === gun.userData.laserLightUnit && ['lightTube', 'laserTube', 'moduleShell', 'rearCap'].includes(mesh.name)) {
       markPaintSurface(mesh, 'light shell');
     } else if (mesh.parent === gun.userData.suppressor && (mesh.material === gunDark || mesh.material === gunAccent)) {
       markPaintSurface(mesh, 'suppressor shell');
@@ -2416,7 +2469,7 @@ export function makeSniperModel(ctx) {
   // (y 0.14, the sight line), the grip's centre line, the mag, the bolt knob (x 0.13) and the support are where they were.
   // A short magwell and open rear chassis visibly separate the magazine and grip.
   // The black grip stays at the established hand anchor behind the magazine.
-  K.slab([[-0.025, 0.028], [0.2, 0.028], [0.2, -0.04], [0.185, -0.05], [0.07, -0.05], [0.064, -0.062], [-0.016, -0.062], [-0.025, -0.049]], 0.07, gunTan, { bevel: 0.007 });
+  K.slab([[-0.025, 0.028], [0.2, 0.028], [0.2, -0.04], [0.185, -0.05], [0.101, -0.05], [0.095, -0.062], [-0.016, -0.062], [-0.025, -0.049]], 0.07, gunTan, { bevel: 0.007 });
   K.slab([[-0.3, 0.03], [-0.251, 0.03], [-0.239, 0.019], [-0.239, -0.039], [-0.3, -0.051]], 0.066, gunTan, { bevel: 0.006 });
   K.slab([[-0.26, -0.034], [-0.024, -0.034], [-0.024, -0.052], [-0.26, -0.052]], 0.064, gunTan, { bevel: 0.003 });
   // GP-20059: the MRAD upper continues its top rail over the handguard.
@@ -2479,58 +2532,44 @@ export function makeSniperModel(ctx) {
     trimPanelBack(THREE, cheek, -1, .052, 'y');
     D.screw(gun, sx * 0.025, -0.1 - 0.1 * 0.16 * Math.cos(0.25), -0.12 - 0.1 * 0.16 * Math.sin(0.25), { axis: 'x', side: sx, r: 0.003, kind: 'slot' });   // the panel screw at the palm point
   }
-  // CL-318 (J30: "the mag should have more width"): 36 mm (0.05) like a big-bore box, the floorplate 40, the ribs at its edges.
+  // GT-20106/J153-36: full .308 prop, 80 mm outside box at the issued gun scale.
+  // Grow toward the barrel; the rear wall/root stay clear of the trigger guard.
   const mag = K.group(0, -0.12, 0.02);
+  const issuedMetresPerLocalUnit = .88 * (1.15 * 1.25 / 1.608) * (1.655 / 1.8);
+  const magDepth = .080 / issuedMetresPerLocalUnit, rearZ = -.040;
+  const frontZ = rearZ + magDepth, centreZ = (rearZ + frontZ) / 2;
   const issueArt = roundGeometry(THREE, 'sniper');
   issueArt.computeBoundingBox();
   const bounds = issueArt.boundingBox;
-  const displayScale = .098 / (bounds.max.y - bounds.min.y);
+  const displayScale = 1 / issuedMetresPerLocalUnit;
   const issueFinish = new THREE.MeshStandardMaterial({color: 0xffffff, vertexColors: true, roughness: .39, metalness: .42});
   const displayArt = issueArt.clone();
-  const positions = displayArt.attributes.position;
-  // Only the forward portion of the graphic is exposed in the existing box.
-  // Close the hidden end on its last colour ring and flatten the unseen back.
-  const rear = bounds.max.y - .069 / displayScale;
-  let lastRing = -Infinity;
-  for (let i = 0; i < positions.count; i++) {
-    const y = positions.getY(i);
-    if (y <= rear) lastRing = Math.max(lastRing, y);
-  }
-  for (let i = 0; i < positions.count; i++) {
-    const y = positions.getY(i);
-    if (y < lastRing) positions.setXYZ(i, 0, rear, 0);
-    else {
-      positions.setY(i, Math.max(rear, y));
-      if (positions.getZ(i) > 0) positions.setZ(i, positions.getZ(i) * .15);
-    }
-  }
-  displayArt.computeBoundingBox();
-  displayArt.computeBoundingSphere();
-  const displayBounds = displayArt.boundingBox;
+  const displayBounds = bounds;
   const shelfTop = .070 - (displayBounds.max.z - displayBounds.min.z) * displayScale;
-  K.slab([[-.04,shelfTop],[.04,shelfTop],[.04,-.07],[-.04,-.07]], .05, gunAccent, {bevel:.005, parent:mag});
+  const magBody = K.slab([[rearZ,shelfTop],[frontZ,shelfTop],[frontZ,-.07],[rearZ,-.07]], .05, gunAccent, {bevel:.005, parent:mag});
+  magBody.name = 'Sniper .308 magazine body';
   for (const side of [-1, 1]) {
-    K.box(.004, .070 - shelfTop, .073, gunDark, side * .019, (shelfTop + .070) / 2, 0, 0, 0, 0, mag, .001);
+    K.box(.004, .070 - shelfTop, magDepth - .004, gunDark, side * .023, (shelfTop + .070) / 2, centreZ, 0, 0, 0, mag, .001);
   }
-  // The back edge of the window covers the cropped end in the close view.
-  K.box(.034, .070 - shelfTop, .004, gunDark, 0, (shelfTop + .070) / 2, -.0365, 0, 0, 0, mag, 0);
+  for (const z of [rearZ + .002,frontZ - .002])
+    K.box(.042, .070 - shelfTop, .004, gunDark, 0, (shelfTop + .070) / 2, z, 0, 0, 0, mag, .0005);
   const topRound = new THREE.Mesh(displayArt, issueFinish);
   topRound.name = 'magazine top round';
   topRound.rotation.x = Math.PI / 2;
   topRound.scale.setScalar(displayScale);
   topRound.position.set(0, shelfTop + displayBounds.max.z * displayScale,
-    -(displayBounds.min.y + displayBounds.max.y) * displayScale / 2);
+    centreZ - (displayBounds.min.y + displayBounds.max.y) * displayScale / 2);
   topRound.visible = false;
   mag.add(topRound);
   gun.userData.magazineTopRound = topRound;
-  K.slab([[-0.043, -0.068], [0.043, -0.068], [0.043, -0.083], [-0.043, -0.083]], 0.056, gunDark, { bevel: 0.004, parent: mag });
-  for (const sx of [-1, 1]) for (const z of [-0.026, 0.026]) {
+  K.slab([[rearZ-.003,-.068],[frontZ+.003,-.068],[frontZ+.003,-.083],[rearZ-.003,-.083]], .056, gunDark, { bevel:.004, parent:mag });
+  for (const sx of [-1, 1]) for (const z of [rearZ + .014,frontZ - .014]) {
     const sideRib = K.box(0.0025, 0.113, 0.004, gunBody, sx * 0.025, -0.004, z, 0, 0, 0, mag, 0.001);
     trimPanelBack(THREE, sideRib, sx, .025);
   }
-  for (const sx of [-1, 1]) K.box(0.002, 0.03, 0.05, gunDark, sx * 0.0255, -0.02, 0, 0, 0, 0, mag, 0.001);   // the witness window's frame
+  for (const sx of [-1, 1]) K.box(0.002, 0.03, magDepth - .030, gunDark, sx * 0.0255, -0.02, centreZ, 0, 0, 0, mag, 0.001);
   K.box(0.021, 0.017, 0.007, gunDark, 0, -0.064, -0.031, 0, 0, 0, null, 0.002);
-  const magazineCatch = K.box(0.024, 0.012, 0.01, gunDark, 0, -0.06, 0.047, 0, 0, 0, null, 0.002);   // forward-pressed magazine catch
+  const magazineCatch = K.box(0.024, 0.012, 0.01, gunDark, 0, -0.06, 0.078, 0, 0, 0, null, 0.002);   // forward-pressed magazine catch
   K.box(0.024, 0.006, 0.036, gunDark, 0, -0.055, -0.22, 0, 0, 0, null, 0.002);   // upper/lower receiver latch behind grip
   // CF-2 (J149, D-177): the ambidextrous safety is one part, both hubs and their selector tabs on the cross-shaft;
   // it turns about x at the hubs (its origin).

@@ -1,0 +1,14 @@
+[
+  [
+    "function writeStatus({ agent, fields, notes }) {",
+    "// Keep ordinary writes first. Some Windows file-sharing filters reject truncate-open\n// with UNKNOWN while an existing-file descriptor remains writable (GP-20138).\nfunction writeCrewUtf8(file, text) {\n  try { fs.writeFileSync(file, text, 'utf8'); }\n  catch (error) {\n    if (error.code !== 'UNKNOWN') throw error;\n    const bytes = Buffer.from(text, 'utf8');\n    const fd = fs.openSync(file, 'r+');\n    try {\n      fs.writeFileSync(fd, bytes);\n      fs.ftruncateSync(fd, bytes.length);\n    } finally { fs.closeSync(fd); }\n  }\n}\nfunction writeStatus({ agent, fields, notes }) {"
+  ],
+  [
+    "fs.writeFileSync(statusPath(agent), head.join('\\n') + '\\n\\n' + body + '\\n', 'utf8');",
+    "writeCrewUtf8(statusPath(agent), head.join('\\n') + '\\n\\n' + body + '\\n');"
+  ],
+  [
+    "fs.writeFileSync(file, after + again.slice(before.length), 'utf8');",
+    "writeCrewUtf8(file, after + again.slice(before.length));"
+  ]
+]

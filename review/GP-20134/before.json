@@ -1,0 +1,442 @@
+{
+  "label": "before",
+  "rows": [
+    {
+      "kind": "m240",
+      "hold": 80,
+      "point": {
+        "x": 411.53125,
+        "y": 607.234375,
+        "disabled": false,
+        "text": "Ammo · $48",
+        "hit": "<button class=\"armory-offer-ammo\" type=\"button\" data-buy-build-ammo=\"m240\">Ammo · $48</button>"
+      },
+      "before": {
+        "cash": 999999,
+        "belt": 0,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "connected": true,
+      "after": {
+        "cash": 999999,
+        "belt": 300,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      }
+    },
+    {
+      "kind": "m240",
+      "hold": 250,
+      "point": {
+        "x": 411.53125,
+        "y": 607.234375,
+        "disabled": false,
+        "text": "Ammo · $48",
+        "hit": "<button class=\"armory-offer-ammo\" type=\"button\" data-buy-build-ammo=\"m240\">Ammo · $48</button>"
+      },
+      "before": {
+        "cash": 999999,
+        "belt": 300,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "connected": true,
+      "after": {
+        "cash": 999999,
+        "belt": 600,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      }
+    },
+    {
+      "kind": "m240",
+      "hold": 600,
+      "point": {
+        "x": 411.53125,
+        "y": 607.234375,
+        "disabled": false,
+        "text": "Ammo · $48",
+        "hit": "<button class=\"armory-offer-ammo\" type=\"button\" data-buy-build-ammo=\"m240\">Ammo · $48</button>"
+      },
+      "before": {
+        "cash": 999999,
+        "belt": 600,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "connected": true,
+      "after": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      }
+    },
+    {
+      "kind": "mortar",
+      "hold": 80,
+      "point": {
+        "x": 565.28125,
+        "y": 607.234375,
+        "disabled": false,
+        "text": "Ammo · $34",
+        "hit": "<button class=\"armory-offer-ammo\" type=\"button\" data-buy-build-ammo=\"mortar\">Ammo · $34</button>"
+      },
+      "before": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 0,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "connected": true,
+      "after": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 4,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      }
+    },
+    {
+      "kind": "mortar",
+      "hold": 250,
+      "point": {
+        "x": 565.28125,
+        "y": 607.234375,
+        "disabled": false,
+        "text": "Ammo · $34",
+        "hit": "<button class=\"armory-offer-ammo\" type=\"button\" data-buy-build-ammo=\"mortar\">Ammo · $34</button>"
+      },
+      "before": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 4,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "connected": true,
+      "after": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 8,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      }
+    },
+    {
+      "kind": "mortar",
+      "hold": 600,
+      "point": {
+        "x": 565.28125,
+        "y": 607.234375,
+        "disabled": false,
+        "text": "Ammo · $34",
+        "hit": "<button class=\"armory-offer-ammo\" type=\"button\" data-buy-build-ammo=\"mortar\">Ammo · $34</button>"
+      },
+      "before": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 8,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      },
+      "connected": true,
+      "after": {
+        "cash": 999999,
+        "belt": 900,
+        "shells": 12,
+        "cif": true,
+        "shop": false,
+        "phase": "prep"
+      }
+    }
+  ],
+  "events": [
+    {
+      "type": "pointerdown",
+      "id": 1,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 34062
+    },
+    {
+      "type": "mousedown",
+      "id": 1,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 34062.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 1,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 34162.90000000596
+    },
+    {
+      "type": "click",
+      "id": 1,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 34162.90000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 2,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 34528.5
+    },
+    {
+      "type": "mousedown",
+      "id": 2,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 34528.5
+    },
+    {
+      "type": "mouseup",
+      "id": 2,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 34797
+    },
+    {
+      "type": "click",
+      "id": 2,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 34797.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 3,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 35162.09999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 3,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 35162.19999998808
+    },
+    {
+      "type": "mouseup",
+      "id": 3,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 35778.90000000596
+    },
+    {
+      "type": "click",
+      "id": 3,
+      "text": "Ammo · $48",
+      "data": {
+        "buyBuildAmmo": "m240"
+      },
+      "time": 35778.90000000596
+    },
+    {
+      "type": "pointerdown",
+      "id": 4,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 36162
+    },
+    {
+      "type": "mousedown",
+      "id": 4,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 36162.09999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 4,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 36262.40000000596
+    },
+    {
+      "type": "click",
+      "id": 4,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 36262.5
+    },
+    {
+      "type": "pointerdown",
+      "id": 5,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 36645.90000000596
+    },
+    {
+      "type": "mousedown",
+      "id": 5,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 36646
+    },
+    {
+      "type": "mouseup",
+      "id": 5,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 36911
+    },
+    {
+      "type": "click",
+      "id": 5,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 36911.09999999404
+    },
+    {
+      "type": "pointerdown",
+      "id": 6,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 37296.59999999404
+    },
+    {
+      "type": "mousedown",
+      "id": 6,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 37296.59999999404
+    },
+    {
+      "type": "mouseup",
+      "id": 6,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 37912.40000000596
+    },
+    {
+      "type": "click",
+      "id": 6,
+      "text": "Ammo · $34",
+      "data": {
+        "buyBuildAmmo": "mortar"
+      },
+      "time": 37912.40000000596
+    }
+  ],
+  "mutations": [
+    {
+      "time": 34165.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34165.5,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34799.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 34799.40000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35780.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 35780.90000000596,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36264.69999998808,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36264.69999998808,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36913.19999998808,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 36913.19999998808,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37914.59999999404,
+      "removed": "armory-item armory-offer"
+    },
+    {
+      "time": 37914.59999999404,
+      "removed": "armory-item armory-offer"
+    }
+  ],
+  "errors": []
+}

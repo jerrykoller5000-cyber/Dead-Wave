@@ -4,7 +4,7 @@ import { ammoReserveUnit, magazineHudItems } from './magazine-hud.js';
 
 test('reserve label follows the gun and its ammunition form', () => {
   assert.equal(ammoReserveUnit('m4', true), 'mags');
-  assert.equal(ammoReserveUnit('revolver', true), 'loaders');
+  assert.equal(ammoReserveUnit('revolver', true), 'rounds');
   assert.equal(ammoReserveUnit('shotgun', false), 'shells');
   assert.equal(ammoReserveUnit('launcher', false), 'rounds');
 });
@@ -16,3 +16,4 @@ test('each spare magazine retains its own visible fullness', () => {
   ]);
   assert.deepEqual(magazineHudItems(null), []);
 });
+test('a loose-round reserve is never drawn as a magazine group', () => { assert.deepEqual(magazineHudItems({size:6,spare:[3],reserveKind:'rounds',spareRounds:3}),[]); });

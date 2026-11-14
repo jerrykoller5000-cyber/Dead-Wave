@@ -1,0 +1,2569 @@
+{
+  "stage": "candidate-debug",
+  "indexHash": "63e42fd70dc2c84dff26ecfe42f25369965b8753c3f840a4a52f0518e94c74d9",
+  "moduleHash": "3cf57f0b2d97ae69b481560a9cd8595f789c52d198609f556b7f03ee98a489bc",
+  "rows": [
+    {
+      "view": "detail",
+      "time": 1,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "detail-noon-1.png",
+      "actual": {
+        "camera": [
+          0.65,
+          -198.49820704562728,
+          -639.47
+        ],
+        "fov": 36,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.0479417563954128,
+            -198.67351032996044,
+            -640.5545692039
+          ],
+          "mouth": [
+            0.042033241135227134,
+            -198.6729364275026,
+            -640.5716913492888
+          ],
+          "draw": 1,
+          "wristTarget": [
+            0.08355017419212071,
+            -198.81096917174122,
+            -640.47415848636
+          ],
+          "wristActual": [
+            0.08355017419212331,
+            -198.81096917174125,
+            -640.4741584863599
+          ],
+          "targetReach": 0.2305872502533359,
+          "actualReach": 0.2305872502534235,
+          "handOffset": 0.16318325924256571,
+          "pinchError": 0.00023951906304235838,
+          "smokingBeat": {
+            "draw": 1,
+            "inhale": 1,
+            "exhale": 0,
+            "flick": 0
+          }
+        },
+        "ember": 16759136,
+        "emberPosition": [
+          0.06733198781161734,
+          -198.67565796015228,
+          -640.5008029372991
+        ]
+      }
+    },
+    {
+      "view": "detail",
+      "time": 2.5,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "detail-noon-2.5.png",
+      "actual": {
+        "camera": [
+          0.65,
+          -198.49820704562728,
+          -639.47
+        ],
+        "fov": 36,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.197431762285458,
+            -198.99148330384918,
+            -640.3922962284314
+          ],
+          "mouth": [
+            0.267609767815196,
+            -198.94606933419388,
+            -640.4066361933413
+          ],
+          "draw": 0.10399999999999987,
+          "wristTarget": [
+            0.35935480996393154,
+            -199.0278290600489,
+            -640.4887379117301
+          ],
+          "wristActual": [
+            0.30991213056557254,
+            -199.0573482887896,
+            -640.4904733469846
+          ],
+          "targetReach": 0.3133616887940771,
+          "actualReach": 0.31841127058581836,
+          "handOffset": 0.1631832592425656,
+          "pinchError": 0.08863161105518004,
+          "smokingBeat": {
+            "draw": 0.10399999999999987,
+            "inhale": 0,
+            "exhale": 0,
+            "flick": 0
+          }
+        },
+        "ember": 11351314,
+        "emberPosition": [
+          0.29190997386429646,
+          -198.94606839148517,
+          -640.3364311242851
+        ]
+      }
+    },
+    {
+      "view": "detail",
+      "time": 3.5,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "detail-noon-3.5.png",
+      "actual": {
+        "camera": [
+          0.65,
+          -198.49820704562728,
+          -639.47
+        ],
+        "fov": 36,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.20097509392672763,
+            -199.032272176499,
+            -640.3952151250273
+          ],
+          "mouth": [
+            0.28,
+            -198.97820704562727,
+            -640.4100000000001
+          ],
+          "draw": 0,
+          "wristTarget": [
+            0.370295021206462,
+            -199.0457375991075,
+            -640.4981719035774
+          ],
+          "wristActual": [
+            0.31624322703693764,
+            -199.08098437590002,
+            -640.4999488598783
+          ],
+          "targetReach": 0.32602668363224047,
+          "actualReach": 0.3345216901671621,
+          "handOffset": 0.1631832592425656,
+          "pinchError": 0.09931230163762643,
+          "smokingBeat": {
+            "draw": 0,
+            "inhale": 0,
+            "exhale": 1,
+            "flick": 0
+          }
+        },
+        "ember": 11351314,
+        "emberPosition": [
+          0.2968959764423027,
+          -198.97754997029637,
+          -640.3383600602446
+        ]
+      }
+    },
+    {
+      "view": "detail",
+      "time": 5.25,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "detail-noon-5.25.png",
+      "actual": {
+        "camera": [
+          0.65,
+          -198.49820704562728,
+          -639.47
+        ],
+        "fov": 36,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.27915775927218406,
+            -199.00153273674488,
+            -640.3684295649534
+          ],
+          "mouth": [
+            0.28,
+            -199.00110017609376,
+            -640.3871068695336
+          ],
+          "draw": 0,
+          "wristTarget": [
+            0.30575834712237915,
+            -199.1037609316849,
+            -640.4928103551999
+          ],
+          "wristActual": [
+            0.3057583471223814,
+            -199.1037609316849,
+            -640.4928103551999
+          ],
+          "targetReach": 0.3496138843903314,
+          "actualReach": 0.34961388439033186,
+          "handOffset": 0.16318325924256555,
+          "pinchError": 0.0007634783469709739,
+          "smokingBeat": {
+            "draw": 0,
+            "inhale": 0,
+            "exhale": 0,
+            "flick": 0.9157252186588927
+          }
+        },
+        "ember": 11351314,
+        "emberPosition": [
+          0.27753157344000445,
+          -199.00188721119972,
+          -640.314740733791
+        ]
+      }
+    },
+    {
+      "view": "detail",
+      "time": 7.5,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "detail-noon-7.5.png",
+      "actual": {
+        "camera": [
+          0.65,
+          -198.49820704562728,
+          -639.47
+        ],
+        "fov": 36,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.13652425857695497,
+            -198.75110556876086,
+            -640.4445978130487
+          ],
+          "mouth": [
+            0.10269511279257482,
+            -198.76362808702987,
+            -640.469806819671
+          ],
+          "draw": 0.7084548104956272,
+          "wristTarget": [
+            0.13663316994156582,
+            -198.92114340013632,
+            -640.4503810588138
+          ],
+          "wristActual": [
+            0.16138761415183295,
+            -198.91238181901954,
+            -640.4453466448653
+          ],
+          "targetReach": 0.2536704553857872,
+          "actualReach": 0.2454189829402454,
+          "handOffset": 0.16318325924256563,
+          "pinchError": 0.04113459321415315,
+          "smokingBeat": {
+            "draw": 0.7084548104956272,
+            "inhale": 0,
+            "exhale": 0,
+            "flick": 0
+          }
+        },
+        "ember": 11351314,
+        "emberPosition": [
+          0.08594256804481706,
+          -198.76739563388003,
+          -640.4010432867469
+        ]
+      }
+    },
+    {
+      "view": "gameplay",
+      "time": 1,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "gameplay-noon-1.png",
+      "actual": {
+        "camera": [
+          1.4,
+          -198.2982070456273,
+          -643.6700000000001
+        ],
+        "fov": 50,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.0479417563954128,
+            -198.67351032996044,
+            -640.5545692039
+          ],
+          "mouth": [
+            0.042033241135227134,
+            -198.6729364275026,
+            -640.5716913492888
+          ],
+          "draw": 1,
+          "wristTarget": [
+            0.08355017419212071,
+            -198.81096917174122,
+            -640.47415848636
+          ],
+          "wristActual": [
+            0.08355017419212331,
+            -198.81096917174125,
+            -640.4741584863599
+          ],
+          "targetReach": 0.2305872502533359,
+          "actualReach": 0.2305872502534235,
+          "handOffset": 0.16318325924256571,
+          "pinchError": 0.00023951906304235838,
+          "smokingBeat": {
+            "draw": 1,
+            "inhale": 1,
+            "exhale": 0,
+            "flick": 0
+          }
+        },
+        "ember": 16759136,
+        "emberPosition": [
+          0.06733198781161734,
+          -198.67565796015228,
+          -640.5008029372991
+        ]
+      }
+    },
+    {
+      "view": "gameplay",
+      "time": 2.5,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "gameplay-noon-2.5.png",
+      "actual": {
+        "camera": [
+          1.4,
+          -198.2982070456273,
+          -643.6700000000001
+        ],
+        "fov": 50,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.197431762285458,
+            -198.99148330384918,
+            -640.3922962284314
+          ],
+          "mouth": [
+            0.267609767815196,
+            -198.94606933419388,
+            -640.4066361933413
+          ],
+          "draw": 0.10399999999999987,
+          "wristTarget": [
+            0.35935480996393154,
+            -199.0278290600489,
+            -640.4887379117301
+          ],
+          "wristActual": [
+            0.30991213056557254,
+            -199.0573482887896,
+            -640.4904733469846
+          ],
+          "targetReach": 0.3133616887940771,
+          "actualReach": 0.31841127058581836,
+          "handOffset": 0.1631832592425656,
+          "pinchError": 0.08863161105518004,
+          "smokingBeat": {
+            "draw": 0.10399999999999987,
+            "inhale": 0,
+            "exhale": 0,
+            "flick": 0
+          }
+        },
+        "ember": 11351314,
+        "emberPosition": [
+          0.29190997386429646,
+          -198.94606839148517,
+          -640.3364311242851
+        ]
+      }
+    },
+    {
+      "view": "gameplay",
+      "time": 3.5,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "gameplay-noon-3.5.png",
+      "actual": {
+        "camera": [
+          1.4,
+          -198.2982070456273,
+          -643.6700000000001
+        ],
+        "fov": 50,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.20097509392672763,
+            -199.032272176499,
+            -640.3952151250273
+          ],
+          "mouth": [
+            0.28,
+            -198.97820704562727,
+            -640.4100000000001
+          ],
+          "draw": 0,
+          "wristTarget": [
+            0.370295021206462,
+            -199.0457375991075,
+            -640.4981719035774
+          ],
+          "wristActual": [
+            0.31624322703693764,
+            -199.08098437590002,
+            -640.4999488598783
+          ],
+          "targetReach": 0.32602668363224047,
+          "actualReach": 0.3345216901671621,
+          "handOffset": 0.1631832592425656,
+          "pinchError": 0.09931230163762643,
+          "smokingBeat": {
+            "draw": 0,
+            "inhale": 0,
+            "exhale": 1,
+            "flick": 0
+          }
+        },
+        "ember": 11351314,
+        "emberPosition": [
+          0.2968959764423027,
+          -198.97754997029637,
+          -640.3383600602446
+        ]
+      }
+    },
+    {
+      "view": "gameplay",
+      "time": 5.25,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "gameplay-noon-5.25.png",
+      "actual": {
+        "camera": [
+          1.4,
+          -198.2982070456273,
+          -643.6700000000001
+        ],
+        "fov": 50,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.27915775927218406,
+            -199.00153273674488,
+            -640.3684295649534
+          ],
+          "mouth": [
+            0.28,
+            -199.00110017609376,
+            -640.3871068695336
+          ],
+          "draw": 0,
+          "wristTarget": [
+            0.30575834712237915,
+            -199.1037609316849,
+            -640.4928103551999
+          ],
+          "wristActual": [
+            0.3057583471223814,
+            -199.1037609316849,
+            -640.4928103551999
+          ],
+          "targetReach": 0.3496138843903314,
+          "actualReach": 0.34961388439033186,
+          "handOffset": 0.16318325924256555,
+          "pinchError": 0.0007634783469709739,
+          "smokingBeat": {
+            "draw": 0,
+            "inhale": 0,
+            "exhale": 0,
+            "flick": 0.9157252186588927
+          }
+        },
+        "ember": 11351314,
+        "emberPosition": [
+          0.27753157344000445,
+          -199.00188721119972,
+          -640.314740733791
+        ]
+      }
+    },
+    {
+      "view": "gameplay",
+      "time": 7.5,
+      "lighting": {
+        "name": "noon",
+        "sun": 1.73,
+        "moon": 0.05,
+        "hemi": 0.6799999999999999
+      },
+      "file": "gameplay-noon-7.5.png",
+      "actual": {
+        "camera": [
+          1.4,
+          -198.2982070456273,
+          -643.6700000000001
+        ],
+        "fov": 50,
+        "cig": {
+          "smokeRollApplied": -3,
+          "pinch": [
+            0.13652425857695497,
+            -198.75110556876086,
+            -640.4445978130487
+          ],
+          "mouth": [
+            0.10269511279257482,
+            -198.76362808702987,
+            -640.469806819671
+          ],
+          "draw": 0.7084548104956272,
+          "wristTarget": [
+            0.13663316994156582,
+            -198.92114340013632,
+            -640.4503810588138
+          ],
+          "wristActual": [
+            0.16138761415183295,
+            -198.91238181901954,
+            -640.4453466448653
+          ],
+          "targetReach": 0.2536704553857872,
+          "actualReach": 0.2454189829402454,
+          "handOffset": 0.16318325924256563,
+          "pinchError": 0.04113459321415315,
+          "smokingBeat": {
+            "draw": 0.7084548104956272,
+            "inhale": 0,
+            "exhale": 0,
+            "flick": 0
+          }
+        },
+        "ember": 11351314,
+        "emberPosition": [
+          0.08594256804481706,
+          -198.76739563388003,
+          -640.4010432867469
+        ]
+      }
+    }
+  ],
+  "setup": {
+    "position": [
+      0,
+      -0.6982070456272625,
+      0
+    ],
+    "renderer": "WebGPURenderer"
+  },
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 285 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 5ms pools 6113ms compile 1251ms warm frame 149ms | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:285"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 64ms | trees 240ms | player+weapons+zombie types 1368ms | foliage scattered 2512ms | POIs+minimap+foliage chunks 4116ms | contact shading + rest of setup 4362ms | post + pools + compile + warm frame 11891ms | ready 11894ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 307 variants after 13 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:285 a-fresh:285 a-flash:289 a-faded:290 a-kill-generic:299 a-kill-melee:302 a-kill-explosive:304 a-fx:307 a-corpse:307"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 376 shader variants compiled after 35 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:285 a-fresh:285 a-flash:289 a-faded:290 a-kill-generic:299 a-kill-melee:302 a-kill-explosive:304 a-fx:307 a-corpse:307 fresh:365 burning:367 flash:367 faded:367 tree-fade:367 kill-explosive:367 kill-chainsaw:367 kill-pellet:367 kill-generic:367 kill-melee:367 kill-explosive:369 kill-chainsaw:369 kill-pellet:369 kill-generic:370 kill-melee:370 kill-explosive:370 kill-chainsaw:370 kill-pellet:370 kill-generic:370 effects:375 corpses:375 corpses2:375"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 376 variants | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:285 a-fresh:285 a-flash:289 a-faded:290 a-kill-generic:299 a-kill-melee:302 a-kill-explosive:304 a-fx:307 a-corpse:307 fresh:365 burning:367 flash:367 faded:367 tree-fade:367 kill-explosive:367 kill-chainsaw:367 kill-pellet:367 kill-generic:367 kill-melee:367 kill-explosive:369 kill-chainsaw:369 kill-pellet:369 kill-generic:370 kill-melee:370 kill-explosive:370 kill-chainsaw:370 kill-pellet:370 kill-generic:370 effects:375 corpses:375 corpses2:375"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":23.53,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.53,\"frames\":9,\"over50\":3,\"over100\":1,\"worst\":117},\"loading\":{\"at\":0.53,\"seconds\":23,\"frames\":375,\"over50\":69,\"over100\":37,\"worst\":3983},\"menu\":{\"at\":23.53,\"seconds\":12.32,\"frames\":4,\"over50\":1,\"over100\":1,\"worst\":12017}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":49,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":76,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Texture \"output\"] usage (TextureBinding|RenderAttachment) includes writable usage and another usage in the same synchronization scope.\n - While validating render pass usage.\n - While finishing [CommandEncoder \"renderContext_6\"].\n"
+    },
+    {
+      "type": "warning",
+      "text": "[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer from CommandEncoder \"renderContext_6\"]])\n"
+    }
+  ],
+  "uniqueFrames": 1,
+  "failure": "AssertionError [ERR_ASSERTION]: every keyframe must really render\n\n1 !== 10\n\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20140/smoking-native.mjs:5:1624"
+}

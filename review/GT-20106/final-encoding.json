@@ -1,0 +1,44 @@
+[
+  {
+    "file": "studio/weapon-heavy.js",
+    "bom": false,
+    "crlf": 0,
+    "bareLf": 2201,
+    "invalidReplacement": false
+  },
+  {
+    "file": "studio/weapon-sidearms.js",
+    "bom": false,
+    "crlf": 0,
+    "bareLf": 1916,
+    "invalidReplacement": false
+  },
+  {
+    "file": "studio/weapon-longarms.js",
+    "bom": false,
+    "crlf": 0,
+    "bareLf": 2796,
+    "invalidReplacement": false
+  },
+  {
+    "file": "studio/weapon-attachments.js",
+    "bom": false,
+    "crlf": 0,
+    "bareLf": 198,
+    "invalidReplacement": false
+  },
+  {
+    "file": "studio/weapon-casings.js",
+    "bom": false,
+    "crlf": 0,
+    "bareLf": 214,
+    "invalidReplacement": false
+  },
+  {
+    "file": "index.html",
+    "bom": false,
+    "crlf": 70817,
+    "bareLf": 17,
+    "invalidReplacement": false
+  }
+]

@@ -1,0 +1,3835 @@
+{
+  "scope": "Allocation sampling only, not frame acceptance. Historic minigun primed baseline differs from current whole tree; no isolated causality or exact per-shot byte claim.",
+  "historicAfterSleeve": {
+    "totalMiB": 490.0394592285156,
+    "holdSubtreeMiB": 157.3419075012207,
+    "solveArmSubtreeMiB": 113.99724578857422,
+    "limitFunctionsSelfMiB": 117.9321517944336,
+    "self": [
+      {
+        "fn": "shoulderBad",
+        "file": "127.0.0.1:45780/index.html?debug=1&__gameTestToken=59d47a35-1359-44e1-a2bb-62767368ad36",
+        "line": 55195,
+        "bytes": 40577244,
+        "via": [
+          "holdShoulderIK",
+          "solveArmIK",
+          "holdHand",
+          "holdDiveHand",
+          "holdWeapon"
+        ]
+      },
+      {
+        "fn": "shoulderAngles",
+        "file": "core/body-limits.js",
+        "line": 181,
+        "bytes": 37124680,
+        "via": [
+          "shoulderBad",
+          "holdShoulderIK",
+          "solveArmIK",
+          "holdHand",
+          "holdDiveHand"
+        ]
+      },
+      {
+        "fn": "exactTrace",
+        "file": "world/training-exact.js",
+        "line": 109,
+        "bytes": 32681664,
+        "via": [
+          "traceTraining",
+          "trainingTraceExact",
+          "trainingRound",
+          "updateProjectiles",
+          "tick"
+        ]
+      },
+      {
+        "fn": "traceTraining",
+        "file": "world/training-ballistics.js",
+        "line": 17,
+        "bytes": 27719144,
+        "via": [
+          "trainingTraceExact",
+          "trainingRound",
+          "updateProjectiles",
+          "tick",
+          "update"
+        ]
+      },
+      {
+        "fn": "updateProjectiles",
+        "file": "127.0.0.1:45780/index.html?debug=1&__gameTestToken=59d47a35-1359-44e1-a2bb-62767368ad36",
+        "line": 60538,
+        "bytes": 19981580,
+        "via": [
+          "tick",
+          "update",
+          "(root)"
+        ]
+      },
+      {
+        "fn": "wristAngles",
+        "file": "core/body-limits.js",
+        "line": 60,
+        "bytes": 18222296,
+        "via": [
+          "clampWrist",
+          "limitWrist",
+          "holdHand",
+          "holdDiveHand",
+          "holdWeapon"
+        ]
+      },
+      {
+        "fn": "traceTraining",
+        "file": "world/training-ballistics.js",
+        "line": 17,
+        "bytes": 13752408,
+        "via": [
+          "updateMouseAimBody",
+          "updateMouseAim",
+          "tick",
+          "update",
+          "(root)"
+        ]
+      },
+      {
+        "fn": "updateByType",
+        "file": "three/three.webgpu.js",
+        "line": 52796,
+        "bytes": 13144776,
+        "via": [
+          "_update",
+          "_renderObjectDirect",
+          "renderObject",
+          "filter",
+          "_renderObjects"
+        ]
+      },
+      {
+        "fn": "updateByType",
+        "file": "three/three.webgpu.js",
+        "line": 52796,
+        "bytes": 11817192,
+        "via": [
+          "_update",
+          "_renderObjectDirect",
+          "renderObject",
+          "filter",
+          "_renderObjects"
+        ]
+      },
+      {
+        "fn": "clampWrist",
+        "file": "core/body-limits.js",
+        "line": 77,
+        "bytes": 11050092,
+        "via": [
+          "limitWrist",
+          "holdHand",
+          "holdDiveHand",
+          "holdWeapon",
+          "tick"
+        ]
+      },
+      {
+        "fn": "shoulderAngles",
+        "file": "core/body-limits.js",
+        "line": 181,
+        "bytes": 10761400,
+        "via": [
+          "turnAt",
+          "holdShoulderIK",
+          "solveArmIK",
+          "holdHand",
+          "holdDiveHand"
+        ]
+      },
+      {
+        "fn": "updateByType",
+        "file": "three/three.webgpu.js",
+        "line": 52796,
+        "bytes": 7588572,
+        "via": [
+          "_update",
+          "_renderObjectDirect",
+          "renderObject",
+          "filter",
+          "_renderObjects"
+        ]
+      },
+      {
+        "fn": "tick",
+        "file": "127.0.0.1:45780/index.html?debug=1&__gameTestToken=59d47a35-1359-44e1-a2bb-62767368ad36",
+        "line": 68345,
+        "bytes": 7310852,
+        "via": [
+          "update",
+          "(root)"
+        ]
+      },
+      {
+        "fn": "traceTraining",
+        "file": "world/training-ballistics.js",
+        "line": 17,
+        "bytes": 7097544,
+        "via": [
+          "shotBlocked",
+          "updateShotLos",
+          "updateMouseAimBody",
+          "updateMouseAim",
+          "tick"
+        ]
+      },
+      {
+        "fn": "updateMarinePose",
+        "file": "127.0.0.1:45780/index.html?debug=1&__gameTestToken=59d47a35-1359-44e1-a2bb-62767368ad36",
+        "line": 22924,
+        "bytes": 6310608,
+        "via": [
+          "tick",
+          "update",
+          "(root)"
+        ]
+      },
+      {
+        "fn": "turnAt",
+        "file": "127.0.0.1:45780/index.html?debug=1&__gameTestToken=59d47a35-1359-44e1-a2bb-62767368ad36",
+        "line": 55223,
+        "bytes": 6242064,
+        "via": [
+          "holdShoulderIK",
+          "solveArmIK",
+          "holdHand",
+          "holdDiveHand",
+          "holdWeapon"
+        ]
+      },
+      {
+        "fn": "updateByType",
+        "file": "three/three.webgpu.js",
+        "line": 52796,
+        "bytes": 6129864,
+        "via": [
+          "_update",
+          "_renderObjectDirect",
+          "renderObject",
+          "filter",
+          "_renderScene"
+        ]
+      },
+      {
+        "fn": "flippedTwin",
+        "file": "game/vm-flip.js",
+        "line": 18,
+        "bytes": 5574032,
+        "via": [
+          "mirrorParts",
+          "update",
+          "updateViewmodel",
+          "tick",
+          "update"
+        ]
+      },
+      {
+        "fn": "swingAt",
+        "file": "core/body-limits.js",
+        "line": 96,
+        "bytes": 5320760,
+        "via": [
+          "clampWrist",
+          "limitWrist",
+          "holdHand",
+          "holdDiveHand",
+          "holdWeapon"
+        ]
+      },
+      {
+        "fn": "equals",
+        "file": "three/three.webgpu.js",
+        "line": 294,
+        "bytes": 5097288,
+        "via": [
+          "needsRefresh",
+          "needsRefresh",
+          "_renderObjectDirect",
+          "renderObject",
+          "filter"
+        ]
+      }
+    ]
+  },
+  "current": {
+    "ak": {
+      "sourceUnchanged": true,
+      "modulesUnchanged": true,
+      "failure": null,
+      "errors": [],
+      "rows": [
+        {
+          "weapon": "ak",
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "elapsed": 4503.5,
+          "frames": 270,
+          "allocation": {
+            "totalMiB": 98.77801132202148,
+            "holdSubtreeMiB": 33.641197204589844,
+            "solveArmSubtreeMiB": 26.16817855834961,
+            "limitFunctionsSelfMiB": 20.805477142333984,
+            "self": [
+              {
+                "fn": "shoulderBad",
+                "file": "127.0.0.1:27481/index.html?debug=1&__gameTestToken=ad2f7512-bb28-433a-8ac4-ae20ca06b818",
+                "line": 55563,
+                "bytes": 9719268,
+                "via": [
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdShoulderGun",
+                  "holdWeapon"
+                ]
+              },
+              {
+                "fn": "shoulderAngles",
+                "file": "core/body-limits.js",
+                "line": 193,
+                "bytes": 7457448,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdShoulderGun"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 4998948,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 4376136,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 2163480,
+                "via": [
+                  "shoulderAngles",
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand"
+                ]
+              },
+              {
+                "fn": "clampWrist",
+                "file": "core/body-limits.js",
+                "line": 83,
+                "bytes": 2082244,
+                "via": [
+                  "limitWrist",
+                  "holdHand",
+                  "holdWeapon",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "exactTrace",
+                "file": "world/training-exact.js",
+                "line": 109,
+                "bytes": 2081532,
+                "via": [
+                  "traceTraining",
+                  "updateMouseAimBody",
+                  "_otsAimRay",
+                  "updateMouseAim",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "holdShoulderIK",
+                "file": "127.0.0.1:27481/index.html?debug=1&__gameTestToken=ad2f7512-bb28-433a-8ac4-ae20ca06b818",
+                "line": 55579,
+                "bytes": 2048816,
+                "via": [
+                  "solveArmIK",
+                  "holdHand",
+                  "holdShoulderGun",
+                  "holdWeapon",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "equals",
+                "file": "three/three.webgpu.js",
+                "line": 294,
+                "bytes": 2032356,
+                "via": [
+                  "needsRefresh",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter",
+                  "_renderObjects"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 1901244,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdShoulderGun"
+                ]
+              },
+              {
+                "fn": "tick",
+                "file": "127.0.0.1:27481/index.html?debug=1&__gameTestToken=ad2f7512-bb28-433a-8ac4-ae20ca06b818",
+                "line": 68746,
+                "bytes": 1770424,
+                "via": [
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "updateMarinePose",
+                "file": "127.0.0.1:27481/index.html?debug=1&__gameTestToken=ad2f7512-bb28-433a-8ac4-ae20ca06b818",
+                "line": 22961,
+                "bytes": 1573512,
+                "via": [
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "mirrorParts",
+                "file": "game/viewmodel.js",
+                "line": 1302,
+                "bytes": 1524696,
+                "via": [
+                  "update",
+                  "updateViewmodel",
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "flippedTwin",
+                "file": "game/vm-flip.js",
+                "line": 18,
+                "bytes": 1377140,
+                "via": [
+                  "mirrorParts",
+                  "update",
+                  "updateViewmodel",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "traceTraining",
+                "file": "world/training-ballistics.js",
+                "line": 17,
+                "bytes": 1311304,
+                "via": [
+                  "updateMouseAimBody",
+                  "_otsAimRay",
+                  "updateMouseAim",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "one",
+                "file": "studio/marine-body.js",
+                "line": 608,
+                "bytes": 1164952,
+                "via": [
+                  "carrierClearance",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdWeapon"
+                ]
+              },
+              {
+                "fn": "syncRigSkins",
+                "file": "studio/marine-skin.js",
+                "line": 239,
+                "bytes": 1098404,
+                "via": [
+                  "renderFrame",
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "update",
+                "file": "three/three.webgpu.js",
+                "line": 12293,
+                "bytes": 1016184,
+                "via": [
+                  "updateForRender",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter",
+                  "_renderObjects"
+                ]
+              },
+              {
+                "fn": "update",
+                "file": "three/three.core.js",
+                "line": 25013,
+                "bytes": 1016184,
+                "via": [
+                  "update",
+                  "updateForRender",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "updateLasers",
+                "file": "127.0.0.1:27481/index.html?debug=1&__gameTestToken=ad2f7512-bb28-433a-8ac4-ae20ca06b818",
+                "line": 55201,
+                "bytes": 983752,
+                "via": [
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              }
+            ]
+          },
+          "cpuPhases": {
+            "frames": 284,
+            "phases": [
+              {
+                "k": "r:render",
+                "avg": 5.17,
+                "max": 10.2
+              },
+              {
+                "k": "m:hold",
+                "avg": 2.192,
+                "max": 3.8
+              },
+              {
+                "k": "m:pose",
+                "avg": 0.724,
+                "max": 1.8
+              },
+              {
+                "k": "r:matrices",
+                "avg": 0.586,
+                "max": 1.7
+              },
+              {
+                "k": "aim+climb",
+                "avg": 0.402,
+                "max": 1.2
+              },
+              {
+                "k": "viewmodel",
+                "avg": 0.312,
+                "max": 0.7
+              },
+              {
+                "k": "effects",
+                "avg": 0.277,
+                "max": 0.8
+              },
+              {
+                "k": "w:rest",
+                "avg": 0.132,
+                "max": 0.6
+              },
+              {
+                "k": "drops+hud",
+                "avg": 0.124,
+                "max": 0.6
+              },
+              {
+                "k": "r:rigSkin",
+                "avg": 0.121,
+                "max": 0.3
+              },
+              {
+                "k": "daynight",
+                "avg": 0.069,
+                "max": 0.3
+              },
+              {
+                "k": "hud+audio",
+                "avg": 0.056,
+                "max": 0.2
+              },
+              {
+                "k": "m:reload+knife",
+                "avg": 0.053,
+                "max": 0.2
+              },
+              {
+                "k": "camera",
+                "avg": 0.038,
+                "max": 0.2
+              },
+              {
+                "k": "idle+gear",
+                "avg": 0.036,
+                "max": 0.2
+              },
+              {
+                "k": "tree+deck coll",
+                "avg": 0.03,
+                "max": 0.2
+              },
+              {
+                "k": "zombies",
+                "avg": 0.029,
+                "max": 0.2
+              },
+              {
+                "k": "ground+clamp",
+                "avg": 0.027,
+                "max": 0.2
+              },
+              {
+                "k": "move",
+                "avg": 0.025,
+                "max": 0.2
+              },
+              {
+                "k": "r:lightPool",
+                "avg": 0.021,
+                "max": 0.7
+              },
+              {
+                "k": "m:fire",
+                "avg": 0.018,
+                "max": 0.1
+              },
+              {
+                "k": "m:reticle+ghost",
+                "avg": 0.017,
+                "max": 0.1
+              },
+              {
+                "k": "m:idle",
+                "avg": 0.012,
+                "max": 0.5
+              },
+              {
+                "k": "turrets",
+                "avg": 0.012,
+                "max": 0.2
+              },
+              {
+                "k": "m:mortar+carry",
+                "avg": 0.011,
+                "max": 0.1
+              },
+              {
+                "k": "jump+guns",
+                "avg": 0.011,
+                "max": 0.1
+              },
+              {
+                "k": "waves",
+                "avg": 0.01,
+                "max": 0.1
+              },
+              {
+                "k": "combat misc",
+                "avg": 0.01,
+                "max": 0.2
+              },
+              {
+                "k": "fires+smoke",
+                "avg": 0.009,
+                "max": 0.1
+              },
+              {
+                "k": "m:lasers",
+                "avg": 0.008,
+                "max": 0.1
+              },
+              {
+                "k": "m:hush+roof+kills",
+                "avg": 0.006,
+                "max": 0.1
+              },
+              {
+                "k": "marine",
+                "avg": 0.005,
+                "max": 0.1
+              },
+              {
+                "k": "m:hold2+arms",
+                "avg": 0.004,
+                "max": 0.1
+              },
+              {
+                "k": "r:cull",
+                "avg": 0.003,
+                "max": 0.1
+              },
+              {
+                "k": "projectiles",
+                "avg": 0.002,
+                "max": 0.1
+              },
+              {
+                "k": "after render",
+                "avg": 0.001,
+                "max": 0.1
+              }
+            ],
+            "spikes": []
+          }
+        },
+        {
+          "weapon": "ak",
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "elapsed": 3496.300000011921,
+          "frames": 200,
+          "allocation": {
+            "totalMiB": 94.6450309753418,
+            "holdSubtreeMiB": 23.794742584228516,
+            "solveArmSubtreeMiB": 20.322967529296875,
+            "limitFunctionsSelfMiB": 17.070140838623047,
+            "self": [
+              {
+                "fn": "updateProjectiles",
+                "file": "127.0.0.1:27481/index.html?debug=1&__gameTestToken=ad2f7512-bb28-433a-8ac4-ae20ca06b818",
+                "line": 60940,
+                "bytes": 12327456,
+                "via": [
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "shoulderBad",
+                "file": "127.0.0.1:27481/index.html?debug=1&__gameTestToken=ad2f7512-bb28-433a-8ac4-ae20ca06b818",
+                "line": 55563,
+                "bytes": 8408076,
+                "via": [
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdShoulderGun",
+                  "holdWeapon"
+                ]
+              },
+              {
+                "fn": "shoulderAngles",
+                "file": "core/body-limits.js",
+                "line": 193,
+                "bytes": 6670728,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdShoulderGun"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 3786096,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "exactTrace",
+                "file": "world/training-exact.js",
+                "line": 109,
+                "bytes": 3671364,
+                "via": [
+                  "traceTraining",
+                  "trainingTraceExact",
+                  "trainingRound",
+                  "updateProjectiles",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 3654972,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "traceTraining",
+                "file": "world/training-ballistics.js",
+                "line": 17,
+                "bytes": 2688468,
+                "via": [
+                  "trainingTraceExact",
+                  "trainingRound",
+                  "updateProjectiles",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 1573440,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdShoulderGun"
+                ]
+              },
+              {
+                "fn": "equals",
+                "file": "three/three.webgpu.js",
+                "line": 294,
+                "bytes": 1475100,
+                "via": [
+                  "needsRefresh",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter",
+                  "_renderObjects"
+                ]
+              },
+              {
+                "fn": "segmentBox",
+                "file": "world/training.js",
+                "line": 150,
+                "bytes": 1458708,
+                "via": [
+                  "traceTraining",
+                  "trainingTraceExact",
+                  "trainingRound",
+                  "updateProjectiles",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "traceTraining",
+                "file": "world/training-ballistics.js",
+                "line": 17,
+                "bytes": 1393524,
+                "via": [
+                  "updateMouseAimBody",
+                  "updateMouseAim",
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "tick",
+                "file": "127.0.0.1:27481/index.html?debug=1&__gameTestToken=ad2f7512-bb28-433a-8ac4-ae20ca06b818",
+                "line": 68746,
+                "bytes": 1377076,
+                "via": [
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 1376760,
+                "via": [
+                  "shoulderAngles",
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand"
+                ]
+              },
+              {
+                "fn": "segmentBox",
+                "file": "world/training.js",
+                "line": 150,
+                "bytes": 1229256,
+                "via": [
+                  "traceTraining",
+                  "updateMouseAimBody",
+                  "_otsAimRay",
+                  "updateMouseAim",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "next",
+                "file": "",
+                "line": 0,
+                "bytes": 1131180,
+                "via": [
+                  "updateProjectiles",
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "clampWrist",
+                "file": "core/body-limits.js",
+                "line": 83,
+                "bytes": 1115520,
+                "via": [
+                  "limitWrist",
+                  "holdHand",
+                  "holdWeapon",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "traceTraining",
+                "file": "world/training-ballistics.js",
+                "line": 17,
+                "bytes": 1016304,
+                "via": [
+                  "updateMouseAimBody",
+                  "_otsAimRay",
+                  "updateMouseAim",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "flippedTwin",
+                "file": "game/vm-flip.js",
+                "line": 18,
+                "bytes": 934484,
+                "via": [
+                  "mirrorParts",
+                  "update",
+                  "updateViewmodel",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "update",
+                "file": "three/three.webgpu.js",
+                "line": 12293,
+                "bytes": 819504,
+                "via": [
+                  "updateForRender",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter",
+                  "_renderObjects"
+                ]
+              },
+              {
+                "fn": "getCacheKey",
+                "file": "three/three.webgpu.js",
+                "line": 28519,
+                "bytes": 804360,
+                "via": [
+                  "_getRenderPassDescriptor",
+                  "beginRender",
+                  "_renderScene",
+                  "updateBefore",
+                  "updateBefore"
+                ]
+              }
+            ]
+          },
+          "cpuPhases": {
+            "frames": 217,
+            "phases": [
+              {
+                "k": "r:render",
+                "avg": 7.191,
+                "max": 13.3
+              },
+              {
+                "k": "m:hold",
+                "avg": 2.645,
+                "max": 6.5
+              },
+              {
+                "k": "m:pose",
+                "avg": 1.288,
+                "max": 3.3
+              },
+              {
+                "k": "r:matrices",
+                "avg": 0.993,
+                "max": 3.2
+              },
+              {
+                "k": "aim+climb",
+                "avg": 0.703,
+                "max": 2.2
+              },
+              {
+                "k": "viewmodel",
+                "avg": 0.571,
+                "max": 1.8
+              },
+              {
+                "k": "projectiles",
+                "avg": 0.447,
+                "max": 2.5
+              },
+              {
+                "k": "effects",
+                "avg": 0.367,
+                "max": 1
+              },
+              {
+                "k": "m:hold2+arms",
+                "avg": 0.346,
+                "max": 3.6
+              },
+              {
+                "k": "r:rigSkin",
+                "avg": 0.179,
+                "max": 0.5
+              },
+              {
+                "k": "drops+hud",
+                "avg": 0.154,
+                "max": 1
+              },
+              {
+                "k": "w:rest",
+                "avg": 0.148,
+                "max": 0.6
+              },
+              {
+                "k": "m:fire",
+                "avg": 0.112,
+                "max": 3.6
+              },
+              {
+                "k": "daynight",
+                "avg": 0.1,
+                "max": 0.3
+              },
+              {
+                "k": "hud+audio",
+                "avg": 0.091,
+                "max": 0.3
+              },
+              {
+                "k": "m:reload+knife",
+                "avg": 0.078,
+                "max": 0.3
+              },
+              {
+                "k": "idle+gear",
+                "avg": 0.059,
+                "max": 0.2
+              },
+              {
+                "k": "camera",
+                "avg": 0.056,
+                "max": 0.2
+              },
+              {
+                "k": "ground+clamp",
+                "avg": 0.038,
+                "max": 0.2
+              },
+              {
+                "k": "move",
+                "avg": 0.035,
+                "max": 0.2
+              },
+              {
+                "k": "tree+deck coll",
+                "avg": 0.024,
+                "max": 0.2
+              },
+              {
+                "k": "r:lightPool",
+                "avg": 0.024,
+                "max": 1.1
+              },
+              {
+                "k": "zombies",
+                "avg": 0.018,
+                "max": 0.1
+              },
+              {
+                "k": "combat misc",
+                "avg": 0.017,
+                "max": 0.1
+              },
+              {
+                "k": "m:idle",
+                "avg": 0.016,
+                "max": 0.6
+              },
+              {
+                "k": "m:reticle+ghost",
+                "avg": 0.015,
+                "max": 0.1
+              },
+              {
+                "k": "turrets",
+                "avg": 0.013,
+                "max": 0.2
+              },
+              {
+                "k": "jump+guns",
+                "avg": 0.013,
+                "max": 0.1
+              },
+              {
+                "k": "fires+smoke",
+                "avg": 0.012,
+                "max": 0.1
+              },
+              {
+                "k": "m:mortar+carry",
+                "avg": 0.011,
+                "max": 0.1
+              },
+              {
+                "k": "waves",
+                "avg": 0.011,
+                "max": 0.1
+              },
+              {
+                "k": "after render",
+                "avg": 0.011,
+                "max": 0.1
+              },
+              {
+                "k": "marine",
+                "avg": 0.009,
+                "max": 0.2
+              },
+              {
+                "k": "m:lasers",
+                "avg": 0.008,
+                "max": 0.1
+              },
+              {
+                "k": "r:cull",
+                "avg": 0.008,
+                "max": 0.1
+              },
+              {
+                "k": "m:hush+roof+kills",
+                "avg": 0.007,
+                "max": 0.1
+              }
+            ],
+            "spikes": [
+              {
+                "frame": 1,
+                "ms": 24.3,
+                "top": [
+                  "r:render 6.9",
+                  "m:fire 3.6",
+                  "m:hold2+arms 3.5",
+                  "m:hold 3.3"
+                ],
+                "heapMB": 888.4,
+                "freedMB": -1.1
+              },
+              {
+                "frame": 55,
+                "ms": 24.8,
+                "top": [
+                  "r:render 12.6",
+                  "m:hold 3.1",
+                  "r:matrices 2.1",
+                  "m:pose 1.5"
+                ],
+                "heapMB": 895.8,
+                "freedMB": -0.6
+              },
+              {
+                "frame": 57,
+                "ms": 24.8,
+                "top": [
+                  "r:render 11.1",
+                  "m:hold 3.7",
+                  "m:hold2+arms 3.0",
+                  "m:pose 1.1"
+                ],
+                "heapMB": 897,
+                "freedMB": -0.7
+              },
+              {
+                "frame": 122,
+                "ms": 31.6,
+                "top": [
+                  "r:render 9.9",
+                  "m:hold 6.5",
+                  "m:pose 2.9",
+                  "r:matrices 2.8"
+                ],
+                "heapMB": 896.4,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 130,
+                "ms": 25,
+                "top": [
+                  "r:render 13.2",
+                  "m:hold 4.0",
+                  "m:pose 2.3",
+                  "r:matrices 1.3"
+                ],
+                "heapMB": 899.6,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 131,
+                "ms": 24.7,
+                "top": [
+                  "r:render 10.9",
+                  "m:hold 5.1",
+                  "m:pose 2.8",
+                  "aim+climb 1.1"
+                ],
+                "heapMB": 900,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 132,
+                "ms": 27.4,
+                "top": [
+                  "r:render 8.5",
+                  "m:hold 5.6",
+                  "m:hold2+arms 3.6",
+                  "m:pose 2.8"
+                ],
+                "heapMB": 900.5,
+                "freedMB": -0.5
+              },
+              {
+                "frame": 150,
+                "ms": 28.5,
+                "top": [
+                  "r:render 10.7",
+                  "m:hold 5.4",
+                  "r:matrices 2.7",
+                  "m:pose 2.4"
+                ],
+                "heapMB": 877.2,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 152,
+                "ms": 25.1,
+                "top": [
+                  "r:render 10.6",
+                  "m:hold 3.9",
+                  "m:hold2+arms 3.2",
+                  "m:pose 1.5"
+                ],
+                "heapMB": 878.1,
+                "freedMB": -0.5
+              },
+              {
+                "frame": 194,
+                "ms": 26.6,
+                "top": [
+                  "r:render 12.1",
+                  "m:hold2+arms 2.7",
+                  "m:hold 2.3",
+                  "m:pose 2.0"
+                ],
+                "heapMB": 893.9,
+                "freedMB": -0.5
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "pistol": {
+      "sourceUnchanged": true,
+      "modulesUnchanged": true,
+      "failure": null,
+      "errors": [],
+      "rows": [
+        {
+          "weapon": "pistol",
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "elapsed": 4501.5,
+          "frames": 270,
+          "allocation": {
+            "totalMiB": 134.87250137329102,
+            "holdSubtreeMiB": 68.98147964477539,
+            "solveArmSubtreeMiB": 63.18098068237305,
+            "limitFunctionsSelfMiB": 46.92444610595703,
+            "self": [
+              {
+                "fn": "shoulderBad",
+                "file": "127.0.0.1:6442/index.html?debug=1&__gameTestToken=f46edae9-734e-4755-a1a8-4d34a439e31b",
+                "line": 55563,
+                "bytes": 23077116,
+                "via": [
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand",
+                  "holdWeapon"
+                ]
+              },
+              {
+                "fn": "shoulderAngles",
+                "file": "core/body-limits.js",
+                "line": 193,
+                "bytes": 16766976,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 6195420,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 5146464,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 4900608,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 4277796,
+                "via": [
+                  "shoulderAngles",
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand"
+                ]
+              },
+              {
+                "fn": "shoulderAngles",
+                "file": "core/body-limits.js",
+                "line": 193,
+                "bytes": 2884644,
+                "via": [
+                  "turnAt",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "shoulderAngles",
+                "file": "core/body-limits.js",
+                "line": 193,
+                "bytes": 2802696,
+                "via": [
+                  "shoulderAnglesV",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "carrierIntrusion",
+                "file": "studio/marine-body.js",
+                "line": 613,
+                "bytes": 2524056,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "equals",
+                "file": "three/three.webgpu.js",
+                "line": 294,
+                "bytes": 2409336,
+                "via": [
+                  "needsRefresh",
+                  "needsRefresh",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "exactTrace",
+                "file": "world/training-exact.js",
+                "line": 109,
+                "bytes": 2097924,
+                "via": [
+                  "traceTraining",
+                  "updateMouseAimBody",
+                  "_otsAimRay",
+                  "updateMouseAim",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "clampWrist",
+                "file": "core/body-limits.js",
+                "line": 83,
+                "bytes": 2033420,
+                "via": [
+                  "limitWrist",
+                  "holdHand",
+                  "holdDiveHand",
+                  "holdWeapon",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "holdShoulderIK",
+                "file": "127.0.0.1:6442/index.html?debug=1&__gameTestToken=f46edae9-734e-4755-a1a8-4d34a439e31b",
+                "line": 55579,
+                "bytes": 1967136,
+                "via": [
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand",
+                  "holdWeapon",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "tick",
+                "file": "127.0.0.1:6442/index.html?debug=1&__gameTestToken=f46edae9-734e-4755-a1a8-4d34a439e31b",
+                "line": 68746,
+                "bytes": 1885244,
+                "via": [
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "flippedTwin",
+                "file": "game/vm-flip.js",
+                "line": 18,
+                "bytes": 1721412,
+                "via": [
+                  "mirrorParts",
+                  "update",
+                  "updateViewmodel",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "traceTraining",
+                "file": "world/training-ballistics.js",
+                "line": 17,
+                "bytes": 1475228,
+                "via": [
+                  "updateMouseAimBody",
+                  "_otsAimRay",
+                  "updateMouseAim",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "updateMarinePose",
+                "file": "127.0.0.1:6442/index.html?debug=1&__gameTestToken=f46edae9-734e-4755-a1a8-4d34a439e31b",
+                "line": 22961,
+                "bytes": 1343988,
+                "via": [
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "mirrorParts",
+                "file": "game/viewmodel.js",
+                "line": 1302,
+                "bytes": 1311564,
+                "via": [
+                  "update",
+                  "updateViewmodel",
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "one",
+                "file": "studio/marine-body.js",
+                "line": 608,
+                "bytes": 1214048,
+                "via": [
+                  "carrierClearance",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 1212864,
+                "via": [
+                  "carrierIntrusion",
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand"
+                ]
+              }
+            ]
+          },
+          "cpuPhases": {
+            "frames": 290,
+            "phases": [
+              {
+                "k": "r:render",
+                "avg": 6.018,
+                "max": 13.6
+              },
+              {
+                "k": "m:hold",
+                "avg": 2.521,
+                "max": 6.8
+              },
+              {
+                "k": "m:pose",
+                "avg": 0.978,
+                "max": 2.6
+              },
+              {
+                "k": "r:matrices",
+                "avg": 0.747,
+                "max": 2.9
+              },
+              {
+                "k": "aim+climb",
+                "avg": 0.605,
+                "max": 1.6
+              },
+              {
+                "k": "viewmodel",
+                "avg": 0.384,
+                "max": 1.2
+              },
+              {
+                "k": "effects",
+                "avg": 0.306,
+                "max": 0.7
+              },
+              {
+                "k": "r:rigSkin",
+                "avg": 0.158,
+                "max": 0.6
+              },
+              {
+                "k": "drops+hud",
+                "avg": 0.139,
+                "max": 0.9
+              },
+              {
+                "k": "w:rest",
+                "avg": 0.128,
+                "max": 0.5
+              },
+              {
+                "k": "daynight",
+                "avg": 0.109,
+                "max": 0.4
+              },
+              {
+                "k": "hud+audio",
+                "avg": 0.087,
+                "max": 0.3
+              },
+              {
+                "k": "m:reload+knife",
+                "avg": 0.075,
+                "max": 0.3
+              },
+              {
+                "k": "camera",
+                "avg": 0.052,
+                "max": 0.2
+              },
+              {
+                "k": "idle+gear",
+                "avg": 0.048,
+                "max": 0.2
+              },
+              {
+                "k": "tree+deck coll",
+                "avg": 0.039,
+                "max": 0.2
+              },
+              {
+                "k": "ground+clamp",
+                "avg": 0.039,
+                "max": 0.2
+              },
+              {
+                "k": "move",
+                "avg": 0.033,
+                "max": 0.2
+              },
+              {
+                "k": "zombies",
+                "avg": 0.031,
+                "max": 0.2
+              },
+              {
+                "k": "r:lightPool",
+                "avg": 0.023,
+                "max": 0.7
+              },
+              {
+                "k": "m:mortar+carry",
+                "avg": 0.018,
+                "max": 0.1
+              },
+              {
+                "k": "m:reticle+ghost",
+                "avg": 0.018,
+                "max": 0.2
+              },
+              {
+                "k": "fires+smoke",
+                "avg": 0.018,
+                "max": 0.1
+              },
+              {
+                "k": "m:fire",
+                "avg": 0.015,
+                "max": 0.1
+              },
+              {
+                "k": "turrets",
+                "avg": 0.013,
+                "max": 0.2
+              },
+              {
+                "k": "combat misc",
+                "avg": 0.012,
+                "max": 0.1
+              },
+              {
+                "k": "jump+guns",
+                "avg": 0.011,
+                "max": 0.1
+              },
+              {
+                "k": "waves",
+                "avg": 0.01,
+                "max": 0.1
+              },
+              {
+                "k": "m:hush+roof+kills",
+                "avg": 0.009,
+                "max": 0.1
+              },
+              {
+                "k": "m:idle",
+                "avg": 0.008,
+                "max": 0.1
+              },
+              {
+                "k": "marine",
+                "avg": 0.007,
+                "max": 0.3
+              },
+              {
+                "k": "m:hold2+arms",
+                "avg": 0.006,
+                "max": 0.1
+              },
+              {
+                "k": "m:lasers",
+                "avg": 0.006,
+                "max": 0.1
+              },
+              {
+                "k": "r:cull",
+                "avg": 0.003,
+                "max": 0.1
+              },
+              {
+                "k": "after render",
+                "avg": 0.003,
+                "max": 0.1
+              },
+              {
+                "k": "projectiles",
+                "avg": 0.002,
+                "max": 0.1
+              }
+            ],
+            "spikes": []
+          }
+        },
+        {
+          "weapon": "pistol",
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "elapsed": 861.7000000178814,
+          "frames": 38,
+          "allocation": {
+            "totalMiB": 68.31464767456055,
+            "holdSubtreeMiB": 18.820377349853516,
+            "solveArmSubtreeMiB": 17.56946563720703,
+            "limitFunctionsSelfMiB": 13.30203628540039,
+            "self": [
+              {
+                "fn": "updateProjectiles",
+                "file": "127.0.0.1:6442/index.html?debug=1&__gameTestToken=f46edae9-734e-4755-a1a8-4d34a439e31b",
+                "line": 60940,
+                "bytes": 22326512,
+                "via": [
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "shoulderBad",
+                "file": "127.0.0.1:6442/index.html?debug=1&__gameTestToken=f46edae9-734e-4755-a1a8-4d34a439e31b",
+                "line": 55563,
+                "bytes": 7277160,
+                "via": [
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand",
+                  "holdWeapon"
+                ]
+              },
+              {
+                "fn": "shoulderAngles",
+                "file": "core/body-limits.js",
+                "line": 193,
+                "bytes": 3999156,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "next",
+                "file": "",
+                "line": 0,
+                "bytes": 3246020,
+                "via": [
+                  "updateProjectiles",
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "exactTrace",
+                "file": "world/training-exact.js",
+                "line": 109,
+                "bytes": 3245220,
+                "via": [
+                  "traceTraining",
+                  "trainingTraceExact",
+                  "trainingRound",
+                  "updateProjectiles",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "segmentBox",
+                "file": "world/training.js",
+                "line": 150,
+                "bytes": 2376552,
+                "via": [
+                  "traceTraining",
+                  "trainingTraceExact",
+                  "trainingRound",
+                  "updateProjectiles",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "traceTraining",
+                "file": "world/training-ballistics.js",
+                "line": 17,
+                "bytes": 2327948,
+                "via": [
+                  "trainingTraceExact",
+                  "trainingRound",
+                  "updateProjectiles",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "shoulderAngles",
+                "file": "core/body-limits.js",
+                "line": 193,
+                "bytes": 1720956,
+                "via": [
+                  "shoulderAnglesV",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 1622616,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 1180080,
+                "via": [
+                  "shoulderAngles",
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 967008,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 950616,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "carrierIntrusion",
+                "file": "studio/marine-body.js",
+                "line": 613,
+                "bytes": 803112,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "caveMouthFrame",
+                "file": "127.0.0.1:6442/index.html?debug=1&__gameTestToken=f46edae9-734e-4755-a1a8-4d34a439e31b",
+                "line": 52032,
+                "bytes": 656688,
+                "via": [
+                  "pointInCaveMouthShot",
+                  "segmentHitsCaveMouthShot",
+                  "updateProjectiles",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "segmentBox",
+                "file": "world/training.js",
+                "line": 150,
+                "bytes": 606432,
+                "via": [
+                  "traceTraining",
+                  "updateMouseAimBody",
+                  "_otsAimRay",
+                  "updateMouseAim",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "traceTraining",
+                "file": "world/training-ballistics.js",
+                "line": 17,
+                "bytes": 524592,
+                "via": [
+                  "updateMouseAimBody",
+                  "_otsAimRay",
+                  "updateMouseAim",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "equals",
+                "file": "three/three.webgpu.js",
+                "line": 294,
+                "bytes": 475308,
+                "via": [
+                  "needsRefresh",
+                  "needsRefresh",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "exactTrace",
+                "file": "world/training-exact.js",
+                "line": 109,
+                "bytes": 475308,
+                "via": [
+                  "traceTraining",
+                  "updateMouseAimBody",
+                  "_otsAimRay",
+                  "updateMouseAim",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "clampWrist",
+                "file": "core/body-limits.js",
+                "line": 83,
+                "bytes": 459224,
+                "via": [
+                  "limitWrist",
+                  "holdHand",
+                  "holdDiveHand",
+                  "holdWeapon",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 376968,
+                "via": [
+                  "shoulderAngles",
+                  "shoulderAnglesV",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand"
+                ]
+              }
+            ]
+          },
+          "cpuPhases": {
+            "frames": 58,
+            "phases": [
+              {
+                "k": "r:render",
+                "avg": 7.688,
+                "max": 13.4
+              },
+              {
+                "k": "m:hold",
+                "avg": 3.219,
+                "max": 7.9
+              },
+              {
+                "k": "m:pose",
+                "avg": 1.467,
+                "max": 3.6
+              },
+              {
+                "k": "projectiles",
+                "avg": 1.398,
+                "max": 7.3
+              },
+              {
+                "k": "r:matrices",
+                "avg": 1.203,
+                "max": 3.2
+              },
+              {
+                "k": "m:hold2+arms",
+                "avg": 1.116,
+                "max": 4.8
+              },
+              {
+                "k": "aim+climb",
+                "avg": 0.797,
+                "max": 1.7
+              },
+              {
+                "k": "viewmodel",
+                "avg": 0.61,
+                "max": 1.6
+              },
+              {
+                "k": "effects",
+                "avg": 0.417,
+                "max": 1
+              },
+              {
+                "k": "m:fire",
+                "avg": 0.35,
+                "max": 3
+              },
+              {
+                "k": "r:rigSkin",
+                "avg": 0.21,
+                "max": 0.5
+              },
+              {
+                "k": "drops+hud",
+                "avg": 0.178,
+                "max": 0.8
+              },
+              {
+                "k": "w:rest",
+                "avg": 0.15,
+                "max": 0.4
+              },
+              {
+                "k": "m:reload+knife",
+                "avg": 0.133,
+                "max": 0.7
+              },
+              {
+                "k": "hud+audio",
+                "avg": 0.112,
+                "max": 0.3
+              },
+              {
+                "k": "daynight",
+                "avg": 0.11,
+                "max": 0.3
+              },
+              {
+                "k": "camera",
+                "avg": 0.062,
+                "max": 0.2
+              },
+              {
+                "k": "idle+gear",
+                "avg": 0.055,
+                "max": 0.2
+              },
+              {
+                "k": "ground+clamp",
+                "avg": 0.045,
+                "max": 0.2
+              },
+              {
+                "k": "move",
+                "avg": 0.043,
+                "max": 0.2
+              },
+              {
+                "k": "r:lightPool",
+                "avg": 0.026,
+                "max": 0.1
+              },
+              {
+                "k": "m:hush+roof+kills",
+                "avg": 0.024,
+                "max": 0.1
+              },
+              {
+                "k": "tree+deck coll",
+                "avg": 0.024,
+                "max": 0.1
+              },
+              {
+                "k": "m:reticle+ghost",
+                "avg": 0.021,
+                "max": 0.1
+              },
+              {
+                "k": "m:idle",
+                "avg": 0.019,
+                "max": 0.1
+              },
+              {
+                "k": "zombies",
+                "avg": 0.019,
+                "max": 0.2
+              },
+              {
+                "k": "jump+guns",
+                "avg": 0.019,
+                "max": 0.1
+              },
+              {
+                "k": "combat misc",
+                "avg": 0.016,
+                "max": 0.1
+              },
+              {
+                "k": "waves",
+                "avg": 0.014,
+                "max": 0.1
+              },
+              {
+                "k": "m:mortar+carry",
+                "avg": 0.012,
+                "max": 0.1
+              },
+              {
+                "k": "fires+smoke",
+                "avg": 0.012,
+                "max": 0.1
+              },
+              {
+                "k": "r:cull",
+                "avg": 0.012,
+                "max": 0.1
+              },
+              {
+                "k": "turrets",
+                "avg": 0.01,
+                "max": 0.1
+              },
+              {
+                "k": "m:lasers",
+                "avg": 0.009,
+                "max": 0.1
+              },
+              {
+                "k": "after render",
+                "avg": 0.005,
+                "max": 0.1
+              },
+              {
+                "k": "marine",
+                "avg": 0.002,
+                "max": 0.1
+              }
+            ],
+            "spikes": [
+              {
+                "frame": 15,
+                "ms": 24.4,
+                "top": [
+                  "r:render 11.1",
+                  "m:hold 3.2",
+                  "m:hold2+arms 2.5",
+                  "m:pose 2.3"
+                ],
+                "heapMB": 888.2,
+                "freedMB": -1.5
+              },
+              {
+                "frame": 18,
+                "ms": 28.4,
+                "top": [
+                  "r:render 9.3",
+                  "m:hold 4.9",
+                  "m:hold2+arms 2.8",
+                  "m:pose 2.6"
+                ],
+                "heapMB": 893,
+                "freedMB": -1.7
+              },
+              {
+                "frame": 19,
+                "ms": 25,
+                "top": [
+                  "r:render 8.0",
+                  "projectiles 3.4",
+                  "m:hold2+arms 2.9",
+                  "m:hold 2.6"
+                ],
+                "heapMB": 894.8,
+                "freedMB": -1.8
+              },
+              {
+                "frame": 20,
+                "ms": 29.7,
+                "top": [
+                  "r:render 12.5",
+                  "projectiles 3.6",
+                  "m:hold 2.8",
+                  "m:hold2+arms 2.2"
+                ],
+                "heapMB": 898.2,
+                "freedMB": -3.4
+              },
+              {
+                "frame": 21,
+                "ms": 36,
+                "top": [
+                  "r:render 13.4",
+                  "projectiles 7.3",
+                  "m:hold 3.4",
+                  "m:hold2+arms 3.4"
+                ],
+                "heapMB": 869.5,
+                "freedMB": 28.7
+              },
+              {
+                "frame": 22,
+                "ms": 35.2,
+                "top": [
+                  "r:render 9.5",
+                  "m:hold 5.4",
+                  "projectiles 5.2",
+                  "m:hold2+arms 4.7"
+                ],
+                "heapMB": 871.6,
+                "freedMB": -2.1
+              },
+              {
+                "frame": 23,
+                "ms": 28.5,
+                "top": [
+                  "r:render 8.1",
+                  "m:hold 5.6",
+                  "projectiles 5.5",
+                  "m:hold2+arms 2.3"
+                ],
+                "heapMB": 875.7,
+                "freedMB": -4.1
+              },
+              {
+                "frame": 24,
+                "ms": 40.1,
+                "top": [
+                  "r:render 11.1",
+                  "m:hold 6.6",
+                  "projectiles 5.3",
+                  "m:hold2+arms 4.8"
+                ],
+                "heapMB": 877.9,
+                "freedMB": -2.2
+              },
+              {
+                "frame": 51,
+                "ms": 29,
+                "top": [
+                  "r:render 10.0",
+                  "m:hold 7.9",
+                  "r:matrices 2.9",
+                  "m:pose 2.6"
+                ],
+                "heapMB": 873.4,
+                "freedMB": -0.6
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "minigun": {
+      "sourceUnchanged": true,
+      "modulesUnchanged": true,
+      "failure": null,
+      "errors": [],
+      "rows": [
+        {
+          "weapon": "minigun",
+          "fire": false,
+          "ammo": [
+            300,
+            300
+          ],
+          "elapsed": 4516.4000000059605,
+          "frames": 271,
+          "allocation": {
+            "totalMiB": 95.54685592651367,
+            "holdSubtreeMiB": 30.51422882080078,
+            "solveArmSubtreeMiB": 26.871463775634766,
+            "limitFunctionsSelfMiB": 19.976566314697266,
+            "self": [
+              {
+                "fn": "shoulderBad",
+                "file": "127.0.0.1:9064/index.html?debug=1&__gameTestToken=60ce3b75-c793-480a-81a1-588be6a8052a",
+                "line": 55563,
+                "bytes": 8965332,
+                "via": [
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand",
+                  "holdWeapon"
+                ]
+              },
+              {
+                "fn": "shoulderAngles",
+                "file": "core/body-limits.js",
+                "line": 193,
+                "bytes": 8162220,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 5392308,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 4294176,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "equals",
+                "file": "three/three.webgpu.js",
+                "line": 294,
+                "bytes": 2294604,
+                "via": [
+                  "needsRefresh",
+                  "needsRefresh",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "tick",
+                "file": "127.0.0.1:9064/index.html?debug=1&__gameTestToken=60ce3b75-c793-480a-81a1-588be6a8052a",
+                "line": 68746,
+                "bytes": 1918044,
+                "via": [
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "exactTrace",
+                "file": "world/training-exact.js",
+                "line": 109,
+                "bytes": 1884852,
+                "via": [
+                  "traceTraining",
+                  "updateMouseAimBody",
+                  "_otsAimRay",
+                  "updateMouseAim",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 1802904,
+                "via": [
+                  "shoulderAngles",
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand"
+                ]
+              },
+              {
+                "fn": "traceTraining",
+                "file": "world/training-ballistics.js",
+                "line": 17,
+                "bytes": 1540844,
+                "via": [
+                  "updateMouseAimBody",
+                  "_otsAimRay",
+                  "updateMouseAim",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "holdShoulderIK",
+                "file": "127.0.0.1:9064/index.html?debug=1&__gameTestToken=60ce3b75-c793-480a-81a1-588be6a8052a",
+                "line": 55579,
+                "bytes": 1508220,
+                "via": [
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand",
+                  "holdWeapon",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "updateMarinePose",
+                "file": "127.0.0.1:9064/index.html?debug=1&__gameTestToken=60ce3b75-c793-480a-81a1-588be6a8052a",
+                "line": 22961,
+                "bytes": 1458732,
+                "via": [
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "flippedTwin",
+                "file": "game/vm-flip.js",
+                "line": 18,
+                "bytes": 1442692,
+                "via": [
+                  "mirrorParts",
+                  "update",
+                  "updateViewmodel",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "syncRigSkins",
+                "file": "studio/marine-skin.js",
+                "line": 239,
+                "bytes": 1442680,
+                "via": [
+                  "renderFrame",
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 1327596,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "mirrorParts",
+                "file": "game/viewmodel.js",
+                "line": 1302,
+                "bytes": 1245992,
+                "via": [
+                  "update",
+                  "updateViewmodel",
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "update",
+                "file": "three/three.webgpu.js",
+                "line": 12293,
+                "bytes": 1229256,
+                "via": [
+                  "updateForRender",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter",
+                  "_renderObjects"
+                ]
+              },
+              {
+                "fn": "sort",
+                "file": "",
+                "line": 0,
+                "bytes": 1083648,
+                "via": [
+                  "sort",
+                  "_renderScene",
+                  "render",
+                  "updateBefore",
+                  "updateBeforeNode"
+                ]
+              },
+              {
+                "fn": "shoulderAngles",
+                "file": "core/body-limits.js",
+                "line": 193,
+                "bytes": 1065348,
+                "via": [
+                  "shoulderAnglesV",
+                  "turnAt",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand"
+                ]
+              },
+              {
+                "fn": "update",
+                "file": "three/three.core.js",
+                "line": 25013,
+                "bytes": 950616,
+                "via": [
+                  "update",
+                  "updateForRender",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "reversePainterSortStable",
+                "file": "three/three.webgpu.js",
+                "line": 27844,
+                "bytes": 901452,
+                "via": [
+                  "sort",
+                  "sort",
+                  "_renderScene",
+                  "render",
+                  "updateBefore"
+                ]
+              }
+            ]
+          },
+          "cpuPhases": {
+            "frames": 285,
+            "phases": [
+              {
+                "k": "r:render",
+                "avg": 5.734,
+                "max": 9.1
+              },
+              {
+                "k": "m:hold",
+                "avg": 2.22,
+                "max": 4
+              },
+              {
+                "k": "m:pose",
+                "avg": 0.906,
+                "max": 2.1
+              },
+              {
+                "k": "r:matrices",
+                "avg": 0.763,
+                "max": 1.7
+              },
+              {
+                "k": "aim+climb",
+                "avg": 0.555,
+                "max": 1.2
+              },
+              {
+                "k": "viewmodel",
+                "avg": 0.336,
+                "max": 1
+              },
+              {
+                "k": "effects",
+                "avg": 0.317,
+                "max": 0.6
+              },
+              {
+                "k": "r:rigSkin",
+                "avg": 0.135,
+                "max": 0.5
+              },
+              {
+                "k": "drops+hud",
+                "avg": 0.122,
+                "max": 0.7
+              },
+              {
+                "k": "w:rest",
+                "avg": 0.114,
+                "max": 0.5
+              },
+              {
+                "k": "daynight",
+                "avg": 0.094,
+                "max": 0.3
+              },
+              {
+                "k": "hud+audio",
+                "avg": 0.078,
+                "max": 0.3
+              },
+              {
+                "k": "m:reload+knife",
+                "avg": 0.07,
+                "max": 0.2
+              },
+              {
+                "k": "idle+gear",
+                "avg": 0.047,
+                "max": 0.2
+              },
+              {
+                "k": "camera",
+                "avg": 0.046,
+                "max": 0.2
+              },
+              {
+                "k": "ground+clamp",
+                "avg": 0.038,
+                "max": 0.2
+              },
+              {
+                "k": "tree+deck coll",
+                "avg": 0.031,
+                "max": 0.2
+              },
+              {
+                "k": "r:lightPool",
+                "avg": 0.029,
+                "max": 1.4
+              },
+              {
+                "k": "move",
+                "avg": 0.027,
+                "max": 0.2
+              },
+              {
+                "k": "zombies",
+                "avg": 0.027,
+                "max": 0.2
+              },
+              {
+                "k": "m:reticle+ghost",
+                "avg": 0.018,
+                "max": 0.2
+              },
+              {
+                "k": "turrets",
+                "avg": 0.015,
+                "max": 0.2
+              },
+              {
+                "k": "fires+smoke",
+                "avg": 0.014,
+                "max": 0.2
+              },
+              {
+                "k": "m:fire",
+                "avg": 0.013,
+                "max": 0.2
+              },
+              {
+                "k": "waves",
+                "avg": 0.012,
+                "max": 0.1
+              },
+              {
+                "k": "m:hush+roof+kills",
+                "avg": 0.011,
+                "max": 0.2
+              },
+              {
+                "k": "m:mortar+carry",
+                "avg": 0.011,
+                "max": 0.1
+              },
+              {
+                "k": "combat misc",
+                "avg": 0.011,
+                "max": 0.1
+              },
+              {
+                "k": "m:idle",
+                "avg": 0.009,
+                "max": 0.1
+              },
+              {
+                "k": "m:lasers",
+                "avg": 0.007,
+                "max": 0.1
+              },
+              {
+                "k": "jump+guns",
+                "avg": 0.007,
+                "max": 0.1
+              },
+              {
+                "k": "marine",
+                "avg": 0.005,
+                "max": 0.1
+              },
+              {
+                "k": "m:hold2+arms",
+                "avg": 0.002,
+                "max": 0.1
+              },
+              {
+                "k": "projectiles",
+                "avg": 0.002,
+                "max": 0.1
+              },
+              {
+                "k": "r:cull",
+                "avg": 0.002,
+                "max": 0.1
+              },
+              {
+                "k": "after render",
+                "avg": 0.002,
+                "max": 0.1
+              }
+            ],
+            "spikes": []
+          }
+        },
+        {
+          "weapon": "minigun",
+          "fire": true,
+          "ammo": [
+            300,
+            0
+          ],
+          "elapsed": 19956.59999999404,
+          "frames": 1126,
+          "allocation": {
+            "totalMiB": 421.79138946533203,
+            "holdSubtreeMiB": 81.3434829711914,
+            "solveArmSubtreeMiB": 66.47357177734375,
+            "limitFunctionsSelfMiB": 50.30373764038086,
+            "self": [
+              {
+                "fn": "exactTrace",
+                "file": "world/training-exact.js",
+                "line": 109,
+                "bytes": 40237452,
+                "via": [
+                  "traceTraining",
+                  "trainingTraceExact",
+                  "trainingRound",
+                  "updateProjectiles",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "traceTraining",
+                "file": "world/training-ballistics.js",
+                "line": 17,
+                "bytes": 27489392,
+                "via": [
+                  "trainingTraceExact",
+                  "trainingRound",
+                  "updateProjectiles",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "shoulderBad",
+                "file": "127.0.0.1:9064/index.html?debug=1&__gameTestToken=60ce3b75-c793-480a-81a1-588be6a8052a",
+                "line": 55563,
+                "bytes": 20782524,
+                "via": [
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand",
+                  "holdWeapon"
+                ]
+              },
+              {
+                "fn": "updateProjectiles",
+                "file": "127.0.0.1:9064/index.html?debug=1&__gameTestToken=60ce3b75-c793-480a-81a1-588be6a8052a",
+                "line": 60940,
+                "bytes": 17572768,
+                "via": [
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "shoulderAngles",
+                "file": "core/body-limits.js",
+                "line": 193,
+                "bytes": 17504520,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "traceTraining",
+                "file": "world/training-ballistics.js",
+                "line": 17,
+                "bytes": 13900208,
+                "via": [
+                  "updateMouseAimBody",
+                  "updateMouseAim",
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 13095612,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 10997688,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 9752052,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "updateByType",
+                "file": "three/three.webgpu.js",
+                "line": 52796,
+                "bytes": 9014496,
+                "via": [
+                  "update",
+                  "_update",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "exactTrace",
+                "file": "world/training-exact.js",
+                "line": 109,
+                "bytes": 7719696,
+                "via": [
+                  "traceTraining",
+                  "updateMouseAimBody",
+                  "updateMouseAim",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "tick",
+                "file": "127.0.0.1:9064/index.html?debug=1&__gameTestToken=60ce3b75-c793-480a-81a1-588be6a8052a",
+                "line": 68746,
+                "bytes": 6950296,
+                "via": [
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "traceTraining",
+                "file": "world/training-ballistics.js",
+                "line": 17,
+                "bytes": 6720792,
+                "via": [
+                  "shotBlocked",
+                  "updateShotLos",
+                  "updateMouseAimBody",
+                  "updateMouseAim",
+                  "tick"
+                ]
+              },
+              {
+                "fn": "shoulderAngles",
+                "file": "core/body-limits.js",
+                "line": 193,
+                "bytes": 5588988,
+                "via": [
+                  "turnAt",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "flippedTwin",
+                "file": "game/vm-flip.js",
+                "line": 18,
+                "bytes": 5328176,
+                "via": [
+                  "mirrorParts",
+                  "update",
+                  "updateViewmodel",
+                  "tick",
+                  "update"
+                ]
+              },
+              {
+                "fn": "hitWildlifeSegment",
+                "file": "127.0.0.1:9064/index.html?debug=1&__gameTestToken=60ce3b75-c793-480a-81a1-588be6a8052a",
+                "line": 15768,
+                "bytes": 5131016,
+                "via": [
+                  "updateProjectiles",
+                  "tick",
+                  "update",
+                  "(root)"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 4785876,
+                "via": [
+                  "shoulderAngles",
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand"
+                ]
+              },
+              {
+                "fn": "equals",
+                "file": "three/three.webgpu.js",
+                "line": 294,
+                "bytes": 4572816,
+                "via": [
+                  "needsRefresh",
+                  "needsRefresh",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              },
+              {
+                "fn": "hypot",
+                "file": "",
+                "line": 0,
+                "bytes": 4245012,
+                "via": [
+                  "shoulderBad",
+                  "holdShoulderIK",
+                  "solveArmIK",
+                  "holdHand",
+                  "holdDiveHand"
+                ]
+              },
+              {
+                "fn": "equals",
+                "file": "three/three.webgpu.js",
+                "line": 294,
+                "bytes": 3802476,
+                "via": [
+                  "needsRefresh",
+                  "needsRefresh",
+                  "_renderObjectDirect",
+                  "renderObject",
+                  "filter"
+                ]
+              }
+            ]
+          },
+          "cpuPhases": {
+            "frames": 1146,
+            "phases": [
+              {
+                "k": "r:render",
+                "avg": 7.576,
+                "max": 17.7
+              },
+              {
+                "k": "m:hold",
+                "avg": 2.422,
+                "max": 7.6
+              },
+              {
+                "k": "m:pose",
+                "avg": 1.235,
+                "max": 4.1
+              },
+              {
+                "k": "r:matrices",
+                "avg": 1.024,
+                "max": 4.6
+              },
+              {
+                "k": "aim+climb",
+                "avg": 0.672,
+                "max": 2.2
+              },
+              {
+                "k": "projectiles",
+                "avg": 0.608,
+                "max": 4.6
+              },
+              {
+                "k": "m:hold2+arms",
+                "avg": 0.522,
+                "max": 4.8
+              },
+              {
+                "k": "viewmodel",
+                "avg": 0.478,
+                "max": 1.5
+              },
+              {
+                "k": "effects",
+                "avg": 0.389,
+                "max": 2.1
+              },
+              {
+                "k": "r:rigSkin",
+                "avg": 0.171,
+                "max": 1.1
+              },
+              {
+                "k": "drops+hud",
+                "avg": 0.134,
+                "max": 1.1
+              },
+              {
+                "k": "w:rest",
+                "avg": 0.123,
+                "max": 0.9
+              },
+              {
+                "k": "m:fire",
+                "avg": 0.119,
+                "max": 3
+              },
+              {
+                "k": "daynight",
+                "avg": 0.098,
+                "max": 0.7
+              },
+              {
+                "k": "hud+audio",
+                "avg": 0.086,
+                "max": 0.6
+              },
+              {
+                "k": "m:reload+knife",
+                "avg": 0.083,
+                "max": 0.4
+              },
+              {
+                "k": "idle+gear",
+                "avg": 0.072,
+                "max": 1.2
+              },
+              {
+                "k": "camera",
+                "avg": 0.053,
+                "max": 0.3
+              },
+              {
+                "k": "ground+clamp",
+                "avg": 0.034,
+                "max": 0.3
+              },
+              {
+                "k": "move",
+                "avg": 0.032,
+                "max": 0.3
+              },
+              {
+                "k": "r:lightPool",
+                "avg": 0.023,
+                "max": 0.8
+              },
+              {
+                "k": "tree+deck coll",
+                "avg": 0.021,
+                "max": 0.2
+              },
+              {
+                "k": "m:reticle+ghost",
+                "avg": 0.016,
+                "max": 0.2
+              },
+              {
+                "k": "zombies",
+                "avg": 0.016,
+                "max": 0.2
+              },
+              {
+                "k": "jump+guns",
+                "avg": 0.016,
+                "max": 0.2
+              },
+              {
+                "k": "fires+smoke",
+                "avg": 0.015,
+                "max": 0.1
+              },
+              {
+                "k": "turrets",
+                "avg": 0.014,
+                "max": 0.2
+              },
+              {
+                "k": "m:mortar+carry",
+                "avg": 0.012,
+                "max": 0.1
+              },
+              {
+                "k": "m:hush+roof+kills",
+                "avg": 0.011,
+                "max": 0.2
+              },
+              {
+                "k": "waves",
+                "avg": 0.01,
+                "max": 0.2
+              },
+              {
+                "k": "m:lasers",
+                "avg": 0.009,
+                "max": 0.1
+              },
+              {
+                "k": "combat misc",
+                "avg": 0.009,
+                "max": 0.1
+              },
+              {
+                "k": "m:idle",
+                "avg": 0.008,
+                "max": 0.2
+              },
+              {
+                "k": "marine",
+                "avg": 0.008,
+                "max": 0.4
+              },
+              {
+                "k": "r:cull",
+                "avg": 0.007,
+                "max": 0.1
+              },
+              {
+                "k": "after render",
+                "avg": 0.007,
+                "max": 0.1
+              }
+            ],
+            "spikes": [
+              {
+                "frame": 18,
+                "ms": 26.6,
+                "top": [
+                  "r:render 13.9",
+                  "m:hold2+arms 3.2",
+                  "m:hold 2.5",
+                  "m:pose 1.3"
+                ],
+                "heapMB": 900.8,
+                "freedMB": -1.1
+              },
+              {
+                "frame": 181,
+                "ms": 29.6,
+                "top": [
+                  "r:render 10.8",
+                  "m:hold 6.1",
+                  "m:hold2+arms 3.6",
+                  "r:matrices 1.7"
+                ],
+                "heapMB": 884.9,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 211,
+                "ms": 27.9,
+                "top": [
+                  "r:render 12.0",
+                  "m:hold2+arms 3.9",
+                  "m:hold 3.6",
+                  "m:pose 2.2"
+                ],
+                "heapMB": 895.6,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 218,
+                "ms": 28.9,
+                "top": [
+                  "r:render 14.8",
+                  "m:hold 2.9",
+                  "m:pose 2.0",
+                  "r:matrices 1.9"
+                ],
+                "heapMB": 898.2,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 219,
+                "ms": 26.7,
+                "top": [
+                  "r:render 9.2",
+                  "m:hold 7.6",
+                  "m:pose 1.9",
+                  "effects 1.8"
+                ],
+                "heapMB": 898.5,
+                "freedMB": -0.3
+              },
+              {
+                "frame": 234,
+                "ms": 26,
+                "top": [
+                  "r:render 10.2",
+                  "m:hold 4.2",
+                  "m:pose 4.0",
+                  "aim+climb 1.9"
+                ],
+                "heapMB": 903.9,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 238,
+                "ms": 24.8,
+                "top": [
+                  "r:render 10.8",
+                  "m:hold 2.9",
+                  "m:hold2+arms 2.2",
+                  "projectiles 1.8"
+                ],
+                "heapMB": 905.3,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 239,
+                "ms": 25.5,
+                "top": [
+                  "r:render 12.9",
+                  "m:hold 2.8",
+                  "r:matrices 2.8",
+                  "m:pose 2.7"
+                ],
+                "heapMB": 905.7,
+                "freedMB": -0.3
+              },
+              {
+                "frame": 418,
+                "ms": 26.1,
+                "top": [
+                  "r:render 10.3",
+                  "m:hold 4.8",
+                  "m:pose 2.7",
+                  "r:matrices 2.1"
+                ],
+                "heapMB": 886.5,
+                "freedMB": -0.3
+              },
+              {
+                "frame": 440,
+                "ms": 25.8,
+                "top": [
+                  "r:render 10.2",
+                  "m:hold 3.2",
+                  "m:hold2+arms 2.5",
+                  "r:matrices 2.5"
+                ],
+                "heapMB": 894.4,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 454,
+                "ms": 25.2,
+                "top": [
+                  "r:render 9.9",
+                  "m:hold 4.8",
+                  "m:hold2+arms 2.1",
+                  "m:pose 1.5"
+                ],
+                "heapMB": 899.5,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 572,
+                "ms": 25.6,
+                "top": [
+                  "r:render 13.0",
+                  "m:hold 2.9",
+                  "m:pose 1.6",
+                  "m:hold2+arms 1.6"
+                ],
+                "heapMB": 888.2,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 589,
+                "ms": 28.9,
+                "top": [
+                  "r:render 12.9",
+                  "m:pose 3.1",
+                  "m:hold2+arms 3.1",
+                  "m:hold 2.9"
+                ],
+                "heapMB": 894.5,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 590,
+                "ms": 26.5,
+                "top": [
+                  "r:render 12.4",
+                  "m:hold 5.2",
+                  "m:pose 2.5",
+                  "projectiles 1.4"
+                ],
+                "heapMB": 894.9,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 591,
+                "ms": 29.2,
+                "top": [
+                  "r:render 12.1",
+                  "m:hold 4.1",
+                  "m:hold2+arms 2.9",
+                  "m:pose 2.1"
+                ],
+                "heapMB": 895.3,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 592,
+                "ms": 24.1,
+                "top": [
+                  "r:render 11.2",
+                  "m:hold 4.4",
+                  "r:matrices 1.8",
+                  "m:pose 1.6"
+                ],
+                "heapMB": 895.7,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 594,
+                "ms": 24.4,
+                "top": [
+                  "r:render 11.7",
+                  "m:hold 3.3",
+                  "m:hold2+arms 1.8",
+                  "m:pose 1.7"
+                ],
+                "heapMB": 896.4,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 610,
+                "ms": 43.3,
+                "top": [
+                  "r:render 17.7",
+                  "m:hold 6.2",
+                  "r:matrices 4.6",
+                  "m:hold2+arms 3.4"
+                ],
+                "heapMB": 902.5,
+                "freedMB": -0.5
+              },
+              {
+                "frame": 626,
+                "ms": 24.2,
+                "top": [
+                  "r:render 10.8",
+                  "m:hold 5.0",
+                  "aim+climb 2.1",
+                  "m:pose 2.0"
+                ],
+                "heapMB": 908.4,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 631,
+                "ms": 24.7,
+                "top": [
+                  "r:render 7.7",
+                  "m:hold 4.6",
+                  "m:pose 2.9",
+                  "m:hold2+arms 2.4"
+                ],
+                "heapMB": 910.2,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 636,
+                "ms": 24.7,
+                "top": [
+                  "r:render 10.5",
+                  "m:hold 4.6",
+                  "m:pose 2.5",
+                  "r:matrices 2.2"
+                ],
+                "heapMB": 912,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 640,
+                "ms": 30.7,
+                "top": [
+                  "r:render 8.2",
+                  "m:hold 4.7",
+                  "m:hold2+arms 3.3",
+                  "m:pose 2.9"
+                ],
+                "heapMB": 913.5,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 643,
+                "ms": 32.2,
+                "top": [
+                  "r:render 13.4",
+                  "m:hold 4.8",
+                  "m:pose 2.8",
+                  "m:hold2+arms 2.8"
+                ],
+                "heapMB": 881.4,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 645,
+                "ms": 28.9,
+                "top": [
+                  "r:render 11.8",
+                  "m:hold 3.3",
+                  "m:hold2+arms 3.2",
+                  "m:pose 2.5"
+                ],
+                "heapMB": 882.2,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 650,
+                "ms": 24.4,
+                "top": [
+                  "r:render 11.7",
+                  "m:hold 3.5",
+                  "m:pose 2.0",
+                  "aim+climb 1.4"
+                ],
+                "heapMB": 884,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 651,
+                "ms": 24.5,
+                "top": [
+                  "r:render 12.2",
+                  "m:hold 2.3",
+                  "m:hold2+arms 1.8",
+                  "m:pose 1.7"
+                ],
+                "heapMB": 884.4,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 660,
+                "ms": 24.5,
+                "top": [
+                  "r:render 12.0",
+                  "m:hold 4.0",
+                  "m:pose 2.3",
+                  "r:matrices 2.0"
+                ],
+                "heapMB": 887.7,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 669,
+                "ms": 24.2,
+                "top": [
+                  "r:render 7.8",
+                  "m:hold2+arms 4.8",
+                  "m:hold 3.8",
+                  "m:pose 1.8"
+                ],
+                "heapMB": 890.9,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 672,
+                "ms": 27,
+                "top": [
+                  "r:render 13.0",
+                  "m:hold 2.7",
+                  "m:hold2+arms 2.1",
+                  "m:pose 2.1"
+                ],
+                "heapMB": 892,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 673,
+                "ms": 33.5,
+                "top": [
+                  "r:render 16.0",
+                  "r:matrices 3.5",
+                  "m:hold 3.3",
+                  "projectiles 2.6"
+                ],
+                "heapMB": 892.4,
+                "freedMB": -0.3
+              },
+              {
+                "frame": 674,
+                "ms": 42.8,
+                "top": [
+                  "r:render 14.5",
+                  "m:hold 6.9",
+                  "m:hold2+arms 4.7",
+                  "projectiles 4.6"
+                ],
+                "heapMB": 892.8,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 684,
+                "ms": 33.5,
+                "top": [
+                  "r:render 13.4",
+                  "m:hold2+arms 4.4",
+                  "r:matrices 3.8",
+                  "m:hold 2.7"
+                ],
+                "heapMB": 896.5,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 685,
+                "ms": 26.2,
+                "top": [
+                  "r:render 12.7",
+                  "m:hold 3.9",
+                  "m:pose 3.0",
+                  "r:matrices 2.2"
+                ],
+                "heapMB": 896.8,
+                "freedMB": -0.3
+              },
+              {
+                "frame": 690,
+                "ms": 26,
+                "top": [
+                  "r:render 10.8",
+                  "m:hold2+arms 4.1",
+                  "r:matrices 2.3",
+                  "m:hold 1.8"
+                ],
+                "heapMB": 898.7,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 711,
+                "ms": 28.5,
+                "top": [
+                  "r:render 11.6",
+                  "r:matrices 3.7",
+                  "m:hold 3.3",
+                  "m:pose 3.1"
+                ],
+                "heapMB": 906.3,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 769,
+                "ms": 27.4,
+                "top": [
+                  "r:render 9.3",
+                  "m:hold2+arms 4.1",
+                  "m:hold 3.3",
+                  "m:pose 2.2"
+                ],
+                "heapMB": 896.5,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 773,
+                "ms": 24.9,
+                "top": [
+                  "r:render 9.5",
+                  "m:hold 3.9",
+                  "r:matrices 3.6",
+                  "m:pose 2.2"
+                ],
+                "heapMB": 898.1,
+                "freedMB": -0.3
+              },
+              {
+                "frame": 853,
+                "ms": 25,
+                "top": [
+                  "r:render 11.1",
+                  "m:hold 5.5",
+                  "r:matrices 2.0",
+                  "m:pose 1.8"
+                ],
+                "heapMB": 899.9,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 876,
+                "ms": 24.6,
+                "top": [
+                  "r:render 12.2",
+                  "m:hold 3.5",
+                  "r:matrices 1.6",
+                  "aim+climb 1.5"
+                ],
+                "heapMB": 908.4,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 888,
+                "ms": 35.7,
+                "top": [
+                  "r:render 14.9",
+                  "m:hold 5.4",
+                  "m:hold2+arms 3.1",
+                  "r:matrices 2.8"
+                ],
+                "heapMB": 912.8,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 890,
+                "ms": 26.7,
+                "top": [
+                  "r:render 9.6",
+                  "m:hold2+arms 4.2",
+                  "m:hold 4.0",
+                  "r:matrices 1.7"
+                ],
+                "heapMB": 913.6,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 897,
+                "ms": 25.3,
+                "top": [
+                  "r:render 13.2",
+                  "m:hold 2.8",
+                  "m:pose 2.1",
+                  "m:hold2+arms 1.8"
+                ],
+                "heapMB": 882.9,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 904,
+                "ms": 27.4,
+                "top": [
+                  "r:render 9.8",
+                  "m:hold2+arms 4.4",
+                  "m:hold 3.1",
+                  "m:pose 1.6"
+                ],
+                "heapMB": 885.5,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 910,
+                "ms": 24.9,
+                "top": [
+                  "r:render 14.4",
+                  "m:hold 2.4",
+                  "r:matrices 2.3",
+                  "projectiles 1.6"
+                ],
+                "heapMB": 887.7,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 911,
+                "ms": 29.4,
+                "top": [
+                  "r:render 10.6",
+                  "m:hold 6.8",
+                  "m:pose 2.5",
+                  "m:hold2+arms 2.5"
+                ],
+                "heapMB": 888.2,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 1066,
+                "ms": 25.3,
+                "top": [
+                  "r:render 12.4",
+                  "m:hold2+arms 3.3",
+                  "m:hold 2.4",
+                  "m:pose 1.6"
+                ],
+                "heapMB": 890.9,
+                "freedMB": -0.4
+              },
+              {
+                "frame": 1103,
+                "ms": 24.1,
+                "top": [
+                  "r:render 10.0",
+                  "m:hold2+arms 3.1",
+                  "m:hold 2.4",
+                  "r:matrices 2.3"
+                ],
+                "heapMB": 904.1,
+                "freedMB": -0.4
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

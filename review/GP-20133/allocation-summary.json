@@ -1,0 +1,1280 @@
+{
+  "scope": "Diagnostic sampling; major367ms previous run not reproduced here. Official tag290 has3failures; baseline comparison pending.",
+  "rows": [
+    {
+      "mode": "idle",
+      "frames": 270,
+      "totalMB": 114.45541000366211,
+      "MBPerSecond": 25.421542323693487,
+      "self": [
+        {
+          "k": "shoulderBad index.html:55195",
+          "bytes": 12766260,
+          "via": [
+            "holdHand index.html:55516",
+            "solveArmIK index.html:55135",
+            "holdShoulderIK index.html:55211"
+          ]
+        },
+        {
+          "k": "shoulderAngles core/body-limits.js:181",
+          "bytes": 11762048,
+          "via": [
+            "solveArmIK index.html:55135",
+            "holdShoulderIK index.html:55211",
+            "shoulderBad index.html:55195"
+          ]
+        },
+        {
+          "k": "shoulderAngles core/body-limits.js:181",
+          "bytes": 3937220,
+          "via": [
+            "solveArmIK index.html:55135",
+            "holdShoulderIK index.html:55211",
+            "turnAt index.html:55223"
+          ]
+        },
+        {
+          "k": "wristAngles core/body-limits.js:60",
+          "bytes": 3518228,
+          "via": [
+            "holdHand index.html:55516",
+            "limitWrist index.html:55443",
+            "clampWrist core/body-limits.js:77"
+          ]
+        },
+        {
+          "k": "swingAt core/body-limits.js:96",
+          "bytes": 2643964,
+          "via": [
+            "holdHand index.html:55516",
+            "limitWrist index.html:55443",
+            "clampWrist core/body-limits.js:77"
+          ]
+        },
+        {
+          "k": "bend studio/marine-cloth.js:64",
+          "bytes": 2556932,
+          "via": [
+            "_renderScene vendor/three/three.webgpu.js:50617",
+            "_renderObjects vendor/three/three.webgpu.js:52128",
+            "(anonymous) vendor/three/three.webgpu.js:38138"
+          ]
+        },
+        {
+          "k": "updateByType vendor/three/three.webgpu.js:52796",
+          "bytes": 2229036,
+          "via": [
+            "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+            "_update vendor/three/three.webgpu.js:27681",
+            "update vendor/three/three.webgpu.js:52771"
+          ]
+        },
+        {
+          "k": "updateByType vendor/three/three.webgpu.js:52796",
+          "bytes": 2212656,
+          "via": [
+            "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+            "_update vendor/three/three.webgpu.js:27681",
+            "update vendor/three/three.webgpu.js:52771"
+          ]
+        },
+        {
+          "k": "turnAt index.html:55223",
+          "bytes": 1921284,
+          "via": [
+            "holdHand index.html:55516",
+            "solveArmIK index.html:55135",
+            "holdShoulderIK index.html:55211"
+          ]
+        },
+        {
+          "k": "hypot :0",
+          "bytes": 1737336,
+          "via": [
+            "solveArmIK index.html:55135",
+            "holdShoulderIK index.html:55211",
+            "shoulderBad index.html:55195"
+          ]
+        },
+        {
+          "k": "clampWrist core/body-limits.js:77",
+          "bytes": 1706552,
+          "via": [
+            "holdDiveHand index.html:55905",
+            "holdHand index.html:55516",
+            "limitWrist index.html:55443"
+          ]
+        },
+        {
+          "k": "tick index.html:68337",
+          "bytes": 1704884,
+          "via": [
+            "(root) :0",
+            "update vendor/three/three.webgpu.js:24925"
+          ]
+        },
+        {
+          "k": "updateByType vendor/three/three.webgpu.js:52796",
+          "bytes": 1655388,
+          "via": [
+            "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+            "_update vendor/three/three.webgpu.js:27681",
+            "update vendor/three/three.webgpu.js:52771"
+          ]
+        },
+        {
+          "k": "updateMarinePose index.html:22924",
+          "bytes": 1540744,
+          "via": [
+            "(root) :0",
+            "update vendor/three/three.webgpu.js:24925",
+            "tick index.html:68337"
+          ]
+        },
+        {
+          "k": "updateByType vendor/three/three.webgpu.js:52796",
+          "bytes": 1524276,
+          "via": [
+            "_updateBindings vendor/three/three.webgpu.js:27639",
+            "_update vendor/three/three.webgpu.js:27681",
+            "update vendor/three/three.webgpu.js:52771"
+          ]
+        },
+        {
+          "k": "flippedTwin game/vm-flip.js:18",
+          "bytes": 1459116,
+          "via": [
+            "updateViewmodel index.html:54268",
+            "update game/viewmodel.js:1328",
+            "mirrorParts game/viewmodel.js:1302"
+          ]
+        },
+        {
+          "k": "traceTraining world/training-ballistics.js:17",
+          "bytes": 1458756,
+          "via": [
+            "updateMouseAim index.html:54436",
+            "_otsAimRay index.html:54399",
+            "updateMouseAimBody index.html:54442"
+          ]
+        },
+        {
+          "k": "syncRigSkins studio/marine-skin.js:239",
+          "bytes": 1442680,
+          "via": [
+            "update vendor/three/three.webgpu.js:24925",
+            "tick index.html:68337",
+            "renderFrame index.html:2524"
+          ]
+        },
+        {
+          "k": "updateByType vendor/three/three.webgpu.js:52796",
+          "bytes": 1343976,
+          "via": [
+            "_updateBindings vendor/three/three.webgpu.js:27639",
+            "_update vendor/three/three.webgpu.js:27681",
+            "update vendor/three/three.webgpu.js:52771"
+          ]
+        },
+        {
+          "k": "hypot :0",
+          "bytes": 1262028,
+          "via": [
+            "holdShoulderIK index.html:55211",
+            "shoulderBad index.html:55195",
+            "shoulderAngles core/body-limits.js:181"
+          ]
+        },
+        {
+          "k": "updateByType vendor/three/three.webgpu.js:52796",
+          "bytes": 1229256,
+          "via": [
+            "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+            "_update vendor/three/three.webgpu.js:27681",
+            "update vendor/three/three.webgpu.js:52771"
+          ]
+        },
+        {
+          "k": "exactTrace world/training-exact.js:109",
+          "bytes": 1229256,
+          "via": [
+            "updateShotLos index.html:53936",
+            "shotBlocked index.html:53867",
+            "traceTraining world/training-ballistics.js:17"
+          ]
+        },
+        {
+          "k": "mirrorParts game/viewmodel.js:1302",
+          "bytes": 1180432,
+          "via": [
+            "tick index.html:68337",
+            "updateViewmodel index.html:54268",
+            "update game/viewmodel.js:1328"
+          ]
+        },
+        {
+          "k": "equals vendor/three/three.webgpu.js:294",
+          "bytes": 1130916,
+          "via": [
+            "renderObject vendor/three/three.webgpu.js:52154",
+            "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+            "needsRefresh vendor/three/three.webgpu.js:47246"
+          ]
+        }
+      ],
+      "inclusive": [
+        {
+          "k": "update vendor/three/three.webgpu.js:24925",
+          "bytes": 119109516,
+          "via": [
+            "(root) :0"
+          ]
+        },
+        {
+          "k": "tick index.html:68337",
+          "bytes": 118994784,
+          "via": [
+            "(root) :0",
+            "update vendor/three/three.webgpu.js:24925"
+          ]
+        },
+        {
+          "k": "holdWeapon index.html:55963",
+          "bytes": 48617728,
+          "via": [
+            "update vendor/three/three.webgpu.js:24925",
+            "tick index.html:68337"
+          ]
+        },
+        {
+          "k": "holdHand index.html:55516",
+          "bytes": 45009516,
+          "via": [
+            "holdWeapon index.html:55963",
+            "holdDiveHand index.html:55905"
+          ]
+        },
+        {
+          "k": "holdDiveHand index.html:55905",
+          "bytes": 45009516,
+          "via": [
+            "tick index.html:68337",
+            "holdWeapon index.html:55963"
+          ]
+        },
+        {
+          "k": "renderFrame index.html:2524",
+          "bytes": 37118148,
+          "via": [
+            "update vendor/three/three.webgpu.js:24925",
+            "tick index.html:68337"
+          ]
+        },
+        {
+          "k": "solveArmIK index.html:55135",
+          "bytes": 36091428,
+          "via": [
+            "holdDiveHand index.html:55905",
+            "holdHand index.html:55516"
+          ]
+        },
+        {
+          "k": "holdShoulderIK index.html:55211",
+          "bytes": 35796408,
+          "via": [
+            "holdHand index.html:55516",
+            "solveArmIK index.html:55135"
+          ]
+        },
+        {
+          "k": "_renderScene vendor/three/three.webgpu.js:50617",
+          "bytes": 34986396,
+          "via": [
+            "render vendor/three/three.webgpu.js:70670",
+            "render vendor/three/three.webgpu.js:31243"
+          ]
+        },
+        {
+          "k": "render vendor/three/three.webgpu.js:31243",
+          "bytes": 34986396,
+          "via": [
+            "renderFrame index.html:2524",
+            "render vendor/three/three.webgpu.js:70670"
+          ]
+        },
+        {
+          "k": "render vendor/three/three.webgpu.js:70670",
+          "bytes": 34986396,
+          "via": [
+            "tick index.html:68337",
+            "renderFrame index.html:2524"
+          ]
+        },
+        {
+          "k": "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+          "bytes": 34904348,
+          "via": [
+            "filter game/viewmodel.js:190",
+            "renderObject vendor/three/three.webgpu.js:52154"
+          ]
+        },
+        {
+          "k": "renderObject vendor/three/three.webgpu.js:52154",
+          "bytes": 34904348,
+          "via": [
+            "_renderObjects vendor/three/three.webgpu.js:52128",
+            "filter game/viewmodel.js:190"
+          ]
+        },
+        {
+          "k": "filter game/viewmodel.js:190",
+          "bytes": 34904348,
+          "via": [
+            "_renderScene vendor/three/three.webgpu.js:50617",
+            "_renderObjects vendor/three/three.webgpu.js:52128"
+          ]
+        },
+        {
+          "k": "_renderObjects vendor/three/three.webgpu.js:52128",
+          "bytes": 34904348,
+          "via": [
+            "render vendor/three/three.webgpu.js:31243",
+            "_renderScene vendor/three/three.webgpu.js:50617"
+          ]
+        },
+        {
+          "k": "shoulderBad index.html:55195",
+          "bytes": 27675188,
+          "via": [
+            "solveArmIK index.html:55135",
+            "holdShoulderIK index.html:55211"
+          ]
+        },
+        {
+          "k": "updateBeforeNode vendor/three/three.webgpu.js:45477",
+          "bytes": 24603872,
+          "via": [
+            "renderObject vendor/three/three.webgpu.js:52154",
+            "_renderObjectDirect vendor/three/three.webgpu.js:52263"
+          ]
+        },
+        {
+          "k": "updateBefore vendor/three/three.webgpu.js:33703",
+          "bytes": 20404092,
+          "via": [
+            "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+            "updateBeforeNode vendor/three/three.webgpu.js:45477"
+          ]
+        },
+        {
+          "k": "shoulderAngles core/body-limits.js:181",
+          "bytes": 13024076,
+          "via": [
+            "holdShoulderIK index.html:55211",
+            "shoulderBad index.html:55195"
+          ]
+        },
+        {
+          "k": "_renderScene vendor/three/three.webgpu.js:50617",
+          "bytes": 11032356,
+          "via": [
+            "updateBefore vendor/three/three.webgpu.js:33703",
+            "render vendor/three/three.webgpu.js:50539"
+          ]
+        }
+      ],
+      "gc": {
+        "synced": true,
+        "mainThread": "CrRendererMain",
+        "events": 272,
+        "totalMs": 5.2,
+        "perFrameMs": 0.02,
+        "byName": {
+          "V8.GC_HEAP_EXTERNAL_PROLOGUE": {
+            "n": 4,
+            "ms": 0.1
+          },
+          "V8.GC_HEAP_PROLOGUE": {
+            "n": 4,
+            "ms": 0
+          },
+          "V8.GC_TIME_TO_SAFEPOINT": {
+            "n": 4,
+            "ms": 0
+          },
+          "V8.GC_SCAVENGER": {
+            "n": 4,
+            "ms": 5.1
+          },
+          "V8.GC_HEAP_PROLOGUE_SAFEPOINT": {
+            "n": 4,
+            "ms": 0
+          },
+          "V8.GC_SCAVENGER_SCAVENGE": {
+            "n": 4,
+            "ms": 4.5
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_IDENTIFY": {
+            "n": 4,
+            "ms": 0.6
+          },
+          "V8.GC_SCAVENGER_TRACED_HANDLES_COMPUTE_WEAKNESS_PARALLEL": {
+            "n": 4,
+            "ms": 0.5
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_COLLECT_OLD_TO_NEW_PAGES": {
+            "n": 4,
+            "ms": 0.7
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE": {
+            "n": 4,
+            "ms": 1.1
+          },
+          "Parallel scavenge started": {
+            "n": 4,
+            "ms": 0
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_ROOTS": {
+            "n": 4,
+            "ms": 0.3
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_PARALLEL": {
+            "n": 2,
+            "ms": 0.2
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_PROCESS": {
+            "n": 4,
+            "ms": 1
+          },
+          "V8.GC_SCAVENGER_TRACED_HANDLES_RESET_PARALLEL": {
+            "n": 4,
+            "ms": 0.4
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_FINALIZE": {
+            "n": 4,
+            "ms": 0.2
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_RESTORE_AND_QUARANTINE_PINNED": {
+            "n": 4,
+            "ms": 0.1
+          },
+          "V8.GC_SCAVENGER_FREE_REMEMBERED_SET": {
+            "n": 4,
+            "ms": 0.2
+          },
+          "V8.GC_SCAVENGER_SWEEP_ARRAY_BUFFERS": {
+            "n": 4,
+            "ms": 0
+          },
+          "V8.GC_SCAVENGER_RESIZE_NEW_SPACE": {
+            "n": 4,
+            "ms": 0
+          },
+          "V8.GC_HEAP_EXTERNAL_WEAK_GLOBAL_HANDLES": {
+            "n": 4,
+            "ms": 0.4
+          },
+          "V8.GC_HEAP_EPILOGUE_SAFEPOINT": {
+            "n": 4,
+            "ms": 0
+          },
+          "V8.GC_HEAP_EPILOGUE": {
+            "n": 4,
+            "ms": 0
+          },
+          "V8.GC_HEAP_DUMP_STATISTICS": {
+            "n": 4,
+            "ms": 0
+          },
+          "V8.GC_HEAP_EXTERNAL_EPILOGUE": {
+            "n": 4,
+            "ms": 0
+          }
+        },
+        "spikesWithGc": "0/0",
+        "spikes": []
+      }
+    },
+    {
+      "mode": "fire",
+      "frames": 1150,
+      "totalMB": 883.7208061218262,
+      "MBPerSecond": 44.3523616622985,
+      "self": [
+        {
+          "k": "arm.bendSleeve studio/fp-arms.js:205",
+          "bytes": 317918780,
+          "via": [
+            "tick index.html:68337",
+            "updateViewmodel index.html:54268",
+            "update game/viewmodel.js:1328"
+          ]
+        },
+        {
+          "k": "rot studio/fp-arms.js:220",
+          "bytes": 95297712,
+          "via": [
+            "updateViewmodel index.html:54268",
+            "update game/viewmodel.js:1328",
+            "arm.bendSleeve studio/fp-arms.js:205"
+          ]
+        },
+        {
+          "k": "shoulderBad index.html:55195",
+          "bytes": 41528376,
+          "via": [
+            "holdHand index.html:55516",
+            "solveArmIK index.html:55135",
+            "holdShoulderIK index.html:55211"
+          ]
+        },
+        {
+          "k": "shoulderAngles core/body-limits.js:181",
+          "bytes": 36565928,
+          "via": [
+            "solveArmIK index.html:55135",
+            "holdShoulderIK index.html:55211",
+            "shoulderBad index.html:55195"
+          ]
+        },
+        {
+          "k": "exactTrace world/training-exact.js:109",
+          "bytes": 33960084,
+          "via": [
+            "trainingRound index.html:67175",
+            "trainingTraceExact index.html:67089",
+            "traceTraining world/training-ballistics.js:17"
+          ]
+        },
+        {
+          "k": "traceTraining world/training-ballistics.js:17",
+          "bytes": 26570844,
+          "via": [
+            "updateProjectiles index.html:60538",
+            "trainingRound index.html:67175",
+            "trainingTraceExact index.html:67089"
+          ]
+        },
+        {
+          "k": "updateProjectiles index.html:60538",
+          "bytes": 20997968,
+          "via": [
+            "(root) :0",
+            "update vendor/three/three.webgpu.js:24925",
+            "tick index.html:68337"
+          ]
+        },
+        {
+          "k": "wristAngles core/body-limits.js:60",
+          "bytes": 19702360,
+          "via": [
+            "holdHand index.html:55516",
+            "limitWrist index.html:55443",
+            "clampWrist core/body-limits.js:77"
+          ]
+        },
+        {
+          "k": "traceTraining world/training-ballistics.js:17",
+          "bytes": 14850636,
+          "via": [
+            "tick index.html:68337",
+            "updateMouseAim index.html:54436",
+            "updateMouseAimBody index.html:54442"
+          ]
+        },
+        {
+          "k": "clampWrist core/body-limits.js:77",
+          "bytes": 12051860,
+          "via": [
+            "holdDiveHand index.html:55905",
+            "holdHand index.html:55516",
+            "limitWrist index.html:55443"
+          ]
+        },
+        {
+          "k": "updateByType vendor/three/three.webgpu.js:52796",
+          "bytes": 11620512,
+          "via": [
+            "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+            "_update vendor/three/three.webgpu.js:27681",
+            "update vendor/three/three.webgpu.js:52771"
+          ]
+        },
+        {
+          "k": "shoulderAngles core/body-limits.js:181",
+          "bytes": 10712500,
+          "via": [
+            "solveArmIK index.html:55135",
+            "holdShoulderIK index.html:55211",
+            "turnAt index.html:55223"
+          ]
+        },
+        {
+          "k": "updateByType vendor/three/three.webgpu.js:52796",
+          "bytes": 9883176,
+          "via": [
+            "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+            "_update vendor/three/three.webgpu.js:27681",
+            "update vendor/three/three.webgpu.js:52771"
+          ]
+        },
+        {
+          "k": "updateByType vendor/three/three.webgpu.js:52796",
+          "bytes": 8162220,
+          "via": [
+            "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+            "_update vendor/three/three.webgpu.js:27681",
+            "update vendor/three/three.webgpu.js:52771"
+          ]
+        },
+        {
+          "k": "traceTraining world/training-ballistics.js:17",
+          "bytes": 7949872,
+          "via": [
+            "updateMouseAimBody index.html:54442",
+            "updateShotLos index.html:53936",
+            "shotBlocked index.html:53867"
+          ]
+        },
+        {
+          "k": "updateByType vendor/three/three.webgpu.js:52796",
+          "bytes": 7375500,
+          "via": [
+            "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+            "_update vendor/three/three.webgpu.js:27681",
+            "update vendor/three/three.webgpu.js:52771"
+          ]
+        },
+        {
+          "k": "tick index.html:68337",
+          "bytes": 7048872,
+          "via": [
+            "(root) :0",
+            "update vendor/three/three.webgpu.js:24925"
+          ]
+        },
+        {
+          "k": "flippedTwin game/vm-flip.js:18",
+          "bytes": 5738016,
+          "via": [
+            "updateViewmodel index.html:54268",
+            "update game/viewmodel.js:1328",
+            "mirrorParts game/viewmodel.js:1302"
+          ]
+        },
+        {
+          "k": "hitWildlifeSegment index.html:15741",
+          "bytes": 5655524,
+          "via": [
+            "update vendor/three/three.webgpu.js:24925",
+            "tick index.html:68337",
+            "updateProjectiles index.html:60538"
+          ]
+        },
+        {
+          "k": "turnAt index.html:55223",
+          "bytes": 5470188,
+          "via": [
+            "holdHand index.html:55516",
+            "solveArmIK index.html:55135",
+            "holdShoulderIK index.html:55211"
+          ]
+        },
+        {
+          "k": "updateMarinePose index.html:22924",
+          "bytes": 5408904,
+          "via": [
+            "(root) :0",
+            "update vendor/three/three.webgpu.js:24925",
+            "tick index.html:68337"
+          ]
+        },
+        {
+          "k": "hypot :0",
+          "bytes": 5228412,
+          "via": [
+            "solveArmIK index.html:55135",
+            "holdShoulderIK index.html:55211",
+            "shoulderBad index.html:55195"
+          ]
+        },
+        {
+          "k": "equals vendor/three/three.webgpu.js:294",
+          "bytes": 4900608,
+          "via": [
+            "renderObject vendor/three/three.webgpu.js:52154",
+            "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+            "needsRefresh vendor/three/three.webgpu.js:47246"
+          ]
+        },
+        {
+          "k": "swingAt core/body-limits.js:96",
+          "bytes": 4630984,
+          "via": [
+            "holdHand index.html:55516",
+            "limitWrist index.html:55443",
+            "clampWrist core/body-limits.js:77"
+          ]
+        }
+      ],
+      "inclusive": [
+        {
+          "k": "update vendor/three/three.webgpu.js:24925",
+          "bytes": 924982240,
+          "via": [
+            "(root) :0"
+          ]
+        },
+        {
+          "k": "tick index.html:68337",
+          "bytes": 924867484,
+          "via": [
+            "(root) :0",
+            "update vendor/three/three.webgpu.js:24925"
+          ]
+        },
+        {
+          "k": "updateViewmodel index.html:54268",
+          "bytes": 430301472,
+          "via": [
+            "update vendor/three/three.webgpu.js:24925",
+            "tick index.html:68337"
+          ]
+        },
+        {
+          "k": "update game/viewmodel.js:1328",
+          "bytes": 430219524,
+          "via": [
+            "tick index.html:68337",
+            "updateViewmodel index.html:54268"
+          ]
+        },
+        {
+          "k": "arm.bendSleeve studio/fp-arms.js:205",
+          "bytes": 413216492,
+          "via": [
+            "updateViewmodel index.html:54268",
+            "update game/viewmodel.js:1328"
+          ]
+        },
+        {
+          "k": "holdWeapon index.html:55963",
+          "bytes": 165216176,
+          "via": [
+            "update vendor/three/three.webgpu.js:24925",
+            "tick index.html:68337"
+          ]
+        },
+        {
+          "k": "holdHand index.html:55516",
+          "bytes": 150894168,
+          "via": [
+            "holdWeapon index.html:55963",
+            "holdDiveHand index.html:55905"
+          ]
+        },
+        {
+          "k": "holdDiveHand index.html:55905",
+          "bytes": 150894168,
+          "via": [
+            "tick index.html:68337",
+            "holdWeapon index.html:55963"
+          ]
+        },
+        {
+          "k": "renderFrame index.html:2524",
+          "bytes": 132841796,
+          "via": [
+            "update vendor/three/three.webgpu.js:24925",
+            "tick index.html:68337"
+          ]
+        },
+        {
+          "k": "_renderScene vendor/three/three.webgpu.js:50617",
+          "bytes": 130569540,
+          "via": [
+            "renderFrame index.html:2524",
+            "render vendor/three/three.webgpu.js:70670"
+          ]
+        },
+        {
+          "k": "render vendor/three/three.webgpu.js:70670",
+          "bytes": 130569540,
+          "via": [
+            "tick index.html:68337",
+            "renderFrame index.html:2524"
+          ]
+        },
+        {
+          "k": "solveArmIK index.html:55135",
+          "bytes": 111574412,
+          "via": [
+            "holdDiveHand index.html:55905",
+            "holdHand index.html:55516"
+          ]
+        },
+        {
+          "k": "holdShoulderIK index.html:55211",
+          "bytes": 110590928,
+          "via": [
+            "holdHand index.html:55516",
+            "solveArmIK index.html:55135"
+          ]
+        },
+        {
+          "k": "updateProjectiles index.html:60538",
+          "bytes": 95431940,
+          "via": [
+            "update vendor/three/three.webgpu.js:24925",
+            "tick index.html:68337"
+          ]
+        },
+        {
+          "k": "rot studio/fp-arms.js:220",
+          "bytes": 95297712,
+          "via": [
+            "update game/viewmodel.js:1328",
+            "arm.bendSleeve studio/fp-arms.js:205"
+          ]
+        },
+        {
+          "k": "shoulderBad index.html:55195",
+          "bytes": 88485572,
+          "via": [
+            "solveArmIK index.html:55135",
+            "holdShoulderIK index.html:55211"
+          ]
+        },
+        {
+          "k": "_renderObjectDirect vendor/three/three.webgpu.js:52263",
+          "bytes": 79295760,
+          "via": [
+            "filter game/viewmodel.js:190",
+            "renderObject vendor/three/three.webgpu.js:52154"
+          ]
+        },
+        {
+          "k": "renderObject vendor/three/three.webgpu.js:52154",
+          "bytes": 79295760,
+          "via": [
+            "_renderObjects vendor/three/three.webgpu.js:52128",
+            "filter game/viewmodel.js:190"
+          ]
+        },
+        {
+          "k": "filter game/viewmodel.js:190",
+          "bytes": 79295760,
+          "via": [
+            "_renderScene vendor/three/three.webgpu.js:50617",
+            "_renderObjects vendor/three/three.webgpu.js:52128"
+          ]
+        },
+        {
+          "k": "_renderObjects vendor/three/three.webgpu.js:52128",
+          "bytes": 79295760,
+          "via": [
+            "render vendor/three/three.webgpu.js:70670",
+            "_renderScene vendor/three/three.webgpu.js:50617"
+          ]
+        }
+      ],
+      "gc": {
+        "synced": true,
+        "mainThread": "CrRendererMain",
+        "events": 2130,
+        "totalMs": 54.5,
+        "perFrameMs": 0.05,
+        "byName": {
+          "V8.GC_HEAP_EXTERNAL_PROLOGUE": {
+            "n": 32,
+            "ms": 0.9
+          },
+          "V8.GC_HEAP_PROLOGUE": {
+            "n": 32,
+            "ms": 0
+          },
+          "V8.GC_TIME_TO_SAFEPOINT": {
+            "n": 32,
+            "ms": 0.1
+          },
+          "V8.GC_SCAVENGER": {
+            "n": 32,
+            "ms": 49.5
+          },
+          "V8.GC_HEAP_PROLOGUE_SAFEPOINT": {
+            "n": 31,
+            "ms": 0
+          },
+          "V8.GC_SCAVENGER_SCAVENGE": {
+            "n": 32,
+            "ms": 44.7
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_IDENTIFY": {
+            "n": 32,
+            "ms": 6.2
+          },
+          "V8.GC_SCAVENGER_TRACED_HANDLES_COMPUTE_WEAKNESS_PARALLEL": {
+            "n": 32,
+            "ms": 4.4
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_COLLECT_OLD_TO_NEW_PAGES": {
+            "n": 32,
+            "ms": 4.9
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE": {
+            "n": 32,
+            "ms": 11.4
+          },
+          "Parallel scavenge started": {
+            "n": 32,
+            "ms": 0.1
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_ROOTS": {
+            "n": 32,
+            "ms": 5.4
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_PROCESS": {
+            "n": 32,
+            "ms": 10.3
+          },
+          "V8.GC_SCAVENGER_TRACED_HANDLES_RESET_PARALLEL": {
+            "n": 32,
+            "ms": 3.5
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_FINALIZE": {
+            "n": 32,
+            "ms": 2.5
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_RESTORE_AND_QUARANTINE_PINNED": {
+            "n": 32,
+            "ms": 0.7
+          },
+          "V8.GC_SCAVENGER_FREE_REMEMBERED_SET": {
+            "n": 32,
+            "ms": 1.8
+          },
+          "V8.GC_SCAVENGER_SWEEP_ARRAY_BUFFERS": {
+            "n": 32,
+            "ms": 0.3
+          },
+          "V8.GC_SCAVENGER_RESIZE_NEW_SPACE": {
+            "n": 32,
+            "ms": 0.1
+          },
+          "V8.GC_HEAP_EXTERNAL_WEAK_GLOBAL_HANDLES": {
+            "n": 32,
+            "ms": 3.6
+          },
+          "V8.GC_HEAP_EPILOGUE_SAFEPOINT": {
+            "n": 32,
+            "ms": 0.2
+          },
+          "V8.GC_HEAP_EPILOGUE": {
+            "n": 32,
+            "ms": 0.2
+          },
+          "V8.GC_HEAP_DUMP_STATISTICS": {
+            "n": 32,
+            "ms": 0
+          },
+          "V8.GC_HEAP_EXTERNAL_EPILOGUE": {
+            "n": 32,
+            "ms": 0.1
+          },
+          "V8.GCDeoptMarkedAllocationSites": {
+            "n": 5,
+            "ms": 3.6
+          },
+          "V8.GC_SCAVENGER_SCAVENGE_PARALLEL": {
+            "n": 7,
+            "ms": 0.4
+          }
+        },
+        "spikesWithGc": "1/38",
+        "spikes": [
+          {
+            "frame": 11,
+            "ms": 33.3,
+            "wallMs": 36.6,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 12,
+            "ms": 26.5,
+            "wallMs": 27.3,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 17,
+            "ms": 26,
+            "wallMs": 27.5,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 25,
+            "ms": 26.3,
+            "wallMs": 27.2,
+            "gcMs": 2.1,
+            "names": {
+              "V8.GC_SCAVENGER": 1.6,
+              "V8.GC_SCAVENGER_SCAVENGE": 1.4,
+              "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_IDENTIFY": 0.2,
+              "V8.GC_SCAVENGER_TRACED_HANDLES_COMPUTE_WEAKNESS_PARALLEL": 0.2,
+              "V8.GC_SCAVENGER_SCAVENGE_COLLECT_OLD_TO_NEW_PAGES": 0.1,
+              "V8.GC_SCAVENGER_SCAVENGE_PARALLEL_PHASE": 0.4,
+              "V8.GC_SCAVENGER_SCAVENGE_ROOTS": 0.1,
+              "V8.GC_SCAVENGER_SCAVENGE_WEAK_GLOBAL_HANDLES_PROCESS": 0.3,
+              "V8.GC_SCAVENGER_TRACED_HANDLES_RESET_PARALLEL": 0.1,
+              "V8.GC_SCAVENGER_SCAVENGE_FINALIZE": 0.1,
+              "V8.GC_SCAVENGER_FREE_REMEMBERED_SET": 0.1,
+              "V8.GC_HEAP_EXTERNAL_WEAK_GLOBAL_HANDLES": 0.1,
+              "V8.GCDeoptMarkedAllocationSites": 0.4
+            }
+          },
+          {
+            "frame": 33,
+            "ms": 30.4,
+            "wallMs": 31.5,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 166,
+            "ms": 25.9,
+            "wallMs": 27.7,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 169,
+            "ms": 26.2,
+            "wallMs": 28.1,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 281,
+            "ms": 25.5,
+            "wallMs": 27.3,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 292,
+            "ms": 25.9,
+            "wallMs": 29,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 303,
+            "ms": 27.3,
+            "wallMs": 29.1,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 334,
+            "ms": 27.8,
+            "wallMs": 29.2,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 353,
+            "ms": 25.5,
+            "wallMs": 26.1,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 428,
+            "ms": 26.4,
+            "wallMs": 27,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 446,
+            "ms": 26.7,
+            "wallMs": 28,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 447,
+            "ms": 28.7,
+            "wallMs": 29.7,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 448,
+            "ms": 26.8,
+            "wallMs": 27.9,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 484,
+            "ms": 25.7,
+            "wallMs": 27.9,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 510,
+            "ms": 26.1,
+            "wallMs": 27.9,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 524,
+            "ms": 27.1,
+            "wallMs": 31.6,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 531,
+            "ms": 26,
+            "wallMs": 27.1,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 535,
+            "ms": 26.5,
+            "wallMs": 29.2,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 595,
+            "ms": 26.9,
+            "wallMs": 28.1,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 603,
+            "ms": 25.6,
+            "wallMs": 26.4,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 612,
+            "ms": 25.3,
+            "wallMs": 26,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 691,
+            "ms": 26.2,
+            "wallMs": 27.1,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 711,
+            "ms": 25.4,
+            "wallMs": 26.3,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 809,
+            "ms": 25.5,
+            "wallMs": 26.2,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 810,
+            "ms": 26.9,
+            "wallMs": 27.9,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 817,
+            "ms": 26.3,
+            "wallMs": 28,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 821,
+            "ms": 26.4,
+            "wallMs": 28.1,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 843,
+            "ms": 26,
+            "wallMs": 27,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 863,
+            "ms": 26.1,
+            "wallMs": 28.8,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 909,
+            "ms": 27.2,
+            "wallMs": 28.9,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 937,
+            "ms": 26.1,
+            "wallMs": 28,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 958,
+            "ms": 25.1,
+            "wallMs": 25.8,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 959,
+            "ms": 28.6,
+            "wallMs": 30.8,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 989,
+            "ms": 27.1,
+            "wallMs": 29.4,
+            "gcMs": 0,
+            "names": {}
+          },
+          {
+            "frame": 1000,
+            "ms": 27.9,
+            "wallMs": 28.9,
+            "gcMs": 0,
+            "names": {}
+          }
+        ]
+      }
+    }
+  ]
+}

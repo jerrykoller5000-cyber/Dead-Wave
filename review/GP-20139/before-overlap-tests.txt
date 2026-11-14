@@ -1,0 +1,29 @@
+{"overlapSquareMetres":13.710978025449549,"pairs":288}
+✖ opaque yellow border and striped paint have no shared visible area (12.228ms)
+✔ CJ1 depth layers, paint elevation, and world-aligned UVs remain (0.4524ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 1
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 531.6692
+
+✖ failing tests:
+
+test at review\GP-20139\paint-overlap.test.mjs:4:1
+✖ opaque yellow border and striped paint have no shared visible area (12.228ms)
+  AssertionError [ERR_ASSERTION]: paint must end before its opaque border, not rely on depth bias
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20139/paint-overlap.test.mjs:4:579)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.start (node:internal/test_runner/test:1003:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

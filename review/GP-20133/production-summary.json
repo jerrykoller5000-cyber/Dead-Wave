@@ -1,0 +1,1623 @@
+{
+  "note": "All captured phases retained. Derived frame statistics omit only the first rAF sample: its timestamp may precede the performance.now start. Raw arrays are unchanged in receipts. Earlier aggregate numbers included that sample.",
+  "results": [
+    {
+      "file": "review/GP-20133/minigun-production-after.json",
+      "scope": "Production title/Training warm-up + scalar sleeve after-fix first/second full magazines, fresh High-pinned browser load for one weapon. No private priming called; resource profiler journals, no CPU/allocation sampler/general timers.",
+      "readyWallMs": 14484,
+      "errors": [],
+      "warmTrace": [
+        "fire-hot:183",
+        "fire-cold:183",
+        "fire-resources:74/0",
+        "fire-clean:183",
+        "load:263",
+        "a-fresh:263",
+        "a-flash:266",
+        "a-faded:267",
+        "a-kill-generic:272",
+        "a-kill-melee:277",
+        "a-kill-explosive:282",
+        "a-fx:285",
+        "a-corpse:285",
+        "fresh:340",
+        "burning:342",
+        "flash:342",
+        "faded:342",
+        "tree-fade:342",
+        "kill-explosive:342",
+        "kill-chainsaw:342",
+        "kill-pellet:342",
+        "kill-generic:342",
+        "kill-melee:342",
+        "kill-explosive:344",
+        "kill-chainsaw:344",
+        "kill-pellet:344",
+        "kill-generic:345",
+        "kill-melee:345",
+        "kill-explosive:345",
+        "kill-chainsaw:345",
+        "kill-pellet:345",
+        "kill-generic:345",
+        "effects:350",
+        "corpses:350",
+        "corpses2:350",
+        "training-staged:637",
+        "training-fire-hot:642",
+        "training-fire-cold:642",
+        "training-fire-resources:100/8",
+        "training-clean:642"
+      ],
+      "rows": [
+        {
+          "pass": 0,
+          "fire": false,
+          "weapon": "minigun",
+          "ammo": [
+            300,
+            300
+          ],
+          "mean": 16.852238805970156,
+          "p50": 16.69999999999709,
+          "p99": 33.30000000000291,
+          "worst": 33.400000000001455,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 7.537,
+              "max": 11.7
+            },
+            {
+              "k": "m:hold",
+              "avg": 2.838,
+              "max": 7.2
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.032,
+              "max": 2.5
+            },
+            {
+              "k": "r:matrices",
+              "avg": 0.994,
+              "max": 2
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.739,
+              "max": 1.7
+            },
+            {
+              "k": "effects",
+              "avg": 0.4,
+              "max": 0.9
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.386,
+              "max": 1.1
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.18,
+              "max": 0.7
+            }
+          ]
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "weapon": "minigun",
+          "ammo": [
+            300,
+            0
+          ],
+          "mean": 17.424125874125878,
+          "p50": 16.69999999999709,
+          "p99": 33.400000000001455,
+          "worst": 33.599999999998545,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 7.677,
+              "max": 16.1
+            },
+            {
+              "k": "m:hold",
+              "avg": 2.479,
+              "max": 8
+            },
+            {
+              "k": "r:matrices",
+              "avg": 0.94,
+              "max": 5.2
+            },
+            {
+              "k": "m:pose",
+              "avg": 0.903,
+              "max": 4.1
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.623,
+              "max": 2.6
+            },
+            {
+              "k": "m:hold2+arms",
+              "avg": 0.589,
+              "max": 5.4
+            },
+            {
+              "k": "projectiles",
+              "avg": 0.565,
+              "max": 7
+            },
+            {
+              "k": "effects",
+              "avg": 0.488,
+              "max": 2.6
+            }
+          ]
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "weapon": "minigun",
+          "ammo": [
+            300,
+            300
+          ],
+          "mean": 16.666296296296327,
+          "p50": 16.69999999999709,
+          "p99": 16.89999999999418,
+          "worst": 17,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 6.997,
+              "max": 14.8
+            },
+            {
+              "k": "m:hold",
+              "avg": 2.621,
+              "max": 5.6
+            },
+            {
+              "k": "r:matrices",
+              "avg": 0.891,
+              "max": 2.1
+            },
+            {
+              "k": "m:pose",
+              "avg": 0.873,
+              "max": 3.3
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.636,
+              "max": 1.6
+            },
+            {
+              "k": "effects",
+              "avg": 0.322,
+              "max": 1
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.32,
+              "max": 1
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.157,
+              "max": 0.5
+            }
+          ]
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "weapon": "minigun",
+          "ammo": [
+            300,
+            0
+          ],
+          "mean": 17.080789022298454,
+          "p50": 16.69999999999709,
+          "p99": 33.39999999999418,
+          "worst": 33.60000000000582,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 7.222,
+              "max": 14
+            },
+            {
+              "k": "m:hold",
+              "avg": 2.495,
+              "max": 6.9
+            },
+            {
+              "k": "r:matrices",
+              "avg": 0.897,
+              "max": 3.4
+            },
+            {
+              "k": "m:pose",
+              "avg": 0.873,
+              "max": 3.3
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.579,
+              "max": 2.4
+            },
+            {
+              "k": "m:hold2+arms",
+              "avg": 0.565,
+              "max": 4.5
+            },
+            {
+              "k": "projectiles",
+              "avg": 0.475,
+              "max": 2.1
+            },
+            {
+              "k": "effects",
+              "avg": 0.446,
+              "max": 2.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "review/GP-20133/uzi-production-after.json",
+      "scope": "Production title/Training warm-up + scalar sleeve after-fix first/second full magazines, fresh High-pinned browser load for one weapon. No private priming called; resource profiler journals, no CPU/allocation sampler/general timers.",
+      "readyWallMs": 12933,
+      "errors": [],
+      "warmTrace": [
+        "fire-hot:183",
+        "fire-cold:183",
+        "fire-resources:74/0",
+        "fire-clean:183",
+        "load:263",
+        "a-fresh:263",
+        "a-flash:266",
+        "a-faded:267",
+        "a-kill-generic:274",
+        "a-kill-melee:279",
+        "a-kill-explosive:281",
+        "a-fx:284",
+        "a-corpse:284",
+        "fresh:339",
+        "burning:341",
+        "flash:341",
+        "faded:341",
+        "tree-fade:341",
+        "kill-explosive:341",
+        "kill-chainsaw:341",
+        "kill-pellet:341",
+        "kill-generic:341",
+        "kill-melee:341",
+        "kill-explosive:343",
+        "kill-chainsaw:343",
+        "kill-pellet:343",
+        "kill-generic:344",
+        "kill-melee:344",
+        "kill-explosive:344",
+        "kill-chainsaw:344",
+        "kill-pellet:344",
+        "kill-generic:344",
+        "effects:349",
+        "corpses:349",
+        "corpses2:349",
+        "training-staged:637",
+        "training-fire-hot:642",
+        "training-fire-cold:642",
+        "training-fire-resources:100/8",
+        "training-clean:642"
+      ],
+      "rows": [
+        {
+          "pass": 0,
+          "fire": false,
+          "weapon": "uzi",
+          "ammo": [
+            32,
+            32
+          ],
+          "mean": 16.727777777777778,
+          "p50": 16.69999999999709,
+          "p99": 17,
+          "worst": 33.30000000000291,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 6.382,
+              "max": 12.3
+            },
+            {
+              "k": "m:hold",
+              "avg": 2.717,
+              "max": 4.8
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.082,
+              "max": 3.6
+            },
+            {
+              "k": "r:matrices",
+              "avg": 0.838,
+              "max": 4.3
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.619,
+              "max": 1.5
+            },
+            {
+              "k": "effects",
+              "avg": 0.346,
+              "max": 0.7
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.332,
+              "max": 0.9
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.156,
+              "max": 0.5
+            }
+          ]
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "weapon": "uzi",
+          "ammo": [
+            32,
+            0
+          ],
+          "mean": 17.110666666666656,
+          "p50": 16.69999999999709,
+          "p99": 33.5,
+          "worst": 33.5,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 7.292,
+              "max": 12
+            },
+            {
+              "k": "m:hold",
+              "avg": 2.825,
+              "max": 5.5
+            },
+            {
+              "k": "r:matrices",
+              "avg": 0.922,
+              "max": 4.3
+            },
+            {
+              "k": "m:pose",
+              "avg": 0.653,
+              "max": 1.7
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.635,
+              "max": 2.1
+            },
+            {
+              "k": "projectiles",
+              "avg": 0.587,
+              "max": 3.1
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.541,
+              "max": 4.7
+            },
+            {
+              "k": "effects",
+              "avg": 0.499,
+              "max": 3.4
+            }
+          ]
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "weapon": "uzi",
+          "ammo": [
+            32,
+            32
+          ],
+          "mean": 16.791044776119403,
+          "p50": 16.69999999999709,
+          "p99": 17,
+          "worst": 33.39999999999418,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 7.018,
+              "max": 12.9
+            },
+            {
+              "k": "m:hold",
+              "avg": 3.035,
+              "max": 9.5
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.207,
+              "max": 3.9
+            },
+            {
+              "k": "r:matrices",
+              "avg": 0.981,
+              "max": 2.3
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.756,
+              "max": 2.1
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.356,
+              "max": 0.8
+            },
+            {
+              "k": "effects",
+              "avg": 0.351,
+              "max": 0.7
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.201,
+              "max": 0.5
+            }
+          ]
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "weapon": "uzi",
+          "ammo": [
+            32,
+            0
+          ],
+          "mean": 19.706349206349206,
+          "p50": 16.69999999999709,
+          "p99": 33.5,
+          "worst": 33.5,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 8.512,
+              "max": 15.3
+            },
+            {
+              "k": "m:hold",
+              "avg": 3.344,
+              "max": 8.4
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.158,
+              "max": 2.9
+            },
+            {
+              "k": "m:pose",
+              "avg": 0.853,
+              "max": 2.3
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.732,
+              "max": 1.9
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.633,
+              "max": 4.4
+            },
+            {
+              "k": "projectiles",
+              "avg": 0.622,
+              "max": 1.6
+            },
+            {
+              "k": "m:hold2+arms",
+              "avg": 0.604,
+              "max": 6.8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "review/GP-20133/ak-production-after.json",
+      "scope": "Production title/Training warm-up + scalar sleeve after-fix first/second full magazines, fresh High-pinned browser load for one weapon. No private priming called; resource profiler journals, no CPU/allocation sampler/general timers.",
+      "readyWallMs": 13559,
+      "errors": [],
+      "warmTrace": [
+        "fire-hot:180",
+        "fire-cold:180",
+        "fire-resources:74/0",
+        "fire-clean:180",
+        "load:261",
+        "a-fresh:261",
+        "a-flash:264",
+        "a-faded:265",
+        "a-kill-generic:270",
+        "a-kill-melee:275",
+        "a-kill-explosive:279",
+        "a-fx:282",
+        "a-corpse:282",
+        "fresh:337",
+        "burning:339",
+        "flash:339",
+        "faded:339",
+        "tree-fade:339",
+        "kill-explosive:339",
+        "kill-chainsaw:339",
+        "kill-pellet:339",
+        "kill-generic:339",
+        "kill-melee:339",
+        "kill-explosive:341",
+        "kill-chainsaw:341",
+        "kill-pellet:341",
+        "kill-generic:342",
+        "kill-melee:342",
+        "kill-explosive:342",
+        "kill-chainsaw:342",
+        "kill-pellet:342",
+        "kill-generic:342",
+        "effects:347",
+        "corpses:347",
+        "corpses2:347",
+        "training-staged:635",
+        "training-fire-hot:640",
+        "training-fire-cold:640",
+        "training-fire-resources:100/8",
+        "training-clean:640"
+      ],
+      "rows": [
+        {
+          "pass": 0,
+          "fire": false,
+          "weapon": "ak",
+          "ammo": [
+            30,
+            30
+          ],
+          "mean": 16.78996282527881,
+          "p50": 16.69999999999709,
+          "p99": 16.900000000001455,
+          "worst": 33.299999999995634,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 6.891,
+              "max": 10.7
+            },
+            {
+              "k": "m:hold",
+              "avg": 3.049,
+              "max": 7.1
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.084,
+              "max": 2.5
+            },
+            {
+              "k": "r:matrices",
+              "avg": 0.86,
+              "max": 1.9
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.633,
+              "max": 1.3
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.382,
+              "max": 1.1
+            },
+            {
+              "k": "effects",
+              "avg": 0.37,
+              "max": 0.8
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.177,
+              "max": 0.5
+            }
+          ]
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "weapon": "ak",
+          "ammo": [
+            30,
+            0
+          ],
+          "mean": 17.25606060606063,
+          "p50": 16.69999999999709,
+          "p99": 33.5,
+          "worst": 33.80000000000291,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 7.423,
+              "max": 11.8
+            },
+            {
+              "k": "m:hold",
+              "avg": 2.924,
+              "max": 8.7
+            },
+            {
+              "k": "r:matrices",
+              "avg": 0.908,
+              "max": 2.2
+            },
+            {
+              "k": "m:pose",
+              "avg": 0.778,
+              "max": 2.3
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.679,
+              "max": 2.7
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.549,
+              "max": 3.8
+            },
+            {
+              "k": "effects",
+              "avg": 0.488,
+              "max": 2.3
+            },
+            {
+              "k": "m:hold2+arms",
+              "avg": 0.408,
+              "max": 5.2
+            }
+          ]
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "weapon": "ak",
+          "ammo": [
+            30,
+            30
+          ],
+          "mean": 17.509338521400785,
+          "p50": 16.69999999999709,
+          "p99": 33.5,
+          "worst": 33.5,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 7.827,
+              "max": 16.9
+            },
+            {
+              "k": "m:hold",
+              "avg": 3.165,
+              "max": 9.6
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.192,
+              "max": 4
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.02,
+              "max": 2.7
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.775,
+              "max": 2.8
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.414,
+              "max": 1.1
+            },
+            {
+              "k": "effects",
+              "avg": 0.363,
+              "max": 0.7
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.232,
+              "max": 0.7
+            }
+          ]
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "weapon": "ak",
+          "ammo": [
+            30,
+            0
+          ],
+          "mean": 21.440853658536557,
+          "p50": 16.799999999995634,
+          "p99": 33.69999999999709,
+          "worst": 33.700000000004366,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 9.484,
+              "max": 15.8
+            },
+            {
+              "k": "m:hold",
+              "avg": 3.428,
+              "max": 9.9
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.398,
+              "max": 3.8
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.14,
+              "max": 3.3
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.85,
+              "max": 1.8
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.758,
+              "max": 4.2
+            },
+            {
+              "k": "m:hold2+arms",
+              "avg": 0.609,
+              "max": 8.3
+            },
+            {
+              "k": "effects",
+              "avg": 0.585,
+              "max": 2.3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "review/GP-20133/ak-natural-after.json",
+      "scope": "Natural continued hold: fresh High first magazine plus two ammo-only refill steady magazines. Second/third do not re-grant weapons/replan kit or reset pose. Earlier production-after receipts retained; all new phases reported, no private priming. Resource journals only, no CPU/allocation sampler/general timers.",
+      "readyWallMs": 13978,
+      "errors": [],
+      "warmTrace": [
+        "fire-hot:178",
+        "fire-cold:178",
+        "fire-resources:74/0",
+        "fire-clean:178",
+        "load:259",
+        "a-fresh:259",
+        "a-flash:262",
+        "a-faded:263",
+        "a-kill-generic:268",
+        "a-kill-melee:273",
+        "a-kill-explosive:277",
+        "a-fx:280",
+        "a-corpse:280",
+        "fresh:338",
+        "burning:340",
+        "flash:340",
+        "faded:340",
+        "tree-fade:340",
+        "kill-explosive:340",
+        "kill-chainsaw:340",
+        "kill-pellet:340",
+        "kill-generic:340",
+        "kill-melee:340",
+        "kill-explosive:342",
+        "kill-chainsaw:342",
+        "kill-pellet:342",
+        "kill-generic:343",
+        "kill-melee:343",
+        "kill-explosive:343",
+        "kill-chainsaw:343",
+        "kill-pellet:343",
+        "kill-generic:343",
+        "effects:348",
+        "corpses:348",
+        "corpses2:348",
+        "training-staged:635",
+        "training-fire-hot:640",
+        "training-fire-cold:640",
+        "training-fire-resources:100/8",
+        "training-clean:640"
+      ],
+      "rows": [
+        {
+          "pass": 0,
+          "fire": false,
+          "weapon": "ak",
+          "ammo": [
+            30,
+            30
+          ],
+          "mean": 17.438610038610033,
+          "p50": 16.69999999999709,
+          "p99": 33.400000000001455,
+          "worst": 33.5,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 7.491,
+              "max": 14.1
+            },
+            {
+              "k": "m:hold",
+              "avg": 3.705,
+              "max": 8.6
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.21,
+              "max": 2.8
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.021,
+              "max": 2.6
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.695,
+              "max": 2.1
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.432,
+              "max": 2.7
+            },
+            {
+              "k": "effects",
+              "avg": 0.392,
+              "max": 0.8
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.178,
+              "max": 0.4
+            }
+          ]
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "weapon": "ak",
+          "ammo": [
+            30,
+            0
+          ],
+          "mean": 19.27262569832404,
+          "p50": 16.69999999999709,
+          "p99": 33.5,
+          "worst": 33.599999999998545,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 8.265,
+              "max": 12.9
+            },
+            {
+              "k": "m:hold",
+              "avg": 3.744,
+              "max": 8.7
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.158,
+              "max": 2.7
+            },
+            {
+              "k": "m:pose",
+              "avg": 0.81,
+              "max": 2.5
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.719,
+              "max": 1.7
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.678,
+              "max": 6.1
+            },
+            {
+              "k": "projectiles",
+              "avg": 0.513,
+              "max": 3
+            },
+            {
+              "k": "effects",
+              "avg": 0.505,
+              "max": 3
+            }
+          ]
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "weapon": "ak",
+          "ammo": [
+            30,
+            30
+          ],
+          "mean": 19.468103448275855,
+          "p50": 16.700000000004366,
+          "p99": 33.5,
+          "worst": 49.80000000000291,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 8.486,
+              "max": 18.3
+            },
+            {
+              "k": "m:hold",
+              "avg": 3.83,
+              "max": 11
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.48,
+              "max": 4.2
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.312,
+              "max": 4.2
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.852,
+              "max": 2.3
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.483,
+              "max": 1.5
+            },
+            {
+              "k": "effects",
+              "avg": 0.39,
+              "max": 0.9
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.24,
+              "max": 0.8
+            }
+          ]
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "weapon": "ak",
+          "ammo": [
+            30,
+            0
+          ],
+          "mean": 26.54148148148147,
+          "p50": 17,
+          "p99": 50.69999999999709,
+          "worst": 66.09999999999854,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 10.853,
+              "max": 19.4
+            },
+            {
+              "k": "m:hold",
+              "avg": 5.414,
+              "max": 12.4
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.827,
+              "max": 3.8
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.191,
+              "max": 3.6
+            },
+            {
+              "k": "aim+climb",
+              "avg": 1.013,
+              "max": 2.7
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.903,
+              "max": 8.4
+            },
+            {
+              "k": "m:hold2+arms",
+              "avg": 0.863,
+              "max": 10.2
+            },
+            {
+              "k": "projectiles",
+              "avg": 0.689,
+              "max": 1.8
+            }
+          ]
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "weapon": "ak",
+          "ammo": [
+            30,
+            30
+          ],
+          "mean": 29.629411764705853,
+          "p50": 33.19999999999709,
+          "p99": 50.400000000001455,
+          "worst": 50.5,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 12.435,
+              "max": 21.1
+            },
+            {
+              "k": "m:hold",
+              "avg": 5.931,
+              "max": 13.3
+            },
+            {
+              "k": "m:pose",
+              "avg": 2.813,
+              "max": 5.8
+            },
+            {
+              "k": "r:matrices",
+              "avg": 2.165,
+              "max": 4.9
+            },
+            {
+              "k": "aim+climb",
+              "avg": 1.37,
+              "max": 3.3
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.729,
+              "max": 2.1
+            },
+            {
+              "k": "effects",
+              "avg": 0.538,
+              "max": 1
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.376,
+              "max": 0.9
+            }
+          ]
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "weapon": "ak",
+          "ammo": [
+            30,
+            0
+          ],
+          "mean": 31.3026086956522,
+          "p50": 33.20000000001164,
+          "p99": 50.30000000000291,
+          "worst": 66.59999999999127,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 12.613,
+              "max": 26.9
+            },
+            {
+              "k": "m:hold",
+              "avg": 6.556,
+              "max": 13.2
+            },
+            {
+              "k": "r:matrices",
+              "avg": 2.352,
+              "max": 8.3
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.649,
+              "max": 4
+            },
+            {
+              "k": "aim+climb",
+              "avg": 1.235,
+              "max": 3.1
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.991,
+              "max": 7
+            },
+            {
+              "k": "m:hold2+arms",
+              "avg": 0.941,
+              "max": 5.8
+            },
+            {
+              "k": "projectiles",
+              "avg": 0.82,
+              "max": 2.1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "file": "review/GP-20133/pistol-natural-after.json",
+      "scope": "Natural continued hold: fresh High first magazine plus two ammo-only refill steady magazines. Second/third do not re-grant weapons/replan kit or reset pose. Earlier production-after receipts retained; all new phases reported, no private priming. Resource journals only, no CPU/allocation sampler/general timers.",
+      "readyWallMs": 13312,
+      "errors": [],
+      "warmTrace": [
+        "fire-hot:181",
+        "fire-cold:181",
+        "fire-resources:74/0",
+        "fire-clean:181",
+        "load:263",
+        "a-fresh:263",
+        "a-flash:266",
+        "a-faded:267",
+        "a-kill-generic:274",
+        "a-kill-melee:279",
+        "a-kill-explosive:281",
+        "a-fx:284",
+        "a-corpse:284",
+        "fresh:339",
+        "burning:340",
+        "flash:340",
+        "faded:340",
+        "tree-fade:340",
+        "kill-explosive:340",
+        "kill-chainsaw:340",
+        "kill-pellet:340",
+        "kill-generic:340",
+        "kill-melee:340",
+        "kill-explosive:342",
+        "kill-chainsaw:342",
+        "kill-pellet:342",
+        "kill-generic:343",
+        "kill-melee:343",
+        "kill-explosive:343",
+        "kill-chainsaw:343",
+        "kill-pellet:343",
+        "kill-generic:343",
+        "effects:349",
+        "corpses:349",
+        "corpses2:349",
+        "training-staged:637",
+        "training-fire-hot:642",
+        "training-fire-cold:642",
+        "training-fire-resources:100/8",
+        "training-clean:642"
+      ],
+      "rows": [
+        {
+          "pass": 0,
+          "fire": false,
+          "weapon": "pistol",
+          "ammo": [
+            24,
+            24
+          ],
+          "mean": 16.78996282527881,
+          "p50": 16.69999999999709,
+          "p99": 17,
+          "worst": 33.30000000000291,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 6.301,
+              "max": 11
+            },
+            {
+              "k": "m:hold",
+              "avg": 3.077,
+              "max": 5.1
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.028,
+              "max": 3.1
+            },
+            {
+              "k": "r:matrices",
+              "avg": 0.845,
+              "max": 2.6
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.608,
+              "max": 1.4
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.366,
+              "max": 0.7
+            },
+            {
+              "k": "effects",
+              "avg": 0.346,
+              "max": 0.8
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.158,
+              "max": 0.4
+            }
+          ]
+        },
+        {
+          "pass": 0,
+          "fire": true,
+          "weapon": "pistol",
+          "ammo": [
+            24,
+            0
+          ],
+          "mean": 21.42571428571412,
+          "p50": 16.69999999999709,
+          "p99": 49.900000000001455,
+          "worst": 49.900000000001455,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 8.021,
+              "max": 18.8
+            },
+            {
+              "k": "m:hold",
+              "avg": 3.141,
+              "max": 5.7
+            },
+            {
+              "k": "m:hold2+arms",
+              "avg": 1.81,
+              "max": 6
+            },
+            {
+              "k": "projectiles",
+              "avg": 1.29,
+              "max": 4
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.036,
+              "max": 3.1
+            },
+            {
+              "k": "effects",
+              "avg": 0.918,
+              "max": 2.9
+            },
+            {
+              "k": "m:pose",
+              "avg": 0.836,
+              "max": 2.8
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.631,
+              "max": 1.8
+            }
+          ]
+        },
+        {
+          "pass": 1,
+          "fire": false,
+          "weapon": "pistol",
+          "ammo": [
+            24,
+            24
+          ],
+          "mean": 16.853183520599234,
+          "p50": 16.69999999999709,
+          "p99": 33.299999999995634,
+          "worst": 33.30000000000291,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 6.919,
+              "max": 12.6
+            },
+            {
+              "k": "m:hold",
+              "avg": 3.396,
+              "max": 10.3
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.067,
+              "max": 3.3
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.005,
+              "max": 3.2
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.721,
+              "max": 2.8
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.397,
+              "max": 1.1
+            },
+            {
+              "k": "effects",
+              "avg": 0.358,
+              "max": 0.8
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.189,
+              "max": 0.5
+            }
+          ]
+        },
+        {
+          "pass": 1,
+          "fire": true,
+          "weapon": "pistol",
+          "ammo": [
+            24,
+            0
+          ],
+          "mean": 26.348387096774054,
+          "p50": 33.200000000004366,
+          "p99": 33.599999999998545,
+          "worst": 33.599999999998545,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 10.137,
+              "max": 15.4
+            },
+            {
+              "k": "m:hold",
+              "avg": 4.289,
+              "max": 8.6
+            },
+            {
+              "k": "m:hold2+arms",
+              "avg": 2.443,
+              "max": 7.1
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.414,
+              "max": 2.8
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.123,
+              "max": 4.1
+            },
+            {
+              "k": "effects",
+              "avg": 1.003,
+              "max": 2.3
+            },
+            {
+              "k": "projectiles",
+              "avg": 0.98,
+              "max": 2.7
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.831,
+              "max": 2.3
+            }
+          ]
+        },
+        {
+          "pass": 2,
+          "fire": false,
+          "weapon": "pistol",
+          "ammo": [
+            24,
+            24
+          ],
+          "mean": 17.852173913043472,
+          "p50": 16.69999999999709,
+          "p99": 33.5,
+          "worst": 50.19999999999709,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 7.751,
+              "max": 16.5
+            },
+            {
+              "k": "m:hold",
+              "avg": 3.64,
+              "max": 8.4
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.179,
+              "max": 2.8
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.147,
+              "max": 4.3
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.818,
+              "max": 2.6
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.413,
+              "max": 1.1
+            },
+            {
+              "k": "effects",
+              "avg": 0.381,
+              "max": 1
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.227,
+              "max": 0.6
+            }
+          ]
+        },
+        {
+          "pass": 2,
+          "fire": true,
+          "weapon": "pistol",
+          "ammo": [
+            24,
+            0
+          ],
+          "mean": 30.130769230769285,
+          "p50": 33.30000000000291,
+          "p99": 50.099999999998545,
+          "worst": 50.099999999998545,
+          "pipelines": 0,
+          "builders": 0,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 10.716,
+              "max": 17.4
+            },
+            {
+              "k": "m:hold",
+              "avg": 5.052,
+              "max": 10.8
+            },
+            {
+              "k": "m:hold2+arms",
+              "avg": 2.965,
+              "max": 6.1
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.565,
+              "max": 2.7
+            },
+            {
+              "k": "m:pose",
+              "avg": 1.194,
+              "max": 2.8
+            },
+            {
+              "k": "projectiles",
+              "avg": 1.132,
+              "max": 2.5
+            },
+            {
+              "k": "effects",
+              "avg": 1.065,
+              "max": 2
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.89,
+              "max": 1.5
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

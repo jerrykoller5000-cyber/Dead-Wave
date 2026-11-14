@@ -1,0 +1,2018 @@
+{
+  "scope": "Diagnostic fresh outdoor first magazine: metadata for actual new node builders/pipelines; no CPU sampler, no gameplay/effect disabling. Second/third do not re-grant weapons/replan kit or reset pose. Earlier production-after receipts retained; all new phases reported, no private priming. Resource journals only, no CPU/allocation sampler/general timers.",
+  "sourceSha256": "1d312956639359e794760ceb95055f71d44ac1711ccffb50454aa0ec56bd8445",
+  "rows": [
+    {
+      "pass": 0,
+      "weapon": "pistol",
+      "pair": true,
+      "fire": false,
+      "setup": {
+        "weapon": "pistol",
+        "pair": true,
+        "ammo": 24,
+        "magSize": 12,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            null,
+            "pistol:second"
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "elapsed": 4511.0999999821215,
+      "frames": [
+        -5.400000017878483,
+        16.69999999999709,
+        33.30000000000291,
+        16.69999999999709,
+        33.30000000000291,
+        16.69999999999709,
+        16.599999999998545,
+        16.599999999998545,
+        33.400000000001455,
+        16.599999999998545,
+        16.80000000000291,
+        16.80000000000291,
+        33.19999999999709,
+        16.69999999999709,
+        16.700000000004366,
+        33.299999999995634,
+        16.60000000000582,
+        16.599999999998545,
+        33.299999999995634,
+        33.400000000001455,
+        16.700000000004366,
+        33.299999999995634,
+        16.80000000000291,
+        16.5,
+        33.299999999995634,
+        16.80000000000291,
+        33.19999999999709,
+        33.400000000001455,
+        16.700000000004366,
+        16.599999999998545,
+        33.400000000001455,
+        16.599999999998545,
+        16.69999999999709,
+        33.30000000000291,
+        16.599999999998545,
+        33.5,
+        16.599999999998545,
+        33.30000000000291,
+        16.599999999998545,
+        16.80000000000291,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.69999999999709,
+        16.700000000004366,
+        33.099999999998545,
+        16.80000000000291,
+        16.69999999999709,
+        16.5,
+        16.69999999999709,
+        33.400000000001455,
+        16.700000000004366,
+        16.599999999998545,
+        33.299999999995634,
+        16.700000000004366,
+        16.69999999999709,
+        33.400000000001455,
+        16.69999999999709,
+        16.700000000004366,
+        16.5,
+        33.400000000001455,
+        16.599999999998545,
+        16.799999999995634,
+        16.60000000000582,
+        33.39999999999418,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        16.5,
+        16.700000000004366,
+        16.599999999998545,
+        16.80000000000291,
+        16.599999999998545,
+        16.799999999995634,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        33.30000000000291,
+        16.69999999999709,
+        16.60000000000582,
+        16.69999999999709,
+        16.900000000001455,
+        16.400000000001455,
+        16.799999999995634,
+        16.599999999998545,
+        33.200000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.80000000000291,
+        16.599999999998545,
+        16.700000000004366,
+        33.299999999995634,
+        16.700000000004366,
+        16.599999999998545,
+        16.599999999998545,
+        33.400000000001455,
+        16.799999999995634,
+        16.60000000000582,
+        33.39999999999418,
+        16.5,
+        16.700000000004366,
+        33.599999999998545,
+        16.400000000001455,
+        33.400000000001455,
+        16.69999999999709,
+        16.69999999999709,
+        33.30000000000291,
+        16.599999999998545,
+        33.30000000000291,
+        33.299999999995634,
+        16.80000000000291,
+        33.30000000000291,
+        16.69999999999709,
+        16.69999999999709,
+        33.200000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        33.30000000000291,
+        16.69999999999709,
+        33.400000000001455,
+        16.599999999998545,
+        33.5,
+        33.400000000001455,
+        33.30000000000291,
+        16.69999999999709,
+        33.099999999998545,
+        16.80000000000291,
+        16.599999999998545,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.599999999998545,
+        16.80000000000291,
+        16.599999999998545,
+        16.69999999999709,
+        33.30000000000291,
+        16.69999999999709,
+        16.599999999998545,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        16.700000000004366,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.80000000000291,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.700000000004366,
+        16.69999999999709,
+        16.599999999998545,
+        16.80000000000291,
+        16.599999999998545,
+        16.599999999998545,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        16.60000000000582,
+        16.799999999995634,
+        16.599999999998545,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.80000000000291,
+        16.5,
+        16.69999999999709,
+        16.60000000000582,
+        16.69999999999709,
+        16.69999999999709,
+        16.700000000004366,
+        16.599999999998545,
+        16.599999999998545,
+        16.900000000001455,
+        16.69999999999709,
+        16.60000000000582,
+        16.5,
+        16.69999999999709,
+        16.69999999999709,
+        17,
+        16.400000000001455,
+        16.700000000004366,
+        16.599999999998545,
+        16.69999999999709,
+        16.599999999998545,
+        16.60000000000582
+      ],
+      "stats": {},
+      "startAmmo": 24,
+      "endAmmo": 24,
+      "ammo": 24,
+      "projectiles": 0,
+      "casings": 0,
+      "prof": {
+        "rep": {
+          "frames": 241,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 9.763,
+              "max": 19.3
+            },
+            {
+              "k": "m:hold",
+              "avg": 2.688,
+              "max": 4.4
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.078,
+              "max": 2.5
+            },
+            {
+              "k": "m:pose",
+              "avg": 0.89,
+              "max": 2
+            },
+            {
+              "k": "w:treeFall+leaves+batches",
+              "avg": 0.434,
+              "max": 0.8
+            },
+            {
+              "k": "r:cull",
+              "avg": 0.432,
+              "max": 1.2
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.362,
+              "max": 0.9
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.353,
+              "max": 0.9
+            },
+            {
+              "k": "zombies",
+              "avg": 0.331,
+              "max": 4.1
+            },
+            {
+              "k": "w:minimap",
+              "avg": 0.239,
+              "max": 1.2
+            },
+            {
+              "k": "effects",
+              "avg": 0.228,
+              "max": 1.6
+            },
+            {
+              "k": "w:stairs+roof+birds+bugs+wildlife",
+              "avg": 0.187,
+              "max": 0.6
+            },
+            {
+              "k": "waves",
+              "avg": 0.179,
+              "max": 0.5
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.166,
+              "max": 0.4
+            },
+            {
+              "k": "w:treeFade+sway",
+              "avg": 0.146,
+              "max": 0.5
+            },
+            {
+              "k": "hud+audio",
+              "avg": 0.141,
+              "max": 0.5
+            },
+            {
+              "k": "drops+hud",
+              "avg": 0.132,
+              "max": 0.7
+            },
+            {
+              "k": "w:wind",
+              "avg": 0.099,
+              "max": 0.2
+            },
+            {
+              "k": "daynight",
+              "avg": 0.08,
+              "max": 0.4
+            },
+            {
+              "k": "m:reload+knife",
+              "avg": 0.066,
+              "max": 0.2
+            },
+            {
+              "k": "marine",
+              "avg": 0.062,
+              "max": 13.7
+            },
+            {
+              "k": "w:weather+lightning+clouds",
+              "avg": 0.049,
+              "max": 0.2
+            },
+            {
+              "k": "camera",
+              "avg": 0.049,
+              "max": 0.3
+            },
+            {
+              "k": "w:motes+flame+ripples+life",
+              "avg": 0.044,
+              "max": 0.2
+            },
+            {
+              "k": "idle+gear",
+              "avg": 0.034,
+              "max": 0.2
+            },
+            {
+              "k": "tree+deck coll",
+              "avg": 0.033,
+              "max": 0.2
+            },
+            {
+              "k": "move",
+              "avg": 0.029,
+              "max": 0.1
+            },
+            {
+              "k": "w:banner..normals",
+              "avg": 0.021,
+              "max": 0.2
+            },
+            {
+              "k": "m:reticle+ghost",
+              "avg": 0.017,
+              "max": 0.1
+            },
+            {
+              "k": "m:mortar+carry",
+              "avg": 0.016,
+              "max": 0.1
+            },
+            {
+              "k": "ground+clamp",
+              "avg": 0.015,
+              "max": 0.2
+            },
+            {
+              "k": "combat misc",
+              "avg": 0.013,
+              "max": 0.1
+            },
+            {
+              "k": "turrets",
+              "avg": 0.012,
+              "max": 0.1
+            },
+            {
+              "k": "jump+guns",
+              "avg": 0.012,
+              "max": 0.1
+            },
+            {
+              "k": "fires+smoke",
+              "avg": 0.012,
+              "max": 0.1
+            },
+            {
+              "k": "r:lightPool",
+              "avg": 0.012,
+              "max": 0.7
+            },
+            {
+              "k": "w:doors+traps+shadowLOD",
+              "avg": 0.009,
+              "max": 0.1
+            },
+            {
+              "k": "w:foliageCull",
+              "avg": 0.009,
+              "max": 0.1
+            },
+            {
+              "k": "m:hush+roof+kills",
+              "avg": 0.008,
+              "max": 0.1
+            },
+            {
+              "k": "m:fire",
+              "avg": 0.008,
+              "max": 0.1
+            },
+            {
+              "k": "m:lasers",
+              "avg": 0.008,
+              "max": 0.1
+            },
+            {
+              "k": "m:idle",
+              "avg": 0.007,
+              "max": 0.1
+            },
+            {
+              "k": "m:hold2+arms",
+              "avg": 0.002,
+              "max": 0.1
+            },
+            {
+              "k": "projectiles",
+              "avg": 0.002,
+              "max": 0.1
+            },
+            {
+              "k": "w:water",
+              "avg": 0.002,
+              "max": 0.1
+            },
+            {
+              "k": "after render",
+              "avg": 0.002,
+              "max": 0.1
+            },
+            {
+              "k": "w:rest",
+              "avg": 0,
+              "max": 0.1
+            }
+          ],
+          "spikes": [
+            {
+              "frame": 2,
+              "ms": 27,
+              "top": [
+                "r:render 16.7",
+                "m:hold 2.9",
+                "r:matrices 1.3",
+                "w:minimap 1.1"
+              ],
+              "heapMB": 793.1,
+              "freedMB": -1.1,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 34079.8,
+              "t1": 34107.6
+            },
+            {
+              "frame": 17,
+              "ms": 25.6,
+              "top": [
+                "r:render 11.2",
+                "zombies 4.1",
+                "m:hold 3.0",
+                "r:matrices 1.4"
+              ],
+              "heapMB": 775,
+              "freedMB": -1.2,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 34409.5,
+              "t1": 34435.8
+            },
+            {
+              "frame": 20,
+              "ms": 37.1,
+              "top": [
+                "marine 13.7",
+                "r:render 13.0",
+                "m:hold 3.2",
+                "r:matrices 1.2"
+              ],
+              "heapMB": 790.2,
+              "freedMB": -13.4,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 1,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 1,
+              "t0": 34480.9,
+              "t1": 34518.7
+            },
+            {
+              "frame": 28,
+              "ms": 25.8,
+              "top": [
+                "r:render 14.5",
+                "m:hold 3.5",
+                "r:matrices 1.4",
+                "m:pose 1.1"
+              ],
+              "heapMB": 797.9,
+              "freedMB": -0.9,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 34681.6,
+              "t1": 34708.1
+            },
+            {
+              "frame": 106,
+              "ms": 26.7,
+              "top": [
+                "r:render 16.7",
+                "m:hold 2.8",
+                "r:matrices 1.6",
+                "m:pose 0.9"
+              ],
+              "heapMB": 798,
+              "freedMB": -0.9,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 36252.4,
+              "t1": 36280.5
+            },
+            {
+              "frame": 112,
+              "ms": 25.4,
+              "top": [
+                "r:render 13.2",
+                "m:hold 4.4",
+                "r:matrices 1.7",
+                "m:pose 1.0"
+              ],
+              "heapMB": 770,
+              "freedMB": 32.4,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 36396.9,
+              "t1": 36423.3
+            },
+            {
+              "frame": 113,
+              "ms": 25.2,
+              "top": [
+                "r:render 13.1",
+                "m:hold 3.8",
+                "m:pose 1.5",
+                "r:matrices 1.4"
+              ],
+              "heapMB": 770.8,
+              "freedMB": -0.9,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 36423.3,
+              "t1": 36449.2
+            },
+            {
+              "frame": 116,
+              "ms": 25.8,
+              "top": [
+                "r:render 13.6",
+                "m:hold 3.7",
+                "m:pose 1.4",
+                "r:matrices 1.4"
+              ],
+              "heapMB": 773.5,
+              "freedMB": -0.8,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 36498.7,
+              "t1": 36525.6
+            },
+            {
+              "frame": 124,
+              "ms": 25.1,
+              "top": [
+                "r:render 13.6",
+                "m:hold 3.6",
+                "r:matrices 1.3",
+                "m:pose 1.2"
+              ],
+              "heapMB": 780.3,
+              "freedMB": -0.9,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 36683,
+              "t1": 36708.9
+            },
+            {
+              "frame": 125,
+              "ms": 25.3,
+              "top": [
+                "r:render 14.3",
+                "m:hold 3.5",
+                "r:matrices 1.3",
+                "m:pose 1.1"
+              ],
+              "heapMB": 781.2,
+              "freedMB": -0.9,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 36708.9,
+              "t1": 36735.2
+            },
+            {
+              "frame": 126,
+              "ms": 28.2,
+              "top": [
+                "r:render 14.4",
+                "m:hold 3.8",
+                "r:matrices 2.0",
+                "m:pose 1.3"
+              ],
+              "heapMB": 782.1,
+              "freedMB": -0.9,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 36735.2,
+              "t1": 36764.2
+            },
+            {
+              "frame": 127,
+              "ms": 33.4,
+              "top": [
+                "r:render 19.3",
+                "m:hold 4.0",
+                "r:matrices 2.1",
+                "m:pose 1.4"
+              ],
+              "heapMB": 783.1,
+              "freedMB": -1,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 36764.2,
+              "t1": 36799.6
+            },
+            {
+              "frame": 128,
+              "ms": 27.5,
+              "top": [
+                "r:render 14.3",
+                "m:hold 3.9",
+                "m:pose 1.7",
+                "r:matrices 1.4"
+              ],
+              "heapMB": 783.9,
+              "freedMB": -0.9,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 36799.6,
+              "t1": 36827.7
+            },
+            {
+              "frame": 161,
+              "ms": 25.1,
+              "top": [
+                "r:render 14.0",
+                "m:hold 3.7",
+                "r:matrices 1.4",
+                "m:pose 1.0"
+              ],
+              "heapMB": 783.9,
+              "freedMB": -0.8,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 37391.2,
+              "t1": 37417.2
+            }
+          ]
+        },
+        "gpu": [
+          3.692832,
+          3.150368,
+          2.266464,
+          3.393344,
+          0.44316800000000006,
+          0.445824,
+          0.4611200000000001,
+          3.205472,
+          3.496928,
+          2.194944,
+          3.2541759999999997,
+          3.468448,
+          0.434912,
+          0.43424,
+          0.431616,
+          0.43372800000000006,
+          0.437664,
+          0.431456,
+          0.4408,
+          0.439456,
+          0.436256,
+          0.438272,
+          0.4336,
+          0.435328,
+          0.43372799999999995,
+          0.43513599999999997,
+          0.44435199999999997,
+          0.431328,
+          0.43257599999999996,
+          0.435488,
+          0.43644799999999995,
+          0.439712,
+          0.434016,
+          0.44220799999999993,
+          0.43212799999999996,
+          0.435296,
+          0.435744,
+          0.43539199999999995,
+          0.43535999999999997,
+          0.43727999999999995,
+          0.438656,
+          0.44230400000000003,
+          0.434176,
+          0.43712,
+          0.432224,
+          0.43679999999999997,
+          0.43635199999999996,
+          0.43695999999999996,
+          0.432288,
+          0.442048,
+          0.44364800000000004,
+          0.428704,
+          0.43779199999999996,
+          0.436288,
+          0.43551999999999996,
+          0.443424,
+          0.43616,
+          0.432256,
+          0.435552,
+          0.439872,
+          0.436384,
+          0.43731200000000003,
+          0.43132800000000004,
+          0.436832,
+          0.4312639999999999,
+          0.431712,
+          0.434144,
+          0.434688,
+          0.439392,
+          0.44390399999999997,
+          0.428544,
+          0.43769600000000003,
+          0.43609600000000004,
+          0.43904,
+          0.437248,
+          0.429152,
+          0.438208,
+          0.43568,
+          0.43254400000000004,
+          0.436576,
+          0.434144,
+          0.44140799999999997,
+          0.430048,
+          0.440448
+        ],
+        "pipes": {
+          "made": 0,
+          "released": 0,
+          "withNewShaders": 0,
+          "top": [],
+          "first": []
+        },
+        "builds": {
+          "made": 0,
+          "top": [],
+          "zombieAndEcho": []
+        },
+        "renderObjects": {
+          "made": 1,
+          "perFrame": 0,
+          "top": [
+            {
+              "k": "marine-shadow < Group < Group | NodeMaterial | ortho",
+              "n": 1,
+              "frames": [
+                20
+              ]
+            }
+          ],
+          "spikes": [
+            {
+              "frame": 2,
+              "n": 0,
+              "top": []
+            },
+            {
+              "frame": 17,
+              "n": 0,
+              "top": []
+            },
+            {
+              "frame": 20,
+              "n": 1,
+              "top": [
+                "1 marine-shadow < Group < Group | NodeMaterial | ortho"
+              ]
+            },
+            {
+              "frame": 28,
+              "n": 0,
+              "top": []
+            },
+            {
+              "frame": 106,
+              "n": 0,
+              "top": []
+            },
+            {
+              "frame": 112,
+              "n": 0,
+              "top": []
+            },
+            {
+              "frame": 113,
+              "n": 0,
+              "top": []
+            },
+            {
+              "frame": 116,
+              "n": 0,
+              "top": []
+            }
+          ]
+        }
+      }
+    },
+    {
+      "pass": 0,
+      "weapon": "pistol",
+      "pair": true,
+      "fire": true,
+      "setup": {
+        "weapon": "pistol",
+        "pair": true,
+        "ammo": 24,
+        "magSize": 12,
+        "auto": true,
+        "loadout": {
+          "primary": [
+            null,
+            null
+          ],
+          "secondary": [
+            null,
+            "pistol:second"
+          ],
+          "hip": "pistol:base"
+        },
+        "position": [
+          42,
+          -7.5467963358017105,
+          -20
+        ]
+      },
+      "elapsed": 758.4999999821157,
+      "frames": [
+        -7.900000017878483,
+        16.69999999999709,
+        33.099999999998545,
+        16.700000000004366,
+        33.19999999999709,
+        16.599999999998545,
+        16.700000000004366,
+        16.69999999999709,
+        16.69999999999709,
+        16.700000000004366,
+        33.299999999995634,
+        16.700000000004366,
+        16.599999999998545,
+        33.400000000001455,
+        33.19999999999709,
+        17.30000000000291,
+        16.5,
+        33,
+        33.400000000001455,
+        33.299999999995634,
+        17.099999999998545,
+        49.5,
+        33.30000000000291,
+        16.69999999999709,
+        33.5,
+        33.200000000004366,
+        33.299999999995634,
+        33.5,
+        33.200000000004366,
+        33.299999999995634
+      ],
+      "stats": {},
+      "startAmmo": 24,
+      "endAmmo": 0,
+      "ammo": 0,
+      "projectiles": 10,
+      "casings": 24,
+      "prof": {
+        "rep": {
+          "frames": 38,
+          "phases": [
+            {
+              "k": "r:render",
+              "avg": 12.958,
+              "max": 66.4
+            },
+            {
+              "k": "m:hold",
+              "avg": 2.847,
+              "max": 5.5
+            },
+            {
+              "k": "m:hold2+arms",
+              "avg": 1.805,
+              "max": 5.3
+            },
+            {
+              "k": "projectiles",
+              "avg": 1.705,
+              "max": 6.1
+            },
+            {
+              "k": "r:matrices",
+              "avg": 1.337,
+              "max": 2.7
+            },
+            {
+              "k": "m:pose",
+              "avg": 0.774,
+              "max": 1.9
+            },
+            {
+              "k": "viewmodel",
+              "avg": 0.561,
+              "max": 1.1
+            },
+            {
+              "k": "w:treeFall+leaves+batches",
+              "avg": 0.542,
+              "max": 1.8
+            },
+            {
+              "k": "r:cull",
+              "avg": 0.532,
+              "max": 1.2
+            },
+            {
+              "k": "m:fire",
+              "avg": 0.429,
+              "max": 3.4
+            },
+            {
+              "k": "aim+climb",
+              "avg": 0.408,
+              "max": 1.5
+            },
+            {
+              "k": "w:minimap",
+              "avg": 0.403,
+              "max": 1.3
+            },
+            {
+              "k": "zombies",
+              "avg": 0.311,
+              "max": 3.5
+            },
+            {
+              "k": "effects",
+              "avg": 0.271,
+              "max": 0.4
+            },
+            {
+              "k": "w:stairs+roof+birds+bugs+wildlife",
+              "avg": 0.213,
+              "max": 0.5
+            },
+            {
+              "k": "waves",
+              "avg": 0.205,
+              "max": 0.5
+            },
+            {
+              "k": "r:rigSkin",
+              "avg": 0.195,
+              "max": 0.6
+            },
+            {
+              "k": "drops+hud",
+              "avg": 0.176,
+              "max": 1.1
+            },
+            {
+              "k": "hud+audio",
+              "avg": 0.163,
+              "max": 0.3
+            },
+            {
+              "k": "w:treeFade+sway",
+              "avg": 0.15,
+              "max": 0.4
+            },
+            {
+              "k": "w:wind",
+              "avg": 0.121,
+              "max": 0.3
+            },
+            {
+              "k": "daynight",
+              "avg": 0.092,
+              "max": 0.2
+            },
+            {
+              "k": "m:reload+knife",
+              "avg": 0.087,
+              "max": 0.4
+            },
+            {
+              "k": "w:motes+flame+ripples+life",
+              "avg": 0.058,
+              "max": 0.2
+            },
+            {
+              "k": "camera",
+              "avg": 0.058,
+              "max": 0.2
+            },
+            {
+              "k": "move",
+              "avg": 0.045,
+              "max": 0.1
+            },
+            {
+              "k": "w:weather+lightning+clouds",
+              "avg": 0.037,
+              "max": 0.2
+            },
+            {
+              "k": "idle+gear",
+              "avg": 0.032,
+              "max": 0.2
+            },
+            {
+              "k": "tree+deck coll",
+              "avg": 0.032,
+              "max": 0.2
+            },
+            {
+              "k": "combat misc",
+              "avg": 0.024,
+              "max": 0.1
+            },
+            {
+              "k": "w:foliageCull",
+              "avg": 0.024,
+              "max": 0.2
+            },
+            {
+              "k": "ground+clamp",
+              "avg": 0.021,
+              "max": 0.1
+            },
+            {
+              "k": "m:idle",
+              "avg": 0.018,
+              "max": 0.1
+            },
+            {
+              "k": "m:reticle+ghost",
+              "avg": 0.013,
+              "max": 0.1
+            },
+            {
+              "k": "w:banner..normals",
+              "avg": 0.013,
+              "max": 0.1
+            },
+            {
+              "k": "w:doors+traps+shadowLOD",
+              "avg": 0.013,
+              "max": 0.1
+            },
+            {
+              "k": "jump+guns",
+              "avg": 0.011,
+              "max": 0.1
+            },
+            {
+              "k": "marine",
+              "avg": 0.008,
+              "max": 0.2
+            },
+            {
+              "k": "turrets",
+              "avg": 0.008,
+              "max": 0.1
+            },
+            {
+              "k": "m:hush+roof+kills",
+              "avg": 0.005,
+              "max": 0.1
+            },
+            {
+              "k": "m:mortar+carry",
+              "avg": 0.005,
+              "max": 0.1
+            },
+            {
+              "k": "m:lasers",
+              "avg": 0.005,
+              "max": 0.1
+            },
+            {
+              "k": "fires+smoke",
+              "avg": 0.005,
+              "max": 0.1
+            },
+            {
+              "k": "r:lightPool",
+              "avg": 0.005,
+              "max": 0.1
+            },
+            {
+              "k": "after render",
+              "avg": 0.005,
+              "max": 0.1
+            },
+            {
+              "k": "w:water",
+              "avg": 0.003,
+              "max": 0.1
+            },
+            {
+              "k": "w:rest",
+              "avg": 0.003,
+              "max": 0.1
+            }
+          ],
+          "spikes": [
+            {
+              "frame": 2,
+              "ms": 25.7,
+              "top": [
+                "r:render 9.6",
+                "m:fire 3.4",
+                "m:hold2+arms 2.4",
+                "m:hold 1.9"
+              ],
+              "heapMB": 796.4,
+              "freedMB": -1.7,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 2,
+              "t0": 40616,
+              "t1": 40643.6
+            },
+            {
+              "frame": 11,
+              "ms": 25.2,
+              "top": [
+                "r:render 10.6",
+                "m:hold 3.0",
+                "m:hold2+arms 2.4",
+                "projectiles 1.7"
+              ],
+              "heapMB": 779.5,
+              "freedMB": -2.5,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 2,
+              "t0": 40807.7,
+              "t1": 40834
+            },
+            {
+              "frame": 14,
+              "ms": 30.3,
+              "top": [
+                "r:render 11.9",
+                "m:hold 3.7",
+                "m:hold2+arms 3.3",
+                "r:matrices 2.2"
+              ],
+              "heapMB": 786.3,
+              "freedMB": -1.8,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 1,
+              "t0": 40874.4,
+              "t1": 40905.7
+            },
+            {
+              "frame": 17,
+              "ms": 25.2,
+              "top": [
+                "r:render 9.6",
+                "m:hold 3.1",
+                "zombies 2.9",
+                "m:hold2+arms 1.8"
+              ],
+              "heapMB": 791.6,
+              "freedMB": -2,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 2,
+              "t0": 40946.7,
+              "t1": 40973.3
+            },
+            {
+              "frame": 18,
+              "ms": 25.7,
+              "top": [
+                "r:render 10.1",
+                "m:hold 3.7",
+                "m:hold2+arms 3.5",
+                "projectiles 1.8"
+              ],
+              "heapMB": 793.7,
+              "freedMB": -2.1,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 2,
+              "t0": 40973.3,
+              "t1": 41000.5
+            },
+            {
+              "frame": 20,
+              "ms": 30.5,
+              "top": [
+                "r:render 12.7",
+                "m:hold2+arms 3.9",
+                "m:hold 3.7",
+                "r:matrices 1.9"
+              ],
+              "heapMB": 797.9,
+              "freedMB": -2.2,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 2,
+              "t0": 41026.4,
+              "t1": 41058.6
+            },
+            {
+              "frame": 21,
+              "ms": 33.5,
+              "top": [
+                "r:render 11.4",
+                "m:hold 4.9",
+                "m:hold2+arms 3.9",
+                "projectiles 2.1"
+              ],
+              "heapMB": 800.1,
+              "freedMB": -2.2,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 2,
+              "t0": 41058.6,
+              "t1": 41093.4
+            },
+            {
+              "frame": 22,
+              "ms": 29.6,
+              "top": [
+                "r:render 14.8",
+                "m:hold2+arms 2.9",
+                "m:hold 2.6",
+                "projectiles 1.6"
+              ],
+              "heapMB": 802.6,
+              "freedMB": -2.5,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 2,
+              "t0": 41093.4,
+              "t1": 41125.2
+            },
+            {
+              "frame": 23,
+              "ms": 32.8,
+              "top": [
+                "r:render 13.7",
+                "projectiles 6.1",
+                "m:hold2+arms 3.1",
+                "m:hold 2.9"
+              ],
+              "heapMB": 775,
+              "freedMB": 27.6,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 2,
+              "t0": 41125.2,
+              "t1": 41159.8
+            },
+            {
+              "frame": 24,
+              "ms": 29.2,
+              "top": [
+                "r:render 12.3",
+                "m:hold 3.4",
+                "m:hold2+arms 2.8",
+                "projectiles 2.6"
+              ],
+              "heapMB": 778.5,
+              "freedMB": -3.5,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 2,
+              "t0": 41159.8,
+              "t1": 41190.5
+            },
+            {
+              "frame": 25,
+              "ms": 25.9,
+              "top": [
+                "r:render 12.1",
+                "m:hold2+arms 3.1",
+                "m:hold 2.8",
+                "projectiles 1.6"
+              ],
+              "heapMB": 781.7,
+              "freedMB": -3.2,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 1,
+              "t0": 41190.5,
+              "t1": 41218
+            },
+            {
+              "frame": 26,
+              "ms": 31.2,
+              "top": [
+                "r:render 13.1",
+                "projectiles 3.8",
+                "m:hold 3.0",
+                "m:hold2+arms 2.9"
+              ],
+              "heapMB": 787.2,
+              "freedMB": -5.5,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 1,
+              "t0": 41218,
+              "t1": 41250.7
+            },
+            {
+              "frame": 27,
+              "ms": 29.6,
+              "top": [
+                "r:render 14.0",
+                "m:hold 3.3",
+                "m:hold2+arms 2.9",
+                "projectiles 2.1"
+              ],
+              "heapMB": 789.9,
+              "freedMB": -2.7,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 2,
+              "t0": 41250.7,
+              "t1": 41281.9
+            },
+            {
+              "frame": 28,
+              "ms": 26.5,
+              "top": [
+                "r:render 13.6",
+                "m:hold 2.6",
+                "m:hold2+arms 2.6",
+                "projectiles 1.1"
+              ],
+              "heapMB": 792.5,
+              "freedMB": -2.5,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 1,
+              "t0": 41281.9,
+              "t1": 41310.2
+            },
+            {
+              "frame": 29,
+              "ms": 31.5,
+              "top": [
+                "r:render 15.3",
+                "m:hold2+arms 2.9",
+                "m:hold 2.5",
+                "r:matrices 2.2"
+              ],
+              "heapMB": 795,
+              "freedMB": -2.5,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 1,
+              "t0": 41310.2,
+              "t1": 41344.1
+            },
+            {
+              "frame": 30,
+              "ms": 37.4,
+              "top": [
+                "r:render 15.6",
+                "m:hold 4.8",
+                "m:hold2+arms 2.8",
+                "r:matrices 2.7"
+              ],
+              "heapMB": 797.5,
+              "freedMB": -2.5,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 2,
+              "t0": 41344.1,
+              "t1": 41383
+            },
+            {
+              "frame": 31,
+              "ms": 93.5,
+              "top": [
+                "r:render 66.4",
+                "m:hold 5.4",
+                "projectiles 5.1",
+                "zombies 3.5"
+              ],
+              "heapMB": 787.9,
+              "freedMB": 9.6,
+              "newPipelines": 1,
+              "newTextures": 0,
+              "newGeometries": 1,
+              "newBuilds": 2,
+              "sunShadow": 0,
+              "newRenderObjects": 7,
+              "t0": 41383,
+              "t1": 41480.6
+            },
+            {
+              "frame": 34,
+              "ms": 26.3,
+              "top": [
+                "r:render 12.7",
+                "projectiles 3.5",
+                "m:hold 2.5",
+                "r:matrices 1.6"
+              ],
+              "heapMB": 800,
+              "freedMB": -5,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 41530.9,
+              "t1": 41558.3
+            },
+            {
+              "frame": 36,
+              "ms": 25.6,
+              "top": [
+                "r:render 13.1",
+                "projectiles 2.8",
+                "m:hold 1.9",
+                "r:matrices 1.7"
+              ],
+              "heapMB": 774.6,
+              "freedMB": 30.6,
+              "newPipelines": 0,
+              "newTextures": 0,
+              "newGeometries": 0,
+              "newBuilds": 0,
+              "sunShadow": 0,
+              "newRenderObjects": 0,
+              "t0": 41582.1,
+              "t1": 41608.7
+            }
+          ]
+        },
+        "gpu": [
+          0.430656,
+          0.44249600000000006,
+          0.43459200000000003,
+          0.43744000000000005,
+          0.44118399999999997,
+          0.43881599999999993,
+          0.436672,
+          0.44073599999999996,
+          0.436608,
+          0.441536,
+          0.45094399999999996,
+          2.964128
+        ],
+        "pipes": {
+          "made": 1,
+          "released": 0,
+          "withNewShaders": 0,
+          "top": [
+            {
+              "k": "Mesh < Scene | MeshStandardMaterial | transparent side1 zw | scene",
+              "n": 1,
+              "newShaders": 0,
+              "frames": [
+                31
+              ]
+            }
+          ],
+          "first": [
+            {
+              "frame": 31,
+              "obj": "Mesh < Scene",
+              "kind": "Mesh",
+              "mat": "MeshStandardMaterial",
+              "state": "transparent side1 zw",
+              "cam": "scene",
+              "newShaders": ""
+            }
+          ]
+        },
+        "builds": {
+          "made": 2,
+          "top": [
+            {
+              "k": "Mesh < Scene | Mesh | MeshStandardMaterial",
+              "n": 2,
+              "frames": [
+                31,
+                31
+              ]
+            }
+          ],
+          "zombieAndEcho": []
+        },
+        "renderObjects": {
+          "made": 61,
+          "perFrame": 1.61,
+          "top": [
+            {
+              "k": "Mesh < Scene | MeshStandardMaterial | scene",
+              "n": 40,
+              "frames": [
+                2,
+                3,
+                5,
+                7,
+                9,
+                11
+              ]
+            },
+            {
+              "k": "Mesh < Scene | MeshBasicMaterial | scene",
+              "n": 15,
+              "frames": [
+                3,
+                5,
+                7,
+                9,
+                11,
+                12
+              ]
+            },
+            {
+              "k": "Mesh < Group < vm-gun | MeshBasicNodeMaterial | scene",
+              "n": 1,
+              "frames": [
+                2
+              ]
+            },
+            {
+              "k": "Mesh < Group < vm-gun-2 | MeshBasicNodeMaterial | scene",
+              "n": 1,
+              "frames": [
+                3
+              ]
+            },
+            {
+              "k": "Mesh < Group < Group | NodeMaterial | ortho",
+              "n": 1,
+              "frames": [
+                33
+              ]
+            },
+            {
+              "k": "Mesh < Group < Scene | NodeMaterial | ortho",
+              "n": 1,
+              "frames": [
+                33
+              ]
+            },
+            {
+              "k": "Mesh < Group < Group | MeshStandardNodeMaterial | scene",
+              "n": 1,
+              "frames": [
+                33
+              ]
+            },
+            {
+              "k": "Mesh < Group < Scene | MeshStandardNodeMaterial | scene",
+              "n": 1,
+              "frames": [
+                33
+              ]
+            }
+          ],
+          "spikes": [
+            {
+              "frame": 2,
+              "n": 2,
+              "top": [
+                "1 Mesh < Group < vm-gun | MeshBasicNodeMaterial | scene",
+                "1 Mesh < Scene | MeshStandardMaterial | scene"
+              ]
+            },
+            {
+              "frame": 11,
+              "n": 2,
+              "top": [
+                "1 Mesh < Scene | MeshBasicMaterial | scene",
+                "1 Mesh < Scene | MeshStandardMaterial | scene"
+              ]
+            },
+            {
+              "frame": 14,
+              "n": 1,
+              "top": [
+                "1 Mesh < Scene | MeshStandardMaterial | scene"
+              ]
+            },
+            {
+              "frame": 17,
+              "n": 2,
+              "top": [
+                "1 Mesh < Scene | MeshBasicMaterial | scene",
+                "1 Mesh < Scene | MeshStandardMaterial | scene"
+              ]
+            },
+            {
+              "frame": 18,
+              "n": 2,
+              "top": [
+                "1 Mesh < Scene | MeshBasicMaterial | scene",
+                "1 Mesh < Scene | MeshStandardMaterial | scene"
+              ]
+            },
+            {
+              "frame": 20,
+              "n": 2,
+              "top": [
+                "1 Mesh < Scene | MeshBasicMaterial | scene",
+                "1 Mesh < Scene | MeshStandardMaterial | scene"
+              ]
+            },
+            {
+              "frame": 21,
+              "n": 2,
+              "top": [
+                "1 Mesh < Scene | MeshBasicMaterial | scene",
+                "1 Mesh < Scene | MeshStandardMaterial | scene"
+              ]
+            },
+            {
+              "frame": 22,
+              "n": 2,
+              "top": [
+                "1 Mesh < Scene | MeshBasicMaterial | scene",
+                "1 Mesh < Scene | MeshStandardMaterial | scene"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "readyWallMs": 15634,
+  "loadMarks": [
+    "terrain+water+sky built 0ms",
+    "rocks 56ms",
+    "trees 226ms",
+    "player+weapons+zombie types 1251ms",
+    "foliage scattered 2345ms",
+    "POIs+minimap+foliage chunks 3840ms",
+    "contact shading + rest of setup 4064ms",
+    "post + pools + compile + warm frame 12653ms",
+    "ready 12657ms"
+  ],
+  "graphics": "high",
+  "extraBuilds": [
+    {
+      "frame": 31,
+      "path": [
+        "Mesh",
+        "Scene"
+      ],
+      "uuid": "05d50c61-efec-4078-a574-923b84a3ffa1",
+      "geometry": "PlaneGeometry",
+      "position": [
+        39.614676046676394,
+        -0.20150873889761617,
+        13.45920265140895
+      ],
+      "material": {
+        "type": "MeshStandardMaterial",
+        "name": "",
+        "color": 14383658,
+        "side": 1,
+        "transparent": true,
+        "vertexColors": false,
+        "userData": {
+          "pooled": true
+        }
+      },
+      "userData": {
+        "effectPooled": true,
+        "poolCap": 108,
+        "_shadowCaster": {
+          "has": false,
+          "n": 0
+        }
+      },
+      "pools": []
+    },
+    {
+      "frame": 31,
+      "path": [
+        "Mesh",
+        "Scene"
+      ],
+      "uuid": "05d50c61-efec-4078-a574-923b84a3ffa1",
+      "geometry": "PlaneGeometry",
+      "position": [
+        39.614676046676394,
+        -0.20150873889761617,
+        13.45920265140895
+      ],
+      "material": {
+        "type": "MeshStandardMaterial",
+        "name": "",
+        "color": 14383658,
+        "side": 0,
+        "transparent": true,
+        "vertexColors": false,
+        "userData": {
+          "pooled": true
+        }
+      },
+      "userData": {
+        "effectPooled": true,
+        "poolCap": 108,
+        "_shadowCaster": {
+          "has": false,
+          "n": 0
+        }
+      },
+      "pools": []
+    }
+  ],
+  "extraPipelines": [
+    {
+      "frame": 31,
+      "path": [
+        "Mesh",
+        "Scene"
+      ],
+      "uuid": "05d50c61-efec-4078-a574-923b84a3ffa1",
+      "geometry": "PlaneGeometry",
+      "position": [
+        39.614676046676394,
+        -0.20150873889761617,
+        13.45920265140895
+      ],
+      "material": {
+        "type": "MeshStandardMaterial",
+        "name": "",
+        "color": 14383658,
+        "side": 1,
+        "transparent": true,
+        "vertexColors": false,
+        "userData": {
+          "pooled": true
+        }
+      },
+      "userData": {
+        "effectPooled": true,
+        "poolCap": 108,
+        "_shadowCaster": {
+          "has": false,
+          "n": 0
+        }
+      },
+      "pools": []
+    }
+  ],
+  "warmTrace": [
+    "fire-hot:218",
+    "fire-cold:218",
+    "fire-resources:100/8",
+    "fire-clean:218",
+    "load:293",
+    "a-fresh:293",
+    "a-flash:296",
+    "a-faded:297",
+    "a-kill-generic:302",
+    "a-kill-melee:307",
+    "a-kill-explosive:311",
+    "a-fx:314",
+    "a-corpse:314",
+    "fresh:371",
+    "burning:373",
+    "flash:373",
+    "faded:373",
+    "tree-fade:373",
+    "kill-explosive:373",
+    "kill-chainsaw:373",
+    "kill-pellet:373",
+    "kill-generic:373",
+    "kill-melee:373",
+    "kill-explosive:375",
+    "kill-chainsaw:375",
+    "kill-pellet:375",
+    "kill-generic:376",
+    "kill-melee:376",
+    "kill-explosive:376",
+    "kill-chainsaw:376",
+    "kill-pellet:376",
+    "kill-generic:376",
+    "effects:381",
+    "corpses:381",
+    "corpses2:381"
+  ],
+  "warmLogs": [
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 293 shader variants compiled, 38 bodies pooled, 4 warm frames, lights visible 24/24, shadows true | post 7ms pools 7178ms compile 1256ms warm frame 141ms | fire-hot:218 fire-cold:218 fire-resources:100/8 fire-clean:218 load:293"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 56ms | trees 226ms | player+weapons+zombie types 1251ms | foliage scattered 2345ms | POIs+minimap+foliage chunks 3840ms | contact shading + rest of setup 4064ms | post + pools + compile + warm frame 12653ms | ready 12657ms"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 314 variants after 12 warm frames | fire-hot:218 fire-cold:218 fire-resources:100/8 fire-clean:218 load:293 a-fresh:293 a-flash:296 a-faded:297 a-kill-generic:302 a-kill-melee:307 a-kill-explosive:311 a-fx:314 a-corpse:314"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 382 shader variants compiled after 34 warm frames | fire-hot:218 fire-cold:218 fire-resources:100/8 fire-clean:218 load:293 a-fresh:293 a-flash:296 a-faded:297 a-kill-generic:302 a-kill-melee:307 a-kill-explosive:311 a-fx:314 a-corpse:314 fresh:371 burning:373 flash:373 faded:373 tree-fade:373 kill-explosive:373 kill-chainsaw:373 kill-pellet:373 kill-generic:373 kill-melee:373 kill-explosive:375 kill-chainsaw:375 kill-pellet:375 kill-generic:376 kill-melee:376 kill-explosive:376 kill-chainsaw:376 kill-pellet:376 kill-generic:376 effects:381 corpses:381 corpses2:381"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 34 warm frames, 382 variants | fire-hot:218 fire-cold:218 fire-resources:100/8 fire-clean:218 load:293 a-fresh:293 a-flash:296 a-faded:297 a-kill-generic:302 a-kill-melee:307 a-kill-explosive:311 a-fx:314 a-corpse:314 fresh:371 burning:373 flash:373 faded:373 tree-fade:373 kill-explosive:373 kill-chainsaw:373 kill-pellet:373 kill-generic:373 kill-melee:373 kill-explosive:375 kill-chainsaw:375 kill-pellet:375 kill-generic:376 kill-melee:376 kill-explosive:376 kill-chainsaw:376 kill-pellet:376 kill-generic:376 effects:381 corpses:381 corpses2:381"
+    }
+  ],
+  "endSourceSha256": "1d312956639359e794760ceb95055f71d44ac1711ccffb50454aa0ec56bd8445",
+  "errors": []
+}

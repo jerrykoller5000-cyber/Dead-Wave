@@ -1,0 +1,97 @@
+✖ launcher analytic gravity at 10/25/50m 30Hz (10.1327ms)
+✖ launcher analytic gravity at 10/25/50m 60Hz (3.4247ms)
+✖ launcher analytic gravity at 10/25/50m 144Hz (2.3427ms)
+✔ different dt partitions agree for a raised launch (2.7175ms)
+✖ hand grenades and mortar retain exact previous semi-implicit step (1.9078ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 1
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 144.7868
+
+✖ failing tests:
+
+test at review\GP-20137\trajectory.test.mjs:4:29
+✖ launcher analytic gravity at 10/25/50m 30Hz (10.1327ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(Math.abs(g.pos.y-(30-8*(d/60)**2))<1e-9)
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20137/trajectory.test.mjs:4:189)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.start (node:internal/test_runner/test:1003:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at review\GP-20137\trajectory.test.mjs:4:29
+✖ launcher analytic gravity at 10/25/50m 60Hz (3.4247ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(Math.abs(g.pos.y-(30-8*(d/60)**2))<1e-9)
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20137/trajectory.test.mjs:4:189)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at review\GP-20137\trajectory.test.mjs:4:29
+✖ launcher analytic gravity at 10/25/50m 144Hz (2.3427ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(Math.abs(g.pos.y-(30-8*(d/60)**2))<1e-9)
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20137/trajectory.test.mjs:4:189)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }
+
+test at review\GP-20137\trajectory.test.mjs:6:1
+✖ hand grenades and mortar retain exact previous semi-implicit step (1.9078ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  7 !== 6.6
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20137/trajectory.test.mjs:6:280)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 7,
+    expected: 6.6,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

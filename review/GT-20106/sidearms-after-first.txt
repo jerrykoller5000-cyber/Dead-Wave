@@ -1,0 +1,3 @@
+PASS KR7 after 4 native eye/inspection/reload four-light shots; own source stable; other changed sources []
+PASS pistol after 40 native eye/inspection/reload four-light shots; own source stable; other changed sources []
+PASS uzi after 40 native eye/inspection/reload four-light shots; own source stable; other changed sources []

@@ -1,0 +1,7 @@
+{
+  "before": "0cafbdb071d02bb0c10782b29e562bb2cc292a7495de23828380f728e9e03aa3",
+  "after": "7ec5143b5ba5192bd43714c98752aec3e7f0b7761ce446c35c0e921225ba73d0",
+  "normalizedCandidate": "7ec5143b5ba5192bd43714c98752aec3e7f0b7761ce446c35c0e921225ba73d0",
+  "hunks": 22,
+  "outsideBytesPreserved": true
+}

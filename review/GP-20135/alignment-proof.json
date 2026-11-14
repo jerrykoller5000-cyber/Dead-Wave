@@ -1,0 +1,102 @@
+{
+  "pass": 8,
+  "fail": 0,
+  "rows": [
+    {
+      "id": "tp-day-1280",
+      "owned": 0,
+      "stock": 0,
+      "ammo": 0,
+      "heights": [
+        28,
+        28
+      ],
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "tp-day-390",
+      "owned": 0,
+      "stock": 0,
+      "ammo": 0,
+      "heights": [
+        42,
+        42
+      ],
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "tp-night-1280",
+      "owned": 0,
+      "stock": 0,
+      "ammo": 0,
+      "heights": [
+        28,
+        28
+      ],
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "tp-night-390",
+      "owned": 0,
+      "stock": 0,
+      "ammo": 0,
+      "heights": [
+        42,
+        42
+      ],
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "fp-day-1280",
+      "owned": 0,
+      "stock": 0,
+      "ammo": 0,
+      "heights": [
+        28,
+        28
+      ],
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "fp-day-390",
+      "owned": 0,
+      "stock": 0,
+      "ammo": 0,
+      "heights": [
+        42,
+        42
+      ],
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "fp-night-1280",
+      "owned": 0,
+      "stock": 0,
+      "ammo": 0,
+      "heights": [
+        28,
+        28
+      ],
+      "overflow": false,
+      "hit": true
+    },
+    {
+      "id": "fp-night-390",
+      "owned": 0,
+      "stock": 0,
+      "ammo": 0,
+      "heights": [
+        42,
+        42
+      ],
+      "overflow": false,
+      "hit": true
+    }
+  ]
+}

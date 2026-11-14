@@ -1,0 +1,46 @@
+✔ one cell around all four walls is reserved, interior and range are not border cells (2.03ms)
+✔ layout joins medical enclosure, recesses both stations and preserves the gate approach (2.3601ms)
+✔ medical corners have matching returns and paint reaches both edges without entering the enclosure (1.336ms)
+✔ coil clearance trims crossing and terminal pillar joints in either direction (0.5777ms)
+✔ razor ribbon also breaks in front of each wall pillar, retaining the physical fence seal (68.9588ms)
+✔ fences stop swept movement but door and station openings remain usable (38.515ms)
+✔ six batched meshes, stable geometry, and camera cutaway keep collision intact (32.9443ms)
+✔ faded foreground fence does not trap camera aim, but rounds still hit it; old shell rule survives (30.2469ms)
+✔ clampToRects: inside stays, outside goes to the nearest edge of the nearest room (2.7153ms)
+✔ segmentBox: where a round first meets a box (0.4857ms)
+✖ the build: two rooms past the map, five targets downrange, every station on a wall facing in (1330.0367ms)
+✔ CL-143: the build room is a hangar, and building stays five squares clear of the zombie gate (1102.8632ms)
+✔ CL-144: the plates are twice the size, and a hit scores by its ring and the lane (1067.2279ms)
+✔ GP-20102: target backing stays behind the plate and clear of its base through either fall (920.4089ms)
+✔ CL-146: the door has a keypad each side, and nothing in the hangar touches the shared wall (1206.8829ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 14
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5937.538
+
+✖ failing tests:
+
+test at world\training.test.mjs:26:1
+✖ the build: two rooms past the map, five targets downrange, every station on a wall facing in (1330.0367ms)
+  AssertionError [ERR_ASSERTION]: he starts inside, behind the line
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/world/training.test.mjs:52:10)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

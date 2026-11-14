@@ -1,5 +1,4 @@
 // GP-164: heavy-weapon cosmetic constructors. Existing animation and grip contracts remain in the caller.
-import { minigunSidePanelGeometry } from './weapon-minigun-panel.js';
 import { attachLaserLight } from './weapon-attachments.js';
 import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup, setArtworkHeatRange } from './weapon-model-hooks.js';
 import { markPaintSurface } from './weapon-finish.js';
@@ -7,6 +6,8 @@ import { roundGeometry, spentCaseGeometry } from './weapon-casings.js';
 import { clipArtworkProfile, fitCollarFaces, trimPanelBack } from './weapon-longarms.js';
 import { boxProjectUV } from '../core/geometry.js';
 import { weaponDetail, fastenerGeometry } from './weapon-detail.js';
+import * as TSL from 'three/tsl';
+import { foldStatic } from '../world/bake.js';
 
 // CF-1: screw heads and pin ends from the shared CB-316 geometry, as plain meshes. The batchers merge them by material
 // (one draw), and code that measures a part by geometry.boundingBox (the extended magazine's feed line, the carry fit,
@@ -219,8 +220,11 @@ function gripShape(cz, cy, h, d, rake, points) {
 // Six genuinely recessed chambers. Each sector is a closed cell surrounding its bore.
 const launcherDrumFace = .065;
 
-function launcherDrum(T) {
-  return geometry(T, 'launcher-six-chambers', (quad) => {
+// CG-6 (J153 note 26, Jerry: "cylinder needs camo for launcher"): which = 'core' (the two end faces and the six bores,
+// bare steel) or 'shell' (the outer wall, painted with the gun); the two together are the whole drum as before.
+function launcherDrum(T, which = 'all') {
+  return geometry(T, 'launcher-six-chambers' + (which === 'all' ? '' : ':' + which), (quad) => {
+    const core = which !== 'shell', shell = which !== 'core';
     // M32A1 drum: 157 mm across at the held scale, with six true 40 mm bores.
     const outerR = 0.112, orbit = 0.065, holeR = 0.030, halfLength = launcherDrumFace;
     for (let sector = 0; sector < 6; sector++) {
@@ -247,13 +251,13 @@ function launcherDrum(T) {
       }
       for (let i = 0; i < rays.length; i++) {
         const a = rays[i], b = rays[(i + 1) % rays.length], at = (p, z) => [p[0], p[1], z];
-        for (const z of [-halfLength, halfLength]) quad(at(a.inner, z), at(a.outer, z), at(b.outer, z), at(b.inner, z), [0, 0, Math.sign(z)]);
-        quad(at(a.inner, -halfLength), at(a.inner, halfLength), at(b.inner, halfLength), at(b.inner, -halfLength), [-a.dir[0], -a.dir[1], 0], [-a.dir[0], -a.dir[1], 0], [-b.dir[0], -b.dir[1], 0], [-b.dir[0], -b.dir[1], 0]);
+        if (core) for (const z of [-halfLength, halfLength]) quad(at(a.inner, z), at(a.outer, z), at(b.outer, z), at(b.inner, z), [0, 0, Math.sign(z)]);
+        if (core) quad(at(a.inner, -halfLength), at(a.inner, halfLength), at(b.inner, halfLength), at(b.inner, -halfLength), [-a.dir[0], -a.dir[1], 0], [-a.dir[0], -a.dir[1], 0], [-b.dir[0], -b.dir[1], 0], [-b.dir[0], -b.dir[1], 0]);
         const dx = b.outer[0] - a.outer[0], dy = b.outer[1] - a.outer[1], len = Math.hypot(dx, dy) || 1;
         const faceN = [dy / len, -dx / len, 0];
         const mx = (a.outer[0] + b.outer[0]) / 2 - centre[0], my = (a.outer[1] + b.outer[1]) / 2 - centre[1];
         if (faceN[0] * mx + faceN[1] * my < 0) { faceN[0] *= -1; faceN[1] *= -1; }
-        quad(at(a.outer, -halfLength), at(a.outer, halfLength), at(b.outer, halfLength), at(b.outer, -halfLength), faceN);
+        if (shell) quad(at(a.outer, -halfLength), at(a.outer, halfLength), at(b.outer, halfLength), at(b.outer, -halfLength), faceN);
       }
     }
   });
@@ -279,13 +283,11 @@ export function makeMinigunModel(ctx) {
   const panelRearBottom = [-.255, -.092], panelRearTop = [-.247, .098];
   for (const sx of [-1, 1]) {
     const plate = K.slab([panelRearBottom, [0.152, -0.092], [0.161, -0.08], [0.161, 0.087], [0.148, 0.098], panelRearTop], 0.020, gunMid, { x: sx * 0.150, bevel: 0.003 });
-    if (sx === 1) plate.geometry = minigunSidePanelGeometry(THREE);
     markPaintSurface(plate, 'receiver');
     const sideFace = plate.position.x + sx * .010;
     for (let i = 0; i < 4; i++) {
       const rib = K.box(0.012, 0.009, 0.26, gunDark, sx * 0.158, 0.065 - i * 0.039, -0.064, 0, 0, 0, null, 0.003);
       seatBoxArt(rib, 'x', () => sideFace, sx);
-      if (sx === 1 && i >= 2) rib.geometry = minigunSidePanelGeometry(THREE, i === 2 ? 'upperStrip' : 'lowerStrip');
     }
     for (const [by, bz] of [[0.085, 0.13], [0.085, -0.24], [-0.085, 0.13], [-0.085, -0.24]]) hexHeads.push({ x: sideFace, y: by, z: bz, axis: 'x', side: sx, r: 0.009, turn: bz * 7 });
   }
@@ -410,7 +412,8 @@ export function makeMinigunModel(ctx) {
   // GB-180 pass 5 (the collars were rings round the outside, not gripping the barrels): each clamp is a solid plate
   // from the spindle out past the barrels, the six barrels running through it, with a raised rim and bolts between them.
   for (const [rz, radius] of [[0.04, 0.118], [0.39, 0.112], [0.80, 0.108]]) {
-    K.lathe([[0.026, rz - 0.016], [radius - 0.003, rz - 0.016], [radius, rz - 0.012], [radius, rz + 0.012], [radius - 0.003, rz + 0.016], [0.026, rz + 0.016], [0.026, rz - 0.016]], gunMid, { parent: barrelAssembly, seg: 28 });
+    // CG-6 (J153 note 29, Jerry: "Rings around minigun barrels could use camo"): the clamp plate takes the gun's paint
+    markPaintSurface(K.lathe([[0.026, rz - 0.016], [radius - 0.003, rz - 0.016], [radius, rz - 0.012], [radius, rz + 0.012], [radius - 0.003, rz + 0.016], [0.026, rz + 0.016], [0.026, rz - 0.016]], gunMid, { parent: barrelAssembly, seg: 28 }), 'clamp');
     // Stepped rim and six transverse fasteners read as a barrel clamp rather
     // than a smooth ring; they turn with the animated barrel assembly.
     for (const dz of [-0.018, 0.018]) K.tor(radius - 0.004, 0.002, gunDark, 0, 0, rz + dz, 0, 0, 0, barrelAssembly, Math.PI * 2, 28);
@@ -426,19 +429,32 @@ export function makeMinigunModel(ctx) {
   const ammoBox = new THREE.Group();
   ammoBox.position.set(0.2, -0.08, -0.02);
   ammoBox.rotation.z = 0.12;
-  const drumShell = K.cyl(0.125, 0.125, 0.155, drumFinish, 0, -0.045, 0, ammoBox, 32, 'x');
-  K.cyl(0.128, 0.124, 0.009, lidFinish, 0.082, -0.045, 0, ammoBox, 32, 'x');
-  K.cyl(0.050, 0.056, 0.009, gunOlive, 0.091, -0.045, 0, ammoBox, 24, 'x');
+  // GT-20106/J153-31: clear the complete receiver panel; retain the reload root.
+  const drumOffsetX = .060;
+  const drumShell = K.cyl(0.125, 0.125, 0.155, drumFinish, drumOffsetX, -0.045, 0, ammoBox, 32, 'x');
+  drumShell.name = 'minigun drum shell';
+  K.cyl(0.128, 0.124, 0.009, lidFinish, drumOffsetX + 0.082, -0.045, 0, ammoBox, 32, 'x');
+  K.cyl(0.050, 0.056, 0.009, gunOlive, drumOffsetX + 0.091, -0.045, 0, ammoBox, 24, 'x');
   // CF-1: the lid's six slotted screws move with the drum (their own draw on the drum).
   heads(THREE, ammoBox, gunAccent, 'slot', Array.from({ length: 6 }, (_, i) => {
     const a = i * Math.PI / 3;
-    return { x: 0.0865, y: -0.045 + 0.108 * Math.cos(a), z: 0.108 * Math.sin(a), axis: 'x', side: 1, r: 0.0042, turn: a * 1.7 };
+    return { x: drumOffsetX + 0.0865, y: -0.045 + 0.108 * Math.cos(a), z: 0.108 * Math.sin(a), axis: 'x', side: 1, r: 0.0042, turn: a * 1.7 };
   }));
-  const drumNeck = K.box(0.048, 0.072, 0.062, drumFinish, -0.018, 0.110, 0.028, 0, 0, 0, ammoBox, 0.004);
-  // CF-1 (c): the drum is a painted can; its steel lid and screws stay bare.
-  for (const piece of [drumShell, drumNeck]) markPaintSurface(piece, 'magazine');
+  const drumNeck = K.slab([[-.042,.146],[.006,.146],[.059,.074],[.011,.074]], .062, gunDark,
+    {ry:Math.PI/2,z:.028,bevel:.003,parent:ammoBox});
+  drumNeck.name = 'minigun sloped feed chute';
+  for (const y of [.088,.104,.120,.136]) {
+    const x = -.018 + (.146-y) * (.053/.072);
+    K.box(.050,.003,.064,gunMid,x,y,.028,0,0,0,ammoBox,.001);
+  }
+  // Painted drum; bare feed guide, lid and fasteners.
+  markPaintSurface(drumShell, 'magazine');
   gun.add(ammoBox);
   // Fixed socket above the detachable drum neck.
+  const feedHanger = gun;   // Fixed bracket: share the receiver's static metal batch.
+  for (const z of [-.018,.074]) K.slab([[.159,.018],[.159,.082],[.193,.082]], .006, gunMid,
+    {ry:Math.PI/2,z,bevel:.001,parent:feedHanger});
+  K.box(.042,.008,.098,gunDark,.172,.078,.028,0,0,0,feedHanger,.002);
   K.box(0.054, 0.030, 0.068, gunDark, 0.167, 0.071, 0.028, 0, 0, -0.12, null, 0.004);
   K.box(0.064, 0.055, 0.103, gunDark, 0.172, 0.111, 0.034, 0, 0, -0.12, null, 0.006);
   K.box(0.068, 0.008, 0.108, gunMid, 0.172, 0.141, 0.034, 0, 0, -0.12, null, 0.003);
@@ -722,7 +738,8 @@ export function makeLauncherModel(ctx) {
   const drum = new THREE.Group();
   drum.position.set(0.14, 0, 0);
   K.cyl(0.018, 0.018, 0.14, gunMid, 0, 0, 0, drum, 8);
-  part(THREE, launcherDrum(THREE), gunMid, drum);
+  part(THREE, launcherDrum(THREE, 'core'), gunMid, drum);
+  markPaintSurface(part(THREE, launcherDrum(THREE, 'shell'), gunMid, drum), 'cylinder');   // CG-6 (J153 26): the painted outer wall
   K.cyl(0.041, 0.041, 0.019, gunDark, 0, 0, 0.072, drum, 16, 'z');   // cylinder spring's forward housing
   K.cyl(0.015, 0.015, 0.011, gunMid, 0, 0, 0.085, drum, 12, 'z');   // winding axle cap
   // The dark ring starts at the side graphic and keeps its original outer face.
@@ -1108,7 +1125,8 @@ export function makeFlamerModel(ctx) {
   W.lathe([[.035,.364],[.05,.364],[.052,.367],[.052,.375],[.035,.375],[.035,.364]], gunAccent, { y: .05, seg: 24 });
   W.lathe([[.035,.665],[.052,.665],[.052,.671],[.035,.674],[.035,.665]], gunAccent, { y: .05, seg: 24 });
   // Nozzle: a thick flared bell, the igniter housing under it, the pilot light.
-  W.lathe([[0.034, 0.69], [0.038, 0.69], [0.062, 0.786], [0.062, 0.792], [0.054, 0.792], [0.032, 0.705], [0.034, 0.69]], gunAccent, { y: 0.05, seg: 16 });
+  const nozzle = W.lathe([[0.034, 0.69], [0.038, 0.69], [0.062, 0.786], [0.062, 0.792], [0.054, 0.792], [0.032, 0.705], [0.034, 0.69]], gunAccent, { y: 0.05, seg: 16 });
+  nozzle.name = 'flamerNozzle';
   W.box(0.03, 0.04, 0.08, gunDark, 0, 0.0, 0.7, 0, 0, 0, null, 0.01);
   W.cyl(0.004, 0.004, 0.05, steelMat, 0, 0.02, 0.73, null, 5, 'y');
   W.cyl(0.009, 0.009, 0.058, brassMat, 0, 0.01, 0.746, null, 8);
@@ -1185,15 +1203,16 @@ export function makeFlamerModel(ctx) {
   const needle = K.group(0, 0.044, -0.184);
   rod(THREE, K, [0,0,0], [0,0.015,0], 0.0013, tritium, needle);   // CI-1 (note 50): a tritium needle
   K.cyl(0.0024, 0.0024, 0.002, gunDark, 0, 0, -0.001, needle, 10);
-  needle.rotation.z = 3 * Math.PI / 4;
+  needle.rotation.z = -3 * Math.PI / 4;
   needle.name = 'fuel-gauge-needle';
   gun.userData.fuelNeedle = needle;
   // CI-1 (J151 note 50: "The flamethrower gauge needs to show how much fuel is left in the tank"): the needle reads the
-  // tank. Seen from behind (the shooter's side) it sweeps from FULL at the lower right (rotation.z +3PI/4, its old rest)
-  // to EMPTY at the lower left (-3PI/4) across the twelve-o'clock stroke; index.html calls this every frame the flamer
+  // tank. GT-20106/J153-21: FULL is lower right (-3PI/4) at the native eye,
+  // EMPTY lower left (+3PI/4), draining counter-clockwise through twelve o'clock.
+  // index.html calls this every frame the flamer
   // is in hand with fuel left / the tank's size. It eases so a refill sweeps the needle up instead of snapping.
-  gun.userData.gaugeFull = 3 * Math.PI / 4;
-  gun.userData.gaugeEmpty = -3 * Math.PI / 4;
+  gun.userData.gaugeFull = -3 * Math.PI / 4;
+  gun.userData.gaugeEmpty = 3 * Math.PI / 4;
   gun.userData.setFuelGauge = (fraction, dt = 1) => {
     const f = Math.max(0, Math.min(1, Number.isFinite(fraction) ? fraction : 1));
     const want = gun.userData.gaugeEmpty + (gun.userData.gaugeFull - gun.userData.gaugeEmpty) * f;
@@ -1275,6 +1294,23 @@ export function makeFlamerModel(ctx) {
   bindModelArtwork(gun, 'controls', 'safety', safety);
   bindModelArtwork(gun, 'controls', 'igniter', igniter);
   bindModelArtwork(gun, 'controls', 'valve', valve);
+  // GT-20106/GT-20077: the existing bell is the heat surface; keep pilot/cage bare.
+  bindModelArtwork(gun, 'heatParts', 'barrel', nozzle);
+  // Fixed wand fittings share the receiver's static batches. Bake the complete
+  // local matrix, including the wand's nonuniform stretch, without TRS shear loss.
+  // The independently heated bell and emissive pilot keep their existing nodes.
+  wand.updateMatrix();
+  for (const mesh of wand.children.slice()) {
+    if (!mesh.isMesh || mesh === nozzle || mesh === pilot) continue;
+    mesh.updateMatrix();
+    mesh.geometry = mesh.geometry.clone().applyMatrix4(new THREE.Matrix4().multiplyMatrices(wand.matrix, mesh.matrix));
+    mesh.geometry.userData.shared = false;
+    mesh.position.set(0,0,0); mesh.rotation.set(0,0,0); mesh.scale.set(1,1,1);
+    gun.add(mesh);
+  }
+  // The slot head shares this lever's physical shadow as well as its pivot.
+  for (const mesh of safety.children) mesh.castShadow = true;
+  foldStatic(THREE, TSL, safety);   // Static artwork only; its named pivot stays movable.
   return finishGun(gun);
 }
 

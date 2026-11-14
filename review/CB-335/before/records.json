@@ -1,0 +1,5 @@
+{
+  "stage": "before",
+  "rows": [],
+  "failure": "Error: No Chrome or Edge found. Set CHROME=<path to chrome.exe>.\n    at findChrome (file:///sessions/rcw-01ke4f6wemsxmdgfvypvfdvc/mnt/Tiny%20Trek/tools/cdp.mjs:38:9)\n    at launch (file:///sessions/rcw-01ke4f6wemsxmdgfvypvfdvc/mnt/Tiny%20Trek/tools/cdp.mjs:245:11)\n    at async file:///sessions/rcw-01ke4f6wemsxmdgfvypvfdvc/mnt/Tiny%20Trek/review/CB-335/footaim-native.mjs:57:13"
+}

@@ -1,22 +1,24 @@
 # ChatGPT
 
-state: idle
-model: GPT-6.1 Sol (Medium, per D-175)
-task: —
-touching: —
-since: 2026-11-13T07:10Z
+state: active
+model: unsure (session model not exposed; prior card GPT-6.1 Sol Medium)
+task: GP-20133 Director: diagnose per-magazine accumulation in pair and KR7 with scene counters
+touching: review/GP-20133
+since: 2026-11-14T04:33Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-13-chatgpt-GP-20132.md
+last-report: handoffs/2026-11-14-chatgpt-GP-20142.md
 
 ## Notes
 
-STAND DOWN until after playtest per Director07:20Z (requests.md GP-20129 ACCEPTED). GP-20130 waits for Jerry design OK, then 3P aim follow-up; do not start parked work. GP-20130 HELD until that approval. Design review/GP-20130/design.md; own unwired game/training-integrity.js/tests8/0 prepared. No owner integration or duplicate rebuild.
+GP-20142 DONE--review04:33Z, handoff2026-11-14-chatgpt-GP-20142.md.144primaryPNGs/48triplets0errors,indexstable; actualKeyD9.2/32/69.7mm matchedbefore/live; fixedcamera0→0flags andfollowcameraidentical31-39k. Root CONFIRMED target-hidden/records.json: sun.target IN hidWorld,visiblefalse,updateMatrixWorld===_thSkip; real shadowupdate sees localfollowvsoldmenuworld. C2/Director/C7 notified missingkeep.add(sun.target), no productionedits. Nativevisualsnapnotcertified whiletargetfrozen. Firstfixture nulltg and first oneframe audit failures retained NOTproof. All ownGP42browsers closed.
 
-GP-20129 ACCEPTED by Director07:20Z: all six notes implemented. Note27 final review posted06:53Z with three decoded Armory wood/plain-synthetic/camo pictures; source/eye/rack/slung and save/isolation/reload verified. furniture-copies.json:18,408polymer vertices,0errors; furniture-native-after.json0errors. Factory standalone Inspector stays independent per Director; 3P aim follow-up after playtest. Final handoff2026-11-13-chatgpt-GP-20129.md.
+GP-20133 ACTIVE accumulation diagnosis perDirector (requests.md20326, answeredNOTE). accumulation-batch.mjs session96040 CURRENT: freshexclusiveonebrowser/lease eachpistolpair+KR7 TrainingHigh,5fullmags,scene countersbefore/afterphase,numericpeakdraws/triangles/effectlights piggybackrenderFrame; waitsbgWarmOFF; no screenshotsuntilALLphasesdone. Need inspect nonvacuousdrawcounts/objects andpermagtrend, then isolatewhatgrows/cap-own orrequestowner(ChatGPT2 impacts). C5shot solveMUSTSTAY(t229); do NOT parkonlyonhold. Priorpost-C5report remains diagnostic baseline, notdone.
 
-GP-20132 DONE diagnosis: unchanged native t33629/0; routed two cloud findings are fakethree API parity defects. Draft tests0/2 +parity-before.json/native.json underreview/GP-20132. Director froze ALL shim/vendor changes before playtest; C2 notified to record known false-reds. No production/model changes. C2 FYI07:32Z: CB-332 getObjectByProperty landed; instance-aware Box3 remains parked (tgt20076 side effects). Prior0/2 parity baseline is historical, not rerun during stand-down. Handoff2026-11-13-chatgpt-GP-20132.md.
+GP-20133 post-C5 native rerun checkpoint handoffs/2026-11-14-chatgpt-GP-20133-post-C5.md: 3gun PROF+heap0errors/stableindex+4modules; minigunhold157.34→81.34MiB per300rounds(-48.3%, diagnosticdifferentwhole-tree). ProfilerOFF pair3fullmags +8.26/+12.72/+26.20% overidle;0newbuilders/pipelines/errors,indexstable; actualmenu20.086s FAIL18. post-c5-alloc/summary.json and post-c5-clock/summary.json. Prior completed fixes/measurement caveats in2026-11-13GP33report; no broad8conditionbatchuntilreason.
 
-Loans OUT: index icons and furniture adapter (4fa1bed2->069f0b5a, exact reverse proof). C3 active loans: ui/weapon-sling.js body path only (stud mounts untouched), ui/marine-kit-fit.js clearCarryPack secondary rule if needed; keep out. C8 eye-hide/ballistics and C2 camera changes preserved.
+GP-20141 DONE: unchanged C7 native-probe79WebGPUstops+79PNGs0errors,69shotgun-tour mesh/UV/map signatures unchanged. Named outputloan review/CG-6/native; C7 gotDONE, rawstops+receipt. vmFov absent(info.fovundefined); camFov present. Handoff2026-11-14-chatgpt-GP-20141.md. No ownCG6browser remains.
 
-GP-20131 DONE/review35/0 plus native18callbacks/duplicates/19th/accuracy proof; prior GP-20124–27 done, details in their handoffs. Read current requests and next before acting; when no eligible work, standby. No git.
+GP-20140 ACCEPTED byDirector: handoff2026-11-14-chatgpt-GP-20140.md,21/0liveunits,t2555/0,1522chain samples0clip/anatomyviolations,80matchedfourlightshots0errors/<=.390mmcameradiff,32Inspector shots/rollcleanup0. Exclusivebefore60.001fps/p9516.9→after60.004/p9516.8,poseCPU1.28→2.25ms. C2unchangedtce4cloudgatepending; final module8a989ae8 sent fornextt255snapshot. D127no1Pidle. NEVERcopy archived fullindex/candidates. Reference71files moved _DELETE ME/GP-20140-reference perDirector; words/termsreference-source.txt only inreview.
+
+GP39 paint ACCEPTED; original47/0browser,13.711m2/288overlaps→0,25-59%flagsdown; prior shadow audit inconclusive (no caster receipts). GP38 I/O fallback DONE,GP37gravity DONE: respective2026-11-14handoffs. GP36 ammo done but WHOLECARD waits C5 physical LIVE shotgun-shell catch andGP33. GP30 AFTER ZOMBIES. Earliercards inreports, no duplication. No git/subagents; allgamesvia slots, onebrowser/worker; timingexclusive. D147 stayrunning, note/requests every15m, standby repeat untilOFF.

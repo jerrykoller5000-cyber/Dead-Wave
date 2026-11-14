@@ -1,0 +1,74 @@
+[
+  {
+    "glove": true,
+    "margin": -0.0005,
+    "triangles": 1624,
+    "intersections": 0
+  },
+  {
+    "glove": true,
+    "margin": 0,
+    "triangles": 1624,
+    "intersections": 0
+  },
+  {
+    "glove": true,
+    "margin": 0.0005,
+    "triangles": 1624,
+    "intersections": 0
+  },
+  {
+    "glove": true,
+    "margin": 0.001,
+    "triangles": 1624,
+    "intersections": 0
+  },
+  {
+    "glove": true,
+    "digit": "index",
+    "triangles": 162,
+    "clearanceMm": 8.343524932861328
+  },
+  {
+    "glove": true,
+    "digit": "middle",
+    "triangles": 174,
+    "clearanceMm": 1.0419845581054688
+  },
+  {
+    "glove": false,
+    "margin": -0.0005,
+    "triangles": 1404,
+    "intersections": 0
+  },
+  {
+    "glove": false,
+    "margin": 0,
+    "triangles": 1404,
+    "intersections": 0
+  },
+  {
+    "glove": false,
+    "margin": 0.0005,
+    "triangles": 1404,
+    "intersections": 0
+  },
+  {
+    "glove": false,
+    "margin": 0.001,
+    "triangles": 1404,
+    "intersections": 0
+  },
+  {
+    "glove": false,
+    "digit": "index",
+    "triangles": 162,
+    "clearanceMm": 9.434852600097656
+  },
+  {
+    "glove": false,
+    "digit": "middle",
+    "triangles": 174,
+    "clearanceMm": 2.4357032775878906
+  }
+]

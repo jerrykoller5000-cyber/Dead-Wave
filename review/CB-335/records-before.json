@@ -1,0 +1,135 @@
+{
+  "stage": "before",
+  "rows": [
+    {
+      "kind": "feet",
+      "type": "shambler",
+      "res": "ground",
+      "hitFrac": null,
+      "aimKind": "ground",
+      "ground": [
+        -17,
+        -200,
+        -640
+      ],
+      "aim": [
+        -16.975,
+        -200,
+        -639.989
+      ],
+      "zScreen": [
+        638,
+        195
+      ],
+      "dpr": 1,
+      "file": "shambler-feet.png"
+    },
+    {
+      "kind": "edge",
+      "type": "shambler",
+      "res": "ground",
+      "hitFrac": null,
+      "aimKind": "ground",
+      "ground": [
+        -17,
+        -200,
+        -640.62
+      ],
+      "aim": [
+        -17,
+        -200,
+        -640.62
+      ],
+      "zScreen": [
+        640,
+        194
+      ],
+      "dpr": 1,
+      "file": "shambler-edge.png"
+    },
+    {
+      "kind": "feet",
+      "type": "brute",
+      "res": "legs",
+      "hitFrac": 0.11,
+      "aimKind": "zombie",
+      "ground": [
+        -17,
+        -200,
+        -640
+      ],
+      "aim": [
+        -17,
+        -199.695,
+        -640.455
+      ],
+      "zScreen": [
+        640,
+        181
+      ],
+      "dpr": 1,
+      "file": "brute-feet.png"
+    },
+    {
+      "kind": "edge",
+      "type": "brute",
+      "res": "ground",
+      "hitFrac": null,
+      "aimKind": "ground",
+      "ground": [
+        -17,
+        -200,
+        -640.84
+      ],
+      "aim": [
+        -17,
+        -200,
+        -640.84
+      ],
+      "zScreen": [
+        640,
+        179
+      ],
+      "dpr": 1,
+      "file": "brute-edge.png"
+    }
+  ],
+  "spot": {
+    "active": true,
+    "origin": [
+      0,
+      -640
+    ]
+  },
+  "errors": [],
+  "console": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "THREE.WebGLProgram: Shader Error 0 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+    },
+    {
+      "type": "error",
+      "text": "THREE.WebGLProgram: Shader Error 1282 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ]
+}

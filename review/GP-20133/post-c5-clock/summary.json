@@ -1,0 +1,102 @@
+{
+  "profilerOff": {
+    "prof": false,
+    "gpuTimestamps": false
+  },
+  "sourceUnchanged": true,
+  "menuWallMs": 20086,
+  "errors": [],
+  "failure": null,
+  "rows": [
+    {
+      "pass": 0,
+      "fire": false,
+      "ammo": [
+        24,
+        24
+      ],
+      "n": 271,
+      "mean": 16.654243542369443,
+      "p95": 17.5,
+      "worst": 18.900000005960464,
+      "builders": 0,
+      "pipelines": 0
+    },
+    {
+      "pass": 0,
+      "fire": true,
+      "ammo": [
+        24,
+        0
+      ],
+      "n": 46,
+      "mean": 18.030434782738272,
+      "p95": 23.600000023841858,
+      "worst": 25.700000017881393,
+      "builders": 0,
+      "pipelines": 0,
+      "overIdlePercent": 8.263306807467497,
+      "within10": true
+    },
+    {
+      "pass": 1,
+      "fire": false,
+      "ammo": [
+        24,
+        24
+      ],
+      "n": 270,
+      "mean": 16.66629629631837,
+      "p95": 16.900000005960464,
+      "worst": 25.799999982118607,
+      "builders": 0,
+      "pipelines": 0
+    },
+    {
+      "pass": 1,
+      "fire": true,
+      "ammo": [
+        24,
+        0
+      ],
+      "n": 45,
+      "mean": 18.78666666679912,
+      "p95": 25.5,
+      "worst": 36.20000001788139,
+      "builders": 0,
+      "pipelines": 0,
+      "overIdlePercent": 12.722504945199752,
+      "within10": false
+    },
+    {
+      "pass": 2,
+      "fire": false,
+      "ammo": [
+        24,
+        24
+      ],
+      "n": 268,
+      "mean": 16.832089552238806,
+      "p95": 20.099999994039536,
+      "worst": 27.600000023841858,
+      "builders": 0,
+      "pipelines": 0
+    },
+    {
+      "pass": 2,
+      "fire": true,
+      "ammo": [
+        24,
+        0
+      ],
+      "n": 40,
+      "mean": 21.242500000447034,
+      "p95": 30.099999994039536,
+      "worst": 35.69999998807907,
+      "builders": 0,
+      "pipelines": 0,
+      "overIdlePercent": 26.20239415029495,
+      "within10": false
+    }
+  ]
+}

@@ -1,0 +1,759 @@
+{
+  "scope": "CPU sampling diagnostic only; inclusive stacks overlap, do not sum; sampled time estimate, not deterministic calls or acceptance latency",
+  "phases": [
+    {
+      "file": "cpu-pistol-0-fire.json",
+      "wallMs": 1522.625,
+      "samples": 805,
+      "topSelf": [
+        [
+          "(program) @ :0",
+          386.7889999999999
+        ],
+        [
+          "updateMatrixWorld @ three.core.js:13980",
+          224.629
+        ],
+        [
+          "writeBuffer @ :0",
+          56.37899999999999
+        ],
+        [
+          "multiplyMatrices @ three.core.js:11564",
+          55.67400000000001
+        ],
+        [
+          "getBoundingClientRect @ :0",
+          51.293
+        ],
+        [
+          "_projectObject @ three.webgpu.js:51929",
+          39.687
+        ],
+        [
+          "updateProjectiles @ index.html:60728",
+          39.205
+        ],
+        [
+          "updateByType @ three.webgpu.js:52796",
+          33.434
+        ],
+        [
+          "bend @ marine-cloth.js:64",
+          31.246000000000002
+        ],
+        [
+          "_renderObjectDirect @ three.webgpu.js:52263",
+          31.009999999999998
+        ],
+        [
+          "updateWorldMatrix @ three.core.js:14027",
+          30.329
+        ],
+        [
+          "tick @ index.html:68535",
+          26.308000000000003
+        ],
+        [
+          "updateForRender @ three.webgpu.js:47227",
+          25.434
+        ],
+        [
+          "shoulderBad @ index.html:55385",
+          17.029999999999998
+        ],
+        [
+          "needsRenderUpdate @ three.webgpu.js:69618",
+          15.831
+        ],
+        [
+          "shoulderAngles @ body-limits.js:181",
+          11.875
+        ],
+        [
+          "draw @ three.webgpu.js:69345",
+          11.185999999999998
+        ],
+        [
+          "equals @ three.webgpu.js:294",
+          11.062999999999999
+        ],
+        [
+          "get @ three.webgpu.js:26002",
+          11.006
+        ],
+        [
+          "sameState @ marine-skin.js:65",
+          10.793
+        ]
+      ],
+      "selectedInclusive": [
+        [
+          "renderFrame @ index.html:2525",
+          535.2740000000002
+        ],
+        [
+          "holdWeapon @ index.html:56153",
+          275.971
+        ],
+        [
+          "updateProjectiles @ index.html:60728",
+          72.81300000000002
+        ],
+        [
+          "getBoundingClientRect @ :0",
+          51.293
+        ],
+        [
+          "bend @ marine-cloth.js:64",
+          32.77
+        ],
+        [
+          "shoulderBad @ index.html:55385",
+          28.892999999999994
+        ],
+        [
+          "traceTraining @ training-ballistics.js:17",
+          21.912
+        ],
+        [
+          "syncRigSkins @ marine-skin.js:239",
+          13.961
+        ],
+        [
+          "bend @ marine-waist.js:39",
+          4.898000000000001
+        ],
+        [
+          "arm.bendSleeve @ fp-arms.js:205",
+          1.557
+        ]
+      ]
+    },
+    {
+      "file": "cpu-pistol-0-idle.json",
+      "wallMs": 5371.111,
+      "samples": 2991,
+      "topSelf": [
+        [
+          "(program) @ :0",
+          973.3039999999996
+        ],
+        [
+          "(idle) @ :0",
+          735.5609999999997
+        ],
+        [
+          "updateMatrixWorld @ three.core.js:13980",
+          623.6419999999998
+        ],
+        [
+          "updateWorldMatrix @ three.core.js:14027",
+          230.61799999999997
+        ],
+        [
+          "multiplyMatrices @ three.core.js:11564",
+          175.50599999999997
+        ],
+        [
+          "writeBuffer @ :0",
+          166.52100000000007
+        ],
+        [
+          "updateByType @ three.webgpu.js:52796",
+          146.97199999999992
+        ],
+        [
+          "_projectObject @ three.webgpu.js:51929",
+          136.27200000000008
+        ],
+        [
+          "updateForRender @ three.webgpu.js:47227",
+          109.84900000000006
+        ],
+        [
+          "_renderObjectDirect @ three.webgpu.js:52263",
+          104.32099999999996
+        ],
+        [
+          "getBoundingClientRect @ :0",
+          89.30100000000003
+        ],
+        [
+          "draw @ three.webgpu.js:69345",
+          66.136
+        ],
+        [
+          "submit @ :0",
+          59.083000000000006
+        ],
+        [
+          "tick @ index.html:68535",
+          56.779999999999994
+        ],
+        [
+          "bend @ marine-cloth.js:64",
+          56.334
+        ],
+        [
+          "toArray @ three.core.js:12264",
+          56.15300000000001
+        ],
+        [
+          "set @ three.webgpu.js:3074",
+          54.452
+        ],
+        [
+          "shoulderBad @ index.html:55385",
+          50.821000000000005
+        ],
+        [
+          "needsRenderUpdate @ three.webgpu.js:69618",
+          48.67799999999999
+        ],
+        [
+          "setVertexBuffer @ :0",
+          47.53999999999999
+        ]
+      ],
+      "selectedInclusive": [
+        [
+          "renderFrame @ index.html:2525",
+          2029.2479999999998
+        ],
+        [
+          "holdWeapon @ index.html:56153",
+          729.7929999999993
+        ],
+        [
+          "shoulderBad @ index.html:55385",
+          89.43199999999999
+        ],
+        [
+          "getBoundingClientRect @ :0",
+          89.30100000000003
+        ],
+        [
+          "bend @ marine-cloth.js:64",
+          58.026
+        ],
+        [
+          "syncRigSkins @ marine-skin.js:239",
+          47.13099999999999
+        ],
+        [
+          "bend @ marine-waist.js:39",
+          31.364000000000004
+        ],
+        [
+          "traceTraining @ training-ballistics.js:17",
+          12.599999999999998
+        ]
+      ]
+    },
+    {
+      "file": "cpu-pistol-1-fire.json",
+      "wallMs": 1540.391,
+      "samples": 777,
+      "topSelf": [
+        [
+          "(program) @ :0",
+          404.2570000000001
+        ],
+        [
+          "updateMatrixWorld @ three.core.js:13980",
+          224.29899999999998
+        ],
+        [
+          "_renderObjectDirect @ three.webgpu.js:52263",
+          53.838
+        ],
+        [
+          "writeBuffer @ :0",
+          53.744000000000014
+        ],
+        [
+          "multiplyMatrices @ three.core.js:11564",
+          50.03600000000001
+        ],
+        [
+          "updateWorldMatrix @ three.core.js:14027",
+          44.875
+        ],
+        [
+          "getBoundingClientRect @ :0",
+          42.052
+        ],
+        [
+          "_projectObject @ three.webgpu.js:51929",
+          40.242
+        ],
+        [
+          "updateByType @ three.webgpu.js:52796",
+          37.098
+        ],
+        [
+          "updateProjectiles @ index.html:60728",
+          27.267000000000003
+        ],
+        [
+          "bend @ marine-cloth.js:64",
+          26.623
+        ],
+        [
+          "updateForRender @ three.webgpu.js:47227",
+          22.102
+        ],
+        [
+          "equals @ three.webgpu.js:294",
+          19.355
+        ],
+        [
+          "shoulderAngles @ body-limits.js:181",
+          17.066000000000003
+        ],
+        [
+          "toArray @ three.core.js:12264",
+          15.543999999999997
+        ],
+        [
+          "set @ three.webgpu.js:3074",
+          14.841999999999999
+        ],
+        [
+          "get @ three.webgpu.js:26002",
+          13.787000000000003
+        ],
+        [
+          "_update @ three.webgpu.js:27681",
+          12.691999999999998
+        ],
+        [
+          "needsRenderUpdate @ three.webgpu.js:69618",
+          11.071
+        ],
+        [
+          "submit @ :0",
+          10.849
+        ]
+      ],
+      "selectedInclusive": [
+        [
+          "renderFrame @ index.html:2525",
+          587.9950000000003
+        ],
+        [
+          "holdWeapon @ index.html:56153",
+          264.817
+        ],
+        [
+          "updateProjectiles @ index.html:60728",
+          47.334
+        ],
+        [
+          "getBoundingClientRect @ :0",
+          42.052
+        ],
+        [
+          "bend @ marine-cloth.js:64",
+          26.623
+        ],
+        [
+          "traceTraining @ training-ballistics.js:17",
+          22.822000000000003
+        ],
+        [
+          "shoulderBad @ index.html:55385",
+          22.31
+        ],
+        [
+          "syncRigSkins @ marine-skin.js:239",
+          10.587
+        ],
+        [
+          "bend @ marine-waist.js:39",
+          7.416
+        ],
+        [
+          "arm.bendSleeve @ fp-arms.js:205",
+          6.355
+        ]
+      ]
+    },
+    {
+      "file": "cpu-pistol-1-idle.json",
+      "wallMs": 5019.809,
+      "samples": 3031,
+      "topSelf": [
+        [
+          "updateMatrixWorld @ three.core.js:13980",
+          783.2940000000004
+        ],
+        [
+          "(program) @ :0",
+          573.324
+        ],
+        [
+          "(idle) @ :0",
+          360.4050000000002
+        ],
+        [
+          "updateWorldMatrix @ three.core.js:14027",
+          235.0779999999999
+        ],
+        [
+          "multiplyMatrices @ three.core.js:11564",
+          204.59400000000002
+        ],
+        [
+          "writeBuffer @ :0",
+          184.25300000000001
+        ],
+        [
+          "updateByType @ three.webgpu.js:52796",
+          175.71
+        ],
+        [
+          "_projectObject @ three.webgpu.js:51929",
+          172.8979999999999
+        ],
+        [
+          "_renderObjectDirect @ three.webgpu.js:52263",
+          132.263
+        ],
+        [
+          "updateForRender @ three.webgpu.js:47227",
+          115.67800000000001
+        ],
+        [
+          "getBoundingClientRect @ :0",
+          108.97300000000001
+        ],
+        [
+          "bend @ marine-cloth.js:64",
+          69.83
+        ],
+        [
+          "submit @ :0",
+          68.73999999999998
+        ],
+        [
+          "setBindGroup @ :0",
+          66.197
+        ],
+        [
+          "needsRenderUpdate @ three.webgpu.js:69618",
+          60.594000000000015
+        ],
+        [
+          "set @ three.webgpu.js:3074",
+          58.742
+        ],
+        [
+          "shoulderBad @ index.html:55385",
+          57.228
+        ],
+        [
+          "setVertexBuffer @ :0",
+          53.21599999999999
+        ],
+        [
+          "shoulderAngles @ body-limits.js:181",
+          52.77499999999999
+        ],
+        [
+          "draw @ three.webgpu.js:69345",
+          51.538999999999994
+        ]
+      ],
+      "selectedInclusive": [
+        [
+          "renderFrame @ index.html:2525",
+          2311.588999999999
+        ],
+        [
+          "holdWeapon @ index.html:56153",
+          904.4400000000005
+        ],
+        [
+          "getBoundingClientRect @ :0",
+          108.97300000000001
+        ],
+        [
+          "shoulderBad @ index.html:55385",
+          105.95499999999998
+        ],
+        [
+          "bend @ marine-cloth.js:64",
+          71.349
+        ],
+        [
+          "bend @ marine-waist.js:39",
+          45.73899999999999
+        ],
+        [
+          "syncRigSkins @ marine-skin.js:239",
+          42.321000000000005
+        ],
+        [
+          "traceTraining @ training-ballistics.js:17",
+          15.177999999999999
+        ],
+        [
+          "arm.bendSleeve @ fp-arms.js:205",
+          1.252
+        ]
+      ]
+    },
+    {
+      "file": "cpu-pistol-2-fire.json",
+      "wallMs": 1583.819,
+      "samples": 748,
+      "topSelf": [
+        [
+          "(program) @ :0",
+          490.20600000000013
+        ],
+        [
+          "updateMatrixWorld @ three.core.js:13980",
+          219.694
+        ],
+        [
+          "writeBuffer @ :0",
+          64.851
+        ],
+        [
+          "getBoundingClientRect @ :0",
+          45.20899999999999
+        ],
+        [
+          "multiplyMatrices @ three.core.js:11564",
+          41.33500000000001
+        ],
+        [
+          "updateWorldMatrix @ three.core.js:14027",
+          38.157000000000004
+        ],
+        [
+          "updateByType @ three.webgpu.js:52796",
+          34.714999999999996
+        ],
+        [
+          "_projectObject @ three.webgpu.js:51929",
+          30.986
+        ],
+        [
+          "updateForRender @ three.webgpu.js:47227",
+          24.833
+        ],
+        [
+          "_renderObjectDirect @ three.webgpu.js:52263",
+          23.455000000000002
+        ],
+        [
+          "shoulderBad @ index.html:55385",
+          20.991
+        ],
+        [
+          "updateProjectiles @ index.html:60728",
+          20.101000000000003
+        ],
+        [
+          "setVertexBuffer @ :0",
+          18.639
+        ],
+        [
+          "bend @ marine-cloth.js:64",
+          16.855999999999998
+        ],
+        [
+          "shoulderAngles @ body-limits.js:181",
+          15.613000000000001
+        ],
+        [
+          "update @ three.webgpu.js:12293",
+          15.068000000000001
+        ],
+        [
+          "needsRenderUpdate @ three.webgpu.js:69618",
+          14.108
+        ],
+        [
+          "tick @ index.html:68535",
+          13.4
+        ],
+        [
+          "updateSceneMatrices @ index.html:2501",
+          12.655
+        ],
+        [
+          "setBindGroup @ :0",
+          12.453
+        ]
+      ],
+      "selectedInclusive": [
+        [
+          "renderFrame @ index.html:2525",
+          555.423
+        ],
+        [
+          "holdWeapon @ index.html:56153",
+          272.901
+        ],
+        [
+          "getBoundingClientRect @ :0",
+          45.20899999999999
+        ],
+        [
+          "updateProjectiles @ index.html:60728",
+          43.91900000000001
+        ],
+        [
+          "shoulderBad @ index.html:55385",
+          27.371999999999996
+        ],
+        [
+          "traceTraining @ training-ballistics.js:17",
+          22.627999999999997
+        ],
+        [
+          "bend @ marine-cloth.js:64",
+          16.855999999999998
+        ],
+        [
+          "syncRigSkins @ marine-skin.js:239",
+          12.230999999999998
+        ],
+        [
+          "bend @ marine-waist.js:39",
+          9.829
+        ],
+        [
+          "arm.bendSleeve @ fp-arms.js:205",
+          4.694
+        ]
+      ]
+    },
+    {
+      "file": "cpu-pistol-2-idle.json",
+      "wallMs": 5070.598,
+      "samples": 3044,
+      "topSelf": [
+        [
+          "updateMatrixWorld @ three.core.js:13980",
+          808.4819999999995
+        ],
+        [
+          "(program) @ :0",
+          614.9150000000002
+        ],
+        [
+          "updateWorldMatrix @ three.core.js:14027",
+          279.60900000000004
+        ],
+        [
+          "(idle) @ :0",
+          251.507
+        ],
+        [
+          "updateByType @ three.webgpu.js:52796",
+          209.99799999999996
+        ],
+        [
+          "writeBuffer @ :0",
+          206.28599999999997
+        ],
+        [
+          "multiplyMatrices @ three.core.js:11564",
+          185.0239999999999
+        ],
+        [
+          "_projectObject @ three.webgpu.js:51929",
+          170.68900000000002
+        ],
+        [
+          "_renderObjectDirect @ three.webgpu.js:52263",
+          160.72299999999996
+        ],
+        [
+          "updateForRender @ three.webgpu.js:47227",
+          160.22199999999995
+        ],
+        [
+          "getBoundingClientRect @ :0",
+          115.89799999999997
+        ],
+        [
+          "bend @ marine-cloth.js:64",
+          72.01599999999999
+        ],
+        [
+          "shoulderBad @ index.html:55385",
+          68.08400000000002
+        ],
+        [
+          "equals @ three.webgpu.js:294",
+          67.068
+        ],
+        [
+          "draw @ three.webgpu.js:69345",
+          58.736999999999995
+        ],
+        [
+          "shoulderAngles @ body-limits.js:181",
+          56.41100000000001
+        ],
+        [
+          "setVertexBuffer @ :0",
+          51.143
+        ],
+        [
+          "toArray @ three.core.js:12264",
+          50.910999999999994
+        ],
+        [
+          "sameState @ marine-skin.js:65",
+          48.757
+        ],
+        [
+          "tick @ index.html:68535",
+          45.54500000000001
+        ]
+      ],
+      "selectedInclusive": [
+        [
+          "renderFrame @ index.html:2525",
+          2357.8540000000025
+        ],
+        [
+          "holdWeapon @ index.html:56153",
+          913.7610000000001
+        ],
+        [
+          "shoulderBad @ index.html:55385",
+          124.69299999999997
+        ],
+        [
+          "getBoundingClientRect @ :0",
+          115.89799999999997
+        ],
+        [
+          "bend @ marine-cloth.js:64",
+          79.069
+        ],
+        [
+          "syncRigSkins @ marine-skin.js:239",
+          62.956
+        ],
+        [
+          "bend @ marine-waist.js:39",
+          27.896999999999995
+        ],
+        [
+          "traceTraining @ training-ballistics.js:17",
+          12.943000000000001
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+FAIL  t333     14 pass   2 fail  37.7s  (real renderer)
+    FAIL ak: every small part touches a bigger one (77 small) FLOAT 1 at 0.047,-0.012,0.512
+    FAIL no floating hardware across the set (1)
+FAIL  tcl334c    4 pass   1 fail  34.7s  (real renderer)
+    FAIL no part of either hand inside any part of a gun (deepest per gun, mm: m4 0.3, ak 0.2, shotgun 3.7, aa12 0.2, sniper 0.5); through: shotgun: 3.7 mm (r glove in shotgun trigger)
+2 checks: 18 pass, 3 fail (real renderer)

@@ -1,0 +1,76 @@
+{
+  "stage": "inspect-after",
+  "indexHash": "1123bcf448636e6f895d886b77400828b0e922ac77890cc26483b81a931b4704",
+  "moduleHash": "d22384a682b3e3ff59155e55fff1a67ca0463f16b215a7c6d88e745e6fee541b",
+  "rows": [],
+  "built": {
+    "id": "marine",
+    "name": "The marine (live)",
+    "kind": "marine",
+    "variant": null,
+    "mode": null,
+    "center": {
+      "x": -25.98088046541348,
+      "y": -199.19350646335886,
+      "z": -632.1272156772822
+    },
+    "size": {
+      "x": 0.7609953995364336,
+      "y": 1.6129870731244011,
+      "z": 0.8803159139258696
+    },
+    "yaw": 0,
+    "info": {
+      "meshes": 199,
+      "drawables": 199,
+      "tris": 196070,
+      "points": 0,
+      "segments": 0,
+      "materials": 83
+    }
+  },
+  "failure": "Error: evaluate failed: SyntaxError: await is only valid in async functions and the top level bodies of modules\n    at Page.evaluate (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:166:13)\n    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20140/smoking-inspector-native.mjs:5:364",
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 0 shader variants compiled, 0 bodies pooled, 0 warm frames, lights visible 24/24, shadows true | post 5ms pools 0ms compile 0ms warm frame 0ms | "
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 71ms | trees 268ms | player+weapons+zombie types 1423ms | foliage scattered 2580ms | POIs+minimap+foliage chunks 4213ms | contact shading + rest of setup 4423ms | post + pools + compile + warm frame 4436ms | ready 4439ms"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 0 variants after 0 warm frames | "
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 0 warm frames, 135 variants | "
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":9.61,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.59,\"frames\":16,\"over50\":1,\"over100\":1,\"worst\":167},\"loading\":{\"at\":0.59,\"seconds\":9.01,\"frames\":46,\"over50\":14,\"over100\":9,\"worst\":2600},\"menu\":{\"at\":9.61,\"seconds\":8.86,\"frames\":4,\"over50\":0,\"over100\":0,\"worst\":33}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":11,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":null,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "info",
+      "text": "Inspector 1.2.0: 115 subjects; DWInspect.help() for the API"
+    }
+  ],
+  "errors": []
+}

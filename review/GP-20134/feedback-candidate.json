@@ -1,0 +1,19 @@
+{
+  "note": "REVIEW ONLY, unapproved additive callback fields. Production unchanged.",
+  "index": [
+    {
+      "old": "ammo: { price: AMMO_PACK[calibre].cost, full: (reserveAmmo[calibre] | 0) >= reserveCap(calibre),",
+      "next": "ammo: { current: reserveAmmo[calibre] | 0, capacity: reserveCap(calibre), quantity: AMMO_PACK[calibre].n, price: AMMO_PACK[calibre].cost, full: (reserveAmmo[calibre] | 0) >= reserveCap(calibre),"
+    }
+  ],
+  "ui": [
+    {
+      "old": "      if (plan.owned && plan.ammo) {",
+      "next": "      if (plan.owned && plan.ammo) {\n        if (Number.isFinite(plan.ammo.current) && Number.isFinite(plan.ammo.capacity)) {\n          const stock = el('small', 'armory-build-ammo-stock', text('shop.carried', { count:plan.ammo.current, capacity:plan.ammo.capacity }));\n          stock.dataset.buildAmmoStock = plan.kind; stock.setAttribute('aria-live', 'polite'); item.append(stock);\n        }"
+    },
+    {
+      "old": "const refill = el('button', 'armory-offer-ammo', t('armory.ammoPack', { price: plan.ammo.price }, 'Ammo · ${price}'));",
+      "next": "const refill = el('button', 'armory-offer-ammo', plan.ammo.full ? t('armory.ammoFull', {}, 'Ammo full') : Number.isFinite(plan.ammo.quantity) ? text('armory.typed.pack', { count:plan.ammo.quantity, price:plan.ammo.price }) : t('armory.ammoPack', { price:plan.ammo.price }, 'Ammo · ${price}'));"
+    }
+  ]
+}

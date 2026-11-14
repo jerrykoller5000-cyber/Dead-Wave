@@ -117,7 +117,7 @@
         const B = bodyGrid();
         // (4) handgun shells: the lowest third of each against him
         const loose = [];
-        for (const [k, sp] of [...rig.holsters.map((x, i) => ['holster ' + i, x]), ...rig.pairs.map((x, i) => ['pair ' + i, x])]) {
+        for (const [k, sp] of [['hip', rig.hip], ['hip pair', rig.hipPair], ...rig.holsters.map((x, i) => ['holster ' + i, x]), ...rig.pairs.map((x, i) => ['pair ' + i, x])]) {   // CC-350: + the base pistol and its pair
           if (!vis(sp.g) || !sp.shell || !vis(sp.shell) || (sp.kind || sp.fitKind) === 'uzi') continue;
           const P = ptsOf(sp.shell, B.inv, 300).sort((a, b) => a.y - b.y), low = P.slice(0, Math.max(1, Math.floor(P.length / 3)));
           if (!P.length || P[0].y >= 0.93) continue;   // on the pack's face (it ends at y .93): the upper row, as accepted (CL-160)
@@ -147,7 +147,8 @@
       setVest(true); T.carryDbg({ ...SEAT[0], inHand: null, akimbo: false, vest: true, grenades: 4 }); rig.t = 1e6;
       const press = (k, z) => T.flightInput && T.flightInput({ keys: k, zoom: !!z });
       const legs = []; M.traverse((o) => { if (o.isMesh && /live-trouser-leg|live-seat|boot|pad/.test(o.name || '')) legs.push(o); });
-      const spots = [...rig.holsters, ...rig.pairs].filter((x) => x.onHips && vis(x.g) && x.shell && x.shell.userData.fitKey);
+      // CC-350: the base pistol rides the belt too now (4 o'clock), so its shell and its pair's count with the secondaries'
+      const spots = [rig.hip, rig.hipPair, ...rig.holsters, ...rig.pairs].filter((x) => x && x.onHips && vis(x.g) && x.shell && x.shell.userData.fitKey);
       const home = T.player.position.clone(), v = V3(), q = V3(); let worst = -1, where = '';
       T.flightHold && T.flightHold(true);
       const MOVES = [['stand', () => { press([]); step(20); }], ['walk', () => { press(['KeyW']); step(14); }], ['run', () => { press(['KeyW', 'ShiftLeft']); step(18); }], ['crouch', () => { press(['KeyC']); step(24); }], ['crouch-walk', () => { press(['KeyC', 'KeyW']); step(14); }], ['aim', () => { press([], true); step(24); }], ['jump', () => { press(['Space']); step(2); press([]); step(8); }]];

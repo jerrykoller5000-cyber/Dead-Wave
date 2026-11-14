@@ -1,0 +1,30 @@
+{
+  "before": "7dd982e35c3e5a2ee4c3ae40be9bc903664c9b959adb5144d15a134f62cbf665",
+  "after": "d22384a682b3e3ff59155e55fff1a67ca0463f16b215a7c6d88e745e6fee541b",
+  "hunks": [
+    {
+      "before": "  const handCigQ=new THREE.Quaternion();",
+      "after": "  const handCigQ=new THREE.Quaternion();\n  const lastPinchWant=new THREE.Vector3(),lastPinchTarget=new THREE.Vector3();\n  let pinchWarm=false;"
+    },
+    {
+      "before": "    desired.copy(pinchTarget).sub(offset);want.copy(desired);",
+      "after": "    desired.copy(pinchTarget).sub(offset);want.copy(desired);\n    // A continuous gesture starts near the previous bounded solution. Keep the\n    // cold solve for a new cigarette or a discontinuous target, not every frame.\n    if(pinchWarm&&target.distanceToSquared(lastPinchTarget)<.0064)\n      want.copy(lastPinchWant).add(desiredDir.copy(target).sub(lastPinchTarget));"
+    },
+    {
+      "before": "    let miss=Infinity;\n    for(let iteration=0;iteration<12;iteration++){",
+      "after": "    let miss=Infinity,iterations=0;\n    for(let iteration=0;iteration<12;iteration++){\n      iterations++;"
+    },
+    {
+      "before": "    wr.getWorldPosition(actual);u.armRG.getWorldPosition(shoulder);",
+      "after": "    lastPinchWant.copy(want);lastPinchTarget.copy(target);pinchWarm=true;\n    wr.getWorldPosition(actual);u.armRG.getWorldPosition(shoulder);"
+    },
+    {
+      "before": "cig.userData.handOffset=offset.length();cig.userData.pinchError=miss;",
+      "after": "cig.userData.handOffset=offset.length();cig.userData.pinchError=miss;cig.userData.pinchIterations=iterations;"
+    },
+    {
+      "before": "  function hide() { root.visible = false;",
+      "after": "  function hide() { pinchWarm=false;root.visible = false;"
+    }
+  ]
+}

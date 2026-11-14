@@ -1,0 +1,6 @@
+{
+  "before": "5892c85e85733413dadf46fc14398f35509233ecf90e7d56af68d8efc01f7ca6",
+  "after": "b1e416c2c8f0474005643b3827ddb91b46bf2c75134d9807a56cb38305f37538",
+  "add": "\n/* GP-20135: keep the emplacement controls on matching rows, including wrapped mobile names. */\n#cif .armory-offer[data-offer-build] { align-content:start; }\n@media (max-width:600px) { #cif .armory-offer[data-offer-build] .armory-name { min-height:2lh; } }",
+  "scope": "Only emplacement grid alignment and mobile name min-height; exact reverse outside proof"
+}

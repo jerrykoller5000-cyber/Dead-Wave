@@ -1,0 +1,147 @@
+{
+  "scope": "Native production HUD before/after equivalence using saved original body in same lexical context; zero unchanged DOM writes.",
+  "sourceSha256": "b3288fe9294b1f60e0e85b2cdeff75f74d4a0124e3d37772045fc83b764e2ed2",
+  "rows": [],
+  "graphics": "high",
+  "hud": [
+    {
+      "mutations": {
+        "grenadeChips": 100,
+        "ammoWeapon": 100,
+        "ammoCount": 100,
+        "ammoDetail": 100
+      },
+      "snapshot": {
+        "text": "30\nKR-7 RIFLE\n30 / 30 · 0 Bullets · AUTO\nG×0\nH×0\n0 mags",
+        "chips": "<span class=\"gchip\">G×0</span><span class=\"gchip\">H×0</span>",
+        "cls": "glass"
+      },
+      "before": true
+    },
+    {
+      "mutations": {},
+      "snapshot": {
+        "text": "30\nKR-7 RIFLE\n30 / 30 · 0 Bullets · AUTO\nG×0\nH×0\n0 mags",
+        "chips": "<span class=\"gchip\">G×0</span><span class=\"gchip\">H×0</span>",
+        "cls": "glass"
+      },
+      "before": false
+    }
+  ],
+  "scenarios": [
+    {
+      "key": "ak",
+      "reload": false,
+      "before": {
+        "text": "30\nKR-7 RIFLE\n30 / 30 · 0 Bullets · AUTO\nG×2\nH×3\n0 mags",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      },
+      "after": {
+        "text": "30\nKR-7 RIFLE\n30 / 30 · 0 Bullets · AUTO\nG×2\nH×3\n0 mags",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      }
+    },
+    {
+      "key": "pistol",
+      "reload": false,
+      "before": {
+        "text": "12\nPISTOL\n12 / 12 · 168 Bullets · AUTO\nG×2\nH×3\n14 mags\n12\n12\n12\n12\n12\n12\n12\n12\n12\n12\n12\n12\n12\n12",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      },
+      "after": {
+        "text": "12\nPISTOL\n12 / 12 · 168 Bullets · AUTO\nG×2\nH×3\n14 mags\n12\n12\n12\n12\n12\n12\n12\n12\n12\n12\n12\n12\n12\n12",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      }
+    },
+    {
+      "key": "minigun",
+      "reload": false,
+      "before": {
+        "text": "300\nROTARY GUN\n300 / 300 · 1200 Bullets\nG×2\nH×3\n4 mags\n300\n300\n300\n300",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      },
+      "after": {
+        "text": "300\nROTARY GUN\n300 / 300 · 1200 Bullets\nG×2\nH×3\n4 mags\n300\n300\n300\n300",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      }
+    },
+    {
+      "key": "shotgun",
+      "reload": false,
+      "before": {
+        "text": "8\nSHOTGUN · X CHANGE SHELLS\n8 / 8 · BIRD · 154 spare\nG×2\nH×3",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      },
+      "after": {
+        "text": "8\nSHOTGUN · X CHANGE SHELLS\n8 / 8 · BIRD · 154 spare\nG×2\nH×3",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      }
+    },
+    {
+      "key": "shotgun",
+      "reload": true,
+      "before": {
+        "text": "8\nSHOTGUN · X CHANGE SHELLS\nReloading BIRD · 154 spare\nG×2\nH×3",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      },
+      "after": {
+        "text": "8\nSHOTGUN · X CHANGE SHELLS\nReloading BIRD · 154 spare\nG×2\nH×3",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      }
+    },
+    {
+      "key": "revolver",
+      "reload": true,
+      "before": {
+        "text": "…\nREVOLVER\nReloading\nG×2\nH×3\n8 loaders\n6\n6\n6\n6\n6\n6\n6\n6",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      },
+      "after": {
+        "text": "…\nREVOLVER\nReloading\nG×2\nH×3\n8 loaders\n6\n6\n6\n6\n6\n6\n6\n6",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      }
+    },
+    {
+      "key": "flamer",
+      "reload": false,
+      "before": {
+        "text": "60\nFLAMETHROWER\n60 / 60 · 300 fuel\nG×2\nH×3\n5 mags\n60\n60\n60\n60\n60",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      },
+      "after": {
+        "text": "60\nFLAMETHROWER\n60 / 60 · 300 fuel\nG×2\nH×3\n5 mags\n60\n60\n60\n60\n60",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      }
+    },
+    {
+      "key": "chainsaw",
+      "reload": false,
+      "before": {
+        "text": "23s\nCHAINSAW\nGas 23 / 60 · Heat 38%\nG×2\nH×3",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      },
+      "after": {
+        "text": "23s\nCHAINSAW\nGas 23 / 60 · Heat 38%\nG×2\nH×3",
+        "chips": "<span class=\"gchip\">G×2</span><span class=\"gchip\">H×3</span>",
+        "cls": "glass"
+      }
+    }
+  ],
+  "endSourceSha256": "b3288fe9294b1f60e0e85b2cdeff75f74d4a0124e3d37772045fc83b764e2ed2",
+  "errors": []
+}

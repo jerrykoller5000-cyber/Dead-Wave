@@ -1,0 +1,67 @@
+{
+  "stage": "candidate-runtime",
+  "indexHash": "63e42fd70dc2c84dff26ecfe42f25369965b8753c3f840a4a52f0518e94c74d9",
+  "moduleHash": "3cf57f0b2d97ae69b481560a9cd8595f789c52d198609f556b7f03ee98a489bc",
+  "rows": [],
+  "contact": "INFO smoking pinch: solved 1.8 cm, sampled 1.8 cm, wrist miss 0.0 cm; shoulder target/actual 24.3/24.3 cm; hand offset 16.3 cm\nPASS the cigarette is lit and visible\nPASS the filter meets the lips (0.00 cm error)\nPASS the ember points forward, away from the face (7.5 cm from lips)\nPASS the completed runtime frame keeps the fingertip pinch outside the face (1.8 cm from lips)\nPASS the palm clears the face (10.6 cm from lips)",
+  "uniqueFrames": 0,
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 287 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 7ms pools 6700ms compile 1255ms warm frame 139ms | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1 fire-clean:232 load:287"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 71ms | trees 287ms | player+weapons+zombie types 1442ms | foliage scattered 2621ms | POIs+minimap+foliage chunks 4289ms | contact shading + rest of setup 4539ms | post + pools + compile + warm frame 12651ms | ready 12657ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 308 variants after 13 warm frames | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1 fire-clean:232 load:287 a-fresh:287 a-flash:290 a-faded:291 a-kill-generic:296 a-kill-melee:301 a-kill-explosive:305 a-fx:308 a-corpse:308"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 375 shader variants compiled after 35 warm frames | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1 fire-clean:232 load:287 a-fresh:287 a-flash:290 a-faded:291 a-kill-generic:296 a-kill-melee:301 a-kill-explosive:305 a-fx:308 a-corpse:308 fresh:364 burning:366 flash:366 faded:366 tree-fade:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 kill-melee:366 kill-explosive:368 kill-chainsaw:368 kill-pellet:368 kill-generic:369 kill-melee:369 kill-explosive:369 kill-chainsaw:369 kill-pellet:369 kill-generic:369 effects:374 corpses:374 corpses2:374"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 375 variants | fire-hot:230 fire-cold:230 fire-resources:100/8 fire-pool-falling-leaves:232 fire-leaf-resources:1 fire-clean:232 load:287 a-fresh:287 a-flash:290 a-faded:291 a-kill-generic:296 a-kill-melee:301 a-kill-explosive:305 a-fx:308 a-corpse:308 fresh:364 burning:366 flash:366 faded:366 tree-fade:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 kill-melee:366 kill-explosive:368 kill-chainsaw:368 kill-pellet:368 kill-generic:369 kill-melee:369 kill-explosive:369 kill-chainsaw:369 kill-pellet:369 kill-generic:369 effects:374 corpses:374 corpses2:374"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":23.08,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.67,\"frames\":13,\"over50\":4,\"over100\":1,\"worst\":117},\"loading\":{\"at\":0.67,\"seconds\":22.41,\"frames\":370,\"over50\":65,\"over100\":28,\"worst\":4417},\"menu\":{\"at\":23.08,\"seconds\":8.91,\"frames\":10,\"over50\":2,\"over100\":1,\"worst\":8467}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":41,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":75,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    }
+  ]
+}

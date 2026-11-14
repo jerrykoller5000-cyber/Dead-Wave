@@ -1,0 +1,19 @@
+{
+  "before": "fb8caf0f23acbd5f213d5c7a752c6c93dc92f1e4989162ff03a13a2dc9a84311",
+  "after": "6811fe0aa5bca69ae084e9d652ab6f4b2a65c198ef52a98e887495ac63a341af",
+  "outsideUnchanged": true,
+  "patches": [
+    [
+      "function writeStatus({ agent, fields, notes }) {",
+      "// Keep ordinary writes first. Some Windows file-sharing filters reject truncate-open\n// with UNKNOWN while an existing-file descriptor remains writable (GP-20138).\nfunction writeCrewUtf8(file, text) {\n  try { fs.writeFileSync(file, text, 'utf8'); }\n  catch (error) {\n    if (error.code !== 'UNKNOWN') throw error;\n    const bytes = Buffer.from(text, 'utf8');\n    const fd = fs.openSync(file, 'r+');\n    try {\n      fs.writeFileSync(fd, bytes);\n      fs.ftruncateSync(fd, bytes.length);\n    } finally { fs.closeSync(fd); }\n  }\n}\nfunction writeStatus({ agent, fields, notes }) {"
+    ],
+    [
+      "fs.writeFileSync(statusPath(agent), head.join('\\n') + '\\n\\n' + body + '\\n', 'utf8');",
+      "writeCrewUtf8(statusPath(agent), head.join('\\n') + '\\n\\n' + body + '\\n');"
+    ],
+    [
+      "fs.writeFileSync(file, after + again.slice(before.length), 'utf8');",
+      "writeCrewUtf8(file, after + again.slice(before.length));"
+    ]
+  ]
+}

@@ -1,0 +1,3 @@
+ok    t333     16 pass   0 fail  24.9s  (real renderer)
+ok    t336     29 pass   0 fail  34.9s  (real renderer)
+2 checks: 45 pass, 0 fail (real renderer)

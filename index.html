@@ -1365,7 +1365,7 @@
     import { createGuardianReward, quoteRestock, createSkullValueAccumulator, equipmentPrice, equipmentStocked, GUN_STOCK_NIGHT } from './game/economy.js';
     import { LASER_COLORS, laserColorById, laserColorOpen } from './game/laser-colors.js';
     import { createSkills, resetSkills, skillLvl, addSkillXp as awardSkillXp, SKILL_RANKS } from './game/skills.js';
-    import { MAGAZINE_WEAPONS, createMagazineStore, isMagazineWeapon, issueMagazines, issueSecondGun, addMagazineRounds, setMagazineSize, loadedMagazineRounds, spareMagazineRounds, magazineSnapshot, chooseMagazineHand, useMagazineRound, reloadMagazines, pickUpMagazine, setLoadedMagazineRounds } from './game/magazines.js';
+    import { MAGAZINE_WEAPONS, createMagazineStore, isMagazineWeapon, isLooseRoundWeapon, issueMagazines, issueSecondGun, addMagazineRounds, setMagazineSize, loadedMagazineRounds, spareMagazineRounds, magazineSnapshot, chooseMagazineHand, useMagazineRound, reloadMagazines, pickUpMagazine, setLoadedMagazineRounds } from './game/magazines.js';
     import { createMagazineHud } from './ui/magazine-hud.js';   // GP-144 restores GP-79
     import { mountObjectiveRuntime } from './ui/objectives-runtime.js';
     import { createConvoyMission, CONVOY } from './game/convoy-mission.js'; // GP-19937
@@ -1415,6 +1415,7 @@
     import { webbingGeometry, bandolierFit } from './ui/marine-webbing.js';
     import { clearCarryPack, fitCarryHolster } from './ui/marine-kit-fit.js';
     import { fitWeaponSling } from './ui/weapon-sling.js';   // GP-156
+    import { BACK_CARRY, PAIR_CARRY, carryOrder, seatOnBack, fitBackSling } from './studio/marine-carry.js';   // CC-350: the slung guns flat on his back
     import { hasText as dwHasText } from './ui/strings.js';   // CL-92: a line that may not be written yet falls back
     import { LIGHTNING, BOOTS_HEX, stormTimes, rollStrike, strikeTarget, boltPoints, buildBoltGeometry, buildInsulatedBoots, MAST_PERCH, mastStrikeFinds, buildWornBoots, buildMastPerchParts } from './world/lightning.js';   // CL-178: the mast's perch
     import * as History from './world/history-props.js';   // CL-108, CL-109: the valley's history in things
@@ -2521,6 +2522,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
     }
     let viewmodel = null;   // CL-281 (game/viewmodel.js): made on the first frame of a match, false if it failed
+    let renderTargetLeaks = 0;   // CB-335: see renderFrame
     function renderFrame() {
       if (gameStarted && !training.active) sceneCull(); else if (cullStats.hidden) { cullShowAll(); cullStats.hidden = 0; }   // CL-140
       PROF.mark('r:cull');
@@ -2535,6 +2537,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // is a second render() inside the first: the two walks were 6.9 ms of a 30 ms night frame (AG-86 --cpu).
       updateSceneMatrices();
       PROF.mark('r:matrices');
+      // CB-335 (GP-20140's frozen native frames): the frame always draws to the canvas. PostProcessing.render() draws its
+      // last quad into whatever target the renderer has bound, so a target left bound (a throw inside the scene pass's
+      // render, which then never restores it, or any other leak) made that quad read and write the pass's own "output"
+      // texture: WebGPU rejects that command buffer every frame and the picture freezes. One null check a frame.
+      const leakedTarget = renderer.getRenderTarget ? renderer.getRenderTarget() : null;
+      if (leakedTarget) {
+        renderer.setRenderTarget(null);
+        if (renderer.setMRT) renderer.setMRT(null);
+        if (renderTargetLeaks++ === 0) console.warn('Grave Shift: a render target (' + (leakedTarget.texture?.name || '?') + ') was left bound before the frame; drawing to the canvas.');
+      }
       try {
         scene.matrixWorldAutoUpdate = false;
         if (postProcessing) postProcessing.render();
@@ -2573,6 +2585,21 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     scene.add(sun);
     scene.add(sun.target);
     const sunDir = new THREE.Vector3(0, 1, 0.3).normalize();
+    // CG-6 (J153 note 23, Jerry: "Flickering along this edge", the fence's rail and posts over the striped floor): the shadow
+    // map rode along with him to the millimetre and turned with the sun every frame, so its texels (~3 cm) slid under every
+    // shadow edge as he moved and the edges crawled and flickered. It now follows him in whole texels of its own grid, and
+    // turns only in steps of about a quarter of a degree (the light itself still turns smoothly), so a shadow edge holds
+    // still while he walks.
+    const _sunShadowDir = sunDir.clone(), _sunAxes = new THREE.Matrix4(), _sunX = new THREE.Vector3(), _sunY = new THREE.Vector3(), _sunZ = new THREE.Vector3(), _sunO = new THREE.Vector3(), _sunUp = new THREE.Vector3(0, 1, 0), _sunAt = new THREE.Vector3();
+    function followSun(p) {
+      if (_sunShadowDir.angleTo(sunDir) > 0.004) _sunShadowDir.copy(sunDir);
+      const cam = sun.shadow.camera, texel = (cam.right - cam.left) / (sun.shadow.mapSize.x || 2048);
+      _sunAxes.lookAt(_sunShadowDir, _sunO, _sunUp).extractBasis(_sunX, _sunY, _sunZ);
+      const x = p.dot(_sunX), y = p.dot(_sunY);
+      _sunAt.copy(p).addScaledVector(_sunX, Math.round(x / texel) * texel - x).addScaledVector(_sunY, Math.round(y / texel) * texel - y);
+      sun.target.position.copy(_sunAt);
+      sun.position.copy(_sunAt).addScaledVector(_sunShadowDir, 85);
+    }
     const moon = new THREE.DirectionalLight(0x8899cc, 0);
     moon.position.set(-12, 20, -8);
     scene.add(moon);
@@ -22291,7 +22318,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // CE-4 (J16, Claude 5): in first person with the view gun up, 2 is the support thumb's press on the light's switch
     // (game/viewmodel.js lightPressTimes: the pad fully in at 'at' s, the hand home by 'total'): the light changes and clicks
     // on the press; a second 2 during one does nothing more. Third person, the M240 and a busy hand: at once, as before.
-    let lightPress = { t: -1, at: 0, total: 0, flip: false };
+    let lightPress = { t: -1, at: 0, total: 0, flip: false, kind: 'flashlight' };
     function flipFlashlight() {
       flashlightOn = !flashlightOn;
       AudioSys.nvgClick();
@@ -22303,13 +22330,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (mortarMounted?.type !== 'm240' && !needGear('laserLight', dwText('gear.laserLight.name'))) return;
       if (lightPress.t >= 0 && !now) return;   // a second 2 during the press: nothing more (CLAUDE DIRECTOR)
       const lp = now || mortarMounted ? null : viewmodel?.lightPressTimes?.(currentWeapon);
-      if (lp) { lightPress = { t: 0, at: lp.at, total: lp.total, flip: true }; return; }
+      if (lp) { lightPress = { t: 0, at: lp.at, total: lp.total, flip: true, kind: 'flashlight' }; return; }
       flipFlashlight();
     }
     function tickLightPress(dt) {   // CE-4: from updateViewmodel, every frame
       if (lightPress.t < 0) return;
       lightPress.t += dt;
-      if (lightPress.flip && (lightPress.t >= lightPress.at || !gameStarted || gameOver || won)) { lightPress.flip = false; flipFlashlight(); }
+      if (lightPress.flip && (lightPress.t >= lightPress.at || !gameStarted || gameOver || won)) { lightPress.flip = false; if (lightPress.kind === 'laser') flipLasers(); else flipFlashlight(); }
       if (lightPress.t >= lightPress.total) lightPress.t = -1;
     }
 
@@ -22399,8 +22426,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       updateTacticalHud();
     }
 
-    function toggleLasers() {
+    function toggleLasers(now = false) {   // GP-20140: same physical module press as the flashlight
       if (gameStarted && mortarMounted?.type !== 'm240' && !needGear('laserLight', dwText('gear.laserLight.name'))) return;
+      if (lightPress.t >= 0 && !now) return;
+      const lp = now || mortarMounted || !laserLightFitted[currentWeapon] ? null : viewmodel?.lightPressTimes?.(currentWeapon);
+      if (lp) { lightPress = { t: 0, at: lp.at, total: lp.total, flip: true, kind: 'laser' }; return; }
+      flipLasers();
+    }
+    function flipLasers() {
       lasersEnabled = !lasersEnabled;
       if (AudioSys.laserClick) AudioSys.laserClick(); else AudioSys.nvgClick();   // CL-162
       updateLasers();
@@ -22570,8 +22603,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
 
     // GP-74: a cosmetic idle layer; all action poses retain priority.
     const marineIdle = createMarineIdle({ THREE, marine, scene,
-      solveArm: (side, target, hand) => solveArmIK(marine.userData['arm' + side + 'G'], marine.userData['elbow' + side + 'G'],
-        hand || (side === 'R' ? _HAND_R : _HAND_L), target, side === 'R' ? _POLE_R : _POLE_L, 1),
+      solveArm: (side, target, hand) => {
+        if (side === 'R') handRollR = 0; else handRollL = 0;
+        solveArmIK(marine.userData['arm' + side + 'G'], marine.userData['elbow' + side + 'G'],
+          hand || (side === 'R' ? _HAND_R : _HAND_L), target, side === 'R' ? _POLE_R : _POLE_L, 1);
+      },
+      setForearmRoll: (side, angle) => { if (side === 'R') handRollR = angle; else handRollL = angle; },
       smoke: (...args) => spawnSmokePuff(...args), ground: (x, z) => sampleHeight(x, z),
       ignite: (x, z) => spawnGroundFire(x, z, false, 0, true)
     });
@@ -23557,7 +23594,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         POSE.holdTwist = _ease(POSE.holdTwist || 0, (wh ? wh.twist || 0 : 0) * holdW, dt, 10);
       }
       if (torso) {
-        torso.rotation.x = POSE.lean;
+        torso.rotation.x = POSE.lean + tpAimLeanStep(dt);   // CB-333 (J153 note 39): + the aim's pitch on the spine
         torso.rotation.z = POSE.leanSide + torsoRoll;
         torso.rotation.y = torsoTwist + POSE.holdTwist;
         // The torso pivot rides the hips.
@@ -24319,16 +24356,32 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if(empty){const key='shell-fit:'+kind+'+'+gunLookKey(kind);
           let copy=rig.copies.get(key);if(!copy){copy=carryGunCopy(kind);if(copy){foldGun(copy,true);rig.copies.set(key,copy);}}
           if(!copy)return;h.gun=copy;h.kind=kind;h.g.add(copy);
-          if(cls==='holster')copy.rotation.z=(kind==='uzi'?1:-1)*(h.g.position.x>0?Math.PI/2:-Math.PI/2);
+          copy.rotation.z=h.gunRoll!==undefined?h.gunRoll:cls==='holster'?(kind==='uzi'?1:-1)*(h.g.position.x>0?Math.PI/2:-Math.PI/2):0;   // CC-350: its station's roll
         }
         fitCarriedGun(h,cls,band);
-        if(cls==='holster'&&!h.onHips)clearCarryPack(THREE,h);
+        if(h.station&&/^(pack|hip)/.test(h.station)){h.gun.position.set(0,0,0);rig.seatStation(h);}   // CC-350
+        else if(cls==='holster'&&!h.onHips&&!h.station)clearCarryPack(THREE,h);
         if(kind!=='uzi')fitCarryHolster(THREE,h,leatherMat);
         if(h.onHips&&h.loop&&h.shell&&h.shell.userData.fittedHolster)beltLoop(h);
         if(h.shell)h.shell.visible=kind!=='uzi';
         if(empty){h.g.remove(h.gun);h.gun=null;h.kind=original;}
       }
-      rig.slings.forEach(s=>{fitCarriedGun(s,'sling');clearCarryPack(THREE,s,true);fitWeaponSling(THREE,s,rig.slingVest,carryMats.mag);});
+      // CC-350 (J153 notes 20, 38, Jerry: "the Magazine towards the player leaving a massive gap ... think about how weapons would
+      // actually be carried"): a slung gun lies flat on his back across the pack, muzzle up behind a shoulder, magazine or drum out
+      // and down, on a sling over that shoulder and across his chest (studio/marine-carry.js); two cross in an X, the second resting
+      // on the first where both are thin. Seated only when what is slung or the carrier changes (an ammo count does not re-seat).
+      // CC-350 p2 (D-182): with a bulky gun, a thin one goes on first, flat on the pack, the bulky one on it; two bulky: the
+      // longer across the pack, the other straight on it, tight (marine-carry.js carryOrder, PAIR_CARRY.mode); nothing below mid-thigh.
+      {let under=null,prev='';rig.slings.forEach((s)=>fitCarriedGun(s,'sling'));
+       const ord=carryOrder(rig.slings.map((s)=>s.gun?s.kind:null));
+       (ord.first?[1,0]:[0,1]).forEach((i)=>{const s=rig.slings[i];if(!s)return;
+        if(!s.gun){s.sling.visible=false;s.sling.userData.signature=null;s.seatKey=null;s.seat=null;return;}
+        const side=i?-1:1,tp=s.sling.userData.torsoPivotY||0.865,key=s.token+'|'+!!rig.slingVest+'|'+prev+'|'+(ord.bulky?(ord.upright===i?'u':'b')+PAIR_CARRY.mode:'');
+        if(s.seatKey!==key||!s.seat){s.seat=seatOnBack(THREE,s,side,tp,!!rig.slingVest,BACK_CARRY,under,ord.bulky?{lowest:PAIR_CARRY.lowest,pair:true,upright:ord.upright===i}:{});s.seatKey=key;}
+        else s.gun.position.set(0,0,0);
+        under=s.seat&&s.seat.pts;prev=s.seatKey;
+        const band=side>0?!!rig.bandolier?.visible:!!rig.belt40?.visible;
+        fitBackSling(THREE,s,side,tp,!!rig.slingVest,carryMats.mag,(band?.012:0)+(i?.007:0));});}
       for(const h of rig.holsters.concat(rig.pairs))station(h,'holster');
       for(const h of [rig.hip,rig.hipPair])station(h,'hip');
     }
@@ -24799,6 +24852,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     let runArmory = createArmory();
     let armoryLive = false;
     function armoryMagazines(w) {
+      if (isLooseRoundWeapon(w)) return [];
       const entry = magazineStore[w];
       if (entry) return entry.spare.map((item) => ({ rounds: item.rounds }));
       const size = singleMagSize(w);
@@ -24808,10 +24862,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     }
     function noteArmoryGun(w) {
       if (!w || w === 'pistol' || !slotType(w) || !weaponOwned[w]) return;
-      const loaded = Number.isFinite(ammoByWeapon[w]) ? Math.max(0, ammoByWeapon[w] | 0) : 0;
-      const magazines = armoryMagazines(w);
-      if (runArmory.has(w)) runArmory.revise(w, { loaded, magazines });
-      else runArmory.buy({ id: w, kind: w, loaded, magazines, rounds: 0, upgrades: {} }, { store: true });
+      const loaded = w === 'revolver' && magazineStore[w] ? magazineStore[w].loaded[0].rounds : Number.isFinite(ammoByWeapon[w]) ? Math.max(0, ammoByWeapon[w] | 0) : 0;
+      const magazines = armoryMagazines(w), rounds = isLooseRoundWeapon(w) ? reserveOf(w) : 0;
+      if (runArmory.has(w)) runArmory.revise(w, { loaded, magazines, rounds });
+      else runArmory.buy({ id: w, kind: w, loaded, magazines, rounds, upgrades: {} }, { store: true });
     }
     function carriedIds() {
       const load = runArmory.loadout();
@@ -24830,6 +24884,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function setSpareMags(w, n) {
       const entry = magazineStore[w];
       if (!entry) return 0;
+      if (isLooseRoundWeapon(w)) { entry.spare.length = 0; entry.spareRounds = Math.max(0, n | 0) * entry.size; syncMagazine(w); return Math.max(0, n | 0); }
       entry.spare = Array.from({ length: n }, () => ({ rounds: entry.size, size: entry.size }));
       return entry.spare.length;
     }
@@ -25032,7 +25087,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           spot.g.rotation.set(Math.PI / 2 + lf.rx, 0, side * -lf.tilt, 'ZXY');
           spot.g.scale.setScalar(0.68);
           if (spot.gun) spot.gun.rotation.z = -(side > 0 ? Math.PI / 2 : -Math.PI / 2);
-          if (!spot.shell.userData.fittedHolster) { spot.shell.scale.set(1, 1, 1); spot.shell.position.set(-side * 0.055, 0, 0.11); }
+          if (spot.shell && !spot.shell.userData.fittedHolster) { spot.shell.scale.set(1, 1, 1); spot.shell.position.set(-side * 0.055, 0, 0.11); }
           if (!spot.loop) { spot.loop = rmesh(.032, .02, .258, leatherMat, .006); spot.g.add(spot.loop); }
           spot.loop.visible = true;   // the belt loop: fitCarriedGuns lays it on the shell's back, up to the belt
           return;
@@ -25047,6 +25102,85 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if(!spot.loop){spot.loop=rmesh(.032,.02,.258,leatherMat,.006);spot.loop.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),new THREE.Vector3(0,.15,-.21).normalize());spot.g.add(spot.loop);}
         spot.loop.visible=lower;spot.loop.position.set(-gripIn*side*.055,.075,-.105);spot.loop.scale.set(1,1,1);
         spot.loop.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1),new THREE.Vector3(0,.15,-.21).normalize());
+      };
+      // CC-350 (J153 notes 20, 38: "Notice how the right arm clips through holster", "that weird sideways holster"): every handgun
+      // rides vertical, muzzle down, where his arms never go. Measured over every weapon and unarmed, standing, walking, running
+      // and crouched (review/CC-350): his hands sweep the outside and the front of both thighs from the belt down to y .56 and the
+      // front of his chest; they never come behind z -0.10 at the hips or near the pack. So the stations, in the order they fill:
+      // the belt at 4 o'clock on the gun hand's side, just behind the hip bone (the CLAUDE DIRECTOR, 20:22Z: where a soldier wears
+      // it; not the small of the back), then 8 o'clock on the other, then the pack's two sides (flat on them, the grip back; an Uzi
+      // goes there first), and for a fifth and sixth the drop-leg mounts on his thighs. The old upper row (a pistol lying on its side
+      // on the pack) and the small-of-the-back row are gone.
+      const PACK_SIDE = { x: 0.127, y: 1.075, z: -0.215, clear: 0.004 };   // the pack's side face (x .122-.13 at z -.2/-.24, y .95-1.2)
+      rig.packSide = PACK_SIDE;
+      // the hip at 4 o'clock (lowerBody frame): just behind the hip bone, where his side (x .21, z -.06) turns into his seat
+      // (x .11, z -.11): the point on it, its outward normal [x, z] (+x side; mirrored), the gun's middle height, the air left
+      // It rides high (the grip over the belt) with the muzzle splayed out 7 deg, so its lower end clears his thigh as it swings
+      // back running (scanned, cloud, CC-350: lower or flat on him put the running thigh 2-20 mm into the shell; more splay left
+      // its lowest third 5-9 cm off him). Here: legs 3.5 mm clear, the lowest third 3.7 cm and the nearest point 1.5 cm from him,
+      // the unarmed swing 2 cm clear.
+      // CC-350 p2: the pistol grew (GT-20106's magazine): 2 cm higher, 1 deg less splay, its face turned 3.5 deg further out
+      // (tcc347, cloud: its lowest third 4.0-4.2 -> 2.5 cm at 4 o'clock, 3.7 at 8; legs 6.6 mm clear walking to jumping).
+      const HIP_FIT = { x: 0.135, z: -0.1, n: [0.36, -0.933], y: 0.87, clear: 0.004, splay: 0.1 };
+      rig.hipFit = HIP_FIT;
+      const _sb = new THREE.Box3(), _sv = new THREE.Vector3(), _sm = new THREE.Matrix4(), _si = new THREE.Matrix4();
+      rig.placeStation = (spot, name, kind) => {
+        spot.station = name; spot.fitKind = kind;
+        const side = name.endsWith('+') ? 1 : -1;
+        if (name.startsWith('hip')) {   // the belt at 4 (or 8) o'clock: vertical, muzzle down, the flat on his hip, the slide forward, the grip back
+          spot.onHips = true;
+          if (spot.g.parent !== hipsG) hipsG.add(spot.g);
+          const n = new THREE.Vector3(side * HIP_FIT.n[0], 0, HIP_FIT.n[1]), t = new THREE.Vector3(-HIP_FIT.n[1] * side, 0, HIP_FIT.n[0]).normalize();
+          if (t.z < 0) t.negate();
+          const u = new THREE.Vector3(0, -1, 0).addScaledVector(n, HIP_FIT.splay).normalize();
+          t.addScaledVector(u, -t.dot(u)).normalize();
+          const x = new THREE.Vector3().crossVectors(t, u);
+          spot.g.quaternion.setFromRotationMatrix(_sm.makeBasis(x, t, u));
+          spot.g.position.set(side * HIP_FIT.x, HIP_FIT.y, HIP_FIT.z).addScaledVector(n, 0.05);
+          spot.g.scale.setScalar(0.8);
+          spot.gunRoll = 0; if (spot.gun) spot.gun.rotation.z = 0;
+          if (!spot.loop) { spot.loop = rmesh(.032, .02, .258, leatherMat, .006); spot.g.add(spot.loop); }
+          spot.loop.visible = true;
+          return;
+        }
+        if (spot.loop) spot.loop.visible = false;
+        if (name.startsWith('thigh')) {   // the drop-leg mount (marine-body's thigh panel), muzzle down, grip back
+          spot.onHips = false; const leg = side > 0 ? ud.legRG : ud.legLG;
+          if (spot.g.parent !== leg) leg.add(spot.g);
+          spot.g.position.set(side * 0.118, -0.05, 0.035); spot.g.quaternion.identity(); spot.g.rotation.set(Math.PI / 2, 0, -side * 0.1); spot.g.scale.setScalar(0.8);
+          spot.gunRoll = 0; if (spot.gun) spot.gun.rotation.z = 0;
+          return;
+        }
+        // the pack's side: the flat of the gun on it, muzzle down, the slide forward and the grip back, seated by its bounds
+        spot.onHips = false;
+        if (spot.g.parent !== torso) torso.add(spot.g);
+        spot.g.quaternion.setFromRotationMatrix(_sm.makeBasis(_sv.set(1, 0, 0), new THREE.Vector3(0, 0, 1), new THREE.Vector3(0, -1, 0)));
+        spot.g.scale.setScalar(0.8);
+        spot.g.position.copy(T(side * (PACK_SIDE.x + 0.04), PACK_SIDE.y, PACK_SIDE.z));
+        spot.gunRoll = 0; if (spot.gun) spot.gun.rotation.z = 0;
+      };
+      // after the gun is sized (fitCarriedGuns): slide a pack-side gun in until its inner face is PACK_SIDE.clear off the pack
+      rig.seatStation = (spot) => {
+        if (!spot.station || !/^(pack|hip)/.test(spot.station) || !spot.gun) return;
+        const side = spot.station.endsWith('+') ? 1 : -1;
+        if (spot.station.startsWith('hip')) {   // slide in along the hip's normal until the gun's nearest point is HIP_FIT.clear off it
+          const n = new THREE.Vector3(side * HIP_FIT.n[0], 0, HIP_FIT.n[1]), P0 = new THREE.Vector3(side * HIP_FIT.x, 0, HIP_FIT.z);
+          spot.g.updateMatrix(); spot.gun.updateMatrixWorld(true); hipsG.updateMatrixWorld(true); _si.copy(hipsG.matrixWorld).invert();
+          let lo = Infinity;
+          spot.gun.traverseVisible((o) => { const P = o.geometry && o.geometry.attributes && o.geometry.attributes.position; if (!o.isMesh || !P) return;
+            _sm.multiplyMatrices(_si, o.matrixWorld); for (let i = 0; i < P.count; i += 2) { _sv.fromBufferAttribute(P, i).applyMatrix4(_sm); lo = Math.min(lo, (_sv.x - P0.x) * n.x + (_sv.z - P0.z) * n.z); } });
+          if (Number.isFinite(lo)) spot.g.position.addScaledVector(n, HIP_FIT.clear + 0.006 - lo);   // + the holster's wall
+          spot.g.updateMatrix();
+          return;
+        }
+        spot.g.updateMatrix(); spot.gun.updateMatrixWorld(true); torso.updateMatrixWorld(true);
+        _si.copy(torso.matrixWorld).invert(); _sb.makeEmpty();
+        spot.gun.traverseVisible((o) => { const P = o.geometry && o.geometry.attributes && o.geometry.attributes.position; if (!o.isMesh || !P) return;
+          _sm.multiplyMatrices(_si, o.matrixWorld); for (let i = 0; i < P.count; i += 2) _sb.expandByPoint(_sv.fromBufferAttribute(P, i).applyMatrix4(_sm)); });
+        if (_sb.isEmpty()) return;
+        const inner = side > 0 ? _sb.min.x : -_sb.max.x;
+        spot.g.position.x += side * (PACK_SIDE.x + PACK_SIDE.clear - inner);
+        spot.g.updateMatrix();
       };
       const harness = addCast(new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.032, 0.014), leatherMat));
       harness.position.copy(T(0, 0.95, -0.19));
@@ -25205,28 +25339,25 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         cans: carried.filter(carrySuppressed), looks: carried.map(gunLookKey)
       };
     }
+    const STATION_ORDER = ['hip+', 'hip-', 'pack+', 'pack-', 'thigh+', 'thigh-'];   // CC-350: rig.placeStation
     function applyCarryPlan(rig, p) {
       rig.slingVest = p.vest;
       rig.slings.forEach((s, i) => { mountCarryGun(rig, s, 'sling' + i, p.primary[i]); s.sling.visible = !!p.primary[i]; });
       // A holster stays on him, empty, while its gun is in his hands.
       rig.holsters.forEach((h, i) => { mountCarryGun(rig, h, 'holster' + i, p.secondary[i]); h.g.visible = !!p.holsterOn[i] && (p.secondaryKinds[i] !== "uzi" || !!p.secondary[i]); });
       rig.pairs.forEach((h, i) => { mountCarryGun(rig, h, 'pair' + i, p.paired[i]); h.g.visible = !!p.pairOn[i] && (p.secondaryKinds[i] !== "uzi" || !!p.paired[i]); });
-      const twoRows=p.secondaryKinds.every(k=>k&&k!=='uzi');
-      // GB-276 (Claude, 4 Nov): by height, not slot: the taller handgun (the revolver) rides the lower row, the shorter above at +0.27.
-      const up=twoRows?((p.secondaryKinds[0]==='revolver'&&p.secondaryKinds[1]!=='revolver')?1:0):-1;
-      for (let i = 0; i < 2; i++) {
-        const kind=p.secondaryKinds[i],side=p.secondaryKinds.indexOf(kind)===i?1:-1;
-        rig.holsters[i].fitKind=kind;rig.pairs[i].fitKind=kind;
-        // CC-347: the low row (one handgun type, or the taller of two) rides the belt (LOW_FIT); the upper row stays on the pack.
-        const low=i!==up;
-        rig.placeSecondary(rig.holsters[i],side,kind!=='uzi',low);
-        rig.placeSecondary(rig.pairs[i],-side,kind!=='uzi',low);
-        // Two handgun types occupy separate rows, including their akimbo copies.
-        if(twoRows&&i===up){rig.holsters[i].g.position.y+=.27;rig.pairs[i].g.position.y+=.27;}
-      }
-      rig.harness.visible = p.holsterOn.some(Boolean);
       mountCarryGun(rig, rig.hip, 'hip', p.hip);
       mountCarryGun(rig, rig.hipPair, 'hipPair', p.hipPair); rig.hipPair.g.visible = p.hipPairOn;
+      // CC-350: each handgun he carries takes the next free station (rig.placeStation): the base pistol first, its akimbo pair,
+      // then each secondary and its pair; an Uzi takes a pack side first. By what he carries, not what is in his hands, so the
+      // empty holster of the gun in his hand stays where it was.
+      {const want=[[rig.hip,'pistol']];if(p.hipPairOn)want.push([rig.hipPair,'pistol']);
+       for(let i=0;i<2;i++){const k=p.secondaryKinds[i];if(!k)continue;if(p.holsterOn[i])want.push([rig.holsters[i],k]);if(p.pairOn[i])want.push([rig.pairs[i],k]);}
+       const free=STATION_ORDER.slice();
+       for(const [spot,kind] of want){
+         const pref=kind==='uzi'?free.filter(n=>n.startsWith('pack')).concat(free.filter(n=>n.startsWith('thigh'))):free;
+         const name=pref[0]||free[0];free.splice(free.indexOf(name),1);rig.placeStation(spot,name,kind);}
+       rig.harness.visible=want.some(([spot])=>spot.station&&spot.station.startsWith('pack'));}
       rig.mags.count = p.mags; rig.grenades.count = p.grenades;
       rig.shells.count = p.shells; rig.rounds40.count = p.rounds40;
       rig.boxes.count = p.boxes; rig.tanks.count = p.tanks;
@@ -25354,6 +25485,30 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       return _dpV;
     }
+    // CC-350 (for Claude 5's CE-12 draw and holster in third person): where a carried gun's pistol grip is on him, in world space,
+    // with the stowed gun's world rotation: from its copy fitted on its spot (slung, at the hip, on the pack). While the gun is in
+    // his hands its spot still knows where it goes back to (the cached copy at that spot). Null when he doesn't carry it.
+    const _cgM = new THREE.Matrix4();
+    function carryGripWorld(kind, outPos, outQuat) {
+      const rig = carryRig, H = WEAPON_HOLD[kind];
+      if (!rig || !kind) return null;
+      const shown = (o) => { for (let q = o; q; q = q.parent) if (!q.visible) return false; return true; };
+      const load = carriedLoadout();
+      const spots = [...rig.slings.map((s, i) => [s, 'sling' + i, load.primary[i]]), [rig.hip, 'hip', 'pistol'], [rig.hipPair, 'hipPair', rig.hipPair.g.visible ? 'pistol' : null],
+        ...rig.holsters.map((h, i) => [h, 'holster' + i, h.g.visible ? h.fitKind : null]), ...rig.pairs.map((h, i) => [h, 'pair' + i, h.g.visible ? h.fitKind : null])];
+      for (const [spot, key, lives] of spots) {
+        if (!spot || !spot.g || lives !== kind || !shown(spot.g.parent)) continue;
+        const copy = spot.kind === kind && spot.gun ? spot.gun : rig.copies.get(key + ':' + kind + '+' + gunLookKey(kind));
+        const inner = copy && copy.children[0];
+        if (!inner) continue;
+        spot.g.updateWorldMatrix(true, false); copy.updateMatrix(); inner.updateMatrix();
+        _cgM.multiplyMatrices(spot.g.matrixWorld, copy.matrix).multiply(inner.matrix);
+        if (outPos) { if (H && Array.isArray(H.grip)) outPos.set(H.grip[0], H.grip[1], H.grip[2]).applyMatrix4(_cgM); else outPos.setFromMatrixPosition(_cgM); }
+        if (outQuat) _cgM.decompose(_dpS, outQuat, _dpF);
+        return { key, station: spot.station || (key.startsWith('sling') ? 'back' : 'hip') };
+      }
+      return null;
+    }
     function drawPose(m, f, d) {
       const ud = m.userData;
       ud.torsoG.rotation.y += f.twistY;
@@ -25414,7 +25569,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // carries a magazine with more rounds in it than that gun has. Otherwise a reload would only swap rounds away.
     function reloadGainsMagazine(w, dual = akimboOn()) {
       const entry = magazineStore[w];
-      if (!entry || !entry.spare.length) return false;
+      if (!entry) return false;
+      if (isLooseRoundWeapon(w)) {
+        if (spareMagazineRounds(magazineStore, w) <= 0) return false;
+        for (let h = 0; h < (dual ? 2 : 1); h++) if (entry.loaded[h] && entry.loaded[h].rounds < entry.size) return true;
+        return false;
+      }
+      if (!entry.spare.length) return false;
       let best = 0;
       for (const m of entry.spare) best = Math.max(best, m.rounds);
       for (let h = 0; h < (dual ? 2 : 1); h++) {
@@ -25448,6 +25609,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         setLoadedMagazineRounds(magazineStore, w, loaded, dual);
         const entry = magazineStore[w], cap = entry.maxSpare, left = spare0 + loaded0 - loaded;
         entry.spare.length = 0;
+        if (isLooseRoundWeapon(w)) entry.spareRounds = 0;
         entry.maxSpare = Math.max(cap, Math.ceil(left / entry.size) + 1);   // room for the lot, then the cap goes back
         if (left > 0) addMagazineRounds(magazineStore, w, left, { allowPartial: true });
         entry.maxSpare = cap;
@@ -28604,8 +28766,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         screen.name = 'armory-security-mesh'; screen.raycast = rackNoRay; arm.add(screen);
         // Anchor heads read as a wall-mounted frame without adding one draw per bolt.
         const boltPoints = [];
-        for (const x of [-1.39, 2.91]) for (const y of [0.64, 1.25, 2.3, 3.3, 3.91]) boltPoints.push([x, y, 0.89]);
-        for (const x of [-0.75, 0.76, 2.27]) for (const y of [0.60, 3.91]) boltPoints.push([x, y, 0.89]);
+        for (const x of [-1.39, 2.91]) for (const y of [0.64, 1.25, 2.3, 3.3, 3.91]) boltPoints.push([x, y, 0.879]);
+        for (const x of [-0.75, 0.76, 2.27]) for (const y of [0.60, 3.91]) boltPoints.push([x, y, 0.879]);
         const bolts = new THREE.InstancedMesh(new THREE.CylinderGeometry(0.027, 0.027, 0.018, 6), rail, boltPoints.length);
         const boltPose = new THREE.Object3D(); boltPose.rotation.x = Math.PI / 2;
         boltPoints.forEach(([x, y, z], i) => { boltPose.position.set(x, y, z); boltPose.updateMatrix(); bolts.setMatrixAt(i, boltPose.matrix); });
@@ -30189,6 +30351,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return Math.max(1, Math.ceil(pk.cost * singleMagSize(w) / pk.n));
     }
     function buyAmmo(key, quiet) {
+      if (isLooseRoundWeapon(key)) key = caliberOf(key);
       // A calibre key ('.45') fills the reserve. A weapon key ('pistol') buys that gun a magazine.
       const magWeapon = isMagazineWeapon(key) ? key : null;
       if (magWeapon && weaponOwned[magWeapon]) {
@@ -30206,9 +30369,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         if (sawFuel >= sawFuelMax() - 0.01 || !spend(pk.cost)) return false;
         sawFuel = Math.min(sawFuelMax(), sawFuel + pk.n);
       } else {
-        const cap = reserveCap(c);
-        if ((reserveAmmo[c] | 0) >= cap || !spend(pk.cost)) return false;
-        reserveAmmo[c] = Math.min(cap, (reserveAmmo[c] | 0) + pk.n);
+        const cap = looseReserveCapacity(c);
+        const target = magazineSupplyTarget(c), loose = isLooseRoundWeapon(target) && magazineStore[target];
+        const have = loose ? spareMagazineRounds(magazineStore, target) : reserveAmmo[c] | 0;
+        if (have >= cap || !spend(pk.cost)) return false;
+        if (loose) addWeaponMagazineRounds(target, pk.n, true);
+        else reserveAmmo[c] = Math.min(cap, have + pk.n);
       }
       if (!quiet) { updateAmmoHud(); renderShop(); }
       reportPurchase('ammo:' + c, pk.cost);
@@ -30227,7 +30393,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return out;
     }
     function stockedLooseCalibers() {
-      return stockedCalibers().filter(c => c === '60mm' || (c === '7.62 belt' && buildUnlocked.m240) || WEAPON_ORDER.some(w => weaponOwned[w] && !isMagazineWeapon(w) && caliberOf(w) === c));
+      return stockedCalibers().filter(c => c === '60mm' || (c === '7.62 belt' && buildUnlocked.m240) || WEAPON_ORDER.some(w => weaponOwned[w] && (!isMagazineWeapon(w) || isLooseRoundWeapon(w)) && caliberOf(w) === c));
     }
 
     // A quote covers the complete refill. Recompute at click time; never spend a
@@ -30241,14 +30407,19 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       reportPurchase('grenade', HAND_GRENADE_PRICE);
       return true;
     }
+    function looseReserveCapacity(calibre) {
+      const target = magazineSupplyTarget(calibre);
+      // Preserve the revolver's existing carried-round budget, without exposing loader groups.
+      return isLooseRoundWeapon(target) && magazineStore[target] ? magazineCap(target) : reserveCap(calibre);
+    }
     function ammoRestockPlan(w) {
-      const magKeys = w == null ? MAGAZINE_WEAPONS.filter(k => weaponOwned[k]) : isMagazineWeapon(w) && weaponOwned[w] ? [w] : [];
+      const magKeys = w == null ? MAGAZINE_WEAPONS.filter(k => weaponOwned[k] && !isLooseRoundWeapon(k)) : isMagazineWeapon(w) && !isLooseRoundWeapon(w) && weaponOwned[w] ? [w] : [];
       const keys = w == null ? [...stockedLooseCalibers(), ...(weaponOwned.chainsaw ? ['chainsaw'] : [])]
-        : weaponOwned[w] && !isMagazineWeapon(w) ? [w === 'chainsaw' ? w : caliberOf(w)] : [];
+        : weaponOwned[w] && (!isMagazineWeapon(w) || isLooseRoundWeapon(w)) ? [w === 'chainsaw' ? w : caliberOf(w)] : [];
       const reserves = magKeys.map(key => ({ key, current: magazineStore[key].spare.length * singleMagSize(key),
         capacity: magazineCap(key), quantity: singleMagSize(key), price: magazinePrice(key) }));
       reserves.push(...keys.map(key => ({ key, current: key === 'chainsaw' ? sawFuel : (reserveAmmo[key] | 0),
-        capacity: key === 'chainsaw' ? sawFuelMax() : reserveCap(key), quantity: AMMO_PACK[key].n,
+        capacity: key === 'chainsaw' ? sawFuelMax() : looseReserveCapacity(key), quantity: AMMO_PACK[key].n,
         price: AMMO_PACK[key].cost, tolerance: key === 'chainsaw' ? 0.01 : 0 })));
       if (w == null) reserves.push({ key: 'hand-grenade', current: grenades, capacity: maxGrenades(), quantity: 1, price: HAND_GRENADE_PRICE });
       return quoteRestock(reserves);
@@ -31465,7 +31636,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const calibre = kind === 'm240' ? '7.62 belt' : '60mm';
         return { kind, name: BUILD_NAMES[kind], icon: WHEEL_ICONS[kind], owned, price, affordable: bank >= price,
           shortfall: Math.max(0, price - bank),
-          ammo: { price: AMMO_PACK[calibre].cost, full: (reserveAmmo[calibre] | 0) >= reserveCap(calibre),
+          ammo: { current: reserveAmmo[calibre] | 0, capacity: reserveCap(calibre), quantity: AMMO_PACK[calibre].n, price: AMMO_PACK[calibre].cost, full: (reserveAmmo[calibre] | 0) >= reserveCap(calibre),
             affordable: bank >= AMMO_PACK[calibre].cost, shortfall: Math.max(0, AMMO_PACK[calibre].cost - bank) } };
       }),
       onBuyBuild: (kind) => withArmoryBuy(() => {
@@ -31482,6 +31653,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const st = WEAPON_STATS[kind];
         if (!st) return '';
         if (st.melee) return Math.max(0, Math.ceil(sawFuel)) + 's of gas';
+        if (isLooseRoundWeapon(kind)) return dwText('armory.looseSummary', { loaded: Math.ceil(ammoByWeapon[kind]), count: reserveOf(kind) });
         return (Number.isFinite(ammoByWeapon[kind]) ? Math.ceil(ammoByWeapon[kind]) : '∞') + ' loaded · ' + reserveOf(kind) + ' spare' + (ammoHasTypes(kind) ? ' · ' + ammoHudTag(kind) : '');   // CB-294: the type in the gun
       },
       onApply: applyArmoryLoadout,
@@ -31489,10 +31661,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       getPhase: () => phase,
       getOwned: () => {
         const owned = WEAPON_ORDER.filter(w => w !== 'pistol' && weaponOwned[w]).map(w => ({
-          id: w, kind: w, loaded: Number.isSafeInteger(ammoByWeapon[w]) ? ammoByWeapon[w] : 0
+          id: w, kind: w, loaded: w === 'revolver' && magazineStore[w] ? magazineStore[w].loaded[0].rounds : Number.isSafeInteger(ammoByWeapon[w]) ? ammoByWeapon[w] : 0,
+          ...(isLooseRoundWeapon(w) ? { magazines: [], rounds: reserveOf(w) } : {})
         }));
         for (const w of ['pistol', 'uzi', 'revolver']) if (dualOwned[w]) owned.push({
-          id: `${w}:second`, kind: w, loaded: null
+          id: `${w}:second`, kind: w, loaded: w === 'revolver' && magazineStore[w]?.loaded[1] ? magazineStore[w].loaded[1].rounds : null,
+          ...(isLooseRoundWeapon(w) ? { magazines: [], rounds: 0 } : {})
         });
         return owned;
       }
@@ -52750,6 +52924,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return out;
     }
     function weaponInReach(k) { return k === 'pistol' || weaponsInReach().includes(k); }
+    function wheelAmmoMeta(key) {
+      const loaded = Number.isFinite(ammoByWeapon[key]) ? Math.ceil(ammoByWeapon[key]) : '∞';
+      return isLooseRoundWeapon(key) ? dwText('weapon.wheel.loose', { loaded, count: reserveOf(key) }) : loaded + ' + ' + reserveOf(key);
+    }
     function buildWheelItems(kind) {
       const out = [];
       if (kind === 'weapon' && !bigtexWheel) {
@@ -52759,7 +52937,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
             seen.add(key);
             const st = WEAPON_STATS[key];
             const meta = st.melee ? Math.max(0, Math.ceil(sawFuel)) + 's gas'
-              : (Number.isFinite(ammoByWeapon[key]) ? Math.ceil(ammoByWeapon[key]) : '∞') + ' + ' + reserveOf(key);
+              : wheelAmmoMeta(key);
             out.push({ key, name: st.name, meta, locked: false, current: !unarmed && key === currentWeapon, slot: WHEEL_SLOT_NAMES[i] });
           } else {
             out.push({ key: 'empty' + i, name: WHEEL_SLOT_NAMES[i], empty: true, locked: true, current: false,
@@ -52777,7 +52955,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           let meta;
           if (!owned) meta = equipmentStocked(key, day) ? '$' + weaponPrice(key) : dwText('shop.weaponArrives', { night: GUN_STOCK_NIGHT[key] });
           else if (st.melee) meta = Math.max(0, Math.ceil(sawFuel)) + 's gas';
-          else meta = (Number.isFinite(ammoByWeapon[key]) ? Math.ceil(ammoByWeapon[key]) : '∞') + ' + ' + reserveOf(key);
+          else meta = wheelAmmoMeta(key);
           out.push({ key, name: st.name, meta, locked: !owned, current: !unarmed && key === currentWeapon });
         }
       } else {
@@ -53395,6 +53573,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         }
       }
     }
+    // GP-20133: retain unchanged HUD nodes; firing changes rounds, not the weapon name or chips.
+    function setAmmoHudText(el, value) {
+      if (!el) return;
+      const text = String(value);
+      if (el.textContent !== text) el.textContent = text;
+    }
     function updateAmmoHud() {
       if (!(reloading && reloadWeapon === 'revolver')) {   // CL-326: the chambers as the count stands (a pair: half each, the right gun the odd one; CE-6: each gun's live rounds its own magazine's, so the gun that fired shows it)
         const a = ammoByWeapon.revolver | 0, pair = !!(dualActive && pairInLoadout('revolver')), mR = pair && magazineStore.revolver && magazineStore.revolver.loaded && magazineStore.revolver.loaded[0], aR = pair ? (mR ? Math.min(a, mR.rounds | 0) : Math.ceil(a / 2)) : a, sR = pair ? Math.ceil(revolverSpent / 2) : revolverSpent;
@@ -53403,44 +53587,47 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       const st = WEAPON_STATS[currentWeapon];
       const ammo = ammoByWeapon[currentWeapon];
-      if (grenadeChipsEl) grenadeChipsEl.innerHTML = '<span class="gchip">G×' + grenades + '</span><span class="gchip">H×' + medkits + '</span>';
-      if (ammoWeaponEl) ammoWeaponEl.textContent = st.name;
+      const chips = '<span class="gchip">G×' + grenades + '</span><span class="gchip">H×' + medkits + '</span>';
+      if (grenadeChipsEl && grenadeChipsEl.innerHTML !== chips) grenadeChipsEl.innerHTML = chips;
+      setAmmoHudText(ammoWeaponEl, st.name);
       const mg = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null;   // GB-138: on the Watchman, its belt
       const carriedMg = mortarCarried?.kind === 'm240' ? mortarCarried : null;
       const typedAmmo = typeof ammoTypeState === 'function' ? ammoTypeState(currentWeapon) : null;
+      const label = mg || carriedMg ? BUILD_NAMES.m240 : typedAmmo ? st.name + ' · ' + sayText('hud.ammo.typeHint') : st.name;
+      setAmmoHudText(ammoWeaponEl, label);
       magazineHud.render(currentWeapon, !mortarMounted && !mortarCarried && isMagazineWeapon(currentWeapon) && magazineStore[currentWeapon] ? magazineSnapshot(magazineStore, currentWeapon) : null);
       if (mg) {
         const belt = mg.belt | 0, res = reserveAmmo['7.62 belt'] | 0, feeding = mg.feedT > 0;
-        if (ammoWeaponEl) ammoWeaponEl.textContent = BUILD_NAMES.m240;
-        if (ammoCountEl) ammoCountEl.textContent = feeding ? '\u2026' : String(belt);
-        if (ammoDetailEl) ammoDetailEl.textContent = feeding ? sayText('m240.reloading') : sayText('m240.ammo', {belt, max: mg.beltMax | 0, reserve: res});
+        setAmmoHudText(ammoWeaponEl, BUILD_NAMES.m240);
+        setAmmoHudText(ammoCountEl, feeding ? '\u2026' : String(belt));
+        setAmmoHudText(ammoDetailEl, feeding ? sayText('m240.reloading') : sayText('m240.ammo', {belt, max: mg.beltMax | 0, reserve: res}));
         if (belt <= 0 && !feeding) ammoEl.classList.add('empty'); else ammoEl.classList.remove('empty');
       } else if (carriedMg) {
         ammoEl.classList.remove('empty');
-        if (ammoWeaponEl) ammoWeaponEl.textContent = BUILD_NAMES.m240;
-        if (ammoCountEl) ammoCountEl.textContent = String(carriedMg.belt | 0);
-        if (ammoDetailEl) ammoDetailEl.textContent = sayText('m240.carriedAmmo', {belt: carriedMg.belt | 0});
+        setAmmoHudText(ammoWeaponEl, BUILD_NAMES.m240);
+        setAmmoHudText(ammoCountEl, String(carriedMg.belt | 0));
+        setAmmoHudText(ammoDetailEl, sayText('m240.carriedAmmo', {belt: carriedMg.belt | 0}));
       } else if (typedAmmo) {
         const loaded = Math.max(0, typedAmmo.inGun | 0);
         const type = sayText('ammo.type.' + typedAmmo.loaded + '.tag', {}, typedAmmo.types?.[typedAmmo.loaded]?.tag || typedAmmo.loaded);
         const reserve = Math.max(0, typedAmmo.carried?.[typedAmmo.loaded] | 0);
-        if (ammoWeaponEl) ammoWeaponEl.textContent = st.name + ' · ' + sayText('hud.ammo.typeHint');
-        if (ammoCountEl) ammoCountEl.textContent = String(loaded);
-        if (ammoDetailEl) ammoDetailEl.textContent = typedAmmo.switching
+        setAmmoHudText(ammoWeaponEl, st.name + ' · ' + sayText('hud.ammo.typeHint'));
+        setAmmoHudText(ammoCountEl, String(loaded));
+        setAmmoHudText(ammoDetailEl, typedAmmo.switching
           ? ammoHudTag(currentWeapon)
           : reloading ? sayText('hud.ammo.typedReloading', {type, reserve})
-          : sayText('hud.ammo.typed', {loaded, capacity: magSize(currentWeapon), type, reserve});
+          : sayText('hud.ammo.typed', {loaded, capacity: magSize(currentWeapon), type, reserve}));
         if (loaded <= 0 && !reloading && !typedAmmo.switching) ammoEl.classList.add('empty');
         else ammoEl.classList.remove('empty');
       } else if (reloading) {
         ammoEl.classList.remove('empty');
-        if (ammoCountEl) ammoCountEl.textContent = '…';
-        if (ammoDetailEl) ammoDetailEl.textContent = 'Reloading';
+        setAmmoHudText(ammoCountEl, '…');
+        setAmmoHudText(ammoDetailEl, 'Reloading');
       } else if (st.melee) {
         const running = AudioSys.isChainsawRunning && AudioSys.isChainsawRunning();
         const fuel = Math.max(0, Math.ceil(sawFuel));
-        if (ammoCountEl) ammoCountEl.textContent = fuel + 's';
-        if (ammoDetailEl) ammoDetailEl.textContent = 'Gas ' + fuel + ' / ' + Math.round(sawFuelMax()) + (running ? ' · Running' : (fuel <= 0 ? ' · EMPTY' : ''));
+        setAmmoHudText(ammoCountEl, fuel + 's');
+        setAmmoHudText(ammoDetailEl, 'Gas ' + fuel + ' / ' + Math.round(sawFuelMax()) + (running ? ' · Running' : (fuel <= 0 ? ' · EMPTY' : '')));
         if (ammoDetailEl && (sawOverheat || sawHeat > 0.05)) ammoDetailEl.textContent += sawOverheat ? ' \u00b7 OVERHEAT' : ' \u00b7 Heat ' + Math.round(sawHeat * 100) + '%';   // GB-52
         if (fuel <= 0) ammoEl.classList.add('empty'); else ammoEl.classList.remove('empty');
       } else {
@@ -53448,10 +53635,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // the reload pulls out of it.
         const ammoLabel = Number.isFinite(ammo) ? Math.ceil(ammo) : '∞';
         const res = reserveOf(currentWeapon);
-        if (ammoCountEl) ammoCountEl.textContent = String(ammoLabel);
+        setAmmoHudText(ammoCountEl, String(ammoLabel));
         const mode = selectorGun(currentWeapon) ? ('  ·  ' + (weaponIsAuto(currentWeapon) ? 'AUTO' : 'SEMI')) : '';
         const loadTag = ammoHasTypes(currentWeapon) ? '  ·  ' + ammoHudTag(currentWeapon) : '';   // CB-294: the type in the gun, or the change as it runs
-        if (ammoDetailEl) ammoDetailEl.textContent = ammoLabel + ' / ' + magSize(currentWeapon) + '  ·  ' + res + ' ' + sayText('ammo.unit.' + (currentWeapon === 'launcher' ? 'grenades' : currentWeapon === 'flamer' ? 'fuel' : 'bullets')) + mode + loadTag;
+        setAmmoHudText(ammoDetailEl, ammoLabel + ' / ' + magSize(currentWeapon) + '  ·  ' + res + ' ' + sayText('ammo.unit.' + (isLooseRoundWeapon(currentWeapon) ? 'rounds' : currentWeapon === 'flamer' ? 'fuel' : 'bullets')) + mode + loadTag);
         if (Number.isFinite(ammo) && ammo <= 0) ammoEl.classList.add('empty');
         else ammoEl.classList.remove('empty');
       }
@@ -53475,7 +53662,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (ammo > 0 || reloading || ammoSwitch.active() || !gameStarted || paused || gameOver || won || placeMode || buildMode || vault || unarmed || mortarMounted || playerSwimming) { autoReloadT = 0; return false; }
       const st = WEAPON_STATS[currentWeapon];
       if (!st || st.melee || !Number.isFinite(st.maxAmmo) || st.reload <= 0) return false;
-      if (isMagazineWeapon(currentWeapon) ? !magazineStore[currentWeapon]?.spare.length : reserveOf(currentWeapon) <= 0) return false;
+      if (isMagazineWeapon(currentWeapon) ? spareMagazineRounds(magazineStore, currentWeapon) <= 0 : reserveOf(currentWeapon) <= 0) return false;
       if (isMagazineWeapon(currentWeapon) && !reloadGainsMagazine(currentWeapon)) return false;
       if (currentWeapon === 'shotgun' && shotgunPumping) return false;
       if (currentWeapon === 'sniper') {
@@ -53496,7 +53683,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         return;
       }
       if (reloading) {
-        if (reloadWeapon === currentWeapon && isMagazineWeapon(currentWeapon) && !reloadDrop && performance.now() - reloadStartedAt <= 300) {
+        if (reloadWeapon === currentWeapon && isMagazineWeapon(currentWeapon) && !isLooseRoundWeapon(currentWeapon) && !reloadDrop && performance.now() - reloadStartedAt <= 300) {
           reloadDrop = true;
           const elapsed = reloadAnimDuration - reloadTimer;
           reloadAnimDuration *= 0.6;
@@ -53510,7 +53697,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (ammoByWeapon[currentWeapon] >= magSize(currentWeapon)) return;
       // Two magazines, one pair of hands: swapping both takes half again as long.
       akimboReloadMult = akimboOn() ? 1.5 : 1;
-      if (isMagazineWeapon(currentWeapon) ? !magazineStore[currentWeapon]?.spare.length : reserveOf(currentWeapon) <= 0) {
+      if (isMagazineWeapon(currentWeapon) ? spareMagazineRounds(magazineStore, currentWeapon) <= 0 : reserveOf(currentWeapon) <= 0) {
         AudioSys.emptyClick(); flashNoAmmo(); return;
       }
       // GB-137: every magazine he carries holds no more than the one in the gun: R would only swap rounds away.
@@ -53547,7 +53734,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         revolverReloadSpent = currentWeapon === 'revolver' ? Math.max(0, revolverSpent) : 0;
         // CL-326 (J78): the unfired rounds coming out, and how many the loader going in holds (the fullest he carries)
         revolverReloadLive = currentWeapon === 'revolver' ? Math.max(0, ammoByWeapon.revolver | 0) : 0;
-        revolverReloadLoad = currentWeapon === 'revolver' ? Math.min(6, Math.max(0, ...((magazineStore.revolver && magazineStore.revolver.spare) || []).map((m) => m.rounds | 0))) : 0;
+        revolverReloadLoad = currentWeapon === 'revolver' ? Math.min(6, Math.max(0, (ammoByWeapon.revolver | 0) + spareMagazineRounds(magazineStore, 'revolver'))) : 0;
         shotgunReloadNeed = 0;
         shotgunReloadStartedEmpty = false;
         launcherReloadNeed = 0;
@@ -53599,8 +53786,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function completeReloadStep() {
       const w = reloadWeapon || currentWeapon;
       if (isMagazineWeapon(w)) {
-        // GB-137: R pockets the old magazine with its rounds and the fullest one goes in. The revolver's empties fall,
-        // and its live rounds go back into a loader (a part-full one); only a double tap dumps the cylinder outright.
+        // Magazines retain their old swap/drop behavior. A revolver keeps live rounds and
+        // tops up its cylinders from one loose-round pool, including an akimbo pair.
         const result = reloadMagazines(magazineStore, w, { dual: akimboOn(), drop: reloadDrop, discardOld: w === 'revolver' && reloadDrop });
         reloading = false;
         for (const item of result.dropped) {
@@ -54030,8 +54217,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // way, as in a top-down shooter. A body under the cursor, or just off it (the assist), is aimed at as it is.
     const AIM_CHEST = 1.15;
     const _aimRaised = new THREE.Vector3();
+    // CB-333 (J153 note 39, Jerry: "the round does not actually hit where aiming it hits the wall across from him. The player
+    // model does not point the gun elevation wise where the cross hair terminates"): the chest-height lift is gone. The
+    // round goes from the muzzle to the crosshair's world point, the camera ray's first hit (floor, wall, prop, plate, a
+    // body), and the gun (holdWeapon aims its bore at weaponAimPoint) and his upper body (tpAimLean) pitch to it. The
+    // assist still puts a round just off a body on it. AIM_CHEST stays for the tests' record (t276).
+    const AIM_TO_CROSSHAIR = true;
     function shotAimTarget() {
-      if (aimKind !== 'ground' || !directFire() || sniperScopingNow || OTS.w > 0.25 || placeMode || buildMode) return aimTarget;
+      if (AIM_TO_CROSSHAIR || aimKind !== 'ground' || !directFire() || sniperScopingNow || OTS.w > 0.25 || placeMode || buildMode) return aimTarget;
       return _aimRaised.set(aimTarget.x, aimTarget.y + AIM_CHEST, aimTarget.z);
     }
     // CL-247: the light assist. A body whose middle (0.35-0.8 of its height, its axis) passes within AIM_ASSIST_NDC of
@@ -54064,6 +54257,69 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       if (shotBlocked(_losFrom, out)) { aimAssistLast.blocked = true; return null; }
       return best;
     }
+    // CB-335 (the t222 follow-up the Director approved for zombies next): the cursor on the ground inside a body's footprint
+    // (its radius + AIM_FOOTPRINT_PAD) aims at its legs. With the chest lift gone (CB-333) a cursor at a zombie's feet, or
+    // just off its edge, sent the round from the muzzle to that ground point: short of it, or between its legs into the
+    // dirt. Now the aim is a point on its legs the round from the muzzle really meets (the game's own hit test, low under
+    // 0.4 of its height; its axis at a quarter height if none), with the lead and the line-of-sight check the assist has.
+    // Only for a ground point (a plate or the assist under the cursor wins) or the cursor on its very feet (the pick under
+    // 0.12 of its height: the round from the muzzle to that point met the floor at its toes), a straight-firing gun, not scoped.
+    const AIM_FOOTPRINT_PAD = 0.3, LEG_AIM_FY = [0.25, 0.18, 0.32], LEG_AIM_SWEEP = 6, LEG_AIM_STEP = 0.05;
+    const _legAimFrom = new THREE.Vector3(), _legAimEnd = new THREE.Vector3(), _legAimPt = new THREE.Vector3();
+    // The pick is kept for 50 ms while neither the muzzle nor the body has moved 5 cm (its legs move under it: a longer
+    // keep went stale on a shuffling shambler): fewer hit tests, and the aim does not flip between legs as the gun turns.
+    const _legAimKeep = { z: null, off: 0, fy: 0.25, mx: 0, my: 0, mz: 0, zx: 0, zz: 0, t: -1e9 };
+    function legAimLow(z, m, p, H, rx, rz, off, fy) {
+      _legAimPt.set(p.x + rx * off, p.y + H * fy, p.z + rz * off);
+      _legAimEnd.copy(_legAimPt).sub(m);
+      const L = _legAimEnd.length();
+      if (L < 0.3) return false;
+      _legAimEnd.multiplyScalar((L + 2) / L).add(m);
+      const h = zombieRoundHit(z, _legAimFrom.copy(m), _legAimEnd);
+      return !!h && (h.point.y - p.y) / H < 0.4;
+    }
+    function footprintLegPick(gp, outPt) {
+      if (!directFire() || placeMode || buildMode || mortarMounted || grenadeCharging) return null;
+      const P = localPlayer.position, reach = WEAPON_STATS[currentWeapon].range || 60;
+      let best = null, bd = Infinity;
+      for (const z of zombies) {
+        if (!z.alive || !z.mesh || !(z.hp > 0)) continue;
+        const p = z.mesh.position, d = hypot(gp.x - p.x, gp.z - p.z);
+        if (d > (z.radius || 0.4) + AIM_FOOTPRINT_PAD || d >= bd || Math.abs(gp.y - p.y) > 1) continue;
+        if (hypot(p.x - P.x, p.z - P.z) > reach) continue;
+        best = z; bd = d;
+      }
+      if (!best) return null;
+      const m = getMuzzleWorld(), p = best.mesh.position, H = best.hitH || 1.45, K = _legAimKeep, N = LEG_AIM_SWEEP;
+      let rx = m.z - p.z, rz = p.x - m.x;
+      const rl = hypot(rx, rz) || 1; rx /= rl; rz /= rl;
+      const now = performance.now();
+      if (!(K.z === best && now - K.t < 50 && hypot(m.x - K.mx, m.y - K.my, m.z - K.mz) < 0.05 && hypot(p.x - K.zx, p.z - K.zz) < 0.05)) {
+        // Across its width (30 cm either side of its axis, 5 cm steps) at a quarter of its height, then lower, then higher:
+        // the round from the muzzle meets it low along runs of offsets (its legs as the muzzle sees them); the middle of
+        // the run nearest its axis is the aim (a run two steps wide or more before a single step), so the round goes into
+        // the middle of a leg, not past its edge.
+        K.z = best; K.t = now; K.mx = m.x; K.my = m.y; K.mz = m.z; K.zx = p.x; K.zz = p.z; K.off = 0; K.fy = 0.25;
+        for (let i = 0; i < LEG_AIM_FY.length; i++) {
+          let runStart = null, bestC = Infinity, bestS = Infinity;
+          for (let j = -N; j <= N + 1; j++) {
+            const low = j <= N && legAimLow(best, m, p, H, rx, rz, j * LEG_AIM_STEP, LEG_AIM_FY[i]);
+            if (low) { if (runStart === null) runStart = j; }
+            else if (runStart !== null) {
+              const c = (runStart + j - 1) / 2 * LEG_AIM_STEP, s = Math.abs(c) + (j - runStart < 2 ? 10 : 0);
+              if (s < bestS) { bestS = s; bestC = c; }
+              runStart = null;
+            }
+          }
+          if (bestC !== Infinity) { K.off = bestC; K.fy = LEG_AIM_FY[i]; break; }
+        }
+      }
+      const out = _legAimPt.set(p.x + rx * K.off, p.y + H * K.fy, p.z + rz * K.off);
+      _losFrom.copy(m);
+      if (shotBlocked(_losFrom, out)) return null;
+      outPt.copy(out);
+      return best;
+    }
     const _weaponAimPoint = new THREE.Vector3(), _aimSelfEnd = new THREE.Vector3();
     function weaponAimPoint(out = _weaponAimPoint, scoped = sniperScopingNow) {
       // CC-342 (J108: "Weird laser bend when looking as far down as you can"): in first person the aim is the centre ray's
@@ -54071,6 +54327,26 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // under 2.25 m out and up, so looking down the laser and the rounds left the sights' line for a point beyond it
       // (a caller that asks for the safeguard by name, updateScopeDir's raise, keeps it)
       if (arguments.length < 2 && viewFirst && OTS.w > 0.5) scoped = true;
+      // CB-333 (J153 notes 39 and 4): in third person a crosshair inside his personal space (GP-170: under 2.25 m) used
+      // to send the round to a fixed ready point 2.25 m ahead at his waist, not where the crosshair is: the floor a step
+      // ahead, or the dummy his muzzle is pressed into (the ready point at 0.95 m ran under its chest). Now, while the
+      // point is in front of him (within 60 deg of his facing; a cursor over his own body from 1.2 m), the aim runs from his gun
+      // shoulder through the crosshair's point, carried out to 2.25 m: the gun and the round pass through what the
+      // crosshair is on. Closer than 0.75 m it does that only for a surface under the cursor (a plate, the dummy, a
+      // body), never the floor at his feet; GP-170's ready point stays for those and for a cursor over his own body
+      // closer than 1.2 m.
+      if (AIM_TO_CROSSHAIR && !scoped && !viewFirst && !diving() && directFire() && !placeMode && !buildMode) {
+        const t = shotAimTarget(), P = localPlayer.position, S = AIM_PERSONAL_SPACE, sy = P.y + (crouching ? 1.0 : 1.4);
+        const dx = t.x - P.x, dz = t.z - P.z, dh = hypot(dx, dz);
+        const surface = aimKind === 'training' || aimKind === 'zombie' || aimKind === 'assist';
+        // (the overhead camera's ray to a floor point a step ahead passes over his own body: that point counts from 1.2 m)
+        if (dh > 0.2 && dh < S.weaponRange && (dh >= S.facingRadius || surface) && (!aimThroughMarine || dh >= 1.2) &&
+          (dx * Math.sin(aimYaw) + dz * Math.cos(aimYaw)) / dh > 0.5) {
+          const k = S.weaponRange / dh;
+          out.set(P.x + dx * k, sy + (t.y - sy) * k, P.z + dz * k);
+          return out;
+        }
+      }
       marineAimPoint(localPlayer.position, shotAimTarget(), aimYaw, out,
         { self:aimThroughMarine, crouch:crouching, scoped });
       // Share the cleared aim with the gun and bullets, including near-body picks.
@@ -54083,6 +54359,29 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         out.lerp(_diveAimLocal,diveFlatW);
       }
       return out;
+    }
+    // CB-333 (J153 note 39): his upper body pitches toward where the round goes. The gun already aims its bore at
+    // weaponAimPoint (holdWeapon: the hold turned by part of the pitch, the barrel at the point); the spine takes a share
+    // of the elevation from his gun shoulder to it, forward when the crosshair is on the floor, a little back when it is
+    // high (core/body-limits.js spine flex -30..75 deg; this stays inside -7..17). Third person, a straight-firing gun in
+    // his hands, not in a reload, a dive, a vault, the water, the mounted guns or the scope. tpAim is the hook the
+    // third-person holds (CE-12) read: the point, the pitch from the shoulder (radians, + up) and the lean on the spine.
+    const TP_AIM_LEAN = { share: 0.45, fwd: 0.3, back: 0.12, rate: 9 };
+    const tpAim = { point: new THREE.Vector3(), pitch: 0, yaw: 0, lean: 0, on: false };
+    function tpAimLeanStep(dt) {
+      const H = WEAPON_HOLD[currentWeapon];
+      const on = !viewFirst && !!H && !H.level && holdW > 0.01 && !!weaponMount?.visible && directFire() && !(akimboCarryW > 0.5) &&
+        !reloading && !playerSwimming && !mortarMounted && !mortarCarried && !diving() && !vault && !(scopeAmt > 0.01) && !gameOver && !won;
+      tpAim.on = on;
+      let want = 0;
+      if (on) {
+        const p = weaponAimPoint(tpAim.point), P = localPlayer.position, sy = P.y + (crouching ? 1.0 : 1.4);
+        tpAim.pitch = Math.atan2(p.y - sy, Math.max(0.5, hypot(p.x - P.x, p.z - P.z)));
+        tpAim.yaw = aimYaw;
+        want = Math.max(-TP_AIM_LEAN.back, Math.min(TP_AIM_LEAN.fwd, -tpAim.pitch * TP_AIM_LEAN.share)) * Math.min(1, holdW);
+      }
+      tpAim.lean = _ease(tpAim.lean, want, dt, TP_AIM_LEAN.rate);
+      return tpAim.lean;
     }
     // CL-174: may the shoulder aim run now? Everything but the sniper (its scope), the mounted guns, swimming, the
     // tower ladder, menus, building, cinematics and the Training Ground's wake-up. (CL-193: the dive allows it.)
@@ -54245,8 +54544,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return true;
     }
     function fpPunchUndo() { camera.quaternion.copy(_fpPunchQ); camera.updateMatrixWorld(); }
-    function ensureViewmodel() {
-      if (viewmodel === null && gameStarted && VM_ON) {
+    function ensureViewmodel(warm = false) {
+      if (viewmodel === null && (gameStarted || warm) && VM_ON) {
         try { viewmodel = createViewmodel({ THREE, TSL, renderer, scene, camera, marine, weaponMeshes, hold: (k) => WEAPON_HOLD[k],
           stowed: () => (carryRig ? [...carryRig.slings.map((x) => x.g), ...carryRig.holsters.map((x) => x.g)] : []),   // AG-168: his stowed guns out of the eye
           offhand: (k) => offhandMeshes[k] || null,   // CL-301: a pair's other gun
@@ -54480,7 +54779,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       aimKind = zt !== Infinity ? 'zombie' : trainingHit ? 'training' : groundT === Infinity ? 'sky' : 'ground';
       // CL-247: just off a body, a light assist puts the round on it (aimAssistPick): never a lock, the cursor and the
       // view don't move, and only within a few pixels of it.
-      const assistZ = zt === Infinity && !scoped && !_otsCentre && !trainingHit ? aimAssistPick(ray, Math.min(groundT, AIM_SKY_DIST), _pickAim) : null;
+      let assistZ = zt === Infinity && !scoped && !_otsCentre && !trainingHit ? aimAssistPick(ray, Math.min(groundT, AIM_SKY_DIST), _pickAim) : null;
+      // CB-335: a ground point inside a body's footprint, or the cursor on its very feet, aims at its legs (footprintLegPick).
+      if (!assistZ && !scoped && !_otsCentre && !trainingHit) {
+        const onFeet = zt !== Infinity && !rayPick.head && rayPick.z && _pickAim.y - rayPick.z.mesh.position.y < (rayPick.z.hitH || 1.45) * 0.12;
+        if (onFeet || (zt === Infinity && groundT !== Infinity)) assistZ = footprintLegPick(onFeet ? _pickAim : aimHit, _pickAim);
+      }
       if (assistZ) aimKind = 'assist';
       if (zt !== Infinity || assistZ) {
         const m = getMuzzleWorld(), st = WEAPON_STATS[currentWeapon], pz = assistZ || rayPick.z;
@@ -54711,16 +55015,45 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       else scene.remove(mesh);
     }
 
+    const _tailAnchor = new THREE.Vector3();   // CB-333
     function spawnProjectile(fromTurret = false, origin = null, dir = null, damage = 10, life = 0.45, color = null, speed = null, kind = 'bullet', pierce = 0) {
       if (!fromTurret) damage = damage * dmgMult();
       const o = origin ? origin.clone() : getMuzzleWorld().clone();
       const d = dir ? dir.clone().normalize() : getAimDir().clone();
+      // CB-333 (J153 note 4, Jerry: "Cannot shoot dummy up close"): pressed against the dummy (or a zombie) the muzzle
+      // is already inside it, and a trace that starts there never meets its front face (the exact traces skip back
+      // faces). The player's round traces its first step from behind the muzzle, back along the shot toward his
+      // shoulder (or his eye in first person) by the gun's own length (0.25-0.9 m), so a target touching the muzzle,
+      // or one the barrel has gone into, is hit; the tracer still starts at the muzzle.
+      // In third person the gun is held off a wall or the dummy it's pushed into (heldWallPull: back, up and the muzzle
+      // tipped up), and a round from that muzzle went over the dummy's head; there the round takes the aim's own line
+      // from his shoulder through the crosshair's point (the spread kept), starting level with the muzzle.
+      let tail = null;
+      if (!fromTurret && !origin) {
+        const fp = viewFirst && OTS.w > 0.5;
+        const a = fp ? camera.position : _tailAnchor.set(localPlayer.position.x, localPlayer.position.y + (crouching ? 1.0 : 1.4), localPlayer.position.z);
+        const pulled = fp ? 0 : (firingGun() === offhandMeshes[currentWeapon] ? _wallHold.l : _wallHold.r);
+        // Or the muzzle has reached the crosshair's point (a body or the dummy it is pushed into): from there the point is
+        // behind it or beside it, and muzzle-to-point flew back at him or off to the side.
+        const Q = weaponAimPoint(), ql = Math.hypot(Q.x - a.x, Q.y - a.y, Q.z - a.z) || 1;
+        const reached = ((o.x - a.x) * (Q.x - a.x) + (o.y - a.y) * (Q.y - a.y) + (o.z - a.z) * (Q.z - a.z)) / ql > ql - 0.3;
+        if (pulled > 0.3 || reached) {
+          const aimD = getAimDir(), sx = d.x - aimD.x, sy = d.y - aimD.y, sz = d.z - aimD.z;
+          d.copy(weaponAimPoint()).sub(a).normalize(); d.x += sx; d.y += sy; d.z += sz; d.normalize();
+          const along = Math.max(0.25, (o.x - a.x) * d.x + (o.y - a.y) * d.y + (o.z - a.z) * d.z);
+          o.copy(a).addScaledVector(d, along);
+          tail = a.clone();
+        } else {
+          const back = Math.max(0.25, Math.min(0.9, (o.x - a.x) * d.x + (o.y - a.y) * d.y + (o.z - a.z) * d.z));
+          tail = o.clone().addScaledVector(d, -back);
+        }
+      }
       const mesh = acquireTracerMesh(tracerMatFor(color));
       mesh.position.copy(o);
       mesh.quaternion.setFromUnitVectors(AXIS_Z, d);
       const spd = (speed != null && speed > 0) ? speed : (fromTurret ? 55 : 70);
       projectiles.push({
-        mesh, pos: o.clone(), prev: o.clone(), dir: d,
+        mesh, pos: o.clone(), prev: o.clone(), tail, dir: d,
         speed: spd,
         life, age: 0, hit: false, damage,
         fromTurret,
@@ -54984,6 +55317,48 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // (gripFit; the akimbo pair keeps grip) and the support fist's on TP_FIT l.p (fore). Their hold points sit 3-4 cm toward the gun
     // side (below) so the fitted arm stays inside the shoulder's table and the firing wrist under 0.75 rad at every pitch (t229).
     for (const k of ['pistol', 'revolver']) { const F = TP_FIT[k]; if (F && F.r && F.l && F.r.p && F.l.p) { WEAPON_HOLD[k].gripFit = F.r.p.slice(); WEAPON_HOLD[k].fore = F.l.p.slice(); } }
+    // CE-12 (J153 note 20, D-181): the third-person reload's workspace. From the game's camera (8 m up and back) the
+    // handgun reload read as nothing: the gun stayed out at arm's length, level, and only the support fist moved under it.
+    // In third person the firing hand now brings the gun in toward his chest, muzzle up and the magwell canted to the
+    // support hand, for the swap and the rack, and takes it back out to the hold at the end. off: torso space (+x the
+    // gun side, +y up, +z forward) added to the hold; rx: the muzzle up (rad, negative up, as reloadMountOff.rx); rz: the
+    // cant, the magwell toward the support hand (as reloadMountOff.rz); nod: his chin down to the gun (rad, the neck's flex, + down;
+    // inside BODY_LIMITS.neck); arc: (torso space, metres) the support hand's swing out on its way to the pouch and back, at the
+    // middle of each leg, so the trip to the belt reads from the game camera; in/out: the reload's fractions it eases over.
+    // First person and akimbo are untouched (the viewmodel and akimboReloadAnchor own those).
+    const TP_RELOAD = {
+      pistol: { off: [0.07, 0.03, -0.14], rx: -0.62, rz: 0.85, nod: 0.36, arc: [-0.16, 0.06, 0.12], in: 0.12, out: 0.88 },
+      // the shouldered guns (holdShoulderGun): off moves the butt's seat (the stock drops off the shoulder into the
+      // armpit, the gun comes in), rx/rz turn about the butt; the muzzle a little up, the magwell canted to the left hand.
+      m4: { off: [0.03, -0.07, 0.03], rx: -0.22, rz: 0.5, nod: 0.3, in: 0.15, out: 0.9 },
+      ak: { off: [0.03, -0.07, 0.03], rx: -0.22, rz: 0.55, nod: 0.3, in: 0.15, out: 0.9 },
+      aa12: { off: [0.03, -0.08, 0.03], rx: -0.2, rz: 0.55, nod: 0.3, in: 0.15, out: 0.9 },
+      sniper: { off: [0.03, -0.07, 0.03], rx: -0.18, rz: 0.4, nod: 0.3, in: 0.12, out: 0.94 },
+      // the revolver (RELOAD_PLAN.revolver): muzzle up while the cylinder swings out and the empties go (to u .3), muzzle
+      // down while the loader goes in (u .46-.8), level again to close; rxk: [u, rx] keys over the reload (eased)
+      revolver: { off: [0.07, 0.02, -0.14], arc: [-0.14, 0.06, 0.12], rx: -0.9, rxk: [[0, -0.9], [0.3, -0.9], [0.42, 0.55], [0.8, 0.55], [0.9, -0.2]], rz: 0.35, nod: 0.36, in: 0.12, out: 0.92 },
+    };
+    function tpReloadRx(R, u) {   // CE-12: the muzzle's up/down through the reload (rxk keys, eased), else rx
+      const K = R.rxk; if (!K) return R.rx;
+      let i = 0; while (i < K.length - 1 && u >= K[i + 1][0]) i++;
+      if (i >= K.length - 1) return K[K.length - 1][1];
+      return K[i][1] + (K[i + 1][1] - K[i][1]) * _smooth((u - K[i][0]) / (K[i + 1][0] - K[i][0]));
+    }
+    // CE-12: the support hand's legs to and from the pouch (RELOAD_PLAN keys with 'pouch' at one end) bow out by R.arc
+    // (torso space) at their middle; third person only, a single gun.
+    const _tpArc = new THREE.Vector3(), _tpArcQ = new THREE.Quaternion();
+    function tpReloadArc(w, u, fore, torso) {
+      const R = !viewFirst && !akimboOn() ? TP_RELOAD[w] : null, p = RELOAD_PLAN[w];
+      if (!R || !R.arc || !p) return;
+      const K = p.keys; let i = 0; while (i < K.length - 1 && u >= K[i + 1][0]) i++;
+      if (i >= K.length - 1 || (K[i][1] === 'pouch') === (K[i + 1][1] === 'pouch')) return;
+      const s = Math.sin(Math.PI * _clamp01((u - K[i][0]) / (K[i + 1][0] - K[i][0])));
+      fore.add(_tpArc.set(R.arc[0], R.arc[1], R.arc[2]).applyQuaternion(torso.getWorldQuaternion(_tpArcQ)).multiplyScalar(s));
+    }
+    function tpReloadW(u) {
+      const R = !viewFirst && reloading && !akimboOn() ? TP_RELOAD[currentWeapon] : null;
+      return R ? _seg(u, 0, R.in) * (1 - _seg(u, R.out, 1)) : 0;
+    }
     // GB-130 (Jerry): the grip and support points are read off each model, not guessed (gun space,
     // so they hold at any WEAPON_SIZE). The hand point (gripR/gripL, the front of the palm where the
     // curled fingers close) goes on:
@@ -55181,11 +55556,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // carrier on, the elbow outside it and the upper arm's middle off its front (studio/marine-body.js carrierClearance,
     // CC-341) is kept, the most natural of them (below); where none is, the least bad. A pose already inside costs one reading.
     const _shIK = { q: new THREE.Quaternion(), r: new THREE.Quaternion(), e: new THREE.Vector3(), w: new THREE.Vector3(), u: new THREE.Vector3(),
-      f: new THREE.Vector3(), m: new THREE.Vector3(), p: new THREE.Vector3(), E: new THREE.Vector3(), c: {} };
+      f: new THREE.Vector3(), m: new THREE.Vector3(), p: new THREE.Vector3(), E: new THREE.Vector3(), c: {}, ua: [0, 0, 0], ha: [0, 0, 0], sa: { back: 0, across: 0, turn: null } };
+    // CE-12 (GP-20133: the hold's garbage on firing frames): shoulderAngles read from two vectors through reused arrays
+    function shoulderAnglesV(u, h, side) { const ua = _shIK.ua, ha = _shIK.ha; ua[0] = u.x; ua[1] = u.y; ua[2] = u.z; ha[0] = h.x; ha[1] = h.y; ha[2] = h.z; return shoulderAngles(ua, ha, side, _shIK.sa); }
     const SHOULDER_STEP = 5 * Math.PI / 180, SLEEVE_T = [0.2, 0.35, 0.5, 0.65, 0.8];
     function shoulderBad(armG, side, q, cc) {
       const u = _shIK.u.copy(_shIK.E).applyQuaternion(q), h = _shIK.f.copy(_AXIS_X).applyQuaternion(q);   // the hinge: where the elbow points
-      const a = shoulderAngles([u.x, u.y, u.z], [h.x, h.y, h.z], side);
+      const a = shoulderAnglesV(u, h, side);
       let bad = shoulderPast(a);
       if (cc) {   // metres to radians: 1 cm counts as about 17 deg (a sleeve through the carrier is the worse of the two)
         bad += 30 * carrierIntrusion(cc, _shIK.p.copy(armG.position).add(u));   // the elbow
@@ -55212,7 +55589,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // the least bad.
       let best = 0, bestBad = b0, bestTurn = Infinity, found = false;
       const turnAt = (ang) => { const qq = _shIK.q.setFromAxisAngle(axis, ang).multiply(q), u = _shIK.u.copy(_shIK.E).applyQuaternion(qq), h = _shIK.f.copy(_AXIS_X).applyQuaternion(qq);
-        const a = shoulderAngles([u.x, u.y, u.z], [h.x, h.y, h.z], side); return Math.abs(a.turn == null ? 0 : a.turn) + 0.15 * Math.abs(ang) + Math.max(0, u.y / IK_UPPER); };   // an elbow above the shoulder costs up to 57 deg
+        const a = shoulderAnglesV(u, h, side); return Math.abs(a.turn == null ? 0 : a.turn) + 0.15 * Math.abs(ang) + Math.max(0, u.y / IK_UPPER); };   // an elbow above the shoulder costs up to 57 deg
       for (let i = 1; i < 72; i++) {
         const ang = (i <= 36 ? i : i - 72) * SHOULDER_STEP, b = at(ang);
         if (b <= 1e-6) { const t = turnAt(ang); if (!found || t < bestTurn) { found = true; bestTurn = t; best = ang; bestBad = 0; } }
@@ -55721,6 +56098,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       P.y += walkBob * 0.25;
       P.z += bodyRecoil.gripR * 0.5;
       P.x += gunLag.x * 0.6; P.y += gunLag.y * 0.6; P.z += gunLag.z * 0.6;   // CL-133: the gun's inertia (less: the butt is in the shoulder)
+      const tpRl = tpReloadW(reloading ? _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1)) : 0), tpR = tpRl > 0 ? TP_RELOAD[currentWeapon] : null;   // CE-12: the 3P reload's workspace
+      if (tpR) { P.x += tpR.off[0] * tpRl; P.y += tpR.off[1] * tpRl; P.z += tpR.off[2] * tpRl; if (ud.headG && dt > 0) ud.headG.rotation.x += (tpR.nod || 0) * tpRl; }
       torso.localToWorld(P);
       fpSteadyShiftInto(P);   // CL-260 part 2: down the sights in first person, the sights on the steadied view
       if(diving())P.y=Math.max(P.y,localPlayer.position.y+.27*diveFlatW);
@@ -55753,7 +56132,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const rlT = viewFirst ? 1 + (_rls.turn - 1) * fpReloadLiftW : 1;   // GB-245: first person keeps this much of the reload's tilt
       const rlTip = viewFirst ? _rls.tip * fpReloadLiftW : 0;   // GB-245: the muzzle dips, which brings the grip and the magwell up to him
       const rlCant = viewFirst ? 1 + (_rls.cant - 1) * fpReloadLiftW : 1;   // GB-245: the roll, tunable
-      _hE.set(reloadMountOff.rx * rlT + rlTip + recoilKick.rx, reloadMountOff.ry * rlT + recoilKick.ry, reloadMountOff.rz * rlT * rlCant + recoilKick.rz);
+      _hE.set(reloadMountOff.rx * rlT + rlTip + recoilKick.rx + (tpR ? tpR.rx * tpRl : 0), reloadMountOff.ry * rlT + recoilKick.ry, reloadMountOff.rz * rlT * rlCant + recoilKick.rz + (tpR ? tpR.rz * tpRl : 0));   // CE-12: + the 3P reload's turn
       _hq.gun.multiply(_hq.a.setFromEuler(_hE));
       const sw = _hv.b.copy(armR.position); torso.localToWorld(sw);
       heldWallPull(gun, H, sw, P, sh.butt, _hq.gun, 'r', dt);
@@ -55971,6 +56350,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       poseHands(ud, holdW, akimboOn() ? holdW : Math.max(holdWL * holdW, knifeAnimT > 0 ? 1 : 0));   // GB-152: the fingers
       if (!H || holdW < 0.01) {poseDiveBrace();return;}
       const k = on ? 1 : holdW;
+      // CE-12 (J153 note 20: "how bad the chainsaw start looked in 3rd person"): in third person the pull-start is a
+      // working move: he leans into it (the spine forward), the saw goes down and out on the braced left arm with its nose
+      // dipped a little, and the right hand pulls the cord from the starter up and back to above his shoulder line with his
+      // chest turning into it (poseSawStarter), instead of the saw staying at the hip while the right arm went straight up.
+      // sawSw: the start's weight (its hand's take).
+      const sawSw = currentWeapon === 'chainsaw' && on && !viewFirst && sawStart.phase === 'starting' ? sawStartPose(sawStart).take : 0;
+      if (sawSw > 0 && dt > 0) {   // once a frame (the recoil re-solve, dt 0, finds it bent)
+        ud.torsoG.rotation.x += SAW_START_TP.bend * sawSw;
+        ud.torsoG.rotation.y += SAW_START_TP.twist * sawStartPose(sawStart).cord;   // the right shoulder goes back with the pull
+        if (ud.lowerBody) { const lim = BODY_LIMITS.spine.turn[1] - 2 * Math.PI / 180, tw = _wrapAngle(ud.torsoG.rotation.y - ud.lowerBody.rotation.y);
+          if (Math.abs(tw) > lim) ud.torsoG.rotation.y = ud.lowerBody.rotation.y + Math.sign(tw) * lim; }
+      }
       player.updateMatrixWorld(true);
       const torso = ud.torsoG, armR = ud.armRG, armL = ud.armLG;
 
@@ -56005,6 +56396,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // undefined read adds nothing, so every gun without them moves exactly as it did before.
         if (viewFirst && OTS.w > 0 && !aki && fpReloadLiftW > 0) { const rl = fpReloadSet(), rw = fpReloadLiftW; off.x += (rl.side || 0) * rw; off.y += (rl.up || 0) * rw; off.z += (rl.fwd || 0) * rw; }
         if (viewFirst && OTS.w > 0 && !aki && fpBladeDip > 0) { const bw = OTS.w * fpBladeDip; off.x += FP_BLADE_DIP.x * bw; off.y += FP_BLADE_DIP.y * bw; off.z += FP_BLADE_DIP.z * bw; }   // CL-269: out of the blade's way
+        const tpRl = tpReloadW(reloadU), tpR = tpRl > 0 ? TP_RELOAD[currentWeapon] : null;   // CE-12: the 3P reload's workspace
+        if (tpR) { off.x += tpR.off[0] * tpRl; off.y += tpR.off[1] * tpRl; off.z += tpR.off[2] * tpRl; if (ud.headG && dt > 0) ud.headG.rotation.x += (tpR.nod || 0) * tpRl; }   // the nod once a frame (not on the recoil re-solve, dt 0)
+        if (sawSw > 0) { const so = SAW_START_TP.off; off.x += so[0] * sawSw; off.y += so[1] * sawSw; off.z += so[2] * sawSw; }   // CE-12
         if (aki && akimboRetreat > 0.001) off.z += akimboRetreat * AKIMBO_CARRY.retreatReach;   // CL-189: backing off, out at it
         if (carry > 0.001) off.lerp(_akAt.set(AKIMBO_CARRY.at[0], AKIMBO_CARRY.at[1], AKIMBO_CARRY.at[2]), carry);   // CL-188: up by his collarbone
         off.y += walkBob * 0.25;
@@ -56059,7 +56453,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           // grip (the uzi's magazine is in the grip) up to his eye without asking the arm for more reach. tip is 0 unless a
           // gun's entry sets it, so every other gun's orientation is unchanged.
           const _rlt = viewFirst && fpReloadLiftW > 0 ? (fpReloadSet().tip || 0) * fpReloadLiftW : 0;
-          _hE.set(reloadMountOff.rx + _rlt - 0.5 * dipR + recoilKick.rx * mainKick, reloadMountOff.ry + recoilKick.ry * mainKick, reloadMountOff.rz + recoilKick.rz * mainKick);
+          _hE.set(reloadMountOff.rx + _rlt - 0.5 * dipR + recoilKick.rx * mainKick + (tpR ? tpReloadRx(tpR, reloadU) * tpRl : 0) + SAW_START_TP.dip * sawSw, reloadMountOff.ry + recoilKick.ry * mainKick, reloadMountOff.rz + recoilKick.rz * mainKick + (tpR ? tpR.rz * tpRl : 0));   // CE-12: + the 3P reload's turn
           _hq.gun.multiply(_hq.a.setFromEuler(_hE));
         };
         aimGun();
@@ -56232,6 +56626,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         } else {
           palmItem = reloadSupportTarget(currentWeapon, u, gun, fore, ud, torso);
         }
+        tpReloadArc(currentWeapon, u, fore, torso);   // CE-12: the swing out to the pouch and back (3P)
       } else if (!reloading && currentWeapon === 'sniper' && gun.userData.bolt && gun.userData.boltCycle && gun.userData.boltCycle.hand > 0) {
         // GB-301: bolt animates; FP firing hand rides it via st.boltHand; in third person holdShoulderGun takes the firing
         // hand onto the knob (CB-307). Support stays on the forend.
@@ -56322,6 +56717,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       home: new THREE.Vector3(), target: new THREE.Vector3(), grip: new THREE.Vector3(),
       channel: new THREE.Vector3(), end: new THREE.Vector3(), direction: new THREE.Vector3(), q: new THREE.Quaternion() };
     const SAW_PULL = [0.16, 0.30, -0.08];   // CL-326 (J82): the starter's pull, in the saw's own axes (metres at full pull)
+    // CE-12: the third person's start (holdWeapon's sawSw). bend: the spine forward (rad, inside BODY_LIMITS.spine.flex); twist:
+    // the chest turned right with the cord (rad at full pull; held inside BODY_LIMITS.spine.turn on the hips);
+    // off: the saw's hold moved (torso space, +x his right, +y up, +z forward); dip: the nose down (rad, as
+    // reloadMountOff.rx, + down; the bar's nose stays off the floor); pull: the cord's stroke in his torso's axes, from the
+    // starter up and back to above his right shoulder line, metres at full pull.
+    const SAW_START_TP = { bend: 0.2, twist: 0.32, off: [0.02, -0.04, 0.08], dip: 0.1, pull: [0.16, 0.56, -0.2] };
+    const _sawTQ = new THREE.Quaternion();
     function poseSawStarter(gun, ud) {
       const data = gun.userData, handle = data.starterHandle, cord = data.starterCord;
       if (!handle || !cord) return;
@@ -56331,8 +56733,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       _saw.home.copy(data.starterHome);
       // CL-326 (J82: "The pull animation looks bad in 3rd person"): the cord pulled up and out in front of his right
       // shoulder (SAW_PULL; it went 26 cm out to the saw's right, the arm barely moving)
-      _saw.target.copy(_saw.home).addScaledVector(_saw.direction.set(SAW_PULL[0], SAW_PULL[1], SAW_PULL[2]), pose.cord);
-      gun.localToWorld(_saw.target);
+      if (viewFirst) {
+        _saw.target.copy(_saw.home).addScaledVector(_saw.direction.set(SAW_PULL[0], SAW_PULL[1], SAW_PULL[2]), pose.cord);
+        gun.localToWorld(_saw.target);
+      } else {   // CE-12: the pull, in his torso's axes, from the starter's home on the saw
+        gun.localToWorld(_saw.target.copy(_saw.home));
+        ud.torsoG.getWorldQuaternion(_sawTQ);
+        _saw.target.addScaledVector(_saw.direction.set(SAW_START_TP.pull[0], SAW_START_TP.pull[1], SAW_START_TP.pull[2]).applyQuaternion(_sawTQ), pose.cord);
+      }
       _saw.grip.set(...WEAPON_HOLD.chainsaw.grip); gun.localToWorld(_saw.grip);
       _saw.target.lerp(_saw.grip, 1 - pose.take);
       gun.getWorldQuaternion(_saw.q);
@@ -56423,6 +56831,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       return d.addScaledVector(right, Math.cos(a) * r + side).addScaledVector(up, Math.sin(a) * r + climb).normalize();
     }
 
+    const LAUNCHER_GRAVITY = 16; // GP-20137 / J153-25: metres per second squared
     function fireLauncherShell() {
       // 40mm grenade round (cartridge) - NOT the throwable Key-G hand grenade
       const st = WEAPON_STATS.launcher;
@@ -56466,14 +56875,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         pos: origin.clone(),
         prev: origin.clone(), // swept each frame so impact detection can't tunnel through a target
         vx: dir.x * spd,
-        vy: dir.y * spd, // straight at the cursor: a 40 mm, not a lob
+        vy: dir.y * spd, // same muzzle aim and speed; gravity bends the flight
         vz: dir.z * spd,
         age: 0,
         fuse,
         damage: st.damage,
         rangePacket:rangeShotPacket,originWeapon:'launcher',
         isShell: true, // 40mm launcher round - distinct from Key-G throwable
-        direct: true // no gravity; the mortar's shell is the one that arcs
+        gravity: LAUNCHER_GRAVITY // GP-20137 / J153-25: existing world gravity, launcher-only exact integration
       });
     }
 
@@ -58666,12 +59075,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const g = grenadesInFlight[i];
         g.age += dt;
         if (g.whistleAt != null && g.age >= g.whistleAt) { g.whistleAt = null; const sa = sndAt(g.landX, g.landZ, 140); if (AudioSys.mortarIncoming) AudioSys.mortarIncoming(Math.max(0.2, sa.v), sa.pan); }   // CL-161
-        if (!g.direct) g.vy -= 16 * dt; // the 40 mm flies the aim; grenades and mortar shells still fall
+        const launcherGravity = g.originWeapon === 'launcher' ? (g.gravity || 0) : 0;
+        if (!g.direct && !launcherGravity) g.vy -= 16 * dt; // preserve hand-grenade and mortar integration
         const rangeFrom = g.handThrown && training.active && training.tg ? {x:g.pos.x,y:g.pos.y,z:g.pos.z} : null;
         if (g.prev) { g.prev.x = g.pos.x; g.prev.y = g.pos.y; g.prev.z = g.pos.z; }
         g.pos.x += g.vx * dt;
-        g.pos.y += g.vy * dt;
+        g.pos.y += g.vy * dt - 0.5 * launcherGravity * dt * dt;
         g.pos.z += g.vz * dt;
+        if (launcherGravity) g.vy -= launcherGravity * dt;
         if(rangeFrom){
           const hit=bounceRangeGrenade(g,training.tg,rangeFrom,dt);
           if(hit&&hit.speed>1&&g.age>=(g.rangeFenceSoundAt||0)){
@@ -60536,7 +60947,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           projectiles.splice(i, 1);
           continue;
         }
-        p.prev.copy(p.pos);
+        if (p.tail) { p.prev.copy(p.tail); p.tail = null; } else p.prev.copy(p.pos);   // CB-333 (note 4): the first step from behind the muzzle
         const step = p.speed * dt;
         p.pos.x += p.dir.x * step;
         p.pos.y += p.dir.y * step;
@@ -66069,6 +66480,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         // in the scene, left where it was aimed in the valley. Hidden with the valley, its matrix stopped updating, so the
         // gun light kept pointing at the old spot outside (a patch high on the hangar wall) and lit nothing he aimed at.
         keep.add(flashlight.target);
+        // CB-335 (ChatGPT's GP-20142 find): the same for the sun's target, and any top-level light's. Hidden with the valley,
+        // its matrix stayed where he left the valley, so the sun's shadow camera looked from over his head toward that old
+        // spot and the Training Ground fell outside its shadow map.
+        for (const o of scene.children) if (o.isLight && o.target && o.target.isObject3D) keep.add(o.target);
         // CL-293 (AG-219, ChatGPT's find): the view gun's root rides the camera but sits in the scene at the top level; left
         // where he was in the valley when he went in, it was hidden and frozen there, so in the Training Ground the gun
         // could be "visible" and nowhere near his eye.
@@ -66734,6 +67149,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           tg.cutaway?.update?.(camera.position, viewFirst ? _noCutaway : localPlayer.position, 0);
           tg.ceiling?.update(viewFirst);
           training.perimeter?.update?.(camera.position, viewFirst ? _noCutaway : localPlayer.position, 0);
+          // GP-20133: the camo/keeper stage above is restored; prime the player's actual finish last.
+          try {
+            const {warmWeaponFire} = await import('./game/fire-warmup.js');
+            const receipt = await warmWeaponFire({THREE, scene, heat:barrelHeat, guns:weaponMeshes, offhand:offhandMeshes,
+              viewmodel:ensureViewmodel() ? viewmodel : null, furniture:gunFurniture, compile:() => compileForLiveTarget(scene),
+              draw:tag => warmFrame('training-' + tag), settle:() => renderer.backend?.device?.queue?.onSubmittedWorkDone?.()});
+            _warmStats.trace.push('training-fire-resources:' + receipt.meshes + '/' + receipt.viewRecords);
+          } catch (e) { console.info('Grave Shift: Training fire resource warm-up skipped.', e); }
           warmFrame('training-clean');
           try { await warmArmoryPics(); } catch (_) {}
           try { await renderer.backend?.device?.queue?.onSubmittedWorkDone?.(); } catch (_) {}
@@ -67470,8 +67893,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         player.visible = true;
         updateMarinePose(.016, false, false); holdWeapon(.016);
         updateDayNight(0);
-        sun.position.copy(player.position).addScaledVector(sunDir, 85);
-        sun.target.position.copy(player.position);
+        followSun(player.position);
         insertion = beginMarineInsertion();
       }, () => {
         insertion.finish();
@@ -68367,8 +68789,7 @@ live++;
         menuCamera.advance(dt);
         updateDayNight(dt);
         updateCaveEyes();
-        sun.position.copy(player.position).addScaledVector(sunDir, 85);
-        sun.target.position.copy(player.position);
+        followSun(player.position);
         sun.target.updateMatrixWorld();
         updateWorldAnimations(dt);
         updateGroundFires(dt);
@@ -68437,8 +68858,7 @@ live++;
       updateDayNight(dt);
       updateCaveEyes();
       // Shadow frustum rides along with the player.
-      sun.position.copy(player.position).addScaledVector(sunDir, 85);
-      sun.target.position.copy(player.position);
+      followSun(player.position);
       sun.target.updateMatrixWorld();
       PROF.mark('daynight');
       if (knifeCd > 0) knifeCd -= dt;
@@ -69395,10 +69815,12 @@ live++;
         if(!_trainingDesiredOn)_trainingIdealEye.copy(camera.position);_trainingIdealOn=true;   // CB-327: the fades follow the wanted eye
         _trainingDesiredOn=false;
         const contact=training.cameraCollision.pull(head,camera.position);
-        if(!window.__GP91_BASELINE){
-          const station=trainingStationShoulder(head,camera.position,camLook,training.tg.stations,(a,b)=>training.cameraCollision.pull(a,b),{x:fwdX,z:fwdZ});
-          if(contact&&!station)trainingCloseFraming(head,camera.position,camLook,{x:fwdX,z:fwdZ},(a,b)=>training.cameraCollision.pull(a,b));
-        }
+        // CB-333 (J153 note 19, Jerry: "3rd person rotate on camera still getting stuck. Unplayable"): the station shoulder
+        // (GP-20091) moved the eye to the station's player side and looked at the station whenever he stood within 8.5 m of
+        // a station's face and the heading pointed away from it, whatever the mouse said: about 140 degrees of the turn sat
+        // facing the CIF/terminal/Armory with him out of frame (review/J153-playtest/16). The heading is his: a station
+        // behind him only pulls the eye in (the pull above), and the close framing keeps looking where he turned.
+        if(!window.__GP91_BASELINE&&contact)trainingCloseFraming(head,camera.position,camLook,{x:fwdX,z:fwdZ},(a,b)=>training.cameraCollision.pull(a,b));
         if(!window.__GP91_BASELINE)trainingEyeDistance=Math.hypot(camera.position.x-head.x,camera.position.y-head.y,camera.position.z-head.z);
       }
       trainingMarineFade.update(trainingEyeDistance);
@@ -69409,8 +69831,7 @@ live++;
       if (!gameStarted && _preRollDone && !_liveRoll) {
         if (!_menuCamSeen) { _menuCamSeen = true; window.DWPerf?.mark('menu-camera'); }
         menuCamera.menu(dt);
-        sun.position.copy(menuCamera.focus).addScaledVector(sunDir, 85);
-        sun.target.position.copy(menuCamera.focus);
+        followSun(menuCamera.focus);
       }
       if (inspectHook) inspectHook.frame(dt, realDt);   // CL-196: the inspector has the last word before the draw
       applyShotView();
@@ -69513,7 +69934,7 @@ live++;
           getWorldTime: () => worldTime,
           killZombie, damageZombie, damageHouse, damagePlayer, house, corpses, gibPieces,
           landmarks, damageLandmark, getMapDrums: () => mapDrums, restoreMapDrums, addSkillXp, skillLvl, SKILL_RANKS, getSkillEffects: () => ({ damage: dmgMult(), reload: reloadMult(), speed: speedMult(), cash: cashMult(), grenades: maxGrenades(), radius: grenadeRadiusMult(), maxHp: PLAYER_MAX_HP }), addCash: (n) => { bank += n; updateCoinHud(); }, getBank: () => bank, getMaxHp: () => PLAYER_MAX_HP,
-          jumpFeelDbg: () => ({ ...jumpFeel, grounded, vy }), aimTarget, getWeaponAimDbg: () => weaponAimPoint(new THREE.Vector3()), aimSafetyDbg: () => ({ self:aimThroughMarine, yaw:aimYaw }), getCrouching: () => crouching,
+          jumpFeelDbg: () => ({ ...jumpFeel, grounded, vy }), aimTarget, getWeaponAimDbg: () => weaponAimPoint(new THREE.Vector3()), tpAimDbg: () => ({ point: tpAim.point.clone(), pitch: tpAim.pitch, yaw: tpAim.yaw, lean: tpAim.lean, on: tpAim.on }),   /* CB-333 */ aimSafetyDbg: () => ({ self:aimThroughMarine, yaw:aimYaw }), getCrouching: () => crouching,
           // Debug-only: knife swing + grenade/launcher round state for regression probes.
           knife, marine, grenadesInFlight, getKnifeAnimT: () => knifeAnimT, getKnifeCd: () => knifeCd,
           AudioSys, getAudioState: () => _audioState, getAmbState: () => _ambState,
@@ -69527,7 +69948,7 @@ live++;
             live: z._bg ? z._bg.points() : null, targets: z._bg ? z._bg.targets() : null, animated: z._bg ? z._bg.animated() : null, plant: z._bg && z._bgu !== undefined ? z._bg.plant(z._bgu) : 0 }),
           // Debug-only: economy hooks. grantAllWeapons hands over the arsenal so the older
           // weapon probes keep working; the rest let probes drive the kiosk directly.
-          grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, skullValueDbg: () => skullValueTotal, siegeNightDbg: () => siegeNightNow, LATE_CASH_NIGHT, LATE_CASH_FACTOR, LATE_CASH_STEP, lateCashMul, buyExtMag, buyHeavyBarrel, fitWeaponMod, weaponMods, HEAVY_BARREL_PRICE, EXT_MAG_RELOAD_MUL, HEAVY_CLIMB_MUL, HEAVY_SWAP_DUR, HEAVY_MOVE_SPREAD_MUL, recoilClimb, getReloadDbg: () => ({ timer: reloadTimer, anim: reloadAnimDuration, weapon: reloadWeapon }), /* CL-84 */ akimboDbg: { AKIMBO_CARRY, carry: () => akimboCarryW, retreat: () => akimboRetreat },   /* CL-188 */ airDbg: { AIR, pose: () => POSE.airPose, jumpNow: () => { if (!grounded) return false; vy = PHYS.jumpVel; grounded = false; coyoteT = 0; return true; } },   /* CL-210 */ rigSkinDbg: { info: (r) => rigSkinInfo(r || marine), count: () => rigSkinCount(), sync: () => syncRigSkins() },   /* CL-189 */ aoDbg: { AO_DEFAULTS, info: () => marine.userData.aoInfo, bake: (o) => (marine.userData.aoInfo = bakeMarineAO(THREE, marine, { ...marine.userData.ao, ...(o || {}) })) },   /* CL-186 */ zombieFeetDbg: { ZFEET, ZLEAN },   /* CL-187 */ gaitDbg: { GAIT, GAIT_FEEL, GAIT_WEIGHT, UNARMED_ARMS, UNARMED_RUN, WINDED, winded: () => POSE.winded || 0, setWinded: (v) => { POSE.winded = v; }, breaths: () => POSE.breaths || 0, pose: () => POSE, clips: () => MARINE_GAIT, w: () => POSE.gaitW || 0, run: () => POSE.gaitRun || 0, sample: (u, r) => { const g = marineGait(u, r); return g && { ...g }; } },   /* CL-84 */ smoothDbg: { MOVE_FEEL, GUN_LAG, xfade: () => XFADE, gunLag: () => gunLag, wish: () => ({ x: wishVX, z: wishVZ }), vel: () => ({ x: velX, z: velZ, y: vy }), lookY: () => camLookYS, pose: () => POSE, phase: () => walkPhase, lerpK: _lerpK, decayK: _decayK },   /* CL-133 */ handsDbg: { HANDS, roll: () => ({ r: handRollR, l: handRollL }), WRIST, HAND_R: _HAND_R, HAND_L: _HAND_L, wrist: () => ({ r: wristTurnR, l: wristTurnL, needR: wristNeedR, needL: wristNeedL }), gripPoint: (side, out = new THREE.Vector3()) => side === 'L' ? fistPointW(marine.userData.elbowLG, _HAND_L, gripAL, out) : fistPointW(marine.userData.elbowRG, _HAND_R, gripAR, out), gripA: () => ({ r: gripAR, l: gripAL }),   /* CU-100: where each hand closes now (the hand point while it isn't holding) */ knife: () => ({ u: knifeArmU, clip: KNIFE_CLIP, chop: MACHETE_CLIP, dur: knifeSwingDur, places: _kp }), FP_BLADE_PATH, FP_BLADE_AIM, FP_BLADE_DIP, fpBladeDip: () => fpBladeDip, BLADE_BODY, bladeTwist: (u, h) => bladeTwist(u, h),   /* CL-261 */ knifeHold: (u) => { knifeHoldU = u == null ? null : _clamp01(u); if (u != null) { knifeSwingDur = bladeSwingDur(); knifeAnimT = knifeSwingDur * (1 - knifeHoldU) || 0.0001; } }, drawHold: (t) => { drawHoldT = t == null ? null : Math.max(0, t); }, knifeClip: (on) => { if (!on) { _kc = KNIFE_CLIP || _kc; KNIFE_CLIP = null; } else if (_kc) KNIFE_CLIP = _kc; }, drawPlace, gripDownDir, foreChannelDir },   /* CL-122 */ fpReloadLiftDbg: () => FP_RELOAD_LIFT, fpReloadLiftGunDbg: () => FP_RELOAD_LIFT_GUN, fpReloadSetDbg: () => ({ ...fpReloadSet() }),   /* GB-245 */ reloadClipDbg: { clip: () => RELOAD_CLIP, places: () => _rlP, hold: (u) => { reloadHoldU = u == null ? null : _clamp01(u); if (reloading && u != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU)); }, mag: () => (RELOAD_CLIP ? Studio.magAt(RELOAD_CLIP, _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null) }, getSwapDbg: () => ({ swapT, swapDur, fireCooldown }), setSprayDbg: (h, n) => { sprayHeat = h; sprayShot = n | 0; sprayWeapon = currentWeapon; }, setVelDbg: (x, z) => { velX = x; velZ = z; }, resetEconomyDbg: () => resetEconomy(), WEAPON_ORDER, buySuppressor, SUPPRESSOR_PRICE, SHOT_HEARING, SUPPRESSED_HEARING_MUL, SUPPRESSED_DAMAGE_MUL, shotHearingRadius, suppressedDamageMul, heardShotDbg: () => ({ shotsHeard, lastShotNoise }), sawCutTick, sawCutDbg: () => ({ holdT: sawCutHoldT, hearT: sawCutHearT, fuel: sawFuel, heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), buyPistolAuto, PISTOL_AUTO_PRICE, toggleFireMode, toggleHolster, isUnarmed: () => unarmed, setSpareMags, handInGun, takeOutGun, spareMagCount: (w) => (magazineStore[w] && magazineStore[w].spare ? magazineStore[w].spare.length : 0), magazinesDbg: (w) => (magazineStore[w] ? magazineSnapshot(magazineStore, w) : null), setMagazinesDbg: (w, loaded, spare, loaded2 = null) => { const e = magazineStore[w]; if (!e) return false; e.loaded[0].rounds = Math.min(e.size, loaded | 0); if (loaded2 != null && e.loaded[1]) e.loaded[1].rounds = Math.min(e.size, loaded2 | 0); e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w); updateAmmoHud(); return true; }, reloadGainsMagazine, toggleDualWieldDbg: () => toggleDualWield(), setDualOwnedDbg: (w, on = true) => { dualOwned[w] = !!on; if (on && isMagazineWeapon(w) && magazineStore[w]) { issueSecondGun(magazineStore, w); syncMagazine(w); } return !!dualOwned[w]; },   /* CL-188 */   /* GB-137 */ stepFireDbg: (dt) => tryFire(dt), recoilSpan, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
+          grantAllWeapons, KIOSK, openShop, closeShop, buyWeapon, buyAmmo, buyGear, buyBuild, skullValueDbg: () => skullValueTotal, siegeNightDbg: () => siegeNightNow, LATE_CASH_NIGHT, LATE_CASH_FACTOR, LATE_CASH_STEP, lateCashMul, buyExtMag, buyHeavyBarrel, fitWeaponMod, weaponMods, HEAVY_BARREL_PRICE, EXT_MAG_RELOAD_MUL, HEAVY_CLIMB_MUL, HEAVY_SWAP_DUR, HEAVY_MOVE_SPREAD_MUL, recoilClimb, getReloadDbg: () => ({ timer: reloadTimer, anim: reloadAnimDuration, weapon: reloadWeapon }), /* CL-84 */ akimboDbg: { AKIMBO_CARRY, carry: () => akimboCarryW, retreat: () => akimboRetreat },   /* CL-188 */ airDbg: { AIR, pose: () => POSE.airPose, jumpNow: () => { if (!grounded) return false; vy = PHYS.jumpVel; grounded = false; coyoteT = 0; return true; } },   /* CL-210 */ rigSkinDbg: { info: (r) => rigSkinInfo(r || marine), count: () => rigSkinCount(), sync: () => syncRigSkins() },   /* CL-189 */ aoDbg: { AO_DEFAULTS, info: () => marine.userData.aoInfo, bake: (o) => (marine.userData.aoInfo = bakeMarineAO(THREE, marine, { ...marine.userData.ao, ...(o || {}) })) },   /* CL-186 */ zombieFeetDbg: { ZFEET, ZLEAN },   /* CL-187 */ gaitDbg: { GAIT, GAIT_FEEL, GAIT_WEIGHT, UNARMED_ARMS, UNARMED_RUN, WINDED, winded: () => POSE.winded || 0, setWinded: (v) => { POSE.winded = v; }, breaths: () => POSE.breaths || 0, pose: () => POSE, clips: () => MARINE_GAIT, w: () => POSE.gaitW || 0, run: () => POSE.gaitRun || 0, sample: (u, r) => { const g = marineGait(u, r); return g && { ...g }; } },   /* CL-84 */ smoothDbg: { MOVE_FEEL, GUN_LAG, xfade: () => XFADE, gunLag: () => gunLag, wish: () => ({ x: wishVX, z: wishVZ }), vel: () => ({ x: velX, z: velZ, y: vy }), lookY: () => camLookYS, pose: () => POSE, phase: () => walkPhase, lerpK: _lerpK, decayK: _decayK },   /* CL-133 */ handsDbg: { HANDS, roll: () => ({ r: handRollR, l: handRollL }), WRIST, HAND_R: _HAND_R, HAND_L: _HAND_L, wrist: () => ({ r: wristTurnR, l: wristTurnL, needR: wristNeedR, needL: wristNeedL }), gripPoint: (side, out = new THREE.Vector3()) => side === 'L' ? fistPointW(marine.userData.elbowLG, _HAND_L, gripAL, out) : fistPointW(marine.userData.elbowRG, _HAND_R, gripAR, out), gripA: () => ({ r: gripAR, l: gripAL }),   /* CU-100: where each hand closes now (the hand point while it isn't holding) */ knife: () => ({ u: knifeArmU, clip: KNIFE_CLIP, chop: MACHETE_CLIP, dur: knifeSwingDur, places: _kp }), FP_BLADE_PATH, FP_BLADE_AIM, FP_BLADE_DIP, fpBladeDip: () => fpBladeDip, BLADE_BODY, bladeTwist: (u, h) => bladeTwist(u, h),   /* CL-261 */ knifeHold: (u) => { knifeHoldU = u == null ? null : _clamp01(u); if (u != null) { knifeSwingDur = bladeSwingDur(); knifeAnimT = knifeSwingDur * (1 - knifeHoldU) || 0.0001; } }, drawHold: (t) => { drawHoldT = t == null ? null : Math.max(0, t); }, knifeClip: (on) => { if (!on) { _kc = KNIFE_CLIP || _kc; KNIFE_CLIP = null; } else if (_kc) KNIFE_CLIP = _kc; }, drawPlace, gripDownDir, foreChannelDir },   /* CL-122 */ fpReloadLiftDbg: () => FP_RELOAD_LIFT, fpReloadLiftGunDbg: () => FP_RELOAD_LIFT_GUN, fpReloadSetDbg: () => ({ ...fpReloadSet() }),   /* GB-245 */ reloadClipDbg: { clip: () => RELOAD_CLIP, places: () => _rlP, hold: (u) => { reloadHoldU = u == null ? null : _clamp01(u); if (reloading && u != null) reloadTimer = Math.max(0.001, (reloadAnimDuration || 1) * (1 - reloadHoldU)); }, mag: () => (RELOAD_CLIP ? Studio.magAt(RELOAD_CLIP, _clamp01(1 - reloadTimer / Math.max(0.05, reloadAnimDuration || 1))) : null) }, getSwapDbg: () => ({ swapT, swapDur, fireCooldown }), setSprayDbg: (h, n) => { sprayHeat = h; sprayShot = n | 0; sprayWeapon = currentWeapon; }, setVelDbg: (x, z) => { velX = x; velZ = z; }, resetEconomyDbg: () => resetEconomy(), WEAPON_ORDER, buySuppressor, SUPPRESSOR_PRICE, SHOT_HEARING, SUPPRESSED_HEARING_MUL, SUPPRESSED_DAMAGE_MUL, shotHearingRadius, suppressedDamageMul, heardShotDbg: () => ({ shotsHeard, lastShotNoise }), sawCutTick, sawCutDbg: () => ({ holdT: sawCutHoldT, hearT: sawCutHearT, fuel: sawFuel, heat: sawHeat, overheat: sawOverheat, biteT: sawBiteT }), buyPistolAuto, PISTOL_AUTO_PRICE, toggleFireMode, toggleHolster, isUnarmed: () => unarmed, setSpareMags, handInGun, takeOutGun, spareMagCount: (w) => (magazineStore[w] && magazineStore[w].spare ? magazineStore[w].spare.length : 0), magazinesDbg: (w) => (magazineStore[w] ? magazineSnapshot(magazineStore, w) : null), setMagazinesDbg: (w, loaded, spare, loaded2 = null) => { const e = magazineStore[w]; if (!e) return false; e.loaded[0].rounds = Math.min(e.size, loaded | 0); if (loaded2 != null && e.loaded[1]) e.loaded[1].rounds = Math.min(e.size, loaded2 | 0); if (isLooseRoundWeapon(w)) e.spareRounds = 0; e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w); updateAmmoHud(); return true; }, reloadGainsMagazine, toggleDualWieldDbg: () => toggleDualWield(), setDualOwnedDbg: (w, on = true) => { dualOwned[w] = !!on; if (on && isMagazineWeapon(w) && magazineStore[w]) { issueSecondGun(magazineStore, w); syncMagazine(w); } return !!dualOwned[w]; },   /* CL-188 */   /* GB-137 */ stepFireDbg: (dt) => tryFire(dt), recoilSpan, GEAR, WEAPON_PRICE, AMMO_PACK, caliberOf, RESERVE_CAP, RESERVE_CAP_BASE, SPARE_CAP_MULT, START_RESERVE_45, reserveCap, BUILD_UNLOCK_PRICE,
           getWeaponOwned: () => weaponOwned, magArtDbg: () => ({ ..._magArtShown }),   /* CB-301 */ carryGunCopyDbg: (k) => carryGunCopy(k),   /* CB-299 */ revolverPullDbg: () => ({ t: revolverPullT, pull: REVOLVER_PULL, shots: revolverPullShots }),   /* CB-297 */ ammoTypeState: (g) => ammoTypeState(g), buyAmmoType: (g, t) => buyAmmoType(g, t),   /* CB-294 */ ammoDbg: { start: (to) => startAmmoSwitch(to), state: () => ammoSwitch.state(), loaded: () => ({ ...ammoLoaded }), carried: (g = 'shotgun') => ammoCarriedAll(g), carry: (g, t, n) => ammoAddCarried(g, t, n), count: () => ammoSwitchCount, chamber: () => shotgunChamber.type, hulls: () => [...shotgunChamber.hulls], j134: () => j134Breaches((g) => !!((WEAPON_STATS[g] && WEAPON_STATS[g].auto) || FIRE_SELECT[g] || g === 'pistol')), shellShown: () => ammoShellShown, load: (t) => { const k = ammoCanon('shotgun', t); if (!k) return false; ammoLoaded.shotgun = k; applyShotgunLoad(); updateAmmoHud(); return true; } },armLimitsDbg: () => armLimitsNow(), bodyLimitsDbg: () => ({ hits: { ...bodyLimitHits } }),   /* CB-289 */ grantWeaponDbg: (w) => { grantVaultWeapon(w); if (w !== 'pistol' && !weaponInReach(w)) takeOutGun(w); return weaponInReach(w); },   /* CB-296: one gun issued with its ammo (tools/bench.mjs --fp) */ toggleFlashlightDbg: () => { toggleFlashlight(true); return flashlightOn; }, /* CL-327 */ getReserve: () => reserveAmmo, getGearOwned: () => gearOwned, getBuildUnlocked: () => buildUnlocked,
           sawPullDbg: SAW_PULL, /* CL-326 */ getAmmo: () => ammoByWeapon, getPhase: () => phase, setPhase: (p) => { phase = p; }, isShopOpen: () => shopOpen, requestViewToggleDbg: () => requestViewToggle(), viewSwapDbg: (k) => { if (k !== undefined) viewSwapHold = k; return { in: viewSwapIn, out: viewSwapOut, hold: viewSwapHold }; }, /* CL-328 */ getSawFuel: () => sawFuel, sawStartDbg: () => ({ ...sawStart, ...sawStartPose(sawStart) }),
           // Debug-only: survival-rules hooks (health cap, medkits, cash decay, self-damage).
@@ -69566,7 +69987,7 @@ live++;
           setShotView, getShotView: () => shotView,
           skipGrace: () => { hoursSinceMatchStart = Math.max(hoursSinceMatchStart, ZOMBIE_GRACE_HOURS + 0.01); },
           getQuestState: () => quest.read(), learnQuest: place => quest.learn(place), restoreQuestDbg: state => quest.restore(state),
-          wallCullDbg: () => (wallCull ? { cells: wallCull.stats.cells, hidden: wallCull.stats.hidden, tested: wallCull.stats.tested, segments: wallCull.stats.segments, ms: cullStats.wallMs, cull: wallCull } : null),   /* GB-273 */ launcherBrassDbg: () => ({ thrown: launcherBrassThrown, spent: launcherSpent }),   /* GB-133 */ dismemberDbg: (z, part) => detachZombiePart(z, part, 0, 1), MAIMED_HOP_MUL, cloneLean,   /* CL-136 */ slowMoDbg, triggerSlowMo, diveDbg: () => ({ phase: dive.phase, w: dive.w, k: diveTimeScale(dive), meter: dive.meter, cd: dive.cd, slowT: dive.slowT, slowing: slowmoOn(dive), vx: dive.vx, vz: dive.vz, dirX: dive.dirX, dirZ: dive.dirZ, dives: dive.dives, flat: diveFlatW,pose:divePoseFrame,contact:dive.contact }), setDiveMeterDbg: (v) => { dive.meter = Math.max(0, Math.min(1, +v || 0)); }, DIVE,   /* CL-193 */ selectorFlick,   /* GB-167 */   /* CL-137 */ trainingHideWorld, getHidWorld: () => training.hidWorld,   /* CL-138 */ profDbg: PROF, rotateCamera, cullDbg: cullStats, cullShowAll, zombiePoolDbg: () => Object.fromEntries([...zombiePool].map(([k, v]) => [k, v.length])), shadowPruneDbg: () => ({ on: SHADOW_PRUNE, ...shadowPrune }),   /* CL-288 */ sunShadowDbg: () => ({ ...sunShadowStats, deep: sunShadowDeep, tick: sunShadowTick, every: SUN_SHADOW_DEEP_EVERY, move: SUN_SHADOW_DEEP_MOVE }),   /* CL-237 */ zombieHitNightMul,   /* CL-244 */ marineShadowDbg: (full) => ({ builds: marineShadowBuilds, lastDiff: marineShadowDiff, proxy: marineShadowProxy, ms: marineShadowMs, sig: marineShadowSig, bones: marineShadowProxy ? marineShadowProxy.skeleton.bones.length : 0, verts: marineShadowProxy ? marineShadowProxy.geometry.attributes.position.count : 0, warm: marineShadowWarm, retired: marineShadowRetired.length, drawnAt: marineShadowProxy ? marineShadowProxy.userData.drawnAt : null, seen: marineShadowSeen, seenAt: marineShadowSeenAt, builtAt: marineShadowBuiltAt, frame: perfFrame, now: full ? marineShadowNow() : undefined }),   /* CL-241: warm..frame, now */ skinMergeGroup, skinUnmerge,   /* CL-140 */   /* GB-136 */ grenadeArcDbg: () => ({ charging: grenadeCharging, t: grenadeChargeT, visible: grenadeArc.visible, hit: grenadeArc.userData.hit, dots: grenadeArc.userData.dots, launcher: launcherArc.visible, lhit: launcherArc.userData.hit, lstate: launcherArc.userData.state, last: lastGrenadeThrow, n: grenades, cd: grenadeCd }), startGrenadeCharge, releaseGrenadeCharge, GRENADE_THROW, grenadeThrowSpeed, flyArc,   /* GB-134 */ grenadeAnimDbg: () => ({ phase: grenadeAnim.phase, t: grenadeAnim.t, inHand: grenadeAnim.inHand, queued: grenadeAnim.queued, hand: grenadeHand, carriedShown: grenadeInHandN, simple: !!grenadeArc.userData.simple, segs: grenadeArc.userData.segs, release: grenadeReleasePoint().clone(), anim: GRENADE_ANIM, keys: GR_KEY }), holdGrenadeAnim: (phase, t) => { grenadeAnimHold = phase ? { phase, t: t || 0 } : null; if (!phase) { grenadeAnim.phase = ''; setGrenadeInHand(false); } }, setGrenadesDbg: (n) => { grenades = n | 0; updateAmmoHud(); updateCarriedGear(0, true); },   /* CU-97 */ m240Dbg: () => { const b = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null; return { belt: b ? b.belt : null, feedT: b ? (b.feedT || 0) : 0, reserve: reserveAmmo['7.62 belt'] | 0, flash: !!(b && b.mesh.userData.flash && b.mesh.userData.flash.visible), hud: ammoDetailEl ? ammoDetailEl.textContent : '', hudName: ammoWeaponEl ? ammoWeaponEl.textContent : '' }; }, watchmanDbg: () => ({state:mortarMounted?.watchman || null,weight:_watchman.weight,ghost:ghostGroup}), crewDbg: () => ({ mortar: { w: _mcrew.w, phase: _mcrew.load.phase, roundIn: _mcrew.load.round, dropping: _mcrew.load.dropping, dropT: _mcrew.load.dropT, fired: _mcrew.load.fired, round: _mcrew.round, muzzle: _mcrew.muzzle, axis: _mcrew.axis, feet: _mcrew.plant.feet, steps: _mcrew.plant.steps }, m240: { feet: _watchman.plant.feet, steps: _watchman.plant.steps } }),   /* GB-156 */ feedM240, m240MuzzleWorld, M240_FEED_S, stockedLooseCalibers, aimPointDbg: (x, y, z) => { aimTarget.set(x, y, z); }, upgradeAvailableHint, getUpgradeAvailHint: () => upgradeAvailHint, tipOnce, tipsDbg: () => ({ seen: Object.assign({}, tipsSeen || {}), reset: () => { tipsSeen = {}; try { localStorage.removeItem(TIP_STORE); } catch (e) {} } }), placeBannerText: () => placeBannerEl.textContent, bigBannerText: () => bigBannerT.textContent + ' | ' + bigBannerS.textContent,   /* GB-139 */ m240VisDbg: () => ({ carried: carriedM240Mesh.visible, carriedMortar: carriedMortarMesh.visible, carriedGun: carriedM240Mesh, spent: { ...m240Spent }, casings: casings.length, pitchTo: m240PitchTo, muzzle: m240MuzzleWorld, CARRY_M240, CARRY_ARM, ELEV: [M240_ELEV_MIN, M240_ELEV_MAX], setDown: setDownMortar, casingsList: casings }),   /* CL-131 */ brandtGunDbg: () => { const r = roofCrew.find((c) => c.who === 'brandt'); return r && r.gun ? { gun: r.gun, flashed: !!r.gun.userData.flash, shots: r.shots } : null; },   /* GB-138 */ getSimTime: () => simTime,   /* GB-131 */ getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, warrenDbg: () => ({ safe: warrenSafe, lastY: warrenLastY, open: (x, y, z) => belowCamOpen(x, y, z), roof: (x, z) => belowRoofAt(x, z) }), hollowState: () => hollow.state(), belowDbg, applyVaultReward,   /* CL-259 */   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ hordeDbg,   /* GB-94 */ getMedDropCount: () => medDrops.length,   /* GB-94 */ grantHaul, claimHollowHere, markHollowPassage: (b) => { markHollowPassage(b); return passageMark; },   /* CU-80, CU-72 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof, mapRevealDbg: () => ({ seen: (x, z) => mapReveal.seen(x, z), count: () => mapReveal.count(), found: () => mapReveal.found(), step: () => stepMapReveal() }),   /* CU-198 */   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-116 */ lightPoolDbg: { pool: () => ensureLightPool(), update: () => updateLightPool() }, /* CL-115 */ trainingDbg: { act: (a) => trainingDoAction(a), hitDbg: (i, p, wreck) => trainingHitTarget(i, p, false, null, wreck), wreck: () => training.wreck,   /* CB-250 */ round: (p) => trainingRound(p),   /* GB-163: a round by hand (shots, tests) */ start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
+          wallCullDbg: () => (wallCull ? { cells: wallCull.stats.cells, hidden: wallCull.stats.hidden, tested: wallCull.stats.tested, segments: wallCull.stats.segments, ms: cullStats.wallMs, cull: wallCull } : null),   /* GB-273 */ launcherBrassDbg: () => ({ thrown: launcherBrassThrown, spent: launcherSpent }),   /* GB-133 */ dismemberDbg: (z, part) => detachZombiePart(z, part, 0, 1), MAIMED_HOP_MUL, cloneLean,   /* CL-136 */ slowMoDbg, triggerSlowMo, diveDbg: () => ({ phase: dive.phase, w: dive.w, k: diveTimeScale(dive), meter: dive.meter, cd: dive.cd, slowT: dive.slowT, slowing: slowmoOn(dive), vx: dive.vx, vz: dive.vz, dirX: dive.dirX, dirZ: dive.dirZ, dives: dive.dives, flat: diveFlatW,pose:divePoseFrame,contact:dive.contact }), setDiveMeterDbg: (v) => { dive.meter = Math.max(0, Math.min(1, +v || 0)); }, DIVE,   /* CL-193 */ selectorFlick,   /* GB-167 */   /* CL-137 */ trainingHideWorld, getHidWorld: () => training.hidWorld,   /* CL-138 */ profDbg: PROF, rotateCamera, cullDbg: cullStats, cullShowAll, zombiePoolDbg: () => Object.fromEntries([...zombiePool].map(([k, v]) => [k, v.length])), shadowPruneDbg: () => ({ on: SHADOW_PRUNE, ...shadowPrune }),   /* CL-288 */ sunShadowDbg: () => ({ ...sunShadowStats, deep: sunShadowDeep, tick: sunShadowTick, every: SUN_SHADOW_DEEP_EVERY, move: SUN_SHADOW_DEEP_MOVE }),   /* CL-237 */ zombieHitNightMul,   /* CL-244 */ marineShadowDbg: (full) => ({ builds: marineShadowBuilds, lastDiff: marineShadowDiff, proxy: marineShadowProxy, ms: marineShadowMs, sig: marineShadowSig, bones: marineShadowProxy ? marineShadowProxy.skeleton.bones.length : 0, verts: marineShadowProxy ? marineShadowProxy.geometry.attributes.position.count : 0, warm: marineShadowWarm, retired: marineShadowRetired.length, drawnAt: marineShadowProxy ? marineShadowProxy.userData.drawnAt : null, seen: marineShadowSeen, seenAt: marineShadowSeenAt, builtAt: marineShadowBuiltAt, frame: perfFrame, now: full ? marineShadowNow() : undefined }),   /* CL-241: warm..frame, now */ skinMergeGroup, skinUnmerge,   /* CL-140 */   /* GB-136 */ grenadeArcDbg: () => ({ charging: grenadeCharging, t: grenadeChargeT, visible: grenadeArc.visible, hit: grenadeArc.userData.hit, dots: grenadeArc.userData.dots, launcher: launcherArc.visible, lhit: launcherArc.userData.hit, lstate: launcherArc.userData.state, last: lastGrenadeThrow, n: grenades, cd: grenadeCd }), startGrenadeCharge, releaseGrenadeCharge, GRENADE_THROW, grenadeThrowSpeed, flyArc,   /* GB-134 */ grenadeAnimDbg: () => ({ phase: grenadeAnim.phase, t: grenadeAnim.t, inHand: grenadeAnim.inHand, queued: grenadeAnim.queued, hand: grenadeHand, carriedShown: grenadeInHandN, simple: !!grenadeArc.userData.simple, segs: grenadeArc.userData.segs, release: grenadeReleasePoint().clone(), anim: GRENADE_ANIM, keys: GR_KEY }), holdGrenadeAnim: (phase, t) => { grenadeAnimHold = phase ? { phase, t: t || 0 } : null; if (!phase) { grenadeAnim.phase = ''; setGrenadeInHand(false); } }, setGrenadesDbg: (n) => { grenades = n | 0; updateAmmoHud(); updateCarriedGear(0, true); },   /* CU-97 */ m240Dbg: () => { const b = mortarMounted && mortarMounted.type === 'm240' ? mortarMounted : null; return { belt: b ? b.belt : null, feedT: b ? (b.feedT || 0) : 0, reserve: reserveAmmo['7.62 belt'] | 0, flash: !!(b && b.mesh.userData.flash && b.mesh.userData.flash.visible), hud: ammoDetailEl ? ammoDetailEl.textContent : '', hudName: ammoWeaponEl ? ammoWeaponEl.textContent : '' }; }, watchmanDbg: () => ({state:mortarMounted?.watchman || null,weight:_watchman.weight,ghost:ghostGroup}), crewDbg: () => ({ mortar: { w: _mcrew.w, phase: _mcrew.load.phase, roundIn: _mcrew.load.round, dropping: _mcrew.load.dropping, dropT: _mcrew.load.dropT, fired: _mcrew.load.fired, round: _mcrew.round, muzzle: _mcrew.muzzle, axis: _mcrew.axis, feet: _mcrew.plant.feet, steps: _mcrew.plant.steps }, m240: { feet: _watchman.plant.feet, steps: _watchman.plant.steps } }),   /* GB-156 */ feedM240, m240MuzzleWorld, M240_FEED_S, stockedLooseCalibers, aimPointDbg: (x, y, z) => { aimTarget.set(x, y, z); }, upgradeAvailableHint, getUpgradeAvailHint: () => upgradeAvailHint, tipOnce, tipsDbg: () => ({ seen: Object.assign({}, tipsSeen || {}), reset: () => { tipsSeen = {}; try { localStorage.removeItem(TIP_STORE); } catch (e) {} } }), placeBannerText: () => placeBannerEl.textContent, bigBannerText: () => bigBannerT.textContent + ' | ' + bigBannerS.textContent,   /* GB-139 */ m240VisDbg: () => ({ carried: carriedM240Mesh.visible, carriedMortar: carriedMortarMesh.visible, carriedGun: carriedM240Mesh, spent: { ...m240Spent }, casings: casings.length, pitchTo: m240PitchTo, muzzle: m240MuzzleWorld, CARRY_M240, CARRY_ARM, ELEV: [M240_ELEV_MIN, M240_ELEV_MAX], setDown: setDownMortar, casingsList: casings }),   /* CL-131 */ brandtGunDbg: () => { const r = roofCrew.find((c) => c.who === 'brandt'); return r && r.gun ? { gun: r.gun, flashed: !!r.gun.userData.flash, shots: r.shots } : null; },   /* GB-138 */ getSimTime: () => simTime,   /* GB-131 */ getDebugTouched: () => debugTouched, resetGame, ensureCrew,   /* CL-105 */ makeMarine,   /* CL-94 */ carryDbg, carryPreview, updateCarriedGear, CARRY_SLOTS, carryGripWorld,   /* CC-350 */ drawDbg, updateMarineDraw, drawPreview,   /* CL-90 */ dressMarine, DRESS, getMarine: () => marine, dressGuns, getGunFurniture: () => gunFurniture,   /* CL-97 */ buildWarren, layoutWarren, WARREN_THEMES, HOLLOW, enterHollow, leaveHollow, warrenDbg: () => ({ safe: warrenSafe, lastY: warrenLastY, open: (x, y, z) => belowCamOpen(x, y, z), roof: (x, z) => belowRoofAt(x, z) }), hollowState: () => hollow.state(), belowDbg, applyVaultReward,   /* CL-259 */   /* GB-107 */ stirDbg,   /* GB-108 */ heartDbg,   /* GB-92 */ runePistolDbg,   /* GB-119 */ hordeDbg,   /* GB-94 */ getMedDropCount: () => medDrops.length,   /* GB-94 */ grantHaul, claimHollowHere, markHollowPassage: (b) => { markHollowPassage(b); return passageMark; },   /* CU-80, CU-72 */ hqLadderAt, stepHqLadder, onHqRoof: () => onHqRoof, mapRevealDbg: () => ({ seen: (x, z) => mapReveal.seen(x, z), count: () => mapReveal.count(), found: () => mapReveal.found(), step: () => stepMapReveal() }),   /* CU-198 */   /* CL-99 */ pitSignal, setPitWord, setPitSilenced, updatePitSignal, setOnTowerDeckDbg: (v) => { onTowerDeck = !!v; }, /* CL-107 */ firstPeople, updateFirstPeople, caveSealSolids, /* CL-112 */ buildHeart, HEART, /* CL-81 */ letGoDbg, /* CL-116 */ lightPoolDbg: { pool: () => ensureLightPool(), update: () => updateLightPool() }, /* CL-115 */ trainingDbg: { act: (a) => trainingDoAction(a), hitDbg: (i, p, wreck) => trainingHitTarget(i, p, false, null, wreck), wreck: () => training.wreck,   /* CB-250 */ round: (p) => trainingRound(p),   /* GB-163: a round by hand (shots, tests) */ start: () => startTraining(), enter: () => enterTraining(), leave: () => leaveTraining(), state: () => training, tg: () => training.tg,
             action: () => trainingActionTarget(), spawn: (k, n) => trainingSpawn(k, n), clear: () => trainingClear(), layout: () => trainingLayout(), clearLayout: () => trainingLayoutClear(), layoutPieces: () => training.layout || [], layoutRefused: () => training.layoutRefused || [], alive: () => trainingAlive(), blackout: () => trainingBlackout(), hitTarget: (i, pt) => trainingHitTarget(i, pt, !!pt), deployNow: (k, n) => trainingDeployNow(k, n), tunnel: () => training.tunnel, pops: () => training.pops, clearSkulls: () => trainingClearSkulls(),   /* CL-171 */
             update: (dt) => updateTraining(dt), panel: () => (ensureTrainingUi(), training.panel), openPanel: () => openTrainingPanel(), round: (p) => trainingRound(p), TRAINING,
             lights: () => ({ on: !training.lightsOff, night: isNight, room: training.tg ? training.tg.lightsOn() : null }), toggleLights: () => toggleTrainingLights() /* CU-94 */, char: () => training.char }, flameDbg: { particles: () => flameParticles, stages: FLAME_STAGES, nozzleJet: () => _nozzleJet, heat: (i) => _targetFlameHeat[i] || 0, igniteS: BURN_IGNITE_S, burnS: BURN_DURATION_S, clear: clearFlameStream, resetHeat: resetTargetFlameHeat }, /* CL-114 */ stockNoticeDbg: { arrivals: (n) => stockArrivals(n), queue: (n) => queueStockNotice(n), state: () => ({ t: stockNotice.t, hold: stockNotice.hold, guns: stockNotice.guns.slice(), shown: stockNotice.shown.slice(), visible: !!(stockNotice.el && stockNotice.el.classList.contains('show')) }), tick: (dt) => updateStockNotice(dt), show: (guns) => showStockNotice(guns), setDay: (n) => { day = n; }, NIGHT: GUN_STOCK_NIGHT }, modsOwnAllDbg: () => { for (const w in OPTIC_OPTIONS) { opticOwned[w] = opticOwned[w] || {}; for (const k of OPTIC_OPTIONS[w]) opticOwned[w][k] = true; } for (const w in SUPPRESSOR_PRICE) suppressorOwned[w] = true; return true; }, /* CL-332 */ armoryFinishDbg: { list: (k) => armoryFinishes(k), paint: (k, key) => paintArmoryGun(k, key) }, /* CL-113 */ armoryDbg: { mods: (w) => armoryMods(w), fit: (w, id, on) => fitArmoryMod(w, id, on), inReach: () => weaponsInReach(), picture: (k) => armoryPicture(k, true), pics: () => ({ drawn: armoryPics.drawn, cached: armoryPics.cache.size, ok: !!armoryPics.r }), rack: () => (house.armoryRack ? house.armoryRack.children.map((g) => g.userData.rackKind).filter(Boolean) : null), refreshRack: () => refreshArmoryRack(true), stored: () => armoryStoredKinds(), bigtex: () => bigtexWheel, ui: () => armoryUI, owned: () => ({ suppressor: { ...suppressorOwned }, auto: pistolAutoOwned, tank: sawTankUpgraded }) }, /* CL-83 */ nightRimDbg, /* CL-108, CL-109 */ historyProps, storyPropInReach, /* CL-111 */ runeFinishDbg: { unlocked: () => runeFinishUnlocked(), unlock: () => unlockRuneFinish(), lock: () => { runeFinish.unlocked = false; try { localStorage.removeItem(RUNE_FINISH_STORE); } catch (_) {} }, isGunFinishKey: (k) => isGunFinishKey(k), tex: () => runeFinish.tex, glow: (l) => updateRuneFinishGlow(l), state: () => runeFinish, furniture: () => gunFurniture, readWardrobe: () => readWardrobe(), KEY: RUNE_FINISH_KEY }, /* CL-78 */ guardianBossDbg: { rigOf: (z) => (z && z.mesh && z.mesh.userData.bossRig) || null, update: (dt) => updateGuardianBossRigs(dt), BOSS_RIG }, /* CL-93 */ rabbitDbg: { ensure: () => ensureRabbitMound(), state: () => rabbitMound, update: (dt) => updateRabbitMound(dt), wake: () => wakeKillerRabbit(), hit: (a, b) => rabbitMoundHit(a.x, a.y, a.z, b.x, b.y, b.z), give: () => { ensureRabbitMound(); rabbitMound.holy = true; rabbitMound.reliquary.userData.grenade.visible = false; }, ready: () => holyGrenadeReady(), throwG: () => { grenadeCd = 0; throwGrenade(); }, reset: () => resetRabbitMound(), distToPath: (x, z) => distToPath(x, z), RABBIT }, /* CL-92 */ lightningDbg: { yank: () => bootsYankPress(), yankState: () => ({ ...bootsYank, inReach: bootsYankInReach() }), skeleton: () => POI.mast && POI.mast.skeleton, strike: (k) => strikeLightning(k || null), update: (dt) => updateLightning(dt), state: () => lightning, odds: (o) => { lightning.odds = o || null; }, boots: () => ensureInsulatedBoots(), wear: (p) => wearInsulatedBoots(p || localPlayer), /* CL-178 */ mast: () => ({ ladder: mastLadder(), climb: mastClimb, high: onMastHigh(), perch: POI.mast ? POI.mast.perch : null, PERCH: MAST_PERCH }), climbMast: (y) => { const L = mastLadder(); if (!L) return false; mastClimb.on = true; climbingTower = true; player.position.set(L.x, Math.min(L.top, L.foot + (y || 0)), L.z); velX = 0; velZ = 0; vy = 0; return true; }, leaveMast: () => letGoOfMast(), /* CL-179 */ fall: () => mastFall, smoke: () => zapSmoke, ladderNow: () => ladderNow(), holster: () => ({ ...ladderHolster, unarmed }), /* CL-180 */ limbs: () => _lad.st, handTargets: () => _lad.hand, LADDER_GRIP, worn: (p) => insulatedBootsOn(p || localPlayer), reset: () => resetLightning(), marine: () => worldMarine, bolt: (x, z, hold) => { showBolt({ x, y: sampleHeight(x, z), z }); if (hold) { lightning.boltT = 1e9; lightning.flashT = 0; lightning.flashEl.style.opacity = '0'; } }, LIGHTNING, BOOTS_HEX }, /* CL-76 */ fogNightDbg: { active: () => fogNightActive(), k: () => fogNightK, force: (v) => { fogNightForce = v; }, step: (dt) => updateDayNight(dt), apply: (dt) => applyFogNight(dt), FOG_NIGHT }, /* CL-75 */ makeSurvivorFigure, SURVIVOR_LOOK, resolveTreeCollisionsDbg: (dt) => resolveTreeCollisions(dt),   /* CL-80 */ boatRig, getExtractionBoat: () => extractionBoat, /* CL-143 */ trainingBuildDbg: { refusal: (x, z, gx, gz, kind) => { const was = placeMode; if (kind) placeMode = kind; try { return placeRefusal(x, z, gx, gz); } finally { placeMode = was; } }, area: () => training.tg && training.tg.build, gridIndex }, /* CL-142 */ makeCargoPlane, insertionDbg: { begin: () => beginMarineInsertion(), rig: () => marineInsertion, ordersEl: () => ordersCardEl }, BOARD_HOLD_S, boardingDbg: () => ({ holdT: boardHoldT, pending: !!boardPending, reach: boardingReach(), won, gameOver, hot: !!matchStats.hotExtraction, state: extractionState }),   /* CL-73 */ setGunSuppressor, SUPPRESSOR,   /* CL-95 */
@@ -69807,6 +70228,27 @@ live++;
         }
       } catch (err) {
         console.info('Grave Shift: effect warm-up skipped a step.', err);
+      }
+      // GP-20133: real cached hot/cold FP materials and all smoke slots, before the first magazine.
+      if (typeof renderer.compileAsync === 'function') {
+        ensureLightPool();
+        setFlashWarm(true);
+        try {
+          const {warmWeaponFire, warmPooledEffect} = await import('./game/fire-warmup.js');
+          const receipt = await warmWeaponFire({THREE, scene, heat:barrelHeat, guns:weaponMeshes, offhand:offhandMeshes,
+            viewmodel:ensureViewmodel(true) ? viewmodel : null, furniture:gunFurniture, compile:() => compileForLiveTarget(scene),
+            draw:async tag => { if (window.DWOpening?.gpuGate) await window.DWOpening.gpuGate('warm'); warmFrame(tag); },
+            settle:() => renderer.backend?.device?.queue?.onSubmittedWorkDone?.()});
+          _warmStats.trace.push('fire-resources:' + receipt.meshes + '/' + receipt.viewRecords);
+          // GP-20133: a shot through foliage also needs the pooled leaf's two transparent side passes.
+          const leafReceipt = await warmPooledEffect({THREE, scene, key:'falling-leaves',
+            create:() => new THREE.Mesh(leafGeo, leafMatPool()), compile:() => compileForLiveTarget(scene),
+            draw:async tag => { if (window.DWOpening?.gpuGate) await window.DWOpening.gpuGate('warm'); warmFrame(tag); },
+            settle:() => renderer.backend?.device?.queue?.onSubmittedWorkDone?.()});
+          _warmStats.trace.push('fire-leaf-resources:' + leafReceipt.meshes);
+
+        } catch (e) { console.info('Grave Shift: fire resource warm-up skipped.', e); }
+        finally { setFlashWarm(false); warmFrame('fire-clean'); }
       }
     }
     const _warmZombies = [], _warmSkinAnchors = [];

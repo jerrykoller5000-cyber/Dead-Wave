@@ -1,0 +1,27 @@
+{
+  "before": "9447d96516fe948d7ec0b4e0f8124eb785abb64650d5dfb9a0cccba1f2b1631d",
+  "after": "fc77e63592f6a1450754266212bc2b963f201778a0bb65599ba28e8b8c7377b2",
+  "outsideUnchanged": true,
+  "patches": [
+    [
+      "    function fireLauncherShell() {",
+      "    const LAUNCHER_GRAVITY = 16; // GP-20137 / J153-25: metres per second squared\r\n    function fireLauncherShell() {"
+    ],
+    [
+      "vy: dir.y * spd, // straight at the cursor: a 40 mm, not a lob",
+      "vy: dir.y * spd, // same muzzle aim and speed; gravity bends the flight"
+    ],
+    [
+      "direct: true // no gravity; the mortar's shell is the one that arcs",
+      "gravity: LAUNCHER_GRAVITY // GP-20137 / J153-25: existing world gravity, launcher-only exact integration"
+    ],
+    [
+      "if (!g.direct) g.vy -= 16 * dt; // the 40 mm flies the aim; grenades and mortar shells still fall",
+      "const launcherGravity = g.originWeapon === 'launcher' ? (g.gravity || 0) : 0;\r\n        if (!g.direct && !launcherGravity) g.vy -= 16 * dt; // preserve hand-grenade and mortar integration"
+    ],
+    [
+      "g.pos.y += g.vy * dt;\r\n        g.pos.z += g.vz * dt;",
+      "g.pos.y += g.vy * dt - 0.5 * launcherGravity * dt * dt;\r\n        g.pos.z += g.vz * dt;\r\n        if (launcherGravity) g.vy -= launcherGravity * dt;"
+    ]
+  ]
+}

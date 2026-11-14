@@ -1,0 +1,3550 @@
+{
+  "phase": "after",
+  "start": {
+    "studio/weapon-sidearms.js": "529017944e86c818c4d74303d0d97344e3f164df87ad280ec202e942cfa0c093",
+    "studio/weapon-longarms.js": "5c7882531e7840a8a418c90ea2f4f76e7f71d57b0a05177d7a4c24cc88c5f7b7",
+    "studio/weapon-attachments.js": "e82ec1f65ce0afce33b17a34efb0ad991381b7d8def6e6d8ae43e58735d2fcc9",
+    "game/viewmodel.js": "a81d0a67b625fae826dfb4df265a4b75bd5b25850a94f06c2bc0e3f50fec13b0",
+    "game/viewmodel-poses.js": "2d69a764204632f84ad7aba0353aafc64644301a2e166fc5c78d71827ebb85d1",
+    "game/viewmodel-fit.js": "f1dac3893c06c12cc261f4823f3355e0a25f2836259bc89d674f4e3c8c486e78",
+    "studio/hand-contacts.js": "0dd1bc329916581ece0c6fa9a179daa80e0800c6abee8eb99a6fea03a86daa89",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "index.html": "fc77e63592f6a1450754266212bc2b963f201778a0bb65599ba28e8b8c7377b2"
+  },
+  "end": {
+    "studio/weapon-sidearms.js": "529017944e86c818c4d74303d0d97344e3f164df87ad280ec202e942cfa0c093",
+    "studio/weapon-longarms.js": "5c7882531e7840a8a418c90ea2f4f76e7f71d57b0a05177d7a4c24cc88c5f7b7",
+    "studio/weapon-attachments.js": "e82ec1f65ce0afce33b17a34efb0ad991381b7d8def6e6d8ae43e58735d2fcc9",
+    "game/viewmodel.js": "a81d0a67b625fae826dfb4df265a4b75bd5b25850a94f06c2bc0e3f50fec13b0",
+    "game/viewmodel-poses.js": "2d69a764204632f84ad7aba0353aafc64644301a2e166fc5c78d71827ebb85d1",
+    "game/viewmodel-fit.js": "f1dac3893c06c12cc261f4823f3355e0a25f2836259bc89d674f4e3c8c486e78",
+    "studio/hand-contacts.js": "0dd1bc329916581ece0c6fa9a179daa80e0800c6abee8eb99a6fea03a86daa89",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "index.html": "fc77e63592f6a1450754266212bc2b963f201778a0bb65599ba28e8b8c7377b2"
+  },
+  "changed": [],
+  "records": [
+    {
+      "name": "hip-standard",
+      "ext": false,
+      "light": "noon",
+      "file": "hip-standard-noon.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.007202012957104983,
+          -198.5798908776588,
+          -640.5524203587282
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.7203917022579948,
+        0.06498542473507049,
+        0.0018189987336473647,
+        0,
+        0.06501087743132315,
+        0.7201096585153934,
+        0.020156497587987893,
+        0,
+        1.1104614861726042e-16,
+        0.02023840782787946,
+        -0.7230359781609449,
+        0,
+        -0.20615978614806313,
+        -0.21217784088376226,
+        -0.6418700952148586,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 666,
+        "renderFrame": 666
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "hip-standard",
+      "ext": false,
+      "light": "overcast",
+      "file": "hip-standard-overcast.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.007202012957104983,
+          -198.5798908776588,
+          -640.5524203587282
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.7203917022579948,
+        0.06498542473507049,
+        0.0018189987336473647,
+        0,
+        0.06501087743132315,
+        0.7201096585153934,
+        0.020156497587987893,
+        0,
+        1.1104614861726042e-16,
+        0.02023840782787946,
+        -0.7230359781609449,
+        0,
+        -0.20615978614806313,
+        -0.21217784088376226,
+        -0.6418700952148586,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 689,
+        "renderFrame": 689
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "hip-standard",
+      "ext": false,
+      "light": "dusk",
+      "file": "hip-standard-dusk.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.007202012957104983,
+          -198.5798908776588,
+          -640.5524203587282
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.7203917022579948,
+        0.06498542473507049,
+        0.0018189987336473647,
+        0,
+        0.06501087743132315,
+        0.7201096585153934,
+        0.020156497587987893,
+        0,
+        1.1104614861726042e-16,
+        0.02023840782787946,
+        -0.7230359781609449,
+        0,
+        -0.20615978614806313,
+        -0.21217784088376226,
+        -0.6418700952148586,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 711,
+        "renderFrame": 711
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "hip-standard",
+      "ext": false,
+      "light": "night",
+      "file": "hip-standard-night.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.007202012957104983,
+          -198.5798908776588,
+          -640.5524203587282
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.7203917022579948,
+        0.06498542473507049,
+        0.0018189987336473647,
+        0,
+        0.06501087743132315,
+        0.7201096585153934,
+        0.020156497587987893,
+        0,
+        1.1104614861726042e-16,
+        0.02023840782787946,
+        -0.7230359781609449,
+        0,
+        -0.20615978614806313,
+        -0.21217784088376226,
+        -0.6418700952148586,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 1.7338826403929692
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 733,
+        "renderFrame": 733
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "side-standard",
+      "ext": false,
+      "light": "noon",
+      "file": "side-standard-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.0007025032816927485,
+          -198.58002957649325,
+          -640.5512278805368
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5499961267072201,
+          0.24082422884827917,
+          0.04837683060185671
+        ],
+        "q": [
+          0.0412495884026902,
+          0.5639368173333494,
+          0.02822036175522496,
+          0.8243041603042809
+        ]
+      },
+      "gun": [
+        -0.7203917022579933,
+        0.06499512553141265,
+        0.0014310281431260089,
+        0,
+        0.06501087743132303,
+        0.7202171539602527,
+        0.01585735865655312,
+        0,
+        8.830364642869702e-17,
+        0.015921798425711176,
+        -0.7231439104365401,
+        0,
+        -0.20615978614806318,
+        -0.2149959266221467,
+        -0.6422665627108957,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 766,
+        "renderFrame": 766
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "side-standard",
+      "ext": false,
+      "light": "overcast",
+      "file": "side-standard-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.0007025032816927485,
+          -198.58002957649325,
+          -640.5512278805368
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5499961267072201,
+          0.24082422884827917,
+          0.04837683060185671
+        ],
+        "q": [
+          0.0412495884026902,
+          0.5639368173333494,
+          0.02822036175522496,
+          0.8243041603042809
+        ]
+      },
+      "gun": [
+        -0.7203917022579933,
+        0.06499512553141265,
+        0.0014310281431260089,
+        0,
+        0.06501087743132303,
+        0.7202171539602527,
+        0.01585735865655312,
+        0,
+        8.830364642869702e-17,
+        0.015921798425711176,
+        -0.7231439104365401,
+        0,
+        -0.20615978614806318,
+        -0.2149959266221467,
+        -0.6422665627108957,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 789,
+        "renderFrame": 789
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "side-standard",
+      "ext": false,
+      "light": "dusk",
+      "file": "side-standard-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.0007025032816927485,
+          -198.58002957649325,
+          -640.5512278805368
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5499961267072201,
+          0.24082422884827917,
+          0.04837683060185671
+        ],
+        "q": [
+          0.0412495884026902,
+          0.5639368173333494,
+          0.02822036175522496,
+          0.8243041603042809
+        ]
+      },
+      "gun": [
+        -0.7203917022579933,
+        0.06499512553141265,
+        0.0014310281431260089,
+        0,
+        0.06501087743132303,
+        0.7202171539602527,
+        0.01585735865655312,
+        0,
+        8.830364642869702e-17,
+        0.015921798425711176,
+        -0.7231439104365401,
+        0,
+        -0.20615978614806318,
+        -0.2149959266221467,
+        -0.6422665627108957,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 810,
+        "renderFrame": 810
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "side-standard",
+      "ext": false,
+      "light": "night",
+      "file": "side-standard-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.0007025032816927485,
+          -198.58002957649325,
+          -640.5512278805368
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5499961267072201,
+          0.24082422884827917,
+          0.04837683060185671
+        ],
+        "q": [
+          0.0412495884026902,
+          0.5639368173333494,
+          0.02822036175522496,
+          0.8243041603042809
+        ]
+      },
+      "gun": [
+        -0.7203917022579933,
+        0.06499512553141265,
+        0.0014310281431260089,
+        0,
+        0.06501087743132303,
+        0.7202171539602527,
+        0.01585735865655312,
+        0,
+        8.830364642869702e-17,
+        0.015921798425711176,
+        -0.7231439104365401,
+        0,
+        -0.20615978614806318,
+        -0.2149959266221467,
+        -0.6422665627108957,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 0.9053089020156759
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 832,
+        "renderFrame": 832
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "back-standard",
+      "ext": false,
+      "light": "noon",
+      "file": "back-standard-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.003627681694014392,
+          -198.57933288572536,
+          -640.5520057857823
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.34208797232681243,
+          0.15512005464316134,
+          0.2411431046955972
+        ],
+        "q": [
+          0.09933466539753062,
+          -0.09933466539753062,
+          -0.009966711079379185,
+          0.9900332889206209
+        ]
+      },
+      "gun": [
+        -0.7203917022579923,
+        0.06498541593919471,
+        0.0018193129473387335,
+        0,
+        0.06501087743132294,
+        0.7201095610474587,
+        0.020159979419720135,
+        0,
+        8.814680158601712e-17,
+        0.020241903808779788,
+        -0.7230358802969286,
+        0,
+        -0.2061597861480632,
+        -0.21217555932594429,
+        -0.6418697730546787,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 865,
+        "renderFrame": 865
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "back-standard",
+      "ext": false,
+      "light": "overcast",
+      "file": "back-standard-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.003627681694014392,
+          -198.57933288572536,
+          -640.5520057857823
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.34208797232681243,
+          0.15512005464316134,
+          0.2411431046955972
+        ],
+        "q": [
+          0.09933466539753062,
+          -0.09933466539753062,
+          -0.009966711079379185,
+          0.9900332889206209
+        ]
+      },
+      "gun": [
+        -0.7203917022579923,
+        0.06498541593919471,
+        0.0018193129473387335,
+        0,
+        0.06501087743132294,
+        0.7201095610474587,
+        0.020159979419720135,
+        0,
+        8.814680158601712e-17,
+        0.020241903808779788,
+        -0.7230358802969286,
+        0,
+        -0.2061597861480632,
+        -0.21217555932594429,
+        -0.6418697730546787,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 887,
+        "renderFrame": 887
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "back-standard",
+      "ext": false,
+      "light": "dusk",
+      "file": "back-standard-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.003627681694014392,
+          -198.57933288572536,
+          -640.5520057857823
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.34208797232681243,
+          0.15512005464316134,
+          0.2411431046955972
+        ],
+        "q": [
+          0.09933466539753062,
+          -0.09933466539753062,
+          -0.009966711079379185,
+          0.9900332889206209
+        ]
+      },
+      "gun": [
+        -0.7203917022579923,
+        0.06498541593919471,
+        0.0018193129473387335,
+        0,
+        0.06501087743132294,
+        0.7201095610474587,
+        0.020159979419720135,
+        0,
+        8.814680158601712e-17,
+        0.020241903808779788,
+        -0.7230358802969286,
+        0,
+        -0.2061597861480632,
+        -0.21217555932594429,
+        -0.6418697730546787,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 907,
+        "renderFrame": 907
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "back-standard",
+      "ext": false,
+      "light": "night",
+      "file": "back-standard-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.003627681694014392,
+          -198.57933288572536,
+          -640.5520057857823
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.34208797232681243,
+          0.15512005464316134,
+          0.2411431046955972
+        ],
+        "q": [
+          0.09933466539753062,
+          -0.09933466539753062,
+          -0.009966711079379185,
+          0.9900332889206209
+        ]
+      },
+      "gun": [
+        -0.7203917022579923,
+        0.06498541593919471,
+        0.0018193129473387335,
+        0,
+        0.06501087743132294,
+        0.7201095610474587,
+        0.020159979419720135,
+        0,
+        8.814680158601712e-17,
+        0.020241903808779788,
+        -0.7230358802969286,
+        0,
+        -0.2061597861480632,
+        -0.21217555932594429,
+        -0.6418697730546787,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 0.9032723488997347
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 928,
+        "renderFrame": 928
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "below-standard",
+      "ext": false,
+      "light": "noon",
+      "file": "below-standard-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.001362537200617615,
+          -198.58076091488618,
+          -640.5504178364488
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.27076349992118204,
+          0.703009729071752,
+          -0.3389387880409256
+        ],
+        "q": [
+          -0.45035926880694593,
+          0.3009211363333468,
+          -0.16439396602553005,
+          0.8243771119105122
+        ]
+      },
+      "gun": [
+        -0.7203917022579892,
+        0.06499513184995723,
+        0.0014307411356137179,
+        0,
+        0.06501087743132267,
+        0.7202172239766446,
+        0.01585417829907281,
+        0,
+        8.814680158601678e-17,
+        0.015918605144167892,
+        -0.7231439807374586,
+        0,
+        -0.20615978614806332,
+        -0.21499801207217967,
+        -0.6422668550316254,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 961,
+        "renderFrame": 961
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "below-standard",
+      "ext": false,
+      "light": "overcast",
+      "file": "below-standard-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.001362537200617615,
+          -198.58076091488618,
+          -640.5504178364488
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.27076349992118204,
+          0.703009729071752,
+          -0.3389387880409256
+        ],
+        "q": [
+          -0.45035926880694593,
+          0.3009211363333468,
+          -0.16439396602553005,
+          0.8243771119105122
+        ]
+      },
+      "gun": [
+        -0.7203917022579892,
+        0.06499513184995723,
+        0.0014307411356137179,
+        0,
+        0.06501087743132267,
+        0.7202172239766446,
+        0.01585417829907281,
+        0,
+        8.814680158601678e-17,
+        0.015918605144167892,
+        -0.7231439807374586,
+        0,
+        -0.20615978614806332,
+        -0.21499801207217967,
+        -0.6422668550316254,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 984,
+        "renderFrame": 984
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "below-standard",
+      "ext": false,
+      "light": "dusk",
+      "file": "below-standard-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.001362537200617615,
+          -198.58076091488618,
+          -640.5504178364488
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.27076349992118204,
+          0.703009729071752,
+          -0.3389387880409256
+        ],
+        "q": [
+          -0.45035926880694593,
+          0.3009211363333468,
+          -0.16439396602553005,
+          0.8243771119105122
+        ]
+      },
+      "gun": [
+        -0.7203917022579892,
+        0.06499513184995723,
+        0.0014307411356137179,
+        0,
+        0.06501087743132267,
+        0.7202172239766446,
+        0.01585417829907281,
+        0,
+        8.814680158601678e-17,
+        0.015918605144167892,
+        -0.7231439807374586,
+        0,
+        -0.20615978614806332,
+        -0.21499801207217967,
+        -0.6422668550316254,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1007,
+        "renderFrame": 1007
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "below-standard",
+      "ext": false,
+      "light": "night",
+      "file": "below-standard-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.001362537200617615,
+          -198.58076091488618,
+          -640.5504178364488
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.27076349992118204,
+          0.703009729071752,
+          -0.3389387880409256
+        ],
+        "q": [
+          -0.45035926880694593,
+          0.3009211363333468,
+          -0.16439396602553005,
+          0.8243771119105122
+        ]
+      },
+      "gun": [
+        -0.7203917022579892,
+        0.06499513184995723,
+        0.0014307411356137179,
+        0,
+        0.06501087743132267,
+        0.7202172239766446,
+        0.01585417829907281,
+        0,
+        8.814680158601678e-17,
+        0.015918605144167892,
+        -0.7231439807374586,
+        0,
+        -0.20615978614806332,
+        -0.21499801207217967,
+        -0.6422668550316254,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 0.9790648985400223
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1031,
+        "renderFrame": 1031
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "reload-standard",
+      "ext": false,
+      "light": "noon",
+      "file": "reload-standard-noon.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.014278731107237014,
+          -198.57762058653245,
+          -640.5572359422202
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.709881790069806,
+        -0.09897739734043097,
+        -0.09727249256371148,
+        0,
+        -0.117826798273359,
+        0.6977325152288681,
+        0.14992265228310178,
+        0,
+        0.07331649611439446,
+        0.1629829158981552,
+        -0.7008936291545228,
+        0,
+        -0.1600437053146855,
+        -0.12992487857190416,
+        -0.6002308112504486,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1065,
+        "renderFrame": 1065
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": 0.25,
+      "viewHandPlace": "pouch",
+      "viewMagState": "hand",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 1.7625000000000002,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "name": "reload-standard",
+      "ext": false,
+      "light": "overcast",
+      "file": "reload-standard-overcast.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.014278731107237014,
+          -198.57762058653245,
+          -640.5572359422202
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.709881790069806,
+        -0.09897739734043097,
+        -0.09727249256371148,
+        0,
+        -0.117826798273359,
+        0.6977325152288681,
+        0.14992265228310178,
+        0,
+        0.07331649611439446,
+        0.1629829158981552,
+        -0.7008936291545228,
+        0,
+        -0.1600437053146855,
+        -0.12992487857190416,
+        -0.6002308112504486,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1088,
+        "renderFrame": 1088
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": 0.25,
+      "viewHandPlace": "pouch",
+      "viewMagState": "hand",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 1.7625000000000002,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "name": "reload-standard",
+      "ext": false,
+      "light": "dusk",
+      "file": "reload-standard-dusk.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.014278731107237014,
+          -198.57762058653245,
+          -640.5572359422202
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.709881790069806,
+        -0.09897739734043097,
+        -0.09727249256371148,
+        0,
+        -0.117826798273359,
+        0.6977325152288681,
+        0.14992265228310178,
+        0,
+        0.07331649611439446,
+        0.1629829158981552,
+        -0.7008936291545228,
+        0,
+        -0.1600437053146855,
+        -0.12992487857190416,
+        -0.6002308112504486,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1112,
+        "renderFrame": 1112
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": 0.25,
+      "viewHandPlace": "pouch",
+      "viewMagState": "hand",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 1.7625000000000002,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "name": "reload-standard",
+      "ext": false,
+      "light": "night",
+      "file": "reload-standard-night.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.014278731107237014,
+          -198.57762058653245,
+          -640.5572359422202
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.709881790069806,
+        -0.09897739734043097,
+        -0.09727249256371148,
+        0,
+        -0.117826798273359,
+        0.6977325152288681,
+        0.14992265228310178,
+        0,
+        0.07331649611439446,
+        0.1629829158981552,
+        -0.7008936291545228,
+        0,
+        -0.1600437053146855,
+        -0.12992487857190416,
+        -0.6002308112504486,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 1.5577771949816626
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1136,
+        "renderFrame": 1136
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": 0.25,
+      "viewHandPlace": "pouch",
+      "viewMagState": "hand",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 1.7625000000000002,
+        "anim": 2.35,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "name": "hip-extended",
+      "ext": true,
+      "light": "noon",
+      "file": "hip-extended-noon.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          0.007406708676481247,
+          -198.58080214860712,
+          -640.5516077359797
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.7203917022579923,
+        0.06499508825942844,
+        0.001432719979479846,
+        0,
+        0.06501087743132293,
+        0.7202167409458586,
+        0.015876106055742904,
+        0,
+        8.830364642869687e-17,
+        0.01594062200896807,
+        -0.7231434957437738,
+        0,
+        -0.2061597861480632,
+        -0.21498363344624555,
+        -0.6422648395252588,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1171,
+        "renderFrame": 1171
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "hip-extended",
+      "ext": true,
+      "light": "overcast",
+      "file": "hip-extended-overcast.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          0.007406708676481247,
+          -198.58080214860712,
+          -640.5516077359797
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.7203917022579923,
+        0.06499508825942844,
+        0.001432719979479846,
+        0,
+        0.06501087743132293,
+        0.7202167409458586,
+        0.015876106055742904,
+        0,
+        8.830364642869687e-17,
+        0.01594062200896807,
+        -0.7231434957437738,
+        0,
+        -0.2061597861480632,
+        -0.21498363344624555,
+        -0.6422648395252588,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1195,
+        "renderFrame": 1195
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "hip-extended",
+      "ext": true,
+      "light": "dusk",
+      "file": "hip-extended-dusk.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          0.007406708676481247,
+          -198.58080214860712,
+          -640.5516077359797
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.7203917022579923,
+        0.06499508825942844,
+        0.001432719979479846,
+        0,
+        0.06501087743132293,
+        0.7202167409458586,
+        0.015876106055742904,
+        0,
+        8.830364642869687e-17,
+        0.01594062200896807,
+        -0.7231434957437738,
+        0,
+        -0.2061597861480632,
+        -0.21498363344624555,
+        -0.6422648395252588,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1218,
+        "renderFrame": 1218
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "hip-extended",
+      "ext": true,
+      "light": "night",
+      "file": "hip-extended-night.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          0.007406708676481247,
+          -198.58080214860712,
+          -640.5516077359797
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.7203917022579923,
+        0.06499508825942844,
+        0.001432719979479846,
+        0,
+        0.06501087743132293,
+        0.7202167409458586,
+        0.015876106055742904,
+        0,
+        8.830364642869687e-17,
+        0.01594062200896807,
+        -0.7231434957437738,
+        0,
+        -0.2061597861480632,
+        -0.21498363344624555,
+        -0.6422648395252588,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 1.7434075310261934
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1241,
+        "renderFrame": 1241
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "side-extended",
+      "ext": true,
+      "light": "noon",
+      "file": "side-extended-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.005980507670091364,
+          -198.57835101895245,
+          -640.5555052823024
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5500231929432705,
+          0.23784644155057605,
+          0.04808863092351279
+        ],
+        "q": [
+          0.0412495884026902,
+          0.5639368173333494,
+          0.02822036175522496,
+          0.8243041603042809
+        ]
+      },
+      "gun": [
+        -0.7203917022579933,
+        0.06498546023728306,
+        0.0018177299411650087,
+        0,
+        0.06501087743132303,
+        0.7201100519187799,
+        0.020142437978084016,
+        0,
+        8.830364642869701e-17,
+        0.02022429108374306,
+        -0.7230363731630103,
+        0,
+        -0.20615978614806318,
+        -0.21218705380948555,
+        -0.6418713960776656,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1274,
+        "renderFrame": 1274
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "side-extended",
+      "ext": true,
+      "light": "overcast",
+      "file": "side-extended-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.005980507670091364,
+          -198.57835101895245,
+          -640.5555052823024
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5500231929432705,
+          0.23784644155057605,
+          0.04808863092351279
+        ],
+        "q": [
+          0.0412495884026902,
+          0.5639368173333494,
+          0.02822036175522496,
+          0.8243041603042809
+        ]
+      },
+      "gun": [
+        -0.7203917022579933,
+        0.06498546023728306,
+        0.0018177299411650087,
+        0,
+        0.06501087743132303,
+        0.7201100519187799,
+        0.020142437978084016,
+        0,
+        8.830364642869701e-17,
+        0.02022429108374306,
+        -0.7230363731630103,
+        0,
+        -0.20615978614806318,
+        -0.21218705380948555,
+        -0.6418713960776656,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1298,
+        "renderFrame": 1298
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "side-extended",
+      "ext": true,
+      "light": "dusk",
+      "file": "side-extended-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.005980507670091364,
+          -198.57835101895245,
+          -640.5555052823024
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5500231929432705,
+          0.23784644155057605,
+          0.04808863092351279
+        ],
+        "q": [
+          0.0412495884026902,
+          0.5639368173333494,
+          0.02822036175522496,
+          0.8243041603042809
+        ]
+      },
+      "gun": [
+        -0.7203917022579933,
+        0.06498546023728306,
+        0.0018177299411650087,
+        0,
+        0.06501087743132303,
+        0.7201100519187799,
+        0.020142437978084016,
+        0,
+        8.830364642869701e-17,
+        0.02022429108374306,
+        -0.7230363731630103,
+        0,
+        -0.20615978614806318,
+        -0.21218705380948555,
+        -0.6418713960776656,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1320,
+        "renderFrame": 1320
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "side-extended",
+      "ext": true,
+      "light": "night",
+      "file": "side-extended-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          -0.005980507670091364,
+          -198.57835101895245,
+          -640.5555052823024
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.5500231929432705,
+          0.23784644155057605,
+          0.04808863092351279
+        ],
+        "q": [
+          0.0412495884026902,
+          0.5639368173333494,
+          0.02822036175522496,
+          0.8243041603042809
+        ]
+      },
+      "gun": [
+        -0.7203917022579933,
+        0.06498546023728306,
+        0.0018177299411650087,
+        0,
+        0.06501087743132303,
+        0.7201100519187799,
+        0.020142437978084016,
+        0,
+        8.830364642869701e-17,
+        0.02022429108374306,
+        -0.7230363731630103,
+        0,
+        -0.20615978614806318,
+        -0.21218705380948555,
+        -0.6418713960776656,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 0.9098941144326766
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1343,
+        "renderFrame": 1343
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "back-extended",
+      "ext": true,
+      "light": "noon",
+      "file": "back-extended-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.004609046783794905,
+          -198.5801027217883,
+          -640.5526664719403
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.34208219969697873,
+          0.15806076121949408,
+          0.2417101589580617
+        ],
+        "q": [
+          0.09933466539753062,
+          -0.09933466539753062,
+          -0.009966711079379185,
+          0.9900332889206209
+        ]
+      },
+      "gun": [
+        -0.7203917022579931,
+        0.06499509937418455,
+        0.0014322156717404258,
+        0,
+        0.06501087743132301,
+        0.7202168641095258,
+        0.015870517773824283,
+        0,
+        8.814680158601723e-17,
+        0.015935011017870412,
+        -0.7231436194079428,
+        0,
+        -0.20615978614806318,
+        -0.21498729782964984,
+        -0.6422653531829141,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1379,
+        "renderFrame": 1379
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "back-extended",
+      "ext": true,
+      "light": "overcast",
+      "file": "back-extended-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.004609046783794905,
+          -198.5801027217883,
+          -640.5526664719403
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.34208219969697873,
+          0.15806076121949408,
+          0.2417101589580617
+        ],
+        "q": [
+          0.09933466539753062,
+          -0.09933466539753062,
+          -0.009966711079379185,
+          0.9900332889206209
+        ]
+      },
+      "gun": [
+        -0.7203917022579931,
+        0.06499509937418455,
+        0.0014322156717404258,
+        0,
+        0.06501087743132301,
+        0.7202168641095258,
+        0.015870517773824283,
+        0,
+        8.814680158601723e-17,
+        0.015935011017870412,
+        -0.7231436194079428,
+        0,
+        -0.20615978614806318,
+        -0.21498729782964984,
+        -0.6422653531829141,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1401,
+        "renderFrame": 1401
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "back-extended",
+      "ext": true,
+      "light": "dusk",
+      "file": "back-extended-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.004609046783794905,
+          -198.5801027217883,
+          -640.5526664719403
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.34208219969697873,
+          0.15806076121949408,
+          0.2417101589580617
+        ],
+        "q": [
+          0.09933466539753062,
+          -0.09933466539753062,
+          -0.009966711079379185,
+          0.9900332889206209
+        ]
+      },
+      "gun": [
+        -0.7203917022579931,
+        0.06499509937418455,
+        0.0014322156717404258,
+        0,
+        0.06501087743132301,
+        0.7202168641095258,
+        0.015870517773824283,
+        0,
+        8.814680158601723e-17,
+        0.015935011017870412,
+        -0.7231436194079428,
+        0,
+        -0.20615978614806318,
+        -0.21498729782964984,
+        -0.6422653531829141,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1426,
+        "renderFrame": 1426
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "back-extended",
+      "ext": true,
+      "light": "night",
+      "file": "back-extended-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.004609046783794905,
+          -198.5801027217883,
+          -640.5526664719403
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          -0.34208219969697873,
+          0.15806076121949408,
+          0.2417101589580617
+        ],
+        "q": [
+          0.09933466539753062,
+          -0.09933466539753062,
+          -0.009966711079379185,
+          0.9900332889206209
+        ]
+      },
+      "gun": [
+        -0.7203917022579931,
+        0.06499509937418455,
+        0.0014322156717404258,
+        0,
+        0.06501087743132301,
+        0.7202168641095258,
+        0.015870517773824283,
+        0,
+        8.814680158601723e-17,
+        0.015935011017870412,
+        -0.7231436194079428,
+        0,
+        -0.20615978614806318,
+        -0.21498729782964984,
+        -0.6422653531829141,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 0.9076500009345454
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1448,
+        "renderFrame": 1448
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "below-extended",
+      "ext": true,
+      "light": "noon",
+      "file": "below-extended-noon.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.0007310872556068231,
+          -198.57830108071434,
+          -640.5571677864181
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.27078224427209924,
+          0.7014088477729353,
+          -0.33640437494349684
+        ],
+        "q": [
+          -0.45035926880694593,
+          0.3009211363333468,
+          -0.16439396602553005,
+          0.8243771119105122
+        ]
+      },
+      "gun": [
+        -0.7203917022579994,
+        0.06498544688821702,
+        0.0018182071194739263,
+        0,
+        0.0650108774313236,
+        0.7201099039965119,
+        0.020147725636208685,
+        0,
+        8.84604912713775e-17,
+        0.020229600229397675,
+        -0.7230362246396286,
+        0,
+        -0.206159786148063,
+        -0.2121835889313357,
+        -0.6418709068413735,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1482,
+        "renderFrame": 1482
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "below-extended",
+      "ext": true,
+      "light": "overcast",
+      "file": "below-extended-overcast.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.0007310872556068231,
+          -198.57830108071434,
+          -640.5571677864181
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.27078224427209924,
+          0.7014088477729353,
+          -0.33640437494349684
+        ],
+        "q": [
+          -0.45035926880694593,
+          0.3009211363333468,
+          -0.16439396602553005,
+          0.8243771119105122
+        ]
+      },
+      "gun": [
+        -0.7203917022579994,
+        0.06498544688821702,
+        0.0018182071194739263,
+        0,
+        0.0650108774313236,
+        0.7201099039965119,
+        0.020147725636208685,
+        0,
+        8.84604912713775e-17,
+        0.020229600229397675,
+        -0.7230362246396286,
+        0,
+        -0.206159786148063,
+        -0.2121835889313357,
+        -0.6418709068413735,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1507,
+        "renderFrame": 1507
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "below-extended",
+      "ext": true,
+      "light": "dusk",
+      "file": "below-extended-dusk.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.0007310872556068231,
+          -198.57830108071434,
+          -640.5571677864181
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.27078224427209924,
+          0.7014088477729353,
+          -0.33640437494349684
+        ],
+        "q": [
+          -0.45035926880694593,
+          0.3009211363333468,
+          -0.16439396602553005,
+          0.8243771119105122
+        ]
+      },
+      "gun": [
+        -0.7203917022579994,
+        0.06498544688821702,
+        0.0018182071194739263,
+        0,
+        0.0650108774313236,
+        0.7201099039965119,
+        0.020147725636208685,
+        0,
+        8.84604912713775e-17,
+        0.020229600229397675,
+        -0.7230362246396286,
+        0,
+        -0.206159786148063,
+        -0.2121835889313357,
+        -0.6418709068413735,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1533,
+        "renderFrame": 1533
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "below-extended",
+      "ext": true,
+      "light": "night",
+      "file": "below-extended-night.png",
+      "inspection": true,
+      "camera": {
+        "p": [
+          0.0007310872556068231,
+          -198.57830108071434,
+          -640.5571677864181
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 42
+      },
+      "space": {
+        "p": [
+          0.27078224427209924,
+          0.7014088477729353,
+          -0.33640437494349684
+        ],
+        "q": [
+          -0.45035926880694593,
+          0.3009211363333468,
+          -0.16439396602553005,
+          0.8243771119105122
+        ]
+      },
+      "gun": [
+        -0.7203917022579994,
+        0.06498544688821702,
+        0.0018182071194739263,
+        0,
+        0.0650108774313236,
+        0.7201099039965119,
+        0.020147725636208685,
+        0,
+        8.84604912713775e-17,
+        0.020229600229397675,
+        -0.7230362246396286,
+        0,
+        -0.206159786148063,
+        -0.2121835889313357,
+        -0.6418709068413735,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 0.9835129361961279
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1559,
+        "renderFrame": 1559
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 2.35,
+        "weapon": null
+      }
+    },
+    {
+      "name": "reload-extended",
+      "ext": true,
+      "light": "noon",
+      "file": "reload-extended-noon.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.015039410897651002,
+          -198.57796762498614,
+          -640.558995034185
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.7098817900698106,
+        -0.09954731683030284,
+        -0.09668916539990619,
+        0,
+        -0.11782679827335976,
+        0.6986014982207448,
+        0.1458197900113008,
+        0,
+        0.07331649611439496,
+        0.15886125160711212,
+        -0.7018393071080384,
+        0,
+        -0.1600437053146854,
+        -0.13260152390195898,
+        -0.6007186953903527,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1595,
+        "renderFrame": 1595
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": 0.25,
+      "viewHandPlace": "pouch",
+      "viewMagState": "hand",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 2.203125,
+        "anim": 2.9375,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "name": "reload-extended",
+      "ext": true,
+      "light": "overcast",
+      "file": "reload-extended-overcast.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.015039410897651002,
+          -198.57796762498614,
+          -640.558995034185
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.7098817900698106,
+        -0.09954731683030284,
+        -0.09668916539990619,
+        0,
+        -0.11782679827335976,
+        0.6986014982207448,
+        0.1458197900113008,
+        0,
+        0.07331649611439496,
+        0.15886125160711212,
+        -0.7018393071080384,
+        0,
+        -0.1600437053146854,
+        -0.13260152390195898,
+        -0.6007186953903527,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1619,
+        "renderFrame": 1619
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": 0.25,
+      "viewHandPlace": "pouch",
+      "viewMagState": "hand",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 2.203125,
+        "anim": 2.9375,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "name": "reload-extended",
+      "ext": true,
+      "light": "dusk",
+      "file": "reload-extended-dusk.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.015039410897651002,
+          -198.57796762498614,
+          -640.558995034185
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.7098817900698106,
+        -0.09954731683030284,
+        -0.09668916539990619,
+        0,
+        -0.11782679827335976,
+        0.6986014982207448,
+        0.1458197900113008,
+        0,
+        0.07331649611439496,
+        0.15886125160711212,
+        -0.7018393071080384,
+        0,
+        -0.1600437053146854,
+        -0.13260152390195898,
+        -0.6007186953903527,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1643,
+        "renderFrame": 1643
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": 0.25,
+      "viewHandPlace": "pouch",
+      "viewMagState": "hand",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 2.203125,
+        "anim": 2.9375,
+        "weapon": "sniper"
+      }
+    },
+    {
+      "name": "reload-extended",
+      "ext": true,
+      "light": "night",
+      "file": "reload-extended-night.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          -0.015039410897651002,
+          -198.57796762498614,
+          -640.558995034185
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 59.99999999999999
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.7098817900698106,
+        -0.09954731683030284,
+        -0.09668916539990619,
+        0,
+        -0.11782679827335976,
+        0.6986014982207448,
+        0.1458197900113008,
+        0,
+        0.07331649611439496,
+        0.15886125160711212,
+        -0.7018393071080384,
+        0,
+        -0.1600437053146854,
+        -0.13260152390195898,
+        -0.6007186953903527,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 1.5607473487538408
+      },
+      "exposure": 1,
+      "renderStamp": {
+        "frame": 1667,
+        "renderFrame": 1667
+      },
+      "viewKey": "sniper",
+      "first": true,
+      "viewActive": true,
+      "viewReloadU": 0.25,
+      "viewHandPlace": "pouch",
+      "viewMagState": "hand",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": "ext",
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": false
+      },
+      "reload": {
+        "timer": 2.203125,
+        "anim": 2.9375,
+        "weapon": "sniper"
+      }
+    }
+  ],
+  "errors": [],
+  "mode": "Native eye hip/aim/reload plus explicitly rotated eye-space inspection; native four light presets and task lamp at night; after reuses recorded camera/view-space/exposure exactly."
+}

@@ -1,0 +1,41 @@
+(node:8580) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./review/GP-20140/node-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ glove cigarette has index/middle surface contact without penetration (38.4352ms)
+✔ bare cigarette has index/middle surface contact without penetration (16.3334ms)
+(node:30896) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./review/GP-20140/node-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ laser and click wait until the physical digit contact, then flip once (13.7455ms)
+✔ flashlight still flips its own circuit at contact (19.4148ms)
+✔ repeated or cross-circuit input cannot replace an in-flight press (32.7398ms)
+✔ second press after return can switch laser back off (17.0814ms)
+✔ mounted mortar retains the approved immediate path (16.7691ms)
+✔ missing equipment makes no change or press (14.4169ms)
+✔ debug/immediate and unavailable-press fallbacks retain existing behavior (13.5193ms)
+✔ an unfitted module never causes a press in empty air (10.9213ms)
+(node:27812) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./review/GP-20140/node-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ drag settles at lips before exhale; ash is flicked with hand lowered (0.8281ms)
+✔ cycle joins continuously without a hand teleport or ember pop (0.3106ms)
+✔ all timeline weights remain finite and within bounds through a full cigarette (140.5101ms)
+✔ discarded cigarette rests on the ground instead of hovering two centimetres above it (10.7977ms)
+(node:18296) ExperimentalWarning: `--experimental-loader` may be removed in the future; instead use `register()`:
+--import 'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("./review/GP-20140/node-loader.mjs", pathToFileURL("./"));'
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ bored after 5s, pack after 25s, each lit cigarette lasts 60s (1.2446ms)
+✔ movement cancels immediately and drops only one lit cigarette (0.3038ms)
+✔ pause freezes the cigarette; death, menus and reset remove it without fire (0.7722ms)
+✔ frame-rate independent timing across repeated cigarettes (13.1803ms)
+✔ props show extraction and smoking, emitted smoke and landing fire, all clear on reset (13.7862ms)
+✔ cigarette, pack, lighter and spark remain hidden before and after the smoke phases (3.5748ms)
+✔ long sessions keep discarded cigarette objects bounded (10.2055ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 330.173

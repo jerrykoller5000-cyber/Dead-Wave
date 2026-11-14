@@ -1,0 +1,42 @@
+[
+  {
+    "light": "noon",
+    "phase": "before",
+    "greenPixels": 0
+  },
+  {
+    "light": "noon",
+    "phase": "after-sights-v2",
+    "greenPixels": 17
+  },
+  {
+    "light": "overcast",
+    "phase": "before",
+    "greenPixels": 0
+  },
+  {
+    "light": "overcast",
+    "phase": "after-sights-v2",
+    "greenPixels": 23
+  },
+  {
+    "light": "dusk",
+    "phase": "before",
+    "greenPixels": 0
+  },
+  {
+    "light": "dusk",
+    "phase": "after-sights-v2",
+    "greenPixels": 23
+  },
+  {
+    "light": "night",
+    "phase": "before",
+    "greenPixels": 0
+  },
+  {
+    "light": "night",
+    "phase": "after-sights-v2",
+    "greenPixels": 19
+  }
+]

@@ -1,0 +1,1 @@
+import assert from'node:assert/strict';import{spawn}from'node:child_process';assert(process.env.DW_GAME_TEST_TOKEN);for(const args of [['review/GT-20106/models-final-checks.mjs'],['review/GT-20106/model-contracts.mjs']]){const p=spawn(process.execPath,args,{env:process.env,stdio:'inherit'});assert.equal(await new Promise(r=>p.on('close',r)),0,args.join(' '));}

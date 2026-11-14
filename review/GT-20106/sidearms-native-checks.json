@@ -1,0 +1,47 @@
+{
+  "start": {
+    "studio/weapon-sidearms.js": "e54234974da762743ac7342958159c534ec8c2fa05ff971aae2cdbb6a45dd703",
+    "studio/weapon-longarms.js": "36e92bcbdaf1d93428cd0c8b978b0972d0a1c7d004821a037fb891b090e9ff06",
+    "studio/weapon-casings.js": "bbb863711356d6296ef16c2f334b90bbd4eab760aff60f5d5e2474785ce39de2",
+    "game/viewmodel.js": "a81d0a67b625fae826dfb4df265a4b75bd5b25850a94f06c2bc0e3f50fec13b0",
+    "game/viewmodel-poses.js": "2d69a764204632f84ad7aba0353aafc64644301a2e166fc5c78d71827ebb85d1",
+    "game/viewmodel-fit.js": "f1dac3893c06c12cc261f4823f3355e0a25f2836259bc89d674f4e3c8c486e78",
+    "studio/hand-contacts.js": "0dd1bc329916581ece0c6fa9a179daa80e0800c6abee8eb99a6fea03a86daa89",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "tools/tests/t333.js": "6d63696c352e5e93cf776f508f6ae3299fd7d0f8edacaa057cc1e75b45daab26",
+    "tools/tests/tcl334b.js": "50903890cccd3144a1ee67f5ada012fe3025eda0a7f0037c9fc847f3f8240b7d",
+    "tools/tests/tcb294b.js": "8221a68f0882daf8a2b29317ffc319f9d1933f4e71f1f3ea2146f6914124bd33"
+  },
+  "end": {
+    "studio/weapon-sidearms.js": "e54234974da762743ac7342958159c534ec8c2fa05ff971aae2cdbb6a45dd703",
+    "studio/weapon-longarms.js": "36e92bcbdaf1d93428cd0c8b978b0972d0a1c7d004821a037fb891b090e9ff06",
+    "studio/weapon-casings.js": "bbb863711356d6296ef16c2f334b90bbd4eab760aff60f5d5e2474785ce39de2",
+    "game/viewmodel.js": "a81d0a67b625fae826dfb4df265a4b75bd5b25850a94f06c2bc0e3f50fec13b0",
+    "game/viewmodel-poses.js": "2d69a764204632f84ad7aba0353aafc64644301a2e166fc5c78d71827ebb85d1",
+    "game/viewmodel-fit.js": "f1dac3893c06c12cc261f4823f3355e0a25f2836259bc89d674f4e3c8c486e78",
+    "studio/hand-contacts.js": "0dd1bc329916581ece0c6fa9a179daa80e0800c6abee8eb99a6fea03a86daa89",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "tools/tests/t333.js": "6d63696c352e5e93cf776f508f6ae3299fd7d0f8edacaa057cc1e75b45daab26",
+    "tools/tests/tcl334b.js": "50903890cccd3144a1ee67f5ada012fe3025eda0a7f0037c9fc847f3f8240b7d",
+    "tools/tests/tcb294b.js": "8221a68f0882daf8a2b29317ffc319f9d1933f4e71f1f3ea2146f6914124bd33"
+  },
+  "changed": [],
+  "rows": [
+    {
+      "test": "t333",
+      "pass": 16,
+      "fail": 0
+    },
+    {
+      "test": "tcl334b",
+      "pass": 4,
+      "fail": 1
+    },
+    {
+      "test": "tcb294b",
+      "pass": 25,
+      "fail": 0
+    }
+  ],
+  "exit": 0
+}

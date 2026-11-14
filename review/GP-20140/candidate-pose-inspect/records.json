@@ -1,0 +1,739 @@
+{
+  "stage": "candidate-pose-inspect",
+  "indexHash": "faca8dba6a8bcba1a7ca70d944f9412d9f886ad21437ec0753a50bbeca9e49ec",
+  "moduleHash": "b161e10fcfdb2132a86df09e32e9e00e421f9521e89d189a255fd132368418f2",
+  "rows": [
+    {
+      "beat": "draw",
+      "view": "hands",
+      "light": "noon",
+      "file": "draw-hands-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.144299999982109,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 176,
+            "mb": 47.962
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -24.984359317413265,
+        "y": -198.78799889005674,
+        "z": -630.0643651088989,
+        "tx": -26.073684643683784,
+        "ty": -199.05027595570914,
+        "tz": -631.9380611470434,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "hands",
+      "light": "overcast",
+      "file": "draw-hands-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.144299999982109,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 176,
+            "mb": 47.962
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.18160451737417,
+        "y": -198.7925286513241,
+        "z": -630.3689748948534,
+        "tx": -26.087356429253,
+        "ty": -199.00480732514868,
+        "tz": -631.8712226934686,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "hands",
+      "light": "dusk",
+      "file": "draw-hands-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.144299999982109,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 176,
+            "mb": 47.962
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.228126084003488,
+        "y": -198.7935599150218,
+        "z": -630.4374354441894,
+        "tx": -26.090469003030794,
+        "ty": -198.9944557535505,
+        "tz": -631.8560059818772,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "hands",
+      "light": "night",
+      "file": "draw-hands-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.144299999982109,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 176,
+            "mb": 47.962
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.256160087070942,
+        "y": -198.7941750696304,
+        "z": -630.4781126215615,
+        "tx": -26.092325670833738,
+        "ty": -198.98828098274404,
+        "tz": -631.8469291276416,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "three",
+      "light": "noon",
+      "file": "draw-three-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.144299999982109,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 176,
+            "mb": 47.962
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -24.21244901268428,
+        "y": -198.14497904468243,
+        "z": -629.5399498837269,
+        "tx": -26.056770443451484,
+        "ty": -199.10656691410688,
+        "tz": -632.0208572162394,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "three",
+      "light": "overcast",
+      "file": "draw-three-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.144299999982109,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 176,
+            "mb": 47.962
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.78770129508496,
+        "y": -197.74183946783515,
+        "z": -629.271819634823,
+        "tx": -26.04279520349956,
+        "ty": -199.15306005718148,
+        "tz": -632.0892209127053,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "three",
+      "light": "dusk",
+      "file": "draw-three-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.144299999982109,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 176,
+            "mb": 47.962
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.600212373803313,
+        "y": -197.53702535415673,
+        "z": -629.1732105388425,
+        "tx": -26.0365683989758,
+        "ty": -199.17377553073445,
+        "tz": -632.1196810247231,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "three",
+      "light": "night",
+      "file": "draw-three-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.144299999982109,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 176,
+            "mb": 47.962
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.5490007282755,
+        "y": -197.47801882935147,
+        "z": -629.1484109087955,
+        "tx": -26.034854643428847,
+        "ty": -199.17947689129167,
+        "tz": -632.1280643272233,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "hands",
+      "light": "noon",
+      "file": "flick-hands-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.89429999998214,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 461,
+            "mb": 47.962
+          },
+          "span": 7.666666666666687,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -24.832471816001153,
+        "y": -198.72673987068816,
+        "z": -630.2304001713459,
+        "tx": -25.950077432400004,
+        "ty": -199.12604991911695,
+        "tz": -631.910331807808,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "hands",
+      "light": "overcast",
+      "file": "flick-hands-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.89429999998214,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 461,
+            "mb": 47.962
+          },
+          "span": 7.666666666666687,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.08808561583186,
+        "y": -198.8756349138577,
+        "z": -630.525742125257,
+        "tx": -25.936101564325803,
+        "ty": -199.11510400349425,
+        "tz": -631.8650900427408,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "hands",
+      "light": "dusk",
+      "file": "flick-hands-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.89429999998214,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 461,
+            "mb": 47.962
+          },
+          "span": 7.666666666666687,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.185929062266926,
+        "y": -198.92330974999268,
+        "z": -630.6476267529072,
+        "tx": -25.930590568041044,
+        "ty": -199.11078778499464,
+        "tz": -631.8472502063975,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "hands",
+      "light": "night",
+      "file": "flick-hands-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.89429999998214,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 461,
+            "mb": 47.962
+          },
+          "span": 7.666666666666687,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.217310076575856,
+        "y": -198.9374421458624,
+        "z": -630.6878334004879,
+        "tx": -25.928800530305587,
+        "ty": -199.10938582542335,
+        "tz": -631.841455613442,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "three",
+      "light": "noon",
+      "file": "flick-three-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.89429999998214,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 461,
+            "mb": 47.962
+          },
+          "span": 7.666666666666687,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -24.035978592844433,
+        "y": -198.06425927881745,
+        "z": -629.4851478863495,
+        "tx": -25.990726158814017,
+        "ty": -199.15788604744438,
+        "tz": -632.0419172035015,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "three",
+      "light": "overcast",
+      "file": "flick-three-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.89429999998214,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 461,
+            "mb": 47.962
+          },
+          "span": 7.666666666666687,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.652731479044117,
+        "y": -197.63753962695765,
+        "z": -629.2132153979638,
+        "tx": -26.01007052500849,
+        "ty": -199.1730365768437,
+        "tz": -632.1045375191841,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "three",
+      "light": "dusk",
+      "file": "flick-three-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.89429999998214,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 461,
+            "mb": 47.962
+          },
+          "span": 7.666666666666687,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.534474694481837,
+        "y": -197.49068753020433,
+        "z": -629.1400650960447,
+        "tx": -26.01609260579823,
+        "ty": -199.1777530773035,
+        "tz": -632.1240318048241,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "three",
+      "light": "night",
+      "file": "flick-three-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.89429999998214,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2081,
+            "capacity": 537,
+            "frames": 461,
+            "mb": 47.962
+          },
+          "span": 7.666666666666687,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.50230797991464,
+        "y": -197.44942476743742,
+        "z": -629.1210513501544,
+        "tx": -26.017738444890185,
+        "ty": -199.17904210033473,
+        "tz": -632.1293596073721,
+        "fov": 40
+      }
+    }
+  ],
+  "built": {
+    "id": "marine",
+    "name": "The marine (live)",
+    "kind": "marine",
+    "variant": null,
+    "mode": null,
+    "center": {
+      "x": -25.965392163648872,
+      "y": -199.18105039903554,
+      "z": -632.1302319491731
+    },
+    "size": {
+      "x": 0.7584252227302599,
+      "y": 1.638121258786441,
+      "z": 0.9047558520057919
+    },
+    "yaw": 0,
+    "info": {
+      "meshes": 224,
+      "drawables": 224,
+      "tris": 195984,
+      "points": 0,
+      "segments": 0,
+      "materials": 88
+    }
+  },
+  "move": {
+    "weapon": "pistol",
+    "unarmed": true,
+    "reloading": false,
+    "crouching": false,
+    "grounded": true,
+    "dive": "idle",
+    "vault": false,
+    "akimbo": false,
+    "mortar": null,
+    "carried": false,
+    "zoom": false,
+    "ots": false,
+    "training": true,
+    "wake": false,
+    "grenades": 6,
+    "medkits": 0,
+    "hp": 100,
+    "god": true,
+    "paused": false,
+    "move": "smoke",
+    "loop": false,
+    "treadmill": false,
+    "running": false,
+    "holds": {},
+    "error": null,
+    "blade": "machete",
+    "camo": "m81"
+  },
+  "rollLifecycle": {
+    "before": {
+      "r": -1.4835298641951802,
+      "l": 0
+    },
+    "after": {
+      "r": 0,
+      "l": 0
+    }
+  },
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 0 shader variants compiled, 0 bodies pooled, 0 warm frames, lights visible 24/24, shadows true | post 8ms pools 0ms compile 0ms warm frame 0ms | "
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 57ms | trees 218ms | player+weapons+zombie types 1259ms | foliage scattered 2321ms | POIs+minimap+foliage chunks 3812ms | contact shading + rest of setup 4023ms | post + pools + compile + warm frame 4040ms | ready 4041ms"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 0 variants after 0 warm frames | "
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 0 warm frames, 133 variants | "
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":8.7,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.49,\"frames\":8,\"over50\":1,\"over100\":1,\"worst\":200},\"loading\":{\"at\":0.49,\"seconds\":8.21,\"frames\":42,\"over50\":16,\"over100\":9,\"worst\":2350},\"menu\":{\"at\":8.7,\"seconds\":7.38,\"frames\":4,\"over50\":1,\"over100\":1,\"worst\":7317}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":10,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":null,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "info",
+      "text": "Inspector 1.2.0: 115 subjects; DWInspect.help() for the API"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "probeHash": "666f4fc67b5f1d40316bce0321dd8d18591b4220d47c21e2c2734012d14a959f",
+  "unchangedRecipe": true,
+  "stops": 79,
+  "allWebGPU": true,
+  "screenshots": 79,
+  "pageErrorsFromConsole": 0,
+  "keys": [
+    "shotgun",
+    "m4",
+    "pistol"
+  ],
+  "caveat": "vmFov is absent from stop records (V.info.fov undefined); world camFov is recorded. No claim that all possible resize glitches are disproved.",
+  "shotgunTourStops": 69,
+  "tourMeshSignatureChanged": []
+}

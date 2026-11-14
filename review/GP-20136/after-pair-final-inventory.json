@@ -1,0 +1,6 @@
+{
+  "label": "after-pair-final",
+  "useSnapshot": false,
+  "rows": [],
+  "failure": "Error: evaluate failed: SyntaxError: missing ) after argument list\n    at Page.evaluate (file:///C:/Users/Zero/Desktop/Tiny%20Trek/tools/cdp.mjs:166:13)\n    at async file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20136/inventory-pair-photo.mjs:6:563"
+}

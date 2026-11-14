@@ -1,0 +1,21 @@
+{
+  "authorization": "Director named loan, handoffs/requests.md GT20106 armory bolt native audit",
+  "before": "fc77e63592f6a1450754266212bc2b963f201778a0bb65599ba28e8b8c7377b2",
+  "after": "d8f4c277514f3b3efeab1f3247beafa98bb4302ea5d3689394134c27e2fe96d3",
+  "onlyChanges": [
+    {
+      "before": "for (const x of [-1.39, 2.91]) for (const y of [0.64, 1.25, 2.3, 3.3, 3.91]) boltPoints.push([x, y, 0.89]);",
+      "after": "for (const x of [-1.39, 2.91]) for (const y of [0.64, 1.25, 2.3, 3.3, 3.91]) boltPoints.push([x, y, 0.879]);"
+    },
+    {
+      "before": "for (const x of [-0.75, 0.76, 2.27]) for (const y of [0.60, 3.91]) boltPoints.push([x, y, 0.89]);",
+      "after": "for (const x of [-0.75, 0.76, 2.27]) for (const y of [0.60, 3.91]) boltPoints.push([x, y, 0.879]);"
+    }
+  ],
+  "outsideBytesIdentical": true,
+  "utf8NoBom": true,
+  "crlf": 70809,
+  "bytesBefore": 4367387,
+  "bytesAfter": 4367389,
+  "rule": "world-design transition contact and rule13 structural dependence"
+}

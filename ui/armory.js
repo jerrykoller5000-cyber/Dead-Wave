@@ -37,6 +37,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     if (!hasText(key)) return String(fallback).replace(/\{(\w+)\}/g, (_, k) => (params && params[k] != null ? params[k] : ''));
     try { return text(key, params || {}); } catch (_) { return fallback; }
   };
+  let buildAmmoBought = null;
   let armory = shared || createArmory(), selected = { type: 'primary', index: 0 }, bench = null, open = false, showLocked = false;
   const button = doc.createElement('button');
   button.type = 'button'; button.id = 'armoryOpen'; button.textContent = text('armory.open');
@@ -84,10 +85,11 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   // The second of an akimbo pair is its own gun in the Armory (GP-78); say so.
   const labelGun = gun => /:second$/.test(gun.id) ? t('armory.pair', { gun: text(`weapon.${gun.kind}.name`) }, '{gun} · pair') : text(`weapon.${gun.kind}.name`);
   const detailGun = gun => {
-    const parts = [];
+    const parts = [], loose = gun.kind === 'revolver' || gun.kind === 'launcher';
     if (gun.loaded !== null && gun.kind !== 'chainsaw') parts.push(text('armory.loaded', { count: gun.loaded }));
-    if (gun.magazines.length) parts.push(text('armory.magazines', { count: gun.magazines.length }));
-    if (gun.rounds) parts.push(text('armory.rounds', { count: gun.rounds }));
+    if (!loose && gun.magazines.length) parts.push(text('armory.magazines', { count: gun.magazines.length }));
+    if (loose && /:second$/.test(gun.id)) parts.push(text('armory.roundsShared'));
+    else if (loose || gun.rounds) parts.push(text('armory.rounds', { count: gun.rounds }));
     return parts.join(' · ');
   };
   const modsOf = kind => { try { return getMods(kind) || []; } catch (_) { return []; } };
@@ -121,7 +123,10 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
     return wrap;
   }
   function syncOwned() {
-    for (const gun of getOwned() || []) if (!armory.has(gun.id)) armory.buy(gun, { store: true });
+    for (const gun of getOwned() || []) {
+      if (!armory.has(gun.id)) armory.buy(gun, { store: true });
+      else if ((gun.kind === 'revolver' || gun.kind === 'launcher') && Object.hasOwn(gun, 'rounds')) armory.revise(gun.id, gun);
+    }
   }
   function gunKindOf(id) { return String(id || '').replace(/:second$/, ''); }
   // bench holds a gun id ('m4', 'pistol', 'pistol:second') so an akimbo pair can
@@ -379,11 +384,18 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       buy.addEventListener('click', () => { if (onBuyBuild(plan.kind)) render(); });
       item.append(buy);
       if (plan.owned && plan.ammo) {
+        if (Number.isFinite(plan.ammo.current) && Number.isFinite(plan.ammo.capacity)) {
+          const stock = el('small', 'armory-build-ammo-stock', text('shop.carried', { count:plan.ammo.current, capacity:plan.ammo.capacity }));
+          stock.dataset.buildAmmoStock = plan.kind; stock.setAttribute('aria-live', 'polite'); item.append(stock);
+        }
         if (!plan.ammo.full && !plan.ammo.affordable) item.append(el('small', null,
           t('armory.store.shortfall', { price: plan.ammo.price, amount: plan.ammo.shortfall }, '${price} Cash · Need {amount} more')));
-        const refill = el('button', 'armory-offer-ammo', t('armory.ammoPack', { price: plan.ammo.price }, 'Ammo · ${price}'));
+        const refill = el('button', 'armory-offer-ammo', plan.ammo.full ? t('armory.ammoFull', {}, 'Ammo full') : Number.isFinite(plan.ammo.quantity) ? text('armory.typed.pack', { count:plan.ammo.quantity, price:plan.ammo.price }) : t('armory.ammoPack', { price:plan.ammo.price }, 'Ammo · ${price}'));
         refill.type = 'button'; refill.dataset.buyBuildAmmo = plan.kind; refill.disabled = plan.ammo.full || !plan.ammo.affordable;
-        refill.addEventListener('click', () => { if (onBuyAmmo(plan.kind)) render(); });
+        if (buildAmmoBought?.kind === plan.kind && Date.now() - buildAmmoBought.time < 450) refill.classList.add('just-bought');
+        refill.addEventListener('click', () => {
+          if (onBuyAmmo(plan.kind)) { buildAmmoBought = { kind:plan.kind, time:Date.now() }; render(); }
+        });
         item.append(refill);
       }
       buildOffers.append(item);

@@ -1,0 +1,6 @@
+ok    t333     16 pass   0 fail  28.2s  (real renderer)
+FAIL  tcl334c    4 pass   1 fail  35.6s  (real renderer)
+    FAIL no part of either hand inside any part of a gun (deepest per gun, mm: m4 0.3, ak 0.2, shotgun 3.7, aa12 0.2, sniper 0.5); through: shotgun: 3.7 mm (r glove in shotgun trigger)
+FAIL  tcb294b   24 pass   1 fail  41.8s  (real renderer)
+    FAIL sniper: 51.0 mm long (the real 70 mm)
+3 checks: 44 pass, 2 fail (real renderer)

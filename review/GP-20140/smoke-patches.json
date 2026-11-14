@@ -1,0 +1,194 @@
+[
+  {
+    "before": "// Props and posing use the game's existing two-bone arm solver and smoke pool.",
+    "after": "// GP-20140: settle at the lips, draw, lower, breathe out, flick, then return.\n// CMU 80_28 is a body-path reference only (review/GP-20140/reference-source.txt).\n// The fingertip/lip contact and anatomical bounds below remain CC-340's.\nexport function cigaretteBeat(time, out) {\n  const p = ((time % 8) + 8) % 8;\n  out.draw = p < 1.7 ? 1 : p < 2.7 ? 1 - smooth((p - 1.7) / 1.0) : smooth((p - 6.6) / 1.4);\n  out.inhale = smooth((p - .2) / .45) * (1 - smooth((p - 1.25) / .45));\n  out.exhale = smooth((p - 2.7) / .35) * (1 - smooth((p - 4.0) / .45));\n  out.flick = p < 5.2 ? smooth((p - 5.0) / .2) : 1 - smooth((p - 5.2) / .28);\n  out.travel = 4 * out.draw * (1 - out.draw);\n  return out;\n}\n\n// Props and posing use the game's existing two-bone arm solver and smoke pool."
+  },
+  {
+    "before": "  const ash = new THREE.MeshStandardMaterial({ color: 0x47433e, roughness: 1 });",
+    "after": "  const ash = new THREE.MeshStandardMaterial({ color: 0x47433e, roughness: 1 });\n  const smolder = new THREE.MeshBasicMaterial({ color: 0x742009, toneMapped: false });\n  const flame = ember.clone();   // the lighter and dropped cigarette do not pulse with a later drag"
+  },
+  {
+    "before": "new THREE.SphereGeometry(.016, 5, 4), ember",
+    "after": "new THREE.SphereGeometry(.016, 5, 4), flame"
+  },
+  {
+    "before": "  let smokeT = 0;",
+    "after": "  let smokeT = 0, previousSmokeTime = -1;\n  const beat = {}, ashBits = [];\n  const ashGeo = new THREE.TetrahedronGeometry(.0025);\n  // A fixed six-flake pool. No new mesh, vector or material during a flick.\n  for (let i = 0; i < 6; i++) {\n    const mesh = new THREE.Mesh(ashGeo, ash); mesh.visible = false; scene.add(mesh);\n    ashBits.push({ mesh, age: 2, vx: 0, vy: 0, vz: 0 });\n  }\n  function flickAsh() {\n    cig.localToWorld(tip.set(0, 0, cig.children[2].position.z));\n    u.headG.getWorldQuaternion(headQ); axis.set(0, 0, 1).applyQuaternion(headQ);\n    let used = 0;\n    for (const bit of ashBits) {\n      if (bit.mesh.visible) continue;\n      bit.mesh.position.copy(tip); bit.mesh.visible = true; bit.age = 0;\n      bit.vx = axis.x * .08 + (used - 1) * .025;\n      bit.vz = axis.z * .08; bit.vy = -.04 - used * .025;\n      if (++used === 3) break;\n    }\n  }"
+  },
+  {
+    "before": "d.mesh.children[2].material = lit ? ember : ash;",
+    "after": "d.mesh.children[2].material = lit ? smolder : ash;"
+  },
+  {
+    "before": "    for (let i = drops.length - 1; i >= 0; i--) {",
+    "after": "    for (const bit of ashBits) {\n      if (!bit.mesh.visible) continue;\n      bit.age += dt; bit.vy -= .75 * dt;\n      bit.mesh.position.x += bit.vx * dt; bit.mesh.position.y += bit.vy * dt;\n      bit.mesh.position.z += bit.vz * dt; bit.mesh.rotation.x += 3 * dt;\n      if (bit.age > 1.6 || bit.mesh.position.y <= ground(bit.mesh.position.x, bit.mesh.position.z) + .0025) bit.mesh.visible = false;\n    }\n    for (let i = drops.length - 1; i >= 0; i--) {"
+  },
+  {
+    "before": "    const puff = t % 8;\n    const draw = packing ? smooth((t - 2.1) / 1.0) :\n      (puff > 6.8 ? smooth((puff - 6.8) / 1.2) : 1 - smooth((puff - 2.3) / .9));",
+    "after": "    cigaretteBeat(t, beat);\n    const draw = packing ? smooth((t - 2.1) / 1.0) : beat.draw;"
+  },
+  {
+    "before": "    right.lerp(mouth, draw);",
+    "after": "    right.lerp(mouth, draw);\n    // The travel clears the chest before coming in to the lips; the ash gesture\n    // is a short downward beat, below the face, with the pinch kept intact.\n    if (!packing) {\n      right.x += .035 * beat.travel;\n      right.z += .055 * beat.travel + .025 * beat.flick;\n      right.y -= .025 * beat.flick;\n    }"
+  },
+  {
+    "before": "    cig.children[2].material = s.lit || (packing && t > 3.35) ? ember : ash;",
+    "after": "    cig.children[2].material = s.lit || (packing && t > 3.35) ? ember : ash;\n    const glow = packing ? (t > 3.35 ? .8 : 0) : beat.inhale;\n    ember.color.setRGB(.42 + .58 * glow, .035 + .45 * glow, .006 + .11 * glow);\n    const info = cig.userData.smokingBeat || (cig.userData.smokingBeat = {});\n    info.draw = draw; info.inhale = beat.inhale; info.exhale = beat.exhale; info.flick = beat.flick;\n    if (!packing && previousSmokeTime >= 0 && t >= previousSmokeTime &&\n        Math.floor((t - 5.2) / 8) > Math.floor((previousSmokeTime - 5.2) / 8)) flickAsh();\n    previousSmokeTime = packing ? -1 : t;"
+  },
+  {
+    "before": "      const exhale = puff > 2.8 && puff < 4.5;\n      if (exhale) u.headG.localToWorld(tip.set(.025, .114, .162));\n      else cig.localToWorld(tip.set(0, 0, cig.children[2].position.z));\n      smoke(tip.x, tip.y, tip.z, { tone: 'pale', size: exhale ? .16 : .08, grow: exhale ? 2.2 : 1.7, vy: .24, life: 2.2, peak: .6 });",
+    "after": "      const exhale = !packing && beat.exhale > .05;\n      // Use the fitted head's real mouth, never the old pre-CC340 face point.\n      if (exhale) u.headG.localToWorld(tip.set(CIG_AT.x, CIG_AT.y, CIG_AT.z + .008));\n      else cig.localToWorld(tip.set(0, 0, cig.children[2].position.z));\n      smoke(tip.x, tip.y, tip.z, { tone: 'pale', size: exhale ? .12 + .05 * beat.exhale : .035,\n        grow: exhale ? 2.0 : 1.3, vy: exhale ? .2 : .14, life: exhale ? 1.8 : 1.3,\n        peak: exhale ? .35 + .25 * beat.exhale : .25 });"
+  },
+  {
+    "before": "    clock.reset(); hide(); smokeT = 0;",
+    "after": "    clock.reset(); hide(); smokeT = 0; previousSmokeTime = -1;\n    for (const bit of ashBits) bit.mesh.visible = false;"
+  },
+  {
+    "before": "  function holdPinch(target,draw){\n    const wr=u.elbowRG.userData.wrist,hand=wr?.userData.hand;if(!hand){solveArm('R',target);return;}\n    hand.set(smokePose).update();\n    // Hold the filter at the fingertips. The old PIP-joint anchor put both\n    // fingers and most of the glove through his nose and cheek.\n    hand.point('indexTip',pinch);hand.point('middleTip',middle);pinch.add(middle).multiplyScalar(.5).sub(wr.position);\n    u.headG.getWorldQuaternion(headQ);\n    // Turn the hand's finger axis up-left toward the cigarette. At -1.12 the\n    // wrist had to sit above the fingertips, which raised the elbow and spread\n    // the palm across his eye like a facepalm. This roll puts the wrist below\n    // and to the right of the pinch instead.\n    const handRoll = Number.isFinite(cig.userData.smokeRoll) ? cig.userData.smokeRoll : SMOKE_ROLL;\n    cig.userData.smokeRollApplied = handRoll;\n    // CC-340: and tip the hand about the head's left-right axis (smokePitch), so on a man's narrower shoulders the\n    // wrist sits out in front of the chin instead of folding back against the shoulder.\n    const handPitch = Number.isFinite(cig.userData.smokePitch) ? cig.userData.smokePitch : SMOKE_PITCH;\n    const handYaw = Number.isFinite(cig.userData.smokeYaw) ? cig.userData.smokeYaw : SMOKE_YAW;\n    cigQ.setFromAxisAngle(local.set(0,0,1),handRoll).premultiply(headQ);   // the cigarette straight out from the lips, as before\n    handQ.setFromAxisAngle(local.set(0,0,1),handRoll).premultiply(twistQ.setFromAxisAngle(axis.set(1,0,0),handPitch)).premultiply(twistQ.setFromAxisAngle(axis.set(0,1,0),handYaw)).premultiply(headQ);\n    offset.copy(pinch).multiply(wr.scale).applyQuaternion(handQ);\n    // `target` is the filter's lip end. Keep the fingertips outside the face,\n    // 1.8 cm down the cigarette, instead of solving the glove onto the lips.\n    axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ);\n    pinchTarget.copy(target).add(axis);\n    desired.copy(pinchTarget).sub(offset);\n    want.copy(desired);\n    // The generic two-bone solve uses the historical arm lengths, while the\n    // fitted sleeve/wrist rig has moved since those constants were authored.\n    // Its endpoint radius is right but its fitted shoulder basis can rotate the\n    // wrist off the requested bearing. Rotate the solved upper arm in world\n    // space by that measured angular error; this keeps the bend and reach while\n    // putting the real fitted wrist on the requested point.\n    solveArm('R',want,wr.position);\n    marine.updateWorldMatrix(true,true);\n    u.armRG.getWorldPosition(shoulder);\n    wr.getWorldPosition(actual);\n    desiredDir.copy(desired).sub(shoulder);\n    actualDir.copy(actual).sub(shoulder);\n    if(desiredDir.lengthSq()>.0001&&actualDir.lengthSq()>.0001){\n      correctQ.setFromUnitVectors(actualDir.normalize(),desiredDir.clone().normalize());\n      u.armRG.getWorldQuaternion(armWorldQ);\n      armWorldQ.premultiply(correctQ);\n      u.armRG.parent.getWorldQuaternion(armParentQ).invert();\n      u.armRG.quaternion.copy(armParentQ).multiply(armWorldQ);\n      marine.updateWorldMatrix(true,true);\n    }\n    const targetReach=shoulder.distanceTo(desired);\n    // Roll the forearm around the solved wrist line before asking the wrist to\n    // bend. Rolling preserves contact; putting all this twist in the wrist did not.\n    u.elbowRG.getWorldQuaternion(parentQ);wr.quaternion.copy(parentQ.invert()).multiply(handQ);\n    axis.copy(wr.position).normalize();\n    const projection=wr.quaternion.x*axis.x+wr.quaternion.y*axis.y+wr.quaternion.z*axis.z;\n    let angle=2*Math.atan2(projection,wr.quaternion.w);angle=Math.atan2(Math.sin(angle),Math.cos(angle));\n    twistQ.setFromAxisAngle(axis,Math.max(-1.7,Math.min(1.7,angle)));\n    u.elbowRG.quaternion.multiply(twistQ);u.elbowRG.updateWorldMatrix(true,false);\n    u.elbowRG.getWorldQuaternion(parentQ);wr.quaternion.copy(parentQ.invert()).multiply(handQ);\n    // Bound flexion during the travel between lip and resting hand. Contact\n    // follows the fingers throughout; the full draw already lies inside this limit.\n    const bend=2*Math.acos(Math.min(1,Math.abs(wr.quaternion.w)));\n    if(bend>1.05)wr.quaternion.slerp(new THREE.Quaternion(),1-1.05/bend);\n    wr.getWorldQuaternion(handQ);\n    marine.updateWorldMatrix(true,true);\n    wr.getWorldPosition(actual);\n    pointOnHand(wr,'indexTip',pinch);pointOnHand(wr,'middleTip',middle);pinch.add(middle).multiplyScalar(.5);\n    // Wrist flexion changes the fingertip offset after the arm solve. Correct\n    // the final rigid arm bearing from the measured fingertip, so the visible\n    // fingers—not merely the wrist proxy—finish on the cigarette.\n    desiredDir.copy(pinchTarget).sub(shoulder);\n    actualDir.copy(pinch).sub(shoulder);\n    if(desiredDir.lengthSq()>.0001&&actualDir.lengthSq()>.0001){\n      correctQ.setFromUnitVectors(actualDir.normalize(),desiredDir.clone().normalize());\n      u.armRG.getWorldQuaternion(armWorldQ);\n      armWorldQ.premultiply(correctQ);\n      u.armRG.parent.getWorldQuaternion(armParentQ).invert();\n      u.armRG.quaternion.copy(armParentQ).multiply(armWorldQ);\n      marine.updateWorldMatrix(true,true);\n      wr.getWorldPosition(actual);\n      pointOnHand(wr,'indexTip',pinch);pointOnHand(wr,'middleTip',middle);pinch.add(middle).multiplyScalar(.5);\n    }\n    // The prop follows the head-facing axis, not a clamped wrist quaternion:\n    // filter at the lips, ember out in front. This makes its direction explicit\n    // and prevents a bent wrist from visually reversing it.\n    root.worldToLocal(tip.copy(target));cig.position.copy(tip);\n    root.getWorldQuaternion(rootQ);cig.quaternion.copy(rootQ.invert()).multiply(cigQ);\n    cig.userData.pinch=pinch.toArray();cig.userData.mouth=target.toArray();cig.userData.draw=draw;\n    cig.userData.wristTarget=desired.toArray();cig.userData.wristActual=actual.toArray();\n    cig.userData.targetReach=targetReach;cig.userData.actualReach=shoulder.distanceTo(actual);cig.userData.handOffset=offset.length();\n  }",
+    "after": "  function holdPinch(target,draw){\n    const wr=u.elbowRG.userData.wrist,hand=wr?.userData.hand;\n    if(!hand){solveArm('R',target);return;}\n    hand.set(smokePose).update();\n    u.headG.getWorldQuaternion(headQ);\n    const roll=Number.isFinite(cig.userData.smokeRoll)?cig.userData.smokeRoll:SMOKE_ROLL;\n    const pitch=Number.isFinite(cig.userData.smokePitch)?cig.userData.smokePitch:SMOKE_PITCH;\n    const yaw=Number.isFinite(cig.userData.smokeYaw)?cig.userData.smokeYaw:SMOKE_YAW;\n    cigQ.setFromAxisAngle(local.set(0,0,1),roll).premultiply(headQ);\n    handQ.setFromAxisAngle(local.set(0,0,1),roll)\n      .premultiply(twistQ.setFromAxisAngle(axis.set(1,0,0),pitch))\n      .premultiply(twistQ.setFromAxisAngle(axis.set(0,1,0),yaw)).premultiply(headQ);\n    axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ);\n    pinchTarget.copy(target).add(axis);\n    hand.point('indexTip',pinch);hand.point('middleTip',middle);\n    offset.copy(pinch).add(middle).multiplyScalar(.5).sub(wr.position);\n    wr.getWorldScale(local);offset.multiply(local).applyQuaternion(handQ);\n    desired.copy(pinchTarget).sub(offset);want.copy(desired);\n    // Solve the visible fingertip contact, including the wrist's bounded bend.\n    // Correct the requested target, never rotate a solved shoulder outside its\n    // anatomical limits (the old post-solve bearing correction did that).\n    let miss=Infinity;\n    for(let iteration=0;iteration<6;iteration++){\n      solveArm('R',want,wr.position);\n      marine.updateWorldMatrix(true,true);\n      u.elbowRG.getWorldQuaternion(parentQ);\n      wr.quaternion.copy(parentQ.invert()).multiply(handQ);\n      axis.copy(wr.position).normalize();\n      const projection=wr.quaternion.x*axis.x+wr.quaternion.y*axis.y+wr.quaternion.z*axis.z;\n      let angle=2*Math.atan2(projection,wr.quaternion.w);angle=Math.atan2(Math.sin(angle),Math.cos(angle));\n      twistQ.setFromAxisAngle(axis,Math.max(-1.7,Math.min(1.7,angle)));\n      u.elbowRG.quaternion.multiply(twistQ);u.elbowRG.updateWorldMatrix(true,false);\n      u.elbowRG.getWorldQuaternion(parentQ);wr.quaternion.copy(parentQ.invert()).multiply(handQ);\n      const bend=2*Math.acos(Math.min(1,Math.abs(wr.quaternion.w)));\n      if(bend>1.05)wr.quaternion.slerp(rootQ.identity(),1-1.05/bend);\n      marine.updateWorldMatrix(true,true);\n      pointOnHand(wr,'indexTip',pinch);pointOnHand(wr,'middleTip',middle);pinch.add(middle).multiplyScalar(.5);\n      miss=pinch.distanceTo(pinchTarget);\n      if(miss<.001)break;\n      want.add(desiredDir.copy(pinchTarget).sub(pinch));\n    }\n    wr.getWorldPosition(actual);u.armRG.getWorldPosition(shoulder);\n    root.worldToLocal(tip.copy(target));cig.position.copy(tip);\n    root.getWorldQuaternion(rootQ);cig.quaternion.copy(rootQ.invert()).multiply(cigQ);\n    cig.userData.smokeRollApplied=roll;\n    cig.userData.pinch=pinch.toArray();cig.userData.mouth=target.toArray();cig.userData.draw=draw;\n    cig.userData.wristTarget=want.toArray();cig.userData.wristActual=actual.toArray();\n    cig.userData.targetReach=shoulder.distanceTo(want);cig.userData.actualReach=shoulder.distanceTo(actual);\n    cig.userData.handOffset=offset.length();cig.userData.pinchError=miss;\n  }"
+  },
+  {
+    "before": "    right.set(.28, .82, .2);",
+    "after": "    right.set(.28, 1.02, .26);"
+  },
+  {
+    "before": "for(let iteration=0;iteration<6;iteration++)",
+    "after": "for(let iteration=0;iteration<12;iteration++)"
+  },
+  {
+    "before": "want.add(desiredDir.copy(pinchTarget).sub(pinch));",
+    "after": "want.addScaledVector(desiredDir.copy(pinchTarget).sub(pinch),.65);"
+  },
+  {
+    "before": "    root.worldToLocal(tip.copy(target));cig.position.copy(tip);",
+    "after": "    // Off the lips the cigarette belongs to the actual fingertip pinch, even\n    // when a bounded joint cannot reach the planned path exactly.\n    if(draw<.999)tip.copy(pinch).sub(axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ));\n    else tip.copy(target);\n    root.worldToLocal(tip);cig.position.copy(tip);"
+  },
+  {
+    "before": "const CIG_AT = mouthPoint(.015);",
+    "after": "import { ARM_LIMITS, clampWrist } from '../core/body-limits.js';\nconst CIG_AT = mouthPoint(.015);"
+  },
+  {
+    "before": "      twistQ.setFromAxisAngle(axis,Math.max(-1.7,Math.min(1.7,angle)));",
+    "after": "      const forearmRoll=Math.max(-ARM_LIMITS.twist,Math.min(ARM_LIMITS.twist,angle));\n      twistQ.setFromAxisAngle(axis,forearmRoll);"
+  },
+  {
+    "before": "      const bend=2*Math.acos(Math.min(1,Math.abs(wr.quaternion.w)));\n      if(bend>1.05)wr.quaternion.slerp(rootQ.identity(),1-1.05/bend);",
+    "after": "      // The actual anatomical ellipse, not the old spherical 60-degree cap.\n      clampWrist(wr.quaternion,1,forearmRoll);\n      clampWrist(wr.quaternion,1,0);"
+  },
+  {
+    "before": "        const y = ground(d.mesh.position.x, d.mesh.position.z);\n        if (d.mesh.position.y <= y + .025) {\n          d.mesh.position.y = y + .025; d.mesh.rotation.x = 0; d.landed = true;",
+    "after": "        const y = ground(d.mesh.position.x, d.mesh.position.z);\n        const restY = y + .0037 * Math.max(Math.abs(d.mesh.scale.x), Math.abs(d.mesh.scale.y));\n        if (d.mesh.position.y <= restY) {\n          d.mesh.position.y = restY; d.mesh.rotation.x = 0; d.landed = true;"
+  },
+  {
+    "before": "export function cigaretteBeat(time, out)",
+    "after": "function cigaretteBeat(time, out)"
+  },
+  {
+    "before": "      smoke(tip.x, tip.y, tip.z, { tone: 'pale', size: exhale ? .12 + .05 * beat.exhale : .035,\n        grow: exhale ? 2.0 : 1.3, vy: exhale ? .2 : .14, life: exhale ? 1.8 : 1.3,\n        peak: exhale ? .35 + .25 * beat.exhale : .25 });",
+    "after": "      u.headG.getWorldQuaternion(headQ);axis.set(0,0,1).applyQuaternion(headQ);\n      smoke(tip.x, tip.y, tip.z, { tone: 'pale', size: exhale ? .065 + .025 * beat.exhale : .025,\n        grow: exhale ? 2.2 : 1.3, vy: exhale ? .06 : .14, life: exhale ? 1.8 : 1.3,\n        vx: exhale ? axis.x * .42 : 0, vz: exhale ? axis.z * .42 : 0,\n        peak: exhale ? .35 + .25 * beat.exhale : .25 });"
+  },
+  {
+    "before": "  const headQ=new THREE.Quaternion(),handQ=new THREE.Quaternion(),cigQ=new THREE.Quaternion(),",
+    "after": "  const handCigQ=new THREE.Quaternion();\n  const headQ=new THREE.Quaternion(),handQ=new THREE.Quaternion(),cigQ=new THREE.Quaternion(),"
+  },
+  {
+    "before": "    axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ);\n    pinchTarget.copy(target).add(axis);",
+    "after": "    // Keep the cigarette's seated axis in the hand, through every bounded wrist\n    // turn. Holding it head-facing on the lowered path cut it through a finger.\n    handCigQ.copy(handQ).invert().multiply(cigQ);\n    axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ);\n    pinchTarget.copy(target).add(axis);"
+  },
+  {
+    "before": "      marine.updateWorldMatrix(true,true);\n      pointOnHand(wr,'indexTip',pinch);",
+    "after": "      marine.updateWorldMatrix(true,true);\n      wr.getWorldQuaternion(parentQ);cigQ.copy(parentQ).multiply(handCigQ);\n      pinchTarget.copy(target).add(axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ));\n      pointOnHand(wr,'indexTip',pinch);"
+  },
+  {
+    "before": "  const handCigQ=new THREE.Quaternion();",
+    "after": "  const handCigQ=new THREE.Quaternion();\n  const lastPinchWant=new THREE.Vector3(),lastPinchTarget=new THREE.Vector3();\n  let pinchWarm=false;"
+  },
+  {
+    "before": "    desired.copy(pinchTarget).sub(offset);want.copy(desired);",
+    "after": "    desired.copy(pinchTarget).sub(offset);want.copy(desired);\n    // A continuous gesture starts near the previous bounded solution. Keep the\n    // cold solve for a new cigarette or a discontinuous target, not every frame.\n    if(pinchWarm&&target.distanceToSquared(lastPinchTarget)<.0064)\n      want.copy(lastPinchWant).add(desiredDir.copy(target).sub(lastPinchTarget));"
+  },
+  {
+    "before": "    let miss=Infinity;\n    for(let iteration=0;iteration<12;iteration++){",
+    "after": "    let miss=Infinity,iterations=0;\n    for(let iteration=0;iteration<12;iteration++){\n      iterations++;"
+  },
+  {
+    "before": "    wr.getWorldPosition(actual);u.armRG.getWorldPosition(shoulder);",
+    "after": "    lastPinchWant.copy(want);lastPinchTarget.copy(target);pinchWarm=true;\n    wr.getWorldPosition(actual);u.armRG.getWorldPosition(shoulder);"
+  },
+  {
+    "before": "cig.userData.handOffset=offset.length();cig.userData.pinchError=miss;",
+    "after": "cig.userData.handOffset=offset.length();cig.userData.pinchError=miss;cig.userData.pinchIterations=iterations;"
+  },
+  {
+    "before": "  function hide() { root.visible = false;",
+    "after": "  function hide() { pinchWarm=false;root.visible = false;"
+  },
+  {
+    "before": "export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground, ignite })",
+    "after": "export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground, ignite, setForearmRoll })"
+  },
+  {
+    "before": "  let pinchWarm=false;",
+    "after": "  let pinchWarm=false,posedIdle=false;"
+  },
+  {
+    "before": "    hand.set(smokePose).update();",
+    "after": "    hand.set(smokePose).update();posedIdle=true;"
+  },
+  {
+    "before": "    let miss=Infinity,iterations=0;",
+    "after": "    let miss=Infinity,iterations=0,solvedRoll=0;"
+  },
+  {
+    "before": "      twistQ.setFromAxisAngle(axis,forearmRoll);",
+    "after": "      solvedRoll=forearmRoll;twistQ.setFromAxisAngle(axis,forearmRoll);"
+  },
+  {
+    "before": "      clampWrist(wr.quaternion,1,forearmRoll);\n      clampWrist(wr.quaternion,1,0);",
+    "after": "      clampWrist(wr.quaternion,1,-forearmRoll);"
+  },
+  {
+    "before": "    lastPinchWant.copy(want);",
+    "after": "    setForearmRoll?.('R',solvedRoll);\n    lastPinchWant.copy(want);"
+  },
+  {
+    "before": "  function hide() { pinchWarm=false;root.visible = false;",
+    "after": "  function hide() { pinchWarm=false;if(posedIdle){setForearmRoll?.('R',0);setForearmRoll?.('L',0);posedIdle=false;}root.visible = false;"
+  },
+  {
+    "before": "const SMOKE_ROLL=-3, SMOKE_PITCH=-1, SMOKE_YAW=-.45;",
+    "after": "const SMOKE_ROLL=-3.1, SMOKE_PITCH=-.8, SMOKE_YAW=.3;"
+  },
+  {
+    "before": "  const smokePose={f:[[.46,.58,.26,.08],[.5,.64,.3,-.08],[.96,1.08,.72,-.04],[1.08,1.16,.82,-.08]],t:[.7,-.08,.42]};",
+    "after": "  const SMOKE_GRIPS = {\"glove\":{\"pose\":{\"f\":[[0.24,0.12,0.08,0.08],[0.16,0.24,0.1,0.13],[0.96,1.08,0.72,-0.04],[1.08,1.16,0.82,-0.08]],\"t\":[0.7,-0.08,0.42]},\"weight\":0.61},\"bare\":{\"pose\":{\"f\":[[0.24,0.24,0.08,0.08],[0.16,0.24,0.1,0.13],[0.96,1.08,0.72,-0.04],[1.08,1.16,0.82,-0.08]],\"t\":[0.7,-0.08,0.42]},\"weight\":0.6}};"
+  },
+  {
+    "before": "    hand.set(smokePose).update();posedIdle=true;",
+    "after": "    const grip=SMOKE_GRIPS[u.dress?.picked?.gloves===false?'bare':'glove'],weight=grip.weight;\n    hand.set(grip.pose).update();posedIdle=true;"
+  },
+  {
+    "before": "    offset.copy(pinch).add(middle).multiplyScalar(.5).sub(wr.position);",
+    "after": "    offset.copy(pinch).multiplyScalar(weight).addScaledVector(middle,1-weight).sub(wr.position);"
+  },
+  {
+    "before": "pointOnHand(wr,'indexTip',pinch);pointOnHand(wr,'middleTip',middle);pinch.add(middle).multiplyScalar(.5);",
+    "after": "pointOnHand(wr,'indexTip',pinch);pointOnHand(wr,'middleTip',middle);pinch.multiplyScalar(weight).addScaledVector(middle,1-weight);"
+  },
+  {
+    "before": "    // Off the lips the cigarette belongs to the actual fingertip pinch, even\n    // when a bounded joint cannot reach the planned path exactly.\n    if(draw<.999)tip.copy(pinch).sub(axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ));\n    else tip.copy(target);",
+    "after": "    // The paper belongs to the actual grip, at the lips as well as in travel.\n    // The solve brings that rigid contact to the mouth within its tolerance.\n    tip.copy(pinch).sub(axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ));"
+  },
+  {
+    "before": "cig.userData.pinchIterations=iterations;",
+    "after": "cig.userData.pinchIterations=iterations;cig.userData.pinchWeight=weight;"
+  },
+  {
+    "before": "    cigQ.setFromAxisAngle(local.set(0,0,1),roll).premultiply(headQ);",
+    "after": "    const swivel=Number.isFinite(cig.userData.smokeSwivel)?cig.userData.smokeSwivel:-.6;\n    cigQ.setFromAxisAngle(local.set(0,0,1),roll+swivel).premultiply(headQ);"
+  },
+  {
+    "before": ".premultiply(twistQ.setFromAxisAngle(axis.set(0,1,0),yaw)).premultiply(headQ);",
+    "after": ".premultiply(twistQ.setFromAxisAngle(axis.set(0,1,0),yaw))\n      .premultiply(twistQ.setFromAxisAngle(axis.set(0,0,1),swivel)).premultiply(headQ);"
+  }
+]

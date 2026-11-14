@@ -5,7 +5,6 @@
 import { weaponDetail } from './weapon-detail.js';
 import { pistolChamberGeometry, pistolSlideShellGeometry } from './weapon-pistol-action.js';
 import { gunDetail } from './gun-detail.js';
-import { waspGripTrimGeometry } from './weapon-wasp-trim.js';
 import { clipArtworkProfile, clipArtworkUnderside, fitCollarFaces, profileEdgeSplits as frameEdgeSplits, splitArtworkRows, trimPanelBack } from './weapon-longarms.js';
 import { boxProjectUV } from '../core/geometry.js';
 import * as TSL from 'three/tsl';
@@ -14,6 +13,45 @@ import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork,
 import { markPaintSurface, walnutTexture } from './weapon-finish.js';
 import { attachLaserLight } from './weapon-attachments.js';
 import { fitPortCarrier, roundGeometry, spentCaseGeometry } from './weapon-casings.js';
+
+const waspMagwellLipCache = new WeakMap();
+function waspMagwellLipGeometry(T) {
+  if (waspMagwellLipCache.has(T)) return waspMagwellLipCache.get(T);
+  // GT-20106/J153-32: a thin, closed moulded lip around an actual magazine opening.
+  const loop = (w, d, y, c) => [
+    [-w/2+c,y,-d/2],[w/2-c,y,-d/2],[w/2,y,-d/2+c],[w/2,y,d/2-c],
+    [w/2-c,y,d/2],[-w/2+c,y,d/2],[-w/2,y,d/2-c],[-w/2,y,-d/2+c]];
+  const outer = [loop(.060,.078,.003,.0067),loop(.062,.080,.002,.008),
+    loop(.062,.080,-.002,.008),loop(.060,.078,-.003,.0067)];
+  const inner = [loop(.058,.068,.003,.0015),loop(.056,.066,.002,.001),
+    loop(.056,.066,-.002,.001),loop(.058,.068,-.003,.0015)];
+  const position = [], uv = [], va = new T.Vector3(), vb = new T.Vector3(), vc = new T.Vector3(), n = new T.Vector3();
+  function face(a,b,c,target) {
+    va.fromArray(a); vb.fromArray(b); vc.fromArray(c);
+    n.subVectors(vb,va).cross(new T.Vector3().subVectors(vc,va));
+    if (n.x*target[0]+n.y*target[1]+n.z*target[2] < 0) [b,c]=[c,b];
+    n.normalize();
+    for (const p of [a,b,c]) {
+      position.push(...p);
+      if (Math.abs(n.y)>.5) uv.push(p[0]/.064+.5,p[2]/.080+.5);
+      else uv.push((Math.abs(n.x)>.5?p[2]/.080:p[0]/.064)+.5,p[1]/.006+.5);
+    }
+  }
+  function quad(a,b,c,d,target) { face(a,b,c,target); face(a,c,d,target); }
+  for (const [rings,sign] of [[outer,1],[inner,-1]]) for(let r=0;r<3;r++) for(let i=0;i<8;i++) {
+    const j=(i+1)%8,a=rings[r][i],b=rings[r][j],c=rings[r+1][j],d=rings[r+1][i];
+    quad(a,b,c,d,[sign*(a[0]+b[0]),0,sign*(a[2]+b[2])]);
+  }
+  for (const [r,normal] of [[0,[0,1,0]],[3,[0,-1,0]]]) for(let i=0;i<8;i++) {
+    const j=(i+1)%8; quad(outer[r][i],outer[r][j],inner[r][j],inner[r][i],normal);
+  }
+  const geometry = new T.BufferGeometry();
+  geometry.setAttribute('position',new T.Float32BufferAttribute(position,3));
+  geometry.setAttribute('uv',new T.Float32BufferAttribute(uv,2));
+  geometry.computeVertexNormals(); geometry.computeBoundingBox(); geometry.computeBoundingSphere();
+  geometry.userData.shared=true; waspMagwellLipCache.set(T,geometry); return geometry;
+}
+
 
 function shapedGrip(cz, cy, h, d, rake, pts) {
   const sr = Math.sin(rake), cr = Math.cos(rake), k = d / 0.08;
@@ -580,12 +618,9 @@ export function makePistolModel(ctx) {
   // grip's axis (out through the front strap by ~20 mm) and its baseplate hung 44 mm below the grip. gunExtLook
   // stretches the same body down its own axis, so the extended one only comes out below the grip.
   const mag = K.group(0, -0.0877, -0.0255);
-  // GB-260 (J7, Jerry: the pistol's extended magazine reads undersized): the body was 28 mm across and 20 mm front to
-  // back inside a grip 52 mm across and about 100 mm deep (docs/weapons-sizes.md) - the narrowest thing on the gun, and
-  // shallower than it was wide, which no real box magazine is. A .45 double-stack body is 40 mm across and 46 mm front
-  // to back, deeper than wide, with a floorplate proud of it on every side (52 x 54 mm here). Same 162 mm length, centre
-  // line and rake as GB-154/GB-180, so the well, the hand hold and gunExtLook's own growth are untouched.
-  const magBody = K.slab([[-0.015, 0.081], [0.015, 0.081], [0.015, -0.081], [-0.015, -0.081]], 0.040, magPoly, { bevel: 0.003, rx: 0.3, parent: mag });
+  // GT-20106/J153-30: a 0.050-wide by 0.052-deep body (gun units, before bevels) fills the existing grip's well.
+  // Standard and extended use this same section; the existing mod stretches only its length. Root, rake and feed height stay put.
+  const magBody = K.slab([[-0.026, 0.081], [0.026, 0.081], [0.026, -0.081], [-0.026, -0.081]], 0.050, magPoly, { bevel: 0.003, rx: 0.3, parent: mag });
   magazineTop(THREE, magBody);
   const topArt = roundGeometry(THREE, 'pistol');
   topArt.computeBoundingBox();
@@ -606,8 +641,9 @@ export function makePistolModel(ctx) {
     const mesh = this?.magazineTopRound || topRound;
     mesh.visible = Number.isFinite(count) && count > 0;
   };
-  K.slab([[-.022,-.081], [.019,-.081], [.025,-.084], [.026,-.089], [.023,-.092],
-    [-.025,-.092], [-.028,-.089], [-.027,-.085]], .052, rearPlate, {bevel:.003, rx:.3, parent:mag});
+  // GT-20106/J153-30: one .45-class body for standard and extended, with a flush broad base pad.
+  K.slab([[-.028,-.081], [.025,-.081], [.031,-.084], [.032,-.089], [.029,-.092],
+    [-.031,-.092], [-.034,-.089], [-.033,-.085]], .062, rearPlate, {bevel:.003, rx:.3, parent:mag});
   gun.userData.slide = slide;
   gun.userData.mag = mag;
   gun.userData.baseSlidePos = slide.position.clone();
@@ -1563,8 +1599,7 @@ export function makeUziModel(ctx) {
   const gripSafety = W.chamferBox(gun,.040,.047,.006,.0015,gunDark,0,-.087,-.065,UZI_RAKE);  // backstrap grip safety, proud enough to squeeze
   const strapRibs = gripRidges(K, gunDark, UZI_GZ, UZI_GY, UZI_GH, UZI_GD, UZI_RAKE, [0.42, 0.52, 0.62, 0.72, 0.82], 0.025, 0.048, 0.0028, 0.0022);   // front-strap serrations
   for (const rib of strapRibs) markPaintSurface(rib, 'furniture');
-  // Flat base cap (mag floorplate reads flush with it).
-  K.box(0.050, 0.003, 0.090, gunDark, 0, UZI_GY - 0.52 * UZI_GH * Math.cos(UZI_RAKE), UZI_GZ - 0.52 * UZI_GH * Math.sin(UZI_RAKE), UZI_RAKE, 0, 0, null, 0.0006);
+  // GT-20106: the open moulded lip below replaces the old solid base cap and wide skirt.
   const gloveGuard = K.slab(gunBand([[0.088, -0.034], [0.096, -0.042], [0.100, -0.056], [0.094, -0.070], [0.078, -0.080], [0.052, -0.082], [0.030, -0.076], [0.018, -0.062], [0.016, -0.046]], 0.0075), 0.032, gunDark, { bevel: 0.005, segs: 3 });
   // Give the oversized game glove room in the drawn loop; keep its upper attachment fixed.
   {
@@ -1607,8 +1642,11 @@ export function makeUziModel(ctx) {
     geometry.computeBoundingSphere();
   }   // GB-316 (J25): smoother moulded guard
   K.slab([[0.012, -0.030], [0.036, -0.032], [0.040, -0.050], [0.024, -0.058], [0.008, -0.046]], 0.028, gunPoly, { bevel: 0.005, segs: 3 });   // guard root into the front strap
-  const gripTrim = K.box(0.068, 0.010, 0.108, gunPoly, 0, UZI_GY - 0.48 * UZI_GH * Math.cos(UZI_RAKE), UZI_GZ - 0.48 * UZI_GH * Math.sin(UZI_RAKE), UZI_RAKE, 0, 0, null, 0.003);
-  gripTrim.geometry = waspGripTrimGeometry(THREE);
+  const gripTrim = new THREE.Mesh(waspMagwellLipGeometry(THREE), gunPoly);
+  gripTrim.name = 'Wasp magazine well lip';
+  gripTrim.position.set(0, UZI_GY - .528125 * UZI_GH * Math.cos(UZI_RAKE), UZI_GZ - .528125 * UZI_GH * Math.sin(UZI_RAKE));
+  gripTrim.rotation.x = UZI_RAKE;
+  gripTrim.castShadow = gripTrim.receiveShadow = true; gun.add(gripTrim);
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire, moved to mid-guard.
   addTriggerArtwork(gun, K, [[0.0574, -0.0411], [0.0492, -0.0532], [0.0498, -0.0617], [0.0582, -0.0692], [0.0538, -0.0748], [0.0422, -0.0663], [0.0388, -0.0508], [0.0466, -0.0349]], 0.011, gunAccent, { bevel: 0.002 });
@@ -1629,22 +1667,23 @@ export function makeUziModel(ctx) {
   for (const z of [-0.018, 0.006, 0.030]) K.box(0.0015, 0.004, 0.005, gunAccent, -0.04975, 0.055, z, 0, 0, 0, null, 0); // S / R / A marks pressed into the left receiver face
   // The narrow magazine passes through the grip. Bake its rake into the inner
   // assembly: reload animates the outer group back to zero at insertion.
-  const mag = K.group(0, -0.205, -0.0435);
+  // GT-20106/J153-32: align the insertion axis to the grip and fill its well; its same body only grows longer.
+  const mag = K.group(0, -0.205, -0.0535);
   const stick = new THREE.Group(); stick.rotation.x = 0.22; mag.add(stick);
-  K.slab([[-0.022, 0.107], [0.022, 0.107], [0.022, -0.109], [-0.022, -0.109]], 0.036, gunAccent, { bevel: 0.003, parent: stick });
+  K.slab([[-0.029, 0.107], [0.029, 0.107], [0.029, -0.109], [-0.029, -0.109]], 0.048, gunAccent, { bevel: 0.003, parent: stick });
   for (const sx of [-1, 1]) {
-    const strip = K.box(0.003, 0.18, 0.006, gunDark, sx * 0.0185, 0, 0, 0, 0, 0, stick);
+    const strip = K.box(0.003, 0.18, 0.006, gunDark, sx * 0.0245, 0, 0, 0, 0, 0, stick);
     strip.geometry = strip.geometry.clone();
     strip.geometry.userData = { ...strip.geometry.userData, shared: false };
-    trimSlabBack(strip, 0, sx * .018 - strip.position.x, sx);
+    trimSlabBack(strip, 0, sx * .024 - strip.position.x, sx);
     strip.geometry.computeBoundingBox();
   }
-  K.slab([[-0.026, -0.106], [0.026, -0.106], [0.026, -0.119], [-0.026, -0.119]], 0.042, gunDark, { bevel: 0.003, parent: stick });
+  K.slab([[-0.033, -0.106], [0.033, -0.106], [0.033, -0.119], [-0.033, -0.119]], 0.054, gunDark, { bevel: 0.003, parent: stick });
   // The dark floor is visible between the two lips when this magazine is empty.
-  K.box(.026, .002, .042, gunDark, 0, .108, 0, 0, 0, 0, stick, 0);
+  K.box(.038, .002, .056, gunDark, 0, .108, 0, 0, 0, 0, stick, 0);
   for (const side of [-1, 1]) {
     K.slab([[-.021,.107],[-.019,.115],[-.014,.119],[.009,.117],[.019,.112],[.021,.107]],
-      .004, gunDark, {x:side*.015, bevel:.0008, parent:stick});
+      .004, gunDark, {x:side*.021, bevel:.0008, parent:stick});
   }
   const liveArt = roundGeometry(THREE, 'uzi');
   liveArt.computeBoundingBox();
@@ -1752,6 +1791,8 @@ export function makeUziModel(ctx) {
     part.position.sub(pivot.position);
     pivot.add(part);
   }
+  releaseHead.castShadow = releasePaddle.castShadow;   // One physical catch and shadow.
+  foldStatic(THREE, TSL, release);   // Cap and paddle move together on the original pivot.
   bindModelArtwork(gun, 'controls', 'magRelease', release);
   bindModelArtwork(gun, 'controls', 'selector', selector);
   bindModelArtwork(gun, 'controls', 'safety', gripSafety);

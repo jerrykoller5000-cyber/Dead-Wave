@@ -1,0 +1,10 @@
+{
+  "approval": "Director response under GP-20133 title VM gate needs narrow loan",
+  "before": "c681d0646529853ea23b3b01b0bb2e3adac6800bbd10fbf97b8d32d1baac6da3",
+  "after": "f92fec7079b62494bd2c7baa42dbc0502939c97c18e2eec71161605b326d1b0b",
+  "reverseExact": true,
+  "initBefore": "function ensureViewmodel() {\r\n      if (viewmodel === null && gameStarted && VM_ON) {",
+  "initAfter": "function ensureViewmodel(warm = false) {\r\n      if (viewmodel === null && (gameStarted || warm) && VM_ON) {",
+  "callBefore": "viewmodel:ensureViewmodel() ? viewmodel : null",
+  "callAfter": "viewmodel:ensureViewmodel(true) ? viewmodel : null"
+}

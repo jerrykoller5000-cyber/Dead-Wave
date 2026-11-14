@@ -1,0 +1,49 @@
+{
+  "scope": "Active incomplete GP20136 audit/candidate checkpoint; no production changes yet",
+  "nativeBefore": {
+    "errors": [],
+    "rows": [
+      {
+        "weapon": "revolver",
+        "pair": false,
+        "loaded": 5,
+        "reserve": 3,
+        "reloadStarted": false,
+        "afterLoaded": 5,
+        "afterReserve": 3,
+        "groups": [
+          3
+        ]
+      },
+      {
+        "weapon": "revolver",
+        "pair": true,
+        "loaded": 7,
+        "reserve": 3,
+        "reloadStarted": true,
+        "afterLoaded": 8,
+        "afterReserve": 2,
+        "groups": [
+          3
+        ]
+      },
+      {
+        "weapon": "launcher",
+        "pair": false,
+        "loaded": 2,
+        "reserve": 11,
+        "reloadStarted": true,
+        "afterLoaded": 6,
+        "afterReserve": 7
+      }
+    ]
+  },
+  "model": {
+    "baseline": "baseline-units.txt:2pass5fail",
+    "candidate": "candidate-units.txt:11pass0fail,686unequalpair conservation cases",
+    "sourceUnchanged": true
+  },
+  "uiCandidate": "3pass0fail: loose-round Armory revision/no refill, invalid counts, HUD classification and regular mag preservation",
+  "adapterEdits": 23,
+  "pending": "Director reload count-only loan and fast-R semantics; C2 adapter loan already granted. J15115 live-shell catch belongs C5 CE13. No runtime acceptance claim for candidates."
+}

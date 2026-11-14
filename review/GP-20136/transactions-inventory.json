@@ -1,0 +1,1034 @@
+{
+  "label": "transactions",
+  "useSnapshot": false,
+  "rows": [
+    {
+      "weapon": "revolver",
+      "pair": false,
+      "cap": 48,
+      "near": {
+        "ok": true,
+        "spent": 15,
+        "quote": {
+          "rows": [],
+          "cost": 0
+        }
+      },
+      "full": {
+        "ok": false,
+        "spent": 0,
+        "quote": {
+          "rows": [],
+          "cost": 0
+        }
+      },
+      "poor": {
+        "ok": false,
+        "spent": 0,
+        "quote": {
+          "rows": [
+            {
+              "key": ".44",
+              "packs": 1,
+              "cost": 15
+            }
+          ],
+          "cost": 15
+        }
+      },
+      "pickup": {
+        "id": "ammo:.44",
+        "accepted": 2,
+        "remaining": 1
+      },
+      "transferConserved": true,
+      "twice": {
+        "started": true,
+        "drop": false,
+        "duration": 1.8
+      },
+      "before": {
+        "weapon": "revolver",
+        "activeWeapon": "revolver",
+        "gameStarted": true,
+        "paused": false,
+        "gameOver": false,
+        "won": false,
+        "placeMode": null,
+        "buildMode": false,
+        "vault": false,
+        "mortarMounted": false,
+        "activeCap": 6,
+        "gain": true,
+        "pair": false,
+        "loaded": 5,
+        "reserve": 3,
+        "store": {
+          "size": 6,
+          "maxSpare": 8,
+          "loaded": [
+            5
+          ],
+          "spare": [],
+          "reserveKind": "rounds",
+          "spareRounds": 3
+        },
+        "armory": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              null,
+              null
+            ],
+            "secondary": [
+              {
+                "id": "revolver",
+                "kind": "revolver",
+                "loaded": 5,
+                "magazines": [],
+                "rounds": 3,
+                "upgrades": {}
+              },
+              null
+            ]
+          },
+          "shelf": []
+        },
+        "hud": "5\nREVOLVER\n5 / 6 · 3 rounds\nG×3\nH×0",
+        "quote": {
+          "rows": [
+            {
+              "key": ".44",
+              "packs": 4,
+              "cost": 60
+            }
+          ],
+          "cost": 60
+        },
+        "reloading": false
+      },
+      "after": {
+        "weapon": "revolver",
+        "activeWeapon": "revolver",
+        "gameStarted": true,
+        "paused": false,
+        "gameOver": false,
+        "won": false,
+        "placeMode": null,
+        "buildMode": false,
+        "vault": false,
+        "mortarMounted": false,
+        "activeCap": 6,
+        "gain": false,
+        "pair": false,
+        "loaded": 6,
+        "reserve": 2,
+        "store": {
+          "size": 6,
+          "maxSpare": 8,
+          "loaded": [
+            6
+          ],
+          "spare": [],
+          "reserveKind": "rounds",
+          "spareRounds": 2
+        },
+        "armory": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              null,
+              null
+            ],
+            "secondary": [
+              {
+                "id": "revolver",
+                "kind": "revolver",
+                "loaded": 5,
+                "magazines": [],
+                "rounds": 3,
+                "upgrades": {}
+              },
+              null
+            ]
+          },
+          "shelf": []
+        },
+        "hud": "6\nREVOLVER\n6 / 6 · 2 rounds\nG×3\nH×0",
+        "quote": {
+          "rows": [
+            {
+              "key": ".44",
+              "packs": 4,
+              "cost": 60
+            }
+          ],
+          "cost": 60
+        },
+        "reloading": false
+      },
+      "ui": {
+        "hidden": true,
+        "hud": "6\nREVOLVER\n6 / 6 · 2 rounds\nG×3\nH×0",
+        "wheel": "6 loaded · 2 rounds",
+        "tiles": [
+          "SECONDARY 1\nRevolver\n6 loaded · 2 loose rounds\nLaser/light combo",
+          "SECONDARY 2\nEmpty slot"
+        ]
+      }
+    },
+    {
+      "weapon": "revolver",
+      "pair": true,
+      "cap": 48,
+      "near": {
+        "ok": true,
+        "spent": 15,
+        "quote": {
+          "rows": [],
+          "cost": 0
+        }
+      },
+      "full": {
+        "ok": false,
+        "spent": 0,
+        "quote": {
+          "rows": [],
+          "cost": 0
+        }
+      },
+      "poor": {
+        "ok": false,
+        "spent": 0,
+        "quote": {
+          "rows": [
+            {
+              "key": ".44",
+              "packs": 1,
+              "cost": 15
+            }
+          ],
+          "cost": 15
+        }
+      },
+      "pickup": {
+        "id": "ammo:.44",
+        "accepted": 2,
+        "remaining": 1
+      },
+      "transferConserved": true,
+      "twice": {
+        "started": true,
+        "drop": false,
+        "duration": 2.7
+      },
+      "before": {
+        "weapon": "revolver",
+        "activeWeapon": "revolver",
+        "gameStarted": true,
+        "paused": false,
+        "gameOver": false,
+        "won": false,
+        "placeMode": null,
+        "buildMode": false,
+        "vault": false,
+        "mortarMounted": false,
+        "activeCap": 12,
+        "gain": true,
+        "pair": true,
+        "loaded": 7,
+        "reserve": 3,
+        "store": {
+          "size": 6,
+          "maxSpare": 8,
+          "loaded": [
+            5,
+            2
+          ],
+          "spare": [],
+          "reserveKind": "rounds",
+          "spareRounds": 3
+        },
+        "armory": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              null,
+              null
+            ],
+            "secondary": [
+              {
+                "id": "revolver",
+                "kind": "revolver",
+                "loaded": 5,
+                "magazines": [],
+                "rounds": 3,
+                "upgrades": {}
+              },
+              {
+                "id": "revolver:second",
+                "kind": "revolver",
+                "loaded": null,
+                "magazines": [],
+                "rounds": 0,
+                "upgrades": {}
+              }
+            ]
+          },
+          "shelf": [
+            {
+              "id": "minigun",
+              "kind": "minigun",
+              "loaded": 300,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "m4",
+              "kind": "m4",
+              "loaded": 30,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "ak",
+              "kind": "ak",
+              "loaded": 30,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "uzi",
+              "kind": "uzi",
+              "loaded": 32,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "shotgun",
+              "kind": "shotgun",
+              "loaded": 8,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "aa12",
+              "kind": "aa12",
+              "loaded": 20,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "sniper",
+              "kind": "sniper",
+              "loaded": 5,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "launcher",
+              "kind": "launcher",
+              "loaded": 6,
+              "magazines": [],
+              "rounds": 25,
+              "upgrades": {}
+            },
+            {
+              "id": "flamer",
+              "kind": "flamer",
+              "loaded": 60,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "chainsaw",
+              "kind": "chainsaw",
+              "loaded": 0,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "pistol:second",
+              "kind": "pistol",
+              "loaded": null,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "uzi:second",
+              "kind": "uzi",
+              "loaded": null,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            }
+          ]
+        },
+        "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+        "quote": {
+          "rows": [
+            {
+              "key": ".44",
+              "packs": 4,
+              "cost": 60
+            }
+          ],
+          "cost": 60
+        },
+        "reloading": false
+      },
+      "after": {
+        "weapon": "revolver",
+        "activeWeapon": "revolver",
+        "gameStarted": true,
+        "paused": false,
+        "gameOver": false,
+        "won": false,
+        "placeMode": null,
+        "buildMode": false,
+        "vault": false,
+        "mortarMounted": false,
+        "activeCap": 12,
+        "gain": false,
+        "pair": true,
+        "loaded": 10,
+        "reserve": 0,
+        "store": {
+          "size": 6,
+          "maxSpare": 8,
+          "loaded": [
+            6,
+            4
+          ],
+          "spare": [],
+          "reserveKind": "rounds",
+          "spareRounds": 0
+        },
+        "armory": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              null,
+              null
+            ],
+            "secondary": [
+              {
+                "id": "revolver",
+                "kind": "revolver",
+                "loaded": 5,
+                "magazines": [],
+                "rounds": 3,
+                "upgrades": {}
+              },
+              {
+                "id": "revolver:second",
+                "kind": "revolver",
+                "loaded": null,
+                "magazines": [],
+                "rounds": 0,
+                "upgrades": {}
+              }
+            ]
+          },
+          "shelf": [
+            {
+              "id": "minigun",
+              "kind": "minigun",
+              "loaded": 300,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "m4",
+              "kind": "m4",
+              "loaded": 30,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "ak",
+              "kind": "ak",
+              "loaded": 30,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "uzi",
+              "kind": "uzi",
+              "loaded": 32,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "shotgun",
+              "kind": "shotgun",
+              "loaded": 8,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "aa12",
+              "kind": "aa12",
+              "loaded": 20,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "sniper",
+              "kind": "sniper",
+              "loaded": 5,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "launcher",
+              "kind": "launcher",
+              "loaded": 6,
+              "magazines": [],
+              "rounds": 25,
+              "upgrades": {}
+            },
+            {
+              "id": "flamer",
+              "kind": "flamer",
+              "loaded": 60,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "chainsaw",
+              "kind": "chainsaw",
+              "loaded": 0,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "pistol:second",
+              "kind": "pistol",
+              "loaded": null,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "uzi:second",
+              "kind": "uzi",
+              "loaded": null,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            }
+          ]
+        },
+        "hud": "10\nREVOLVER\n10 / 12 · 0 rounds\nG×3\nH×0",
+        "quote": {
+          "rows": [
+            {
+              "key": ".44",
+              "packs": 4,
+              "cost": 60
+            }
+          ],
+          "cost": 60
+        },
+        "reloading": false
+      },
+      "ui": {
+        "hidden": true,
+        "hud": "10\nREVOLVER\n10 / 12 · 0 rounds\nG×3\nH×0",
+        "wheel": "10 loaded · 0 rounds",
+        "tiles": [
+          "SECONDARY 1\nRevolver\n6 loaded · 0 loose rounds\nLaser/light combo\nRevolver pair",
+          "SECONDARY 2\nRevolver · second gun\n4 loaded · Shared loose rounds\nLaser/light combo\nRevolver pair"
+        ]
+      }
+    },
+    {
+      "weapon": "launcher",
+      "pair": false,
+      "cap": 25,
+      "near": {
+        "ok": true,
+        "spent": 44,
+        "quote": {
+          "rows": [],
+          "cost": 0
+        }
+      },
+      "full": {
+        "ok": false,
+        "spent": 0,
+        "quote": {
+          "rows": [],
+          "cost": 0
+        }
+      },
+      "poor": {
+        "ok": false,
+        "spent": 0,
+        "quote": {
+          "rows": [
+            {
+              "key": "40mm",
+              "packs": 1,
+              "cost": 44
+            }
+          ],
+          "cost": 44
+        }
+      },
+      "pickup": {
+        "id": "ammo:40mm",
+        "accepted": 2,
+        "remaining": 1
+      },
+      "transferConserved": true,
+      "twice": {
+        "started": true,
+        "drop": false,
+        "duration": 2.4000000000000004
+      },
+      "before": {
+        "weapon": "launcher",
+        "activeWeapon": "launcher",
+        "gameStarted": true,
+        "paused": false,
+        "gameOver": false,
+        "won": false,
+        "placeMode": null,
+        "buildMode": false,
+        "vault": false,
+        "mortarMounted": false,
+        "activeCap": 6,
+        "gain": null,
+        "pair": false,
+        "loaded": 2,
+        "reserve": 11,
+        "store": null,
+        "armory": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              {
+                "id": "launcher",
+                "kind": "launcher",
+                "loaded": 2,
+                "magazines": [],
+                "rounds": 11,
+                "upgrades": {}
+              },
+              null
+            ],
+            "secondary": [
+              null,
+              null
+            ]
+          },
+          "shelf": [
+            {
+              "id": "minigun",
+              "kind": "minigun",
+              "loaded": 300,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "m4",
+              "kind": "m4",
+              "loaded": 30,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "ak",
+              "kind": "ak",
+              "loaded": 30,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "uzi",
+              "kind": "uzi",
+              "loaded": 32,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "shotgun",
+              "kind": "shotgun",
+              "loaded": 8,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "aa12",
+              "kind": "aa12",
+              "loaded": 20,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "sniper",
+              "kind": "sniper",
+              "loaded": 5,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "flamer",
+              "kind": "flamer",
+              "loaded": 60,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "chainsaw",
+              "kind": "chainsaw",
+              "loaded": 0,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "pistol:second",
+              "kind": "pistol",
+              "loaded": null,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "uzi:second",
+              "kind": "uzi",
+              "loaded": null,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "revolver",
+              "kind": "revolver",
+              "loaded": 6,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "revolver:second",
+              "kind": "revolver",
+              "loaded": 4,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            }
+          ]
+        },
+        "hud": "2\nLAUNCHER\n2 / 6 · 11 rounds\nG×3\nH×0",
+        "quote": {
+          "rows": [
+            {
+              "key": "40mm",
+              "packs": 3,
+              "cost": 132
+            }
+          ],
+          "cost": 132
+        },
+        "reloading": false
+      },
+      "after": {
+        "weapon": "launcher",
+        "activeWeapon": "launcher",
+        "gameStarted": true,
+        "paused": false,
+        "gameOver": false,
+        "won": false,
+        "placeMode": null,
+        "buildMode": false,
+        "vault": false,
+        "mortarMounted": false,
+        "activeCap": 6,
+        "gain": null,
+        "pair": false,
+        "loaded": 6,
+        "reserve": 7,
+        "store": null,
+        "armory": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              {
+                "id": "launcher",
+                "kind": "launcher",
+                "loaded": 2,
+                "magazines": [],
+                "rounds": 11,
+                "upgrades": {}
+              },
+              null
+            ],
+            "secondary": [
+              null,
+              null
+            ]
+          },
+          "shelf": [
+            {
+              "id": "minigun",
+              "kind": "minigun",
+              "loaded": 300,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "m4",
+              "kind": "m4",
+              "loaded": 30,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "ak",
+              "kind": "ak",
+              "loaded": 30,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "uzi",
+              "kind": "uzi",
+              "loaded": 32,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "shotgun",
+              "kind": "shotgun",
+              "loaded": 8,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "aa12",
+              "kind": "aa12",
+              "loaded": 20,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "sniper",
+              "kind": "sniper",
+              "loaded": 5,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "flamer",
+              "kind": "flamer",
+              "loaded": 60,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "chainsaw",
+              "kind": "chainsaw",
+              "loaded": 0,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "pistol:second",
+              "kind": "pistol",
+              "loaded": null,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "uzi:second",
+              "kind": "uzi",
+              "loaded": null,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "revolver",
+              "kind": "revolver",
+              "loaded": 6,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "revolver:second",
+              "kind": "revolver",
+              "loaded": 4,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            }
+          ]
+        },
+        "hud": "6\nLAUNCHER\n6 / 6 · 7 rounds\nG×3\nH×0",
+        "quote": {
+          "rows": [
+            {
+              "key": "40mm",
+              "packs": 3,
+              "cost": 132
+            }
+          ],
+          "cost": 132
+        },
+        "reloading": false
+      },
+      "ui": {
+        "hidden": true,
+        "hud": "6\nLAUNCHER\n6 / 6 · 7 rounds\nG×3\nH×0",
+        "wheel": "6 loaded · 7 rounds",
+        "tiles": [
+          "PRIMARY 1\nLauncher\n6 loaded · 7 loose rounds\nLaser/light combo",
+          "PRIMARY 2\nEmpty slot"
+        ]
+      }
+    }
+  ],
+  "layouts": [
+    {
+      "id": "tp-day-1280",
+      "hidden": true,
+      "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+      "left": 16,
+      "right": 276.40625,
+      "bottom": 702,
+      "viewport": 1280,
+      "overflow": false
+    },
+    {
+      "id": "tp-day-390",
+      "hidden": true,
+      "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+      "left": 12,
+      "right": 378,
+      "bottom": 832,
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "tp-night-1280",
+      "hidden": true,
+      "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+      "left": 16,
+      "right": 276.40625,
+      "bottom": 702,
+      "viewport": 1280,
+      "overflow": false
+    },
+    {
+      "id": "tp-night-390",
+      "hidden": true,
+      "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+      "left": 12,
+      "right": 378,
+      "bottom": 832,
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "fp-day-1280",
+      "hidden": true,
+      "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+      "left": 16,
+      "right": 276.40625,
+      "bottom": 702,
+      "viewport": 1280,
+      "overflow": false
+    },
+    {
+      "id": "fp-day-390",
+      "hidden": true,
+      "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+      "left": 12,
+      "right": 378,
+      "bottom": 832,
+      "viewport": 390,
+      "overflow": false
+    },
+    {
+      "id": "fp-night-1280",
+      "hidden": true,
+      "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+      "left": 16,
+      "right": 276.40625,
+      "bottom": 702,
+      "viewport": 1280,
+      "overflow": false
+    },
+    {
+      "id": "fp-night-390",
+      "hidden": true,
+      "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+      "left": 12,
+      "right": 378,
+      "bottom": 832,
+      "viewport": 390,
+      "overflow": false
+    }
+  ],
+  "errors": []
+}

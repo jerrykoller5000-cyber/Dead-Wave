@@ -1,0 +1,88 @@
+{
+  "scope": "High repeated current tree. No CPU sampling, general wrappers or bench profiler. Residual impacts/dummy method timing from Q.objects remained enabled; total impact timing .2-9.8ms per full magazine. Treat as low-overhead, not completely uninstrumented.",
+  "sourceUnchanged": true,
+  "graphics": "high",
+  "errors": [],
+  "rows": [
+    {
+      "pass": 0,
+      "weapon": "uzi",
+      "shots": 32,
+      "idleMs": 16.742,
+      "fireMs": 17.503,
+      "deltaPercent": 4.54,
+      "p95": 33.19999999999709,
+      "worst": 33.5
+    },
+    {
+      "pass": 0,
+      "weapon": "ak",
+      "shots": 30,
+      "idleMs": 17.778,
+      "fireMs": 20.956,
+      "deltaPercent": 17.88,
+      "p95": 33.599999999998545,
+      "worst": 50.099999999998545
+    },
+    {
+      "pass": 0,
+      "weapon": "minigun",
+      "shots": 300,
+      "idleMs": 20.336,
+      "fireMs": 20.967,
+      "deltaPercent": 3.1,
+      "p95": 33.5,
+      "worst": 216.60000000000582
+    },
+    {
+      "pass": 0,
+      "weapon": "pistol",
+      "shots": 24,
+      "idleMs": 16.594,
+      "fireMs": 18.171,
+      "deltaPercent": 9.51,
+      "p95": 33.30000000000291,
+      "worst": 49.90000000000873
+    },
+    {
+      "pass": 1,
+      "weapon": "uzi",
+      "shots": 32,
+      "idleMs": 16.678,
+      "fireMs": 17.58,
+      "deltaPercent": 5.4,
+      "p95": 33.10000000000582,
+      "worst": 33.5
+    },
+    {
+      "pass": 1,
+      "weapon": "ak",
+      "shots": 30,
+      "idleMs": 17.293,
+      "fireMs": 20.602,
+      "deltaPercent": 19.13,
+      "p95": 33.5,
+      "worst": 49.80000000000291
+    },
+    {
+      "pass": 1,
+      "weapon": "minigun",
+      "shots": 300,
+      "idleMs": 18.194,
+      "fireMs": 19.288,
+      "deltaPercent": 6.01,
+      "p95": 33.39999999999418,
+      "worst": 50.40000000002328
+    },
+    {
+      "pass": 1,
+      "weapon": "pistol",
+      "shots": 24,
+      "idleMs": 16.615,
+      "fireMs": 16.673,
+      "deltaPercent": 0.35,
+      "p95": 16.89999999999418,
+      "worst": 33.10000000000582
+    }
+  ]
+}

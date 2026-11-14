@@ -1,0 +1,5 @@
+{
+  "before": "3e642be0100b1c224fbc4b5f91f5613fcb60483cee3251811e2561c6d31f58b6",
+  "after": "9a5d18da426b9d6cc822d096ebb85a05c5452dec476528685bbe1d6e82c3c667",
+  "reason": "Director approved J15325 supersedes old straight-flight expectation; strict analytic1e-5 position/velocity replaces tolerance. Section4+descriptive header only."
+}

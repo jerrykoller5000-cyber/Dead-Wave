@@ -1,0 +1,1998 @@
+{
+  "stage": "shadow-audit",
+  "indexHash": "63e42fd70dc2c84dff26ecfe42f25369965b8753c3f840a4a52f0518e94c74d9",
+  "trainingHash": "c14b51e72eb854f43023e8017bcff49afb4ebb626a95a1491232889bba4a3de0",
+  "metric": "RGB channel range across3frames; dx -.002,0,+.002m; still vs walk camera, fixed/follow/snapped sun anchor controls. Fixed thresholds16/24/32/48/64/96.",
+  "views": {
+    "jerryA": [
+      -12,
+      1.35,
+      -2,
+      -10,
+      0.08,
+      1,
+      40
+    ],
+    "jerryB": [
+      -12.3,
+      1.35,
+      -1.85,
+      -10,
+      0.08,
+      1,
+      40
+    ],
+    "firingLine": [
+      2,
+      1.35,
+      -2,
+      0,
+      0.02,
+      0.1,
+      40
+    ]
+  },
+  "rows": [
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "still-fixed",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-noon-still-fixed-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              -11.999999999999995,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryA-noon-still-fixed-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              -11.999999999999995,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryA-noon-still-fixed-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              -11.999999999999995,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "still-follow",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-noon-still-follow-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.002,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              -12.001999999999995,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryA-noon-still-follow-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              -11.999999999999995,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryA-noon-still-follow-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -11.998,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              -11.997999999999994,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "still-snapped",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-noon-still-snapped-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -11.986328125000131,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "shadowPosition": [
+              -11.986328125000126,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryA-noon-still-snapped-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -11.986328125000131,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "shadowPosition": [
+              -11.986328125000126,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryA-noon-still-snapped-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -11.986328125000131,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "shadowPosition": [
+              -11.986328125000126,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "walk-fixed",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-noon-walk-fixed-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.002,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              -11.999999999999995,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryA-noon-walk-fixed-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              -11.999999999999995,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryA-noon-walk-fixed-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -11.998,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              -11.999999999999995,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "walk-follow",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-noon-walk-follow-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.002,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.002,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              -12.001999999999995,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryA-noon-walk-follow-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              -11.999999999999995,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryA-noon-walk-follow-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -11.998,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -11.998,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              -11.997999999999994,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "walk-snapped",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-noon-walk-snapped-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.002,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -11.986328125000131,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "shadowPosition": [
+              -11.986328125000126,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryA-noon-walk-snapped-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -11.986328125000131,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "shadowPosition": [
+              -11.986328125000126,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryA-noon-walk-snapped-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -11.998,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -11.986328125000131,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "shadowPosition": [
+              -11.986328125000126,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "still-fixed",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-noon-still-fixed-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.3,
+              -200,
+              -641.85
+            ],
+            "shadowPosition": [
+              -12.299999999999995,
+              -118.58476575620213,
+              -617.4254297268607
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryB-noon-still-fixed-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.3,
+              -200,
+              -641.85
+            ],
+            "shadowPosition": [
+              -12.299999999999995,
+              -118.58476575620213,
+              -617.4254297268607
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryB-noon-still-fixed-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.3,
+              -200,
+              -641.85
+            ],
+            "shadowPosition": [
+              -12.299999999999995,
+              -118.58476575620213,
+              -617.4254297268607
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "still-follow",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-noon-still-follow-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.302000000000001,
+              -200,
+              -641.85
+            ],
+            "shadowPosition": [
+              -12.301999999999996,
+              -118.58476575620213,
+              -617.4254297268607
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryB-noon-still-follow-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.3,
+              -200,
+              -641.85
+            ],
+            "shadowPosition": [
+              -12.299999999999995,
+              -118.58476575620213,
+              -617.4254297268607
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryB-noon-still-follow-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.298,
+              -200,
+              -641.85
+            ],
+            "shadowPosition": [
+              -12.297999999999995,
+              -118.58476575620213,
+              -617.4254297268607
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "still-snapped",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-noon-still-snapped-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.318359375000131,
+              -199.99907213382954,
+              -641.8530928872349
+            ],
+            "shadowPosition": [
+              -12.318359375000126,
+              -118.58383789003167,
+              -617.4285226140955
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryB-noon-still-snapped-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.285156250000131,
+              -199.99907213382954,
+              -641.8530928872349
+            ],
+            "shadowPosition": [
+              -12.285156250000126,
+              -118.58383789003167,
+              -617.4285226140955
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryB-noon-still-snapped-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.285156250000131,
+              -199.99907213382954,
+              -641.8530928872349
+            ],
+            "shadowPosition": [
+              -12.285156250000126,
+              -118.58383789003167,
+              -617.4285226140955
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "walk-fixed",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-noon-walk-fixed-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.302000000000001,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.3,
+              -200,
+              -641.85
+            ],
+            "shadowPosition": [
+              -12.299999999999995,
+              -118.58476575620213,
+              -617.4254297268607
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryB-noon-walk-fixed-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.3,
+              -200,
+              -641.85
+            ],
+            "shadowPosition": [
+              -12.299999999999995,
+              -118.58476575620213,
+              -617.4254297268607
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryB-noon-walk-fixed-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12.298,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.3,
+              -200,
+              -641.85
+            ],
+            "shadowPosition": [
+              -12.299999999999995,
+              -118.58476575620213,
+              -617.4254297268607
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "walk-follow",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-noon-walk-follow-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.302000000000001,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.302000000000001,
+              -200,
+              -641.85
+            ],
+            "shadowPosition": [
+              -12.301999999999996,
+              -118.58476575620213,
+              -617.4254297268607
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryB-noon-walk-follow-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.3,
+              -200,
+              -641.85
+            ],
+            "shadowPosition": [
+              -12.299999999999995,
+              -118.58476575620213,
+              -617.4254297268607
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryB-noon-walk-follow-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12.298,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.298,
+              -200,
+              -641.85
+            ],
+            "shadowPosition": [
+              -12.297999999999995,
+              -118.58476575620213,
+              -617.4254297268607
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "walk-snapped",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-noon-walk-snapped-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.302000000000001,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.318359375000131,
+              -199.99907213382954,
+              -641.8530928872349
+            ],
+            "shadowPosition": [
+              -12.318359375000126,
+              -118.58383789003167,
+              -617.4285226140955
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryB-noon-walk-snapped-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.285156250000131,
+              -199.99907213382954,
+              -641.8530928872349
+            ],
+            "shadowPosition": [
+              -12.285156250000126,
+              -118.58383789003167,
+              -617.4285226140955
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "jerryB-noon-walk-snapped-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12.298,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              -12.285156250000131,
+              -199.99907213382954,
+              -641.8530928872349
+            ],
+            "shadowPosition": [
+              -12.285156250000126,
+              -118.58383789003167,
+              -617.4285226140955
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "firingLine",
+      "light": "noon",
+      "kind": "still-fixed",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "firingLine-noon-still-fixed-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": 2,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              2,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              2.000000000000005,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "firingLine-noon-still-fixed-1.png",
+          "dx": 0,
+          "actual": {
+            "x": 2,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              2,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              2.000000000000005,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "firingLine-noon-still-fixed-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": 2,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              2,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              2.000000000000005,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "firingLine",
+      "light": "noon",
+      "kind": "still-follow",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "firingLine-noon-still-follow-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": 2,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              1.998,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              1.9980000000000049,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "firingLine-noon-still-follow-1.png",
+          "dx": 0,
+          "actual": {
+            "x": 2,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              2,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              2.000000000000005,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "firingLine-noon-still-follow-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": 2,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              2.002,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              2.0020000000000047,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "firingLine",
+      "light": "noon",
+      "kind": "still-snapped",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "firingLine-noon-still-snapped-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": 2,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              1.992187499999869,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "shadowPosition": [
+              1.9921874999998739,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "firingLine-noon-still-snapped-1.png",
+          "dx": 0,
+          "actual": {
+            "x": 2,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              1.992187499999869,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "shadowPosition": [
+              1.9921874999998739,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "firingLine-noon-still-snapped-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": 2,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              1.992187499999869,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "shadowPosition": [
+              1.9921874999998739,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "firingLine",
+      "light": "noon",
+      "kind": "walk-fixed",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "firingLine-noon-walk-fixed-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": 1.998,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              2,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              2.000000000000005,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "firingLine-noon-walk-fixed-1.png",
+          "dx": 0,
+          "actual": {
+            "x": 2,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              2,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              2.000000000000005,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "firingLine-noon-walk-fixed-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": 2.002,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              2,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              2.000000000000005,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "firingLine",
+      "light": "noon",
+      "kind": "walk-follow",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "firingLine-noon-walk-follow-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": 1.998,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              1.998,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              1.9980000000000049,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "firingLine-noon-walk-follow-1.png",
+          "dx": 0,
+          "actual": {
+            "x": 2,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              2,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              2.000000000000005,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "firingLine-noon-walk-follow-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": 2.002,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              2.002,
+              -200,
+              -642
+            ],
+            "shadowPosition": [
+              2.0020000000000047,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "view": "firingLine",
+      "light": "noon",
+      "kind": "walk-snapped",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "firingLine-noon-walk-snapped-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": 1.998,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              1.992187499999869,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "shadowPosition": [
+              1.9921874999998739,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "firingLine-noon-walk-snapped-1.png",
+          "dx": 0,
+          "actual": {
+            "x": 2,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              1.992187499999869,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "shadowPosition": [
+              1.9921874999998739,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        },
+        {
+          "file": "firingLine-noon-walk-snapped-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": 2.002,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150,
+            "shadowTarget": [
+              1.992187499999869,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "shadowPosition": [
+              1.9921874999998739,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "shadowMap": [
+              2048,
+              2048
+            ],
+            "shadowSize": [
+              68,
+              68
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "setup": {
+    "origin": {
+      "x": 0,
+      "y": -200,
+      "z": -640
+    },
+    "paint": {
+      "vertices": 456,
+      "offset": -1,
+      "units": -1
+    },
+    "near": 0.1,
+    "far": 150,
+    "warming": false,
+    "renderer": "WebGPURenderer"
+  },
+  "errors": []
+}

@@ -1,0 +1,17 @@
+{
+  "approved": "Director reply 2026-11-14 02:46Z GP40 actual idle forearm-roll callback contract",
+  "moduleBefore": "d22384a682b3e3ff59155e55fff1a67ca0463f16b215a7c6d88e745e6fee541b",
+  "moduleAfter": "e9a15d08c66558f5533678d9a1c8b503f3e0cc071444d06b5ace58c985e5be30",
+  "indexBefore": "a8e7b6b6185d96d4d25353f0f797ef611588dc5507d25ab01c3f7575182b446e",
+  "indexAfter": "faca8dba6a8bcba1a7ca70d944f9412d9f886ad21437ec0753a50bbeca9e49ec",
+  "indexPatches": [
+    {
+      "before": "      solveArm: (side, target, hand) => solveArmIK(marine.userData['arm' + side + 'G'], marine.userData['elbow' + side + 'G'],\n        hand || (side === 'R' ? _HAND_R : _HAND_L), target, side === 'R' ? _POLE_R : _POLE_L, 1),",
+      "after": "      solveArm: (side, target, hand) => {\n        if (side === 'R') handRollR = 0; else handRollL = 0;\n        solveArmIK(marine.userData['arm' + side + 'G'], marine.userData['elbow' + side + 'G'],\n          hand || (side === 'R' ? _HAND_R : _HAND_L), target, side === 'R' ? _POLE_R : _POLE_L, 1);\n      },\n      setForearmRoll: (side, angle) => { if (side === 'R') handRollR = angle; else handRollL = angle; },"
+    }
+  ],
+  "laserFitGuard": {
+    "before": "const lp = now || mortarMounted ? null : viewmodel?.lightPressTimes?.(currentWeapon);\r\n      if (lp) { lightPress = { t: 0, at: lp.at, total: lp.total, flip: true, kind: 'laser' };",
+    "after": "const lp = now || mortarMounted || !laserLightFitted[currentWeapon] ? null : viewmodel?.lightPressTimes?.(currentWeapon);\r\n      if (lp) { lightPress = { t: 0, at: lp.at, total: lp.total, flip: true, kind: 'laser' };"
+  }
+}

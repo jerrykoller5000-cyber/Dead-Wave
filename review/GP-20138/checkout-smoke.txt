@@ -1,0 +1,51 @@
+ChatGPT checked out.
+Your queue is empty. Stop here.
+
+GRAVE SHIFT CREW · 2026-11-14 00:40 UTC · Jerry's view: crew/panel.html
+──────────────────────────────────────────────────────────────────────────────
+NEEDS JERRY
+  ▷ Ready, needs a prompt: CLAUDE DIRECTOR (CL-361), Claude 2 (CB-335), Claude 3 (CC-350), Claude 6 (CF-10), ChatGPT (GP-20136).
+  ◉ For Jerry to look at: guardian-grab-drag v5, guardian-throw-out v4, motion-marine-marine v2, suppressors v2 (review/<asset>/index.html)
+──────────────────────────────────────────────────────────────────────────────
+CLAUDE DIRECIDLE     (no task)
+                     last seen 3 days ago · next: CL-361 D-182: the last pass on the playtest issues, then 
+Claude 2    IDLE     (no task)
+                     last seen 18 min ago · next: CB-335 D-182 last pass, shell and combat (after CB-333): 
+Claude 3    IDLE     (no task)
+                     last seen 1.9 h ago · next: CC-350 (22:58Z, CLAUDE DIRECTOR: ACCEPTED for the common 
+Claude 1    ACTIVE   CD-14 D-182 last pass, the hands: J153 1,3,6,7,8,16,17,18
+                     31 min ago · Claude Opus 5.5 · touching game/viewmodel-fit.js, studio/hand-contacts.js, studio/marine-hand.js, studio/fp
+                     latest: CD-14: the handgun set (pistol/revolver thumbs, Wasp pair thumb, revolver pair distance, paired pistol rack) pas
+Claude 5    ACTIVE   CE-12 J153 note 20: every weapon's 3P handling: holds, re
+                     5.6 h ago · Claude Opus 5.5 · touching index.html (third-person hold and 3P actions: WEAPON_HOLD), game/tp-fit.js, tools
+                     latest: CE-12 part 1 landed + handoff (handoffs/2026-11-14-claude5-CE-12a.md), sent for review. Part 2 (support-hand pos
+Claude 6    IDLE     (no task)
+                     last seen 20.5 h ago · next: CF-10 (00:50Z: MOVED to Claude 9 as CI-1 (weapon-heavy.j
+Claude 7    ACTIVE   CG-6 D-182 last pass, the look: J153 5 camo resize first,
+                     2 h ago · Claude Opus 5.5 · touching review/CG-6
+                     latest: CG-6 note 5: Jerry's 05/06 crops show the same pose with the camo texels ~3-4x magnified on gun AND sleeve toget
+Claude 8    IDLE     (no task)
+                     last seen 20.2 h ago · next: queue empty
+Claude 9    IDLE     (no task)
+                     last seen 17.5 h ago · next: queue empty
+Claude 10   IDLE     (no task)
+                     last seen 20.6 h ago · next: queue empty
+ChatGPT     IDLE     (no task)
+                     last seen just now · next: queue empty
+ChatGPT 2   ACTIVE   GT-20106 Accepted magazine sweep continuing heavy and pum
+                     23 min ago · GPT-6.1 Sol · touching studio/weapon-longarms.js (GT20106 KR7, GW4, sniper magazines and pump suppressor se
+                     latest: Gauge four-light reversal inspected; minigun drum/feed and pump housing/seam sheets captured. Native dimension/e
+Antigravity IDLE     (no task)
+                     last seen 18.4 h ago · next: queue empty
+──────────────────────────────────────────────────────────────────────────────
+Game-test slot: ChatGPT 2 has one (GT-20106, since just now) · 1 of 3 in use · queue empty
+» 89 handoff(s) for Claude to review (node crew/crew.mjs reviewed <report> "<verdict>")
+
+Last log lines:
+- 2026-11-14T00:40Z · claude · REPLY · DONE · ChatGPT 2: GT20106 minigun drum audit: clear receiver without moving reload root · Approved as you pick
+- 2026-11-14T00:40Z · chatgpt · NOTE · GP38 C2-loaned I/O fallback landed: normalwrite first, UNKNOWN only r+fdwrite+UTF8byte ftruncate+close. Fault-
+- 2026-11-14T00:40Z · chatgpt2 · NOTE · Gauge four-light reversal inspected; minigun drum/feed and pump housing/seam sheets captured. Native dimension
+- 2026-11-14T00:40Z · chatgpt · DONE · GP-20138 Restore UNKNOWN-only UTF8 write fallback under C2 named loan; preserve normal path/content · report h
+- 2026-11-14T00:40Z · chatgpt · REVIEW · handoffs/2026-11-14-chatgpt-GP-20138.md · C2 named shared I/O loan; UNKNOWN-only fallback,8/0 fault-injection 
+
+Your briefing: node crew/crew.mjs me <you>  ·  Orders, decisions and queues: crew/BOARD.md

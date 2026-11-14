@@ -1,0 +1,38 @@
+{
+  "sourceSha256": "0eeebc8106fedbcc34917198da6d4ebe7a887746f5faaf0aa680eda1c0875427",
+  "scope": "Review-only candidate; production source UNCHANGED pending contract/loans",
+  "changes": [
+    {
+      "a": "export const isMagazineWeapon = weapon => MAGAZINE_WEAPONS.includes(weapon);",
+      "b": "export const isMagazineWeapon = weapon => MAGAZINE_WEAPONS.includes(weapon);\nexport const isLooseRoundWeapon = weapon => weapon === 'revolver' || weapon === 'launcher';"
+    },
+    {
+      "a": "  return value;\n}",
+      "b": "  if (isLooseRoundWeapon(weapon)) {\n    // Older run/replay snapshots and legacy debug adapters can still supply loader groups.\n    // Fold each old group into the shared pool once, preserving every partial round.\n    if (value.reserveKind !== 'rounds') { value.reserveKind = 'rounds'; value.spareRounds = Math.max(0, Number(value.spareRounds) || 0); }\n    if (value.spare.length) { for (const item of value.spare) value.spareRounds += Math.max(0, Number(item.rounds) || 0); value.spare.length = 0; }\n  }\n  return value;\n}"
+    },
+    {
+      "a": "  store[weapon] = entry;",
+      "b": "  if (isLooseRoundWeapon(weapon)) { entry.reserveKind = 'rounds'; entry.spareRounds = 0; }\n  store[weapon] = entry;"
+    },
+    {
+      "a": "  let accepted = 0;\n  while (entry.spare.length",
+      "b": "  if (entry.reserveKind === 'rounds') {\n    if (!Number.isSafeInteger(rounds)) throw new TypeError('Loose rounds must be whole');\n    const accepted = Math.min(rounds, Math.max(0, entry.size * entry.maxSpare - entry.spareRounds));\n    entry.spareRounds += accepted; return accepted;\n  }\n  let accepted = 0;\n  while (entry.spare.length"
+    },
+    {
+      "a": "export function spareMagazineRounds(store, weapon) { return state(store, weapon).spare.reduce((n, item) => n + item.rounds, 0); }",
+      "b": "export function spareMagazineRounds(store, weapon) { const entry = state(store, weapon); return entry.reserveKind === 'rounds' ? entry.spareRounds : entry.spare.reduce((n, item) => n + item.rounds, 0); }"
+    },
+    {
+      "a": "    loaded: entry.loaded.map(item => item.rounds), spare: entry.spare.map(item => item.rounds) };",
+      "b": "    loaded: entry.loaded.map(item => item.rounds), spare: entry.spare.map(item => item.rounds),\n    ...(entry.reserveKind === 'rounds' ? { reserveKind: 'rounds', spareRounds: entry.spareRounds } : {}) };"
+    },
+    {
+      "a": "  let swapped = 0;\n  for (let hand",
+      "b": "  let swapped = 0;\n  if (entry.reserveKind === 'rounds') {\n    for (let hand = 0; hand < (dual ? 2 : 1); hand++) {\n      const current = entry.loaded[hand]; if (!current) continue;\n      const take = Math.min(Math.max(0, entry.size - current.rounds), entry.spareRounds);\n      if (take > 0) { current.rounds += take; entry.spareRounds -= take; swapped++; }\n    }\n    return { swapped, dropped };\n  }\n  for (let hand"
+    },
+    {
+      "a": "  if (entry.spare.length >= entry.maxSpare) return false;",
+      "b": "  if (entry.reserveKind === 'rounds') {\n    if (item.rounds > Math.max(0, entry.size * entry.maxSpare - entry.spareRounds)) return false;\n    return addMagazineRounds(store, item.weapon, item.rounds) === item.rounds;\n  }\n  if (entry.spare.length >= entry.maxSpare) return false;"
+    }
+  ]
+}

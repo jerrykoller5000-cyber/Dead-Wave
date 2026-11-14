@@ -1,0 +1,14 @@
+✔ ordinary path remains a single UTF8 path write (3.4708ms)
+✔ UNKNOWN fallback preserves Unicode bytes and truncates old tail (3.8488ms)
+✔ UNKNOWN fallback writes empty content without stale bytes (1.9072ms)
+✔ EACCES propagates and never opens a fallback descriptor (2.0486ms)
+✔ fallback descriptor is closed if fd write fails; error propagates (2.1084ms)
+✔ both named call sites use helper with original content expression (0.1784ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 92.6632

@@ -1,0 +1,11 @@
+check-players: 313 player.position reads, all in the allowed places
+ERROR tce4     0 pass   0 fail  216.6s  — time limit: check still running after 180s
+           recovering browser after tce4: time limit: check still running after 180s
+           INFO smoking pinch: solved 1.8 cm, sampled 1.8 cm, wrist miss 0.0 cm; shoulder target/actual 23.9/23.9 cm; hand offset 16.3 cm
+ok    t255     5 pass   0 fail  57.2s
+
+2 checks: 5 pass, 0 fail, 1 could not run
+
+by owner:
+  unassigned
+    tce4   0 fail  time limit: check still running after 180s

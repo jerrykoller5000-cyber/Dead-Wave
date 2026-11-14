@@ -1,0 +1,16 @@
+{
+  "approval": "Director under remaining outdoor cold hitch identified: falling leaves",
+  "proof": [
+    {
+      "file": "game/fire-warmup.js",
+      "before": "2a9fec133c1512b60dfe38dc279c0ea82c3a773419d0d50835da9e28c8979491",
+      "after": "ff72813c050f6356e5800e90ded5dcdd9c72f08fcc1856a9322afe791f648552"
+    },
+    {
+      "file": "index.html",
+      "before": "1d312956639359e794760ceb95055f71d44ac1711ccffb50454aa0ec56bd8445",
+      "after": "5160b0a41708052962b8ff4a1758ff8eea58b24f43aa3a482ee0ed5b27ab82db"
+    }
+  ],
+  "scope": "One real existing pooled leaf material with leafGeo, both sides; factory/physics untouched. Node-builder cache is shared by render key in bundled three; anchor retained off-scene."
+}

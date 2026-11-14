@@ -1,0 +1,432 @@
+{
+  "label": "before-pair-photo",
+  "useSnapshot": true,
+  "rows": [
+    {
+      "weapon": "revolver",
+      "pair": true,
+      "before": {
+        "weapon": "revolver",
+        "activeWeapon": "revolver",
+        "gameStarted": true,
+        "paused": false,
+        "gameOver": false,
+        "won": false,
+        "placeMode": null,
+        "buildMode": false,
+        "vault": false,
+        "mortarMounted": false,
+        "activeCap": 12,
+        "gain": true,
+        "pair": true,
+        "loaded": 7,
+        "reserve": 3,
+        "store": {
+          "size": 6,
+          "maxSpare": 8,
+          "loaded": [
+            5,
+            2
+          ],
+          "spare": [
+            3
+          ]
+        },
+        "armory": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              null,
+              null
+            ],
+            "secondary": [
+              {
+                "id": "revolver",
+                "kind": "revolver",
+                "loaded": 7,
+                "magazines": [
+                  {
+                    "rounds": 3
+                  }
+                ],
+                "rounds": 0,
+                "upgrades": {}
+              },
+              {
+                "id": "revolver:second",
+                "kind": "revolver",
+                "loaded": null,
+                "magazines": [],
+                "rounds": 0,
+                "upgrades": {}
+              }
+            ]
+          },
+          "shelf": []
+        },
+        "hud": "7\nREVOLVER\n7 / 12 · 3 Bullets\nG×3\nH×0\n1 loaders\n3",
+        "quote": {
+          "rows": [
+            {
+              "key": "revolver",
+              "packs": 7,
+              "cost": 56
+            }
+          ],
+          "cost": 56
+        },
+        "reloading": false
+      },
+      "preReload": {
+        "weapon": "revolver",
+        "activeWeapon": "revolver",
+        "gameStarted": true,
+        "paused": false,
+        "gameOver": false,
+        "won": false,
+        "placeMode": null,
+        "buildMode": false,
+        "vault": false,
+        "mortarMounted": false,
+        "activeCap": 12,
+        "gain": true,
+        "pair": true,
+        "loaded": 7,
+        "reserve": 3,
+        "store": {
+          "size": 6,
+          "maxSpare": 8,
+          "loaded": [
+            5,
+            2
+          ],
+          "spare": [
+            3
+          ]
+        },
+        "armory": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              null,
+              null
+            ],
+            "secondary": [
+              {
+                "id": "revolver",
+                "kind": "revolver",
+                "loaded": 7,
+                "magazines": [
+                  {
+                    "rounds": 3
+                  }
+                ],
+                "rounds": 0,
+                "upgrades": {}
+              },
+              {
+                "id": "revolver:second",
+                "kind": "revolver",
+                "loaded": null,
+                "magazines": [],
+                "rounds": 0,
+                "upgrades": {}
+              }
+            ]
+          },
+          "shelf": [
+            {
+              "id": "minigun",
+              "kind": "minigun",
+              "loaded": 300,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "m4",
+              "kind": "m4",
+              "loaded": 30,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "ak",
+              "kind": "ak",
+              "loaded": 30,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "uzi",
+              "kind": "uzi",
+              "loaded": 32,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "shotgun",
+              "kind": "shotgun",
+              "loaded": 8,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "aa12",
+              "kind": "aa12",
+              "loaded": 20,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "sniper",
+              "kind": "sniper",
+              "loaded": 5,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "launcher",
+              "kind": "launcher",
+              "loaded": 6,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "flamer",
+              "kind": "flamer",
+              "loaded": 60,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "chainsaw",
+              "kind": "chainsaw",
+              "loaded": 0,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "pistol:second",
+              "kind": "pistol",
+              "loaded": null,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "uzi:second",
+              "kind": "uzi",
+              "loaded": null,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            }
+          ]
+        },
+        "hud": "7\nREVOLVER\n7 / 12 · 3 Bullets\nG×3\nH×0\n1 loaders\n3",
+        "quote": {
+          "rows": [
+            {
+              "key": "revolver",
+              "packs": 7,
+              "cost": 56
+            }
+          ],
+          "cost": 56
+        },
+        "reloading": false
+      },
+      "started": true,
+      "after": {
+        "weapon": "revolver",
+        "activeWeapon": "revolver",
+        "gameStarted": true,
+        "paused": false,
+        "gameOver": false,
+        "won": false,
+        "placeMode": null,
+        "buildMode": false,
+        "vault": false,
+        "mortarMounted": false,
+        "activeCap": 12,
+        "gain": false,
+        "pair": true,
+        "loaded": 8,
+        "reserve": 2,
+        "store": {
+          "size": 6,
+          "maxSpare": 8,
+          "loaded": [
+            3,
+            5
+          ],
+          "spare": [
+            2
+          ]
+        },
+        "armory": {
+          "hip": {
+            "id": "pistol:base",
+            "kind": "pistol"
+          },
+          "slots": {
+            "primary": [
+              null,
+              null
+            ],
+            "secondary": [
+              {
+                "id": "revolver",
+                "kind": "revolver",
+                "loaded": 7,
+                "magazines": [
+                  {
+                    "rounds": 3
+                  }
+                ],
+                "rounds": 0,
+                "upgrades": {}
+              },
+              {
+                "id": "revolver:second",
+                "kind": "revolver",
+                "loaded": null,
+                "magazines": [],
+                "rounds": 0,
+                "upgrades": {}
+              }
+            ]
+          },
+          "shelf": [
+            {
+              "id": "minigun",
+              "kind": "minigun",
+              "loaded": 300,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "m4",
+              "kind": "m4",
+              "loaded": 30,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "ak",
+              "kind": "ak",
+              "loaded": 30,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "uzi",
+              "kind": "uzi",
+              "loaded": 32,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "shotgun",
+              "kind": "shotgun",
+              "loaded": 8,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "aa12",
+              "kind": "aa12",
+              "loaded": 20,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "sniper",
+              "kind": "sniper",
+              "loaded": 5,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "launcher",
+              "kind": "launcher",
+              "loaded": 6,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "flamer",
+              "kind": "flamer",
+              "loaded": 60,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "chainsaw",
+              "kind": "chainsaw",
+              "loaded": 0,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "pistol:second",
+              "kind": "pistol",
+              "loaded": null,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            },
+            {
+              "id": "uzi:second",
+              "kind": "uzi",
+              "loaded": null,
+              "magazines": [],
+              "rounds": 0,
+              "upgrades": {}
+            }
+          ]
+        },
+        "hud": "8\nREVOLVER\n8 / 12 · 2 Bullets\nG×3\nH×0\n1 loaders\n2",
+        "quote": {
+          "rows": [
+            {
+              "key": "revolver",
+              "packs": 7,
+              "cost": 56
+            }
+          ],
+          "cost": 56
+        },
+        "reloading": false
+      },
+      "armoryText": "HQ · WEAPONS LOCKER\n\nARMORY\n\nRestock or buy a blade here. Choose a gun below to equip it, buy ammo or fit attachments.\n\nRESUPPLY\nCASH $40\n\nFill all carried ammo and grenades here. Choose a gun below for its ammo, attachments and paired gun. Night 1: each Shambler is worth 1 skull value before bonuses. Bank skulls at the HQ window: 1 skull value = 1 Cash.\n\nAMMO\n▥\nRESTOCK ALL4 SHORT\nFill carried magazines, loose ammo and chainsaw fuel. Hand grenades: 12 Cash each, up to your carrying limit. R reloads your gun.\nRestock $524\nUPGRADES\n◇\nMACHETEOWNED\nA heavier blade for F: 2.45m reach and 69 damage (knife: 2.4m, 26). Narrower swing, up to 3 targets, slightly quicker recovery.\nOWNED\nCARRIED GUNS\nPRIMARY 1\nEmpty slot\nPRIMARY 2\nEmpty slot\nSECONDARY 1\nRevolver\n7 loaded · 1 magazine\nLaser/light combo\nRevolver pair\nSECONDARY 2\nRevolver · second gun\nLaser/light combo\nRevolver pair\nHip holster · Pistol\nLaser/light combo\nSTORED GUNS\nRotary Gun\n300 loaded\nLaser/light combo\nPRIMARY\nWORKBENCH\nGW-4 Carbine\n30 loaded\nLaser/light combo\nPRIMARY\nWORKBENCH\nKR-7 Rifle\n30 loaded\nLaser/light combo\nPRIMARY\nWORKBENCH\nWasp SMG\n32 loaded\nLaser/light combo\nSECONDARY\nWORKBENCH\nShotgun\n8 loaded\nLaser/light combo\nPRIMARY\nWORKBENCH\nBreacher-12\n20 loaded\nLaser/light combo\nPRIMARY\nWORKBENCH\nSniper\n5 loaded\nLaser/light combo\nPRIMARY\nWORKBENCH\nLauncher\n6 loaded\nLaser/light combo\nPRIMARY\nWORKBENCH\nFlamethrower\n60 loaded\nPRIMARY\nWORKBENCH\nChainsaw\nPRIMARY\nWORKBENCH\nPistol · second gun\nLaser/light combo\nSECONDARY\nWORKBENCH\nWasp SMG · second gun\nLaser/light combo\nSECONDARY\nWORKBENCH\nEMPLACEMENTS · WATCHMAN MG AND MORTAR\nWatchman MG\nOwned\nOWNED\n0 / 1260 carried\n$48 Cash · Need 8 more\nPACK 300 · $48\nMortar\nOwned\nOWNED\n0 / 22 carried\nPACK 4 · $34\nWORKBENCH\n\nDrag to turn · Scroll or pinch to zoom · Home faces front\n\nTurn left\nFront view\nTurn right\n\nRevolver\n\n7 loaded · 3 spare\n\n$56 Cash · Need 16 more\nBUY AMMO\n3X prism\nFixed 3X sight. One optic per gun; fit or remove it here free.\n$115 CASH · NEED 75 MORE\nBUY\n1X RMR red dot\n1X dot. One optic per gun; fit or remove it here free.\n$75 CASH · NEED 35 MORE\nBUY\nLaser/light combo\nFits this gun. Z toggles its aiming laser; L toggles its white light.\nFITTED\nREMOVE\nRevolver pair\nA second Revolver. Carry it in a free secondary slot, then use Y to draw both.\nFITTED\nREMOVE\nWEAPON FINISH\nFactory finish\nSHOW 45 LOCKED FINISHES\nLASER COLOR\nRed\nMOVE TO SHELF\nDONE"
+    }
+  ],
+  "errors": []
+}

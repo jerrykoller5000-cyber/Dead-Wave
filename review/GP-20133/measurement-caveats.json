@@ -1,0 +1,36 @@
+{
+  "acceptance": "Production perfSamples tick-start intervals, including interval after final shot, with profiler/GPU queries OFF. No screenshots/readback BEFORE OR BETWEEN any timed phases in a browser. Final visual capture only after ALL timing ends. Current clean-matrix records use corrected sun-target source798ae744; all source/module hashes and failures retained; 10% criterion unchanged.",
+  "diagnosticOnly": [
+    {
+      "runs": "Original profile/natural/production/outdoor-after/sleeve-ABBA",
+      "why": "Builtin PROF/GPU timestamp diagnostics and screenshots in timed phases contaminate latency; keep resource and allocation evidence, do not treat latency as acceptance or causal FPS improvement."
+    },
+    {
+      "runs": "*-outdoor-clean.json and *-training-clean.json",
+      "why": "Screenshots/profilers removed, but independent RAF callback can miss callbacks under load. Boundary trace has two game renders in one66.5ms observer interval. Treat latency as diagnostic, resource counters remain actual method-call evidence."
+    },
+    {
+      "runs": "GC/boundary traces",
+      "why": "Diagnostic hooks enabled.16.488ms main GC observed, but longest50/66.5ms observer intervals do not overlap it. No confirmed attribution of those observer gaps to GC/shadows."
+    },
+    {
+      "runs": "single-lease-clock, scene-compile-clock, post-c5-clock and earlier phase-by-phase PNG clock batches",
+      "why": "Raw tick clock is correct, but repeated screenshots after phases perturb subsequent phases. Same-page ABBA: no-PNG17.42/16.66/17.17ms; interphase PNGs rise to34.27ms and idle25.91; removing PNGs recovers toward18.93ms, flat game draw/effect counts. Keep actual resource/allocation data and induced-load raw timing; not clean gameplay acceptance."
+    }
+  ],
+  "resourceEvidence": {
+    "beforeLeaf": "pistol-outdoor-before-leaf.json:1newpipeline/2builders; identity trace matches pooled falling leaf PlaneGeometry108cap, two sides.",
+    "afterLeaf": "pistol-outdoor-after.json:all3mags0newpipeline/builders,15.339scoldload. Actual pooled leaf anchor retained off scene, no simulation changes."
+  },
+  "unchangedEvidence": "Sleeve454q/5448buffers and4PNGpairs byte-identical; sampled allocation removal remains valid diagnostic evidence. GP34 transaction/queued-click checks unaffected by frame-sampling corrections.",
+  "loadTimeCorrection": "All earlier14-17s coldload labels are DWLoad-ready, NOT actual title menu; do not claim18s budget passes. Canonical early dismissForTesting actualmenu19-23s; fullscene candidate19.12/20.12. Final game-clock reports separate readyWallMs/menuWallMs.",
+  "slotStatusCorrection": "Sandbox-default slot status falsely showedzero holders; escalated status confirms native tests have activeleases. First sequential batch stopped conservatively, incomplete minigun excluded; final single-lease-clock uses one fresh exclusive command per browser. Read scene-compile-clock/lease-caveat.json with this correction.",
+  "screenshotObserverCorrection": {
+    "proof": "accumulation-observer-summary.json and accumulation-abba/pistol-game-clock-training.json",
+    "limits": "Strong controlled association/carryover, not isolated driver/compositor mechanism. New counters and no-readback protocol are not a game fix."
+  },
+  "sunTargetSourceBoundary": {
+    "before": "5cd3a20a, Training sun target frozen by trainingHideWorld: shadow map missed room; earlier native shadow/clean-counter timing not final correct-shadows acceptance.",
+    "after": "798ae744, C2 keeps light targets; exact source difference only target-keep block. clean-matrix measures current proper-shadow tree and Training timing fails so far. No hidden-light/missing-shadow variant may be used to certify performance."
+  }
+}

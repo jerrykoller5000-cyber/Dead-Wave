@@ -1,0 +1,131 @@
+{
+  "rows": [
+    {
+      "ext": false,
+      "full": {
+        "n": 180,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.001566054175629155,
+          "where": "glove in _ box [[-32,-193,-88],[32,-170,-9]] tris 128",
+          "detail": {
+            "vertex": 3454,
+            "bone": 0,
+            "digit": "palm",
+            "point": [
+              0.027730192037393235,
+              -0.18972331533955622,
+              -0.01280463958710559
+            ],
+            "depthMm": 1.566054175629155
+          }
+        }
+      },
+      "magOnly": {
+        "n": 7,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        }
+      },
+      "nonMag": {
+        "n": 173,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.001566054175629155,
+          "where": "glove in _ box [[-32,-193,-88],[32,-170,-9]] tris 128",
+          "detail": {
+            "vertex": 3454,
+            "bone": 0,
+            "digit": "palm",
+            "point": [
+              0.027730192037393235,
+              -0.18972331533955622,
+              -0.01280463958710559
+            ],
+            "depthMm": 1.566054175629155
+          }
+        }
+      },
+      "magNode": ""
+    },
+    {
+      "ext": true,
+      "full": {
+        "n": 180,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.0015661240210532495,
+          "where": "glove in _ box [[-32,-193,-88],[32,-170,-9]] tris 128",
+          "detail": {
+            "vertex": 3454,
+            "bone": 0,
+            "digit": "palm",
+            "point": [
+              0.027730192037394637,
+              -0.18972331533955622,
+              -0.012804639587110093
+            ],
+            "depthMm": 1.5661240210532494
+          }
+        }
+      },
+      "magOnly": {
+        "n": 7,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        }
+      },
+      "nonMag": {
+        "n": 173,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.0015661240210532495,
+          "where": "glove in _ box [[-32,-193,-88],[32,-170,-9]] tris 128",
+          "detail": {
+            "vertex": 3454,
+            "bone": 0,
+            "digit": "palm",
+            "point": [
+              0.027730192037394637,
+              -0.18972331533955622,
+              -0.012804639587110093
+            ],
+            "depthMm": 1.5661240210532494
+          }
+        }
+      },
+      "magNode": ""
+    }
+  ],
+  "errors": []
+}

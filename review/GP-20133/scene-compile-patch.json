@@ -1,0 +1,15 @@
+{
+  "before": "9c4758cad5ea2b3cf3943b46cd0d03af4fa20c6b4ec8a7bda24152e4a0dde500",
+  "after": "daf1919c75aa3fbcc2c972ade0c1a3fff063a76b0512fc060781b2bcbe835ce4",
+  "changes": [
+    {
+      "start": "async function warmEffectPools(",
+      "count": 2
+    },
+    {
+      "start": "function trainingWarmCompile(",
+      "count": 1
+    }
+  ],
+  "scope": "Only three approved warm helper compile callbacks; compile same full scene that warmFrame draws"
+}

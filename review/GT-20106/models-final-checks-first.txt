@@ -1,0 +1,18 @@
+FAIL  t38      32 pass   1 fail  88.4s  (real renderer)
+    FAIL cold attached mesh count 322 / 319 (300 + 19 J149 controls; including hidden parts)
+    INFO minigun cold meshes 30, equipped draws 29
+    INFO m4 cold meshes 37, equipped draws 32
+    INFO ak cold meshes 29, equipped draws 23
+    INFO aa12 cold meshes 27, equipped draws 25
+    INFO pistol cold meshes 22, equipped draws 17
+    INFO uzi cold meshes 28, equipped draws 23
+    INFO shotgun cold meshes 26, equipped draws 20
+    INFO revolver cold meshes 26, equipped draws 21
+    INFO sniper cold meshes 38, equipped draws 34
+    INFO launcher cold meshes 26, equipped draws 22
+    INFO flamer cold meshes 20, equipped draws 19
+    INFO chainsaw cold meshes 13, equipped draws 12
+    INFO twelve cold guns: 322 attached meshes; equipped individually: 277 actual draws
+ok    t334     29 pass   0 fail  32.8s  (real renderer)
+ok    tcb294b   25 pass   0 fail  38.3s  (real renderer)
+3 checks: 86 pass, 1 fail (real renderer)

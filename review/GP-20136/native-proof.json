@@ -1,0 +1,209 @@
+{
+  "nativeReloads": {
+    "pass": 3,
+    "fail": 0,
+    "rows": [
+      {
+        "weapon": "revolver",
+        "pair": false,
+        "before": [
+          5,
+          3
+        ],
+        "after": [
+          6,
+          2
+        ],
+        "activeVerified": true,
+        "conserved": true
+      },
+      {
+        "weapon": "revolver",
+        "pair": true,
+        "before": [
+          8,
+          2
+        ],
+        "after": [
+          10,
+          0
+        ],
+        "activeVerified": true,
+        "conserved": true
+      },
+      {
+        "weapon": "launcher",
+        "pair": false,
+        "before": [
+          6,
+          7
+        ],
+        "after": [
+          6,
+          7
+        ],
+        "activeVerified": true,
+        "conserved": true
+      }
+    ]
+  },
+  "transactions": {
+    "conditions": 3,
+    "guards": "nearfull delivers1; full/poor0charge; partialpickup2+1left; stow no refill; doubleR no live loss",
+    "rows": [
+      {
+        "weapon": "revolver",
+        "pair": false,
+        "capacity": 48,
+        "fullSpent": 0,
+        "poorSpent": 0,
+        "pickup": {
+          "id": "ammo:.44",
+          "accepted": 2,
+          "remaining": 1
+        },
+        "drop": false,
+        "ui": {
+          "hidden": true,
+          "hud": "6\nREVOLVER\n6 / 6 · 2 rounds\nG×3\nH×0",
+          "wheel": "6 loaded · 2 rounds",
+          "tiles": [
+            "SECONDARY 1\nRevolver\n6 loaded · 2 loose rounds\nLaser/light combo",
+            "SECONDARY 2\nEmpty slot"
+          ]
+        }
+      },
+      {
+        "weapon": "revolver",
+        "pair": true,
+        "capacity": 48,
+        "fullSpent": 0,
+        "poorSpent": 0,
+        "pickup": {
+          "id": "ammo:.44",
+          "accepted": 2,
+          "remaining": 1
+        },
+        "drop": false,
+        "ui": {
+          "hidden": true,
+          "hud": "10\nREVOLVER\n10 / 12 · 0 rounds\nG×3\nH×0",
+          "wheel": "10 loaded · 0 rounds",
+          "tiles": [
+            "SECONDARY 1\nRevolver\n6 loaded · 0 loose rounds\nLaser/light combo\nRevolver pair",
+            "SECONDARY 2\nRevolver · second gun\n4 loaded · Shared loose rounds\nLaser/light combo\nRevolver pair"
+          ]
+        }
+      },
+      {
+        "weapon": "launcher",
+        "pair": false,
+        "capacity": 25,
+        "fullSpent": 0,
+        "poorSpent": 0,
+        "pickup": {
+          "id": "ammo:40mm",
+          "accepted": 2,
+          "remaining": 1
+        },
+        "drop": false,
+        "ui": {
+          "hidden": true,
+          "hud": "6\nLAUNCHER\n6 / 6 · 7 rounds\nG×3\nH×0",
+          "wheel": "6 loaded · 7 rounds",
+          "tiles": [
+            "PRIMARY 1\nLauncher\n6 loaded · 7 loose rounds\nLaser/light combo",
+            "PRIMARY 2\nEmpty slot"
+          ]
+        }
+      }
+    ]
+  },
+  "responsiveLayouts": {
+    "pass": 8,
+    "fail": 0,
+    "rows": [
+      {
+        "id": "tp-day-1280",
+        "hidden": true,
+        "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+        "left": 16,
+        "right": 276.40625,
+        "bottom": 702,
+        "viewport": 1280,
+        "overflow": false
+      },
+      {
+        "id": "tp-day-390",
+        "hidden": true,
+        "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+        "left": 12,
+        "right": 378,
+        "bottom": 832,
+        "viewport": 390,
+        "overflow": false
+      },
+      {
+        "id": "tp-night-1280",
+        "hidden": true,
+        "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+        "left": 16,
+        "right": 276.40625,
+        "bottom": 702,
+        "viewport": 1280,
+        "overflow": false
+      },
+      {
+        "id": "tp-night-390",
+        "hidden": true,
+        "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+        "left": 12,
+        "right": 378,
+        "bottom": 832,
+        "viewport": 390,
+        "overflow": false
+      },
+      {
+        "id": "fp-day-1280",
+        "hidden": true,
+        "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+        "left": 16,
+        "right": 276.40625,
+        "bottom": 702,
+        "viewport": 1280,
+        "overflow": false
+      },
+      {
+        "id": "fp-day-390",
+        "hidden": true,
+        "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+        "left": 12,
+        "right": 378,
+        "bottom": 832,
+        "viewport": 390,
+        "overflow": false
+      },
+      {
+        "id": "fp-night-1280",
+        "hidden": true,
+        "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+        "left": 16,
+        "right": 276.40625,
+        "bottom": 702,
+        "viewport": 1280,
+        "overflow": false
+      },
+      {
+        "id": "fp-night-390",
+        "hidden": true,
+        "hud": "7\nREVOLVER\n7 / 12 · 3 rounds\nG×3\nH×0",
+        "left": 12,
+        "right": 378,
+        "bottom": 832,
+        "viewport": 390,
+        "overflow": false
+      }
+    ]
+  },
+  "fixtureCorrection": "Earlier before/after/after-gates single first gun was absent from loadout; ignored for reload acceptance. Corrected fixture asserts successful take and active gun, matched saved-source baseline. All earlier receipts retained."
+}

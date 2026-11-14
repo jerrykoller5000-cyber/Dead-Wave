@@ -8,7 +8,7 @@ const shapes = {
   m4:       [45, 4.8, 4.78, 3.20, 35],
   ak:       [39, 5.7, 5.62, 4.30, 29],
   minigun:  [51, 6.0, 5.95, 4.30, 39],
-  sniper:   [69.2, 7.45, 7.45, 4.75, 52],
+  sniper:   [51, 6.0, 5.95, 4.30, 39],
   shotgun:  [70, 11.3, 10.3, 10.2],
   launcher: [46, 21.9, 20.5, 20.1]
 };
@@ -172,7 +172,7 @@ function metallicCartridge(THREE, kind, live) {
     if (kind === 'pistol') tip = 32.4 - length;
     if (kind === 'revolver') tip = 40.39 - length;
     if (kind === 'm4') tip = 57.4 - length;
-    if (kind === 'sniper') tip = 93.5 - length;
+    if (kind === 'sniper') tip = 71 - length;
     if (kind === 'minigun') tip = 71.12 - length;
     if (kind === 'uzi') tip = 29.7 - length;
   }

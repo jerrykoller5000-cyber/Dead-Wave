@@ -1,0 +1,9 @@
+{
+  "scope": "Batch stopped after slot status unexpectedly showed zero holders while third child browser was running. Do not reuse batch harness. One fresh crew slot command per browser from here.",
+  "firstWasp": "Completed under initial grant; retain actual-clock result",
+  "secondKr7": "Exclude from acceptance: shared slot token was released between browser runs",
+  "thirdMinigun": "Aborted incomplete; excluded",
+  "termination": "Only identified owned batch PID7412 and descendants terminated; parent crew command exited1. No other agent or Jerry processes touched.",
+  "replacement": "single-lease-clock/ receipts, one fresh exclusive lease per browser",
+  "correction": "Matching escalated slot status confirms ACTIVE native holder. Default sandbox status sees a different state/view and falsely reported zero. No actual release bug established; batch stopped conservatively. Use same escalated context for slot commands/status. Keep final fresh-lease reruns as canonical."
+}

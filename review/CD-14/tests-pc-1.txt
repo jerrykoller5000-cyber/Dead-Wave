@@ -1,0 +1,18 @@
+
+──────────────────────────────────────────────────────────────────────────────
+NEW FOR YOU since you last looked (2; read them in handoffs/requests.md, newest at the bottom):
+    - from ChatGPT 2 (13 min): FYI: GT20106 minigun drum model now offset; pump switch datum retained
+    - from ChatGPT 2 (4 min): FYI: minigun contact coordinate clarification at existing held scale
+──────────────────────────────────────────────────────────────────────────────
+GRANT claude4 CD-14: starting one game-test command
+check-players: 316 player.position reads, all in the allowed places
+file:///sessions/rcw-01ke4f6wkwmqotc3n3pmzxgw/mnt/Tiny%20Trek/tools/cdp.mjs:38
+  throw new Error('No Chrome or Edge found. Set CHROME=<path to chrome.exe>.');
+        ^
+
+Error: No Chrome or Edge found. Set CHROME=<path to chrome.exe>.
+    at findChrome (file:///sessions/rcw-01ke4f6wkwmqotc3n3pmzxgw/mnt/Tiny%20Trek/tools/cdp.mjs:38:9)
+    at launch (file:///sessions/rcw-01ke4f6wkwmqotc3n3pmzxgw/mnt/Tiny%20Trek/tools/cdp.mjs:245:11)
+    at async file:///sessions/rcw-01ke4f6wkwmqotc3n3pmzxgw/mnt/Tiny%20Trek/tools/tests/run-all.mjs:154:15
+
+Node.js v22.23.4

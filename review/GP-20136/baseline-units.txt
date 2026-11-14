@@ -1,0 +1,132 @@
+Command: node --test review/GP-20136/loose-rounds.test.mjs
+Exit: 1
+✖ partial revolver tops up missing rounds from the loose pool instead of swapping to a worse loader (3.2705ms)
+✖ akimbo cylinders share one pool without duplicating rounds (1.9517ms)
+✔ scarce rounds can partially fill an empty cylinder without requiring a full six-round group (0.7594ms)
+✖ legacy speedloader groups migrate to one loose pool without losing partial rounds (0.2491ms)
+✖ loose purchases accept individual rounds up to capacity (0.1753ms)
+✖ cylinder top-up conserves rounds across unequal pairs and repeated/fast reload requests (0.4265ms)
+✔ ordinary pistol magazines keep their existing independent partial groups (0.1306ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 2
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 97.2469
+
+✖ failing tests:
+
+test at review\GP-20136\loose-rounds.test.mjs:3:1
+✖ partial revolver tops up missing rounds from the loose pool instead of swapping to a worse loader (3.2705ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  3 !== 6
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20136/loose-rounds.test.mjs:3:166)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.start (node:internal/test_runner/test:1003:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:358:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 3,
+    expected: 6,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at review\GP-20136\loose-rounds.test.mjs:4:1
+✖ akimbo cylinders share one pool without duplicating rounds (1.9517ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      6,
+  +   1
+  -   6
+    ]
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20136/loose-rounds.test.mjs:4:141)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 6, 1 ],
+    expected: [ 6, 6 ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at review\GP-20136\loose-rounds.test.mjs:6:1
+✖ legacy speedloader groups migrate to one loose pool without losing partial rounds (0.2491ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   2,
+  +   5
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20136/loose-rounds.test.mjs:6:284)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 2, 5 ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at review\GP-20136\loose-rounds.test.mjs:7:1
+✖ loose purchases accept individual rounds up to capacity (0.1753ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  0 !== 2
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20136/loose-rounds.test.mjs:7:95)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at review\GP-20136\loose-rounds.test.mjs:8:1
+✖ cylinder top-up conserves rounds across unequal pairs and repeated/fast reload requests (0.4265ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  7 !== 8
+  
+      at TestContext.<anonymous> (file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20136/loose-rounds.test.mjs:8:273)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 7,
+    expected: 8,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

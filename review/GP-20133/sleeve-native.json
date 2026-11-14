@@ -1,0 +1,46 @@
+{
+  "scope": "Actual active FP arms, original and scalar sleeve functions in same native frame; byte-level buffers and screenshots, no performance claim. Review-only module controller; production function used for scalar path.",
+  "sourceSha256": "b3288fe9294b1f60e0e85b2cdeff75f74d4a0124e3d37772045fc83b764e2ed2",
+  "rows": [],
+  "graphics": "high",
+  "sleeves": [
+    {
+      "weapon": "uzi",
+      "pair": false,
+      "arms": 2,
+      "vertices": 17640,
+      "bytes": 211680,
+      "diff": 0,
+      "byteIdenticalPng": true
+    },
+    {
+      "weapon": "ak",
+      "pair": false,
+      "arms": 2,
+      "vertices": 17640,
+      "bytes": 211680,
+      "diff": 0,
+      "byteIdenticalPng": true
+    },
+    {
+      "weapon": "minigun",
+      "pair": false,
+      "arms": 2,
+      "vertices": 17640,
+      "bytes": 211680,
+      "diff": 0,
+      "byteIdenticalPng": true
+    },
+    {
+      "weapon": "pistol",
+      "pair": true,
+      "arms": 2,
+      "vertices": 17640,
+      "bytes": 211680,
+      "diff": 0,
+      "byteIdenticalPng": true
+    }
+  ],
+  "endSourceSha256": "b3288fe9294b1f60e0e85b2cdeff75f74d4a0124e3d37772045fc83b764e2ed2",
+  "errors": []
+}

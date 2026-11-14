@@ -1,0 +1,949 @@
+{
+  "measurement": "Production perfSamples actual tick-start intervals; all phases retained; no FPS-profiler/screenshot during timing",
+  "rows": [
+    {
+      "file": "ak-game-clock-outdoor.json",
+      "environment": "outdoor",
+      "loaderReadyMs": 12944,
+      "menuMs": 19366,
+      "sourceUnchanged": true,
+      "errors": [],
+      "phases": [
+        {
+          "pass": 0,
+          "weapon": "ak",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "n": 209,
+          "mean": 21.540191387588326,
+          "p50": 20.599999994039536,
+          "p99": 37.099999994039536,
+          "worst": 110.2000000178814,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "weapon": "ak",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "n": 188,
+          "mean": 18.40851063820276,
+          "p50": 17.80000001192093,
+          "p99": 27.900000005960464,
+          "worst": 32.29999998211861,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": -14.538778662802743,
+          "within10Percent": true
+        },
+        {
+          "pass": 1,
+          "weapon": "ak",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "n": 249,
+          "mean": 18.101204819229235,
+          "p50": 17.5,
+          "p99": 24.700000017881393,
+          "worst": 27.900000005960464,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "weapon": "ak",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "n": 187,
+          "mean": 18.83208556146545,
+          "p50": 18.400000005960464,
+          "p99": 28,
+          "worst": 31.599999994039536,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 4.037746379510554,
+          "within10Percent": true
+        },
+        {
+          "pass": 2,
+          "weapon": "ak",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "n": 235,
+          "mean": 19.22085106385515,
+          "p50": 18.599999994039536,
+          "p99": 31.700000017881393,
+          "worst": 33.599999994039536,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "weapon": "ak",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "n": 145,
+          "mean": 24.233103448358076,
+          "p50": 23.400000005960464,
+          "p99": 41.69999998807907,
+          "worst": 43.29999998211861,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 26.0771615567454,
+          "within10Percent": false
+        }
+      ]
+    },
+    {
+      "file": "ak-game-clock-training.json",
+      "environment": "training",
+      "loaderReadyMs": 17078,
+      "menuMs": 26478,
+      "sourceUnchanged": true,
+      "errors": [],
+      "phases": [
+        {
+          "pass": 0,
+          "weapon": "ak",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "n": 255,
+          "mean": 17.67882352938839,
+          "p50": 16.900000005960464,
+          "p99": 27.599999994039536,
+          "worst": 38.099999994039536,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "weapon": "ak",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "n": 201,
+          "mean": 17.143781094557017,
+          "p50": 16.700000017881393,
+          "p99": 29.19999998807907,
+          "worst": 32.599999994039536,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": -3.026459503608614,
+          "within10Percent": true
+        },
+        {
+          "pass": 1,
+          "weapon": "ak",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "n": 269,
+          "mean": 16.72788104093651,
+          "p50": 16.69999998807907,
+          "p99": 24.299999982118607,
+          "worst": 24.599999994039536,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "weapon": "ak",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "n": 204,
+          "mean": 16.66862745100961,
+          "p50": 16.69999998807907,
+          "p99": 22.599999994039536,
+          "worst": 23.30000001192093,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": -0.35422053625259187,
+          "within10Percent": true
+        },
+        {
+          "pass": 2,
+          "weapon": "ak",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            30,
+            30
+          ],
+          "n": 268,
+          "mean": 16.795895522321338,
+          "p50": 16.69999998807907,
+          "p99": 26.400000005960464,
+          "worst": 28.600000023841858,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "weapon": "ak",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            30,
+            0
+          ],
+          "n": 198,
+          "mean": 17.239393939424044,
+          "p50": 16.69999998807907,
+          "p99": 26.799999982118607,
+          "worst": 27.700000017881393,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 2.6405166459466667,
+          "within10Percent": true
+        }
+      ]
+    },
+    {
+      "file": "minigun-game-clock-outdoor.json",
+      "environment": "outdoor",
+      "loaderReadyMs": 13553,
+      "menuMs": 19614,
+      "sourceUnchanged": false,
+      "errors": [],
+      "phases": [
+        {
+          "pass": 0,
+          "weapon": "minigun",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            300,
+            300
+          ],
+          "n": 147,
+          "mean": 30.677551020367616,
+          "p50": 31,
+          "p99": 44.80000001192093,
+          "worst": 49.400000005960464,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "weapon": "minigun",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            300,
+            0
+          ],
+          "n": 873,
+          "mean": 22.86116838485924,
+          "p50": 21.5,
+          "p99": 41.5,
+          "worst": 69,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": -25.479161065754163,
+          "within10Percent": true
+        },
+        {
+          "pass": 1,
+          "weapon": "minigun",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            300,
+            300
+          ],
+          "n": 264,
+          "mean": 17.09469696969697,
+          "p50": 16.600000023841858,
+          "p99": 26,
+          "worst": 28.400000005960464,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "weapon": "minigun",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            300,
+            0
+          ],
+          "n": 1157,
+          "mean": 17.2919619705982,
+          "p50": 16.600000023841858,
+          "p99": 28.099999994039536,
+          "worst": 32.80000001192093,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 1.1539543593601875,
+          "within10Percent": true
+        },
+        {
+          "pass": 2,
+          "weapon": "minigun",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            300,
+            300
+          ],
+          "n": 266,
+          "mean": 16.933834586488572,
+          "p50": 16.69999998807907,
+          "p99": 23.69999998807907,
+          "worst": 25.19999998807907,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "weapon": "minigun",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            300,
+            0
+          ],
+          "n": 1161,
+          "mean": 17.239190353133573,
+          "p50": 16.599999994039536,
+          "p99": 28.599999994039536,
+          "worst": 31.799999982118607,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 1.8032287080957055,
+          "within10Percent": true
+        }
+      ]
+    },
+    {
+      "file": "minigun-game-clock-training.json",
+      "environment": "training",
+      "loaderReadyMs": 14905,
+      "menuMs": 21131,
+      "sourceUnchanged": true,
+      "errors": [],
+      "phases": [
+        {
+          "pass": 0,
+          "weapon": "minigun",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            300,
+            300
+          ],
+          "n": 270,
+          "mean": 16.67037037037037,
+          "p50": 16.69999998807907,
+          "p99": 21.5,
+          "worst": 24.30000001192093,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "weapon": "minigun",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            300,
+            0
+          ],
+          "n": 1186,
+          "mean": 17.089038785829715,
+          "p50": 16.69999998807907,
+          "p99": 22.400000005960464,
+          "worst": 368.59999999403954,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 2.511452392224456,
+          "within10Percent": true
+        },
+        {
+          "pass": 1,
+          "weapon": "minigun",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            300,
+            300
+          ],
+          "n": 270,
+          "mean": 16.666296296207992,
+          "p50": 16.69999998807907,
+          "p99": 19,
+          "worst": 23,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "weapon": "minigun",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            300,
+            0
+          ],
+          "n": 1191,
+          "mean": 16.79596977329975,
+          "p50": 16.69999998807907,
+          "p99": 24.299999982118607,
+          "worst": 30.599999994039536,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 0.7780581527358388,
+          "within10Percent": true
+        },
+        {
+          "pass": 2,
+          "weapon": "minigun",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            300,
+            300
+          ],
+          "n": 270,
+          "mean": 16.66629629631837,
+          "p50": 16.69999998807907,
+          "p99": 19.19999998807907,
+          "worst": 20.799999982118607,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "weapon": "minigun",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            300,
+            0
+          ],
+          "n": 1179,
+          "mean": 16.954028837983138,
+          "p50": 16.69999998807907,
+          "p99": 25.400000005960464,
+          "worst": 30.69999998807907,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 1.7264336151777693,
+          "within10Percent": true
+        }
+      ]
+    },
+    {
+      "file": "pistol-game-clock-outdoor.json",
+      "environment": "outdoor",
+      "loaderReadyMs": 14464,
+      "menuMs": 20885,
+      "sourceUnchanged": true,
+      "errors": [],
+      "phases": [
+        {
+          "pass": 0,
+          "weapon": "pistol",
+          "pair": true,
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "n": 236,
+          "mean": 19.116525423728813,
+          "p50": 19.400000005960464,
+          "p99": 27.200000017881393,
+          "worst": 43.79999998211861,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "weapon": "pistol",
+          "pair": true,
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "n": 44,
+          "mean": 18.78181818127632,
+          "p50": 18.19999998807907,
+          "p99": 29.80000001192093,
+          "worst": 29.80000001192093,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": -1.750879069462219,
+          "within10Percent": true
+        },
+        {
+          "pass": 1,
+          "weapon": "pistol",
+          "pair": true,
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "n": 266,
+          "mean": 16.959398496195785,
+          "p50": 16.400000005960464,
+          "p99": 27.69999998807907,
+          "worst": 32.400000005960464,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "weapon": "pistol",
+          "pair": true,
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "n": 46,
+          "mean": 20.097826086956523,
+          "p50": 19.599999994039536,
+          "p99": 25.19999998807907,
+          "worst": 25.19999998807907,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 18.505535980328137,
+          "within10Percent": false
+        },
+        {
+          "pass": 2,
+          "weapon": "pistol",
+          "pair": true,
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "n": 258,
+          "mean": 17.491860465139382,
+          "p50": 16.80000001192093,
+          "p99": 27.5,
+          "worst": 30.19999998807907,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "weapon": "pistol",
+          "pair": true,
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "n": 30,
+          "mean": 27.446666666865347,
+          "p50": 27.099999994039536,
+          "p99": 40.5,
+          "worst": 40.5,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 56.91107713536543,
+          "within10Percent": false
+        }
+      ]
+    },
+    {
+      "file": "pistol-game-clock-training.json",
+      "environment": "training",
+      "loaderReadyMs": 13339,
+      "menuMs": 19905,
+      "sourceUnchanged": true,
+      "errors": [],
+      "phases": [
+        {
+          "pass": 0,
+          "weapon": "pistol",
+          "pair": true,
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "n": 262,
+          "mean": 17.196946564862746,
+          "p50": 16.69999998807907,
+          "p99": 24.19999998807907,
+          "worst": 24.899999976158142,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "weapon": "pistol",
+          "pair": true,
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "n": 45,
+          "mean": 16.68888888888889,
+          "p50": 16.600000023841858,
+          "p99": 29.599999994039536,
+          "worst": 29.599999994039536,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": -2.9543481690635254,
+          "within10Percent": true
+        },
+        {
+          "pass": 1,
+          "weapon": "pistol",
+          "pair": true,
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "n": 271,
+          "mean": 16.663468634620365,
+          "p50": 16.69999998807907,
+          "p99": 21.5,
+          "worst": 22.69999998807907,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "weapon": "pistol",
+          "pair": true,
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "n": 47,
+          "mean": 16.602127659828106,
+          "p50": 16.80000001192093,
+          "p99": 24.599999994039536,
+          "worst": 24.599999994039536,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": -0.3681164836522477,
+          "within10Percent": true
+        },
+        {
+          "pass": 2,
+          "weapon": "pistol",
+          "pair": true,
+          "fire": false,
+          "ammo": [
+            24,
+            24
+          ],
+          "n": 264,
+          "mean": 17.053409090999402,
+          "p50": 16.69999998807907,
+          "p99": 26.5,
+          "worst": 28.799999982118607,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "weapon": "pistol",
+          "pair": true,
+          "fire": true,
+          "ammo": [
+            24,
+            0
+          ],
+          "n": 34,
+          "mean": 25.302941175944664,
+          "p50": 24,
+          "p99": 51.30000001192093,
+          "worst": 51.30000001192093,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 48.374680047400446,
+          "within10Percent": false
+        }
+      ]
+    },
+    {
+      "file": "uzi-game-clock-training.json",
+      "environment": "training",
+      "loaderReadyMs": 15953,
+      "menuMs": 22189,
+      "sourceUnchanged": true,
+      "errors": [],
+      "phases": [
+        {
+          "pass": 0,
+          "weapon": "uzi",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            32,
+            32
+          ],
+          "n": 270,
+          "mean": 16.66518518516311,
+          "p50": 16.69999998807907,
+          "p99": 17.100000023841858,
+          "worst": 31.69999998807907,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "weapon": "uzi",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            32,
+            0
+          ],
+          "n": 152,
+          "mean": 16.810526315907115,
+          "p50": 16.69999998807907,
+          "p99": 25.19999998807907,
+          "worst": 33.099999994039536,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 0.8721243066257767,
+          "within10Percent": true
+        },
+        {
+          "pass": 1,
+          "weapon": "uzi",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            32,
+            32
+          ],
+          "n": 266,
+          "mean": 16.916541353316234,
+          "p50": 16.69999998807907,
+          "p99": 26.19999998807907,
+          "worst": 27.299999982118607,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "weapon": "uzi",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            32,
+            0
+          ],
+          "n": 153,
+          "mean": 16.798039215647318,
+          "p50": 16.599999994039536,
+          "p99": 26.799999982118607,
+          "worst": 27.100000023841858,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": -0.7005104364651071,
+          "within10Percent": true
+        },
+        {
+          "pass": 2,
+          "weapon": "uzi",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            32,
+            32
+          ],
+          "n": 268,
+          "mean": 16.83955223880597,
+          "p50": 16.69999998807907,
+          "p99": 24.80000001192093,
+          "worst": 26.30000001192093,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "weapon": "uzi",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            32,
+            0
+          ],
+          "n": 147,
+          "mean": 17.306802721047887,
+          "p50": 16.599999994039536,
+          "p99": 26.5,
+          "worst": 30.599999994039536,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 2.7747203465728676,
+          "within10Percent": true
+        }
+      ]
+    },
+    {
+      "file": "../scene-compile-clock/uzi-game-clock-outdoor.json",
+      "environment": "outdoor",
+      "loaderReadyMs": 13969,
+      "menuMs": 20494,
+      "sourceUnchanged": true,
+      "errors": [],
+      "phases": [
+        {
+          "pass": 0,
+          "weapon": "uzi",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            32,
+            32
+          ],
+          "n": 253,
+          "mean": 17.836363636340078,
+          "p50": 16.700000017881393,
+          "p99": 33.599999994039536,
+          "worst": 38,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 0,
+          "weapon": "uzi",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            32,
+            0
+          ],
+          "n": 147,
+          "mean": 17.29115646246339,
+          "p50": 16.700000017881393,
+          "p99": 27.400000005960464,
+          "worst": 29.400000005960464,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": -3.0567170808621147,
+          "within10Percent": true
+        },
+        {
+          "pass": 1,
+          "weapon": "uzi",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            32,
+            32
+          ],
+          "n": 264,
+          "mean": 17.104924242379088,
+          "p50": 16.5,
+          "p99": 27.099999994039536,
+          "worst": 28.200000017881393,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 1,
+          "weapon": "uzi",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            32,
+            0
+          ],
+          "n": 136,
+          "mean": 18.791911764618227,
+          "p50": 18.19999998807907,
+          "p99": 27.19999998807907,
+          "worst": 31,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 9.862584004081508,
+          "within10Percent": true
+        },
+        {
+          "pass": 2,
+          "weapon": "uzi",
+          "pair": false,
+          "fire": false,
+          "ammo": [
+            32,
+            32
+          ],
+          "n": 240,
+          "mean": 18.750833333283662,
+          "p50": 18.19999998807907,
+          "p99": 28.599999994039536,
+          "worst": 29.799999982118607,
+          "builders": 0,
+          "pipelines": 0
+        },
+        {
+          "pass": 2,
+          "weapon": "uzi",
+          "pair": false,
+          "fire": true,
+          "ammo": [
+            32,
+            0
+          ],
+          "n": 99,
+          "mean": 25.56767676785739,
+          "p50": 24.899999976158142,
+          "p99": 37.5,
+          "worst": 37.5,
+          "builders": 0,
+          "pipelines": 0,
+          "overIdlePercent": 36.35488254526529,
+          "within10Percent": false
+        }
+      ]
+    }
+  ]
+}

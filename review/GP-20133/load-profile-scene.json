@@ -1,0 +1,1195 @@
+{
+  "variant": "scene",
+  "scope": "Diagnostic title warm-stage timing, source modifications in memory only; first draw builder counts, actual menu time, High",
+  "sourceSha256": "9c4758cad5ea2b3cf3943b46cd0d03af4fa20c6b4ec8a7bda24152e4a0dde500",
+  "loaderReadyMs": 12977,
+  "menuWallMs": 19117,
+  "profile": [
+    {
+      "phase": "ensure-viewmodel",
+      "t": 6472.5999999940395,
+      "ms": 0.800000011920929
+    },
+    {
+      "phase": "begin-fire-warm",
+      "t": 6472.799999982119
+    },
+    {
+      "phase": "world-prime",
+      "t": 6476.5999999940395
+    },
+    {
+      "phase": "view-copies",
+      "t": 6521.299999982119
+    },
+    {
+      "phase": "view-ready",
+      "t": 6545.699999988079
+    },
+    {
+      "phase": "view-heat",
+      "t": 6546.299999982119
+    },
+    {
+      "phase": "hot-compile",
+      "t": 10108.699999988079
+    },
+    {
+      "phase": "before-draw",
+      "tag": "fire-hot",
+      "t": 10108.799999982119,
+      "nodes": 207
+    },
+    {
+      "phase": "after-draw",
+      "tag": "fire-hot",
+      "t": 10376.299999982119,
+      "nodes": 229
+    },
+    {
+      "phase": "hot-draw",
+      "t": 10376.299999982119
+    },
+    {
+      "phase": "hot-gpu-done",
+      "t": 10616.299999982119
+    },
+    {
+      "phase": "cold-compile",
+      "t": 10736
+    },
+    {
+      "phase": "before-draw",
+      "tag": "fire-cold",
+      "t": 10736,
+      "nodes": 229
+    },
+    {
+      "phase": "after-draw",
+      "tag": "fire-cold",
+      "t": 10751.90000000596,
+      "nodes": 229
+    },
+    {
+      "phase": "cold-draw",
+      "t": 10752
+    },
+    {
+      "phase": "cold-gpu-done",
+      "t": 10772.40000000596
+    },
+    {
+      "phase": "before-draw",
+      "tag": "fire-pool-falling-leaves",
+      "t": 10815.59999999404,
+      "nodes": 231
+    },
+    {
+      "phase": "after-draw",
+      "tag": "fire-pool-falling-leaves",
+      "t": 10825.799999982119,
+      "nodes": 231
+    }
+  ],
+  "opening": {
+    "v": 1,
+    "at": "2026-11-13T21:59:27.048Z",
+    "url": "/index.html?debug=1&__gameTestToken=c4b13908-e7a6-44dc-bd70-186320deee63",
+    "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36",
+    "cores": 24,
+    "mem": 32,
+    "screen": [
+      2560,
+      1440,
+      1
+    ],
+    "marks": [
+      [
+        107,
+        "gate-mode",
+        "all"
+      ],
+      [
+        107,
+        "gate-compile"
+      ],
+      [
+        107,
+        "gate-warm"
+      ],
+      [
+        291,
+        "phase-loading"
+      ],
+      [
+        487,
+        "module-start"
+      ],
+      [
+        598,
+        "phase-loading"
+      ],
+      [
+        851,
+        "renderer",
+        "WebGPU / high"
+      ],
+      [
+        5594,
+        "gpu-gate-wait"
+      ],
+      [
+        5594,
+        "gpu-gate-open"
+      ],
+      [
+        5601,
+        "post-done"
+      ],
+      [
+        10849,
+        "pools-done"
+      ],
+      [
+        11635,
+        "compile-async-done"
+      ],
+      [
+        11635,
+        "warm-gate-open"
+      ],
+      [
+        11746,
+        "warm-load-done"
+      ],
+      [
+        11753,
+        "loop-start"
+      ],
+      [
+        11767,
+        "warm-setA"
+      ],
+      [
+        12743,
+        "warm-setA-done"
+      ],
+      [
+        12835,
+        "warm-fight"
+      ],
+      [
+        17047,
+        "warm-live"
+      ],
+      [
+        18629,
+        "warm-live-end",
+        83
+      ],
+      [
+        18631,
+        "warm-done"
+      ],
+      [
+        18635,
+        "menu-camera"
+      ],
+      [
+        18762,
+        "title-release"
+      ],
+      [
+        18762,
+        "opening-ready"
+      ],
+      [
+        19112,
+        "phase-menu"
+      ],
+      [
+        19112,
+        "opening-complete"
+      ]
+    ],
+    "segments": [
+      [
+        0,
+        "boot"
+      ],
+      [
+        488,
+        "loading"
+      ],
+      [
+        19113,
+        "menu"
+      ]
+    ],
+    "load": [
+      [
+        487,
+        "terrain",
+        "begin"
+      ],
+      [
+        1637,
+        "terrain",
+        "end"
+      ],
+      [
+        1637,
+        "rocks",
+        "begin"
+      ],
+      [
+        1695,
+        "rocks",
+        "end"
+      ],
+      [
+        1695,
+        "trees",
+        "begin"
+      ],
+      [
+        1850,
+        "trees",
+        "end"
+      ],
+      [
+        1850,
+        "actors",
+        "begin"
+      ],
+      [
+        2845,
+        "actors",
+        "end"
+      ],
+      [
+        2845,
+        "foliage",
+        "begin"
+      ],
+      [
+        3908,
+        "foliage",
+        "end"
+      ],
+      [
+        3908,
+        "pois",
+        "begin"
+      ],
+      [
+        5385,
+        "pois",
+        "end"
+      ],
+      [
+        5385,
+        "setup",
+        "begin"
+      ],
+      [
+        5588,
+        "setup",
+        "end"
+      ],
+      [
+        5588,
+        "compile",
+        "begin"
+      ],
+      [
+        11746,
+        "compile",
+        "end"
+      ],
+      [
+        11747,
+        "loop",
+        "begin"
+      ],
+      [
+        11751,
+        "loop",
+        "end"
+      ],
+      [
+        11751,
+        "warmup",
+        "begin"
+      ],
+      [
+        12743,
+        "warmup",
+        "end"
+      ]
+    ],
+    "loaf": [
+      [
+        28,
+        144,
+        22,
+        "boot",
+        ""
+      ],
+      [
+        172,
+        55,
+        3,
+        "boot",
+        ""
+      ],
+      [
+        228,
+        72,
+        0,
+        "boot",
+        ""
+      ],
+      [
+        312,
+        74,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        504,
+        286,
+        44,
+        "loading",
+        "IdleRequestCallback @ heron.js:25359 93ms"
+      ],
+      [
+        828,
+        811,
+        738,
+        "loading",
+        ""
+      ],
+      [
+        1639,
+        58,
+        7,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 56ms"
+      ],
+      [
+        1697,
+        155,
+        104,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 153ms"
+      ],
+      [
+        1852,
+        1016,
+        942,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 991ms"
+      ],
+      [
+        2868,
+        452,
+        400,
+        "loading",
+        "warmDressView @ index.html?debug=1&__gameTestToken=c4b13:1703531 450ms"
+      ],
+      [
+        3320,
+        590,
+        489,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 524ms"
+      ],
+      [
+        3910,
+        1490,
+        1425,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 1474ms"
+      ],
+      [
+        5400,
+        190,
+        138,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 187ms"
+      ],
+      [
+        5599,
+        308,
+        256,
+        "loading",
+        "import.then @ index.html?debug=1&__gameTestToken=c4b13:64368 305ms"
+      ],
+      [
+        6154,
+        55,
+        0,
+        "loading",
+        "BaseAudioContext.decodeAudioData.then @ takes.js:25930 12ms"
+      ],
+      [
+        6301,
+        67,
+        11,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 61ms"
+      ],
+      [
+        6470,
+        51,
+        0,
+        "loading",
+        "import.then @ index.html?debug=1&__gameTestToken=c4b13:4141728 50ms"
+      ],
+      [
+        6546,
+        3528,
+        3478,
+        "loading",
+        "check @ viewmodel.js:156775 3527ms"
+      ],
+      [
+        10381,
+        70,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        10105,
+        272,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        10614,
+        121,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        10907,
+        99,
+        48,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 98ms"
+      ],
+      [
+        11040,
+        100,
+        49,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 99ms"
+      ],
+      [
+        11146,
+        130,
+        80,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 130ms"
+      ],
+      [
+        11313,
+        55,
+        1,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 50ms"
+      ],
+      [
+        11389,
+        86,
+        31,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 81ms"
+      ],
+      [
+        11533,
+        84,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        11630,
+        119,
+        63,
+        "loading",
+        ""
+      ],
+      [
+        11752,
+        212,
+        153,
+        "loading",
+        "update @ three.webgpu.js:600902 201ms"
+      ],
+      [
+        11965,
+        97,
+        43,
+        "loading",
+        "update @ three.webgpu.js:600902 92ms"
+      ],
+      [
+        12061,
+        64,
+        14,
+        "loading",
+        "update @ three.webgpu.js:600902 63ms"
+      ],
+      [
+        12126,
+        176,
+        126,
+        "loading",
+        "update @ three.webgpu.js:600902 176ms"
+      ],
+      [
+        12302,
+        283,
+        231,
+        "loading",
+        "update @ three.webgpu.js:600902 280ms"
+      ],
+      [
+        12585,
+        77,
+        26,
+        "loading",
+        "update @ three.webgpu.js:600902 75ms"
+      ],
+      [
+        12663,
+        61,
+        11,
+        "loading",
+        "update @ three.webgpu.js:600902 60ms"
+      ],
+      [
+        12751,
+        68,
+        0,
+        "loading",
+        "update @ three.webgpu.js:600902 18ms"
+      ],
+      [
+        12835,
+        139,
+        89,
+        "loading",
+        "update @ three.webgpu.js:600902 138ms"
+      ],
+      [
+        12976,
+        123,
+        72,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 122ms"
+      ],
+      [
+        13098,
+        70,
+        20,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 70ms"
+      ],
+      [
+        13197,
+        120,
+        70,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 120ms"
+      ],
+      [
+        13318,
+        68,
+        14,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 64ms"
+      ],
+      [
+        13421,
+        62,
+        10,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 60ms"
+      ],
+      [
+        13579,
+        221,
+        166,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 216ms"
+      ],
+      [
+        13931,
+        97,
+        0,
+        "loading",
+        ""
+      ],
+      [
+        14043,
+        166,
+        112,
+        "loading",
+        "run @ loader.js:8002 162ms"
+      ],
+      [
+        14464,
+        86,
+        0,
+        "loading",
+        "run @ loader.js:8002 46ms"
+      ],
+      [
+        14574,
+        87,
+        37,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        14685,
+        85,
+        35,
+        "loading",
+        "run @ loader.js:8002 44ms"
+      ],
+      [
+        14788,
+        87,
+        37,
+        "loading",
+        "run @ loader.js:8002 48ms"
+      ],
+      [
+        14902,
+        88,
+        37,
+        "loading",
+        "run @ loader.js:8002 45ms"
+      ],
+      [
+        15014,
+        83,
+        33,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 42ms"
+      ],
+      [
+        15133,
+        76,
+        26,
+        "loading",
+        "run @ loader.js:8002 39ms"
+      ],
+      [
+        15239,
+        77,
+        26,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 39ms"
+      ],
+      [
+        15350,
+        73,
+        23,
+        "loading",
+        "run @ loader.js:8002 37ms"
+      ],
+      [
+        15463,
+        72,
+        2,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 52ms"
+      ],
+      [
+        15615,
+        65,
+        0,
+        "loading",
+        "run @ loader.js:8002 41ms"
+      ],
+      [
+        15718,
+        75,
+        25,
+        "loading",
+        "run @ loader.js:8002 37ms"
+      ],
+      [
+        15823,
+        76,
+        24,
+        "loading",
+        "run @ loader.js:8002 37ms"
+      ],
+      [
+        15923,
+        93,
+        43,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 55ms"
+      ],
+      [
+        16059,
+        91,
+        34,
+        "loading",
+        "run @ loader.js:8002 42ms"
+      ],
+      [
+        16187,
+        80,
+        30,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 41ms"
+      ],
+      [
+        16302,
+        86,
+        36,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        16424,
+        83,
+        30,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 40ms"
+      ],
+      [
+        16540,
+        84,
+        32,
+        "loading",
+        "TimerHandler:setTimeout @ :-1 41ms"
+      ],
+      [
+        16751,
+        85,
+        0,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        16856,
+        82,
+        32,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        16946,
+        97,
+        34,
+        "loading",
+        "run @ loader.js:8002 43ms"
+      ],
+      [
+        17044,
+        66,
+        16,
+        "loading",
+        "update @ three.webgpu.js:600902 63ms"
+      ]
+    ],
+    "gaps": [
+      [
+        109,
+        53,
+        "boot"
+      ],
+      [
+        162,
+        133,
+        "boot"
+      ],
+      [
+        312,
+        67,
+        "boot"
+      ],
+      [
+        495,
+        283,
+        "loading"
+      ],
+      [
+        795,
+        67,
+        "loading"
+      ],
+      [
+        862,
+        767,
+        "loading"
+      ],
+      [
+        1629,
+        67,
+        "loading"
+      ],
+      [
+        1695,
+        150,
+        "loading"
+      ],
+      [
+        1845,
+        1017,
+        "loading"
+      ],
+      [
+        2862,
+        450,
+        "loading"
+      ],
+      [
+        3312,
+        584,
+        "loading"
+      ],
+      [
+        3895,
+        1500,
+        "loading"
+      ],
+      [
+        5395,
+        183,
+        "loading"
+      ],
+      [
+        5595,
+        67,
+        "loading"
+      ],
+      [
+        5662,
+        233,
+        "loading"
+      ],
+      [
+        5979,
+        50,
+        "loading"
+      ],
+      [
+        6245,
+        50,
+        "loading"
+      ],
+      [
+        6295,
+        67,
+        "loading"
+      ],
+      [
+        6562,
+        3500,
+        "loading"
+      ],
+      [
+        10112,
+        250,
+        "loading"
+      ],
+      [
+        10379,
+        67,
+        "loading"
+      ],
+      [
+        10629,
+        100,
+        "loading"
+      ],
+      [
+        10879,
+        100,
+        "loading"
+      ],
+      [
+        11029,
+        100,
+        "loading"
+      ],
+      [
+        11162,
+        100,
+        "loading"
+      ],
+      [
+        11395,
+        67,
+        "loading"
+      ],
+      [
+        11545,
+        67,
+        "loading"
+      ],
+      [
+        11645,
+        100,
+        "loading"
+      ],
+      [
+        11762,
+        200,
+        "loading"
+      ],
+      [
+        11962,
+        84,
+        "loading"
+      ],
+      [
+        12045,
+        67,
+        "loading"
+      ],
+      [
+        12112,
+        183,
+        "loading"
+      ],
+      [
+        12295,
+        283,
+        "loading"
+      ],
+      [
+        12579,
+        67,
+        "loading"
+      ],
+      [
+        12645,
+        67,
+        "loading"
+      ],
+      [
+        12712,
+        84,
+        "loading"
+      ],
+      [
+        12829,
+        134,
+        "loading"
+      ],
+      [
+        12979,
+        117,
+        "loading"
+      ],
+      [
+        13095,
+        67,
+        "loading"
+      ],
+      [
+        13195,
+        117,
+        "loading"
+      ],
+      [
+        13329,
+        50,
+        "loading"
+      ],
+      [
+        13595,
+        200,
+        "loading"
+      ],
+      [
+        13945,
+        68,
+        "loading"
+      ],
+      [
+        14045,
+        150,
+        "loading"
+      ],
+      [
+        14479,
+        67,
+        "loading"
+      ],
+      [
+        14579,
+        67,
+        "loading"
+      ],
+      [
+        14695,
+        67,
+        "loading"
+      ],
+      [
+        14795,
+        67,
+        "loading"
+      ],
+      [
+        14912,
+        67,
+        "loading"
+      ],
+      [
+        15029,
+        67,
+        "loading"
+      ],
+      [
+        15245,
+        67,
+        "loading"
+      ],
+      [
+        15629,
+        50,
+        "loading"
+      ],
+      [
+        15829,
+        67,
+        "loading"
+      ],
+      [
+        15929,
+        83,
+        "loading"
+      ],
+      [
+        16062,
+        83,
+        "loading"
+      ],
+      [
+        16195,
+        67,
+        "loading"
+      ],
+      [
+        16312,
+        66,
+        "loading"
+      ],
+      [
+        16429,
+        67,
+        "loading"
+      ],
+      [
+        16545,
+        67,
+        "loading"
+      ],
+      [
+        16762,
+        67,
+        "loading"
+      ],
+      [
+        16862,
+        67,
+        "loading"
+      ],
+      [
+        16962,
+        67,
+        "loading"
+      ],
+      [
+        17029,
+        67,
+        "loading"
+      ]
+    ],
+    "drops": [],
+    "stats": {
+      "boot": {
+        "ms": 487.5,
+        "frames": 7,
+        "over33": 4,
+        "over50": 3,
+        "over100": 1,
+        "worst": 133
+      },
+      "loading": {
+        "ms": 18625.69999998808,
+        "frames": 351,
+        "over33": 89,
+        "over50": 60,
+        "over100": 21,
+        "worst": 3500
+      }
+    },
+    "videos": {
+      "caracal@loading": {
+        "frames": 4,
+        "dropped": 0
+      }
+    },
+    "summary": null
+  },
+  "warm": {
+    "trace": [
+      "fire-hot:229",
+      "fire-cold:229",
+      "fire-resources:100/8",
+      "fire-pool-falling-leaves:231",
+      "fire-leaf-resources:1",
+      "fire-clean:231",
+      "load:286",
+      "a-fresh:286",
+      "a-flash:289",
+      "a-faded:290",
+      "a-kill-generic:297",
+      "a-kill-melee:300",
+      "a-kill-explosive:304",
+      "a-fx:307",
+      "a-corpse:307",
+      "fresh:362",
+      "burning:364",
+      "flash:364",
+      "faded:364",
+      "tree-fade:364",
+      "kill-explosive:364",
+      "kill-chainsaw:364",
+      "kill-pellet:364",
+      "kill-generic:364",
+      "kill-melee:364",
+      "kill-explosive:366",
+      "kill-chainsaw:366",
+      "kill-pellet:366",
+      "kill-generic:367",
+      "kill-melee:367",
+      "kill-explosive:367",
+      "kill-chainsaw:367",
+      "kill-pellet:367",
+      "kill-generic:367",
+      "effects:372",
+      "corpses:372",
+      "corpses2:372"
+    ]
+  },
+  "errors": []
+}

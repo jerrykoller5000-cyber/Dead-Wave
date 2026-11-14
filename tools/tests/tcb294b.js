@@ -17,7 +17,7 @@
     const C = T.casings;
     if (!C) { ok(false, 'T.casings is there'); return out.join('\n'); }
     const length = (geo) => { geo.computeBoundingBox && geo.computeBoundingBox(); const b = geo.boundingBox; return b ? (b.max.y - b.min.y) : 0; };
-    const REAL = { pistol: 0.023, uzi: 0.019, m4: 0.045, ak: 0.039, aa12: 0.070, minigun: 0.051, sniper: 0.070, shotgun: 0.070 };
+    const REAL = { pistol: 0.023, uzi: 0.019, m4: 0.045, ak: 0.039, aa12: 0.070, minigun: 0.051, sniper: 0.051, shotgun: 0.070 };   // GT-20106 (J153 36, Director-approved): the sniper's spent case is the .308's 51 mm (was 70)
     for (const w of ['pistol', 'uzi', 'm4', 'ak', 'aa12', 'minigun', 'sniper', 'shotgun']) {
       if (!(await take(w))) { ok(false, w + ' in hand'); continue; }
       T.setAmmoDbg && T.setAmmoDbg(w, 10);

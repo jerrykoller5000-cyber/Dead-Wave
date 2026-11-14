@@ -1,0 +1,657 @@
+{
+  "indexHash": "5cd3a20a35722a54e272d012e4ab2e1b005a9109bc712bea5edd635b034d10fc",
+  "scope": "One-frame target-hidden identity diagnostic only, not flicker comparison.",
+  "metric": "Same RGB channel range across three frames, thresholds16/24/32/48/64/96; actual KeyD walking at60Hz. Fixed observer isolates shadow from geometry translation; following observer translates by actual player displacement. One initial shadow refresh per fixture reset; ordinary redraw cadence retained during triplet. Fixed four-light environments bypass Training danger dim only. Before is old exact continuous follow formula inside same caller; after is live function, unchanged.",
+  "views": {
+    "jerryA": [
+      -12,
+      1.35,
+      -2,
+      -10,
+      0.08,
+      1,
+      40
+    ]
+  },
+  "rows": [
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "walk-fixed",
+      "variant": "before",
+      "reset": {
+        "player": [
+          -12,
+          -200,
+          -642
+        ],
+        "camera": [
+          -12,
+          -198.65,
+          -642
+        ],
+        "cameraQ": [
+          0.04883559348445305,
+          0.9434032608622245,
+          0.1612930084146349,
+          -0.2856395239460033
+        ],
+        "fov": 40,
+        "sunPosition": [
+          -11.999999999999995,
+          -118.58476575620213,
+          -617.5754297268606
+        ],
+        "sunTarget": [
+          -12,
+          -200,
+          -642
+        ],
+        "sunDir": [
+          5.864994471676414e-17,
+          0.9578262852211513,
+          0.2873478855663454
+        ],
+        "sunIntensity": 1.73,
+        "castShadow": true,
+        "autoUpdate": true,
+        "needsUpdate": false,
+        "mapSize": [
+          2048,
+          2048
+        ],
+        "shadowCameraMatrix": [
+          -0.9911364832031715,
+          -3.469446951953614e-18,
+          -0.1328475504616064,
+          0,
+          0.02741223972897488,
+          0.9784795987726774,
+          -0.2045146544839792,
+          0,
+          0.12998861787360566,
+          -0.20634358430942357,
+          -0.9698068284136019,
+          0,
+          -11.999999999999995,
+          -118.58476575620213,
+          -617.5754297268606,
+          1
+        ],
+        "shadowProjection": [
+          0.029411764705882353,
+          0,
+          0,
+          0,
+          0,
+          0.029411764705882353,
+          0,
+          0,
+          0,
+          0,
+          -0.005917159763313609,
+          0,
+          0,
+          0,
+          -0.005917159763313609,
+          1
+        ],
+        "pointTexel": [
+          1050.0195000944268,
+          -1241.6506780767809
+        ],
+        "sunUpdates": 1,
+        "hiddenTarget": true,
+        "targetVisible": false,
+        "targetUpdateIsSkip": true,
+        "passTarget": {
+          "lightIsSun": true,
+          "targetIsSame": true,
+          "targetLocal": [
+            -12,
+            -200,
+            -642
+          ],
+          "targetWorld": [
+            -86.07969955631373,
+            -0.9908488343513826,
+            -64.88858951137635
+          ],
+          "lightWorld": [
+            -11.999999999999995,
+            -118.58476575620213,
+            -617.5754297268606
+          ],
+          "targetAuto": true
+        },
+        "targetWorld": [
+          -86.07969955631373,
+          -0.9908488343513826,
+          -64.88858951137635
+        ],
+        "shadowAuto": true,
+        "shadowWorldAuto": true,
+        "shadowUp": [
+          0,
+          1,
+          0
+        ],
+        "drawnSunCasterCalls": 0,
+        "drawnSunCasterNames": [],
+        "cadence": {
+          "redraws": 0,
+          "moved": 0,
+          "timed": 0,
+          "deep": false,
+          "tick": 0,
+          "every": 900,
+          "move": 16
+        },
+        "prune": {
+          "on": true,
+          "cursor": 1740,
+          "passes": 168,
+          "last": 8,
+          "refreshed": 2239
+        }
+      },
+      "frames": [
+        {
+          "file": "jerryA-noon-walk-fixed-before-0.png",
+          "actual": {
+            "player": [
+              -12.009211654669189,
+              -200,
+              -642
+            ],
+            "camera": [
+              -12,
+              -198.65,
+              -642
+            ],
+            "cameraQ": [
+              0.04883559348445305,
+              0.9434032608622245,
+              0.1612930084146349,
+              -0.2856395239460033
+            ],
+            "fov": 40,
+            "sunPosition": [
+              -11.999999999999995,
+              -118.58476575620213,
+              -617.5754297268606
+            ],
+            "sunTarget": [
+              -12,
+              -200,
+              -642
+            ],
+            "sunDir": [
+              5.864994471676414e-17,
+              0.9578262852211513,
+              0.2873478855663454
+            ],
+            "sunIntensity": 1.73,
+            "castShadow": true,
+            "autoUpdate": true,
+            "needsUpdate": false,
+            "mapSize": [
+              2048,
+              2048
+            ],
+            "shadowCameraMatrix": [
+              -0.9911364832031715,
+              -3.469446951953614e-18,
+              -0.1328475504616064,
+              0,
+              0.02741223972897488,
+              0.9784795987726774,
+              -0.2045146544839792,
+              0,
+              0.12998861787360566,
+              -0.20634358430942357,
+              -0.9698068284136019,
+              0,
+              -11.999999999999995,
+              -118.58476575620213,
+              -617.5754297268606,
+              1
+            ],
+            "shadowProjection": [
+              0.029411764705882353,
+              0,
+              0,
+              0,
+              0,
+              0.029411764705882353,
+              0,
+              0,
+              0,
+              0,
+              -0.005917159763313609,
+              0,
+              0,
+              0,
+              -0.005917159763313609,
+              1
+            ],
+            "pointTexel": [
+              1050.0195000944268,
+              -1241.6506780767809
+            ],
+            "sunUpdates": 2,
+            "hiddenTarget": true,
+            "targetVisible": false,
+            "targetUpdateIsSkip": true,
+            "passTarget": {
+              "lightIsSun": true,
+              "targetIsSame": true,
+              "targetLocal": [
+                -12,
+                -200,
+                -642
+              ],
+              "targetWorld": [
+                -86.07969955631373,
+                -0.9908488343513826,
+                -64.88858951137635
+              ],
+              "lightWorld": [
+                -11.999999999999995,
+                -118.58476575620213,
+                -617.5754297268606
+              ],
+              "targetAuto": true
+            },
+            "targetWorld": [
+              -86.07969955631373,
+              -0.9908488343513826,
+              -64.88858951137635
+            ],
+            "shadowAuto": true,
+            "shadowWorldAuto": true,
+            "shadowUp": [
+              0,
+              1,
+              0
+            ],
+            "drawnSunCasterCalls": 0,
+            "drawnSunCasterNames": [],
+            "cadence": {
+              "redraws": 0,
+              "moved": 0,
+              "timed": 0,
+              "deep": false,
+              "tick": 0,
+              "every": 900,
+              "move": 16
+            },
+            "prune": {
+              "on": true,
+              "cursor": 1752,
+              "passes": 169,
+              "last": 8,
+              "refreshed": 2239
+            }
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "walk-fixed",
+      "variant": "live",
+      "reset": {
+        "player": [
+          -12,
+          -200,
+          -642
+        ],
+        "camera": [
+          -12,
+          -198.65,
+          -642
+        ],
+        "cameraQ": [
+          0.04883559348445305,
+          0.9434032608622245,
+          0.1612930084146349,
+          -0.2856395239460033
+        ],
+        "fov": 40,
+        "sunPosition": [
+          -11.986328125000126,
+          -118.5869589026496,
+          -617.5681192387024
+        ],
+        "sunTarget": [
+          -11.986328125000131,
+          -200.00219314644747,
+          -641.9926895118417
+        ],
+        "sunDir": [
+          5.864994471676414e-17,
+          0.9578262852211513,
+          0.2873478855663454
+        ],
+        "sunIntensity": 1.73,
+        "castShadow": true,
+        "autoUpdate": true,
+        "needsUpdate": false,
+        "mapSize": [
+          2048,
+          2048
+        ],
+        "shadowCameraMatrix": [
+          -0.9911330231960924,
+          0,
+          -0.13287336200372749,
+          0,
+          0.027418310930263645,
+          0.9784784161283449,
+          -0.20451949881783177,
+          0,
+          0.13001371679905546,
+          -0.206349192319635,
+          -0.9698022707094105,
+          0,
+          -11.986328125000126,
+          -118.5869589026496,
+          -617.5681192387024,
+          1
+        ],
+        "shadowProjection": [
+          0.029411764705882353,
+          0,
+          0,
+          0,
+          0,
+          0.029411764705882353,
+          0,
+          0,
+          0,
+          0,
+          -0.005917159763313609,
+          0,
+          0,
+          0,
+          -0.005917159763313609,
+          1
+        ],
+        "pointTexel": [
+          1050.4737325545657,
+          -1241.545915661925
+        ],
+        "sunUpdates": 3,
+        "hiddenTarget": true,
+        "targetVisible": false,
+        "targetUpdateIsSkip": true,
+        "passTarget": {
+          "lightIsSun": true,
+          "targetIsSame": true,
+          "targetLocal": [
+            -11.986328125000131,
+            -200.00219314644747,
+            -641.9926895118417
+          ],
+          "targetWorld": [
+            -86.07969955631373,
+            -0.9908488343513826,
+            -64.88858951137635
+          ],
+          "lightWorld": [
+            -11.986328125000126,
+            -118.5869589026496,
+            -617.5681192387024
+          ],
+          "targetAuto": true
+        },
+        "targetWorld": [
+          -86.07969955631373,
+          -0.9908488343513826,
+          -64.88858951137635
+        ],
+        "shadowAuto": true,
+        "shadowWorldAuto": true,
+        "shadowUp": [
+          0,
+          1,
+          0
+        ],
+        "drawnSunCasterCalls": 0,
+        "drawnSunCasterNames": [],
+        "cadence": {
+          "redraws": 0,
+          "moved": 0,
+          "timed": 0,
+          "deep": false,
+          "tick": 0,
+          "every": 900,
+          "move": 16
+        },
+        "prune": {
+          "on": true,
+          "cursor": 1776,
+          "passes": 170,
+          "last": 8,
+          "refreshed": 2239
+        }
+      },
+      "frames": [
+        {
+          "file": "jerryA-noon-walk-fixed-live-0.png",
+          "actual": {
+            "player": [
+              -12.009211654669189,
+              -200,
+              -642
+            ],
+            "camera": [
+              -12,
+              -198.65,
+              -642
+            ],
+            "cameraQ": [
+              0.04883559348445305,
+              0.9434032608622245,
+              0.1612930084146349,
+              -0.2856395239460033
+            ],
+            "fov": 40,
+            "sunPosition": [
+              -11.986328125000126,
+              -118.5869589026496,
+              -617.5681192387024
+            ],
+            "sunTarget": [
+              -11.986328125000131,
+              -200.00219314644747,
+              -641.9926895118417
+            ],
+            "sunDir": [
+              5.864994471676414e-17,
+              0.9578262852211513,
+              0.2873478855663454
+            ],
+            "sunIntensity": 1.73,
+            "castShadow": true,
+            "autoUpdate": true,
+            "needsUpdate": false,
+            "mapSize": [
+              2048,
+              2048
+            ],
+            "shadowCameraMatrix": [
+              -0.9911330231960924,
+              0,
+              -0.13287336200372749,
+              0,
+              0.027418310930263645,
+              0.9784784161283449,
+              -0.20451949881783177,
+              0,
+              0.13001371679905546,
+              -0.206349192319635,
+              -0.9698022707094105,
+              0,
+              -11.986328125000126,
+              -118.5869589026496,
+              -617.5681192387024,
+              1
+            ],
+            "shadowProjection": [
+              0.029411764705882353,
+              0,
+              0,
+              0,
+              0,
+              0.029411764705882353,
+              0,
+              0,
+              0,
+              0,
+              -0.005917159763313609,
+              0,
+              0,
+              0,
+              -0.005917159763313609,
+              1
+            ],
+            "pointTexel": [
+              1050.4737325545657,
+              -1241.545915661925
+            ],
+            "sunUpdates": 4,
+            "hiddenTarget": true,
+            "targetVisible": false,
+            "targetUpdateIsSkip": true,
+            "passTarget": {
+              "lightIsSun": true,
+              "targetIsSame": true,
+              "targetLocal": [
+                -11.986328125000131,
+                -200.00219314644747,
+                -641.9926895118417
+              ],
+              "targetWorld": [
+                -86.07969955631373,
+                -0.9908488343513826,
+                -64.88858951137635
+              ],
+              "lightWorld": [
+                -11.986328125000126,
+                -118.5869589026496,
+                -617.5681192387024
+              ],
+              "targetAuto": true
+            },
+            "targetWorld": [
+              -86.07969955631373,
+              -0.9908488343513826,
+              -64.88858951137635
+            ],
+            "shadowAuto": true,
+            "shadowWorldAuto": true,
+            "shadowUp": [
+              0,
+              1,
+              0
+            ],
+            "drawnSunCasterCalls": 0,
+            "drawnSunCasterNames": [],
+            "cadence": {
+              "redraws": 0,
+              "moved": 0,
+              "timed": 0,
+              "deep": false,
+              "tick": 0,
+              "every": 900,
+              "move": 16
+            },
+            "prune": {
+              "on": true,
+              "cursor": 1788,
+              "passes": 171,
+              "last": 8,
+              "refreshed": 2239
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "setup": {
+    "origin": {
+      "x": 0,
+      "y": -200,
+      "z": -640
+    },
+    "renderer": "WebGPURenderer",
+    "hooked": 4324,
+    "shadowSize": [
+      2048,
+      2048
+    ]
+  },
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 284 shader variants compiled, 38 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 5ms pools 4947ms compile 725ms warm frame 140ms | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 53ms | trees 202ms | player+weapons+zombie types 1149ms | foliage scattered 2156ms | POIs+minimap+foliage chunks 3609ms | contact shading + rest of setup 3792ms | post + pools + compile + warm frame 9618ms | ready 9622ms"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 303 variants after 13 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift pre-roll: 372 shader variants compiled after 35 warm frames | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 35 warm frames, 372 variants | fire-hot:229 fire-cold:229 fire-resources:100/8 fire-pool-falling-leaves:231 fire-leaf-resources:1 fire-clean:231 load:284 a-fresh:284 a-flash:287 a-faded:288 a-kill-generic:295 a-kill-melee:298 a-kill-explosive:300 a-fx:303 a-corpse:303 fresh:361 burning:363 flash:363 faded:363 tree-fade:363 kill-explosive:363 kill-chainsaw:363 kill-pellet:363 kill-generic:363 kill-melee:363 kill-explosive:365 kill-chainsaw:365 kill-pellet:365 kill-generic:366 kill-melee:366 kill-explosive:366 kill-chainsaw:366 kill-pellet:366 kill-generic:366 effects:371 corpses:371 corpses2:371"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":18.04,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.47,\"frames\":7,\"over50\":3,\"over100\":1,\"worst\":100},\"loading\":{\"at\":0.47,\"seconds\":17.57,\"frames\":329,\"over50\":49,\"over100\":23,\"worst\":3267},\"menu\":{\"at\":18.04,\"seconds\":7.37,\"frames\":4,\"over50\":1,\"over100\":1,\"worst\":7200}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":23,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":77,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    }
+  ],
+  "endIndexHash": "5cd3a20a35722a54e272d012e4ab2e1b005a9109bc712bea5edd635b034d10fc"
+}

@@ -1,0 +1,8 @@
+ok    t333     16 pass   0 fail  21.8s  (real renderer)
+FAIL  tcl334b    4 pass   1 fail  34.5s  (real renderer)
+    INFO pistol the hands into each other: 0.0 mm
+    INFO revolver the hands into each other: 0.0 mm
+    INFO uzi the hands into each other: 0.0 mm
+    FAIL no part of either hand inside any part of a gun (deepest per gun, mm: pistol 0.1, revolver 0.0, uzi 1.6); through: uzi: 1.6 mm (r glove in ?)
+ok    tcb294b   25 pass   0 fail  40.3s  (real renderer)
+3 checks: 45 pass, 1 fail (real renderer)

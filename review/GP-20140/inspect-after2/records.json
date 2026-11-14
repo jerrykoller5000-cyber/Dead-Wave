@@ -1,0 +1,1977 @@
+{
+  "stage": "inspect-after2",
+  "indexHash": "1123bcf448636e6f895d886b77400828b0e922ac77890cc26483b81a931b4704",
+  "moduleHash": "d22384a682b3e3ff59155e55fff1a67ca0463f16b215a7c6d88e745e6fee541b",
+  "rows": [
+    {
+      "beat": "draw",
+      "view": "head",
+      "light": "noon",
+      "file": "draw-head-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.149800000011911,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 176,
+            "mb": 47.948
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.419640145887513,
+        "y": -198.6170948175634,
+        "z": -630.5774029441537,
+        "tx": -26.00869755703197,
+        "ty": -198.7818923199582,
+        "tz": -632.0075407915729,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "head",
+      "light": "overcast",
+      "file": "draw-head-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.149800000011911,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 176,
+            "mb": 47.948
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.65290790230421,
+        "y": -198.54895249742594,
+        "z": -631.0573842125492,
+        "tx": -25.998174946004234,
+        "ty": -198.64829921045128,
+        "tz": -631.9690670495667,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "head",
+      "light": "dusk",
+      "file": "draw-head-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.149800000011911,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 176,
+            "mb": 47.948
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.7192215983524,
+        "y": -198.52672387000885,
+        "z": -631.2091147421293,
+        "tx": -25.99490745051213,
+        "ty": -198.60681569633684,
+        "tz": -631.9571201308563,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "head",
+      "light": "night",
+      "file": "draw-head-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.149800000011911,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 176,
+            "mb": 47.948
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.737010910811023,
+        "y": -198.52049879071475,
+        "z": -631.251211049449,
+        "tx": -25.99400551406964,
+        "ty": -198.5953648792714,
+        "tz": -631.9538223875583,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "hands",
+      "light": "noon",
+      "file": "draw-hands-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.149800000011911,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 176,
+            "mb": 47.948
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.438366851315788,
+        "y": -198.71256501114465,
+        "z": -630.7124468095243,
+        "tx": -26.055620251418155,
+        "ty": -198.86334839902673,
+        "tz": -631.8759976674463,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "hands",
+      "light": "overcast",
+      "file": "draw-hands-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.149800000011911,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 176,
+            "mb": 47.948
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.318972302986165,
+        "y": -198.76908891609122,
+        "z": -630.5630662741864,
+        "tx": -26.07481623530184,
+        "ty": -198.94683828387713,
+        "tz": -631.8517514864626,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "hands",
+      "light": "dusk",
+      "file": "draw-hands-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.149800000011911,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 176,
+            "mb": 47.948
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.28356578670419,
+        "y": -198.78458346154048,
+        "z": -630.5231585930517,
+        "tx": -26.080173630962634,
+        "ty": -198.97013942590394,
+        "tz": -631.8449846343137,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "hands",
+      "light": "night",
+      "file": "draw-hands-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.149800000011911,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 176,
+            "mb": 47.948
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.26833503142189,
+        "y": -198.79109516225046,
+        "z": -630.5065346071747,
+        "tx": -26.08243784365115,
+        "ty": -198.97998725958553,
+        "tz": -631.8421247386729,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "three",
+      "light": "noon",
+      "file": "draw-three-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.149800000011911,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 176,
+            "mb": 47.948
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -24.115543253982125,
+        "y": -198.04881324627854,
+        "z": -629.4949143469962,
+        "tx": -26.054203764044992,
+        "ty": -199.12982432488045,
+        "tz": -632.0385454860517,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "three",
+      "light": "overcast",
+      "file": "draw-three-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.149800000011911,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 176,
+            "mb": 47.948
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.746701211710292,
+        "y": -197.6806076210647,
+        "z": -629.277214998678,
+        "tx": -26.04543090597523,
+        "ty": -199.17638151129339,
+        "tz": -632.0995770961749,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "three",
+      "light": "dusk",
+      "file": "draw-three-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.149800000011911,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 176,
+            "mb": 47.948
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.632728258378446,
+        "y": -197.55311743317267,
+        "z": -629.2198685957568,
+        "tx": -26.042690435136883,
+        "ty": -199.1909250740258,
+        "tz": -632.1186421883524,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "draw",
+      "view": "three",
+      "light": "night",
+      "file": "draw-three-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 4.149800000011911,
+          "frames": 243,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 176,
+            "mb": 47.948
+          },
+          "span": 2.9166666666666563,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 29.499999999999773,
+          "phase": "smoking",
+          "time": 0.49999999999999006,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.60165335455697,
+        "y": -197.51716306788884,
+        "z": -629.2050599517279,
+        "tx": -26.04193925774693,
+        "ty": -199.19491154063627,
+        "tz": -632.1238680298321,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "lower",
+      "view": "head",
+      "light": "noon",
+      "file": "lower-head-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 6.149800000011904,
+          "frames": 363,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 296,
+            "mb": 47.948
+          },
+          "span": 4.916666666666649,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 31.49999999999966,
+          "phase": "smoking",
+          "time": 2.4999999999999862,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.161237289571286,
+        "y": -198.39812560211226,
+        "z": -630.3444490618402,
+        "tx": -26.007643706768704,
+        "ty": -198.79592022200583,
+        "tz": -632.014095657746,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "lower",
+      "view": "head",
+      "light": "overcast",
+      "file": "lower-head-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 6.149800000011904,
+          "frames": 363,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 296,
+            "mb": 47.948
+          },
+          "span": 4.916666666666649,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 31.49999999999966,
+          "phase": "smoking",
+          "time": 2.4999999999999862,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.62758347187467,
+        "y": -198.51024605293136,
+        "z": -631.0376059171995,
+        "tx": -25.999783863795855,
+        "ty": -198.6383991293288,
+        "tz": -631.9729281058552,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "lower",
+      "view": "head",
+      "light": "dusk",
+      "file": "lower-head-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 6.149800000011904,
+          "frames": 363,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 296,
+            "mb": 47.948
+          },
+          "span": 4.916666666666649,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 31.49999999999966,
+          "phase": "smoking",
+          "time": 2.4999999999999862,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.70559171938696,
+        "y": -198.51517806538732,
+        "z": -631.1886317129026,
+        "tx": -25.99820684641983,
+        "ty": -198.6067937268926,
+        "tz": -631.9646681514407,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "lower",
+      "view": "head",
+      "light": "night",
+      "file": "lower-head-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 6.149800000011904,
+          "frames": 363,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 296,
+            "mb": 47.948
+          },
+          "span": 4.916666666666649,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 31.49999999999966,
+          "phase": "smoking",
+          "time": 2.4999999999999862,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.73390361598305,
+        "y": -198.51549826264295,
+        "z": -631.2472034476198,
+        "tx": -25.997604658590426,
+        "ty": -198.59472512893043,
+        "tz": -631.9615140682356,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "lower",
+      "view": "hands",
+      "light": "noon",
+      "file": "lower-hands-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 6.149800000011904,
+          "frames": 363,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 296,
+            "mb": 47.948
+          },
+          "span": 4.916666666666649,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 31.49999999999966,
+          "phase": "smoking",
+          "time": 2.4999999999999862,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.46888280446645,
+        "y": -198.84345056272338,
+        "z": -630.9160439318583,
+        "tx": -25.972068849155647,
+        "ty": -198.9674864979695,
+        "tz": -631.862439402264,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "lower",
+      "view": "hands",
+      "light": "overcast",
+      "file": "lower-hands-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 6.149800000011904,
+          "frames": 363,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 296,
+            "mb": 47.948
+          },
+          "span": 4.916666666666649,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 31.49999999999966,
+          "phase": "smoking",
+          "time": 2.4999999999999862,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.372717482439562,
+        "y": -198.9441589940064,
+        "z": -630.82393662273,
+        "tx": -25.964113204000636,
+        "ty": -199.08361977297474,
+        "tz": -631.8315728308191,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "lower",
+      "view": "hands",
+      "light": "dusk",
+      "file": "lower-hands-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 6.149800000011904,
+          "frames": 363,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 296,
+            "mb": 47.948
+          },
+          "span": 4.916666666666649,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 31.49999999999966,
+          "phase": "smoking",
+          "time": 2.4999999999999862,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.345156491738138,
+        "y": -198.97179769489725,
+        "z": -630.7995804270472,
+        "tx": -25.961920180071992,
+        "ty": -199.11563264509712,
+        "tz": -631.8230642650831,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "lower",
+      "view": "hands",
+      "light": "night",
+      "file": "lower-hands-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 6.149800000011904,
+          "frames": 363,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 296,
+            "mb": 47.948
+          },
+          "span": 4.916666666666649,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 31.49999999999966,
+          "phase": "smoking",
+          "time": 2.4999999999999862,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.334352490287827,
+        "y": -198.98249852356622,
+        "z": -630.7902618734033,
+        "tx": -25.961069983781037,
+        "ty": -199.12804346505473,
+        "tz": -631.819765645795,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "lower",
+      "view": "three",
+      "light": "noon",
+      "file": "lower-three-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 6.149800000011904,
+          "frames": 363,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 296,
+            "mb": 47.948
+          },
+          "span": 4.916666666666649,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 31.49999999999966,
+          "phase": "smoking",
+          "time": 2.4999999999999862,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -24.111620440020182,
+        "y": -198.1174342241167,
+        "z": -629.540442742599,
+        "tx": -26.006338863216218,
+        "ty": -199.17382317211593,
+        "tz": -632.0276824802581,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "lower",
+      "view": "three",
+      "light": "overcast",
+      "file": "lower-three-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 6.149800000011904,
+          "frames": 363,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 296,
+            "mb": 47.948
+          },
+          "span": 4.916666666666649,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 31.49999999999966,
+          "phase": "smoking",
+          "time": 2.4999999999999862,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.712381504663483,
+        "y": -197.6857434256583,
+        "z": -629.2587630623649,
+        "tx": -26.020469067783154,
+        "ty": -199.18811282615331,
+        "tz": -632.0925815332174,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "lower",
+      "view": "three",
+      "light": "dusk",
+      "file": "lower-three-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 6.149800000011904,
+          "frames": 363,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 296,
+            "mb": 47.948
+          },
+          "span": 4.916666666666649,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 31.49999999999966,
+          "phase": "smoking",
+          "time": 2.4999999999999862,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.578181816715407,
+        "y": -197.52320352662983,
+        "z": -629.1767748349696,
+        "tx": -26.02525517175999,
+        "ty": -199.19295293796426,
+        "tz": -632.1145637779889,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "lower",
+      "view": "three",
+      "light": "night",
+      "file": "lower-three-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 6.149800000011904,
+          "frames": 363,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 296,
+            "mb": 47.948
+          },
+          "span": 4.916666666666649,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 31.49999999999966,
+          "phase": "smoking",
+          "time": 2.4999999999999862,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.548006213931902,
+        "y": -197.48537219467235,
+        "z": -629.1592226245181,
+        "tx": -26.026336351410297,
+        "ty": -199.19404631797033,
+        "tz": -632.1195295613963,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "exhale",
+      "view": "head",
+      "light": "noon",
+      "file": "exhale-head-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 7.149800000011901,
+          "frames": 423,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 356,
+            "mb": 47.948
+          },
+          "span": 5.916666666666646,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 32.4999999999996,
+          "phase": "smoking",
+          "time": 3.4999999999999827,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.36469710354517,
+        "y": -198.45996870311347,
+        "z": -630.6070917494367,
+        "tx": -26.005854367324712,
+        "ty": -198.73116537275322,
+        "tz": -631.9983580721591,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "exhale",
+      "view": "head",
+      "light": "overcast",
+      "file": "exhale-head-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 7.149800000011901,
+          "frames": 423,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 356,
+            "mb": 47.948
+          },
+          "span": 5.916666666666646,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 32.4999999999996,
+          "phase": "smoking",
+          "time": 3.4999999999999827,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.64580151169436,
+        "y": -198.5117507258644,
+        "z": -631.0653131173245,
+        "tx": -26.002032926238858,
+        "ty": -198.63210844658988,
+        "tz": -631.9707030597644,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "exhale",
+      "view": "head",
+      "light": "dusk",
+      "file": "exhale-head-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 7.149800000011901,
+          "frames": 423,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 356,
+            "mb": 47.948
+          },
+          "span": 5.916666666666646,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 32.4999999999996,
+          "phase": "smoking",
+          "time": 3.4999999999999827,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.722448703829976,
+        "y": -198.5158237977176,
+        "z": -631.2158849110335,
+        "tx": -26.000841607944054,
+        "ty": -198.60122786365946,
+        "tz": -631.9620817251766,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "exhale",
+      "view": "head",
+      "light": "night",
+      "file": "exhale-head-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 7.149800000011901,
+          "frames": 423,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 356,
+            "mb": 47.948
+          },
+          "span": 5.916666666666646,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 32.4999999999996,
+          "phase": "smoking",
+          "time": 3.4999999999999827,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.742520292940245,
+        "y": -198.51593254250437,
+        "z": -631.257767846413,
+        "tx": -26.00051476551505,
+        "ty": -198.5927556654417,
+        "tz": -631.9597164312411,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "exhale",
+      "view": "hands",
+      "light": "noon",
+      "file": "exhale-hands-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 7.149800000011901,
+          "frames": 423,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 356,
+            "mb": 47.948
+          },
+          "span": 5.916666666666646,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 32.4999999999996,
+          "phase": "smoking",
+          "time": 3.4999999999999827,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.476427824870544,
+        "y": -198.8543542916691,
+        "z": -630.9374124687259,
+        "tx": -25.971518768460253,
+        "ty": -198.97607160495522,
+        "tz": -631.8697809134965,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "exhale",
+      "view": "hands",
+      "light": "overcast",
+      "file": "exhale-hands-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 7.149800000011901,
+          "frames": 423,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 356,
+            "mb": 47.948
+          },
+          "span": 5.916666666666646,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 32.4999999999996,
+          "phase": "smoking",
+          "time": 3.4999999999999827,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.379623049549302,
+        "y": -198.9585659163975,
+        "z": -630.8483680209555,
+        "tx": -25.962455258041643,
+        "ty": -199.0958877300857,
+        "tz": -631.8416690503126,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "exhale",
+      "view": "hands",
+      "light": "dusk",
+      "file": "exhale-hands-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 7.149800000011901,
+          "frames": 423,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 356,
+            "mb": 47.948
+          },
+          "span": 5.916666666666646,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 32.4999999999996,
+          "phase": "smoking",
+          "time": 3.4999999999999827,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.34840514305811,
+        "y": -198.99070842831034,
+        "z": -630.8219750986631,
+        "tx": -25.959646556472617,
+        "ty": -199.13301768560032,
+        "tz": -631.8329574330048,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "exhale",
+      "view": "hands",
+      "light": "night",
+      "file": "exhale-hands-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 7.149800000011901,
+          "frames": 423,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 356,
+            "mb": 47.948
+          },
+          "span": 5.916666666666646,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 32.4999999999996,
+          "phase": "smoking",
+          "time": 3.4999999999999827,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.339689160695947,
+        "y": -198.99956818057478,
+        "z": -630.8147930346188,
+        "tx": -25.95887126227313,
+        "ty": -199.14326677701501,
+        "tz": -631.8305527395189,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "exhale",
+      "view": "three",
+      "light": "noon",
+      "file": "exhale-three-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 7.149800000011901,
+          "frames": 423,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 356,
+            "mb": 47.948
+          },
+          "span": 5.916666666666646,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 32.4999999999996,
+          "phase": "smoking",
+          "time": 3.4999999999999827,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -24.115326301255127,
+        "y": -198.1257460776601,
+        "z": -629.557406692965,
+        "tx": -26.003462632026665,
+        "ty": -199.17824812417362,
+        "tz": -632.0350498847936,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "exhale",
+      "view": "three",
+      "light": "overcast",
+      "file": "exhale-three-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 7.149800000011901,
+          "frames": 423,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 356,
+            "mb": 47.948
+          },
+          "span": 5.916666666666646,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 32.4999999999996,
+          "phase": "smoking",
+          "time": 3.4999999999999827,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.716657152709086,
+        "y": -197.69221689816885,
+        "z": -629.2738465253741,
+        "tx": -26.017346202258352,
+        "ty": -199.18913960368548,
+        "tz": -632.0987202877054,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "exhale",
+      "view": "three",
+      "light": "dusk",
+      "file": "exhale-three-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 7.149800000011901,
+          "frames": 423,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 356,
+            "mb": 47.948
+          },
+          "span": 5.916666666666646,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 32.4999999999996,
+          "phase": "smoking",
+          "time": 3.4999999999999827,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.581432092018908,
+        "y": -197.52758443364152,
+        "z": -629.1904183438503,
+        "tx": -26.022091497797344,
+        "ty": -199.19286222605695,
+        "tz": -632.1204823326162,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "exhale",
+      "view": "three",
+      "light": "night",
+      "file": "exhale-three-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 7.149800000011901,
+          "frames": 423,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 356,
+            "mb": 47.948
+          },
+          "span": 5.916666666666646,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 32.4999999999996,
+          "phase": "smoking",
+          "time": 3.4999999999999827,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.54830551900549,
+        "y": -197.48580995132124,
+        "z": -629.170969727439,
+        "tx": -26.02325950132518,
+        "ty": -199.1937785095691,
+        "tz": -632.1258388262254,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "head",
+      "light": "noon",
+      "file": "flick-head-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.899800000011941,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 461,
+            "mb": 47.948
+          },
+          "span": 7.6666666666666865,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.16367077346107,
+        "y": -198.39716041825838,
+        "z": -630.3505419883932,
+        "tx": -26.004971059351266,
+        "ty": -198.79054961427232,
+        "tz": -632.0183832915915,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "head",
+      "light": "overcast",
+      "file": "flick-head-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.899800000011941,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 461,
+            "mb": 47.948
+          },
+          "span": 7.6666666666666865,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.594743385229542,
+        "y": -198.50457347632062,
+        "z": -630.9796483790321,
+        "tx": -26.001019955129784,
+        "ty": -198.64910099189356,
+        "tz": -631.9800611459684,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "head",
+      "light": "dusk",
+      "file": "flick-head-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.899800000011941,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 461,
+            "mb": 47.948
+          },
+          "span": 7.6666666666666865,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.693934744401442,
+        "y": -198.51310834319065,
+        "z": -631.1653568246361,
+        "tx": -25.999943065513833,
+        "ty": -198.6105485913261,
+        "tz": -631.9696162884378,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "head",
+      "light": "night",
+      "file": "flick-head-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.899800000011941,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 461,
+            "mb": 47.948
+          },
+          "span": 7.6666666666666865,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.73108289559641,
+        "y": -198.51401101636566,
+        "z": -631.2407585056709,
+        "tx": -25.99951431059814,
+        "ty": -198.59519926395754,
+        "tz": -631.9654577526476,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "hands",
+      "light": "noon",
+      "file": "flick-hands-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.899800000011941,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 461,
+            "mb": 47.948
+          },
+          "span": 7.6666666666666865,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.552503309602955,
+        "y": -198.88006143086608,
+        "z": -631.0415152715675,
+        "tx": -26.004253578068912,
+        "ty": -198.99168295616835,
+        "tz": -631.8910003003493,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "hands",
+      "light": "overcast",
+      "file": "flick-hands-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.899800000011941,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 461,
+            "mb": 47.948
+          },
+          "span": 7.6666666666666865,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.488731567861485,
+        "y": -198.99395670103874,
+        "z": -630.986821523667,
+        "tx": -26.005739133965044,
+        "ty": -199.1159634890387,
+        "tz": -631.8676611012106,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "hands",
+      "light": "dusk",
+      "file": "flick-hands-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.899800000011941,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 461,
+            "mb": 47.948
+          },
+          "span": 7.6666666666666865,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.468156079795456,
+        "y": -199.02938062261924,
+        "z": -630.9706032441683,
+        "tx": -26.006202249810173,
+        "ty": -199.15470742601426,
+        "tz": -631.860385203372,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "hands",
+      "light": "night",
+      "file": "flick-hands-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.899800000011941,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 461,
+            "mb": 47.948
+          },
+          "span": 7.6666666666666865,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -25.462465554010294,
+        "y": -199.0390748614891,
+        "z": -630.9662325854847,
+        "tx": -26.00632907711334,
+        "ty": -199.16531770655723,
+        "tz": -631.8583926511612,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "three",
+      "light": "noon",
+      "file": "flick-three-noon.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.899800000011941,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 461,
+            "mb": 47.948
+          },
+          "span": 7.6666666666666865,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -24.147394782765357,
+        "y": -198.14385740440355,
+        "z": -629.5947395101707,
+        "tx": -26.01310567788606,
+        "ty": -199.18352143883786,
+        "tz": -632.0432577368756,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "three",
+      "light": "overcast",
+      "file": "flick-three-overcast.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.899800000011941,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 461,
+            "mb": 47.948
+          },
+          "span": 7.6666666666666865,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.716769670252567,
+        "y": -197.69373003654252,
+        "z": -629.278854313735,
+        "tx": -26.015221217272398,
+        "ty": -199.18920433412853,
+        "tz": -632.1009694692182,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "three",
+      "light": "dusk",
+      "file": "flick-three-dusk.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.899800000011941,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 461,
+            "mb": 47.948
+          },
+          "span": 7.6666666666666865,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.570842510435245,
+        "y": -197.5228677458865,
+        "z": -629.1852235220971,
+        "tx": -26.01594249239982,
+        "ty": -199.19114186885434,
+        "tz": -632.1206457926031,
+        "fov": 40
+      }
+    },
+    {
+      "beat": "flick",
+      "view": "three",
+      "light": "night",
+      "file": "flick-three-night.png",
+      "clock": {
+        "clock": {
+          "k": 1,
+          "paused": true,
+          "step": 0,
+          "gameTime": 8.899800000011941,
+          "frames": 528,
+          "rewind": {
+            "nodes": 2096,
+            "capacity": 533,
+            "frames": 461,
+            "mb": 47.948
+          },
+          "span": 7.6666666666666865,
+          "scrubbing": false
+        },
+        "idle": {
+          "quiet": 34.2499999999995,
+          "phase": "smoking",
+          "time": 5.249999999999977,
+          "lit": true,
+          "number": 1
+        }
+      },
+      "camera": {
+        "x": -23.538052631228854,
+        "y": -197.48312572595987,
+        "z": -629.1651184902045,
+        "tx": -26.016105228458276,
+        "ty": -199.19157902071555,
+        "tz": -632.1250852182686,
+        "fov": 40
+      }
+    }
+  ],
+  "built": {
+    "id": "marine",
+    "name": "The marine (live)",
+    "kind": "marine",
+    "variant": null,
+    "mode": null,
+    "center": {
+      "x": -25.990977057360134,
+      "y": -199.19391368620754,
+      "z": -632.1147398019439
+    },
+    "size": {
+      "x": 0.7628954420206782,
+      "y": 1.6130083385354226,
+      "z": 0.8803100105072872
+    },
+    "yaw": 0,
+    "info": {
+      "meshes": 199,
+      "drawables": 199,
+      "tris": 196070,
+      "points": 0,
+      "segments": 0,
+      "materials": 83
+    }
+  },
+  "move": {
+    "weapon": "pistol",
+    "unarmed": true,
+    "reloading": false,
+    "crouching": false,
+    "grounded": true,
+    "dive": "idle",
+    "vault": false,
+    "akimbo": false,
+    "mortar": null,
+    "carried": false,
+    "zoom": false,
+    "ots": false,
+    "training": true,
+    "wake": false,
+    "grenades": 6,
+    "medkits": 0,
+    "hp": 100,
+    "god": true,
+    "paused": false,
+    "move": "smoke",
+    "loop": false,
+    "treadmill": false,
+    "running": false,
+    "holds": {},
+    "error": null,
+    "blade": "machete",
+    "camo": "m81"
+  },
+  "errors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift renderer: WebGPU."
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift warm-up: 0 shader variants compiled, 0 bodies pooled, 0 warm frames, lights visible 24/24, shadows true | post 7ms pools 0ms compile 0ms warm frame 0ms | "
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift load: terrain+water+sky built 0ms | rocks 65ms | trees 231ms | player+weapons+zombie types 1343ms | foliage scattered 2439ms | POIs+minimap+foliage chunks 3996ms | contact shading + rest of setup 4224ms | post + pools + compile + warm frame 4245ms | ready 4247ms"
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift first minute: 0 variants after 0 warm frames | "
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift title: menu up after 0 warm frames, 137 variants | "
+    },
+    {
+      "type": "info",
+      "text": "Grave Shift opening perf: {\"toMenu\":9.33,\"segments\":{\"boot\":{\"at\":0,\"seconds\":0.55,\"frames\":8,\"over50\":2,\"over100\":1,\"worst\":200},\"loading\":{\"at\":0.55,\"seconds\":8.78,\"frames\":44,\"over50\":15,\"over100\":10,\"worst\":2517},\"menu\":{\"at\":9.33,\"seconds\":9.13,\"frames\":3,\"over50\":0,\"over100\":0,\"worst\":33}},\"videos\":{\"caracal@loading\":{\"frames\":4,\"dropped\":0}},\"loafOver100\":12,\"gpuGateWait\":0,\"order\":\"boot > loading > menu\",\"liveRollTicks\":null,\"renderer\":\"WebGPU / high\"}"
+    },
+    {
+      "type": "error",
+      "text": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "type": "info",
+      "text": "Inspector 1.2.0: 115 subjects; DWInspect.help() for the API"
+    }
+  ]
+}

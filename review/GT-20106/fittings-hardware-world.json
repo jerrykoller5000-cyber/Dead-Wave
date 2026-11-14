@@ -1,0 +1,44 @@
+{
+  "start": {
+    "studio/weapon-heavy.js": "53c40d147103cbc002cded672c02a59f6176c3b19ecd936426e907738dfffba0",
+    "studio/weapon-attachments.js": "073188b173f5d24d3fc0d3597e8918586b47a7e962e66d145ffc46bc1a79cf4c",
+    "studio/weapon-sidearms.js": "529017944e86c818c4d74303d0d97344e3f164df87ad280ec202e942cfa0c093",
+    "studio/weapon-longarms.js": "606d9e6baa101ed0b3858c1c70032179c184180ab9af296812994e1070ded00e",
+    "studio/weapon-casings.js": "cb52591967fdf3ef30d6e46e583eff7adc06482f11a634769275450e41fb23c8",
+    "game/viewmodel.js": "a81d0a67b625fae826dfb4df265a4b75bd5b25850a94f06c2bc0e3f50fec13b0",
+    "game/viewmodel-poses.js": "2d69a764204632f84ad7aba0353aafc64644301a2e166fc5c78d71827ebb85d1",
+    "game/viewmodel-fit.js": "f1dac3893c06c12cc261f4823f3355e0a25f2836259bc89d674f4e3c8c486e78",
+    "studio/hand-contacts.js": "0dd1bc329916581ece0c6fa9a179daa80e0800c6abee8eb99a6fea03a86daa89",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "tools/tests/t333.js": "6d63696c352e5e93cf776f508f6ae3299fd7d0f8edacaa057cc1e75b45daab26",
+    "tools/tests/t336.js": "06ef855e9511114f178ac63ae8564d071690df7d4e45127aff456474c131a1d3"
+  },
+  "end": {
+    "studio/weapon-heavy.js": "53c40d147103cbc002cded672c02a59f6176c3b19ecd936426e907738dfffba0",
+    "studio/weapon-attachments.js": "073188b173f5d24d3fc0d3597e8918586b47a7e962e66d145ffc46bc1a79cf4c",
+    "studio/weapon-sidearms.js": "529017944e86c818c4d74303d0d97344e3f164df87ad280ec202e942cfa0c093",
+    "studio/weapon-longarms.js": "606d9e6baa101ed0b3858c1c70032179c184180ab9af296812994e1070ded00e",
+    "studio/weapon-casings.js": "cb52591967fdf3ef30d6e46e583eff7adc06482f11a634769275450e41fb23c8",
+    "game/viewmodel.js": "a81d0a67b625fae826dfb4df265a4b75bd5b25850a94f06c2bc0e3f50fec13b0",
+    "game/viewmodel-poses.js": "2d69a764204632f84ad7aba0353aafc64644301a2e166fc5c78d71827ebb85d1",
+    "game/viewmodel-fit.js": "f1dac3893c06c12cc261f4823f3355e0a25f2836259bc89d674f4e3c8c486e78",
+    "studio/hand-contacts.js": "0dd1bc329916581ece0c6fa9a179daa80e0800c6abee8eb99a6fea03a86daa89",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "tools/tests/t333.js": "6d63696c352e5e93cf776f508f6ae3299fd7d0f8edacaa057cc1e75b45daab26",
+    "tools/tests/t336.js": "06ef855e9511114f178ac63ae8564d071690df7d4e45127aff456474c131a1d3"
+  },
+  "changed": [],
+  "rows": [
+    {
+      "test": "t333",
+      "pass": 16,
+      "fail": 0
+    },
+    {
+      "test": "t336",
+      "pass": 29,
+      "fail": 0
+    }
+  ],
+  "exit": 0
+}

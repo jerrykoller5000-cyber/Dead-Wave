@@ -433,13 +433,8 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
   radioPart(v(rmesh(.022,.035,.012,nvgMat,.004),-.027,1.105,.189));
   const antenna=radioPart(v(cyl(.0035,.0035,.17,nvgMat,5),RX-.015,1.185,.19));antenna.rotation.z=.42;antenna.position.x-=.035;
   v(rmesh(.092,.025,.019,webMat,.006),0,1.138,-.179);
-  const patchRed=new T.MeshStandardMaterial({color:0xb03030,roughness:.9});
-  // (the shirt's own patch stays; the carrier's moved to the right chest with the radio, CC-341: x +.219 from the old place)
-  for(const [fn,z,dx,dy] of [[at,.132,0,0],[v,.178,.196,-.082]]) {   // tcc341 (J128): the carrier's patch 2.3 cm in from the plate's corner, clear of the support arm's sleeve
-    fn(rmesh(.083,.047,.009,patchMat,.003),-.084+dx,1.092+dy,z);
-    fn(rmesh(.029,.024,.006,patchInk,.002),-.108+dx,1.1+dy,z+.007);
-    fn(rmesh(.045,.009,.006,patchRed,.002),-.073+dx,1.081+dy,z+.007);
-  }
+  // CC-351 (Jerry, D-182: "Remove it"; no logos or markings on models): the flag patch is gone, from the shirt's chest and from
+  // the carrier's (CC-341 had moved that one up by the radio, under his shoulder strap); nothing in its place.
   // Lower-profile pack hugs the back plate; shoulder webbing follows the top.
   at(form([[-.148,.09,.04],[-.13,.122,.058],[-.10,.127,.06],[.065,.133,.063],[.112,.124,.06],[.145,.104,.05],[.159,.058,.029],[.162,0,0]],packW,'soft-pack',16),0,.992,-.227);
   at(form([[-.053,.062,.01],[-.04,.091,.022],[.027,.089,.025],[.051,.071,.008]],packTrimW),0,.96,-.286);
@@ -508,10 +503,8 @@ export function buildMarineBody(T, {root, put, rmesh: roundedMesh, cyl, part, dr
     put(armG,plate(.068,.027,.008,uniformW),side*.052,-.056,0,0,side*Math.PI/2,0);
     // Follow the sleeve's changing center as it slopes into the shoulder.
     seam(armG,[[side*.0335,-.09,-.0385],[side*.0405,-.175,-.0338],[side*.0467,-.207,-.0365]],uniformW,.0012);
-    // GB-123 (Jerry): the PGB unit patch on his own left shoulder (+x: he faces +z), 1 mm off the raised block,
-    // facing out and reading the right way round. The right shoulder keeps its placeholder.
-    if(side>0&&pgbPatch)patches.push(put(armG,pgbPatch(.058,.066),side*.051,-.1,0,0,Math.PI/2,0));
-    else put(armG,rmesh(.007,.041,.051,side>0?patchMat:patchInk,.002),side*.053,-.1,0);
+    // CC-351 (Jerry, D-182: "Remove it"; no logos or markings on models): no patch on either shoulder (GB-123's PGB unit
+    // patch on the left, the placeholder on the right): the sleeve's plain raised block only.
     addGear('pads',armG,plate(.11,.104,.023,padW),0,-.261,-.057,0,Math.PI,0);
     addGear('pads',armG,plate(.09,.082,.019,plateW),0,-.261,-.076,0,Math.PI,0);
     const elbowG=new T.Group();elbowG.position.set(0,-.28,0);elbowG.rotation.set(side<0?-.35:-.2,0,0);armG.add(elbowG);

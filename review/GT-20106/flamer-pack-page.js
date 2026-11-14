@@ -1,0 +1,12 @@
+(async()=>{
+const G=TT.THREE,ctx=TT.inspectHost().builders.weaponContext(),{makeFlamerModel}=await import('/studio/weapon-heavy.js');
+const before=makeFlamerModel({...ctx,THREE:{...G,MeshStandardNodeMaterial:undefined},finishGun:g=>g}),after=makeFlamerModel({...ctx,finishGun:g=>g});
+before.updateMatrixWorld(true);after.updateMatrixWorld(true);const bn=before.getObjectByName('flamerNozzle'),an=after.getObjectByName('flamerNozzle'),wb=bn.parent,wa=an.parent;
+const originals=wb.children.filter(o=>o.isMesh&&o!==bn&&!(o.material.emissiveIntensity>0&&(o.material.emissive.r||o.material.emissive.g||o.material.emissive.b))&&!o.material.userData?.weaponFinishRole),packed=wa.children.filter(o=>o.isMesh&&o.geometry.attributes.foldRM);
+if(packed.length!==1)throw Error('expected one static bare wand batch, got'+packed.length);
+const expected=[];for(const m of originals){const p=m.geometry.attributes.position,n=m.geometry.attributes.normal,ix=m.geometry.index,nm=new G.Matrix3().getNormalMatrix(m.matrixWorld);for(let j=0;j<(ix?ix.count:p.count);j++){const i=ix?ix.getX(j):j,v=new G.Vector3().fromBufferAttribute(p,i).applyMatrix4(m.matrixWorld),normal=new G.Vector3().fromBufferAttribute(n,i).applyMatrix3(nm).normalize();expected.push([...v.toArray(),...normal.toArray(),m.material.color.r,m.material.color.g,m.material.color.b,m.material.roughness,m.material.metalness]);}}
+const mesh=packed[0],p=mesh.geometry.attributes.position,n=mesh.geometry.attributes.normal,c=mesh.geometry.attributes.color,rm=mesh.geometry.attributes.foldRM,nm=new G.Matrix3().getNormalMatrix(mesh.matrixWorld),errors=new Array(11).fill(0);if(expected.length!==p.count)throw Error('packed vertex count changed');
+for(let i=0;i<p.count;i++){const actual=[...new G.Vector3().fromBufferAttribute(p,i).applyMatrix4(mesh.matrixWorld).toArray(),...new G.Vector3().fromBufferAttribute(n,i).applyMatrix3(nm).normalize().toArray(),c.getX(i),c.getY(i),c.getZ(i),rm.getX(i),rm.getY(i)];for(let j=0;j<11;j++)errors[j]=Math.max(errors[j],Math.abs(actual[j]-expected[i][j]));}
+const bp=bn.geometry.attributes.position.array,ap=an.geometry.attributes.position.array;
+return{beforeBareMeshes:originals.length,afterBareMeshes:packed.length,vertices:p.count,maxPositionError:Math.max(...errors.slice(0,3)),maxNormalError:Math.max(...errors.slice(3,6)),maxColorError:Math.max(...errors.slice(6,9)),maxRoughMetalError:Math.max(...errors.slice(9)),nozzleVerticesIdentical:bp.length===ap.length&&bp.every((v,i)=>v===ap[i]),retainedPilot:wa.children.some(o=>o.isMesh&&o.material.emissiveIntensity>0&&o!==an)};
+})()

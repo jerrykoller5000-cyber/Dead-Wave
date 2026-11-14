@@ -1,0 +1,319 @@
+{
+  "rows": [
+    {
+      "ext": false,
+      "phase": "ready",
+      "full": {
+        "n": 282,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.00046776929352379575,
+          "where": "glovePads in _ box [[-15,-93,-88],[15,-50,-23]] tris 116",
+          "detail": {
+            "vertex": 367,
+            "bone": 2,
+            "digit": "index",
+            "point": [
+              0.01435419690803863,
+              -0.08143946795211249,
+              -0.03733464485432958
+            ],
+            "depthMm": 0.46776929352379576
+          }
+        }
+      },
+      "magOnly": {
+        "n": 8,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.0001402560946862829,
+          "where": "glove in Sniper .308 magazine body<magazineBody<_ box [[-25,-190,-20],[25,-67,91]] tris 44",
+          "detail": {
+            "vertex": 736,
+            "bone": 5,
+            "digit": "middle",
+            "point": [
+              -0.02073968399303805,
+              -0.09850852204691878,
+              -0.019484164718373886
+            ],
+            "depthMm": 0.14025609468628292
+          }
+        }
+      },
+      "nonMag": {
+        "n": 274,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.00046776929352379575,
+          "where": "glovePads in _ box [[-15,-93,-88],[15,-50,-23]] tris 116",
+          "detail": {
+            "vertex": 367,
+            "bone": 2,
+            "digit": "index",
+            "point": [
+              0.01435419690803863,
+              -0.08143946795211249,
+              -0.03733464485432958
+            ],
+            "depthMm": 0.46776929352379576
+          }
+        }
+      },
+      "magNode": ""
+    },
+    {
+      "ext": false,
+      "phase": "reload.25",
+      "full": {
+        "n": 282,
+        "l": {
+          "worst": 0.00540792333640251,
+          "where": "glove in _<magazineBody<_ box [[-480,-495,-312],[-361,-456,-194]] tris 44",
+          "detail": {
+            "vertex": 4575,
+            "bone": 13,
+            "digit": "thumb",
+            "point": [
+              -0.45912637748870955,
+              -0.48241597411482007,
+              -0.27259490023370236
+            ],
+            "depthMm": 5.4079233364025106
+          }
+        },
+        "r": {
+          "worst": 0.00046627676145269653,
+          "where": "glovePads in _ box [[-15,-93,-88],[15,-50,-23]] tris 116",
+          "detail": {
+            "vertex": 367,
+            "bone": 2,
+            "digit": "index",
+            "point": [
+              0.014354196908031136,
+              -0.0814394679521131,
+              -0.03733464485433652
+            ],
+            "depthMm": 0.46627676145269653
+          }
+        }
+      },
+      "magOnly": {
+        "n": 8,
+        "l": {
+          "worst": 0.00540792333640251,
+          "where": "glove in _<magazineBody<_ box [[-480,-495,-312],[-361,-456,-194]] tris 44",
+          "detail": {
+            "vertex": 4575,
+            "bone": 13,
+            "digit": "thumb",
+            "point": [
+              -0.45912637748870955,
+              -0.48241597411482007,
+              -0.27259490023370236
+            ],
+            "depthMm": 5.4079233364025106
+          }
+        },
+        "r": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        }
+      },
+      "nonMag": {
+        "n": 274,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.00046627676145269653,
+          "where": "glovePads in _ box [[-15,-93,-88],[15,-50,-23]] tris 116",
+          "detail": {
+            "vertex": 367,
+            "bone": 2,
+            "digit": "index",
+            "point": [
+              0.014354196908031136,
+              -0.0814394679521131,
+              -0.03733464485433652
+            ],
+            "depthMm": 0.46627676145269653
+          }
+        }
+      }
+    },
+    {
+      "ext": true,
+      "phase": "ready",
+      "full": {
+        "n": 282,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.0004671496526049689,
+          "where": "glovePads in _ box [[-15,-93,-88],[15,-50,-23]] tris 116",
+          "detail": {
+            "vertex": 367,
+            "bone": 2,
+            "digit": "index",
+            "point": [
+              0.014354196908019479,
+              -0.08143946795211213,
+              -0.03733464485432886
+            ],
+            "depthMm": 0.46714965260496893
+          }
+        }
+      },
+      "magOnly": {
+        "n": 8,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.00013941819603905582,
+          "where": "glove in Sniper .308 magazine body<magazineBody<_ box [[-25,-257,-20],[25,-75,91]] tris 44",
+          "detail": {
+            "vertex": 736,
+            "bone": 5,
+            "digit": "middle",
+            "point": [
+              -0.020739683993057756,
+              -0.09850852204691872,
+              -0.019484164718372943
+            ],
+            "depthMm": 0.13941819603905584
+          }
+        }
+      },
+      "nonMag": {
+        "n": 274,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.0004671496526049689,
+          "where": "glovePads in _ box [[-15,-93,-88],[15,-50,-23]] tris 116",
+          "detail": {
+            "vertex": 367,
+            "bone": 2,
+            "digit": "index",
+            "point": [
+              0.014354196908019479,
+              -0.08143946795211213,
+              -0.03733464485432886
+            ],
+            "depthMm": 0.46714965260496893
+          }
+        }
+      },
+      "magNode": ""
+    },
+    {
+      "ext": true,
+      "phase": "reload.25",
+      "full": {
+        "n": 282,
+        "l": {
+          "worst": 0.018074030355301737,
+          "where": "glove in Sniper .308 magazine body<magazineBody<_ box [[-486,-547,-327],[-360,-345,-189]] tris 44",
+          "detail": {
+            "vertex": 4274,
+            "bone": 0,
+            "digit": "palm",
+            "point": [
+              -0.43591900460485683,
+              -0.5005405089526583,
+              -0.26564044086210614
+            ],
+            "depthMm": 18.074030355301737
+          }
+        },
+        "r": {
+          "worst": 0.0004661627596984106,
+          "where": "glovePads in _ box [[-15,-93,-88],[15,-50,-23]] tris 116",
+          "detail": {
+            "vertex": 367,
+            "bone": 2,
+            "digit": "index",
+            "point": [
+              0.014354196908026362,
+              -0.08143946795211726,
+              -0.03733464485433596
+            ],
+            "depthMm": 0.46616275969841064
+          }
+        }
+      },
+      "magOnly": {
+        "n": 8,
+        "l": {
+          "worst": 0.018074030355301737,
+          "where": "glove in Sniper .308 magazine body<magazineBody<_ box [[-486,-547,-327],[-360,-345,-189]] tris 44",
+          "detail": {
+            "vertex": 4274,
+            "bone": 0,
+            "digit": "palm",
+            "point": [
+              -0.43591900460485683,
+              -0.5005405089526583,
+              -0.26564044086210614
+            ],
+            "depthMm": 18.074030355301737
+          }
+        },
+        "r": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        }
+      },
+      "nonMag": {
+        "n": 274,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.0004661627596984106,
+          "where": "glovePads in _ box [[-15,-93,-88],[15,-50,-23]] tris 116",
+          "detail": {
+            "vertex": 367,
+            "bone": 2,
+            "digit": "index",
+            "point": [
+              0.014354196908026362,
+              -0.08143946795211726,
+              -0.03733464485433596
+            ],
+            "depthMm": 0.46616275969841064
+          }
+        }
+      }
+    }
+  ],
+  "errors": []
+}

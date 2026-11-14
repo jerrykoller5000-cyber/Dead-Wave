@@ -75,6 +75,7 @@ export function createArmory({ guns = [] } = {}) {
       const gun = allGuns().find(item => item.id === id);
       if (!gun) return { ok: false, reason: 'missing' };
       if (patch && patch.loaded != null && Number.isSafeInteger(patch.loaded) && patch.loaded >= 0) gun.loaded = patch.loaded;
+      if (patch && Number.isSafeInteger(patch.rounds) && patch.rounds >= 0) gun.rounds = patch.rounds;
       if (patch && Array.isArray(patch.magazines)) gun.magazines = patch.magazines.map(mag => ({ rounds: mag.rounds | 0 }));
       return { ok: true, gun: copyGun(gun) };
     },

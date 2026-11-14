@@ -112,11 +112,25 @@ function readStatus(agent) {
   }
   return { agent, fields, notes: lines.slice(i).join('\n').trimEnd() };
 }
+// Keep ordinary writes first. Some Windows file-sharing filters reject truncate-open
+// with UNKNOWN while an existing-file descriptor remains writable (GP-20138).
+function writeCrewUtf8(file, text) {
+  try { fs.writeFileSync(file, text, 'utf8'); }
+  catch (error) {
+    if (error.code !== 'UNKNOWN') throw error;
+    const bytes = Buffer.from(text, 'utf8');
+    const fd = fs.openSync(file, 'r+');
+    try {
+      fs.writeFileSync(fd, bytes);
+      fs.ftruncateSync(fd, bytes.length);
+    } finally { fs.closeSync(fd); }
+  }
+}
 function writeStatus({ agent, fields, notes }) {
   const head = ['# ' + AGENTS[agent], ''];
   for (const k of FIELDS) head.push(`${k}: ${fields[k] || DASH}`);
   const body = notes && notes.trim() ? notes : '## Notes\n\n(Anything your next session should know. Yours to edit.)';
-  fs.writeFileSync(statusPath(agent), head.join('\n') + '\n\n' + body + '\n', 'utf8');
+  writeCrewUtf8(statusPath(agent), head.join('\n') + '\n\n' + body + '\n');
 }
 const log = (agent, kind, text) => append(logPath, [`- ${now()} · ${agent} · ${kind} · ${text}`], '# Crew log\n\nNewest at the bottom. Append only.\n');
 
@@ -576,7 +590,7 @@ async function slotSummary() {
 function rewriteKeepingTail(file, before, after) {
   const again = read(file);
   if (!again.startsWith(before)) throw new Error(`${path.relative(ROOT, file)} changed under us; run archive again`);
-  fs.writeFileSync(file, after + again.slice(before.length), 'utf8');
+  writeCrewUtf8(file, after + again.slice(before.length));
 }
 function archiveOld(days) {
   const cut = new Date(Date.now() - days * 864e5).toISOString();

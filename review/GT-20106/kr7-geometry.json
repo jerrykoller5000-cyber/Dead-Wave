@@ -1,0 +1,27 @@
+{
+  "candidate": false,
+  "vertices": 10068,
+  "triangles": 3356,
+  "volume": 0.0009707186953565029,
+  "degenerate": 0,
+  "nonManifoldEdges": 0,
+  "bore": [],
+  "wood": [
+    {
+      "z": 0.24199999868869781,
+      "normal": [
+        0,
+        0,
+        -1
+      ]
+    },
+    {
+      "z": 0.5410000085830688,
+      "normal": [
+        0,
+        0,
+        1
+      ]
+    }
+  ]
+}

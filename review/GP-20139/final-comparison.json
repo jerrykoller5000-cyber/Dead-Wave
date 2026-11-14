@@ -1,0 +1,557 @@
+{
+  "indexHash": "d8f4c277514f3b3efeab1f3247beafa98bb4302ea5d3689394134c27e2fe96d3",
+  "beforeModel": "3954998a1df7470e239cb63d884bdd854cc2fe75a6202a62f7e132120dd237da",
+  "afterModel": "c14b51e72eb854f43023e8017bcff49afb4ebb626a95a1491232889bba4a3de0",
+  "matchedCamerasAndLights": true,
+  "stationaryAllThresholdsZero": true,
+  "paintVerticesBefore": 456,
+  "paintVerticesAfter": 456,
+  "candidateAfterPngByteIdentical": 48,
+  "totalImages": 48,
+  "rows": [
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "region": "full",
+      "before": 16203,
+      "after": 14675,
+      "changePercent": -9.43035240387583,
+      "sensitivity": {
+        "gt16": {
+          "before": 35175,
+          "after": 32902
+        },
+        "gt24": {
+          "before": 22099,
+          "after": 19959
+        },
+        "gt32": {
+          "before": 16203,
+          "after": 14675
+        },
+        "gt48": {
+          "before": 6623,
+          "after": 5183
+        },
+        "gt64": {
+          "before": 2682,
+          "after": 1587
+        },
+        "gt96": {
+          "before": 939,
+          "after": 110
+        }
+      }
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "region": "lower-half",
+      "before": 3863,
+      "after": 2908,
+      "changePercent": -24.721718871343512,
+      "sensitivity": {
+        "gt16": {
+          "before": 7306,
+          "after": 5815
+        },
+        "gt24": {
+          "before": 5155,
+          "after": 3722
+        },
+        "gt32": {
+          "before": 3863,
+          "after": 2908
+        },
+        "gt48": {
+          "before": 2482,
+          "after": 1558
+        },
+        "gt64": {
+          "before": 1513,
+          "after": 820
+        },
+        "gt96": {
+          "before": 582,
+          "after": 27
+        }
+      }
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "region": "full",
+      "before": 15531,
+      "after": 13274,
+      "changePercent": -14.532225870838966,
+      "sensitivity": {
+        "gt16": {
+          "before": 34610,
+          "after": 31275
+        },
+        "gt24": {
+          "before": 22126,
+          "after": 18945
+        },
+        "gt32": {
+          "before": 15531,
+          "after": 13274
+        },
+        "gt48": {
+          "before": 6144,
+          "after": 4000
+        },
+        "gt64": {
+          "before": 2599,
+          "after": 1182
+        },
+        "gt96": {
+          "before": 1235,
+          "after": 58
+        }
+      }
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "region": "lower-half",
+      "before": 3984,
+      "after": 2271,
+      "changePercent": -42.99698795180723,
+      "sensitivity": {
+        "gt16": {
+          "before": 6793,
+          "after": 4391
+        },
+        "gt24": {
+          "before": 5266,
+          "after": 2900
+        },
+        "gt32": {
+          "before": 3984,
+          "after": 2271
+        },
+        "gt48": {
+          "before": 2797,
+          "after": 1127
+        },
+        "gt64": {
+          "before": 1642,
+          "after": 558
+        },
+        "gt96": {
+          "before": 949,
+          "after": 0
+        }
+      }
+    },
+    {
+      "view": "jerryA",
+      "light": "overcast",
+      "region": "full",
+      "before": 14862,
+      "after": 13347,
+      "changePercent": -10.19378280177634,
+      "sensitivity": {
+        "gt16": {
+          "before": 33734,
+          "after": 31482
+        },
+        "gt24": {
+          "before": 20480,
+          "after": 18370
+        },
+        "gt32": {
+          "before": 14862,
+          "after": 13347
+        },
+        "gt48": {
+          "before": 5525,
+          "after": 4319
+        },
+        "gt64": {
+          "before": 2525,
+          "after": 1443
+        },
+        "gt96": {
+          "before": 39,
+          "after": 39
+        }
+      }
+    },
+    {
+      "view": "jerryA",
+      "light": "overcast",
+      "region": "lower-half",
+      "before": 3661,
+      "after": 2713,
+      "changePercent": -25.894564326686698,
+      "sensitivity": {
+        "gt16": {
+          "before": 6902,
+          "after": 5408
+        },
+        "gt24": {
+          "before": 4863,
+          "after": 3442
+        },
+        "gt32": {
+          "before": 3661,
+          "after": 2713
+        },
+        "gt48": {
+          "before": 2080,
+          "after": 1319
+        },
+        "gt64": {
+          "before": 1474,
+          "after": 788
+        },
+        "gt96": {
+          "before": 0,
+          "after": 0
+        }
+      }
+    },
+    {
+      "view": "jerryB",
+      "light": "overcast",
+      "region": "full",
+      "before": 14406,
+      "after": 12162,
+      "changePercent": -15.576842982090799,
+      "sensitivity": {
+        "gt16": {
+          "before": 33019,
+          "after": 29720
+        },
+        "gt24": {
+          "before": 20313,
+          "after": 17150
+        },
+        "gt32": {
+          "before": 14406,
+          "after": 12162
+        },
+        "gt48": {
+          "before": 4950,
+          "after": 3427
+        },
+        "gt64": {
+          "before": 2479,
+          "after": 1077
+        },
+        "gt96": {
+          "before": 33,
+          "after": 33
+        }
+      }
+    },
+    {
+      "view": "jerryB",
+      "light": "overcast",
+      "region": "lower-half",
+      "before": 3897,
+      "after": 2187,
+      "changePercent": -43.87990762124711,
+      "sensitivity": {
+        "gt16": {
+          "before": 6467,
+          "after": 4079
+        },
+        "gt24": {
+          "before": 5117,
+          "after": 2751
+        },
+        "gt32": {
+          "before": 3897,
+          "after": 2187
+        },
+        "gt48": {
+          "before": 2074,
+          "after": 925
+        },
+        "gt64": {
+          "before": 1615,
+          "after": 540
+        },
+        "gt96": {
+          "before": 0,
+          "after": 0
+        }
+      }
+    },
+    {
+      "view": "jerryA",
+      "light": "dusk",
+      "region": "full",
+      "before": 7454,
+      "after": 5989,
+      "changePercent": -19.653877112959485,
+      "sensitivity": {
+        "gt16": {
+          "before": 19844,
+          "after": 17685
+        },
+        "gt24": {
+          "before": 13936,
+          "after": 12422
+        },
+        "gt32": {
+          "before": 7454,
+          "after": 5989
+        },
+        "gt48": {
+          "before": 2216,
+          "after": 1155
+        },
+        "gt64": {
+          "before": 871,
+          "after": 17
+        },
+        "gt96": {
+          "before": 0,
+          "after": 0
+        }
+      }
+    },
+    {
+      "view": "jerryA",
+      "light": "dusk",
+      "region": "lower-half",
+      "before": 2582,
+      "after": 1657,
+      "changePercent": -35.82494190549961,
+      "sensitivity": {
+        "gt16": {
+          "before": 4907,
+          "after": 3470
+        },
+        "gt24": {
+          "before": 3499,
+          "after": 2548
+        },
+        "gt32": {
+          "before": 2582,
+          "after": 1657
+        },
+        "gt48": {
+          "before": 1416,
+          "after": 727
+        },
+        "gt64": {
+          "before": 573,
+          "after": 8
+        },
+        "gt96": {
+          "before": 0,
+          "after": 0
+        }
+      }
+    },
+    {
+      "view": "jerryB",
+      "light": "dusk",
+      "region": "full",
+      "before": 6982,
+      "after": 4798,
+      "changePercent": -31.28043540532799,
+      "sensitivity": {
+        "gt16": {
+          "before": 20133,
+          "after": 16927
+        },
+        "gt24": {
+          "before": 13615,
+          "after": 11365
+        },
+        "gt32": {
+          "before": 6982,
+          "after": 4798
+        },
+        "gt48": {
+          "before": 2255,
+          "after": 861
+        },
+        "gt64": {
+          "before": 1190,
+          "after": 0
+        },
+        "gt96": {
+          "before": 0,
+          "after": 0
+        }
+      }
+    },
+    {
+      "view": "jerryB",
+      "light": "dusk",
+      "region": "lower-half",
+      "before": 2868,
+      "after": 1179,
+      "changePercent": -58.89121338912133,
+      "sensitivity": {
+        "gt16": {
+          "before": 5229,
+          "after": 2858
+        },
+        "gt24": {
+          "before": 3792,
+          "after": 2084
+        },
+        "gt32": {
+          "before": 2868,
+          "after": 1179
+        },
+        "gt48": {
+          "before": 1577,
+          "after": 505
+        },
+        "gt64": {
+          "before": 955,
+          "after": 0
+        },
+        "gt96": {
+          "before": 0,
+          "after": 0
+        }
+      }
+    },
+    {
+      "view": "jerryA",
+      "light": "night",
+      "region": "full",
+      "before": 9822,
+      "after": 8141,
+      "changePercent": -17.11464060272857,
+      "sensitivity": {
+        "gt16": {
+          "before": 27106,
+          "after": 24771
+        },
+        "gt24": {
+          "before": 17184,
+          "after": 15400
+        },
+        "gt32": {
+          "before": 9822,
+          "after": 8141
+        },
+        "gt48": {
+          "before": 3641,
+          "after": 2329
+        },
+        "gt64": {
+          "before": 1785,
+          "after": 586
+        },
+        "gt96": {
+          "before": 969,
+          "after": 42
+        }
+      }
+    },
+    {
+      "view": "jerryA",
+      "light": "night",
+      "region": "lower-half",
+      "before": 3667,
+      "after": 2544,
+      "changePercent": -30.624488682847016,
+      "sensitivity": {
+        "gt16": {
+          "before": 6541,
+          "after": 4934
+        },
+        "gt24": {
+          "before": 4508,
+          "after": 3343
+        },
+        "gt32": {
+          "before": 3667,
+          "after": 2544
+        },
+        "gt48": {
+          "before": 2091,
+          "after": 1218
+        },
+        "gt64": {
+          "before": 1187,
+          "after": 339
+        },
+        "gt96": {
+          "before": 724,
+          "after": 35
+        }
+      }
+    },
+    {
+      "view": "jerryB",
+      "light": "night",
+      "region": "full",
+      "before": 9155,
+      "after": 6577,
+      "changePercent": -28.159475696340795,
+      "sensitivity": {
+        "gt16": {
+          "before": 26976,
+          "after": 23424
+        },
+        "gt24": {
+          "before": 16768,
+          "after": 13967
+        },
+        "gt32": {
+          "before": 9155,
+          "after": 6577
+        },
+        "gt48": {
+          "before": 3612,
+          "after": 1769
+        },
+        "gt64": {
+          "before": 1906,
+          "after": 357
+        },
+        "gt96": {
+          "before": 1111,
+          "after": 22
+        }
+      }
+    },
+    {
+      "view": "jerryB",
+      "light": "night",
+      "region": "lower-half",
+      "before": 3748,
+      "after": 1726,
+      "changePercent": -53.94877267876201,
+      "sensitivity": {
+        "gt16": {
+          "before": 6333,
+          "after": 3646
+        },
+        "gt24": {
+          "before": 4577,
+          "after": 2510
+        },
+        "gt32": {
+          "before": 3748,
+          "after": 1726
+        },
+        "gt48": {
+          "before": 2115,
+          "after": 703
+        },
+        "gt64": {
+          "before": 1470,
+          "after": 208
+        },
+        "gt96": {
+          "before": 864,
+          "after": 22
+        }
+      }
+    }
+  ]
+}

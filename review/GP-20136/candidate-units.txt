@@ -1,0 +1,21 @@
+Command: node --test review/GP-20136/candidate.test.mjs review/GP-20136/magazines-existing-candidate.test.mjs
+Exit: 0
+✔ partial revolver tops up missing rounds from the loose pool instead of swapping to a worse loader (1.3374ms)
+✔ akimbo cylinders share one pool without duplicating rounds (0.199ms)
+✔ scarce rounds can partially fill an empty cylinder without requiring a full six-round group (0.1373ms)
+✔ legacy speedloader groups migrate to one loose pool without losing partial rounds (0.1538ms)
+✔ loose purchases accept individual rounds up to capacity (0.126ms)
+✔ cylinder top-up conserves rounds across unequal pairs and repeated/fast reload requests (3.2955ms)
+✔ ordinary pistol magazines keep their existing independent partial groups (0.1949ms)
+✔ stow keeps every partial round and chooses the fullest carried magazine (1.3469ms)
+✔ drop loses only the old magazine until it is picked up; empty one is discarded (0.2805ms)
+✔ akimbo tracks two loaded magazines and replaces each independently (0.2163ms)
+✔ buying adds full magazines only and an extended magazine changes capacity without inventing rounds (0.1891ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 74.2923

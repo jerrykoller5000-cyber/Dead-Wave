@@ -1,0 +1,14 @@
+Command: node tools/tests/run-all.mjs tcb294 tcb294b tcb295 tcb297 tcb301 --jobs 1 --no-retry --all-fails --agent chatgpt --task GP-20136
+Index source SHA256: 60b2c664ac60bc022c14ee7be829ef8202256693effa6cbb1544639e349b4058
+check-players: 316 player.position reads, all in the allowed places
+           INFO stopped after 2 out; then fired
+ok    tcb294  39 pass   0 fail  127.7s
+ok    tcb294b  25 pass   0 fail  77.0s
+ok    tcb295  21 pass   0 fail  75.1s
+ok    tcb297  15 pass   0 fail  112.4s
+           INFO the offhand Wasp has no setMagazineRounds of its own (a clone drops userData functions): its count waits on the art
+ok    tcb301   9 pass   0 fail  77.5s
+
+5 checks: 109 pass, 0 fail
+
+Exit: {"code":0,"signal":null}

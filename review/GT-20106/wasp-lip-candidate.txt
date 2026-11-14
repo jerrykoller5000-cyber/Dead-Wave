@@ -1,0 +1,37 @@
+const waspMagwellLipCache = new WeakMap();
+function waspMagwellLipGeometry(T) {
+  if (waspMagwellLipCache.has(T)) return waspMagwellLipCache.get(T);
+  // GT-20106/J153-32: a thin, closed moulded lip around an actual magazine opening.
+  const loop = (w, d, y, c) => [
+    [-w/2+c,y,-d/2],[w/2-c,y,-d/2],[w/2,y,-d/2+c],[w/2,y,d/2-c],
+    [w/2-c,y,d/2],[-w/2+c,y,d/2],[-w/2,y,d/2-c],[-w/2,y,-d/2+c]];
+  const outer = [loop(.060,.078,.003,.0067),loop(.062,.080,.002,.008),
+    loop(.062,.080,-.002,.008),loop(.060,.078,-.003,.0067)];
+  const inner = [loop(.058,.068,.003,.0015),loop(.056,.066,.002,.001),
+    loop(.056,.066,-.002,.001),loop(.058,.068,-.003,.0015)];
+  const position = [], uv = [], va = new T.Vector3(), vb = new T.Vector3(), vc = new T.Vector3(), n = new T.Vector3();
+  function face(a,b,c,target) {
+    va.fromArray(a); vb.fromArray(b); vc.fromArray(c);
+    n.subVectors(vb,va).cross(new T.Vector3().subVectors(vc,va));
+    if (n.x*target[0]+n.y*target[1]+n.z*target[2] < 0) [b,c]=[c,b];
+    n.normalize();
+    for (const p of [a,b,c]) {
+      position.push(...p);
+      if (Math.abs(n.y)>.5) uv.push(p[0]/.064+.5,p[2]/.080+.5);
+      else uv.push((Math.abs(n.x)>.5?p[2]/.080:p[0]/.064)+.5,p[1]/.006+.5);
+    }
+  }
+  function quad(a,b,c,d,target) { face(a,b,c,target); face(a,c,d,target); }
+  for (const [rings,sign] of [[outer,1],[inner,-1]]) for(let r=0;r<3;r++) for(let i=0;i<8;i++) {
+    const j=(i+1)%8,a=rings[r][i],b=rings[r][j],c=rings[r+1][j],d=rings[r+1][i];
+    quad(a,b,c,d,[sign*(a[0]+b[0]),0,sign*(a[2]+b[2])]);
+  }
+  for (const [r,normal] of [[0,[0,1,0]],[3,[0,-1,0]]]) for(let i=0;i<8;i++) {
+    const j=(i+1)%8; quad(outer[r][i],outer[r][j],inner[r][j],inner[r][i],normal);
+  }
+  const geometry = new T.BufferGeometry();
+  geometry.setAttribute('position',new T.Float32BufferAttribute(position,3));
+  geometry.setAttribute('uv',new T.Float32BufferAttribute(uv,2));
+  geometry.computeVertexNormals(); geometry.computeBoundingBox(); geometry.computeBoundingSphere();
+  geometry.userData.shared=true; waspMagwellLipCache.set(T,geometry); return geometry;
+}

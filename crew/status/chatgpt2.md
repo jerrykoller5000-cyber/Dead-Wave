@@ -4,16 +4,16 @@ state: idle
 model: GPT-6.1 Sol (Medium effort)
 task: —
 touching: —
-since: 2026-11-13T09:35Z
-next: GT-20079 (17:15Z, UN-PARKED (J149): each modeler does camo-per-part o
+since: 2026-11-14T02:13Z
+next: —
 blocked-on: —
-last-report: handoffs/2026-11-13-chatgpt2-GT-20104.md
+last-report: handoffs/2026-11-14-chatgpt2-GT-20077.md
 
 ## Notes
 
 ### Where things stand
 
-GT-20104 native closure DONE: unchanged tcl334b5/0 after C7 CG5, revolver index2.6->0.0mm, hands0/sleevesPASS, nine hashes stable. Result sent to Director/C7. Director explicitly ordered: rerun once, post result, then STAND DOWN UNTIL AFTER PLAYTEST; GT20079/GT20077 umbrellas PARKED this freeze, no new gun. C7 promised trigger four-light sheet belongs to his CG5 review, pending/not inspected by me. Final report handoffs/2026-11-13-chatgpt2-GT-20104.md. CG4 paired28/0/four sheets accepted08:08Z; single-pistol47/0 accepted06:58Z. Paired main-eye .2056 stroke remains parked until after playtest. GT20105 allFX and GT20101 .45 accepted/done. Resume only after playtest/Director instruction.
+GT-20106, GT-20079 and GT-20077 DONE/checked out14Nov02:04Z; Director02:02Z ACCEPTED final sheets. Original native103/0,318cold/319,273draws/279; all controls/heat pass. Reports handoffs/2026-11-14-chatgpt2-{GT-20106,GT-20079,GT-20077}.md; files released, ready to commit; no git. Director latest request14Nov02:13Z says STAND DOWN to stretch credits, answer C1/C5 model requests only; zombies await his call. Flamer blade stays until C1 supplies reachable target; sniper blade stays fixed. C2 fixed live index allCRLF and owns full-suite/load18.7s report. Training sample50zombies56.7fps lacks before/formal48 proof. C1/C5/C3 own fits/carries/slings; C7 independent paint hunks have1mesh headroom.
 
 Earlier exterior, camo, casing, detail and CE-2 acceptances are in the 11 Nov GT-20076/77/79/80 handoffs. The KR-7 laminate and D-152 budget were accepted on GT-20082 and GT-20081. Keep previous test expectations and the crew slot.
 

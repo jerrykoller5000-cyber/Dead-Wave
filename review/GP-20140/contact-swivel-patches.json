@@ -1,0 +1,10 @@
+[
+  {
+    "before": "    cigQ.setFromAxisAngle(local.set(0,0,1),roll).premultiply(headQ);",
+    "after": "    const swivel=Number.isFinite(cig.userData.smokeSwivel)?cig.userData.smokeSwivel:-.6;\n    cigQ.setFromAxisAngle(local.set(0,0,1),roll+swivel).premultiply(headQ);"
+  },
+  {
+    "before": ".premultiply(twistQ.setFromAxisAngle(axis.set(0,1,0),yaw)).premultiply(headQ);",
+    "after": ".premultiply(twistQ.setFromAxisAngle(axis.set(0,1,0),yaw))\n      .premultiply(twistQ.setFromAxisAngle(axis.set(0,0,1),swivel)).premultiply(headQ);"
+  }
+]

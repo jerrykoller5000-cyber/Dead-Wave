@@ -19,7 +19,7 @@
       if (s && s.gripPose && !(FIT[k] && FIT[k].r && FIT[k].r.pose)) poses.push([k + ' firing hand', s.gripPose]);   // what the game uses: a fitted hold first
       if (s && s.supportPose && !(FIT[k] && FIT[k].l && FIT[k].l.pose)) poses.push([k + ' support hand', s.supportPose]);
     }
-    for (const [k, f] of Object.entries(FIT)) { if (f.r && f.r.pose) poses.push([k + ' firing hand (fitted)', f.r.pose]); if (f.l && f.l.pose) poses.push([k + ' support hand (fitted)', f.l.pose]); }
+    for (const [k, f] of Object.entries(FIT)) { if (f.r && f.r.pose) poses.push([k + ' firing hand (fitted)', f.r.pose]); if (f.l && f.l.pose) poses.push([k + ' support hand (fitted)', f.l.pose]); if (f.pair && f.pair.pose) poses.push([k + ' pair firing hand (fitted, CD-14)', f.pair.pose]); }
     for (const [k, e] of Object.entries(G.ITEM_POSES || {})) poses.push(['item ' + k, G.gripPose(e)]);
     if (G.FIST) poses.push(['hand-grips FIST', G.gripPose(G.FIST)]);
     const bad = [];

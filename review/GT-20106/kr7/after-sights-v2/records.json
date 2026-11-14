@@ -1,0 +1,356 @@
+{
+  "phase": "after",
+  "start": {
+    "studio/weapon-longarms.js": "36e92bcbdaf1d93428cd0c8b978b0972d0a1c7d004821a037fb891b090e9ff06",
+    "studio/weapon-attachments.js": "e82ec1f65ce0afce33b17a34efb0ad991381b7d8def6e6d8ae43e58735d2fcc9",
+    "game/viewmodel.js": "a81d0a67b625fae826dfb4df265a4b75bd5b25850a94f06c2bc0e3f50fec13b0",
+    "game/viewmodel-poses.js": "2d69a764204632f84ad7aba0353aafc64644301a2e166fc5c78d71827ebb85d1",
+    "game/viewmodel-fit.js": "f1dac3893c06c12cc261f4823f3355e0a25f2836259bc89d674f4e3c8c486e78",
+    "studio/hand-contacts.js": "0dd1bc329916581ece0c6fa9a179daa80e0800c6abee8eb99a6fea03a86daa89",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "index.html": "60b2c664ac60bc022c14ee7be829ef8202256693effa6cbb1544639e349b4058"
+  },
+  "end": {
+    "studio/weapon-longarms.js": "36e92bcbdaf1d93428cd0c8b978b0972d0a1c7d004821a037fb891b090e9ff06",
+    "studio/weapon-attachments.js": "e82ec1f65ce0afce33b17a34efb0ad991381b7d8def6e6d8ae43e58735d2fcc9",
+    "game/viewmodel.js": "a81d0a67b625fae826dfb4df265a4b75bd5b25850a94f06c2bc0e3f50fec13b0",
+    "game/viewmodel-poses.js": "2d69a764204632f84ad7aba0353aafc64644301a2e166fc5c78d71827ebb85d1",
+    "game/viewmodel-fit.js": "f1dac3893c06c12cc261f4823f3355e0a25f2836259bc89d674f4e3c8c486e78",
+    "studio/hand-contacts.js": "0dd1bc329916581ece0c6fa9a179daa80e0800c6abee8eb99a6fea03a86daa89",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "index.html": "60b2c664ac60bc022c14ee7be829ef8202256693effa6cbb1544639e349b4058"
+  },
+  "changed": [],
+  "records": [
+    {
+      "name": "aimed",
+      "ext": false,
+      "light": "noon",
+      "file": "aimed-noon.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          0.10740654097306689,
+          -198.65504054566176,
+          -640.4817801608028
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 38.00000000000001
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.686418032786911,
+        0,
+        0,
+        0,
+        0,
+        0.686418032786911,
+        2.2282012072132088e-17,
+        0,
+        0,
+        2.2282012072132088e-17,
+        -0.686418032786911,
+        0,
+        0,
+        -0.050794934426231425,
+        -0.3,
+        1
+      ],
+      "actualLight": {
+        "sun": 3.1,
+        "sky": 1.25,
+        "fill": 0.16,
+        "sunColor": 16774364,
+        "skyColor": 14017791,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "aimed",
+      "ext": false,
+      "light": "overcast",
+      "file": "aimed-overcast.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          0.10740654097306689,
+          -198.65504054566176,
+          -640.4817801608028
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 38.00000000000001
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.686418032786911,
+        0,
+        0,
+        0,
+        0,
+        0.686418032786911,
+        2.2282012072132088e-17,
+        0,
+        0,
+        2.2282012072132088e-17,
+        -0.686418032786911,
+        0,
+        0,
+        -0.050794934426231425,
+        -0.3,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.65,
+        "sky": 1.85,
+        "fill": 0.42,
+        "sunColor": 15132910,
+        "skyColor": 13948894,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "aimed",
+      "ext": false,
+      "light": "dusk",
+      "file": "aimed-dusk.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          0.10740654097306689,
+          -198.65504054566176,
+          -640.4817801608028
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 38.00000000000001
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.686418032786911,
+        0,
+        0,
+        0,
+        0,
+        0.686418032786911,
+        2.2282012072132088e-17,
+        0,
+        0,
+        2.2282012072132088e-17,
+        -0.686418032786911,
+        0,
+        0,
+        -0.050794934426231425,
+        -0.3,
+        1
+      ],
+      "actualLight": {
+        "sun": 1.55,
+        "sky": 0.65,
+        "fill": 0.1,
+        "sunColor": 16756858,
+        "skyColor": 16762018,
+        "lamp": 0
+      },
+      "exposure": 1,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    },
+    {
+      "name": "aimed",
+      "ext": false,
+      "light": "night",
+      "file": "aimed-night.png",
+      "inspection": false,
+      "camera": {
+        "p": [
+          0.10740654097306689,
+          -198.65504054566176,
+          -640.4817801608028
+        ],
+        "q": [
+          0,
+          0.9992001066609779,
+          0.03998933418663424,
+          0
+        ],
+        "fov": 38.00000000000001
+      },
+      "space": {
+        "p": [
+          0,
+          0,
+          0
+        ],
+        "q": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "gun": [
+        -0.686418032786911,
+        0,
+        0,
+        0,
+        0,
+        0.686418032786911,
+        2.2282012072132088e-17,
+        0,
+        0,
+        2.2282012072132088e-17,
+        -0.686418032786911,
+        0,
+        0,
+        -0.050794934426231425,
+        -0.3,
+        1
+      ],
+      "actualLight": {
+        "sun": 0.35,
+        "sky": 0.25,
+        "fill": 0.04,
+        "sunColor": 9414360,
+        "skyColor": 5531808,
+        "lamp": 1.0553524529124925
+      },
+      "exposure": 1,
+      "viewActive": true,
+      "viewReloadU": null,
+      "viewHandPlace": "fore",
+      "viewMagState": "seated",
+      "magScale": [
+        1,
+        1,
+        1
+      ],
+      "mods": {
+        "fitted": null,
+        "ext": true,
+        "heavy": false,
+        "canExt": true,
+        "canHeavy": true
+      },
+      "reload": {
+        "timer": 0,
+        "anim": 1.8,
+        "weapon": null
+      }
+    }
+  ],
+  "errors": [],
+  "mode": "Native eye hip/aim/reload plus explicitly rotated eye-space inspection; native four light presets and task lamp at night; after reuses recorded camera/view-space/exposure exactly."
+}

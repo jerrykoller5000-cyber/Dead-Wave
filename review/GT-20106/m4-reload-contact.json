@@ -1,0 +1,279 @@
+{
+  "rows": [
+    {
+      "ext": false,
+      "phase": "ready",
+      "full": {
+        "n": 421,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.000269691132502653,
+          "where": "glove in _<controls-trigger box [[-6,-100,-62],[6,-48,-42]] tris 92",
+          "detail": {
+            "vertex": 3024,
+            "bone": 3,
+            "digit": "index",
+            "point": [
+              -0.0028917817086511204,
+              -0.09196095187529997,
+              -0.04555570006135835
+            ],
+            "depthMm": 0.26969113250265303
+          }
+        }
+      },
+      "magOnly": {
+        "n": 36,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        }
+      },
+      "nonMag": {
+        "n": 385,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.000269691132502653,
+          "where": "glove in _<controls-trigger box [[-6,-100,-62],[6,-48,-42]] tris 92",
+          "detail": {
+            "vertex": 3024,
+            "bone": 3,
+            "digit": "index",
+            "point": [
+              -0.0028917817086511204,
+              -0.09196095187529997,
+              -0.04555570006135835
+            ],
+            "depthMm": 0.26969113250265303
+          }
+        }
+      },
+      "magNode": ""
+    },
+    {
+      "ext": false,
+      "phase": "reload.25",
+      "full": {
+        "n": 421,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.0002690724348665413,
+          "where": "glove in _<controls-trigger box [[-6,-100,-62],[6,-48,-42]] tris 92",
+          "detail": {
+            "vertex": 3024,
+            "bone": 3,
+            "digit": "index",
+            "point": [
+              -0.002891781708637131,
+              -0.09196095187530037,
+              -0.04555570006136489
+            ],
+            "depthMm": 0.2690724348665413
+          }
+        }
+      },
+      "magOnly": {
+        "n": 36,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        }
+      },
+      "nonMag": {
+        "n": 385,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.0002690724348665413,
+          "where": "glove in _<controls-trigger box [[-6,-100,-62],[6,-48,-42]] tris 92",
+          "detail": {
+            "vertex": 3024,
+            "bone": 3,
+            "digit": "index",
+            "point": [
+              -0.002891781708637131,
+              -0.09196095187530037,
+              -0.04555570006136489
+            ],
+            "depthMm": 0.2690724348665413
+          }
+        }
+      }
+    },
+    {
+      "ext": true,
+      "phase": "ready",
+      "full": {
+        "n": 421,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.0002687951202366922,
+          "where": "glove in _<controls-trigger box [[-6,-100,-62],[6,-47,-42]] tris 92",
+          "detail": {
+            "vertex": 3024,
+            "bone": 3,
+            "digit": "index",
+            "point": [
+              -0.002891781708653507,
+              -0.09196095187529965,
+              -0.04555570006135956
+            ],
+            "depthMm": 0.26879512023669216
+          }
+        }
+      },
+      "magOnly": {
+        "n": 36,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        }
+      },
+      "nonMag": {
+        "n": 385,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.0002687951202366922,
+          "where": "glove in _<controls-trigger box [[-6,-100,-62],[6,-47,-42]] tris 92",
+          "detail": {
+            "vertex": 3024,
+            "bone": 3,
+            "digit": "index",
+            "point": [
+              -0.002891781708653507,
+              -0.09196095187529965,
+              -0.04555570006135956
+            ],
+            "depthMm": 0.26879512023669216
+          }
+        }
+      },
+      "magNode": ""
+    },
+    {
+      "ext": true,
+      "phase": "reload.25",
+      "full": {
+        "n": 421,
+        "l": {
+          "worst": 0.012097914406726067,
+          "where": "glove in _<magazineBody<_ box [[-214,-650,-142],[-159,-329,34]] tris 164",
+          "detail": {
+            "vertex": 233,
+            "bone": 0,
+            "digit": "palm",
+            "point": [
+              -0.17864214741200685,
+              -0.6273804781021032,
+              -0.050558269618738105
+            ],
+            "depthMm": 12.097914406726067
+          }
+        },
+        "r": {
+          "worst": 0.0002693821615501272,
+          "where": "glove in _<controls-trigger box [[-6,-100,-62],[6,-48,-42]] tris 92",
+          "detail": {
+            "vertex": 3024,
+            "bone": 3,
+            "digit": "index",
+            "point": [
+              -0.0028917817086179243,
+              -0.09196095187529979,
+              -0.04555570006136356
+            ],
+            "depthMm": 0.2693821615501272
+          }
+        }
+      },
+      "magOnly": {
+        "n": 36,
+        "l": {
+          "worst": 0.012097914406726067,
+          "where": "glove in _<magazineBody<_ box [[-214,-650,-142],[-159,-329,34]] tris 164",
+          "detail": {
+            "vertex": 233,
+            "bone": 0,
+            "digit": "palm",
+            "point": [
+              -0.17864214741200685,
+              -0.6273804781021032,
+              -0.050558269618738105
+            ],
+            "depthMm": 12.097914406726067
+          }
+        },
+        "r": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        }
+      },
+      "nonMag": {
+        "n": 385,
+        "l": {
+          "worst": 0,
+          "where": "",
+          "detail": null
+        },
+        "r": {
+          "worst": 0.0002693821615501272,
+          "where": "glove in _<controls-trigger box [[-6,-100,-62],[6,-48,-42]] tris 92",
+          "detail": {
+            "vertex": 3024,
+            "bone": 3,
+            "digit": "index",
+            "point": [
+              -0.0028917817086179243,
+              -0.09196095187529979,
+              -0.04555570006136356
+            ],
+            "depthMm": 0.2693821615501272
+          }
+        }
+      }
+    }
+  ],
+  "errors": []
+}

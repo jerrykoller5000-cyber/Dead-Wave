@@ -1,0 +1,1 @@
+import {spawnSync} from 'node:child_process';for(const stage of ['before-final-perf','after-final-perf']){const r=spawnSync(process.execPath,['review/GP-20140/smoking-perf-native.mjs',stage],{stdio:'inherit',env:process.env});if(r.status!==0)process.exit(r.status||1);}

@@ -1,0 +1,276 @@
+{
+  "at": "2026-11-13T23:25:32.589Z",
+  "approval": "Director additive contract + no fast dump + COUNT-only reload loan; C2 exact adapter loan; request responses in handoffs/requests.md",
+  "files": [
+    {
+      "path": "game/magazines.js",
+      "before": "0eeebc8106fedbcc34917198da6d4ebe7a887746f5faaf0aa680eda1c0875427",
+      "after": "490642d948b0b20bfbff788c16d711dd60d91dfb8f20be43c45487ba2af520f5",
+      "edits": [
+        {
+          "a": "export const isMagazineWeapon = weapon => MAGAZINE_WEAPONS.includes(weapon);",
+          "b": "export const isMagazineWeapon = weapon => MAGAZINE_WEAPONS.includes(weapon);\nexport const isLooseRoundWeapon = weapon => weapon === 'revolver' || weapon === 'launcher';"
+        },
+        {
+          "a": "  return value;\n}",
+          "b": "  if (isLooseRoundWeapon(weapon)) {\n    // Older run/replay snapshots and legacy debug adapters can still supply loader groups.\n    // Fold each old group into the shared pool once, preserving every partial round.\n    if (value.reserveKind !== 'rounds') { value.reserveKind = 'rounds'; value.spareRounds = Math.max(0, Number(value.spareRounds) || 0); }\n    if (value.spare.length) { for (const item of value.spare) value.spareRounds += Math.max(0, Number(item.rounds) || 0); value.spare.length = 0; }\n  }\n  return value;\n}"
+        },
+        {
+          "a": "  store[weapon] = entry;",
+          "b": "  if (isLooseRoundWeapon(weapon)) { entry.reserveKind = 'rounds'; entry.spareRounds = 0; }\n  store[weapon] = entry;"
+        },
+        {
+          "a": "  let accepted = 0;\n  while (entry.spare.length",
+          "b": "  if (entry.reserveKind === 'rounds') {\n    if (!Number.isSafeInteger(rounds)) throw new TypeError('Loose rounds must be whole');\n    const accepted = Math.min(rounds, Math.max(0, entry.size * entry.maxSpare - entry.spareRounds));\n    entry.spareRounds += accepted; return accepted;\n  }\n  let accepted = 0;\n  while (entry.spare.length"
+        },
+        {
+          "a": "export function spareMagazineRounds(store, weapon) { return state(store, weapon).spare.reduce((n, item) => n + item.rounds, 0); }",
+          "b": "export function spareMagazineRounds(store, weapon) { const entry = state(store, weapon); return entry.reserveKind === 'rounds' ? entry.spareRounds : entry.spare.reduce((n, item) => n + item.rounds, 0); }"
+        },
+        {
+          "a": "    loaded: entry.loaded.map(item => item.rounds), spare: entry.spare.map(item => item.rounds) };",
+          "b": "    loaded: entry.loaded.map(item => item.rounds), spare: entry.spare.map(item => item.rounds),\n    ...(entry.reserveKind === 'rounds' ? { reserveKind: 'rounds', spareRounds: entry.spareRounds } : {}) };"
+        },
+        {
+          "a": "  let swapped = 0;\n  for (let hand",
+          "b": "  let swapped = 0;\n  if (entry.reserveKind === 'rounds') {\n    for (let hand = 0; hand < (dual ? 2 : 1); hand++) {\n      const current = entry.loaded[hand]; if (!current) continue;\n      const take = Math.min(Math.max(0, entry.size - current.rounds), entry.spareRounds);\n      if (take > 0) { current.rounds += take; entry.spareRounds -= take; swapped++; }\n    }\n    return { swapped, dropped };\n  }\n  for (let hand"
+        },
+        {
+          "a": "  if (entry.spare.length >= entry.maxSpare) return false;",
+          "b": "  if (entry.reserveKind === 'rounds') {\n    if (item.rounds > Math.max(0, entry.size * entry.maxSpare - entry.spareRounds)) return false;\n    return addMagazineRounds(store, item.weapon, item.rounds) === item.rounds;\n  }\n  if (entry.spare.length >= entry.maxSpare) return false;"
+        }
+      ],
+      "append": "",
+      "outsideReverseIdentical": true
+    },
+    {
+      "path": "game/armory.js",
+      "before": "2796518b9fc8fe984babdc2426f0f4010e098edde579f962be0a38193706d9b7",
+      "after": "cf537a6feedf576ddbefc9c081d1fc0eedfc7be28acea2608deca6c012cf070d",
+      "edits": [
+        {
+          "a": "      if (patch && Array.isArray(patch.magazines))",
+          "b": "      if (patch && Number.isSafeInteger(patch.rounds) && patch.rounds >= 0) gun.rounds = patch.rounds;\n      if (patch && Array.isArray(patch.magazines))",
+          "count": 1
+        }
+      ],
+      "append": "",
+      "outsideReverseIdentical": true
+    },
+    {
+      "path": "ui/magazine-hud.js",
+      "before": "12bd9a907959e1a970736d2f2c59633a12e14e06688e2a9da5525e739056c61c",
+      "after": "54ff5c917259b6c872ad370ada053a993983da1fc83a94c80b8e0b3f6e4b1060",
+      "edits": [
+        {
+          "a": "if (weapon === 'revolver') return 'loaders';",
+          "b": "if (weapon === 'revolver') return 'rounds';",
+          "count": 1
+        },
+        {
+          "a": "  if (!snapshot) return [];",
+          "b": "  if (!snapshot || snapshot.reserveKind === 'rounds') return [];",
+          "count": 1
+        },
+        {
+          "a": "    render(weapon,snapshot) {",
+          "b": "    render(weapon,snapshot) {\n      if (weapon === 'revolver' || weapon === 'launcher' || snapshot?.reserveKind === 'rounds') snapshot = null;",
+          "count": 1
+        }
+      ],
+      "append": "",
+      "outsideReverseIdentical": true
+    },
+    {
+      "path": "ui/armory.js",
+      "before": "dfdb9f739ef55f15a3fa2c58ceec5f10471c98ad7f6a8d921ad42c0b80fe0efe",
+      "after": "48c3a8727fc9f7c19c5692a5ee6066e98a658fe5a6bbf46a96c22d2a8c3ba96d",
+      "edits": [
+        {
+          "a": "    const parts = [];\r\n    if (gun.loaded",
+          "b": "    const parts = [], loose = gun.kind === 'revolver' || gun.kind === 'launcher';\r\n    if (gun.loaded",
+          "count": 1
+        },
+        {
+          "a": "    if (gun.magazines.length) parts.push",
+          "b": "    if (!loose && gun.magazines.length) parts.push",
+          "count": 1
+        },
+        {
+          "a": "    if (gun.rounds) parts.push(text('armory.rounds', { count: gun.rounds }));",
+          "b": "    if (loose && /:second$/.test(gun.id)) parts.push(text('armory.roundsShared'));\r\n    else if (loose || gun.rounds) parts.push(text('armory.rounds', { count: gun.rounds }));",
+          "count": 1
+        },
+        {
+          "a": "    for (const gun of getOwned() || []) if (!armory.has(gun.id)) armory.buy(gun, { store: true });",
+          "b": "    for (const gun of getOwned() || []) {\r\n      if (!armory.has(gun.id)) armory.buy(gun, { store: true });\r\n      else if (Object.hasOwn(gun, 'rounds')) armory.revise(gun.id, gun);\r\n    }",
+          "count": 1
+        }
+      ],
+      "append": "",
+      "outsideReverseIdentical": true
+    },
+    {
+      "path": "ui/strings.js",
+      "before": "8b1c966a305ec9f5c0d51415bc19f310b702f428a69fb52023a76c7f4d4a5cab",
+      "after": "caaaf0cdcf38dad0313225a57ad736e0a76580df5da17ce062952a9503784554",
+      "edits": [
+        {
+          "a": "  \"armory.loaded\":",
+          "b": "  \"armory.roundsShared\": \"Shared loose rounds\",\r\n  \"weapon.wheel.loose\": \"{loaded} loaded · {count} rounds\",\r\n  \"armory.looseSummary\": \"{loaded} loaded · {count} loose rounds\",\r\n  \"armory.loaded\":",
+          "count": 1
+        }
+      ],
+      "append": "",
+      "outsideReverseIdentical": true
+    },
+    {
+      "path": "index.html",
+      "before": "ae453c3858e19ee220c2edf4f2269400dc18fe55ffd1c6c8d8cf7fe63594490a",
+      "after": "cf75871c8995f35b0ef844540bc21bf53fbc33d3ce7bfca0dd9f88429ade306b",
+      "edits": [
+        {
+          "a": "createMagazineStore, isMagazineWeapon, issueMagazines",
+          "b": "createMagazineStore, isMagazineWeapon, isLooseRoundWeapon, issueMagazines",
+          "count": 1
+        },
+        {
+          "a": "    function armoryMagazines(w) {\r\n      const entry",
+          "b": "    function armoryMagazines(w) {\r\n      if (isLooseRoundWeapon(w)) return [];\r\n      const entry",
+          "count": 1
+        },
+        {
+          "a": "      const loaded = Number.isFinite(ammoByWeapon[w]) ? Math.max(0, ammoByWeapon[w] | 0) : 0;\r\n      const magazines = armoryMagazines(w);\r\n      if (runArmory.has(w)) runArmory.revise(w, { loaded, magazines });\r\n      else runArmory.buy({ id: w, kind: w, loaded, magazines, rounds: 0, upgrades: {} }, { store: true });",
+          "b": "      const loaded = w === 'revolver' && magazineStore[w] ? magazineStore[w].loaded[0].rounds : Number.isFinite(ammoByWeapon[w]) ? Math.max(0, ammoByWeapon[w] | 0) : 0;\r\n      const magazines = armoryMagazines(w), rounds = isLooseRoundWeapon(w) ? reserveOf(w) : 0;\r\n      if (runArmory.has(w)) runArmory.revise(w, { loaded, magazines, rounds });\r\n      else runArmory.buy({ id: w, kind: w, loaded, magazines, rounds, upgrades: {} }, { store: true });",
+          "count": 1
+        },
+        {
+          "a": "      if (!entry) return 0;\r\n      entry.spare = Array.from",
+          "b": "      if (!entry) return 0;\r\n      if (isLooseRoundWeapon(w)) { entry.spare.length = 0; entry.spareRounds = Math.max(0, n | 0) * entry.size; syncMagazine(w); return Math.max(0, n | 0); }\r\n      entry.spare = Array.from",
+          "count": 1
+        },
+        {
+          "a": "        entry.spare.length = 0;\r\n        entry.maxSpare",
+          "b": "        entry.spare.length = 0;\r\n        if (isLooseRoundWeapon(w)) entry.spareRounds = 0;\r\n        entry.maxSpare",
+          "count": 1
+        },
+        {
+          "a": "    function buyAmmo(key, quiet) {\r\n",
+          "b": "    function buyAmmo(key, quiet) {\r\n      if (isLooseRoundWeapon(key)) key = caliberOf(key);\r\n",
+          "count": 1
+        },
+        {
+          "a": "        if ((reserveAmmo[c] | 0) >= cap || !spend(pk.cost)) return false;\r\n        reserveAmmo[c] = Math.min(cap, (reserveAmmo[c] | 0) + pk.n);",
+          "b": "        const target = magazineSupplyTarget(c), loose = isLooseRoundWeapon(target) && magazineStore[target];\r\n        const have = loose ? spareMagazineRounds(magazineStore, target) : reserveAmmo[c] | 0;\r\n        if (have >= cap || !spend(pk.cost)) return false;\r\n        if (loose) addWeaponMagazineRounds(target, pk.n, true);\r\n        else reserveAmmo[c] = Math.min(cap, have + pk.n);",
+          "count": 1
+        },
+        {
+          "a": "weaponOwned[w] && !isMagazineWeapon(w) && caliberOf(w) === c",
+          "b": "weaponOwned[w] && (!isMagazineWeapon(w) || isLooseRoundWeapon(w)) && caliberOf(w) === c",
+          "count": 1
+        },
+        {
+          "a": "const magKeys = w == null ? MAGAZINE_WEAPONS.filter(k => weaponOwned[k]) : isMagazineWeapon(w) && weaponOwned[w] ? [w] : [];",
+          "b": "const magKeys = w == null ? MAGAZINE_WEAPONS.filter(k => weaponOwned[k] && !isLooseRoundWeapon(k)) : isMagazineWeapon(w) && !isLooseRoundWeapon(w) && weaponOwned[w] ? [w] : [];",
+          "count": 1
+        },
+        {
+          "a": "weaponOwned[w] && !isMagazineWeapon(w) ? [w === 'chainsaw' ? w : caliberOf(w)] : [];",
+          "b": "weaponOwned[w] && (!isMagazineWeapon(w) || isLooseRoundWeapon(w)) ? [w === 'chainsaw' ? w : caliberOf(w)] : [];",
+          "count": 1
+        },
+        {
+          "a": "    function buildWheelItems(kind) {",
+          "b": "    function wheelAmmoMeta(key) {\r\n      const loaded = Number.isFinite(ammoByWeapon[key]) ? Math.ceil(ammoByWeapon[key]) : '∞';\r\n      return isLooseRoundWeapon(key) ? dwText('weapon.wheel.loose', { loaded, count: reserveOf(key) }) : loaded + ' + ' + reserveOf(key);\r\n    }\r\n    function buildWheelItems(kind) {",
+          "count": 1
+        },
+        {
+          "a": ": (Number.isFinite(ammoByWeapon[key]) ? Math.ceil(ammoByWeapon[key]) : '∞') + ' + ' + reserveOf(key);",
+          "b": ": wheelAmmoMeta(key);",
+          "count": 1
+        },
+        {
+          "a": "else meta = (Number.isFinite(ammoByWeapon[key]) ? Math.ceil(ammoByWeapon[key]) : '∞') + ' + ' + reserveOf(key);",
+          "b": "else meta = wheelAmmoMeta(key);",
+          "count": 1
+        },
+        {
+          "a": "(currentWeapon === 'launcher' ? 'grenades' : currentWeapon === 'flamer' ? 'fuel' : 'bullets')",
+          "b": "(isLooseRoundWeapon(currentWeapon) ? 'rounds' : currentWeapon === 'flamer' ? 'fuel' : 'bullets')",
+          "count": 1
+        },
+        {
+          "a": "        if (st.melee) return Math.max(0, Math.ceil(sawFuel)) + 's of gas';\r\n        return",
+          "b": "        if (st.melee) return Math.max(0, Math.ceil(sawFuel)) + 's of gas';\r\n        if (isLooseRoundWeapon(kind)) return dwText('armory.looseSummary', { loaded: Math.ceil(ammoByWeapon[kind]), count: reserveOf(kind) });\r\n        return",
+          "count": 1
+        },
+        {
+          "a": "          id: w, kind: w, loaded: Number.isSafeInteger(ammoByWeapon[w]) ? ammoByWeapon[w] : 0\r\n        }));",
+          "b": "          id: w, kind: w, loaded: w === 'revolver' && magazineStore[w] ? magazineStore[w].loaded[0].rounds : Number.isSafeInteger(ammoByWeapon[w]) ? ammoByWeapon[w] : 0,\r\n          ...(isLooseRoundWeapon(w) ? { magazines: [], rounds: reserveOf(w) } : {})\r\n        }));",
+          "count": 1
+        },
+        {
+          "a": "kind: w, loaded: null\r\n        });",
+          "b": "kind: w, loaded: w === 'revolver' && magazineStore[w]?.loaded[1] ? magazineStore[w].loaded[1].rounds : null,\r\n          ...(isLooseRoundWeapon(w) ? { magazines: [], rounds: 0 } : {})\r\n        });",
+          "count": 1
+        },
+        {
+          "a": "e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w);",
+          "b": "if (isLooseRoundWeapon(w)) e.spareRounds = 0; e.spare = spare.slice(0, e.maxSpare).map((r) => ({ rounds: Math.min(e.size, r | 0), size: e.size })); syncMagazine(w);",
+          "count": 1
+        },
+        {
+          "a": "      if (!entry || !entry.spare.length) return false;\r\n      let best = 0;",
+          "b": "      if (!entry) return false;\r\n      if (isLooseRoundWeapon(w)) {\r\n        if (spareMagazineRounds(magazineStore, w) <= 0) return false;\r\n        for (let h = 0; h < (dual ? 2 : 1); h++) if (entry.loaded[h] && entry.loaded[h].rounds < entry.size) return true;\r\n        return false;\r\n      }\r\n      if (!entry.spare.length) return false;\r\n      let best = 0;",
+          "count": 1,
+          "area": "reload-counts: Director approval pending"
+        },
+        {
+          "a": "isMagazineWeapon(currentWeapon) ? !magazineStore[currentWeapon]?.spare.length : reserveOf(currentWeapon) <= 0",
+          "b": "isMagazineWeapon(currentWeapon) ? spareMagazineRounds(magazineStore, currentWeapon) <= 0 : reserveOf(currentWeapon) <= 0",
+          "count": 2,
+          "area": "reload-counts: Director approval pending"
+        },
+        {
+          "a": "reloadWeapon === currentWeapon && isMagazineWeapon(currentWeapon) && !reloadDrop",
+          "b": "reloadWeapon === currentWeapon && isMagazineWeapon(currentWeapon) && !isLooseRoundWeapon(currentWeapon) && !reloadDrop",
+          "count": 1,
+          "area": "reload-counts: Director approval pending"
+        },
+        {
+          "a": "Math.min(6, Math.max(0, ...((magazineStore.revolver && magazineStore.revolver.spare) || []).map((m) => m.rounds | 0)))",
+          "b": "Math.min(6, Math.max(0, (ammoByWeapon.revolver | 0) + spareMagazineRounds(magazineStore, 'revolver')))",
+          "count": 1,
+          "area": "reload-counts: Director approval pending"
+        },
+        {
+          "a": "        // GB-137: R pockets the old magazine with its rounds and the fullest one goes in. The revolver's empties fall,\r\n        // and its live rounds go back into a loader (a part-full one); only a double tap dumps the cylinder outright.",
+          "b": "        // Magazines retain their old swap/drop behavior. A revolver keeps live rounds and\r\n        // tops up its cylinders from one loose-round pool, including an akimbo pair.",
+          "count": 1,
+          "area": "reload-counts: Director approval pending"
+        }
+      ],
+      "append": "",
+      "outsideReverseIdentical": true
+    },
+    {
+      "path": "ui/magazine-hud.test.mjs",
+      "before": "35e118d21687123e531d41c9216b9e3f9527872d18e707f3777f5731c215ea84",
+      "after": "48fc0ad48530957b7d33c9ddc617cc47eb55cc6cdccdf9408cec97eadcc10ccb",
+      "edits": [
+        {
+          "a": "ammoReserveUnit('revolver', true), 'loaders'",
+          "b": "ammoReserveUnit('revolver', true), 'rounds'",
+          "count": 1
+        }
+      ],
+      "append": "test('a loose-round reserve is never drawn as a magazine group', () => { assert.deepEqual(magazineHudItems({size:6,spare:[3],reserveKind:'rounds',spareRounds:3}),[]); });\n",
+      "outsideReverseIdentical": true
+    }
+  ],
+  "newTest": {
+    "path": "game/loose-rounds.test.mjs",
+    "sha256": "1ac75f0b77b939ade7a4b9db9959cbfcc698f1ea21ddb1a1d75d4ba37ec5d26b"
+  },
+  "review": "Strict HUD expected unit changed loaders->rounds per J15327; no test weakened"
+}

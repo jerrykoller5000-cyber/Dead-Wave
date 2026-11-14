@@ -1,0 +1,912 @@
+{
+  "stage": "before",
+  "indexHash": "d8f4c277514f3b3efeab1f3247beafa98bb4302ea5d3689394134c27e2fe96d3",
+  "trainingHash": "3954998a1df7470e239cb63d884bdd854cc2fe75a6202a62f7e132120dd237da",
+  "metric": "RGB channel range across3frames; dx -.002,0,+.002m camera+target translated together. Fixed thresholds16/24/32/48/64/96; stationary triplet control.",
+  "views": {
+    "jerryA": [
+      -12,
+      1.35,
+      -2,
+      -10,
+      0.08,
+      1,
+      40
+    ],
+    "jerryB": [
+      -12.3,
+      1.35,
+      -1.85,
+      -10,
+      0.08,
+      1,
+      40
+    ]
+  },
+  "rows": [
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "move",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-noon-move-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.002,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-noon-move-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-noon-move-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -11.998,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "noon",
+      "kind": "still",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-noon-still-0.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-noon-still-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-noon-still-2.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "move",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-noon-move-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.302000000000001,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-noon-move-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-noon-move-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12.298,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "noon",
+      "kind": "still",
+      "lighting": {
+        "name": "noon",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.73,
+        "hemi": 0.6799999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-noon-still-0.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-noon-still-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-noon-still-2.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "overcast",
+      "kind": "move",
+      "lighting": {
+        "name": "overcast",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.1245,
+        "hemi": 0.5983999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 1,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-overcast-move-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.002,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-overcast-move-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-overcast-move-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -11.998,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "overcast",
+      "kind": "still",
+      "lighting": {
+        "name": "overcast",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.1245,
+        "hemi": 0.5983999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 1,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-overcast-still-0.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-overcast-still-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-overcast-still-2.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "overcast",
+      "kind": "move",
+      "lighting": {
+        "name": "overcast",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.1245,
+        "hemi": 0.5983999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 1,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-overcast-move-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.302000000000001,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-overcast-move-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-overcast-move-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12.298,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "overcast",
+      "kind": "still",
+      "lighting": {
+        "name": "overcast",
+        "worldTime": 0.5,
+        "isNight": false,
+        "sun": 1.1245,
+        "hemi": 0.5983999999999999,
+        "ambient": 0.04,
+        "moon": 0.05,
+        "weather": 1,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-overcast-still-0.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-overcast-still-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-overcast-still-2.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "dusk",
+      "kind": "move",
+      "lighting": {
+        "name": "dusk",
+        "worldTime": 0.73,
+        "isNight": true,
+        "sun": 0.28864740917634063,
+        "hemi": 0.22609517752118488,
+        "ambient": 0.05104762617397825,
+        "moon": 0.2433334580446194,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-dusk-move-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.002,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-dusk-move-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-dusk-move-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -11.998,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "dusk",
+      "kind": "still",
+      "lighting": {
+        "name": "dusk",
+        "worldTime": 0.73,
+        "isNight": true,
+        "sun": 0.28864740917634063,
+        "hemi": 0.22609517752118488,
+        "ambient": 0.05104762617397825,
+        "moon": 0.2433334580446194,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-dusk-still-0.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-dusk-still-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-dusk-still-2.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "dusk",
+      "kind": "move",
+      "lighting": {
+        "name": "dusk",
+        "worldTime": 0.73,
+        "isNight": true,
+        "sun": 0.28864740917634063,
+        "hemi": 0.22609517752118488,
+        "ambient": 0.05104762617397825,
+        "moon": 0.2433334580446194,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-dusk-move-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.302000000000001,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-dusk-move-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-dusk-move-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12.298,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "dusk",
+      "kind": "still",
+      "lighting": {
+        "name": "dusk",
+        "worldTime": 0.73,
+        "isNight": true,
+        "sun": 0.28864740917634063,
+        "hemi": 0.22609517752118488,
+        "ambient": 0.05104762617397825,
+        "moon": 0.2433334580446194,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-dusk-still-0.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-dusk-still-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-dusk-still-2.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "night",
+      "kind": "move",
+      "lighting": {
+        "name": "night",
+        "worldTime": 0,
+        "isNight": true,
+        "sun": 0.025,
+        "hemi": 0.15,
+        "ambient": 0.06,
+        "moon": 0.4,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-night-move-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.002,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-night-move-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-night-move-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -11.998,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryA",
+      "light": "night",
+      "kind": "still",
+      "lighting": {
+        "name": "night",
+        "worldTime": 0,
+        "isNight": true,
+        "sun": 0.025,
+        "hemi": 0.15,
+        "ambient": 0.06,
+        "moon": 0.4,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryA-night-still-0.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-night-still-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryA-night-still-2.png",
+          "dx": 0,
+          "actual": {
+            "x": -12,
+            "y": -198.65,
+            "z": -642,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "night",
+      "kind": "move",
+      "lighting": {
+        "name": "night",
+        "worldTime": 0,
+        "isNight": true,
+        "sun": 0.025,
+        "hemi": 0.15,
+        "ambient": 0.06,
+        "moon": 0.4,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-night-move-0.png",
+          "dx": -0.002,
+          "actual": {
+            "x": -12.302000000000001,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-night-move-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-night-move-2.png",
+          "dx": 0.002,
+          "actual": {
+            "x": -12.298,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    },
+    {
+      "view": "jerryB",
+      "light": "night",
+      "kind": "still",
+      "lighting": {
+        "name": "night",
+        "worldTime": 0,
+        "isNight": true,
+        "sun": 0.025,
+        "hemi": 0.15,
+        "ambient": 0.06,
+        "moon": 0.4,
+        "weather": 0,
+        "roomLamps": true
+      },
+      "frames": [
+        {
+          "file": "jerryB-night-still-0.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-night-still-1.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        },
+        {
+          "file": "jerryB-night-still-2.png",
+          "dx": 0,
+          "actual": {
+            "x": -12.3,
+            "y": -198.65,
+            "z": -641.85,
+            "fov": 40,
+            "near": 0.1,
+            "far": 150
+          }
+        }
+      ]
+    }
+  ],
+  "setup": {
+    "origin": {
+      "x": 0,
+      "y": -200,
+      "z": -640
+    },
+    "paint": {
+      "vertices": 456,
+      "offset": -1,
+      "units": -1
+    },
+    "near": 0.1,
+    "far": 150,
+    "warming": false,
+    "renderer": "WebGPURenderer"
+  },
+  "errors": [
+    "TypeError: Cannot read properties of null (reading 'tx')\n    at Object.beforeDraw (http://127.0.0.1:31222/index.html?debug=1&__gameTestToken=cbd370a8-9e06-4ea3-abf2-ffd30e5a286e:70824:1823)\n    at renderFrame (http://127.0.0.1:31222/index.html?debug=1&__gameTestToken=cbd370a8-9e06-4ea3-abf2-ffd30e5a286e:2525:49)\n    at Animation.tick [as _animationLoop] (http://127.0.0.1:31222/index.html?debug=1&__gameTestToken=cbd370a8-9e06-4ea3-abf2-ffd30e5a286e:68734:9)\n    at update (http://127.0.0.1:31222/vendor/three/three.webgpu.js:24935:45)"
+  ],
+  "failure": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20139/fence-native.mjs:5:1711"
+}

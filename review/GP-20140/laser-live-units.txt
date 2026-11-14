@@ -1,0 +1,16 @@
+✔ laser and click wait until the physical digit contact, then flip once (10.4197ms)
+✔ flashlight still flips its own circuit at contact (9.4782ms)
+✔ repeated or cross-circuit input cannot replace an in-flight press (19.4789ms)
+✔ second press after return can switch laser back off (9.892ms)
+✔ mounted mortar retains the approved immediate path (9.4785ms)
+✔ missing equipment makes no change or press (9.2269ms)
+✔ debug/immediate and unavailable-press fallbacks retain existing behavior (8.9825ms)
+✔ an unfitted module never causes a press in empty air (8.8788ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 152.6221

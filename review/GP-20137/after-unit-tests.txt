@@ -1,0 +1,17 @@
+✔ a tap lobs short, 0.8 s throws furthest (GP-171, half of 1.6 s), and it grows in between (5.959ms)
+✔ the flight lands on the flat where the motion says, and on a hill sooner (1.1617ms)
+✔ a wall takes it, and the fuse ends it (0.5427ms)
+✔ the dots run evenly to where it lands (0.5406ms)
+✔ launcher analytic gravity at 10/25/50m 30Hz (6.4493ms)
+✔ launcher analytic gravity at 10/25/50m 60Hz (6.6872ms)
+✔ launcher analytic gravity at 10/25/50m 144Hz (2.3547ms)
+✔ different dt partitions agree for a raised launch (3.091ms)
+✔ hand grenades and mortar retain exact previous semi-implicit step (2.5619ms)
+ℹ tests 9
+ℹ suites 0
+ℹ pass 9
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 174.4582

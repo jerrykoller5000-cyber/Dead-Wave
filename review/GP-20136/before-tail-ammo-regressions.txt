@@ -1,0 +1,9 @@
+Command: node tools/tests/run-all.mjs tcb294b tcb301 --jobs 1 --no-retry --all-fails --agent chatgpt --task GP-20136
+check-players: 316 player.position reads, all in the allowed places
+ok    tcb294b  25 pass   0 fail  82.1s
+           INFO the offhand Wasp has no setMagazineRounds of its own (a clone drops userData functions): its count waits on the art
+ok    tcb301   9 pass   0 fail  66.2s
+
+2 checks: 34 pass, 0 fail
+
+Exit: {"code":0,"signal":null}

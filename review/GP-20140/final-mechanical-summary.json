@@ -1,0 +1,82 @@
+{
+  "moduleSha256": "8a989ae8227d9b449f4cb323d0547e4f8751fa5e87b87bd28c984c7a67ac6cb3",
+  "chains": {
+    "chain": {
+      "samples": 761,
+      "finalPhase": "smoking",
+      "cigarettes": 2,
+      "maxPinchGapMm": 2.5601696320342655,
+      "maxHandDepthMm": 0,
+      "checkedGloveVertices": 630108,
+      "minForward": 0.8476574865835007,
+      "fullDrawSamples": 181,
+      "maxLipGapMm": 0.9981043080500764,
+      "badCount": 0,
+      "indexHash": "5cd3a20a35722a54e272d012e4ab2e1b005a9109bc712bea5edd635b034d10fc",
+      "moduleHash": "9e9554fa7a794db58a2f8614781d9aacbd60c5bcf006c1d8aff3484c87045dda",
+      "errors": [],
+      "failure": null,
+      "originalT255": "INFO smoking pinch: solved 1.8 cm, sampled 1.6 cm, wrist miss 0.0 cm; shoulder target/actual 21.4/21.4 cm; hand offset 18.4 cm\nPASS the cigarette is lit and visible\nPASS the filter meets the lips (0.04 cm error)\nPASS the ember points forward, away from the face (7.5 cm from lips)\nPASS the completed runtime frame keeps the fingertip pinch outside the face (1.6 cm from lips)\nPASS the palm clears the face (12.7 cm from lips)"
+    },
+    "bare-chain": {
+      "samples": 761,
+      "finalPhase": "smoking",
+      "cigarettes": 2,
+      "maxPinchGapMm": 2.442721965104531,
+      "maxHandDepthMm": 0,
+      "checkedGloveVertices": 543354,
+      "minForward": 0.8525720410572825,
+      "fullDrawSamples": 181,
+      "maxLipGapMm": 0.996112254508026,
+      "badCount": 0,
+      "indexHash": "5cd3a20a35722a54e272d012e4ab2e1b005a9109bc712bea5edd635b034d10fc",
+      "moduleHash": "9e9554fa7a794db58a2f8614781d9aacbd60c5bcf006c1d8aff3484c87045dda",
+      "errors": [],
+      "failure": null,
+      "originalT255": "INFO smoking pinch: solved 1.7 cm, sampled 1.6 cm, wrist miss 0.0 cm; shoulder target/actual 21.4/21.4 cm; hand offset 18.4 cm\nPASS the cigarette is lit and visible\nPASS the filter meets the lips (0.10 cm error)\nPASS the ember points forward, away from the face (7.4 cm from lips)\nPASS the completed runtime frame keeps the fingertip pinch outside the face (1.6 cm from lips)\nPASS the palm clears the face (12.7 cm from lips)"
+    }
+  },
+  "reference": "reference-source.txt",
+  "contactAudit": "cigarette-contact-selected.json",
+  "units": "final-live-units.txt",
+  "inspector": {
+    "source": "9e9554fa7a794db58a2f8614781d9aacbd60c5bcf006c1d8aff3484c87045dda",
+    "shots": 16,
+    "cleanup": {
+      "before": {
+        "r": -1.4835298641951802,
+        "l": 0
+      },
+      "after": {
+        "r": 0,
+        "l": 0
+      }
+    },
+    "errors": [],
+    "failure": null
+  },
+  "actualBareInspector": {
+    "moduleHash": "8a989ae8227d9b449f4cb323d0547e4f8751fa5e87b87bd28c984c7a67ac6cb3",
+    "indexHash": "5cd3a20a35722a54e272d012e4ab2e1b005a9109bc712bea5edd635b034d10fc",
+    "wardrobe": {
+      "hat": "cover",
+      "eyewear": "none",
+      "rolled": false,
+      "shorts": false,
+      "gloves": false
+    },
+    "shots": 16,
+    "cleanup": {
+      "before": {
+        "r": -1.4835298641951802,
+        "l": 0
+      },
+      "after": {
+        "r": 0,
+        "l": 0
+      }
+    },
+    "errors": [],
+    "failure": null
+  }
+}

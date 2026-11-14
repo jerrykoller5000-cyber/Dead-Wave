@@ -1,0 +1,7 @@
+{
+  "before": "23bf794932d03d58e7b602174f1ac15e177d635129a42966839179d69fbc558f",
+  "after": "8b1c966a305ec9f5c0d51415bc19f310b702f428a69fb52023a76c7f4d4a5cab",
+  "old": "\"armory.typed.pack\": \"Pack of {count} · ${price} Cash\"",
+  "next": "\"armory.typed.pack\": \"Pack {count} · ${price}\"",
+  "scope": "One localized pack label; no transaction or layout logic change"
+}

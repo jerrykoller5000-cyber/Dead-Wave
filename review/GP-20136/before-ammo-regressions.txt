@@ -1,0 +1,9 @@
+Command: node tools/tests/run-all.mjs tcb294 tcb294b tcb295 tcb297 tcb301 --jobs 1 --no-retry --agent chatgpt --task GP-20136
+Exit: 1
+check-players: 316 player.position reads, all in the allowed places
+ok    tcb294  39 pass   0 fail  121.6s
+FAIL  tcb294b  23 pass   2 fail  103.4s
+           recovering browser after tcb294b: 2 fail
+ok    tcb295  21 pass   0 fail  96.9s
+ok    tcb297  15 pass   0 fail  114.9s
+

@@ -372,6 +372,17 @@ export class Mesh extends Object3D {
 }
 export class InstancedMesh extends Mesh {
   constructor(g, m, count) { super(g, m); this.isInstancedMesh = true; this.count = count; this.instanceMatrix = new InstancedBufferAttribute(new Float32Array(count * 16), 16); this.instanceColor = null; this._mats = []; this.boundingBox = null; }
+  // CB-335: as three.js, copy() takes the count, the instance matrices and colours too (cloneLean makes the Training
+  // armory's bolt heads with new InstancedMesh().copy(src, false): without it they had no count and no instances, t336).
+  copy(src, recursive = true) {
+    Object3D.prototype.copy.call(this, src, recursive);
+    if (src.geometry) this.geometry = src.geometry; if (src.material) this.material = src.material;
+    this.count = src.count; this._mats = (src._mats || []).map((m) => m && m.clone());
+    this.instanceMatrix = new InstancedBufferAttribute(new Float32Array(src.instanceMatrix ? src.instanceMatrix.array : 0), 16);
+    this.instanceColor = src.instanceColor ? new InstancedBufferAttribute(new Float32Array(src.instanceColor.array), 3) : null;
+    this.boundingBox = null;
+    return this;
+  }
   setMatrixAt(i, m) { this._mats[i] = m.clone(); }
   // CB-316: as three.js, a copy keeps its count, its instance matrices and colours (a gun's W.fasteners heads on its rack and eye copies).
   clone(recursive = true) { const o = super.clone(recursive); o.count = this.count; o._mats = this._mats.map((m) => m && m.clone()); o.instanceMatrix = new InstancedBufferAttribute(new Float32Array(this.instanceMatrix.array), 16); o.instanceColor = this.instanceColor ? new InstancedBufferAttribute(new Float32Array(this.instanceColor.array), 3) : null; return o; }
@@ -586,6 +597,20 @@ export class Box3 {
     this.makeEmpty(); o.updateWorldMatrix(true, true);
     let x0 = Infinity, y0 = Infinity, z0 = Infinity, x1 = -Infinity, y1 = -Infinity, z1 = -Infinity;
     o.traverse(c => {
+      // CB-335 (t336's false red): as three.js's expandByObject, an InstancedMesh counts by the box round its
+      // instances (computeBoundingBox over every instance's matrix, done fresh), moved by its matrixWorld; a count of 0 adds nothing.
+      // The vertex walk below saw only the source geometry at the mesh's origin.
+      if (c.isInstancedMesh && c.computeBoundingBox) {
+        c.computeBoundingBox();
+        const bb = c.boundingBox; if (!bb || bb.isEmpty()) return;
+        const e = c.matrixWorld.elements;
+        for (const x of [bb.min.x, bb.max.x]) for (const y of [bb.min.y, bb.max.y]) for (const z of [bb.min.z, bb.max.z]) {
+          const w = 1 / ((e[3] * x + e[7] * y + e[11] * z + e[15]) || 1);
+          const wx = (e[0] * x + e[4] * y + e[8] * z + e[12]) * w, wy = (e[1] * x + e[5] * y + e[9] * z + e[13]) * w, wz = (e[2] * x + e[6] * y + e[10] * z + e[14]) * w;
+          if (wx < x0) x0 = wx; if (wx > x1) x1 = wx; if (wy < y0) y0 = wy; if (wy > y1) y1 = wy; if (wz < z0) z0 = wz; if (wz > z1) z1 = wz;
+        }
+        return;
+      }
       const p = c.geometry && c.geometry.attributes && c.geometry.attributes.position;
       if (!p) return;
       const e = c.matrixWorld.elements, a = p.array, s = p.itemSize, n = p.count;

@@ -1,0 +1,2 @@
+PASS pistol before 40 native eye/inspection/reload four-light shots; own source stable; other changed sources []
+PASS uzi before 40 native eye/inspection/reload four-light shots; own source stable; other changed sources []

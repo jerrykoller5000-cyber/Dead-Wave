@@ -1,0 +1,6 @@
+[
+  {
+    "before": "if(pinchWarm&&target.distanceToSquared(lastPinchTarget)<.0064)",
+    "after": "if(pinchWarm&&draw<.999&&target.distanceToSquared(lastPinchTarget)<.0064)"
+  }
+]

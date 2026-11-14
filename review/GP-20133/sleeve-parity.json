@@ -1,0 +1,10 @@
+{
+  "quaternions": 454,
+  "sides": 2,
+  "normalModes": 2,
+  "bufferComparisons": 5448,
+  "byteDifferences": 0,
+  "attributeVersionDifferences": 0,
+  "geometryReplacement": true,
+  "threshold": 0.002
+}

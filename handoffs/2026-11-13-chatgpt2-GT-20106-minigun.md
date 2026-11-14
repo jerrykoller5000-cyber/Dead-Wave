@@ -1,0 +1,10 @@
+# chatgpt2 — GT-20106 minigun drum mount/feed (J153 31) — 2026-11-13
+Changed: Drum shell/lid/6screws move+60raw gun-mm in ammoBox localX (+42mm after existing heldScale.70); full receiver panel/strips replace obsolete drum cutouts. A named sloped steel feed chute joins the same socket to the drum, with fixed gusset hanger. Root/pivots/hold/grips/sight and reload motion unchanged.
+Files: studio/weapon-heavy.js (ammoBox/feed/hanger/panel only); review/GT-20106/fittings/minigun/{before,after}; minigun-{front,back,below,side,hip}-four-lights.jpg.
+Tests: Rule16 slots, one browser/worker. Native actual-builder transformed shell/panel bounds prove minimum axial gap9.134/std11.623/ext gun-mm after held scale, roots[.14,-.056,-.014],rotZ.12 unchanged; fittings-native.json. Final original hardware t33316/0, fittings-final-t333.txt. Original Training t33629/0 in fittings-hardware-world.txt. No official tests edited.
+Screenshots: Inspected minigun-{front,back,below}-four-lights.jpg;36 real BEFORE/36AFTER, same camera/view-space/exposure, std/ext, four lights. Back/below show clear drum edge and full panel; front shows feed/hanger. Side is occluded by opposite panel and is context only. Native hip retained; rotated inspection hides hands and is labeled.
+Not verified: Full reload/contact sweep on moved drum shell remains C5; exact raw/held delta sent C1/C5. C7 owns barrel-ring camo in a named disjoint loan, not this component. Whole-card budgets/full integration pending.
+Requests: Director approved picked geometry approach; final shape review sent. C1/C5 exact moving contact delta and held-scale clarification sent.
+Contract changes: No new exports; existing ammoBox/mag roots, baseAmmoPos/rests/pivots remain. Drum stays painted; feed chute/lid/screws are bare.
+Art: Military family. Silhouette/proportion/construction/topology/material/style/readability4; integration3 pending moving-drum hand contact.
+Commit: Model ready to commit after Director review/file release; no full-motion claim. No git, Jerry runs Director job.

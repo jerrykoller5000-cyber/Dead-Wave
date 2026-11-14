@@ -1,0 +1,156 @@
+{
+  "label": "before-v4",
+  "sourceHash": "60b2c664ac60bc022c14ee7be829ef8202256693effa6cbb1544639e349b4058",
+  "traces": [
+    {
+      "hz": 30,
+      "rows": [
+        {
+          "distance": 10,
+          "age": 0.16666666666666666,
+          "x": 0,
+          "y": 0,
+          "z": 10,
+          "vy": 0,
+          "direct": true,
+          "gravity": null
+        },
+        {
+          "distance": 25,
+          "age": 0.4166666666666667,
+          "x": 0,
+          "y": 0,
+          "z": 25.000000000000004,
+          "vy": 0,
+          "direct": true,
+          "gravity": null
+        },
+        {
+          "distance": 50,
+          "age": 0.8333333333333334,
+          "x": 0,
+          "y": 0,
+          "z": 50.00000000000001,
+          "vy": 0,
+          "direct": true,
+          "gravity": null
+        }
+      ],
+      "start": {
+        "x": 42,
+        "y": 22.45320366419829,
+        "z": -20
+      },
+      "speed": 60,
+      "damage": 80,
+      "fuse": 1.0333333333333334,
+      "isShell": true
+    },
+    {
+      "hz": 60,
+      "rows": [
+        {
+          "distance": 10,
+          "age": 0.16666666666666666,
+          "x": 0,
+          "y": 0,
+          "z": 10,
+          "vy": 0,
+          "direct": true,
+          "gravity": null
+        },
+        {
+          "distance": 25,
+          "age": 0.41666666666666663,
+          "x": 0,
+          "y": 0,
+          "z": 25,
+          "vy": 0,
+          "direct": true,
+          "gravity": null
+        },
+        {
+          "distance": 50,
+          "age": 0.8333333333333334,
+          "x": 0,
+          "y": 0,
+          "z": 49.99999999999995,
+          "vy": 0,
+          "direct": true,
+          "gravity": null
+        }
+      ],
+      "start": {
+        "x": 42,
+        "y": 22.45320366419829,
+        "z": -20
+      },
+      "speed": 60,
+      "damage": 80,
+      "fuse": 1.0333333333333334,
+      "isShell": true
+    },
+    {
+      "hz": 144,
+      "rows": [
+        {
+          "distance": 10,
+          "age": 0.16666666666666666,
+          "x": 0,
+          "y": 0,
+          "z": 10,
+          "vy": 0,
+          "direct": true,
+          "gravity": null
+        },
+        {
+          "distance": 25,
+          "age": 0.4166666666666661,
+          "x": 0,
+          "y": 0,
+          "z": 25,
+          "vy": 0,
+          "direct": true,
+          "gravity": null
+        },
+        {
+          "distance": 50,
+          "age": 0.8333333333333313,
+          "x": 0,
+          "y": 0,
+          "z": 50.00000000000003,
+          "vy": 0,
+          "direct": true,
+          "gravity": null
+        }
+      ],
+      "start": {
+        "x": 42,
+        "y": 22.45320366419829,
+        "z": -20
+      },
+      "speed": 60,
+      "damage": 80,
+      "fuse": 1.0333333333333334,
+      "isShell": true
+    }
+  ],
+  "shots": [
+    {
+      "first": false,
+      "origin": {
+        "x": 120.21146426332706,
+        "y": -0.1355447801428406,
+        "z": -79.15769586301012
+      },
+      "pos": {
+        "x": 120.17285315906398,
+        "y": 3.7697545425709595,
+        "z": -60.54982442231908
+      },
+      "vy": 12.12632797258652,
+      "alive": false
+    }
+  ],
+  "failure": "AssertionError [ERR_ASSERTION]: long shot reaches45m\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/review/GP-20137/trajectory-native.mjs:6:1362"
+}

@@ -1,0 +1,69 @@
+{
+  "scope": "Review-only candidates; production files unchanged while index loans pending",
+  "patches": [
+    {
+      "path": "game/armory.js",
+      "candidate": "armory-candidate.mjs",
+      "sourceSha256": "2796518b9fc8fe984babdc2426f0f4010e098edde579f962be0a38193706d9b7",
+      "edits": [
+        [
+          "      if (patch && Array.isArray(patch.magazines))",
+          "      if (patch && Number.isSafeInteger(patch.rounds) && patch.rounds >= 0) gun.rounds = patch.rounds;\n      if (patch && Array.isArray(patch.magazines))"
+        ]
+      ]
+    },
+    {
+      "path": "ui/magazine-hud.js",
+      "candidate": "magazine-hud-candidate.mjs",
+      "sourceSha256": "12bd9a907959e1a970736d2f2c59633a12e14e06688e2a9da5525e739056c61c",
+      "edits": [
+        [
+          "if (weapon === 'revolver') return 'loaders';",
+          "if (weapon === 'revolver') return 'rounds';"
+        ],
+        [
+          "  if (!snapshot) return [];",
+          "  if (!snapshot || snapshot.reserveKind === 'rounds') return [];"
+        ],
+        [
+          "    render(weapon,snapshot) {",
+          "    render(weapon,snapshot) {\n      if (weapon === 'revolver' || weapon === 'launcher' || snapshot?.reserveKind === 'rounds') snapshot = null;"
+        ]
+      ]
+    },
+    {
+      "path": "ui/armory.js",
+      "candidate": "armory-ui-candidate.js",
+      "sourceSha256": "dfdb9f739ef55f15a3fa2c58ceec5f10471c98ad7f6a8d921ad42c0b80fe0efe",
+      "edits": [
+        [
+          "    const parts = [];\r\n    if (gun.loaded",
+          "    const parts = [], loose = gun.kind === 'revolver' || gun.kind === 'launcher';\r\n    if (gun.loaded"
+        ],
+        [
+          "    if (gun.magazines.length) parts.push",
+          "    if (!loose && gun.magazines.length) parts.push"
+        ],
+        [
+          "    if (gun.rounds) parts.push(text('armory.rounds', { count: gun.rounds }));",
+          "    if (loose && /:second$/.test(gun.id)) parts.push(text('armory.roundsShared'));\r\n    else if (loose || gun.rounds) parts.push(text('armory.rounds', { count: gun.rounds }));"
+        ],
+        [
+          "    for (const gun of getOwned() || []) if (!armory.has(gun.id)) armory.buy(gun, { store: true });",
+          "    for (const gun of getOwned() || []) {\r\n      if (!armory.has(gun.id)) armory.buy(gun, { store: true });\r\n      else if (Object.hasOwn(gun, 'rounds')) armory.revise(gun.id, gun);\r\n    }"
+        ]
+      ]
+    },
+    {
+      "path": "ui/strings.js",
+      "candidate": "strings-candidate.js",
+      "sourceSha256": "8b1c966a305ec9f5c0d51415bc19f310b702f428a69fb52023a76c7f4d4a5cab",
+      "edits": [
+        [
+          "  \"armory.loaded\":",
+          "  \"armory.roundsShared\": \"Shared loose rounds\",\r\n  \"weapon.wheel.loose\": \"{loaded} loaded · {count} rounds\",\r\n  \"armory.looseSummary\": \"{loaded} loaded · {count} loose rounds\",\r\n  \"armory.loaded\":"
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "before": "0dc589d9f1b720cff144c37bf7e6163bd27c6dfe25c470ad0bb7fa59cf9714a9",
+  "after": "9cf7d0ba68b2513e23b4d0018008a79b6013d69030943011b5056116c44e3796",
+  "reverseExact": true,
+  "old": "            m = m.clone();\n            m.userData = m.userData ? { ...m.userData } : {};",
+  "next": "            // Keep factory Texture/Node references: Material.clone serializes userData to JSON.\n            const sourceData = m.userData;\n            m = m.clone();\n            m.userData = sourceData ? { ...sourceData } : {};",
+  "regression": "new unchanged-expectation test failed before fix: DataTexture reference became plain serialized object after early heat isolation"
+}
