@@ -1,0 +1,37 @@
+{
+  "setup": {
+    "fixture": "Both poses use supported setMagazinesDbg full spare pistol reserve, clipped by actual magazine capacity, to exercise BOTH actual belt slots; no forced count/visibility.",
+    "backend": "WebGPU",
+    "pouches": [
+      {
+        "position": [
+          -0.1119999997317791,
+          0.8619999885559082,
+          0.13500000163912773
+        ],
+        "geometrySize": [
+          0.0819999948143959,
+          0.1119999885559082,
+          0.037999995052814484
+        ],
+        "parent": "",
+        "sourceHidden": true
+      },
+      {
+        "position": [
+          0.1119999997317791,
+          0.8619999885559082,
+          0.13500000163912773
+        ],
+        "geometrySize": [
+          0.0819999948143959,
+          0.1119999885559082,
+          0.037999995052814484
+        ],
+        "parent": "",
+        "sourceHidden": true
+      }
+    ]
+  },
+  "served": {}
+}

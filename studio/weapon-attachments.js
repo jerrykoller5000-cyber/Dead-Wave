@@ -159,6 +159,9 @@ export function attachLaserLight(gun, kind, ctx) {
   if(spec.kind==='guard'){
     pad=unit.children.find(mesh=>mesh.name==='activationPad' && mesh.position.x<0);
     axis=new THREE.Vector3(1,0,0);faceOffset=.0015;
+  }else if(kind==='ak'){
+    const tape=kr7TapeSwitch(THREE,gun,unit,ctx,padKit);
+    pad=tape.pad;axis=tape.axis;faceOffset=tape.faceOffset;
   }else if(kind==='uzi'){
     // The support grip covers the back of this compact light; its near side is exposed.
     faceOffset=.0012;
@@ -195,4 +198,97 @@ export function attachLaserLight(gun, kind, ctx) {
   gun.userData.laserLensLocal=laser.clone().applyMatrix4(unit.matrix);
   gun.userData.lightLensLocal=light.clone().applyMatrix4(unit.matrix);
   return gun;
+}
+
+
+// V5 review: real routed wood, with the pressure surface flush to its original face.
+function routeKr7TapePocket(T,wood,axis,tangent,v0,z0,height,length){
+  if(wood.position.length()>1e-12||wood.quaternion.angleTo(new T.Quaternion())>1e-12||wood.scale.distanceTo(new T.Vector3(1,1,1))>1e-12)throw Error('KR-7 source handguard must be in its raw frame');
+  const old=wood.geometry,P=old.attributes.position,N=old.attributes.normal,U=old.attributes.uv;
+  if(old.index||!N||!U||Object.keys(old.attributes).length!==3)throw Error('Actual nonindexed wood position/normal/UV required');
+  const probe=new T.Mesh(old,new T.MeshBasicMaterial({side:T.DoubleSide}));probe.updateMatrixWorld(true);
+  const ray=new T.Raycaster(),vMin=v0-height/2,vMax=v0+height/2,zMin=z0-length/2,zMax=z0+length/2;
+  let ringZ=Infinity;for(let i=0;i<P.count;i++)if(Math.abs(P.getZ(i)-z0)<Math.abs(ringZ-z0))ringZ=P.getZ(i);
+  const samples=new Set([vMin,vMax]);for(let i=0;i<P.count;i++)if(Math.abs(P.getZ(i)-ringZ)<1e-7&&P.getX(i)<-.018){const v=tangent.x*P.getX(i)+tangent.y*P.getY(i);if(v>vMin&&v<vMax)samples.add(v);}
+  const surface=v=>{ray.set(axis.clone().multiplyScalar(-1).addScaledVector(tangent,v).add(new T.Vector3(0,0,z0)),axis);const h=ray.intersectObject(probe,false)[0];if(!h||h.point.x>-.018)throw Error('Wood outer left face required');return h.point.dot(axis);};
+  const skin=[...samples].map(v=>({v,u:surface(v)})),front=Math.max(...skin.map(s=>s.u))-.0002,back=front+.0025,floor=back+.00006;
+  // Keep uncut triangles intact. Split only actual cavity intersections, then
+  // insert shared edge points before triangulating: a local cut without T junctions.
+  const planes=[p=>floor-p.dot(axis),p=>p.dot(tangent)-vMin,p=>vMax-p.dot(tangent),p=>p.z-zMin,p=>zMax-p.z];
+  const blend=(a,b,t)=>({p:a.p.clone().lerp(b.p,t),n:a.n.clone().lerp(b.n,t).normalize(),uv:a.uv.clone().lerp(b.uv,t)});
+  const clip=(poly,d,positive)=>{const out=[];for(let i=0;i<poly.length;i++){const a=poly[i],b=poly[(i+1)%poly.length],da=d(a.p)*(positive?1:-1),db=d(b.p)*(positive?1:-1);if(da>=-1e-12)out.push(a);if(da>1e-12&&db< -1e-12||da< -1e-12&&db>1e-12)out.push(blend(a,b,da/(da-db)));}return out.filter((a,i)=>a.p.distanceToSquared(out[(i+out.length-1)%out.length].p)>1e-22);};
+  const polys=[],kept=[],positions=[],normals=[],uvs=[];let removedTriangles=0;
+  const add=(a,b,c)=>{if(new T.Vector3().subVectors(b.p,a.p).cross(new T.Vector3().subVectors(c.p,a.p)).lengthSq()<1e-24)return;kept.push([a,b,c]);};
+  for(let i=0;i<P.count;i+=3){let poly=[0,1,2].map(j=>({p:new T.Vector3().fromBufferAttribute(P,i+j),n:new T.Vector3().fromBufferAttribute(N,i+j),uv:new T.Vector2().fromBufferAttribute(U,i+j)}));
+   if(planes.some(d=>poly.every(a=>d(a.p)<-1e-12))){polys.push(poly);continue;}
+   for(const plane of planes){const outside=clip(poly,plane,false);if(outside.length>=3)polys.push(outside);poly=clip(poly,plane,true);if(poly.length<3)break;}
+   if(poly.length>=3)removedTriangles++;
+  }
+  if(!removedTriangles)throw Error('Routed pocket removed no original wood');
+  const grid=new Map(),unique=new Map(),h=.01;
+  for(const poly of polys)for(const a of poly){const k=a.p.toArray().map(x=>Math.round(x*1e8)).join(',');if(unique.has(k))continue;unique.set(k,a.p);const cell=a.p.toArray().map(x=>Math.floor(x/h)).join(',');if(!grid.has(cell))grid.set(cell,[]);grid.get(cell).push(a.p);}
+  let repairedEdges=0;
+  for(const poly of polys){const expanded=[];for(let i=0;i<poly.length;i++){const a=poly[i],b=poly[(i+1)%poly.length],d=b.p.clone().sub(a.p),L=d.lengthSq(),points=new Map();expanded.push(a);if(L<1e-22)continue;
+    const lo=a.p.clone().min(b.p).multiplyScalar(1/h).floor(),hi=a.p.clone().max(b.p).multiplyScalar(1/h).floor();
+    for(let x=lo.x;x<=hi.x;x++)for(let y=lo.y;y<=hi.y;y++)for(let z=lo.z;z<=hi.z;z++)for(const q of grid.get([x,y,z].join(','))||[]){const t=q.clone().sub(a.p).dot(d)/L;if(t<=1e-7||t>=1-1e-7)continue;if(a.p.clone().addScaledVector(d,t).distanceToSquared(q)>1e-18)continue;points.set(Math.round(t*1e10),t);}
+    if(points.size)repairedEdges++;for(const t of [...points.values()].sort((a,b)=>a-b))expanded.push(blend(a,b,t));
+   }
+   if(expanded.length===3){add(...expanded);continue;}
+   const centre={p:new T.Vector3(),n:new T.Vector3(),uv:new T.Vector2()};for(const a of expanded){centre.p.add(a.p);centre.n.add(a.n);centre.uv.add(a.uv);}centre.p.multiplyScalar(1/expanded.length);centre.n.normalize();centre.uv.multiplyScalar(1/expanded.length);
+   for(let i=0;i<expanded.length;i++)add(expanded[i],expanded[(i+1)%expanded.length],centre);
+  }
+  const key=p=>p.toArray().map(x=>Math.round(x*1e7)).join(','),edges=new Map();
+  for(const tri of kept)for(let i=0;i<3;i++){const a=tri[i],b=tri[(i+1)%3],ka=key(a.p),kb=key(b.p),k=ka<kb?ka+'|'+kb:kb+'|'+ka,r=edges.get(k)||{count:0,a,b};r.count++;edges.set(k,r);}
+  const boundary=[...edges.values()].filter(e=>e.count===1);if(boundary.length<4)throw Error('No actual routed opening boundary');
+  if([...edges.values()].some(e=>e.count>2))throw Error('Wood split created nonmanifold edge');
+  const bb=old.boundingBox||new T.Box3().setFromBufferAttribute(P),middle=(bb.min.y+bb.max.y)/2,halfWidth=Math.max(Math.abs(bb.min.x),Math.abs(bb.max.x));
+  const fresh=(p,n)=>{const side=Math.abs(n.x)>.75,end=Math.abs(n.z)>.70,along=p.z,across=p.y-middle,section=side?.5+across/.24:.5+p.x/(2*halfWidth);return{p,n:n.clone(),uv:new T.Vector2(.63+(side||!end?along:across)*3.8,(side?0:.5)+.02+.46*Math.max(0,Math.min(1,section)))};};
+  const rawTriangle=(a,b,c)=>{const n=new T.Vector3().subVectors(b,a).cross(new T.Vector3().subVectors(c,a)).normalize();add(fresh(a,n),fresh(b,n),fresh(c,n));};
+  const centre=axis.clone().multiplyScalar(floor).addScaledVector(tangent,v0).add(new T.Vector3(0,0,z0));
+  for(const {a,b}of boundary){const A=a.p.clone().addScaledVector(axis,floor-a.p.dot(axis)),B=b.p.clone().addScaledVector(axis,floor-b.p.dot(axis));
+   if(Math.abs(a.p.z-zMin)>1e-6&&Math.abs(a.p.z-zMax)>1e-6&&Math.abs(a.p.dot(tangent)-vMin)>1e-6&&Math.abs(a.p.dot(tangent)-vMax)>1e-6)throw Error('Opening escaped routed rectangle');
+   rawTriangle(b.p,a.p,A);rawTriangle(b.p,A,B);rawTriangle(B,A,centre);
+  }
+  for(const tri of kept)for(const a of tri){positions.push(...a.p.toArray());normals.push(...a.n.toArray());uvs.push(...a.uv.toArray());}
+  const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(positions,3));g.setAttribute('normal',new T.Float32BufferAttribute(normals,3));g.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));g.computeBoundingBox();g.computeBoundingSphere();wood.geometry=g;probe.material.dispose();
+  // The factory cloned this geometry before attaching the lamp; only this copy is replaced.
+  old.dispose();
+  return{front,back,floor,v0,z0,height,length,skin,maximumProudRaw:.0002,sourceTriangles:P.count/3,routedTriangles:g.attributes.position.count/3,openingEdges:boundary.length,removedPolygons:removedTriangles,repairedEdges};
+}
+
+function kr7TapeSwitch(T,gun,unit,ctx,K){
+  const axis=new T.Vector3(.998,-.063,0).normalize(),tangent=new T.Vector3(-axis.y,axis.x,0),oldContact=new T.Vector3(-.04132328823429005,-.02229852990104181,.397);
+  const width=.0025,height=.016,length=.028,faceOffset=width/2;
+  const wood=gun.getObjectByName('KR-7 lower handguard');if(!wood)throw Error('Actual KR-7 handguard required');
+  const pocket=routeKr7TapePocket(T,wood,axis,tangent,oldContact.dot(tangent),oldContact.z,.0184,.0334);
+  const contact=axis.clone().multiplyScalar(pocket.front).addScaledVector(tangent,pocket.v0).add(new T.Vector3(0,0,pocket.z0)),centre=contact.clone().addScaledVector(axis,faceOffset);
+  const pad=K.box(width,height,length,ctx.gunRubber,centre.x-unit.position.x,centre.y-unit.position.y,centre.z-unit.position.z,0,0,Math.atan2(axis.y,axis.x),unit,.0005);
+  pad.name='lightSwitchPad';pad.userData.tapePressurePad=true;
+  const basis=new T.Matrix4().makeBasis(tangent,new T.Vector3(0,0,1),axis);
+  const at=(o,u)=>{o.applyMatrix4(basis);o.position.copy(axis).multiplyScalar(u).addScaledVector(tangent,pocket.v0).add(new T.Vector3(0,0,pocket.z0)).sub(unit.position);o.castShadow=o.receiveShadow=true;unit.add(o);return o;};
+  // A shallow fixed surround beds the pad in the routed seat; its aperture clears
+  // the deforming rubber on all four sides. The cable grommet meets its front lip.
+  const shape=new T.Shape();shape.moveTo(-.009,-.0165);shape.lineTo(.009,-.0165);shape.lineTo(.009,.0165);shape.lineTo(-.009,.0165);shape.closePath();
+  const hole=new T.Path();hole.moveTo(-.0081,-.0141);hole.lineTo(-.0081,.0141);hole.lineTo(.0081,.0141);hole.lineTo(.0081,-.0141);hole.closePath();shape.holes.push(hole);
+  const seat=at(new T.Mesh(new T.ExtrudeGeometry(shape,{depth:width-.0004,steps:1,curveSegments:1,bevelEnabled:true,bevelSize:.0001,bevelThickness:.0002,bevelSegments:1}),ctx.gunRubber),pocket.front+.0002);
+  seat.name='KR-7 tape-switch fixed inset surround';
+  const backing=at(new T.Mesh(new T.BoxGeometry(.0162,.0282,.00006),ctx.gunRubber),pocket.back+.00003);backing.name='KR-7 tape-switch adhesive backing';
+  // V6 review: retain the approved pad-side exit/wood/datum; route the last
+  // four points directly into a named socket on the actual lamp rear face.
+  // No loose forward/downward hook; the first five control points stay exact.
+  const cablePoints=[[-.04007577139269901,-.029,.4115],[-.0408,-.0245,.422],[-.0406,-.031,.438],[-.039,-.032,.463],[-.035,-.032,.498],[-.0315,-.034,.507],[-.026,-.040,.516],[-.023,-.0445,.5195],[-.023,-.045,.522]];
+  const curve=new T.CatmullRomCurve3(cablePoints.map(p=>new T.Vector3(...p).sub(unit.position)),false,'centripetal'),segments=24,radial=6,radius=.0011;
+  const tube=new T.TubeGeometry(curve,segments,radius,radial,false),TP=tube.attributes.position,positions=Array.from(TP.array),indices=Array.from(tube.index.array),uv=Array.from(tube.attributes.uv.array);
+  for(const end of[0,1]){const c=curve.getPoint(end),normal=curve.getTangent(end).normalize().multiplyScalar(end?1:-1),centreIndex=positions.length/3;positions.push(...c.toArray());uv.push(.5,.5);const row=end?segments*(radial+1):0;for(let i=0;i<radial;i++){let a=row+i,b=row+(i+1)%radial;const A=new T.Vector3().fromBufferAttribute(TP,a).sub(c),B=new T.Vector3().fromBufferAttribute(TP,b).sub(c);if(A.cross(B).dot(normal)<0)[a,b]=[b,a];indices.push(centreIndex,a,b);}}
+  tube.setAttribute('position',new T.Float32BufferAttribute(positions,3));tube.setAttribute('uv',new T.Float32BufferAttribute(uv,2));tube.deleteAttribute('normal');tube.setIndex(indices);tube.computeVertexNormals();tube.computeBoundingBox();tube.computeBoundingSphere();const cable=new T.Mesh(tube,ctx.gunRubber);cable.name='KR-7 tape-switch cable';cable.castShadow=cable.receiveShadow=true;unit.add(cable);
+  for(const[t,label]of[[0,'pad'],[1,'lamp']]){const r=t?.0016:.0015,cap=new T.Mesh(new T.CylinderGeometry(r,r,.003,8),ctx.gunRubber);cap.name='KR-7 tape-switch '+label+' strain relief';cap.position.copy(curve.getPoint(t));cap.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),curve.getTangent(t).normalize());cap.castShadow=cap.receiveShadow=true;unit.add(cap);}
+  // Closed annular rear receptacle: its base enters the existing module shell,
+  // its bore receives the cable's rubber strain relief. It is fixed artwork.
+  const lampPortRaw=[-.023,-.045,.5203],portProfile=[[.0014,-.002],[.0036,-.002],[.0036,.002],[.0014,.002],[.0014,-.002]];
+  const port=new T.Mesh(new T.LatheGeometry(portProfile.map(p=>new T.Vector2(...p)),12),ctx.gunMid);
+  port.name='KR-7 tape-switch lamp rear cable socket';port.rotation.x=Math.PI/2;
+  port.position.fromArray(lampPortRaw).sub(unit.position);port.castShadow=port.receiveShadow=true;unit.add(port);
+  wood.userData.kr7TapePocket={...pocket,axis:axis.toArray(),tangent:tangent.toArray()};
+  unit.userData.kr7TapeSwitch={version:6,contact:contact.toArray(),padSize:[width,height,length],inwardAxis:axis.toArray(),travel:.001,sourceThumbPad:[0,-.0138,.009],pocket,cablePoints,cableRadius:radius,lampPort:{center:lampPortRaw,rearShellZ:.521,axis:[0,0,1],innerRadius:.0014,outerRadius:.0036,length:.004},scope:'Review only V6: approvedpad/wood/datum/first5cordpoints exact; last4points run directly into named rear lamp socket. No loose forward hook. Actualnative connection/fullpressclip/fourlightLOOK required before approval; no hand/motion/row change.'};
+  return{pad,axis,faceOffset};
 }

@@ -1,0 +1,820 @@
+{
+  "before": {
+    "front-noon": {
+      "md5": "08c03265",
+      "meanRGB": [
+        124.2,
+        123.4,
+        115.0
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "threequarter-noon": {
+      "md5": "8ae02af9",
+      "meanRGB": [
+        124.9,
+        124.2,
+        115.7
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "side-noon": {
+      "md5": "72b901d7",
+      "meanRGB": [
+        125.8,
+        125.4,
+        117.0
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "back-noon": {
+      "md5": "071b948a",
+      "meanRGB": [
+        124.3,
+        123.6,
+        115.2
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "front-overcast": {
+      "md5": "f1c175a2",
+      "meanRGB": [
+        105.0,
+        105.9,
+        101.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "threequarter-overcast": {
+      "md5": "92d4013e",
+      "meanRGB": [
+        105.7,
+        106.8,
+        102.7
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "side-overcast": {
+      "md5": "0c5fc323",
+      "meanRGB": [
+        106.8,
+        108.0,
+        103.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "back-overcast": {
+      "md5": "310362d0",
+      "meanRGB": [
+        105.2,
+        106.2,
+        102.1
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "front-dusk": {
+      "md5": "3dd37428",
+      "meanRGB": [
+        98.6,
+        89.4,
+        79.4
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "threequarter-dusk": {
+      "md5": "fdfe89bf",
+      "meanRGB": [
+        99.9,
+        90.7,
+        80.6
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "side-dusk": {
+      "md5": "7a764ee9",
+      "meanRGB": [
+        100.4,
+        91.7,
+        81.7
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "back-dusk": {
+      "md5": "db0c28bb",
+      "meanRGB": [
+        98.8,
+        89.6,
+        79.6
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "front-night": {
+      "md5": "ae8e7f10",
+      "meanRGB": [
+        75.3,
+        78.1,
+        79.1
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "threequarter-night": {
+      "md5": "92344403",
+      "meanRGB": [
+        76.1,
+        79.0,
+        79.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "side-night": {
+      "md5": "bfc2e45e",
+      "meanRGB": [
+        77.3,
+        80.3,
+        81.2
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "back-night": {
+      "md5": "7ce36fac",
+      "meanRGB": [
+        75.4,
+        78.3,
+        79.2
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "front-black": {
+      "md5": "f8d03c93",
+      "meanRGB": [
+        235.2,
+        235.2,
+        235.2
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "threequarter-black": {
+      "md5": "5e6460b8",
+      "meanRGB": [
+        237.6,
+        237.6,
+        237.6
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "side-black": {
+      "md5": "e5dcd8fc",
+      "meanRGB": [
+        241.7,
+        241.7,
+        241.7
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "back-black": {
+      "md5": "f2b276c8",
+      "meanRGB": [
+        236.5,
+        236.5,
+        236.5
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-front-noon": {
+      "md5": "83550da6",
+      "meanRGB": [
+        117.7,
+        114.2,
+        108.1
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-threequarter-noon": {
+      "md5": "51a47aad",
+      "meanRGB": [
+        118.9,
+        115.5,
+        109.5
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-front-overcast": {
+      "md5": "938f2a0f",
+      "meanRGB": [
+        112.6,
+        109.8,
+        105.0
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-threequarter-overcast": {
+      "md5": "f5a293d1",
+      "meanRGB": [
+        114.4,
+        111.7,
+        106.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-front-dusk": {
+      "md5": "53806784",
+      "meanRGB": [
+        109.6,
+        102.5,
+        95.0
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-threequarter-dusk": {
+      "md5": "5514185c",
+      "meanRGB": [
+        114.9,
+        107.0,
+        98.7
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-front-night": {
+      "md5": "65a53ada",
+      "meanRGB": [
+        104.9,
+        103.6,
+        99.0
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-threequarter-night": {
+      "md5": "b0fb3f36",
+      "meanRGB": [
+        106.0,
+        104.7,
+        100.0
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    }
+  },
+  "candidate": {
+    "front-noon": {
+      "md5": "e1a3cccc",
+      "meanRGB": [
+        124.1,
+        123.3,
+        114.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "threequarter-noon": {
+      "md5": "0aaaf61d",
+      "meanRGB": [
+        124.8,
+        124.1,
+        115.7
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "side-noon": {
+      "md5": "05bbf307",
+      "meanRGB": [
+        125.8,
+        125.4,
+        116.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "back-noon": {
+      "md5": "bc1b286f",
+      "meanRGB": [
+        124.1,
+        123.4,
+        115.0
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "front-overcast": {
+      "md5": "68d2b7ce",
+      "meanRGB": [
+        104.9,
+        105.8,
+        101.7
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "threequarter-overcast": {
+      "md5": "ab9ffd46",
+      "meanRGB": [
+        105.7,
+        106.7,
+        102.6
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "side-overcast": {
+      "md5": "d32c8c05",
+      "meanRGB": [
+        106.7,
+        108.0,
+        103.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "back-overcast": {
+      "md5": "d2f66974",
+      "meanRGB": [
+        105.0,
+        106.0,
+        101.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "front-dusk": {
+      "md5": "48c62f7b",
+      "meanRGB": [
+        98.5,
+        89.3,
+        79.3
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "threequarter-dusk": {
+      "md5": "59619b54",
+      "meanRGB": [
+        99.8,
+        90.6,
+        80.5
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "side-dusk": {
+      "md5": "b4eb8028",
+      "meanRGB": [
+        100.4,
+        91.6,
+        81.6
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "back-dusk": {
+      "md5": "d4677ace",
+      "meanRGB": [
+        98.6,
+        89.4,
+        79.4
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "front-night": {
+      "md5": "d3326ecf",
+      "meanRGB": [
+        75.1,
+        78.0,
+        78.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "threequarter-night": {
+      "md5": "6b296c4c",
+      "meanRGB": [
+        76.1,
+        78.9,
+        79.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "side-night": {
+      "md5": "af2ce3c2",
+      "meanRGB": [
+        77.2,
+        80.2,
+        81.1
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "back-night": {
+      "md5": "72814ada",
+      "meanRGB": [
+        75.2,
+        78.1,
+        79.0
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "front-black": {
+      "md5": "03642ed1",
+      "meanRGB": [
+        234.9,
+        234.9,
+        234.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "threequarter-black": {
+      "md5": "dd80daf5",
+      "meanRGB": [
+        237.4,
+        237.4,
+        237.4
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "side-black": {
+      "md5": "8d413f2e",
+      "meanRGB": [
+        241.5,
+        241.5,
+        241.5
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "back-black": {
+      "md5": "5bce7dfc",
+      "meanRGB": [
+        236.1,
+        236.1,
+        236.1
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-front-noon": {
+      "md5": "b508c60c",
+      "meanRGB": [
+        117.1,
+        113.3,
+        107.2
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-threequarter-noon": {
+      "md5": "a252f3ad",
+      "meanRGB": [
+        118.5,
+        115.0,
+        108.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-front-overcast": {
+      "md5": "6addcf19",
+      "meanRGB": [
+        111.9,
+        108.9,
+        104.1
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-threequarter-overcast": {
+      "md5": "c889aa75",
+      "meanRGB": [
+        114.0,
+        111.1,
+        106.3
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-front-dusk": {
+      "md5": "2614e105",
+      "meanRGB": [
+        108.9,
+        101.4,
+        93.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-threequarter-dusk": {
+      "md5": "c11c07af",
+      "meanRGB": [
+        114.4,
+        106.2,
+        98.0
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-front-night": {
+      "md5": "aaddc9eb",
+      "meanRGB": [
+        104.0,
+        102.6,
+        97.9
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    },
+    "head-threequarter-night": {
+      "md5": "38e624d9",
+      "meanRGB": [
+        105.4,
+        104.0,
+        99.3
+      ],
+      "size": [
+        1280,
+        900
+      ]
+    }
+  },
+  "pairDiffs": {
+    "front-noon": {
+      "changedPct": 0.39,
+      "maxChannelDiff": 107,
+      "meanAbsDiff": 0.1506
+    },
+    "threequarter-noon": {
+      "changedPct": 0.291,
+      "maxChannelDiff": 149,
+      "meanAbsDiff": 0.1005
+    },
+    "side-noon": {
+      "changedPct": 0.291,
+      "maxChannelDiff": 127,
+      "meanAbsDiff": 0.1204
+    },
+    "back-noon": {
+      "changedPct": 0.793,
+      "maxChannelDiff": 123,
+      "meanAbsDiff": 0.2465
+    },
+    "front-overcast": {
+      "changedPct": 0.384,
+      "maxChannelDiff": 116,
+      "meanAbsDiff": 0.1344
+    },
+    "threequarter-overcast": {
+      "changedPct": 0.278,
+      "maxChannelDiff": 108,
+      "meanAbsDiff": 0.0818
+    },
+    "side-overcast": {
+      "changedPct": 0.278,
+      "maxChannelDiff": 121,
+      "meanAbsDiff": 0.0993
+    },
+    "back-overcast": {
+      "changedPct": 0.747,
+      "maxChannelDiff": 112,
+      "meanAbsDiff": 0.1977
+    },
+    "front-dusk": {
+      "changedPct": 0.363,
+      "maxChannelDiff": 138,
+      "meanAbsDiff": 0.1681
+    },
+    "threequarter-dusk": {
+      "changedPct": 0.273,
+      "maxChannelDiff": 136,
+      "meanAbsDiff": 0.1113
+    },
+    "side-dusk": {
+      "changedPct": 0.262,
+      "maxChannelDiff": 144,
+      "meanAbsDiff": 0.1179
+    },
+    "back-dusk": {
+      "changedPct": 0.714,
+      "maxChannelDiff": 138,
+      "meanAbsDiff": 0.2355
+    },
+    "front-night": {
+      "changedPct": 0.342,
+      "maxChannelDiff": 140,
+      "meanAbsDiff": 0.1599
+    },
+    "threequarter-night": {
+      "changedPct": 0.217,
+      "maxChannelDiff": 139,
+      "meanAbsDiff": 0.0926
+    },
+    "side-night": {
+      "changedPct": 0.227,
+      "maxChannelDiff": 148,
+      "meanAbsDiff": 0.1186
+    },
+    "back-night": {
+      "changedPct": 0.602,
+      "maxChannelDiff": 139,
+      "meanAbsDiff": 0.2261
+    },
+    "front-black": {
+      "changedPct": 0.115,
+      "maxChannelDiff": 255,
+      "meanAbsDiff": 0.2937
+    },
+    "threequarter-black": {
+      "changedPct": 0.066,
+      "maxChannelDiff": 255,
+      "meanAbsDiff": 0.1685
+    },
+    "side-black": {
+      "changedPct": 0.083,
+      "maxChannelDiff": 255,
+      "meanAbsDiff": 0.2112
+    },
+    "back-black": {
+      "changedPct": 0.159,
+      "maxChannelDiff": 255,
+      "meanAbsDiff": 0.4046
+    },
+    "head-front-noon": {
+      "changedPct": 3.056,
+      "maxChannelDiff": 109,
+      "meanAbsDiff": 1.1684
+    },
+    "head-threequarter-noon": {
+      "changedPct": 2.656,
+      "maxChannelDiff": 130,
+      "meanAbsDiff": 0.9347
+    },
+    "head-front-overcast": {
+      "changedPct": 3.013,
+      "maxChannelDiff": 109,
+      "meanAbsDiff": 1.0331
+    },
+    "head-threequarter-overcast": {
+      "changedPct": 2.551,
+      "maxChannelDiff": 125,
+      "meanAbsDiff": 0.7453
+    },
+    "head-front-dusk": {
+      "changedPct": 2.868,
+      "maxChannelDiff": 138,
+      "meanAbsDiff": 1.2791
+    },
+    "head-threequarter-dusk": {
+      "changedPct": 2.481,
+      "maxChannelDiff": 143,
+      "meanAbsDiff": 0.959
+    },
+    "head-front-night": {
+      "changedPct": 2.777,
+      "maxChannelDiff": 142,
+      "meanAbsDiff": 1.1818
+    },
+    "head-threequarter-night": {
+      "changedPct": 2.385,
+      "maxChannelDiff": 142,
+      "meanAbsDiff": 0.8438
+    }
+  }
+}

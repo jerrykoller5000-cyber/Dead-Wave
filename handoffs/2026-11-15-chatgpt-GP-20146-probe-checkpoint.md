@@ -1,0 +1,8 @@
+# chatgpt — GP-20146 width-probe optimization (IN PROGRESS) — 2026-11-15
+Changed: Review-only fixed-width probe calculates positions for region fitting and leaves final normal/color work and attribute updates to the final pass. Production remains untouched; task remains active.
+Files: review/GP-20146/body-appearance.mjs SHA2562c3dfba1d8f5c1dc2cb7b7b58ee47c6f2cd55e9fa077429ce0e121f1054145d4; baseline body-before-width-probe.mjs SHA10608d95; width-probe-parity.mjs and receipts.
+Tests: targeted six-module Node suite33pass/0fail (checkpoint-20261115-1920/pure-tests.txt). Exclusive crew native width-probe-parity EXIT0:24paired retargets each bomber/colossus;7,716,384P/N/C scalar comparisons bitexact, roots/effective records exact, no extra appearance RNG. Paired CPU median bomber15.5->11.3ms; colossus17.1->12.4ms. Snapshot/served hashes/results in review/GP-20146/width-probe-parity/.
+Screenshots: None new; numeric parity only, final visual proof still outstanding.
+Not verified: Candidate always followed baseline in these pairs, so timing order/cache effects remain; no FPS/load/whole-spawn budget claim. True loft-cap clipping, current owner model integration, guardian semantic metadata, skull silhouette/joins/pool/flash and live birth/reset/hit/gib glue remain unfinished. Existing skull forehead lip/flat cheek defect remains.
+Requests: No new open incoming requests. Existing C3 cap metadata and C2 spawn/reset/core-merge asks pending. Carrier import still waits Director sheet OK.
+Contract changes: None landed. Native comparison used exclusive crew slot per rule16; browser closed and lease released. No git.

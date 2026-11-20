@@ -101,3 +101,35 @@ export function wristTransition(T,elbow,wrist,material,{ox,oz,gz,scale=1.18}){
     P.needsUpdate=true;active.computeVertexNormals();};
   mesh.onBeforeRender=bend;mesh.onBeforeShadow=bend;mesh.userData.bend=bend;elbow.add(mesh);return mesh;
 }
+
+// GP-20151 review-only, derive the band from the existing trouser bind surface.
+// No bones, cloth weights, hand targets or animation are changed.
+export function fitThighBands(T,{root,legLG,legRG}){
+ const cloth=[];root.traverse(o=>{if(o.name==='live-trouser-leg'&&o.userData?.cloth)cloth.push(o.userData.cloth);});
+ const records=[];
+ for(const leg of [legLG,legRG]){
+  const c=cloth.find(c=>c.bones.includes(leg));if(!c)throw Error('Missing actual trouser bind surface');
+  const inv=c.bindInv[c.bones.indexOf(leg)],pts=[];
+  for(let i=0;i<c.rest.length;i+=3)pts.push(new T.Vector3().fromArray(c.rest,i).applyMatrix4(inv));
+  const triangles=[];for(let i=0;i<c.map.length;i+=3){const t=Array.from(c.map.slice(i,i+3),j=>pts[j]);if(t.every(v=>v.y<-.13&&v.y>-.20)||Math.min(...t.map(v=>v.y))<-.15&&Math.max(...t.map(v=>v.y))>-.18)triangles.push(t);}
+  const bands=[];leg.traverse(o=>{if(o.name==='holster-thigh-band')bands.push(o);});
+  for(const m of bands){
+   const p=[],ix=[],n=64,ray=new T.Ray(),hit=new T.Vector3(),dir=new T.Vector3(),origin=new T.Vector3(),radii=[];
+   // Four rings, ordered inner-low / outer-low / outer-high / inner-high.
+   for(const[dy,gap]of[[-.008,.0015],[-.008,.0028],[.008,.0028],[.008,.0015]]){
+    for(let j=0;j<=n;j++){
+     const a=j/n*2*Math.PI;dir.set(Math.sin(a),0,Math.cos(a));origin.set(m.position.x,m.position.y+dy,m.position.z);ray.set(origin,dir);
+     let radius=-Infinity;for(const t of triangles){if(ray.intersectTriangle(...t,false,hit)){const r=hit.clone().sub(origin).dot(dir);if(r>0&&r<.2)radius=Math.max(radius,r);}}
+     if(!Number.isFinite(radius))throw Error('No trouser ray '+j+' at '+origin.y);
+     radii.push(radius);p.push(dir.x*(radius+gap),dy,dir.z*(radius+gap));
+    }
+   }
+   const quad=(a,b,c,d)=>ix.push(a,b,c,a,c,d);
+   for(let j=0;j<n;j++){const k=n+1;quad(j,j+1,k+j+1,k+j);quad(k+j,k+j+1,2*k+j+1,2*k+j);quad(2*k+j,2*k+j+1,3*k+j+1,3*k+j);quad(3*k+j,3*k+j+1,j+1,j);}
+   const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(p,3));geo.setIndex(ix);geo.computeVertexNormals();geo.computeBoundingSphere();
+   const old=m.geometry; m.geometry=geo;m.userData.gp20151FittedBand=true;
+   records.push({side:Math.sign(leg.position.x),triangles:ix.length/3,bodyRadii:[Math.min(...radii),Math.max(...radii)],oldVertices:old.attributes.position.count,newVertices:p.length/3});
+  }
+ }
+ return records;
+}

@@ -86,7 +86,9 @@
   try {
     await startMatch(T, 'Shoulder');
     T.clearZombies && T.clearZombies(); T.setHp(100000); T.grantAllWeapons();
-    const aimer = setInterval(pin, 5); pin();
+    // CB-335: the aim pinned in the frame where the pointer's would be (a 5 ms timer between frames lost to a real cursor
+    // over the window on the PC: rows ~61 deg off); the timer only where the game has no pin hook.
+    const aimer = T.pinAimDbg ? (T.pinAimDbg(() => { pin(); if (T.setAimYawDbg) T.setAimYawDbg(0); }), null) : setInterval(pin, 5); pin();
     // A key held down that does nothing: he counts as busy, so the idle (bored, the cigarette) never takes his hands.
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'F13', key: 'F13', bubbles: true }));
     ok(typeof T.getShoulderDbg === 'function', 'TT.getShoulderDbg is exported');
@@ -135,7 +137,7 @@
     const p = T.getShoulderDbg();
     ok(T.getCurrentWeapon() === 'pistol' && p.w < 0.02 && p.cheek === 0, 'pistol: not shouldered (roll ' + p.w.toFixed(3) + ')');
     ok(Math.abs(ud.armRG.position.z - 0.02) < 0.004 && Math.abs(ud.armLG.position.z - 0.02) < 0.004, 'pistol: the shoulders are back (' + f3(ud.armRG.position) + ')');
-    clearInterval(aimer);
+    if (T.pinAimDbg) T.pinAimDbg(null); else clearInterval(aimer);
     window.dispatchEvent(new KeyboardEvent('keyup', { code: 'F13', key: 'F13', bubbles: true }));
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
   return out.join('\n');

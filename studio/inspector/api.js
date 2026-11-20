@@ -343,7 +343,13 @@ export function createApi(ix) {
           // The host owns fresh renderer-frame bookkeeping; the supported agent API uses no private GPU fields.
           await presentationWait(ix.host.render(), signal, 'Held-frame draw');
           if (typeof ix.host.renderer?.waitForGPU === 'function') await presentationWait(ix.host.renderer.waitForGPU(), signal, 'Held-frame GPU presentation');
-          checkSignal(signal); ix.presentFrame?.();
+          // CB-345: the held copy is made of a frame drawn in THIS task. WebGL (no preserveDrawingBuffer) and WebGPU both let the
+          // drawing buffer go when the task that drew it ends, so a copy made after the awaits above read a cleared buffer: a black
+          // canvas over the real one, and every camera --inspect shot came out uniform black (ChatGPT 2's 12 native CB-343 shots
+          // on the 5080, Claude 2's cloud sheet in software). The fenced draw above stays: it warms the pipelines.
+          checkSignal(signal);
+          const drawn = ix.host.render(); ix.presentFrame?.();
+          if (drawn && typeof drawn.then === 'function') await presentationWait(drawn, signal, 'Held-frame copy draw');
           await new Promise((r) => setTimeout(r, 0)); checkSignal(signal); return true;
         } catch (e) {
           ix.clearPresentation?.();

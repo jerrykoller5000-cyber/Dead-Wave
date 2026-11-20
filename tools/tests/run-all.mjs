@@ -168,6 +168,18 @@ function queryForTest(code) {
   return parts.length ? '&' + parts.join('&') : '';
 }
 
+// CB-350 (ChatGPT 2's tce4 on the PC, 17 Nov; Director 15:20Z): a long check carries its own time cap: the first
+// `// budget: <seconds>` in its first lines, at most BUDGET_MAX_S (over it the check is an ERROR, not a long wait). The cap is
+// the largest of that, DW_CHECK_MS and the 180 s default (a runner limit, never a bar). The run lists the checks that used one.
+const BUDGET_MAX_S = 900, budgetsUsed = [];
+function budgetForTest(code) {
+  for (const line of String(code).split(/\r?\n/).slice(0, 20)) {
+    const m = line.match(/^\s*\/\/\s*budget:\s*(\d+(?:\.\d+)?)\s*s?\s*$/);
+    if (m) { const sec = Number(m[1]); if (sec > BUDGET_MAX_S) throw new Error('its // budget: ' + sec + ' s is over the ' + BUDGET_MAX_S + ' s ceiling (CB-350): not run'); return sec * 1000; }
+  }
+  return 0;
+}
+
 async function runOne(name) {
   const code = fs.readFileSync(path.join(HERE, name + '.js'), 'utf8');
   const page = await browser.newPage({ width: 1280, height: 720 });
@@ -177,6 +189,7 @@ async function runOne(name) {
     // raf=timer: a background page gets no animation frames, and every check needs the
     // game's loop to actually run.
     // CU-235: a first-lines `// query:` on the test, plus DW_TEST_QUERY for the whole run.
+    budgetForTest(code);   // CB-350: over the ceiling it stops here, before the page is loaded
     const extra = queryForTest(code);
     // D-152: t38 needs real submission counters. Give its real page the same fresh profile as the generated fixture.
     const testPath = name === 't38' ? '/index.html' : '/tools/tests/' + PAGE_NAME;
@@ -197,7 +210,8 @@ async function runOne(name) {
       await page.evaluate(fs.readFileSync(path.join(HERE, 'lib.js'), 'utf8'));
       // t37 walks seven burials and each one waits out the insertion, so a 75s cap
       // cut it off mid-test. Three minutes still stops a probe that would otherwise sit.
-      const CHECK_MS = Number(process.env.DW_CHECK_MS) || 180000;   // CB-243: DW_CHECK_MS raises it on a slow box (the cloud)
+      const BUDGET = budgetForTest(code), CHECK_MS = Math.max(Number(process.env.DW_CHECK_MS) || 180000, BUDGET);   // CB-243: DW_CHECK_MS raises it on a slow box (the cloud); CB-350: a test's own '// budget:'
+      if (BUDGET) budgetsUsed.push(name + ' ' + BUDGET / 1000 + ' s');
       let timer;
       const running = page.evaluate(code, CHECK_MS + 20000).finally(() => clearTimeout(timer));
       running.catch(() => {});
@@ -279,6 +293,7 @@ const broken = results.filter((r) => r.note);
 const failing = results.filter((r) => r.fail > 0);
 const infos = results.filter((r) => r.info && !r.note);
 
+if (budgetsUsed.length) console.log('\nchecks with their own time cap (// budget:, CB-350): ' + budgetsUsed.join(', '));
 console.log(`\n${results.length} checks: ${totalPass} pass, ${totalFail} fail`
   + (flaky.length ? `, ${flaky.length} flaky (failed under load, passed alone)` : '')
   + (broken.length ? `, ${broken.length} could not run` : '')

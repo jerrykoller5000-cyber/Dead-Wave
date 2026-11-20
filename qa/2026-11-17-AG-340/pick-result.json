@@ -1,0 +1,7892 @@
+{
+  "c": {
+    "pistol_pick": {
+      "tag": "pistol",
+      "hitsLayer0": [
+        {
+          "dist": 2.7987,
+          "point": [
+            -26.1264,
+            -199.2811,
+            -631.7571
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "chapel-glow",
+          "matName": "color#ffe7a0",
+          "matHex": "ffe7a0",
+          "chain": [
+            "chapel-glow",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.8552,
+          "point": [
+            -26.1289,
+            -199.2877,
+            -631.8132
+          ],
+          "layersMask": 1,
+          "instanceId": 0,
+          "meshName": "(unnamed)",
+          "matName": "color#24272b",
+          "matHex": "24272b",
+          "chain": [
+            "Mesh[inst:1]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9241,
+          "point": [
+            -26.1319,
+            -199.2958,
+            -631.8816
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-trouser-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-trouser-leg[skin]",
+            "live-trouser-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9241,
+          "point": [
+            -26.1319,
+            -199.2958,
+            -631.8816
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-shorts-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-shorts-leg[skin]",
+            "live-shorts-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.0481,
+          "point": [
+            -26,
+            -199.4,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#ffffff",
+          "matHex": "ffffff",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        }
+      ],
+      "hitsAllLayers": [
+        {
+          "dist": 2.7987,
+          "point": [
+            -26.1264,
+            -199.2811,
+            -631.7571
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "chapel-glow",
+          "matName": "color#ffe7a0",
+          "matHex": "ffe7a0",
+          "chain": [
+            "chapel-glow",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.8552,
+          "point": [
+            -26.1289,
+            -199.2877,
+            -631.8132
+          ],
+          "layersMask": 1,
+          "instanceId": 0,
+          "meshName": "(unnamed)",
+          "matName": "color#24272b",
+          "matHex": "24272b",
+          "chain": [
+            "Mesh[inst:1]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9241,
+          "point": [
+            -26.1319,
+            -199.2958,
+            -631.8816
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-trouser-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-trouser-leg[skin]",
+            "live-trouser-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9241,
+          "point": [
+            -26.1319,
+            -199.2958,
+            -631.8816
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-shorts-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-shorts-leg[skin]",
+            "live-shorts-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.0481,
+          "point": [
+            -26,
+            -199.4,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#ffffff",
+          "matHex": "ffffff",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        }
+      ],
+      "instList": [
+        {
+          "name": "",
+          "mat": "color#4b5434",
+          "vis": true,
+          "ownVis": true,
+          "count": 4,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:4]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.77,
+                -199.308,
+                -632.037
+              ],
+              "px": [
+                1000,
+                845
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.23,
+                -199.308,
+                -632.037
+              ],
+              "px": [
+                608,
+                845
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.801,
+                -199.308,
+                -632.099
+              ],
+              "px": [
+                970,
+                839
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.199,
+                -199.308,
+                -632.099
+              ],
+              "px": [
+                638,
+                839
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-chamber-layer-0",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-chamber-layer-0[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.954,
+                -198.689,
+                -631.718
+              ],
+              "px": [
+                849,
+                284
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.967,
+                -198.682,
+                -631.72
+              ],
+              "px": [
+                837,
+                278
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.976,
+                -198.681,
+                -631.709
+              ],
+              "px": [
+                828,
+                276
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.973,
+                -198.687,
+                -631.696
+              ],
+              "px": [
+                831,
+                280
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.96,
+                -198.694,
+                -631.695
+              ],
+              "px": [
+                844,
+                287
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.951,
+                -198.695,
+                -631.706
+              ],
+              "px": [
+                852,
+                289
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-visible-tips",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-visible-tips[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.954,
+                -198.689,
+                -631.718
+              ],
+              "px": [
+                849,
+                284
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.967,
+                -198.682,
+                -631.72
+              ],
+              "px": [
+                837,
+                278
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.976,
+                -198.681,
+                -631.709
+              ],
+              "px": [
+                828,
+                276
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.973,
+                -198.687,
+                -631.696
+              ],
+              "px": [
+                831,
+                280
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.96,
+                -198.694,
+                -631.695
+              ],
+              "px": [
+                844,
+                287
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.951,
+                -198.695,
+                -631.706
+              ],
+              "px": [
+                852,
+                289
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-live-reload-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-live-reload-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.985,
+                -198.689,
+                -631.684
+              ],
+              "px": [
+                819,
+                281
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-spent-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-spent-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.985,
+                -198.689,
+                -631.684
+              ],
+              "px": [
+                819,
+                281
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-chamber-layer-0",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-chamber-layer-0[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.015,
+                -198.63,
+                -631.615
+              ],
+              "px": [
+                790,
+                213
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.027,
+                -198.637,
+                -631.613
+              ],
+              "px": [
+                777,
+                220
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.027,
+                -198.651,
+                -631.608
+              ],
+              "px": [
+                777,
+                234
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.015,
+                -198.657,
+                -631.607
+              ],
+              "px": [
+                790,
+                241
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.002,
+                -198.651,
+                -631.609
+              ],
+              "px": [
+                802,
+                234
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.002,
+                -198.637,
+                -631.614
+              ],
+              "px": [
+                802,
+                220
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-visible-tips",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-visible-tips[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.015,
+                -198.63,
+                -631.615
+              ],
+              "px": [
+                790,
+                213
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.027,
+                -198.637,
+                -631.613
+              ],
+              "px": [
+                777,
+                220
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.027,
+                -198.651,
+                -631.608
+              ],
+              "px": [
+                777,
+                234
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.015,
+                -198.657,
+                -631.607
+              ],
+              "px": [
+                790,
+                241
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.002,
+                -198.651,
+                -631.609
+              ],
+              "px": [
+                802,
+                234
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.002,
+                -198.637,
+                -631.614
+              ],
+              "px": [
+                802,
+                220
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-live-reload-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-live-reload-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.015,
+                -198.675,
+                -631.606
+              ],
+              "px": [
+                790,
+                259
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-spent-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-spent-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.015,
+                -198.675,
+                -631.606
+              ],
+              "px": [
+                790,
+                259
+              ]
+            }
+          ]
+        },
+        {
+          "name": "launcher-loaded-inserts",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "launcher-loaded-inserts[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.974,
+                -198.751,
+                -631.577
+              ],
+              "px": [
+                831,
+                334
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.974,
+                -198.794,
+                -631.563
+              ],
+              "px": [
+                832,
+                378
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.013,
+                -198.816,
+                -631.555
+              ],
+              "px": [
+                792,
+                400
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.052,
+                -198.794,
+                -631.56
+              ],
+              "px": [
+                751,
+                378
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.053,
+                -198.751,
+                -631.574
+              ],
+              "px": [
+                751,
+                334
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.014,
+                -198.729,
+                -631.582
+              ],
+              "px": [
+                791,
+                312
+              ]
+            }
+          ]
+        },
+        {
+          "name": "launcher-spent-inserts",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "launcher-spent-inserts[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.013,
+                -198.772,
+                -631.566
+              ],
+              "px": [
+                791,
+                355
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.013,
+                -198.772,
+                -631.566
+              ],
+              "px": [
+                791,
+                355
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.013,
+                -198.772,
+                -631.566
+              ],
+              "px": [
+                791,
+                355
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.013,
+                -198.772,
+                -631.566
+              ],
+              "px": [
+                791,
+                355
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.013,
+                -198.772,
+                -631.566
+              ],
+              "px": [
+                791,
+                355
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.013,
+                -198.772,
+                -631.566
+              ],
+              "px": [
+                791,
+                355
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "chainsaw link finish",
+          "vis": false,
+          "ownVis": true,
+          "count": 42,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:42]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.014,
+                -198.719,
+                -631.598
+              ],
+              "px": [
+                790,
+                303
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.013,
+                -198.711,
+                -631.573
+              ],
+              "px": [
+                791,
+                292
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.012,
+                -198.703,
+                -631.548
+              ],
+              "px": [
+                792,
+                281
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.011,
+                -198.695,
+                -631.523
+              ],
+              "px": [
+                793,
+                270
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.01,
+                -198.687,
+                -631.498
+              ],
+              "px": [
+                794,
+                259
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.009,
+                -198.679,
+                -631.473
+              ],
+              "px": [
+                795,
+                248
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#24272b",
+          "vis": true,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.114,
+                -199.275,
+                -631.828
+              ],
+              "px": [
+                700,
+                836
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#8e2a22",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.145,
+                -199.218,
+                -631.824
+              ],
+              "px": [
+                672,
+                786
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#a8843c",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.843,
+                -199.205,
+                -631.844
+              ],
+              "px": [
+                947,
+                772
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#4a5236",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.225,
+                -199.122,
+                -632.225
+              ],
+              "px": [
+                622,
+                679
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#6d705c",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.034,
+                -198.796,
+                -632.318
+              ],
+              "px": [
+                777,
+                417
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#4b5434",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.776,
+                -199.307,
+                -632.06
+              ],
+              "px": [
+                993,
+                842
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.961,
+                -199.023,
+                -631.301
+              ],
+              "px": [
+                850,
+                621
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.754,
+                -199.174,
+                -631.742
+              ],
+              "px": [
+                1037,
+                751
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "chainsaw link finish",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.76,
+                -199.156,
+                -631.746
+              ],
+              "px": [
+                1031,
+                734
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.357,
+                -198.938,
+                -632.332
+              ],
+              "px": [
+                523,
+                530
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#24272b",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.98,
+                -199.307,
+                -631.825
+              ],
+              "px": [
+                823,
+                866
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#8e2a22",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.996,
+                -199.254,
+                -631.792
+              ],
+              "px": [
+                808,
+                821
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#a8843c",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.782,
+                -199.221,
+                -632.005
+              ],
+              "px": [
+                992,
+                774
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#4a5236",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.314,
+                -199.096,
+                -632.017
+              ],
+              "px": [
+                534,
+                665
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#6d705c",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.208,
+                -198.749,
+                -632.158
+              ],
+              "px": [
+                630,
+                370
+              ]
+            }
+          ]
+        }
+      ],
+      "nearbyMeshes": [
+        {
+          "name": "holster-thigh-band",
+          "mat": "color#2b2e24",
+          "layersMask": 0,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              604,
+              768
+            ],
+            "py": [
+              884,
+              937
+            ]
+          },
+          "chain": [
+            "holster-thigh-band",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "(unnamed)",
+          "mat": "color#2b2e24",
+          "layersMask": 0,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              601,
+              981
+            ],
+            "py": [
+              652,
+              852
+            ]
+          },
+          "chain": [
+            "Mesh",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "live-trouser-leg",
+          "mat": "wear:trousers",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              599,
+              777
+            ],
+            "py": [
+              710,
+              1353
+            ]
+          },
+          "chain": [
+            "live-trouser-leg[skin]",
+            "live-trouser-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "live-seat",
+          "mat": "wear:trousers",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              646,
+              963
+            ],
+            "py": [
+              675,
+              855
+            ]
+          },
+          "chain": [
+            "live-seat[skin]",
+            "live-seat-live",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "live-sleeve",
+          "mat": "wear:shirt",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              530,
+              734
+            ],
+            "py": [
+              357,
+              819
+            ]
+          },
+          "chain": [
+            "live-sleeve[skin]",
+            "live-sleeve-live",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:trousers",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              592,
+              1017
+            ],
+            "py": [
+              675,
+              1013
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:holster",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              591,
+              1018
+            ],
+            "py": [
+              810,
+              917
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "rig-skin-plain",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              583,
+              1015
+            ],
+            "py": [
+              125,
+              1431
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:belt",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              585,
+              1024
+            ],
+            "py": [
+              645,
+              910
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        }
+      ],
+      "rigSkinInfo": {
+        "skins": 9,
+        "sources": 116,
+        "baked": 56,
+        "handedBack": [
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand"
+        ],
+        "bakes": 13
+      }
+    },
+    "ishot_before_direct": {
+      "urlOk": true,
+      "centerRgb": [
+        0,
+        0,
+        0
+      ],
+      "cornerRgb": [
+        0,
+        0,
+        0
+      ]
+    },
+    "unarmed_loop_state": {
+      "cam": [
+        -26.005,
+        -198.954,
+        -628.98
+      ],
+      "magsCount": 1,
+      "magsVis": true
+    },
+    "unarmed_direct_pick": {
+      "tag": "unarmed_direct",
+      "hitsLayer0": [
+        {
+          "dist": 2.7987,
+          "point": [
+            -26.1264,
+            -199.2811,
+            -631.7571
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "chapel-glow",
+          "matName": "color#ffe7a0",
+          "matHex": "ffe7a0",
+          "chain": [
+            "chapel-glow",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.8869,
+          "point": [
+            -26.1303,
+            -199.2914,
+            -631.8446
+          ],
+          "layersMask": 1,
+          "instanceId": 0,
+          "meshName": "(unnamed)",
+          "matName": "color#24272b",
+          "matHex": "24272b",
+          "chain": [
+            "Mesh[inst:1]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9241,
+          "point": [
+            -26.1319,
+            -199.2958,
+            -631.8816
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-trouser-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-trouser-leg[skin]",
+            "live-trouser-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9241,
+          "point": [
+            -26.1319,
+            -199.2958,
+            -631.8816
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-shorts-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-shorts-leg[skin]",
+            "live-shorts-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.0481,
+          "point": [
+            -26,
+            -199.4,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#ffffff",
+          "matHex": "ffffff",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        }
+      ],
+      "hitsAllLayers": [
+        {
+          "dist": 2.7987,
+          "point": [
+            -26.1264,
+            -199.2811,
+            -631.7571
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "chapel-glow",
+          "matName": "color#ffe7a0",
+          "matHex": "ffe7a0",
+          "chain": [
+            "chapel-glow",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.8869,
+          "point": [
+            -26.1303,
+            -199.2914,
+            -631.8446
+          ],
+          "layersMask": 1,
+          "instanceId": 0,
+          "meshName": "(unnamed)",
+          "matName": "color#24272b",
+          "matHex": "24272b",
+          "chain": [
+            "Mesh[inst:1]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9241,
+          "point": [
+            -26.1319,
+            -199.2958,
+            -631.8816
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-trouser-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-trouser-leg[skin]",
+            "live-trouser-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9241,
+          "point": [
+            -26.1319,
+            -199.2958,
+            -631.8816
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-shorts-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-shorts-leg[skin]",
+            "live-shorts-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.0481,
+          "point": [
+            -26,
+            -199.4,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#ffffff",
+          "matHex": "ffffff",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        }
+      ],
+      "instList": [
+        {
+          "name": "",
+          "mat": "color#4b5434",
+          "vis": true,
+          "ownVis": true,
+          "count": 4,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:4]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.77,
+                -199.308,
+                -632.037
+              ],
+              "px": [
+                1000,
+                845
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.23,
+                -199.308,
+                -632.037
+              ],
+              "px": [
+                608,
+                845
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.801,
+                -199.308,
+                -632.099
+              ],
+              "px": [
+                970,
+                839
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.199,
+                -199.308,
+                -632.099
+              ],
+              "px": [
+                638,
+                839
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-chamber-layer-0",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-chamber-layer-0[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.241,
+                -199.31,
+                -631.7
+              ],
+              "px": [
+                574,
+                884
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.254,
+                -199.309,
+                -631.707
+              ],
+              "px": [
+                563,
+                882
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.256,
+                -199.315,
+                -631.72
+              ],
+              "px": [
+                562,
+                886
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.245,
+                -199.322,
+                -631.726
+              ],
+              "px": [
+                573,
+                892
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.232,
+                -199.323,
+                -631.719
+              ],
+              "px": [
+                585,
+                894
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.23,
+                -199.317,
+                -631.707
+              ],
+              "px": [
+                585,
+                889
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-visible-tips",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-visible-tips[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.241,
+                -199.31,
+                -631.7
+              ],
+              "px": [
+                574,
+                884
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.254,
+                -199.309,
+                -631.707
+              ],
+              "px": [
+                563,
+                882
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.256,
+                -199.315,
+                -631.72
+              ],
+              "px": [
+                562,
+                886
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.245,
+                -199.322,
+                -631.726
+              ],
+              "px": [
+                573,
+                892
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.232,
+                -199.323,
+                -631.719
+              ],
+              "px": [
+                585,
+                894
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.23,
+                -199.317,
+                -631.707
+              ],
+              "px": [
+                585,
+                889
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-live-reload-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-live-reload-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.245,
+                -199.326,
+                -631.743
+              ],
+              "px": [
+                574,
+                893
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-spent-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-spent-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.245,
+                -199.326,
+                -631.743
+              ],
+              "px": [
+                574,
+                893
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-chamber-layer-0",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-chamber-layer-0[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.76,
+                -199.262,
+                -631.713
+              ],
+              "px": [
+                1033,
+                837
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.771,
+                -199.268,
+                -631.718
+              ],
+              "px": [
+                1022,
+                842
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.77,
+                -199.276,
+                -631.73
+              ],
+              "px": [
+                1022,
+                848
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.757,
+                -199.279,
+                -631.736
+              ],
+              "px": [
+                1033,
+                850
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.746,
+                -199.273,
+                -631.73
+              ],
+              "px": [
+                1045,
+                845
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.747,
+                -199.264,
+                -631.719
+              ],
+              "px": [
+                1045,
+                838
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-visible-tips",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-visible-tips[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.76,
+                -199.262,
+                -631.713
+              ],
+              "px": [
+                1033,
+                837
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.771,
+                -199.268,
+                -631.718
+              ],
+              "px": [
+                1022,
+                842
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.77,
+                -199.276,
+                -631.73
+              ],
+              "px": [
+                1022,
+                848
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.757,
+                -199.279,
+                -631.736
+              ],
+              "px": [
+                1033,
+                850
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.746,
+                -199.273,
+                -631.73
+              ],
+              "px": [
+                1045,
+                845
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.747,
+                -199.264,
+                -631.719
+              ],
+              "px": [
+                1045,
+                838
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-live-reload-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-live-reload-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.757,
+                -199.285,
+                -631.752
+              ],
+              "px": [
+                1033,
+                855
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-spent-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-spent-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.757,
+                -199.285,
+                -631.752
+              ],
+              "px": [
+                1033,
+                855
+              ]
+            }
+          ]
+        },
+        {
+          "name": "launcher-loaded-inserts",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "launcher-loaded-inserts[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.711,
+                -199.333,
+                -631.814
+              ],
+              "px": [
+                1069,
+                891
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.707,
+                -199.36,
+                -631.85
+              ],
+              "px": [
+                1069,
+                911
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.744,
+                -199.379,
+                -631.868
+              ],
+              "px": [
+                1034,
+                926
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.785,
+                -199.371,
+                -631.849
+              ],
+              "px": [
+                999,
+                921
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.788,
+                -199.344,
+                -631.813
+              ],
+              "px": [
+                998,
+                902
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.751,
+                -199.325,
+                -631.795
+              ],
+              "px": [
+                1034,
+                886
+              ]
+            }
+          ]
+        },
+        {
+          "name": "launcher-spent-inserts",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "launcher-spent-inserts[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.747,
+                -199.354,
+                -631.83
+              ],
+              "px": [
+                1034,
+                908
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.747,
+                -199.354,
+                -631.83
+              ],
+              "px": [
+                1034,
+                908
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.747,
+                -199.354,
+                -631.83
+              ],
+              "px": [
+                1034,
+                908
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.747,
+                -199.354,
+                -631.83
+              ],
+              "px": [
+                1034,
+                908
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.747,
+                -199.354,
+                -631.83
+              ],
+              "px": [
+                1034,
+                908
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.747,
+                -199.354,
+                -631.83
+              ],
+              "px": [
+                1034,
+                908
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "chainsaw link finish",
+          "vis": false,
+          "ownVis": true,
+          "count": 42,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:42]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.754,
+                -199.307,
+                -631.791
+              ],
+              "px": [
+                1032,
+                870
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.751,
+                -199.327,
+                -631.775
+              ],
+              "px": [
+                1036,
+                891
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.747,
+                -199.348,
+                -631.759
+              ],
+              "px": [
+                1040,
+                912
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.744,
+                -199.369,
+                -631.743
+              ],
+              "px": [
+                1044,
+                934
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.741,
+                -199.39,
+                -631.728
+              ],
+              "px": [
+                1048,
+                955
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.738,
+                -199.411,
+                -631.712
+              ],
+              "px": [
+                1053,
+                977
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#24272b",
+          "vis": true,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.13,
+                -199.293,
+                -631.857
+              ],
+              "px": [
+                687,
+                850
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#8e2a22",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.161,
+                -199.238,
+                -631.849
+              ],
+              "px": [
+                658,
+                801
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#a8843c",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.859,
+                -199.223,
+                -631.838
+              ],
+              "px": [
+                933,
+                788
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#4a5236",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.204,
+                -199.097,
+                -632.242
+              ],
+              "px": [
+                640,
+                657
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#6d705c",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.008,
+                -198.763,
+                -632.279
+              ],
+              "px": [
+                797,
+                388
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#4b5434",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.776,
+                -199.307,
+                -632.06
+              ],
+              "px": [
+                993,
+                842
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.961,
+                -199.023,
+                -631.301
+              ],
+              "px": [
+                850,
+                621
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.754,
+                -199.174,
+                -631.742
+              ],
+              "px": [
+                1037,
+                751
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "chainsaw link finish",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.76,
+                -199.156,
+                -631.746
+              ],
+              "px": [
+                1031,
+                734
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.357,
+                -198.938,
+                -632.332
+              ],
+              "px": [
+                523,
+                530
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#24272b",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.98,
+                -199.307,
+                -631.825
+              ],
+              "px": [
+                823,
+                866
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#8e2a22",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.996,
+                -199.254,
+                -631.792
+              ],
+              "px": [
+                808,
+                821
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#a8843c",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.782,
+                -199.221,
+                -632.005
+              ],
+              "px": [
+                992,
+                774
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#4a5236",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.314,
+                -199.096,
+                -632.017
+              ],
+              "px": [
+                534,
+                665
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#6d705c",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.208,
+                -198.749,
+                -632.158
+              ],
+              "px": [
+                630,
+                370
+              ]
+            }
+          ]
+        }
+      ],
+      "nearbyMeshes": [
+        {
+          "name": "holster-thigh-band",
+          "mat": "color#2b2e24",
+          "layersMask": 0,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              604,
+              768
+            ],
+            "py": [
+              884,
+              937
+            ]
+          },
+          "chain": [
+            "holster-thigh-band",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "(unnamed)",
+          "mat": "color#2b2e24",
+          "layersMask": 0,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              601,
+              981
+            ],
+            "py": [
+              652,
+              852
+            ]
+          },
+          "chain": [
+            "Mesh",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "live-trouser-leg",
+          "mat": "wear:trousers",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              599,
+              777
+            ],
+            "py": [
+              710,
+              1353
+            ]
+          },
+          "chain": [
+            "live-trouser-leg[skin]",
+            "live-trouser-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "live-seat",
+          "mat": "wear:trousers",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              646,
+              963
+            ],
+            "py": [
+              675,
+              855
+            ]
+          },
+          "chain": [
+            "live-seat[skin]",
+            "live-seat-live",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "(unnamed)",
+          "mat": "wear:shirt",
+          "layersMask": 0,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              526,
+              653
+            ],
+            "py": [
+              602,
+              863
+            ]
+          },
+          "chain": [
+            "Mesh",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "gb152-hand",
+          "mat": "wear:gloves",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              537,
+              680
+            ],
+            "py": [
+              809,
+              975
+            ]
+          },
+          "chain": [
+            "gb152-hand",
+            "Group",
+            "wrist",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "live-sleeve",
+          "mat": "wear:shirt",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              530,
+              734
+            ],
+            "py": [
+              357,
+              819
+            ]
+          },
+          "chain": [
+            "live-sleeve[skin]",
+            "live-sleeve-live",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:trousers",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              592,
+              1017
+            ],
+            "py": [
+              675,
+              1013
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:holster",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              591,
+              1018
+            ],
+            "py": [
+              810,
+              917
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "rig-skin-plain",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              583,
+              1016
+            ],
+            "py": [
+              126,
+              1434
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:belt",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              585,
+              1024
+            ],
+            "py": [
+              645,
+              910
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:belt",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              554,
+              1056
+            ],
+            "py": [
+              824,
+              838
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:shirt",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              522,
+              1078
+            ],
+            "py": [
+              433,
+              854
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "marine-shadow",
+          "mat": "color#000000",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              512,
+              1088
+            ],
+            "py": [
+              100,
+              1492
+            ]
+          },
+          "chain": [
+            "marine-shadow[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        }
+      ],
+      "rigSkinInfo": {
+        "skins": 9,
+        "sources": 116,
+        "baked": 56,
+        "handedBack": [
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand"
+        ],
+        "bakes": 13
+      }
+    },
+    "directRgb686_850": [
+      30,
+      33,
+      16
+    ],
+    "hostRenderInfo": {
+      "rendered": "host.render",
+      "mags": {
+        "vis": true,
+        "cnt": 1
+      }
+    },
+    "hostRgb686_850": [
+      30,
+      33,
+      16
+    ]
+  },
+  "live": {
+    "pistol_pick": {
+      "tag": "pistol",
+      "hitsLayer0": [
+        {
+          "dist": 2.7987,
+          "point": [
+            -26.1264,
+            -199.2811,
+            -631.7571
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "chapel-glow",
+          "matName": "color#ffe7a0",
+          "matHex": "ffe7a0",
+          "chain": [
+            "chapel-glow",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.8552,
+          "point": [
+            -26.1289,
+            -199.2877,
+            -631.8132
+          ],
+          "layersMask": 1,
+          "instanceId": 0,
+          "meshName": "(unnamed)",
+          "matName": "color#24272b",
+          "matHex": "24272b",
+          "chain": [
+            "Mesh[inst:1]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9216,
+          "point": [
+            -26.1318,
+            -199.2955,
+            -631.879
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-trouser-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-trouser-leg[skin]",
+            "live-trouser-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9216,
+          "point": [
+            -26.1318,
+            -199.2955,
+            -631.879
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-shorts-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-shorts-leg[skin]",
+            "live-shorts-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.0481,
+          "point": [
+            -26,
+            -199.4,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#ffffff",
+          "matHex": "ffffff",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        }
+      ],
+      "hitsAllLayers": [
+        {
+          "dist": 2.7987,
+          "point": [
+            -26.1264,
+            -199.2811,
+            -631.7571
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "chapel-glow",
+          "matName": "color#ffe7a0",
+          "matHex": "ffe7a0",
+          "chain": [
+            "chapel-glow",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.8552,
+          "point": [
+            -26.1289,
+            -199.2877,
+            -631.8132
+          ],
+          "layersMask": 1,
+          "instanceId": 0,
+          "meshName": "(unnamed)",
+          "matName": "color#24272b",
+          "matHex": "24272b",
+          "chain": [
+            "Mesh[inst:1]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9216,
+          "point": [
+            -26.1318,
+            -199.2955,
+            -631.879
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-trouser-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-trouser-leg[skin]",
+            "live-trouser-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9216,
+          "point": [
+            -26.1318,
+            -199.2955,
+            -631.879
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-shorts-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-shorts-leg[skin]",
+            "live-shorts-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.0481,
+          "point": [
+            -26,
+            -199.4,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#ffffff",
+          "matHex": "ffffff",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        }
+      ],
+      "instList": [
+        {
+          "name": "",
+          "mat": "color#4b5434",
+          "vis": true,
+          "ownVis": true,
+          "count": 4,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:4]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.77,
+                -199.308,
+                -632.037
+              ],
+              "px": [
+                1000,
+                845
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.23,
+                -199.308,
+                -632.037
+              ],
+              "px": [
+                608,
+                845
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.801,
+                -199.308,
+                -632.099
+              ],
+              "px": [
+                970,
+                839
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.199,
+                -199.308,
+                -632.099
+              ],
+              "px": [
+                638,
+                839
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-chamber-layer-0",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-chamber-layer-0[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.954,
+                -198.689,
+                -631.718
+              ],
+              "px": [
+                849,
+                284
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.967,
+                -198.682,
+                -631.72
+              ],
+              "px": [
+                837,
+                278
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.976,
+                -198.681,
+                -631.709
+              ],
+              "px": [
+                828,
+                275
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.973,
+                -198.687,
+                -631.696
+              ],
+              "px": [
+                831,
+                280
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.96,
+                -198.694,
+                -631.694
+              ],
+              "px": [
+                844,
+                287
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.951,
+                -198.695,
+                -631.705
+              ],
+              "px": [
+                852,
+                289
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-visible-tips",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-visible-tips[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.954,
+                -198.689,
+                -631.718
+              ],
+              "px": [
+                849,
+                284
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.967,
+                -198.682,
+                -631.72
+              ],
+              "px": [
+                837,
+                278
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.976,
+                -198.681,
+                -631.709
+              ],
+              "px": [
+                828,
+                275
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.973,
+                -198.687,
+                -631.696
+              ],
+              "px": [
+                831,
+                280
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.96,
+                -198.694,
+                -631.694
+              ],
+              "px": [
+                844,
+                287
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.951,
+                -198.695,
+                -631.705
+              ],
+              "px": [
+                852,
+                289
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-live-reload-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-live-reload-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.985,
+                -198.689,
+                -631.684
+              ],
+              "px": [
+                819,
+                281
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-spent-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-spent-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.985,
+                -198.689,
+                -631.684
+              ],
+              "px": [
+                819,
+                281
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-chamber-layer-0",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-chamber-layer-0[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.015,
+                -198.63,
+                -631.615
+              ],
+              "px": [
+                790,
+                213
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.027,
+                -198.637,
+                -631.613
+              ],
+              "px": [
+                777,
+                220
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.027,
+                -198.651,
+                -631.608
+              ],
+              "px": [
+                777,
+                234
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.015,
+                -198.657,
+                -631.607
+              ],
+              "px": [
+                790,
+                241
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.002,
+                -198.651,
+                -631.609
+              ],
+              "px": [
+                802,
+                234
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.002,
+                -198.637,
+                -631.614
+              ],
+              "px": [
+                802,
+                220
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-visible-tips",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-visible-tips[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.015,
+                -198.63,
+                -631.615
+              ],
+              "px": [
+                790,
+                213
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.027,
+                -198.637,
+                -631.613
+              ],
+              "px": [
+                777,
+                220
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.027,
+                -198.651,
+                -631.608
+              ],
+              "px": [
+                777,
+                234
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.015,
+                -198.657,
+                -631.607
+              ],
+              "px": [
+                790,
+                241
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.002,
+                -198.651,
+                -631.609
+              ],
+              "px": [
+                802,
+                234
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.002,
+                -198.637,
+                -631.614
+              ],
+              "px": [
+                802,
+                220
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-live-reload-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-live-reload-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.015,
+                -198.675,
+                -631.606
+              ],
+              "px": [
+                790,
+                259
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-spent-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-spent-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.015,
+                -198.675,
+                -631.606
+              ],
+              "px": [
+                790,
+                259
+              ]
+            }
+          ]
+        },
+        {
+          "name": "launcher-loaded-inserts",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "launcher-loaded-inserts[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.974,
+                -198.751,
+                -631.577
+              ],
+              "px": [
+                831,
+                334
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.974,
+                -198.794,
+                -631.563
+              ],
+              "px": [
+                832,
+                378
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.013,
+                -198.816,
+                -631.555
+              ],
+              "px": [
+                792,
+                400
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.052,
+                -198.794,
+                -631.56
+              ],
+              "px": [
+                751,
+                378
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.053,
+                -198.751,
+                -631.574
+              ],
+              "px": [
+                751,
+                334
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.014,
+                -198.729,
+                -631.582
+              ],
+              "px": [
+                791,
+                312
+              ]
+            }
+          ]
+        },
+        {
+          "name": "launcher-spent-inserts",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "launcher-spent-inserts[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.013,
+                -198.772,
+                -631.566
+              ],
+              "px": [
+                791,
+                355
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.013,
+                -198.772,
+                -631.566
+              ],
+              "px": [
+                791,
+                355
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.013,
+                -198.772,
+                -631.566
+              ],
+              "px": [
+                791,
+                355
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.013,
+                -198.772,
+                -631.566
+              ],
+              "px": [
+                791,
+                355
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.013,
+                -198.772,
+                -631.566
+              ],
+              "px": [
+                791,
+                355
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.013,
+                -198.772,
+                -631.566
+              ],
+              "px": [
+                791,
+                355
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "chainsaw link finish",
+          "vis": false,
+          "ownVis": true,
+          "count": 42,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:42]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.014,
+                -198.719,
+                -631.598
+              ],
+              "px": [
+                790,
+                303
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.013,
+                -198.711,
+                -631.573
+              ],
+              "px": [
+                791,
+                292
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.012,
+                -198.703,
+                -631.548
+              ],
+              "px": [
+                792,
+                281
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.011,
+                -198.695,
+                -631.523
+              ],
+              "px": [
+                793,
+                270
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.01,
+                -198.687,
+                -631.498
+              ],
+              "px": [
+                794,
+                259
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.009,
+                -198.679,
+                -631.473
+              ],
+              "px": [
+                795,
+                248
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#24272b",
+          "vis": true,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.114,
+                -199.275,
+                -631.828
+              ],
+              "px": [
+                700,
+                836
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#8e2a22",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.145,
+                -199.218,
+                -631.824
+              ],
+              "px": [
+                672,
+                786
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#a8843c",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.843,
+                -199.205,
+                -631.844
+              ],
+              "px": [
+                947,
+                772
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#4a5236",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.225,
+                -199.122,
+                -632.225
+              ],
+              "px": [
+                622,
+                679
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#6d705c",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.034,
+                -198.796,
+                -632.318
+              ],
+              "px": [
+                777,
+                417
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#4b5434",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.774,
+                -199.307,
+                -632.056
+              ],
+              "px": [
+                995,
+                842
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.966,
+                -199.02,
+                -631.302
+              ],
+              "px": [
+                844,
+                617
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.757,
+                -199.182,
+                -631.746
+              ],
+              "px": [
+                1034,
+                759
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "chainsaw link finish",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.762,
+                -199.164,
+                -631.75
+              ],
+              "px": [
+                1028,
+                741
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.351,
+                -198.938,
+                -632.339
+              ],
+              "px": [
+                529,
+                530
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#24272b",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.983,
+                -199.307,
+                -631.825
+              ],
+              "px": [
+                820,
+                866
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#8e2a22",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26,
+                -199.254,
+                -631.792
+              ],
+              "px": [
+                805,
+                821
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#a8843c",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.782,
+                -199.221,
+                -632.001
+              ],
+              "px": [
+                992,
+                774
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#4a5236",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.313,
+                -199.095,
+                -632.023
+              ],
+              "px": [
+                535,
+                665
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#6d705c",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.205,
+                -198.749,
+                -632.162
+              ],
+              "px": [
+                633,
+                371
+              ]
+            }
+          ]
+        }
+      ],
+      "nearbyMeshes": [
+        {
+          "name": "holster-thigh-band",
+          "mat": "color#2b2e24",
+          "layersMask": 0,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              597,
+              780
+            ],
+            "py": [
+              882,
+              939
+            ]
+          },
+          "chain": [
+            "holster-thigh-band",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "(unnamed)",
+          "mat": "color#2b2e24",
+          "layersMask": 0,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              601,
+              981
+            ],
+            "py": [
+              652,
+              852
+            ]
+          },
+          "chain": [
+            "Mesh",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "live-trouser-leg",
+          "mat": "wear:trousers",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              597,
+              778
+            ],
+            "py": [
+              710,
+              1356
+            ]
+          },
+          "chain": [
+            "live-trouser-leg[skin]",
+            "live-trouser-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "live-seat",
+          "mat": "wear:trousers",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              646,
+              963
+            ],
+            "py": [
+              675,
+              855
+            ]
+          },
+          "chain": [
+            "live-seat[skin]",
+            "live-seat-live",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "live-sleeve",
+          "mat": "wear:shirt",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              542,
+              734
+            ],
+            "py": [
+              357,
+              819
+            ]
+          },
+          "chain": [
+            "live-sleeve[skin]",
+            "live-sleeve-live",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:trousers",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              586,
+              1023
+            ],
+            "py": [
+              675,
+              1013
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:holster",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              588,
+              1021
+            ],
+            "py": [
+              810,
+              917
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "rig-skin-plain",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              583,
+              1022
+            ],
+            "py": [
+              93,
+              1425
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:belt",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              579,
+              1030
+            ],
+            "py": [
+              645,
+              910
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        }
+      ],
+      "rigSkinInfo": {
+        "skins": 9,
+        "sources": 118,
+        "baked": 58,
+        "handedBack": [
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand"
+        ],
+        "bakes": 13
+      }
+    },
+    "ishot_before_direct": {
+      "urlOk": true,
+      "centerRgb": [
+        0,
+        0,
+        0
+      ],
+      "cornerRgb": [
+        0,
+        0,
+        0
+      ]
+    },
+    "unarmed_loop_state": {
+      "cam": [
+        -26.005,
+        -198.954,
+        -628.98
+      ],
+      "magsCount": 1,
+      "magsVis": true
+    },
+    "unarmed_direct_pick": {
+      "tag": "unarmed_direct",
+      "hitsLayer0": [
+        {
+          "dist": 2.7987,
+          "point": [
+            -26.1264,
+            -199.2811,
+            -631.7571
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "chapel-glow",
+          "matName": "color#ffe7a0",
+          "matHex": "ffe7a0",
+          "chain": [
+            "chapel-glow",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.8869,
+          "point": [
+            -26.1303,
+            -199.2914,
+            -631.8446
+          ],
+          "layersMask": 1,
+          "instanceId": 0,
+          "meshName": "(unnamed)",
+          "matName": "color#24272b",
+          "matHex": "24272b",
+          "chain": [
+            "Mesh[inst:1]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9216,
+          "point": [
+            -26.1318,
+            -199.2955,
+            -631.879
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-trouser-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-trouser-leg[skin]",
+            "live-trouser-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9216,
+          "point": [
+            -26.1318,
+            -199.2955,
+            -631.879
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-shorts-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-shorts-leg[skin]",
+            "live-shorts-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.0481,
+          "point": [
+            -26,
+            -199.4,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#ffffff",
+          "matHex": "ffffff",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        }
+      ],
+      "hitsAllLayers": [
+        {
+          "dist": 2.7987,
+          "point": [
+            -26.1264,
+            -199.2811,
+            -631.7571
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "chapel-glow",
+          "matName": "color#ffe7a0",
+          "matHex": "ffe7a0",
+          "chain": [
+            "chapel-glow",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.8869,
+          "point": [
+            -26.1303,
+            -199.2914,
+            -631.8446
+          ],
+          "layersMask": 1,
+          "instanceId": 0,
+          "meshName": "(unnamed)",
+          "matName": "color#24272b",
+          "matHex": "24272b",
+          "chain": [
+            "Mesh[inst:1]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9216,
+          "point": [
+            -26.1318,
+            -199.2955,
+            -631.879
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-trouser-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-trouser-leg[skin]",
+            "live-trouser-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 2.9216,
+          "point": [
+            -26.1318,
+            -199.2955,
+            -631.879
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "live-shorts-leg",
+          "matName": "wear:trousers",
+          "matHex": "d2cebd",
+          "chain": [
+            "live-shorts-leg[skin]",
+            "live-shorts-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "rigSkin": false,
+          "udKeys": [
+            "liveShape",
+            "aoOwners",
+            "cloth"
+          ],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.0481,
+          "point": [
+            -26,
+            -199.4,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#ffffff",
+          "matHex": "ffffff",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        },
+        {
+          "dist": 3.1183,
+          "point": [
+            -26,
+            -200,
+            -632
+          ],
+          "layersMask": 1,
+          "instanceId": null,
+          "meshName": "(unnamed)",
+          "matName": "color#f2c418",
+          "matHex": "f2c418",
+          "chain": [
+            "LineSegments",
+            "inspector-overlays",
+            "inspector-stage",
+            "Scene"
+          ],
+          "rigSkin": false,
+          "udKeys": [],
+          "srcCheck": null
+        }
+      ],
+      "instList": [
+        {
+          "name": "",
+          "mat": "color#4b5434",
+          "vis": true,
+          "ownVis": true,
+          "count": 4,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:4]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.77,
+                -199.308,
+                -632.037
+              ],
+              "px": [
+                1000,
+                845
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.23,
+                -199.308,
+                -632.037
+              ],
+              "px": [
+                608,
+                845
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.801,
+                -199.308,
+                -632.099
+              ],
+              "px": [
+                970,
+                839
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.199,
+                -199.308,
+                -632.099
+              ],
+              "px": [
+                638,
+                839
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-chamber-layer-0",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-chamber-layer-0[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.241,
+                -199.31,
+                -631.7
+              ],
+              "px": [
+                574,
+                884
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.254,
+                -199.309,
+                -631.707
+              ],
+              "px": [
+                563,
+                882
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.256,
+                -199.315,
+                -631.72
+              ],
+              "px": [
+                562,
+                886
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.245,
+                -199.322,
+                -631.726
+              ],
+              "px": [
+                573,
+                892
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.232,
+                -199.323,
+                -631.719
+              ],
+              "px": [
+                585,
+                893
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.23,
+                -199.317,
+                -631.706
+              ],
+              "px": [
+                585,
+                889
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-visible-tips",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-visible-tips[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.241,
+                -199.31,
+                -631.7
+              ],
+              "px": [
+                574,
+                884
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -26.254,
+                -199.309,
+                -631.707
+              ],
+              "px": [
+                563,
+                882
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -26.256,
+                -199.315,
+                -631.72
+              ],
+              "px": [
+                562,
+                886
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -26.245,
+                -199.322,
+                -631.726
+              ],
+              "px": [
+                573,
+                892
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -26.232,
+                -199.323,
+                -631.719
+              ],
+              "px": [
+                585,
+                893
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -26.23,
+                -199.317,
+                -631.706
+              ],
+              "px": [
+                585,
+                889
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-live-reload-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-live-reload-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.245,
+                -199.326,
+                -631.743
+              ],
+              "px": [
+                574,
+                893
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-spent-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-spent-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.245,
+                -199.326,
+                -631.743
+              ],
+              "px": [
+                574,
+                893
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-chamber-layer-0",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-chamber-layer-0[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.76,
+                -199.262,
+                -631.713
+              ],
+              "px": [
+                1033,
+                836
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.771,
+                -199.268,
+                -631.718
+              ],
+              "px": [
+                1022,
+                842
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.77,
+                -199.276,
+                -631.73
+              ],
+              "px": [
+                1022,
+                848
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.757,
+                -199.279,
+                -631.736
+              ],
+              "px": [
+                1033,
+                850
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.746,
+                -199.273,
+                -631.73
+              ],
+              "px": [
+                1045,
+                845
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.747,
+                -199.264,
+                -631.718
+              ],
+              "px": [
+                1045,
+                838
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-visible-tips",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "revolver-visible-tips[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.76,
+                -199.262,
+                -631.713
+              ],
+              "px": [
+                1033,
+                836
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.771,
+                -199.268,
+                -631.718
+              ],
+              "px": [
+                1022,
+                842
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.77,
+                -199.276,
+                -631.73
+              ],
+              "px": [
+                1022,
+                848
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.757,
+                -199.279,
+                -631.736
+              ],
+              "px": [
+                1033,
+                850
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.746,
+                -199.273,
+                -631.73
+              ],
+              "px": [
+                1045,
+                845
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.747,
+                -199.264,
+                -631.718
+              ],
+              "px": [
+                1045,
+                838
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-live-reload-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-live-reload-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.756,
+                -199.285,
+                -631.752
+              ],
+              "px": [
+                1033,
+                855
+              ]
+            }
+          ]
+        },
+        {
+          "name": "revolver-spent-instances",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "revolver-spent-instances[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.756,
+                -199.285,
+                -631.752
+              ],
+              "px": [
+                1033,
+                855
+              ]
+            }
+          ]
+        },
+        {
+          "name": "launcher-loaded-inserts",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "launcher-loaded-inserts[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.711,
+                -199.333,
+                -631.814
+              ],
+              "px": [
+                1069,
+                891
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.707,
+                -199.36,
+                -631.85
+              ],
+              "px": [
+                1069,
+                911
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.744,
+                -199.379,
+                -631.868
+              ],
+              "px": [
+                1034,
+                926
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.785,
+                -199.371,
+                -631.849
+              ],
+              "px": [
+                999,
+                921
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.788,
+                -199.344,
+                -631.813
+              ],
+              "px": [
+                998,
+                902
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.751,
+                -199.325,
+                -631.795
+              ],
+              "px": [
+                1034,
+                886
+              ]
+            }
+          ]
+        },
+        {
+          "name": "launcher-spent-inserts",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": false,
+          "count": 6,
+          "layersMask": 1,
+          "chain": [
+            "launcher-spent-inserts[inst:6]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.747,
+                -199.354,
+                -631.83
+              ],
+              "px": [
+                1034,
+                908
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.747,
+                -199.354,
+                -631.83
+              ],
+              "px": [
+                1034,
+                908
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.747,
+                -199.354,
+                -631.83
+              ],
+              "px": [
+                1034,
+                908
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.747,
+                -199.354,
+                -631.83
+              ],
+              "px": [
+                1034,
+                908
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.747,
+                -199.354,
+                -631.83
+              ],
+              "px": [
+                1034,
+                908
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.747,
+                -199.354,
+                -631.83
+              ],
+              "px": [
+                1034,
+                908
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "chainsaw link finish",
+          "vis": false,
+          "ownVis": true,
+          "count": 42,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:42]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.754,
+                -199.307,
+                -631.791
+              ],
+              "px": [
+                1032,
+                870
+              ]
+            },
+            {
+              "i": 1,
+              "w": [
+                -25.751,
+                -199.327,
+                -631.775
+              ],
+              "px": [
+                1036,
+                891
+              ]
+            },
+            {
+              "i": 2,
+              "w": [
+                -25.747,
+                -199.348,
+                -631.759
+              ],
+              "px": [
+                1040,
+                912
+              ]
+            },
+            {
+              "i": 3,
+              "w": [
+                -25.744,
+                -199.369,
+                -631.743
+              ],
+              "px": [
+                1044,
+                934
+              ]
+            },
+            {
+              "i": 4,
+              "w": [
+                -25.741,
+                -199.39,
+                -631.727
+              ],
+              "px": [
+                1049,
+                955
+              ]
+            },
+            {
+              "i": 5,
+              "w": [
+                -25.738,
+                -199.411,
+                -631.712
+              ],
+              "px": [
+                1053,
+                977
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#24272b",
+          "vis": true,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.13,
+                -199.293,
+                -631.857
+              ],
+              "px": [
+                687,
+                850
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#8e2a22",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.161,
+                -199.238,
+                -631.849
+              ],
+              "px": [
+                658,
+                801
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#a8843c",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.859,
+                -199.223,
+                -631.838
+              ],
+              "px": [
+                933,
+                788
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#4a5236",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.204,
+                -199.097,
+                -632.242
+              ],
+              "px": [
+                640,
+                657
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#6d705c",
+          "vis": false,
+          "ownVis": false,
+          "count": 0,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:0]",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.008,
+                -198.763,
+                -632.279
+              ],
+              "px": [
+                797,
+                388
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#4b5434",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.774,
+                -199.307,
+                -632.056
+              ],
+              "px": [
+                995,
+                842
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.966,
+                -199.02,
+                -631.302
+              ],
+              "px": [
+                844,
+                617
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.757,
+                -199.182,
+                -631.746
+              ],
+              "px": [
+                1034,
+                759
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "chainsaw link finish",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.762,
+                -199.164,
+                -631.75
+              ],
+              "px": [
+                1028,
+                741
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#ffffff",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.351,
+                -198.938,
+                -632.339
+              ],
+              "px": [
+                529,
+                530
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#24272b",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.983,
+                -199.307,
+                -631.825
+              ],
+              "px": [
+                820,
+                866
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#8e2a22",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26,
+                -199.254,
+                -631.792
+              ],
+              "px": [
+                805,
+                821
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#a8843c",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -25.782,
+                -199.221,
+                -632.001
+              ],
+              "px": [
+                992,
+                774
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#4a5236",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.313,
+                -199.095,
+                -632.023
+              ],
+              "px": [
+                535,
+                665
+              ]
+            }
+          ]
+        },
+        {
+          "name": "",
+          "mat": "color#6d705c",
+          "vis": false,
+          "ownVis": true,
+          "count": 1,
+          "layersMask": 1,
+          "chain": [
+            "Mesh[inst:1]",
+            "training-marine-fade-pipeline-keepers",
+            "Group",
+            "Group"
+          ],
+          "instances": [
+            {
+              "i": 0,
+              "w": [
+                -26.205,
+                -198.749,
+                -632.162
+              ],
+              "px": [
+                633,
+                371
+              ]
+            }
+          ]
+        }
+      ],
+      "nearbyMeshes": [
+        {
+          "name": "holster-thigh-band",
+          "mat": "color#2b2e24",
+          "layersMask": 0,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              597,
+              780
+            ],
+            "py": [
+              882,
+              939
+            ]
+          },
+          "chain": [
+            "holster-thigh-band",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "(unnamed)",
+          "mat": "color#2b2e24",
+          "layersMask": 0,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              601,
+              981
+            ],
+            "py": [
+              652,
+              852
+            ]
+          },
+          "chain": [
+            "Mesh",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "live-trouser-leg",
+          "mat": "wear:trousers",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              597,
+              778
+            ],
+            "py": [
+              710,
+              1356
+            ]
+          },
+          "chain": [
+            "live-trouser-leg[skin]",
+            "live-trouser-leg-live",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "live-seat",
+          "mat": "wear:trousers",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              646,
+              963
+            ],
+            "py": [
+              675,
+              855
+            ]
+          },
+          "chain": [
+            "live-seat[skin]",
+            "live-seat-live",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "gb152-hand",
+          "mat": "wear:gloves",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              537,
+              680
+            ],
+            "py": [
+              809,
+              975
+            ]
+          },
+          "chain": [
+            "gb152-hand",
+            "Group",
+            "wrist",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "live-sleeve",
+          "mat": "wear:shirt",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              542,
+              734
+            ],
+            "py": [
+              357,
+              819
+            ]
+          },
+          "chain": [
+            "live-sleeve[skin]",
+            "live-sleeve-live",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:trousers",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              586,
+              1023
+            ],
+            "py": [
+              675,
+              1013
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:holster",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              588,
+              1021
+            ],
+            "py": [
+              810,
+              917
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "rig-skin-plain",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              582,
+              1022
+            ],
+            "py": [
+              95,
+              1427
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:belt",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              579,
+              1030
+            ],
+            "py": [
+              645,
+              910
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:belt",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              554,
+              1056
+            ],
+            "py": [
+              824,
+              838
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "rig-skin",
+          "mat": "wear:shirt",
+          "layersMask": 1,
+          "rigSkin": true,
+          "pxBox": {
+            "px": [
+              527,
+              1076
+            ],
+            "py": [
+              433,
+              854
+            ]
+          },
+          "chain": [
+            "rig-skin[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        },
+        {
+          "name": "marine-shadow",
+          "mat": "color#000000",
+          "layersMask": 1,
+          "rigSkin": false,
+          "pxBox": {
+            "px": [
+              517,
+              1086
+            ],
+            "py": [
+              66,
+              1492
+            ]
+          },
+          "chain": [
+            "marine-shadow[skin]",
+            "Group",
+            "Group",
+            "Group"
+          ]
+        }
+      ],
+      "rigSkinInfo": {
+        "skins": 9,
+        "sources": 118,
+        "baked": 58,
+        "handedBack": [
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand",
+          "gb152-hand"
+        ],
+        "bakes": 13
+      }
+    },
+    "directRgb686_850": [
+      32,
+      34,
+      18
+    ],
+    "hostRenderInfo": {
+      "rendered": "host.render",
+      "mags": {
+        "vis": true,
+        "cnt": 1
+      }
+    },
+    "hostRgb686_850": [
+      32,
+      34,
+      18
+    ]
+  }
+}

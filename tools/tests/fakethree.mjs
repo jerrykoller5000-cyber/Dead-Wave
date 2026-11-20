@@ -4,6 +4,9 @@
 export * as TSL from './faketsl.mjs';
 // CB-243: the real ShapeUtils (earcut), for the models that triangulate a face (studio/weapon-longarms.js pocket(), 11 Nov).
 export { ShapeUtils } from '../../vendor/three/three.core.js';
+// CB-335: the stand-in's marker. Its Matrix4.transpose is real since CB-291, so a check that needs the real renderer
+// itself (a ShadowNode and its passes: tcl288a) reads this instead of the old transpose tell. Real three has no STAND_IN.
+export const STAND_IN = true;
 const STUB_CACHE = Symbol('stubcache');
 function makeStub(name = 'stub') {
   const fn = function () {};
@@ -45,6 +48,7 @@ export class Vector2 {
   constructor(x = 0, y = 0) { this.x = x; this.y = y; this.isVector2 = true; }
   set(x, y) { this.x = x; this.y = y; return this; }
   copy(v) { this.x = v.x; this.y = v.y; return this; }
+  toArray(a = [], o = 0) { a[o] = this.x; a[o + 1] = this.y; return a; }   // CB-348: as three.js (studio/weapon-attachments.js fd83b21b)
   clone() { return new Vector2(this.x, this.y); }
   length() { return Math.hypot(this.x, this.y); }
   multiplyScalar(s) { this.x *= s; this.y *= s; return this; }
@@ -153,6 +157,7 @@ export class Quaternion {
   copy(q) { return this.set(q.x, q.y, q.z, q.w); }
   clone() { return new Quaternion(this.x, this.y, this.z, this.w); }
   identity() { return this.set(0, 0, 0, 1); }
+  dot(q) { return this.x * q.x + this.y * q.y + this.z * q.z + this.w * q.w; } // as three r175 Quaternion.dot (Claude 6, Director loan 17 Nov: t164's whip check read NaN without it)
   setFromAxisAngle(a, ang) { const s = Math.sin(ang / 2); return this.set(a.x * s, a.y * s, a.z * s, Math.cos(ang / 2)); }
   setFromEuler(e) {
     const c1 = Math.cos(e.x / 2), c2 = Math.cos(e.y / 2), c3 = Math.cos(e.z / 2), s1 = Math.sin(e.x / 2), s2 = Math.sin(e.y / 2), s3 = Math.sin(e.z / 2);
@@ -181,7 +186,7 @@ export class Quaternion {
     if (m22 > m33) { const s = 2.0 * Math.sqrt(1.0 + m22 - m11 - m33); return this.set((m12 + m21) / s, 0.25 * s, (m23 + m32) / s, (m13 - m31) / s); }
     const s = 2.0 * Math.sqrt(1.0 + m33 - m11 - m22); return this.set((m13 + m31) / s, (m23 + m32) / s, 0.25 * s, (m21 - m12) / s);
   }
-  angleTo() { return 0; }
+  angleTo(q) { return 2 * Math.acos(Math.abs(Math.max(-1, Math.min(1, this.dot(q))))); }   // as three r175 Quaternion.angleTo (CB-355, for ChatGPT's GP154: the fake 0 hid its shoulder-turn cap)
   rotateTowards(q, s) { return this.slerp(q, Math.min(1, s)); }
 }
 export class Matrix4 {
@@ -278,6 +283,19 @@ export class Color {
   equals(c) { return c.r === this.r && c.g === this.g && c.b === this.b; }
 }
 let _id = 0;
+// CB-353 (GP-20152): three.js r175's Layers, as it is: a 32-bit mask, layer 0 on by default; test() is mask & mask (the old
+// stand-in had no mask and test() was always true, so code that counts only what a camera draws read nothing on the test page).
+export class Layers {
+  constructor() { this.mask = 1 | 0; }
+  set(layer) { this.mask = (1 << layer | 0) >>> 0; }
+  enable(layer) { this.mask |= 1 << layer | 0; }
+  enableAll() { this.mask = 0xffffffff | 0; }
+  toggle(layer) { this.mask ^= 1 << layer | 0; }
+  disable(layer) { this.mask &= ~(1 << layer | 0); }
+  disableAll() { this.mask = 0; }
+  test(layers) { return (this.mask & layers.mask) !== 0; }
+  isEnabled(layer) { return (this.mask & (1 << layer | 0)) !== 0; }
+}
 export class Object3D {
   constructor() {
     this.id = ++_id; this.uuid = 'u' + this.id; this.name = ''; this.type = 'Object3D';
@@ -287,7 +305,7 @@ export class Object3D {
     this.matrix = new Matrix4(); this.matrixWorld = new Matrix4();
     this.visible = true; this.castShadow = false; this.receiveShadow = false; this.frustumCulled = true;
     this.renderOrder = 0; this.userData = {}; this.matrixAutoUpdate = true; this.matrixWorldNeedsUpdate = false;
-    this.layers = { set() {}, enable() {}, disable() {}, test() { return true; } };
+    this.layers = new Layers();
     this.up = new Vector3(0, 1, 0);
     this.isObject3D = true;
     return permissive(this);
@@ -346,6 +364,7 @@ export class Object3D {
     const o = new this.constructor(this.geometry, this.material);
     o.position.copy(this.position); o.rotation.copy(this.rotation); o.scale.copy(this.scale);
     o.visible = this.visible; o.userData = Object.assign({}, this.userData); o.name = this.name;
+    if (this.layers && o.layers) o.layers.mask = this.layers.mask;   // CB-353
     if (recursive) for (const c of this.children) o.add(c.clone());
     return o;
   }
@@ -354,6 +373,7 @@ export class Object3D {
     this.name = src.name; this.position.copy(src.position); this.rotation.copy(src.rotation); this.scale.copy(src.scale);
     this.visible = src.visible; this.castShadow = src.castShadow; this.receiveShadow = src.receiveShadow; this.frustumCulled = src.frustumCulled;
     this.renderOrder = src.renderOrder; this.matrixAutoUpdate = src.matrixAutoUpdate; this.userData = Object.assign({}, src.userData);
+    if (src.layers && this.layers) this.layers.mask = src.layers.mask;   // CB-353
     if (recursive) for (const c of src.children) this.add(c.clone());
     return this;
   }
@@ -455,7 +475,7 @@ export class Uint16BufferAttribute extends BufferAttribute { constructor(a, s) {
 export class Uint32BufferAttribute extends BufferAttribute { constructor(a, s) { super(new Uint32Array(a), s); } }
 export class InstancedBufferAttribute extends BufferAttribute { constructor(a, s, n, m) { super(a, s, n); this.meshPerAttribute = m || 1; } }
 export class BufferGeometry {
-  constructor() { this.attributes = {}; this.index = null; this.groups = []; this.userData = {}; this.boundingBox = null; this.boundingSphere = null; this.isBufferGeometry = true; this.drawRange = { start: 0, count: Infinity }; }
+  constructor() { this.attributes = {}; this.morphAttributes = {}; this.morphTargetsRelative = false; this.index = null; this.groups = []; this.userData = {}; this.boundingBox = null; this.boundingSphere = null; this.isBufferGeometry = true; this.drawRange = { start: 0, count: Infinity }; }
   setAttribute(n, a) { this.attributes[n] = a; return this; }
   getAttribute(n) { return this.attributes[n]; }
   deleteAttribute(n) { delete this.attributes[n]; return this; }
@@ -627,6 +647,9 @@ export class Box3 {
   }
   makeEmpty() { this.min.set(Infinity, Infinity, Infinity); this.max.set(-Infinity, -Infinity, -Infinity); return this; }
   setFromPoints(pts) { this.makeEmpty(); for (const p of pts) this.expandByPoint(p); return this; }   // CL-252: as three.js (t277, AG-120)
+  // CB-348 (Claude 5's URGENT, 17 Nov): as three.js r175 (studio/weapon-attachments.js fd83b21b line 244 builds its box this way);
+  // without it the test page never booted ('setFromBufferAttribute is not a function').
+  setFromBufferAttribute(at) { this.makeEmpty(); let x0 = Infinity, y0 = Infinity, z0 = Infinity, x1 = -Infinity, y1 = -Infinity, z1 = -Infinity; for (let i = 0, n = at.count; i < n; i++) { const x = at.getX(i), y = at.getY(i), z = at.getZ(i); if (x < x0) x0 = x; if (x > x1) x1 = x; if (y < y0) y0 = y; if (y > y1) y1 = y; if (z < z0) z0 = z; if (z > z1) z1 = z; } if (x0 <= x1) { this.min.set(x0, y0, z0); this.max.set(x1, y1, z1); } return this; }
   expandByPoint(p) { this.min.min(p); this.max.max(p); return this; }
   getSize(v) { return v.subVectors(this.max, this.min); }
   getCenter(v) { return v.addVectors(this.min, this.max).multiplyScalar(0.5); }
@@ -662,6 +685,20 @@ export class Ray {
   at(t, v) { return v.copy(this.origin).addScaledVector(this.direction, t); }
   intersectPlane() { return null; } intersectBox() { return null; } intersectSphere() { return null; }
   set(o, d) { this.origin.copy(o); this.direction.copy(d); return this; }
+  // CC-357 c (Claude 3, Director loan 20:09Z; owner Claude 2): three.js r175's Ray.intersectTriangle, the same steps, signs and
+  // null returns (GeometricTools' ray/triangle; vendor/three/three.core.js), so a builder that uses it (GP-20151's thigh bands)
+  // builds here as it does in the game. Returns the hit (in target) or null.
+  intersectTriangle(a, b, c, backfaceCulling, target) {
+    const e1 = new Vector3().subVectors(b, a), e2 = new Vector3().subVectors(c, a), n = new Vector3().crossVectors(e1, e2), diff = new Vector3();
+    let DdN = this.direction.dot(n), sign;
+    if (DdN > 0) { if (backfaceCulling) return null; sign = 1; } else if (DdN < 0) { sign = -1; DdN = -DdN; } else return null;
+    diff.subVectors(this.origin, a);
+    const DdQxE2 = sign * this.direction.dot(e2.crossVectors(diff, e2)); if (DdQxE2 < 0) return null;
+    const DdE1xQ = sign * this.direction.dot(e1.cross(diff)); if (DdE1xQ < 0) return null;
+    if (DdQxE2 + DdE1xQ > DdN) return null;
+    const QdN = -sign * diff.dot(n); if (QdN < 0) return null;
+    return this.at(QdN / DdN, target);
+  }
 }
 export class Plane { constructor(n = new Vector3(0, 1, 0), c = 0) { this.normal = n; this.constant = c; } setFromNormalAndCoplanarPoint(n, p) { this.normal.copy(n); this.constant = -p.dot(n); return this; } }
 export class Triangle {
@@ -695,8 +732,7 @@ function meshRaycast(mesh, rc, out) {
 }
 function rcVisit(rc, o, rec, out) {
   if (!o) return;
-  if (o.layers && o.layers.test && rc.layers && !o.layers.test(rc.layers)) return;
-  if (o.raycast) o.raycast(rc, out);
+  if (o.raycast && !(o.layers && o.layers.test && rc.layers && !o.layers.test(rc.layers))) o.raycast(rc, out);   // CB-353: r175 visits the children whatever the parent's layer
   if (rec && o.children) for (const c of o.children) rcVisit(rc, c, rec, out);
 }
 export class Raycaster {
@@ -705,7 +741,7 @@ export class Raycaster {
     if (origin && origin.isVector3) this.ray.origin.copy(origin);
     if (direction && direction.isVector3) this.ray.direction.copy(direction);
     this.near = near; this.far = far; this.params = {}; this.camera = null;
-    this.layers = { mask: 1, set() {}, enable() {}, disable() {}, test() { return true; } };
+    this.layers = new Layers();
   }
   setFromCamera(ndc, camera) {
     this.camera = camera;
@@ -797,6 +833,42 @@ export class CatmullRomCurve3 {
   getTangentAt(u, out = new Vector3()) { return this.getTangent(u, out); }
   getLength() { let len = 0, prev = this.getPoint(0); for (let i = 1; i <= 24; i++) { const p = this.getPoint(i / 24); len += Math.hypot(p.x - prev.x, p.y - prev.y, p.z - prev.z); prev = p; } return len; }
   getSpacedPoints(n = 5) { return this.getPoints(n); }
+}
+// CB-368: the P5 spider's hooks and angular tubes (ChatGPT 2's review models) sweep along a cubic Bezier, straight lines and a
+// path of them. Real formulas for the Bezier and the line; the path maps t by each piece's length, as three's CurvePath does.
+class FakeCurve3 {
+  getPoints(n = 5) { const r = []; for (let i = 0; i <= n; i++) r.push(this.getPoint(i / n)); return r; }
+  getSpacedPoints(n = 5) { return this.getPoints(n); }
+  getPointAt(u, out = new Vector3()) { return this.getPoint(u, out); }
+  getTangent(t, out = new Vector3()) {
+    const e = 1e-4, a = this.getPoint(Math.max(0, t - e)), b = this.getPoint(Math.min(1, t + e));
+    out.set(b.x - a.x, b.y - a.y, b.z - a.z);
+    return out.lengthSq() > 0 ? out.normalize() : out.set(0, 0, 1);
+  }
+  getTangentAt(u, out = new Vector3()) { return this.getTangent(u, out); }
+  getLength() { let len = 0, prev = this.getPoint(0); for (let i = 1; i <= 200; i++) { const p = this.getPoint(i / 200); len += Math.hypot(p.x - prev.x, p.y - prev.y, p.z - prev.z); prev = p; } return len; }
+}
+export class CubicBezierCurve3 extends FakeCurve3 {
+  constructor(v0 = new Vector3(), v1 = new Vector3(), v2 = new Vector3(), v3 = new Vector3()) { super(); this.v0 = v0; this.v1 = v1; this.v2 = v2; this.v3 = v3; this.isCubicBezierCurve3 = true; }
+  getPoint(t, out = new Vector3()) {
+    const k = 1 - t, a = k * k * k, b = 3 * k * k * t, c = 3 * k * t * t, d = t * t * t, p = [this.v0, this.v1, this.v2, this.v3];
+    return out.set(a * p[0].x + b * p[1].x + c * p[2].x + d * p[3].x, a * p[0].y + b * p[1].y + c * p[2].y + d * p[3].y, a * p[0].z + b * p[1].z + c * p[2].z + d * p[3].z);
+  }
+}
+export class LineCurve3 extends FakeCurve3 {
+  constructor(v1 = new Vector3(), v2 = new Vector3()) { super(); this.v1 = v1; this.v2 = v2; this.isLineCurve3 = true; }
+  getPoint(t, out = new Vector3()) { const a = this.v1, b = this.v2; return out.set(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, a.z + (b.z - a.z) * t); }
+}
+export class CurvePath extends FakeCurve3 {
+  constructor() { super(); this.curves = []; this.isCurvePath = true; }
+  add(c) { this.curves.push(c); }
+  getPoint(t, out = new Vector3()) {
+    const L = this.curves.map((c) => c.getLength()), total = L.reduce((a, b) => a + b, 0);
+    if (!this.curves.length) return out.set(0, 0, 0);
+    let d = Math.max(0, Math.min(1, t)) * total;
+    for (let i = 0; i < this.curves.length; i++) { if (d <= L[i] || i === this.curves.length - 1) return this.curves[i].getPoint(L[i] > 0 ? Math.min(1, d / L[i]) : 0, out); d -= L[i]; }
+    return out;
+  }
 }
 // CU-82: the marine's fitted plates (studio/marine-body.js, GP-106) draw a Shape and extrude it. The outline is kept;
 // the extrusion is its bounding box, depth deep, which is all the checks can see of it.

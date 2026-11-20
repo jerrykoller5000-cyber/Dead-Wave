@@ -34,12 +34,49 @@
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'F13', key: 'F13', bubbles: true }));   // busy: no idle
     const m = T.marine || window.worldMarine, ud = m.userData;
     const pin = () => { const p = T.player.position; T.aimTarget.set(p.x, T.sampleHeight(p.x, p.z) + 1.25, p.z + 10); };
-    aimer = setInterval(pin, 5); pin();
+    // CB-335: the aim pinned in the frame (see t187); the timer only where the game has no pin hook.
+    aimer = T.pinAimDbg ? (T.pinAimDbg(() => { pin(); if (T.setAimYawDbg) T.setAimYawDbg(0); }), null) : setInterval(pin, 5); pin();
     // CU-100: where each hand closes now, as the game has it (the middle of the fist on a grip; the hand point through
     // a magazine change); before, the hand point.
     const gp = T.handsDbg && T.handsDbg.gripPoint;
     const palmL = () => gp ? gp('L', V()) : ud.elbowLG.localToWorld(V().set(0.02, -0.27, 0.13));
     const palmR = () => gp ? gp('R', V()) : ud.elbowRG.localToWorld(V().set(-0.01, -0.26, 0.12));
+    // CE-12 part 2 (a) (Director 16:30Z, --review): 'in the palm' is also the magazine touching the support glove: its gap
+    // to the magazine's true shape (a prism along the magazine's own x, the drum's along z, its cross-section the hull of
+    // its vertices; a raked magazine's axis box is far deeper than it) under 2 mm. The seat holds put the foot on the palm
+    // 1.5-3 cm from the grip point; the drum is held by its rim.
+    const hullOf = (mag, ia) => {
+      mag.updateMatrixWorld(true);
+      const inv = new THREE.Matrix4().copy(mag.matrixWorld).invert(), v = V(), pts = [], iu = (ia + 1) % 3, iv = (ia + 2) % 3;
+      let lo = Infinity, hi = -Infinity;
+      mag.traverse((o) => { const pa = o.isMesh && o.visible && o.geometry && o.geometry.attributes && o.geometry.attributes.position; if (!pa) return;
+        const mm = new THREE.Matrix4().multiplyMatrices(inv, o.matrixWorld);
+        for (let i = 0; i < pa.count; i++) { v.fromBufferAttribute(pa, i).applyMatrix4(mm); const a = [v.x, v.y, v.z]; lo = Math.min(lo, a[ia]); hi = Math.max(hi, a[ia]); pts.push([a[iu], a[iv]]); } });
+      pts.sort((p, q) => p[0] - q[0] || p[1] - q[1]);
+      const cr = (o, a, b) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]), L = [], U = [];
+      for (const p of pts) { while (L.length >= 2 && cr(L[L.length - 2], L[L.length - 1], p) <= 0) L.pop(); L.push(p); }
+      for (let i = pts.length - 1; i >= 0; i--) { const p = pts[i]; while (U.length >= 2 && cr(U[U.length - 2], U[U.length - 1], p) <= 0) U.pop(); U.push(p); }
+      const P = L.slice(0, -1).concat(U.slice(0, -1));
+      const E = P.map((p, i) => { const q = P[(i + 1) % P.length], dx = q[0] - p[0], dy = q[1] - p[1], l = Math.hypot(dx, dy) || 1; return { x: p[0], y: p[1], dx: dx / l, dy: dy / l, l }; });
+      return { ia, iu, iv, mid: (lo + hi) / 2, half: (hi - lo) / 2, E };
+    };
+    const hulls = new Map();
+    const gloveGap = (w, mag) => {   // metres: the support glove's nearest vertex to the magazine (0 if it is in it)
+      const wr = ud.elbowLG.userData.wrist, rig = wr && wr.userData.hand; if (!rig || !rig.skins) return Infinity;
+      let sk = null; for (const k of rig.skins) if (shown(k.mesh) && (!sk || k.n > sk.n)) sk = k; if (!sk) return Infinity;
+      if (!hulls.has(mag)) hulls.set(mag, hullOf(mag, w === 'aa12' ? 2 : 0));
+      const H = hulls.get(mag); sk.mesh.updateMatrixWorld(true); mag.updateMatrixWorld(true);
+      const M = new THREE.Matrix4().copy(mag.matrixWorld).invert().multiply(sk.mesh.matrixWorld), pa = sk.mesh.geometry.attributes.position.array, v = V();
+      let best = Infinity;
+      for (let i = 0; i < sk.n; i++) {
+        v.set(pa[i * 3], pa[i * 3 + 1], pa[i * 3 + 2]).applyMatrix4(M); const a = [v.x, v.y, v.z], u = a[H.iu], q = a[H.iv];
+        let dp = -Infinity;   // + outside the hull's polygon (its distance, signed per edge)
+        for (const e of H.E) dp = Math.max(dp, -(e.dx * (q - e.y) - e.dy * (u - e.x)));
+        const da = Math.abs(a[H.ia] - H.mid) - H.half, d = Math.hypot(Math.max(dp, 0), Math.max(da, 0));
+        if (d < best) best = d;
+      }
+      return best * mag.getWorldScale(V()).x;
+    };
     const shown = (o) => { for (let q = o; q; q = q.parent) { if (!q.visible) return false; if (q === T.scene) break; } return true; };
     const holds = T.getShoulderDbg().holds;
     const pouchOf = (sx) => {
@@ -75,6 +112,7 @@
       return !!T.getReloadDbg().weapon;
     };
     const at = async (u) => { R.hold(u); const s0 = T.getSimTime(), w0 = Date.now(); while (T.getSimTime() - s0 < 0.2 && Date.now() - w0 < 3000) await wait(20); m.updateMatrixWorld(true); };   // GB-188: 0.2 s of game time for the arms to settle
+    let slideHold = null;   // CE-12 (b): the support hand at u .8 (gun space), the pistol's slide release
     const BEATS = Array.from({ length: 25 }, (_, k) => +(k * 0.04).toFixed(2));   // 0 .. 0.96
     const end = async () => { R.hold(null); for (let i = 0; i < 100 && T.getReloadDbg().weapon; i++) await wait(100); await wait(300); };
 
@@ -94,7 +132,8 @@
         const dW = foot.distanceTo(well), dH = foot.distanceTo(hl);
         if (shown(mag)) {
           const clipState = clip && R.mag() ? R.mag().state : null;
-          if (dH < TOL) inHand++;
+          const touch = dH >= TOL && gloveGap(w, mag) < 0.002;   // CE-12 (a): or touching the glove
+          if (dH < TOL || touch) inHand++;
           else if (dW >= TOL && clipState !== 'drop') floating.push(u.toFixed(2) + ' (well ' + f3(dW) + ', palm ' + f3(dH) + ')');
         } else if (!clip && !(u >= pouch - 0.02 && u < pouch + 0.06)) hidden.push(u.toFixed(2));
       }
@@ -116,7 +155,14 @@
           const tgt = part ? part.localToWorld(grab ? grab.clone() : V()) : V();
           // the sniper's bolt: the firing hand (its fist's grip point); the pistol's slide: the support hand
           const d = part ? (w === 'sniper' ? palmR() : palmL()).distanceTo(tgt) : 9, sh = (w === 'sniper' ? ud.armRG : ud.armLG).getWorldPosition(V()).distanceTo(tgt);
-          ikOk(d < 0.05, w + ': the hand on the ' + (w === 'pistol' ? 'slide as it racks' : 'bolt as it cycles') + ' (' + f3(d) + ' m; ' + f3(sh) + ' m from that shoulder)');
+          // CE-12 (Director 16:30Z, --review): the pistol in third person goes home off the slide stop (TP_RELOAD.pistol.slideRelease):
+          // the slide home by u .8 and the support hand back on its hold (within 5 cm of where it holds after the reload)
+          const rel = w === 'pistol' && T.tpWrapDbg && T.tpWrapDbg.TP_RELOAD.pistol && T.tpWrapDbg.TP_RELOAD.pistol.slideRelease;
+          if (rel) {
+            const sb = gun.userData.baseSlidePos;
+            ok(!!sb && part.position.distanceTo(sb) < 0.002, w + ': the slide home by u .8 (off the slide stop, third person)');
+            slideHold = gun.worldToLocal(palmL());
+          } else ikOk(d < 0.05, w + ': the hand on the ' + (w === 'pistol' ? 'slide as it racks' : 'bolt as it cycles') + ' (' + f3(d) + ' m; ' + f3(sh) + ' m from that shoulder)');
         }
       }
       if (w === 'sniper') await at(seatU);   // the firing hand holds the grip through the magazine; it leaves it for the bolt after
@@ -124,6 +170,11 @@
       ikOk(gripD < 0.03, w + ': the firing hand stays on the grip (' + f3(gripD) + ' m)');
       await end();
       ok(mag.visible && mag.position.distanceTo(gun.userData.baseMagPos) < 0.002, w + ': seated after the reload');
+      if (slideHold) {   // CE-12 (b): at u .8 the support hand is back on its hold
+        const dh = gun.worldToLocal(palmL()).distanceTo(slideHold) * gun.getWorldScale(V()).x;
+        ikOk(dh < 0.05, w + ': the support hand back on its hold as the slide goes home (' + f3(dh) + ' m)');
+        slideHold = null;
+      }
     }
 
     // --- akimbo ------------------------------------------------------------------------------------------------
@@ -206,7 +257,7 @@
       } else ok(false, 'shotgun: the reload did not start');
     } else ok(false, 'shotgun: could not take it');
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
-  if (aimer) clearInterval(aimer);
+  if (T.pinAimDbg) T.pinAimDbg(null); if (aimer) clearInterval(aimer);
   try { T.reloadClipDbg.hold(null); } catch { /* */ }
   return out.join('\n');
 })();

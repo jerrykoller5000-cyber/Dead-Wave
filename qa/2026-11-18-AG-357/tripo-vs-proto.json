@@ -1,0 +1,241 @@
+{
+  "H": 1.8,
+  "res": {
+    "ours": {
+      "crotch height": 0.782,
+      "thigh gap at the crotch": 0.03,
+      "head width": 0.216,
+      "head height (chin to top)": 0.18799999999999994,
+      "neck length (chin to collar)": 0.12200000000000011,
+      "neck width": 0.132,
+      "shoulder width": 0.546,
+      "shoulder slope (deg)": 48.433133978892734,
+      "upper-arm thickness": null,
+      "forearm thickness": 0.11,
+      "wrist thickness": 0.056,
+      "hand length": null,
+      "chest depth (side)": 0.256,
+      "waist width": 0.306,
+      "hip width": 0.418,
+      "knee height": 0.398,
+      "height": 1.8,
+      "_profile": [
+        {
+          "pct": 10,
+          "h": 0.18,
+          "front_central": null,
+          "front_full": 0.43,
+          "side_central": 0.128,
+          "side_full": 0.128,
+          "leg_runs": [
+            0.102,
+            0.102
+          ]
+        },
+        {
+          "pct": 20,
+          "h": 0.36,
+          "front_central": null,
+          "front_full": 0.438,
+          "side_central": 0.172,
+          "side_full": 0.172,
+          "leg_runs": [
+            0.152,
+            0.13
+          ]
+        },
+        {
+          "pct": 30,
+          "h": 0.54,
+          "front_central": null,
+          "front_full": 0.416,
+          "side_central": 0.176,
+          "side_full": 0.176,
+          "leg_runs": [
+            0.154,
+            0.158
+          ]
+        },
+        {
+          "pct": 40,
+          "h": 0.72,
+          "front_central": null,
+          "front_full": 1.034,
+          "side_central": 0.198,
+          "side_full": 0.27,
+          "leg_runs": [
+            0.028,
+            0.026,
+            0.018,
+            0.19,
+            0.19,
+            0.022,
+            0.026,
+            0.026
+          ]
+        },
+        {
+          "pct": 50,
+          "h": 0.9,
+          "front_central": 0.378,
+          "front_full": 0.946,
+          "side_central": 0.278,
+          "side_full": 0.278,
+          "leg_runs": []
+        },
+        {
+          "pct": 60,
+          "h": 1.08,
+          "front_central": 0.308,
+          "front_full": 0.78,
+          "side_central": 0.276,
+          "side_full": 0.276,
+          "leg_runs": []
+        },
+        {
+          "pct": 70,
+          "h": 1.26,
+          "front_central": 0.364,
+          "front_full": 0.584,
+          "side_central": 0.272,
+          "side_full": 0.272,
+          "leg_runs": []
+        },
+        {
+          "pct": 80,
+          "h": 1.44,
+          "front_central": 0.402,
+          "front_full": 0.402,
+          "side_central": 0.206,
+          "side_full": 0.206,
+          "leg_runs": []
+        },
+        {
+          "pct": 90,
+          "h": 1.6199999999999999,
+          "front_central": 0.18,
+          "front_full": 0.18,
+          "side_central": 0.288,
+          "side_full": 0.288,
+          "leg_runs": []
+        }
+      ]
+    },
+    "tripo": {
+      "crotch height": 0.746,
+      "thigh gap at the crotch": 0.026,
+      "head width": 0.202,
+      "head height (chin to top)": 0.18599999999999994,
+      "neck length (chin to collar)": 0.13800000000000012,
+      "neck width": 0.122,
+      "shoulder width": 0.558,
+      "shoulder slope (deg)": 52.14079542583747,
+      "upper-arm thickness": null,
+      "forearm thickness": 0.096,
+      "wrist thickness": null,
+      "hand length": null,
+      "chest depth (side)": 0.27,
+      "waist width": 0.332,
+      "hip width": 0.41,
+      "knee height": 0.398,
+      "height": 1.8,
+      "_profile": [
+        {
+          "pct": 10,
+          "h": 0.18,
+          "front_central": null,
+          "front_full": 0.426,
+          "side_central": 0.13,
+          "side_full": 0.13,
+          "leg_runs": [
+            0.116,
+            0.116
+          ]
+        },
+        {
+          "pct": 20,
+          "h": 0.36,
+          "front_central": null,
+          "front_full": 0.408,
+          "side_central": 0.154,
+          "side_full": 0.154,
+          "leg_runs": [
+            0.132,
+            0.136
+          ]
+        },
+        {
+          "pct": 30,
+          "h": 0.54,
+          "front_central": null,
+          "front_full": 0.408,
+          "side_central": 0.174,
+          "side_full": 0.174,
+          "leg_runs": [
+            0.162,
+            0.166
+          ]
+        },
+        {
+          "pct": 40,
+          "h": 0.72,
+          "front_central": null,
+          "front_full": 0.922,
+          "side_central": 0.202,
+          "side_full": 0.202,
+          "leg_runs": [
+            0.01,
+            0.194,
+            0.2,
+            0.01
+          ]
+        },
+        {
+          "pct": 50,
+          "h": 0.9,
+          "front_central": 0.34,
+          "front_full": 0.882,
+          "side_central": 0.264,
+          "side_full": 0.264,
+          "leg_runs": []
+        },
+        {
+          "pct": 60,
+          "h": 1.08,
+          "front_central": 0.338,
+          "front_full": 0.758,
+          "side_central": 0.244,
+          "side_full": 0.244,
+          "leg_runs": []
+        },
+        {
+          "pct": 70,
+          "h": 1.26,
+          "front_central": 0.368,
+          "front_full": 0.586,
+          "side_central": 0.284,
+          "side_full": 0.284,
+          "leg_runs": []
+        },
+        {
+          "pct": 80,
+          "h": 1.44,
+          "front_central": 0.354,
+          "front_full": 0.354,
+          "side_central": 0.17,
+          "side_full": 0.17,
+          "leg_runs": []
+        },
+        {
+          "pct": 90,
+          "h": 1.6199999999999999,
+          "front_central": 0.158,
+          "front_full": 0.158,
+          "side_central": 0.13,
+          "side_full": 0.17,
+          "leg_runs": []
+        }
+      ]
+    }
+  }
+}

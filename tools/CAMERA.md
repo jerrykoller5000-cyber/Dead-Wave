@@ -19,7 +19,10 @@ node tools/camera.mjs stop --agent grokbot --task GB-177
   `status` is read-only and does not need a slot.
 - `start` on Windows opens a real browser window **off screen**, so the game draws on the real GPU (it should take
   about a second a picture). `--show` puts the window on screen so you can watch. If pictures come out blank or black
-  from the off-screen window, use `--show`. `--soft` is headless software rendering
+  from the off-screen window, use `--show`. CB-345 (17 Nov): on the RTX 5080 the off-screen window gives black (WebGPU) or
+  stale pictures; start the camera with `--onscreen` (the window sits at the screen's top-left) for native shots. Every shot
+  is checked before it is saved: an all-black picture, or one identical to the last although the camera moved, is refused
+  with an error and nothing is written. `--soft` is headless software rendering
   (works anywhere, a cloud box included, but each picture takes 10 to 40 s). `start` prints the renderer: if it says
   SwiftShader on a desktop, you are in software.
 - `--match` starts it inside a running match (prep of night 1, the marine at the HQ, the HUD up); `--training` inside

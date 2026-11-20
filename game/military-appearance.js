@@ -24,16 +24,21 @@ export function prepareMilitaryAppearance(T,g,camoTex){
     const remainder=slice(other),a=C,data=new Float32Array(other.length*3);other.forEach((n,j)=>{data[j*3]=a.getX(n);data[j*3+1]=a.getY(n);data[j*3+2]=a.getZ(n);});remainder.setAttribute('color',new T.BufferAttribute(data,3));m.geometry=remainder;
     if(geo!==source)geo.dispose();
   }
-  const scale=Math.abs(u.head.position.y)/.58;
+  const sharedFit=typeof u.torso.userData.cc355TorsoAt==='function'&&Number.isFinite(u.head.userData.cc355Crown);
+  const scale=sharedFit?u.torso.userData.cc355Scale:Math.abs(u.head.position.y)/.58;
+  if(sharedFit)fittedHelmet(T,u,material,scale);
+  else{
   const shell=new T.Mesh(new T.SphereGeometry(.205*scale,10,6,0,Math.PI*2,0,Math.PI/2),material);
   weatherCloth(T,shell.geometry);shell.position.set(0,.125*scale,-.027*scale);shell.scale.set(1,.85,.95);shell.castShadow=true;u.head.add(shell);
   // The back and ear coverage leave a clear opening around the exposed face.
   const rear=new T.Mesh(new T.CylinderGeometry(.197*scale,.17*scale,.24*scale,10,1,true,Math.PI/2,Math.PI),material);
   weatherCloth(T,rear.geometry,.85);rear.position.set(0,.06*scale,-.027*scale);rear.scale.z=.95;rear.castShadow=true;u.head.add(rear);
+  }
   const gearMaterial=parts[0].material.clone();gearMaterial.vertexColors=true;gearMaterial.color.setRGB(1,1,1);
   // Preserve the atlas and vertex tints through the legacy solid-color compactor.
   gearMaterial.userData.militaryUniform=true;gearMaterial.userData.militaryGear=true;
-  wornCarrier(T,u,material,scale,gearMaterial);
+  if(sharedFit)fittedCarrier(T,u,material,scale,gearMaterial);
+  else wornCarrier(T,u,material,scale,gearMaterial);
   batchWornGear(T,u.torso);batchWornGear(T,u.head);
   u.militaryCamo=MILITARY_CAMOS[(variant-1)%5];u.militaryCamoTex=camoTex;
 }
@@ -104,4 +109,113 @@ function batchWornGear(T,bone){
   }
   const geo=new T.BufferGeometry();for(const [key,a]of Object.entries(data))geo.setAttribute(key,new T.Float32BufferAttribute(a,key==='uv'?2:3));geo.computeBoundingSphere();
   const m=new T.Mesh(geo,parts[0].material);m.name='military-worn-gear';m.castShadow=true;bone.add(m);
+}
+
+// Review-only convex support envelopes of our own source triangles.
+const key3=p=>p.toArray().map(v=>Math.round(v*1e9)).join(',');
+function sliceFace(T,P,n,h){
+ const out=[];if(!P.length)return out;
+ for(let i=0;i<P.length;i++){const a=P[i],b=P[(i+1)%P.length],da=n.dot(a)-h,db=n.dot(b)-h,ai=da<=1e-10,bi=db<=1e-10;
+  if(ai)out.push(a);if(ai!==bi)out.push(a.clone().lerp(b,da/(da-db)));
+ }return out.filter((p,i)=>i===0||p.distanceToSquared(out[i-1])>1e-20).filter((p,i,a)=>i!==a.length-1||a.length<2||p.distanceToSquared(a[0])>1e-20);
+}
+function clipSolid(T,F,n,h,tag){
+ const out=[],cut=[];for(const f of F){const P=sliceFace(T,f.P,n,h);if(P.length>=3)out.push({...f,P});
+  for(let i=0;i<f.P.length;i++){const a=f.P[i],b=f.P[(i+1)%f.P.length],da=n.dot(a)-h,db=n.dot(b)-h;if((da<=1e-10)!==(db<=1e-10))cut.push(a.clone().lerp(b,da/(da-db)));}
+ }
+ const map=new Map(cut.map(p=>[key3(p),p])),P=[...map.values()];if(P.length>=3){
+  const C=P.reduce((a,p)=>a.add(p),new T.Vector3()).multiplyScalar(1/P.length),u=(Math.abs(n.y)<.9?new T.Vector3(0,1,0):new T.Vector3(1,0,0)).cross(n).normalize(),v=new T.Vector3().crossVectors(n,u);
+  P.sort((a,b)=>Math.atan2(v.dot(a.clone().sub(C)),u.dot(a.clone().sub(C)))-Math.atan2(v.dot(b.clone().sub(C)),u.dot(b.clone().sub(C))));
+  out.push({P,n:n.clone(),tag});
+ }return out;
+}
+function sourceTriangles(T,bone){
+ const rows=[],v=new T.Vector3();for(const m of bone.children){if(!m.isMesh||m.visible===false||m.isSkinnedMesh||!m.geometry?.attributes.position)continue;m.updateMatrix();const P=m.geometry.attributes.position,I=m.geometry.index?.array,n=I?.length??P.count;
+  for(let i=0;i<n;i+=3){const tri=[];for(let j=0;j<3;j++)tri.push(v.fromBufferAttribute(P,I?I[i+j]:i+j).applyMatrix4(m.matrix).clone());rows.push(tri);}
+ }return rows;
+}
+function envelope(T,points,s){
+ if(!points.length)throw Error('No source envelope points');const R=2*s,F=[],dirs=[];
+ for(const a of[0,1,2])for(const sign of[-1,1]){const n=new T.Vector3().setComponent(a,sign),C=n.clone().multiplyScalar(R),u=(a===1?new T.Vector3(1,0,0):new T.Vector3(0,1,0)).cross(n).normalize(),v=new T.Vector3().crossVectors(n,u);
+  F.push({n,tag:'initial',P:[[-1,-1],[1,-1],[1,1],[-1,1]].map(([x,y])=>C.clone().addScaledVector(u,x*R).addScaledVector(v,y*R))});}
+ for(const phi of[-.6,0,.6,1.05,Math.PI/2])for(let i=0;i<(phi===Math.PI/2?1:16);i++){const a=i*Math.PI/8,n=new T.Vector3(Math.sin(a)*Math.cos(phi),Math.sin(phi),Math.cos(a)*Math.cos(phi));let h=-Infinity;for(const p of points)h=Math.max(h,n.dot(p));dirs.push({n,h:h+.002*s});}
+ let faces=F;for(const{n,h}of dirs)faces=clipSolid(T,faces,n,h,'shell');return faces;
+}
+function patchFaces(T,faces,{x0=-Infinity,x1=Infinity,y0=-Infinity,y1=Infinity,z0=-Infinity,z1=Infinity}={}){
+ const planes=[[new T.Vector3(-1,0,0),-x0],[new T.Vector3(1,0,0),x1],[new T.Vector3(0,-1,0),-y0],[new T.Vector3(0,1,0),y1],[new T.Vector3(0,0,-1),-z0],[new T.Vector3(0,0,1),z1]];
+ return faces.flatMap(f=>{let P=f.P;for(const[n,h]of planes)if(Number.isFinite(h))P=sliceFace(T,P,n,h);return P.length>=3?[{...f,P}]:[];});
+}
+function gearGeometry(T,triangles){
+ const P=[],I=[],map=new Map();for(const{p,group}of triangles){if(new T.Vector3().crossVectors(p[1].clone().sub(p[0]),p[2].clone().sub(p[0])).lengthSq()<1e-22)continue;
+  for(const v of p){const key=group+':'+key3(v);let i=map.get(key);if(i===undefined){i=P.length/3;map.set(key,i);P.push(...v.toArray());}I.push(i);}
+ }
+ const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(P,3));g.setIndex(I);g.computeVertexNormals();g.userData.gearRimVertices=[...map.entries()].filter(([k])=>k.startsWith('rim:')).map(([,i])=>i);return g;
+}
+function shellPatch(T,faces,inner,outer){
+ const vertices=[...new Map(faces.flatMap(f=>f.P).map(p=>[key3(p),p])).values()];
+ // Split collinear edge vertices too: the shoulders meet the plates at
+ // T-junctions, which must be welded rather than capped through each other.
+ faces=faces.map(f=>({...f,P:f.P.flatMap((a,i)=>{const b=f.P[(i+1)%f.P.length],d=b.clone().sub(a),l=d.lengthSq();if(l<1e-20)return[];const row=[{p:a,t:0}];for(const p of vertices){const t=p.clone().sub(a).dot(d)/l;if(t>1e-8&&t<1-1e-8&&p.distanceToSquared(a.clone().addScaledVector(d,t))<1e-16)row.push({p,t});}row.sort((x,y)=>x.t-y.t);return row.map(v=>v.p);})}));
+ const triangles=[],edges=new Map(),tri=(p,group)=>triangles.push({p,group});
+ for(const f of faces){const A=f.P.map(inner),B=f.P.map(outer);for(let i=1;i<f.P.length-1;i++){tri([A[0],A[i+1],A[i]],'inner');tri([B[0],B[i],B[i+1]],'outer');}
+  for(let i=0;i<f.P.length;i++){const a=f.P[i],b=f.P[(i+1)%f.P.length],ka=key3(a),kb=key3(b),key=ka<kb?ka+'|'+kb:kb+'|'+ka;const e=edges.get(key);if(e)e.n++;else edges.set(key,{a,b,n:1});}
+ }
+ for(const{a,b,n}of edges.values())if(n===1){const A=inner(a),B=inner(b),C=outer(b),D=outer(a);tri([A,B,C],'rim');tri([A,C,D],'rim');}
+ return gearGeometry(T,triangles);
+}
+function fittedCarrierGeometry(T,u,s){
+ const hull=envelope(T,sourceTriangles(T,u.torso).flatMap(P=>P),s),C=new T.Vector3(0,.25*s,0),out=p=>p.clone().sub(C).multiplyScalar(1.05).add(C),all=[],harness=[];
+ for(const dir of[-1,1])harness.push(...patchFaces(T,hull.filter(f=>f.n.z*dir>1e-6),{x0:-.18*s,x1:.18*s,y0:.14*s,y1:.43*s}));
+ for(const x of[-.14,.14])harness.push(...patchFaces(T,hull,{x0:(x-.014)*s,x1:(x+.014)*s,y0:.43*s}));
+ all.push(shellPatch(T,harness,p=>p.clone(),out));
+ const outside=hull.map(f=>({...f,P:f.P.map(out)}));
+ const at=(dir,rect)=>patchFaces(T,outside.filter(f=>f.n.z*dir>1e-6),Object.fromEntries(Object.entries(rect).map(([k,v])=>[k,v*s])));
+ const patch=(F,a,b,dir=1)=>all.push(shellPatch(T,F,p=>p.clone().addScaledVector(new T.Vector3(0,0,dir),(typeof a==='function'?a(p.y/s):a)*s),p=>p.clone().addScaledVector(new T.Vector3(0,0,dir),(typeof b==='function'?b(p.y/s):b)*s)));
+ for(const dir of[-1,1])for(let row=0;row<3;row++)patch(at(dir,{x0:-.145,x1:.145,y0:.20+row*.066,y1:.212+row*.066}),.002,.006,dir);
+ for(const x of[-.12,-.04,.04,.12]){
+  patch(at(1,{x0:x-.032,x1:x+.032,y0:.17,y1:.275}),.008,.048);
+  const lower=at(1,{x0:x-.034,x1:x+.034,y0:.255,y1:.275}),upper=at(1,{x0:x-.034,x1:x+.034,y0:.275,y1:.29}),base=y=>y<=.275?.049:.049+(.002-.049)*(y-.275)/.015;
+  patch([...lower,...upper],base,y=>base(y)+.004);
+ }
+ return all;
+}
+function fittedHelmetGeometry(T,u,s){
+ const bottom=-.045*s,seam=.09*s,cz=-.035*s,C=new T.Vector3(0,seam,cz),points=[];
+ for(const tri of sourceTriangles(T,u.head)){
+  const top=sliceFace(T,tri,new T.Vector3(0,-1,0),-seam);points.push(...top);
+  let rear=sliceFace(T,tri,new T.Vector3(0,-1,0),-bottom);rear=sliceFace(T,rear,new T.Vector3(0,1,0),seam);rear=sliceFace(T,rear,new T.Vector3(0,0,1),cz);points.push(...rear);
+ }
+ let hull=envelope(T,points,s);hull=clipSolid(T,hull,new T.Vector3(0,-1,0),-bottom,'bottom-open');
+ const cap=clipSolid(T,hull,new T.Vector3(0,-1,0),-seam,'cap-seam');
+ let rear=clipSolid(T,hull,new T.Vector3(0,1,0),seam,'rear-seam');rear=clipSolid(T,rear,new T.Vector3(0,0,1),cz,'front-open');
+ const triangles=[],outer=p=>p.clone().sub(C).multiplyScalar(1.06).add(C),tri=(p,group)=>triangles.push({p,group});
+ for(const f of[...cap,...rear]){
+  if(f.tag==='shell'){const B=f.P.map(outer);for(let i=1;i<f.P.length-1;i++){tri([f.P[0],f.P[i+1],f.P[i]],'inner');tri([B[0],B[i],B[i+1]],'outer');}continue;}
+  if(f.tag==='rear-seam')continue;
+  for(let i=0;i<f.P.length;i++){
+   let a=f.P[i],b=f.P[(i+1)%f.P.length];if(!hull.some(q=>q.tag==='shell'&&Math.abs(q.n.dot(a)-q.n.dot(q.P[0]))<1e-8&&Math.abs(q.n.dot(b)-q.n.dot(q.P[0]))<1e-8))continue;if(f.tag==='cap-seam'){
+    const da=a.z-cz,db=b.z-cz;if(da<0&&db<0)continue;if((da>=0)!==(db>=0)){const q=a.clone().lerp(b,da/(da-db));if(da<0)a=q;else b=q;}
+   }
+   const A=a,B=b,D=outer(a),E=outer(b),n=new T.Vector3().crossVectors(B.clone().sub(A),E.clone().sub(A));
+   if(n.dot(f.n)>=0){tri([A,B,E],'rim');tri([A,E,D],'rim');}else{tri([A,E,B],'rim');tri([A,D,E],'rim');}
+  }
+ }
+ return gearGeometry(T,triangles);
+}
+
+function fittedCarrier(T,u,mat,s,gearMat){
+ const C=new T.Color(0x5b6148);for(const geo of fittedCarrierGeometry(T,u,s)){
+  weatherCloth(T,geo);const A=geo.attributes.color;for(let i=0;i<A.count;i++)A.setXYZ(i,A.getX(i)*C.r,A.getY(i)*C.g,A.getZ(i)*C.b);
+  geo.setAttribute('uv',new T.BufferAttribute(detailUV(T,geo,'cloth'),2));const m=new T.Mesh(geo,gearMat);m.name='military-worn-gear';m.castShadow=true;u.torso.add(m);
+ }
+}
+function fittedHelmet(T,u,mat,s){
+ const geo=fittedHelmetGeometry(T,u,s);weatherCloth(T,geo);fitGearUV(T,geo);const C=geo.attributes.color,rim=new T.Color(0x30382a);
+ for(const i of geo.userData.gearRimVertices)C.setXYZ(i,rim.r,rim.g,rim.b);
+ const m=new T.Mesh(geo,mat);m.name='military-helmet-shell';m.castShadow=true;u.head.add(m);
+}
+function fitGearUV(T,geo){
+ const P=geo.attributes.position,N=geo.attributes.normal,U=new Float32Array(P.count*2);
+ for(let i=0;i<P.count;i++){if(Math.abs(N.getY(i))>.55){U[i*2]=P.getX(i)*2.5;U[i*2+1]=P.getZ(i)*2.5;}else{U[i*2]=(Math.abs(N.getZ(i))>.5?P.getX(i):P.getZ(i))*2.5;U[i*2+1]=P.getY(i)*2.5;}}
+ geo.setAttribute('uv',new T.BufferAttribute(U,2));
 }

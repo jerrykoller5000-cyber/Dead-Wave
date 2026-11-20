@@ -104,8 +104,10 @@ export function pistolSlideShellGeometry(T) {
 // the slide is held back. Coordinates are still in the resting gun's frame.
 export function pistolChamberGeometry(T) {
   if(chambers.has(T))return chambers.get(T);
-  const outline=[[-.014,.0375],[-.012,.0355],[.012,.0355],[.014,.0375],
-    [.014,.072],[.012,.074],[-.012,.074],[-.014,.072]];
+  // GT-20107: a 0.6 mm running fit to the left port bearing wall at x=-.015.
+  // Only the chamber's left bearing face changes; bore, action datum and pivot stay fixed.
+  const outline=[[-.0144,.0375],[-.012,.0355],[.012,.0355],[.014,.0375],
+    [.014,.072],[.012,.074],[-.012,.074],[-.0144,.072]];
   const hole=Array.from({length:32},(_,i)=>{
     const angle=-i*Math.PI/16;return [.0065*Math.cos(angle),.05+.0065*Math.sin(angle)];
   });

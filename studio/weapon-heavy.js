@@ -281,13 +281,21 @@ export function makeMinigunModel(ctx) {
   const housing = K.slab([[.225,-.13],[.225,.13],...rearShell],.28,gunBody,{bevel:.035,segs:3});
   markPaintSurface(housing, 'receiver');
   const panelRearBottom = [-.255, -.092], panelRearTop = [-.247, .098];
+  // Raw-art seating contract: names survive construction; rendering may batch
+  // these fixed surfaces. Audits rebuild the same constructor without finishGun.
+  gun.userData.seatingParts = {rightPlate:'minigun-right-plate',rightStrips:[]};
   for (const sx of [-1, 1]) {
     const plate = K.slab([panelRearBottom, [0.152, -0.092], [0.161, -0.08], [0.161, 0.087], [0.148, 0.098], panelRearTop], 0.020, gunMid, { x: sx * 0.150, bevel: 0.003 });
     markPaintSurface(plate, 'receiver');
+    if (sx > 0) plate.name = gun.userData.seatingParts.rightPlate;
     const sideFace = plate.position.x + sx * .010;
     for (let i = 0; i < 4; i++) {
       const rib = K.box(0.012, 0.009, 0.26, gunDark, sx * 0.158, 0.065 - i * 0.039, -0.064, 0, 0, 0, null, 0.003);
       seatBoxArt(rib, 'x', () => sideFace, sx);
+      if (sx > 0) {
+        rib.name = 'minigun-right-strip-' + i;
+        gun.userData.seatingParts.rightStrips.push(rib.name);
+      }
     }
     for (const [by, bz] of [[0.085, 0.13], [0.085, -0.24], [-0.085, 0.13], [-0.085, -0.24]]) hexHeads.push({ x: sideFace, y: by, z: bz, axis: 'x', side: sx, r: 0.009, turn: bz * 7 });
   }
@@ -534,6 +542,17 @@ export function makeMinigunModel(ctx) {
   rightDisc.name = 'minigun right side disc';
   rightDisc.position.x = -leftDisc.position.x;
   gun.add(rightDisc);
+  // GT-20107: lid, centre cap and fasteners are one rigid drum fitting.
+  // Match the final body-metal finish already applied by mergeBodyMetals in
+  // the caller (.66 roughness/.08 metalness), while retaining each colour.
+  const drumFitting = mesh => mesh.isMesh && !mesh.material?.userData?.weaponFinishRole;
+  for (const mesh of ammoBox.children) if (drumFitting(mesh)) {
+    if (mesh.material === gunDark || mesh.material === gunMid) {
+      mesh.material = mesh.material.clone(); mesh.material.roughness = .66; mesh.material.metalness = .08;
+    }
+    mesh.castShadow = true;
+  }
+  foldStatic(THREE, TSL, ammoBox, {skip:mesh=>!drumFitting(mesh),enter:mesh=>mesh.isMesh});
   return finishGun(gun);
 }
 
@@ -1253,10 +1272,10 @@ export function makeFlamerModel(ctx) {
     }
   }
   K.box(0.04, 0.012, 0.05, gunDark, 0, -0.162, -0.165, 0, 0, -0.06, null, 0.003);
-  K.slab(gunBand([[-0.064, -0.034], [-0.064, -0.064], [-0.078, -0.076], [-0.128, -0.076], [-0.132, -0.062]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
+  K.slab(gunBand([[-0.064, -0.034], [-0.064, -0.073], [-0.078, -0.085], [-0.128, -0.085], [-0.132, -0.071]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard); CD-14 (J153 22): the bottom 9 mm lower, room for a gloved finger
   // GB-175: trigger face toward the grip, tip curling forward (the convention Jerry set on the revolver and sniper).
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire, moved to mid-guard.
-  addTriggerArtwork(gun, K, [[-0.088, -0.0357], [-0.0927, -0.0484], [-0.092, -0.056], [-0.0875, -0.0615], [-0.0925, -0.0665], [-0.1, -0.06], [-0.1033, -0.0476], [-0.1, -0.0323]], 0.011, gunAccent, { bevel: 0.002 });
+  addTriggerArtwork(gun, K, [[-0.103, -0.0357], [-0.1077, -0.0484], [-0.107, -0.056], [-0.1025, -0.0615], [-0.1075, -0.0665], [-0.115, -0.06], [-0.1183, -0.0476], [-0.115, -0.0323]], 0.011, gunAccent, { bevel: 0.002 });   // CD-14 (J153 22): the blade 15 mm back toward the grip
   // CF-1 (a): the trigger pin's two ends in the grip mount's cheeks.
   pinEnds(THREE, gun, gunAccent, [{ x: 0, y: gun.userData.triggerPin[1], z: gun.userData.triggerPin[2], axis: 'x', span: 0.054, r: 0.0026 }]);
   // CF-1 (b): the safety, a thumb lever on the grip mount's left cheek; it turns about x on its boss.
@@ -1653,14 +1672,26 @@ export function makeChainsawModel(ctx) {
   rearBand[0] = outlineIntersection(rearBand[0], rearBand[1], caseCorner, [-.28, -.024]);
   rearBand[rearBand.length - 1] = outlineIntersection(rearBand.at(-1), rearBand.at(-2), caseCorner, [-.27, .105]);
   rearBand.push(caseCorner);
-  K.slab(rearBand, .07, gunPoly, { bevel: .007 });
-  K.box(0.074, 0.13, 0.055, gunRubber, 0, -0.014, -0.46, 0, 0, 0, null, 0.012);
-  for (let i = 0; i < 5; i++) K.box(0.076, 0.007, 0.058, gunPoly, 0, -0.064 + i * 0.024, -0.46, 0, 0, 0, null, 0.002);
+  // GT-20112: preserve the loop's side outline; narrow its grip section and retain the case attachment.
+  {
+    const frame = K.slab(rearBand, .07, gunPoly, { bevel: .007 });
+    frame.name = 'chainsaw rear handle frame';
+    const P = frame.geometry.attributes.position;
+    for (let i = 0; i < P.count; i++) {
+      const root = Math.max(0, Math.min(1, (P.getZ(i) + .33) / .05));
+      P.setX(i, P.getX(i) * (.038 + .032 * root) / .07);
+    }
+    P.needsUpdate = true; frame.geometry.computeVertexNormals();
+    frame.geometry.computeBoundingBox(); frame.geometry.computeBoundingSphere();
+  }
+  K.box(0.038, 0.13, 0.038, gunRubber, 0, -0.014, -0.4835, 0, 0, 0, null, 0.010).name = 'chainsaw rear rubber grip';
+  for (let i = 0; i < 5; i++) K.box(0.040, 0.007, 0.040, gunPoly, 0, -0.064 + i * 0.024, -0.4835, 0, 0, 0, null, 0.002).name = 'chainsaw rear grip rib ' + i;
   addTriggerArtwork(gun, K, gunBand([[-0.395, 0.062], [-0.393, 0.045], [-0.375, 0.01], [-0.365, -0.03]], 0.006), 0.022, hazardYellow, { bevel: 0.002 });
   // CF-1 (a): the throttle's pin, its two ends on the cheeks of the handle's top bar just above the blade's root.
-  pinEnds(THREE, gun, gunAccent, [{ x: 0, y: 0.078, z: gun.userData.triggerPin[2], axis: 'x', span: 0.07, r: 0.0028 }]);
+  pinEnds(THREE, gun, gunAccent, [{ x: 0, y: 0.078, z: gun.userData.triggerPin[2], axis: 'x', span: 0.038, r: 0.0028 }]);
   K.slab(gunBand([[-0.395, 0.062], [-0.34, 0.06], [-0.326, -0.065], [-0.42, -0.069]], 0.006), 0.033, gunDark, { bevel: 0.003 });
-  const rearTrim = K.box(0.072, 0.02, 0.04, gunAccent, 0, 0.085, -0.445, 0, 0, 0, null, 0.004);
+  const rearTrim = K.box(0.040, 0.02, 0.04, gunAccent, 0, 0.085, -0.445, 0, 0, 0, null, 0.004);
+  rearTrim.name = 'chainsaw rear handle crown trim';
   trimPanelBack(THREE, rearTrim, 1, .094, 'y');
   // CF-1 (b): the throttle lock is its own part, hinged at its back edge; the palm presses it down.
   const throttleLock = K.group(0, 0.0995, -0.4575); throttleLock.name = 'chainsaw-throttle-lock';

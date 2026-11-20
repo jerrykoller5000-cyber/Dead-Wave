@@ -1,11 +1,13 @@
+import {refineBrute} from "./zombie-brute.js";
 // GP-161: cosmetic meshes from review/zombie-types/GPT-Concepts. Joint transforms,
 // hit logic and animation remain owned by the original rigs. No random/world state.
-import {detailUV,detailMaterial} from './zombie-detail.js';
-import {skinMergeGroup} from '../core/skin-merge.js';
-import {blendZombieJoins} from '../combat/zombie-joins.js';
-import {sculptGuardian} from './zombie-guardian-detail.js';
-import {sculptDemon} from '../combat/demon-visual.js';
-import {refineZombieFace,refineHeavyArmor} from '../combat/zombie-fidelity.js';
+import {detailUV,detailMaterial} from "./zombie-detail.js";
+import {skinMergeGroup} from "./../core/skin-merge.js";
+import {blendZombieJoins} from "./../combat/zombie-joins.js";
+import {sculptGuardian} from "./zombie-guardian-detail.js";
+import {sculptDemon} from "./../combat/demon-visual.js";
+import {refineZombieFace,refineHeavyArmor} from "./../combat/zombie-fidelity.js";
+import {refineHumanoid,humanoidPivots} from "./zombie-humanoids.js";
 export const CONCEPT_TYPES = Object.freeze(['shambler','feral','brute','military','spitter','bomber','screamer','drowned','leaper','spider','colossus','demon','guardian','caveguard']);
 
 // GP-19937: the one spitter found asleep in the medical convoy. Clone materials
@@ -50,25 +52,63 @@ export function prepareConvoySleeperAppearance(T, g) {
 const templates = new WeakMap();
 function bones(u){
   const out={hips:u.hips,torso:u.torso,head:u.head};
-  for(const S of ['L','R']){out['arm'+S]=u['arm'+S+'G'];out['elbow'+S]=out['arm'+S].userData.elbowG;out['leg'+S]=u['leg'+S+'G'];out['shin'+S]=out['leg'+S].userData.shinG;}
+  for(const S of ['L','R']){out['arm'+S]=u['arm'+S+'G'];out['elbow'+S]=out['arm'+S]?.userData.elbowG;out['leg'+S]=u['leg'+S+'G'];out['shin'+S]=out['leg'+S]?.userData.shinG;
+    for(const [name,bone]of Object.entries(out['elbow'+S]?.userData.hand?.bones||{}))out['hand:'+S+':'+name]=bone;}
   (u.crawlLimbs||[]).forEach((l,i)=>{out['crawl'+i]=l.root;out['knee'+i]=l.knee;});return out;
 }
+// GP-20146 / J162: cache the complete rigid part tree; geometry stays shared,
+// while each body owns its materials and mutable metadata.
+function cacheData(value, seen = new Map()) {
+  if (!value || typeof value !== 'object') return value;
+  if (seen.has(value)) return seen.get(value);
+  if (value.isObject3D) throw new Error('Concept part metadata needs a named rig reference');
+  if (ArrayBuffer.isView(value)) return value.slice();
+  if (value.clone && value.constructor !== Object) return value.clone();
+  const out = Array.isArray(value) ? [] : {};
+  seen.set(value, out);
+  for (const [key, item] of Object.entries(value)) out[key] = cacheData(item, seen);
+  return out;
+}
+function cachePart(node, copy, keep) {
+  const part = {
+    kind: node.isMesh ? 'mesh' : node.isGroup ? 'group' : 'object',
+    name: node.name, position: node.position.clone(), quaternion: node.quaternion.clone(),
+    scale: node.scale.clone(), visible: node.visible, castShadow: node.castShadow,
+    receiveShadow: node.receiveShadow, renderOrder: node.renderOrder,
+    frustumCulled: node.frustumCulled, layers: node.layers.mask,
+    matrixAutoUpdate: node.matrixAutoUpdate, userData: cacheData(node.userData), children: []
+  };
+  if (node.isMesh) { part.geometry = node.geometry; part.material = copy(node.material); }
+  for (const child of node.children) if (!keep.has(child)) part.children.push(cachePart(child, copy, keep));
+  return part;
+}
+function restorePart(T, part, copy) {
+  const node = part.kind === 'mesh' ? new T.Mesh(part.geometry, copy(part.material))
+    : part.kind === 'group' ? new T.Group() : new T.Object3D();
+  node.name = part.name; node.position.copy(part.position); node.quaternion.copy(part.quaternion);
+  node.scale.copy(part.scale); node.visible = part.visible; node.castShadow = part.castShadow;
+  node.receiveShadow = part.receiveShadow; node.renderOrder = part.renderOrder;
+  node.frustumCulled = part.frustumCulled; node.layers.mask = part.layers;
+  node.userData = cacheData(part.userData); node.updateMatrix(); node.matrixAutoUpdate = part.matrixAutoUpdate;
+  for (const child of part.children) node.add(restorePart(T, child, copy));
+  return node;
+}
 function remember(T,g,key){
-  const u=g.userData,materials=new Map(),copy=m=>{if(!materials.has(m))materials.set(m,m.clone());return materials.get(m);};
-  const parts=[];for(const [bone,p]of Object.entries(bones(u)))for(const m of p.children)if(m.isMesh&&!u.eyes.includes(m)){
-    parts.push({bone,geometry:m.geometry,material:copy(m.material),position:m.position.clone(),quaternion:m.quaternion.clone(),scale:m.scale.clone(),compacted:!!m.userData.compacted});
+  const u=g.userData,materials=new Map(),copy=m=>{if(Array.isArray(m))return m.map(copy);if(!materials.has(m))materials.set(m,m.clone());return materials.get(m);};
+  const parts=[],keep=new Set(u.eyes||[]);for(const [bone,p]of Object.entries(bones(u)))for(const m of p?.children||[])if(m.isMesh&&!keep.has(m)){
+    parts.push({bone,node:cachePart(m,copy,keep)});
   }
-  const tpl={parts,body:u.bodyMats.map(copy),pulse:u.pulseMats.map(copy),ember:u.emberMat?copy(u.emberMat):null,concept:{...u.concept},eyes:u.eyes.map(e=>({position:e.position.clone(),scale:e.scale.clone(),color:e.material.color.clone(),emissive:e.material.emissive.clone(),emissiveIntensity:e.material.emissiveIntensity,baseEmissive:e.material.userData.baseEmissive}))};
+  const tpl={sharedFit:{head:{cc355Crown:u.head.userData.cc355Crown,cc355CrownY:u.head.userData.cc355CrownY},torso:{cc355Scale:u.torso.userData.cc355Scale,cc355TorsoAt:u.torso.userData.cc355TorsoAt}},parts,body:u.bodyMats.map(copy),pulse:u.pulseMats.map(copy),ember:u.emberMat?copy(u.emberMat):null,concept:{...u.concept},eyes:u.eyes.map(e=>({position:e.position.clone(),scale:e.scale.clone(),color:e.material.color.clone(),emissive:e.material.emissive.clone(),emissiveIntensity:e.material.emissiveIntensity,baseEmissive:e.material.userData.baseEmissive}))};
   let map=templates.get(T);if(!map){map=new Map();templates.set(T,map);}map.set(key,tpl);
 }
 function restore(T,g,key,k){
   const tpl=templates.get(T)?.get(key);if(!tpl)return false;
-  const u=g.userData,bs=bones(u),materials=new Map(),copy=m=>{if(!materials.has(m))materials.set(m,m.clone());return materials.get(m);};
+  const u=g.userData,bs=bones(u),materials=new Map(),copy=m=>{if(Array.isArray(m))return m.map(copy);if(!materials.has(m))materials.set(m,m.clone());return materials.get(m);};
   stripMeshes(g,new Set(u.eyes));
-  for(const p of tpl.parts){const m=new T.Mesh(p.geometry,copy(p.material));m.position.copy(p.position);m.quaternion.copy(p.quaternion);m.scale.copy(p.scale);m.castShadow=true;m.userData.compacted=p.compacted;bs[p.bone].add(m);
-    if(p.compacted){if(p.bone.startsWith('leg'))bs[p.bone].userData.thigh=m;if(p.bone.startsWith('arm'))bs[p.bone].userData.upper=m;if(p.bone==='torso')bs.torso.userData.bodyMat=m.material;}}
+  for(const p of tpl.parts){if(!bs[p.bone])throw new Error('Concept cache missing rig bone '+p.bone);const m=restorePart(T,p.node,copy);bs[p.bone].add(m);
+    if(m.userData.compacted){if(p.bone.startsWith('leg'))bs[p.bone].userData.thigh=m;if(p.bone.startsWith('arm'))bs[p.bone].userData.upper=m;if(p.bone==='torso')bs.torso.userData.bodyMat=m.material;}}
   tpl.eyes.forEach((e,i)=>{const eye=u.eyes[i];eye.position.copy(e.position);eye.scale.copy(e.scale);eye.material.color.copy(e.color);eye.material.emissive.copy(e.emissive);eye.material.emissiveIntensity=e.emissiveIntensity;eye.material.userData.baseEmissive=e.baseEmissive;});
-  u.bodyMats=tpl.body.map(copy);u.pulseMats=tpl.pulse.map(copy);if(tpl.ember)u.emberMat=copy(tpl.ember);u.concept={...tpl.concept};return true;
+  u.bodyMats=tpl.body.map(copy);u.pulseMats=tpl.pulse.map(copy);if(tpl.ember)u.emberMat=copy(tpl.ember);u.concept={...tpl.concept};if(tpl.sharedFit){Object.assign(u.head.userData,tpl.sharedFit.head);Object.assign(u.torso.userData,tpl.sharedFit.torso);}return true;
 }
 
 function mergeEyes(T,g){
@@ -127,7 +167,51 @@ function sculpt(T, s, rbox) {
     for(const edge of [0,steps]){const P=curve.getPoint(edge/steps),c=pos.length/3;pos.push(P.x*s,P.y*s,P.z*s);for(let i=0;i<sides;i++){const a=edge*sides+i,b=edge*sides+(i+1)%sides;idx.push(c,...(edge?[a,b]:[b,a]));}}
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setIndex(idx);geo.computeVertexNormals();return put(p,geo,m);
   };
-  const spike = (p,m,a,b,r=.035) => rod(p,m,a,b,r,0,5);
+  // Extend only a tooth's hidden root; the crown and its normals stay exact.
+  const spike = (p,m,a,b,r=.035,seat) => {
+    const o=rod(p,m,a,b,r,0,5);
+    if(!seat)return o;
+    const source=o.geometry,P=source.attributes.position,N=source.attributes.normal,U=source.attributes.uv;
+    const delta=new T.Vector3(...seat).sub(new T.Vector3(...a)).multiplyScalar(s).applyQuaternion(o.quaternion.clone().invert());
+    // The first two five-sided cylinder rings are the unchanged crown;
+    // cap-only vertices follow them. Select the sides without material groups.
+    const indices=source.index.array,idx=[];
+    for(let i=0;i<indices.length;i+=3)if(indices[i]<12&&indices[i+1]<12&&indices[i+2]<12)idx.push(indices[i],indices[i+1],indices[i+2]);
+    const pos=Array.from(P.array),normal=Array.from(N.array),uv=Array.from(U.array),ring=Array.from({length:5},(_,i)=>new T.Vector3().fromBufferAttribute(P,6+i));
+    // Stop the root just outside the first real facial surface, instead of
+    // burying an approximate center coordinate inside a low-poly maxilla.
+    o.updateMatrix();const inverse=o.matrix.clone().invert(),mid=ring.reduce((v,q)=>v.add(q),new T.Vector3()).multiplyScalar(.2),plane=new T.Vector3().crossVectors(ring[1].clone().sub(ring[0]),ring[2].clone().sub(ring[0])).normalize(),denom=plane.dot(delta);
+    const walls=ring.map((v,i)=>{const n=new T.Vector3().crossVectors(ring[(i+1)%5].clone().sub(v),delta).normalize();if(n.dot(mid.clone().sub(v))<0)n.negate();return{n,d:n.dot(v)};});
+    let fraction=1;
+    for(const host of p.children){
+      if(host===o||!host.isMesh||host.visible===false||!host.geometry?.attributes.position)continue;
+      host.updateMatrix();const matrix=new T.Matrix4().multiplyMatrices(inverse,host.matrix),hp=host.geometry.attributes.position,hi=host.geometry.index?.array,count=hi?.length??hp.count;
+      for(let j=0;j<count;j+=3){
+        let poly=Array.from({length:3},(_,k)=>new T.Vector3().fromBufferAttribute(hp,hi?hi[j+k]:j+k).applyMatrix4(matrix));
+        for(const {n,d}of walls){
+          const clipped=[];for(let k=0;k<poly.length;k++){const a=poly[k],b=poly[(k+1)%poly.length],da=n.dot(a)-d,db=n.dot(b)-d;if(da>=0)clipped.push(a);if((da>=0)!==(db>=0))clipped.push(a.clone().lerp(b,da/(da-db)));}poly=clipped;if(!poly.length)break;
+        }
+        if(!poly.length)continue;
+        const ts=poly.map(v=>plane.dot(v.clone().sub(ring[0]))/denom),first=Math.min(...ts);
+        if(Math.max(...ts)>=0)fraction=Math.min(fraction,Math.max(0,first));
+      }
+    }
+    delta.multiplyScalar(Math.max(0,fraction-.00025*s/delta.length()));
+    const back=ring.map(v=>v.clone().add(delta));
+    const center=ring.reduce((v,q)=>v.add(q),new T.Vector3()).multiplyScalar(.2).addScaledVector(delta,.5);
+    const triangle=(a,b,c)=>{
+      const n=new T.Vector3().crossVectors(b.clone().sub(a),c.clone().sub(a)),mid=a.clone().add(b).add(c).multiplyScalar(1/3);
+      if(n.dot(mid.sub(center))<0){const swap=b;b=c;c=swap;n.negate();}
+      n.normalize();const start=pos.length/3;
+      for(const v of[a,b,c]){pos.push(v.x,v.y,v.z);normal.push(n.x,n.y,n.z);uv.push(0,0);}
+      idx.push(start,start+1,start+2);
+    };
+    for(let i=0;i<5;i++){const j=(i+1)%5;triangle(ring[i],back[i],ring[j]);triangle(ring[j],back[i],back[j]);}
+    const end=back.reduce((v,q)=>v.add(q),new T.Vector3()).multiplyScalar(.2);
+    for(let i=0;i<5;i++)triangle(end,back[i],back[(i+1)%5]);
+    const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('normal',new T.Float32BufferAttribute(normal,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geo.setIndex(idx);
+    o.geometry=geo;source.dispose();return o;
+  };
   // Connected tapered masses replace stacked oval limbs. Rings stay in bone-local space.
   // At horde distance ten sides retain the silhouette; the shared profile helper forces
   // sixteen on flesh, which costs thousands of triangles across every zombie.
@@ -237,6 +321,12 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
     u.legLG.position.x-=hip;
     u.legRG.position.x+=hip;
   }
+  // GP-20146: keep legacy spacing before the shared pivot hook and template restore.
+  if(k==='military'){
+    g.userData.armLG.position.x-=.04;
+    g.userData.armRG.position.x+=.04;
+  }
+  humanoidPivots(T,g,s,k); // CC-355 s27 (Claude 3, J158 / D-190): a LIVE humanoid's shoulders, hips and head on its body (both paths)
   const cacheKey=k+':'+s;if(!audit&&restore(T,g,cacheKey,k)){mergeEyes(T,g);return true;}
   const u=g.userData, {hips,torso,head,armLG,armRG,legLG,legRG}=u;
   const A=sculpt(T,s,rbox),{mat,egg,rock,box,rod,path,spike,rag,loft,plate,ribbon}=A;
@@ -415,7 +505,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
   // Dirt patches follow the skin's contours and repeat deterministically per type.
   for(let i=0;i<5;i++){
     const x=(i%3-1)*.077,y=-.03+Math.floor(i/3)*.15;
-    const z=['shambler','drowned','spitter','bomber'].includes(k)?headDepth(x,y,-1)-.004:-.148;
+    const z=['shambler','military','drowned','spitter','bomber'].includes(k)?headDepth(x,y,-1)-.004:-.148;
     egg(head,i%2?shadow:pale,x,y,z,.065,.067,.016,i*.8);
   }
 
@@ -431,7 +521,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
     loft(head,olive,[[.145,.171,.146,-.02],[.18,.18,.15,-.02],[.245,.17,.141,-.03],[.265,.15,.126,-.03]],12);
     box(head,camDark,0,.148,-.017,.35,.02,.28);box(head,olive,0,.154,.178,.33,.024,.19,-.06);
     box(head,camDark,0,.223,.127,.073,.040,.01);box(head,camLight,0,.226,.134,.053,.012,.008);
-    for(let i=0;i<3;i++){const x=(i-1)*.099;rock(head,i%2?camDark:camLight,x,.202+(i%2)*.031,.136,.075,.04,.012,i*.6);}
+    for(let i=0;i<3;i++){const x=(i-1)*.099,y=.202+(i%2)*.031,f=Math.max(0,Math.min(1,(y-.18)/.065)),rx=.18-.01*f,rz=.15-.009*f;rock(head,i%2?camDark:camLight,x,y,-.02-.01*f+rz*Math.sqrt(Math.max(0,1-(x/rx)**2))+.002,.075,.04,.012,i*.6);}
     egg(torso,olive,0,.25,0,.51,.51,.345);
     // The vest shell is an ellipsoid; use its front depth to seat each pouch
     // instead of leaving the outer columns on the old flat chest plane.
@@ -448,7 +538,8 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
       box(torso,steel,side*.185,.34,vestFront(.185,.34)+.02,.063,.048,.02);
       box(leg,olive,side*.105,-.135,.005,.06,.14,.14);
       const el=arm.userData.elbowG;egg(el,leather,0,-.365,.085,.12,.11,.075);box(el,camDark,0,-.33,.107,.12,.025,.07);
-      for(let j=0;j<2;j++)path(shin,camLight,[[-.052,-.24-j*.037,.09],[.050,-.25-j*.037,.093]],.005);
+      const bootFront=(x,y)=>{const f=Math.max(0,Math.min(1,(y+.32)/.085)),rx=.077+.001*f,rz=.089-.009*f,cz=.005*(1-f);return cz+rz*Math.sqrt(Math.max(0,1-(x/rx)**2));};
+      for(let j=0;j<2;j++){const y=-.24-j*.037;path(shin,camLight,[[-.052,y,bootFront(-.052,y)+.001],[0,y-.005,bootFront(0,y-.005)+.001],[.050,y-.01,bootFront(.050,y-.01)+.001]],.005);}
     }
     box(torso,olive,0,.3,.177,.36,.21,.06);
     // Seat the radio pack into the rounded back instead of leaving a side-view gap.
@@ -456,7 +547,7 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
     box(torso,camDark,.14,.44,-.18,.1,.12,.075);rod(torso,hair,[.14,.48,-.18],[.14,.82,-.19],.01,.006);
     for(let i=0;i<3;i++)box(torso,camLight,0,.235+i*.027,.211,.30,.009,.009);
     for(let i=0;i<3;i++){const x=(i-1)*.12,y=.10;rock(torso,i%2?camDark:camLight,x,y,-.26,.13,.073,.012,i*.5);}
-    box(torso,camLight,-.076,.357,.221,.10,.046,.013);box(torso,wound,-.059,.349,.230,.041,.014,.006);
+    box(torso,camLight,-.076,.357,.216,.10,.046,.013);box(torso,wound,-.059,.349,.225,.041,.014,.006);
     box(torso,hair,.123,.382,.220,.067,.104,.030);for(let j=0;j<3;j++)box(torso,steel,.123,.406-j*.019,.239,.04,.005,.008);
     path(torso,hair,[[.123,.43,.215],[.21,.455,.14],[.22,.37,.0],[.15,.46,-.21]],.009);
   }
@@ -506,12 +597,16 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
       for(let j=0;j<7;j++)rag(hips,leather,(j-3)*.067,.11,.245,.075,.18+(j%2)*.05);
     }
   }
-  if(k==='military'){
-    g.userData.armLG.position.x-=.04;
-    g.userData.armRG.position.x+=.04;
-  }
   if(k==='drowned'){
     egg(torso,cloth,0,.24,0,.46,.46,.32);
+    // GP-20146: weeds and tabs root on the base torso/cloth envelope.
+    const backRings=[[-.08,wide*.29,deep*.32],[.03,wide*.36,deep*.40],[.17,wide*.43,deep*.47],[.31,wide*.5,deep*.5],[.42,wide*.44,deep*.42],[.48,wide*.22,deep*.28],[.51,.064,.065]];
+    const backPoint=(x,y)=>{let a=backRings[0],b=backRings.at(-1);for(let j=1;j<backRings.length;j++)if(y<=backRings[j][0]){a=backRings[j-1];b=backRings[j];break;}
+      const f=Math.max(0,Math.min(1,(y-a[0])/(b[0]-a[0]))),rx=a[1]+(b[1]-a[1])*f,rz=a[2]+(b[2]-a[2])*f,xx=Math.max(-rx*.9,Math.min(rx*.9,x));
+      const flesh=rz*Math.sqrt(Math.max(0,1-(xx/rx)**2)),clothZ=.16*Math.sqrt(Math.max(0,1-(xx/.23)**2-((y-.24)/.23)**2));
+      return[xx,y,-Math.max(flesh,clothZ)-.001];};
+    const backPath=pts=>pts.map(([x,y])=>backPoint(x,y));
+
     // Lay the washboard into the rounded chest, clear of the lowered chin.
     for(const side of [-1,1])box(torso,leather,side*.14,.23,.135,.032,.42,.025,side*.09);
     for(let i=0;i<4;i++){box(torso,rust,0,.35-i*.072,.171,.278,.052,.069,(i%2?1:-1)*.03);for(const side of [-1,1])egg(torso,steel,side*.107,.35-i*.072,.208,.022,.022,.009);}
@@ -522,14 +617,15 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
     }
     for(let i=0;i<8;i++){
       const p=i<4?armLG:head,x=i<4?-.07:(i-5)*.045,y=i<4?-.05-(i%4)*.047:.09,z=i<4?.08:(i===5?-.19:-.17);
-      const b=A.put(p,new T.CylinderGeometry(.018*s,.027*s,.023*s,6),pale,x,y,z,Math.PI/2);
-      egg(p,hair,x,y,z+.015,.017,.017,.009);
+      const seatZ=i<4?z:headDepth(x,y,-1)-.008;
+      const b=A.put(p,new T.CylinderGeometry(.018*s,.027*s,.023*s,6),pale,x,y,seatZ,Math.PI/2);
+      egg(p,hair,x,y,seatZ+.015,.017,.017,.009);
     }
     for(let i=0;i<7;i++){
-      const x=(i-3)*.061,y=.47-(i%3)*.065;path(torso,moss,[[x,y,-.13],[x+.032,y-.15,-.20],[x-.024,y-.34,-.185],[x+.013,y-.51,-.15]],.012);
-      ribbon(torso,moss,[[x,y,-.15],[x+.05,y-.19,-.22],[x-.017,y-.38,-.195],[x+.028,y-.52,-.158]],.023);
+      const x=(i-3)*.061,y=.47-(i%3)*.065;path(torso,moss,backPath([[x,y],[x+.032,y-.15],[x-.024,y-.34],[x+.013,y-.51]]),.012);
+      ribbon(torso,moss,backPath([[x,y],[x+.05,y-.19],[x-.017,y-.38],[x+.028,y-.52]]),.023,(x,y)=>backPoint(x,y)[2]);
     }
-    for(let i=0;i<5;i++)rag(torso,cloth,(i-2)*.064,.055,-.153,.056,.12+(i%2)*.05,i*.1);
+    for(let i=0;i<5;i++){const m=rag(torso,cloth,(i-2)*.064,.055,-.153,.056,.12+(i%2)*.05,i*.1),P=m.geometry.attributes.position,v=new T.Vector3();m.updateMatrix();for(let j=0;j<P.count;j++){const depth=P.getZ(j)/s;v.fromBufferAttribute(P,j).applyMatrix4(m.matrix);const q=backPoint(v.x/s,v.y/s);P.setXYZ(j,q[0]*s,q[1]*s,(q[2]-depth)*s);}m.position.set(0,0,0);m.rotation.set(0,0,0);m.scale.set(1,1,1);m.geometry.computeVertexNormals();}
   }
   if(k==='leaper'){
     // Root the dorsal ridge on the taper of the hunched back; the older fixed
@@ -638,6 +734,8 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
     const belly=u.pulseMats[0];Object.assign(belly,detailMaterial(T));
     g.traverse(o=>{if(o.isMesh&&o.material===belly)o.geometry.setAttribute('uv',new T.Float32BufferAttribute(detailUV(T,o.geometry,'wet'),2));});
   }
+  refineHumanoid(A,T,g,s,k,{skin,shadow,pale,wound,mouth,teeth,hair,cloth,shirt,leather,steel,rust,moss},u.look); // CC-355 (Claude 3): the humanoids' anatomy
+  if(k==='brute')refineBrute(A,T,g,s,{skin,shadow,wound,teeth,leather,steel});
   if(audit) audit({type:k,root:g}); // Inspect separate parts before draw-call batching hides their seams.
   batchGlow(T,g);
   const keep=new Set([...u.eyes.map(e=>e.material),...A.mats.filter(m=>m.emissive.getHex()!==0)]);
@@ -769,18 +867,23 @@ export function applyGuardianConcept({THREE:T,g,rbox,kind='caveguard',audit=null
 function batchSurfaces(T,g,keep){
   const groups=[];g.traverse(o=>{if(o.isGroup)groups.push(o);});const mats=[];
   for(const p of groups){
-    const meshes=p.children.filter(o=>o.isMesh&&!keep.has(o.material));if(!meshes.length)continue;
-    const pos=[],norm=[],col=[],uv=[];
+    const all=p.children.filter(o=>o.isMesh&&!keep.has(o.material));if(!all.length)continue;
+    // CC-359 (proposal, Claude 3): pieces painted from their own atlas (material.userData.cc359Atlas) keep their UVs and that material
+    for(const meshes of [all.filter(o=>!o.material.userData.cc359Atlas),all.filter(o=>o.material.userData.cc359Atlas)]){if(!meshes.length)continue;const atlasMat=meshes[0].material.userData.cc359Atlas?meshes[0].material:null;
+    const pos=[],norm=[],col=[],uv=[],bootAttachment=[];
+    const hasBootAttachment=meshes.some(o=>o.userData.bootAttachment||o.geometry.attributes.bootAttachment);
     for(const o of meshes){o.updateMatrix();const src=o.geometry.index?o.geometry.toNonIndexed():o.geometry.clone();src.applyMatrix4(o.matrix);
-      const mapped=detailUV(T,src,o.material.userData.surface||'skin');uv.push(...mapped);
-      const a=src.getAttribute('position'),n=src.getAttribute('normal'),c=o.material.color;
-      for(let i=0;i<a.count;i++){pos.push(a.getX(i),a.getY(i),a.getZ(i));norm.push(n.getX(i),n.getY(i),n.getZ(i));col.push(c.r,c.g,c.b);}
+      const mapped=atlasMat?src.getAttribute('uv').array:detailUV(T,src,o.material.userData.surface||'skin');uv.push(...mapped);
+      const a=src.getAttribute('position'),n=src.getAttribute('normal'),c=o.material.color,vc=o.material.vertexColors&&src.getAttribute('color'),binding=src.getAttribute('bootAttachment');
+      if(hasBootAttachment)for(let i=0;i<a.count;i++)bootAttachment.push(o.userData.bootAttachment?1:(binding?.getX(i)||0));
+      for(let i=0;i<a.count;i++){pos.push(a.getX(i),a.getY(i),a.getZ(i));norm.push(n.getX(i),n.getY(i),n.getZ(i));col.push(c.r*(vc?vc.getX(i):1),c.g*(vc?vc.getY(i):1),c.b*(vc?vc.getZ(i):1));}
       src.dispose();o.removeFromParent();
     }
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('normal',new T.Float32BufferAttribute(norm,3));geo.setAttribute('color',new T.Float32BufferAttribute(col,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));
-    const material=new T.MeshStandardMaterial({vertexColors:true,roughness:.86,...detailMaterial(T)});mats.push(material);
+    if(hasBootAttachment)geo.setAttribute('bootAttachment',new T.Float32BufferAttribute(bootAttachment,1));
+    const material=atlasMat||new T.MeshStandardMaterial({vertexColors:true,roughness:.86,...detailMaterial(T)});if(!mats.includes(material))mats.push(material);
     const m=new T.Mesh(geo,material);m.castShadow=true;m.name='concept-surface';m.userData.compacted=true;p.add(m);
     if(p.userData.thigh)p.userData.thigh=m;if(p.userData.upper)p.userData.upper=m;if(p.userData.bodyMat)p.userData.bodyMat=material;
-  }
+  }}
   g.userData.mats=[...mats,...keep];
 }

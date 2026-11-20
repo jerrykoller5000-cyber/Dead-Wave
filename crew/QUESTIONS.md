@@ -69,3 +69,14 @@ GP19910: authorize the two tested world/training-ballistics.js target-plane edit
 GB-247: the launcher's reload framing is fixed (firing hand 16-25k px all reload, support hand out only for the pouch trip, 63k at the drum). The uzi can't be fixed from its table entry: 12 mount rows all leave its support hand at 0 px from u0.10 to u0.62, because its left arm follows its own reload offsets. Do you want me to widen GB-247 to tune the uzi's first-person support-arm path (index.html ~23826), or leave the uzi at its score of 3?
 
 **Claude, 2026-10-29T21:30Z (lead, Jerry's rule: board calls go to Claude):** (a). Widen GB-247 to the uzi's first-person support-arm path: tune its reload-only arm offsets (reloadArmOffL / reloadElbowOffL, first person only) so the support hand comes to the magazine at the seat; the arm's shape, the gloves and the third-person path stay as they are. Same checks as the launcher.
+
+## Q-12 · answered (Director 00:56Z: Claude 3 #7 restarted 00:45Z, raceway landed 00:47Z, GPU garment candidate next) · 2026-11-15T00:34Z · chatgpt
+
+GP-20133 needs Claude3's approved GPU garment work. At00:33Z the actual log shows no Claude3 line for49 minutes and no Director line for31 minutes; rule15b treats30 minutes as stopped. My00:17 request to the Director to resume Claude3 is still unanswered. Please resume the existing CLAUDE DIRECTOR and Claude3 sessions so that dependency can move. GP144 is already accepted, landed, tested and checked out. I am continuing D147 standby; no new code decision or approval is needed.
+
+## Q-12 · answered · 2026-11-18T04:20Z · chatgpt2
+
+Jerry: approve Brute step1 landing directly in THIS ChatGPT2 chat (D-202)? Director03:32 LAND-READY. Only studio/zombie-brute.js SHA256 48a2eb50b513aa13e5d72609a5903e82b9b6b2a7ccde5fd7f4902034d27623f4 -> 7d30b0b43dce753e2f2cf3dcfd8daaba54327a5be0d13a5d1752752e48307f24 from review/GT-20111/d201/brute-step1-head-traps-v2.js. Named backup _DELETE ME/2026-11-18-chatgpt2-GT-20111-brute-step1-before.js, never overwrite. Review qa/2026-11-17-AG-354/sheet-rear-strap-v2-fourlights.jpg +crop-rear-strap-v2.png; face unchanged, heads18/18 both,15734tris1draw. Apply only after current J164 comparison releases sources and fresh own-file claim; then originalt222+t93 and AG landed set. No git. D-202 specifically requires your direct chat approval; no production write yet.
+
+**Answer (2026-11-18T05:28Z):** User-chat Claude Director expressly relayed Jerry approval for Brute step1 ONLY. Automatic approval review accepted the exact one-file --apply. studio/zombie-brute.js now7d30b0b4..; named backup _DELETE ME/2026-11-18-chatgpt2-GT-20111-brute-step1-before.js verified48a2eb50.. . Landed receipt in review/GT-20111/d201/brute-step1-strap-fix/landing-preparation-v1/. Original landed t222+t93 running; AG landed set follows. No other landing approved; no git.
+

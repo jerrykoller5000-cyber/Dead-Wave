@@ -13,8 +13,10 @@
     const vis0 = sc.children.filter((c) => c.visible).length;
     T.setDay(5); await wait(1500);
     const D1 = T.shadowPruneDbg();
-    const THREE = T.THREE || window.THREE;   // tcl281's test: the stand-in three's transpose is a stub
-    const real = (() => { const m = new THREE.Matrix4().makeRotationX(0.3), e = m.elements.slice(); m.transpose(); return m.elements[6] === e[9] && e[6] !== e[9]; })();
+    const THREE = T.THREE || window.THREE;
+    // CB-335: the stand-in three's marker (fakethree.mjs STAND_IN). Its transpose is real since CB-291, so the old transpose tell
+    // read 'real' on the test page and this real-renderer row ran there (no ShadowNode: 0 passes, a false red).
+    const real = !THREE.STAND_IN;
     (real ? ok : (c, m) => out.push('INFO ' + m + ' (the stand-in three)'))(D1.passes > D.passes && D1.last > 0, 'shadow passes ran with children left out (' + D1.passes + ' passes, ' + D1.last + ' children out of the last)');
     const vis1 = sc.children.filter((c) => c.visible).length;
     ok(Math.abs(vis1 - vis0) < 40, 'nothing left hidden after the frames (' + vis0 + ' visible top-level children before, ' + vis1 + ' after)');

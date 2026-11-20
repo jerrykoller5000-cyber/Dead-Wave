@@ -1,0 +1,8 @@
+# chatgpt2 — GT-20111 Brute cloth/head gates and Spider death loan — 2026-11-18
+Changed: REVIEW only. Brute skinfield weights3 CPU preserves roots/noncloth. Director23:02 accepted Spider15 legs and approved bounded death-curl retarget loan; native corpse currently fails.
+Files: review/GT-20111/d201/cloth-hinge-v1/; review/GT-20111/d204/; crew/status/chatgpt2.md. NO production edits.
+Tests: LOWER-WEIGHTS3-SKINFIELD-NATIVE-MERGE-CPU-v4.json PASS roots324 exact/lower456/noncloth exact/bones32draw1; native253 queued owner-v13-skinfield. Original t222 CB358d before12/0 Brute6/6 vsfrozenStep2 after12/0 Brute4/6; conditional original-neck-clamped counterlift runtime9 now originalt22212/0 Brute6/6 single run. Three original frozen pairs and reds retained/unwaived.
+Screenshots: d204/spider-shape-p4-owner-v12-natural-arc/SPIDER-P4-NATURAL-LEG-ARC-v1.png and SPIDER-P4-NATURAL-LEG-CONTEXT-v1.jpg ALL20LOOKED, Director23:02 direction accepted. Brute weights2 waist LOOKED, no final acceptance.
+Not verified: No landing. Brute weights2 still24walk/24getup contacts; weights3 native/art/cache14/perf owed. Spider corpse18contacts/22floating/floor-126.66mm; rawangles/feet/head37.477mmgap/allclips/routes/perf unresolved. Full suite not run, Director/C2 cloud before commit D135.
+Requests: Director approved bounded begin/applySpiderDeath REVIEWloan23:02; C5sampler ruling pending. AIMloan pending, maybe unnecessary aftercounterlift6/6. OwnerChatGPT FYI sent.
+Contract changes: none. Games through crew slot, oneinstance/worker/lease, exclusiveperformance. J164 CLOSED separate GT-20124-landed handoff.

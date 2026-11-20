@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AG-357 Step 3 — 30-Shambler 5080 WebGPU Benchmark</title>
+  <style>
+    html, body { margin: 0; padding: 0; background: #14191e; color: #e2e8f0; font-family: ui-monospace, monospace; overflow: hidden; }
+    #hud { position: fixed; top: 8px; left: 8px; background: rgba(10,14,18,0.82); padding: 8px 12px; font-size: 12px; border-radius: 6px; z-index: 10; pointer-events: none; }
+    canvas { display: block; }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "../../vendor/three/three.webgpu.js",
+        "three/webgpu": "../../vendor/three/three.webgpu.js",
+        "three/tsl": "../../vendor/three/three.tsl.js"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="hud">Initializing WebGPU benchmark...</div>
+  <script type="module">
+    import * as THREE from 'three/webgpu';
+    import * as BufferGeometryUtils from '../../review/J168/lib/utils/BufferGeometryUtils.js';
+    import { GLTFLoader } from '../../review/J168/lib/loaders/GLTFLoader.js';
+    import { buildShamblerStep2 } from '../../review/AG-357/shambler-step2.mjs';
+    import {
+      buildShamblerStep3,
+      cloneSkinnedShambler,
+      createShamblerAtlasMaterial
+    } from '../../review/AG-357/shambler-step3.mjs';
+
+    const params = new URLSearchParams(location.search);
+    const W = parseInt(params.get('w') || '1280', 10);
+    const H = parseInt(params.get('h') || '720', 10);
+    const hud = document.getElementById('hud');
+
+    // Single un-duplicated WebGPU renderer: toggle timestamp tracking off during rAF/CPU timing, on for 12 GPU timestamp frames
+    const renderer = new THREE.WebGPURenderer({ antialias: true, preserveDrawingBuffer: true, trackTimestamp: true });
+    renderer.setPixelRatio(1);
+    renderer.setSize(W, H, false);
+    renderer.shadowMap.enabled = true;
+    document.body.appendChild(renderer.domElement);
+    await renderer.init();
+
+    const supportsGpuTs = !!renderer.backend?.trackTimestamp;
+    function setTimestampTracking(enabled) {
+      if (!supportsGpuTs || !renderer.backend) return;
+      renderer.backend.trackTimestamp = !!enabled;
+      const pool = renderer.backend.timestampQueryPool?.render;
+      if (pool) pool.trackTimestamp = !!enabled;
+    }
+    setTimestampTracking(false);
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x6d7986);
+    scene.fog = new THREE.Fog(0x6d7986, 28, 70);
+
+    const camera = new THREE.PerspectiveCamera(46, W / H, 0.1, 150);
+    camera.position.set(0, 4.9, 12.0);
+    camera.lookAt(0, 1.15, -5.5);
+
+    const hemi = new THREE.HemisphereLight(0xbcd0e8, 0x3b443e, 1.15);
+    scene.add(hemi);
+    const dir = new THREE.DirectionalLight(0xfff1dc, 2.35);
+    dir.position.set(9, 18, 12);
+    dir.castShadow = true;
+    dir.shadow.mapSize.set(2048, 2048);
+    dir.shadow.camera.near = 1;
+    dir.shadow.camera.far = 55;
+    const sc = 22;
+    dir.shadow.camera.left = -sc; dir.shadow.camera.right = sc;
+    dir.shadow.camera.top = sc; dir.shadow.camera.bottom = -sc;
+    scene.add(dir);
+
+    const floor = new THREE.Mesh(
+      new THREE.CircleGeometry(42, 64),
+      new THREE.MeshStandardMaterial({ color: 0x73797f, roughness: 0.94, metalness: 0.0 })
+    );
+    floor.rotation.x = -Math.PI / 2;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    // 30 horde slots: 5 rows x 6 cols
+    // Row 0 (6 shamblers at z=+3.2m) is ~9.6m from camera (<15m -> LOD0)
+    // Rows 1..4 (24 shamblers at z=-3.8..-15.8m) are 16.2m..27.9m from camera (>=15m -> LOD1)
+    function makePlacements(count = 30) {
+      const list = [];
+      const rowZ = [3.2, -3.8, -7.8, -11.8, -15.8];
+      const cols = 6;
+      const rowsNeeded = Math.ceil(count / cols);
+      for (let i = 0; i < count; i++) {
+        const rIdx = Math.floor(i / cols);
+        const c = i % cols;
+        const r = rIdx % rowZ.length;
+        const wrapLayer = Math.floor(rIdx / rowZ.length);
+        const z = rowZ[r] - wrapLayer * 3.0;
+        const spanX = 9.0 + (r + wrapLayer) * 1.15;
+        const x = ((c / (cols - 1)) - 0.5) * spanX + ((r % 2) ? 0.45 : -0.45);
+        const ry = (Math.sin(i * 1.7) * 0.25);
+        const distM = camera.position.distanceTo(new THREE.Vector3(x, 0.9, z));
+        list.push({ x, z, ry, distM, phase: i * 0.57, speed: 3.1 + (i % 5) * 0.18 });
+      }
+      return list;
+    }
+
+    // Load current live shambler GLB and wrap it on the 14-bone SkinnedMesh skeleton for a 100% fair animated comparison
+    const gltfLoader = new GLTFLoader();
+    const oursGltf = await gltfLoader.loadAsync('../../Claude outputs/J168/proportions/ours/shambler.glb');
+
+    function buildSkinnedOursTemplate(srcScene) {
+      srcScene.updateMatrixWorld(true);
+      const geos = [];
+      let matRef = null;
+      srcScene.traverse((o) => {
+        if (!o.isMesh || !o.geometry) return;
+        const g = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry.clone();
+        g.applyMatrix4(o.matrixWorld);
+        if (!matRef) matRef = o.material;
+        geos.push(g);
+      });
+      const merged = geos.length === 1 ? geos[0] : BufferGeometryUtils.mergeGeometries(geos, false);
+      const indexed = BufferGeometryUtils.mergeVertices(merged, 1e-4);
+      indexed.computeBoundingBox();
+      const box = indexed.boundingBox;
+      const yMin = box.min.y;
+      const h = Math.max(0.01, box.max.y - yMin);
+      const s = 1.8 / h;
+      indexed.translate(0, -yMin, 0);
+      indexed.scale(s, s, s);
+      indexed.computeVertexNormals();
+
+      const root = new THREE.Group();
+      root.name = 'ours-skinned-template';
+      const mkBone = (name, x, y, z) => { const g = new THREE.Group(); g.name = name; g.position.set(x, y, z); return g; };
+      const hips = mkBone('hips', 0, 0.90, 0);
+      const torso = mkBone('torso', 0, 0.14, 0.02);
+      const head = mkBone('head', 0, 0.44, 0.10);
+      const jaw = mkBone('jaw', 0, 0.14, 0.03);
+      const armLG = mkBone('armLG', 0.17, 0.38, 0.08);
+      const elbowLG = mkBone('elbowLG', 0.02, -0.24, 0.14);
+      const armRG = mkBone('armRG', -0.17, 0.38, 0.08);
+      const elbowRG = mkBone('elbowRG', -0.02, -0.24, 0.14);
+      const legLG = mkBone('legLG', 0.10, -0.05, 0);
+      const shinLG = mkBone('shinLG', 0, -0.39, 0);
+      const ankleLG = mkBone('ankleLG', 0, -0.38, 0);
+      const legRG = mkBone('legRG', -0.10, -0.05, 0);
+      const shinRG = mkBone('shinRG', 0, -0.39, 0);
+      const ankleRG = mkBone('ankleRG', 0, -0.38, 0);
+
+      root.add(hips);
+      hips.add(torso); torso.add(head); head.add(jaw);
+      torso.add(armLG); armLG.add(elbowLG);
+      torso.add(armRG); armRG.add(elbowRG);
+      hips.add(legLG); legLG.add(shinLG); shinLG.add(ankleLG);
+      hips.add(legRG); legRG.add(shinRG); shinRG.add(ankleRG);
+
+      const bones = [hips, torso, head, jaw, armLG, elbowLG, armRG, elbowRG, legLG, shinLG, ankleLG, legRG, shinRG, ankleRG];
+      // Assign skin weights cleanly by vertex zone in rest shamble coords
+      const pos = indexed.attributes.position;
+      const vCount = pos.count;
+      const si = new Uint16Array(vCount * 4);
+      const sw = new Float32Array(vCount * 4);
+      for (let i = 0; i < vCount; i++) {
+        const vx = pos.getX(i), vy = pos.getY(i), vz = pos.getZ(i);
+        let b = 1; // torso default
+        if (vy >= 1.44) b = 2; // head
+        else if (vy < 0.87) {
+          if (vx >= 0) b = vy < 0.13 ? 10 : (vy < 0.50 ? 9 : 8);
+          else b = vy < 0.13 ? 13 : (vy < 0.50 ? 12 : 11);
+        } else if (Math.abs(vx) > 0.20 || (Math.abs(vx) > 0.14 && vz > 0.16 && vy > 0.92 && vy < 1.44)) {
+          if (vx >= 0) b = (vz > 0.30 || vy < 1.15) ? 5 : 4;
+          else b = (vz > 0.30 || vy < 1.15) ? 7 : 6;
+        } else if (vy < 1.04) {
+          b = 0; // hips
+        }
+        si[i * 4] = b;
+        sw[i * 4] = 1.0;
+      }
+      indexed.setAttribute('skinIndex', new THREE.Uint16BufferAttribute(si, 4));
+      indexed.setAttribute('skinWeight', new THREE.Float32BufferAttribute(sw, 4));
+
+      const sm = new THREE.SkinnedMesh(indexed, matRef);
+      sm.name = 'ours-skinned';
+      sm.castShadow = true;
+      sm.receiveShadow = true;
+      sm.frustumCulled = false;
+      root.add(sm);
+      root.updateMatrixWorld(true);
+      sm.bind(new THREE.Skeleton(bones), new THREE.Matrix4());
+      const triCount = Math.round((indexed.index ? indexed.index.count : pos.count) / 3);
+      root.userData = {
+        hips, torso, head, jaw, armLG, elbowLG, armRG, elbowRG, legLG, shinLG, ankleLG, legRG, shinRG, ankleRG,
+        skinnedMesh: sm,
+        stats: { tris: triCount, meshCount: 1, materials: 1, texBytes: 0, texCount: 0 }
+      };
+      return root;
+    }
+
+    function cloneOursSkinned(template) {
+      const clone = template.clone(true);
+      clone.position.set(0, 0, 0);
+      clone.rotation.set(0, 0, 0);
+      const srcSkin = template.getObjectByName('ours-skinned');
+      const dstSkin = clone.getObjectByName('ours-skinned');
+      const clonedBones = srcSkin.skeleton.bones.map((b) => clone.getObjectByName(b.name));
+      clone.updateMatrixWorld(true);
+      dstSkin.bind(new THREE.Skeleton(clonedBones, srcSkin.skeleton.boneInverses), srcSkin.bindMatrix.clone());
+      clone.userData = {};
+      for (const b of clonedBones) clone.userData[b.name] = b;
+      return clone;
+    }
+
+    function cloneStep2Unmerged(template) {
+      const clone = template.clone(true);
+      clone.position.set(0, 0, 0);
+      clone.rotation.set(0, 0, 0);
+      const armLG = clone.getObjectByName('armLG');
+      const armRG = clone.getObjectByName('armRG');
+      const legLG = clone.getObjectByName('legLG');
+      const legRG = clone.getObjectByName('legRG');
+      clone.userData = {
+        hips: clone.getObjectByName('hips'),
+        torso: clone.getObjectByName('torso'),
+        head: clone.getObjectByName('head'),
+        jaw: clone.getObjectByName('jaw'),
+        armLG, armRG,
+        elbowLG: armLG?.getObjectByName('elbowLG'),
+        elbowRG: armRG?.getObjectByName('elbowRG'),
+        legLG, legRG,
+        shinLG: legLG?.getObjectByName('shinLG'),
+        shinRG: legRG?.getObjectByName('shinRG'),
+        ankleLG: legLG?.getObjectByName('ankleLG'),
+        ankleRG: legRG?.getObjectByName('ankleRG')
+      };
+      return clone;
+    }
+
+    // Build shared templates once (strict zero duplicate geometry/material/atlas allocation across horde!)
+    const oursTpl = buildSkinnedOursTemplate(oursGltf.scene);
+    const step2Tpl = buildShamblerStep2(THREE, BufferGeometryUtils, { pose: 'shamble' });
+    const atlas1KTpl = buildShamblerStep3(THREE, BufferGeometryUtils, { pose: 'shamble', atlasSize: 1024, lod: 0 });
+    const atlas512Bundle = createShamblerAtlasMaterial(THREE, { atlasSize: 512 });
+    const atlas512Tpl = buildShamblerStep3(THREE, BufferGeometryUtils, { pose: 'shamble', atlasBundle: atlas512Bundle, lod: 0 });
+    const lod1Tpl = buildShamblerStep3(THREE, BufferGeometryUtils, { pose: 'shamble', atlasBundle: atlas512Bundle, lod: 1 });
+
+    const BONE_KEYS = ['hips', 'torso', 'head', 'jaw', 'armLG', 'elbowLG', 'armRG', 'elbowRG', 'legLG', 'shinLG', 'ankleLG', 'legRG', 'shinRG', 'ankleRG'];
+
+    function snapshotBaseRot(actor) {
+      const base = {};
+      for (const k of BONE_KEYS) {
+        const b = actor.userData[k];
+        if (b) base[k] = { x: b.rotation.x, y: b.rotation.y, z: b.rotation.z, py: b.position.y };
+      }
+      actor.userData.baseRot = base;
+    }
+
+    function animateActor(actor, t, p) {
+      const base = actor.userData.baseRot;
+      const ph = t * p.speed + p.phase;
+      const s = Math.sin(ph);
+      const c = Math.cos(ph);
+      const u = actor.userData;
+      if (u.hips && base.hips) {
+        u.hips.position.y = base.hips.py + Math.abs(c) * 0.024;
+        u.hips.rotation.y = base.hips.y + s * 0.07;
+      }
+      if (u.torso && base.torso) {
+        u.torso.rotation.x = base.torso.x + Math.sin(ph * 2) * 0.035;
+        u.torso.rotation.z = base.torso.z + c * 0.04;
+      }
+      if (u.head && base.head) {
+        u.head.rotation.y = base.head.y - s * 0.09;
+        u.head.rotation.z = base.head.z + c * 0.05;
+      }
+      if (u.jaw && base.jaw) {
+        u.jaw.rotation.x = base.jaw.x + Math.sin(ph * 1.5) * 0.06;
+      }
+      if (u.armLG && base.armLG) u.armLG.rotation.x = base.armLG.x - s * 0.14;
+      if (u.armRG && base.armRG) u.armRG.rotation.x = base.armRG.x + s * 0.14;
+      if (u.legLG && base.legLG) u.legLG.rotation.x = base.legLG.x + s * 0.24;
+      if (u.legRG && base.legRG) u.legRG.rotation.x = base.legRG.x - s * 0.24;
+      if (u.shinLG && base.shinLG) u.shinLG.rotation.x = base.shinLG.x + Math.max(0, -c) * 0.22;
+      if (u.shinRG && base.shinRG) u.shinRG.rotation.x = base.shinRG.x + Math.max(0, c) * 0.22;
+    }
+
+    function createHorde(mode, count = 30) {
+      const placements = makePlacements(count);
+      const group = new THREE.Group();
+      const actors = [];
+      let totalTris = 0;
+      let totalMeshes = 0;
+      const uniqueGeos = new Set();
+      const uniqueMats = new Set();
+
+      for (let i = 0; i < placements.length; i++) {
+        const p = placements[i];
+        let a;
+        if (mode === 'OURS_NOW') a = cloneOursSkinned(oursTpl);
+        else if (mode === 'STEP2_UNMERGED') a = cloneStep2Unmerged(step2Tpl);
+        else if (mode === 'STEP3_ATLAS_1K') a = cloneSkinnedShambler(THREE, atlas1KTpl);
+        else if (mode === 'STEP3_ATLAS_512') a = cloneSkinnedShambler(THREE, atlas512Tpl);
+        else if (mode === 'STEP3_LOD1_15M') a = cloneSkinnedShambler(THREE, lod1Tpl);
+        else if (mode === 'STEP3_MIXED_HORDE') {
+          a = p.distM < 15.0 ? cloneSkinnedShambler(THREE, atlas512Tpl) : cloneSkinnedShambler(THREE, lod1Tpl);
+        }
+        a.position.set(p.x, 0, p.z);
+        a.rotation.y = p.ry;
+        snapshotBaseRot(a);
+        group.add(a);
+        actors.push({ actor: a, p });
+
+        a.traverse((o) => {
+          if (o.isMesh && o.geometry) {
+            totalMeshes++;
+            totalTris += o.geometry.index ? (o.geometry.index.count / 3) : (o.geometry.attributes.position.count / 3);
+            uniqueGeos.add(o.geometry);
+            if (o.material) uniqueMats.add(o.material);
+          }
+        });
+      }
+
+      const tplStats =
+        mode === 'OURS_NOW' ? oursTpl.userData.stats
+        : mode === 'STEP2_UNMERGED' ? step2Tpl.userData.stats
+        : mode === 'STEP3_ATLAS_1K' ? atlas1KTpl.userData.stats
+        : mode === 'STEP3_LOD1_15M' ? lod1Tpl.userData.stats
+        : atlas512Tpl.userData.stats;
+
+      return {
+        mode,
+        count,
+        group,
+        actors,
+        summaryStats: {
+          count,
+          totalTris: Math.round(totalTris),
+          avgTrisPerShambler: Math.round(totalTris / count),
+          meshesPerShambler: Number((totalMeshes / count).toFixed(1)),
+          totalMeshes,
+          uniqueGeos: uniqueGeos.size,
+          uniqueMats: uniqueMats.size,
+          texCount: tplStats.texCount,
+          texMB: Number((tplStats.texBytes / (1024 * 1024)).toFixed(2))
+        }
+      };
+    }
+
+    function nextFrame() {
+      return new Promise((r) => requestAnimationFrame(r));
+    }
+
+    function withTimeout(promise, ms, fallback = null) {
+      return Promise.race([
+        promise,
+        new Promise((resolve) => setTimeout(() => resolve(fallback), ms))
+      ]);
+    }
+
+    async function benchHorde(mode, count = 30, warmupMax = 35, measureMax = 90, capturePng = false) {
+      const horde = createHorde(mode, count);
+      scene.add(horde.group);
+      hud.textContent = `Bench ${mode} (${count} shamblers)...`;
+
+      // Ensure timestamp tracking is OFF during warmup + rAF measurement so zero readbacks stall rAF
+      setTimestampTracking(false);
+
+      // Initial render so WebGPU pipelines/bindgroups compile cleanly before warmup finishes
+      renderer.render(scene, camera);
+      let pngDataUrl = null;
+
+      const tWarm0 = performance.now();
+      for (let i = 0; i < warmupMax; i++) {
+        const t = i / 60;
+        for (const item of horde.actors) animateActor(item.actor, t, item.p);
+        renderer.render(scene, camera);
+        if (capturePng && i === 4) pngDataUrl = renderer.domElement.toDataURL('image/png');
+        await nextFrame();
+        if (i >= 6 && performance.now() - tWarm0 > 1200) break;
+      }
+
+      const rafDeltas = [];
+      const cpuSubmitTimes = [];
+      let renderCallsSample = 0;
+      let renderTrisSample = 0;
+      let prevTs = performance.now();
+      const tMeas0 = prevTs;
+
+      for (let i = 0; i < measureMax; i++) {
+        const now = await nextFrame();
+        rafDeltas.push(now - prevTs);
+        prevTs = now;
+
+        const t = (i + 35) / 60;
+        const c0 = performance.now();
+        for (const item of horde.actors) animateActor(item.actor, t, item.p);
+        renderer.render(scene, camera);
+        const c1 = performance.now();
+        cpuSubmitTimes.push(c1 - c0);
+
+        if (i === 4) {
+          // NOTE: Three WebGPURenderer info.render.calls is a lifetime counter; drawCalls is per-frame draw calls!
+          renderCallsSample = renderer.info.render.drawCalls ?? renderer.info.render.frameCalls ?? renderer.info.render.calls;
+          renderTrisSample = renderer.info.render.triangles;
+        }
+        if (i >= 12 && now - tMeas0 > 2400) break;
+      }
+
+      // Measure clean hardware GPU render pass duration over 10 frames using the ALREADY warmed single renderer
+      let gpuMsAvg = null;
+      let gpuMsP95 = null;
+      if (supportsGpuTs) {
+        try {
+          setTimestampTracking(true);
+          const gpuSamples = [];
+          for (let i = 0; i < 10; i++) {
+            const t = (i + 120) / 60;
+            for (const item of horde.actors) animateActor(item.actor, t, item.p);
+            renderer.render(scene, camera);
+            const ms = await withTimeout(renderer.resolveTimestampsAsync(THREE.TimestampQuery.RENDER), 1200, null);
+            if (ms === null) {
+              console.warn(`GPU timestamp timed out on ${mode} iter ${i}, skipping remaining`);
+              break;
+            }
+            if (i >= 2 && Number.isFinite(ms) && ms >= 0) gpuSamples.push(ms);
+          }
+          if (gpuSamples.length) {
+            const gs = [...gpuSamples].sort((a, b) => a - b);
+            gpuMsAvg = Number((gs.reduce((a, b) => a + b, 0) / gs.length).toFixed(3));
+            gpuMsP95 = Number(gs[Math.floor(gs.length * 0.95)].toFixed(3));
+          }
+        } catch (err) {
+          console.warn('GPU timestamp pass fallback:', err?.message || err);
+        } finally {
+          setTimestampTracking(false);
+        }
+      }
+
+      scene.remove(horde.group);
+
+      const sortedRaf = [...rafDeltas].sort((a, b) => a - b);
+      const sortedCpu = [...cpuSubmitTimes].sort((a, b) => a - b);
+      const avgMs = rafDeltas.reduce((a, b) => a + b, 0) / rafDeltas.length;
+      const p95Ms = sortedRaf[Math.floor(sortedRaf.length * 0.95)];
+      const low1Ms = sortedRaf[Math.max(0, Math.floor(sortedRaf.length * 0.99) - 1)];
+      const worstMs = sortedRaf[sortedRaf.length - 1];
+      const cpuAvgMs = cpuSubmitTimes.reduce((a, b) => a + b, 0) / cpuSubmitTimes.length;
+      const cpuP95Ms = sortedCpu[Math.floor(sortedCpu.length * 0.95)];
+
+      return {
+        mode,
+        ...horde.summaryStats,
+        renderCallsSample,
+        renderTrisSample,
+        fps: Number((1000 / avgMs).toFixed(1)),
+        low1PctFps: Number((1000 / low1Ms).toFixed(1)),
+        avgMs: Number(avgMs.toFixed(2)),
+        p95Ms: Number(p95Ms.toFixed(2)),
+        worstMs: Number(worstMs.toFixed(2)),
+        cpuSubmitAvgMs: Number(cpuAvgMs.toFixed(3)),
+        cpuSubmitP95Ms: Number(cpuP95Ms.toFixed(3)),
+        gpuPassAvgMs: gpuMsAvg,
+        gpuPassP95Ms: gpuMsP95,
+        pngDataUrl
+      };
+    }
+
+    let gpuAdapterInfo = 'WebGPU';
+    try {
+      const adapter = await navigator.gpu?.requestAdapter();
+      if (adapter) {
+        const info = adapter.info || (await adapter.requestAdapterInfo?.());
+        if (info) {
+          gpuAdapterInfo = [info.vendor, info.architecture, info.device, info.description].filter(Boolean).join(' / ') || 'WebGPU';
+        }
+      }
+    } catch {}
+
+    hud.textContent = `Ready on ${renderer.backend?.constructor?.name} (${gpuAdapterInfo})`;
+
+    window.__AG357Bench = {
+      ready: true,
+      backend: renderer.backend?.constructor?.name || 'unknown',
+      gpuAdapterInfo,
+      hasGpuTimestamp: supportsGpuTs,
+      async runMode(mode, count = 30, warmup = 35, measureFrames = 90, capturePng = false) {
+        return benchHorde(mode, count, warmup, measureFrames, capturePng);
+      },
+      async runFullSuite() {
+        const modes30 = [
+          'OURS_NOW',
+          'STEP2_UNMERGED',
+          'STEP3_ATLAS_1K',
+          'STEP3_ATLAS_512',
+          'STEP3_LOD1_15M',
+          'STEP3_MIXED_HORDE'
+        ];
+        const results30 = [];
+        const screenshots = {};
+        for (const m of modes30) {
+          const capture = (m === 'OURS_NOW' || m === 'STEP3_MIXED_HORDE');
+          const res = await benchHorde(m, 30, 45, 120, capture);
+          if (res.pngDataUrl) screenshots[m] = res.pngDataUrl;
+          delete res.pngDataUrl;
+          results30.push(res);
+        }
+
+        // 120-shambler stress pass so draw-call & vertex savings separate even above display refresh
+        const stressModes = ['OURS_NOW', 'STEP2_UNMERGED', 'STEP3_ATLAS_512', 'STEP3_MIXED_HORDE'];
+        const results120 = [];
+        for (const m of stressModes) {
+          const res = await benchHorde(m, 120, 30, 90, false);
+          delete res.pngDataUrl;
+          results120.push(res);
+        }
+
+        hud.textContent = 'Benchmark complete.';
+        return {
+          at: new Date().toISOString(),
+          viewport: { w: W, h: H },
+          backend: renderer.backend?.constructor?.name || 'unknown',
+          gpuAdapterInfo,
+          results30,
+          results120,
+          screenshots
+        };
+      }
+    };
+  </script>
+</body>
+</html>

@@ -26,7 +26,7 @@
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'F13', key: 'F13', bubbles: true }));   // busy: no idle
     const m = T.marine || window.worldMarine, ud = m.userData;
     const pin = () => { const p = T.player.position; T.aimTarget.set(p.x, T.sampleHeight(p.x, p.z) + 1.25, p.z + 10); };
-    aimer = setInterval(pin, 5); pin();
+    aimer = T.pinAimDbg ? (T.pinAimDbg(() => { pin(); if (T.setAimYawDbg) T.setAimYawDbg(0); }), null) : setInterval(pin, 5); pin();   /* CB-335: aim pinned in the frame (TT.pinAimDbg), his facing held at the no-cursor 0 deg, so a real cursor over the window cannot turn him */
     const palmL = () => ud.elbowLG.localToWorld(V().set(0.02, -0.27, 0.13));
     // CB-307: the firing hand's grip point: its fist's channel (wrist.userData.grip, what holdHand lays on the anchor); gripR without one
     const wrR = ud.elbowRG.getObjectByName('wrist');
@@ -195,6 +195,6 @@
     ok(reloadSeen, 'the reload runs');
     if (reloadSeen) ok(reloadCase, 'the last round\'s case comes out on the reload\'s bolt pull');
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
-  if (aimer) clearInterval(aimer);
+  if (T.pinAimDbg) T.pinAimDbg(null); if (aimer) clearInterval(aimer);
   return out.join('\n');
 })();

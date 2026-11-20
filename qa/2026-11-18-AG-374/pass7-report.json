@@ -1,0 +1,1709 @@
+{
+  "at": "2026-11-18T21:50:59.810Z",
+  "step": "4b-pass7",
+  "backend": "WebGPUBackend",
+  "aPoseNormScale": 0.9728363491835529,
+  "stats": {
+    "ours": {
+      "tris": 18592,
+      "meshes": 1,
+      "materials": 1,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "proto_apose": {
+      "tris": 36496,
+      "meshes": 31,
+      "materials": 10,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "proto_shamble": {
+      "tris": 36496,
+      "meshes": 31,
+      "materials": 10,
+      "size": [
+        0.6235,
+        1.776,
+        0.9212
+      ]
+    },
+    "white_apose": {
+      "tris": 36496,
+      "meshes": 31,
+      "materials": 2,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "white_shamble": {
+      "tris": 36496,
+      "meshes": 31,
+      "materials": 2,
+      "size": [
+        0.6235,
+        1.776,
+        0.9212
+      ]
+    },
+    "tripo": {
+      "tris": 17664,
+      "meshes": 1,
+      "materials": 1,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "step3_1k": {
+      "tris": 36496,
+      "meshes": 2,
+      "materials": 2,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "step3_512": {
+      "tris": 36496,
+      "meshes": 2,
+      "materials": 2,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "step3_512_shamble": {
+      "tris": 36496,
+      "meshes": 2,
+      "materials": 2,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "step3_lod1": {
+      "tris": 7820,
+      "meshes": 2,
+      "materials": 2,
+      "size": [
+        0.5494,
+        1.7427,
+        0.8705
+      ]
+    }
+  },
+  "protoStats": {
+    "tris": 36496,
+    "meshCount": 31,
+    "aoVerts": 19625,
+    "materials": 10,
+    "texBytes": 19070976,
+    "texCount": 21
+  },
+  "step3Stats": {
+    "step3_1k": {
+      "tris": 36496,
+      "meshCount": 2,
+      "materials": 2,
+      "texBytes": 12582912,
+      "texCount": 3,
+      "atlasSize": 1024,
+      "lod": 0
+    },
+    "step3_512": {
+      "tris": 36496,
+      "meshCount": 2,
+      "materials": 2,
+      "texBytes": 3145728,
+      "texCount": 3,
+      "atlasSize": 512,
+      "lod": 0
+    },
+    "step3_512_shamble": {
+      "tris": 36496,
+      "meshCount": 2,
+      "materials": 2,
+      "texBytes": 3145728,
+      "texCount": 3,
+      "atlasSize": 512,
+      "lod": 0
+    },
+    "step3_lod1": {
+      "tris": 7820,
+      "meshCount": 2,
+      "materials": 2,
+      "texBytes": 3145728,
+      "texCount": 3,
+      "atlasSize": 512,
+      "lod": 1
+    }
+  },
+  "headMetrics": {
+    "crownY": 1.8,
+    "chinY": 1.4652,
+    "collarY": 1.3757,
+    "mouthGapeM": 0.0459,
+    "headHeightOpenM": 0.3348,
+    "headHeightOpenPct": 18.6,
+    "headHeightClosedM": 0.2889,
+    "headHeightClosedPct": 16.1,
+    "headDepthBrowM": 0.2795,
+    "headDepthBrowPct": 15.5,
+    "headDepthMaxM": 0.2795,
+    "headDepthMaxPct": 15.5,
+    "craniumWidthM": 0.2169,
+    "craniumWidthPct": 12,
+    "neckTopWidthM": 0.1249,
+    "craniumToNeckRatio": 1.74,
+    "jawGonionWidthM": 0.1722,
+    "neckLengthChinToCollar": 0.0895,
+    "occiputBackZ": -0.1184,
+    "browFrontZ": 0.1611,
+    "neckBackZ": -0.067,
+    "neckMidZ": -0.0088,
+    "occiputOverhangM": 0.0514,
+    "neckCenterPctFromBack": 39.2
+  },
+  "headComparison": {
+    "ours_pass6": {
+      "crownY": 1.8,
+      "chinY": 1.4652,
+      "collarY": 1.3757,
+      "mouthGapeM": 0.0459,
+      "headHeightOpenM": 0.3348,
+      "headHeightOpenPct": 18.6,
+      "headHeightClosedM": 0.2889,
+      "headHeightClosedPct": 16.1,
+      "headDepthBrowM": 0.2795,
+      "headDepthBrowPct": 15.5,
+      "headDepthMaxM": 0.2795,
+      "headDepthMaxPct": 15.5,
+      "craniumWidthM": 0.2169,
+      "craniumWidthPct": 12,
+      "neckTopWidthM": 0.1249,
+      "craniumToNeckRatio": 1.74,
+      "jawGonionWidthM": 0.1722,
+      "neckLengthChinToCollar": 0.0895,
+      "occiputBackZ": -0.1184,
+      "browFrontZ": 0.1611,
+      "neckBackZ": -0.067,
+      "neckMidZ": -0.0088,
+      "occiputOverhangM": 0.0514,
+      "neckCenterPctFromBack": 39.2
+    },
+    "tripo": {
+      "crownY": 1.8,
+      "chinY": 1.4351,
+      "collarY": 1.405,
+      "mouthGapeM": 0.0703,
+      "headHeightOpenM": 0.3649,
+      "headHeightOpenPct": 20.3,
+      "headHeightClosedM": 0.2946,
+      "headHeightClosedPct": 16.4,
+      "headDepthBrowM": 0.2919,
+      "headDepthBrowPct": 16.2,
+      "headDepthMaxM": 0.299,
+      "headDepthMaxPct": 16.6,
+      "craniumWidthM": 0.2119,
+      "craniumWidthPct": 11.8,
+      "neckTopWidthM": 0.1328,
+      "craniumToNeckRatio": 1.6,
+      "jawGonionWidthM": null,
+      "neckLengthChinToCollar": 0.0301,
+      "occiputBackZ": -0.1447,
+      "browFrontZ": 0.1473,
+      "neckBackZ": -0.0998,
+      "neckMidZ": -0.0317,
+      "occiputOverhangM": 0.0448,
+      "neckCenterPctFromBack": 38.7
+    },
+    "ours_live": {
+      "crownY": 1.8,
+      "chinY": 1.4902,
+      "collarY": 1.405,
+      "mouthGapeM": 0.05,
+      "headHeightOpenM": 0.3098,
+      "headHeightOpenPct": 17.2,
+      "headHeightClosedM": 0.2598,
+      "headHeightClosedPct": 14.4,
+      "headDepthBrowM": 0.2203,
+      "headDepthBrowPct": 12.2,
+      "headDepthMaxM": 0.2203,
+      "headDepthMaxPct": 12.2,
+      "craniumWidthM": 0.2369,
+      "craniumWidthPct": 13.2,
+      "neckTopWidthM": 0.2284,
+      "craniumToNeckRatio": 1.04,
+      "jawGonionWidthM": null,
+      "neckLengthChinToCollar": 0.0852,
+      "occiputBackZ": -0.1464,
+      "browFrontZ": 0.0739,
+      "neckBackZ": -0.2094,
+      "neckMidZ": -0.0824,
+      "occiputOverhangM": -0.063,
+      "neckCenterPctFromBack": 29.1
+    }
+  },
+  "frames": {
+    "noon-ours-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-ours-front.png",
+      "md5": "76f8da66",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-ours-3q.png",
+      "md5": "eaf0fb3b",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-ours-side.png",
+      "md5": "48bc2446",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-ours-back.png",
+      "md5": "3c200974",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-head_front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-ours-head_front.png",
+      "md5": "e5eaef92",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-ours-head_3q.png",
+      "md5": "44958a6c",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-ours-head_side.png",
+      "md5": "10236ea1",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-ours-head_back.png",
+      "md5": "26e598d5",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-proto_shamble-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_shamble-front.png",
+      "md5": "6a7acb3b",
+      "hFill": 0.85,
+      "boundsH": 1.776,
+      "size": [
+        0.6235,
+        1.776,
+        0.9212
+      ]
+    },
+    "noon-proto_shamble-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_shamble-3q.png",
+      "md5": "e3da607b",
+      "hFill": 0.85,
+      "boundsH": 1.776,
+      "size": [
+        0.6235,
+        1.776,
+        0.9212
+      ]
+    },
+    "noon-proto_shamble-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_shamble-side.png",
+      "md5": "93c77e6b",
+      "hFill": 0.85,
+      "boundsH": 1.776,
+      "size": [
+        0.6235,
+        1.776,
+        0.9212
+      ]
+    },
+    "noon-proto_shamble-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_shamble-back.png",
+      "md5": "84b823cf",
+      "hFill": 0.85,
+      "boundsH": 1.776,
+      "size": [
+        0.6235,
+        1.776,
+        0.9212
+      ]
+    },
+    "noon-proto_shamble-head_front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_shamble-head_front.png",
+      "md5": "a929cd5e",
+      "hFill": 0.716,
+      "boundsH": 1.776,
+      "size": [
+        0.6235,
+        1.776,
+        0.9212
+      ]
+    },
+    "noon-proto_shamble-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_shamble-head_3q.png",
+      "md5": "40a38c44",
+      "hFill": 0.716,
+      "boundsH": 1.776,
+      "size": [
+        0.6235,
+        1.776,
+        0.9212
+      ]
+    },
+    "noon-proto_shamble-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_shamble-head_side.png",
+      "md5": "f244bbcb",
+      "hFill": 0.716,
+      "boundsH": 1.776,
+      "size": [
+        0.6235,
+        1.776,
+        0.9212
+      ]
+    },
+    "noon-proto_shamble-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_shamble-head_back.png",
+      "md5": "83e4785c",
+      "hFill": 0.716,
+      "boundsH": 1.776,
+      "size": [
+        0.6235,
+        1.776,
+        0.9212
+      ]
+    },
+    "noon-proto_shamble-head_3q_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_shamble-head_3q_back.png",
+      "md5": "49c1f40e",
+      "hFill": 0.716,
+      "boundsH": 1.776,
+      "size": [
+        0.6235,
+        1.776,
+        0.9212
+      ]
+    },
+    "noon-proto_apose-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-front.png",
+      "md5": "782a51e1",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-proto_apose-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-3q.png",
+      "md5": "d4716115",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-proto_apose-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-side.png",
+      "md5": "39d80aeb",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-proto_apose-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-back.png",
+      "md5": "16497dcb",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-proto_apose-head_front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-head_front.png",
+      "md5": "8d57c726",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-proto_apose-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-head_3q.png",
+      "md5": "0b46ba91",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-proto_apose-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-head_side.png",
+      "md5": "ffa7ec7f",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-proto_apose-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-head_back.png",
+      "md5": "9f6aec39",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-proto_apose-head_3q_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-head_3q_back.png",
+      "md5": "f6acafd8",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-proto_apose-seam_neck_torso_front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-seam_neck_torso_front.png",
+      "md5": "5febf89a",
+      "hFill": 3.988,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-proto_apose-seam_neck_torso_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-seam_neck_torso_back.png",
+      "md5": "670df635",
+      "hFill": 3.703,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-proto_apose-seam_neck_face": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-seam_neck_face.png",
+      "md5": "61e0785c",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-proto_apose-seam_face_scalp": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-proto_apose-seam_face_scalp.png",
+      "md5": "f4c6a665",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-white_apose-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-white_apose-head_3q.png",
+      "md5": "58414f5e",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-white_apose-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-white_apose-head_back.png",
+      "md5": "60aa1ae2",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-white_apose-head_front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-white_apose-head_front.png",
+      "md5": "39f6918e",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-white_apose-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-white_apose-head_side.png",
+      "md5": "64c28244",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-white_apose-head_3q_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-white_apose-head_3q_back.png",
+      "md5": "49fcab96",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0424,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_1k-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_1k-front.png",
+      "md5": "0ec7ef66",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_1k-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_1k-3q.png",
+      "md5": "2fcbe222",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_1k-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_1k-side.png",
+      "md5": "69284cf7",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_1k-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_1k-back.png",
+      "md5": "81a6b89a",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_1k-head_front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_1k-head_front.png",
+      "md5": "02811247",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_1k-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_1k-head_3q.png",
+      "md5": "4c4b42a7",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_1k-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_1k-head_side.png",
+      "md5": "9cbc15f9",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_1k-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_1k-head_back.png",
+      "md5": "31e8408c",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-front.png",
+      "md5": "c2cad715",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-3q.png",
+      "md5": "c92b0d74",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-side.png",
+      "md5": "ad34446f",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-back.png",
+      "md5": "059ad3ed",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-head_front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-head_front.png",
+      "md5": "d031aa5b",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-head_3q.png",
+      "md5": "67e0dbb1",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-head_side.png",
+      "md5": "c88b78e5",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-head_back.png",
+      "md5": "dafc1640",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-head_3q_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-head_3q_back.png",
+      "md5": "58f9a45f",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-seam_neck_torso_front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-seam_neck_torso_front.png",
+      "md5": "4625a5ab",
+      "hFill": 3.988,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-seam_neck_torso_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-seam_neck_torso_back.png",
+      "md5": "46dc0af8",
+      "hFill": 3.703,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-seam_neck_face": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-seam_neck_face.png",
+      "md5": "0c7f050b",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512-seam_face_scalp": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512-seam_face_scalp.png",
+      "md5": "7d1f5cde",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "noon-step3_512_shamble-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512_shamble-front.png",
+      "md5": "3f27fcda",
+      "hFill": 0.85,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "noon-step3_512_shamble-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512_shamble-3q.png",
+      "md5": "c3920de8",
+      "hFill": 0.85,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "noon-step3_512_shamble-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512_shamble-side.png",
+      "md5": "39f630c2",
+      "hFill": 0.85,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "noon-step3_512_shamble-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512_shamble-back.png",
+      "md5": "e9ce149c",
+      "hFill": 0.85,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "noon-step3_512_shamble-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512_shamble-head_3q.png",
+      "md5": "7821ee4c",
+      "hFill": 0.716,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "noon-step3_512_shamble-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512_shamble-head_back.png",
+      "md5": "9ac3d2b4",
+      "hFill": 0.716,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "noon-step3_512_shamble-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-step3_512_shamble-head_side.png",
+      "md5": "6a8d931d",
+      "hFill": 0.716,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "noon-tripo-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-front.png",
+      "md5": "e6f3d354",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-3q.png",
+      "md5": "f3693fc0",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-side.png",
+      "md5": "17932c38",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-back.png",
+      "md5": "23a220fa",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-head_front.png",
+      "md5": "f7f70383",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-head_3q.png",
+      "md5": "cd7c4a55",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-head_side.png",
+      "md5": "ce5c9659",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-head_back.png",
+      "md5": "40b8f551",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_3q_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-head_3q_back.png",
+      "md5": "267fb1ca",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-seam_neck_torso_front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-seam_neck_torso_front.png",
+      "md5": "aec2d4e8",
+      "hFill": 3.988,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-seam_neck_torso_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-seam_neck_torso_back.png",
+      "md5": "c0ae1252",
+      "hFill": 3.703,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-seam_neck_face": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-seam_neck_face.png",
+      "md5": "cb950b18",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-seam_face_scalp": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/noon-tripo-seam_face_scalp.png",
+      "md5": "97868616",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "samescale-step3_512-full": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/samescale-step3_512-full.png",
+      "md5": "ad34446f",
+      "mode": "full",
+      "dist": 3.4633,
+      "boundsH": 1.8,
+      "maxY": 1.8
+    },
+    "samescale-step3_512-head": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/samescale-step3_512-head.png",
+      "md5": "ec9ae9d2",
+      "mode": "head",
+      "dist": 0.9881,
+      "boundsH": 1.8,
+      "maxY": 1.8
+    },
+    "samescale-step3_512_shamble-full": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/samescale-step3_512_shamble-full.png",
+      "md5": "040c8885",
+      "mode": "full",
+      "dist": 3.4633,
+      "boundsH": 1.7433,
+      "maxY": 1.7433
+    },
+    "samescale-step3_512_shamble-head": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/samescale-step3_512_shamble-head.png",
+      "md5": "f2ec69e9",
+      "mode": "head",
+      "dist": 0.9881,
+      "boundsH": 1.7433,
+      "maxY": 1.7433
+    },
+    "samescale-tripo-full": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/samescale-tripo-full.png",
+      "md5": "17932c38",
+      "mode": "full",
+      "dist": 3.4633,
+      "boundsH": 1.8,
+      "maxY": 1.8
+    },
+    "samescale-tripo-head": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/samescale-tripo-head.png",
+      "md5": "a8e64a6d",
+      "mode": "head",
+      "dist": 0.9881,
+      "boundsH": 1.8,
+      "maxY": 1.8
+    },
+    "samescale-ours-full": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/samescale-ours-full.png",
+      "md5": "48bc2446",
+      "mode": "full",
+      "dist": 3.4633,
+      "boundsH": 1.8,
+      "maxY": 1.8
+    },
+    "samescale-ours-head": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/samescale-ours-head.png",
+      "md5": "8e65e331",
+      "mode": "head",
+      "dist": 0.9881,
+      "boundsH": 1.8,
+      "maxY": 1.8
+    },
+    "game_night-step3_512_shamble-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512_shamble-front.png",
+      "md5": "c0d85fcb",
+      "hFill": 0.85,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "game_night-step3_512_shamble-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512_shamble-3q.png",
+      "md5": "95c35a26",
+      "hFill": 0.85,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "game_night-step3_512_shamble-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512_shamble-side.png",
+      "md5": "a5b7dfcf",
+      "hFill": 0.85,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "game_night-step3_512_shamble-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512_shamble-back.png",
+      "md5": "d8438c49",
+      "hFill": 0.85,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "game_night-step3_512_shamble-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512_shamble-head_3q.png",
+      "md5": "d36df2a0",
+      "hFill": 0.716,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "game_night-step3_512_shamble-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512_shamble-head_side.png",
+      "md5": "af28aaf8",
+      "hFill": 0.716,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "game_night-step3_512_shamble-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512_shamble-head_back.png",
+      "md5": "931e3ba0",
+      "hFill": 0.716,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ]
+    },
+    "game_night-step3_512-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512-front.png",
+      "md5": "94d24508",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "game_night-step3_512-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512-3q.png",
+      "md5": "ba5ab369",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "game_night-step3_512-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512-side.png",
+      "md5": "91f81cba",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "game_night-step3_512-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512-back.png",
+      "md5": "68487aca",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "game_night-step3_512-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512-head_3q.png",
+      "md5": "63ea85ec",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "game_night-step3_512-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512-head_side.png",
+      "md5": "4e21a6aa",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "game_night-step3_512-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-step3_512-head_back.png",
+      "md5": "7661c65b",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ]
+    },
+    "game_night-tripo-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-tripo-front.png",
+      "md5": "c648d4cd",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night-tripo-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-tripo-3q.png",
+      "md5": "c248d2f4",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night-tripo-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-tripo-side.png",
+      "md5": "b2392326",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night-tripo-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-tripo-back.png",
+      "md5": "f4c25c18",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night-tripo-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-tripo-head_3q.png",
+      "md5": "6037fccc",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night-tripo-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-tripo-head_side.png",
+      "md5": "93e89f01",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night-tripo-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night-tripo-head_back.png",
+      "md5": "7a6c5eec",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night_flash-step3_512_shamble-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512_shamble-front.png",
+      "md5": "e3744cf0",
+      "hFill": 0.85,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ],
+      "flashlight": {
+        "dist": 3.361,
+        "intensity": 8.916
+      }
+    },
+    "game_night_flash-step3_512_shamble-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512_shamble-3q.png",
+      "md5": "9fb64b4d",
+      "hFill": 0.85,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ],
+      "flashlight": {
+        "dist": 3.361,
+        "intensity": 8.916
+      }
+    },
+    "game_night_flash-step3_512_shamble-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512_shamble-side.png",
+      "md5": "9d88a461",
+      "hFill": 0.85,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ],
+      "flashlight": {
+        "dist": 3.361,
+        "intensity": 8.916
+      }
+    },
+    "game_night_flash-step3_512_shamble-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512_shamble-back.png",
+      "md5": "b9330f63",
+      "hFill": 0.85,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ],
+      "flashlight": {
+        "dist": 3.361,
+        "intensity": 8.916
+      }
+    },
+    "game_night_flash-step3_512_shamble-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512_shamble-head_3q.png",
+      "md5": "222155fb",
+      "hFill": 0.716,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-step3_512_shamble-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512_shamble-head_side.png",
+      "md5": "b90c9e2f",
+      "hFill": 0.716,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-step3_512_shamble-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512_shamble-head_back.png",
+      "md5": "d930d53d",
+      "hFill": 0.716,
+      "boundsH": 1.7433,
+      "size": [
+        0.5523,
+        1.7433,
+        0.899
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-step3_512-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512-front.png",
+      "md5": "baf773fd",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-step3_512-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512-3q.png",
+      "md5": "88fdb045",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-step3_512-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512-side.png",
+      "md5": "40108b88",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-step3_512-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512-back.png",
+      "md5": "a0254d62",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-step3_512-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512-head_3q.png",
+      "md5": "614a38cf",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-step3_512-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512-head_side.png",
+      "md5": "d2f5ae53",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-step3_512-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-step3_512-head_back.png",
+      "md5": "02f2ddcb",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9203,
+        1.8,
+        0.3222
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-tripo-front": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-tripo-front.png",
+      "md5": "3f9b086c",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-tripo-3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-tripo-3q.png",
+      "md5": "0e287178",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-tripo-side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-tripo-side.png",
+      "md5": "45145acb",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-tripo-back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-tripo-back.png",
+      "md5": "e3c70f35",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-tripo-head_3q": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-tripo-head_3q.png",
+      "md5": "78f5d446",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-tripo-head_side": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-tripo-head_side.png",
+      "md5": "df28d091",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-tripo-head_back": {
+      "file": "qa/2026-11-18-AG-374/frames-pass7/game_night_flash-tripo-head_back.png",
+      "md5": "e77a5332",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    }
+  },
+  "errors": []
+}

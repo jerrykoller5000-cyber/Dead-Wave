@@ -1,0 +1,9 @@
+# chatgpt — GP-20163 seeded Military camouflage review — 2026-11-20
+
+Changed: The initial Military camouflage key comes from the body's existing seeded variation phase. This changes the distribution of the five existing palette tiles without consuming another random draw. Respawns retain their five-tile round-robin and unchanged gear material.
+Files: game/military-appearance.js 4fe1cd81; review-only candidate review/GP-20163/military-appearance.seeded-v1.js 82d3e5e9. Harnesses and raw receipts under review/GP-20163/.
+Tests: Native rule 16, one page in one browser: node crew/crew.mjs slot run chatgpt GP-20163 --checks "Native military cache and horde same-page exact A/B, preserving atlas timing field" -- node review/GP-20163/native-camo.mjs. Exit 0, no page errors, 698 stable source hashes. Same existing canonical cache encoder, plus three same-seed warm builds. Live DCU/MARPAT/M81/UCP differs; candidate M81/M81/M81/M81 with four identical signature hashes. The other 13 kinds match byte-for-byte for every template, cold and warm record. Same exact 20 body variants, transforms and camera; all actor draw counters positive. Static proof selector-proof.json confirms zero extra RNG calls and two unchanged respawn cycles.
+Screenshots: review/GP-20163/native-camo-v2/{before,after}-horde.png. MARPAT/M81/UCP/Multicam/DCU counts 4/4/4/4/4 before and 2/4/9/2/3 after.
+Not verified: v1 separate browser attempt caught the Shambler atlas timing field 425 vs 703 ms. Raw comparisons preserved; v2 uses the same atlas instance and retains every original field. No new palette, model, animation, full-suite result or game-time benchmark. One tested horde establishes coverage, with counts varying by seed.
+Requests: Director LOOK requested for the single-file D-211 landing.
+Contract changes: none.

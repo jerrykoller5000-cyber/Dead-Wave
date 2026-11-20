@@ -1,0 +1,11 @@
+# claude4 — CD-14 #8 revolver reload hand clip (review only) — 2026-11-19 07:13Z to ~09:10Z
+Changed:          Nothing in the game. Looked at the revolver's empty reload at the eye on today's tree and measured the hands: at the hip both hands are clean (0.0 mm), but the moment the reload starts (u .02) the right glove is 6.5 mm and the left glove 14.8 mm inside the walnut grip.
+Files:            Claude outputs/CD-14/s25-8/: cd14-s25-8-revolver-empty-reload-eye-noon.jpg (12 beats .02-.84), cd14-s25-8-numbers.txt, claude4-cd14-s25-tools.tgz.
+Tests:            none changed. Probe = clip-check.js's own inside test (every 2nd glove vertex) on the real game page in my cloud. hip 0.0/0.0 (agrees with tcl334b 5/0); u .02: r 6.5 mm, l 14.8 mm in 'Revolver walnut'.
+Screenshots:      Claude outputs/CD-14/s25-8/cd14-s25-8-revolver-empty-reload-eye-noon.jpg
+Not verified:     the beats after .02 (.08-.94): my cloud page crashes ('Target crashed') whenever the probe runs with the reload held past .02 (6 tries); the shots alone work. The 3-live reload: page crash at .45-.60 (frames .08-.45 only). No 5080 look.
+Findings:         (1) a real clip at the reload's very start, both hands in the grip: the gun's reload offset (gun [.14] pos/rot) and/or the cylinder-release thumb (VM_CONTROLS revolver cylinderRelease .00-.12) moves the grip into the hands before the left hand has left: the hip fit is clean, so it is the reload's first beat. (2) at the eye .08-.22 the left forearm still comes in long and flat across the lower left to reach the ejector (as in s8): that is the reload's elbowL path, Claude 5's (VM_RELOADS.cylinder.elbowL). (3) .29 cup, .36 pouch, .45-.68 loader, .76-.84 read fine.
+Suggested next:   Director: give #8 to Claude 5 (the reload's gun path + elbowL are his) with me on the hand places, or a named loan of VM_RELOADS.cylinder (gun, hand, places, elbowL) to me; first fix the u .02 grip clip (hold the gun still until the left hand is off, or blend the right hand with the gun). A lighter per-beat probe is needed on my side (the page crashes); a fake-three test like tcl334b on the reload beats would be the right gate.
+Requests:         Director (request: who takes #8, and the loan).
+Contract changes: none.
+Rule 16:          game tests in my cloud only (separate queue state), one instance at a time; nothing on the PC slot.

@@ -1,0 +1,8 @@
+# chatgpt — GP-20146 Zombie Pass 1 (IN PROGRESS) — 2026-11-15
+Changed: Review-only individual appearance/skull work; corrected reversed orbital/nasal walls, restored original rigid ownership for shape deformation, and separated guardian ivory/caveguard bark palettes. Task remains active; no production variation edits or checkout.
+Files: review/GP-20146/{skull-anatomy,body-appearance,zombie-variation}.mjs and regression tests; own crew card.
+Tests: node --test review/GP-20146/{zombie-variation,appearance-stream,body-appearance,feature-index,skull-blockout,skull-anatomy}.test.mjs -> 31 pass / 0 fail; exact command, output and source hashes in review/GP-20146/checkpoint-20261115-0849/. New regressions failed before each fix. npm test not run: broad suite belongs to coordinated cloud integration.
+Screenshots: review/GP-20146/skulls-v7/ records/snapshot:96 native captures,0pageerrors,EXIT0; original before/after four types x front/side/back x four lights. Shambler noon front/side/back and night front inspected; skull forehead lip and mask-like cheek plane still need work. Earlier coupled native-v7a:128 captures,0errors.
+Not verified: No final visual approval, actual loft-cap seam guards, current-C3-body FPS/load, guardian rig/merge support, live spawn/reset/hit/gib plumbing, bounded skull pool retargeting, or complete all14 skull fidelity. Latest original-owner and guardian palette edits postdate v7 captures. No asset score claimed as passing.
+Requests: Pending C3 exact loft cap metadata; C2 spawn/reset agreement and guardian skin-merge metadata. Colossus builder call waits on Director-approved owner sheet/export.
+Contract changes: None landed. All game checks used crew test slot (rule16); no game process or lease remains. No git.

@@ -1,18 +1,18 @@
 # Antigravity
 
-state: idle
-model: Claude Sonnet 5.5 (medium)
-task: —
-touching: —
-since: 2026-11-13T06:14Z
+state: active
+model: Gemini 4 Carbon
+task: AG-396 Commit job: run Claude Commit.bat (checkpoint 19:40Z)
+touching: git
+since: 2026-11-20T20:07Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-13-antigravity-AG-315.md
+last-report: handoffs/2026-11-20-antigravity-AG-395.md
 
 ## Notes
 
-### Your model (Jerry, 2026-11-11, D-164)
-You run on **Claude Opus 5.5 (high)** (Jerry, 11 Nov 2026, D-164; Gemini 4 Carbon before): check in with `--model "Claude Opus 5.5 (high)"`. Keep the git rule: ONLY `Claude Commit.bat` when `Claude outputs/commit/files.txt` is present.
+### Your model (Jerry, 2026-11-16, D-188)
+You run on **Gemini 4 Carbon** (Jerry, 16 Nov 2026, D-188): check in with `--model "Gemini 4 Carbon"`. Keep the git rule: ONLY `Claude Commit.bat` when `Claude outputs/commit/files.txt` is present, never retry on failure, never run any other git command, never push.
 
 
 ### STANDING RULE (Jerry, 2026-10-15, effective immediately): ONE active game-testing session per computer
@@ -36,11 +36,25 @@ a real GPU the way you can.
 - Serve the game with `npm run serve` and open http://127.0.0.1:8971/index.html?debug=1.
   With ?debug=1, window.TT is available in the DevTools console.
 
-### Status (2026-11-06)
+### Status (2026-11-18)
 - **D-114 in force**: Lighter load on Jerry's PC until he is home — keep real-renderer runs to the few short runs a task needs, score strictly what the pictures show, no long batches or benches unless Claude asks.
-- **AG-236**: DONE (`handoffs/2026-11-06-antigravity-AG-236.md`, `qa/2026-11-06-AG-236/`). Rescored Grokbot's `GB-280` live brute get-up after-fix pictures.
-- **AG-237**: DONE (`handoffs/2026-11-06-antigravity-AG-237.md`, `qa/2026-11-06-AG-237/`). `t298` five runs on real WebGPU renderer after CL-302.
-- **AG-239**: DONE (`handoffs/2026-11-06-antigravity-AG-239.md`, `qa/2026-11-06-AG-239/`). The chain sound log (CL-295, J53): logged 4 seats in TG and Trail; identified gravel footsteps as sole repeating rhythmic source.
-- **AG-240**: DONE (`handoffs/2026-11-06-antigravity-AG-240.md`, `qa/2026-11-06-AG-240/`, `review/AG-240/`). Footstep A/B evaluation on trail outside Threshold (First Person): 20s walk & run As-Is vs `?steps=grass`. As-Is fired 61 gravel walk steps and 89 gravel run stomps; `?steps=grass` cleanly switched dirt to 63 soft grass walk steps and 90 soft grass run steps (0 gravel takes on dirt). Verified 100% surface invariance on stone, metal, water, and leaves. Recorded 10s master WebAudio from all runs + side-by-side comparison tracks to `review/AG-240/`. Composite sheet: `qa/2026-11-06-AG-240/footstep-ab-sheet.jpg`.
-- **AG-295**: DONE (`handoffs/2026-11-11-antigravity-AG-295.md`, `qa/2026-11-11-CD-1-pass2/`, `review/CD-1/pass2/`). CD-1 pass 2 hand fits in 4 lights across 8 guns on RTX 5080 WebGPU (48 screenshots, `sheet.jpg`, `hands-detail.jpg`, `focus-checks.jpg`). Verified launcher firing hand on grip (palm out of receiver), pistol/revolver two-hand holds clean (0.1/1.1 mm overlap), chainsaw rear hand out of rubber block with no visible dent from glove give, pump shotgun aimed bead sight (y=362) completely clear of support glove (y=366).
-- **Next**: Check board queue.
+- **Recent DONE**: AG-364/365 (J164 landed 72e543b4 closeups PASS), AG-368..374 (AG-357 Shambler Pass 7 `18-shambler-final-jerry.jpg` + CB-358 probes + humanoid kit plan), AG-375 (GP-20155 v12). Reports in `handoffs/2026-11-18-antigravity-*.md`.
+- **AG-376**: DONE (`handoffs/2026-11-18-antigravity-AG-376.md`, `qa/2026-11-18-AG-376/report.md`): GP-20155 v14 (supersedes v13) CaveGuard look; chin fangs & brown gum bar/balls resolved (`15/15` lower teeth seated, `+18.79 mm` chin clearance, `13/13` Hunt clear); open jaw underside w/ small tan tips in `head-back-noon.png`, flat tray jaw, mild round eyes/rear side sliver, zigzag moss & step-3 body items remain.
+- **AG-377**: DONE (`handoffs/2026-11-18-antigravity-AG-377.md`, `qa/2026-11-18-AG-377/report.md`): Spider `naturalleg15` `death2` filmstrips (`0` contacts, `+0.117 mm` floor across `61` frames); flagged `f30..60` upright "coat-hook" tibias & pre-socket open neck/femur seams.
+- **AG-378**: DONE (`handoffs/2026-11-18-antigravity-AG-378.md`, `qa/2026-11-18-AG-378/report.md`): `Spider17` joint seats look (`58/58` rooted at `2 um`, `0` contacts across `90` poses, `+0.421 mm` corpse floor, `4,712` tris); flagged protruding ventral brown triangular shards under femur root cuffs (`close-side/3q-noon`) & abrupt rear cervical collar edge.
+- **Next**: Idle; waiting on next board/request assignment.
+r root cuffs (`close-side/3q-noon`) & abrupt rear cervical collar edge.
+- **Next**: Idle; waiting on next board/request assignment.
+& abrupt rear cervical collar edge.
+- **Next**: Idle; waiting on next board/request assignment.
+cervical collar edge.
+- **Next**: Idle; waiting on next board/request assignment.
+cal collar edge.
+- **Next**: Idle; waiting on next board/request assignment.
+equest assignment.
+cal collar edge.
+- **Next**: Idle; waiting on next board/request assignment.
+xt board/request assignment.
+equest assignment.
+cal collar edge.
+- **Next**: Idle; waiting on next board/request assignment.

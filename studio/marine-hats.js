@@ -122,7 +122,9 @@ export function buildMarineHats(T, { hatG, part, dress, mats, addCast, rmesh, cy
   const backRings = ballRings.map(([y, w, f, b], i) => [y, w + (i < 2 ? .004 : 0), b + (i < 2 ? .004 : 0), f + (i < 2 ? .004 : 0)]);
   const ballcap = (grp, rings = ballRings, reversePlan = false) => {
     grp.add(loft(T, rings, capW, addCast, { reversePlan }));
-    grp.add(bill(T, capW, addCast, { y: 1.508, z0: .112, w: .205, d: .108, droop: .026 }));
+    // CC-357 (J164): the head is 11% smaller (ui/marine-face.js HEAD_SIZE) and the cap with it, but a ballcap's bill is a bill:
+    // .124 here keeps it its length in metres (8 cm, was .108 at the old head size), so it still shades the face (t146).
+    grp.add(bill(T, capW, addCast, { y: 1.508, z0: .112, w: .205, d: .124, droop: .026 }));
     at(grp, cyl(.012, .013, .008, capBandW, 8), 0, 1.6, 0);
     for (let j = 0; j < 6; j++) {
       const a = j / 6 * Math.PI * 2;

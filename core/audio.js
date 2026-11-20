@@ -114,6 +114,7 @@ export const AudioSys = (() => {
     } catch (_) { reverbNode = null; }
     applyMuteGains();
     setTimeout(warmBanks, 0);   // CL-134: the gun sounds, built in the background
+    setTimeout(warmDeathVerbs, 0);   // CB-362: the death cries' own reverbs, built now, not on the frame a cave guard dies
     return ctx;
   }
   let reverbNode = null, reverbGain = null;
@@ -198,6 +199,29 @@ export const AudioSys = (() => {
     }
     return buf;
   }
+  // CB-362: a death cry's reverb is its own ConvolverNode (its tail fades with the cry, GP: the 2 s envelope). Giving a new
+  // one the 1.6 s impulse is synchronous main-thread work (the impulse is cut up and transformed): ~11 ms in the cloud, on
+  // the frame a cave guard dies. So a few are built ahead (warmDeathVerbs, after the context starts) and lent out; one is
+  // lent again only once its last cry has ended AND that cry's tail has died in it (end + the impulse + a margin), so a
+  // cry never hears another's tail. All lent out: a new one, as before.
+  const DEATH_VERBS = 4, DEATH_VERB_REST = 1.8;
+  const deathVerbs = [];
+  function makeDeathVerb() {
+    const wet = ctx.createGain(), verb = ctx.createConvolver();
+    verb.buffer = reverbNode.buffer; verb.normalize = reverbNode.normalize;
+    verb.connect(wet); wet.connect(sfxGain);
+    wet.gain.value = 0;
+    return { wet, verb, freeAt: 0 };
+  }
+  function warmDeathVerbs() {
+    if (!ctx || !reverbNode || deathVerbs.length >= DEATH_VERBS) return;
+    try { deathVerbs.push(makeDeathVerb()); } catch (_) { return; }
+    if (deathVerbs.length < DEATH_VERBS) setTimeout(warmDeathVerbs, 50);   // one a tick: the title keeps painting
+  }
+  function lendDeathVerb(route) {
+    for (const v of deathVerbs) if (v.freeAt <= ctx.currentTime) { v.freeAt = route.end + DEATH_VERB_REST; v.wet.gain.cancelScheduledValues(0); return v; }
+    return null;
+  }
   function sendToReverb(node, amount) {
     if (!reverbNode || !(amount > 0)) return;
     const g = ctx.createGain();
@@ -205,11 +229,9 @@ export const AudioSys = (() => {
     node.connect(g);
     if (deathRoute) {
       if (!deathRoute.wet) {
-        const wet = ctx.createGain(), verb = ctx.createConvolver();
-        verb.buffer = reverbNode.buffer; verb.normalize = reverbNode.normalize;
-        verb.connect(wet); wet.connect(sfxGain);
-        scheduleDeathCryFade(wet.gain, deathRoute.start, 2, reverbGain.gain.value);
-        deathRoute.wet = wet; deathRoute.verb = verb;
+        const lent = lendDeathVerb(deathRoute), made = lent || makeDeathVerb();
+        scheduleDeathCryFade(made.wet.gain, deathRoute.start, 2, reverbGain.gain.value);
+        deathRoute.wet = made.wet; deathRoute.verb = made.verb; deathRoute.lent = !!lent;
       }
       g.connect(deathRoute.verb); deathRoute.sends.push(g);
     } else g.connect(reverbNode);
@@ -3508,7 +3530,7 @@ export const AudioSys = (() => {
     try { return synthZombieCry(type, state, v, pan, when, emitter); }
     finally {
       routeBus = previousBus; deathRoute = previousDeath;
-      setTimeout(() => { for (const node of [dry, scope.wet, scope.verb, ...scope.sends]) { try { node?.disconnect(); } catch (_) {} } }, (Math.max(0, when) + 2.2) * 1000);
+      setTimeout(() => { for (const node of [dry, ...(scope.lent ? [] : [scope.wet, scope.verb]), ...scope.sends]) { try { node?.disconnect(); } catch (_) {} } }, (Math.max(0, when) + 2.2) * 1000);   // CB-362: a lent reverb stays wired
     }
   }
   function synthZombieCry(type, state, v, pan, when, emitter) {

@@ -11,6 +11,7 @@
 // - the hand goes home: no press shown after 'total', the support wrist back on the gun where it was before the key (under 1 mm);
 // - a second 2 during a press changes nothing more (CLAUDE DIRECTOR, 11 Nov); 2 again after it turns the light off the same way;
 // - third person: 2 changes the light at once, as before.
+// budget: 600
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));

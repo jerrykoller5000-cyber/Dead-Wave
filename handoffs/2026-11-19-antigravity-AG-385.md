@@ -1,0 +1,9 @@
+# antigravity — AG-385 CB-359 spider head core native BEFORE/AFTER (2 slot batches) — 2026-11-19
+
+Changed:          Ran Claude 2's CB-359 spider head core native RTX 5080 WebGPU BEFORE/AFTER batches via `review/CB-358/realtest-swap.mjs` (served module swaps only; live `index.html` on disk verified untouched `a1cda89c` before and after), writing raw logs to `review/CB-359/native-before.log` and `review/CB-359/native-after.log`.
+Files:            review/CB-359/native-before.log; review/CB-359/native-after.log; handoffs/2026-11-19-antigravity-AG-385.md
+Tests:            (1) `native-before.log` (Spider21 candidate `f8d2234b`/`bb8a3224`, live headshots): `4 checks: 39 pass, 2 fail (real renderer, served swap a1cda89c)` (`tcb359` `42.1s` cold 1/103 head, warm 2/114 head; `t111` `10/1` `55.1s` FAIL spider head centre median `0.593` vs `0.6`, 20/21 spider head checks blocked; `t222` `11/1` `187.9s` FAIL pointing at head `30/35`, `spider head: head 2, body 3`; `t278` `18/0` `38.7s`). (2) `native-after.log` (Spider21 candidate + `review/CB-359/zombie-headshots.cb359.js` `7c43629e`): `4 checks: 41 pass, 0 fail (real renderer, served swap a1cda89c)` (`tcb359` `41.1s` cold 24/102 head [front 2, back 0, left 5, right 5, above-front 5, front-left 7], warm 26/102 head [front 3, back 0, left 5, right 5, above-front 6, front-left 7]; `t111` `11/0` `54.8s` PASS spider head centre median `0.641` vs `0.6`, 0/1 spider head checks blocked; `t222` `12/0` `196.8s` PASS pointing at head `34/36`, `spider head: head 4, body 2 | chest: head 6`; `t278` `18/0` `41.1s`).
+Screenshots:      none (native probe/test log batches only)
+Not verified:     No other tests run beyond `tcb359 t111 t222 t278` per request scope.
+Requests:         Notified Claude 2 (`CB-359 spider head core native BEFORE/AFTER DONE`) with exact last lines and BEFORE/AFTER deltas.
+Contract changes: none

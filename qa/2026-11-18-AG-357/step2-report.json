@@ -1,0 +1,669 @@
+{
+  "at": "2026-11-18T07:20:56.908Z",
+  "step": 2,
+  "backend": "WebGPUBackend",
+  "stats": {
+    "ours": {
+      "tris": 18592,
+      "meshes": 1,
+      "materials": 1,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "proto_apose": {
+      "tris": 42416,
+      "meshes": 31,
+      "materials": 10,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "proto_shamble": {
+      "tris": 42416,
+      "meshes": 31,
+      "materials": 10,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "white_apose": {
+      "tris": 42416,
+      "meshes": 31,
+      "materials": 2,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "white_shamble": {
+      "tris": 42416,
+      "meshes": 31,
+      "materials": 2,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "tripo": {
+      "tris": 17664,
+      "meshes": 1,
+      "materials": 1,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    }
+  },
+  "protoStats": {
+    "tris": 42416,
+    "meshCount": 31,
+    "aoVerts": 22562,
+    "materials": 10,
+    "texBytes": 18874368,
+    "texCount": 18
+  },
+  "headMetrics": {
+    "crownY": 1.8,
+    "chinY": 1.5255,
+    "collarY": 1.4226,
+    "mouthGapeM": 0.0265,
+    "headHeightChinToTopOpenJaw": 0.2745,
+    "neckLengthChinToCollar": 0.1029
+  },
+  "frames": {
+    "noon-ours-front": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-ours-front.png",
+      "md5": "37f86773",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-3q": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-ours-3q.png",
+      "md5": "472d3d04",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-side": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-ours-side.png",
+      "md5": "9dd4cc19",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-back": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-ours-back.png",
+      "md5": "e44e869d",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-head": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-ours-head.png",
+      "md5": "bcc5de4b",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-proto_apose-front": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_apose-front.png",
+      "md5": "bf5a1ef6",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "noon-proto_apose-3q": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_apose-3q.png",
+      "md5": "583d6fc1",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "noon-proto_apose-side": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_apose-side.png",
+      "md5": "64c4a596",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "noon-proto_apose-back": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_apose-back.png",
+      "md5": "d919435a",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "noon-proto_apose-head": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_apose-head.png",
+      "md5": "0b853ee5",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "noon-proto_apose-head_front": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_apose-head_front.png",
+      "md5": "0997595e",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "noon-proto_apose-head_3q": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_apose-head_3q.png",
+      "md5": "fb77b6ec",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "noon-proto_apose-head_side": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_apose-head_side.png",
+      "md5": "345661cc",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "noon-proto_apose-head_back": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_apose-head_back.png",
+      "md5": "696f831a",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "noon-proto_shamble-front": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_shamble-front.png",
+      "md5": "4d6f8f21",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "noon-proto_shamble-3q": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_shamble-3q.png",
+      "md5": "f46e4b91",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "noon-proto_shamble-side": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_shamble-side.png",
+      "md5": "91abf1cd",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "noon-proto_shamble-back": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_shamble-back.png",
+      "md5": "8a01c248",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "noon-proto_shamble-head": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_shamble-head.png",
+      "md5": "5bbcc552",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "noon-proto_shamble-head_side": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-proto_shamble-head_side.png",
+      "md5": "aec8c33e",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "noon-tripo-front": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-tripo-front.png",
+      "md5": "6f4a5ff0",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-3q": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-tripo-3q.png",
+      "md5": "e4eeac78",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-side": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-tripo-side.png",
+      "md5": "5c479720",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-back": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-tripo-back.png",
+      "md5": "bce9198b",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-tripo-head.png",
+      "md5": "d54f1de5",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_front": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-tripo-head_front.png",
+      "md5": "d253951f",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_3q": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-tripo-head_3q.png",
+      "md5": "f7481fd9",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_side": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-tripo-head_side.png",
+      "md5": "cbd01d98",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_back": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/noon-tripo-head_back.png",
+      "md5": "75772b73",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "night-ours-front": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-ours-front.png",
+      "md5": "4009669f",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "night-ours-3q": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-ours-3q.png",
+      "md5": "86d49c68",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "night-ours-side": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-ours-side.png",
+      "md5": "b4f89278",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "night-ours-back": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-ours-back.png",
+      "md5": "e7391e68",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "night-ours-head": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-ours-head.png",
+      "md5": "27d8de09",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "night-proto_apose-front": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_apose-front.png",
+      "md5": "cff5b574",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "night-proto_apose-3q": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_apose-3q.png",
+      "md5": "9350c442",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "night-proto_apose-side": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_apose-side.png",
+      "md5": "e83c577a",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "night-proto_apose-back": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_apose-back.png",
+      "md5": "d2108187",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "night-proto_apose-head": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_apose-head.png",
+      "md5": "9da64c72",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "night-proto_apose-head_front": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_apose-head_front.png",
+      "md5": "54c3862f",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "night-proto_apose-head_3q": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_apose-head_3q.png",
+      "md5": "96da84c4",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "night-proto_apose-head_side": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_apose-head_side.png",
+      "md5": "0a832b87",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "night-proto_apose-head_back": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_apose-head_back.png",
+      "md5": "7ce15726",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3098
+      ]
+    },
+    "night-proto_shamble-front": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_shamble-front.png",
+      "md5": "2e644181",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "night-proto_shamble-3q": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_shamble-3q.png",
+      "md5": "4b28d293",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "night-proto_shamble-side": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_shamble-side.png",
+      "md5": "98a0b41a",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "night-proto_shamble-back": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_shamble-back.png",
+      "md5": "d31c882e",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "night-proto_shamble-head": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-proto_shamble-head.png",
+      "md5": "a769860e",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "night-tripo-front": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-tripo-front.png",
+      "md5": "06986982",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "night-tripo-3q": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-tripo-3q.png",
+      "md5": "3fe2bd99",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "night-tripo-side": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-tripo-side.png",
+      "md5": "bfc49fc5",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "night-tripo-back": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-tripo-back.png",
+      "md5": "1be79050",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "night-tripo-head": {
+      "file": "qa/2026-11-18-AG-357/frames-step2/night-tripo-head.png",
+      "md5": "ed4b2ddf",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    }
+  },
+  "errors": []
+}

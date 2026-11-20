@@ -323,6 +323,7 @@ export function createViewmodel(ctx) {
       o = new T.InstancedMesh(geoOf(src.geometry), vmMaterial(src.material), capacity);
       o.count = src.count;
       if (src.userData.artworkSlots) o.userData.artworkSlots = src.userData.artworkSlots;
+      if (src.userData.artworkCapacity) o.userData.artworkCapacity = src.userData.artworkCapacity;   // CD-14 #8 s29: a fixed-capacity batch (the revolver's loader rounds) keeps it in the eye copy, so its shader buffer has room for every slot
       o.instanceMatrix.array.set(src.instanceMatrix.array);
       o.instanceMatrix.needsUpdate = true;
       o.userData.vmInstanceVersion = src.instanceMatrix.version;
@@ -583,8 +584,14 @@ export function createViewmodel(ctx) {
   const rockAngle = (R, u) => R.rock.angle * (smooth((u - R.rock.out[0]) / (R.rock.out[1] - R.rock.out[0])) - smooth((u - R.rock.in[0]) / (R.rock.in[1] - R.rock.in[0])));
   function placeFrame(name, R, u, out) {
     const pl = R.places, arm = arms.l, sL = sockets.l;
-    if (name === 'fore' || !gun) { out.p.copy(sL.p); out.q.copy(sL.q); out.s = sL.s; return out; }
+    if (name === 'fore' || !gun) { out.p.copy(sL.p); out.q.copy(sL.q); out.s = sL.s;
+      if (R && R.holdF) { out.p.copy(R.holdF.p); out.q.copy(R.holdF.q); out.s = R.holdF.s; }   // CE-13 (J151 15): the unload's hand path: the hold itself, on the forend where it is
+      return out; }
     const z = _pz, y = _py, at = _pat;
+    if (pl[name] && (pl[name].hold || pl[name].slide) && R.holdF) {   // CE-13: off the hold as it stands: hold [x, y, z] in the hand's own axes (+z its palm's side), slide [x, y, z] in the gun's
+      const o = pl[name].hold || [0, 0, 0], g = pl[name].slide || [0, 0, 0]; out.q.copy(R.holdF.q); out.s = R.holdF.s;
+      out.p.copy(R.holdF.p).add(_pg.set(o[0], o[1], o[2]).multiplyScalar(out.s).applyQuaternion(out.q)).add(_pg.set(g[0], g[1], g[2])); return out;
+    }
     if (name === 'pouch') {
       const g = G, inv = _pinv.copy(g.q).invert();
       at.set(pl.pouch.at[0] * MX, pl.pouch.at[1], pl.pouch.at[2]).sub(g.p).applyQuaternion(inv).multiplyScalar(1 / g.s);
@@ -686,6 +693,18 @@ export function createViewmodel(ctx) {
     for (const k of PR.post) hand.push(k.slice());
     return (byN[n] = Object.freeze({ ...R, hand, round: { ...R.round, trips } }));
   }
+  const _uhCache = new WeakMap(), _uhHold = F();
+  // CD-14 #8: a reload path with foreHold, over its own hold as it stands (holdF, holdPose: the path's 'fore'), built once a path
+  const _fhCache = new WeakMap(), _fhHold = F();
+  const foreHoldOf = (R) => { let H = _fhCache.get(R); if (!H) _fhCache.set(R, H = Object.create(R)); return H; };
+  function unloadHandOf(R) {   // CE-13: the unload's hand path as a reload path (its places over the reload's, the forend riding)
+    const U = R.unload; let H = _uhCache.get(U);
+    if (!H || H.hand !== U.hand) { H = { hand: U.hand, places: {}, poses: U.poses || R.poses, elbowL: U.elbowL || R.elbowL, holdF: null, holdPose: null }; _uhCache.set(U, H); }
+    for (const k in R.places) H.places[k] = R.places[k];
+    if (U.places) for (const k in U.places) H.places[k] = U.places[k];   // live (a place tried live shows at once)
+    H.elbowL = U.elbowL || R.elbowL; H.poses = U.poses || R.poses;
+    return H;
+  }
   const reloadOf = (P, st) => { let R = P.reload && VM_RELOADS[P.reload];
     if (R && R.perRound && st.reloadU != null && st.rounds && st.rounds.need) R = perRoundOf(R, st.rounds.need);
     return R && st.reloadU != null && st.reloadEmpty === false ? tacticalOf(R) : R; };
@@ -693,7 +712,7 @@ export function createViewmodel(ctx) {
   // CE-9 (GT-20101): a reload may name its own finger poses (R.poses: { name: ITEM_POSES-style entry }), the pistol's rack
   // grip that keeps its fingers off the round in the open port and its thumb on the slide's side
   const _rPoses = new WeakMap();
-  const fingerPose = (name, R) => { if (name === 'fore') return sockets.poseL; const e = R && R.poses && R.poses[name];
+  const fingerPose = (name, R) => { if (name === 'fore') return (R && R.holdPose) || sockets.poseL; const e = R && R.poses && R.poses[name];
     if (e) { let p = _rPoses.get(e); if (!p) _rPoses.set(e, p = gripPose(e)); return p; } return POSES[name] || sockets.poseL; };
   const _ka = F(), _kb = F(), _pa = copyPose(HAND_POSES.relaxed);
   function reloadHand(R, u, out) {
@@ -1010,7 +1029,12 @@ export function createViewmodel(ctx) {
   // CE-2: the trigger finger's scratch, and the hold's give without the index finger's vertices (the give fades with the
   // whole pose's distance from the fit, so an index on the trigger would take the other fingers' give with it): its pose
   // keeps the fit's but for the index, which follows the hand's own.
-  let _trigPose = copyPose(HAND_POSES.relaxed); const _trgP = V3(), _trgQ = Q(), trigContacts = new Map();
+  // CE-13 (J153 9): the index along a row's travel: rest to pull, or its keys ([k, f] in order) where a straight blend between
+  // the two would cut the blade's arc
+  const trigFinger = (R, k, f) => { const K = R.keys; if (!K) { for (let j = 0; j < 4; j++) f[j] = R.rest[j] + (R.pull[j] - R.rest[j]) * k; return; }
+    let i = 0; while (i < K.length - 2 && k > K[i + 1][0]) i++; const a = K[i], c = K[i + 1], t = clamp((k - a[0]) / Math.max(1e-6, c[0] - a[0]), 0, 1);
+    for (let j = 0; j < 4; j++) f[j] = a[1][j] + (c[1][j] - a[1][j]) * t; };
+  let _trigPose = copyPose(HAND_POSES.relaxed), _trigPoseL = copyPose(HAND_POSES.relaxed); const _trgP = V3(), _trgQ = Q(), trigContacts = new Map();
   function trigContact(key, pose) {
     const c0 = handContact(key, 'r'); if (!c0) return null;
     let c = trigContacts.get(key);
@@ -1146,7 +1170,7 @@ export function createViewmodel(ctx) {
   // drawn, nothing of the glove in it: Claude 5's solve-light). Null when there is no press to show.
   const LIGHT_RELAX = { f: VM_LIGHT.curl, t: HAND_POSES.relaxed.t };
   const _lpFull = copyPose(HAND_POSES.relaxed), _lpPose = copyPose(HAND_POSES.relaxed), _lpGi = F(), _lpH = F(), _lpW = F(), _lpM = M4(), _lpM2 = M4(),
-    _lpC = V3(), _lpA = V3(), _lpPad = V3(), _lpPiv = V3(), _lpQ = Q(), _lpV = V3(), _lpHold = V3(), _lpZ = V3();
+    _lpC = V3(), _lpA = V3(), _lpPad = V3(), _lpPiv = V3(), _lpQ = Q(), _lpV = V3(), _lpHold = V3(), _lpZ = V3(), _lpEl = V3();
   function lightTimes() { const T0 = VM_LIGHT.times, t1 = T0.reach, t2 = t1 + T0.press, t3 = t2 + T0.hold, t4 = t3 + T0.lift; return { t1, t2, t3, t4, t5: t4 + T0.back, at: t1 + T0.press * 0.5 }; }
   function lightRest(sw) {
     const r = sw.userData.restPosition || sw.userData.vmLightRest || (sw.userData.vmLightRest = sw.position.toArray());
@@ -1161,9 +1185,26 @@ export function createViewmodel(ctx) {
     if (!LP || !E || gun2 || LP.t == null || LP.t < 0) return null;
     const TT = lightTimes(), t = LP.t;
     if (t >= TT.t5) return null;
-    const k = t < TT.t4 ? smooth(t / TT.t1) : 1 - smooth((t - TT.t4) / VM_LIGHT.times.back);
+    const k0 = t < TT.t4 ? smooth(t / TT.t1) : 1 - smooth((t - TT.t4) / VM_LIGHT.times.back);
+    // CE-13 (the rotary gun, 15 Nov): E.grip a with E.off [x, y, z] (gun axes): the hand first slides off its grip along off
+    // as it holds it (k0 0..a; the grip in the hand: any other way off cut the fingers through it), then makes its move (k)
+    // from there, the slide fading as it goes; on the way back the same, the other way round
+    const ga = E.grip || 0, k = ga ? clamp((k0 - ga) / (1 - ga), 0, 1) : k0, ko = ga ? smooth(k0 / ga) * (1 - k) : 0;
     const press = t < TT.t1 ? 0 : t < TT.t2 ? smooth((t - TT.t1) / VM_LIGHT.times.press) : t < TT.t3 ? 1 : 1 - smooth((t - TT.t3) / VM_LIGHT.times.lift);
     const gap = VM_LIGHT.gap * (t < TT.t1 ? 1 - smooth(t / TT.t1) : t < TT.t3 ? 0 : smooth((t - TT.t3) / VM_LIGHT.times.lift));
+    // CE-13o (KR-7 light C, thumb-only; the Director 09:58Z, 17 Nov): E.still: the hand stays on its hold (no slide, no
+    // turn, no gap, no arc, no drop, the elbow left alone) and only the pressing digit's joints move: from the hold to
+    // E.v0 (that digit on the pad, not yet in; E.v when the row has none) by k, then to E.v (pressed) by the press. The
+    // rest of the hand keeps the hold exactly (E.o not used). Only a row with still has it: every other gun unchanged.
+    if (E.still) {
+      for (let i = 0; i < 4; i++) for (let j = 0; j < 4; j++) _lpFull.f[i][j] = hold.f[i][j];
+      for (let j = 0; j < 6; j++) _lpFull.t[j] = hold.t[j] || 0;
+      const V0 = E.v0 || E.v, n = E.fi < 0 ? 6 : 4, dst = E.fi < 0 ? _lpFull.t : _lpFull.f[E.fi];
+      for (let j = 0; j < n; j++) dst[j] = V0[j] + (E.v[j] - V0[j]) * press;
+      if (press > 0) { sw.position.x += ls.axis[0] * ls.travel * press; sw.position.y += ls.axis[1] * ls.travel * press; sw.position.z += ls.axis[2] * ls.travel * press; }
+      info.light = { t, k, press, gap: 0, elbow: null, still: 1 };
+      return lerpPose(hold, _lpFull, k, _lpPose);
+    }
     // the switch's node in the gun's space (its parents' own frames up to the gun's root), its contact and inward axis
     _lpM.identity(); for (let o = sw.parent; o && o !== gun.root; o = o.parent) { o.updateMatrix(); _lpM.premultiply(o.matrix); }
     _lpC.fromArray(rest).applyMatrix4(_lpM);
@@ -1201,14 +1242,23 @@ export function createViewmodel(ctx) {
     // to the switch and back the hand arcs out from the gun along the switch's outward axis (E.lift gun units at the
     // middle of the way, VM_LIGHT.lift by default) instead of cutting straight through the light and the fore-end
     // (E.arc [x, y, z]: the way out in the gun's own axes instead, for a gun whose light sits where outward runs into it)
-    { const arc = E.arc || (E.lift != null ? E.lift : VM_LIGHT.lift || 0), w = 4 * k * (1 - k);
+    { const arc = E.arc || (E.lift != null ? E.lift : VM_LIGHT.lift || 0), w0 = 4 * k * (1 - k), w = ga ? w0 * w0 : w0;   // CE-13: off its grip, the arc starts once the hand is off (w squared)
       if (arc && k > 0 && k < 1) {
         if (Array.isArray(arc)) _lpV.set(arc[0], arc[1], arc[2]); else _lpV.copy(_lpA).multiplyScalar(-arc);
         WL.p.add(_lpV.multiplyScalar(w * G.s).applyQuaternion(G.q));
       } }
+    // CE-13 (J151 46, Claude 1's sniper row; the Director, 15 Nov): E.drop [x, y, z] (gun units, the gun's own axes): the hand
+    // drops off the hold first, a quick-out bump over k 0..0.5 (out fast, gone by half way), on the way there and on the way
+    // back; only a row with drop has it (every other gun's press unchanged)
+    if (E.drop && k > 0 && k < 0.5) { const u = k / 0.5, b = Math.sqrt(4 * u * (1 - u)); WL.p.add(_lpV.set(E.drop[0], E.drop[1], E.drop[2]).multiplyScalar(b * G.s).applyQuaternion(G.q)); }
+    // CE-13 (the rotary gun, 15 Nov): E.near [x, y, z] (gun axes): onto the switch and off it from that side, a bump over
+    // k 0.5..1 (gone at the switch); E.elbow [x, y, z] (gun axes): the support elbow moved by it with the hand (the caller)
+    if (E.off && ko > 0) WL.p.add(_lpV.set(E.off[0], E.off[1], E.off[2]).multiplyScalar(ko * G.s).applyQuaternion(G.q));
+    if (E.near && k > 0.5 && k < 1) { const u = (k - 0.5) / 0.5; WL.p.add(_lpV.set(E.near[0], E.near[1], E.near[2]).multiplyScalar(4 * u * (1 - u) * G.s).applyQuaternion(G.q)); }
+    const elbow = E.elbow ? _lpEl.set(E.elbow[0], E.elbow[1], E.elbow[2]).multiplyScalar(k * G.s).applyQuaternion(G.q) : null;
     // the eye copy's pad in by the thumb (the switch's node; studio/weapon-light-switch.js moves the pad's vertices)
     if (press > 0) { sw.position.x += ls.axis[0] * ls.travel * press; sw.position.y += ls.axis[1] * ls.travel * press; sw.position.z += ls.axis[2] * ls.travel * press; }
-    info.light = { t, k, press, gap };
+    info.light = { t, k, press, gap, elbow };
     return lerpPose(hold, _lpFull, k, _lpPose);
   }
   // CE-1: a shot's stroke: 0 to 1 by tb, held to th, home (0) by te; 0 outside.
@@ -1232,7 +1282,7 @@ export function createViewmodel(ctx) {
     // J118 (CLAUDE DIRECTOR's (c), 11 Nov: "Hammer needs to pull back on trigger pull like it would in real double action"):
     // while index.html's trigger lead runs (st.triggerPull.u, 0 at the click, 1 at the break) the pull draws the hammer up
     // to full cock (.88 of the travel); the round goes at the break and the reset follows as above
-    const lead = st.triggerPull && st.triggerPull.weapon === g.key && st.triggerPull.u != null && g === gun ? clamp(st.triggerPull.u, 0, 1) : null;
+    const lead = st.triggerPull && st.triggerPull.weapon === g.key && st.triggerPull.u != null && (st.triggerPull.hand != null ? g === (st.triggerPull.hand === 1 ? gun2 : gun) : g === gun && !gun2) ? clamp(st.triggerPull.u, 0, 1) : null;   // CE-13 (J153 9): not on a pair unless index.html says which gun fires next (st.triggerPull.hand): its guns' triggers come from his own (mirrorParts), which index.html pulls on the gun that fires next; the view's lead pulled the right one on the left one's shots too
     if (da && g.trigger && g.hammer && ud.doubleActionPose && st.reloadU == null) {
       if (lead != null) ud.doubleActionPose(g.trigger, g.hammer, 0.88 * lead, false);
       else if (t < da.t[2]) ud.doubleActionPose(g.trigger, g.hammer, stroke(t, da.t[0], da.t[1], da.t[2]), true);
@@ -1566,6 +1616,10 @@ export function createViewmodel(ctx) {
       info.handPlace = 'starter';
     }
     let poseL = sockets.poseL;
+    // CE-13 (J151 15: "see the player physically collecting the ejected shotgun ammo when switching"): an unload with its
+    // own hand path (R.unload.hand, places, poses) works the forend back, takes the shell off the port, puts it in the
+    // pouch and comes back to the forend for the stroke home, a reload's keyed hand over each shell's 0..1
+    const UH = !AK && u == null && S.unloadW && R && R.unload && R.unload.hand ? unloadHandOf(R) : null;
     // CL-293 (J54): a support hand's own fingers and thumb for a gun (VM_SOCKETS supportPose, a HAND_POSES-shaped pose: the
     // pistol's thumbs forward), or tried live (info.tune[key].poseL); the body's hold gives the rest.
     { const tp = (info.tune[gun.key] && info.tune[gun.key].poseL) || (VM_FIT[gun.key] && VM_FIT[gun.key].l && VM_FIT[gun.key].l.pose) || (VM_SOCKETS[gun.key] && VM_SOCKETS[gun.key].supportPose); if (tp) poseL = tp; }
@@ -1575,8 +1629,20 @@ export function createViewmodel(ctx) {
       if (AKF) followK(WL, eL); else rel(WL, REL.l, eL);
       twistToward(arms.l, WL, eL); info.handPlace = 'pair';
       poseL = gripP;
-    } else if (u != null) {
-      poseL = reloadHand(R, u, _localF); mul(G, _localF, WL);
+    } else if (u != null || UH) {
+      // CD-14 #8 (Claude 1, the revolver's reload): a path with foreHold starts and ends on the hold as it stands, as the
+      // unload's does (its frame turned toward its elbow, its own fingers, its own elbow): it was the bare socket and the
+      // body's fingers, 7-15 mm in the walnut grip and 13 mm in the firing glove from the reload's first frame
+      const FH = !UH && R.foreHold ? foreHoldOf(R) : null, HD = UH || FH;
+      if (HD) {   // CE-13: the hold as it stands (on the forend where it is, turned toward its elbow, its own fingers): the path's 'fore'
+        mul(G, sockets.l, WL);
+        if (gun.pump && gun.pumpBase) WL.p.add(_pg.copy(gun.pump.position).sub(gun.pumpBase).multiplyScalar(G.s).applyQuaternion(G.q));
+        const SEL = (info.tune[gun.key] && info.tune[gun.key].supportElbow) || VM_SUPPORT_ELBOW[gun.key];
+        if (SEL) rel(WL, SEL, eL); else if (FOL) follow(WL, eL); else if (REL) rel(WL, REL.l, eL);
+        twistToward(arms.l, WL, eL);
+        HD.holdF = placeLocalOfWrist(UH ? _uhHold : _fhHold); HD.holdPose = poseL;
+      }
+      poseL = UH ? reloadHand(UH, clamp(S.unloadW.u, 0, 1), _localF) : reloadHand(FH || R, u, _localF); mul(G, _localF, WL);
       // GB-301 (J18): sniper 'work' is the firing hand on the bolt — support returns to the forend for those beats.
       if (gun.key === 'sniper' && info.handPlace === 'work') {
         mul(G, sockets.l, WL); poseL = sockets.poseL; info.handPlace = boltW > 0 ? 'bolt' : 'fore';
@@ -1585,10 +1651,11 @@ export function createViewmodel(ctx) {
       // eye): during a reload the support elbow stays where the hold keeps it, so the forearm pivots from low left up to
       // the magazine or the handle instead of standing up through the middle of the view under the raised hand.
       mul(G, sockets.l, _foreWL);
-      if (FOL) follow(_foreWL, eL);
-      else if (REL) {   // CL-326: the hold's hint while the hand is on the hold, a low one (VM.reloadElbowL) as it leaves it
-        rel(_foreWL, REL.l, eL);
-        const LO = (R && R.elbowL) || VM.reloadElbowL;
+      const SELr = FH && ((info.tune[gun.key] && info.tune[gun.key].supportElbow) || VM_SUPPORT_ELBOW[gun.key]);   // CD-14 #8: the hold's own elbow on the hold
+      if (FOL && !SELr) follow(_foreWL, eL);
+      else if (REL || SELr) {   // CL-326: the hold's hint while the hand is on the hold, a low one (VM.reloadElbowL) as it leaves it
+        rel(_foreWL, SELr || REL.l, eL);
+        const LO = (UH && UH.elbowL) || (R && R.elbowL) || VM.reloadElbowL;
         if (LO) { rel(_foreWL, LO, _eLo); const w = clamp(WL.p.distanceTo(_foreWL.p) / 0.10, 0, 1); for (let k = 0; k < 3; k++) eL[k] += (_eLo[k] - eL[k]) * w; }
       }
     }
@@ -1605,7 +1672,8 @@ export function createViewmodel(ctx) {
       // rise only by VM_LIGHT.elbowUp, so a reach up over the gun keeps the forearm below the view)
       if (!st.grenade && !BL && !HN && !boltW && !sawW) {
         _lpHold.copy(WL.p); const lp = lightPressFrame(WL, poseL, st);
-        if (lp) { poseL = lp; info.handPlace = 'light'; eL[0] += WL.p.x - _lpHold.x; eL[1] += (WL.p.y - _lpHold.y) * VM_LIGHT.elbowUp; eL[2] += WL.p.z - _lpHold.z; }
+        if (lp) { poseL = lp; info.handPlace = 'light'; eL[0] += WL.p.x - _lpHold.x; eL[1] += (WL.p.y - _lpHold.y) * VM_LIGHT.elbowUp; eL[2] += WL.p.z - _lpHold.z;
+          const el = info.light && info.light.elbow; if (el) { eL[0] += el.x; eL[1] += el.y; eL[2] += el.z; } }   // CE-13: E.elbow
       }
     }
     // (CL-306: the reload's elbow is set above, from the hold's wrist)
@@ -1637,7 +1705,7 @@ export function createViewmodel(ctx) {
     // the trigger is held; the trigger turns on its pin with it. Claude 1's fit keeps the hand, the other fingers and the
     // thumb (agreed 11 Nov). Not on a pair yet (their hands sit on the hold's grip, not the fit).
     // CE-2 (12 Nov): info.tune.trigger[key] tries an entry live (the solver's pick before it goes into VM_TRIGGER)
-    const TR = !AK && ((info.tune.trigger && info.tune.trigger[gun.key]) || VM_TRIGGER[gun.key]);
+    const TRrow = (info.tune.trigger && info.tune.trigger[gun.key]) || VM_TRIGGER[gun.key], TR = TRrow && (!AK || TRrow.pair) ? TRrow : null, TRf = AK && TR && TR.pair && TR.pair.keys ? TR.pair : TR;   // CE-13 (J153 9): a pair too where its row has a pair entry (its own index keys: the pair's hands sit 6 mm off the single's)
     let trigOn = false;
     if (TR && poseR === gripP && !BL && !HN) {
       const want = (st.fireHeld || (S.slideT < TR.hold && S.shots > 0)) ? 1 : 0;
@@ -1646,8 +1714,11 @@ export function createViewmodel(ctx) {
       // reset, actionCycle above): TR.follow is the trigger's turn at full travel
       if (TR.follow && gun.trigger) S.trig = clamp(gun.trigger.rotation.x / TR.follow, 0, 1);
       const k = TR.follow ? S.trig : smooth(S.trig), f = (_trigPose = copyPose(gripP, _trigPose)).f[0];   // a following finger keeps to its trigger's own travel
-      for (let j = 0; j < 4; j++) f[j] = TR.rest[j] + (TR.pull[j] - TR.rest[j]) * k;
+      trigFinger(TRf, k, f);
       poseR = _trigPose; trigOn = true; info.trigger = k;
+      // CE-13 (J153 9: "Revolver trigger finger outside of guard does not pull trigger in akimbo"): the pair's left index in its own
+      // guard on the same row (the left gun and hand are the right's mirror), following its own gun's double action
+      if (AK && gun2 && poseL === gripP) { const k2 = TR.follow && gun2.trigger ? clamp(gun2.trigger.rotation.x / TR.follow, 0, 1) : k; trigFinger(TRf, k2, (_trigPoseL = copyPose(gripP, _trigPoseL)).f[0]); poseL = _trigPoseL; info.trigger2 = k2; }
       const tp = gun.ctrls[TR.part || 'trigger'];
       if (tp && tp.parent === gun.root && TR.turn) {
         if (TR.pivot) _trgP.set(TR.pivot[0], TR.pivot[1], TR.pivot[2]); else _trgP.copy(tp.position);   // no pivot: the control's own origin (its pin, userData.triggerPin)
@@ -1729,7 +1800,24 @@ export function createViewmodel(ctx) {
     // CE-3 (J133): the unload's shell (the type coming out: index.html's syncReloadShell) up out of the ejection port on the
     // back stroke and away to the right, turning (R.unload.shell, fly); index.html puts it back in his count
     { const Uw = S.unloadW, U = R && R.unload, EP = gun.src.userData && gun.src.userData.ejectPort;
-      if (Uw && U && U.shell && gun.shell && gun.shellBase && EP && !AK) {
+      if (Uw && U && U.take && gun.shell && gun.shellBase && EP && !AK) {
+        // CE-13 (J151 15): out of the port as the forend comes back (pop), into the hand that comes over the port (take:
+        // [from, in the hand by, gone at the pouch], held at the palm by at, turned by rot), carried to the pouch
+        const u = clamp(Uw.u, 0, 1), C = U.take, on = u >= C.pop[0] && u < C.gone;
+        gun.shell.visible = on;
+        if (on) {
+          const k1 = smooth((u - C.pop[0]) / (C.pop[1] - C.pop[0])), w = smooth((u - C.from) / (C.by - C.from));
+          gun.shell.position.set(EP[0] - 0.014 + 0.024 * k1, EP[1] + 0.008 * k1 + C.rise * k1, EP[2]);
+          gun.shell.quaternion.copy(gun.shellBase.quat).premultiply(_eq.setFromAxisAngle(AX_Y, -0.5 * k1));
+          if (w > 0) {
+            const local = placeLocalOfWrist(_local2);
+            wristSpacePoint(arms.l, 'palm', _ppalm); if (C.at) _ppalm.add(_tipA.set(C.at[0], C.at[1], C.at[2]));
+            _ppalm.multiplyScalar(local.s).applyQuaternion(local.q).add(local.p);
+            _cq.copy(local.q).multiply(gun.shellBase.quat); if (C.rot) _cq.multiply(_eq.setFromEuler(_ue.set(C.rot[0], C.rot[1], C.rot[2])));
+            gun.shell.position.lerp(_ppalm, w); gun.shell.quaternion.slerp(_cq, w);
+          }
+        }
+      } else if (Uw && U && U.shell && gun.shell && gun.shellBase && EP && !AK) {
         const u = clamp(Uw.u, 0, 1), W = U.shell, on = u >= W[0] && u < W[2];
         gun.shell.visible = on;
         if (on) {
@@ -1747,7 +1835,7 @@ export function createViewmodel(ctx) {
   // empties show in the open cylinder, slide out of its back at the ejector's press and are gone; its speedloader comes up in
   // the support palm from the pouch, goes onto the cylinder's back and is gone once the rounds are in. Everything in the
   // cylinder's own frame, so it rides the swing (the body's; GB-300 on the pair).
-  const _cm = M4(), _cb = M4(), _cq = Q(), _cp = V3(), _cs = V3(), _lp = V3();
+  const _cm = M4(), _cb = M4(), _cq = Q(), _cp = V3(), _cs = V3(), _lp = V3(), _ue = new T.Euler();
   const _swP = V3(), _swQ = Q();   // CL-328
   function driveParts(R, u, RN = null) {
     if (!R || gun2) return;   // the pair: the body's cylinders (GB-300); no hand is free for a loader
@@ -2218,6 +2306,7 @@ export function createViewmodel(ctx) {
     isEyeHidden: (o) => hideOn && !!(o && o.userData && o.userData.vmEyeHide),
     // CE-4: when the support thumb can press the light's switch on the gun in hand (key) now: the press's times (at: the
     // pad fully in, when index.html changes the light; total: the hand home), else null (index.html changes it at once)
+    unloadPump: () => (VM_RELOADS.tube && VM_RELOADS.tube.unload && VM_RELOADS.tube.unload.pump) || null,   // CE-13: the unload's forend keys [back from, back by, home from, home by] (index.html poseUnloadPump)
     lightPressTimes: (key) => (info.active && gun && gun.key === key && !gun2 && S.raise > 0.98 && S.lightFree && (VM_LIGHT[key] || (info.tune.light && info.tune.light[key])) && gun.ctrls.lightSwitch && gun.src.userData.lightSwitch ? (() => { const T0 = lightTimes(); return { at: T0.at, total: T0.t5 }; })() : null)
   };
 }

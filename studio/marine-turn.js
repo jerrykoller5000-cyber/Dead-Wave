@@ -110,6 +110,54 @@ export function createMarineTurn({ THREE: T, marine }) {
   const worldQ = new T.Quaternion(), inverseQ = new T.Quaternion(), pivotQ = new T.Quaternion(), toPivotQ = new T.Quaternion(), yAxis = new T.Vector3(0, 1, 0);
   const xAxis = new T.Vector3(1, 0, 0), pivotPt = new T.Vector3(), held = { p: new T.Vector3(), q: new T.Quaternion() };   // CC-343
   const surfaceUp = new T.Vector3(), surfaceForward = new T.Vector3(), surfaceRight = new T.Vector3(), surfaceBasis = new T.Matrix4();
+  // GP-20148: reads share a fresh parent matrix within one apply; no pose/limit changes.
+  const readPosition = new T.Vector3(), readScale = new T.Vector3(), readQuaternion = new T.Quaternion();
+  const parentReads = [0, 1].map(() => ({ parent: null, inverse: new T.Matrix4(), inverseQ: new T.Quaternion() }));
+  let parentReadCount = 0;
+  function readParent(parent) {
+    for (let i = 0; i < parentReadCount; i++) if (parentReads[i].parent === parent) return parentReads[i];
+    const r = parentReads[parentReadCount++]; r.parent = parent;
+    parent.updateWorldMatrix(true, false);
+    r.inverse.copy(parent.matrixWorld).invert();
+    parent.matrixWorld.decompose(readPosition, r.inverseQ, readScale); r.inverseQ.invert();
+    return r;
+  }
+  // GP-20149 review: advance the step clock, but replay a proven fixed leg/hip solve.
+  // Inputs are compared exactly; no pose rounding and no skipped required surface reads.
+  const fixedWorld=T.Object3D.prototype.updateWorldMatrix,fixedLocal=T.Object3D.prototype.updateMatrix;
+  const fixedNodes=[marine,lower,...legs,...knees,...ankles],fixedCallbacks=fixedNodes.map(o=>o.quaternion._onChangeCallback);
+  const fixedStateNames=['yaw','swing','u','count','from','to','slide','pos','rot','lift','lastAim','aim','reach','dur'];
+  const fixedPivotNames=Object.keys(PIVOT),fixedTwistNames=Object.keys(TWIST);
+  const fixedDebugNames=['active','swing','steps','plantedError','yaw','visualYaw','crouch','lift','slide','sink','hipLead','twist'];
+  const fixed={valid:false,clock:null,nodes:[],parents:[],input:[],probe:[],state:[],nextState:[],debug:{},
+    quats:[...legs,...knees,...ankles].map(()=>new T.Quaternion())};
+  let sampledSurface=false;
+  function clockValues(s,out){let n=0;for(const k of fixedStateNames)out[n++]=s[k];for(const a of[s.feet,s.planted,s.vel,s.turned]){out[n++]=a[0];out[n++]=a[1];}out.length=n;}
+  function fixedInputs(out,dt,yaw,crouch,ankleH,sole,flex,aimLocked,surface){
+    if(lower.parent!==marine||legs[0].parent!==lower||legs[1].parent!==lower||knees[0].parent!==legs[0]||knees[1].parent!==legs[1]||ankles[0].parent!==knees[0]||ankles[1].parent!==knees[1])return false;
+    let n=0;out[n++]=fixed.dtFree?0:dt;out[n++]=yaw;out[n++]=crouch;out[n++]=ankleH;out[n++]=!!aimLocked;
+    out[n++]=!!sole;out[n++]=sole?sole[0]:0;out[n++]=sole?sole[1]:0;out[n++]=!!flex;out[n++]=flex?flex[0]:0;out[n++]=flex?flex[1]:0;out[n++]=!!surface;out[n++]=ud.idleSway||0;out[n++]=ud.torsoG?ud.torsoG.rotation.y:0;
+    for(const k of fixedPivotNames)out[n++]=PIVOT[k];for(const k of fixedTwistNames)out[n++]=TWIST[k];
+    for(let j=0;j<fixed.nodes.length;j++){const o=fixed.nodes[j];
+      if(o.parent!==fixed.parents[j]||!o.matrixAutoUpdate||o.matrixWorldAutoUpdate!==true||o.updateWorldMatrix!==fixedWorld||o.updateMatrix!==fixedLocal)return false;
+      const p=o.position,q=o.quaternion,s=o.scale,e=o.rotation;
+      out[n++]=p.x;out[n++]=p.y;out[n++]=p.z;out[n++]=q.x;out[n++]=q.y;out[n++]=q.z;out[n++]=q.w;out[n++]=s.x;out[n++]=s.y;out[n++]=s.z;out[n++]=e.x;out[n++]=e.y;out[n++]=e.z;out[n++]=e.order;
+    }
+    for(let j=0;j<fixedNodes.length;j++)if(fixedNodes[j].quaternion._onChangeCallback!==fixedCallbacks[j])return false;
+    out.length=n;return true;
+  }
+  function sameFixed(a,b){if(a.length!==b.length)return false;for(let i=0;i<a.length;i++)if(!Object.is(a[i],b[i]))return false;return true;}
+  function replayFixed(dt,yaw,crouch,ankleH,sole,flex,aimLocked,surface){
+    if(!Number.isFinite(dt)||dt<0||!fixed.valid||clock!==fixed.clock||debug.swing!==-1||!fixedInputs(fixed.probe,dt,yaw,crouch,ankleH,sole,flex,aimLocked,surface)||!sameFixed(fixed.probe,fixed.input))return false;
+    clockValues(clock.state,fixed.nextState);if(!sameFixed(fixed.state,fixed.nextState))return false;
+    // aimVel still decays exactly, even though this stable stance cannot start a new step.
+    clock.step(dt,yaw,crouch);
+    for(const s of saved){s.q.copy(s.o.quaternion);s.y=s.o.position.y;}applied=true;
+    marine.rotation.y=fixed.yaw;marine.position.y=fixed.y;lower.rotation.set(fixed.lowerX,fixed.lowerY,fixed.lowerZ);
+    for(let i=0;i<6;i++)fixedNodes[i+2].quaternion.copy(fixed.quats[i]);
+    debug.feet[0]=fixed.feet0;debug.feet[1]=fixed.feet1;Object.assign(debug,fixed.debug);
+    return true;
+  }
   let clock = null, applied = false, count = 0, visualYaw = 0;
   const debug = { active: false, swing: -1, steps: 0, plantedError: 0, feet: [0, 0] };
   ud.turn = debug;
@@ -130,14 +178,25 @@ export function createMarineTurn({ THREE: T, marine }) {
   function apply(dt, { eligible, yaw, ground, footing = null, surface = null, ankleH = .104, sole = null, flex = null, aimLocked = false, crouch = 0 }) {
     crouch = Math.max(0, Math.min(1, crouch));
     const lift = .065 - .03 * crouch;
-    marine.getWorldPosition(center);
+    if(eligible&&replayFixed(dt,yaw,crouch,ankleH,sole,flex,aimLocked,surface))return;
+    fixed.valid=false;fixed.dtFree=false;sampledSurface=false;
+    const fixedClock=clock,fixedVisualYaw=visualYaw;
+    let fixedInputReady=false;
+    if(eligible&&clock&&clock.state.swing<0){
+      fixed.nodes.length=0;for(const o of fixedNodes)fixed.nodes.push(o);for(let o=marine.parent;o;o=o.parent)fixed.nodes.push(o);
+      fixed.parents.length=fixed.nodes.length;for(let i=0;i<fixed.nodes.length;i++)fixed.parents[i]=fixed.nodes[i].parent;
+      fixedInputReady=fixedInputs(fixed.input,dt,yaw,crouch,ankleH,sole,flex,aimLocked,surface);
+      clockValues(clock.state,fixed.state);
+    }
+    marine.updateWorldMatrix(true, false); center.setFromMatrixPosition(marine.matrixWorld);
     if (!eligible || (clock && center.distanceToSquared(previous) > .035 * .035)) {
       clock = null; debug.active = false; debug.swing = -1; return;
     }
     previous.copy(center);
     for (const s of saved) { s.q.copy(s.o.quaternion); s.y = s.o.position.y; }
     applied = true;
-    const sc = marine.getWorldScale(a).y, ankleHeight = ankleH * sc;
+    marine.matrixWorld.decompose(readPosition, readQuaternion, a);
+    const sc = a.y, ankleHeight = ankleH * sc;
     // CU-99: the point a boot turns on, on the ground under it: its heel when it leads the turn, its ball when it trails.
     const turnPoint = (f, i, dir, out) => {
       const z = (leadsTurn(i, dir) ? PIVOT.heel : PIVOT.ball) * sc;
@@ -257,18 +316,24 @@ export function createMarineTurn({ THREE: T, marine }) {
     // GP-19920: a stationary turn should not impose a permanent half squat.
     // Keep the crouched turn clearance and the actual reach-based sink below.
     marine.position.y -= .008 * crouch;
-    marine.updateWorldMatrix(true, true);
+    // GP-20148: only hips are read for reach; defer the full subtree refresh until final height.
+    marine.updateWorldMatrix(true, false);
+    for (const leg of legs) leg.updateWorldMatrix(true, false);
     // CU-99: turning on planted boots carries his hips round over them; where a leg could not reach its boot, he sinks
     // into the turn by what it lacks (the knees bend a little more) instead of the boot slipping.
     let sink = 0;
     for (let i = 0; i < 2; i++) {
-      legs[i].getWorldPosition(hip);
+      hip.setFromMatrixPosition(legs[i].matrixWorld);
       const reach = (knees[i].position.length() + ankles[i].position.length()) * sc * (.999 - .004*crouch), f = feet[i];
       const h = Math.hypot(hip.x - f.p.x, hip.z - f.p.z), can = Math.sqrt(Math.max(0, reach * reach - h * h));
       sink = Math.max(sink, hip.y - f.p.y - can);
     }
     sink = Math.min(.08 * sc, sink);
-    if (sink > 0) { marine.position.y -= sink / (marine.parent ? marine.parent.getWorldScale(a).y : 1); marine.updateWorldMatrix(true, true); }
+    if (sink > 0) marine.position.y -= sink / (marine.parent ? marine.parent.getWorldScale(a).y : 1);
+    // GP-20149 review: the solve reads only the leg chains; scene/render updates other branches.
+    marine.updateWorldMatrix(true, false);
+    for (const leg of legs) leg.updateWorldMatrix(true, false);
+    parentReadCount = 0;
     let worst = 0;
     // CC-343: five passes (three left a rear boot on its ball up to 1.7 deg past the ankle's range, which the clamp after the
     // pose then turned back about the ankle, lifting its toe 5 mm)
@@ -276,12 +341,13 @@ export function createMarineTurn({ THREE: T, marine }) {
       const leg = legs[i], kn = knees[i], ankle = ankles[i], f0 = feet[i];
       const f = pass ? held : f0;
       // Two-bone 3D IK preserves the support ankle in world space, including its sole orientation.
-      leg.parent.worldToLocal(local.copy(f.p)).sub(leg.position);
+      const parentRead = readParent(leg.parent);
+      local.copy(f.p).applyMatrix4(parentRead.inverse).sub(leg.position);
       const l1 = kn.position.length(), l2 = ankle.position.length();
       const dist = Math.max(.01, Math.min(l1 + l2 - .0001, local.length()));
       direction.copy(local).normalize();
       // CU-99: the knee goes over the toes (the leg turns at the hip with the boot) rather than staying on the hips' front.
-      fwd.set(0, 0, 1).applyQuaternion(f.q).applyQuaternion(leg.parent.getWorldQuaternion(legSpaceQ).invert()); fwd.y = 0;
+      fwd.set(0, 0, 1).applyQuaternion(f.q).applyQuaternion(legSpaceQ.copy(parentRead.inverseQ)); fwd.y = 0;
       pole.set(0, 0, 1);
       if (fwd.lengthSq() > 1e-6) pole.lerp(fwd.normalize(), .7);
       if (pole.lengthSq() < .04) pole.set(0, 0, 1);
@@ -292,8 +358,14 @@ export function createMarineTurn({ THREE: T, marine }) {
       inverseQ.copy(leg.quaternion).invert();
       b.copy(local).sub(knee).applyQuaternion(inverseQ).normalize();
       kn.quaternion.setFromUnitVectors(a.copy(ankle.position).normalize(), b);
-      kn.getWorldQuaternion(worldQ); ankle.quaternion.copy(worldQ.invert()).multiply(f.q);
-      ankle.getWorldPosition(hip);
+      if (kn.parent === leg) {
+        leg.updateWorldMatrix(false, false); kn.updateWorldMatrix(false, false);
+        kn.matrixWorld.decompose(readPosition, worldQ, readScale);
+      } else kn.getWorldQuaternion(worldQ);
+      ankle.quaternion.copy(worldQ.invert()).multiply(f.q);
+      if (ankle.parent === kn && kn.parent === leg) {
+        ankle.updateWorldMatrix(false, false); hip.setFromMatrixPosition(ankle.matrixWorld);
+      } else ankle.getWorldPosition(hip);
       if (i !== s.swing) worst = Math.max(worst, hip.distanceTo(f.p));
       if (!flex) continue;
       // CC-343: the ankle's flex as core/body-limits.js reads it (Euler YXZ, about x); past its range the boot turns on its
@@ -305,6 +377,7 @@ export function createMarineTurn({ THREE: T, marine }) {
       const pz = (over > 0 ? (sole ? sole[1] : PIVOT.ball) : (sole ? sole[0] : PIVOT.heel)) * sc;   // the toe's tip (or the heel's) stays on the ground, ankle space (z)
       pivotPt.set(0, -ankleHeight, pz).applyQuaternion(held.q).add(held.p);
       if (!pass && surface) {
+        sampledSurface=true;
         // CC-343: that point (and the boot's last 12 mm past it) out over a drop: draw the boot back along its sole, towards
         // its ankle, until the point is on what the sole stood on (at most the sole's length from it to the ankle).
         fwd.set(0, 0, Math.sign(pz)).applyQuaternion(held.q); fwd.y = 0;
@@ -325,6 +398,16 @@ export function createMarineTurn({ THREE: T, marine }) {
     debug.feet[0] = s.feet[0]; debug.feet[1] = s.feet[1];
     Object.assign(debug, { active: true, swing: s.swing, steps: count, plantedError: worst,
       yaw: s.yaw, visualYaw, crouch, lift: s.swing < 0 ? 0 : s.lift * lift, slide: s.swing < 0 ? 0 : s.slide, sink: Math.max(0, sink), hipLead, twist });
+    if(fixedInputReady&&clock===fixedClock&&s.swing<0&&!sampledSurface&&Object.is(fixedVisualYaw,visualYaw)){
+      clockValues(s,fixed.nextState);
+      if(sameFixed(fixed.state,fixed.nextState)){
+        fixed.dtFree=Object.is(visualYaw,lead)&&Object.is(s.feet[0],yaw)&&Object.is(s.feet[1],yaw)&&s.vel[0]===0&&s.vel[1]===0;
+        if(fixed.dtFree)fixed.input[0]=0;
+        fixed.clock=clock;fixed.yaw=marine.rotation.y;fixed.y=marine.position.y;fixed.lowerX=lower.rotation.x;fixed.lowerY=lower.rotation.y;fixed.lowerZ=lower.rotation.z;
+        for(let i=0;i<6;i++)fixed.quats[i].copy(fixedNodes[i+2].quaternion);
+        fixed.feet0=debug.feet[0];fixed.feet1=debug.feet[1];for(const k of fixedDebugNames)fixed.debug[k]=debug[k];fixed.valid=true;
+      }
+    }
   }
   return { restore, apply, debug, reset() { restore(); clock = null; debug.active = false; debug.swing = -1; } };
 }

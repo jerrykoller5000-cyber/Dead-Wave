@@ -6,10 +6,12 @@ const smooth = x => { x = clamp(x); return x * x * (3 - 2 * x); };
 
 export function zombieJoinRules(T, g, scale = 1) {
   const u = g.userData, r = u.rig, rules = [];
-  const add = (parent, child, axis, low, high, radius, label) => {
+  const add = (parent, child, axis, low, high, radius, label, fadeStart) => {
     if (!parent || !child) return;
-    rules.push({parent, child, axis, low:low * scale, high:high * scale,
-      radius:radius * scale, label});
+    const rule = {parent, child, axis, low:low * scale, high:high * scale,
+      radius:radius * scale, label};
+    if (fadeStart !== undefined) rule.fadeStart = fadeStart;
+    rules.push(rule);
   };
   if (r) {
     for (const [a,b] of [['pelvis','spine1'],['spine1','spine2'],['spine2','chest'],['chest','neck'],['neck','head']])
@@ -37,13 +39,19 @@ export function zombieJoinRules(T, g, scale = 1) {
   } else {
     const heavy=['brute','colossus','demon'].includes(u.typeKey), m=heavy?1.5:1;
     add(u.hips,u.torso,'y',-.12,.035,.31,'waist');
-    add(u.torso,u.head,'y',-.20,-.025,.17,'neck');
+    if(u.head?.userData.cc359NeckJoin){const q=u.head.userData.cc359NeckJoin;add(u.torso,u.head,'y',q[0],q[1],q[2],'neck');}else add(u.torso,u.head,'y',-.20,-.025,.17,'neck');   // GP-20157 REVIEW: explicit neck-base metadata; legacy unchanged.
     add(u.head,u.spitterJaw,'z',-.045,.075,.14,'spitter jaw hinge');
     add(u.head,u.screamerJaw,'z',-.05,.08,.15,'screamer jaw hinge');
+    const shoulder = u.torso?.userData.cc359ShoulderJoin;
     for (const S of ['L','R']) {
       const arm=u['arm'+S+'G'],leg=u['leg'+S+'G'];
       const side=S==='L'?-1:1;
-      add(u.torso,arm,'x',-.20*m*side,.10*m*side,.15*m,'shoulder'+S);
+      if (shoulder) {
+        const [low, high, radius, fadeStart] = shoulder;
+        add(u.torso,arm,'x',low*side,high*side,radius,'shoulder'+S,fadeStart);
+      } else {
+        add(u.torso,arm,'x',-.20*m*side,.10*m*side,.15*m,'shoulder'+S);
+      }
       add(arm,arm?.userData.elbowG,'y',.075,-.095,.105*m,'elbow'+S);
       add(u.hips,leg,'y',.065,-.105,.14*m,'hip'+S);
       add(leg,leg?.userData.shinG,'y',.07,-.10,.115*m,'knee'+S);
@@ -72,7 +80,9 @@ export function blendZombieJoins(T, g, skin, scale = 1) {
       const distance=radial2/(r.radius*r.radius)+Math.abs((along-r.low)/(r.high-r.low)-.5)*.15;
       // Fade to rigid ownership outside the socket, avoiding a hard deformation
       // boundary on broad chests or fingers adjacent to the selected joint.
-      const fade=1-smooth((Math.sqrt(radial2)/r.radius-.70)/.30);
+      const fade = r.fadeStart === undefined
+        ? 1-smooth((Math.sqrt(radial2)/r.radius-.70)/.30)
+        : 1-smooth((Math.sqrt(radial2)/r.radius-r.fadeStart)/(1-r.fadeStart));
       const target=smooth((along-r.low)/(r.high-r.low)),own=bone===r.child?1:0;
       if(distance<bestDistance){bestDistance=distance;best={r,weight:own+(target-own)*fade};}
     }

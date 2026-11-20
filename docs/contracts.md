@@ -466,6 +466,22 @@ and the cave chase in `index.html` (Grokbot's beats drive them; the modules own 
   `tentacleUpdate(arm, t)` to rebuild the tube; `tentacleShow(arm, on)`, `tentacleTip(arm)`.
 - Both are added to the scene by their caller and disposed with `disposeRigProp` (they carry
   `userData.mats`).
+- The live cave guard boss (GP-154, D-203, Director-approved 2026-11-18, landed 19:38Z):
+  - `makeCaveGuardianRig(design)` accepts optional `design.poseProfile = "caveguard-boss"`. It enables the corrected live-enemy
+    poses only when conceptKind resolves to caveguard. Default story/carry/drag/throw rigs and the Guardian keep their original
+    pose path; other or missing profile values give null. The rig exposes the profile in `userData.poseProfile`.
+  - `guardianSupport(g, R, dt, floorY, reset = false, surfaceAt = null)` is the live cave guard's post-pose support pass. The
+    caller passes the same rig and R, a positive dt and a finite world floorY, and calls it after its ordinary pose, damping and
+    the unchanged `guardianHindFloor`. It changes only supported limb joint rotations within the existing limits: no root,
+    geometry, bind or range change. It does nothing for the default/Guardian profiles.
+  - Optional `surfaceAt(worldX, worldZ)` is a pure, read-only, finite world-height query. Calls may be deduplicated; callers must
+    not depend on the query count or change state. Without it the flat floorY is used. Invalid results are counted in the
+    diagnostics and fall back to floorY; invalid queries are a validation failure, not an acceptance.
+  - `reset` rebuilds the private hand/sole caches after an actor reset/reuse. `userData.gp154SupportResult` is diagnostic data
+    (raw point counts, clearances, unresolved contacts, query/invalid counts); `cache.sampleSides` is private, not a contract.
+  - The only production caller is `index.html`: the constructor opts in ONLY typeKey caveguard; the alive cave guard controller
+    calls the support pass right after the unchanged `guardianHindFloor`. Outdoors the query is max(sampleHeight, groundMeshY);
+    training/hollow use their own sampleHeight.
 
 ## The studio: clips, rigs and the player (CL-57 to CL-59, D-40, 2026-09-26)
 

@@ -2,7 +2,7 @@
 // drum across the receiver to the left (x +0.140 to -0.465 at half way) and 3 of 48 phases crossed the fitted right side
 // plate. Held at 48 phases (TT.reloadClipDbg.hold), the first-person drum (the view gun's copy of the world ammoBox) is set
 // on a freshly built minigun (the real artwork, unmerged) and measured with the seating audit (tools/tests/weapon-seating.js):
-// - 0 of 48 phases: the drum through the right plate or its two fitted strips (visibleSurfaceGap: penetrating);
+// - 0 of 48 phases: the drum through the full right plate or any of its four fitted strips (visibleSurfaceGap: penetrating);
 // - the drum stays on its own side: its centre never inboard of the rest (x >= rest - 1 mm) while it is shown;
 // - the swap is seen: the drum off in the palm through several phases, away (hidden) through a few;
 // - the world (third-person) drum unchanged: 0 of 48 crossing as before;
@@ -24,20 +24,24 @@
     T.setViewFirstDbg(true);
     ok(await until(() => { T.stepFrame(1 / 30); const v = T.viewmodelDbg(); return v && v.info.active && v.info.raise > 0.99; }, 20000), 'first person: the view gun is up');
     const { makeMinigunModel } = await import(new URL('/studio/weapon-heavy.js', location.origin).href);
-    const { minigunSidePanelGeometry } = await import(new URL('/studio/weapon-minigun-panel.js', location.origin).href);
     const { visibleSurfaceGap } = await import(new URL('/tools/tests/weapon-seating.js', location.origin).href);
-    // the real artwork, built unmerged so the right plate and its strips are their own meshes
+    // Director-approved GT-20107: inspect the accepted full plate and all four
+    // fitted strips by construction contract, not obsolete cut-panel vertex counts.
     const ctx = T.inspectHost().builders.weaponContext();
     const model = makeMinigunModel({ ...ctx, finishGun: (g) => g, mergeRigidMeshes: () => {} });
     model.scale.copy(T.weaponMeshes.minigun.scale);
-    const nPlate = minigunSidePanelGeometry(G).attributes.position.count;
-    const nUp = minigunSidePanelGeometry(G, 'upperStrip').attributes.position.count, nLo = minigunSidePanelGeometry(G, 'lowerStrip').attributes.position.count;
-    const kids = model.children.filter((o) => o.isMesh && o.position.x >= 0);
-    const plate = kids.find((o) => o.geometry.attributes.position.count === nPlate);
-    const strips = kids.filter((o) => o !== plate && (o.geometry.attributes.position.count === nUp || o.geometry.attributes.position.count === nLo));
+    const seating = model.userData.seatingParts;
+    const plate = seating && model.getObjectByName(seating.rightPlate);
+    const stripNames = seating && seating.rightStrips;
+    const strips = Array.isArray(stripNames) ? stripNames.map(name => model.getObjectByName(name)) : [];
     const holder = model.userData.ammoBox, drum = holder && holder.children[0];
-    ok(!!plate && strips.length === 2 && !!drum, 'the right plate, its two strips and the drum found on the built gun (' + (plate ? 'plate' : 'no plate') + ', ' + strips.length + ' strips)');
-    if (!plate || !drum) return out.join('\n');
+    const surfacesFound = !!plate?.isMesh && strips.length === 4 && strips.every(part => part?.isMesh) &&
+      new Set([plate, ...strips]).size === 5 && !!drum;
+    ok(surfacesFound, 'the actual full right plate, all four fitted strips and drum resolve by the raw-art contract (' + (plate ? 'plate' : 'no plate') + ', ' + strips.filter(Boolean).length + ' strips)');
+    if (!surfacesFound) return out.join('\n');
+    model.updateMatrixWorld(true);
+    ok([plate, ...strips].every(part => new G.Box3().setFromObject(part).getCenter(new G.Vector3()).x > 0),
+      'the named right plate and all four strips are on the positive-x side of the built gun');
     const rest = { p: holder.position.clone(), q: holder.quaternion.clone(), s: holder.scale.clone() };
     const world = T.weaponMeshes.minigun.userData.ammoBox;
     const V = T.viewmodelDbg();

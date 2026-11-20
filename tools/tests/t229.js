@@ -37,7 +37,10 @@
     const simWait = async (s) => { const t0 = sim(), w0 = Date.now(); while (sim() - t0 < s && Date.now() - w0 < 20000) await wait(4); };
     let pitch = 0;
     const aim = () => { P.position.x = home.x; P.position.z = home.z; T.aimTarget.set(home.x, home.y + 1.25 + Math.tan(pitch) * 30, home.z + 30); T.setAimYawDbg(0); };
-    const pin = setInterval(aim, 5);
+    // CB-335: the aim and his facing pinned in the frame (TT.pinAimDbg), so a real cursor over the window cannot turn him; his
+    // place stays on the 5 ms timer between frames, as before (moved inside the frame, it put the pistol and revolver 3-15 cm off their hold).
+    const aimOnly = () => { T.aimTarget.set(home.x, home.y + 1.25 + Math.tan(pitch) * 30, home.z + 30); T.setAimYawDbg(0); };
+    const pin = T.pinAimDbg ? (T.pinAimDbg(aimOnly), setInterval(() => { P.position.x = home.x; P.position.z = home.z; }, 5)) : setInterval(aim, 5); aim();
     const take = async (w) => { for (let i = 0; i < 16 && T.getCurrentWeapon() !== w; i++) { T.setWeapon(T.WEAPON_ORDER.indexOf(w)); await wait(150); } await simWait(1.0); };
     const mirrored = (e) => { const wr = e.userData.wrist; return !!wr && wr.children.some((h) => h.scale.x < 0); };
     // GB-152: each hand a fingered rig, its index finger and thumb on the +x*side edge (the mitt's were on -x*side).
@@ -146,7 +149,7 @@
     const bR = bend(ud.elbowRG, T.weaponMeshes.pistol), bL = bend(ud.elbowLG, og);
     handOk(bR < 0.9 && bL < 0.9, 'akimbo: wrists firm, guns in line with the forearms (' + bR.toFixed(2) + ', ' + bL.toFixed(2) + ' rad bore to forearm; wrist turn incl. roll ' + wt.r.toFixed(2) + ', ' + wt.l.toFixed(2) + ')'); }
     T.toggleDualWieldDbg(); await simWait(0.5);
-    clearInterval(pin);
+    if (T.pinAimDbg) T.pinAimDbg(null); clearInterval(pin);
     window.dispatchEvent(new KeyboardEvent('keyup', { code: 'F13', key: 'F13', bubbles: true }));
     const bad = errs.filter((e) => !/contains' on 'Node'/.test(e));   // a known page error outside the hands
     ok(bad.length === 0, 'no errors' + (bad.length ? ': ' + bad[0] : ''));

@@ -2,7 +2,9 @@
 //  - Size: TT.getWeaponSizeDbg() (MARINE_UPM = 1.655 units / 1.80 m). m = the real overall length of the gun's
 //    class (in its range); look = the by-eye factor against the Uzi (Uzi 1.0, others 1-1.6). Each gun's measured
 //    overall length (visible vertices, butt to muzzle, at its world scale relative to the marine) is m x look
-//    marine metres; the knife and the machete too. The minigun is unchanged (scale 0.88, no size factor).
+//    marine metres, except the four accepted-art references below (Director, GT-20107,14Nov).
+//    Their existing in-game size and hand fits stay fixed; the old m/look calibration is metadata.
+//    The knife and the machete too. The minigun is unchanged (scale 0.88, no size factor).
 //    Akimbo copies match their main gun.
 //  - Anchors: every grip anchor sits on the gun's own grip (close to its geometry, inside its bounds), the
 //    trigger a finger's reach ahead of it (2-6 cm at the gun's size), every support anchor on the gun
@@ -49,11 +51,16 @@
   // Real overall lengths (m) per class: generic references, the names in the game are fictional.
   const RANGE = { pistol: [0.18, 0.21], revolver: [0.24, 0.31], uzi: [0.42, 0.52], m4: [0.80, 0.90], ak: [0.84, 0.93], aa12: [0.92, 1.0],
     shotgun: [0.95, 1.06], sniper: [1.08, 1.22], launcher: [0.68, 0.82], flamer: [0.85, 1.05], chainsaw: [0.75, 0.95] };
+  // Director14Nov GT-20107: retain accepted J149/J153 models, not a rescale to stale calibration.
+  // Independent native measured references: review/GT-20107/lengths-native.json
+  // (Wasp .452834, KR-7 1.003015, launcher .842268, flamer 1.100159 m), rounded to 1mm.
+  // Original3% tolerance and all anchor/hand/aim/class/scale checks remain unchanged.
+  const ACCEPTED_LENGTH_M = Object.freeze({uzi:.453,ak:1.003,launcher:.842,flamer:1.100});
   const BASE = { pistol: 1.05, revolver: 1.0, uzi: 1.0, m4: 0.92, ak: 0.92, aa12: 0.9, shotgun: 0.95, sniper: 0.88, launcher: 0.92, flamer: 1, chainsaw: 1.18 };
   try {
     await startMatch(T, 'Sizes');
     T.clearZombies && T.clearZombies(); T.setHp(100000); T.grantAllWeapons();
-    const aimer = setInterval(pin, 5); pin();
+    const aimer = T.pinAimDbg ? (T.pinAimDbg(() => { pin(); if (T.setAimYawDbg) T.setAimYawDbg(0); }), null) : setInterval(pin, 5); pin();   /* CB-335: aim pinned in the frame (TT.pinAimDbg), his facing held at the no-cursor 0 deg, so a real cursor over the window cannot turn him */
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'F13', key: 'F13', bubbles: true }));
     ok(typeof T.getWeaponSizeDbg === 'function', 'TT.getWeaponSizeDbg is exported');
     const S = T.getWeaponSizeDbg();
@@ -92,8 +99,9 @@
       const pts = vertsOf(gun), b = bbox(pts), ws = gun.getWorldScale(V()).x / mScale;
       if (!aki) {
         const lenM = (b[5] - b[2]) * ws / S.upm;
-        const want = S.sizes[gw].m * S.sizes[gw].look;
-        if (pts.length > 300) ok(Math.abs(lenM / want - 1) < 0.03, gw + ': measured ' + lenM.toFixed(3) + ' m long next to him (m x look ' + want.toFixed(3) + ')');
+        const acceptedLength = ACCEPTED_LENGTH_M[gw];
+        const want = acceptedLength ?? S.sizes[gw].m * S.sizes[gw].look;
+        if (pts.length > 300) ok(Math.abs(lenM / want - 1) < 0.03, gw + ': measured ' + lenM.toFixed(3) + ' m long next to him (' + (acceptedLength == null ? 'm x look ' : 'accepted art ') + want.toFixed(3) + ')');
         else out.push('SKIP ' + gw + ': the test page gives this model too few vertices to measure (' + pts.length / 3 + ')');
         const lk = S.sizes[gw].look || 1;
         const gN = nearest(pts, H.grip) * ws, inB = H.grip[1] > b[1] && H.grip[1] < b[4] && H.grip[2] > b[2] && H.grip[2] < b[5];
@@ -142,7 +150,7 @@
     const hc = model.localToWorld(V(0, 0, model === kn.userData.knifeModel ? -0.062 : -0.065));
     const gl = ud.gripL.getWorldPosition(V());
     ok(kn.visible && hc.distanceTo(gl) < 0.04, 'knife: handle in the left hand (' + hc.distanceTo(gl).toFixed(3) + ' m from the handle centre; the hand closes on the handle off-centre)');
-    clearInterval(aimer);
+    if (T.pinAimDbg) T.pinAimDbg(null); if (aimer) clearInterval(aimer);
     window.dispatchEvent(new KeyboardEvent('keyup', { code: 'F13', key: 'F13', bubbles: true }));
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
   return out.join('\n');

@@ -1,0 +1,26 @@
+
+=== START: node tools/camera-cb345d.mjs start --inspect --onscreen --nofreeze --agent antigravity --task AG-345 (2026-11-17T21:57:33.284Z) ===
+camera: loading the game............................................
+camera: ready in 44 s on port 45112: inspect, ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11), 1600x900
+[exit 0 signal=none]
+
+=== BATCH: node tools/camera-cb345d.mjs batch review/CB-343/native-job.json --agent antigravity --task AG-345 (2026-11-17T21:58:17.920Z) ===
+FAILED zombie.shambler:walk: the picture is identical to the last one although the camera moved: a stale frame (on a real GPU the camera window may be off screen; start the camera with --onscreen) (CB-345); nothing saved
+FAILED zombie.shambler:walk: the picture is identical to the last one although the camera moved: a stale frame (on a real GPU the camera window may be off screen; start the camera with --onscreen) (CB-345); nothing saved
+FAILED zombie.shambler:walk: the picture is identical to the last one although the camera moved: a stale frame (on a real GPU the camera window may be off screen; start the camera with --onscreen) (CB-345); nothing saved
+FAILED zombie.brute:walk: the picture is identical to the last one although the camera moved: a stale frame (on a real GPU the camera window may be off screen; start the camera with --onscreen) (CB-345); nothing saved
+FAILED zombie.brute:walk: the picture is identical to the last one although the camera moved: a stale frame (on a real GPU the camera window may be off screen; start the camera with --onscreen) (CB-345); nothing saved
+FAILED zombie.brute:walk: the picture is identical to the last one although the camera moved: a stale frame (on a real GPU the camera window may be off screen; start the camera with --onscreen) (CB-345); nothing saved
+FAILED zombie.demon:live: the picture is identical to the last one although the camera moved: a stale frame (on a real GPU the camera window may be off screen; start the camera with --onscreen) (CB-345); nothing saved
+FAILED zombie.demon:live: the picture is identical to the last one although the camera moved: a stale frame (on a real GPU the camera window may be off screen; start the camera with --onscreen) (CB-345); nothing saved
+FAILED zombie.demon:live: the picture is identical to the last one although the camera moved: a stale frame (on a real GPU the camera window may be off screen; start the camera with --onscreen) (CB-345); nothing saved
+FAILED zombie.brute:live: the picture is identical to the last one although the camera moved: a stale frame (on a real GPU the camera window may be off screen; start the camera with --onscreen) (CB-345); nothing saved
+FAILED zombie.brute:live: the picture is identical to the last one although the camera moved: a stale frame (on a real GPU the camera window may be off screen; start the camera with --onscreen) (CB-345); nothing saved
+FAILED zombie.brute:live: the picture is identical to the last one although the camera moved: a stale frame (on a real GPU the camera window may be off screen; start the camera with --onscreen) (CB-345); nothing saved
+sheet: review/CB-343/native/CB-343-native-sheet.jpg
+(39.6 s)
+[exit 1 signal=none]
+
+=== STOP: node tools/camera-cb345d.mjs stop --agent antigravity --task AG-345 (2026-11-17T21:58:57.678Z) ===
+camera: stopped
+[exit 0 signal=none]

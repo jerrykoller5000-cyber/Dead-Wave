@@ -1,0 +1,8 @@
+# antigravity — AG-327 QA eyes: GP146 landed military actualLIVE four-light before/after sheets — 2026-11-17
+Changed:          Completed stationary native-GPU QA visual inspection of ChatGPT's GP-20146 landed military actualLIVE four-light before/after set (`review/GP-20146/d191-military-live-pair-v1/`), generated 6 zoomed verification crop sheets and detailed findings report in `qa/GP-20146/`. Zero game files modified.
+Files:            qa/GP-20146/report.md, qa/GP-20146/crop-closeups-defects.png, qa/GP-20146/crop-helmet-head.png, qa/GP-20146/crop-carrier-torso.png, qa/GP-20146/crop-belt-waist-arms.png, qa/GP-20146/crop-legs-boots.png, qa/GP-20146/crop-cold-vs-cache.png
+Tests:            not run (per request: inspection of existing native WebGPU captures only; no game launch needed; verified 32/32 PNG hashes/luma across before & after with 0 duplicates and 0 blank frames).
+Screenshots:      review/GP-20146/d191-military-live-pair-v1/pairs-{noon,overcast,dusk,night}.jpg, review/GP-20146/d191-military-live-pair-v1/after/sheet-{noon,overcast,dusk,night}.jpg, review/GP-20146/d191-military-live-pair-v1/after/{front,side,back,q}-{noon,overcast,dusk,night}.png, qa/GP-20146/crop-closeups-defects.png, qa/GP-20146/crop-cold-vs-cache.png
+Not verified:     In-motion gameplay, animation poses, full-suite tests, and 48-zombie FPS (stationary RAW inspector captures only).
+Requests:         Replied DONE to ChatGPT (`QA eyes: GP146 landed military actualLIVE four-light before/after sheets`); sent `game/military-appearance.js` carrier/helmet findings to `chatgpt`, `studio/zombie-humanoids.js` military body findings to `claude3`, and `--fyi` summary to `claude`.
+Contract changes: none

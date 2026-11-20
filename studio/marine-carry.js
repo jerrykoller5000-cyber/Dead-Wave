@@ -204,6 +204,59 @@ function gunPoints(T, spot, step = 3) {
   return pts;
 }
 
+// CC-352 follow-up: a gun's triangles in its spot's parent (the torso) frame, every one (an instanced part's copies each
+// placed), 9 numbers a triangle: for rasterTris. Hidden materials skipped. `root`: another part of the spot instead (its fitted
+// holster shell), walked whether shown yet or not.
+export function gunTris(T, spot, root = spot.gun) {
+  const out = [];
+  if (!root) return out;
+  spot.g.updateMatrix(); spot.g.updateWorldMatrix(false, true);   // its pose as set now (the parent's is current)
+  const inv = new T.Matrix4().copy(spot.g.parent.matrixWorld).invert(), m = new T.Matrix4(), mi = new T.Matrix4(), im = new T.Matrix4(), v = new T.Vector3();
+  const walk = (o) => {
+    const g = o.geometry, P = g && g.attributes && g.attributes.position;
+    if (!o.isMesh || !P) return;
+    const mt = Array.isArray(o.material) ? o.material[0] : o.material; if (mt && mt.visible === false) return;
+    m.multiplyMatrices(inv, o.matrixWorld);
+    const ix = g.index, nt = ((ix ? ix.count : P.count) / 3) | 0, inst = o.isInstancedMesh ? o.count : 0, W = new Float32Array(P.count * 3);
+    for (let r = 0; r < Math.max(1, inst); r++) {
+      if (inst) { o.getMatrixAt(r, im); mi.multiplyMatrices(m, im); } else mi.copy(m);
+      for (let i = 0; i < P.count; i++) { v.fromBufferAttribute(P, i).applyMatrix4(mi); W[3 * i] = v.x; W[3 * i + 1] = v.y; W[3 * i + 2] = v.z; }
+      for (let t = 0; t < nt; t++) {
+        const a = 3 * (ix ? ix.getX(3 * t) : 3 * t), b = 3 * (ix ? ix.getX(3 * t + 1) : 3 * t + 1), c = 3 * (ix ? ix.getX(3 * t + 2) : 3 * t + 2);
+        out.push(W[a], W[a + 1], W[a + 2], W[b], W[b + 1], W[b + 2], W[c], W[c + 1], W[c + 2]);
+      }
+    }
+  };
+  if (root === spot.gun) root.traverseVisible(walk); else root.traverse(walk);
+  return out;
+}
+// CC-352 follow-up (the stacks sank 25-30 mm through each other's flat faces: the map under a gun was its vertices, every 3rd,
+// so a face between them left holes): a gun's triangles written into a depth map on the `cell` grid (keys Math.round(x / cell)
+// + ',' + Math.round(y / cell)), 'min' keeping the back-most z per cell (what a gun over it rests on), 'max' the z nearest him
+// (its near face). Each triangle at the cell centres it covers, plus its corners and points along its edges half a cell apart,
+// so a part thinner than a cell (a barrel, a rail, a face seen edge-on) still marks the cells it crosses. `dz` shifts every z.
+export function rasterTris(tris, cell, mode = 'min', map = new Map(), dz = 0) {
+  const lo = mode === 'min', h = cell / 2;
+  const put = (x, y, z) => { const k = Math.round(x / cell) + ',' + Math.round(y / cell), o = map.get(k); z += dz; if (o === undefined || (lo ? z < o : z > o)) map.set(k, z); };
+  const edge = (x0, y0, z0, x1, y1, z1) => { const n = Math.ceil(Math.hypot(x1 - x0, y1 - y0) / h); for (let s = 0; s <= n; s++) { const f = n ? s / n : 0; put(x0 + (x1 - x0) * f, y0 + (y1 - y0) * f, z0 + (z1 - z0) * f); } };
+  for (let t = 0; t + 8 < tris.length; t += 9) {
+    const ax = tris[t], ay = tris[t + 1], az = tris[t + 2], bx = tris[t + 3], by = tris[t + 4], bz = tris[t + 5], cx = tris[t + 6], cy = tris[t + 7], cz = tris[t + 8];
+    edge(ax, ay, az, bx, by, bz); edge(bx, by, bz, cx, cy, cz); edge(cx, cy, cz, ax, ay, az);
+    const d = (by - cy) * (ax - cx) + (cx - bx) * (ay - cy);
+    if (Math.abs(d) < 1e-12) continue;   // edge-on: its edges are in
+    const i0 = Math.ceil(Math.min(ax, bx, cx) / cell), i1 = Math.floor(Math.max(ax, bx, cx) / cell), j0 = Math.ceil(Math.min(ay, by, cy) / cell), j1 = Math.floor(Math.max(ay, by, cy) / cell);
+    for (let i = i0; i <= i1; i++) for (let j = j0; j <= j1; j++) {
+      const px = i * cell, py = j * cell, w1 = ((by - cy) * (px - cx) + (cx - bx) * (py - cy)) / d, w2 = ((cy - ay) * (px - cx) + (ax - cx) * (py - cy)) / d, w3 = 1 - w1 - w2;
+      if (w1 < -1e-9 || w2 < -1e-9 || w3 < -1e-9) continue;
+      const z = w1 * az + w2 * bz + w3 * cz + dz, k = i + ',' + j, o = map.get(k);
+      if (o === undefined || (lo ? z < o : z > o)) map.set(k, z);
+    }
+  }
+  return map;
+}
+// a depth map back to points at its cell centres (what the next gun's map is built from)
+export function mapPoints(T, map, cell) { const out = []; for (const [k, z] of map) { const [i, j] = k.split(',').map(Number); out.push(new T.Vector3(i * cell, j * cell, z)); } return out; }
+
 // CC-350 p2 (D-182): two slung guns where one is bulky (the saw, the minigun, the launcher, the flamer) do not stack. The bulky
 // one with a thin gun crosses over the thin one (which lies flat on the pack, a few cm under it); two bulky ones: the longer
 // lies across the pack as when it is alone and the other hangs upright on the pack's other upper side (muzzle up behind that
@@ -287,17 +340,41 @@ export function seatOnBack(T, spot, side, tp, vest, P = BACK_CARRY, under = null
     // Crossing a gun already there: slide this one along its length (and a little across) so the two cross where both are
     // thin (a barrel over a stock), not receiver on receiver or over a drum; the least slide that keeps it closest to him.
     // Alone (or the first of a pair), only slid up its length when it would reach below `lowest`.
-    let bestScore = -Infinity;
+    let bestScore = -Infinity; const cands = [];
     // (a pair's first gun: the slide up its length and across that lies tightest on the pack)
-    const slides = map.size && !opt.noSlide ? [-0.3, -0.25, -0.2, -0.15, -0.1, -0.05, 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3] : opt.pair ? [0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3] : [0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24];
-    search: for (const a of slides) for (const c of (map.size && !opt.noSlide ? [-0.08, -0.04, 0, 0.04, 0.08] : opt.pair ? [-0.06, -0.03, 0, 0.03, 0.06] : [0])) {
+    // CC-352 follow-up (option): a first gun over the pack's handguns stays where it would lie alone, unless they hold it more
+    // than 5 cm off his back there (C11: an AA-12's drum on a pack revolver's holster shell): then it slides along its length
+    // and across like a gun over a gun, to where it lies closest to him
+    let noSlide = !!opt.noSlide;
+    if (noSlide && map.size && !opt.pair && fits(0)) {
+      const d0 = depth(0, 0, few);
+      if (d0.off > 0.05) noSlide = false;
+    }
+    const slides = map.size && !noSlide ? [-0.3, -0.25, -0.2, -0.15, -0.1, -0.05, 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3] : opt.pair ? [0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3] : [0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24];
+    search: for (const a of slides) for (const c of (map.size && !noSlide ? [-0.08, -0.04, 0, 0.04, 0.08] : opt.pair ? [-0.06, -0.03, 0, 0.03, 0.06] : [0])) {
       const ox = ax.x * a + ac.x * c, oy = ax.y * a + ac.y * c;
       if (!fits(oy)) continue;   // not down to his knees, not over his head
-      if ((!map.size || opt.noSlide) && !opt.pair) { best = { ox, oy, a, c }; break search; }   // CC-352: noSlide, over handguns only
+      if ((!map.size || noSlide) && !opt.pair) { best = { ox, oy, a, c }; break search; }   // CC-352: noSlide, over handguns only
       const d = depth(ox, oy, few);
       const score = opt.pair ? -air(ox, oy, d.dz) - 0.5 * d.off - 2 * Math.max(0, d.off - PAIR_CARRY.maxOff) - 0.01 * (Math.abs(a) + Math.abs(c)) - 0.002 * inArm(few, ox, oy, d.dz)
         : d.dz - 0.1 * (Math.abs(a) + Math.abs(c));
       if (score > bestScore) { bestScore = score; best = { ox, oy, a, c }; }
+      cands.push({ ox, oy, a, c, score });
+    }
+    // CC-352 follow-up: the few best on a gun, again with both guns' triangles (the search sees every 4th vertex: a slide that
+    // looked clear could still need a lift where a face crosses the gun under it)
+    if (map.size && cands.length > 1) {
+      const tris0 = gunTris(T, spot), sh = new Float32Array(tris0.length);
+      cands.sort((p, q) => q.score - p.score); bestScore = -Infinity;
+      for (const k of cands.slice(0, 6)) {
+        for (let i = 0; i < tris0.length; i += 3) { sh[i] = tris0[i] + k.ox; sh[i + 1] = tris0[i + 1] + k.oy; sh[i + 2] = tris0[i + 2]; }
+        const d = depth(k.ox, k.oy, few); let dz = d.dz;
+        for (const [key2, z] of rasterTris(sh, cell, 'max')) { const u = map.get(key2); if (u !== undefined && u - P.clear - z < dz) dz = u - P.clear - z; }
+        const off = d.off + Math.max(0, d.dz - dz);
+        const score = opt.pair ? -air(k.ox, k.oy, dz) - 0.5 * off - 2 * Math.max(0, off - PAIR_CARRY.maxOff) - 0.01 * (Math.abs(k.a) + Math.abs(k.c)) - 0.002 * inArm(few, k.ox, k.oy, dz)
+          : dz - 0.1 * (Math.abs(k.a) + Math.abs(k.c));
+        if (score > bestScore) { bestScore = score; best = k; }
+      }
     }
     if (!best) best = { ox: 0, oy: 0, a: 0, c: 0 };
   }
@@ -328,10 +405,20 @@ export function seatOnBack(T, spot, side, tp, vest, P = BACK_CARRY, under = null
     }
   }
   const d = depth(0, 0);
-  let dz = d.dz; const on = d.on;
+  let dz = d.dz, on = d.on;
+  // CC-352 follow-up: on a gun, its near face (every triangle, rasterised) onto the gun under it (rasterised too): a flat face
+  // between its vertices no longer sinks onto a ridge of the gun under it, nor its vertices into the holes of that gun's face
+  const tris = gunTris(T, spot);
+  if (map.size) {
+    const near = rasterTris(tris, cell, 'max');
+    for (const [k, z] of near) { const u = map.get(k); if (u !== undefined && u - P.clear - z < dz) { dz = u - P.clear - z; on = 'gun'; } }
+  }
   if (Number.isFinite(dz)) { spot.g.position.z += dz; for (const p of pts) p.z += dz; }
   spot.g.updateMatrix();
-  return { dz, z: spot.g.position.z, on, off: d.off, air: air(0, 0, 0, pts), upright, slide: [best.a, best.c], hinge, arm: inArm(pts, 0, 0, 0), n: pts.length, pts };
+  // what the next gun rests on: this one's back face, rasterised
+  const back = mapPoints(T, rasterTris(tris, cell, 'min', new Map(), Number.isFinite(dz) ? dz : 0), cell);
+  const off = Number.isFinite(d.dz) && Number.isFinite(dz) ? d.off + Math.max(0, d.dz - dz) : d.off;   // his back to it, with the lift onto the gun
+  return { dz, z: spot.g.position.z, on, off, air: air(0, 0, 0, pts), upright, slide: [best.a, best.c], hinge, arm: inArm(pts, 0, 0, 0), n: pts.length, pts, under: back };
 }
 
 // Flat webbing along a path (the strap). Width turns with the path; uv runs along it.

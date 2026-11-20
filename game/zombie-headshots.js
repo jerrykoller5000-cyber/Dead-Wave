@@ -4,6 +4,8 @@ export function headCore(z){
  const s=z.mesh?.userData?.headScale||Math.abs(z.mesh?.userData?.legLG?.userData?.shinG?.position.y||.38)/.38;
  if(z.mesh?.userData?.bossRig)return {x:.32,y:.26,z:.48,cy:.015,cz:.38,scale:1};
  if(z.typeKey==='spider')return {x:.15*s,y:.125*s,z:.20*s,cy:0,cz:.015*s,scale:s};
+ // GP-20157 REVIEW: CC-359 neck-base head, actual skull-local bounds with <=2mm fitting margin at scale1.
+ if(z.typeKey==='shambler'&&z.mesh?.userData?.head?.userData.cc359NeckJoin)return {x:.113*s,y:.173*s,z:.145*s,cy:.2465*s,cz:.017*s,scale:s};
  const heavy=['brute','colossus','demon','guardian','caveguard'].includes(z.typeKey),fat=z.typeKey==='bomber';
  return {x:(heavy?.185:fat?.174:.155)*s,y:.195*s,z:(fat?.225:.215)*s,cy:.015*s,cz:.005*s,scale:s};
 }

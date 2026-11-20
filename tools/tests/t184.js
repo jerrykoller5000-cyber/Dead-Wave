@@ -19,7 +19,10 @@
     const px = 18, pz = 18, p = T.player.position;
     T.levelGroundRect(px - 10, pz - 10, px + 10, pz + 10, T.sampleHeight(px, pz), 6);
     p.set(px, T.sampleHeight(px, pz), pz);
-    await wait(600);
+    // CD-17: in game time, not wall time. The test page runs the game at 0.2-0.7x real time (50 ms steps, slow frames),
+    // and the gun arm is still rising out of the insertion hand-off for ~0.5 s of game time after startMatch returns.
+    const simWait = async (s) => { const t0 = T.getSimTime(); await until(() => T.getSimTime() - t0 >= s, 30000); };
+    await simWait(0.8);
     const V = T.THREE.Vector3, ud = T.marine.userData;
     const gy = () => T.sampleHeight(p.x, p.z);
     // His own frame: fwd along his facing, up from the ground.
@@ -114,8 +117,11 @@
     }
     // Unarmed and crouched: hands down in front, near the knees.
     T.toggleHolster();
-    await until(() => !T.drawDbg().active, 10000);
-    await wait(1200);
+    // CD-17: the holster move starts on the next frame (so waiting for 'not active' returned at once); wait for it to
+    // start, then to end, then 1.2 s of game time.
+    await until(() => T.drawDbg().active, 2000);
+    await until(() => !T.drawDbg().active, 20000);
+    await simWait(1.2);
     ok(T.isUnarmed() && T.getCrouching(), 'U while crouched: unarmed, still crouching');
     const fist = (elbow) => { T.player.updateMatrixWorld(true); return elbow.localToWorld(new V(0, -0.25, 0.07)); };
     for (const [s, elbow, arm] of [['L', ud.elbowLG, ud.armLG], ['R', ud.elbowRG, ud.armRG]]) {

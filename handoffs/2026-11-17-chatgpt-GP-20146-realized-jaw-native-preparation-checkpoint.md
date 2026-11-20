@@ -1,0 +1,10 @@
+# chatgpt — GP-20146 native jaw preparation checkpoint — 2026-11-17
+Changed: REVIEW ONLY current-source semantic cranium/cap metadata hooks and an actual same-parent native jaw fixture prepared; no game run or production edit. Pausing for C3's newly reported GP151 suite startup failure in my band helper.
+Files: review/GP-20146/prepare-realized-jaw-native-source-v1.mjs; realized-jaw-native-source-v1/{index,concepts}.{live,metadata} files and receipt; realized-jaw-native-fixture-v1.mjs. Earlier realized-jaw-checkpoint remains the CPU result.
+Tests: node --check review/GP-20146/realized-jaw-native-fixture-v1.mjs PASS. No native test run; runner not yet prepared.
+Screenshots: None new. Matched current actual same-parent seeds22/73 four-light proof still owed.
+Not verified: Fixture not executed; native equality, actual cranium/headFit and skull inheritance, visual acceptance and wider GP146 obligations remain unverified. No --done.
+Requests: C3 GP151 band helper uses Ray.intersectTriangle absent from suite stand-in; taking own compatibility fix next.
+Contract changes: None live. Review-only metadata propagation must first prove uninstrumented and instrumented native actual-body equality.
+Resume: Fixture imports ./bank-palette-before-native-v1.mjs, a virtual alias NOT on disk; native proxy must map it to realized-jaw-v1/bank-palette-before.mjs bytes at GP146 root so old/new share same rest module. Current helper before5a4e0c18 after0a0291ed; metadata source before concepts78f6fdbd/index46782053 (MD59311196f), afterce59e210/30dbc1e0. Fresh source guard or regenerate if current sources drift. Freeze current source, not old CC357 overlays/archived tree. One browser/page/worker via crew slot. First native untouched control, reload same page with only two metadata hooks and exact model+RNG equality, then same actual parent reference/old/new morphology/skulls. Preserve failures, no relaxations. Review fixture potential floor/metadata/bind equality issues on first execution. Actual factory, never studio/zombie.js stand-in rig.
+Rule16: All game tests via crew slot; no own browser/process/lease active.

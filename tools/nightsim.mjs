@@ -4,6 +4,10 @@
 //   node tools/nightsim.mjs 5 10 18 --jobs 2   just those nights
 //   node tools/nightsim.mjs --out qa/nightsim.json --dt 0.0333 --god
 //   node tools/nightsim.mjs 8 9 10 --repeat 3     a fresh page each time; medians after
+//   node tools/nightsim.mjs 3 6 9 --builds         CB-336: a ring of barricades round his post (structure damage)
+//
+// CB-336 (wave pressure): every night also reports contact (game s from the first spawn to the first hit on him),
+// near (to the first zombie within 3 m of him) and, with --builds, the ring's HP lost, pieces broken and the first hit on one.
 //
 // Each night gets a fresh page of the test build (fake three.js, like npm test), a real match start
 // (it waits out the insertion), then T.setDay(n-1) + startPrep + hqStartWave with the marine at the
@@ -43,10 +47,12 @@ const DT = Number(opt('--dt', 1 / 30)) || 1 / 30;
 const CAP = Number(opt('--cap', 900)) || 900;
 const OUT = opt('--out', null);
 const GOD = argv.includes('--god');
+const BUILDS = argv.includes('--builds');
+const SEED = opt('--seed', null);
 const FULL = argv.includes('--full');
 const WALLCAP = Number(opt('--wallcap', 40)) || 40;   // GB-58: real minutes per night before it is cut off
 const REPEAT = Math.max(1, Number(opt('--repeat', 1)) || 1);
-const skip = new Set(['--jobs', '--dt', '--cap', '--out', '--wallcap', '--repeat'].map((k) => argv.indexOf(k) + 1).filter((i) => i > 0));
+const skip = new Set(['--jobs', '--dt', '--cap', '--out', '--wallcap', '--repeat', '--seed'].map((k) => argv.indexOf(k) + 1).filter((i) => i > 0));
 let nights = argv.filter((a, i) => !a.startsWith('--') && !skip.has(i)).map(Number).filter((n) => n >= 1);
 if (!nights.length) nights = Array.from({ length: 20 }, (_, i) => i + 1);
 
@@ -104,6 +110,7 @@ async function playNight(o) {
   const buy = (w) => { T.addCash(5000); T.buyWeapon(w); };
   const gear = (k) => { const g = T.GEAR.find((x) => x.key === k); if (g) { T.addCash(1000); T.buyGear(g); } };
   const n = o.night;
+  T.setDay(n - 1);   // CB-336: the kiosk stocks by day (equipmentStocked); the night sets it again below
   if (n >= 3) { buy('shotgun'); gear('helmet'); }
   if (n >= 5) { buy('m4'); gear('vest'); }
   if (n >= 8) { buy('ak'); gear('pads'); T.setMacheteOwned && T.setMacheteOwned(true); }
@@ -118,6 +125,7 @@ async function playNight(o) {
 
   // The night.
   T.clearZombies && T.clearZombies();
+  if (o.seed != null) { let s = (Number(o.seed) * 7919 + n * 104729) >>> 0; Math.random = () => { s = (s + 0x6D2B79F5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; R.seed = Number(o.seed); }
   const post = { x: -5.9, z: -2.2 };
   T.player.position.set(post.x, T.sampleHeight(post.x, post.z), post.z);
   T.setDay(n - 1); T.startPrep();
@@ -134,12 +142,26 @@ async function playNight(o) {
   R.signature = signature;
   const maxHp = T.getMaxHp();
   const deaths = [], dmgBy = {};
+  // CB-336: the ring (opt-in): 14 barricades 5 m round his post, none inside the HQ's footprint.
+  let ring = [];
+  if (o.builds && T.spawnBuild) {
+    const H0 = T.house, hx = H0 && H0.group ? H0.group.position.x : 0, hz = H0 && H0.group ? H0.group.position.z : 0, hh = H0 && H0.half ? H0.half + 0.6 : 3.6;
+    for (let i = 0; i < 14; i++) {
+      const a = i / 14 * Math.PI * 2, x = post.x + Math.sin(a) * 5, z = post.z + Math.cos(a) * 5;
+      if (Math.abs(x - hx) < hh && Math.abs(z - hz) < hh) continue;
+      const b = T.spawnBuild('barricade', x, z);
+      if (b) ring.push({ b, hp0: b.hp });
+    }
+  }
+  R.ring = ring.length;
+  let contactHit = null;
   let t0 = simT;
   let dmg = 0, dmgHp = 0, hits = 0;
   window.addEventListener('dw-game', (e) => {
     const d = e.detail || {};
     if (d.type !== 'player-damaged') return;
     hits++; dmg += d.amount || 0; dmgHp += d.toHp || 0;
+    if (contactHit === null && T.getWaveDirectorState().phase === 'wave') contactHit = simT - t0;
     const c = d.cause || 'unknown'; dmgBy[c] = (dmgBy[c] || 0) + (d.amount || 0);
     if (d.fatal) {
       const p = T.player.position, near = {};
@@ -161,10 +183,13 @@ async function playNight(o) {
   // GB-58: the tail after the last spawn (when the field is down to 10, 5 and 1), and a stall probe.
   let tail10 = null, tail5 = null, tail1 = null, probe = null;
   const kills0 = () => T.getWaveDirectorState();
+  let contactNear = null, ringHit = null;
   botFn = (dt) => {
     const ws = T.getWaveDirectorState();
     if (ws.phase !== 'wave') return;
     const t = simT - t0;
+    if (contactNear === null) { const pp = T.player.position; for (const z of T.zombies) if (z.alive && !z.dying && z.mesh && Math.hypot(z.mesh.position.x - pp.x, z.mesh.position.z - pp.z) < 3) { contactNear = t; break; } }
+    if (ring.length && ringHit === null) for (const r of ring) if (r.b.hp < r.hp0) { ringHit = t; break; }
     if (ws.waveSpawned > spawnedPrev) { if (firstSpawn === null) firstSpawn = t; lastSpawn = t; spawnedPrev = ws.waveSpawned; }
     const alive = T.zombies.filter((z) => z.alive && !z.dying);
     const killed = ws.waveSpawned - T.zombies.filter((z) => z.alive).length;
@@ -227,7 +252,8 @@ async function playNight(o) {
       // Semi-auto guns need a fresh press for every shot: click at the tick rate.
       const st = T.WEAPON_STATS[T.getCurrentWeapon()] || {};
       clickT = !clickT;
-      T.setMouseFireDbg(bdst < 60 && (st.auto || st.spin || st.melee || st.flamer || clickT));
+      const autoNow = T.weaponIsAuto ? T.weaponIsAuto(T.getCurrentWeapon()) : (st.auto && T.getCurrentWeapon() !== 'pistol');   // CB-336: the pistol's sear
+      T.setMouseFireDbg(bdst < 60 && (autoNow || st.spin || st.melee || st.flamer || clickT));
       { const w = T.getCurrentWeapon(), m = T.getAmmo()[w] | 0; if (w === lastW && m < lastMag) fired += lastMag - m; lastW = w; lastMag = m; }
       if (bdst < 2.2 && T.getKnifeCd() <= 0 && (T.isReloading() || (T.getAmmo()[T.getCurrentWeapon()] | 0) === 0)) {
         const before = T.zombies.filter((z) => z.alive).length; T.knifeAttack(); knifeSwings++;
@@ -257,7 +283,7 @@ async function playNight(o) {
     sampleT += dt; logT += dt;
     if (logT >= 30) {
       logT = 0;
-      samples.push({ t: Math.round(t), alive: alive.length, killed, w: T.getCurrentWeapon(), mag: T.getAmmo()[T.getCurrentWeapon()] | 0, rel: T.isReloading(), hp: Math.round(T.getHp()), near: +bdst.toFixed(1) });
+      samples.push({ t: Math.round(t), dmg: Math.round(dmg), alive: alive.length, killed, w: T.getCurrentWeapon(), mag: T.getAmmo()[T.getCurrentWeapon()] | 0, rel: T.isReloading(), hp: Math.round(T.getHp()), near: +bdst.toFixed(1) });
     }
     if (sampleT >= 0.5) {
       sampleT = 0;
@@ -369,6 +395,12 @@ async function playNight(o) {
     length: lastKill !== null && firstSpawn !== null ? +(lastKill - firstSpawn).toFixed(1) : null,
     pushes, lulls, maxAlive, pile, crowd, inside, stuck, lost, capped,
     tail10: tail10 && +tail10.toFixed(1), tail5: tail5 && +tail5.toFixed(1), tail1: tail1 && +tail1.toFixed(1),
+    contact: contactHit !== null && firstSpawn !== null ? +(contactHit - firstSpawn).toFixed(1) : null,
+    near: contactNear !== null && firstSpawn !== null ? +(contactNear - firstSpawn).toFixed(1) : null,
+    ringLost: ring.length ? Math.round(ring.reduce((s, r) => s + r.hp0 - Math.max(0, (T.builds || []).includes(r.b) ? r.b.hp : 0), 0)) : null,
+    ringHp: ring.length ? Math.round(ring.reduce((s, r) => s + r.hp0, 0)) : null,
+    ringBroken: ring.length ? ring.filter((r) => !(T.builds || []).includes(r.b) || r.b.hp <= 0).length : null,
+    ringHit: ringHit !== null && firstSpawn !== null ? +(ringHit - firstSpawn).toFixed(1) : null,
     deaths, damage: Math.round(dmg), damageHp: Math.round(dmgHp), hits, damageBy: Object.fromEntries(Object.entries(dmgBy).map(([k, v]) => [k, Math.round(v)])),
     knifeSwings, meleeKills, meleeShare: lastKillCount > 0 ? +(meleeKills / lastKillCount).toFixed(3) : 0,
     crowd5s: +crowd5s.toFixed(1), signature, sigPeak, screamerCalls, healHp: +healHp.toFixed(1),
@@ -406,13 +438,13 @@ async function runNight(job) {
     await page.evaluate(`(() => { if (window.DWOpening && typeof DWOpening.dismissForTesting === 'function') DWOpening.dismissForTesting(); })()`);
     await page.waitFor('!window.DWOpening || window.DWOpening.active === false', { timeout: 30000 });
     await page.evaluate(lib);
-    const o = { night, dt: DT, cap: CAP, god: GOD, wallCap: WALLCAP * 60000 };
+    const o = { night, dt: DT, cap: CAP, god: GOD, builds: BUILDS, seed: SEED, wallCap: WALLCAP * 60000 };
     const raw = await page.evaluate(`(${playNight.toString()})(${JSON.stringify(o)})`, 45 * 60000);
     const r = JSON.parse(raw);
     r.errors = page.errors.slice(0, 3).map((e) => e.split('\n')[0]);
     r.run = run;
     results.push(r);
-    if (r.error) { console.log(`night ${night} run ${run}  ERROR ${r.error}`); } else console.log(`night ${String(night).padStart(2)} run ${run}  ${r.length}s  spawned ${r.spawned}/${r.planned}  deaths ${r.deaths.length}  melee ${r.meleeKills} (${r.meleeShare})  crowd5 ${r.crowd5s}s  sig ${r.signature} ${r.sigPeak}  scream ${r.screamerCalls}  heal ${r.healHp}  (${((Date.now() - t0) / 1000).toFixed(0)}s real)`);
+    if (r.error) { console.log(`night ${night} run ${run}  ERROR ${r.error}`); } else console.log(`night ${String(night).padStart(2)} run ${run}  ${r.length}s  spawned ${r.spawned}/${r.planned}  deaths ${r.deaths.length}  melee ${r.meleeKills} (${r.meleeShare})  crowd5 ${r.crowd5s}s  sig ${r.signature} ${r.sigPeak}  scream ${r.screamerCalls}  heal ${r.healHp}  contact ${r.contact}s near ${r.near}s  dmg ${r.damage}${r.ring ? `  ring ${r.ringLost}/${r.ringHp} broken ${r.ringBroken}/${r.ring} first ${r.ringHit}s` : ''}  (${((Date.now() - t0) / 1000).toFixed(0)}s real)`);
   } catch (e) {
     results.push({ night, run, error: e.message.split('\n')[0] });
     console.log(`night ${night} run ${run}  ERROR ${e.message.split('\n')[0]}`);

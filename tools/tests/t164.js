@@ -37,15 +37,39 @@
     ok(maxTurn < 0.3 * 3, 'no joint whips round: the biggest turn in a frame ' + maxTurn.toFixed(2) + ' rad over ' + frames + ' frames (the world turn of a chain; each joint is capped at 0.2)');
     // At rest (no ground covered for a while) it stands on all fours, every hand and foot on the ground.
     for (let i = 0; i < 120; i++) B.update(1 / 60);
-    const ext = (node, wantMax) => { let v = wantMax ? -1e9 : 1e9; node.updateWorldMatrix(true, true); node.traverse((o) => { const pa = o.isMesh && o.geometry && o.geometry.attributes.position; if (!pa) return; const e = o.matrixWorld.elements, a = pa.array; for (let j = 0; j < pa.count; j++) { const y = e[1] * a[j * 3] + e[5] * a[j * 3 + 1] + e[9] * a[j * 3 + 2] + e[13]; v = wantMax ? Math.max(v, y) : Math.min(v, y); } }); return v; };
+    // CB-339 (method, thresholds unchanged): only what shows (the mesh and every parent visible), and a skinned mesh's
+    // posed vertices (applyBoneTransform), not hidden or bind-pose geometry riding under the same node.
+    const shows = (o) => { for (let a = o; a; a = a.parent) if (!a.visible) return false; return true; };
+    const ext = (node, wantMax) => { let v = wantMax ? -1e9 : 1e9; node.updateWorldMatrix(true, true); const sv = new T.THREE.Vector3(); node.traverse((o) => { const pa = o.isMesh && o.geometry && o.geometry.attributes.position; if (!pa || !shows(o)) return; const e = o.matrixWorld.elements, a = pa.array, skin = o.isSkinnedMesh && typeof o.applyBoneTransform === 'function'; for (let j = 0; j < pa.count; j++) { let y; if (skin) { sv.fromBufferAttribute(pa, j); o.applyBoneTransform(j, sv); y = e[1] * sv.x + e[5] * sv.y + e[9] * sv.z + e[13]; } else y = e[1] * a[j * 3] + e[5] * a[j * 3 + 1] + e[9] * a[j * 3 + 2] + e[13]; v = wantMax ? Math.max(v, y) : Math.min(v, y); } }); return v; };
     const restLow = ext(rig, false) - T.sampleHeight(z.mesh.position.x, z.mesh.position.z);
     ok(z.bossRig.speed < 0.25 && Math.abs(restLow) < 0.1, 'standing, its hands and feet are on the ground, its claws in it no deeper than 10 cm (lowest ' + restLow.toFixed(3) + ' m)');
     // Its head is inside the body's hit column, in the headshot slice, and a round there is a headshot.
-    const R = rig.userData.rig, hTop = ext(R.head, true) - z.mesh.position.y, hBot = ext(R.head, false) - z.mesh.position.y;
+    // CB-339b (ChatGPT 2's native cave fit: after a skin merge the skull is a skinned mesh under another parent, and the
+    // head joint's own subtree holds only the eyes): the head is what shows under the head joint PLUS every shown skinned
+    // vertex whose strongest bone is the head joint or one under it, posed. Bars unchanged.
+    const headExt = (wantMax) => {
+      const H = rig.userData.rig.head; let v = ext(H, wantMax); const under = new Set(); H.traverse((o) => under.add(o));
+      rig.updateWorldMatrix(true, true); const sv = new T.THREE.Vector3();
+      rig.traverse((o) => {
+        if (!o.isSkinnedMesh || !shows(o) || !o.skeleton || typeof o.applyBoneTransform !== 'function') return;
+        const g = o.geometry, pa = g && g.attributes.position, si = g && g.attributes.skinIndex, sw = g && g.attributes.skinWeight; if (!pa || !si || !sw) return;
+        const bones = o.skeleton.bones, e = o.matrixWorld.elements;
+        for (let j = 0; j < pa.count; j++) {
+          let bi = -1, bw = -1; for (let c = 0; c < 4; c++) { const w = sw.getComponent ? sw.getComponent(j, c) : sw.array[j * 4 + c]; if (w > bw) { bw = w; bi = si.getComponent ? si.getComponent(j, c) : si.array[j * 4 + c]; } }
+          if (!under.has(bones[bi])) continue;
+          sv.fromBufferAttribute(pa, j); o.applyBoneTransform(j, sv);
+          const y = e[1] * sv.x + e[5] * sv.y + e[9] * sv.z + e[13]; v = wantMax ? Math.max(v, y) : Math.min(v, y);
+        }
+      });
+      return v;
+    };
+    const R = rig.userData.rig, hTop = headExt(true) - z.mesh.position.y, hBot = headExt(false) - z.mesh.position.y;
     // Where a player aims: its eyes (the glowing ones; the head joint also carries the jaw, hanging open below).
-    let eyeSum = 0, eyeN = 0; R.head.traverse((o) => { if (o.isMesh && o.material && o.material.emissiveIntensity > 1) { o.getWorldPosition(wp); eyeSum += wp.y; eyeN++; } });
-    const skullY = (eyeN ? eyeSum / eyeN : hBot + 0.7 * (hTop - hBot)) - z.mesh.position.y;
-    ok(hTop <= z.hitH + 0.04 && skullY / z.hitH > 0.78, 'its head is in the hit column, its eyes in the headshot slice (' + (skullY / z.hitH).toFixed(2) + '; head ' +  + hBot.toFixed(2) + '-' + hTop.toFixed(2) + ' of ' + z.hitH.toFixed(2) + ')');
+    // CB-339: the eyes by the rig's own tag (rig.eyes, the ones that show), not any bright material; the fallback is
+    // already relative to the body (hBot/hTop), so it is no longer taken off the body's height twice.
+    let eyeSum = 0, eyeN = 0; const eyeList = Array.isArray(R.eyes) ? R.eyes : []; for (const o of eyeList) { if (!o || !shows(o)) continue; o.getWorldPosition(wp); eyeSum += wp.y; eyeN++; }
+    const skullY = eyeN ? eyeSum / eyeN - z.mesh.position.y : hBot + 0.7 * (hTop - hBot);
+    ok(hTop <= z.hitH + 0.04 && skullY / z.hitH > 0.78, 'its head is in the hit column, its eyes in the headshot slice (' + (skullY / z.hitH).toFixed(2) + ', ' + eyeN + ' eyes; head ' + hBot.toFixed(2) + '-' + hTop.toFixed(2) + ' of ' + z.hitH.toFixed(2) + ')');
     {
       const hp0 = z.hp; z.hp = z.maxHp = 5000;
       const rnd = Math.random; Math.random = () => 0.99; let dHead = 0, dBody = 0;

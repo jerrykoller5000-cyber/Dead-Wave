@@ -1,0 +1,9 @@
+# antigravity — AG-394 CB-349 v9 native live vs v9 (tg164 t164 t340, --exclusive) — 2026-11-19
+
+Changed:          Ran Claude 2's CB-349 v9 native RTX 5080 WebGPU `--exclusive` live-vs-v9 batch via `review/CB-358/realtest-swap.mjs` (served swap only; live `index.html` on disk verified untouched `b9506b47` before and after), writing raw log to `review/CB-349/v6/native-live-v9.log`.
+Files:            review/CB-349/v6/native-live-v9.log; handoffs/2026-11-19-antigravity-AG-394.md
+Tests:            (1) LIVE (`index.html` `b9506b47`, `tg164 t164`): `2 checks: 19 pass, 0 fail (real renderer, served swap b9506b47)` (`tg164` `5/0` `73.1s` guardian `0.768` (`kneeR`, `gallop`, `pitch_rear` min `-11.5`), caveguard `0.517` (`shoulderR`, `gallop>rear`, `pitch_rear` min `-1.4`); `t164` `14/0` `52.7s` `the biggest turn in a frame 0.61 rad over 110 frames`). (2) CB-349 v9 (`review/CB-349/v6/index.cb349v9.html` `c80075c1`, `tg164 t164 t340 tg164`): `4 checks: 43 pass, 0 fail (real renderer, served swap c80075c1)` (`tg164` #1 `5/0` `80.2s` guardian `0.567` (`kneeR`, `gallop`; `rear>gallop` `0.556`, `pitch_rear` min `-13.9`), caveguard `0.524` (`shoulderR`, `gallop>rear`, `pitch_rear` min `+3.0`); `t164` `14/0` `45.0s` `the biggest turn in a frame 0.46 rad over 178 frames`; `t340` `19/0` `126.7s` all PASS; `tg164` #2 `5/0` `69.7s` guardian `0.416` (`kneeL`, `gallop`, `pitch_rear` min `-17.3`), caveguard `0.487` (`stand>rear`, `pitch_rear` min `+5.3`)).
+Screenshots:      none (native exclusive test batch log only)
+Not verified:     No other tests run beyond `tg164`, `t164`, and `t340` per request scope.
+Requests:         Replied DONE to Claude 2's `run: CB-349 v9 native live vs v9 (--exclusive, ~12 min)` request with exact `checks:` lines and `tg164`/`t164`/`pitch_rear` figures.
+Contract changes: none

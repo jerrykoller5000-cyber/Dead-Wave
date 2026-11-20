@@ -4,8 +4,15 @@
 // with a brow, sockets the eyes sit in, cheekbones, a nose, lips, a chin, the jaw's angle and a neck that carries it
 // forward. The head group is scaled by HEAD_GROUP_SCALE (index.html makeMarine uses it). The skull above the eyes is
 // HEAD_RINGS as it was, so everything fitted to it (the hats, the helmet, the hair, the eyewear) still fits.
-import { HEAD_GROUP_SCALE, PIVOT_Y, EYE, lidMargin, skinPoint, offSkin, rowAt, rowSteps, columnAngles, faceZ, sideX, surfaceGeometry, worldGroup, toLocal, ROWS } from '../studio/marine-skull.js';
-export { HEAD_GROUP_SCALE };
+import { HEAD_GROUP_SCALE as SKULL_SCALE, PIVOT_Y, EYE, lidMargin, skinPoint, offSkin, rowAt, rowSteps, columnAngles, faceZ, sideX, surfaceGeometry, worldGroup, toLocal, ROWS } from '../studio/marine-skull.js';
+// CC-357 (J164, D-196; Jerry 17 Nov: "Ok go for it. Let's do those 4 suggestions"): the head, everything worn on it and
+// everything fitted to it (face, balaclava, hair, hats, helmet, NVG, eyewear) 11% smaller, scaled about the head's pivot
+// (the base of the neck, HEAD_PIVOT_Y): the group makeMarine scales is SKULL_SCALE x HEAD_SIZE, while the skull, the face
+// and the kit are still authored in SKULL_SCALE's space (marine-skull.js toLocal), so all of it shrinks as one. A surface
+// change only: the pivot, the joint, its limits, the first-person eye (index.html divides FP_EYE by the group's scale) and
+// the hit volumes are as they were. Chin to crown 22.7 -> 20.2 cm: 6.7 -> 7.5 heads to his height.
+export const HEAD_SIZE = .89;
+export const HEAD_GROUP_SCALE = SKULL_SCALE.map((s) => s * HEAD_SIZE);
 // GP-105. Head-local surfaces; the existing rig and wardrobe own their materials.
 // Rings run bottom to top. Front is +z. A shared vertex grid keeps cloth and skin
 // softly shaded without adding an asset loader, texture or per-frame work.
@@ -65,8 +72,8 @@ export function buildMarineHair(T, hairMaterial) {
       const a = -Math.PI + j / n * Math.PI * 2, c = Math.cos(a), sn = Math.sin(a), phi = Math.abs(a);
       const t = row / rows, yh = rowY(phi, t), lift = rowLift(phi, t, yh, a);
       // CC-340: on the new skull itself (studio/marine-skull.js), its lift in metres (the old head's units were 0.7 m)
-      const yw = (Math.min(yh, APEX - .004) - PIVOT_Y) * HEAD_GROUP_SCALE[1];
-      const q = toLocal(offSkin(a, yw, lift * .7, lift * sstep(1.46, 1.548, yh) * .9 * HEAD_GROUP_SCALE[1]));
+      const yw = (Math.min(yh, APEX - .004) - PIVOT_Y) * SKULL_SCALE[1];
+      const q = toLocal(offSkin(a, yw, lift * .7, lift * sstep(1.46, 1.548, yh) * .9 * SKULL_SCALE[1]));
       p.push(q[0], q[1], q[2]);
       uv.push(j / n, alphaV ? t : t * .5);
     }
@@ -129,7 +136,7 @@ export function buildMarineHead(T, material, { lite = false } = {}) {
 // which the eyewear is fitted to (ui/marine-eyewear.js hemAt).
 export function balaclavaHemY(a) {
   const c = Math.max(0, Math.cos(a)), s = Math.abs(Math.sin(a));
-  return (1.355 + .046 * c ** 5 + .010 * s ** 4 - PIVOT_Y) * HEAD_GROUP_SCALE[1];
+  return (1.355 + .046 * c ** 5 + .010 * s ** 4 - PIVOT_Y) * SKULL_SCALE[1];
 }
 export function buildBalaclava(T, material) {
   material.roughness = .98; material.metalness = 0; material.side = T.DoubleSide;
@@ -155,7 +162,7 @@ export function buildBalaclava(T, material) {
   const parts = [front, hem].map((mesh) => ({ mesh, rest: Float32Array.from(mesh.geometry.attributes.position.array) }));
   // Smoking lowers the face panel under the lip (studio/marine-idle.js), rather than a cigarette through fabric.
   // The panel in front of the jaw, above the chin, comes down about 7 cm and a little back. Kept out of rigid merging.
-  const [SX, SY, SZ] = HEAD_GROUP_SCALE;
+  const [SX, SY, SZ] = SKULL_SCALE;
   for (const { mesh } of parts) { mesh.add(new T.Object3D()); mesh.userData.liveShape = true; }
   let last = -1;
   group.userData.mouthOpen = (k) => {

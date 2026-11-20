@@ -69265,6 +69265,7 @@ class WebGPUBackend extends Backend {
 		// pipeline
 
 		const pipelineGPU = this.get( pipeline ).pipeline;
+		if ( pipelineGPU === undefined ) return; // CB-337: async pipeline not built yet
 		passEncoderGPU.setPipeline( pipelineGPU );
 
 		// bind groups
@@ -69348,6 +69349,7 @@ class WebGPUBackend extends Backend {
 		const bindings = renderObject.getBindings();
 		const renderContextData = this.get( context );
 		const pipelineGPU = this.get( pipeline ).pipeline;
+		if ( pipelineGPU === undefined ) return; // CB-337: async pipeline not built yet
 		const currentSets = renderContextData.currentSets;
 		const passEncoderGPU = renderContextData.currentPass;
 

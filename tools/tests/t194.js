@@ -24,7 +24,7 @@
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'F13', key: 'F13', bubbles: true }));   // busy: no idle
     const m = T.marine || window.worldMarine, ud = m.userData;
     const pin = () => { const p = T.player.position; T.aimTarget.set(p.x, T.sampleHeight(p.x, p.z) + 1.25, p.z + 10); };
-    const aimer = setInterval(pin, 5); pin();
+    const aimer = T.pinAimDbg ? (T.pinAimDbg(() => { pin(); if (T.setAimYawDbg) T.setAimYawDbg(0); }), null) : setInterval(pin, 5); pin();   /* CB-335: aim pinned in the frame (TT.pinAimDbg), his facing held at the no-cursor 0 deg, so a real cursor over the window cannot turn him */
     const hand = () => ud.elbowLG.localToWorld(new THREE.Vector3(0.02, -0.27, 0.13));
     for (const w of ['m4', 'ak', 'aa12']) {
       for (let i = 0; i < 16 && T.getCurrentWeapon() !== w; i++) T.setWeapon(i);
@@ -65,7 +65,7 @@
       ok(d(tgt(), P.fore) < 0.02, w + ': back on the forend (' + f3(d(tgt(), P.fore)) + ' m)');
       R.hold(null); await wait(2500);
     }
-    clearInterval(aimer);
+    if (T.pinAimDbg) T.pinAimDbg(null); if (aimer) clearInterval(aimer);
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
   return out.join('\n');
 })();

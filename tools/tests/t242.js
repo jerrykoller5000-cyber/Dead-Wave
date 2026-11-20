@@ -9,6 +9,10 @@
 //    the regular one's baseplate closes the grip's bottom and the extended one only comes out below it;
 //  - the pistol can is about a quarter fatter than CL-95's 22 mm radius, on the bore, its back on the crown in front
 //    of the slide. (t217 checks it against the barrel like the other five cans.)
+// GT-20107 (Director approved14Nov, --review): the moving barrel is barrelAssembly.
+// The shaft keeps the original grip limits. The complete round and its fixed feed
+// head are instead checked on their actual follower/lip triangles and against the
+// actual receiver, slide and barrel; neither ammo trimming nor hiding may pass.
 // GB-172: the grip is narrower than GB-154's. Its outline is shapedGrip(-0.02, -0.08, 0.18, 0.074, 0.25, pistolGrip)
 // in makePistolModel (studio/weapon-sidearms.js), rebuilt here; the slab is 46 mm wide with an 8 mm bevel.
 // The centre line is unchanged, so the hand anchor stays. The akimbo left gun is a clone of this model.
@@ -40,16 +44,22 @@
     const max = (V, f) => V.reduce((a, p) => Math.max(a, f(p)), -1e9);
     // 1) slide to the muzzle
     const mz = (ud.muzzleBase || ud.muzzleLocal).clone(), bx = mz.x, by = mz.y;
-    const slide = verts(ud.slide, fx), frame = verts(ud.frame, fx);
+    // GT-20107: J151's barrel moves separately from the frame rails. Same limits.
+    ok(!!ud.barrelAssembly, 'the independent barrel assembly exists');
+    if (!ud.barrelAssembly) return out.join('\n');
+    ok(!!ud.frame, 'the fixed frame assembly exists');
+    if (!ud.frame) return out.join('\n');
+    const slide = verts(ud.slide, fx), frame = verts(ud.barrelAssembly, fx), fixedFrame = verts(ud.frame, fx);
     const slideFront = max(slide, (p) => p[2]);
     const crown = max(frame.filter((p) => Math.hypot(p[0] - bx, p[1] - by) < 0.016), (p) => p[2]);
     ok(crown - slideFront >= -0.001 && crown - slideFront <= 0.006, `slide front (${mm(slideFront)}) flush with the barrel crown (${mm(crown)}): crown ${mm(crown - slideFront)} proud`);
-    const proud = frame.filter((p) => p[2] > slideFront + 0.001);
+    // Keep the original guard on the fixed frame as well as the now-moving barrel.
+    const proud = [...fixedFrame, ...frame].filter((p) => p[2] > slideFront + 0.001);
     const proudR = proud.reduce((a, p) => Math.max(a, Math.hypot(p[0] - bx, p[1] - by)), 0);
     ok(proudR <= 0.016, `nothing but the barrel in front of the slide (widest part ahead of it ${mm(proudR)} from the bore)`);
     ok(Math.abs(mz.z - crown) <= 0.01 && Math.hypot(mz.x, mz.y - 0.05) < 1e-6 && Math.abs(mz.z - 0.32) < 1e-6, `the muzzle point is unchanged (0, 50, 320 mm) and at the crown (${mm(mz.z - crown)} ahead)`);
     const body = [];
-    for (const c of gun.children) if (![ud.slide, ud.frame, ud.mag, ...fx].includes(c)) body.push(...verts(c, fx));
+    for (const c of gun.children) if (![ud.slide, ud.frame, ud.barrelAssembly, ud.mag, ...fx].includes(c)) body.push(...verts(c, fx));
     const dust = max(body.filter((p) => p[1] > -0.036 && p[1] < 0.016 && Math.abs(p[0]) < 0.04), (p) => p[2]);
     ok(dust >= slideFront - 0.06 && dust < slideFront, `the frame's dust cover runs on under the slide (front ${mm(dust)}, ${mm(slideFront - dust)} short of the slide's front)`);
     const topY = max(slide, (p) => p[1]);
@@ -64,10 +74,83 @@
     const edge = (z, y) => { let m = 1e9; for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) { const [ax, ay] = poly[j], [bx2, by2] = poly[i], ex = bx2 - ax, ey = by2 - ay, t = Math.max(0, Math.min(1, ((z - ax) * ex + (y - ay) * ey) / (ex * ex + ey * ey))); m = Math.min(m, Math.hypot(z - ax - ex * t, y - ay - ey * t)); } return m; };
     const R = 0.009, HW = 0.026;   // GB-180: the grip is 52 mm wide, 9 mm bevel
     const halfW = (m) => HW - (m >= R ? 0 : R - Math.sqrt(R * R - (R - m) * (R - m)));
-    const magCheck = (g, label, ext) => {
+    const {visibleSurfaceGap, visiblePieces} = await import('/tools/tests/weapon-seating.js');
+    const feedCheck = (g, label) => {
+      const round = g.userData.magazineTopRound, head = g.userData.magFeed, shaft = g.userData.magStretch;
+      ok(!!round && !!head && !!shaft, label + ': a complete round, fixed feed head and extending shaft exist');
+      if (!round || !head || !shaft) return;
+      const wasVisible = round.visible;
+      try {
+      g.userData.setMagazineRounds(0);
+      ok(!round.visible, label + ': an empty magazine shows no top round');
+      g.userData.setMagazineRounds(1);
+      ok(round.visible, label + ': the loaded top round is visible during the feed checks');
+      round.geometry.computeBoundingBox(); const rb = round.geometry.boundingBox;
+      ok(Math.abs(rb.max.y-rb.min.y-.0324)<1e-6 && Math.abs(rb.max.x-.0061)<1e-6,
+        label + ': the whole .45 cartridge retains its32.4mm length and6.1mm rim radius');
+      // Bound the whole cartridge/head by the actual shaft mouth, not merely
+      // a nearby contact. X/Z are unaffected by the shaft's length-only scale.
+      g.updateMatrixWorld(true);
+      const gunToShaft = new THREE.Matrix4().copy(shaft.matrixWorld).invert().multiply(g.matrixWorld);
+      const inShaft = p => new THREE.Vector3(...p).applyMatrix4(gunToShaft).toArray();
+      const shaftPoints = verts(shaft).map(inShaft), roofY = max(shaftPoints,p=>p[1]);
+      const roof = shaftPoints.filter(p=>Math.abs(p[1]-roofY)<1e-6);
+      const mouth = new THREE.Box3().setFromPoints(roof.map(p=>new THREE.Vector3(...p)));
+      ok(roof.length>=4 && Number.isFinite(mouth.min.x) && mouth.max.x>mouth.min.x && mouth.max.z>mouth.min.z,
+        label + ': the actual shaft has a finite feed mouth');
+      const feedVertices = [...verts(round),...verts(head)];
+      ok(feedVertices.length>0 && feedVertices.map(inShaft).every(p=>p[0]>=mouth.min.x-1e-6 && p[0]<=mouth.max.x+1e-6 &&
+        p[2]>=mouth.min.z-1e-6 && p[2]<=mouth.max.z+1e-6),
+        label + ': complete round and feed head stay inside the shaft feed mouth');
+      // Read the two real receiver rails in gun space. Neither a protruding
+      // head nor a sideways round can pass on proximity to the frame alone.
+      const railFixture = g.userData.frame.clone(true);
+      new THREE.Matrix4().copy(g.matrixWorld).invert().multiply(g.userData.frame.matrixWorld)
+        .decompose(railFixture.position,railFixture.quaternion,railFixture.scale);
+      railFixture.visible=true; railFixture.updateMatrixWorld(true);
+      const railPieces=visiblePieces(railFixture), span=p=>p.box.max.z-p.box.min.z;
+      const left=railPieces.filter(p=>p.box.max.x<0).sort((a,b)=>span(b)-span(a))[0];
+      const right=railPieces.filter(p=>p.box.min.x>0).sort((a,b)=>span(b)-span(a))[0];
+      ok(!!left && !!right && span(left)>.1 && span(right)>.1, label + ': both actual receiver rails bound the feed well');
+      if(left && right)ok(feedVertices.every(p=>p[0]>=left.box.max.x+.0005-1e-6 && p[0]<=right.box.min.x-.0005+1e-6),
+        label + ': entire feed assembly stays inside both receiver rails with0.5mm clearance');
+      const touch = visibleSurfaceGap(round,head);
+      ok(!touch.penetrating && touch.upperMm <= .5, label + ': the complete round is supported by its feed head (' + touch.upperMm.toFixed(3) + 'mm)');
+      const join = visibleSurfaceGap(head,shaft);
+      ok(!join.penetrating && join.upperMm <= .5, label + ': the fixed feed head stays seated on the shaft (' + join.upperMm.toFixed(3) + 'mm)');
+      // Inspect actual rendered triangles in the feed head's own insertion space.
+      // The follower crosses x=0; a separate returned lip retains each side.
+      head.updateWorldMatrix(true,true); round.updateWorldMatrix(true,true);
+      const flat = head.clone(true); flat.position.set(0,0,0); flat.rotation.set(0,0,0); flat.scale.set(1,1,1); flat.visible=true;
+      const cartridge = round.clone(); cartridge.matrix.copy(new THREE.Matrix4().copy(head.matrixWorld).invert().multiply(round.matrixWorld));
+      cartridge.matrix.decompose(cartridge.position,cartridge.quaternion,cartridge.scale); cartridge.visible=true;
+      flat.updateMatrixWorld(true); cartridge.updateMatrixWorld(true);
+      const pieces = visiblePieces(flat), sides=[pieces.filter(p=>p.box.max.x < -1e-5),pieces.filter(p=>p.box.min.x > 1e-5)];
+      const floor = pieces.filter(p=>p.box.min.x < 0 && p.box.max.x > 0);
+      ok(sides.every(p=>p.length===1) && floor.length===1, label + ': actual feed triangles have one follower and two returned lips');
+      const physicalScale = head.getWorldScale(new THREE.Vector3()).x;
+      for (const [i, parts] of [...sides,floor].entries()) {
+        if (parts.length!==1) continue;
+        const geometry=new THREE.BufferGeometry();
+        geometry.setAttribute('position',new THREE.Float32BufferAttribute(parts[0].faces.flatMap(f=>f.p.flatMap(p=>p.toArray())),3));
+        const metal=new THREE.Mesh(geometry,new THREE.MeshBasicMaterial());
+        const gap=visibleSurfaceGap(cartridge,metal,physicalScale);
+        ok(!gap.penetrating && gap.upperMm<=.5, label + ': '+['left lip','right lip','follower'][i]+' supports/retains without cutting the round ('+gap.upperMm.toFixed(3)+'mm)');
+        geometry.dispose(); metal.material.dispose();
+      }
+      for (const [name,part] of [['slide',g.userData.slide],['frame',g.userData.frame],['barrel',g.userData.barrelAssembly]]) {
+        const ammoGap=visibleSurfaceGap(round,part), headGap=visibleSurfaceGap(head,part);
+        ok(!ammoGap.penetrating && !headGap.penetrating, label + ': round and feed head do not cross the actual '+name);
+        if(name==='frame')ok(ammoGap.upperMm<=10 && headGap.upperMm<=10,label+': round and feed head remain in the receiver feed area, within10mm of its frame');
+      }
+      } finally { g.userData.setMagazineRounds(wasVisible ? 1 : 0); }
+    };
+    const magCheck = async (g, label, ext) => {
       g.userData.mag.position.copy(g.userData.baseMagPos);
       if (g.userData.baseMagRot) g.userData.mag.rotation.copy(g.userData.baseMagRot);   // GB-179: a reload swing left over from startMatch tilted it (offline: in by 8.5 mm at rest)
-      const V = verts(g.userData.mag);
+      // The fixed feed head and live round have the stronger receiver/feed checks
+      // above; the extending metal shaft keeps every original grip-envelope limit.
+      const V = verts(g.userData.mag, new Set([g.userData.magazineTopRound,g.userData.magFeed].filter(Boolean)));
       let poke = -1e9, n = 0, low = -1e9, where = '';
       const fr = [], bk = [];
       for (const [x, y, z] of V) {
@@ -94,14 +177,15 @@
       }
       if (!ext) ok(low >= 0 && low <= 0.015, `${label}: the regular baseplate closes the grip's bottom (${mm(low)} below it)`);
       else ok(low >= 0.04, `${label}: the extended magazine comes out below the grip (${mm(low)} below it)`);
+      feedCheck(g,label);
       return low;
     };
-    const lowR = magCheck(gun, 'regular', false);
+    const lowR = await magCheck(gun, 'regular', false);
     T.addCash(99999);
     if (!T.weaponMods('pistol').ext) { try { T.buyExtMag('pistol'); } catch (e) { if (typeof startMatch === 'function') { await startMatch(T, 'PistolFit'); T.addCash(99999); T.buyExtMag('pistol'); } else throw e; } }
     T.armoryDbg.fit('pistol', 'ext', true);
     await wait(50);
-    const lowE = magCheck(gun, 'extended', true);
+    const lowE = await magCheck(gun, 'extended', true);
     ok(lowE - lowR >= 0.04, `extended reaches ${mm(lowE - lowR)} further below than the regular one`);
     T.armoryDbg.fit('pistol', 'ext', false);
     // 3) the can

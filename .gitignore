@@ -44,3 +44,7 @@ z-sounds/index-packs.json
 # D-97 (Claude, 2026-10-29): the 1.2 score is made from Jerry's Ghosthack packs (F:\Music); their licence forbids a public server,
 # so the files made from them live on his PC and in the builds only.
 assets/soundtrack/**/gh-*
+
+# D-219 (2026-11-20): the crew's review artifacts (sheets, captures, bench results) stay on Jerry's PC.
+# Too big for GitHub (the 13-checkpoint push failed with HTTP 500). Files already on GitHub stay tracked.
+review/

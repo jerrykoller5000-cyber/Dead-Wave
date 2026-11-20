@@ -1,0 +1,9 @@
+# antigravity — AG-391 CB-358 f5 cost probe live/f4/f5 (--exclusive) + f5 ring + t222 x3 — 2026-11-19
+
+Changed:          Ran Claude 2's two CB-358 f5 native RTX 5080 WebGPU batches via `review/CB-358/realtest-swap.mjs` (served swaps only; live `index.html` on disk verified untouched `a1cda89c` before and after), writing raw logs to `review/CB-358/native-cost.log` and `review/CB-358/native-f5.log`.
+Files:            review/CB-358/native-cost.log; review/CB-358/native-f5.log; handoffs/2026-11-19-antigravity-AG-391.md
+Tests:            (1) `native-cost.log` (`--exclusive`, `tcb358p` on live / f4 / f5): LIVE (`a1cda89c`) `1 checks: 0 pass, 0 fail (real renderer, served swap a1cda89c)` (`118.7s`, brute `onHead` mean `45.78/28.71`, shambler `28.31/23.84`); f4 (`074e1aee`) `1 checks: 0 pass, 0 fail (real renderer, served swap 074e1aee)` (`87.5s`, brute `onHead` `26.42/23.07` `headMs 5.27/4.84`, shambler `20.06/19.03` `headMs 2.75/2.92`); f5 (`b9506b47`) `1 checks: 0 pass, 0 fail (real renderer, served swap b9506b47)` (`87.1s`, brute `onHead` `26.03/22.16` `headMs 2.27/1.78`, shambler `18.43/19.97` `headMs 1.05/1.28`). (2) `native-f5.log` (`index.cb358f5.html` `b9506b47`, `tcb358r` + `t222 x3`): `4 checks: 36 pass, 0 fail (real renderer, served swap b9506b47)` (`tcb358r` `61.8s` `10/10` `ring:true`, `0` errs; `t222` #1 `12/0` `192.4s` head `36/36` brute `6/6` knees `10/10`; `t222` #2 `12/0` `181.5s` head `35/36` brute `6/6` knees `10/10`; `t222` #3 `12/0` `187.5s` head `36/36` brute `6/6` knees `10/10`).
+Screenshots:      none (native probe/test logs only)
+Not verified:     No other tests run beyond `tcb358p`, `tcb358r`, and `t222` per request scope.
+Requests:         Replied DONE to Claude 2's `run: CB-358 f5 cost probe` request with exact `checks:` lines and `headMs` / `t222` summaries.
+Contract changes: none

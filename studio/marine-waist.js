@@ -1,3 +1,4 @@
+import { liveCloth } from './marine-cloth.js';
 // A shirt worn by the pelvis at its hem and the chest above the abdomen.
 // The live mesh keeps the existing wardrobe material and bends only when its two joints change.
 export function followMarineWaist(T,ud){
@@ -6,7 +7,7 @@ export function followMarineWaist(T,ud){
  const e=lower.matrix.elements,y=ud.torsoPivotY||.7;
  torso.position.set(e[4]*y+e[12],e[5]*y+e[13],e[6]*y+e[14]);
 }
-export function createMarineWaist(T,root,{lower,torso,projectUV}={}){
+export function createMarineWaist(T,root,{lower,torso,projectUV,gpu=false}={}){
  const shirt=torso?.getObjectByName('fitted-uniform');if(!shirt?.geometry||!lower)return null;
  root.updateWorldMatrix(true,true);shirt.updateMatrix();torso.updateMatrix();lower.updateMatrix();
  // CC-340 (cloud test): the band follows the torso's pivot (0.7 before; a man's body has it at 0.865, its chest 0.88 as tall)
@@ -30,6 +31,7 @@ export function createMarineWaist(T,root,{lower,torso,projectUV}={}){
  }
  const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(verts,3));geo.setAttribute('normal',new T.Float32BufferAttribute(normals,3));
  if(projectUV)projectUV(verts,uv);geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geo.computeBoundingSphere();
+ if(gpu&&T.SkinnedMesh&&T.Skeleton&&T.Bone)return createGpuMarineWaist(T,root,{lower,torso,shirt,src,geo,lo,hi});
  const mesh=new T.Mesh(geo,shirt.material);mesh.name='marine-flexible-shirt';mesh.castShadow=mesh.receiveShadow=true;mesh.frustumCulled=false;
  mesh.userData.liveShape=true;mesh.userData.aoOwners=[lower,torso];
  const group=new T.Group();group.name='marine-waist-live';root.add(group);group.add(mesh);torso.remove(shirt);src.dispose();
@@ -54,5 +56,25 @@ export function createMarineWaist(T,root,{lower,torso,projectUV}={}){
  }
  mesh.onBeforeRender=bend;mesh.onBeforeShadow=bend;
  const api={mesh,bend,rest,weights,debug:()=>({vertices:weights.length,triangles:weights.length/3,uploads}),dispose(){group.removeFromParent();if(mesh.geometry!==geo)mesh.geometry.dispose();geo.dispose();}};
+ root.userData.waist=api;return api;
+}
+
+// GP-20133 review prototype: the same clipped shirt, weights, UVs and material, using CC-353's reviewed GPU solver.
+// The default and survivors retain the original CPU implementation above.
+function createGpuMarineWaist(T,root,{lower,torso,shirt,src,geo,lo,hi}){
+ const rest=Float32Array.from(geo.attributes.position.array);
+ const weights=Float32Array.from({length:rest.length/3},(_,i)=>{const x=Math.max(0,Math.min(1,(rest[i*3+1]-lo)/(hi-lo)));return x*x*(3-2*x);});
+ const skinWeights=new Float32Array(weights.length*2);
+ for(let i=0;i<weights.length;i++){skinWeights[i*2]=weights[i];skinWeights[i*2+1]=1-weights[i];}
+ const group=new T.Group();group.name='marine-waist-live';root.add(group);
+ const mesh=liveCloth(T,{space:root,bones:[torso,lower],geo,weights:skinWeights,material:shirt.material,name:'marine-flexible-shirt',aoOwners:[lower,torso],holder:group,gpu:true});
+ if(!mesh.isSkinnedMesh)throw Error('GPU waist requires the approved CC-353 GPU cloth implementation');
+ // Preserve this module's procedural/custom projection; retain the helper's conservative fixed padded bounds.
+ mesh.geometry.setAttribute('uv',geo.attributes.uv.clone());
+ const initialGeometry=mesh.geometry,cloth=mesh.userData.cloth;
+ torso.remove(shirt);src.dispose();geo.dispose();
+ const api={mesh,bend:cloth.bend,rest,weights,debug:()=>({vertices:weights.length,triangles:weights.length/3,uploads:0}),dispose(){
+  group.removeFromParent();if(mesh.geometry!==initialGeometry)mesh.geometry.dispose();initialGeometry.dispose();cloth.skeleton.dispose();
+ }};
  root.userData.waist=api;return api;
 }

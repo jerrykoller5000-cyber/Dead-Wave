@@ -13,7 +13,9 @@
   };
   // Play is a no-op while the insertion camera flies (~9s). Cash drops and death
   // cine also only tick after that branch ends.
-  const waitDeployDone = () => waitUntil(() => !document.body.classList.contains('deploying'), 140, 100);
+  // CB-335: up to 60 s, as tools/tests/lib.js's startMatch waits (it was 14 s: the 9 s insertion took 9.5-16.0 s of real time
+  // on a slow box, so the sixth match's wait ran out: 'insertion ended for Marine 6'). A wait, not a bar.
+  const waitDeployDone = () => waitUntil(() => !document.body.classList.contains('deploying'), 600, 100);
 
   const startMatch = async (name) => {
     if (!(await waitUntil(() => modeSelect().classList.contains('show'), 80, 100))) {

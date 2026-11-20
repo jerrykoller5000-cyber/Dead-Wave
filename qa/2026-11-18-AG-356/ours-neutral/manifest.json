@@ -1,0 +1,174 @@
+{
+ "task": "J168 (CF-14)",
+ "at": "2026-11-18T04:11:00.181Z",
+ "sources": {
+  "index.html": "668e97a3",
+  "game/zombie-feet.js": "e116eace",
+  "game/leaper-motion.js": "f6252825",
+  "studio/zombie-humanoids.js": "3d96fdb9",
+  "studio/zombie-guardian-detail.js": "460d1acf"
+ },
+ "units": "metres",
+ "up": "+Y",
+ "facing": "+Z",
+ "origin": "the zombie root on the ground",
+ "types": {
+  "spitter": {
+   "glb": {
+    "bytes": 1777004,
+    "md5": "22cb817fad53518eec4a9c9ecbead03b"
+   },
+   "obj": {
+    "bytes": 1298555
+   },
+   "meshes": 3,
+   "skinned": 1,
+   "instanced": 0,
+   "triangles": 5128,
+   "materials": [
+    {
+     "type": "MeshStandardMaterial",
+     "color": "b6cb38",
+     "vc": false,
+     "map": false,
+     "colorNode": false,
+     "emissiveNode": false,
+     "rough": 0.48,
+     "metal": 0,
+     "rmap": false,
+     "mmap": false,
+     "sameRM": false,
+     "nmap": false,
+     "rmapInfo": null,
+     "outMetal": 0,
+     "outRough": 0.48,
+     "mapInfo": null
+    },
+    {
+     "type": "MeshStandardMaterial",
+     "color": "b6cb38",
+     "vc": false,
+     "map": false,
+     "colorNode": false,
+     "emissiveNode": false,
+     "rough": 0.48,
+     "metal": 0,
+     "rmap": false,
+     "mmap": false,
+     "sameRM": false,
+     "nmap": false,
+     "rmapInfo": null,
+     "outMetal": 0,
+     "outRough": 0.48,
+     "mapInfo": null
+    },
+    {
+     "type": "MeshStandardNodeMaterial",
+     "color": "ffffff",
+     "vc": true,
+     "map": true,
+     "colorNode": false,
+     "emissiveNode": true,
+     "rough": 1,
+     "metal": 1,
+     "rmap": true,
+     "mmap": true,
+     "sameRM": true,
+     "nmap": false,
+     "rmapInfo": {
+      "kind": "Object",
+      "w": 1024,
+      "h": 512,
+      "data": "Uint8Array:2097152",
+      "format": 1023,
+      "repeat": [
+       1,
+       1
+      ],
+      "drawable": true
+     },
+     "outMetal": 1,
+     "outRough": 1,
+     "mapInfo": {
+      "kind": "Object",
+      "w": 1024,
+      "h": 512,
+      "data": "Uint8Array:2097152",
+      "format": 1023,
+      "repeat": [
+       1,
+       1
+      ],
+      "drawable": true
+     }
+    }
+   ],
+   "flipped": 3,
+   "parts": [
+    {
+     "name": "Mesh",
+     "color": "b6cb38",
+     "vc": false,
+     "map": false,
+     "tri": 96,
+     "mapCS": null
+    },
+    {
+     "name": "concept-surface",
+     "color": "b6cb38",
+     "vc": false,
+     "map": false,
+     "tri": 40,
+     "mapCS": null
+    },
+    {
+     "name": "zombie-skin",
+     "color": "ffffff",
+     "vc": true,
+     "map": true,
+     "tri": 4992,
+     "mapCS": "srgb"
+    }
+   ],
+   "box": {
+    "min": [
+     -0.6024,
+     0,
+     -0.2636
+    ],
+    "max": [
+     0.6024,
+     1.9662,
+     0.3873
+    ]
+   },
+   "rootYaw": 0,
+   "movedM": 0,
+   "alive": null,
+   "boss": false,
+   "variant": {
+    "height": 1,
+    "width": 1,
+    "tilt": 0,
+    "lean": 0,
+    "shoulder": 0,
+    "limp": 0,
+    "gait": 1,
+    "phase": 3.142
+   },
+   "mode": "statue",
+   "skippedCount": 0,
+   "exportedAt": "2026-11-18T04:12:48.657Z",
+   "sources": {
+    "index.html": "668e97a3",
+    "game/zombie-feet.js": "e116eace",
+    "game/leaper-motion.js": "f6252825",
+    "studio/zombie-humanoids.js": "3d96fdb9",
+    "studio/zombie-guardian-detail.js": "460d1acf"
+   }
+  }
+ },
+ "pageErrors": [
+  "RangeError: Maximum call stack size exceeded\n    at Proxy.build (http://127.0.0.1:58886/vendor/three/three.webgpu.js:1656:7)\n    at Proxy.build (http://127.0.0.1:58886/vendor/three/three.webgpu.js:1662:19)\n    at Proxy.generate (http://127.0.0.1:58886/vendor/three/three.webgpu.js:1600:22)\n    at Proxy.generate (http://127.0.0.1:58886/vendor/three/three.webgpu.js:14936:17)\n    at Proxy.build (http://127.0.0.1:58886/vendor/three/three.webgpu.js:1763:19)"
+ ]
+}

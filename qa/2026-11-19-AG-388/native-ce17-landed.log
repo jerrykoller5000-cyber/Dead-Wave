@@ -1,0 +1,10 @@
+check-players: 313 player.position reads, all in the allowed places
+ERROR t222     0 pass   0 fail  234.9s  — time limit: check still running after 180s
+           recovering browser after t222: time limit: check still running after 180s
+ok    t330    18 pass   0 fail  75.9s
+
+2 checks: 18 pass, 0 fail, 1 could not run
+
+by owner:
+  unassigned
+    t222   0 fail  time limit: check still running after 180s

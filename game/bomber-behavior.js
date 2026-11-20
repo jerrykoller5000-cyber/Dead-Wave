@@ -49,12 +49,18 @@ export function prepareBomberAppearance(T,g,scale){
    m.position.x*=sx;m.position.z*=sz;
   }
  };
+ // CC-355 s29 (Claude 3, D-190): on the shared humanoid body the shape is built already (its gut, pivots and head): no inflation
+ const shared=u.torso.children.some(m=>m.userData?.cc355);
+ if(!shared){
  sculpt(u.torso,1.44,1.53,true);sculpt(u.hips,1.38,1.35);
  for(const side of ['L','R']){
   const arm=u['arm'+side+'G'],leg=u['leg'+side+'G'];arm.position.x*=1.38;leg.position.x*=1.3;
   sculpt(arm,1.35,1.32);sculpt(arm.userData.elbowG,1.32,1.25);sculpt(leg,1.5,1.4);sculpt(leg.userData.shinG,1.25,1.2);
  }
  sculpt(u.head,1.12,1.10);for(const eye of u.eyes){eye.position.x*=1.12;eye.position.z*=1.10;}
+ }
+ // The shared source skips sculpt's private clones; only the vein that blendBomberSkin replaces must be private.
+ if(shared){const vein=u.torso.children.find(m=>m.isMesh&&m.material===u.pulseMats[1]);if(vein)vein.geometry=vein.geometry.clone();}
  u.bomberBelly=u.torso.children.find(m=>m.isMesh&&m.material===u.pulseMats[0]);blendBomberSkin(T,u,scale);u.bomberPrepared=true;
 }
 
@@ -92,7 +98,7 @@ export function applyBomberPose(z,dt,target=null){
    // Elbows out, forearms cupping the belly sides; hands ride its delayed wobble.
    set(arm.position,'y',arm.position.y+jiggle);set(arm.position,'x',arm.position.x+side*.018*scale*Math.sin(ph-.65)*w);
    set(arm.rotation,'x',-.24+.045*Math.sin(ph-.4)*w-.055*flap*q.flapNear);set(arm.rotation,'z',side*(.62+flapAmp*flap));set(arm.rotation,'y',-side*.10);
-   const elbow=arm.userData.elbowG;set(elbow?.rotation,'x',-1.05+.07*Math.sin(ph*2-1)*w-.12*Math.sin(q.flapPhase-.55)*q.flapNear);set(elbow?.rotation,'z',-side*.30);
+   const elbow=arm.userData.elbowG;set(elbow?.rotation,'x',-1.05+.07*Math.sin(ph*2-1)*w-.12*Math.sin(q.flapPhase-.55)*q.flapNear);set(elbow?.rotation,'y',0);set(elbow?.rotation,'z',0); // GP150 B3 review: forward elbow hinge; contact/anatomy proof required.
   }
  }
 }

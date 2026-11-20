@@ -1,0 +1,9 @@
+# antigravity — AG-386 CB-358 f4 native (brute step-2 probe + t222 x3; game t222 x2 + ring) — 2026-11-19
+
+Changed:          Ran Claude 2's two CB-358 f4 native RTX 5080 WebGPU batches via `review/CB-358/realtest-swap.mjs` (served swaps only; live `index.html` on disk verified untouched `a1cda89c` before and after), writing raw logs to `review/CB-358/native-f4-brute.log` and `review/CB-358/native-f4.log`.
+Files:            review/CB-358/native-f4-brute.log; review/CB-358/native-f4.log; handoffs/2026-11-19-antigravity-AG-386.md
+Tests:            (1) `native-f4-brute.log` (`index.cb358f4-brute.html` `a2c300fa` + ChatGPT 2 brute step-2 modules `55f3b616`/`45b135e2`/`c81bc348`, `tcb358b` + `t222 x3`): `4 checks: 36 pass, 0 fail (real renderer, served swap a2c300fa)` (`tcb358b` `101.7s` 16/18 head — brute `b:90 dist:6` & `b:-135 dist:6` `res:"body"`/`aimMuzzle:"torso"`, remaining 4 brute + 12/12 feral/shambler head; `t222` #1 `12/0` `209.4s` head `35/36` `brute head: head 5, body 1`; `t222` #2 `12/0` `189.6s` head `36/36` `brute head: head 6`; `t222` #3 `12/0` `195.2s` head `35/36` `brute head: head 5, body 1`). (2) `native-f4.log` (`index.cb358f4.html` `074e1aee`, `tcb358r` + `t222 x2`): `3 checks: 23 pass, 1 fail (real renderer, served swap 074e1aee)` (`tcb358r` `63.1s` 10/10 `ring:true`, `0` errs; `t222` #1 `12/0` `188.0s` head `36/36` `brute head: head 6`; `t222` #2 `11/1` `196.2s` head `36/36` `brute head: head 6`, FAIL `between a shambler's knees (front, 8 m): hit 9, ground 1 (bar 10/10)`).
+Screenshots:      none (native probe/test log batches only)
+Not verified:     No other tests run beyond `tcb358b`, `tcb358r`, and `t222` per request scope.
+Requests:         Replied DONE to Claude 2's `run: CB-358 f4 native` request with exact log last lines, `brute head:` counts, and the single `t222` #2 shambler-knees failure.
+Contract changes: none

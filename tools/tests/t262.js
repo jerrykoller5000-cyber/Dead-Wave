@@ -34,7 +34,7 @@
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'F13', key: 'F13', bubbles: true }));   // busy: no idle
     const m = T.marine || window.worldMarine, ud = m.userData;
     const pin = () => { const p = T.player.position; T.aimTarget.set(p.x, T.sampleHeight(p.x, p.z) + 1.25, p.z + 10); };
-    aimer = setInterval(pin, 5); pin();
+    aimer = T.pinAimDbg ? (T.pinAimDbg(() => { pin(); if (T.setAimYawDbg) T.setAimYawDbg(0); }), null) : setInterval(pin, 5); pin();   /* CB-335: aim pinned in the frame (TT.pinAimDbg), his facing held at the no-cursor 0 deg, so a real cursor over the window cannot turn him */
     // CU-100: where each hand closes now, as the game has it (the middle of the fist on a grip; the hand point through
     // a magazine change); before, the hand point.
     const gp = T.handsDbg && T.handsDbg.gripPoint;
@@ -219,7 +219,7 @@
       } else ok(false, 'shotgun: the reload did not start');
     } else ok(false, 'shotgun: could not take it');
   } catch (e) { ok(false, 'threw ' + (e && e.stack || e)); }
-  if (aimer) clearInterval(aimer);
+  if (T.pinAimDbg) T.pinAimDbg(null); if (aimer) clearInterval(aimer);
   try { T.reloadClipDbg.hold(null); } catch { /* */ }
   return out.join('\n');
 })();

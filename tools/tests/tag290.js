@@ -109,10 +109,12 @@
       `daylight (Noon) glow intensity (${glowHotNoon.intensity.toFixed(2)}) is much fainter (<0.35x) than Night (${glowHotNight.intensity.toFixed(2)})`);
 
     // 5. Suppressor vs Barrel Isolation, Axial Gradient (uv1 + emissiveMap), & Bore/Clamp Exclusion
+    // CB-335 (fixture, GT-20107 diagnosis): the cold mock parts start unlit, emissiveIntensity 0 (three's default is 1;
+    // with a black emissive that emits nothing either, but the rows read the intensity). The limits are unchanged.
     const mockGun = new REAL_THREE.Group();
     const mockBarrelMesh = new REAL_THREE.Mesh(
       new REAL_THREE.CylinderGeometry(0.012, 0.012, 0.6, 8),
-      new REAL_THREE.MeshStandardMaterial({ color: 0x383b41, roughness: 0.5, metalness: 0.4, emissive: 0x000000 })
+      new REAL_THREE.MeshStandardMaterial({ color: 0x383b41, roughness: 0.5, metalness: 0.4, emissive: 0x000000, emissiveIntensity: 0 })
     );
     mockBarrelMesh.rotation.x = Math.PI / 2;
     mockBarrelMesh.name = 'heatParts-barrel';
@@ -121,12 +123,12 @@
     mockSuppressor.name = 'suppressor';
     const supTube = new REAL_THREE.Mesh(
       new REAL_THREE.CylinderGeometry(0.024, 0.024, 0.18, 10),
-      new REAL_THREE.MeshStandardMaterial({ color: 0x27292d, roughness: 0.52, metalness: 0.3, emissive: 0x000000 })
+      new REAL_THREE.MeshStandardMaterial({ color: 0x27292d, roughness: 0.52, metalness: 0.3, emissive: 0x000000, emissiveIntensity: 0 })
     );
     supTube.rotation.x = Math.PI / 2;
     const supBore = new REAL_THREE.Mesh(
       new REAL_THREE.CylinderGeometry(0.006, 0.006, 0.004, 8),
-      new REAL_THREE.MeshStandardMaterial({ color: 0x17181a, roughness: 0.92, metalness: 0.0, emissive: 0x000000 })
+      new REAL_THREE.MeshStandardMaterial({ color: 0x17181a, roughness: 0.92, metalness: 0.0, emissive: 0x000000, emissiveIntensity: 0 })
     );
     supBore.name = 'bore';
     mockSuppressor.add(supTube, supBore);
@@ -166,7 +168,10 @@
 
     bhSim.setHeat('m4', 0.20);
     bhSim.update(0.25, { currentWeapon: 'm4', isSuppressed: false, weaponMesh: mockGun, camera: testCamera, daylight: 1.0 });
-    const warmWisp = bhSim._wisps.find((w) => w.active);
+    // CB-335 (fixture): the pool reuses the same wisp object after reset(), so the warm values are copied before it
+    // (holding the object read the hot wisp twice: warm=0.53, hot=0.53). The 1.6x and longer-life limits are unchanged.
+    const warmLive = bhSim._wisps.find((w) => w.active);
+    const warmWisp = warmLive ? { maxOpacity: warmLive.maxOpacity, life: warmLive.life } : null;
 
     bhSim.reset();
     bhSim.setHeat('m4', 0.90);

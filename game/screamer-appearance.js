@@ -37,7 +37,7 @@ export function prepareScreamerAppearance(T,g,s=1){
  // A statue, a newly spawned body and a restored reaction also need her own
  // resting silhouette. This runs before the game's rest snapshot and skin bind.
  for(const [i,arm]of [u.armLG,u.armRG].entries())if(arm){
-  const side=i?-1:1;arm.rotation.set(.28,side*.06,-side*.28);
+  const side=i?-1:1;arm.rotation.set(.28,side*.06,-side*.1); // J158 (Claude 3 s27): hang against her ribs, not an A-pose (was .28)
   arm.userData.baseRotX=.28;arm.userData.elbowG?.rotation.set(-.12,0,0);
  }
  u.bodyMats=(u.bodyMats||[]).map(m=>materials.get(m)||m);u.screamerJaw=jaw;u.screamerTongue=tongue;u.concept.skin=0;u.skinColor=0;

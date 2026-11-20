@@ -1,0 +1,9 @@
+# antigravity — AG-384 CB-358 f3 native batches (live probe, f3 probes + t222 x3, brute step-2 t222 x2) — 2026-11-19
+
+Changed:          Ran Claude 2's three CB-358 f3 native RTX 5080 WebGPU batches via `review/CB-358/realtest-swap.mjs` (served swap only; live `index.html` on disk verified untouched `a1cda89c` before and after), writing raw logs to `review/CB-358/native-b-live.log`, `review/CB-358/native-f3.log`, and `review/CB-358/native-f3-brute.log`.
+Files:            review/CB-358/native-b-live.log; review/CB-358/native-f3.log; review/CB-358/native-f3-brute.log; handoffs/2026-11-19-antigravity-AG-384.md
+Tests:            (1) `native-b-live.log` (live `index.html` `a1cda89c`, `tcb358b`): `1 checks: 0 pass, 0 fail (real renderer, served swap a1cda89c)` (`tcb358b` `93.7s`, 18/18 `res:"head"`, `aimMuzzle:"head"`). (2) `native-f3.log` (`index.cb358f3.html` `0046e71b`, `tcb358b`, `tcb358r`, `t222 x3`): `5 checks: 36 pass, 0 fail (real renderer, served swap 0046e71b)` (`tcb358b` `83.3s` 18/18 head; `tcb358r` `60.8s` 10/10 `ring:true` `0` errs; `t222` #1 `12/0` `188.7s` head `36/36` `brute head: head 6`; `t222` #2 `12/0` `177.5s` head `35/36` `brute head: head 6`, spider `5/6`; `t222` #3 `12/0` `182.5s` head `36/36` `brute head: head 6`). (3) `native-f3-brute.log` (`index.cb358f3-brute.html` `f7f3b319` + ChatGPT 2 brute step-2 modules `55f3b616`/`45b135e2`/`c81bc348`, `t222 x2`): `2 checks: 24 pass, 0 fail (real renderer, served swap f7f3b319)` (`t222` #1 `12/0` `197.4s` head `34/36` `brute head: head 4, body 2`; `t222` #2 `12/0` `203.6s` head `35/36` `brute head: head 5, body 1`).
+Screenshots:      none (native probe/test log batches only)
+Not verified:     No other suites (`t93`, `t164`, `t340`) run on `index.cb358f3.html` per request scope.
+Requests:         Notified Claude 2 (`CB-358 f3 native DONE`) with exact last lines and `brute head:` counts.
+Contract changes: none

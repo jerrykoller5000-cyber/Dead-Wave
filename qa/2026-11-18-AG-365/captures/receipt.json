@@ -1,0 +1,1171 @@
+{
+  "date": "2026-11-18T12:14:11.268Z",
+  "sources": {
+    "studio/marine-body.js": "0d761307cc6de0b2460cf5e4d47412cd",
+    "review/CC-357/c/marine-body.js": "0d761307cc6de0b2460cf5e4d47412cd",
+    "ui/marine-face.js": "0ec0cb8354634c49a7a40a3731e89e3b",
+    "review/CC-357/marine-face.js": "0ec0cb8354634c49a7a40a3731e89e3b",
+    "studio/marine-hats.js": "c2695acf6e46b7f95803e6b5b6decdfc",
+    "review/CC-357/marine-hats.js": "c2695acf6e46b7f95803e6b5b6decdfc",
+    "ui/marine-kit-fit.js": "55c01e28cbffada47b54232d5fff4165",
+    "review/GP-20151/band-ui-v1.source.js": "55c01e28cbffada47b54232d5fff4165",
+    "index.html": "72e543b44476bf4187896db03d2811b3",
+    "review/GT-20124/index.668e-j164-mag-follow-v3.DRAFT.html": "72e543b44476bf4187896db03d2811b3",
+    "tools/tests/tcc344.js": "0970aa54571ebf67f349e38cf152f64a",
+    "review/CC-357/c/tcc344/tcc344.js": "0970aa54571ebf67f349e38cf152f64a",
+    "game/leaper-motion.js": "f62528255fb11ac0edee8ab3174256dc",
+    "tools/tests/fakethree.mjs": "3da2a2c02e26852d93d07591cfe500de",
+    "studio/inspector/api.js": "36f939783188e0713a1f1337cc0eac05",
+    "studio/inspector/marine.js": "56e9b05230f74ac9d314bc9341c4fb4a",
+    "review/GT-20124/native-mag-landed-stage-v2.js": "f9a72038c1665125fad089d8a91c81a5",
+    "review/GT-20124/native-mag-landed-ag-v2.mjs": "369158d426e3800955d65f6d1345b5bd",
+    "review/GT-20124/pouch-components-v1.js": "4a54c4c71f04fdb03f79d652a99fe68e",
+    "qa/2026-11-18-AG-365/native-mag-landed-anatomical-right-stage.js": "657f23ac6bbd975f764ebb655decf4ad",
+    "qa/2026-11-18-AG-365/native-mag-landed-anatomical-right-thigh.mjs": "3c1cbad913aefb9785da67ee6d60c647"
+  },
+  "sourceStable": true,
+  "frames": 2,
+  "actualNormalNativeRender": true,
+  "publicHeldPresentation": true,
+  "noPackageURLOverrides": true,
+  "matchedHistoricalPrelandCameras": false,
+  "supplementaryUnmatchedSideViews": true,
+  "mirroredAzimuthFromHistoricalRightThigh": true,
+  "historicalCameraAzimuthCorrectionNote": "Historical AG-358/AG-364 right-thigh camera (+0.88, +1.6, +1.0 -> +0.112) framed anatomical LEFT (+X) of +Z-facing Marine. These NEW unmatched supplementary views mirror azimuth to (-0.88, +1.6, +1.0 -> -0.112) to capture actual anatomical RIGHT (-X relative Marine) thigh.",
+  "historicalReferenceReceipt": "review/GT-20124/native-mag-landed-ag-v2/receipt.json",
+  "failures": [],
+  "allLandedCornersInside": true,
+  "records": [
+    {
+      "phase": "landed",
+      "pose": "unarmed",
+      "file": "qa/2026-11-18-AG-365/captures/landed/unarmed-anatomical-right-thigh.png",
+      "state": {
+        "pose": "unarmed",
+        "unarmed": true,
+        "magsCount": 2,
+        "pouches": [
+          {
+            "position": [
+              -0.1119999997317791,
+              0.8619999885559082,
+              0.13500000163912773
+            ],
+            "matrixWorld": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              -26,
+              -199.9979661350409,
+              -632,
+              1
+            ]
+          },
+          {
+            "position": [
+              0.1119999997317791,
+              0.8619999885559082,
+              0.13500000163912773
+            ],
+            "matrixWorld": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              -26,
+              -199.9979661350409,
+              -632,
+              1
+            ]
+          }
+        ]
+      },
+      "vestSlotsExact": true,
+      "instanceCapacity": 5,
+      "view": "anatomical-right-thigh",
+      "matchedHistoricalPrelandCameras": false,
+      "camera": [
+        0.7606866453476313,
+        -2.7755575615628914e-17,
+        0.6491192706966624,
+        0,
+        0.39299603513321213,
+        0.7958988453187122,
+        -0.46054222867172084,
+        0,
+        -0.5166332780215981,
+        0.6054296226815636,
+        0.6054296226815445,
+        0,
+        -26.8821154068041,
+        -198.3999999999396,
+        -631.0562826771452,
+        1
+      ],
+      "projection": [
+        3.2708526184841404,
+        0,
+        0,
+        0,
+        0,
+        3.2708526184841404,
+        0,
+        0,
+        0,
+        0,
+        -1.0006671114076051,
+        -1,
+        0,
+        0,
+        -0.1000667111407605,
+        0
+      ],
+      "commonCamera": {
+        "cx": -26.0021154068041,
+        "cz": -632.0562826771452,
+        "baseY": -199.9999999999396,
+        "distance": 2.9709933330851817,
+        "fov": 34,
+        "targetY": -199.22792475605632
+      },
+      "orientationTelemetry": {
+        "playerOriginWorld": [
+          -26,
+          -200,
+          -632
+        ],
+        "marineForwardWorld": [
+          0,
+          0,
+          1
+        ],
+        "marineAnatomicalRightWorld": [
+          -1,
+          0,
+          0
+        ],
+        "cameraRelativeToCommon": [
+          -0.879999999999999,
+          1.5999999999999943,
+          1
+        ],
+        "cameraTarget": [
+          -26.1141154068041,
+          -199.29999999993962,
+          -631.9562826771452
+        ],
+        "cameraTargetRelativeToCommon": [
+          -0.11199999999999832,
+          0.6999999999999886,
+          0.10000000000002274
+        ],
+        "anatomicalRightDot": 0.6606278948920243,
+        "anatomicalSideVerified": true,
+        "worldPositions": {
+          "legLG_minusX": [
+            -26.13,
+            -199.21296613504092,
+            -632
+          ],
+          "legRG_plusX": [
+            -25.87,
+            -199.21296613504092,
+            -632
+          ],
+          "wristLG_minusX": null,
+          "wristRG_plusX": null,
+          "hipHolsterGroup": [
+            -25.850135860969033,
+            -199.1279661350409,
+            -632.1385228936552
+          ],
+          "hipPairHolsterGroup": [
+            -26.149864418097746,
+            -199.1279661350409,
+            -632.1385236169033
+          ],
+          "hipGrip": [
+            -26.218,
+            -199.23096613504092,
+            -631.963
+          ]
+        }
+      },
+      "anatomicalSideVerified": true,
+      "containment": [
+        {
+          "instance": 0,
+          "magMatrixWorld": [
+            0.999999974247183,
+            4.6462080195578195e-12,
+            5.010656785320311e-10,
+            0,
+            -1.0392774978822995e-11,
+            1.0000000076672924,
+            -1.4297123554496416e-10,
+            0,
+            2.5220334501363517e-11,
+            2.7539814699550913e-10,
+            0.999999977909381,
+            0,
+            -26.111999997217232,
+            -199.13596613511692,
+            -631.8649999954922,
+            1
+          ],
+          "pouchMatrixWorld": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            -26,
+            -199.9979661350409,
+            -632,
+            1
+          ],
+          "all8Inside": true,
+          "actualHostMapping": {
+            "matchedCorners": 144,
+            "maxBindErrorMetres": 0,
+            "toleranceMetres": 0.000002,
+            "closedEdges": 72,
+            "triangles": 48
+          },
+          "corners": [
+            {
+              "world": [
+                -26.134499996637835,
+                -199.160966135312,
+                -631.8769999952348
+              ],
+              "pouchLocal": [
+                -0.1344999966378353,
+                0.8369999997289028,
+                0.1230000047652311
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.13449999663723,
+                -199.1609661353054,
+                -631.852999995765
+              ],
+              "pouchLocal": [
+                -0.13449999663723133,
+                0.8369999997355251,
+                0.1470000042349966
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.134499996638358,
+                -199.11096613492865,
+                -631.8769999952419
+              ],
+              "pouchLocal": [
+                -0.13449999663835754,
+                0.8870000001122662,
+                0.12300000475806883
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.13449999663775,
+                -199.11096613492202,
+                -631.8529999957722
+              ],
+              "pouchLocal": [
+                -0.13449999663775003,
+                0.8870000001188885,
+                0.14700000422783432
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.089499997796715,
+                -199.1609661353118,
+                -631.8769999952123
+              ],
+              "pouchLocal": [
+                -0.08949999779671458,
+                0.8369999997291018,
+                0.12300000478774109
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.089499997796107,
+                -199.1609661353052,
+                -631.8529999957425
+              ],
+              "pouchLocal": [
+                -0.08949999779610707,
+                0.836999999735724,
+                0.1470000042575066
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.089499997797233,
+                -199.11096613492845,
+                -631.8769999952194
+              ],
+              "pouchLocal": [
+                -0.08949999779723328,
+                0.8870000001124652,
+                0.12300000478057882
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.08949999779663,
+                -199.11096613492182,
+                -631.8529999957497
+              ],
+              "pouchLocal": [
+                -0.08949999779662932,
+                0.8870000001190874,
+                0.14700000425034432
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            }
+          ]
+        },
+        {
+          "instance": 1,
+          "magMatrixWorld": [
+            0.999999974247183,
+            4.6462080195578195e-12,
+            5.010656785320311e-10,
+            0,
+            -1.0392774978822995e-11,
+            1.0000000076672924,
+            -1.4297123554496416e-10,
+            0,
+            2.5220334501363517e-11,
+            2.7539814699550913e-10,
+            0.999999977909381,
+            0,
+            -25.887999996414692,
+            -199.13596613506454,
+            -631.8649999997399,
+            1
+          ],
+          "pouchMatrixWorld": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            -26,
+            -199.9979661350409,
+            -632,
+            1
+          ],
+          "all8Inside": true,
+          "actualHostMapping": {
+            "matchedCorners": 144,
+            "maxBindErrorMetres": 0,
+            "toleranceMetres": 0.000002,
+            "closedEdges": 72,
+            "triangles": 48
+          },
+          "corners": [
+            {
+              "world": [
+                -25.910499995835295,
+                -199.16096613525963,
+                -631.8769999994825
+              ],
+              "pouchLocal": [
+                0.08950000416470516,
+                0.836999999781284,
+                0.12300000051754978
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.91049999583469,
+                -199.160966135253,
+                -631.8530000000127
+              ],
+              "pouchLocal": [
+                0.08950000416530912,
+                0.8369999997879063,
+                0.14699999998731528
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.910499995835817,
+                -199.11096613487626,
+                -631.8769999994896
+              ],
+              "pouchLocal": [
+                0.08950000416418291,
+                0.8870000001646474,
+                0.12300000051038751
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.91049999583521,
+                -199.11096613486964,
+                -631.8530000000198
+              ],
+              "pouchLocal": [
+                0.08950000416479043,
+                0.8870000001712697,
+                0.146999999980153
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.865499996994174,
+                -199.16096613525943,
+                -631.8769999994599
+              ],
+              "pouchLocal": [
+                0.13450000300582587,
+                0.836999999781483,
+                0.12300000054005977
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.865499996993567,
+                -199.1609661352528,
+                -631.8529999999902
+              ],
+              "pouchLocal": [
+                0.1345000030064334,
+                0.8369999997881052,
+                0.14700000000982527
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.865499996994693,
+                -199.11096613487607,
+                -631.8769999994671
+              ],
+              "pouchLocal": [
+                0.13450000300530718,
+                0.8870000001648464,
+                0.1230000005328975
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.86549999699409,
+                -199.11096613486944,
+                -631.8529999999973
+              ],
+              "pouchLocal": [
+                0.13450000300591114,
+                0.8870000001714686,
+                0.147000000002663
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "all16Inside": true,
+      "renderer": "WebGPU",
+      "scope": "Supplementary unmatched -X anatomical RIGHT thigh view ONLY; actual native live renderFrame via supported DWInspect.still(true); same 8-corner closed pouch containment <=2um and vest/capacity invariants."
+    },
+    {
+      "phase": "landed",
+      "pose": "pistol",
+      "file": "qa/2026-11-18-AG-365/captures/landed/pistol-anatomical-right-thigh.png",
+      "state": {
+        "pose": "pistol",
+        "unarmed": false,
+        "magsCount": 2,
+        "pouches": [
+          {
+            "position": [
+              -0.1119999997317791,
+              0.8619999885559082,
+              0.13500000163912773
+            ],
+            "matrixWorld": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              -26,
+              -199.9979661350409,
+              -632,
+              1
+            ]
+          },
+          {
+            "position": [
+              0.1119999997317791,
+              0.8619999885559082,
+              0.13500000163912773
+            ],
+            "matrixWorld": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              -26,
+              -199.9979661350409,
+              -632,
+              1
+            ]
+          }
+        ]
+      },
+      "vestSlotsExact": true,
+      "instanceCapacity": 5,
+      "view": "anatomical-right-thigh",
+      "matchedHistoricalPrelandCameras": false,
+      "camera": [
+        0.7606866453476313,
+        -2.7755575615628914e-17,
+        0.6491192706966624,
+        0,
+        0.39299603513321213,
+        0.7958988453187122,
+        -0.46054222867172084,
+        0,
+        -0.5166332780215981,
+        0.6054296226815636,
+        0.6054296226815445,
+        0,
+        -26.8821154068041,
+        -198.3999999999396,
+        -631.0562826771452,
+        1
+      ],
+      "projection": [
+        3.2708526184841404,
+        0,
+        0,
+        0,
+        0,
+        3.2708526184841404,
+        0,
+        0,
+        0,
+        0,
+        -1.0006671114076051,
+        -1,
+        0,
+        0,
+        -0.1000667111407605,
+        0
+      ],
+      "commonCamera": {
+        "cx": -26.0021154068041,
+        "cz": -632.0562826771452,
+        "baseY": -199.9999999999396,
+        "distance": 2.9709933330851817,
+        "fov": 34,
+        "targetY": -199.22792475605632
+      },
+      "orientationTelemetry": {
+        "playerOriginWorld": [
+          -26,
+          -200,
+          -632
+        ],
+        "marineForwardWorld": [
+          0,
+          0,
+          1
+        ],
+        "marineAnatomicalRightWorld": [
+          -1,
+          0,
+          0
+        ],
+        "cameraRelativeToCommon": [
+          -0.879999999999999,
+          1.5999999999999943,
+          1
+        ],
+        "cameraTarget": [
+          -26.1141154068041,
+          -199.29999999993962,
+          -631.9562826771452
+        ],
+        "cameraTargetRelativeToCommon": [
+          -0.11199999999999832,
+          0.6999999999999886,
+          0.10000000000002274
+        ],
+        "anatomicalRightDot": 0.6606278948920243,
+        "anatomicalSideVerified": true,
+        "worldPositions": {
+          "legLG_minusX": [
+            -26.13,
+            -199.21296613504092,
+            -632
+          ],
+          "legRG_plusX": [
+            -25.87,
+            -199.21296613504092,
+            -632
+          ],
+          "wristLG_minusX": null,
+          "wristRG_plusX": null,
+          "hipHolsterGroup": [
+            -25.850135860969033,
+            -199.1279661350409,
+            -632.1385228936552
+          ],
+          "hipPairHolsterGroup": [
+            -26.149864418097785,
+            -199.1279661350409,
+            -632.1385236169034
+          ],
+          "hipGrip": [
+            -26.218,
+            -199.23096613504092,
+            -631.963
+          ]
+        }
+      },
+      "anatomicalSideVerified": true,
+      "containment": [
+        {
+          "instance": 0,
+          "magMatrixWorld": [
+            1.0000000205571584,
+            -2.852911275275094e-10,
+            -1.2088313544600382e-9,
+            0,
+            -1.1978305309440218e-9,
+            1.0000000047143935,
+            -3.119131883333459e-9,
+            0,
+            -3.4497244227882362e-9,
+            -3.2203428257382427e-9,
+            0.9999999820423539,
+            0,
+            -26.111999997685384,
+            -199.1359661359853,
+            -631.8650000004732,
+            1
+          ],
+          "pouchMatrixWorld": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            -26,
+            -199.9979661350409,
+            -632,
+            1
+          ],
+          "all8Inside": true,
+          "actualHostMapping": {
+            "matchedCorners": 144,
+            "maxBindErrorMetres": 0,
+            "toleranceMetres": 0.000002,
+            "closedEdges": 72,
+            "triangles": 48
+          },
+          "corners": [
+            {
+              "world": [
+                -26.134499998076578,
+                -199.1609661360581,
+                -631.8770000001525
+              ],
+              "pouchLocal": [
+                -0.13449999807657775,
+                0.8369999989828045,
+                0.12299999984747956
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.13449999815937,
+                -199.1609661361354,
+                -631.8530000005835
+              ],
+              "pouchLocal": [
+                -0.1344999981593702,
+                0.8369999989055259,
+                0.14699999941649367
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.13449999813647,
+                -199.1109661358224,
+                -631.8770000003085
+              ],
+              "pouchLocal": [
+                -0.1344999981364694,
+                0.8869999992185171,
+                0.12299999969150122
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.134499998219262,
+                -199.11096613589967,
+                -631.8530000007395
+              ],
+              "pouchLocal": [
+                -0.13449999821926184,
+                0.8869999991412385,
+                0.14699999926051532
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.089499997151506,
+                -199.16096613607095,
+                -631.8770000002069
+              ],
+              "pouchLocal": [
+                -0.08949999715150625,
+                0.8369999989699579,
+                0.12299999979313725
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.0894999972343,
+                -199.16096613614823,
+                -631.8530000006378
+              ],
+              "pouchLocal": [
+                -0.08949999723429869,
+                0.8369999988926793,
+                0.14699999936215136
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.089499997211398,
+                -199.11096613583524,
+                -631.8770000003628
+              ],
+              "pouchLocal": [
+                -0.0894999972113979,
+                0.8869999992056705,
+                0.12299999963715891
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -26.08949999729419,
+                -199.11096613591252,
+                -631.8530000007938
+              ],
+              "pouchLocal": [
+                -0.08949999729419034,
+                0.8869999991283919,
+                0.14699999920617302
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            }
+          ]
+        },
+        {
+          "instance": 1,
+          "magMatrixWorld": [
+            1.0000000205571584,
+            -2.852911275275094e-10,
+            -1.2088313544600382e-9,
+            0,
+            -1.1978305309440218e-9,
+            1.0000000047143935,
+            -3.119131883333459e-9,
+            0,
+            -3.4497244227882362e-9,
+            -3.2203428257382427e-9,
+            0.9999999820423539,
+            0,
+            -25.887999999662014,
+            -199.13596613619103,
+            -631.8650000069817,
+            1
+          ],
+          "pouchMatrixWorld": [
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            -26,
+            -199.9979661350409,
+            -632,
+            1
+          ],
+          "all8Inside": true,
+          "actualHostMapping": {
+            "matchedCorners": 144,
+            "maxBindErrorMetres": 0,
+            "toleranceMetres": 0.000002,
+            "closedEdges": 72,
+            "triangles": 48
+          },
+          "corners": [
+            {
+              "world": [
+                -25.910500000053208,
+                -199.16096613626382,
+                -631.8770000066611
+              ],
+              "pouchLocal": [
+                0.08949999994679203,
+                0.8369999987770882,
+                0.1229999933389081
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.910500000136,
+                -199.1609661363411,
+                -631.8530000070921
+              ],
+              "pouchLocal": [
+                0.08949999986399959,
+                0.8369999986998096,
+                0.1469999929079222
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.9105000001131,
+                -199.1109661360281,
+                -631.8770000068171
+              ],
+              "pouchLocal": [
+                0.08949999988690038,
+                0.8869999990128008,
+                0.12299999318292976
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.910500000195892,
+                -199.1109661361054,
+                -631.853000007248
+              ],
+              "pouchLocal": [
+                0.08949999980410794,
+                0.8869999989355222,
+                0.14699999275194386
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.865499999128136,
+                -199.16096613627667,
+                -631.8770000067154
+              ],
+              "pouchLocal": [
+                0.13450000087186353,
+                0.8369999987642416,
+                0.12299999328456579
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.86549999921093,
+                -199.16096613635395,
+                -631.8530000071464
+              ],
+              "pouchLocal": [
+                0.1345000007890711,
+                0.836999998686963,
+                0.1469999928535799
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.865499999188028,
+                -199.11096613604096,
+                -631.8770000068714
+              ],
+              "pouchLocal": [
+                0.1345000008119719,
+                0.8869999989999542,
+                0.12299999312858745
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "world": [
+                -25.86549999927082,
+                -199.11096613611824,
+                -631.8530000073024
+              ],
+              "pouchLocal": [
+                0.13450000072917945,
+                0.8869999989226756,
+                0.14699999269760156
+              ],
+              "inside": true,
+              "votes": [
+                true,
+                true,
+                true
+              ]
+            }
+          ]
+        }
+      ],
+      "all16Inside": true,
+      "renderer": "WebGPU",
+      "scope": "Supplementary unmatched -X anatomical RIGHT thigh view ONLY; actual native live renderFrame via supported DWInspect.still(true); same 8-corner closed pouch containment <=2um and vest/capacity invariants."
+    }
+  ],
+  "scope": "Supplementary AG-365 actual anatomical RIGHT (-X relative Marine) thigh views (unarmed + pistol) on exact LANDED 72e543b4 six-file J164 production; no Fetch/package/source override. Public DWInspect.still(true) held presentation; strict 8-corner closed-pouch containment <=2um; vest 3 matrices exact and capacity 5 retained. Historical AG-364/AG-358 evidence preserved unchanged. Extra evidence only; no waiver of t184 0.15 rad red or full motion/clipping/perf."
+}

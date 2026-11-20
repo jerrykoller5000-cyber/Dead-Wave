@@ -48,6 +48,26 @@
     const tubes = new Set();
     const W = (o) => o.getWorldPosition(new THREE.Vector3());
     const segD = (v, a, b) => { const ab = b.clone().sub(a), t = Math.max(0, Math.min(1, v.clone().sub(a).dot(ab) / Math.max(1e-9, ab.lengthSq()))); return v.distanceTo(a.clone().addScaledVector(ab, t)); };
+    // CC-353: a garment skinned on the GPU keeps its bind pose in the geometry; read where it is drawn (userData.cloth.posed /
+    // posedNormals, the same pose the GPU draws) - the same bars. On the suite's three the live cloth bends on the CPU and this
+    // is the geometry's own attribute.
+    // Any other skinned mesh (on the real three: marine-skin.js's rig-skin bakes, drawn with his parts' own materials) is read
+    // where three draws it too: getVertexPosition, and its normals through the same blended bone matrices.
+    const _sk = { m: new THREE.Matrix4(), b: new THREE.Matrix4(), v: new THREE.Vector3(), n: new THREE.Vector3() };
+    const skinnedAttr = (m, name) => {
+      const src = m.geometry.attributes[name]; if (!src) return src;
+      const out = new Float32Array(src.count * 3), si = m.geometry.attributes.skinIndex, sw = m.geometry.attributes.skinWeight, S = m.skeleton;
+      for (let i = 0; i < src.count; i++) {
+        if (name === 'position') { m.getVertexPosition(i, _sk.v); out[i * 3] = _sk.v.x; out[i * 3 + 1] = _sk.v.y; out[i * 3 + 2] = _sk.v.z; continue; }
+        const e = _sk.m.elements; e.fill(0);
+        for (let k = 0; k < 4; k++) { const w = sw.getComponent(i, k); if (!w) continue; const j = si.getComponent(i, k); _sk.b.multiplyMatrices(S.bones[j].matrixWorld, S.boneInverses[j]); for (let q = 0; q < 16; q++) e[q] += w * _sk.b.elements[q]; }
+        _sk.b.multiplyMatrices(m.bindMatrixInverse, _sk.m).multiply(m.bindMatrix);
+        _sk.n.fromBufferAttribute(src, i).transformDirection(_sk.b); out[i * 3] = _sk.n.x; out[i * 3 + 1] = _sk.n.y; out[i * 3 + 2] = _sk.n.z;
+      }
+      return new THREE.BufferAttribute(out, 3);
+    };
+    const effAttr = (m, name) => { const c = m.userData && m.userData.cloth; if (m.isSkinnedMesh && c && c.gpu) return new THREE.BufferAttribute(name === 'normal' ? c.posedNormals() : c.posed(), 3);
+      if (m.isSkinnedMesh && m.skeleton && m.geometry.attributes.skinIndex) return skinnedAttr(m, name); return m.geometry.attributes[name]; };
     const groups = () => {
       M.updateMatrixWorld(true);
       M.traverse((o) => { if (o.userData && o.userData.cloth && typeof o.userData.cloth.bend === 'function') o.userData.cloth.bend(); });
@@ -63,11 +83,34 @@
         const gp0 = o.geometry.parameters, path = gp0 && (Array.isArray(gp0) ? gp0[0] : gp0.path);
         if ((THREE.TubeGeometry && o.geometry instanceof THREE.TubeGeometry) || (path && typeof path.getPoint === 'function')) { tubes.add(o.name || '?'); return; }
         const n = matName(o), wear = n.startsWith('wear:') ? n.slice(5) : null, g = gearOf.get(o), c = chain(o), nm = o.name || '';
+        // CC-357 c (the native reader): marine-skin.js's rig-skin bakes hang on his root, but every vertex in them is one of
+        // his parts', weighted 1 to the very joint group that part hangs on. Each vertex goes with its joint's limb (the knee
+        // and elbow pads, the calf straps, a leg's holster mount move with that limb), and only the rest is read by its
+        // material as below (kit, his trunk's cloth, or not measured). It read every pad and strap of a merged 'wear:pads'
+        // bake as trunk kit, so on the real three the sleeve and the calf strap came out 7-10 mm 'inside the kit' (ChatGPT's
+        // GP-20151 native runs, 3/4, the same before and after). The suite's three bakes nothing: this never runs there.
+        if (o.isSkinnedMesh && o.userData && o.userData.rigSkin && o.skeleton && o.geometry.attributes.skinIndex) {
+          const si = o.geometry.attributes.skinIndex, sw = o.geometry.attributes.skinWeight, boneOf = o.skeleton.bones.map((b) => chain(b) || 'trunk');
+          const cls = new Array(si.count), seen = new Set();
+          for (let i = 0; i < si.count; i++) {
+            let bk = 0, bw = -1;
+            for (let k = 0; k < 4; k++) { const w = sw ? sw.getComponent(i, k) : (k ? 0 : 1); if (w > bw) { bw = w; bk = k; } }
+            seen.add(cls[i] = boneOf[si.getComponent(i, bk)] || 'trunk');
+          }
+          const rest = g === 'bareHead' || g === 'bareTorso' ? null : (g || (wear && KIT_WEAR.has(wear))) ? 'trunk' : wear === 'shirt' || wear === 'trousers' ? 'body' : null;
+          for (const k of seen) {
+            const keep = (i) => cls[i] === k;
+            if (k === 'gun') continue;
+            if (k === 'trunk') { if (rest) G[rest].push({ m: o, keep }); continue; }
+            G[k].push({ m: o, keep }); G.rigid[k].push({ m: o, keep });
+          }
+          return;
+        }
         if (c === 'gun') return;
         if (c) { G[c].push({ m: o }); G.rigid[c].push(o); return; }
         // the live cloth (the sleeves, the trouser legs) hangs off him, not off its limb: each vertex goes with the limb it is on
         if (/live-sleeve|live-trouser-leg/.test(nm)) {
-          const keys = /sleeve/.test(nm) ? ['armL', 'armR'] : ['legL', 'legR'], p = o.geometry.attributes.position, v = new THREE.Vector3(), side = new Uint8Array(p.count);
+          const keys = /sleeve/.test(nm) ? ['armL', 'armR'] : ['legL', 'legR'], p = effAttr(o, 'position'), v = new THREE.Vector3(), side = new Uint8Array(p.count);
           for (let i = 0; i < p.count; i++) side[i] = nearest(v.fromBufferAttribute(p, i).applyMatrix4(o.matrixWorld), keys) === keys[0] ? 0 : 1;
           G[keys[0]].push({ m: o, keep: (i) => side[i] === 0 }); G[keys[1]].push({ m: o, keep: (i) => side[i] === 1 });
           return;
@@ -79,11 +122,14 @@
       return G;
     };
     // A solid's triangles, outward normals, a grid of REACH cells.
+    // (CC-357 c: an entry may be { m, keep } too, a part of a rig-skin bake: only its triangles whose three vertices it keeps.)
     const solid = (meshes, R = REACH) => {
       const P = [], N = [], a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3(), v = new THREE.Vector3(), owner = [];
-      for (const m of meshes) {
-        const p = m.geometry.attributes.position, ix = m.geometry.index, n = ix ? ix.count : p.count, flip = m.matrixWorld.determinant() < 0;
+      for (const e of meshes) {
+        const m = e.isObject3D ? e : e.m, keep = e.isObject3D ? null : e.keep;
+        const p = effAttr(m, 'position'), ix = m.geometry.index, n = ix ? ix.count : p.count, flip = m.matrixWorld.determinant() < 0;
         for (let i = 0; i + 2 < n; i += 3) {
+          if (keep && !(keep(ix ? ix.getX(i) : i) && keep(ix ? ix.getX(i + 1) : i + 1) && keep(ix ? ix.getX(i + 2) : i + 2))) continue;
           a.fromBufferAttribute(p, ix ? ix.getX(i) : i).applyMatrix4(m.matrixWorld); b.fromBufferAttribute(p, ix ? ix.getX(i + 1) : i + 1).applyMatrix4(m.matrixWorld); c.fromBufferAttribute(p, ix ? ix.getX(i + 2) : i + 2).applyMatrix4(m.matrixWorld);
           v.subVectors(b, a).cross(c.clone().sub(a)); const l = v.length(); if (l < 1e-12) continue; v.multiplyScalar((flip ? -1 : 1) / l);
           P.push(a.x, a.y, a.z, b.x, b.y, b.z, c.x, c.y, c.z); N.push(v.x, v.y, v.z); owner.push(m);
@@ -110,7 +156,9 @@
       return { P, N, G, cell, owner, R, range, closed };
     };
     // The deepest vertex of `moving` inside the solid S, along the nearest face's normal; the parts it is in, named.
-    const label = (o) => (matName(o) || '?') + ':' + (o.name || (o.parent && o.parent.name) || '?');
+    // (CC-357 c: a part with no material name says which gear it is, and the nearest named group it hangs in: the native run's
+    // last red was 'in ?:?'.)
+    const label = (o) => { let nm = o.name; for (let x = o.parent; !nm && x && x !== M; x = x.parent) nm = x.name; return (matName(o) || (gearOf.get(o) ? 'gear:' + gearOf.get(o) : '?')) + ':' + (nm || '?'); };
     // Is world point v inside solid S (the nearest face within its reach, behind it)? How deep, which face.
     const depthIn = (S, v) => {
       const cx = S.cell(v.x), cy = S.cell(v.y), cz = S.cell(v.z); let best = S.R, bt = -1;
@@ -142,7 +190,7 @@
     const inside = (S, moving, H, roots) => {
       let worst = 0, at = null, kit = null, part = null; const v = new THREE.Vector3();
       for (const { m, keep } of moving) {
-        const p = m.geometry.attributes.position;
+        const p = effAttr(m, 'position');
         for (let i = 0; i < p.count; i++) {
           if (keep && !keep(i)) continue;
           v.fromBufferAttribute(p, i).applyMatrix4(m.matrixWorld);

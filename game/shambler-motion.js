@@ -11,12 +11,12 @@ function splitBootSurface(T,shin){
   const leather=new T.Color(0x594834),sole=new T.Color(0x27251f),feet=[];
   for(const mesh of [...shin.children]){
     const src=mesh.geometry;if(!mesh.isMesh||!src?.attributes.color)continue;
-    const geo=src.index?src.toNonIndexed():src,P=geo.attributes.position,C=geo.attributes.color;
+    const geo=src.index?src.toNonIndexed():src,P=geo.attributes.position,C=geo.attributes.color,B=geo.attributes.bootAttachment;
     const foot=[],leg=[];
     for(let i=0;i<P.count;i+=3){
       const y=(P.getY(i)+P.getY(i+1)+P.getY(i+2))/3;
       const same=c=>Math.abs(C.getX(i)-c.r)+Math.abs(C.getY(i)-c.g)+Math.abs(C.getZ(i)-c.b)<1e-5;
-      const boot=same(leather)||(same(sole)&&y<-.2*Math.abs(shin.position.y)/.38)||y<-.365*Math.abs(shin.position.y)/.38;
+      const boot=(B&&B.getX(i)===1&&B.getX(i+1)===1&&B.getX(i+2)===1)||same(leather)||(same(sole)&&y<-.2*Math.abs(shin.position.y)/.38)||y<-.365*Math.abs(shin.position.y)/.38;
       (boot?foot:leg).push(i,i+1,i+2);
     }
     if(!foot.length)continue;
@@ -31,7 +31,7 @@ export function prepareShamblerFeet(T,mesh,scale=1){
   const u=mesh.userData;
   for(const leg of [u.legLG,u.legRG]){
     const shin=leg?.userData.shinG;if(!shin||leg.userData.shamblerAnkle)continue;
-    let boots=shin.children.filter(o=>o.isMesh&&o.position.y<-.28*scale);
+    let boots=shin.children.filter(o=>o.isMesh&&(o.position.y<-.28*scale||o.userData.bootAttachment===true));
     if(!boots.length)boots=splitBootSurface(T,shin);
     if(!boots.length)continue;
     const ankle=new T.Group();ankle.name='shambler-ankle';ankle.position.set(0,-.36*scale,.04*scale);

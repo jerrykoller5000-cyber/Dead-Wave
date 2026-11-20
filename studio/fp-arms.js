@@ -233,6 +233,16 @@ export function buildViewArm(T, side, mats) {
             nz * c + (kx * ny - ky * nx) * sn + kz * nd * t1);
         }
       }
+      // GP-20133: the unchanged bend writes only this vertex span; keep every other GPU vertex intact.
+      if (R.idx.length) {
+        const start = R.idx[0] * 3, count = (R.idx[R.idx.length - 1] - R.idx[0] + 1) * 3;
+        for (let ai = 0; ai < (na ? 2 : 1); ai++) {
+          const attr = ai ? na : pa; if (!attr.addUpdateRange) continue;
+          let pending = false;
+          for (const range of attr.updateRanges || []) if (range.start === start && range.count === count) { pending = true; break; }
+          if (!pending) attr.addUpdateRange(start, count);
+        }
+      }
       pa.needsUpdate = true; if (na) na.needsUpdate = true;
     }
   };

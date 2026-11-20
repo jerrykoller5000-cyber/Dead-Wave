@@ -1,0 +1,114 @@
+{
+  "front-noon": {
+    "md5": "23b20d8a",
+    "diffVsBefore48a2Pct": 0.39
+  },
+  "threequarter-noon": {
+    "md5": "04e22427",
+    "diffVsBefore48a2Pct": 0.292
+  },
+  "side-noon": {
+    "md5": "38713db1",
+    "diffVsBefore48a2Pct": 0.292
+  },
+  "back-noon": {
+    "md5": "3a6f95ad",
+    "diffVsBefore48a2Pct": 0.797
+  },
+  "front-overcast": {
+    "md5": "8bb3ebb4",
+    "diffVsBefore48a2Pct": 0.385
+  },
+  "threequarter-overcast": {
+    "md5": "7d165d20",
+    "diffVsBefore48a2Pct": 0.279
+  },
+  "side-overcast": {
+    "md5": "e44eebee",
+    "diffVsBefore48a2Pct": 0.281
+  },
+  "back-overcast": {
+    "md5": "bf5b8213",
+    "diffVsBefore48a2Pct": 0.764
+  },
+  "front-dusk": {
+    "md5": "84437fcd",
+    "diffVsBefore48a2Pct": 0.364
+  },
+  "threequarter-dusk": {
+    "md5": "fdf731e8",
+    "diffVsBefore48a2Pct": 0.274
+  },
+  "side-dusk": {
+    "md5": "743c6bd3",
+    "diffVsBefore48a2Pct": 0.266
+  },
+  "back-dusk": {
+    "md5": "e5790c6d",
+    "diffVsBefore48a2Pct": 0.736
+  },
+  "front-night": {
+    "md5": "e3c8e20d",
+    "diffVsBefore48a2Pct": 0.342
+  },
+  "threequarter-night": {
+    "md5": "70a42e7d",
+    "diffVsBefore48a2Pct": 0.218
+  },
+  "side-night": {
+    "md5": "e1a3546d",
+    "diffVsBefore48a2Pct": 0.231
+  },
+  "back-night": {
+    "md5": "5b032f66",
+    "diffVsBefore48a2Pct": 0.627
+  },
+  "front-black": {
+    "md5": "d4bceba9",
+    "diffVsBefore48a2Pct": 0.115
+  },
+  "threequarter-black": {
+    "md5": "a63c730c",
+    "diffVsBefore48a2Pct": 0.067
+  },
+  "side-black": {
+    "md5": "b14232e8",
+    "diffVsBefore48a2Pct": 0.085
+  },
+  "back-black": {
+    "md5": "55f8dbf7",
+    "diffVsBefore48a2Pct": 0.159
+  },
+  "head-front-noon": {
+    "md5": "032185a6",
+    "diffVsBefore48a2Pct": 3.058
+  },
+  "head-threequarter-noon": {
+    "md5": "583c595f",
+    "diffVsBefore48a2Pct": 2.658
+  },
+  "head-front-overcast": {
+    "md5": "e623e98b",
+    "diffVsBefore48a2Pct": 3.013
+  },
+  "head-threequarter-overcast": {
+    "md5": "0f1ff238",
+    "diffVsBefore48a2Pct": 2.548
+  },
+  "head-front-dusk": {
+    "md5": "125cbcf9",
+    "diffVsBefore48a2Pct": 2.868
+  },
+  "head-threequarter-dusk": {
+    "md5": "080f9e43",
+    "diffVsBefore48a2Pct": 2.481
+  },
+  "head-front-night": {
+    "md5": "59e87a3b",
+    "diffVsBefore48a2Pct": 2.78
+  },
+  "head-threequarter-night": {
+    "md5": "ea7f7c99",
+    "diffVsBefore48a2Pct": 2.382
+  }
+}

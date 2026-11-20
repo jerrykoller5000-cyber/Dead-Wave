@@ -1,0 +1,9 @@
+# antigravity — AG-371 shambler night row at real game settings — 2026-11-18
+
+Changed:          Added real game deep-night (`game_night`) and player flashlight (`game_night_flash`) lighting presets to the review-only AG-357 viewer using exact `index.html` values (`NoToneMapping`, `sun=0.025`, `hemi=0.15`, `ambFill=0x223344@0.06`, `moon=0x8899cc@0.40 @ [-12,20,-8]`, `Fog(0x020508,18,65)`, `SpotLight(0xfff2d0, min(42,2.35*d^1.1), 26, 0.42, 0.74, 1.1)`), captured 36 WebGPU frames, and built `review/AG-357/19-shambler-final-night.jpg` (Pass 6 Shamble & A-pose vs Tripo).
+Files:            review/AG-357/index.html; qa/2026-11-18-AG-371/capture-night.mjs; qa/2026-11-18-AG-371/build_night_sheet.py; qa/2026-11-18-AG-371/night-report.json; review/AG-357/19-shambler-final-night.jpg
+Tests:            node --check qa/2026-11-18-AG-371/capture-night.mjs (exit 0); python -m py_compile qa/2026-11-18-AG-371/build_night_sheet.py (exit 0); slot run capture-night.mjs -> WebGPUBackend, 36 frames captured, Errors: 0.
+Screenshots:      review/AG-357/19-shambler-final-night.jpg; qa/2026-11-18-AG-371/frames-night/game_night-step3_512-front.png; qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512_shamble-3q.png; qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512-head_3q.png; qa/2026-11-18-AG-371/frames-night/game_night_flash-tripo-head_3q.png. Visual check: moonlight rows show clean silhouette and glowing eyes matching Tripo without pitch blackout; flashlight rows at d=3.36..3.47m (I=8.9..9.2) and head close-ups at d=1.015m (I=2.39) read without plastic specular blowout; minor rim catch on inner mouth pharynx bubble and central anterior neck groove shadow visible at axial 1.0m close-up.
+Not verified:     In-game spawned Shambler night crowd frame (live game files untouched; viewer replicates `index.html` light/fog/toneMapping constants directly).
+Requests:         none
+Contract changes: none

@@ -1,0 +1,8 @@
+# chatgpt — GP-20146 native cap proof (IN PROGRESS) — 2026-11-15
+Changed: Review-only reset clears the unused index tail at birth, preserving full-buffer A-B-A determinism. Cap guards validated on the actual C3 shambler using metadata edits only inside a frozen review tree; production untouched.
+Files: review/GP-20146/body-appearance.mjs SHA1efc67e9, strengthened body-appearance.test.mjs; metadata-v4*, loft-guards-native-v1/v1b/v1c*, loft-reset-proof/.
+Tests: fresh actual batch/skin metadata-v4 parity5/0. Initial strict native v1 failed A-B-A; same-frozen v1b isolated inactive index tail only. Regression reproduced old failure, fix yields14adapter/0fail. Same-frozen v1c changes only body fix: EXIT0/0pageerrors;6looks,77source cap ranges,9173protected actual end-region vertices,330228 P/N scalar comparisons bitexact. Full attributes/index A-B-A exact, second body untouched, same geometry/attribute bindings and joint transforms,0extraRNG. Raw failures retained, no assertion weakened. Proof: loft-guards-native-v1c/results.json and loft-reset-proof/receipt.json.
+Screenshots: None in this numeric cap proof. Guarded-body visual validation remains next; no art approval claimed.
+Not verified: Whole-assembly/cross-bone clipping, all types, current-frame/load budget and final per-individual skull match/lifecycle remain unfinished. Conservative locks suppress unsupported regions. Main GP146 not complete.
+Requests: C3 military helmet request answered NOTE: prefer explicit scaled bone-local cc355Crown and fresh/cache preservation; review-only fit is next before any landing. C2 spawn/reset/core-merge asks remain pending.
+Contract changes: None landed. Every native attempt through rule16 crew slot, one browser at a time; all closed/leases released. No git.

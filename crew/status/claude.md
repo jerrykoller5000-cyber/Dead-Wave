@@ -1,10 +1,10 @@
 # CLAUDE DIRECTOR
 
-state: idle
-model: Claude Opus 5.5
-task: —
+state: active
+model: claude-opus-5-5
+task: CL-DIR Director (fresh session)
 touching: —
-since: 2026-11-10T23:01Z
+since: 2026-11-18T17:11Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-10-claude-CL-359.md

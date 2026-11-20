@@ -1,0 +1,681 @@
+{
+  "at": "2026-11-18T21:11:56.249Z",
+  "task": "AG-371",
+  "backend": "WebGPUBackend",
+  "stats": {
+    "ours": {
+      "tris": 18592,
+      "meshes": 1,
+      "materials": 1,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "proto_apose": {
+      "tris": 36496,
+      "meshes": 31,
+      "materials": 10,
+      "size": [
+        1.0412,
+        1.8,
+        0.3247
+      ]
+    },
+    "proto_shamble": {
+      "tris": 36496,
+      "meshes": 31,
+      "materials": 10,
+      "size": [
+        0.6229,
+        1.7772,
+        0.9202
+      ]
+    },
+    "white_apose": {
+      "tris": 36496,
+      "meshes": 31,
+      "materials": 2,
+      "size": [
+        1.0412,
+        1.8,
+        0.3247
+      ]
+    },
+    "white_shamble": {
+      "tris": 36496,
+      "meshes": 31,
+      "materials": 2,
+      "size": [
+        0.6229,
+        1.7772,
+        0.9202
+      ]
+    },
+    "tripo": {
+      "tris": 17664,
+      "meshes": 1,
+      "materials": 1,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "step3_1k": {
+      "tris": 36496,
+      "meshes": 2,
+      "materials": 2,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ]
+    },
+    "step3_512": {
+      "tris": 36496,
+      "meshes": 2,
+      "materials": 2,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ]
+    },
+    "step3_512_shamble": {
+      "tris": 36496,
+      "meshes": 2,
+      "materials": 2,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ]
+    },
+    "step3_lod1": {
+      "tris": 7820,
+      "meshes": 2,
+      "materials": 2,
+      "size": [
+        0.5488,
+        1.7412,
+        0.8695
+      ]
+    }
+  },
+  "step3Stats": {
+    "step3_1k": {
+      "tris": 36496,
+      "meshCount": 2,
+      "materials": 2,
+      "texBytes": 12582912,
+      "texCount": 3,
+      "atlasSize": 1024,
+      "lod": 0
+    },
+    "step3_512": {
+      "tris": 36496,
+      "meshCount": 2,
+      "materials": 2,
+      "texBytes": 3145728,
+      "texCount": 3,
+      "atlasSize": 512,
+      "lod": 0
+    },
+    "step3_512_shamble": {
+      "tris": 36496,
+      "meshCount": 2,
+      "materials": 2,
+      "texBytes": 3145728,
+      "texCount": 3,
+      "atlasSize": 512,
+      "lod": 0
+    },
+    "step3_lod1": {
+      "tris": 7820,
+      "meshCount": 2,
+      "materials": 2,
+      "texBytes": 3145728,
+      "texCount": 3,
+      "atlasSize": 512,
+      "lod": 1
+    }
+  },
+  "headMetrics": {
+    "crownY": 1.8,
+    "chinY": 1.4656,
+    "collarY": 1.3742,
+    "mouthGapeM": 0.0507,
+    "headHeightOpenM": 0.3344,
+    "headHeightOpenPct": 18.6,
+    "headHeightClosedM": 0.2837,
+    "headHeightClosedPct": 15.8,
+    "headDepthBrowM": 0.2891,
+    "headDepthBrowPct": 16.1,
+    "headDepthMaxM": 0.2891,
+    "headDepthMaxPct": 16.1,
+    "craniumWidthM": 0.2044,
+    "craniumWidthPct": 11.4,
+    "neckTopWidthM": 0.0878,
+    "craniumToNeckRatio": 2.33,
+    "jawGonionWidthM": 0.2003,
+    "neckLengthChinToCollar": 0.0914,
+    "occiputBackZ": -0.1267,
+    "browFrontZ": 0.1623,
+    "neckBackZ": -0.0475,
+    "neckMidZ": -0.009,
+    "occiputOverhangM": 0.0792,
+    "neckCenterPctFromBack": 40.7
+  },
+  "settings": {
+    "toneMapping": "NoToneMapping",
+    "exposure": 1,
+    "sun": {
+      "color": "#ffbd87",
+      "intensity": 0.025
+    },
+    "hemi": {
+      "sky": "#f3f1ea",
+      "ground": "#8c877c",
+      "intensity": 0.15
+    },
+    "ambientFill": {
+      "color": "#223344",
+      "intensity": 0.06
+    },
+    "moon": {
+      "color": "#8899cc",
+      "intensity": 0.4,
+      "pos": [
+        -12,
+        20,
+        -8
+      ]
+    },
+    "fog": {
+      "color": "#020508",
+      "near": 18,
+      "far": 65
+    },
+    "flashlight": {
+      "color": "#fff2d0",
+      "distance": 26,
+      "angle": 0.42,
+      "penumbra": 0.74,
+      "decay": 1.1,
+      "formula": "min(42, max(0.45, 2.35 * dist^1.1))"
+    }
+  },
+  "frames": {
+    "game_night-step3_512_shamble-front": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-step3_512_shamble-front.png",
+      "md5": "42696684",
+      "hFill": 0.85,
+      "boundsH": 1.7419,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ]
+    },
+    "game_night-step3_512_shamble-3q": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-step3_512_shamble-3q.png",
+      "md5": "fed51996",
+      "hFill": 0.85,
+      "boundsH": 1.7419,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ]
+    },
+    "game_night-step3_512_shamble-side": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-step3_512_shamble-side.png",
+      "md5": "d6e4bf5a",
+      "hFill": 0.85,
+      "boundsH": 1.7419,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ]
+    },
+    "game_night-step3_512_shamble-back": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-step3_512_shamble-back.png",
+      "md5": "bcedecb2",
+      "hFill": 0.85,
+      "boundsH": 1.7419,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ]
+    },
+    "game_night-step3_512_shamble-head_3q": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-step3_512_shamble-head_3q.png",
+      "md5": "d60937e2",
+      "hFill": 0.716,
+      "boundsH": 1.7419,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ]
+    },
+    "game_night-step3_512_shamble-head_side": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-step3_512_shamble-head_side.png",
+      "md5": "c16d8f9c",
+      "hFill": 0.716,
+      "boundsH": 1.7419,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ]
+    },
+    "game_night-step3_512-front": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-step3_512-front.png",
+      "md5": "c50fffae",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ]
+    },
+    "game_night-step3_512-3q": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-step3_512-3q.png",
+      "md5": "7b4ef26f",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ]
+    },
+    "game_night-step3_512-side": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-step3_512-side.png",
+      "md5": "293cc080",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ]
+    },
+    "game_night-step3_512-back": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-step3_512-back.png",
+      "md5": "3669fc5a",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ]
+    },
+    "game_night-step3_512-head_3q": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-step3_512-head_3q.png",
+      "md5": "197bd62b",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ]
+    },
+    "game_night-step3_512-head_side": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-step3_512-head_side.png",
+      "md5": "b536c995",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ]
+    },
+    "game_night-tripo-front": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-tripo-front.png",
+      "md5": "c648d4cd",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night-tripo-3q": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-tripo-3q.png",
+      "md5": "c248d2f4",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night-tripo-side": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-tripo-side.png",
+      "md5": "b2392326",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night-tripo-back": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-tripo-back.png",
+      "md5": "f4c25c18",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night-tripo-head_3q": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-tripo-head_3q.png",
+      "md5": "6037fccc",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night-tripo-head_side": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night-tripo-head_side.png",
+      "md5": "93e89f01",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "game_night_flash-step3_512_shamble-front": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512_shamble-front.png",
+      "md5": "0cd098f5",
+      "hFill": 0.85,
+      "boundsH": 1.7419,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ],
+      "flashlight": {
+        "dist": 3.358,
+        "intensity": 8.908
+      }
+    },
+    "game_night_flash-step3_512_shamble-3q": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512_shamble-3q.png",
+      "md5": "b23bb749",
+      "hFill": 0.85,
+      "boundsH": 1.7419,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ],
+      "flashlight": {
+        "dist": 3.358,
+        "intensity": 8.908
+      }
+    },
+    "game_night_flash-step3_512_shamble-side": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512_shamble-side.png",
+      "md5": "5cb6ff0b",
+      "hFill": 0.85,
+      "boundsH": 1.7419,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ],
+      "flashlight": {
+        "dist": 3.358,
+        "intensity": 8.908
+      }
+    },
+    "game_night_flash-step3_512_shamble-back": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512_shamble-back.png",
+      "md5": "68fe7853",
+      "hFill": 0.85,
+      "boundsH": 1.7419,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ],
+      "flashlight": {
+        "dist": 3.358,
+        "intensity": 8.908
+      }
+    },
+    "game_night_flash-step3_512_shamble-head_3q": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512_shamble-head_3q.png",
+      "md5": "229b3af0",
+      "hFill": 0.716,
+      "boundsH": 1.7419,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-step3_512_shamble-head_side": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512_shamble-head_side.png",
+      "md5": "6c859a3c",
+      "hFill": 0.716,
+      "boundsH": 1.7419,
+      "size": [
+        0.5517,
+        1.7419,
+        0.898
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-step3_512-front": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512-front.png",
+      "md5": "f60bd435",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-step3_512-3q": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512-3q.png",
+      "md5": "ad5c9fea",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-step3_512-side": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512-side.png",
+      "md5": "413f6e4d",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-step3_512-back": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512-back.png",
+      "md5": "3cc8b43f",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-step3_512-head_3q": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512-head_3q.png",
+      "md5": "0b7699d1",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-step3_512-head_side": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-step3_512-head_side.png",
+      "md5": "e6bb87bf",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9193,
+        1.8,
+        0.3247
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-tripo-front": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-tripo-front.png",
+      "md5": "3f9b086c",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-tripo-3q": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-tripo-3q.png",
+      "md5": "0e287178",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-tripo-side": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-tripo-side.png",
+      "md5": "45145acb",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-tripo-back": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-tripo-back.png",
+      "md5": "e3c70f35",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 3.47,
+        "intensity": 9.234
+      }
+    },
+    "game_night_flash-tripo-head_3q": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-tripo-head_3q.png",
+      "md5": "78f5d446",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    },
+    "game_night_flash-tripo-head_side": {
+      "file": "qa/2026-11-18-AG-371/frames-night/game_night_flash-tripo-head_side.png",
+      "md5": "df28d091",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ],
+      "flashlight": {
+        "dist": 1.015,
+        "intensity": 2.39
+      }
+    }
+  },
+  "errors": []
+}

@@ -37,6 +37,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import zlib from 'node:zlib';
 import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { serve } from './serve.mjs';
@@ -78,6 +79,47 @@ export async function waitForCameraExit(pid, { timeout = 30000, interval = 50, a
 
 // --- arguments ------------------------------------------------------------------------------------------------------
 // `cmd target --key value --flag`: numbers become numbers, "a,b" lists, --flag true.
+// CB-345: the brightest channel and a hash of the pixels of a PNG from Chrome (8-bit RGB or RGBA, not interlaced);
+// null for anything else (then nothing is checked).
+// CB-360: a check sheet's tiles read back off the sheet itself (in the page: the sheet is a JPEG): per subject the brightest
+// channel, the mean and the spread of its picture, the label strip left out. tools/tests/cb360-sheet-tiles.mjs runs it on a made sheet.
+const SHEET_TILES_JS = `(async (src, n, cols, tile) => {
+  const img = new Image(); img.src = src; await img.decode();
+  const rows = Math.ceil(n / cols), th = Math.round((img.height - 30) / rows), c = document.createElement('canvas');
+  c.width = img.width; c.height = img.height; const g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(img, 0, 0);
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const x = i % cols * tile + 2, y = 30 + Math.floor(i / cols) * th + 2, w = tile - 4, h = th - 22 - 4;
+    if (w < 4 || h < 4) { out.push(null); continue; }
+    const d = g.getImageData(x, y, w, h).data; let max = 0, s = 0, s2 = 0;
+    for (let j = 0; j < d.length; j += 4) { const v = (d[j] + d[j + 1] + d[j + 2]) / 3; max = Math.max(max, d[j], d[j + 1], d[j + 2]); s += v; s2 += v * v; }
+    const k = d.length / 4, mean = s / k;
+    out.push({ max, mean: +mean.toFixed(1), spread: +Math.sqrt(Math.max(0, s2 / k - mean * mean)).toFixed(2) });
+  }
+  return out;
+})`;
+function pngStats(buf) {
+  try {
+    if (buf.readUInt32BE(12) !== 0x49484452) return null;
+    const w = buf.readUInt32BE(16), h = buf.readUInt32BE(20), depth = buf[24], type = buf[25], inter = buf[28];
+    if (depth !== 8 || (type !== 2 && type !== 6) || inter !== 0) return null;
+    const ch = type === 6 ? 4 : 3, stride = w * ch, idat = [];
+    for (let o = 8; o < buf.length;) { const len = buf.readUInt32BE(o), t = buf.toString('latin1', o + 4, o + 8); if (t === 'IDAT') idat.push(buf.subarray(o + 8, o + 8 + len)); if (t === 'IEND') break; o += 12 + len; }
+    const raw = zlib.inflateSync(Buffer.concat(idat)), img = Buffer.alloc(stride * h);
+    for (let y = 0; y < h; y++) {
+      const f = raw[y * (stride + 1)], src = y * (stride + 1) + 1, dst = y * stride;
+      for (let x = 0; x < stride; x++) {
+        const a = x >= ch ? img[dst + x - ch] : 0, b = y ? img[dst - stride + x] : 0, c = x >= ch && y ? img[dst - stride + x - ch] : 0, v = raw[src + x];
+        let p = 0;
+        if (f === 1) p = a; else if (f === 2) p = b; else if (f === 3) p = (a + b) >> 1;
+        else if (f === 4) { const q = a + b - c, pa = Math.abs(q - a), pb = Math.abs(q - b), pc = Math.abs(q - c); p = pa <= pb && pa <= pc ? a : pb <= pc ? b : c; }
+        img[dst + x] = (v + p) & 255;
+      }
+    }
+    let max = 0; for (let i = 0; i < img.length; i++) if ((ch === 3 || i % 4 !== 3) && img[i] > max) { max = img[i]; if (max > 8) break; }
+    return { max, hash: crypto.createHash('sha1').update(img).digest('hex') };
+  } catch { return null; }
+}
 function parseArgs(argv) {
   const pos = [], o = {};
   for (let i = 0; i < argv.length; i++) {
@@ -190,10 +232,17 @@ class Engine {
     const args = headless ? [] : ['--disable-features=CalculateNativeWinOcclusion', '--window-size=' + this.size.join(',')];
     this.browser = await launch({ headless, args });
     this.page = await this.browser.newPage({ width: this.size[0], height: this.size[1] });
+    // CB-345 (the 5080, 17 Nov): parked off screen, a WebGPU page draws nothing the camera can read (the canvas copies black
+    // and the page screenshot is a stale compositor frame). --onscreen keeps the window on screen (top left) for native shots.
     if (!headless && !o.show) {
       try {
         const { windowId } = await this.page.send('Browser.getWindowForTarget', {});
-        await this.page.conn.send('Browser.setWindowBounds', { windowId, bounds: { left: -4000, top: -4000 } });
+        if (o.onscreen) {   // CB-345 (c), AG-336: the sequence that lit on the 5080 (review/GP-20151/pouches-diag-v3.mjs): a normal window,
+          // its size, on screen, in front
+          await this.page.conn.send('Browser.setWindowBounds', { windowId, bounds: { windowState: 'normal' } });
+          await this.page.conn.send('Browser.setWindowBounds', { windowId, bounds: { left: 0, top: 0, width: this.size[0] + 20, height: this.size[1] + 80 } });
+          await this.page.send('Page.bringToFront');
+        } else await this.page.conn.send('Browser.setWindowBounds', { windowId, bounds: { left: -4000, top: -4000 } });
       } catch { /* a window manager that won't: it stays where it is */ }
     }
     this.headless = headless;
@@ -269,6 +318,7 @@ class Engine {
   async wake() {
     if (!this.frozen) return;
     try { await this.page.send('Page.setWebLifecycleState', { state: 'active' }, 5000); } catch { /* it was never frozen */ }
+    if (this.opt.onscreen) try { await this.page.send('Page.bringToFront', {}, 5000); } catch { /* best effort */ }   // CB-345 (c)
     this.frozen = false;
     await sleep(120);
   }
@@ -291,6 +341,16 @@ class Engine {
         await fs.promises.mkdir(dir, { recursive: true });
         const sheet = path.join(dir, 'sheet.jpg'), json = path.join(dir, 'check.json');
         await fs.promises.writeFile(sheet, Buffer.from(r.data.split(',')[1], 'base64'));
+        // CB-360 (ChatGPT, GP156: a blank tile on a check sheet passed): every subject's tile is read back off the sheet itself, and
+        // one with no picture on it fails the check as a black shot does (CB-345): black (every pixel RGB <= 8, CB-345's bar), or
+        // one flat colour (spread under 1.5 levels: the sheet's own dark ground where no picture was drawn, a black canvas copy
+        // with the JPEG's noise). A dark night picture still has its spread. Its label strip is left out.
+        const tiles = await this.page.evaluate(`${SHEET_TILES_JS}(${JSON.stringify(r.data)}, ${r.results.length}, ${JSON.stringify(req.cols ?? 8)}, ${JSON.stringify(req.tile ?? 260)})`, 120000);
+        r.results.forEach((x, i) => {
+          const t = tiles[i]; x.tile = t;
+          const blank = !t ? 'its tile could not be read' : t.max <= 8 ? 'its tile is black (every pixel RGB <= 8)' : t.spread < 1.5 ? 'its tile is one flat colour (spread ' + t.spread + ')' : null;
+          if (blank && x.ok) { x.ok = false; x.error = blank + ': nothing drawn (CB-360)'; }
+        });
         await fs.promises.writeFile(json, JSON.stringify({ at: new Date().toISOString(), renderer: this.renderer, results: r.results }, null, 1));
         const bad = r.results.filter((x) => !x.ok);
         return { ok: !bad.length, check: { subjects: r.results.length, broken: bad.map((x) => x.id + ': ' + x.error) }, sheet: path.relative(ROOT, sheet).split(path.sep).join('/'), file: path.relative(ROOT, json).split(path.sep).join('/'), ms: Date.now() - t0 };
@@ -391,9 +451,19 @@ class Engine {
     // compositor waiting 30 to 40 s for a frame)
     const still = this.mode === 'inspect';
     if (still) await this.page.evaluate('DWInspect.still(true)');
-    let thumb = null, inspect = null;
+    let thumb = null, inspect = null, stale;
     try {
-      await this.page.screenshot(abs);
+      // CB-345 (Director 13:22Z): a black picture, or one identical to the last although the camera moved (a stale compositor
+      // frame), is refused loudly and not saved (on a real GPU an off-screen window gives both: --onscreen).
+      const png = Buffer.from((await this.page.send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: false })).data, 'base64');
+      const px = pngStats(png);
+      if (px && px.max <= 8) throw new Error('the picture is black (every pixel RGB <= 8)' + (this.headless ? '' : ': on a real GPU the camera window may be off screen; start the camera with --onscreen') + ' (CB-345); nothing saved');
+      const camKey = JSON.stringify(r.cam || null);
+      stale = !!(px && this._lastPx && px.hash === this._lastPx.hash && camKey !== this._lastPx.cam);
+      if (stale) throw new Error('the picture is identical to the last one although the camera moved: a stale frame' + (this.headless ? '' : ' (on a real GPU the camera window may be off screen; start the camera with --onscreen)') + ' (CB-345); nothing saved');
+      if (px) this._lastPx = { hash: px.hash, cam: camKey };
+      await fs.promises.mkdir(path.dirname(abs), { recursive: true });
+      await fs.promises.writeFile(abs, png);
       if (req.thumb) {   // PNG, thumbnail and recipe describe the same held frame.
         const res = await this.page.send('Page.captureScreenshot', { format: 'jpeg', quality: 82, captureBeyondViewport: false, clip: { x: 0, y: 0, width: size[0], height: size[1], scale: 480 / size[0] } });
         thumb = res.data;
@@ -684,7 +754,7 @@ else if (cmd === 'start') {
     cwd: ROOT,
     detached: true,
     stdio: ['ignore', fd, fd],
-    windowsHide: true,
+    windowsHide: !process.argv.includes('--onscreen'),   // CB-345 (c): a hidden daemon can start its Chrome hidden (AG-336: 12/12 black on screen)
     env: {
       ...process.env,
       DW_CAMERA_ADOPT_CONTROLLER: directQueueCommand ? '1' : '0',

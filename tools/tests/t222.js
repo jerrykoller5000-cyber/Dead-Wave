@@ -119,7 +119,30 @@
       for (const dy of [0, 0.06, -0.06, 0.12, -0.12, 0.18]) for (const dx of [0, 0.08, -0.08, 0.16, -0.16, 0.24, -0.24]) { const p = c.clone().addScaledVector(right, dx); p.y += dy; if (seen(p)) return p; }
       return null;
     };
-    const still = (type, x, zz) => { const z = T.spawnZombie(x, zz, type, true, true); if (z) { z.riseT = 0; z.hp = z.maxHp = 1e6; z.speed = z.baseSpeed = 0; } return z; };
+    // CB-346 (Director's order, 17 Nov): the same body every run. Each kind's cases re-use ONE pooled body, and its build
+    // variation (height, width, head tilt, lean, shoulders, limp, gait, phase: makeZombieMesh) was rolled by the page's dice at
+    // load, so two runs (or before/after a change) aimed at different zombies and a 1-case red could not be judged. A page seed
+    // does not fix it (flightrng=777 gave a different body on every load: the warm-up's dice depend on how many frames the load
+    // took). So the aimed body is given the standard variation (none) before its case: the build offsets it carries on its
+    // joints and rest pose are taken off, and it is spawned again (the pool hands the same body back) so its scale and hit
+    // height are made from it. The bars are unchanged.
+    const STANDARD = { height: 1, width: 1, tilt: 0, lean: 0, shoulder: 0, limp: 0, gait: 1, phase: 0 };
+    const standardBody = (m) => {
+      const u = m.userData, o = u.variant; if (!o || u._t222Standard) return;
+      const dT = -(o.tilt || 0), dL = -(o.lean || 0), dS = -(o.shoulder || 0);
+      if (u.head) u.head.rotation.z += dT; if (u.torso) u.torso.rotation.x += dL;
+      if (u.armLG) u.armLG.rotation.z += dS; if (u.armRG) u.armRG.rotation.z += dS * 0.6;
+      if (u.rest) { u.rest.headRZ += dT; u.rest.torsoRX += dL; u.rest.armLRZ += dS; u.rest.armRRZ += dS * 0.6; }
+      const keepW = o.width; u.variant = { ...o, ...STANDARD };
+      if (keepW === 1.15) u.variant.width = 1.15;   // the bomber's build width is its kind's, not a roll
+      u._t222Standard = true;
+    };
+    const still = (type, x, zz) => {
+      let z = T.spawnZombie(x, zz, type, true, true);
+      if (z && z.mesh && !z.mesh.userData._t222Standard) { const m = z.mesh; T.clearZombies(); standardBody(m); z = T.spawnZombie(x, zz, type, true, true); if (z && z.mesh !== m) info('t222: ' + type + ': the pool handed back another body (its own variation kept)'); }
+      if (z) { z.riseT = 0; z.hp = z.maxHp = 1e6; z.speed = z.baseSpeed = 0; }
+      return z;
+    };
     const fmt = (o) => Object.entries(o).map(([r, n]) => r + ' ' + n).join(', ') || '-';
     // --- Still zombies: head, chest, legs, from three sides at two distances.
     const TYPES = ['shambler', 'feral', 'brute', 'spider', 'leaper', 'colossus'];
@@ -161,6 +184,57 @@
     ok(n(tally.legs, 'legs') >= tot(tally.legs) * (real ? 0.6 : 0.65), 'pointing at the legs lands low: ' + n(tally.legs, 'legs') + '/' + tot(tally.legs) + ' (bar ' + (real ? '60' : '65') + ' %)');
     const stray = ['head', 'chest', 'legs'].reduce((s, k) => s + n(tally[k], 'ground') + n(tally[k], 'miss'), 0);
     ok(stray <= (real ? 4 : 8), 'no round aimed at a body goes into the ground or past it (' + stray + '; bar ' + (real ? 4 : 8) + ')');
+    // CB-340 (AG-317 sheet D, the high third-person camera): the cursor between a shambler's knees at 8 m, its front and its
+    // back to him (x 0 +-4 cm of its axis, 0.32 and 0.6 m up). The camera's ray goes through the gap; the assist put its
+    // point on the axis, and the round from the muzzle went between the legs into the dirt behind: 7 in 10 from behind.
+    // Every round must land on it. And the crown: the cursor 4-40 mm under the top of its head lands on it (9 in 10 on the
+    // 5080 before the fix; the 4 mm one may pass over the top: a real miss, not changed here).
+    {
+      const ensureGun = async (gun) => { if (T.getCurrentWeapon() !== gun) { if (!T.getWeaponOwned()[gun]) T.grantAllWeapons(); T.setWeapon(T.WEAPON_ORDER.indexOf(gun)); await wait(500); } };
+      await ensureGun('pistol');
+      const knees = { front: {}, back: {} }, crown = {}; let yOwn = null;
+      for (const side of ['front', 'back']) {
+        T.clearZombies();
+        const z = still('shambler', P.x, P.z + 8);
+        if (!z) { info('between the knees (' + side + '): no shambler'); continue; }
+        await wait(SETTLE);
+        const zp = z.mesh.position, cp = cam.position;
+        // Its back to him: it would turn to face him each frame, so its yaw is held away from him for this case (the
+        // check's own hold; the game's writes to it are ignored until the body is cleared).
+        if (side === 'back') { const yb = Math.atan2(zp.x - P.x, zp.z - P.z); z.mesh.rotation.y = yb; yOwn = Object.getOwnPropertyDescriptor(z.mesh.rotation, 'y'); Object.defineProperty(z.mesh.rotation, 'y', { configurable: true, get: () => yb, set: () => {} }); await wait(SETTLE); z.mesh.updateMatrixWorld(true); }
+        const fw = new THREE.Vector3(zp.x - cp.x, 0, zp.z - cp.z).normalize(), right = new THREE.Vector3(-fw.z, 0, fw.x);
+        for (const y of [0.32, 0.6]) for (const off of [-0.04, -0.02, 0, 0.02, 0.04]) {
+          await pointAt(new THREE.Vector3(zp.x, zp.y + y, zp.z).addScaledVector(right, off));
+          const r = trace(z).res, k = r === 'ground' || r === 'miss' || r === 'none' ? r : 'hit';
+          knees[side][k] = (knees[side][k] || 0) + 1;
+        }
+        info('between the knees, its ' + side + ' to him (its yaw ' + z.mesh.rotation.y.toFixed(2) + ', toward him ' + Math.atan2(P.x - zp.x, P.z - zp.z).toFixed(2) + '): ' + fmt(knees[side]));
+        if (side === 'back') { if (yOwn) Object.defineProperty(z.mesh.rotation, 'y', { ...yOwn, ...('value' in yOwn ? { value: z.mesh.rotation.y } : {}) }); else delete z.mesh.rotation.y; }
+      }
+      for (const side of ['front', 'back']) ok(n(knees[side], 'hit') === 10, 'the cursor between a shambler\'s knees (its ' + side + ' to him, 8 m) lands every round on it: ' + fmt(knees[side]) + ' (bar 10/10)');
+      T.clearZombies();
+      const zc = still('shambler', P.x, P.z + 8);
+      if (zc) {
+        await wait(SETTLE);
+        const c = headCentre(zc);
+        let top = -Infinity;
+        zc.mesh.updateMatrixWorld(true);
+        // CB-346 (the crown never ran on the 5080, 'no head box'): the top is read from the same head meshes headCentre uses
+        // (CL-222): on a skinned zombie the head's meshes are hidden sources (userData.skinSrc) the skinned body draws, so
+        // 'visible' alone found none there. The case and its bar are unchanged.
+        zc.mesh.userData.head && zc.mesh.userData.head.traverse((m) => { if (!m.isMesh || m.isSkinnedMesh || m.isInstancedMesh || m.userData.stump || !(m.userData.skinSrc || m.visible !== false)) return; for (let q = m.parent; q && q !== zc.mesh.userData.head; q = q.parent) if (q.visible === false || q.userData._skinCollapsed) return; const pa = m.geometry && m.geometry.attributes && m.geometry.attributes.position; if (!pa) return; const e = m.matrixWorld.elements; for (let i = 0; i < pa.count; i++) { const x = pa.array[i * 3], y = pa.array[i * 3 + 1], w = pa.array[i * 3 + 2]; top = Math.max(top, e[1] * x + e[5] * y + e[9] * w + e[13]); } });
+        if (c && Number.isFinite(top)) {
+          for (let i = 1; i <= 10; i++) {
+            await pointAt(new THREE.Vector3(c.x, top - 0.004 * i, c.z));
+            const r = trace(zc).res, k = r === 'ground' || r === 'miss' || r === 'none' ? r : 'hit';
+            crown[k] = (crown[k] || 0) + 1;
+          }
+          info('the crown (4-40 mm under its top at ' + (top - zc.mesh.position.y).toFixed(2) + ' m): ' + fmt(crown));
+          ok(n(crown, 'hit') >= 9, 'the cursor on a shambler\'s crown (4-40 mm under the top, 8 m) lands on it: ' + fmt(crown) + ' (bar 9/10; the 4 mm one may pass over)');
+        } else info('the crown: no head box (no case)');
+      }
+      T.clearZombies();
+    }
     // --- The reticle while it is on them: the ring on a head, not on a chest.
     T.clearZombies();
     const zr = still('shambler', P.x, P.z + 9); await wait(SETTLE + 50);

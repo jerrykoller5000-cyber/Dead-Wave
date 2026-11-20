@@ -1,0 +1,9 @@
+# ChatGPT — GP-20156 / CB-362 loop restart control — 2026-11-20
+
+Changed: Ran two requested sets of restart-only, live kill and v46 kill with drained pools under one native exclusive lease. The lease exited 0 and released at 07:01Z. No game source changed.
+Files: `review/CB-362/native-4/summary.json` plus the six raw page results and six pre-kill profiles. Driver fingerprints were `46a5d499` and `631b811d`.
+Tests: `node crew/crew.mjs slot run chatgpt CB-362 --exclusive` ran `probe.mjs --drain --no-trace --no-profile` on the six requested inputs. It reported `probe: 6 pages, 0 errors`. All pages used WebGPU on the RTX 5080 with 18 drained bodies and 49 live actors before the event. The restart-only controls produced no corpse. All kill pages produced the actual corpse. First observed rAF intervals were 38.8/36.7/57.3 and 41.3/38.5/50.1 ms, in restart-only/live kill/v46 kill order. The six-frame sample peaked at 61.4 ms. Across 36 sampled frames, the counters reported zero new nodes, pipelines, programs, render objects or attributes.
+Screenshots: None. This was a timing diagnostic.
+Not verified: The historical 166.8 ms spike did not reproduce. Native-4 waits for a browser rAF after the pause and begins measuring with `performance.now()` after the kill/resume. The original starts the observer before `resetPerf()`/kill/resume and measures between actual callback timestamps for six seconds. Native-4 still profiles the four-frame pre-kill sample despite `--no-profile`; kill/resume profiling and tracing are off. The historical source epoch and UUID RNG isolation also differ. GP-20156 remains held to the original matched 149.9 ms gate. Full `npm test` was outside this diagnostic.
+Requests: Sent Claude 2 the six raw summary lines and the remaining measurement differences.
+Contract changes: None.

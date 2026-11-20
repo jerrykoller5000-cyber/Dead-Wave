@@ -1,22 +1,22 @@
 # Claude 2
 
 state: active
-model: Claude Opus 5.5 (claude-opus-5-5)
-task: CB-335 D-182 last pass: requests (index line endings, GP40 frozen native render), then t222 footprint aim, CB-326 shim, t228 reds, suite gate
-touching: index.html (line endings only: 17 bare LF to CRLF), core/aim-*, combat/*, tools/tests/fakethree*, tools/tests/t222*/t228*/t336*
-since: 2026-11-14T02:07Z
-next: CB-335 D-182 last pass, shell and combat (after CB-333): (J153 25 m
+model: Claude Opus 5.5 (configured claude-opus-5-5)
+task: CB-363 shambler jaw skin-mask packer seam (review only), then CE-18c TT-ready proof, in-page A/B, spider batch review copy, brute draws
+touching: review/CB-363/, review/CB-364/
+since: 2026-11-20T19:09Z
+next: CC-359 step 4 LOD1 (after Claude 3 lands v7); Director's cost picks (spider hitH, in-page A/B, brute draws per brute)
 blocked-on: —
-last-report: handoffs/2026-11-14-claude2-CB-333.md
+last-report: handoffs/2026-11-20-claude2-GP-20156-landed.md
 
 ## Notes
 
-### Where things stand (claude2 #6, from 02:07Z 14 Nov, Opus 5.5): CB-335
-- Part 1 LANDED + sent for review ~03:50Z (handoffs/2026-11-14-claude2-CB-335-part1.md): footprintLegPick (t222 follow-up), renderFrame unbinds a leaked render target (GP40 frozen frames), index 17 bare LF -> CRLF, fakethree Box3/InstancedMesh.copy (t336 29/0). Sheet review/CB-335/cb335-footaim-sheet.png.
-- Asked the Director: t222 head-ring check to point until the 3P view settles (test change, --review), and CB-326 (B) after the gate (my pick).
-- Suite gate: cloud /home/claude/gate = PC snapshot 03:41Z (index 04c16975), --integration --jobs 1 (the slot rule refuses 2), DW_CHECK_MS=600000, log /home/claude/gate.log (~420 checks, ~10 h). Include tce4 result for ChatGPT (GP-20140). Post reds by owner to the Director as they come.
-- Cloud trees: /home/claude/cb (CB-335 work), /home/claude/before (no footprint, old shim). Cloud has no Windows GPU: native looks go to the crew that runs on Windows.
-- Leftover (Director: leave unless Jerry flags): within ~1.3 m of a station the boom snaps in when it meets it.
+### Where things stand (claude2, 20 Nov ~07:15Z, Opus 5.5)
+- CB-349 v9 LANDED 05:29Z: index.html b9506b47 -> ff5ca139 (v9 + Claude 5's comment). Backup _DELETE ME/index.html.b9506b47.before-CB-349v9. Native AG-395: tg164 5/0 (0.615), t164 14/0, t340 19/0; t330 16/2 = the old 15 cm get-up lines (told Director, not restored). Ready to commit.
+- CB-362 DONE (review): probe review/CB-362/probe.mjs. 14 native kill pages (ChatGPT, native-1..4): no compile, no 150 ms hitch (v46 max 73.5 ms). Pick sent to Director: time GP-20156's gate with the loop running, bar kept. Audio fix review/CB-362/audio.cb362.js (death-cry reverb loan, kill 13 -> 2 ms cloud): waits Director OK, then land core/audio.js (backup, md5, node audio tests).
+- CB-361 BLOCKED: seam review copies in review/CB-361/ (cloud matcheck 0 differences). Waits ChatGPT 2's native bench + 2-line loan + Director OK on matStamp. Seam saves ~2-3 ms only.
+- Later: Claude 3 CC-359 step 4 shambler LOD1 wiring (after the Director's look). CB-343 on the queue.
+- Cloud: tree at /home/claude/tt (fresh each session). Cloud runs: page load ~1 min, the opening waits 4 min, startMatch ~4 min: a probe page is ~10 min.
 
 ### Who you are (D-137, Jerry 10 Nov 2026)
 You are **Claude 2**, the crew's second Claude: a Claude task of your own, on Claude Sonnet 5.5 (Extra). You took

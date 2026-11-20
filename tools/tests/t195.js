@@ -27,7 +27,7 @@
     await startMatch(T, 'Hands');
     T.clearZombies && T.clearZombies(); T.setHp(100000); T.grantAllWeapons();
     const pin = () => { const p = T.player.position; T.aimTarget.set(p.x, T.sampleHeight(p.x, p.z) + 1.25, p.z + 10); };
-    aimer = setInterval(pin, 5); pin();
+    aimer = T.pinAimDbg ? (T.pinAimDbg(() => { pin(); if (T.setAimYawDbg) T.setAimYawDbg(0); }), null) : setInterval(pin, 5); pin();   /* CB-335: aim pinned in the frame (TT.pinAimDbg), his facing held at the no-cursor 0 deg, so a real cursor over the window cannot turn him */
     window.dispatchEvent(new KeyboardEvent('keydown', { code: 'F13', key: 'F13', bubbles: true }));
     const D = T.handsDbg, H = D && D.HANDS, ud = (T.marine || window.worldMarine).userData;
     ok(!!(D && H && H.rollMax > 0.5 && H.rollMax < 1.2 && H.reachL > 0.5 && H.reachL < 0.6), 'TT.handsDbg is exported (roll cap ' + (H && H.rollMax) + ' rad, support reach ' + (H && H.reachL.toFixed(3)) + ' m)');
@@ -108,6 +108,6 @@
     } else ok(false, 'the knife arm ran');
     D.knifeHold(null);
   } catch (e) { out.push('FAIL threw: ' + (e && e.stack || e)); }
-  finally { if (aimer) clearInterval(aimer); }
+  finally { if (T.pinAimDbg) T.pinAimDbg(null); if (aimer) clearInterval(aimer); }
   return out.join('\n');
 })()

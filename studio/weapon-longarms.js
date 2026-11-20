@@ -1061,7 +1061,15 @@ export function makeAkModel(ctx) {
   // Keep the original birch visible from the eye. Fill just the gap between it and the body.
   const joint = slab([[-.232,.029],[-.225,.029],[-.225,-.018],[-.232,-.028]],2 * HW,.001,2);
   fitCollarFaces(THREE, stockCollar, HW, joint);
-  for (const sx of [-1, 1]) for (const ry of [0.014, -0.014]) D.rivet(stock, sx * (HW + 0.0005), ry, -0.236, { axis: 'x', side: sx, r: 0.0032 });
+  for (const sx of [-1, 1]) for (const ry of [0.014, -0.014]) {
+    const rivet = D.rivet(stock, sx * (HW + 0.0005), ry, -0.236, { axis: 'x', side: sx, r: 0.0032 });
+    // GT-20107: this fitted collar skin is 0.5 mm thick. Keep the entire
+    // exposed head fixed; only its hidden bed stops at the actual inner face.
+    const p = rivet.geometry.attributes.position;
+    for (let i = 0; i < p.count; i++) if (p.getY(i) < -.0005) p.setY(i, -.0005);
+    p.needsUpdate = true; rivet.geometry.computeBoundingSphere();
+    rivet.userData.detailSeat.depth = .0005;
+  }
   K.slab([[-0.592, 0.0], [-0.573, -0.004], [-0.579, -0.152], [-0.597, -0.156]], 0.056, gunDark, { bevel: 0.003, parent: stock });   // the buttplate
   for (const y of [-0.03, -0.125]) {
     const surfaceZ = -0.592 + (y - 0.003) * (0.005 / 0.156);
@@ -2203,7 +2211,18 @@ export function makeShotgunModel(ctx) {
   trimPanelBack(THREE, lowerPlate, -1, .030, 'y');
   K.slab(gunBand([[0.072, -0.052], [0.076, -0.08], [0.064, -0.098], [0.012, -0.1], [-0.012, -0.09], [-0.02, -0.052]], 0.009), 0.034, gunDark, { bevel: 0.004, segs: 2 });
   // GB-175/180: the trigger's face toward the grip, the tip curling forward, a solid blade.
-  addTriggerArtwork(gun, K, [[0.0384, -0.0471], [0.0303, -0.0589], [0.0319, -0.0699], [0.0405, -0.0795], [0.0355, -0.0845], [0.0241, -0.0741], [0.0197, -0.0571], [0.0276, -0.0409]], 0.012, gunAccent, { bevel: 0.002 }).name = 'shotgun trigger';
+  // GT-20110: remove the rear bulge and trim the free tip; retain the upper pin and guard.
+  {
+    const blade = addTriggerArtwork(gun, K, [[0.0384,-0.0471],[0.0303,-0.0589],[0.0319,-0.0699],[0.0405,-0.0795],[0.0385,-0.0815],[0.03451923076923077,-0.0815],[0.032100000000000004,-0.0741],[0.0277,-0.0571],[0.0276,-0.0409]], 0.012, gunAccent, { bevel: 0.0005 });
+    blade.name = 'shotgun trigger';
+    const P = blade.geometry.attributes.position;
+    for (let i = 0; i < P.count; i++) {
+      const taper = Math.max(0, Math.min(1, (-P.getY(i) - 0.052) / 0.010));
+      P.setX(i, P.getX(i) * (1 - taper * 0.3125));
+    }
+    P.needsUpdate = true; blade.geometry.computeVertexNormals();
+    blade.geometry.computeBoundingBox(); blade.geometry.computeBoundingSphere();
+  }
   // Stock with a recoil pad; the pistol grip; the sling slot. GB-259: the stock group is gun.userData.fpStock ('fp-stock').
   const stock = K.group(0, 0, 0); stock.name = 'fp-stock';
   // CL-319 (Jerry's reference: a one-piece synthetic pistol-grip stock): its outline measured off the picture at the
@@ -2370,11 +2389,14 @@ export function makeShotgunModel(ctx) {
 
 // Closed square cladding around an existing faceted round skin. Both contours
 // are sampled on the same rays, so the inside follows the neighbour's actual faces.
-function squareCladding(T, radius, depth, bevel, facets) {
+// CC-348 note 42: gaps = [{ z: [z0, z1], a: [a0, a1] }] (local z, radians from +x toward +y) leave the sleeve open there, its
+// cut walls closed between the inside and the outside; with no gaps the sleeve is what it always was.
+function squareCladding(T, radius, depth, bevel, facets, gaps = []) {
   const sides = facets * 4, positions = [], uvs = [], indices = [];
   const steps = [[0,bevel],[.14,.48*bevel],[.46,.16*bevel],[1,0]];
   const rear = steps.map(([t,inset])=>[-depth/2+t*bevel,inset]);
-  const rows = [...rear,...rear.map(([z,inset])=>[-z,inset]).reverse()];
+  const cuts = [...new Set(gaps.flatMap((g)=>g.z))].filter((z)=>z>-depth/2+bevel+1e-6&&z<depth/2-bevel-1e-6).sort((a,b)=>a-b).map((z)=>[z,0]);
+  const rows = [...rear,...cuts,...rear.map(([z,inset])=>[-z,inset]).reverse()];
   const inner = [], directions = [];
   for (let i=0;i<sides;i++) {
     const angle=i*2*Math.PI/sides, facetAngle=2*Math.PI/facets;
@@ -2382,6 +2404,9 @@ function squareCladding(T, radius, depth, bevel, facets) {
     const offset=angle-(Math.floor(i/4)+.5)*facetAngle;
     inner.push(radius*Math.cos(facetAngle/2)/Math.cos(offset));
   }
+  // a cell is the strip between directions i and i+1 over one row step; open if its middle is in a gap
+  const open = (i, zm) => { let a = (i + .5) * 2 * Math.PI / sides; if (a > Math.PI) a -= 2 * Math.PI;
+    return gaps.some((g) => zm >= g.z[0] - 1e-6 && zm <= g.z[1] + 1e-6 && a >= g.a[0] && a <= g.a[1]); };
   function ring(radii,z) {
     return radii.map((r,i)=>{
       const [cx,cy]=directions[i], index=positions.length/3;
@@ -2389,8 +2414,9 @@ function squareCladding(T, radius, depth, bevel, facets) {
       return index;
     });
   }
-  function join(a,b) {
+  function join(a,b,zm) {
     for(let i=0;i<sides;i++){
+      if (open(i, zm)) continue;
       const j=(i+1)%sides;
       indices.push(a[i],a[j],b[j],a[i],b[j],b[i]);
     }
@@ -2409,12 +2435,39 @@ function squareCladding(T, radius, depth, bevel, facets) {
     });
     return {z,radii,vertices:ring(radii,z)};
   });
-  for(let i=1;i<outside.length;i++)join(outside[i-1].vertices,outside[i].vertices);
+  for(let i=1;i<outside.length;i++)join(outside[i-1].vertices,outside[i].vertices,(outside[i-1].z+outside[i].z)/2);
   const first=outside[0],last=outside[outside.length-1];
-  join(ring(inner,last.z),ring(inner,first.z));
+  if (!gaps.length) join(ring(inner,last.z),ring(inner,first.z),0);
+  else for (let k=outside.length-1;k>0;k--) { const z0=outside[k-1].z, z1=outside[k].z; join(ring(inner,z1),ring(inner,z0),(z0+z1)/2); }
   // End annuli have their own normals; the visible side highlights stop at the edge.
-  join(ring(inner,first.z),ring(first.radii,first.z));
-  join(ring(last.radii,last.z),ring(inner,last.z));
+  join(ring(inner,first.z),ring(first.radii,first.z),first.z);
+  join(ring(last.radii,last.z),ring(inner,last.z),last.z);
+  // the cut's walls, inside to outside, facing into the opening
+  const quad = (p, face) => {
+    const e1 = [p[1][0]-p[0][0],p[1][1]-p[0][1],p[1][2]-p[0][2]], e2 = [p[2][0]-p[0][0],p[2][1]-p[0][1],p[2][2]-p[0][2]];
+    const n = [e1[1]*e2[2]-e1[2]*e2[1],e1[2]*e2[0]-e1[0]*e2[2],e1[0]*e2[1]-e1[1]*e2[0]];
+    if (n[0]*face[0]+n[1]*face[1]+n[2]*face[2] < 0) p = [p[0],p[3],p[2],p[1]];
+    const b = positions.length/3; for (const q of p) { positions.push(...q); uvs.push(q[2]*4,q[1]*4); }
+    indices.push(b,b+1,b+2,b,b+2,b+3);
+  };
+  const P = (r,i,z) => [r*directions[i%sides][0],r*directions[i%sides][1],z];
+  for (let k=1;k<outside.length;k++) {
+    const A=outside[k-1], B=outside[k], zm=(A.z+B.z)/2;
+    for (let i=0;i<sides;i++) {
+      const h=(i+sides-1)%sides;
+      if (open(h,zm)===open(i,zm)) continue;
+      const [cx,cy]=directions[i], t=open(i,zm)?[-cy,cx,0]:[cy,-cx,0];
+      quad([P(inner[i],i,A.z),P(A.radii[i],i,A.z),P(B.radii[i],i,B.z),P(inner[i],i,B.z)],t);
+    }
+    if (k<outside.length-1) {
+      const C=outside[k+1], zn=(B.z+C.z)/2;
+      for (let i=0;i<sides;i++) {
+        if (open(i,zm)===open(i,zn)) continue;
+        const j=(i+1)%sides, f=open(i,zn)?[0,0,1]:[0,0,-1];
+        quad([P(inner[i],i,B.z),P(inner[j],j,B.z),P(B.radii[j],j,B.z),P(B.radii[i],i,B.z)],f);
+      }
+    }
+  }
   const geo=new T.BufferGeometry();
   geo.setAttribute('position',new T.Float32BufferAttribute(positions,3));
   geo.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));
@@ -2512,7 +2565,10 @@ export function makeSniperModel(ctx) {
     K.cyl(0.009, 0.009, 0.012, gunBody, sx * 0.012, 0.009, 0.682, null, 12, 'x');   // the leg's knuckle on the pin
   }
   // Trigger guard, trigger, grip, magazine.
-  K.slab(gunBand([[-0.03, -0.05], [-0.031, -0.075], [-0.042, -0.086], [-0.072, -0.083], [-0.082, -0.07]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
+  // CD-14 (J153 16, Claude 1 on the Director's loan): the guard's front 6 gun mm forward (z -0.030 -> -0.024) and its
+  // front-bottom corner squarer and 1 mm lower, so the gloved index clears it on the way to the blade's front (its middle
+  // phalanx went 4-5 mm into the old front wall and corner); the front wall now tucks into the magazine's rear (z -0.020)
+  K.slab(gunBand([[-0.024, -0.05], [-0.0245, -0.0815], [-0.0285, -0.088], [-0.038, -0.0875], [-0.072, -0.083], [-0.082, -0.07]], 0.007), 0.03, gunDark, { bevel: 0.004 });   // GB-180: a moulded guard, not a wire (pass 4: as wide as a real guard)
   // GB-174 (Jerry: the trigger was backwards): face toward the grip, tip curling forward.
   // GB-180: a solid trigger blade (wide at the root, tapering to the curled tip), not a wire.
   addTriggerArtwork(gun, K, [[-0.0441, -0.052], [-0.0487, -0.0625], [-0.048, -0.07], [-0.0435, -0.0755], [-0.0485, -0.0805], [-0.056, -0.074], [-0.0593, -0.0615], [-0.0559, -0.048]], 0.01, gunAccent, { bevel: 0.002 });
@@ -2568,7 +2624,7 @@ export function makeSniperModel(ctx) {
     trimPanelBack(THREE, sideRib, sx, .025);
   }
   for (const sx of [-1, 1]) K.box(0.002, 0.03, magDepth - .030, gunDark, sx * 0.0255, -0.02, centreZ, 0, 0, 0, mag, 0.001);
-  K.box(0.021, 0.017, 0.007, gunDark, 0, -0.064, -0.031, 0, 0, 0, null, 0.002);
+  K.box(0.021, 0.017, 0.007, gunDark, 0, -0.064, -0.025, 0, 0, 0, null, 0.002);   // CD-14 (J153 16): 6 mm forward with the guard's front, inside its wall (was z -0.031)
   const magazineCatch = K.box(0.024, 0.012, 0.01, gunDark, 0, -0.06, 0.078, 0, 0, 0, null, 0.002);   // forward-pressed magazine catch
   K.box(0.024, 0.006, 0.036, gunDark, 0, -0.055, -0.22, 0, 0, 0, null, 0.002);   // upper/lower receiver latch behind grip
   // CF-2 (J149, D-177): the ambidextrous safety is one part, both hubs and their selector tabs on the cross-shaft;
@@ -2630,7 +2686,43 @@ export function makeSniperModel(ctx) {
   // CL-319 (Jerry's bolt-action diagram): the opening sits over the magazine, where the bolt's face travels (z -0.035 to
   // 0.067; the chamber starts at its front), and the bolt (below) is a real bolt's length, from the rear bridge to the face.
   const rearRadius=.027, rearFacets=18;
-  K.lathe([[0, -0.272], [0.018, -0.272], [0.024, -0.25], [rearRadius, -0.24], [rearRadius, -0.035], [0, -0.035]], gunBody, { y: 0.045, seg: rearFacets });
+  // CC-348 note 42 (J151; option A, CLAUDE DIRECTOR 13 Nov): the rear bridge has a raceway cut in its +x side along the handle
+  // root's path: round the bore at the bridge's front while the handle turns up (40 degrees under the bore line to 40 over),
+  // then back along the line from 20 to 40 degrees to a closed end where the receiver starts to taper (the root's stop when
+  // the bolt is drawn). Through it the bolt's bright body shows (it runs back under the root now) and the walls keep their
+  // thickness at the cut's edges. Angles are on the receiver's own 20-degree facets.
+  const RACE = { arc: [-0.6981, 0.6981], line: [0.3491, 0.6981], z: [-0.152, -0.132], end: -0.24 };
+  const raceMat = gunBody.clone(); raceMat.side = THREE.DoubleSide;   // the walls show their inside through the cut
+  const arcLathe = (prof, a0, a1, segs) => {   // [r, z] pairs, z rising, turned from a0 to a1 about the bore
+    const pos = [], nrm = [];
+    for (let j = 0; j + 1 < prof.length; j++) {
+      const [r0, z0] = prof[j], [r1, z1] = prof[j + 1], l = Math.hypot(r1 - r0, z1 - z0), nr = (z1 - z0) / l, nz = -(r1 - r0) / l;
+      for (let s = 0; s < segs; s++) {
+        const f0 = a0 + (a1 - a0) * s / segs, f1 = a0 + (a1 - a0) * (s + 1) / segs, c0 = Math.cos(f0), s0 = Math.sin(f0), c1 = Math.cos(f1), s1 = Math.sin(f1);
+        const q = [[r0 * c0, r0 * s0, z0], [r1 * c0, r1 * s0, z1], [r1 * c1, r1 * s1, z1], [r0 * c1, r0 * s1, z0]], n = [[nr * c0, nr * s0, nz], [nr * c0, nr * s0, nz], [nr * c1, nr * s1, nz], [nr * c1, nr * s1, nz]];
+        for (const k of [0, 2, 1, 0, 3, 2]) { pos.push(...q[k]); nrm.push(...n[k]); }
+      }
+    }
+    const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setAttribute('normal', new THREE.Float32BufferAttribute(nrm, 3));
+    const m = new THREE.Mesh(g, raceMat); m.position.y = 0.045; m.castShadow = m.receiveShadow = true; gun.add(m); return m;
+  };
+  K.lathe([[0.0205, RACE.z[1]], [rearRadius, RACE.z[1]], [rearRadius, -0.035], [0, -0.035]], gunBody, { y: 0.045, seg: rearFacets });   // in front of it; the bolt passes through its back
+  arcLathe([[rearRadius, RACE.z[0]], [rearRadius, RACE.z[1]]], RACE.arc[1], 2 * Math.PI + RACE.arc[0], 14);   // the arc's 2 cm, open from -40 to 40 degrees
+  arcLathe([[rearRadius, RACE.end], [rearRadius, RACE.z[0]]], RACE.line[1], 2 * Math.PI + RACE.line[0], 17);   // behind it, open from 20 to 40
+  arcLathe([[0.018, -0.272], [0.024, -0.25], [rearRadius, RACE.end]], 0, 2 * Math.PI, rearFacets);   // the taper, whole
+  {
+    const sector = (w0, w1, z) => {   // a wall across the cut: a ring's sector, r 0.0225-0.027
+      const wall = [], wn = [];
+      for (let s = 0; s < 3; s++) { const f0 = w0 + (w1 - w0) * s / 3, f1 = w0 + (w1 - w0) * (s + 1) / 3, q = [[0.0225, f0], [rearRadius, f0], [rearRadius, f1], [0.0225, f1]].map(([r, f]) => [r * Math.cos(f), r * Math.sin(f), 0]);
+        for (const k of [0, 1, 2, 0, 2, 3]) { wall.push(...q[k]); wn.push(0, 0, 1); } }
+      const wg = new THREE.BufferGeometry(); wg.setAttribute('position', new THREE.Float32BufferAttribute(wall, 3)); wg.setAttribute('normal', new THREE.Float32BufferAttribute(wn, 3));
+      const m = new THREE.Mesh(wg, raceMat); m.position.set(0, 0.045, z); m.castShadow = m.receiveShadow = true; gun.add(m);
+    };
+    sector(RACE.arc[0], RACE.line[0], RACE.z[0]);   // the arc's back wall under the line
+    sector(RACE.line[0], RACE.line[1], RACE.end);   // the line's closed end
+    const d = 0.001 / 0.0248;   // the edge strips sit just outside the opening
+    for (const [a, z0, z1] of [[RACE.line[1] + d, RACE.end, RACE.z[1]], [RACE.line[0] - d, RACE.end, RACE.z[0]], [RACE.arc[0] - d, RACE.z[0], RACE.z[1]]]) K.box(0.0045, 0.002, z1 - z0, gunBody, 0.0248 * Math.cos(a), 0.045 + 0.0248 * Math.sin(a), (z0 + z1) / 2, 0, 0, a);   // the wall's thickness at the cut's edges
+  }
   K.lathe([[0, 0.067], [0.027, 0.067], [0.027, 0.14], [0.022, 0.152], [0, 0.152]], gunBody, { y: 0.045, seg: 18 });
   {
     const shellMat = gunBody.clone(); shellMat.side = THREE.DoubleSide;   // the wall shows its inside through the cut
@@ -2640,12 +2732,12 @@ export function makeSniperModel(ctx) {
   }
   const railBase = K.box(0.031, 0.014, 0.34, gunDark, 0, 0.074, -0.02, 0, 0, 0, null, 0.002);
   trimPanelBack(THREE, railBase, 1, .045 + rearRadius, 'y');
-  const cladding=new THREE.Mesh(squareCladding(THREE,rearRadius,.104,.005,rearFacets),gunBody);
+  // the cladding opens over the raceway (its z here is the cladding's own: the bridge's centre is z -0.184)
+  const cladding=new THREE.Mesh(squareCladding(THREE,rearRadius,.104,.005,rearFacets,[{ z: [RACE.z[0] + .184, RACE.z[1] + .184], a: RACE.arc }, { z: [-.06, RACE.z[0] + .184], a: RACE.line }]),gunBody);
   cladding.position.set(0,.045,-.184);
   cladding.castShadow=cladding.receiveShadow=true;
   gun.add(cladding);
-  K.box(0.004, 0.026, 0.1, gunRubber, 0.0265, 0.055, -0.18, 0, 0, 0, null, 0.001);   // the handle notch
-  for (const z of [-0.225, -0.144]) D.screw(gun, rearRadius, 0.035, z, { axis: 'x', side: 1, r: 0.0028, head: 0.0012, kind: 'hex' });   // the bridge's bedding screws
+  for (const z of [-0.225, -0.17]) D.screw(gun, rearRadius, 0.035, z, { axis: 'x', side: 1, r: 0.0028, head: 0.0012, kind: 'hex' });   // the bridge's bedding screws (CC-348: the front one behind the raceway's arc, was -0.144)
   K.lathe([[0, -0.3], [0.014, -0.3], [0.02, -0.29], [0.022, -0.27], [0, -0.27]], gunDark, { y: 0.045, seg: 14 });
   K.box(0.05, 0.03, 0.03, gunDark, 0, 0.012, 0.12, 0, 0, 0, null, 0.004);
   coatRail(.34, .085, -.02);
@@ -2706,20 +2798,24 @@ export function makeSniperModel(ctx) {
   // bolt's own axis; the bolt's body is in the group and slides back with the handle through the open receiver. Closed,
   // the knob is 4 cm out and 3 cm down from the axis (VM_SOCKETS.sniper.boltKnob [0.13, 0.035, -0.16], was y 0.067).
   const bolt = K.group(0, 0.045, -0.18);
-  K.slab([[-0.045, -0.009], [0.038, -0.009], [0.045, 0], [0.038, 0.009], [-0.045, 0.009]], 0.03, gunMid, { x: BS * 0.027, y: 0.01, bevel: 0.004, segs: 2, parent: bolt });   // the root, out of the bridge's notch
-  // the handle swept down 12 degrees from its root, so turned up 60 degrees its knob stands out to the side and clears the
-  // scope's eyepiece (straight out, the knob rose into it on the pull)
-  const stem = K.group(BS * 0.04, 0.01, 0.02, bolt); stem.rotation.z = BS * -0.2187;
-  K.cyl(0.0065, 0.0065, 0.084, gunAccent, BS * 0.045, 0, 0, stem, 8, 'x');
-  K.sph(0.017, gunDark, BS * 0.0922, 0, 0, stem, 12);
-  K.cyl(0.008, 0.008, 0.018, gunBody, BS * 0.063, 0, 0, stem, 12, 'x');
-  K.tor(0.012, 0.0015, gunBody, BS * 0.099, 0, 0, 0, Math.PI / 2, 0, stem, Math.PI * 2, 12);
+  // CC-348 note 42: the root is a flat lug on the body's tail, 30 degrees under the bore line, and the stem runs straight from
+  // it, swept back 11 degrees, to the knob (the knob where it was, VM_SOCKETS.sniper.boltKnob). Turned up 60 degrees the root
+  // stands at 30 over the line, in the raceway, under the rail base's edge, and the stem clears the rail; drawn back the root
+  // runs along the raceway to its closed end (it was a 9 cm block through the bridge, its turn through the rail base and the rail).
+  K.box(0.0225, 0.006, 0.014, gunMid, BS * 0.02576, -0.01488, 0.038, 0, 0, BS * -0.5236, bolt, 0.0015);   // the root, r 0.0185-0.041, on the body's tail
+  const stem = K.group(BS * 0.03551, -0.0205, 0.038, bolt), knobAt = new THREE.Vector3(BS * 0.13, -0.01, 0.02).sub(stem.position), KL = knobAt.length();
+  stem.quaternion.setFromUnitVectors(new THREE.Vector3(BS, 0, 0), knobAt.normalize());
+  K.cyl(0.0065, 0.0065, 0.09, gunAccent, BS * 0.045, 0, 0, stem, 8, 'x');
+  K.sph(0.017, gunDark, BS * KL, 0, 0, stem, 12);
+  K.cyl(0.008, 0.008, 0.018, gunBody, BS * (KL - 0.0292), 0, 0, stem, 12, 'x');
+  K.tor(0.012, 0.0015, gunBody, BS * (KL + 0.0068), 0, 0, 0, Math.PI / 2, 0, stem, Math.PI * 2, 12);
   // These four rigid details share the parent animation and can enter its material batches.
   for (const detail of stem.children.slice()) bolt.attach(detail);
   bolt.remove(stem);
-  // the body: closed, its tail in the rear bridge and its face at the chamber (z 0.067); bright, with two flutes that turn
+  // the body: closed, its tail under the root's front (in the raceway) and its face at the chamber (z 0.067); drawn back its
+  // tail stops 2 mm short of the stock's block behind the receiver; bright, with two flutes that turn
   // up out of the opening as the handle lifts, the lug ring and the extractor band behind the face, the extractor's claw
-  K.cyl(0.0205, 0.0205, 0.207, gunMetal, 0, 0, 0.1435, bolt, 18, 'z');
+  K.cyl(0.0205, 0.0205, 0.214, gunMetal, 0, 0, 0.14, bolt, 18, 'z');
   for (const z of [0.225, 0.238]) K.cyl(0.0212, 0.0212, 0.004, gunMid, 0, 0, z, bolt, 18, 'z');
   for (const a of [0.05, 0.75]) K.box(0.0035, 0.003, 0.12, gunDark, Math.cos(a) * 0.0195, Math.sin(a) * 0.0195, 0.135, 0, 0, a, bolt, 0.0008);
   K.box(0.004, 0.006, 0.014, gunDark, BS * 0.0205, -0.004, 0.24, 0, 0, 0, bolt, 0.0008);

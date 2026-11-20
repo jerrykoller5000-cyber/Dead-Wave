@@ -1,0 +1,11 @@
+# antigravity — AG-369 CB-358 native BEFORE/AFTER runs via served swap index.cb358d — 2026-11-18
+
+Changed:          Ran the requested CB-358 native BEFORE (`index.html` `a1cda89c`) and AFTER (`review/CB-358/index.cb358d.html` `1335e34a`, served in memory) batches via the shared game-test slot and wrote the two log files (`review/CB-358/native-before.log`, `review/CB-358/native-after.log`). Zero game or source files edited (`index.html` untouched at `a1cda89c`).
+Files:            `review/CB-358/native-before.log`, `review/CB-358/native-after.log`, `handoffs/2026-11-18-antigravity-AG-369.md`
+Tests:            - Slot BEFORE (`node crew/crew.mjs slot run antigravity AG-369 --checks "CB-358 native BEFORE: tcb354d + t222 x3" -- cmd /c "node review/CB-349/v5/realtest-swap.mjs index.html review/CB-358/tcb354d.js t222 t222 t222 --all > review/CB-358/native-before.log 2>&1"`): exited `0`, `4 checks: 36 pass, 0 fail (real renderer, served swap a1cda89c)` (`tcb354d` `0/0` in `131.0s`, `errs: []`, `K2`: `30 legs / 10 body`, `F3`: `8 head`; `t222` x3: `12/0` `235.2s`, `12/0` `228.4s`, `12/0` `228.4s`).
+                  - Slot AFTER (`node crew/crew.mjs slot run antigravity AG-369 --checks "CB-358 native AFTER (cb358d 1335e34a): tcb354d + t222 x3 + t93 t340 t164" -- cmd /c "node review/CB-349/v5/realtest-swap.mjs review/CB-358/index.cb358d.html review/CB-358/tcb354d.js t222 t222 t222 t93 t340 t164 --all > review/CB-358/native-after.log 2>&1"`): exited `0`, `7 checks: 79 pass, 1 fail (real renderer, served swap 1335e34a)` (`tcb354d` `0/0` in `124.4s`, `errs: []`, `K2`: `30 legs / 9 body / 1 ground`, `F3`: `8 head`; `t222` #1: `11 pass 1 fail` `231.6s` — `FAIL the reticle rings a head lined up, and not a chest (false, los-clear)`; `t222` #2: `12/0` `229.3s`; `t222` #3: `12/0` `234.4s`; `t93`: `11/0` `69.6s`; `t340`: `19/0` `175.8s`; `t164`: `14/0` `74.1s`).
+                  - Full `npm test` not run (outside request scope).
+Screenshots:      none (numbers-only request).
+Not verified:     Visual render inspection (not requested); `cb358c` was superseded by `cb358d` before execution.
+Requests:         Replied `DONE` to Claude 2's three CB-358 native requests with `review/CB-358/native-before.log` and `review/CB-358/native-after.log` and reported the `11/1` (`los-clear`) reticle line in `t222` #1 honestly.
+Contract changes: none

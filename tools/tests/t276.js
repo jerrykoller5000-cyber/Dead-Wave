@@ -124,18 +124,28 @@
     const gp = groundAt(0.1, -0.3), sa = T.shotAimDbg();
     // CB-333 (J153 note 39, D-181): the chest-height lift is gone; the round goes to the crosshair's own point.
     ok(T.aimKindDbg() === 'ground' && Math.abs(sa.y - T.sampleHeight(sa.x, sa.z)) < 0.02, 'the cursor on open ground: the round goes to that point on the ground (CB-333; was ' + T.AIM_CHEST + ' m over it) (' + T.aimKindDbg() + ', ' + (sa.y - T.sampleHeight(sa.x, sa.z)).toFixed(2) + ' m up)');
-    // A still zombie 11 m up the screen, the cursor on the ground just in front of its feet.
+    // A still zombie 11 m up the screen, the cursor on the ground just in front of it, outside its footprint (CB-335: inside
+    // its radius + 0.3 m the cursor on the ground aims at its legs, the row after this one).
     const B1 = basis(), fw = new THREE.Vector3(B1.f.x, 0, B1.f.z).normalize();
     const still = (x, zz) => { const z = T.spawnZombie(x, zz, 'shambler', true, true); if (z) { z.riseT = 0; z.hp = z.maxHp = 1e6; z.speed = z.baseSpeed = 0; } return z; };
     const zf = still(P.x + fw.x * 11, P.z + fw.z * 11);
     await wait(1200);
     if (!zf || !zf.mesh) ok(false, 'a still zombie to aim at');
     else {
-      const zp = zf.mesh.position, front = new THREE.Vector3(zp.x - fw.x * 0.7, T.sampleHeight(zp.x - fw.x * 0.7, zp.z - fw.z * 0.7), zp.z - fw.z * 0.7);
+      const zp = zf.mesh.position, out1 = (zf.radius || 0.42) + 0.3 + 0.4, front = new THREE.Vector3(zp.x - fw.x * out1, T.sampleHeight(zp.x - fw.x * out1, zp.z - fw.z * out1), zp.z - fw.z * out1);
       await aimAgain(() => pointWorld(front));
       const kind = T.aimKindDbg(), now = trace(zf), raw = trace(zf, T.aimTarget.clone().set(front.x, front.y, front.z));
       ok(raw === 'ground', 'before CL-247 the round went at the ground point under the cursor, into the dirt short of it (' + raw + ')');
-      ok(now === raw, 'CB-333 (J153 note 39): the round goes where the crosshair is, the ground just in front of it (' + now + ', aim ' + kind + '; CL-247 had lifted it into the zombie)');
+      ok(now === raw, 'CB-333 (J153 note 39): the round goes where the crosshair is, the ground just in front of it, outside its footprint (' + out1.toFixed(2) + ' m; ' + now + ', aim ' + kind + '; CL-247 had lifted it into the zombie)');
+      // CB-335 (the t222 follow-up, for zombies next): the cursor on the ground inside its footprint (0.5 m in front of it) aims
+      // at its legs: the round from the muzzle meets it under 0.4 of its height (the game's hit test), on 2 of 3 looks.
+      const inside = new THREE.Vector3(zp.x - fw.x * 0.5, T.sampleHeight(zp.x - fw.x * 0.5, zp.z - fw.z * 0.5), zp.z - fw.z * 0.5);
+      await aimAgain(() => pointWorld(inside));
+      const legLook = () => { const M = T.getMuzzleWorld().clone(), d = T.getWeaponAimDbg().clone().sub(M).normalize(); let far = 60;
+        for (let s = 0.5; s < 60; s += 0.03) { const x = M.x + d.x * s, y = M.y + d.y * s, w = M.z + d.z * s; if (y < T.sampleHeight(x, w) - 0.02) { far = s; break; } }
+        const h = T.zombieRoundHit(zf, M, M.clone().addScaledVector(d, far)); return h ? (h.point.y - zp.y) / (zf.hitH || 1.45) : null; };
+      const looks = []; for (let i = 0; i < 3; i++) { pointWorld(inside); await wait(150); looks.push(legLook()); }
+      ok(looks.filter((f) => f != null && f < 0.4).length >= 2, 'CB-335: the cursor on the ground inside its footprint sends the round into its legs (' + looks.map((f) => f == null ? 'miss' : f.toFixed(2)).join(', ') + ' of its height; aim ' + T.aimKindDbg() + ')');
       // The assist: the cursor beside its middle (a point off to the screen's right of it, put on screen again each time
       // as the view slides), stepping out until the game's own pick misses the body.
       const H = zf.hitH || 1.45, mid = new THREE.Vector3(zp.x, zp.y + H * 0.56, zp.z);

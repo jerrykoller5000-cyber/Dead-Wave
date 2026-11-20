@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AG-356 Review Studio Renderer (WebGPU)</title>
+<script type="importmap">
+{
+  "imports": {
+    "three": "../../vendor/three/three.webgpu.js",
+    "three/webgpu": "../../vendor/three/three.webgpu.js",
+    "three/tsl": "../../vendor/three/three.tsl.js"
+  }
+}
+</script>
+<style>
+  html, body { margin: 0; padding: 0; background: #15181d; overflow: hidden; }
+  canvas { display: block; width: 1200px; height: 1200px; }
+</style>
+</head>
+<body>
+<canvas id="view" width="1200" height="1200"></canvas>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from '../../review/J168/lib/loaders/GLTFLoader.js';
+import { GLTFExporter } from '../../review/J168/lib/exporters/GLTFExporter.js';
+import { buildProposedSpitter } from './spitter-blockout.mjs';
+
+const SIZE = 1200;
+const canvas = document.getElementById('view');
+const renderer = new THREE.WebGPURenderer({ canvas, antialias: true, forceWebGL: false });
+renderer.setSize(SIZE, SIZE, false);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.NoToneMapping;
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+await renderer.init();
+
+const scene = new THREE.Scene();
+
+// Exact studio/inspector/stage.js backdrop dome + floor
+const R = 46;
+const domeGeo = new THREE.SphereGeometry(R, 48, 24);
+const domeCol = new Float32Array(domeGeo.attributes.position.count * 3);
+{
+  const P = domeGeo.attributes.position;
+  const top = new THREE.Color(0x5b6168), mid = new THREE.Color(0x878c91), low = new THREE.Color(0x7a7e82), c = new THREE.Color();
+  for (let i = 0; i < P.count; i++) {
+    const h = P.getY(i) / R;
+    if (h >= 0) c.copy(mid).lerp(top, Math.pow(h, 0.7));
+    else c.copy(mid).lerp(low, Math.min(1, -h * 6));
+    domeCol[i * 3] = c.r; domeCol[i * 3 + 1] = c.g; domeCol[i * 3 + 2] = c.b;
+  }
+  domeGeo.setAttribute('color', new THREE.BufferAttribute(domeCol, 3));
+}
+const domeMat = new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.BackSide, fog: false, depthWrite: false });
+const dome = new THREE.Mesh(domeGeo, domeMat);
+dome.renderOrder = -10;
+dome.frustumCulled = false;
+scene.add(dome);
+
+const floorGeo = new THREE.CircleGeometry(R, 72);
+floorGeo.rotateX(-Math.PI / 2);
+const floorMat = new THREE.MeshStandardMaterial({ color: 0x7a7e82, roughness: 0.96, metalness: 0 });
+const floor = new THREE.Mesh(floorGeo, floorMat);
+floor.receiveShadow = true;
+scene.add(floor);
+
+// Exact LIGHTS.noon from studio/inspector/stage.js
+const L_NOON = { dir: [0.12, 0.98, 0.16], sun: 3.1, sunColor: 0xfff4dc, sky: 1.25, skyColor: 0xd5e4ff, ground: 0x8d7b62, fill: 0.16 };
+const hemi = new THREE.HemisphereLight(L_NOON.skyColor, L_NOON.ground, L_NOON.sky);
+const amb = new THREE.AmbientLight(0xffffff, L_NOON.fill);
+const sun = new THREE.DirectionalLight(L_NOON.sunColor, L_NOON.sun);
+sun.castShadow = true;
+sun.shadow.mapSize.set(2048, 2048);
+sun.shadow.bias = -0.0005;
+sun.shadow.normalBias = 0.02;
+const dVec = new THREE.Vector3(...L_NOON.dir).normalize();
+sun.position.set(dVec.x * 85, dVec.y * 85, dVec.z * 85);
+sun.target.position.set(0, 0.9, 0);
+{
+  const sc = sun.shadow.camera;
+  sc.left = sc.bottom = -4;
+  sc.right = sc.top = 4;
+  sc.near = 0.1;
+  sc.far = 200;
+  sc.updateProjectionMatrix();
+}
+scene.add(hemi, amb, sun, sun.target);
+
+const cam = new THREE.PerspectiveCamera(34, 1, 0.01, 200);
+const loader = new GLTFLoader();
+let currentRoot = null;
+
+function setLightMode(silhouette) {
+  if (silhouette) {
+    domeMat.vertexColors = false;
+    domeMat.color.setHex(0xdfe3e8);
+    domeMat.needsUpdate = true;
+    floorMat.color.setHex(0xdfe3e8);
+    floor.receiveShadow = false;
+    hemi.intensity = 0;
+    amb.intensity = 0;
+    sun.intensity = 0;
+  } else {
+    domeMat.vertexColors = true;
+    domeMat.color.setHex(0xffffff);
+    domeMat.needsUpdate = true;
+    floorMat.color.setHex(0x7a7e82);
+    floor.receiveShadow = true;
+    hemi.intensity = L_NOON.sky;
+    amb.intensity = L_NOON.fill;
+    sun.intensity = L_NOON.sun;
+  }
+}
+
+function normalizeModel(obj, targetHeight = null, centerFeet = true) {
+  obj.updateMatrixWorld(true);
+  const box = new THREE.Box3().setFromObject(obj);
+  const h = box.max.y - box.min.y;
+  if (targetHeight && h > 0.05) {
+    const s = targetHeight / h;
+    obj.scale.multiplyScalar(s);
+    obj.updateMatrixWorld(true);
+  }
+  const box2 = new THREE.Box3().setFromObject(obj);
+  obj.position.y -= box2.min.y;
+  if (centerFeet) {
+    const cx = (box2.min.x + box2.max.x) * 0.5;
+    const cz = (box2.min.z + box2.max.z) * 0.5;
+    obj.position.x -= cx;
+    obj.position.z -= cz;
+  }
+  obj.updateMatrixWorld(true);
+  return new THREE.Box3().setFromObject(obj);
+}
+
+function collectWorldPts(root) {
+  const pts = [];
+  const v = new THREE.Vector3();
+  const box = new THREE.Box3();
+  root.updateMatrixWorld(true);
+  root.traverse((m) => {
+    if (!m.isMesh || !m.geometry?.attributes?.position || m.visible === false) return;
+    const pos = m.geometry.attributes.position;
+    for (let i = 0; i < pos.count; i++) {
+      v.fromBufferAttribute(pos, i).applyMatrix4(m.matrixWorld);
+      if (Number.isFinite(v.x) && Number.isFinite(v.y) && Number.isFinite(v.z)) {
+        box.expandByPoint(v);
+        pts.push(v.clone());
+      }
+    }
+  });
+  return { box, pts };
+}
+
+function framePoints(pts, box, yawDeg, targetFill = 0.85, maxWidthFill = 0.90, widthPx = SIZE, heightPx = SIZE) {
+  const min = box.min, max = box.max;
+  const h = Math.max(0.15, max.y - min.y);
+  const cx = (min.x + max.x) * 0.5, cz = (min.z + max.z) * 0.5;
+  const yCamOffset = min.y + h * 0.70;
+  let yLook = min.y + h * 0.50;
+  const yaw = yawDeg * Math.PI / 180;
+  const fov = 34;
+  const halfTan = Math.tan((fov * Math.PI / 180) * 0.5);
+  let dist = Math.max(h, max.x - min.x, max.z - min.z) / targetFill / (2 * halfTan);
+
+  const testCam = cam.clone();
+  testCam.aspect = widthPx / heightPx;
+  testCam.fov = fov;
+
+  const projectPts = (cObj) => {
+    cObj.updateMatrixWorld(true);
+    let pyMin = Infinity, pyMax = -Infinity, pxMin = Infinity, pxMax = -Infinity;
+    for (const p of pts) {
+      const q = p.clone().project(cObj);
+      const px = (q.x + 1) * widthPx * 0.5, py = (1 - q.y) * heightPx * 0.5;
+      if (px < pxMin) pxMin = px; if (px > pxMax) pxMax = px;
+      if (py < pyMin) pyMin = py; if (py > pyMax) pyMax = py;
+    }
+    return {
+      pyMin, pyMax, pxMin, pxMax,
+      hFill: (pyMax - pyMin) / heightPx,
+      wFill: (pxMax - pxMin) / widthPx,
+    };
+  };
+
+  let m = null;
+  for (let iter = 0; iter < 8; iter++) {
+    const camPos = {
+      x: cx + Math.sin(yaw) * dist,
+      y: yCamOffset + (yLook - (min.y + h * 0.50)),
+      z: cz + Math.cos(yaw) * dist,
+    };
+    testCam.position.set(camPos.x, camPos.y, camPos.z);
+    testCam.lookAt(cx, yLook, cz);
+    testCam.updateProjectionMatrix();
+    m = { camPos, ...projectPts(testCam) };
+    const scaleFactor = Math.max(m.hFill / targetFill, m.wFill / maxWidthFill);
+    if (Number.isFinite(scaleFactor) && scaleFactor > 0.15) dist *= scaleFactor;
+    const midNorm = ((m.pyMin + m.pyMax) * 0.5) / heightPx;
+    yLook += (0.50 - midNorm) * h * targetFill;
+    if (Math.abs(scaleFactor - 1) < 0.003 && Math.abs(midNorm - 0.50) < 0.004) break;
+  }
+
+  cam.aspect = widthPx / heightPx;
+  cam.fov = fov;
+  cam.position.set(m.camPos.x, m.camPos.y, m.camPos.z);
+  cam.lookAt(cx, yLook, cz);
+  cam.near = Math.max(0.01, dist * 0.05);
+  cam.far = dist * 10 + 50;
+  cam.updateProjectionMatrix();
+  cam.updateMatrixWorld(true);
+  return { hFill: m.hFill, wFill: m.wFill, boundsH: h, size: [max.x - min.x, h, max.z - min.z] };
+}
+
+async function loadSpec(spec) {
+  let obj;
+  if (spec.kind === 'proposed') {
+    obj = buildProposedSpitter(THREE);
+  } else {
+    const gltf = await loader.loadAsync(spec.url);
+    obj = gltf.scene;
+    obj.traverse((o) => {
+      if (o.isMesh) {
+        o.castShadow = true;
+        o.receiveShadow = true;
+      }
+    });
+  }
+  const box = normalizeModel(obj, spec.targetHeight || null, true);
+  if (spec.silhouette) {
+    const blackMat = new THREE.MeshBasicMaterial({ color: 0x101215 });
+    obj.traverse((o) => {
+      if (o.isMesh) {
+        o.material = blackMat;
+        o.castShadow = false;
+      }
+    });
+  }
+  return { obj, box };
+}
+
+async function renderFrame(w = SIZE, h = SIZE) {
+  canvas.width = w;
+  canvas.height = h;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  renderer.setSize(w, h, false);
+  await renderer.compileAsync(scene, cam);
+  for (let i = 0; i < 2; i++) {
+    await new Promise(requestAnimationFrame);
+    renderer.render(scene, cam);
+    const q = renderer.backend?.device?.queue;
+    if (q) await q.onSubmittedWorkDone();
+  }
+  await new Promise((r) => setTimeout(r, 40));
+}
+
+window.AG356 = {
+  backend: renderer.backend?.constructor?.name || 'unknown',
+  async exportProposedGlb() {
+    const prop = buildProposedSpitter(THREE);
+    normalizeModel(prop, null, true);
+    const box = new THREE.Box3().setFromObject(prop);
+    const exp = new GLTFExporter();
+    const glb = await exp.parseAsync(prop, { binary: true });
+    const b = new Uint8Array(glb);
+    let s = '';
+    for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode.apply(null, b.subarray(i, i + 0x8000));
+    return {
+      glbBase64: btoa(s),
+      size: box.getSize(new THREE.Vector3()).toArray().map((x) => +x.toFixed(4)),
+    };
+  },
+  async renderSingle(spec, yawDeg, opts = {}) {
+    if (currentRoot) scene.remove(currentRoot);
+    setLightMode(!!spec.silhouette);
+    const { obj } = await loadSpec(spec);
+    currentRoot = obj;
+    scene.add(currentRoot);
+    const { box, pts } = collectWorldPts(currentRoot);
+    // Optional shared height framing so OURS/TRIPO/PROPOSED use identical camera zoom
+    let usePts = pts, useBox = box;
+    if (opts.headOnly) {
+      const yCut = box.min.y + (box.max.y - box.min.y) * 0.76;
+      const hp = pts.filter((p) => p.y >= yCut);
+      if (hp.length > 20) {
+        usePts = hp;
+        useBox = new THREE.Box3().setFromPoints(hp);
+      }
+    }
+    const frame = framePoints(
+      usePts,
+      useBox,
+      yawDeg,
+      opts.headOnly ? 0.62 : (opts.targetFill || 0.85),
+      opts.headOnly ? 0.72 : 0.90,
+      opts.width || SIZE,
+      opts.height || SIZE
+    );
+    await renderFrame(opts.width || SIZE, opts.height || SIZE);
+    return frame;
+  },
+  async renderPair(leftSpec, rightSpec, yawDeg = 0, opts = {}) {
+    if (currentRoot) scene.remove(currentRoot);
+    const sil = !!opts.silhouette;
+    setLightMode(sil);
+    const wrap = new THREE.Group();
+    const L = await loadSpec({ ...leftSpec, silhouette: sil });
+    const R = await loadSpec({ ...rightSpec, silhouette: sil });
+    const sep = opts.separation ?? 0.68;
+    const mYaw = (opts.modelYawDeg || 0) * Math.PI / 180;
+    if (mYaw) {
+      L.obj.rotation.y += mYaw;
+      R.obj.rotation.y += mYaw;
+    }
+    L.obj.position.x -= sep;
+    R.obj.position.x += sep;
+    wrap.add(L.obj, R.obj);
+    currentRoot = wrap;
+    scene.add(currentRoot);
+    const { box, pts } = collectWorldPts(currentRoot);
+    const w = opts.width || 1600, h = opts.height || 1200;
+    const frame = framePoints(pts, box, yawDeg, 0.85, 0.90, w, h);
+    await renderFrame(w, h);
+    return {
+      ...frame,
+      leftSize: L.box.getSize(new THREE.Vector3()).toArray().map((x) => +x.toFixed(4)),
+      rightSize: R.box.getSize(new THREE.Vector3()).toArray().map((x) => +x.toFixed(4)),
+    };
+  },
+};
+window.AG356_READY = true;
+</script>
+</body>
+</html>

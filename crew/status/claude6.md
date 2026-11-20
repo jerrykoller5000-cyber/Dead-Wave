@@ -1,13 +1,13 @@
 # Claude 6
 
 state: idle
-model: Claude Opus 5.5 (claude-opus-5-5)
+model: Claude Opus 5.5 (configured claude-opus-5-5)
 task: —
 touching: —
-since: 2026-11-13T04:10Z
-next: CF-10 (00:50Z: MOVED to Claude 9 as CI-1 (weapon-heavy.js for J151
+since: 2026-11-20T19:13Z
+next: CF-18 J168 round 3 (look-only): spider polish22 vs Tripo, CC-358 s
 blocked-on: —
-last-report: handoffs/2026-11-13-claude6-CF-9.md
+last-report: handoffs/2026-11-20-claude6-CF-18-g.md
 
 ## Notes
 - Joined 12 Nov (D-177): the heavy guns detail pass (minigun, Watchman MG, launcher, Breacher, pump shotgun).
@@ -24,3 +24,15 @@ last-report: handoffs/2026-11-13-claude6-CF-9.md
 - 13 Nov (session #2): CF-8 landed 02:31Z (chainsaw heat = dark exhaust shield; Training reaps pulse beds via core/audio.js loan line; tcf8). CF-9 landed 04:05Z (KR-7 Draco fore end akForeEndGeometry, dovetail side rail + bracket clamp, can r .033/len .25 in index SUPPRESSOR ak, mag + synthetic paint roles, guard tang, setKr7Furniture; tcf9). Pictures review/CF-8, review/CF-9. CF-10 is Claude 9's (CI-1).
 - Cloud: run-all in the foreground with < /dev/null, under 10 min per call (nohup runs hung); inspector camera: start (title) then reload --inspect; jobs ignore zoom/pan (use CLI shot); title shelf shows hidden parts. index.html is CRLF (one LF line at 'mountArmory'): edit it in binary.
 - Open: tcl334d chainsaw 6.4 mm right glove (ChatGPT 2, answered LATER); tcl334c AK glove 5.1 mm until Claude 1 refits the fat fore end.
+- 17 Nov CF-12d (12:19-15:40Z): report handoffs/2026-11-17-claude6-CF-12-d.md. Open for next session: Claude 1 pistol trigger re-shoot (left side + under guard; row NOT approved), Claude 3 CC-357b wrist cord (only blocker), Claude 2 guardian CB-349 picture, Claude 5 J162 ankles. Poll multi-recipient headers: grep -cE "→ ([^·]*, )?Claude 6( ·|,)".
+- 17 Nov CF-12e (19:18-22:12Z) report handoffs/2026-11-17-claude6-CF-12-e.md; qdot loan landed (fakethree b293b615, D-199). Open: J164 c dark thigh box (blocker until named), colossus A (fingers round the stone), GP-152 leaper paws, feral stance seam proof.
+- 17 Nov CF-14 J168 DONE (handoffs/2026-11-17-claude6-CF-14.md): review/J168 exporter/viewer; 14 GLBs in Claude outputs/J168/export. Cloud: CHROME=/home/claude/chrome-nosb.sh; inspector re-boot in-page after 'Training Ground still loading'.
+- 17 Nov CF-15 DONE (handoffs/2026-11-17-claude6-CF-15.md): Claude outputs/J168/proportions (overlays + tables ours vs Tripo, 7 types); tools review/J168/proportions/*.py (python3 -I, trimesh).
+- 18 Nov CF-16 (J164 loan, Director 23:55Z): review/CC-357/c/index.668e-c.html 26c68820 (bands + belt mags seated), land-cc357c-v2.mjs (dry run ok), capture-cc357c-v2.mjs; cloud 11 checks LIVE 311/0, PKG 310/1 (t187 flaky). Waiting: Antigravity ag-c2 set -> Director OK -> land v2 -> landed set.
+- 18 Nov CF-16 closed (J164 landed by ChatGPT 2). CF-17 DONE 17:50Z (handoffs/2026-11-18-claude6-CF-17.md): survivors + spider vs Tripo in Claude outputs/J168/proportions (cf17-summary.md). Open: Pike when tripo/survivor-pike/ has a GLB (ours/person.pike.glb ready); spider P4 when ChatGPT 2 builds it. Cloud: tarball needs assets/intro + crew/*.mjs; CHROME=/usr/bin/google-chrome CHROME_ARGS='--no-sandbox --use-angle=swiftshader --enable-unsafe-swiftshader'; P3 = cloud copy with buildSpiderD204Plan swapped in.
+- 19 Nov CF-18: 07:22Z spider+player s11 sent; 10:22Z (b) handoffs/2026-11-19-claude6-CF-18-b.md: CC-359 v5 head = AG within 0.4 mm, chest-line build skull unchanged; CC-358 s12 pose-only (s11 gaps stand), caught IDLE_WEIGHT .03 vs tested .02. OPEN: CC-359 step 3 atlas (ask Claude 3 for a zero-pose OBJ; run cf18_head.py; rest-pose only -> cf18b_head_icp.py), Pike when tripo/survivor-pike/ has a GLB. PC python: pip --user trimesh scipy, run copies from ~/c6 with python3 -E (-I hides user site).
+- 19 Nov CF-18 (c) 15:44-17:26Z: CC-359 v6 head = AG pass 7 (cf18c-cc359-v6-head.md); seams moved shoulders/back up to 2 cm. OPEN: rerun cf18_head.py + cf18c_nn56.py on each new review/CC-359/vN/rig/game-zero.obj; Pike when tripo/survivor-pike/ has a GLB. PC python: pip --user trimesh scipy, copy scripts to ~/c6, python3 -E.
+- 20 Nov CF-18 (d) 05:27-05:36Z: brute fist rev27 vs Tripo (cf18d-brute-fist-rev27.md): size ok, knuckles ~20% narrow, wrist neck 19x12 vs 27x28 cm. Tools: review/J168/proportions/cf18d_brute_fist_export.mjs (CPU build via ChatGPT 2's cpu-loader-v9) + cf18d_hand2.py. OPEN: CC-359 next vN, Pike GLB, brute fist next revision.
+- 20 Nov CF-18 (e) 05:42-05:50Z: nothing new to measure. CC-359 s41 v7 = neck-join weight only (.18->.11), head unchanged; asked Claude 3 for v7/rig/game-zero.obj. No brute rev after 27, no Pike GLB.
+- 20 Nov CF-18 (f) 15:13-15:46Z: spider P5 m30/31/32/33 vs Tripo (cf18f-spider-p5.md). m33 matches body/knees/hooks; open: rear feet 40-50 cm forward, ~8 cm narrow/side, eyes. Tool cf18f_spider_export.mjs <tag> (add path to mods). OPEN: CC-359 s42/rig/game-zero.obj (asked Claude 3), Pike GLB.
+- 20 Nov CF-18 (g) 19:08-19:20Z: spider m42 vs Tripo recorded (horns/eyes fixed, rear feet 13-34 cm short, leftovers small); landed CC-359 s42 skull = AG pass 7, nothing flagged (cf18g-spider-m42-and-cc359-s42.md). OPEN: Pike GLB only.

@@ -29,7 +29,13 @@ export function relMatrix(T, space, bone, out) {
 // carry into one is put back out under it (gap below its underside), or behind it (gap behind its back face, `back`: a
 // pouch standing off the belt) when that is nearer, so the cloth folds there (a trouser leg at the hip crease as the thigh
 // comes up) instead of going through it.
-export function liveCloth(T, { space, bones, geo, weights, material, name = 'live-cloth', aoOwners = null, holder = null, under = null }) {
+// gpu (CC-353, J153 note 2, the lag): drawn as a SkinnedMesh with these same weights in the vertex shader (no vertex
+// is moved or uploaded on the CPU: only the B joint matrices, each frame they change), when three has SkinnedMesh and the
+// garment is worn by 4 joints or fewer; with `under`, CC-344's fold stays on the CPU and is drawn by it on the frames it
+// moves a vertex (gpuCloth, below). Not on the suite's fake three (no SkinnedMesh): there it bends on the CPU as before.
+// userData.cloth.gpu says which; userData.cloth.posed() gives the bent positions (drawn order) on either path for anything
+// that needs them on the CPU.
+export function liveCloth(T, { space, bones, geo, weights, material, name = 'live-cloth', aoOwners = null, holder = null, under = null, gpu = false }) {
   const B = bones.length, count = geo.attributes.position.count;
   if (weights.length !== count * B) throw new Error('liveCloth: weights need ' + count * B + ' values');
   const bindInv = bones.map((b) => relMatrix(T, space, b, new T.Matrix4()).invert());
@@ -54,6 +60,8 @@ export function liveCloth(T, { space, bones, geo, weights, material, name = 'liv
   const padSphere = (g) => { if (padded.has(g)) return; if (!g.boundingSphere) g.computeBoundingSphere(); g.boundingSphere.radius += SPHERE_PAD; padded.add(g); };
   padSphere(out);
   if (!holder) { holder = new T.Group(); holder.name = name + '-live'; space.add(holder); }
+  const useGpu = !!(gpu && B <= 4 && T.SkinnedMesh && T.Skeleton && T.Bone);
+  if (useGpu) return gpuCloth(T, { space, bones, weights, material, name, aoOwners, holder, B, count, drawn, map, rest, nrm, out, bindInv, under });
   const mesh = new T.Mesh(out, material); mesh.name = name; mesh.castShadow = mesh.receiveShadow = true; mesh.frustumCulled = false;
   mesh.userData.liveShape = true; mesh.userData.aoOwners = aoOwners || bones.slice();
   mesh.add(new T.Object3D());   // a child: mergeRigidMeshes leaves it (and its UVs) alone
@@ -113,7 +121,141 @@ export function liveCloth(T, { space, bones, geo, weights, material, name = 'liv
     padSphere(active);   // (a swapped-in copy gets its padded rest sphere once; it isn't thrown away each bend)
   }
   mesh.onBeforeRender = bend; mesh.onBeforeShadow = bend;
-  mesh.userData.cloth = { bend, bones, weights, B, rest, count, drawn, moves: () => moves };
+  const posed = () => { bend(); return Float32Array.from(mesh.geometry.attributes.position.array); };
+  const posedNormals = () => { bend(); return Float32Array.from(mesh.geometry.attributes.normal.array); };
+  mesh.userData.cloth = { bend, bones, weights, B, rest, count, drawn, moves: () => moves, gpu: false, posed, posedNormals, space, map, nrm, under, bindInv };
+  return mesh;
+}
+
+// CC-353: the GPU path of liveCloth. The geometry keeps the bind pose (drawn order, as the CPU path draws it) with
+// skinIndex 0..B-1 and the vertex's own weights; its skeleton's bones are stand-ins outside the scene, and before each draw
+// (onBeforeRender, onBeforeShadow, and three's skeleton.update) update() writes each joint's
+// move since the bind, in `space`, as relMatrix(space, bone) x bind^-1 - the very matrices the CPU path blends - so
+// bindMatrix is the identity and the mesh hangs in `space` as before (holder at rest in it). An unchanged pose writes
+// nothing. With `under` (CC-344's fold under the kit, the trouser legs): each frame the joints move, the shared vertices are
+// bent on the CPU (no copy, no upload) only to see whether the fold moves any; on such a frame the CPU draws it exactly as
+// the CPU path does (the bent, folded pose written to the geometry, the joints' matrices the identity), and on the first
+// frame after, the bind pose goes back and the GPU skins again.
+function gpuCloth(T, { space, bones, weights, material, name, aoOwners, holder, B, count, drawn, map, rest, nrm, out, bindInv, under }) {
+  const si = new Uint16Array(drawn * 4), sw = new Float32Array(drawn * 4);
+  for (let i = 0; i < drawn; i++) {
+    const v = map[i];
+    for (let k = 0; k < 4; k++) { si[i * 4 + k] = k < B ? k : 0; sw[i * 4 + k] = k < B ? weights[v * B + k] : 0; }
+  }
+  out.setAttribute('skinIndex', new T.Uint16BufferAttribute(si, 4));
+  out.setAttribute('skinWeight', new T.Float32BufferAttribute(sw, 4));
+  if (!holder) { holder = new T.Group(); holder.name = name + '-live'; space.add(holder); }
+  const mesh = new T.SkinnedMesh(out, material); mesh.name = name; mesh.castShadow = mesh.receiveShadow = true; mesh.frustumCulled = false;
+  mesh.userData.liveShape = true; mesh.userData.aoOwners = aoOwners || bones.slice();
+  mesh.add(new T.Object3D());   // a child: mergeRigidMeshes leaves it (and its UVs) alone
+  holder.add(mesh);
+  const stand = bones.map(() => { const b = new T.Bone(); b.matrixAutoUpdate = false; b.matrixWorldAutoUpdate = false; return b; });   // outside the scene: their matrixWorld is written by update() below
+  const skeleton = new T.Skeleton(stand, stand.map(() => new T.Matrix4()));
+  mesh.bindMode = T.DetachedBindMode || 'detached';
+  mesh.bind(skeleton, new T.Matrix4());
+  // the padded rest sphere (the geometry's, from liveCloth): three would otherwise skin every vertex on the CPU once to
+  // find the mesh's sphere for the draw order
+  mesh.boundingSphere = out.boundingSphere.clone();
+  const cur = new T.Matrix4(), BM = skeleton.boneMatrices, S = new Float32Array(B * 16), last = new Float32Array(B * 16).fill(NaN);
+  const P = new Float32Array(count * 3), Q = new Float32Array(count * 3), m = new Float64Array(12);
+  const bandM = new T.Matrix4(), bandInv = new T.Matrix4(), ID = new T.Matrix4().elements;
+  const restDrawn = under ? Float32Array.from(out.attributes.position.array) : null, nrmDrawn = under ? Float32Array.from(out.attributes.normal.array) : null;
+  let moves = 0, cpuFrames = 0, onCpu = false;
+  // the CPU path's own bend of the shared vertices with the matrices M (and their normals when asked)
+  function skinShared(M, normals) {
+    for (let i = 0; i < count; i++) {
+      m.fill(0);
+      const wo = i * B;
+      for (let k = 0; k < B; k++) {
+        const w = weights[wo + k]; if (w === 0) continue;
+        const s = k * 16;
+        m[0] += w * M[s]; m[1] += w * M[s + 1]; m[2] += w * M[s + 2];
+        m[3] += w * M[s + 4]; m[4] += w * M[s + 5]; m[5] += w * M[s + 6];
+        m[6] += w * M[s + 8]; m[7] += w * M[s + 9]; m[8] += w * M[s + 10];
+        m[9] += w * M[s + 12]; m[10] += w * M[s + 13]; m[11] += w * M[s + 14];
+      }
+      const o = i * 3, x = rest[o], y = rest[o + 1], z = rest[o + 2];
+      P[o] = m[0] * x + m[3] * y + m[6] * z + m[9];
+      P[o + 1] = m[1] * x + m[4] * y + m[7] * z + m[10];
+      P[o + 2] = m[2] * x + m[5] * y + m[8] * z + m[11];
+      if (normals) {
+        const a = nrm[o], b = nrm[o + 1], c = nrm[o + 2];
+        const nx = m[0] * a + m[3] * b + m[6] * c, ny = m[1] * a + m[4] * b + m[7] * c, nz = m[2] * a + m[5] * b + m[8] * c, l = Math.sqrt(nx * nx + ny * ny + nz * nz) || 1;
+        Q[o] = nx / l; Q[o + 1] = ny / l; Q[o + 2] = nz / l;
+      }
+    }
+  }
+  // CC-344's fold, as the CPU path does it, on P; returns how many vertices it moved
+  function fold() {
+    relMatrix(T, space, bones[under.k], bandM); bandInv.copy(bandM).invert();
+    const f = bandInv.elements, g = bandM.elements, gap = under.gap || 0;
+    let n = 0;
+    for (let i = 0; i < count; i++) {
+      const o = i * 3, x = P[o], y = P[o + 1], z = P[o + 2];
+      let lx = f[0] * x + f[4] * y + f[8] * z + f[12], ly = f[1] * x + f[5] * y + f[9] * z + f[13], lz = f[2] * x + f[6] * y + f[10] * z + f[14], moved = false;
+      for (const b of under.boxes) {
+        if (lx <= b.x[0] || lx >= b.x[1] || ly <= b.y[0] - gap || ly >= b.y[1] || lz <= b.z[0] - gap || lz >= b.z[1]) continue;
+        const down = ly - (b.y[0] - gap), behind = b.back ? lz - (b.z[0] - gap) : Infinity;
+        if (behind < down) lz = b.z[0] - gap; else ly = b.y[0] - gap;
+        moved = true;
+      }
+      if (moved) { n++; P[o] = g[0] * lx + g[4] * ly + g[8] * lz + g[12]; P[o + 1] = g[1] * lx + g[5] * ly + g[9] * lz + g[13]; P[o + 2] = g[2] * lx + g[6] * ly + g[10] * lz + g[14]; }
+    }
+    return n;
+  }
+  function setJoints(M) {
+    BM.set(M);
+    for (let k = 0; k < B; k++) stand[k].matrixWorld.fromArray(M, k * 16);   // three's CPU side (getVertexPosition, raycast) reads the bones' matrixWorld
+    if (skeleton.boneTexture) skeleton.boneTexture.needsUpdate = true;
+  }
+  const IDS = new Float32Array(B * 16); for (let k = 0; k < B; k++) IDS.set(ID, k * 16);
+  function update() {   // the CPU path's own test: any element moved by 1e-6 or more
+    let same = true;
+    for (let k = 0; k < B; k++) {
+      relMatrix(T, space, bones[k], cur).multiply(bindInv[k]);
+      const e = cur.elements;
+      for (let i = 0; i < 16; i++) { const v = e[i]; if (same && !(Math.abs(v - last[k * 16 + i]) < 1e-6)) same = false; S[k * 16 + i] = v; }
+    }
+    if (same) return;
+    last.set(S); moves++;
+    if (under) {
+      skinShared(S, false);
+      const active = mesh.geometry, PA = active.attributes.position, NA = active.attributes.normal;
+      if (fold() > 0 && PA && NA && PA.count === drawn) {   // the fold bites: this frame is drawn as the CPU path draws it
+        skinShared(S, true); fold();
+        const pa = PA.array, na = NA.array;
+        for (let i = 0; i < drawn; i++) { const o = i * 3, s = map[i] * 3; pa[o] = P[s]; pa[o + 1] = P[s + 1]; pa[o + 2] = P[s + 2]; na[o] = Q[s]; na[o + 1] = Q[s + 1]; na[o + 2] = Q[s + 2]; }
+        PA.needsUpdate = true; NA.needsUpdate = true;
+        if (!onCpu) setJoints(IDS);
+        onCpu = true; cpuFrames++;
+        return;
+      }
+      if (onCpu && PA && NA && PA.count === drawn) { PA.array.set(restDrawn); NA.array.set(nrmDrawn); PA.needsUpdate = true; NA.needsUpdate = true; }
+      onCpu = false;
+    }
+    setJoints(S);
+  }
+  // Run before each draw and each shadow draw, as the CPU path's bend is (three uploads a draw's changed attributes before it
+  // updates its nodes, so geometry written from skeleton.update would reach the GPU one draw late: on the frames the fold starts
+  // or stops biting, one draw with the new matrices on the old vertices); skeleton.update then finds the pose unchanged.
+  mesh.onBeforeRender = update; mesh.onBeforeShadow = update; skeleton.update = update;
+  update();
+  // the bent positions on the CPU (drawn order), for tests and tools; never needed to draw
+  const posed = () => {
+    update();
+    skinShared(last, false); if (under) fold();
+    const o = new Float32Array(drawn * 3);
+    for (let i = 0; i < drawn; i++) { const s = map[i] * 3; o[i * 3] = P[s]; o[i * 3 + 1] = P[s + 1]; o[i * 3 + 2] = P[s + 2]; }
+    return o;
+  };
+  const posedNormals = () => {   // and their normals (the fold moves no normal, as on the CPU path)
+    update(); skinShared(last, true);
+    const o = new Float32Array(drawn * 3);
+    for (let i = 0; i < drawn; i++) { const s = map[i] * 3; o[i * 3] = Q[s]; o[i * 3 + 1] = Q[s + 1]; o[i * 3 + 2] = Q[s + 2]; }
+    return o;
+  };
+  // (space, map, nrm, under, bindInv: what it was built from, so a probe can build the CPU path's twin of it beside it, CC-353's proof)
+  mesh.userData.cloth = { bend: update, bones, weights, B, rest, count, drawn, moves: () => moves, cpuFrames: () => cpuFrames, gpu: true, posed, posedNormals, skeleton, space, map, nrm, under, bindInv };
   return mesh;
 }
 

@@ -1,0 +1,5526 @@
+{
+  "task": "AG-355",
+  "at": "2026-11-18T03:19:17.337Z",
+  "liveOnly": true,
+  "size": [
+    1200,
+    1200
+  ],
+  "initialHashes": {
+    "index.html": {
+      "md5": "70e5dea8",
+      "sha256": "d6328d485eb7ed49c0740d1e5450a5acae0af394f5a7e383bdb03910102b5726"
+    },
+    "game/leaper-motion.js": {
+      "md5": "e2a8a04f",
+      "sha256": "cca59d32ba5ed7842a806964443c8782da40500644b8331735cf42969d1960db"
+    },
+    "game/leaper-support.js": {
+      "md5": "13550178",
+      "sha256": "d70eab90576af182794504d82ed28b769f00d373fe471ab601a933d240dd5cb7"
+    },
+    "game/zombie-limits.js": {
+      "md5": "e51526d5",
+      "sha256": "e280f677028a9b36729b279e88287aa834ee0d98fb580a69be92839ddc7a5bb0"
+    },
+    "studio/zombie.js": {
+      "md5": "0e074950",
+      "sha256": "619046a6997b9c0c6e27bab01ac61e248d5c4da30d3b324ef621fdb1d42e11b7"
+    },
+    "studio/zombie-concepts.js": {
+      "md5": "7a178a93",
+      "sha256": "78f6fdbd6c41fb29f9ed2ea506fef043175f6db63ba0ab10d412f3ced9ea9d95"
+    },
+    "studio/zombie-detail.js": {
+      "md5": "1b90fa9d",
+      "sha256": "6501954cc60c2a43554dc3707730974983a411feabf399049933506f9d5e7709"
+    },
+    "review/GP-20152/runtime-normal-continuous-fixture-v2.mjs": {
+      "md5": "724a5488",
+      "sha256": "5838e32d10ce596b00b13da7c6431673c0487a107ebc2e31296dfc4e38108693"
+    },
+    "review/GP-20152/runtime-knock-continuous-fixture-v1.mjs": {
+      "md5": "cd2043fe",
+      "sha256": "8486b4e40c8726b44f1b86481a7d5a73687522644c0e00636f12dda3e440bc91"
+    },
+    "review/GP-20152/runtime-cave-fixture-v2.mjs": {
+      "md5": "31e64320",
+      "sha256": "767730df4443ba8f3e0617dd4c444c5c4156c4078a558301f884f72f469085c1"
+    },
+    "review/GP-20150/audit-original/tools/sampler.js": {
+      "md5": "52513e5f",
+      "sha256": "a9b8bb9d3e7ddcb5cc16de8726d49231b32a6448ea14c252a22f07165b94f5a4"
+    },
+    "tools/tests/lib.js": {
+      "md5": "38af42c9",
+      "sha256": "7017ea2a2b33b87693bd5db682e4192d0b4a5476a122944f53739710d140bf77"
+    }
+  },
+  "renderer": {
+    "backend": "WebGPU",
+    "width": 1200,
+    "height": 1200
+  },
+  "states": {
+    "statue": {
+      "title": "Statue / Constructor (pre-motion)",
+      "ground": -200,
+      "minBodyGap": -0.00006952663835591011,
+      "baseHipsY": 0.5704,
+      "footLift": 0,
+      "violations": [],
+      "floorGapMmByCams": -0.07,
+      "boundsH": 1.0316
+    },
+    "live-idle": {
+      "title": "Live Idle (post-applyLeaperMotion)",
+      "state": "idle",
+      "uuid": "46b95761-ce49-4f9b-aaae-e6d1f632de22",
+      "ground": -200,
+      "minBodyGap": -0.00007279478978716725,
+      "nonHeadGap": -0.00007279478978716725,
+      "coreGap": 0.4719468601193171,
+      "supports": {
+        "handL": -0.00002494919766604653,
+        "footL": -0.00007279478978716725,
+        "handR": -0.000024950021668246336,
+        "footR": -0.00007279478978716725
+      },
+      "reading": {
+        "t": 0.369,
+        "st": "",
+        "p": [
+          -28,
+          -200,
+          -632
+        ],
+        "yaw": 1.571,
+        "rig": "zombie-skin",
+        "legL": {
+          "hipFlex": 88,
+          "hipAbd": 0.4,
+          "hipRot": 0,
+          "knee": 109.9,
+          "kneeVar": -0.1,
+          "kneeRot": -2.3
+        },
+        "armL": {
+          "shFlex": -43.6,
+          "shAbd": 4.7,
+          "shRot": -2.8,
+          "elbow": 93,
+          "elbowLat": -3.6,
+          "foreRot": -146.4
+        },
+        "legR": {
+          "hipFlex": 88,
+          "hipAbd": 0.8,
+          "hipRot": 1.6,
+          "knee": 109.9,
+          "kneeVar": 0.1,
+          "kneeRot": -2.3
+        },
+        "armR": {
+          "shFlex": -43.8,
+          "shAbd": -5,
+          "shRot": 1.1,
+          "elbow": 87.5,
+          "elbowLat": 6.4,
+          "foreRot": -146.2
+        },
+        "spineFlex": 0,
+        "spineLat": 0.3,
+        "spineRot": 0.4,
+        "neckFlex": -2.3,
+        "neckLat": -0.4,
+        "neckRot": 0.2,
+        "handL": [
+          [
+            -27.129,
+            0.008,
+            -631.752
+          ],
+          [
+            -0.581,
+            -0.608,
+            -0.54
+          ],
+          [
+            -27.429,
+            0.818,
+            -631.673
+          ]
+        ],
+        "handR": [
+          [
+            -27.181,
+            -0.049,
+            -632.369
+          ],
+          [
+            -0.584,
+            -0.61,
+            0.536
+          ],
+          [
+            -27.429,
+            0.818,
+            -632.327
+          ]
+        ],
+        "tgt": [
+          -8.8,
+          -632
+        ]
+      },
+      "sourceSupport": {
+        "scope": "Only bounded support construction, no actual state/full-motion/anatomy/clip/performance acceptance",
+        "rows": [
+          {
+            "side": "L",
+            "front": true,
+            "skipped": false,
+            "before": -199.89741015470273,
+            "after": -200.00002494919767,
+            "targetFloor": -200,
+            "targetY": 0.0978174797430472,
+            "iterations": 1
+          },
+          {
+            "side": "L",
+            "front": false,
+            "skipped": false,
+            "before": -200.0959272558069,
+            "after": -200.00007279478976,
+            "targetFloor": -200,
+            "targetY": 0.19740538465985952,
+            "iterations": 1
+          },
+          {
+            "side": "R",
+            "front": true,
+            "skipped": false,
+            "before": -199.89741019723803,
+            "after": -200.00002495002164,
+            "targetFloor": -200,
+            "targetY": 0.09781748135679182,
+            "iterations": 1
+          },
+          {
+            "side": "R",
+            "front": false,
+            "skipped": false,
+            "before": -200.0959272558069,
+            "after": -200.00007279478976,
+            "targetFloor": -200,
+            "targetY": 0.19740538465985952,
+            "iterations": 1
+          }
+        ]
+      },
+      "baseHipsY": 0.5704,
+      "footLift": 0,
+      "flags": {
+        "partsLost": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "alive": true,
+        "hitReact": 0,
+        "hitPartT": 0,
+        "sleeping": false,
+        "poi": false,
+        "poiAwake": true,
+        "knockT": 0,
+        "getUpT": 0
+      },
+      "scope": "Actual game pose at this sampled frame only.",
+      "dt": 0.016666666666666663,
+      "violations": [],
+      "floorGapMmByCams": -0.073,
+      "boundsH": 1.0732
+    },
+    "walk": {
+      "title": "Live Walk (step 30 mid-stride)",
+      "state": "walk",
+      "uuid": "46b95761-ce49-4f9b-aaae-e6d1f632de22",
+      "ground": -200,
+      "minBodyGap": -0.00006533402924446818,
+      "nonHeadGap": -0.00006533402924446818,
+      "coreGap": 0.472198974923316,
+      "supports": {
+        "handL": 0.1094850597824859,
+        "footL": -0.00006533402924446818,
+        "handR": 0.000005931408651349557,
+        "footR": 0.08898571576327186
+      },
+      "reading": {
+        "t": 0.869,
+        "st": "",
+        "p": [
+          -26.192,
+          -200,
+          -631.918
+        ],
+        "yaw": 1.495,
+        "rig": "zombie-skin",
+        "legL": {
+          "hipFlex": 106.1,
+          "hipAbd": 2.7,
+          "hipRot": 3.8,
+          "knee": 113.3,
+          "kneeVar": -0.3,
+          "kneeRot": -2.7
+        },
+        "armL": {
+          "shFlex": -57.6,
+          "shAbd": 7.2,
+          "shRot": -2.5,
+          "elbow": 111.6,
+          "elbowLat": -4.3,
+          "foreRot": -149.9
+        },
+        "legR": {
+          "hipFlex": 67.5,
+          "hipAbd": -0.8,
+          "hipRot": -0.7,
+          "knee": 111.7,
+          "kneeVar": -2.1,
+          "kneeRot": 3.9
+        },
+        "armR": {
+          "shFlex": -29.8,
+          "shAbd": -8.6,
+          "shRot": 0.1,
+          "elbow": 86.3,
+          "elbowLat": 6.9,
+          "foreRot": -145.6
+        },
+        "spineFlex": 1.6,
+        "spineLat": -2.3,
+        "spineRot": 0.9,
+        "neckFlex": -3,
+        "neckLat": -0.8,
+        "neckRot": 1.7,
+        "handL": [
+          [
+            -25.374,
+            0.102,
+            -631.648
+          ],
+          [
+            -0.551,
+            -0.644,
+            -0.531
+          ],
+          [
+            -25.634,
+            0.798,
+            -631.565
+          ]
+        ],
+        "handR": [
+          [
+            -25.183,
+            0.009,
+            -632.224
+          ],
+          [
+            -0.463,
+            -0.694,
+            0.552
+          ],
+          [
+            -25.605,
+            0.818,
+            -632.217
+          ]
+        ],
+        "tgt": [
+          -8.8,
+          -632
+        ]
+      },
+      "sourceSupport": {
+        "scope": "Only bounded support construction, no actual state/full-motion/anatomy/clip/performance acceptance",
+        "rows": [
+          {
+            "side": "L",
+            "front": true,
+            "skipped": false,
+            "before": -199.80794449036847,
+            "after": -199.89051494021746,
+            "targetFloor": -199.89050008664037,
+            "targetY": 0.20561129589452712,
+            "iterations": 6
+          },
+          {
+            "side": "L",
+            "front": false,
+            "skipped": false,
+            "before": -200.0764879334353,
+            "after": -200.00006533402922,
+            "targetFloor": -200,
+            "targetY": 0.17779365997017105,
+            "iterations": 4
+          },
+          {
+            "side": "R",
+            "front": true,
+            "skipped": false,
+            "before": -199.91196215035797,
+            "after": -199.99999406859132,
+            "targetFloor": -200,
+            "targetY": 0.11342462987088513,
+            "iterations": 3
+          },
+          {
+            "side": "R",
+            "front": false,
+            "skipped": false,
+            "before": -200.04436997507912,
+            "after": -199.9110142842367,
+            "targetFloor": -199.9110313203953,
+            "targetY": 0.2937828257614705,
+            "iterations": 2
+          }
+        ]
+      },
+      "baseHipsY": 0.5704,
+      "footLift": 0,
+      "flags": {
+        "partsLost": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "alive": true,
+        "hitReact": 0,
+        "hitPartT": 0,
+        "sleeping": false,
+        "poi": false,
+        "poiAwake": true,
+        "knockT": 0,
+        "getUpT": 0
+      },
+      "scope": "Actual game pose at this sampled frame only.",
+      "dt": 0.01666666666666672,
+      "violations": [],
+      "floorGapMmByCams": -0.065,
+      "boundsH": 1.0654
+    },
+    "body-hit": {
+      "title": "Public Body Hit (hit step 18)",
+      "state": "hit",
+      "uuid": "46b95761-ce49-4f9b-aaae-e6d1f632de22",
+      "ground": -200,
+      "minBodyGap": -0.00004892254841593058,
+      "nonHeadGap": -0.00004892254841593058,
+      "coreGap": 0.4776093093034035,
+      "supports": {
+        "handL": 0.000021818380730564968,
+        "footL": 0.00004937578435715295,
+        "handR": -0.00004892254841593058,
+        "footR": 0.000060454929410980185
+      },
+      "reading": {
+        "t": 1.169,
+        "st": "hit:armR",
+        "p": [
+          -26.192,
+          -200,
+          -631.685
+        ],
+        "yaw": 1.652,
+        "rig": "zombie-skin",
+        "legL": {
+          "hipFlex": 21.8,
+          "hipAbd": -0.4,
+          "hipRot": -0.2,
+          "knee": 37.3,
+          "kneeVar": 0.7,
+          "kneeRot": 3.9
+        },
+        "armL": {
+          "shFlex": -46.4,
+          "shAbd": -2.1,
+          "shRot": -3.3,
+          "elbow": 82.5,
+          "elbowLat": -3.5,
+          "foreRot": -145.8
+        },
+        "legR": {
+          "hipFlex": 4.8,
+          "hipAbd": 0.1,
+          "hipRot": 0,
+          "knee": 7.4,
+          "kneeVar": -0.3,
+          "kneeRot": 1
+        },
+        "armR": {
+          "shFlex": 42.8,
+          "shAbd": 11.1,
+          "shRot": -18.5,
+          "elbow": 4.6,
+          "elbowLat": 10,
+          "foreRot": -149.2
+        },
+        "spineFlex": -2.5,
+        "spineLat": 6.7,
+        "spineRot": -2.2,
+        "neckFlex": 0.7,
+        "neckLat": 6.4,
+        "neckRot": 8.2,
+        "handL": [
+          [
+            -25.421,
+            -0.022,
+            -631.479
+          ],
+          [
+            -0.675,
+            -0.491,
+            -0.551
+          ],
+          [
+            -25.617,
+            0.878,
+            -631.401
+          ]
+        ],
+        "handR": [
+          [
+            -24.828,
+            0.104,
+            -632.316
+          ],
+          [
+            -0.554,
+            -0.808,
+            0.201
+          ],
+          [
+            -25.638,
+            0.805,
+            -632.05
+          ]
+        ],
+        "tgt": [
+          -8.8,
+          -631.918
+        ]
+      },
+      "sourceSupport": {
+        "scope": "Only bounded support construction, no actual state/full-motion/anatomy/clip/performance acceptance",
+        "rows": [
+          {
+            "side": "L",
+            "front": true,
+            "skipped": false,
+            "before": -200.24526947921694,
+            "after": -199.99997818161927,
+            "targetFloor": -200,
+            "targetY": 0.08603859810725818,
+            "iterations": 2
+          },
+          {
+            "side": "L",
+            "front": false,
+            "skipped": false,
+            "before": -200.01854790057968,
+            "after": -199.99995062421564,
+            "targetFloor": -200,
+            "targetY": 0.19598637389780735,
+            "iterations": 2
+          },
+          {
+            "side": "R",
+            "front": true,
+            "skipped": false,
+            "before": -199.75413001494283,
+            "after": -200.00004892254842,
+            "targetFloor": -200,
+            "targetY": 0.08535649155545012,
+            "iterations": 9
+          },
+          {
+            "side": "R",
+            "front": false,
+            "skipped": false,
+            "before": -199.92960441671434,
+            "after": -199.99993954507056,
+            "targetFloor": -200,
+            "targetY": 0.14065275370891167,
+            "iterations": 4
+          }
+        ]
+      },
+      "baseHipsY": 0.5704,
+      "footLift": 0,
+      "flags": {
+        "partsLost": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "alive": true,
+        "hitReact": 0,
+        "hitPartT": 0.15000000000000008,
+        "sleeping": false,
+        "poi": false,
+        "poiAwake": true,
+        "knockT": 0,
+        "getUpT": 0
+      },
+      "scope": "Public inspector body-hit classifier + actual game tick.",
+      "dt": 0.016666666666666607,
+      "violations": [],
+      "floorGapMmByCams": -0.049,
+      "boundsH": 1.0897
+    },
+    "crush-prone": {
+      "title": "Public Crush Forward · Prone (step 60)",
+      "state": "forward-knock",
+      "uuid": "46b95761-ce49-4f9b-aaae-e6d1f632de22",
+      "ground": -200,
+      "minBodyGap": 0,
+      "nonHeadGap": 0.009319794608245502,
+      "coreGap": 0.011218124836176457,
+      "supports": {
+        "handL": 0.009319794608245502,
+        "footL": 0.010220174001517535,
+        "handR": 0.009319794609410792,
+        "footR": 0.024219878698914954
+      },
+      "reading": {
+        "t": 2.185,
+        "st": "knock",
+        "p": [
+          -28,
+          -199.424,
+          -631.78
+        ],
+        "yaw": 0,
+        "rig": "zombie-skin",
+        "legL": {
+          "hipFlex": -2.9,
+          "hipAbd": 0,
+          "hipRot": 0,
+          "knee": 4.6,
+          "kneeVar": 0,
+          "kneeRot": 0
+        },
+        "armL": {
+          "shFlex": 75.5,
+          "shAbd": 13.6,
+          "shRot": 11.1,
+          "elbow": 5.9,
+          "elbowLat": 0,
+          "foreRot": 0.6
+        },
+        "legR": {
+          "hipFlex": -4.6,
+          "hipAbd": 0,
+          "hipRot": 0,
+          "knee": 3.8,
+          "kneeVar": 0,
+          "kneeRot": 0
+        },
+        "armR": {
+          "shFlex": 75.6,
+          "shAbd": 2.8,
+          "shRot": 2.4,
+          "elbow": 5.9,
+          "elbowLat": -0.1,
+          "foreRot": -0.5
+        },
+        "spineFlex": -20,
+        "spineLat": 0,
+        "spineRot": 0,
+        "neckFlex": 59,
+        "neckLat": -10.9,
+        "neckRot": 20.9,
+        "handL": [
+          [
+            -28.539,
+            -0.003,
+            -629.532
+          ],
+          [
+            0.004,
+            0.956,
+            0.294
+          ],
+          [
+            -28.327,
+            0.32,
+            -630.565
+          ]
+        ],
+        "handR": [
+          [
+            -27.593,
+            -0.01,
+            -629.512
+          ],
+          [
+            -0.01,
+            0.955,
+            0.295
+          ],
+          [
+            -27.673,
+            0.32,
+            -630.565
+          ]
+        ],
+        "tgt": [
+          -8.8,
+          -632
+        ]
+      },
+      "sourceSupport": {
+        "before": -199.60493853264362,
+        "after": -200,
+        "floorY": -200,
+        "worldShiftY": -0.3950614673563848,
+        "scope": "Existing lying pose only; no angle/root/geometry change, not a four-paw stance.",
+        "poseCorrection": {
+          "spineCorrections": 0,
+          "contact": {
+            "coreBeforeSeat": -199.59571870065042,
+            "forearms": [
+              {
+                "side": "L",
+                "before": -199.397874244379,
+                "after": -199.59561873803534,
+                "target": -199.59561870065042,
+                "iterations": 2
+              },
+              {
+                "side": "R",
+                "before": -199.39787425655788,
+                "after": -199.59561873803418,
+                "target": -199.59561870065042,
+                "iterations": 2
+              }
+            ],
+            "scope": "Bounded shoulder pitch contact solve on actual drawn distal geometry, same original range; no root/rig/mesh/timing change.",
+            "backArms": null,
+            "head": {
+              "before": -199.61781473642014,
+              "after": -199.60493853264362,
+              "target": -199.59561870065042,
+              "iterations": 4
+            },
+            "shins": [
+              {
+                "side": "L",
+                "before": -199.44826077004868,
+                "after": -199.5947183586421,
+                "target": -199.59471870065042,
+                "iterations": 5
+              },
+              {
+                "side": "R",
+                "before": -199.4406771679331,
+                "after": -199.58071865394467,
+                "target": -199.58071870065044,
+                "iterations": 5
+              }
+            ]
+          },
+          "hipsBefore": 0.95,
+          "hipsAfter": 0,
+          "neck": 59.00041216959592,
+          "neckRange": [
+            -100,
+            60
+          ],
+          "authoredRootPitch": 1.4507963267948965,
+          "authoredTiltWeight": 1,
+          "back": false,
+          "shoulders": [
+            {
+              "side": "L",
+              "before": 92.75223953801435,
+              "after": 92.75223953801435,
+              "range": [
+                -60,
+                190
+              ]
+            },
+            {
+              "side": "R",
+              "before": 92.83319419874387,
+              "after": 92.83319419874387,
+              "range": [
+                -60,
+                190
+              ]
+            }
+          ],
+          "scope": "Director23:44 REVIEW whole existing-rig lying retarget; original ranges/root/state/event/timing/rig unchanged. Trunk support/anatomy/continuous getup/native LOOK required."
+        }
+      },
+      "baseHipsY": 0.5704,
+      "footLift": 0,
+      "flags": {
+        "alive": true,
+        "hitReact": 0,
+        "hitPartT": 0,
+        "sleeping": false,
+        "poi": false,
+        "poiAwake": true,
+        "knockT": 1.0533333333333372,
+        "getUpT": 0
+      },
+      "scope": "Actual game pose at this sampled frame only.",
+      "dt": 0.016666666666666607,
+      "stage": "lying",
+      "classification": {
+        "duration": 2.0700000000000003,
+        "rise": 0.55,
+        "sign": 1,
+        "damage": 12,
+        "kind": "crush"
+      },
+      "rootPitch": 1.4507963267948965,
+      "hipsWorld": [
+        -28,
+        -199.74966516159802,
+        -631.2069559652489
+      ],
+      "torsoWorld": [
+        -28,
+        -199.71875538230788,
+        -630.9506120509016
+      ],
+      "headWorld": [
+        -28,
+        -199.82427350742557,
+        -630.3840487582291
+      ],
+      "violations": [],
+      "floorGapMmByCams": 0,
+      "boundsH": 0.5802
+    },
+    "crush-prone-getup": {
+      "title": "Public Crush Forward · Get-Up (step 110)",
+      "state": "forward-knock",
+      "uuid": "46b95761-ce49-4f9b-aaae-e6d1f632de22",
+      "ground": -200,
+      "minBodyGap": -2.842170943040401e-14,
+      "nonHeadGap": -2.842170943040401e-14,
+      "coreGap": 0.4682470033532127,
+      "supports": {
+        "handL": 0.007742665892720879,
+        "footL": 0.08397297987249885,
+        "handR": -2.842170943040401e-14,
+        "footR": 0.09405672986082436
+      },
+      "reading": {
+        "t": 3.019,
+        "st": "knock",
+        "p": [
+          -28,
+          -199.735,
+          -631.78
+        ],
+        "yaw": 0,
+        "rig": "zombie-skin",
+        "legL": {
+          "hipFlex": 19.3,
+          "hipAbd": -0.1,
+          "hipRot": 0.2,
+          "knee": 9.8,
+          "kneeVar": 0,
+          "kneeRot": 0
+        },
+        "armL": {
+          "shFlex": -46.6,
+          "shAbd": 6.5,
+          "shRot": -2.4,
+          "elbow": 95.2,
+          "elbowLat": 6.8,
+          "foreRot": -122.3
+        },
+        "legR": {
+          "hipFlex": 17.4,
+          "hipAbd": -0.1,
+          "hipRot": 0.2,
+          "knee": 8.9,
+          "kneeVar": 0,
+          "kneeRot": 0
+        },
+        "armR": {
+          "shFlex": -46.4,
+          "shAbd": -5.9,
+          "shRot": 1.2,
+          "elbow": 84.2,
+          "elbowLat": 13.1,
+          "foreRot": -127.2
+        },
+        "spineFlex": -4.2,
+        "spineLat": -1.4,
+        "spineRot": 1.4,
+        "neckFlex": 9.3,
+        "neckLat": -9.2,
+        "neckRot": 34.3,
+        "handL": [
+          [
+            -28.369,
+            -0.091,
+            -630.689
+          ],
+          [
+            0.691,
+            -0.505,
+            -0.516
+          ],
+          [
+            -28.32,
+            0.781,
+            -630.877
+          ]
+        ],
+        "handR": [
+          [
+            -27.512,
+            -0.158,
+            -630.86
+          ],
+          [
+            -0.713,
+            -0.456,
+            -0.532
+          ],
+          [
+            -27.667,
+            0.8,
+            -630.889
+          ]
+        ],
+        "tgt": [
+          -8.8,
+          -632
+        ]
+      },
+      "sourceSupport": {
+        "before": -199.98765432975216,
+        "after": -199.99999999999997,
+        "floorY": -200,
+        "worldShiftY": -0.01234567024783928,
+        "scope": "Existing lying pose only; no angle/root/geometry change, not a four-paw stance.",
+        "poseCorrection": {
+          "spineCorrections": 0,
+          "contact": {
+            "coreBeforeSeat": -199.41870246746814,
+            "forearms": [
+              {
+                "side": "L",
+                "before": -200.2139050331009,
+                "after": -199.9876543297521,
+                "target": -199.9876545088653,
+                "iterations": 4
+              },
+              {
+                "side": "R",
+                "before": -200.10745838380763,
+                "after": -199.911488885797,
+                "target": -199.91149018386776,
+                "iterations": 3
+              }
+            ],
+            "scope": "Bounded shoulder pitch contact solve on actual drawn distal geometry, same original range; no root/rig/mesh/timing change.",
+            "backArms": null,
+            "head": {
+              "before": -199.43895405553224,
+              "after": -199.43316222975108,
+              "target": -199.43316436281967,
+              "iterations": 2
+            },
+            "shins": [
+              {
+                "side": "L",
+                "before": -199.6834957589882,
+                "after": -199.60788188528642,
+                "target": -199.6078819308134,
+                "iterations": 3
+              },
+              {
+                "side": "R",
+                "before": -199.52322016998926,
+                "after": -199.48921874965953,
+                "target": -199.4892193456246,
+                "iterations": 2
+              }
+            ]
+          },
+          "hipsBefore": 0.95,
+          "hipsAfter": 0.6797405951999914,
+          "neck": 9.30134514672385,
+          "neckRange": [
+            -100,
+            60
+          ],
+          "authoredRootPitch": 0.5106803070318132,
+          "authoredTiltWeight": 0.2844835840000091,
+          "back": false,
+          "shoulders": [
+            {
+              "side": "L",
+              "before": 4.697304412054607,
+              "after": 4.697304412054607,
+              "range": [
+                -60,
+                190
+              ]
+            },
+            {
+              "side": "R",
+              "before": 18.64967989962337,
+              "after": 18.64967989962337,
+              "range": [
+                -60,
+                190
+              ]
+            }
+          ],
+          "scope": "Director23:44 REVIEW whole existing-rig lying retarget; original ranges/root/state/event/timing/rig unchanged. Trunk support/anatomy/continuous getup/native LOOK required."
+        },
+        "recovery": {
+          "weight": 0.8746920066631614,
+          "supports": {
+            "scope": "Only bounded support construction, no actual state/full-motion/anatomy/clip/performance acceptance",
+            "rows": [
+              {
+                "side": "L",
+                "front": true,
+                "skipped": false,
+                "before": -200.1614271102286,
+                "after": -200.0000491993822,
+                "targetFloor": -200,
+                "targetY": 0.20563477565165383,
+                "iterations": 10
+              },
+              {
+                "side": "L",
+                "front": false,
+                "skipped": false,
+                "before": -199.78165466576291,
+                "after": -199.99682316516683,
+                "targetFloor": -200,
+                "targetY": -0.27924460706276816,
+                "iterations": 12
+              },
+              {
+                "side": "R",
+                "front": true,
+                "skipped": false,
+                "before": -200.0852616662735,
+                "after": -200.00004723154626,
+                "targetFloor": -200,
+                "targetY": 0.1676619867991021,
+                "iterations": 8
+              },
+              {
+                "side": "R",
+                "front": false,
+                "skipped": false,
+                "before": -199.66299153013603,
+                "after": -199.99682316516683,
+                "targetFloor": -200,
+                "targetY": -0.27924460706276816,
+                "iterations": 12
+              }
+            ]
+          },
+          "seat": {
+            "before": -200.06087777369123,
+            "after": -200.00000000000003,
+            "floorY": -200,
+            "worldShiftY": 0.060877773691231596,
+            "scope": "Existing lying pose only; no angle/root/geometry change, not a four-paw stance."
+          }
+        }
+      },
+      "baseHipsY": 0.5704,
+      "footLift": 0,
+      "flags": {
+        "alive": true,
+        "hitReact": 0,
+        "hitPartT": 0,
+        "sleeping": false,
+        "poi": false,
+        "poiAwake": true,
+        "knockT": 0.22000000000000258,
+        "getUpT": 0
+      },
+      "scope": "Actual game pose at this sampled frame only.",
+      "dt": 0.016666666666666607,
+      "stage": "rising",
+      "classification": {
+        "duration": 2.0700000000000003,
+        "rise": 0.55,
+        "sign": 1,
+        "damage": 12,
+        "kind": "crush"
+      },
+      "rootPitch": 0.5106803070318132,
+      "hipsWorld": [
+        -28,
+        -199.34426606182583,
+        -631.4981120510834
+      ],
+      "torsoWorld": [
+        -28,
+        -199.24641699395917,
+        -631.2619129652486
+      ],
+      "headWorld": [
+        -27.98624167607258,
+        -199.35790912898284,
+        -630.7087097318775
+      ],
+      "violations": [],
+      "floorGapMmByCams": 0,
+      "boundsH": 1.0559
+    },
+    "crush-supine": {
+      "title": "Public Crush Back · Supine (step 60)",
+      "state": "back-knock",
+      "uuid": "46b95761-ce49-4f9b-aaae-e6d1f632de22",
+      "ground": -200,
+      "minBodyGap": -2.842170943040401e-14,
+      "nonHeadGap": -2.842170943040401e-14,
+      "coreGap": -2.842170943040401e-14,
+      "supports": {
+        "handL": 0.10248089106494263,
+        "footL": 0.09622145592163633,
+        "handR": 0.021385012808849524,
+        "footR": 0.09622145592163633
+      },
+      "reading": {
+        "t": 4.035,
+        "st": "knock",
+        "p": [
+          -28,
+          -199.717,
+          -632
+        ],
+        "yaw": 0,
+        "rig": "zombie-skin",
+        "legL": {
+          "hipFlex": 57.4,
+          "hipAbd": 3.3,
+          "hipRot": -2.9,
+          "knee": 137.4,
+          "kneeVar": -0.1,
+          "kneeRot": -0.1
+        },
+        "armL": {
+          "shFlex": -25.2,
+          "shAbd": 53.9,
+          "shRot": 89.1,
+          "elbow": 83.7,
+          "elbowLat": 13.8,
+          "foreRot": -120.9
+        },
+        "legR": {
+          "hipFlex": 57.4,
+          "hipAbd": 3.3,
+          "hipRot": -2.9,
+          "knee": 137.4,
+          "kneeVar": -0.1,
+          "kneeRot": 0.1
+        },
+        "armR": {
+          "shFlex": -18.6,
+          "shAbd": 64.1,
+          "shRot": 89,
+          "elbow": 70.7,
+          "elbowLat": 13.3,
+          "foreRot": -123.9
+        },
+        "spineFlex": -22.3,
+        "spineLat": 0,
+        "spineRot": 0,
+        "neckFlex": 59,
+        "neckLat": -1,
+        "neckRot": 28.4,
+        "handL": [
+          [
+            -29.156,
+            -0.143,
+            -633.229
+          ],
+          [
+            -0.709,
+            0.63,
+            -0.318
+          ],
+          [
+            -28.327,
+            0.28,
+            -633.215
+          ]
+        ],
+        "handR": [
+          [
+            -26.763,
+            -0.203,
+            -633.165
+          ],
+          [
+            0.66,
+            0.638,
+            -0.396
+          ],
+          [
+            -27.673,
+            0.28,
+            -633.215
+          ]
+        ],
+        "tgt": [
+          -8.8,
+          -631.78
+        ]
+      },
+      "sourceSupport": {
+        "before": -199.8578612868609,
+        "after": -200.00000000000003,
+        "floorY": -200,
+        "worldShiftY": -0.1421387131391043,
+        "scope": "Existing lying pose only; no angle/root/geometry change, not a four-paw stance.",
+        "poseCorrection": {
+          "spineCorrections": 0,
+          "contact": {
+            "coreBeforeSeat": -199.8578612868609,
+            "forearms": [
+              {
+                "side": "L",
+                "before": -199.84400721022647,
+                "after": -199.8577613058002,
+                "target": -199.8577612868609,
+                "iterations": 5
+              },
+              {
+                "side": "R",
+                "before": -199.84400725550267,
+                "after": -199.8577607073887,
+                "target": -199.8577612868609,
+                "iterations": 5
+              }
+            ],
+            "scope": "Bounded shoulder pitch contact solve on actual drawn distal geometry, same original range; no root/rig/mesh/timing change.",
+            "backArms": [
+              {
+                "side": "L",
+                "min": -199.84400721022647,
+                "core": -199.8578612868609,
+                "iterations": 3,
+                "shoulderFlex": -154.96698308218527
+              },
+              {
+                "side": "R",
+                "min": -199.84400725550267,
+                "core": -199.8578612868609,
+                "iterations": 3,
+                "shoulderFlex": -148.67126699092313
+              }
+            ],
+            "head": {
+              "before": -199.56484446095115,
+              "after": -199.56484446095115,
+              "target": -199.56484446095115,
+              "iterations": 0
+            },
+            "shins": [
+              {
+                "side": "L",
+                "before": -199.65561399724155,
+                "after": -199.7616398309392,
+                "target": -199.8568612868609,
+                "iterations": 5
+              },
+              {
+                "side": "R",
+                "before": -199.65561399724155,
+                "after": -199.7616398309392,
+                "target": -199.8428612868609,
+                "iterations": 5
+              }
+            ]
+          },
+          "hipsBefore": 0.95,
+          "hipsAfter": 0,
+          "neck": 58.979001469163556,
+          "neckRange": [
+            -100,
+            60
+          ],
+          "authoredRootPitch": -1.4507963267948965,
+          "authoredTiltWeight": 1,
+          "back": true,
+          "shoulders": [
+            {
+              "side": "L",
+              "before": -57.58595191439297,
+              "after": -57.58595191439297,
+              "range": [
+                -60,
+                190
+              ]
+            },
+            {
+              "side": "R",
+              "before": -57.14984811813654,
+              "after": -57.14984811813654,
+              "range": [
+                -60,
+                190
+              ]
+            }
+          ],
+          "scope": "Director23:44 REVIEW whole existing-rig lying retarget; original ranges/root/state/event/timing/rig unchanged. Trunk support/anatomy/continuous getup/native LOOK required."
+        }
+      },
+      "baseHipsY": 0.5704,
+      "footLift": 0,
+      "flags": {
+        "alive": true,
+        "hitReact": 0,
+        "hitPartT": 0,
+        "sleeping": false,
+        "poi": false,
+        "poiAwake": true,
+        "knockT": 1.0533333333333372,
+        "getUpT": 0
+      },
+      "scope": "Actual game pose at this sampled frame only.",
+      "dt": 0.016666666666666607,
+      "stage": "lying",
+      "classification": {
+        "duration": 2.0700000000000003,
+        "rise": 0.55,
+        "sign": -1,
+        "damage": 12,
+        "kind": "crush"
+      },
+      "rootPitch": -1.4507963267948965,
+      "hipsWorld": [
+        -28,
+        -199.78979349342598,
+        -632.5734932873834
+      ],
+      "torsoWorld": [
+        -28,
+        -199.75888371413583,
+        -632.8298372017307
+      ],
+      "headWorld": [
+        -28,
+        -199.5423421190574,
+        -633.364253840845
+      ],
+      "violations": [],
+      "floorGapMmByCams": 0,
+      "boundsH": 0.6223
+    },
+    "crush-supine-getup": {
+      "title": "Public Crush Back · Get-Up (step 110)",
+      "state": "back-knock",
+      "uuid": "46b95761-ce49-4f9b-aaae-e6d1f632de22",
+      "ground": -200,
+      "minBodyGap": 0,
+      "nonHeadGap": 0,
+      "coreGap": 0.5211670727200044,
+      "supports": {
+        "handL": 0.1607825450337259,
+        "footL": 0.007926787419307857,
+        "handR": 0.17983324122798194,
+        "footR": 0
+      },
+      "reading": {
+        "t": 4.869,
+        "st": "knock",
+        "p": [
+          -28,
+          -200,
+          -632
+        ],
+        "yaw": 0,
+        "rig": "zombie-skin",
+        "legL": {
+          "hipFlex": 65.6,
+          "hipAbd": 0.8,
+          "hipRot": 0.5,
+          "knee": 117.5,
+          "kneeVar": 0,
+          "kneeRot": 0
+        },
+        "armL": {
+          "shFlex": -20.7,
+          "shAbd": 10.1,
+          "shRot": -2,
+          "elbow": 14.8,
+          "elbowLat": -11.2,
+          "foreRot": -136.1
+        },
+        "legR": {
+          "hipFlex": 63.8,
+          "hipAbd": 0.8,
+          "hipRot": 0.5,
+          "knee": 115.5,
+          "kneeVar": 0,
+          "kneeRot": 0
+        },
+        "armR": {
+          "shFlex": -21.2,
+          "shAbd": -3.4,
+          "shRot": 1.6,
+          "elbow": 7.1,
+          "elbowLat": 6.9,
+          "foreRot": -136.7
+        },
+        "spineFlex": -4.2,
+        "spineLat": -1.9,
+        "spineRot": -1,
+        "neckFlex": 20.1,
+        "neckLat": -0.9,
+        "neckRot": 37.1,
+        "handL": [
+          [
+            -28.289,
+            0.278,
+            -631.402
+          ],
+          [
+            0.687,
+            -0.463,
+            -0.561
+          ],
+          [
+            -28.337,
+            1.153,
+            -632.071
+          ]
+        ],
+        "handR": [
+          [
+            -27.607,
+            0.238,
+            -631.49
+          ],
+          [
+            -0.687,
+            -0.469,
+            -0.555
+          ],
+          [
+            -27.683,
+            1.177,
+            -632.08
+          ]
+        ],
+        "tgt": [
+          -8.8,
+          -631.78
+        ]
+      },
+      "sourceSupport": {
+        "before": -200.16288734550227,
+        "after": -200,
+        "floorY": -200,
+        "worldShiftY": 0.1628873455022699,
+        "scope": "Existing lying pose only; no angle/root/geometry change, not a four-paw stance.",
+        "poseCorrection": {
+          "spineCorrections": 0,
+          "contact": {
+            "coreBeforeSeat": -199.54532520560716,
+            "forearms": [
+              {
+                "side": "L",
+                "before": -199.95463455446773,
+                "after": -199.83816442886422,
+                "target": -199.83816431558077,
+                "iterations": 4
+              },
+              {
+                "side": "R",
+                "before": -199.83526392277236,
+                "after": -199.75274605841634,
+                "target": -199.75275266901443,
+                "iterations": 3
+              }
+            ],
+            "scope": "Bounded shoulder pitch contact solve on actual drawn distal geometry, same original range; no root/rig/mesh/timing change.",
+            "backArms": [
+              {
+                "side": "L",
+                "min": -199.95463455446773,
+                "core": -199.54532520560716,
+                "iterations": 2,
+                "shoulderFlex": -60.04106987012207
+              },
+              {
+                "side": "R",
+                "min": -199.83526392277236,
+                "core": -199.54532520560716,
+                "iterations": 2,
+                "shoulderFlex": -48.571840911213926
+              }
+            ],
+            "head": {
+              "before": -198.94297971969885,
+              "after": -198.94297971969885,
+              "target": -198.94297971969885,
+              "iterations": 0
+            },
+            "shins": [
+              {
+                "side": "L",
+                "before": -200.17678344902197,
+                "after": -200.1566446024708,
+                "target": -199.99685946120496,
+                "iterations": 1
+              },
+              {
+                "side": "R",
+                "before": -200.21131522095166,
+                "after": -200.1628873455022,
+                "target": -200.01758474071823,
+                "iterations": 3
+              }
+            ]
+          },
+          "hipsBefore": 0.95,
+          "hipsAfter": 0.6797405951999914,
+          "neck": 20.149743489165896,
+          "neckRange": [
+            -100,
+            60
+          ],
+          "authoredRootPitch": -0.5106803070318132,
+          "authoredTiltWeight": 0.2844835840000091,
+          "back": true,
+          "shoulders": [
+            {
+              "side": "L",
+              "before": -37.14172883952179,
+              "after": -37.14172883952179,
+              "range": [
+                -60,
+                190
+              ]
+            },
+            {
+              "side": "R",
+              "before": -23.470791301477966,
+              "after": -23.470791301477966,
+              "range": [
+                -60,
+                190
+              ]
+            }
+          ],
+          "scope": "Director23:44 REVIEW whole existing-rig lying retarget; original ranges/root/state/event/timing/rig unchanged. Trunk support/anatomy/continuous getup/native LOOK required."
+        },
+        "recovery": {
+          "weight": 0.8746920066631614,
+          "supports": {
+            "scope": "Only bounded support construction, no actual state/full-motion/anatomy/clip/performance acceptance",
+            "rows": [
+              {
+                "side": "L",
+                "front": true,
+                "skipped": false,
+                "before": -199.84030396860243,
+                "after": -199.9065208953005,
+                "targetFloor": -200,
+                "targetY": -1.3888599191945707,
+                "iterations": 12
+              },
+              {
+                "side": "L",
+                "front": false,
+                "skipped": false,
+                "before": -200.15878414220902,
+                "after": -200.00005379904528,
+                "targetFloor": -200,
+                "targetY": 0.33898017077448067,
+                "iterations": 11
+              },
+              {
+                "side": "R",
+                "front": true,
+                "skipped": false,
+                "before": -199.75488559815454,
+                "after": -199.8873790461758,
+                "targetFloor": -200,
+                "targetY": -1.5974207418392674,
+                "iterations": 12
+              },
+              {
+                "side": "R",
+                "front": false,
+                "skipped": false,
+                "before": -200.16502688524042,
+                "after": -200.00005379904528,
+                "targetFloor": -200,
+                "targetY": 0.3389801707745941,
+                "iterations": 11
+              }
+            ]
+          },
+          "seat": {
+            "before": -200.0686318180654,
+            "after": -200,
+            "floorY": -200,
+            "worldShiftY": 0.06863181806539842,
+            "scope": "Existing lying pose only; no angle/root/geometry change, not a four-paw stance."
+          }
+        }
+      },
+      "baseHipsY": 0.5704,
+      "footLift": 0,
+      "flags": {
+        "alive": true,
+        "hitReact": 0,
+        "hitPartT": 0,
+        "sleeping": false,
+        "poi": false,
+        "poiAwake": true,
+        "knockT": 0.22000000000000258,
+        "getUpT": 0
+      },
+      "scope": "Actual game pose at this sampled frame only.",
+      "dt": 0.016666666666666607,
+      "stage": "rising",
+      "classification": {
+        "duration": 2.0700000000000003,
+        "rise": 0.55,
+        "sign": -1,
+        "damage": 12,
+        "kind": "crush"
+      },
+      "rootPitch": -0.5106803070318132,
+      "hipsWorld": [
+        -28,
+        -199.42956112031817,
+        -632.2823372015489
+      ],
+      "torsoWorld": [
+        -28,
+        -199.1770285958336,
+        -632.2424401802439
+      ],
+      "headWorld": [
+        -28.00982955466326,
+        -198.76392000457827,
+        -631.8578799199672
+      ],
+      "violations": [],
+      "floorGapMmByCams": 0,
+      "boundsH": 1.4263
+    },
+    "cave-sleep": {
+      "title": "Actual ROOT Cave Sleep",
+      "state": "cave-sleep",
+      "uuid": "e4fd4001-d3c8-49b2-9f99-8bbad6f277c4",
+      "ground": -400,
+      "minBodyGap": 5.684341886080802e-14,
+      "nonHeadGap": 5.684341886080802e-14,
+      "coreGap": 0.15621598205530063,
+      "supports": {
+        "handL": 5.684341886080802e-14,
+        "footL": 0.24986794655899303,
+        "handR": 0.07264105754319417,
+        "footR": 0.24986794655904987
+      },
+      "reading": {
+        "t": 4.682,
+        "st": "",
+        "p": [
+          47.1,
+          -399.78,
+          17.1
+        ],
+        "yaw": 0.299,
+        "rig": "zombie-skin",
+        "legL": {
+          "hipFlex": 57.4,
+          "hipAbd": 3.1,
+          "hipRot": -2.7,
+          "knee": 137.3,
+          "kneeVar": -0.4,
+          "kneeRot": -1.5
+        },
+        "armL": {
+          "shFlex": -59,
+          "shAbd": 66.4,
+          "shRot": 88.9,
+          "elbow": 86.3,
+          "elbowLat": 14.2,
+          "foreRot": -141
+        },
+        "legR": {
+          "hipFlex": 57.4,
+          "hipAbd": 3.3,
+          "hipRot": -3.2,
+          "knee": 137.3,
+          "kneeVar": 0,
+          "kneeRot": -0.9
+        },
+        "armR": {
+          "shFlex": -56.5,
+          "shAbd": 54.5,
+          "shRot": 86.5,
+          "elbow": 97.6,
+          "elbowLat": 14.8,
+          "foreRot": -132.4
+        },
+        "spineFlex": -21.6,
+        "spineLat": 0,
+        "spineRot": 0,
+        "neckFlex": 58.9,
+        "neckLat": -0.5,
+        "neckRot": 28.5,
+        "handL": [
+          [
+            45.78,
+            -0.286,
+            16.05
+          ],
+          [
+            -0.902,
+            0.303,
+            0.309
+          ],
+          [
+            46.403,
+            0.443,
+            15.97
+          ]
+        ],
+        "handR": [
+          [
+            47.581,
+            -0.153,
+            15.389
+          ],
+          [
+            0.91,
+            0.345,
+            -0.229
+          ],
+          [
+            47.041,
+            0.443,
+            15.774
+          ]
+        ],
+        "tgt": [
+          72.25,
+          11.25
+        ]
+      },
+      "sourceSupport": {
+        "before": -400.0748814915016,
+        "after": -399.99999999999994,
+        "floorY": -400,
+        "worldShiftY": 0.07488149150162826,
+        "scope": "Existing lying pose only; no angle/root/geometry change, not a four-paw stance.",
+        "poseCorrection": {
+          "spineCorrections": 0,
+          "contact": {
+            "coreBeforeSeat": -399.9186655094464,
+            "forearms": [
+              {
+                "side": "L",
+                "before": -399.90489483937745,
+                "after": -399.90489483937745,
+                "target": -399.91856549709485,
+                "iterations": 0
+              },
+              {
+                "side": "R",
+                "before": -399.9048948402767,
+                "after": -399.9048948402767,
+                "target": -399.91856549709485,
+                "iterations": 0
+              }
+            ],
+            "scope": "Bounded shoulder pitch contact solve on actual drawn distal geometry, same original range; no root/rig/mesh/timing change.",
+            "backArms": [
+              {
+                "side": "L",
+                "min": -399.90489483937745,
+                "core": -399.9186655094464,
+                "iterations": 4,
+                "shoulderFlex": -134.04001838553626
+              },
+              {
+                "side": "R",
+                "min": -399.9048948402767,
+                "core": -399.9186655094464,
+                "iterations": 4,
+                "shoulderFlex": -144.26329253941634
+              }
+            ],
+            "head": {
+              "before": -399.61774311546407,
+              "after": -399.61774311546407,
+              "target": -399.61774311546407,
+              "iterations": 0
+            },
+            "shins": [
+              {
+                "side": "L",
+                "before": -399.71765164438216,
+                "after": -399.8250135449425,
+                "target": -399.91766532873226,
+                "iterations": 5
+              },
+              {
+                "side": "R",
+                "before": -399.71765164438216,
+                "after": -399.8250135449425,
+                "target": -399.9036653413814,
+                "iterations": 5
+              }
+            ]
+          },
+          "hipsBefore": 0.95,
+          "hipsAfter": 8.583327328670623e-7,
+          "neck": 58.909394174542165,
+          "neckRange": [
+            -100,
+            60
+          ],
+          "authoredRootPitch": -1.45,
+          "authoredTiltWeight": 0.9999990964918601,
+          "back": true,
+          "shoulders": [
+            {
+              "side": "L",
+              "before": -56.83676327704239,
+              "after": -56.83676327704239,
+              "range": [
+                -60,
+                190
+              ]
+            },
+            {
+              "side": "R",
+              "before": -56.40447791341509,
+              "after": -56.40447791341509,
+              "range": [
+                -60,
+                190
+              ]
+            }
+          ],
+          "scope": "Director23:44 REVIEW whole existing-rig lying retarget; original ranges/root/state/event/timing/rig unchanged. Trunk support/anatomy/continuous getup/native LOOK required."
+        }
+      },
+      "baseHipsY": 0.5704,
+      "footLift": 0,
+      "flags": {
+        "partsLost": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "alive": true,
+        "hitReact": 0,
+        "sleeping": true,
+        "poi": false
+      },
+      "scope": "Actual game pose at this sampled frame only.",
+      "violations": [],
+      "floorGapMmByCams": 0,
+      "boundsH": 0.7937
+    },
+    "cave-getup": {
+      "title": "Cave Noise Wake · Get-Up (step 30)",
+      "state": "cave-getup",
+      "uuid": "e4fd4001-d3c8-49b2-9f99-8bbad6f277c4",
+      "ground": -400,
+      "minBodyGap": 0,
+      "nonHeadGap": 0,
+      "coreGap": 0.5456594718793326,
+      "supports": {
+        "handL": 0.18806859992145064,
+        "footL": 0,
+        "handR": 0.18858451682666555,
+        "footR": 1.1368683772161603e-13
+      },
+      "reading": {
+        "t": 5.927,
+        "st": "",
+        "p": [
+          47.1,
+          -399.922,
+          17.1
+        ],
+        "yaw": 0.299,
+        "rig": "zombie-skin",
+        "legL": {
+          "hipFlex": 71.9,
+          "hipAbd": 0.8,
+          "hipRot": 0.3,
+          "knee": 112.4,
+          "kneeVar": -0.1,
+          "kneeRot": -0.3
+        },
+        "armL": {
+          "shFlex": -22.2,
+          "shAbd": -4.5,
+          "shRot": 0.8,
+          "elbow": 5.5,
+          "elbowLat": 13.6,
+          "foreRot": -135.5
+        },
+        "legR": {
+          "hipFlex": 71.9,
+          "hipAbd": 0.7,
+          "hipRot": 0.8,
+          "knee": 112.4,
+          "kneeVar": 0.1,
+          "kneeRot": -0.3
+        },
+        "armR": {
+          "shFlex": -22.3,
+          "shAbd": 6,
+          "shRot": -0.6,
+          "elbow": 13.9,
+          "elbowLat": -6.5,
+          "foreRot": -135.9
+        },
+        "spineFlex": -6.2,
+        "spineLat": 0.1,
+        "spineRot": 0,
+        "neckFlex": 22.5,
+        "neckLat": -4.5,
+        "neckRot": 7.2,
+        "handL": [
+          [
+            46.815,
+            0.271,
+            17.709
+          ],
+          [
+            0.505,
+            -0.495,
+            -0.707
+          ],
+          [
+            46.747,
+            1.231,
+            17.087
+          ]
+        ],
+        "handR": [
+          [
+            47.585,
+            0.327,
+            17.565
+          ],
+          [
+            -0.818,
+            -0.487,
+            -0.306
+          ],
+          [
+            47.385,
+            1.231,
+            16.891
+          ]
+        ],
+        "tgt": [
+          72.25,
+          11.25
+        ]
+      },
+      "sourceSupport": {
+        "before": -400.09489242351054,
+        "after": -399.99999999999994,
+        "floorY": -400,
+        "worldShiftY": 0.09489242351054372,
+        "scope": "Existing lying pose only; no angle/root/geometry change, not a four-paw stance.",
+        "poseCorrection": {
+          "spineCorrections": 0,
+          "contact": {
+            "coreBeforeSeat": -399.4457965727842,
+            "forearms": [
+              {
+                "side": "L",
+                "before": -399.7532647085877,
+                "after": -399.6649354870426,
+                "target": -399.6649353776817,
+                "iterations": 3
+              },
+              {
+                "side": "R",
+                "before": -399.79977484778556,
+                "after": -399.69808665016524,
+                "target": -399.6980884457221,
+                "iterations": 3
+              }
+            ],
+            "scope": "Bounded shoulder pitch contact solve on actual drawn distal geometry, same original range; no root/rig/mesh/timing change.",
+            "backArms": [
+              {
+                "side": "L",
+                "min": -399.7532647085877,
+                "core": -399.4457965727842,
+                "iterations": 2,
+                "shoulderFlex": -44.21519169496514
+              },
+              {
+                "side": "R",
+                "min": -399.79977484778556,
+                "core": -399.4457965727842,
+                "iterations": 2,
+                "shoulderFlex": -43.892330001424696
+              }
+            ],
+            "head": {
+              "before": -398.7761590814501,
+              "after": -398.7761590814501,
+              "target": -398.7761590814501,
+              "iterations": 0
+            },
+            "shins": [
+              {
+                "side": "L",
+                "before": -400.1326713655152,
+                "after": -400.0948924235105,
+                "target": -399.93512320263306,
+                "iterations": 2
+              },
+              {
+                "side": "R",
+                "before": -400.1326713655152,
+                "after": -400.0948924235105,
+                "target": -399.9311025955261,
+                "iterations": 2
+              }
+            ]
+          },
+          "hipsBefore": 0.9499999999999998,
+          "hipsAfter": 0.677173089170886,
+          "neck": 22.469995624014047,
+          "neckRange": [
+            -100,
+            60
+          ],
+          "authoredRootPitch": -0.5135416666666652,
+          "authoredTiltWeight": 0.2871862219253832,
+          "back": true,
+          "shoulders": [
+            {
+              "side": "L",
+              "before": -15.923856606390574,
+              "after": -15.923856606390574,
+              "range": [
+                -60,
+                190
+              ]
+            },
+            {
+              "side": "R",
+              "before": -15.351065574895182,
+              "after": -15.351065574895182,
+              "range": [
+                -60,
+                190
+              ]
+            }
+          ],
+          "scope": "Director23:44 REVIEW whole existing-rig lying retarget; original ranges/root/state/event/timing/rig unchanged. Trunk support/anatomy/continuous getup/native LOOK required."
+        },
+        "recovery": {
+          "weight": 0.8687194191261605,
+          "supports": {
+            "scope": "Only bounded support construction, no actual state/full-motion/anatomy/clip/performance acceptance",
+            "rows": [
+              {
+                "side": "L",
+                "front": true,
+                "skipped": false,
+                "before": -399.73881006296506,
+                "after": -399.8806171788397,
+                "targetFloor": -400,
+                "targetY": -1.6999040447483613,
+                "iterations": 12
+              },
+              {
+                "side": "L",
+                "front": false,
+                "skipped": false,
+                "before": -400.16876699943293,
+                "after": -400.0000519646119,
+                "targetFloor": -400,
+                "targetY": 0.2285561977394376,
+                "iterations": 12
+              },
+              {
+                "side": "R",
+                "front": true,
+                "skipped": false,
+                "before": -399.7719612260877,
+                "after": -399.880617184773,
+                "targetFloor": -400,
+                "targetY": -1.6999039754324807,
+                "iterations": 12
+              },
+              {
+                "side": "R",
+                "front": false,
+                "skipped": false,
+                "before": -400.16876699943293,
+                "after": -400.00005196461177,
+                "targetFloor": -400,
+                "targetY": 0.22855619773927754,
+                "iterations": 12
+              }
+            ]
+          },
+          "seat": {
+            "before": -400.065330620586,
+            "after": -400,
+            "floorY": -400,
+            "worldShiftY": 0.06533062058599626,
+            "scope": "Existing lying pose only; no angle/root/geometry change, not a four-paw stance."
+          }
+        }
+      },
+      "baseHipsY": 0.5704,
+      "footLift": 0,
+      "flags": {
+        "partsLost": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "alive": true,
+        "hitReact": 0,
+        "sleeping": false,
+        "poi": false,
+        "getUpT": 0.28333333333333255
+      },
+      "scope": "Actual game pose at this sampled frame only.",
+      "dt": 0.016666666666666607,
+      "violations": [],
+      "floorGapMmByCams": 0,
+      "boundsH": 1.5132
+    },
+    "cave-awake": {
+      "title": "Cave Noise Wake · Awake (step 60)",
+      "state": "cave-awake",
+      "uuid": "e4fd4001-d3c8-49b2-9f99-8bbad6f277c4",
+      "ground": -400,
+      "minBodyGap": -0.000044322759492843034,
+      "nonHeadGap": -0.000044322759492843034,
+      "coreGap": 0.5224325795496156,
+      "supports": {
+        "handL": 0.000009548176024054555,
+        "footL": 0.11392449775132718,
+        "handR": 0.14024790447865598,
+        "footR": -0.000044322759492843034
+      },
+      "reading": {
+        "t": 6.427,
+        "st": "",
+        "p": [
+          47.878,
+          -400,
+          16.414
+        ],
+        "yaw": 2.758,
+        "rig": "zombie-skin",
+        "legL": {
+          "hipFlex": 83.9,
+          "hipAbd": -1.3,
+          "hipRot": -1.3,
+          "knee": 124.3,
+          "kneeVar": -0.6,
+          "kneeRot": -1.5
+        },
+        "armL": {
+          "shFlex": -39.2,
+          "shAbd": -9.4,
+          "shRot": 1.8,
+          "elbow": 82.8,
+          "elbowLat": 3.9,
+          "foreRot": -154.2
+        },
+        "legR": {
+          "hipFlex": 90.8,
+          "hipAbd": 2.4,
+          "hipRot": 3.1,
+          "knee": 105.9,
+          "kneeVar": -0.1,
+          "kneeRot": 0.5
+        },
+        "armR": {
+          "shFlex": -58.9,
+          "shAbd": 3.6,
+          "shRot": -2.5,
+          "elbow": 107.2,
+          "elbowLat": -3,
+          "foreRot": -149.5
+        },
+        "spineFlex": 0,
+        "spineLat": 0.7,
+        "spineRot": 0.3,
+        "neckFlex": -1.5,
+        "neckLat": 0.8,
+        "neckRot": -0.1,
+        "handL": [
+          [
+            48.509,
+            -0.031,
+            15.737
+          ],
+          [
+            -0.721,
+            -0.59,
+            0.364
+          ],
+          [
+            48.415,
+            0.894,
+            16.009
+          ]
+        ],
+        "handR": [
+          [
+            47.958,
+            0.125,
+            15.561
+          ],
+          [
+            0.245,
+            -0.61,
+            0.754
+          ],
+          [
+            47.8,
+            0.896,
+            15.75
+          ]
+        ],
+        "tgt": [
+          72.25,
+          11.25
+        ]
+      },
+      "sourceSupport": {
+        "scope": "Only bounded support construction, no actual state/full-motion/anatomy/clip/performance acceptance",
+        "rows": [
+          {
+            "side": "L",
+            "front": true,
+            "skipped": false,
+            "before": -399.88997326585576,
+            "after": -399.9999904518239,
+            "targetFloor": -400,
+            "targetY": 0.10113140372002571,
+            "iterations": 3
+          },
+          {
+            "side": "L",
+            "front": false,
+            "skipped": false,
+            "before": -400.02254379954746,
+            "after": -399.8860755022486,
+            "targetFloor": -399.8860393649329,
+            "targetY": 0.31660875324831106,
+            "iterations": 2
+          },
+          {
+            "side": "R",
+            "front": true,
+            "skipped": false,
+            "before": -399.752053788192,
+            "after": -399.85975209552134,
+            "targetFloor": -399.8597407568405,
+            "targetY": 0.22434299402575678,
+            "iterations": 2
+          },
+          {
+            "side": "R",
+            "front": false,
+            "skipped": false,
+            "before": -400.0882625675707,
+            "after": -400.00004432275944,
+            "targetFloor": -400,
+            "targetY": 0.18806038441589404,
+            "iterations": 4
+          }
+        ]
+      },
+      "baseHipsY": 0.5704,
+      "footLift": 0,
+      "flags": {
+        "partsLost": {
+          "armL": false,
+          "armR": false,
+          "legL": false,
+          "legR": false,
+          "head": false
+        },
+        "alive": true,
+        "hitReact": 0,
+        "sleeping": false,
+        "poi": false,
+        "getUpT": -7.28583859910259e-16
+      },
+      "scope": "Actual game pose at this sampled frame only.",
+      "dt": 0.016666666666666607,
+      "violations": [],
+      "floorGapMmByCams": -0.044,
+      "boundsH": 1.1649
+    }
+  },
+  "shots": [
+    {
+      "state": "statue",
+      "title": "Statue / Constructor (pre-motion)",
+      "light": "noon",
+      "view": "front",
+      "label": "Noon · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/statue-noon-front.png",
+      "md5": "d0292a64",
+      "sha1": "0641c8944cfb",
+      "mx": 227,
+      "cam": {
+        "x": -25.99999999493406,
+        "y": -199.2971660051764,
+        "z": -629.4560412593844,
+        "tx": -25.99999999493406,
+        "ty": -199.50348336279387,
+        "tz": -631.6222144435535,
+        "fov": 34
+      },
+      "boundsH": 1.0316,
+      "floorGapMm": -0.07,
+      "fillHeightPct": 85.01,
+      "fillWidthPct": 78.39,
+      "minBodyGapMm": -0.07,
+      "coreGapMm": null,
+      "supportsMm": null,
+      "violations": []
+    },
+    {
+      "state": "statue",
+      "title": "Statue / Constructor (pre-motion)",
+      "light": "noon",
+      "view": "3q",
+      "label": "Noon · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/statue-noon-3q.png",
+      "md5": "57f02dee",
+      "sha1": "db032a25c191",
+      "mx": 224,
+      "cam": {
+        "x": -24.556050458535097,
+        "y": -199.32114216648347,
+        "z": -629.9013823960253,
+        "tx": -25.99999999493406,
+        "ty": -199.52745952410095,
+        "tz": -631.6222144435535,
+        "fov": 34
+      },
+      "boundsH": 1.0316,
+      "floorGapMm": -0.07,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 73.13,
+      "minBodyGapMm": -0.07,
+      "coreGapMm": null,
+      "supportsMm": null,
+      "violations": []
+    },
+    {
+      "state": "statue",
+      "title": "Statue / Constructor (pre-motion)",
+      "light": "noon",
+      "view": "side",
+      "label": "Noon · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/statue-noon-side.png",
+      "md5": "4f179561",
+      "sha1": "d6cd5368f91b",
+      "mx": 220,
+      "cam": {
+        "x": -23.772398898016473,
+        "y": -199.31485940298953,
+        "z": -631.6222144435535,
+        "tx": -25.99999999493406,
+        "ty": -199.521176760607,
+        "tz": -631.6222144435535,
+        "fov": 34
+      },
+      "boundsH": 1.0316,
+      "floorGapMm": -0.07,
+      "fillHeightPct": 82.53,
+      "fillWidthPct": 90.01,
+      "minBodyGapMm": -0.07,
+      "coreGapMm": null,
+      "supportsMm": null,
+      "violations": []
+    },
+    {
+      "state": "statue",
+      "title": "Statue / Constructor (pre-motion)",
+      "light": "noon",
+      "view": "back",
+      "label": "Noon · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/statue-noon-back.png",
+      "md5": "4ead1fe2",
+      "sha1": "d07a1f2d12fc",
+      "mx": 221,
+      "cam": {
+        "x": -25.99999999493406,
+        "y": -199.36754779599048,
+        "z": -633.9160882436705,
+        "tx": -25.99999999493406,
+        "ty": -199.57386515360795,
+        "tz": -631.6222144435535,
+        "fov": 34
+      },
+      "boundsH": 1.0316,
+      "floorGapMm": -0.07,
+      "fillHeightPct": 84.98,
+      "fillWidthPct": 60.5,
+      "minBodyGapMm": -0.07,
+      "coreGapMm": null,
+      "supportsMm": null,
+      "violations": []
+    },
+    {
+      "state": "statue",
+      "title": "Statue / Constructor (pre-motion)",
+      "light": "night",
+      "view": "front",
+      "label": "Night · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/statue-night-front.png",
+      "md5": "e141592b",
+      "sha1": "3cdaa07a52a4",
+      "mx": 255,
+      "cam": {
+        "x": -25.99999999493406,
+        "y": -199.2971660051764,
+        "z": -629.4560412593844,
+        "tx": -25.99999999493406,
+        "ty": -199.50348336279387,
+        "tz": -631.6222144435535,
+        "fov": 34
+      },
+      "boundsH": 1.0316,
+      "floorGapMm": -0.07,
+      "fillHeightPct": 85.01,
+      "fillWidthPct": 78.39,
+      "minBodyGapMm": -0.07,
+      "coreGapMm": null,
+      "supportsMm": null,
+      "violations": []
+    },
+    {
+      "state": "statue",
+      "title": "Statue / Constructor (pre-motion)",
+      "light": "night",
+      "view": "3q",
+      "label": "Night · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/statue-night-3q.png",
+      "md5": "354c60dc",
+      "sha1": "c132c1711f53",
+      "mx": 255,
+      "cam": {
+        "x": -24.556050458535097,
+        "y": -199.32114216648347,
+        "z": -629.9013823960253,
+        "tx": -25.99999999493406,
+        "ty": -199.52745952410095,
+        "tz": -631.6222144435535,
+        "fov": 34
+      },
+      "boundsH": 1.0316,
+      "floorGapMm": -0.07,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 73.13,
+      "minBodyGapMm": -0.07,
+      "coreGapMm": null,
+      "supportsMm": null,
+      "violations": []
+    },
+    {
+      "state": "statue",
+      "title": "Statue / Constructor (pre-motion)",
+      "light": "night",
+      "view": "side",
+      "label": "Night · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/statue-night-side.png",
+      "md5": "5bc6d2c0",
+      "sha1": "f240e7d2f5c8",
+      "mx": 254,
+      "cam": {
+        "x": -23.772398898016473,
+        "y": -199.31485940298953,
+        "z": -631.6222144435535,
+        "tx": -25.99999999493406,
+        "ty": -199.521176760607,
+        "tz": -631.6222144435535,
+        "fov": 34
+      },
+      "boundsH": 1.0316,
+      "floorGapMm": -0.07,
+      "fillHeightPct": 82.53,
+      "fillWidthPct": 90.01,
+      "minBodyGapMm": -0.07,
+      "coreGapMm": null,
+      "supportsMm": null,
+      "violations": []
+    },
+    {
+      "state": "statue",
+      "title": "Statue / Constructor (pre-motion)",
+      "light": "night",
+      "view": "back",
+      "label": "Night · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/statue-night-back.png",
+      "md5": "bc31d471",
+      "sha1": "344d7b3d1871",
+      "mx": 255,
+      "cam": {
+        "x": -25.99999999493406,
+        "y": -199.36754779599048,
+        "z": -633.9160882436705,
+        "tx": -25.99999999493406,
+        "ty": -199.57386515360795,
+        "tz": -631.6222144435535,
+        "fov": 34
+      },
+      "boundsH": 1.0316,
+      "floorGapMm": -0.07,
+      "fillHeightPct": 84.98,
+      "fillWidthPct": 60.5,
+      "minBodyGapMm": -0.07,
+      "coreGapMm": null,
+      "supportsMm": null,
+      "violations": []
+    },
+    {
+      "state": "live-idle",
+      "title": "Live Idle (post-applyLeaperMotion)",
+      "light": "noon",
+      "view": "front",
+      "label": "Noon · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/live-idle-noon-front.png",
+      "md5": "b0171c3b",
+      "sha1": "02280e2306e7",
+      "mx": 222,
+      "cam": {
+        "x": -25.41022970567513,
+        "y": -199.2641240176604,
+        "z": -632.0000000116364,
+        "tx": -27.644956142929786,
+        "ty": -199.47875817940812,
+        "tz": -632.0000000116364,
+        "fov": 34
+      },
+      "boundsH": 1.0732,
+      "floorGapMm": -0.073,
+      "fillHeightPct": 85.03,
+      "fillWidthPct": 70.79,
+      "minBodyGapMm": -0.073,
+      "coreGapMm": 471.947,
+      "supportsMm": {
+        "handL": -0.025,
+        "footL": -0.073,
+        "handR": -0.025,
+        "footR": -0.073
+      },
+      "violations": []
+    },
+    {
+      "state": "live-idle",
+      "title": "Live Idle (post-applyLeaperMotion)",
+      "light": "noon",
+      "view": "3q",
+      "label": "Noon · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/live-idle-noon-3q.png",
+      "md5": "5bf2539d",
+      "sha1": "fad775e04afc",
+      "mx": 223,
+      "cam": {
+        "x": -25.87481221539838,
+        "y": -199.2880143963122,
+        "z": -633.4853271283587,
+        "tx": -27.644956142929786,
+        "ty": -199.50264855805992,
+        "tz": -632.0000000116364,
+        "fov": 34
+      },
+      "boundsH": 1.0732,
+      "floorGapMm": -0.073,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 66.94,
+      "minBodyGapMm": -0.073,
+      "coreGapMm": 471.947,
+      "supportsMm": {
+        "handL": -0.025,
+        "footL": -0.073,
+        "handR": -0.025,
+        "footR": -0.073
+      },
+      "violations": []
+    },
+    {
+      "state": "live-idle",
+      "title": "Live Idle (post-applyLeaperMotion)",
+      "light": "noon",
+      "view": "side",
+      "label": "Noon · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/live-idle-noon-side.png",
+      "md5": "a2569abf",
+      "sha1": "93f230739297",
+      "mx": 226,
+      "cam": {
+        "x": -27.644956142929786,
+        "y": -199.28307142389204,
+        "z": -634.2337070217158,
+        "tx": -27.644956142929786,
+        "ty": -199.49770558563975,
+        "tz": -632.0000000116364,
+        "fov": 34
+      },
+      "boundsH": 1.0732,
+      "floorGapMm": -0.073,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 83.98,
+      "minBodyGapMm": -0.073,
+      "coreGapMm": 471.947,
+      "supportsMm": {
+        "handL": -0.025,
+        "footL": -0.073,
+        "handR": -0.025,
+        "footR": -0.073
+      },
+      "violations": []
+    },
+    {
+      "state": "live-idle",
+      "title": "Live Idle (post-applyLeaperMotion)",
+      "light": "noon",
+      "view": "back",
+      "label": "Noon · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/live-idle-noon-back.png",
+      "md5": "b0447ca7",
+      "sha1": "c7057a9f752a",
+      "mx": 222,
+      "cam": {
+        "x": -29.9991037609642,
+        "y": -199.33198150002357,
+        "z": -632.0000000116364,
+        "tx": -27.644956142929786,
+        "ty": -199.54661566177128,
+        "tz": -632.0000000116364,
+        "fov": 34
+      },
+      "boundsH": 1.0732,
+      "floorGapMm": -0.073,
+      "fillHeightPct": 84.9,
+      "fillWidthPct": 55.72,
+      "minBodyGapMm": -0.073,
+      "coreGapMm": 471.947,
+      "supportsMm": {
+        "handL": -0.025,
+        "footL": -0.073,
+        "handR": -0.025,
+        "footR": -0.073
+      },
+      "violations": []
+    },
+    {
+      "state": "live-idle",
+      "title": "Live Idle (post-applyLeaperMotion)",
+      "light": "night",
+      "view": "front",
+      "label": "Night · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/live-idle-night-front.png",
+      "md5": "5c21ae6a",
+      "sha1": "1fc4ea836cc9",
+      "mx": 255,
+      "cam": {
+        "x": -25.41022970567513,
+        "y": -199.2641240176604,
+        "z": -632.0000000116364,
+        "tx": -27.644956142929786,
+        "ty": -199.47875817940812,
+        "tz": -632.0000000116364,
+        "fov": 34
+      },
+      "boundsH": 1.0732,
+      "floorGapMm": -0.073,
+      "fillHeightPct": 85.03,
+      "fillWidthPct": 70.79,
+      "minBodyGapMm": -0.073,
+      "coreGapMm": 471.947,
+      "supportsMm": {
+        "handL": -0.025,
+        "footL": -0.073,
+        "handR": -0.025,
+        "footR": -0.073
+      },
+      "violations": []
+    },
+    {
+      "state": "live-idle",
+      "title": "Live Idle (post-applyLeaperMotion)",
+      "light": "night",
+      "view": "3q",
+      "label": "Night · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/live-idle-night-3q.png",
+      "md5": "d1e13563",
+      "sha1": "6e90c57214ae",
+      "mx": 254,
+      "cam": {
+        "x": -25.87481221539838,
+        "y": -199.2880143963122,
+        "z": -633.4853271283587,
+        "tx": -27.644956142929786,
+        "ty": -199.50264855805992,
+        "tz": -632.0000000116364,
+        "fov": 34
+      },
+      "boundsH": 1.0732,
+      "floorGapMm": -0.073,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 66.94,
+      "minBodyGapMm": -0.073,
+      "coreGapMm": 471.947,
+      "supportsMm": {
+        "handL": -0.025,
+        "footL": -0.073,
+        "handR": -0.025,
+        "footR": -0.073
+      },
+      "violations": []
+    },
+    {
+      "state": "live-idle",
+      "title": "Live Idle (post-applyLeaperMotion)",
+      "light": "night",
+      "view": "side",
+      "label": "Night · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/live-idle-night-side.png",
+      "md5": "3ebb5323",
+      "sha1": "3f47a2c9c1df",
+      "mx": 251,
+      "cam": {
+        "x": -27.644956142929786,
+        "y": -199.28307142389204,
+        "z": -634.2337070217158,
+        "tx": -27.644956142929786,
+        "ty": -199.49770558563975,
+        "tz": -632.0000000116364,
+        "fov": 34
+      },
+      "boundsH": 1.0732,
+      "floorGapMm": -0.073,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 83.98,
+      "minBodyGapMm": -0.073,
+      "coreGapMm": 471.947,
+      "supportsMm": {
+        "handL": -0.025,
+        "footL": -0.073,
+        "handR": -0.025,
+        "footR": -0.073
+      },
+      "violations": []
+    },
+    {
+      "state": "live-idle",
+      "title": "Live Idle (post-applyLeaperMotion)",
+      "light": "night",
+      "view": "back",
+      "label": "Night · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/live-idle-night-back.png",
+      "md5": "383fbb30",
+      "sha1": "33f8a46fede3",
+      "mx": 253,
+      "cam": {
+        "x": -29.9991037609642,
+        "y": -199.33198150002357,
+        "z": -632.0000000116364,
+        "tx": -27.644956142929786,
+        "ty": -199.54661566177128,
+        "tz": -632.0000000116364,
+        "fov": 34
+      },
+      "boundsH": 1.0732,
+      "floorGapMm": -0.073,
+      "fillHeightPct": 84.9,
+      "fillWidthPct": 55.72,
+      "minBodyGapMm": -0.073,
+      "coreGapMm": 471.947,
+      "supportsMm": {
+        "handL": -0.025,
+        "footL": -0.073,
+        "handR": -0.025,
+        "footR": -0.073
+      },
+      "violations": []
+    },
+    {
+      "state": "walk",
+      "title": "Live Walk (step 30 mid-stride)",
+      "light": "noon",
+      "view": "front",
+      "label": "Noon · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/walk-noon-front.png",
+      "md5": "eacefea9",
+      "sha1": "563a30bb71ad",
+      "mx": 222,
+      "cam": {
+        "x": -23.527231177212855,
+        "y": -199.29806317241935,
+        "z": -631.7111937862093,
+        "tx": -25.9018665093837,
+        "ty": -199.5111403229739,
+        "tz": -631.8910359046721,
+        "fov": 34
+      },
+      "boundsH": 1.0654,
+      "floorGapMm": -0.065,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 67.99,
+      "minBodyGapMm": -0.065,
+      "coreGapMm": 472.199,
+      "supportsMm": {
+        "handL": 109.485,
+        "footL": -0.065,
+        "handR": 0.006,
+        "footR": 88.986
+      },
+      "violations": []
+    },
+    {
+      "state": "walk",
+      "title": "Live Walk (step 30 mid-stride)",
+      "light": "noon",
+      "view": "3q",
+      "label": "Noon · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/walk-noon-3q.png",
+      "md5": "157c19c4",
+      "sha1": "db10483c2191",
+      "mx": 224,
+      "cam": {
+        "x": -23.93835220307134,
+        "y": -199.31271726021697,
+        "z": -633.3003534391996,
+        "tx": -25.9018665093837,
+        "ty": -199.5257944107715,
+        "tz": -631.8910359046721,
+        "fov": 34
+      },
+      "boundsH": 1.0654,
+      "floorGapMm": -0.065,
+      "fillHeightPct": 84.97,
+      "fillWidthPct": 69.79,
+      "minBodyGapMm": -0.065,
+      "coreGapMm": 472.199,
+      "supportsMm": {
+        "handL": 109.485,
+        "footL": -0.065,
+        "handR": 0.006,
+        "footR": 88.986
+      },
+      "violations": []
+    },
+    {
+      "state": "walk",
+      "title": "Live Walk (step 30 mid-stride)",
+      "light": "noon",
+      "view": "side",
+      "label": "Noon · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/walk-noon-side.png",
+      "md5": "72d9cd47",
+      "sha1": "3de6a9f2f5c4",
+      "mx": 229,
+      "cam": {
+        "x": -25.72362051776597,
+        "y": -199.2864203736778,
+        "z": -634.2445959779811,
+        "tx": -25.9018665093837,
+        "ty": -199.49949752423234,
+        "tz": -631.8910359046721,
+        "fov": 34
+      },
+      "boundsH": 1.0654,
+      "floorGapMm": -0.065,
+      "fillHeightPct": 79.76,
+      "fillWidthPct": 90.01,
+      "minBodyGapMm": -0.065,
+      "coreGapMm": 472.199,
+      "supportsMm": {
+        "handL": 109.485,
+        "footL": -0.065,
+        "handR": 0.006,
+        "footR": 88.986
+      },
+      "violations": []
+    },
+    {
+      "state": "walk",
+      "title": "Live Walk (step 30 mid-stride)",
+      "light": "noon",
+      "view": "back",
+      "label": "Noon · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/walk-noon-back.png",
+      "md5": "b9b4f256",
+      "sha1": "36bd4ab6fc56",
+      "mx": 219,
+      "cam": {
+        "x": -28.13206909450973,
+        "y": -199.32386441399328,
+        "z": -632.0599394630739,
+        "tx": -25.9018665093837,
+        "ty": -199.53694156454782,
+        "tz": -631.8910359046721,
+        "fov": 34
+      },
+      "boundsH": 1.0654,
+      "floorGapMm": -0.065,
+      "fillHeightPct": 84.96,
+      "fillWidthPct": 57.98,
+      "minBodyGapMm": -0.065,
+      "coreGapMm": 472.199,
+      "supportsMm": {
+        "handL": 109.485,
+        "footL": -0.065,
+        "handR": 0.006,
+        "footR": 88.986
+      },
+      "violations": []
+    },
+    {
+      "state": "walk",
+      "title": "Live Walk (step 30 mid-stride)",
+      "light": "night",
+      "view": "front",
+      "label": "Night · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/walk-night-front.png",
+      "md5": "d9ac9b16",
+      "sha1": "c8d268df441a",
+      "mx": 255,
+      "cam": {
+        "x": -23.527231177212855,
+        "y": -199.29806317241935,
+        "z": -631.7111937862093,
+        "tx": -25.9018665093837,
+        "ty": -199.5111403229739,
+        "tz": -631.8910359046721,
+        "fov": 34
+      },
+      "boundsH": 1.0654,
+      "floorGapMm": -0.065,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 67.99,
+      "minBodyGapMm": -0.065,
+      "coreGapMm": 472.199,
+      "supportsMm": {
+        "handL": 109.485,
+        "footL": -0.065,
+        "handR": 0.006,
+        "footR": 88.986
+      },
+      "violations": []
+    },
+    {
+      "state": "walk",
+      "title": "Live Walk (step 30 mid-stride)",
+      "light": "night",
+      "view": "3q",
+      "label": "Night · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/walk-night-3q.png",
+      "md5": "a1ac43b6",
+      "sha1": "4fbb0da796b2",
+      "mx": 255,
+      "cam": {
+        "x": -23.93835220307134,
+        "y": -199.31271726021697,
+        "z": -633.3003534391996,
+        "tx": -25.9018665093837,
+        "ty": -199.5257944107715,
+        "tz": -631.8910359046721,
+        "fov": 34
+      },
+      "boundsH": 1.0654,
+      "floorGapMm": -0.065,
+      "fillHeightPct": 84.97,
+      "fillWidthPct": 69.79,
+      "minBodyGapMm": -0.065,
+      "coreGapMm": 472.199,
+      "supportsMm": {
+        "handL": 109.485,
+        "footL": -0.065,
+        "handR": 0.006,
+        "footR": 88.986
+      },
+      "violations": []
+    },
+    {
+      "state": "walk",
+      "title": "Live Walk (step 30 mid-stride)",
+      "light": "night",
+      "view": "side",
+      "label": "Night · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/walk-night-side.png",
+      "md5": "17d1cc3f",
+      "sha1": "401e01e6b9fa",
+      "mx": 248,
+      "cam": {
+        "x": -25.72362051776597,
+        "y": -199.2864203736778,
+        "z": -634.2445959779811,
+        "tx": -25.9018665093837,
+        "ty": -199.49949752423234,
+        "tz": -631.8910359046721,
+        "fov": 34
+      },
+      "boundsH": 1.0654,
+      "floorGapMm": -0.065,
+      "fillHeightPct": 79.76,
+      "fillWidthPct": 90.01,
+      "minBodyGapMm": -0.065,
+      "coreGapMm": 472.199,
+      "supportsMm": {
+        "handL": 109.485,
+        "footL": -0.065,
+        "handR": 0.006,
+        "footR": 88.986
+      },
+      "violations": []
+    },
+    {
+      "state": "walk",
+      "title": "Live Walk (step 30 mid-stride)",
+      "light": "night",
+      "view": "back",
+      "label": "Night · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/walk-night-back.png",
+      "md5": "339cdaf7",
+      "sha1": "5945a325c82d",
+      "mx": 255,
+      "cam": {
+        "x": -28.13206909450973,
+        "y": -199.32386441399328,
+        "z": -632.0599394630739,
+        "tx": -25.9018665093837,
+        "ty": -199.53694156454782,
+        "tz": -631.8910359046721,
+        "fov": 34
+      },
+      "boundsH": 1.0654,
+      "floorGapMm": -0.065,
+      "fillHeightPct": 84.96,
+      "fillWidthPct": 57.98,
+      "minBodyGapMm": -0.065,
+      "coreGapMm": 472.199,
+      "supportsMm": {
+        "handL": 109.485,
+        "footL": -0.065,
+        "handR": 0.006,
+        "footR": 88.986
+      },
+      "violations": []
+    },
+    {
+      "state": "body-hit",
+      "title": "Public Body Hit (hit step 18)",
+      "light": "noon",
+      "view": "front",
+      "label": "Noon · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/body-hit-noon-front.png",
+      "md5": "845cb092",
+      "sha1": "444066197203",
+      "mx": 217,
+      "cam": {
+        "x": -23.07642720303456,
+        "y": -199.3819028508481,
+        "z": -632.0136940406571,
+        "tx": -25.809447017616282,
+        "ty": -199.59983389256806,
+        "tz": -631.791914680997,
+        "fov": 34
+      },
+      "boundsH": 1.0897,
+      "floorGapMm": -0.049,
+      "fillHeightPct": 84.88,
+      "fillWidthPct": 70.09,
+      "minBodyGapMm": -0.049,
+      "coreGapMm": 477.609,
+      "supportsMm": {
+        "handL": 0.022,
+        "footL": 0.049,
+        "handR": -0.049,
+        "footR": 0.06
+      },
+      "violations": []
+    },
+    {
+      "state": "body-hit",
+      "title": "Public Body Hit (hit step 18)",
+      "light": "noon",
+      "view": "3q",
+      "label": "Noon · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/body-hit-noon-3q.png",
+      "md5": "139803c0",
+      "sha1": "4836dd28d806",
+      "mx": 221,
+      "cam": {
+        "x": -23.859718169917805,
+        "y": -199.3896882983874,
+        "z": -633.7172466580186,
+        "tx": -25.809447017616282,
+        "ty": -199.60761934010736,
+        "tz": -631.791914680997,
+        "fov": 34
+      },
+      "boundsH": 1.0897,
+      "floorGapMm": -0.049,
+      "fillHeightPct": 84.87,
+      "fillWidthPct": 66.66,
+      "minBodyGapMm": -0.049,
+      "coreGapMm": 477.609,
+      "supportsMm": {
+        "handL": 0.022,
+        "footL": 0.049,
+        "handR": -0.049,
+        "footR": 0.06
+      },
+      "violations": []
+    },
+    {
+      "state": "body-hit",
+      "title": "Public Body Hit (hit step 18)",
+      "light": "noon",
+      "view": "side",
+      "label": "Noon · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/body-hit-noon-side.png",
+      "md5": "375b5a8a",
+      "sha1": "9ed0f81bea29",
+      "mx": 221,
+      "cam": {
+        "x": -26.10889917700495,
+        "y": -199.2710986286588,
+        "z": -635.4821078819455,
+        "tx": -25.809447017616282,
+        "ty": -199.48902967037876,
+        "tz": -631.791914680997,
+        "fov": 34
+      },
+      "boundsH": 1.0897,
+      "floorGapMm": -0.049,
+      "fillHeightPct": 51.36,
+      "fillWidthPct": 90,
+      "minBodyGapMm": -0.049,
+      "coreGapMm": 477.609,
+      "supportsMm": {
+        "handL": 0.022,
+        "footL": 0.049,
+        "handR": -0.049,
+        "footR": 0.06
+      },
+      "violations": []
+    },
+    {
+      "state": "body-hit",
+      "title": "Public Body Hit (hit step 18)",
+      "light": "noon",
+      "view": "back",
+      "label": "Noon · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/body-hit-noon-back.png",
+      "md5": "2246d589",
+      "sha1": "979e14c2c3ae",
+      "mx": 216,
+      "cam": {
+        "x": -28.400920520556042,
+        "y": -199.36966548319623,
+        "z": -631.5816215353009,
+        "tx": -25.809447017616282,
+        "ty": -199.5875965249162,
+        "tz": -631.791914680997,
+        "fov": 34
+      },
+      "boundsH": 1.0897,
+      "floorGapMm": -0.049,
+      "fillHeightPct": 84.96,
+      "fillWidthPct": 50.98,
+      "minBodyGapMm": -0.049,
+      "coreGapMm": 477.609,
+      "supportsMm": {
+        "handL": 0.022,
+        "footL": 0.049,
+        "handR": -0.049,
+        "footR": 0.06
+      },
+      "violations": []
+    },
+    {
+      "state": "body-hit",
+      "title": "Public Body Hit (hit step 18)",
+      "light": "night",
+      "view": "front",
+      "label": "Night · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/body-hit-night-front.png",
+      "md5": "63b6b789",
+      "sha1": "4c298973c159",
+      "mx": 255,
+      "cam": {
+        "x": -23.07642720303456,
+        "y": -199.3819028508481,
+        "z": -632.0136940406571,
+        "tx": -25.809447017616282,
+        "ty": -199.59983389256806,
+        "tz": -631.791914680997,
+        "fov": 34
+      },
+      "boundsH": 1.0897,
+      "floorGapMm": -0.049,
+      "fillHeightPct": 84.88,
+      "fillWidthPct": 70.09,
+      "minBodyGapMm": -0.049,
+      "coreGapMm": 477.609,
+      "supportsMm": {
+        "handL": 0.022,
+        "footL": 0.049,
+        "handR": -0.049,
+        "footR": 0.06
+      },
+      "violations": []
+    },
+    {
+      "state": "body-hit",
+      "title": "Public Body Hit (hit step 18)",
+      "light": "night",
+      "view": "3q",
+      "label": "Night · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/body-hit-night-3q.png",
+      "md5": "3cfcc61f",
+      "sha1": "4afb3746c497",
+      "mx": 255,
+      "cam": {
+        "x": -23.859718169917805,
+        "y": -199.3896882983874,
+        "z": -633.7172466580186,
+        "tx": -25.809447017616282,
+        "ty": -199.60761934010736,
+        "tz": -631.791914680997,
+        "fov": 34
+      },
+      "boundsH": 1.0897,
+      "floorGapMm": -0.049,
+      "fillHeightPct": 84.87,
+      "fillWidthPct": 66.66,
+      "minBodyGapMm": -0.049,
+      "coreGapMm": 477.609,
+      "supportsMm": {
+        "handL": 0.022,
+        "footL": 0.049,
+        "handR": -0.049,
+        "footR": 0.06
+      },
+      "violations": []
+    },
+    {
+      "state": "body-hit",
+      "title": "Public Body Hit (hit step 18)",
+      "light": "night",
+      "view": "side",
+      "label": "Night · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/body-hit-night-side.png",
+      "md5": "6aed0c46",
+      "sha1": "325b583e9691",
+      "mx": 230,
+      "cam": {
+        "x": -26.10889917700495,
+        "y": -199.2710986286588,
+        "z": -635.4821078819455,
+        "tx": -25.809447017616282,
+        "ty": -199.48902967037876,
+        "tz": -631.791914680997,
+        "fov": 34
+      },
+      "boundsH": 1.0897,
+      "floorGapMm": -0.049,
+      "fillHeightPct": 51.36,
+      "fillWidthPct": 90,
+      "minBodyGapMm": -0.049,
+      "coreGapMm": 477.609,
+      "supportsMm": {
+        "handL": 0.022,
+        "footL": 0.049,
+        "handR": -0.049,
+        "footR": 0.06
+      },
+      "violations": []
+    },
+    {
+      "state": "body-hit",
+      "title": "Public Body Hit (hit step 18)",
+      "light": "night",
+      "view": "back",
+      "label": "Night · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/body-hit-night-back.png",
+      "md5": "21de8389",
+      "sha1": "546ec3ccc01a",
+      "mx": 255,
+      "cam": {
+        "x": -28.400920520556042,
+        "y": -199.36966548319623,
+        "z": -631.5816215353009,
+        "tx": -25.809447017616282,
+        "ty": -199.5875965249162,
+        "tz": -631.791914680997,
+        "fov": 34
+      },
+      "boundsH": 1.0897,
+      "floorGapMm": -0.049,
+      "fillHeightPct": 84.96,
+      "fillWidthPct": 50.98,
+      "minBodyGapMm": -0.049,
+      "coreGapMm": 477.609,
+      "supportsMm": {
+        "handL": 0.022,
+        "footL": 0.049,
+        "handR": -0.049,
+        "footR": 0.06
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone",
+      "title": "Public Crush Forward · Prone (step 60)",
+      "light": "noon",
+      "view": "front",
+      "label": "Noon · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-noon-front.png",
+      "md5": "f7e3ab02",
+      "sha1": "cbb91cf144ca",
+      "mx": 225,
+      "cam": {
+        "x": -27.999999996546855,
+        "y": -199.67014920229445,
+        "z": -627.6450074456372,
+        "tx": -27.999999996546855,
+        "ty": -199.7861902770443,
+        "tz": -630.6787149811704,
+        "fov": 34
+      },
+      "boundsH": 0.5802,
+      "floorGapMm": 0,
+      "fillHeightPct": 40.32,
+      "fillWidthPct": 87.21,
+      "minBodyGapMm": 0,
+      "coreGapMm": 11.218,
+      "supportsMm": {
+        "handL": 9.32,
+        "footL": 10.22,
+        "handR": 9.32,
+        "footR": 24.22
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone",
+      "title": "Public Crush Forward · Prone (step 60)",
+      "light": "noon",
+      "view": "3q",
+      "label": "Noon · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-noon-3q.png",
+      "md5": "55f0d7c4",
+      "sha1": "ddd85675c97f",
+      "mx": 224,
+      "cam": {
+        "x": -25.515699700426502,
+        "y": -199.64207823972362,
+        "z": -627.7180411781861,
+        "tx": -27.999999996546855,
+        "ty": -199.75811931447348,
+        "tz": -630.6787149811704,
+        "fov": 34
+      },
+      "boundsH": 0.5802,
+      "floorGapMm": 0,
+      "fillHeightPct": 30.08,
+      "fillWidthPct": 90,
+      "minBodyGapMm": 0,
+      "coreGapMm": 11.218,
+      "supportsMm": {
+        "handL": 9.32,
+        "footL": 10.22,
+        "handR": 9.32,
+        "footR": 24.22
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone",
+      "title": "Public Crush Forward · Prone (step 60)",
+      "light": "noon",
+      "view": "side",
+      "label": "Noon · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-noon-side.png",
+      "md5": "731d7c7e",
+      "sha1": "af0411fa532e",
+      "mx": 218,
+      "cam": {
+        "x": -23.30516280048169,
+        "y": -199.59882597039453,
+        "z": -630.6787149811704,
+        "tx": -27.999999996546855,
+        "ty": -199.7148670451444,
+        "tz": -630.6787149811704,
+        "fov": 34
+      },
+      "boundsH": 0.5802,
+      "floorGapMm": 0,
+      "fillHeightPct": 21.3,
+      "fillWidthPct": 90.01,
+      "minBodyGapMm": 0,
+      "coreGapMm": 11.218,
+      "supportsMm": {
+        "handL": 9.32,
+        "footL": 10.22,
+        "handR": 9.32,
+        "footR": 24.22
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone",
+      "title": "Public Crush Forward · Prone (step 60)",
+      "light": "noon",
+      "view": "back",
+      "label": "Noon · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-noon-back.png",
+      "md5": "596d6106",
+      "sha1": "125e5f55ee94",
+      "mx": 204,
+      "cam": {
+        "x": -27.999999996546855,
+        "y": -199.85079516931523,
+        "z": -634.3475774163652,
+        "tx": -27.999999996546855,
+        "ty": -199.9668362440651,
+        "tz": -630.6787149811704,
+        "fov": 34
+      },
+      "boundsH": 0.5802,
+      "floorGapMm": 0,
+      "fillHeightPct": 28.32,
+      "fillWidthPct": 37.62,
+      "minBodyGapMm": 0,
+      "coreGapMm": 11.218,
+      "supportsMm": {
+        "handL": 9.32,
+        "footL": 10.22,
+        "handR": 9.32,
+        "footR": 24.22
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone",
+      "title": "Public Crush Forward · Prone (step 60)",
+      "light": "night",
+      "view": "front",
+      "label": "Night · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-night-front.png",
+      "md5": "18f56af9",
+      "sha1": "e70d7402b7e6",
+      "mx": 255,
+      "cam": {
+        "x": -27.999999996546855,
+        "y": -199.67014920229445,
+        "z": -627.6450074456372,
+        "tx": -27.999999996546855,
+        "ty": -199.7861902770443,
+        "tz": -630.6787149811704,
+        "fov": 34
+      },
+      "boundsH": 0.5802,
+      "floorGapMm": 0,
+      "fillHeightPct": 40.32,
+      "fillWidthPct": 87.21,
+      "minBodyGapMm": 0,
+      "coreGapMm": 11.218,
+      "supportsMm": {
+        "handL": 9.32,
+        "footL": 10.22,
+        "handR": 9.32,
+        "footR": 24.22
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone",
+      "title": "Public Crush Forward · Prone (step 60)",
+      "light": "night",
+      "view": "3q",
+      "label": "Night · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-night-3q.png",
+      "md5": "8ba0f0f7",
+      "sha1": "db8a97e4d6d9",
+      "mx": 255,
+      "cam": {
+        "x": -25.515699700426502,
+        "y": -199.64207823972362,
+        "z": -627.7180411781861,
+        "tx": -27.999999996546855,
+        "ty": -199.75811931447348,
+        "tz": -630.6787149811704,
+        "fov": 34
+      },
+      "boundsH": 0.5802,
+      "floorGapMm": 0,
+      "fillHeightPct": 30.08,
+      "fillWidthPct": 90,
+      "minBodyGapMm": 0,
+      "coreGapMm": 11.218,
+      "supportsMm": {
+        "handL": 9.32,
+        "footL": 10.22,
+        "handR": 9.32,
+        "footR": 24.22
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone",
+      "title": "Public Crush Forward · Prone (step 60)",
+      "light": "night",
+      "view": "side",
+      "label": "Night · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-night-side.png",
+      "md5": "0a476b03",
+      "sha1": "df0278f70614",
+      "mx": 206,
+      "cam": {
+        "x": -23.30516280048169,
+        "y": -199.59882597039453,
+        "z": -630.6787149811704,
+        "tx": -27.999999996546855,
+        "ty": -199.7148670451444,
+        "tz": -630.6787149811704,
+        "fov": 34
+      },
+      "boundsH": 0.5802,
+      "floorGapMm": 0,
+      "fillHeightPct": 21.3,
+      "fillWidthPct": 90.01,
+      "minBodyGapMm": 0,
+      "coreGapMm": 11.218,
+      "supportsMm": {
+        "handL": 9.32,
+        "footL": 10.22,
+        "handR": 9.32,
+        "footR": 24.22
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone",
+      "title": "Public Crush Forward · Prone (step 60)",
+      "light": "night",
+      "view": "back",
+      "label": "Night · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-night-back.png",
+      "md5": "1d62152e",
+      "sha1": "5a23842ec014",
+      "mx": 255,
+      "cam": {
+        "x": -27.999999996546855,
+        "y": -199.85079516931523,
+        "z": -634.3475774163652,
+        "tx": -27.999999996546855,
+        "ty": -199.9668362440651,
+        "tz": -630.6787149811704,
+        "fov": 34
+      },
+      "boundsH": 0.5802,
+      "floorGapMm": 0,
+      "fillHeightPct": 28.32,
+      "fillWidthPct": 37.62,
+      "minBodyGapMm": 0,
+      "coreGapMm": 11.218,
+      "supportsMm": {
+        "handL": 9.32,
+        "footL": 10.22,
+        "handR": 9.32,
+        "footR": 24.22
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone-getup",
+      "title": "Public Crush Forward · Get-Up (step 110)",
+      "light": "noon",
+      "view": "front",
+      "label": "Noon · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-getup-noon-front.png",
+      "md5": "78a9bce2",
+      "sha1": "5d3dd945688e",
+      "mx": 232,
+      "cam": {
+        "x": -27.99573609051241,
+        "y": -199.26822891618147,
+        "z": -628.977432018419,
+        "tx": -27.99573609051241,
+        "ty": -199.4794065263984,
+        "tz": -631.3161625281258,
+        "fov": 34
+      },
+      "boundsH": 1.0559,
+      "floorGapMm": 0,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 74.84,
+      "minBodyGapMm": 0,
+      "coreGapMm": 468.247,
+      "supportsMm": {
+        "handL": 7.743,
+        "footL": 83.973,
+        "handR": 0,
+        "footR": 94.057
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone-getup",
+      "title": "Public Crush Forward · Get-Up (step 110)",
+      "light": "noon",
+      "view": "3q",
+      "label": "Noon · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-getup-noon-3q.png",
+      "md5": "17f7b40f",
+      "sha1": "60cded52474a",
+      "mx": 233,
+      "cam": {
+        "x": -26.450244298985712,
+        "y": -199.2995191340439,
+        "z": -629.474317133249,
+        "tx": -27.99573609051241,
+        "ty": -199.51069674426083,
+        "tz": -631.3161625281258,
+        "fov": 34
+      },
+      "boundsH": 1.0559,
+      "floorGapMm": 0,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 82.85,
+      "minBodyGapMm": 0,
+      "coreGapMm": 468.247,
+      "supportsMm": {
+        "handL": 7.743,
+        "footL": 83.973,
+        "handR": 0,
+        "footR": 94.057
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone-getup",
+      "title": "Public Crush Forward · Get-Up (step 110)",
+      "light": "noon",
+      "view": "side",
+      "label": "Noon · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-getup-noon-side.png",
+      "md5": "f9af4d23",
+      "sha1": "6b974bf8437c",
+      "mx": 225,
+      "cam": {
+        "x": -25.189734882439392,
+        "y": -199.30362664951798,
+        "z": -631.3161625281258,
+        "tx": -27.99573609051241,
+        "ty": -199.51480425973492,
+        "tz": -631.3161625281258,
+        "fov": 34
+      },
+      "boundsH": 1.0559,
+      "floorGapMm": 0,
+      "fillHeightPct": 67.3,
+      "fillWidthPct": 90.01,
+      "minBodyGapMm": 0,
+      "coreGapMm": 468.247,
+      "supportsMm": {
+        "handL": 7.743,
+        "footL": 83.973,
+        "handR": 0,
+        "footR": 94.057
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone-getup",
+      "title": "Public Crush Forward · Get-Up (step 110)",
+      "light": "noon",
+      "view": "back",
+      "label": "Noon · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-getup-noon-back.png",
+      "md5": "3644a97a",
+      "sha1": "ea7fa680c210",
+      "mx": 211,
+      "cam": {
+        "x": -27.99573609051241,
+        "y": -199.33916546795936,
+        "z": -633.4900156128796,
+        "tx": -27.99573609051241,
+        "ty": -199.5503430781763,
+        "tz": -631.3161625281258,
+        "fov": 34
+      },
+      "boundsH": 1.0559,
+      "floorGapMm": 0,
+      "fillHeightPct": 84.85,
+      "fillWidthPct": 58.92,
+      "minBodyGapMm": 0,
+      "coreGapMm": 468.247,
+      "supportsMm": {
+        "handL": 7.743,
+        "footL": 83.973,
+        "handR": 0,
+        "footR": 94.057
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone-getup",
+      "title": "Public Crush Forward · Get-Up (step 110)",
+      "light": "night",
+      "view": "front",
+      "label": "Night · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-getup-night-front.png",
+      "md5": "35728be3",
+      "sha1": "5b8b4f53d6a1",
+      "mx": 255,
+      "cam": {
+        "x": -27.99573609051241,
+        "y": -199.26822891618147,
+        "z": -628.977432018419,
+        "tx": -27.99573609051241,
+        "ty": -199.4794065263984,
+        "tz": -631.3161625281258,
+        "fov": 34
+      },
+      "boundsH": 1.0559,
+      "floorGapMm": 0,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 74.84,
+      "minBodyGapMm": 0,
+      "coreGapMm": 468.247,
+      "supportsMm": {
+        "handL": 7.743,
+        "footL": 83.973,
+        "handR": 0,
+        "footR": 94.057
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone-getup",
+      "title": "Public Crush Forward · Get-Up (step 110)",
+      "light": "night",
+      "view": "3q",
+      "label": "Night · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-getup-night-3q.png",
+      "md5": "c7751599",
+      "sha1": "dea7dbe207a9",
+      "mx": 255,
+      "cam": {
+        "x": -26.450244298985712,
+        "y": -199.2995191340439,
+        "z": -629.474317133249,
+        "tx": -27.99573609051241,
+        "ty": -199.51069674426083,
+        "tz": -631.3161625281258,
+        "fov": 34
+      },
+      "boundsH": 1.0559,
+      "floorGapMm": 0,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 82.85,
+      "minBodyGapMm": 0,
+      "coreGapMm": 468.247,
+      "supportsMm": {
+        "handL": 7.743,
+        "footL": 83.973,
+        "handR": 0,
+        "footR": 94.057
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone-getup",
+      "title": "Public Crush Forward · Get-Up (step 110)",
+      "light": "night",
+      "view": "side",
+      "label": "Night · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-getup-night-side.png",
+      "md5": "46b91b52",
+      "sha1": "e7a6ee84faf0",
+      "mx": 242,
+      "cam": {
+        "x": -25.189734882439392,
+        "y": -199.30362664951798,
+        "z": -631.3161625281258,
+        "tx": -27.99573609051241,
+        "ty": -199.51480425973492,
+        "tz": -631.3161625281258,
+        "fov": 34
+      },
+      "boundsH": 1.0559,
+      "floorGapMm": 0,
+      "fillHeightPct": 67.3,
+      "fillWidthPct": 90.01,
+      "minBodyGapMm": 0,
+      "coreGapMm": 468.247,
+      "supportsMm": {
+        "handL": 7.743,
+        "footL": 83.973,
+        "handR": 0,
+        "footR": 94.057
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-prone-getup",
+      "title": "Public Crush Forward · Get-Up (step 110)",
+      "light": "night",
+      "view": "back",
+      "label": "Night · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-prone-getup-night-back.png",
+      "md5": "61f3d38e",
+      "sha1": "380e30611325",
+      "mx": 255,
+      "cam": {
+        "x": -27.99573609051241,
+        "y": -199.33916546795936,
+        "z": -633.4900156128796,
+        "tx": -27.99573609051241,
+        "ty": -199.5503430781763,
+        "tz": -631.3161625281258,
+        "fov": 34
+      },
+      "boundsH": 1.0559,
+      "floorGapMm": 0,
+      "fillHeightPct": 84.85,
+      "fillWidthPct": 58.92,
+      "minBodyGapMm": 0,
+      "coreGapMm": 468.247,
+      "supportsMm": {
+        "handL": 7.743,
+        "footL": 83.973,
+        "handR": 0,
+        "footR": 94.057
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine",
+      "title": "Public Crush Back · Supine (step 60)",
+      "light": "noon",
+      "view": "front",
+      "label": "Noon · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-noon-front.png",
+      "md5": "c4f9458e",
+      "sha1": "4c734e577571",
+      "mx": 222,
+      "cam": {
+        "x": -27.983904067410617,
+        "y": -199.56497280059526,
+        "z": -628.9080749074182,
+        "tx": -27.983904067410617,
+        "ty": -199.6894252547026,
+        "tz": -632.8290228775729,
+        "fov": 34
+      },
+      "boundsH": 0.6223,
+      "floorGapMm": 0,
+      "fillHeightPct": 24.26,
+      "fillWidthPct": 90,
+      "minBodyGapMm": 0,
+      "coreGapMm": 0,
+      "supportsMm": {
+        "handL": 102.481,
+        "footL": 96.221,
+        "handR": 21.385,
+        "footR": 96.221
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine",
+      "title": "Public Crush Back · Supine (step 60)",
+      "light": "noon",
+      "view": "3q",
+      "label": "Noon · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-noon-3q.png",
+      "md5": "7660946b",
+      "sha1": "0885215613e7",
+      "mx": 227,
+      "cam": {
+        "x": -25.64132979368242,
+        "y": -199.58314496492585,
+        "z": -630.0372515709386,
+        "tx": -27.983904067410617,
+        "ty": -199.7075974190332,
+        "tz": -632.8290228775729,
+        "fov": 34
+      },
+      "boundsH": 0.6223,
+      "floorGapMm": 0,
+      "fillHeightPct": 28.47,
+      "fillWidthPct": 90,
+      "minBodyGapMm": 0,
+      "coreGapMm": 0,
+      "supportsMm": {
+        "handL": 102.481,
+        "footL": 96.221,
+        "handR": 21.385,
+        "footR": 96.221
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine",
+      "title": "Public Crush Back · Supine (step 60)",
+      "light": "noon",
+      "view": "side",
+      "label": "Noon · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-noon-side.png",
+      "md5": "4dc944f2",
+      "sha1": "b25b753574d9",
+      "mx": 225,
+      "cam": {
+        "x": -25.23285657678064,
+        "y": -199.65046838117766,
+        "z": -632.8290228775729,
+        "tx": -27.983904067410617,
+        "ty": -199.774920835285,
+        "tz": -632.8290228775729,
+        "fov": 34
+      },
+      "boundsH": 0.6223,
+      "floorGapMm": 0,
+      "fillHeightPct": 48.13,
+      "fillWidthPct": 90.01,
+      "minBodyGapMm": 0,
+      "coreGapMm": 0,
+      "supportsMm": {
+        "handL": 102.481,
+        "footL": 96.221,
+        "handR": 21.385,
+        "footR": 96.221
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine",
+      "title": "Public Crush Back · Supine (step 60)",
+      "light": "noon",
+      "view": "back",
+      "label": "Noon · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-noon-back.png",
+      "md5": "c599c448",
+      "sha1": "6a27036822f6",
+      "mx": 220,
+      "cam": {
+        "x": -27.983904067410617,
+        "y": -199.56461594902777,
+        "z": -637.3679789041454,
+        "tx": -27.983904067410617,
+        "ty": -199.6890684031351,
+        "tz": -632.8290228775729,
+        "fov": 34
+      },
+      "boundsH": 0.6223,
+      "floorGapMm": 0,
+      "fillHeightPct": 24.23,
+      "fillWidthPct": 90.01,
+      "minBodyGapMm": 0,
+      "coreGapMm": 0,
+      "supportsMm": {
+        "handL": 102.481,
+        "footL": 96.221,
+        "handR": 21.385,
+        "footR": 96.221
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine",
+      "title": "Public Crush Back · Supine (step 60)",
+      "light": "night",
+      "view": "front",
+      "label": "Night · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-night-front.png",
+      "md5": "8aa1da08",
+      "sha1": "18370d163954",
+      "mx": 250,
+      "cam": {
+        "x": -27.983904067410617,
+        "y": -199.56497280059526,
+        "z": -628.9080749074182,
+        "tx": -27.983904067410617,
+        "ty": -199.6894252547026,
+        "tz": -632.8290228775729,
+        "fov": 34
+      },
+      "boundsH": 0.6223,
+      "floorGapMm": 0,
+      "fillHeightPct": 24.26,
+      "fillWidthPct": 90,
+      "minBodyGapMm": 0,
+      "coreGapMm": 0,
+      "supportsMm": {
+        "handL": 102.481,
+        "footL": 96.221,
+        "handR": 21.385,
+        "footR": 96.221
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine",
+      "title": "Public Crush Back · Supine (step 60)",
+      "light": "night",
+      "view": "3q",
+      "label": "Night · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-night-3q.png",
+      "md5": "d5b93f7f",
+      "sha1": "d1685cd115f5",
+      "mx": 253,
+      "cam": {
+        "x": -25.64132979368242,
+        "y": -199.58314496492585,
+        "z": -630.0372515709386,
+        "tx": -27.983904067410617,
+        "ty": -199.7075974190332,
+        "tz": -632.8290228775729,
+        "fov": 34
+      },
+      "boundsH": 0.6223,
+      "floorGapMm": 0,
+      "fillHeightPct": 28.47,
+      "fillWidthPct": 90,
+      "minBodyGapMm": 0,
+      "coreGapMm": 0,
+      "supportsMm": {
+        "handL": 102.481,
+        "footL": 96.221,
+        "handR": 21.385,
+        "footR": 96.221
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine",
+      "title": "Public Crush Back · Supine (step 60)",
+      "light": "night",
+      "view": "side",
+      "label": "Night · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-night-side.png",
+      "md5": "ea4ec70f",
+      "sha1": "0b4761cd42d9",
+      "mx": 255,
+      "cam": {
+        "x": -25.23285657678064,
+        "y": -199.65046838117766,
+        "z": -632.8290228775729,
+        "tx": -27.983904067410617,
+        "ty": -199.774920835285,
+        "tz": -632.8290228775729,
+        "fov": 34
+      },
+      "boundsH": 0.6223,
+      "floorGapMm": 0,
+      "fillHeightPct": 48.13,
+      "fillWidthPct": 90.01,
+      "minBodyGapMm": 0,
+      "coreGapMm": 0,
+      "supportsMm": {
+        "handL": 102.481,
+        "footL": 96.221,
+        "handR": 21.385,
+        "footR": 96.221
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine",
+      "title": "Public Crush Back · Supine (step 60)",
+      "light": "night",
+      "view": "back",
+      "label": "Night · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-night-back.png",
+      "md5": "9721bc88",
+      "sha1": "ee9982637c5e",
+      "mx": 229,
+      "cam": {
+        "x": -27.983904067410617,
+        "y": -199.56461594902777,
+        "z": -637.3679789041454,
+        "tx": -27.983904067410617,
+        "ty": -199.6890684031351,
+        "tz": -632.8290228775729,
+        "fov": 34
+      },
+      "boundsH": 0.6223,
+      "floorGapMm": 0,
+      "fillHeightPct": 24.23,
+      "fillWidthPct": 90.01,
+      "minBodyGapMm": 0,
+      "coreGapMm": 0,
+      "supportsMm": {
+        "handL": 102.481,
+        "footL": 96.221,
+        "handR": 21.385,
+        "footR": 96.221
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine-getup",
+      "title": "Public Crush Back · Get-Up (step 110)",
+      "light": "noon",
+      "view": "front",
+      "label": "Noon · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-getup-noon-front.png",
+      "md5": "0ac9c39c",
+      "sha1": "40b418261a30",
+      "mx": 229,
+      "cam": {
+        "x": -28.010005753457776,
+        "y": -198.98038024852494,
+        "z": -629.2136085429375,
+        "tx": -28.010005753457776,
+        "ty": -199.26564025710852,
+        "tz": -631.9527158912726,
+        "fov": 34
+      },
+      "boundsH": 1.4263,
+      "floorGapMm": 0,
+      "fillHeightPct": 85,
+      "fillWidthPct": 53.93,
+      "minBodyGapMm": 0,
+      "coreGapMm": 521.167,
+      "supportsMm": {
+        "handL": 160.783,
+        "footL": 7.927,
+        "handR": 179.833,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine-getup",
+      "title": "Public Crush Back · Get-Up (step 110)",
+      "light": "noon",
+      "view": "3q",
+      "label": "Noon · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-getup-noon-3q.png",
+      "md5": "4593fe3c",
+      "sha1": "75bc99e8adc7",
+      "mx": 230,
+      "cam": {
+        "x": -26.2347065454027,
+        "y": -198.98907246574163,
+        "z": -629.8369966821433,
+        "tx": -28.010005753457776,
+        "ty": -199.2743324743252,
+        "tz": -631.9527158912726,
+        "fov": 34
+      },
+      "boundsH": 1.4263,
+      "floorGapMm": 0,
+      "fillHeightPct": 85.02,
+      "fillWidthPct": 59.81,
+      "minBodyGapMm": 0,
+      "coreGapMm": 521.167,
+      "supportsMm": {
+        "handL": 160.783,
+        "footL": 7.927,
+        "handR": 179.833,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine-getup",
+      "title": "Public Crush Back · Get-Up (step 110)",
+      "light": "noon",
+      "view": "side",
+      "label": "Noon · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-getup-noon-side.png",
+      "md5": "0b2ea852",
+      "sha1": "798e31302740",
+      "mx": 220,
+      "cam": {
+        "x": -25.141295946218552,
+        "y": -199.0221271240258,
+        "z": -631.9527158912726,
+        "tx": -28.010005753457776,
+        "ty": -199.30738713260936,
+        "tz": -631.9527158912726,
+        "fov": 34
+      },
+      "boundsH": 1.4263,
+      "floorGapMm": 0,
+      "fillHeightPct": 85.01,
+      "fillWidthPct": 55.21,
+      "minBodyGapMm": 0,
+      "coreGapMm": 521.167,
+      "supportsMm": {
+        "handL": 160.783,
+        "footL": 7.927,
+        "handR": 179.833,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine-getup",
+      "title": "Public Crush Back · Get-Up (step 110)",
+      "light": "noon",
+      "view": "back",
+      "label": "Noon · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-getup-noon-back.png",
+      "md5": "61d5b952",
+      "sha1": "6f35e67c9dfb",
+      "mx": 208,
+      "cam": {
+        "x": -28.010005753457776,
+        "y": -199.0393016828609,
+        "z": -634.8515908146716,
+        "tx": -28.010005753457776,
+        "ty": -199.32456169144447,
+        "tz": -631.9527158912726,
+        "fov": 34
+      },
+      "boundsH": 1.4263,
+      "floorGapMm": 0,
+      "fillHeightPct": 85,
+      "fillWidthPct": 51.72,
+      "minBodyGapMm": 0,
+      "coreGapMm": 521.167,
+      "supportsMm": {
+        "handL": 160.783,
+        "footL": 7.927,
+        "handR": 179.833,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine-getup",
+      "title": "Public Crush Back · Get-Up (step 110)",
+      "light": "night",
+      "view": "front",
+      "label": "Night · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-getup-night-front.png",
+      "md5": "3525e59f",
+      "sha1": "5ac9225be7ad",
+      "mx": 231,
+      "cam": {
+        "x": -28.010005753457776,
+        "y": -198.98038024852494,
+        "z": -629.2136085429375,
+        "tx": -28.010005753457776,
+        "ty": -199.26564025710852,
+        "tz": -631.9527158912726,
+        "fov": 34
+      },
+      "boundsH": 1.4263,
+      "floorGapMm": 0,
+      "fillHeightPct": 85,
+      "fillWidthPct": 53.93,
+      "minBodyGapMm": 0,
+      "coreGapMm": 521.167,
+      "supportsMm": {
+        "handL": 160.783,
+        "footL": 7.927,
+        "handR": 179.833,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine-getup",
+      "title": "Public Crush Back · Get-Up (step 110)",
+      "light": "night",
+      "view": "3q",
+      "label": "Night · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-getup-night-3q.png",
+      "md5": "b35a2263",
+      "sha1": "6aee503abef3",
+      "mx": 246,
+      "cam": {
+        "x": -26.2347065454027,
+        "y": -198.98907246574163,
+        "z": -629.8369966821433,
+        "tx": -28.010005753457776,
+        "ty": -199.2743324743252,
+        "tz": -631.9527158912726,
+        "fov": 34
+      },
+      "boundsH": 1.4263,
+      "floorGapMm": 0,
+      "fillHeightPct": 85.02,
+      "fillWidthPct": 59.81,
+      "minBodyGapMm": 0,
+      "coreGapMm": 521.167,
+      "supportsMm": {
+        "handL": 160.783,
+        "footL": 7.927,
+        "handR": 179.833,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine-getup",
+      "title": "Public Crush Back · Get-Up (step 110)",
+      "light": "night",
+      "view": "side",
+      "label": "Night · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-getup-night-side.png",
+      "md5": "0828439e",
+      "sha1": "4d117ada7528",
+      "mx": 243,
+      "cam": {
+        "x": -25.141295946218552,
+        "y": -199.0221271240258,
+        "z": -631.9527158912726,
+        "tx": -28.010005753457776,
+        "ty": -199.30738713260936,
+        "tz": -631.9527158912726,
+        "fov": 34
+      },
+      "boundsH": 1.4263,
+      "floorGapMm": 0,
+      "fillHeightPct": 85.01,
+      "fillWidthPct": 55.21,
+      "minBodyGapMm": 0,
+      "coreGapMm": 521.167,
+      "supportsMm": {
+        "handL": 160.783,
+        "footL": 7.927,
+        "handR": 179.833,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "crush-supine-getup",
+      "title": "Public Crush Back · Get-Up (step 110)",
+      "light": "night",
+      "view": "back",
+      "label": "Night · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/crush-supine-getup-night-back.png",
+      "md5": "c9c618f6",
+      "sha1": "46272b9262f1",
+      "mx": 242,
+      "cam": {
+        "x": -28.010005753457776,
+        "y": -199.0393016828609,
+        "z": -634.8515908146716,
+        "tx": -28.010005753457776,
+        "ty": -199.32456169144447,
+        "tz": -631.9527158912726,
+        "fov": 34
+      },
+      "boundsH": 1.4263,
+      "floorGapMm": 0,
+      "fillHeightPct": 85,
+      "fillWidthPct": 51.72,
+      "minBodyGapMm": 0,
+      "coreGapMm": 521.167,
+      "supportsMm": {
+        "handL": 160.783,
+        "footL": 7.927,
+        "handR": 179.833,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-sleep",
+      "title": "Actual ROOT Cave Sleep",
+      "light": "noon",
+      "view": "front",
+      "label": "Noon · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-sleep-noon-front.png",
+      "md5": "0db57db8",
+      "sha1": "a604805235ab",
+      "mx": 222,
+      "cam": {
+        "x": 47.738949322939206,
+        "y": -399.4328749507109,
+        "z": 19.56755286222964,
+        "tx": 46.729960543759944,
+        "ty": -399.5916214826831,
+        "tz": 16.291814915855134,
+        "fov": 34
+      },
+      "boundsH": 0.7937,
+      "floorGapMm": 0,
+      "fillHeightPct": 33.23,
+      "fillWidthPct": 89.98,
+      "minBodyGapMm": 0,
+      "coreGapMm": 156.216,
+      "supportsMm": {
+        "handL": 0,
+        "footL": 249.868,
+        "handR": 72.641,
+        "footR": 249.868
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-sleep",
+      "title": "Actual ROOT Cave Sleep",
+      "light": "noon",
+      "view": "3q",
+      "label": "Noon · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-sleep-noon-3q.png",
+      "md5": "fa3beada",
+      "sha1": "977442d56441",
+      "mx": 222,
+      "cam": {
+        "x": 49.789320692035616,
+        "y": -399.4463828394638,
+        "z": 18.269503267364026,
+        "tx": 46.729960543759944,
+        "ty": -399.60512937143596,
+        "tz": 16.291814915855134,
+        "fov": 34
+      },
+      "boundsH": 0.7937,
+      "floorGapMm": 0,
+      "fillHeightPct": 34.2,
+      "fillWidthPct": 90.02,
+      "minBodyGapMm": 0,
+      "coreGapMm": 156.216,
+      "supportsMm": {
+        "handL": 0,
+        "footL": 249.868,
+        "handR": 72.641,
+        "footR": 249.868
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-sleep",
+      "title": "Actual ROOT Cave Sleep",
+      "light": "noon",
+      "view": "side",
+      "label": "Noon · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-sleep-noon-side.png",
+      "md5": "e9e02714",
+      "sha1": "417c51b26fb2",
+      "mx": 230,
+      "cam": {
+        "x": 49.64886984780347,
+        "y": -399.5176665334637,
+        "z": 15.392736056851328,
+        "tx": 46.729960543759944,
+        "ty": -399.67641306543584,
+        "tz": 16.291814915855134,
+        "fov": 34
+      },
+      "boundsH": 0.7937,
+      "floorGapMm": 0,
+      "fillHeightPct": 52.3,
+      "fillWidthPct": 90,
+      "minBodyGapMm": 0,
+      "coreGapMm": 156.216,
+      "supportsMm": {
+        "handL": 0,
+        "footL": 249.868,
+        "handR": 72.641,
+        "footR": 249.868
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-sleep",
+      "title": "Actual ROOT Cave Sleep",
+      "light": "noon",
+      "view": "back",
+      "label": "Noon · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-sleep-noon-back.png",
+      "md5": "70bfc096",
+      "sha1": "7b7a2aceffe6",
+      "mx": 223,
+      "cam": {
+        "x": 45.48423106456527,
+        "y": -399.45213987063045,
+        "z": 12.247485176891448,
+        "tx": 46.729960543759944,
+        "ty": -399.6108864026026,
+        "tz": 16.291814915855134,
+        "fov": 34
+      },
+      "boundsH": 0.7937,
+      "floorGapMm": 0,
+      "fillHeightPct": 34.5,
+      "fillWidthPct": 89.99,
+      "minBodyGapMm": 0,
+      "coreGapMm": 156.216,
+      "supportsMm": {
+        "handL": 0,
+        "footL": 249.868,
+        "handR": 72.641,
+        "footR": 249.868
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-sleep",
+      "title": "Actual ROOT Cave Sleep",
+      "light": "night",
+      "view": "front",
+      "label": "Night · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-sleep-night-front.png",
+      "md5": "cafd95b1",
+      "sha1": "6246ed27b9d4",
+      "mx": 255,
+      "cam": {
+        "x": 47.738949322939206,
+        "y": -399.4328749507109,
+        "z": 19.56755286222964,
+        "tx": 46.729960543759944,
+        "ty": -399.5916214826831,
+        "tz": 16.291814915855134,
+        "fov": 34
+      },
+      "boundsH": 0.7937,
+      "floorGapMm": 0,
+      "fillHeightPct": 33.23,
+      "fillWidthPct": 89.98,
+      "minBodyGapMm": 0,
+      "coreGapMm": 156.216,
+      "supportsMm": {
+        "handL": 0,
+        "footL": 249.868,
+        "handR": 72.641,
+        "footR": 249.868
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-sleep",
+      "title": "Actual ROOT Cave Sleep",
+      "light": "night",
+      "view": "3q",
+      "label": "Night · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-sleep-night-3q.png",
+      "md5": "adbd0ef9",
+      "sha1": "afd34b27c92d",
+      "mx": 255,
+      "cam": {
+        "x": 49.789320692035616,
+        "y": -399.4463828394638,
+        "z": 18.269503267364026,
+        "tx": 46.729960543759944,
+        "ty": -399.60512937143596,
+        "tz": 16.291814915855134,
+        "fov": 34
+      },
+      "boundsH": 0.7937,
+      "floorGapMm": 0,
+      "fillHeightPct": 34.2,
+      "fillWidthPct": 90.02,
+      "minBodyGapMm": 0,
+      "coreGapMm": 156.216,
+      "supportsMm": {
+        "handL": 0,
+        "footL": 249.868,
+        "handR": 72.641,
+        "footR": 249.868
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-sleep",
+      "title": "Actual ROOT Cave Sleep",
+      "light": "night",
+      "view": "side",
+      "label": "Night · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-sleep-night-side.png",
+      "md5": "b59c51d4",
+      "sha1": "6a4fd90eb951",
+      "mx": 255,
+      "cam": {
+        "x": 49.64886984780347,
+        "y": -399.5176665334637,
+        "z": 15.392736056851328,
+        "tx": 46.729960543759944,
+        "ty": -399.67641306543584,
+        "tz": 16.291814915855134,
+        "fov": 34
+      },
+      "boundsH": 0.7937,
+      "floorGapMm": 0,
+      "fillHeightPct": 52.3,
+      "fillWidthPct": 90,
+      "minBodyGapMm": 0,
+      "coreGapMm": 156.216,
+      "supportsMm": {
+        "handL": 0,
+        "footL": 249.868,
+        "handR": 72.641,
+        "footR": 249.868
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-sleep",
+      "title": "Actual ROOT Cave Sleep",
+      "light": "night",
+      "view": "back",
+      "label": "Night · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-sleep-night-back.png",
+      "md5": "ddf1f854",
+      "sha1": "1f2293971ce0",
+      "mx": 248,
+      "cam": {
+        "x": 45.48423106456527,
+        "y": -399.45213987063045,
+        "z": 12.247485176891448,
+        "tx": 46.729960543759944,
+        "ty": -399.6108864026026,
+        "tz": 16.291814915855134,
+        "fov": 34
+      },
+      "boundsH": 0.7937,
+      "floorGapMm": 0,
+      "fillHeightPct": 34.5,
+      "fillWidthPct": 89.99,
+      "minBodyGapMm": 0,
+      "coreGapMm": 156.216,
+      "supportsMm": {
+        "handL": 0,
+        "footL": 249.868,
+        "handR": 72.641,
+        "footR": 249.868
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-getup",
+      "title": "Cave Noise Wake · Get-Up (step 30)",
+      "light": "noon",
+      "view": "front",
+      "label": "Noon · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-getup-noon-front.png",
+      "md5": "a95d4045",
+      "sha1": "d9db2f336d66",
+      "mx": 226,
+      "cam": {
+        "x": 47.95462754579041,
+        "y": -398.90583434423695,
+        "z": 19.86763925515286,
+        "tx": 47.12704380703212,
+        "ty": -399.208473134235,
+        "tz": 17.1808428181715,
+        "fov": 34
+      },
+      "boundsH": 1.5132,
+      "floorGapMm": 0,
+      "fillHeightPct": 85.01,
+      "fillWidthPct": 53.06,
+      "minBodyGapMm": 0,
+      "coreGapMm": 545.659,
+      "supportsMm": {
+        "handL": 188.069,
+        "footL": 0,
+        "handR": 188.585,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-getup",
+      "title": "Cave Noise Wake · Get-Up (step 30)",
+      "light": "noon",
+      "view": "3q",
+      "label": "Noon · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-getup-noon-3q.png",
+      "md5": "1baa7f83",
+      "sha1": "fcdb92baf268",
+      "mx": 224,
+      "cam": {
+        "x": 49.551892240299296,
+        "y": -398.9257965479845,
+        "z": 18.74835833390768,
+        "tx": 47.12704380703212,
+        "ty": -399.22843533798255,
+        "tz": 17.1808428181715,
+        "fov": 34
+      },
+      "boundsH": 1.5132,
+      "floorGapMm": 0,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 59.75,
+      "minBodyGapMm": 0,
+      "coreGapMm": 545.659,
+      "supportsMm": {
+        "handL": 188.069,
+        "footL": 0,
+        "handR": 188.585,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-getup",
+      "title": "Cave Noise Wake · Get-Up (step 30)",
+      "light": "noon",
+      "view": "side",
+      "label": "Noon · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-getup-noon-side.png",
+      "md5": "bb1ff040",
+      "sha1": "22269a80a1d7",
+      "mx": 223,
+      "cam": {
+        "x": 50.02424255430881,
+        "y": -398.9584711288363,
+        "z": 16.28845121819942,
+        "tx": 47.12704380703212,
+        "ty": -399.2611099188344,
+        "tz": 17.1808428181715,
+        "fov": 34
+      },
+      "boundsH": 1.5132,
+      "floorGapMm": 0,
+      "fillHeightPct": 85.01,
+      "fillWidthPct": 55.63,
+      "minBodyGapMm": 0,
+      "coreGapMm": 545.659,
+      "supportsMm": {
+        "handL": 188.069,
+        "footL": 0,
+        "handR": 188.585,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-getup",
+      "title": "Cave Noise Wake · Get-Up (step 30)",
+      "light": "noon",
+      "view": "back",
+      "label": "Noon · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-getup-noon-back.png",
+      "md5": "f14a5971",
+      "sha1": "4336e88a462e",
+      "mx": 210,
+      "cam": {
+        "x": 46.23023635449343,
+        "y": -398.9596808113684,
+        "z": 14.26930776100063,
+        "tx": 47.12704380703212,
+        "ty": -399.26231960136647,
+        "tz": 17.1808428181715,
+        "fov": 34
+      },
+      "boundsH": 1.5132,
+      "floorGapMm": 0,
+      "fillHeightPct": 85.01,
+      "fillWidthPct": 51.56,
+      "minBodyGapMm": 0,
+      "coreGapMm": 545.659,
+      "supportsMm": {
+        "handL": 188.069,
+        "footL": 0,
+        "handR": 188.585,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-getup",
+      "title": "Cave Noise Wake · Get-Up (step 30)",
+      "light": "night",
+      "view": "front",
+      "label": "Night · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-getup-night-front.png",
+      "md5": "f1df3eb4",
+      "sha1": "1472b766c6f2",
+      "mx": 227,
+      "cam": {
+        "x": 47.95462754579041,
+        "y": -398.90583434423695,
+        "z": 19.86763925515286,
+        "tx": 47.12704380703212,
+        "ty": -399.208473134235,
+        "tz": 17.1808428181715,
+        "fov": 34
+      },
+      "boundsH": 1.5132,
+      "floorGapMm": 0,
+      "fillHeightPct": 85.01,
+      "fillWidthPct": 53.06,
+      "minBodyGapMm": 0,
+      "coreGapMm": 545.659,
+      "supportsMm": {
+        "handL": 188.069,
+        "footL": 0,
+        "handR": 188.585,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-getup",
+      "title": "Cave Noise Wake · Get-Up (step 30)",
+      "light": "night",
+      "view": "3q",
+      "label": "Night · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-getup-night-3q.png",
+      "md5": "378d06d2",
+      "sha1": "0babc9d96160",
+      "mx": 241,
+      "cam": {
+        "x": 49.551892240299296,
+        "y": -398.9257965479845,
+        "z": 18.74835833390768,
+        "tx": 47.12704380703212,
+        "ty": -399.22843533798255,
+        "tz": 17.1808428181715,
+        "fov": 34
+      },
+      "boundsH": 1.5132,
+      "floorGapMm": 0,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 59.75,
+      "minBodyGapMm": 0,
+      "coreGapMm": 545.659,
+      "supportsMm": {
+        "handL": 188.069,
+        "footL": 0,
+        "handR": 188.585,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-getup",
+      "title": "Cave Noise Wake · Get-Up (step 30)",
+      "light": "night",
+      "view": "side",
+      "label": "Night · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-getup-night-side.png",
+      "md5": "0ec044a0",
+      "sha1": "b542b1899fba",
+      "mx": 241,
+      "cam": {
+        "x": 50.02424255430881,
+        "y": -398.9584711288363,
+        "z": 16.28845121819942,
+        "tx": 47.12704380703212,
+        "ty": -399.2611099188344,
+        "tz": 17.1808428181715,
+        "fov": 34
+      },
+      "boundsH": 1.5132,
+      "floorGapMm": 0,
+      "fillHeightPct": 85.01,
+      "fillWidthPct": 55.63,
+      "minBodyGapMm": 0,
+      "coreGapMm": 545.659,
+      "supportsMm": {
+        "handL": 188.069,
+        "footL": 0,
+        "handR": 188.585,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-getup",
+      "title": "Cave Noise Wake · Get-Up (step 30)",
+      "light": "night",
+      "view": "back",
+      "label": "Night · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-getup-night-back.png",
+      "md5": "46f8e03e",
+      "sha1": "d69d2c66fb3a",
+      "mx": 241,
+      "cam": {
+        "x": 46.23023635449343,
+        "y": -398.9596808113684,
+        "z": 14.26930776100063,
+        "tx": 47.12704380703212,
+        "ty": -399.26231960136647,
+        "tz": 17.1808428181715,
+        "fov": 34
+      },
+      "boundsH": 1.5132,
+      "floorGapMm": 0,
+      "fillHeightPct": 85.01,
+      "fillWidthPct": 51.56,
+      "minBodyGapMm": 0,
+      "coreGapMm": 545.659,
+      "supportsMm": {
+        "handL": 188.069,
+        "footL": 0,
+        "handR": 188.585,
+        "footR": 0
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-awake",
+      "title": "Cave Noise Wake · Awake (step 60)",
+      "light": "noon",
+      "view": "front",
+      "label": "Noon · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-awake-noon-front.png",
+      "md5": "363759a2",
+      "sha1": "3be3601f3010",
+      "mx": 224,
+      "cam": {
+        "x": 48.98489418131137,
+        "y": -399.21015474111925,
+        "z": 13.839954926612293,
+        "tx": 48.05970181645186,
+        "ty": -399.4431362462289,
+        "tz": 16.134889603164346,
+        "fov": 34
+      },
+      "boundsH": 1.1649,
+      "floorGapMm": -0.044,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 65.84,
+      "minBodyGapMm": -0.044,
+      "coreGapMm": 522.433,
+      "supportsMm": {
+        "handL": 0.01,
+        "footL": 113.924,
+        "handR": 140.248,
+        "footR": -0.044
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-awake",
+      "title": "Cave Noise Wake · Awake (step 60)",
+      "light": "noon",
+      "view": "3q",
+      "label": "Noon · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-awake-noon-3q.png",
+      "md5": "6f02915a",
+      "sha1": "8ce526c3ac52",
+      "mx": 224,
+      "cam": {
+        "x": 47.33864106002341,
+        "y": -399.1746425733112,
+        "z": 13.921399011516101,
+        "tx": 48.05970181645186,
+        "ty": -399.40762407842084,
+        "tz": 16.134889603164346,
+        "fov": 34
+      },
+      "boundsH": 1.1649,
+      "floorGapMm": -0.044,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 68.79,
+      "minBodyGapMm": -0.044,
+      "coreGapMm": 522.433,
+      "supportsMm": {
+        "handL": 0.01,
+        "footL": 113.924,
+        "handR": 140.248,
+        "footR": -0.044
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-awake",
+      "title": "Cave Noise Wake · Awake (step 60)",
+      "light": "noon",
+      "view": "side",
+      "label": "Noon · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-awake-noon-side.png",
+      "md5": "0c002b92",
+      "sha1": "6ce38ef09925",
+      "mx": 223,
+      "cam": {
+        "x": 45.8046607295104,
+        "y": -399.2153739960854,
+        "z": 15.225780155562425,
+        "tx": 48.05970181645186,
+        "ty": -399.44835550119507,
+        "tz": 16.134889603164346,
+        "fov": 34
+      },
+      "boundsH": 1.1649,
+      "floorGapMm": -0.044,
+      "fillHeightPct": 85,
+      "fillWidthPct": 78.57,
+      "minBodyGapMm": -0.044,
+      "coreGapMm": 522.433,
+      "supportsMm": {
+        "handL": 0.01,
+        "footL": 113.924,
+        "handR": 140.248,
+        "footR": -0.044
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-awake",
+      "title": "Cave Noise Wake · Awake (step 60)",
+      "light": "noon",
+      "view": "back",
+      "label": "Noon · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-awake-noon-back.png",
+      "md5": "c1ac3bd7",
+      "sha1": "f2b935a2d0d4",
+      "mx": 223,
+      "cam": {
+        "x": 47.13757075017427,
+        "y": -399.2561816250178,
+        "z": 18.422230745076725,
+        "tx": 48.05970181645186,
+        "ty": -399.48916313012745,
+        "tz": 16.134889603164346,
+        "fov": 34
+      },
+      "boundsH": 1.1649,
+      "floorGapMm": -0.044,
+      "fillHeightPct": 84.96,
+      "fillWidthPct": 54.58,
+      "minBodyGapMm": -0.044,
+      "coreGapMm": 522.433,
+      "supportsMm": {
+        "handL": 0.01,
+        "footL": 113.924,
+        "handR": 140.248,
+        "footR": -0.044
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-awake",
+      "title": "Cave Noise Wake · Awake (step 60)",
+      "light": "night",
+      "view": "front",
+      "label": "Night · Front (0°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-awake-night-front.png",
+      "md5": "a90abe08",
+      "sha1": "bf332c0aa3a9",
+      "mx": 255,
+      "cam": {
+        "x": 48.98489418131137,
+        "y": -399.21015474111925,
+        "z": 13.839954926612293,
+        "tx": 48.05970181645186,
+        "ty": -399.4431362462289,
+        "tz": 16.134889603164346,
+        "fov": 34
+      },
+      "boundsH": 1.1649,
+      "floorGapMm": -0.044,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 65.84,
+      "minBodyGapMm": -0.044,
+      "coreGapMm": 522.433,
+      "supportsMm": {
+        "handL": 0.01,
+        "footL": 113.924,
+        "handR": 140.248,
+        "footR": -0.044
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-awake",
+      "title": "Cave Noise Wake · Awake (step 60)",
+      "light": "night",
+      "view": "3q",
+      "label": "Night · 3/4 Front-Left (40°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-awake-night-3q.png",
+      "md5": "c7e84aac",
+      "sha1": "7faa37dc5010",
+      "mx": 255,
+      "cam": {
+        "x": 47.33864106002341,
+        "y": -399.1746425733112,
+        "z": 13.921399011516101,
+        "tx": 48.05970181645186,
+        "ty": -399.40762407842084,
+        "tz": 16.134889603164346,
+        "fov": 34
+      },
+      "boundsH": 1.1649,
+      "floorGapMm": -0.044,
+      "fillHeightPct": 84.99,
+      "fillWidthPct": 68.79,
+      "minBodyGapMm": -0.044,
+      "coreGapMm": 522.433,
+      "supportsMm": {
+        "handL": 0.01,
+        "footL": 113.924,
+        "handR": 140.248,
+        "footR": -0.044
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-awake",
+      "title": "Cave Noise Wake · Awake (step 60)",
+      "light": "night",
+      "view": "side",
+      "label": "Night · Side Left (90°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-awake-night-side.png",
+      "md5": "942ab23e",
+      "sha1": "33bc5bbda16d",
+      "mx": 255,
+      "cam": {
+        "x": 45.8046607295104,
+        "y": -399.2153739960854,
+        "z": 15.225780155562425,
+        "tx": 48.05970181645186,
+        "ty": -399.44835550119507,
+        "tz": 16.134889603164346,
+        "fov": 34
+      },
+      "boundsH": 1.1649,
+      "floorGapMm": -0.044,
+      "fillHeightPct": 85,
+      "fillWidthPct": 78.57,
+      "minBodyGapMm": -0.044,
+      "coreGapMm": 522.433,
+      "supportsMm": {
+        "handL": 0.01,
+        "footL": 113.924,
+        "handR": 140.248,
+        "footR": -0.044
+      },
+      "violations": []
+    },
+    {
+      "state": "cave-awake",
+      "title": "Cave Noise Wake · Awake (step 60)",
+      "light": "night",
+      "view": "back",
+      "label": "Night · Back (180°)",
+      "file": "qa/2026-11-17-AG-355/frames/cave-awake-night-back.png",
+      "md5": "72187556",
+      "sha1": "a4871eb83f6c",
+      "mx": 250,
+      "cam": {
+        "x": 47.13757075017427,
+        "y": -399.2561816250178,
+        "z": 18.422230745076725,
+        "tx": 48.05970181645186,
+        "ty": -399.48916313012745,
+        "tz": 16.134889603164346,
+        "fov": 34
+      },
+      "boundsH": 1.1649,
+      "floorGapMm": -0.044,
+      "fillHeightPct": 84.96,
+      "fillWidthPct": 54.58,
+      "minBodyGapMm": -0.044,
+      "coreGapMm": 522.433,
+      "supportsMm": {
+        "handL": 0.01,
+        "footL": 113.924,
+        "handR": 140.248,
+        "footR": -0.044
+      },
+      "violations": []
+    }
+  ],
+  "pageErrors": [],
+  "serverErrors": [],
+  "servedHashes": {
+    "index.html": "d6328d485eb7ed49c0740d1e5450a5acae0af394f5a7e383bdb03910102b5726",
+    "vendor/fonts/fonts.css": "045a789307b1623080358754725fefd59fa29700f0d20e2c7880e8ff10ba56c0",
+    "ui/night-vision.css": "e1b1f915d5a2e9397db86aa26fc09db0beba5ae8b58eeecf20a5451040237010",
+    "assets/intro/opening.css": "9b7df1f8220a8d1c00e88271c23fbf8677e0ab220a5792644705f0c634cff405",
+    "assets/intro/disclaimer.css": "2c51b85b34f6f4223cb7899fdef99c0b0e589eb58cfb079aecde14be415119c5",
+    "ui/loading.css": "8c5613032c5f4cd9e7a1784334d868e0f297c183210d3ad497272280f11cad05",
+    "ui/coach.css": "a4a9bf3eadf9590423e6985ac8ccfdaefbab2fa022adfef9816bd78e8b41f5e7",
+    "ui/wave-preview.css": "672cf01f04308dfa3c82f29333a8330273b8111894f629055aceca0cf54a020e",
+    "ui/story-playback.css": "8af1c54d36defe370fb26a19e429d8c252e3bb6bea82a379f5957e3fae73b19b",
+    "ui/hollows.css": "61ccda84f5cd64c5a845107e4012c2bcfbd5d68021c18da3ff7c424bd86c7a95",
+    "ui/quest.css": "7ceb0ac53934dfa8fd722101b2356a80e805ef243a7350530e756bd9e1017b2d",
+    "ui/survivors.css": "62471a7d4ae3465cf0279f92e5a7378d5b0826b09bb76d18a4d94ad738b0dc1d",
+    "ui/prep-checklist.css": "9156fcbae79663ce67531bfaff041bd099ad203573321a8fcc8600268a8a8065",
+    "ui/objectives.css": "63d986826bc8019140e696c21219b0a24de027e4d15f8944d44e50ad0bc7bad8",
+    "ui/hud-layout.css": "7b0f5a20d972985eca8437bf51db60282c77f74fdcfb57053209aeb81f68c427",
+    "ui/skull-recall.css": "d581a933d2d2c3ba0b7dcb98510bbd6dc257c8342f111b2f75cd0421d77e8f68",
+    "ui/guardian-escape.css": "9c7c16d07d6bc9bc9195209b461944e147b385e3fa1bd07d3806573e04fc833b",
+    "ui/enemy-counter.css": "bba75f072c9b7f8bbf2a142afe34c3eca2c05e3212697232f3a540735b9d9735",
+    "ui/armory.css": "b1e416c2c8f0474005643b3827ddb91b46bf2c75134d9807a56cb38305f37538",
+    "ui/training.css": "7b2bd95211b7c856aa3ddb63bc81681987c1d2cb413f358173bfbf2e6b5e989e",
+    "ui/cif.css": "da8a81c9ff92f6b07f2e77829d0ee9cb896ca3638fa744ffd4129b7a13c6ce95",
+    "ui/skills-panel.css": "4bd7505d6c5de0e9bdf4d053ae70aedb84bb3070df1449745f66386871b3c271",
+    "ui/supply-notice.css": "a33d5f49536a853a3d3823fa377e5a7982add73777b182a89d133292549f8490",
+    "ui/supply-terminal.css": "405b8f55865e715bcacbf2dc62ae5cfeb0a300692b15a97dcc9b40b35d50d40b",
+    "assets/intro/opening-perf.js": "bf2d6587e20ae91ef5d380678bad9132d1d87b1930d388d1646622fe0f06b8a1",
+    "assets/intro/disclaimer.js": "991d858f4961b35505ed858f01213564990e6232eb049c672868a56b8bfcbb2d",
+    "assets/intro/opening.js": "0f77d3b1ac21370625f26f0d46597aae046002d5f84b57c8a845df50ac45d22d",
+    "ui/loading.js": "1e0cf8b82e606aed1b35b9ad2dcc84ce1dee21039404f88504f4ec1cc45103ec",
+    "ui/coach.js": "199b268a77b651a0ae3a2e6745fa19a784d38dd2b186189a99925cff4ca53624",
+    "ui/wave-preview.js": "5b4554b7202d57714d10f92cf41d5b2209f8203e4afeb89b944860bccae772f1",
+    "ui/prep-checklist.js": "dfdde116221d6c3b82abc60c7c489b80108fcc9a977ab9839a7718460c34434d",
+    "assets/intro/menu-camera.js": "3d64c1625dcd656aebd4b6df409156d0b5c960e0d7be9f9cb0bf5c432cf9bc7b",
+    "assets/intro/airborne.js": "4beab895c761c112788f4e0b8747a3095e53c1f64f88a2ad3eb3b64481d95f23",
+    "assets/world/campsites.js": "16a6d021b815cac1788b36517956e70fc55847d0e76d39047aaac96822e25244",
+    "assets/world/landmark-details.js": "30e2bdb225daa78a5757d9d7b7aa003f4788e13a27c95a8876f3496e99fd3aac",
+    "assets/world/objective-props.js": "c11a4dda067683dd113c72fdbd564e7d76211e9f13ffa5ee09b64237e34041ba",
+    "ui/strings.js": "caaaf0cdcf38dad0313225a57ad736e0a76580df5da17ce062952a9503784554",
+    "ui/key-guide.js": "066f7705a2e3cd344a11578bdc1014c6cca573b2a9749c14776488befc5e9cb3",
+    "ui/hollows.js": "4961bbd4a022b648da9d7c935adc46f2fa934c28c8abb73b15adfe9a551e5fb7",
+    "ui/quest-panel.js": "fec6096eb5c88c48110271daa7200d3bc33f588940c93ccf1e5121bc834c6bc1",
+    "ui/scouting.js": "170ee0d2cd6d7fa567a6feccf73befa11ffb92e15c4153844b4636e19a934ad1",
+    "ui/bounties.js": "a2b5b0c74e31a8e28b42e19396ca88e68c9c0043a6b1d3b9918e9773e94c804b",
+    "ui/radio-call.js": "899551283225d0cf1533c2f5845e61cd951effb9cb66d6d3d54ce9eef5ce7839",
+    "ui/night-names.js": "7f9ac1ac43846733121e11a98782cee8e0a76e37b620f9d90afdf9ea254eef03",
+    "ui/story-leads.js": "b2d30080416a7972293b3cc0be4e6caeacb66e571b551fc61d0f45b187804819",
+    "vendor/three/three.webgpu.js": "993720d62175e0f7277c760d6af45d221872a68ddaec68015a6631762be87b2b",
+    "core/texture-uv-per-object.js": "325060260a026f0ede4ee67fe9247476fc5cb6547fe5246cc530c7ffa6f029f8",
+    "ui/prep-repairs.js": "988df1d402aa764daa8ccea15e18a325414fb73dc043246afac7dfb3ab330045",
+    "game/weaknesses.js": "0341a3feb2944e5a760c590cc9bc9cc3002403b0fbc9f54c0625d87bce8a50cd",
+    "game/hit-balance.js": "453a59b0c1d9ee5b647db7e8d433ebc175569f3a04a8fd732d5650be7eadc00d",
+    "game/economy.js": "62bd4b510a22f952a3b7aae4e7e3dc0f2b661b52f5d06483a3940ff40c3266e8",
+    "game/laser-colors.js": "fb47ffce50cb067307b3fc0a48da38421a104a67caa83cc0a1901584afab17de",
+    "game/skills.js": "36ce313571c684d3a3e31a98d60ef7cae058a9c5fbc9a78d5e08ee2de9271013",
+    "game/magazines.js": "490642d948b0b20bfbff788c16d711dd60d91dfb8f20be43c45487ba2af520f5",
+    "ui/magazine-hud.js": "54ff5c917259b6c872ad370ada053a993983da1fc83a94c80b8e0b3f6e4b1060",
+    "ui/objectives-runtime.js": "1d59cc53b739ca1f990fc02817ba343f751cb1810573b208550bb7e0276e1ac4",
+    "game/convoy-mission.js": "7d01fcd88c352e8a82f3901b36dcd611d3c2cc34d1ff0a14542cf536c99632bd",
+    "game/convoy-visual.js": "ef1067084c1c142fe774fbb36c88b8d5ec97babc5b9eb52d69ed42093d290394",
+    "ui/story-aftermath.js": "54548febc70c5565b88171b9a39162e2ba5ba6b57dc3f515ac4c969d37883b6e",
+    "ui/story-playback.js": "b8c435b3344c75e359668cdbbbdcde25ba37b35b19f09ca1b7d22a82e1a7c044",
+    "ui/hikers.js": "eee36cc016c7b2d7d4f99d71bb654900ecfc6d08dedf444053f449d8e22aaffc",
+    "game/hikers-kit.js": "cb5cf666850827e7e85143c7fa1046731e355a668a9f6df80b55fc27bb4ccfe6",
+    "game/fuel-depot.js": "0aca840a370611de0b1bd143ca080f039135820c6153e468b4fe9717b9af61d6",
+    "studio/day-mission-props.js": "bf331e40f4ce2c034c157a402f5169678ad8a7171949dc07cb1f92527ddf3ec9",
+    "core/math.js": "b879a3b4c7cd6eb6c73860c551fb6bdec0a94325161ae17bf74b55015128bbb5",
+    "core/flight-recorder.js": "f2f657c57546f3bbf7cb2adb7d3b4d033b243476051feea3b4b4a52dcdf9b6ab",
+    "core/geometry.js": "f6b3fb538fe085a8e714cfe25f9bcb6cba83e66753f5023279422a93107b6e56",
+    "core/camo.js": "a87f7ca0ece544b6e91e607bc11a18e37528c5f19267483343b3fd2aa44e4b89",
+    "core/audio.js": "d8a0ac6bb1ecfe5705ea35636ee9573c80a6224b07e8bc0e0bcfd476c3dca63c",
+    "core/nav-field.js": "db6cd73cae00bb7c2640418fbb687e9e66ddb3af302376fa5a54f6aace97c749",
+    "game/night-warnings.js": "8f32d5e089eefa7b0386f8bf6dcf877ef7f285df721fda380c31b2b0e3108773",
+    "game/wall-bands.js": "adbcba91c3cade1f96c45b7d212af8c39251bbd5107fe15722d8594229fb851a",
+    "game/shortcut-bands.js": "d24c85bb5086f335e6c55637b439069634b5131032a4e5303dd79cd820b83191",
+    "core/loader.js": "07cf38ee253dac7bfe81a93f555140c9534087a6a1d7c36b2d44eae2d43e8941",
+    "ui/skull-intake.js": "8cac635aefc8d92a600ec413e05a78483745cd289fdbcefaa7bfa74cade26dad",
+    "ui/hq-markings.js": "bb10cfb34427d3f1069189f749770490efb3b0296bb7028b794a13986ac91caa",
+    "ui/hq-damaged-terminal.js": "cbbe64354e37220bb9ba49ac2fb1983e4707086608723cc423537f85fa01eabf",
+    "ui/marine-face.js": "8aa38a3ca41dc6009f5309e728aeba10eb342b871991fb7679fc6fddee106a0d",
+    "ui/marine-eyewear.js": "359f31e8aaeb3bb5ea048f01fb38f67b3ba0aba3d71ed8944720699cefb0c8b8",
+    "studio/marine-body.js": "1851bc89863869ffae1fb611d75b7bc28327a9c45c04439f8fdccb9511e4a3bf",
+    "game/viewmodel.js": "f50a4346dc7b69dd5ce655353bd9b18fcbcc74e1a114e72705aec019f690b305",
+    "game/viewmodel-fit.js": "d1f4c1372a312feb12a2f094350f3efb3ef17612558ccca357d4907fea83d07f",
+    "game/tp-fit.js": "d2dbf1e163f856b672a1a91d1638a949749e3bde1727bda8ceaf1f18c3b08e07",
+    "studio/marine-hand.js": "f3b92570fe48bb259917c8463a1cb09010be22580f0677a5af90f38eff11a587",
+    "game/selector-flick.js": "5d1ae4e17dc93fae180dd7a409b13ba843453ef526f156965c39ef31f6267127",
+    "core/body-limits.js": "fd2562bd882ef767155cc819301ede35e68d008621dd0f683232c593d91459eb",
+    "studio/marine-detail.js": "15656a503c46fb04b31e81f6277f3b77c4a7f9c87d82cdd6fbf1d2648351c093",
+    "studio/weapon-sidearms.js": "0b1797ddf79ccb3027d58841c5b6212f5f91fd02e53a3e3f42a69bde01106da6",
+    "studio/weapon-effects.js": "302f01982e0d5078f377c791b7678c01c58079be6946aff0d418e96651b1cfce",
+    "studio/gun-detail.js": "343231a0f4c439cf2076eb205eb736c1c35654d4ea5ce4f1d848670e6fa86b4f",
+    "studio/weapon-longarms.js": "f68bd8e5908832e67ea81682f181ff3a4777303c8e756449db7883e699dd9db3",
+    "studio/weapon-heavy.js": "fa320d57c246a71dbc1543af365686114ace2954c23d041168d97896a2f9b83f",
+    "studio/weapon-optics.js": "07c3356430f9f8e8abae8e5131d002899cae66d3f47de8c193ea6b732e8c3de9",
+    "studio/weapon-finish.js": "b8f36ca0149c031ad96038b7149cfeeff8b1f8821fee2ffba4aabbfa82a5dea9",
+    "studio/marine-headgear.js": "11de461eb615e79a58aee136e2ab52ab362e17b2c17b1ac4e18a0d0c9cb25b5d",
+    "studio/marine-hats.js": "c6badea04455b090f312d1ae0eb43ffbf4117c261d5c9b08c6a02341af2b7daf",
+    "ui/marine-webbing.js": "67af9b95e50a7b72911aef0f1e4d332b34cba4069ae3fe027ea7086b24107478",
+    "ui/marine-kit-fit.js": "efda9a23b24009a4a06cbe6126386d3753adfad572b286b58b2cff84821870db",
+    "ui/weapon-sling.js": "1ab165bd1c63d7d47231608f0e003dc0de16b83abf161f1e872db46bc270cc43",
+    "studio/marine-carry.js": "178796a2f01b6523218725ec22978b2377936b41dbe0576e430af2c0b78749b9",
+    "world/lightning.js": "18a740987eb5e0bba3eefd31b82eddf3ee2695e5e2660b5c23f1bdc57a2b0e90",
+    "world/history-props.js": "4eba5b94d73a5bc358ef25b2cb8463d7c8f97c41c6f5611442fb0e96952f308c",
+    "world/cordon-checkpoint.js": "e13ba3f6b785c5b257cd5891db9927391b2311d39bfd2dca623a1a4c509a4d64",
+    "world/rabbit.js": "8691a6db8f6b1bc9cda803ca65d79156b5d5b308d1430f2844fd5fc09dd94615",
+    "ui/build-controls.js": "05ee226303e23dc9599e3f9623d2317f910013b0c1b4cced9388a68c11b05f1e",
+    "ui/records.js": "0acc0931f9aa6521f31bb354238fe017d276f5ef42fc1ca5efaef11cae2929cc",
+    "ui/first-run-choice.js": "4e7ba830e76bf44aca39d56a4279e910f858224963bdd1438fe40719f0cb2afa",
+    "ui/badges.js": "95a592590eb2219276e4b6e6dcdf85e6e2652d0a36f0452306ca6e304d71b495",
+    "ui/cif.js": "2047f897774266a5419c60a19fc763d344eb8f91c746a191761e610a9cdc8026",
+    "ui/cif-exterior.js": "5f04d85244279987989ce9b267f9aa68a987de2549cb56d61f3e3f73f20b8b4e",
+    "ui/unlocks.js": "eff262dd5edd26aac600f0fb022e263c97d390719ce0e2d52b2c140aae5071c6",
+    "ui/training-camo.js": "115f5625922ff5c17d78cc0d98677b9c2c49596606ffb40da36bc56fc7cea52a",
+    "ui/badges-runtime.js": "f135d3c2e87c726a4343da0c5a61355d48d03054ed6b09e3edebe0a6546453b2",
+    "ui/map-missions.js": "8e4c84b1547fd09f056e7f3745d0bd9dc1a84881e733cdb61892846279d2334c",
+    "game/skyline-pulls.js": "52baed138aedde666a65c106105e13a8d58fae223c26838837f9cce0ce386fec",
+    "game/place-events.js": "e3240060ccf3ca18f3545ee20e1ba20d708f429e6a864c4041758adba68f7cf4",
+    "ui/map-landmarks.js": "f95f06e1f289aac9def381a85f2e80eaed428907240361236a47a0c174825aea",
+    "ui/map-reveal.js": "a2f342612edb3c04d84999b992fe601a45c12412d00d041396b85ae5d0d9ff9f",
+    "ui/map-enemies.js": "27db8e84779092cf484d27d6daca562039f09ee6c48967d8e98c7e18b419fb66",
+    "ui/build-alerts.js": "842f4aa12f991176161a154585cbb40b8915ae701a4757759365e4d6778cb43f",
+    "ui/relay-story.js": "74cf0a4077cb45414620c420494d71882f2aa3c33326cde404cafbd7d9cb961c",
+    "ui/quest.js": "2dad2cff719764dcc2f7508c67bb4677e2bc1b0ef17dd9031d4c27aa426b882a",
+    "ui/prop-notes.js": "70ea92f91b3fb0a0019b1731ffb0cde6d0187dcedc13c117e53ee3b9b0a8d9cd",
+    "ui/survivors.js": "ba554cdfadca28c45ed3ddb309f91302eaebdb7b8d4b8a2277d0eba1a402fceb",
+    "ui/dawn.js": "30e2976edaf4147e4710b32b0d86df3a9b25beaef5d57dfd86def74dd8ddbc69",
+    "ui/skull-recall.js": "83cb6dc058b9258dee49afa28750630554b9ccf94a3ab47d171a31abd75398f4",
+    "ui/guardian-escape.js": "d4c4a7ff1aa2f52a56032f279d1b5d9e4c80994349153dceb66b989b6e369e0a",
+    "ui/enemy-counter.js": "634a15f722e9ed9f82950a9eaa96d056735150aebb376b844e23c784d73d9e4e",
+    "ui/armory.js": "e2422977fdd087cd4faa881d537f2799ebb35e4498bde35d54bc60720376ae5e",
+    "ui/weapon-icons.js": "822ecbb59397cfa428a71a32896990afb72bd06a3a7e3fa55892b36585f53b23",
+    "world/light-pool.js": "0ff661b159f69bbba7f9f986ef29a8f54f18b59dcef18d5ded22822b878c2f46",
+    "world/bake.js": "e4bae153ba9120d8440c338569b374c05d2738f36d1dfc761d7eebcd607360ea",
+    "world/stone-wall-kit.js": "34cdfc1adc2805cbc5abd80c9a910ef828e09b3339d5b8c08cb682d48f147bf7",
+    "world/story-fence.js": "29be59849b469bc94fb7fd775662cad374ab17a389f44bd998fc42a9caee2f93",
+    "game/story-trucks.js": "f1463bc50f7b8d090add1947769dd4c38902ab94c626d952fcf66c3a7858f2ac",
+    "game/hq-teleprinter.js": "98b8e64fea359068c74ffba68980c63c7b35e00e4b24fbb4c7ef1c0ba1c288d9",
+    "game/wall-cull.js": "20f51fdf9f224bc5a1d4e2340b1364065776d6afb88160977d5814629159c668",
+    "world/training.js": "c14b51e72eb854f43023e8017bcff49afb4ebb626a95a1491232889bba4a3de0",
+    "game/training-ceiling.js": "f02fd9199316ea12f3cbe05e85d176be2573d97110106919d64916ac07e905d1",
+    "game/zombie-ability-runtime.js": "9efd15259b6df8ccecf99f8607f94a8baa6e90f575b67bc5d46b3e2d982503fd",
+    "game/zombie-ability-visuals.js": "e5be412d17e4ad2539a34c04460b1b1416a17ac5c484f4c9ee317ea7a6b41866",
+    "ui/range-feature.js": "c4dd6a61bf768764996dc02b470c0fc1ed7a7de5adc2962b699988b7af83b40f",
+    "game/training-dummy.js": "70cc0f71638534d2a22833cb55096c69aa91640c370e8ed7fea7eb95be852383",
+    "world/training-ballistics.js": "eadc9d04d5fd50ad9f6f23c0a080ea2ad58485ff62e0002f1a6b1b0da4719bdc",
+    "combat/training-grenades.js": "58fe23d3cfe28f939d021e531a9ed182b8f29a313b363524abf1e0b2494336b1",
+    "ui/training-panel.js": "e477a4ff25a4f1ac102014369bc1817c31d2c3fe4dd9f9a13341e7f74a776b11",
+    "ui/training-security.js": "cbc84f1e0fa661f255279098834d67904426f9b0f0da4327399252060c7e1ad9",
+    "ui/training-encounter.js": "de2a0f2391e4831ce7f3a8b4a303a555c7fe968752b3e10047f85bdb028ca94d",
+    "ui/training-danger.js": "8595715d0151176c6e6239828dc87d30d6df8a3e4308f77eb928af816750082a",
+    "game/training-station-reach.js": "2f26f921b96b1a1c25e1fdb1ef3b1790ac97ee9fb341cd11a9c5374d69f8e81e",
+    "game/training-containment.js": "700cc2c4d2d14f486e8f4bdf5e7f1ba350701edab6e3e28333ed91ffa907d39d",
+    "ui/training-build-policy.js": "897ea28007c1dd26e02ac3248e308f98a5963b7a94be3e992a3178277a33875d",
+    "game/training-perimeter.js": "23d97c69544a153e33a6249eac7da12e45332f00c7d1c6da52c9396f564b5927",
+    "game/training-infirmary.js": "6c23721ac7861fb953cc50303b575b0a60b02fa8b18d7e2bcbb5fcf0223375bf",
+    "game/training-armory-collision.js": "bc6d6381e781c269aa69f0e8affbd6b857aebec4279d17c09a1f280e01bbb2ce",
+    "game/training-station-collision.js": "d42b4df14f6045b6a98efc9d8c5f9cdf221b0aba7fdaf5ec8b2ad42cf6fb1aea",
+    "game/training-camera-collision.js": "9138f0820b666dfa2af8a0946dbac966f2284ac6ef112c3d2f4046384478c1db",
+    "game/training-zombie-collision.js": "678989b439da5cf69ad73e01e326400c410e97b58831999057e9d5f65e16186f",
+    "game/training-infirmary-fence.js": "331c841ad90254d86b47b8ebfe25c4b4139d45819601264c69511c238fd9a55e",
+    "ui/training-release.js": "60eea589e0ecf3736dfa2770720ee45d3336a091606969e723ee9898821c8f44",
+    "ui/training-hit-pops.js": "a4f51de7f54e753f1f40cf24eead8bf1535e447d190ffb38f6f97092c6862ca2",
+    "world/training-tunnel.js": "de5b5da5cf8daf2740830a9a056c69599760213a2eb9af6e23e73fecac3b1a2f",
+    "ui/training-deployment.js": "ba7d44997f3ba1a4014660e6be67ae737964c957a923d99106674f1d0e8914fc",
+    "game/armory.js": "cf537a6feedf576ddbefc9c081d1fc0eedfc7be28acea2608deca6c012cf070d",
+    "game/wardrobe.js": "cc53d009a82b86277642b9c93ae8358f58c2984544fca78f966c0206c19d1016",
+    "ui/skills-panel.js": "96b39c0d36dd66b508c646cfe3d996122aa75469ae5af6ec3a3eda1acd58876b",
+    "ui/supply-notice.js": "cf65be969bbca06606c5c4ce9734334d6cfe45dbe4d8b4971e5c739eaaeb9096",
+    "ui/camp-cleared.js": "312f381b3814260785741e648e33cd0fbc1f715d62d26fa4d95e3a2cb7b437e5",
+    "ui/cache-intel.js": "fd245be6d5be2b827047ec652f8796d8b782e88a24eaa6ef7de2cf40bd37e5b9",
+    "world/ground-foliage.js": "83656427f686c4185d41f9aba6558636c6a0162ab7a73367b42784b92665042b",
+    "world/cave-guardian.js": "3212699f75f88effb4ddeebcc6c9ed8ec556250783ec70a0319f2148e595e4cd",
+    "studio/zombie-concepts.js": "78f6fdbd6c41fb29f9ed2ea506fef043175f6db63ba0ab10d412f3ced9ea9d95",
+    "combat/zombie-joins.js": "f3beae745f3b9c056c4270d5d586b51e7bf69e7004c1bf223c3de54a95743f07",
+    "combat/iron-gaps.js": "8206171ac9e1e1f0f7d5f967e5d92891a0380f1015e7d8dd173f41c19c029417",
+    "studio/marine-idle.js": "8a989ae8227d9b449f4cb323d0547e4f8751fa5e87b87bd28c984c7a67ac6cb3",
+    "studio/marine-turn.js": "a1f860e0e89ba8a9e9656b53c130360eead44468ad5c2186f7eba788a17970a2",
+    "studio/marine-gait-feel.js": "9a82bf3c9b9179a7dae0ebd664c1a23cd1cb9f99a6b768e67fed725ed1badf14",
+    "studio/marine-ao.js": "b39ec209ad50095a54fc9703d956fd8e1651a648dd366cd4379a905db3f4c106",
+    "studio/marine-skin.js": "71fc3646525ba333e3f32deefe423999834061e3950f6313f44b04b1af90f19c",
+    "studio/marine-air.js": "0fe87a32fa4a0ae761a2693f5605c1f4e96a4de1627244e7ba709d1fbf4457bc",
+    "studio/marine-bed-exit.js": "e13a35c770f42888608e4cf9bc7f79863cfcc07f0d08914642c171dbf8a71caf",
+    "game/spider-motion.js": "dfbf9a1e0a6309bccec598f1f30a66c4432bc1b7dad4c962bd7caf401bf8f876",
+    "game/spider-web.js": "65d259772b1a15f06ecf8b94068e7801f4bace5dae4d7a482c28a2643cff048d",
+    "game/leaper-motion.js": "cca59d32ba5ed7842a806964443c8782da40500644b8331735cf42969d1960db",
+    "game/drowned-behavior.js": "2e9729bbf0c1f9b8008da4faa6a98a3b2b2a3aaaf1b29bff9fad759805414bd1",
+    "game/military-behavior.js": "b3f1845b9f2ae330a4ab7aa7ba431c3c4a649a18ab4909560ff1fec17cc5cac0",
+    "game/military-appearance.js": "74fd371bae562ae2aaa3d9e3a3a94ea80347d7dea98d1e06bec12fc6d0b0a084",
+    "game/brute-behavior.js": "6008761ab99abd44a12485f15a5d13fdfa0c6f97e11d769c3de58809453297e0",
+    "combat/brute-getup.js": "33c1bcc0a53e1ace4a38497ac9fc2a0a75ae2a35c9f7e90c84907a1aa4e7977c",
+    "game/sight-points.js": "75fb14527270b58cf074f599c1fba9ac353f179a80edf3970f455ee88055a469",
+    "game/zombie-headshots.js": "3ae0315ba719280327e42450ea8f035f85a55acb64799fcad962aa74ddfaf5fd",
+    "game/bomber-behavior.js": "8b9942a872a8584bb520a6b3c98dc1eb9216e8164d43dfbd9ebe632f524f7d56",
+    "game/brute-armor.js": "0d9ead688633a9c92c164c67dd75cef77e73b2945acea14104988bb5d4ee5f08",
+    "game/spitter-motion.js": "42a19cdd44b66d0fdd4f73ae31985193240ba6639986b26dc8882c6d0585dab1",
+    "game/screamer-behavior.js": "27ac36c7abde1e2671f89077b1626c03c3277ac9a995adda3ae8efacd32b9f4d",
+    "game/screamer-appearance.js": "ea33b43e979143147eeae4b39a5360f390cb512bc54ac8cda6eaa5f0186446f5",
+    "game/spitter-acid.js": "7439f100429e6e1ae83a6d4052b18592dd6e1f1f04e57b29f9c944df220f52c0",
+    "game/drowned-motion.js": "94a7317659d0132b942e45e5188891dd9c0bbfc4433560fd70ebc71ba419cfa1",
+    "game/shambler-steering.js": "88facf5c14787c31496f949748d0e764f23071ce37aa57c25917d64e8ed88737",
+    "game/relay-puzzle.js": "21409a5101941eb477424ab2d0a0a987002adb5c23e972d4acd740bd8efcc774",
+    "game/truck-mission.js": "3bbaab469f5a8301dcb61d1615f53f07f79c105aac06e6f56afa459655d669c7",
+    "game/ranger-cache.js": "62435e1ffc8ae19da4ab44b88069004fd8e7f0f7f10dda52a5a065e492f2042a",
+    "game/trapper-path.js": "93fa373209001bbd729dff27dfd72ebf8f9ace523c227c2401d01bb6a9b227a0",
+    "ui/ranger-clues.js": "74a8f25d00d7c07e7ae18512eb7169f621db704e77d414d20ea3a09c0338d475",
+    "ui/relay-panel.js": "3c5c723066051133ab7baa4665c966b8ffc600c24da4e88a7e8f1615b047485d",
+    "game/player-vault.js": "c58aa3214467db6ff2627f46905895f249a92ab8f53497202f04c9395dcea6e3",
+    "game/relay-vault.js": "fbfd3eb30cb8c3d2bb30d56da83c05b70488677aca52a1fb74b3bbc7736b618f",
+    "game/story-chain.js": "8f4f1066b051778f4dd8b997f9a8b82cf2bd478935ebb2bf5328c536cf5e1e0b",
+    "game/chain-gates.js": "3af6fd7a8ffb9e1baf4d6a92c681fedf76f144c3f5071dcf6ea94c6ae41654d5",
+    "game/story-gates.js": "fd8a4eecb7086447966fc51960072281948aa05c02bc7da92f38793428955e7e",
+    "game/utilities.js": "a943a0f7558cb39879861ade494a66475e49b2a444fcc36bc0e99b74cab818b2",
+    "studio/relay-vault-model.js": "e782d6b842510e59ce8872942b2c0249eff7195441e76ffdea4415e7e8a904ef",
+    "studio/katana.js": "e7acb2f6cb5275608df0bbe7c7ef8fc4e55b8d79a99f49c7fda2ca8d9d65ffaa",
+    "studio/frag-grenade.js": "9366cd9767587502c36980644ad2fc78c7fc1fae9d72f39d28c4e67f823bd832",
+    "game/shambler-recovery.js": "c8bc6bb87d62dbc2551f2ec12f8d70381557be24a969f9389ff85041ca348040",
+    "game/shambler-motion.js": "fd9b4458a67f15f778daf5ba62af3e259ecd78acdec854fc9f3af8e7044f995d",
+    "game/zombie-feet.js": "d77e9ec44f8c4e5eaae5576a437fcc06d64000ee7944e224fb355abf26667a09",
+    "game/zombie-react.js": "b4b82bbb02aa2bbe1ea568630c17adc0ac73f0eb75cc5318744a3082164396e6",
+    "game/zombie-clips.js": "45e11f50c71da34bdac2978d741fa5f8f7fb8a91c2f2b63b17c66838e9080fef",
+    "game/zombie-falls.js": "5cd2a751a0de6064ae7e7aa0af33ec1c472d69e2d5de5ee325442d79a3becd9d",
+    "game/feral-motion.js": "672c872d24729a2865fadcd144f2f5b44207b19400e655e0aba33adc1b2e8aa0",
+    "game/chainsaw-animation.js": "7cd994b3ee28efee42f27134fe70047181322853bbdda75e3a226ae0a77de248",
+    "combat/shotgun-loads.js": "5c486f5c6136677302b806c7336854796008279fa738ef3488adfdc446a7bb36",
+    "combat/ammo-types.js": "89a6ba173e1da47890014b1851ba85af2a0f0b26995a3827b7fcb0a1eec31aaf",
+    "studio/weapon-model-hooks.js": "4793952883884efa9645283b8eff59896ecfb55712868bc557e398da2fe6133f",
+    "studio/weapon-casings.js": "cb52591967fdf3ef30d6e46e583eff7adc06482f11a634769275450e41fb23c8",
+    "combat/training-wreck.js": "8b36625fb69428e14b6dff188f725115266cfdd1eb727a70e602bddb035fde12",
+    "combat/saw-blade.js": "c3b95aed5f9276f7739ed09f5923de7ad87a1526e7f7004677ce7fdfe7f3601b",
+    "ui/marine-aim-safety.js": "3ff26c5f2aa28af1c7806cc28d357409f0e88318334dc44f072e0683cd0d256d",
+    "ui/training-map.js": "140f63a2a6736d583bc3c77502a42e5528507008b254d82d91802d0adbdd5d6e",
+    "game/watchman-mg.js": "6defacac2fe03f932a3b42d60f5f7a12377140916dcc162c96ba45e83b683745",
+    "studio/crew-footwork.js": "709ddaf3e71bc2bf88eb1298faa232950bb4e884ded021d02d173c63cfd90bf2",
+    "game/marine-jump.js": "5fa3de2f74b530461a3c7e117c6706506a60ef1d845ecebe341f287cfcf0ff40",
+    "world/training-target-hits.js": "cadeea8bc49fa88fa523609c0705219e6c00a4d2e7b08ddd1c0064fdd51c15da",
+    "studio/marine-draw.js": "8c46934be653e95dd937f636e84935e2991e07e4cbb3884e1ef2a34adc1896c0",
+    "studio/marine-dive-pose.js": "d1e6aff29d3f96e533544ab6bdad01b2c7e4b9ec32683aad22c07a4f4fba8e4b",
+    "studio/marine-dive-aim.js": "9c285834675a897ba38b7cce74da3e5afaaf3997c36a9dd1a4af5745513eaf48",
+    "studio/marine-dive-contact.js": "424124c95e9b264f210ac3daba9b3891a7b19ecbb415073e6661447a4fdb9c9d",
+    "studio/marine-roll.js": "f44fa323cad2c23de3582df46399933b2c7c80ee1f90e4a78a87f3fd079cacb7",
+    "game/barrel-heat.js": "9cf7d0ba68b2513e23b4d0018008a79b6013d69030943011b5056116c44e3796",
+    "studio/marine-dive.js": "33a56731f80d6b68b5e692c4a2af2a5cafb4417d3b358853872f15e6ca2152c0",
+    "studio/index.js": "fdeec8592341b69915a4422375ed4089745a5cb75f63526a473ebbd1d2df31d3",
+    "world/pit-tentacles.js": "edc2e85c1fe0542b7cacc5071135bb8ee9ea0643d28fcbb9e76c04607b5256b8",
+    "world/heron.js": "db676acd9d7704739ec37953d39a465026b41281e67a8cc9b2bcb536fb583752",
+    "world/cargo-plane.js": "62cdaeb153eb0aeb37285ea6cd9acf1af7fd45b3fc326785bea49286e175987f",
+    "world/runes.js": "8bff678f4949ee46709fe21a05946d8380ad880ae1de8467623bdcf8b38eb7d8",
+    "world/hollows.js": "773d6396d75ab086daf5fa12fe5732c154030fa138ae4384ee7974ba83e0c28d",
+    "world/heart.js": "4b4fd5b6245858da4337378c5dcb05f6a92b605ff328de76d93623c135cf0798",
+    "world/first-people.js": "b2e1b589209ac43de23ce3313160e64a366b4a2b0f1567ce4f6f629f612d1013",
+    "core/hollow.js": "ab44dccebe95f539157f1c295675a3967380a2920d089536b2a19d41999c1f76",
+    "studio/marine-waist.js": "aa112ff8f589086e9749ea4bdc07a4f791be11cfb08ffa834999e0485e303b75",
+    "core/skin-merge.js": "35217f169601745f24d02f550370d113fc33bbaa2a5add46b2167a3e2eac19b1",
+    "core/version.js": "c397dac42b17728011b4003be47b3a3383d29acb4259bca26f000c50933b5728",
+    "game/hollows-loot.js": "b396cf53d9678b03851fd3fe66d7ce23de9bc440816e29778929a1b9500fd7d5",
+    "game/below-fight.js": "573c067a2e47d63a5cf65c0a8888c86712abbcd73a4198b3b5c62a4c994d1962",
+    "game/stir.js": "9328f30f8491e25be6c62f8948ddd0a1356d3c6129bd427139195f62c66dd630",
+    "game/heart-fight.js": "5e0dc6e0b38d01c959679433cfe8448f9b284414d7049560e7b6a8245a9bb731",
+    "game/horde.js": "ee584b7bd1e5aae11db04e0f555ed042426b2787bc17168a1d9408f3024419f6",
+    "combat/zombie-ai.js": "6230241e2b162cca448b43ed83d41fecfe3f1d285f4b393b1d7eb492d81bc417",
+    "game/arcs.js": "e53539da3f66f7217b8e29893d90f13a3de86590390b916fb62a618420fe65df",
+    "vendor/three/three.tsl.js": "81c94667fafc303f03b542094365e3d67578d0d67c46e085cce53bda330fe862",
+    "vendor/three/three.core.js": "184ab436f412615e5dc3e07993d9c76c53038ba6758d2711fb0453a0532091f0",
+    "game/objectives.js": "1e63da6d2f835e0fdf3b00cf85b9fa7460dd8b15f305bc2cef78fa6ee8350e02",
+    "ui/objectives.js": "46c2e947e3283296b873bc08ba3cbcb7009d92a9aa247eaf33dd3e257e6d6888",
+    "ui/cache-restock.js": "bbb0f257031837e859aa7fa7877a3db034db686dcd58d3185a3b3d64cdb00b9d",
+    "studio/marine-hand-bake.js": "8c15c8f8dade1b65533359ba68237e83f123cdaa40ab28fbb64f95ceb527ce8b",
+    "studio/marine-skull.js": "feb44666600e841691d3e9fa40445340261736d829217f94eabfc8aec81cacec",
+    "ui/notice-rail.js": "4b7a9cf93113a24c87b3a04c753d1f762bc4f74639179b0f825ff23b967477e9",
+    "studio/weapon-pump-grip.js": "3c753b1e1cf3716c5979996e3ad62f3817555b1902fb08ac346c7d5d2be79cfe",
+    "studio/weapon-kr7-band.js": "52e6027d21e8a628c1a081109614315bae2cd5c66b64f7336cc0bfd70b3b7e3c",
+    "studio/weapon-attachments.js": "23884cadfa9ddd6be9136ea7947c89e3ae4b53c5c369f2887d0f1d6211e86e60",
+    "studio/weapon-detail.js": "dab442b6ae8319a1def3edfd3d58f22394f16b97bdeffdffecd92108c658bd2d",
+    "ui/armory-preview.js": "79774803e365e829286d74f42dfccd809699561daea0c80eb3fdc2bcc9d0bda5",
+    "studio/weapon-pistol-action.js": "dd718bf3b7d08110eacb352360c0d0f9b576bfa9afcdc82ae4761a5ff4e12a96",
+    "game/viewmodel-poses.js": "789a94a908f60645a4735ce4b7f6b3515c25769ee2f31b7ff9216ddb88184003",
+    "studio/fp-arms.js": "aa65f8f59c99f406fa732be3b9016b01577e8575397e18ee142c606a6f9c917d",
+    "studio/hand-grips.js": "a5831642a623d266168dbdaeab4af27adaa04f32a80e53176d16e180e885f2bf",
+    "studio/hand-contacts.js": "ba87e2bd2083c6eb5c1fe43a0fe6f52896cf047eb3450cf1c5b4beca7c25e38b",
+    "game/vm-flip.js": "97235dce96b25c9e9a35cc3985c42ceb87fc298192fdaa32f38cee375e8aca6a",
+    "world/coldwater.js": "1d434b131f91f3a591acd12588c45239d3f7be22b5e601aa186fbad9adb34b2d",
+    "world/trapper.js": "321f22c48c3b91a5e3841d1cdc3c583e30a25bca9f204c5552f934021a5825d2",
+    "world/mine-props.js": "c208e7a1d212a7f50067378acf833b004af021d59d16b786e6d2d84f19d0f176",
+    "ui/zombie-death-envelope.js": "6def9ca2d5080b8bee518295c4ee8db005766fdb2d8fa28d3c9fbd5a9c5c8047",
+    "ui/zombie-audio.js": "c75082efb3038411e8b368db4eb2fe91cb274edeccfdfe70bc131e4d4ff113c1",
+    "ui/training-audio.js": "6396d9b2e651430f962e0a6992f4ce3ce40e41b2b259c28a37d286b6cce7a665",
+    "ui/training-facility-audio.js": "a27c7a1887a9d9d7a5935761c43a71610f6822f5eaee47b43690f3a5beed8557",
+    "core/takes.js": "3fa8bb6752dbfca846461b9e89316bf6a6309df3abbd0f7989ece9e456807615",
+    "core/gunsynth.js": "6b4838b89e80dadc6a95187eb22940060f2fb945ea19ac9ab823551dfdbc50e7",
+    "world/training-dummy.js": "e592996dc407eb906cbbc113a6c705d6daa0d82e857265727b3bf723126ef38d",
+    "ui/range-drills.js": "e3e0ca905792cbb967956f5d8f12f93b4d79ca39dc3b9f4e2489d7716fa18c74",
+    "ui/range-guide.js": "e652cf6035136086008bde4def3866e58c7ae24850d1602d02cb3e573988f95a",
+    "ui/range-monitor.js": "bb7b7e1ce8cd0d9f7ea99e85df3a4bc3799394beab9e5a18864b335b9b2747d6",
+    "ui/range-hit-feedback.js": "7368464c04725f737f074baa1f2f9c1da1da26a9f03db8f92122e9e7f36b5154",
+    "ui/range-barrier-feedback.js": "913d295cd97a0bbb20ec9491f4a5adc890e713dd95cb399bd821e74c54846718",
+    "ui/range-session.js": "c716c1144df0f66d670923f50c2868d269749c992c065424ddcd6f33ca18f777",
+    "ui/range-records.js": "ee2b04efe3413a4e6b5709ba3600a852e75f35477c5e1131f5d6b15986cb12cc",
+    "ui/range-targets.js": "f773b1723996dc9fe4af8810128fde15458988c41c79799f2e91d7a401cfcbcb",
+    "ui/range-console.js": "7c3503fecbc553172d24df1766fa7cfa3709586a83925eed604c632fad5a5784",
+    "game/zombie-abilities.js": "37691135e5330e6dfeacfdde4cecb7a27610c4e6711d2a9141e83855fb788001",
+    "game/zombie-ability-collision.js": "ee717303f9663933b2c6282a95b43c935d55f3669bc55ce6653d3131ee458fe0",
+    "world/training-cutaway.js": "4552cbc0787125d3ef30febdbe39b51f94ff7a109b50a199bf7cee2a110213cb",
+    "world/training-firing-line.js": "e2c3086ef1d7f7c83b987833e162b2fa113daa405fd0e1a0885af893a63fabad",
+    "world/training-props.js": "96a9e9e6460f01a9ad551c560d408c156a5e5a48afb712d44a4d97bb439137a9",
+    "world/training-exact.js": "7caba7c4317700d7807196b38313ca83514209e52e0953ed6f7c7aa6a2e98f5c",
+    "world/training-wear.js": "716de8f95b01779a20c21d8d037de723b281cf6c0c18fac16ccd5090f6b7aab5",
+    "world/training-build-wear.js": "a64b24e8829336cd9eefbf67d7f06f7fe677ba5eb48f1244feccf4bf6d611620",
+    "studio/marine-cloth.js": "b99bcbff54f7d0335d8f7807645dd1cbe7fd6266b0cd6c982ef102b028971c01",
+    "studio/ik.js": "b55b7ee7d8b5a0fe3abe27e9099f25926bd33a3c3be398276ca2313aed1c0edf",
+    "studio/zombie-brute.js": "48a2eb50b513aa13e5d72609a5903e82b9b6b2a7ccde5fd7f4902034d27623f4",
+    "studio/zombie-detail.js": "6501954cc60c2a43554dc3707730974983a411feabf399049933506f9d5e7709",
+    "studio/zombie-guardian-detail.js": "890af53e87ad673c5850ceb123eeb324a852c0f8b7d69b3b8c3c79c6a9bd8358",
+    "combat/demon-visual.js": "dd668bcf9710e7ca7d18b0e62a448c4e4ab4d570167b626519f1e151c4f36c91",
+    "combat/zombie-fidelity.js": "e08ebdf05caa7ce05de420a02ecd8af33422bb52eb517aa292eb8c64f9825716",
+    "studio/zombie-humanoids.js": "69553704aa4ae384ea4fb16c6d69381581a8838446aa2e707f25dcc8cbfe4ad8",
+    "game/leaper-support.js": "d70eab90576af182794504d82ed28b769f00d373fe471ab601a933d240dd5cb7",
+    "studio/bodies.js": "be4e3499a27d96eaf8298438c2e05fa0e98696a81d465959cd4f6e1775effec5",
+    "studio/motion.js": "b45311da23e109cdab9224a8c8358b010e881af5334bd4333526f1051873f3ce",
+    "game/bomber-appearance.js": "548fdf37c059731c7c25759322a874a8d7b76e143d63db2d4474243166de43b4",
+    "studio/weapon-light-switch.js": "ea68b31044b9a24842b140145a31f70ffdf07c3728ab48f95a5fbb9792a9ca20",
+    "studio/clip.js": "d5180c99bcba1c7c15bef6cf2d7c966c03e3b3969a701cebf938507456892d65",
+    "studio/scene.js": "4fdbf826be2fda42cae57a09e42e8bf9a9e37713dc9dcd536e4c266caadfe660",
+    "studio/load.js": "c5b4372f33f8c3698dd1953a6c8859d53501205e535858afcfe15ec5d6557278",
+    "studio/marine.js": "bfa6564e79b54947dc916bd34549ae0a35e2d8c4cb905486d8a872d86000da28",
+    "studio/rigs.js": "7f2089c2e32708aec6aa6c50227be6434715e716ca5e541c93eddcb9e3982498",
+    "studio/reference.js": "dcd5797d59ffbe9ca17530936ace512417056e9d61ec28b1055bd259713421f2",
+    "studio/zombie.js": "619046a6997b9c0c6e27bab01ac61e248d5c4da30d3b324ef621fdb1d42e11b7",
+    "studio/marine-reload.js": "7ab831df7785ed074561d3fcebae29c67b7f0513f1a755c39bbc0c3f6350c7a5",
+    "world/aircraft-kit.js": "91aa514f38f8bcad682c8b31f5747656e2a9b671f468e5feaa8cb69fc38f49a4",
+    "ui/training-door-audio.js": "14751874f8b4ac74e7f27beb389192cd4011b5e2c9c1d33cdbf79bdc72e4b7af",
+    "ui/range-start-audio.js": "32cacc0ae81aa439d61e7c355b6745f6d3ab84ec7b1ac132c9418a4d33b2e3d0",
+    "ui/range-control-model.js": "d6b11db11034745eb91e30ba661d95c0f18fac9039babd29c6243c18ee3b20bd",
+    "core/take-levels.js": "c65125c3e57d969602e0c0335db7f17012a5a997f51857c6020eb01d865947e2",
+    "ui/zombie-vocal-phrases.js": "2c2c2d97012a0aa63dd0f745d97d69b0b3a9c3a7fb5be2a16b4883223fc57847",
+    "studio/zombie-brute-anatomy.js": "f94e7dc0808a412cd265dcac33ba67cd5ff5d43a887272e8eff0f017a0ac4c0c",
+    "game/zombie-limits.js": "e280f677028a9b36729b279e88287aa834ee0d98fb580a69be92839ddc7a5bb0",
+    "studio/motion/index.js": "93bb0f7a80cd0a5f505c3453f23fca180f020df34219b6a507dd932b770c8198",
+    "vendor/three/addons/tsl/display/BloomNode.js": "32c172f25a56c4cb769388e694969e86a2ea10d2f8034501c909f1fe2099f3af",
+    "studio/inspector/inspector.js": "7fbd44cbd5ab593fb1c3660ef0be4ad2bfbbed489b04f51d3073e6e5229fa6ec",
+    "studio/inspector/catalog.js": "c1f48c34c8de22db47773e6c59930cce7cb8b3bc7b77c70f062ab64ab82ddfde",
+    "core/gunsynth-worker.js": "1aaa4b75f52d1133331ed68c82a9d2aee0da6e63f0ec5998872fbe7cb29c14d5",
+    "studio/inspector/stage.js": "0ffdb062b3ca44f6f523ed36036a6fffbf6cb724e11252eb18342aa4107ee47e",
+    "studio/inspector/orbit.js": "c38833ec17b2fcbe3075a3c1f32a15bba06803ca99873181f2399ab62ef902e0",
+    "studio/inspector/timeline.js": "8a50a0f1d17338d73d9e4679e0bd92abde7f90bbe771c9f10c6cd0321ba09bb1",
+    "studio/inspector/subjects.js": "9de71f20614abcef350a3ba7d0a1d0ba27124c8d75788065672743101c265572",
+    "studio/inspector/marine.js": "f4da76611e78a4aa52bdbe868fa012eea483d85720084a0eba1fd48d2b1e7a39",
+    "studio/inspector/ui.js": "9a9d7edd7af457a6be6880a90ce6f6a52ce0b1316ef55db25de6552ace7511a5",
+    "studio/inspector/api.js": "d37f963ecfa4e457ef9a1cb27d2f37b9a733b531f6fa46f5549231bf8e0c6968",
+    "studio/inspector/async.js": "86c4f3835ed57e22fc95987d68e2f3880a2572e1fab494c81de05950073f6ae6",
+    "studio/inspector/inspector.css": "e357edda4a8bfcba31cecdf74352cf15ca61d8618359f3ffc1fda4eaae7d335f",
+    "ui/range-drills.css": "94a725286674ee9b33c4ce8ea31f0d119919c16b0109932f00497f78e0194e7c",
+    "game/fire-warmup.js": "ff72813c050f6356e5800e90ded5dcdd9c72f08fcc1856a9322afe791f648552",
+    "review/GP-20152/runtime-normal-continuous-fixture-v2.mjs": "5838e32d10ce596b00b13da7c6431673c0487a107ebc2e31296dfc4e38108693",
+    "review/GP-20152/runtime-knock-continuous-fixture-v1.mjs": "8486b4e40c8726b44f1b86481a7d5a73687522644c0e00636f12dda3e440bc91",
+    "review/GP-20152/runtime-cave-fixture-v2.mjs": "767730df4443ba8f3e0617dd4c444c5c4156c4078a558301f884f72f469085c1"
+  }
+}

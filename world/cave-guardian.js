@@ -18,6 +18,11 @@
 import * as THREE from 'three';
 import { rbox } from '../core/geometry.js';
 import { applyGuardianConcept } from '../studio/zombie-concepts.js';
+import { ZOMBIE_LIMITS as CAVEGUARD_LIMITS } from '../game/zombie-limits.js';
+
+// GP154 / Director10:17: this profile is for the live enemy controller only.
+// Default story drag/carry/throw/upright and Guardian use the original pose path.
+function caveguardBossPose(g) { return g.userData.poseProfile === 'caveguard-boss' && g.userData.concept?.type === 'caveguard'; }
 
 const UP = new THREE.Vector3(0, 1, 0);
 const _v1 = new THREE.Vector3(), _v2 = new THREE.Vector3(), _v3 = new THREE.Vector3(), _v4 = new THREE.Vector3();
@@ -238,6 +243,8 @@ export function makeCaveGuardianRig(design) {
   g.traverse((o) => { if (o.isMesh) o.receiveShadow = false; });
   rig.eyeMat = M.eye;
   applyGuardianConcept({ THREE, g, rbox, kind: d.conceptKind || 'caveguard' });
+  // GP154: explicit live-boss motion profile; default story rigs keep their original motion.
+  g.userData.poseProfile = d.poseProfile === 'caveguard-boss' ? 'caveguard-boss' : null;
   // What index.html's damping walks: every joint group.
   return g;
 }
@@ -267,6 +274,12 @@ function bodyShape(g, R, { rear = 0, crouch = 0, arch = 0, lean = 0, twist = 0 }
   R.spine1.rotation.set(-0.16 * (1 - rear) - arch * 0.25, twist * 0.5, 0);
   R.spine2.rotation.set(-0.14 * (1 - rear) - arch * 0.3, twist * 0.5, 0);
   R.chest.rotation.set(-0.1 * (1 - rear) - arch * 0.2 + rear * 0.2, 0, 0);
+  // CaveGuard crawl: the pelvis carries the trailing legs; the trunk reaches
+  // forward instead of moving both feet under the wrists. Fade during the rear.
+  if (caveguardBossPose(g)) {
+    R.pelvis.position.y += 0.45 * (1 - rear);
+    R.pelvis.rotation.x += 0.6 * (1 - rear);
+  }
   // The neck comes up out of the chest to level the head.
   R.neck.rotation.set(0.62 + 0.55 * rear + arch * 0.4, 0, 0);
 }
@@ -299,8 +312,61 @@ export function guardianGripPoint(hand, out) {
 // Put a hand's palm on `target` (world), knuckles down. `pole` is where the elbow goes.
 export function guardianHandTo(g, R, S, target, pole, weight = 1) {
   const a = R['shoulder' + S], b = R['elbow' + S];
-  ikLimb(a, b, R.arm.upper, R.arm.fore, target, pole, weight);
+  if (caveguardBossPose(g)) {
+    // Start with an untwisted shoulder; move the elbow on its reach circle
+    // only as far as the original shoulder flexion range requires.
+    const oldA = weight < 1 ? a.quaternion.clone() : null, oldB = weight < 1 ? b.quaternion.clone() : null;
+    caveguardArmIK(a, b, R.arm.upper, R.arm.fore, target, pole, 1, 0);
+    const flex = () => { const v = new THREE.Vector3(0, -1, 0).applyQuaternion(a.quaternion); return Math.atan2(v.z, -v.y); };
+    if (flex() < -59 * Math.PI / 180) {
+      const side = S === 'L' ? -1 : 1; let lo = 0, hi = 85 * Math.PI / 180;
+      for (let i = 0; i < 8; i++) { const mid = (lo + hi) * 0.5; caveguardArmIK(a, b, R.arm.upper, R.arm.fore, target, pole, 1, side * mid); if (flex() < -59 * Math.PI / 180) lo = mid; else hi = mid; }
+      caveguardArmIK(a, b, R.arm.upper, R.arm.fore, target, pole, 1, side * hi);
+    }
+    if (weight < 1) { a.quaternion.copy(oldA.slerp(a.quaternion, weight)); b.quaternion.copy(oldB.slerp(b.quaternion, weight)); }
+  }
+  else ikLimb(a, b, R.arm.upper, R.arm.fore, target, pole, weight);
 }
+
+// GP-20154 REVIEW: forward-flexing CaveGuard elbow (-X), same lengths/reach.
+// No bind, range, wrist axial rotation, mesh or shared studio IK changes.
+function caveguardArmIK(a, b, L1, L2, target, pole, weight, axialTarget = null) {
+  a.updateWorldMatrix(true, false);
+  _S.setFromMatrixPosition(a.matrixWorld);
+  const sc = _v2.setFromMatrixColumn(a.matrixWorld, 1).length() || 1;
+  _T.copy(target).sub(_S).divideScalar(sc);
+  let distance = _T.length();
+  if (distance < 1e-4) { _T.set(0, -1, 0); distance = 1; }
+  const direction = _v1.copy(_T).divideScalar(distance);
+  _E.copy(direction); // reach axis for constrained elbow-plane solve
+  distance = Math.max(Math.abs(L1 - L2) + 0.02, Math.min(L1 + L2 - 0.01, distance));
+  const ca = Math.max(-1, Math.min(1, (L1 * L1 + distance * distance - L2 * L2) / (2 * L1 * distance)));
+  const bend = Math.PI - Math.acos(Math.max(-1, Math.min(1, (L1 * L1 + L2 * L2 - distance * distance) / (2 * L1 * L2))));
+  const plane = _v2.copy(pole).addScaledVector(direction, -pole.dot(direction));
+  if (plane.lengthSq() < 1e-6) plane.set(1, 0, 0).addScaledVector(direction, -direction.x);
+  plane.normalize();
+  const upper = _v3.copy(direction).multiplyScalar(ca).addScaledVector(plane, Math.sqrt(Math.max(0, 1 - ca * ca))).normalize();
+  const lower = _v4.copy(direction).multiplyScalar(distance).addScaledVector(upper, -L1).normalize();
+  const axis = _v2.crossVectors(upper, lower).negate().normalize();
+  const y = _v1.copy(upper).negate(), z = _T.crossVectors(axis, y).normalize(), me = _m.identity().elements;
+  me[0] = axis.x; me[1] = axis.y; me[2] = axis.z; me[4] = y.x; me[5] = y.y; me[6] = y.z; me[8] = z.x; me[9] = z.y; me[10] = z.z;
+  _q.setFromRotationMatrix(_m); a.parent.getWorldQuaternion(_qp).invert(); _q.premultiply(_qp);
+  // Constrain actual shoulder axial turn by moving the elbow on the reach
+  // circle. The hand centre and both bone lengths remain exact.
+  const twist = Math.atan2(Math.sin(2 * Math.atan2(_q.y, _q.w)), Math.cos(2 * Math.atan2(_q.y, _q.w)));
+  if (axialTarget !== null || Math.abs(twist) > Math.PI / 2) {
+    const targetTwist = axialTarget ?? Math.sign(twist) * 85 * Math.PI / 180, tangent = Math.tan(targetTwist / 2);
+    _v4.copy(_E).applyQuaternion(_qp);
+    _qp.set(_v4.x, _v4.y, _v4.z, 0).multiply(_q);
+    let turn = 2 * Math.atan2(-(_q.y - tangent * _q.w), _qp.y - tangent * _qp.w);
+    turn = Math.atan2(Math.sin(turn), Math.cos(turn));
+    _qp.setFromAxisAngle(_v4, turn).multiply(_q); _q.copy(_qp);
+  }
+  if (weight >= 1) a.quaternion.copy(_q); else a.quaternion.slerp(_q, weight);
+  _q.set(-Math.sin(bend / 2), 0, 0, Math.cos(bend / 2));
+  if (weight >= 1) b.quaternion.copy(_q); else b.quaternion.slerp(_q, weight);
+}
+
 // The wrist follows the ground (or the thing held): flatten the hand to the root's floor.
 function levelHand(g, R, S, amt = 1) {
   const wr = R['wrist' + S];
@@ -308,8 +374,12 @@ function levelHand(g, R, S, amt = 1) {
   wr.updateWorldMatrix(true, false);
   _v1.set(0, 0, 1).transformDirection(wr.matrixWorld);
   _v2.set(0, 1, 0).transformDirection(g.matrixWorld);
-  const tip = Math.asin(Math.max(-1, Math.min(1, _v1.dot(_v2))));
-  wr.rotation.x = (tip - 0.1) * amt;
+  const cave = caveguardBossPose(g);
+  const tip = cave
+    ? Math.atan2(_v1.dot(_v2), _v3.set(0, 1, 0).transformDirection(wr.matrixWorld).dot(_v2))
+    : Math.asin(Math.max(-1, Math.min(1, _v1.dot(_v2))));
+  const turn = (tip - 0.1) * amt;
+  wr.rotation.x = cave ? Math.max(-CAVEGUARD_LIMITS.wristFlex[1] * Math.PI / 180, Math.min(-CAVEGUARD_LIMITS.wristFlex[0] * Math.PI / 180, turn)) : turn;
 }
 // Head and jaw. `look` is a world point (or null to hold straight); `open` 0..1.
 export function guardianHead(g, R, look, open, snarl = 0) {
@@ -325,10 +395,23 @@ export function guardianHead(g, R, look, open, snarl = 0) {
     const pitch = -Math.atan2(_T.y, Math.hypot(_T.x, _T.z));
     R.neck.rotation.y = Math.max(-1.2, Math.min(1.2, yaw)) * 0.55;
     R.head.rotation.y = Math.max(-1.2, Math.min(1.2, yaw)) * 0.45;
-    R.neck.rotation.x = Math.max(-0.9, Math.min(1.1, pitch)) * 0.5 + R.neck.rotation.x * 0.5;
-    R.head.rotation.x = Math.max(-0.9, Math.min(1.1, pitch)) * 0.5;
+    // The CaveGuard gaze is the combined neck and head turn, not two full ranges.
+    const basePitch = R.neck.rotation.x;
+    const aimPitch = caveguardBossPose(g)
+      ? Math.max(-60 * Math.PI / 180, Math.min(50 * Math.PI / 180, pitch))
+      : Math.max(-0.9, Math.min(1.1, pitch));
+    if (caveguardBossPose(g)) {
+      // The cervical link rises over the shoulders; the skull flexes toward
+      // the target. Do not add the old downward base bend to the gaze again.
+      R.neck.rotation.x = Math.max(-0.6, Math.min(0.15, aimPitch * 0.3 - 0.65));
+      R.head.rotation.x = Math.max(-0.8, Math.min(0.95, aimPitch - R.neck.rotation.x));
+    } else {
+      R.neck.rotation.x = aimPitch * 0.5 + basePitch * 0.5;
+      R.head.rotation.x = aimPitch * 0.5;
+    }
   } else {
     R.head.rotation.set(0, 0, 0); R.neck.rotation.y = 0;
+    if (caveguardBossPose(g)) { R.neck.rotation.x = -0.4; R.head.rotation.x = 0.65; }
   }
   R.jaw.rotation.x = 0.12 + open * 0.95;
   R.head.rotation.z = snarl * 0.12;
@@ -341,13 +424,13 @@ export function guardianHead(g, R, look, open, snarl = 0) {
 // ahead (ph pi), and the legs drive it into the air while the arms swing forward (3pi/2).
 export function guardianGallop(g, R, ph, run, t, look) {
   const s = Math.sin(ph), c = Math.cos(ph);
-  const r = ease(run);
+  const r = ease(run), cave = caveguardBossPose(g);
   // Body: low and long. Nose down as the hands land, up on the push; the spine flexes as
   // the legs gather and stretches out at full reach; it rides up and down with the bound.
   // Kept a little tall (shoulders over hips), not flat: the play camera looks down on it, and
   // a flat body reads as lying down from up there.
-  bodyShape(g, R, { rear: 0, crouch: 0.16 * r, arch: 0.3 * Math.sin(ph + 0.5) * r, lean: (0.04 + 0.14 * c) * r });
-  R.pelvis.position.y += (0.16 * -s + 0.1) * r;
+  bodyShape(g, R, { rear: 0, crouch: 0.16 * r, arch: (cave ? 0.15 : 0.3) * Math.sin(ph + 0.5) * r, lean: (0.04 + (cave ? 0.08 : 0.14) * c) * r });
+  R.pelvis.position.y += ((cave ? 0.12 : 0.16) * -s + 0.1) * r;
   R.pelvis.rotation.z = 0.05 * Math.sin(ph * 0.5) * r;
   g.updateWorldMatrix(true, false);
   // Forelimbs. Root space, then world.
@@ -357,14 +440,15 @@ export function guardianGallop(g, R, ph, run, t, look) {
     const p = ph - lag;
     const sw = Math.sin(p), cw = Math.cos(p);
     const air = Math.max(0, -sw);                      // swinging forward through the air
-    const z = (1.0 + 1.15 * cw) * r + 1.05 * (1 - r);
-    const y = air * 0.95 * r;
+    const z = (1.0 + (cave ? 0.7 : 1.15) * cw) * r + 1.05 * (1 - r);
+    const y = air * (cave ? 0.35 : 0.95) * r;
     const x = side * (0.82 + 0.12 * r);
     _tgt.set(x, y, z).applyMatrix4(g.matrixWorld);
-    _pole.set(side * 1.0, 0.35, -1).transformDirection(g.matrixWorld);   // elbows back and outside the hind legs
+    _pole.set(cave ? -side : side * 1.0, cave ? 0 : 0.35, cave ? 0.2 : -1).transformDirection(g.matrixWorld);   // elbows back and outside the hind legs
     guardianHandTo(g, R, S, _tgt, _pole);
-    levelHand(g, R, S, 1 - air);
-    R['wrist' + S].rotation.x += air * -0.6;
+    levelHand(g, R, S, cave ? 1 : 1 - air);
+    R['wrist' + S].rotation.x += air * (cave ? 0.45 : -0.6);
+    if (cave) R['wrist' + S].rotation.x = Math.max(-CAVEGUARD_LIMITS.wristFlex[1] * Math.PI / 180, Math.min(-CAVEGUARD_LIMITS.wristFlex[0] * Math.PI / 180, R['wrist' + S].rotation.x));
     guardianGrip(R, S, 0.35 + 0.65 * (1 - air), 'walk');
   }
   // Hind legs: plant as the hands leave, drive together, then trail out behind.
@@ -374,8 +458,8 @@ export function guardianGallop(g, R, ph, run, t, look) {
     const p = ph + Math.PI - 0.35 - lag;
     const sw = Math.sin(p), cw = Math.cos(p);
     const air = Math.max(0, -sw);
-    const z = (-0.15 + 1.0 * cw) * r - 0.25 * (1 - r);
-    const y = air * 0.65 * r;
+    const z = (cave ? 0.3 + 0.35 * cw : -0.15 + 1.0 * cw) * r + (cave ? 0.2 : -0.25) * (1 - r);
+    const y = air * (cave ? 0.35 : 0.65) * r;
     _tgt.set(side * 0.34, y, z).applyMatrix4(g.matrixWorld);
     _pole.set(0, 0.2, 1).transformDirection(g.matrixWorld);   // knees forward
     ikLimb(R['hip' + S], R['knee' + S], R.leg.thigh, R.leg.shin, _tgt, _pole);
@@ -388,6 +472,7 @@ export function guardianGallop(g, R, ph, run, t, look) {
 
 // --- Standing on all fours, breathing, looking at something. -----------------------------
 export function guardianStand(g, R, t, look, { open = 0.3, crouch = 0 } = {}) {
+  const cave = caveguardBossPose(g);
   bodyShape(g, R, { rear: 0, crouch, arch: 0.04 * Math.sin(t * 1.7) });
   g.updateWorldMatrix(true, false);
   for (const S of ['L', 'R']) {
@@ -395,14 +480,14 @@ export function guardianStand(g, R, t, look, { open = 0.3, crouch = 0 } = {}) {
     R['shoulder' + S].position.x = side * (0.66 + 0.25 * crouch);
     const spread = 0.75 * crouch;
     _tgt.set(side * (1.05 + spread), S === 'R' ? 0.65 * crouch : 0, 1.05 + 0.55 * crouch).applyMatrix4(g.matrixWorld);
-    _pole.set(side * (1.4 + 0.9 * crouch), 0.3, -1).transformDirection(g.matrixWorld);
+    _pole.set(cave ? -side : side * (1.4 + 0.9 * crouch), cave ? 0 : 0.3, cave ? 0.2 : -1).transformDirection(g.matrixWorld);
     guardianHandTo(g, R, S, _tgt, _pole);
     levelHand(g, R, S);
     guardianGrip(R, S, 1, 'walk');
   }
   for (const S of ['L', 'R']) {
     const side = S === 'L' ? -1 : 1;
-    _tgt.set(side * (0.42 + 0.1 * crouch), 0, -0.25).applyMatrix4(g.matrixWorld);
+    _tgt.set(side * (0.42 + 0.1 * crouch), 0, cave ? 0.2 : -0.25).applyMatrix4(g.matrixWorld);
     _pole.set(0, 0.2, 1).transformDirection(g.matrixWorld);
     ikLimb(R['hip' + S], R['knee' + S], R.leg.thigh, R.leg.shin, _tgt, _pole);
     levelFoot(g, R, S);
@@ -428,7 +513,8 @@ export function guardianRearGrab(g, R, t, S, ankle, reach, hold, look) {
   _v3.set(side, 0, 0).transformDirection(g.matrixWorld);
   _tgt.addScaledVector(_v3, 0.7 * Math.sin(Math.PI * rr) + 0.18 * rr);
   guardianHandTo(g, R, S, _tgt, _pole);
-  R['wrist' + S].rotation.set(-0.4 * rr, 0, 0);
+  if (caveguardBossPose(g)) levelHand(g, R, S);
+  else R['wrist' + S].rotation.set(-0.4 * rr, 0, 0);
   guardianGrip(R, S, hold, 'grab');
   if (rr < 1) { guardianGrip(R, S, Math.max(hold, (1 - rr) * 0.8), hold > 0.5 ? 'grab' : 'walk'); }
   // The free arm braces on the ground, wide.
@@ -441,7 +527,7 @@ export function guardianRearGrab(g, R, t, S, ankle, reach, hold, look) {
   // Legs planted wide, knees bent.
   for (const L of ['L', 'R']) {
     const ls = L === 'L' ? -1 : 1;
-    _tgt.set(ls * 0.62, 0, -0.3 + 0.2 * rr).applyMatrix4(g.matrixWorld);
+    _tgt.set(ls * 0.62, 0, caveguardBossPose(g) ? 0.25 - 0.05 * rr : -0.3 + 0.2 * rr).applyMatrix4(g.matrixWorld);
     _pole.set(0, 0.2, 1).transformDirection(g.matrixWorld);
     ikLimb(R['hip' + L], R['knee' + L], R.leg.thigh, R.leg.shin, _tgt, _pole);
     levelFoot(g, R, L);
@@ -567,3 +653,184 @@ export function guardianWalkUpright(g, R, t, ph, hold, look) {
 // Convenience for the caller: the joint list for damping, and the hand groups.
 export function guardianJoints(g) { return g.userData.rig.joints; }
 export function guardianHands(g) { return g.userData.rig.hands; }
+
+
+// GP-20154 / Director09:05 REVIEW: final CaveGuard-only local-ground support.
+// Runs AFTER the unchanged guardianHindFloor and damping. Read-only surfaceAt
+// includes outdoor drawn/smooth ground or the current training/hollow floor.
+// Coupled limb IK retains original ranges, binds, curl, event timing and Guardian.
+function caveguardHandFloorPoints(wrist, reset) {
+  if (!reset && wrist.userData._gp154FloorPoints) return wrist.userData._gp154FloorPoints;
+  const entries = [], point = new THREE.Vector3();
+  wrist.traverse(o => {
+    const P = o.isMesh && !o.isSkinnedMesh && o.geometry?.attributes.position;
+    if (!P || !(o.userData.skinSrc || o.visible)) return;
+    o.updateMatrix();
+    const seen = new Set(), points = [];
+    for (let i = 0; i < P.count; i++) {
+      point.fromBufferAttribute(P, i).applyMatrix4(o.matrix);
+      const key = Math.round(point.x * 10000) + ',' + Math.round(point.y * 10000) + ',' + Math.round(point.z * 10000);
+      if (seen.has(key)) continue; seen.add(key); points.push(point.x, point.y, point.z);
+    }
+    entries.push({ joint: o.parent, points: new Float32Array(points) });
+  });
+  wrist.userData._gp154FloorPoints = entries;
+  return entries;
+}
+function caveguardHandFloorLow(entries, surfaceAt) {
+  let low = Infinity;
+  for (const entry of entries) {
+    entry.joint.updateWorldMatrix(true, false);
+    const e = entry.joint.matrixWorld.elements, p = entry.points;
+    for (let i = 0; i < p.length; i += 3) {
+      const x = e[0] * p[i] + e[4] * p[i + 1] + e[8] * p[i + 2] + e[12];
+      const y = e[1] * p[i] + e[5] * p[i + 1] + e[9] * p[i + 2] + e[13];
+      const z = e[2] * p[i] + e[6] * p[i + 1] + e[10] * p[i + 2] + e[14];
+      low = Math.min(low, y - surfaceAt(x, z));
+    }
+  }
+  return low;
+}
+function caveguardSupportArmValid(R, S) {
+  const side = S === 'L' ? -1 : 1, a = R['shoulder' + S].quaternion, b = R['elbow' + S].quaternion;
+  const upper = new THREE.Vector3(0, -1, 0).applyQuaternion(a), lower = new THREE.Vector3(0, -1, 0).applyQuaternion(b), degrees = 180 / Math.PI;
+  const twist = Q => Math.atan2(Math.sin(2 * Math.atan2(Q.y, Q.w)), Math.cos(2 * Math.atan2(Q.y, Q.w))) * degrees;
+  const values = {
+    shFlex: Math.atan2(upper.z, -upper.y) * degrees,
+    shAbd: Math.atan2(upper.x * side, Math.hypot(upper.y, upper.z)) * degrees,
+    shRot: twist(a) * side,
+    elbow: Math.atan2(lower.z, -lower.y) * degrees,
+    elbowLat: Math.asin(Math.max(-1, Math.min(1, lower.x * side))) * degrees,
+    foreRot: twist(b) * side
+  };
+  return Object.entries(values).every(([key, value]) => Number.isFinite(value) && value >= CAVEGUARD_LIMITS[key][0] && value <= CAVEGUARD_LIMITS[key][1]);
+}
+export function guardianSupport(g, R, dt, floorY, reset = false, surfaceAt = null) {
+  if (!caveguardBossPose(g) || !(dt > 0) || !Number.isFinite(floorY)) return;
+  const report = { hands: {}, unresolved: [], surfaceMode: typeof surfaceAt === 'function' ? 'local-ground' : 'flat', surfaceSamples: 0, invalidSurfaceSamples: 0 }, degrees = 180 / Math.PI;
+  const heightAt = (x, z) => {
+    report.surfaceSamples++;
+    const y = typeof surfaceAt === 'function' ? surfaceAt(x, z) : floorY;
+    if (Number.isFinite(y)) return y;
+    report.invalidSurfaceSamples++; return floorY;
+  };
+  for (const S of ['L', 'R']) {
+    const a = R['shoulder' + S], b = R['elbow' + S], wrist = R['wrist' + S], entries = caveguardHandFloorPoints(wrist, reset);
+    const firstLow = caveguardHandFloorLow(entries, heightAt);
+    let low = firstLow, iterations = 0;
+    for (; iterations < 4 && low < 0.007; iterations++) {
+      const oldA = a.quaternion.clone(), oldB = b.quaternion.clone(), oldW = wrist.quaternion.clone();
+      const target = wrist.getWorldPosition(new THREE.Vector3()), start = a.getWorldPosition(new THREE.Vector3());
+      const pole = b.getWorldPosition(new THREE.Vector3()).sub(start);
+      target.y += Math.min(0.2, 0.008 - low);
+      const twist = Math.atan2(Math.sin(2 * Math.atan2(oldA.y, oldA.w)), Math.cos(2 * Math.atan2(oldA.y, oldA.w)));
+      const sign = Math.sign(twist) || (S === 'L' ? -1 : 1);
+      const aims = [null, Math.max(-85, Math.min(85, twist * degrees)), sign * 85, sign * 75, sign * 60, sign * 45, sign * 30, 0, -sign * 30];
+      let best = null;
+      for (const aim of aims) {
+        a.quaternion.copy(oldA); b.quaternion.copy(oldB); wrist.quaternion.copy(oldW);
+        caveguardArmIK(a, b, R.arm.upper, R.arm.fore, target, pole, 1, aim === null ? null : aim / degrees);
+        wrist.quaternion.copy(oldW);
+        if (!caveguardSupportArmValid(R, S) || a.quaternion.angleTo(oldA) > 0.65) continue;
+        const next = caveguardHandFloorLow(entries, heightAt), turn = a.quaternion.angleTo(oldA);
+        const score = Math.max(0, 0.008 - next) * 100 + turn;
+        if (next > low + 0.0005 && (!best || score < best.score)) best = { a: a.quaternion.clone(), b: b.quaternion.clone(), low: next, score };
+      }
+      if (!best) { a.quaternion.copy(oldA); b.quaternion.copy(oldB); wrist.quaternion.copy(oldW); break; }
+      a.quaternion.copy(best.a); b.quaternion.copy(best.b); wrist.quaternion.copy(oldW); low = best.low;
+    }
+    wrist.updateWorldMatrix(true, true);
+    const finalLow = caveguardHandFloorLow(entries, heightAt);
+    report.hands[S] = { before: firstLow, after: finalLow, iterations, points: entries.reduce((n, e) => n + e.points.length / 3, 0) };
+    if (finalLow < -0.001) report.unresolved.push(S);
+  }
+  caveguardSoleSupport(g, R, heightAt, report, reset);
+  if (report.invalidSurfaceSamples) report.unresolved.push('invalid-surface');
+  g.userData.gp154SupportResult = report;
+}
+
+// GP154 REVIEW private physical sole support. No sampler/limit/geometry/bind edits.
+function caveguardSkinSoles(g, R, reset) {
+  if (!reset && g.userData._gp154SkinSoles) return g.userData._gp154SkinSoles;
+  let skin = null; g.traverse(o => { if (o.isSkinnedMesh && o.name === 'guardian-skin' && o.visible) skin = o; });
+  if (!skin) return null;
+  // GP154 REVIEW exact query dedup only. Keep ALL raw ids in sides as the
+  // independent physical oracle; select the first identical position/skin/morph
+  // representative for runtime minima. No geometry, rig, pose or limits change.
+  const result = { skin, sides: {}, sampleSides: {} }, I = skin.geometry.attributes.skinIndex, W = skin.geometry.attributes.skinWeight;
+  const P = skin.geometry.attributes.position, morphs = skin.geometry.morphAttributes.position || [];
+  const keyOf = i => {
+    const values = [P.getX(i), P.getY(i), P.getZ(i)];
+    for (let c = 0; c < 4; c++) values.push(I.getComponent(i, c), W.getComponent(i, c));
+    for (const m of morphs) values.push(m.getX(i), m.getY(i), m.getZ(i));
+    // Preserve signed zero as well: never merge numerically distinct payloads.
+    return values.map(x => Object.is(x, -0) ? '-0' : String(x)).join(',');
+  };
+  for (const S of ['L', 'R']) {
+    const descendants = new Set(); R['ankle' + S].traverse(o => descendants.add(o));
+    const bones = new Set(skin.skeleton.bones.map((b, i) => descendants.has(b) ? i : -1).filter(i => i >= 0)), ids = [];
+    for (let i = 0; i < I.count; i++) {
+      let index = -1, weight = -1;
+      for (let c = 0; c < 4; c++) if (W.getComponent(i, c) > weight) { weight = W.getComponent(i, c); index = I.getComponent(i, c); }
+      if (bones.has(index)) ids.push(i);
+    }
+    result.sides[S] = ids;
+    const seen = new Set(), unique = [];
+    for (const i of ids) { const key = keyOf(i); if (!seen.has(key)) { seen.add(key); unique.push(i); } }
+    result.sampleSides[S] = unique;
+  }
+  return (g.userData._gp154SkinSoles = result);
+}
+function caveguardSkinSoleLow(g, cache, S, surfaceAt) {
+  g.updateWorldMatrix(true, true); cache.skin.skeleton.update();
+  const v = new THREE.Vector3(); let low = Infinity;
+  for (const i of cache.sampleSides[S]) { cache.skin.getVertexPosition(i, v).applyMatrix4(cache.skin.matrixWorld); low = Math.min(low, v.y - surfaceAt(v.x, v.z)); }
+  return low;
+}
+function caveguardSupportLegValid(R, S) {
+  const side = S === 'L' ? -1 : 1, a = R['hip' + S].quaternion, b = R['knee' + S].quaternion, c = R['ankle' + S].quaternion, D = 180 / Math.PI;
+  const twist = q => Math.atan2(Math.sin(2 * Math.atan2(q.y, q.w)), Math.cos(2 * Math.atan2(q.y, q.w))) * D;
+  const u = new THREE.Vector3(0, -1, 0).applyQuaternion(a), v = new THREE.Vector3(0, -1, 0).applyQuaternion(b);
+  const z = 2 * Math.atan2(c.z, c.w), sw = c.clone().multiply(new THREE.Quaternion(0, 0, -Math.sin(z / 2), Math.cos(z / 2))), t = new THREE.Vector3(0, 0, 1).applyQuaternion(sw);
+  const values = { hipFlex: Math.atan2(u.z, -u.y) * D, hipAbd: Math.asin(Math.max(-1, Math.min(1, u.x * side))) * D, hipRot: twist(a) * side,
+    knee: Math.atan2(-v.z, -v.y) * D, kneeVar: Math.asin(Math.max(-1, Math.min(1, v.x * side))) * D, kneeRot: twist(b),
+    plantar: Math.atan2(-t.y, t.z) * D, inv: Math.atan2(Math.sin(z), Math.cos(z)) * D * -side, toeIn: Math.atan2(-t.x * side, Math.hypot(t.y, t.z)) * D };
+  return Object.entries(values).every(([k, x]) => Number.isFinite(x) && x >= CAVEGUARD_LIMITS[k][0] && x <= CAVEGUARD_LIMITS[k][1]);
+}
+function caveguardSoleSupport(g, R, surfaceAt, report, reset) {
+  const cache = caveguardSkinSoles(g, R, reset); report.feet = {};
+  if (!cache) { report.unresolved.push('sole-skin-missing'); return; }
+  const rootQ = g.getWorldQuaternion(new THREE.Quaternion()), axis = new THREE.Vector3(1, 0, 0).applyQuaternion(rootQ), pole = new THREE.Vector3(0, 0.2, 1).transformDirection(g.matrixWorld);
+  const forward = new THREE.Vector3(0, 0, 1).transformDirection(g.matrixWorld); forward.y = 0; forward.normalize();
+  for (const S of ['L', 'R']) {
+    const hip = R['hip' + S], knee = R['knee' + S], ankle = R['ankle' + S], first = caveguardSkinSoleLow(g, cache, S, surfaceAt);
+    let low = first, iterations = 0, tiltUsed = 0, advanceUsed = 0;
+    for (; iterations < 3 && low < 0.001; iterations++) {
+      const old = [hip.quaternion.clone(), knee.quaternion.clone(), ankle.quaternion.clone()], world = ankle.getWorldQuaternion(new THREE.Quaternion()), target = ankle.getWorldPosition(new THREE.Vector3());
+      const lift = Math.min(0.04, 0.003 - low); let best = null;
+      // If a vertical reseat would exceed the original ankle range, move the
+      // ankle slightly forward through the SAME hip/knee IK; never clamp a joint.
+      // Prefer an unchanged horizontal target and bound total advance to 10 cm/frame.
+      for (const advance of [0, 0.025, 0.05, 0.075, 0.1]) {
+        if (advance + advanceUsed > 0.100001) continue;
+        for (const tilt of [0, 0.02, 0.04]) {
+          hip.quaternion.copy(old[0]); knee.quaternion.copy(old[1]); ankle.quaternion.copy(old[2]);
+          const goal = target.clone().addScaledVector(forward, advance); goal.y += lift + tilt * R.leg.foot;
+          ikLimb(hip, knee, R.leg.thigh, R.leg.shin, goal, pole);
+          const foot = world.clone().premultiply(new THREE.Quaternion().setFromAxisAngle(axis, tilt));
+          ankle.quaternion.copy(knee.getWorldQuaternion(new THREE.Quaternion()).invert().multiply(foot));
+          if (!caveguardSupportLegValid(R, S)) continue;
+          const next = caveguardSkinSoleLow(g, cache, S, surfaceAt), score = Math.abs(next - 0.003) * 100 + tilt + advance;
+          if (next > low + 0.0002 && (!best || score < best.score)) best = { pose: [hip.quaternion.clone(), knee.quaternion.clone(), ankle.quaternion.clone()], low: next, tilt, advance, score };
+        }
+        if (best) break;
+      }
+      if (!best) { hip.quaternion.copy(old[0]); knee.quaternion.copy(old[1]); ankle.quaternion.copy(old[2]); break; }
+      hip.quaternion.copy(best.pose[0]); knee.quaternion.copy(best.pose[1]); ankle.quaternion.copy(best.pose[2]); low = best.low; tiltUsed = Math.max(tiltUsed, best.tilt); advanceUsed += best.advance;
+    }
+    for (const joint of [hip, knee, ankle]) if (joint.userData._rdq) joint.userData._rdq.copy(joint.quaternion);
+    const finalLow = caveguardSkinSoleLow(g, cache, S, surfaceAt);
+    report.feet[S] = { before: first, after: finalLow, points: cache.sides[S].length, iterations, tiltUsed, advanceUsed };
+    if (finalLow < -0.001) report.unresolved.push('sole-' + S);
+  }
+}

@@ -1,7 +1,7 @@
-// t111 - GB-99 (P-20 on the board): each kind has its own head line in its hit column. The brute's is 0.74 of
+// t111 - GB-99 (P-20 on the board): each kind has its own head line in its hit column. The brute's is 0.72 of
 // hitH (its head sits low in a tall column), so a shot at its head's centre is always a headshot; every other kind
 // keeps 0.78. hitH itself is unchanged. Claude's lines for the low-headed kinds (2026-09-29): feral 0.70, leaper 0.55,
-// spider 0.60 (was 0.65; Claude dropped it under the walking p10), judged the same way: a shot at the head's centre counts, a chest shot just under the line doesn't.
+// spider 0.60 (was 0.65; Claude dropped it under the walking p10), brute 0.72 (was 0.74; after its v20 rebuild, Director 2026-11-16), judged the same way: a shot at the head's centre counts, a chest shot just under the line doesn't.
 (async () => {
   const T = window.TT; const out = []; const ok = (c, m) => out.push((c ? 'PASS ' : 'FAIL ') + m);
   const wait = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -42,7 +42,7 @@
     }
     mids.sort((a, b) => a - b);
     const p10 = mids[Math.floor(mids.length * 0.1)];
-    ok(mids.length > 20 && p10 > 0.74 + 0.02, 'a walking brute\'s head centre sits above its line with a margin: p10 ' + (p10 || 0).toFixed(3) + ' (line 0.74, ' + mids.length + ' samples)');
+    ok(mids.length > 20 && p10 > 0.72 + 0.02, 'a walking brute\'s head centre sits above its line with a margin: p10 ' + (p10 || 0).toFixed(3) + ' (line 0.72, ' + mids.length + ' samples)');
     T.clearZombies();
     // Feral 0.70, leaper 0.55, spider 0.60 (Claude): just under the line is a body hit, just over is a head,
     // and the head's centre, sampled while they come at him, sits above the line.

@@ -1,0 +1,9 @@
+# claude2 — CB-344 guardian double scale LANDED (v2) — 2026-11-17 (Opus session, 08:06Z-09:20Z)
+Changed:          The guardian/caveguard boss rig now follows hitH once (the mesh's variant scale comes back out), and k's floor is 0.7 (the caveguard's k 0.76-0.86 no longer sits on 0.8): the head bone is a flat .92 of hitH at every height. index.html 99c22c66 -> 75854361 (review/CB-344/land-cb344-v2.py, Director OK 08:48Z).
+Files:            index.html (75854361, CRLF kept; backup _DELETE ME/index.html.99c22c66.before-CB-344). Review: review/CB-344/{land-cb344-v2.py, sheet-before/after/after2.jpg, numbers-*.json, t164-forced-v1/v2.log, landed-75854361-t164-t93.log, cloud-sheet/sheet2.sh, mkjob2.py (out-dir bug fixed), stillpatch.js}.
+Tests:            Cloud on 75854361 (same bytes as the land): t164 14/0, t93 11/0. Forced heights (t164v0/v5/v9 = review/CB-344/t164v9.js with _V 0/.5/.9999): 14/0 x3 on v2 and on v1 (head 2.06-3.32 of 3.48, 2.13-3.44 of 3.57, 2.27-3.66 of 3.80; claws -.067/-.065/-.069). BEFORE: 14/0, 14/0, 13/1.
+Screenshots:      review/CB-344/sheet-before.jpg vs sheet-after2.jpg (side + front, both types, heights .93/1.00/1.07, hit column cyan, head line yellow, ground red). Head bone share of hitH: guardian .858/.922/.985 -> .921/.922/.922; caveguard .912/.927/.989 -> .926/.927/.926.
+Not verified:     Nothing on the 5080 (Director: one native sheet via RAW / the fixed camera once CB-345 is in). At REST (reared, head up) the head top still pokes over hitH by +.11/+.23/+.53 m (guardian) and +.01/+.17/+.41 (caveguard): the pose, not the scale (same before and after); that is CB-339c (a), the column following the posed head, needed on BOTH types.
+Requests:         Director: review ready 08:47Z (OK 08:48Z); CB-345 root cause + api.js loan (OK 08:48Z). ChatGPT 2: RAW approved for CB-343 (08:12Z), CB-345 FYI (08:55Z).
+Contract changes: none.
+Rule 16: cloud, one instance at a time; nothing run on Jerry's PC.

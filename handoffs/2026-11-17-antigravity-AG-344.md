@@ -1,0 +1,14 @@
+# antigravity — AG-344 KR-7 landed re-solved press (cbdb2289) 5080 close look — 2026-11-17
+
+Changed:          Captured 5080 WebGPU noon 1P full-press (`Digit2`, t=0.245s) close-ups on landed `game/viewmodel-poses.js` (`cbdb2289`), `studio/weapon-attachments.js` (`020cc3a8`), `game/viewmodel.js` (`52dde3b0`), `index.html` (`9311196f`), with support glove shown and hidden, plus rest/close-front/eye/release context and contact sheet (`review/J165-landed-s24/sheet.jpg`). No game files modified.
+Files:            `qa/2026-11-17-KR7-s24/capture-kr7-s24.mjs`, `qa/2026-11-17-KR7-s24/build_kr7_s24_sheet.py`, `review/J165-landed-s24/summary.json`, `review/J165-landed-s24/*.png` (6 unique PNGs), `review/J165-landed-s24/sheet.jpg`
+Tests:            `node crew/crew.mjs slot run antigravity AG-344 --checks "KR-7 landed cbdb2289 press close noon (hand shown + hidden)" -- node qa/2026-11-17-KR7-s24/capture-kr7-s24.mjs` → exited 0 (`task-629`, 6/6 unique PNGs via `drawImage-raf`, `WebGPUBackend`, `1280x720`, `pageErrors=0`, `consoleErrors=0`); `python qa/2026-11-17-KR7-s24/build_kr7_s24_sheet.py` → `393773 bytes, 6 unique PNGs`. Full `npm test` not run (visual shot task only).
+Screenshots:      `review/J165-landed-s24/sheet.jpg`, `review/J165-landed-s24/kr7-s24-close-left-press-noon.png` (`a1c946c0`), `review/J165-landed-s24/kr7-s24-close-left-press-nohand-noon.png` (`ccf63f6d`), `review/J165-landed-s24/kr7-s24-close-front-press-noon.png` (`b486726c`), `review/J165-landed-s24/kr7-s24-eye-press-noon.png` (`6093053e`), `review/J165-landed-s24/kr7-s24-close-left-rest-noon.png` (`92f51b26`), `review/J165-landed-s24/kr7-s24-close-left-release-noon.png` (`a4b670b4`)
+Not verified:     Night lighting omitted per Claude 1's single noon 5080 close look request; solver clip clearance metrics (Claude 1 / `tce4` domain).
+Requests:         Replied DONE to Claude 1 (`shots: KR-7 landed re-solved press (cbdb2289)`).
+Contract changes: none
+
+## Details & Visual Inspection
+- **Press state (`Digit2`, `0.245s` = 49 x `0.005s`)**: `lightState = { t: 0.245, k: 1, press: 1, gap: 0, elbow: null, still: 1 }`, `handPlace = "light"`; switch pad traveled from rest `[-0.038414, 0.027518, -0.189]` to `[-0.037416, 0.027455, -0.189]` (`lsTravel = 0.001`), returning to rest at release (`0.450s`, `k = 0.216`, `press = 0`).
+- **Support glove hidden (`kr7-s24-close-left-press-nohand-noon.png`)**: Inletted rectangular V5b pad sits flush in the wooden lower handguard on the left side with the curved cord running forward into the `laserLightUnit`.
+- **Support glove shown (`kr7-s24-close-left-press-noon.png`, `kr7-s24-close-front-press-noon.png`)**: Palm and fingers stay anchored cleanly on the `fore` hold (`still: 1`, fingers curl cleanly above the upper handguard with zero gas-tube/wood puncture), while the left thumb flexes onto the V5b pad face and presses it in cleanly without clipping into the wooden handguard or cord.

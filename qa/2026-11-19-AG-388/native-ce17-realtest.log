@@ -1,0 +1,61 @@
+FAIL  t330     16 pass   2 fail  38.7s  (real renderer)
+    PASS the brute get-up keys are loaded from studio/motion/zombie/brute.json (4 keys, 1.40 s)
+    PASS a blast knocks the brute down keyed: the get-up lasts the keys' 1.4 s (knockDur 2.62)
+    PASS the get-up was sampled 27 times
+    PASS the samples cover the get-up (u 0.02 to 0.98)
+    PASS the mesh stands upright through the get-up (no pitch ride: the joints carry it)
+    PASS the joints carry the keys on every sampled frame
+    FAIL every body point of the live joints is within 15 cm of the keyed target on every frame (worst 0.92 m, crown at u 0.02, over 459 points)
+    PASS the chest, head, hands and pelvis sit within 35 cm (median) of animated point plus key offset, the bones keeping their length (chest 0.14, head 0.18, handL 0.27, handR 0.23, pelvis 0.09)
+    PASS the chest is low on hands and knees at u 0.28 (0.82 m of 2.26) and has come up by u 0.80 (1.72 m)
+    PASS both hands are within a hand's height of the ground at u 0.4-0.55 (3 samples; worst L/R 0.28/0.39 m of 0.50)
+    PASS the hit column follows the posed body: 0.62 m at the start, 2.82 m at the end of 2.83 (never falling back by more than 12 cm)
+    PASS when the get-up ends the full hit column is back (2.83 of 2.83), the animation has its joints and the plant shift is undone
+    PASS no plant shift is left on the mesh
+    PASS a blast against his facing turns him round to land face-down (sign 1, spin 3.14)
+    PASS the turned-round brute gets up through the same keys (25 samples)
+    FAIL and its live joints sit within 15 cm of the keyed target throughout (worst 0.80 m)
+    PASS a shambler is knocked down the old way (knockT 1.67, alive true, rise 0.55, keyed false, cd 4.17)
+    PASS no page errors
+ok    t222     12 pass   0 fail  191.0s  (real renderer)
+    INFO the spot: -140, 0, its lane within 0.55 m of his feet
+    INFO shambler  head: head 6 | chest: body 6 | legs: legs 6
+    INFO feral     head: head 6 | chest: body 6 | legs: legs 6
+    INFO brute     head: head 6 | chest: body 6 | legs: legs 4, body 2
+    INFO spider    head: head 5, body 1 | chest: body 2, head 4 | legs: -
+    INFO leaper    head: head 6 | chest: body 5, head 1 | legs: -
+    INFO colossus  head: head 6 | chest: body 5, head 1 | legs: ground 1, legs 3, body 2
+    PASS pointing at a head is a headshot: 35/36 (bar 90 %; was 17/64)
+    PASS pointing at a chest lands in the body: body 23, head 1 (bar 80 %, no miss; a head only where the head covers the chest from up here)
+    PASS pointing at the legs lands low: 19/24 (bar 60 %)
+    PASS no round aimed at a body goes into the ground or past it (1; bar 4)
+    INFO between the knees, its front to him (its yaw 2.51, toward him 3.14): hit 10
+    INFO between the knees, its back to him (its yaw 0.00, toward him 3.14): hit 10
+    PASS the cursor between a shambler's knees (its front to him, 8 m) lands every round on it: hit 10 (bar 10/10)
+    PASS the cursor between a shambler's knees (its back to him, 8 m) lands every round on it: hit 10 (bar 10/10)
+    INFO the crown (4-40 mm under its top at 1.79 m): hit 10
+    PASS the cursor on a shambler's crown (4-40 mm under the top, 8 m) lands on it: hit 10 (bar 9/10; the 4 mm one may pass over)
+    PASS the reticle rings a head lined up, and not a chest (true, los-clear)
+    INFO the gold-X round: 0 aim(s) blocked before a clear line to the head
+    PASS his round into the head flashes the gold X on the reticle (rgb(255, 210, 74))
+    PASS the ticks show the spread: pistol 7.0 px, shotgun 42.7 px
+    INFO pistol 8 m 3 m/s +: hit, lead 0.31 m (pace x flight 0.31) at 0.65 of its height
+    INFO pistol 8 m 3 m/s -: hit, lead -0.31 m (pace x flight -0.31) at 0.61 of its height
+    INFO pistol 8 m 6 m/s +: hit, lead 0.49 m (pace x flight 0.59) at 0.66 of its height
+    INFO pistol 8 m 6 m/s -: hit, lead -0.58 m (pace x flight -0.59) at 0.59 of its height
+    INFO pistol 18 m 3 m/s +: hit, lead 0.65 m (pace x flight 0.70) at 0.61 of its height
+    INFO pistol 18 m 3 m/s -: hit, lead -0.71 m (pace x flight -0.70) at 0.60 of its height
+    INFO pistol 18 m 6 m/s +: hit, lead 1.38 m (pace x flight 1.39) at 0.60 of its height
+    INFO pistol 18 m 6 m/s -: hit, lead -1.35 m (pace x flight -1.39) at 0.59 of its height
+    INFO m4 8 m 3 m/s +: hit, lead 0.22 m (pace x flight 0.22) at 0.62 of its height
+    INFO m4 8 m 3 m/s -: hit, lead -0.22 m (pace x flight -0.22) at 0.69 of its height
+    INFO m4 8 m 6 m/s +: hit, lead 0.39 m (pace x flight 0.42) at 0.60 of its height
+    INFO m4 8 m 6 m/s -: hit, lead -0.31 m (pace x flight -0.42) at 0.68 of its height
+    INFO m4 18 m 3 m/s +: hit, lead 0.50 m (pace x flight 0.52) at 0.61 of its height
+    INFO m4 18 m 3 m/s -: hit, lead -0.51 m (pace x flight -0.52) at 0.59 of its height
+    INFO m4 18 m 6 m/s +: hit, lead 0.94 m (pace x flight 1.02) at 0.62 of its height
+    INFO m4 18 m 6 m/s -: hit, lead -1.01 m (pace x flight -1.02) at 0.58 of its height
+    PASS a runner crossing in front of him at 3-6 m/s, the cursor on it, is hit: hit 16 (bar 14/16; was 7/36)
+    INFO launcher 12 m 6 m/s +: miss, lead -0.02 m (pace x flight 1.12)
+    PASS the launcher is not led (it lobs): -0.02 m off the body
+2 checks: 28 pass, 2 fail (real renderer)

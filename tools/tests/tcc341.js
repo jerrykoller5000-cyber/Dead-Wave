@@ -20,11 +20,31 @@
       if (o.name === 'marine-shaped-head') return 'head';
       return null;
     };
+    // CC-353: a garment skinned on the GPU keeps its bind pose in the geometry; read where it is drawn (userData.cloth.posed /
+    // posedNormals, the same pose the GPU draws) - the same bars. On the suite's three the live cloth bends on the CPU and this
+    // is the geometry's own attribute.
+    // Any other skinned mesh (on the real three: marine-skin.js's rig-skin bakes, drawn with his parts' own materials) is read
+    // where three draws it too: getVertexPosition, and its normals through the same blended bone matrices.
+    const _sk = { m: new THREE.Matrix4(), b: new THREE.Matrix4(), v: new THREE.Vector3(), n: new THREE.Vector3() };
+    const skinnedAttr = (m, name) => {
+      const src = m.geometry.attributes[name]; if (!src) return src;
+      const out = new Float32Array(src.count * 3), si = m.geometry.attributes.skinIndex, sw = m.geometry.attributes.skinWeight, S = m.skeleton;
+      for (let i = 0; i < src.count; i++) {
+        if (name === 'position') { m.getVertexPosition(i, _sk.v); out[i * 3] = _sk.v.x; out[i * 3 + 1] = _sk.v.y; out[i * 3 + 2] = _sk.v.z; continue; }
+        const e = _sk.m.elements; e.fill(0);
+        for (let k = 0; k < 4; k++) { const w = sw.getComponent(i, k); if (!w) continue; const j = si.getComponent(i, k); _sk.b.multiplyMatrices(S.bones[j].matrixWorld, S.boneInverses[j]); for (let q = 0; q < 16; q++) e[q] += w * _sk.b.elements[q]; }
+        _sk.b.multiplyMatrices(m.bindMatrixInverse, _sk.m).multiply(m.bindMatrix);
+        _sk.n.fromBufferAttribute(src, i).transformDirection(_sk.b); out[i * 3] = _sk.n.x; out[i * 3 + 1] = _sk.n.y; out[i * 3 + 2] = _sk.n.z;
+      }
+      return new THREE.BufferAttribute(out, 3);
+    };
+    const effAttr = (m, name) => { const c = m.userData && m.userData.cloth; if (m.isSkinnedMesh && c && c.gpu) return new THREE.BufferAttribute(name === 'normal' ? c.posedNormals() : c.posed(), 3);
+      if (m.isSkinnedMesh && m.skeleton && m.geometry.attributes.skinIndex) return skinnedAttr(m, name); return m.geometry.attributes[name]; };
     // World triangles of a layer, with each face's outward normal (a mirrored part's winding flipped back).
     const trisOf = (meshes) => {
       const T9 = [], N3 = [], v = new THREE.Vector3(), a = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3();
       for (const m of meshes) {
-        const p = m.geometry.attributes.position, ix = m.geometry.index, n = ix ? ix.count : p.count, flip = m.matrixWorld.determinant() < 0;
+        const p = effAttr(m, 'position'), ix = m.geometry.index, n = ix ? ix.count : p.count, flip = m.matrixWorld.determinant() < 0;
         for (let i = 0; i < n; i += 3) {
           a.fromBufferAttribute(p, ix ? ix.getX(i) : i).applyMatrix4(m.matrixWorld);
           b.fromBufferAttribute(p, ix ? ix.getX(i + 1) : i + 1).applyMatrix4(m.matrixWorld);
@@ -50,7 +70,7 @@
       }
       let worst = 0, at = null;
       for (const m of outerMeshes) {
-        const p = m.geometry.attributes.position, na = m.geometry.attributes.normal, flip = m.matrixWorld.determinant() < 0;
+        const p = effAttr(m, 'position'), na = effAttr(m, 'normal'), flip = m.matrixWorld.determinant() < 0;
         nm.getNormalMatrix(m.matrixWorld);
         for (let i = 0; i < p.count; i++) {
           v.fromBufferAttribute(p, i).applyMatrix4(m.matrixWorld); if (!box.containsPoint(v)) continue;

@@ -93,7 +93,7 @@ export function refineZombieFace(A,T,g,s,k,M) {
   A.path(head,wound,[[-.07,scream?-.283:-.132,jawEdge(.07)+.004],[0,scream?-.298:-.141,jawEdge(0)+.004],[.07,scream?-.283:-.132,jawEdge(.07)+.004]],.006);
   for(let i=0;i<8;i++){
     const x=(i-3.5)*.019,z=mouthEdge(x)+.004,lowerZ=jawEdge(x)+.004,long=i===1||i===6;
-    A.spike(head,teeth,[x,-.07,z],[x*.96,-.089-(long?.012:0),z+.004],.008);
+    A.spike(head,teeth,[x,-.07,z],[x*.96,-.089-(long?.012:0),z+.004],.008,!heavy&&i>=2&&i<=5?[x,-.07,front(x,-.07)+.004]:undefined);
     A.spike(head,teeth,[x,scream?-.286:-.134,lowerZ-.005],[x*.96,scream?-.265:-.118,lowerZ],.007);
   }
   if(scream){const tongue=A.mat(0xae6671,false,0,'wet'),tip=A.mat(0xd89299,false,0,'wet');

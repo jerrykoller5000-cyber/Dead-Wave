@@ -1,0 +1,1609 @@
+{
+  "at": "2026-11-18T19:26:52.968Z",
+  "step": "4b-pass5",
+  "backend": "WebGPUBackend",
+  "stats": {
+    "ours": {
+      "tris": 18592,
+      "meshes": 1,
+      "materials": 1,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "proto_apose": {
+      "tris": 36496,
+      "meshes": 31,
+      "materials": 10,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "proto_shamble": {
+      "tris": 36496,
+      "meshes": 31,
+      "materials": 10,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "white_apose": {
+      "tris": 36496,
+      "meshes": 31,
+      "materials": 2,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "white_shamble": {
+      "tris": 36496,
+      "meshes": 31,
+      "materials": 2,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "tripo": {
+      "tris": 17664,
+      "meshes": 1,
+      "materials": 1,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "step3_1k": {
+      "tris": 36496,
+      "meshes": 2,
+      "materials": 2,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "step3_512": {
+      "tris": 36496,
+      "meshes": 2,
+      "materials": 2,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "step3_512_shamble": {
+      "tris": 36496,
+      "meshes": 2,
+      "materials": 2,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "step3_lod1": {
+      "tris": 7820,
+      "meshes": 2,
+      "materials": 2,
+      "size": [
+        0.5648,
+        1.7399,
+        0.8948
+      ]
+    }
+  },
+  "protoStats": {
+    "tris": 36496,
+    "meshCount": 31,
+    "aoVerts": 19625,
+    "materials": 10,
+    "texBytes": 19070976,
+    "texCount": 21
+  },
+  "step3Stats": {
+    "step3_1k": {
+      "tris": 36496,
+      "meshCount": 2,
+      "materials": 2,
+      "texBytes": 12582912,
+      "texCount": 3,
+      "atlasSize": 1024,
+      "lod": 0
+    },
+    "step3_512": {
+      "tris": 36496,
+      "meshCount": 2,
+      "materials": 2,
+      "texBytes": 3145728,
+      "texCount": 3,
+      "atlasSize": 512,
+      "lod": 0
+    },
+    "step3_512_shamble": {
+      "tris": 36496,
+      "meshCount": 2,
+      "materials": 2,
+      "texBytes": 3145728,
+      "texCount": 3,
+      "atlasSize": 512,
+      "lod": 0
+    },
+    "step3_lod1": {
+      "tris": 7820,
+      "meshCount": 2,
+      "materials": 2,
+      "texBytes": 3145728,
+      "texCount": 3,
+      "atlasSize": 512,
+      "lod": 1
+    }
+  },
+  "headMetrics": {
+    "crownY": 1.8,
+    "chinY": 1.5066,
+    "collarY": 1.4145,
+    "mouthGapeM": 0.0528,
+    "craniumWidthM": 0.1835,
+    "neckTopWidthM": 0.0918,
+    "craniumToNeckRatio": 2,
+    "jawGonionWidthM": 0.1418,
+    "headHeightChinToTopOpenJaw": 0.2934,
+    "neckLengthChinToCollar": 0.0921
+  },
+  "frames": {
+    "noon-ours-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-ours-front.png",
+      "md5": "67be2787",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-ours-3q.png",
+      "md5": "eacbf3da",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-ours-side.png",
+      "md5": "c9c17b7f",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-ours-back.png",
+      "md5": "65021448",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-head_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-ours-head_front.png",
+      "md5": "590328e3",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-ours-head_3q.png",
+      "md5": "7cf2d7b2",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-head_side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-ours-head_side.png",
+      "md5": "d735b95d",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-ours-head_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-ours-head_back.png",
+      "md5": "045e4da1",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "noon-proto_shamble-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_shamble-front.png",
+      "md5": "7072d4a1",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "noon-proto_shamble-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_shamble-3q.png",
+      "md5": "b9a23bb6",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "noon-proto_shamble-side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_shamble-side.png",
+      "md5": "3aed575b",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "noon-proto_shamble-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_shamble-back.png",
+      "md5": "3414d0cb",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "noon-proto_shamble-head_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_shamble-head_front.png",
+      "md5": "5249cf6f",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "noon-proto_shamble-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_shamble-head_3q.png",
+      "md5": "ef7af730",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "noon-proto_shamble-head_side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_shamble-head_side.png",
+      "md5": "45fc2dc2",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "noon-proto_shamble-head_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_shamble-head_back.png",
+      "md5": "937e2dd0",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "noon-proto_shamble-head_3q_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_shamble-head_3q_back.png",
+      "md5": "3d968d75",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "noon-proto_apose-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-front.png",
+      "md5": "35a9aa74",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-3q.png",
+      "md5": "b49380ea",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-side.png",
+      "md5": "91e8f4d5",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-back.png",
+      "md5": "d2bf2c12",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-head_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-head_front.png",
+      "md5": "8dc1acac",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-head_3q.png",
+      "md5": "09c1ff5e",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-head_side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-head_side.png",
+      "md5": "99e67dd5",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-head_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-head_back.png",
+      "md5": "9a61399b",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-head_3q_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-head_3q_back.png",
+      "md5": "aca3747d",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-torso_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-torso_front.png",
+      "md5": "7ec1d4cf",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-torso_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-torso_3q.png",
+      "md5": "7e911169",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-torso_side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-torso_side.png",
+      "md5": "57b5d756",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-torso_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-torso_back.png",
+      "md5": "fd6c0b5b",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-seam_neck_torso_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-seam_neck_torso_front.png",
+      "md5": "436ac82e",
+      "hFill": 3.988,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-seam_neck_torso_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-seam_neck_torso_back.png",
+      "md5": "3c1afd44",
+      "hFill": 3.703,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-seam_neck_face": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-seam_neck_face.png",
+      "md5": "aefecf9e",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-proto_apose-seam_face_scalp": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-proto_apose-seam_face_scalp.png",
+      "md5": "d78218a4",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-white_apose-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-white_apose-head_3q.png",
+      "md5": "dc353567",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-white_apose-head_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-white_apose-head_back.png",
+      "md5": "3e6d5eec",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-white_apose-head_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-white_apose-head_front.png",
+      "md5": "9c77776f",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-white_apose-head_side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-white_apose-head_side.png",
+      "md5": "50ca3dcd",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-white_apose-head_3q_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-white_apose-head_3q_back.png",
+      "md5": "23a8abd6",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-white_apose-torso_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-white_apose-torso_front.png",
+      "md5": "40489539",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-white_apose-torso_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-white_apose-torso_3q.png",
+      "md5": "b4fe6b92",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-white_apose-torso_side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-white_apose-torso_side.png",
+      "md5": "4779d03f",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-white_apose-torso_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-white_apose-torso_back.png",
+      "md5": "1b8762d2",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        1.0719,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-front.png",
+      "md5": "6fd30eab",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-3q.png",
+      "md5": "fe2608e9",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-side.png",
+      "md5": "81818ddc",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-back.png",
+      "md5": "fee393ff",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-head_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-head_front.png",
+      "md5": "deeaa04e",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-head_3q.png",
+      "md5": "31615719",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-head_side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-head_side.png",
+      "md5": "a66557da",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-head_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-head_back.png",
+      "md5": "7ee20664",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-head_3q_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-head_3q_back.png",
+      "md5": "068a16e3",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-torso_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-torso_front.png",
+      "md5": "e45acbf2",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-torso_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-torso_3q.png",
+      "md5": "c7623c69",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-torso_side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-torso_side.png",
+      "md5": "5f4b7429",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-torso_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-torso_back.png",
+      "md5": "76bd5ad8",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-seam_neck_torso_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-seam_neck_torso_front.png",
+      "md5": "6aced11e",
+      "hFill": 3.988,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-seam_neck_torso_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-seam_neck_torso_back.png",
+      "md5": "0fffeaa5",
+      "hFill": 3.703,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-seam_neck_face": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-seam_neck_face.png",
+      "md5": "b43d1428",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_1k-seam_face_scalp": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_1k-seam_face_scalp.png",
+      "md5": "35f762b7",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-front.png",
+      "md5": "43a442df",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-3q.png",
+      "md5": "9d3bb1c2",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-side.png",
+      "md5": "2d436868",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-back.png",
+      "md5": "ae30ba61",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-head_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-head_front.png",
+      "md5": "69d05f3c",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-head_3q.png",
+      "md5": "5e9aa74f",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-head_side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-head_side.png",
+      "md5": "353301eb",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-head_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-head_back.png",
+      "md5": "6df97d60",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-head_3q_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-head_3q_back.png",
+      "md5": "f7d1c130",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-torso_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-torso_front.png",
+      "md5": "629cd330",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-torso_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-torso_3q.png",
+      "md5": "4a69bcca",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-torso_side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-torso_side.png",
+      "md5": "74c43025",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-torso_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-torso_back.png",
+      "md5": "4e870ff0",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-seam_neck_torso_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-seam_neck_torso_front.png",
+      "md5": "3d2012b9",
+      "hFill": 3.988,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-seam_neck_torso_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-seam_neck_torso_back.png",
+      "md5": "99c0b63a",
+      "hFill": 3.703,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-seam_neck_face": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-seam_neck_face.png",
+      "md5": "177838d1",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512-seam_face_scalp": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512-seam_face_scalp.png",
+      "md5": "5b7386a3",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "noon-step3_512_shamble-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512_shamble-front.png",
+      "md5": "1ac44fcd",
+      "hFill": 0.85,
+      "boundsH": 1.7406,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "noon-step3_512_shamble-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512_shamble-3q.png",
+      "md5": "f4bf1a8f",
+      "hFill": 0.85,
+      "boundsH": 1.7406,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "noon-step3_512_shamble-side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512_shamble-side.png",
+      "md5": "01eb9935",
+      "hFill": 0.85,
+      "boundsH": 1.7406,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "noon-step3_512_shamble-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512_shamble-back.png",
+      "md5": "5b1ecf52",
+      "hFill": 0.85,
+      "boundsH": 1.7406,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "noon-step3_512_shamble-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512_shamble-head_3q.png",
+      "md5": "fd5996b9",
+      "hFill": 0.716,
+      "boundsH": 1.7406,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "noon-step3_512_shamble-head_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-step3_512_shamble-head_back.png",
+      "md5": "e03c6c91",
+      "hFill": 0.716,
+      "boundsH": 1.7406,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "noon-tripo-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-front.png",
+      "md5": "24dc485c",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-3q.png",
+      "md5": "d05902b3",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-side.png",
+      "md5": "82dfc7f1",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-back.png",
+      "md5": "b33929d3",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-head_front.png",
+      "md5": "3a93f44b",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-head_3q.png",
+      "md5": "103746fc",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-head_side.png",
+      "md5": "dca38d3b",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-head_back.png",
+      "md5": "112654c4",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-head_3q_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-head_3q_back.png",
+      "md5": "89f9a5b0",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-torso_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-torso_front.png",
+      "md5": "885fb1f8",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-torso_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-torso_3q.png",
+      "md5": "fe3669f0",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-torso_side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-torso_side.png",
+      "md5": "70a21990",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-torso_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-torso_back.png",
+      "md5": "7f88056e",
+      "hFill": 2.25,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-seam_neck_torso_front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-seam_neck_torso_front.png",
+      "md5": "84b1becf",
+      "hFill": 3.988,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-seam_neck_torso_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-seam_neck_torso_back.png",
+      "md5": "3a199d93",
+      "hFill": 3.703,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-seam_neck_face": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-seam_neck_face.png",
+      "md5": "ec21f6af",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "noon-tripo-seam_face_scalp": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/noon-tripo-seam_face_scalp.png",
+      "md5": "9245b942",
+      "hFill": 4.32,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "night-ours-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-ours-front.png",
+      "md5": "abdf0796",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "night-ours-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-ours-3q.png",
+      "md5": "edbbacbe",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "night-ours-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-ours-back.png",
+      "md5": "c33f6511",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "night-ours-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-ours-head_3q.png",
+      "md5": "5feb1f58",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "night-proto_shamble-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-proto_shamble-front.png",
+      "md5": "b57ff35d",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "night-proto_shamble-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-proto_shamble-3q.png",
+      "md5": "1d891cbc",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "night-proto_shamble-side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-proto_shamble-side.png",
+      "md5": "46edb916",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "night-proto_shamble-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-proto_shamble-back.png",
+      "md5": "a58b3fe4",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "night-proto_shamble-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-proto_shamble-head_3q.png",
+      "md5": "a18ca8cb",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6521,
+        1.8,
+        0.9634
+      ]
+    },
+    "night-step3_1k-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_1k-front.png",
+      "md5": "d02f8738",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "night-step3_1k-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_1k-3q.png",
+      "md5": "f936dd56",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "night-step3_1k-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_1k-back.png",
+      "md5": "5afe02a1",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "night-step3_1k-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_1k-head_3q.png",
+      "md5": "8af892fa",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "night-step3_512-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_512-front.png",
+      "md5": "0a935608",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "night-step3_512-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_512-3q.png",
+      "md5": "00e1ce30",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "night-step3_512-side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_512-side.png",
+      "md5": "3c2ef939",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "night-step3_512-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_512-back.png",
+      "md5": "909fb623",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "night-step3_512-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_512-head_3q.png",
+      "md5": "90ae8bb1",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "night-step3_512-head_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_512-head_back.png",
+      "md5": "dc4f8549",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.9464,
+        1.8,
+        0.3228
+      ]
+    },
+    "night-step3_512_shamble-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_512_shamble-front.png",
+      "md5": "44fed498",
+      "hFill": 0.85,
+      "boundsH": 1.7406,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "night-step3_512_shamble-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_512_shamble-3q.png",
+      "md5": "b355591c",
+      "hFill": 0.85,
+      "boundsH": 1.7406,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "night-step3_512_shamble-side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_512_shamble-side.png",
+      "md5": "4ad50be2",
+      "hFill": 0.85,
+      "boundsH": 1.7406,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "night-step3_512_shamble-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_512_shamble-back.png",
+      "md5": "52ea49f8",
+      "hFill": 0.85,
+      "boundsH": 1.7406,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "night-step3_512_shamble-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_512_shamble-head_3q.png",
+      "md5": "03817091",
+      "hFill": 0.716,
+      "boundsH": 1.7406,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "night-step3_512_shamble-head_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-step3_512_shamble-head_back.png",
+      "md5": "93e2916e",
+      "hFill": 0.716,
+      "boundsH": 1.7406,
+      "size": [
+        0.5677,
+        1.7406,
+        0.9241
+      ]
+    },
+    "night-tripo-front": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-tripo-front.png",
+      "md5": "7fde0883",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "night-tripo-3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-tripo-3q.png",
+      "md5": "a1990a22",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "night-tripo-side": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-tripo-side.png",
+      "md5": "cf58db87",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "night-tripo-back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-tripo-back.png",
+      "md5": "b74699e2",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "night-tripo-head_3q": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-tripo-head_3q.png",
+      "md5": "949cc577",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "night-tripo-head_back": {
+      "file": "qa/2026-11-18-AG-368/frames-pass5/night-tripo-head_back.png",
+      "md5": "5955a0c6",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    }
+  },
+  "errors": []
+}

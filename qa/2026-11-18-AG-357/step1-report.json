@@ -1,0 +1,495 @@
+{
+  "at": "2026-11-18T06:26:30.997Z",
+  "backend": "WebGPUBackend",
+  "stats": {
+    "ours": {
+      "tris": 18592,
+      "meshes": 1,
+      "materials": 1,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "proto_apose": {
+      "tris": 41264,
+      "meshes": 30,
+      "materials": 2,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "proto_shamble": {
+      "tris": 41264,
+      "meshes": 30,
+      "materials": 2,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "white_apose": {
+      "tris": 41264,
+      "meshes": 30,
+      "materials": 2,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "white_shamble": {
+      "tris": 41264,
+      "meshes": 30,
+      "materials": 2,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "tripo": {
+      "tris": 17664,
+      "meshes": 1,
+      "materials": 1,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    }
+  },
+  "headMetrics": {
+    "crownY": 1.8,
+    "chinY": 1.5373,
+    "collarY": 1.4226,
+    "mouthGapeM": 0.0265,
+    "headHeightChinToTopOpenJaw": 0.2627,
+    "neckLengthChinToCollar": 0.1147
+  },
+  "frames": {
+    "ours-front": {
+      "file": "qa/2026-11-18-AG-357/frames/ours-front.png",
+      "md5": "dd458956",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "ours-3q": {
+      "file": "qa/2026-11-18-AG-357/frames/ours-3q.png",
+      "md5": "c564da5e",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "ours-side": {
+      "file": "qa/2026-11-18-AG-357/frames/ours-side.png",
+      "md5": "3eb6c185",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "ours-back": {
+      "file": "qa/2026-11-18-AG-357/frames/ours-back.png",
+      "md5": "f6b8f17d",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "ours-head": {
+      "file": "qa/2026-11-18-AG-357/frames/ours-head.png",
+      "md5": "f6eeff2c",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6132,
+        1.8,
+        0.7409
+      ]
+    },
+    "proto_apose-front": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_apose-front.png",
+      "md5": "317784da",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "proto_apose-3q": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_apose-3q.png",
+      "md5": "4e863350",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "proto_apose-side": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_apose-side.png",
+      "md5": "278e9eff",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "proto_apose-back": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_apose-back.png",
+      "md5": "a40fee7e",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "proto_apose-head": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_apose-head.png",
+      "md5": "4717e110",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "proto_apose-head_front": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_apose-head_front.png",
+      "md5": "370e89db",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "proto_apose-head_3q": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_apose-head_3q.png",
+      "md5": "90ab793a",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "proto_apose-head_side": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_apose-head_side.png",
+      "md5": "aa562dcc",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "proto_apose-head_back": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_apose-head_back.png",
+      "md5": "ebd7ee32",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "proto_shamble-front": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_shamble-front.png",
+      "md5": "e662f6a9",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "proto_shamble-3q": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_shamble-3q.png",
+      "md5": "f15600b0",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "proto_shamble-side": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_shamble-side.png",
+      "md5": "51014d2c",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "proto_shamble-back": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_shamble-back.png",
+      "md5": "b6887d35",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "proto_shamble-head": {
+      "file": "qa/2026-11-18-AG-357/frames/proto_shamble-head.png",
+      "md5": "d9bcc15f",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "tripo-front": {
+      "file": "qa/2026-11-18-AG-357/frames/tripo-front.png",
+      "md5": "42b8e1c5",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "tripo-3q": {
+      "file": "qa/2026-11-18-AG-357/frames/tripo-3q.png",
+      "md5": "5c77268f",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "tripo-side": {
+      "file": "qa/2026-11-18-AG-357/frames/tripo-side.png",
+      "md5": "09c91338",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "tripo-back": {
+      "file": "qa/2026-11-18-AG-357/frames/tripo-back.png",
+      "md5": "ddd29810",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "tripo-head": {
+      "file": "qa/2026-11-18-AG-357/frames/tripo-head.png",
+      "md5": "5a115391",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "tripo-head_front": {
+      "file": "qa/2026-11-18-AG-357/frames/tripo-head_front.png",
+      "md5": "558c9873",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "tripo-head_3q": {
+      "file": "qa/2026-11-18-AG-357/frames/tripo-head_3q.png",
+      "md5": "88e8994f",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "tripo-head_side": {
+      "file": "qa/2026-11-18-AG-357/frames/tripo-head_side.png",
+      "md5": "0739c9e7",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "tripo-head_back": {
+      "file": "qa/2026-11-18-AG-357/frames/tripo-head_back.png",
+      "md5": "6d0f69d4",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.0913,
+        1.8,
+        0.3561
+      ]
+    },
+    "white_apose-front": {
+      "file": "qa/2026-11-18-AG-357/frames/white_apose-front.png",
+      "md5": "db8735a1",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "white_apose-3q": {
+      "file": "qa/2026-11-18-AG-357/frames/white_apose-3q.png",
+      "md5": "49f3a7ff",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "white_apose-side": {
+      "file": "qa/2026-11-18-AG-357/frames/white_apose-side.png",
+      "md5": "d94fe5b2",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "white_apose-back": {
+      "file": "qa/2026-11-18-AG-357/frames/white_apose-back.png",
+      "md5": "6c5c22cd",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "white_apose-head": {
+      "file": "qa/2026-11-18-AG-357/frames/white_apose-head.png",
+      "md5": "0e9eb4d7",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "white_apose-head_front": {
+      "file": "qa/2026-11-18-AG-357/frames/white_apose-head_front.png",
+      "md5": "abebd161",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "white_apose-head_side": {
+      "file": "qa/2026-11-18-AG-357/frames/white_apose-head_side.png",
+      "md5": "c737feea",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        1.072,
+        1.8,
+        0.3096
+      ]
+    },
+    "white_shamble-3q": {
+      "file": "qa/2026-11-18-AG-357/frames/white_shamble-3q.png",
+      "md5": "91b1d590",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "white_shamble-side": {
+      "file": "qa/2026-11-18-AG-357/frames/white_shamble-side.png",
+      "md5": "e8702806",
+      "hFill": 0.85,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    },
+    "white_shamble-head": {
+      "file": "qa/2026-11-18-AG-357/frames/white_shamble-head.png",
+      "md5": "acc14c0b",
+      "hFill": 0.716,
+      "boundsH": 1.8,
+      "size": [
+        0.6517,
+        1.8,
+        0.9604
+      ]
+    }
+  },
+  "errors": []
+}
