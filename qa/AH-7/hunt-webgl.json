@@ -1,0 +1,6111 @@
+{
+  "backend": "webgl",
+  "targetNights": 2,
+  "startedAt": "2026-11-21T07:36:36.297Z",
+  "steps": [
+    {
+      "tSec": 0.7,
+      "name": "Opening index.html?renderer=webgl (targetNights=2, NO ?debug=1)"
+    },
+    {
+      "tSec": 61.7,
+      "name": "Frame/Input check [day1-spawn]",
+      "changedPct": 89.118,
+      "frozen3D": false,
+      "distMoved": 3.625
+    },
+    {
+      "tSec": 65.1,
+      "name": "Walked to Approach Day 1 POI Guard",
+      "pos": [
+        42.25,
+        11.89
+      ],
+      "dist": 20.17,
+      "prompt": ""
+    },
+    {
+      "tSec": 66.8,
+      "name": "Walked to Approach Day 1 POI Guard",
+      "pos": [
+        38.77,
+        25.09
+      ],
+      "dist": 6.51,
+      "prompt": ""
+    },
+    {
+      "tSec": 69,
+      "name": "Walked to Approach Day 1 POI Guard",
+      "pos": [
+        34.69,
+        29.21
+      ],
+      "dist": 6.3,
+      "prompt": ""
+    },
+    {
+      "tSec": 73.9,
+      "name": "Walked to Day 1 Pre-Wave Skull Pickup",
+      "pos": [
+        39.61,
+        28.01
+      ],
+      "dist": 0.9,
+      "prompt": ""
+    },
+    {
+      "tSec": 77,
+      "name": "Walked to Day 1 Pre-Wave Skull Pickup",
+      "pos": [
+        29.38,
+        35.72
+      ],
+      "dist": 0.91,
+      "prompt": ""
+    },
+    {
+      "tSec": 84.9,
+      "name": "Walked to Day 1 Pre-Wave Skull Window",
+      "pos": [
+        -5.96,
+        -2.65
+      ],
+      "dist": 0.45,
+      "prompt": "ETurn in 2 skulls"
+    },
+    {
+      "tSec": 90.2,
+      "name": "Day 1 Pre-Wave Skull Banking complete",
+      "skullsHeld": 2,
+      "cashBefore": 40,
+      "cashAfter": 44
+    },
+    {
+      "tSec": 92.4,
+      "name": "Walked to HQ Alarm Panel (Night 1, try 1)",
+      "pos": [
+        4.21,
+        -5.91
+      ],
+      "dist": 0.46,
+      "prompt": "EHQ panel"
+    },
+    {
+      "tSec": 93.6,
+      "name": "Sounded HQ Alarm for Night 1",
+      "btn": "Sound alarm"
+    },
+    {
+      "tSec": 114.8,
+      "name": "Night 1 3P horde screenshot",
+      "live": 15,
+      "kinds": {
+        "shambler": 15
+      },
+      "weapon": "pistol",
+      "fps": 57,
+      "shot": "qa/AH-7/webgl-night1-combat-3p-pistol.png"
+    },
+    {
+      "tSec": 117.2,
+      "name": "Night 1 real 1P (Digit5) horde screenshot",
+      "live": 15,
+      "weapon": "pistol",
+      "shot": "qa/AH-7/webgl-night1-combat-1p-pistol.png"
+    },
+    {
+      "tSec": 143.3,
+      "name": "Night 1 <30 FPS frame drop captured",
+      "fps": 21,
+      "worstMs": 310.4,
+      "live": 7,
+      "shot": "qa/AH-7/webgl-night1-sub30fps-21fps.png"
+    },
+    {
+      "tSec": 153.5,
+      "name": "Night 1 CLEARED -> Day 2 Dawn!",
+      "hp": 88,
+      "skulls": 15,
+      "cash": 44,
+      "weapon": "pistol",
+      "minFps": 21,
+      "maxLiveZombies": 15,
+      "seenKinds": {
+        "shambler": 15
+      }
+    },
+    {
+      "tSec": 155.8,
+      "name": "Walked to Day 2 Dawn Skull Window",
+      "pos": [
+        -5.71,
+        -1.83
+      ],
+      "dist": 0.42,
+      "prompt": "ETurn in 15 skulls"
+    },
+    {
+      "tSec": 161.1,
+      "name": "Day 2 Dawn Skull Banking complete",
+      "skullsHeld": 15,
+      "cashBefore": 44,
+      "cashAfter": 76
+    },
+    {
+      "tSec": 163.9,
+      "name": "Frame/Input check [day2-dawn]",
+      "changedPct": 92.679,
+      "frozen3D": false,
+      "distMoved": 3.417
+    },
+    {
+      "tSec": 166.6,
+      "name": "Walked to Day 2 Armory East Approach",
+      "pos": [
+        9.68,
+        2.92
+      ],
+      "dist": 0.78,
+      "prompt": ""
+    },
+    {
+      "tSec": 167.4,
+      "name": "Walked to Day 2 Armory",
+      "pos": [
+        5.65,
+        3.62
+      ],
+      "dist": 0.41,
+      "prompt": "EArmory"
+    },
+    {
+      "tSec": 171.5,
+      "name": "Bought & equipped uzi at Armory!",
+      "movedFromShelf": true,
+      "shot": "qa/AH-7/webgl-day2-armory-bought-uzi.png"
+    },
+    {
+      "tSec": 174.8,
+      "name": "Equipped Wasp SMG (uzi) & verified 1st-person viewmodel",
+      "equipped": "uzi",
+      "shot": "qa/AH-7/webgl-03-day2-wasp-smg-1p.png"
+    },
+    {
+      "tSec": 176.5,
+      "name": "Walked to HQ Alarm Panel (Night 2, try 1)",
+      "pos": [
+        3.39,
+        -6.57
+      ],
+      "dist": 0.76,
+      "prompt": "EHQ panel"
+    },
+    {
+      "tSec": 177.8,
+      "name": "Sounded HQ Alarm for Night 2",
+      "btn": "Sound alarm"
+    },
+    {
+      "tSec": 212.5,
+      "name": "Night 2 3P horde screenshot",
+      "live": 19,
+      "kinds": {
+        "shambler": 15,
+        "feral": 4
+      },
+      "weapon": "uzi",
+      "fps": 57,
+      "shot": "qa/AH-7/webgl-night2-combat-3p-uzi.png"
+    },
+    {
+      "tSec": 218.3,
+      "name": "Night 2 real 1P (Digit5) horde screenshot",
+      "live": 16,
+      "weapon": "uzi",
+      "shot": "qa/AH-7/webgl-night2-combat-1p-uzi.png"
+    },
+    {
+      "tSec": 275.5,
+      "name": "Night 2 <30 FPS frame drop captured",
+      "fps": 29,
+      "worstMs": 114.9,
+      "live": 38,
+      "shot": "qa/AH-7/webgl-night2-sub30fps-29fps.png"
+    },
+    {
+      "tSec": 325.9,
+      "name": "Night 2 CLEARED -> Day 3 Dawn!",
+      "hp": 70,
+      "skulls": 17,
+      "cash": 1,
+      "weapon": "pistol",
+      "minFps": 20,
+      "maxLiveZombies": 46,
+      "seenKinds": {
+        "shambler": 42,
+        "feral": 4
+      }
+    },
+    {
+      "tSec": 328.8,
+      "name": "Walked to Day 3 Dawn Skull Window",
+      "pos": [
+        -5.42,
+        -2.14
+      ],
+      "dist": 0.48,
+      "prompt": "ETurn in 17 skulls"
+    },
+    {
+      "tSec": 334.1,
+      "name": "Day 3 Dawn Skull Banking complete",
+      "skullsHeld": 17,
+      "cashBefore": 1,
+      "cashAfter": 148
+    },
+    {
+      "tSec": 336,
+      "name": "Frame/Input check [day3-dawn]",
+      "changedPct": 88.694,
+      "frozen3D": false,
+      "distMoved": 3.427
+    },
+    {
+      "tSec": 338.7,
+      "name": "Walked to Day 3 Armory East Approach",
+      "pos": [
+        10.07,
+        3.96
+      ],
+      "dist": 1.26,
+      "prompt": ""
+    },
+    {
+      "tSec": 339.5,
+      "name": "Walked to Day 3 Armory",
+      "pos": [
+        5.73,
+        3.25
+      ],
+      "dist": 0.18,
+      "prompt": "EArmory"
+    },
+    {
+      "tSec": 343.4,
+      "name": "Bought & equipped shotgun at Armory!",
+      "movedFromShelf": true,
+      "shot": "qa/AH-7/webgl-day3-armory-bought-shotgun.png"
+    },
+    {
+      "tSec": 346.5,
+      "name": "Day 3 equipped shotgun & verified 1st-person viewmodel",
+      "equipped": "shotgun",
+      "shot": "qa/AH-7/webgl-06-day3-shotgun-1p.png"
+    },
+    {
+      "tSec": 350.2,
+      "name": "Walked to Day 3 Kiosk Approach",
+      "pos": [
+        -6.94,
+        1.82
+      ],
+      "dist": 0.6,
+      "prompt": "ESupply Terminal"
+    },
+    {
+      "tSec": 350.4,
+      "name": "Walked to Day 3 Supply Kiosk",
+      "pos": [
+        -6.9,
+        1.78
+      ],
+      "dist": 0.66,
+      "prompt": "ESupply Terminal"
+    },
+    {
+      "tSec": 359.2,
+      "name": "Verified Title Screen Best Record & Badges (debugTouched=false!)",
+      "bestRecordText": "Best: Night 3 · 67 kills · streak 29",
+      "bestRecordHidden": false,
+      "badgesText": "Badges · 2/16Choir practiceLockedKill the rabbit with the Choir grenade.Brought them homeLockedRecover all nine Gravewal",
+      "shot": "qa/AH-7/webgl-10-end-title-records.png"
+    }
+  ],
+  "frameChecks": [
+    {
+      "tSec": 61.7,
+      "tag": "day1-spawn",
+      "shotA": "qa/AH-7/webgl-01-day1-spawn-a.png",
+      "shotB": "qa/AH-7/webgl-01-day1-spawn-b.png",
+      "meanLumB": 62.28,
+      "changedPct": 89.118,
+      "frozen3D": false,
+      "distMoved": 3.625,
+      "perfText": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGL2 fallback fps 40 low 25 worst 40ms hitch 5 draws 313 tris 714k zombs 2"
+    },
+    {
+      "tSec": 163.9,
+      "tag": "day2-dawn",
+      "shotA": "qa/AH-7/webgl-02b-day2-move-a.png",
+      "shotB": "qa/AH-7/webgl-02b-day2-move-b.png",
+      "meanLumB": 42.25,
+      "changedPct": 92.679,
+      "frozen3D": false,
+      "distMoved": 3.417,
+      "perfText": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGL2 fallback fps 51 low 38 worst 27ms hitch 54 draws 469 tris 806k zombs 4"
+    },
+    {
+      "tSec": 336,
+      "tag": "day3-dawn",
+      "shotA": "qa/AH-7/webgl-05-day3-move-a.png",
+      "shotB": "qa/AH-7/webgl-05-day3-move-b.png",
+      "meanLumB": 49.22,
+      "changedPct": 88.694,
+      "frozen3D": false,
+      "distMoved": 3.427,
+      "perfText": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGL2 fallback fps 59 low 36 worst 28ms hitch 167 draws 498 tris 852k zombs 3"
+    }
+  ],
+  "weaponsBought": [
+    {
+      "day": 2,
+      "kind": "uzi"
+    },
+    {
+      "day": 3,
+      "kind": "shotgun"
+    }
+  ],
+  "nights": [
+    {
+      "night": 1,
+      "cleared": true,
+      "died": false,
+      "durationSec": 54,
+      "shotsFired": 91,
+      "autoBursts": 0,
+      "reloads": 0,
+      "knifeSwings": 21,
+      "grenadesThrown": 0,
+      "medpensUsed": 0,
+      "weaponSwaps": 0,
+      "maxLiveZombies": 15,
+      "seenKinds": {
+        "shambler": 15
+      },
+      "invisibleLiveZombies": 0,
+      "nanZombies": 0,
+      "minFpsDuringNight": 21,
+      "worstFrameMsDuringNight": 310.4
+    },
+    {
+      "night": 2,
+      "cleared": true,
+      "died": false,
+      "durationSec": 142.3,
+      "shotsFired": 334,
+      "autoBursts": 81,
+      "reloads": 7,
+      "knifeSwings": 98,
+      "grenadesThrown": 4,
+      "medpensUsed": 0,
+      "weaponSwaps": 3,
+      "maxLiveZombies": 46,
+      "seenKinds": {
+        "shambler": 42,
+        "feral": 4
+      },
+      "invisibleLiveZombies": 0,
+      "nanZombies": 0,
+      "minFpsDuringNight": 20,
+      "worstFrameMsDuringNight": 302.1
+    }
+  ],
+  "titleEndState": {
+    "bestRecordText": "Best: Night 3 · 67 kills · streak 29",
+    "bestRecordHidden": false,
+    "badgesText": "Badges · 2/16Choir practiceLockedKill the rabbit with the Choir grenade.Brought them homeLockedRecover all nine Gravewal"
+  },
+  "anomalies": [
+    {
+      "severity": "P1",
+      "kind": "frame-drops-below-30fps",
+      "sub30Seconds": 28,
+      "totalSampledSeconds": 313
+    },
+    {
+      "severity": "P1",
+      "kind": "raf-stalls-over-500ms",
+      "count": 4,
+      "stalls": [
+        {
+          "tMs": 43551,
+          "gapMs": 516.7,
+          "stage": "insertion",
+          "hudPhase": "prep",
+          "day": 1
+        },
+        {
+          "tMs": 355197,
+          "gapMs": 2633.1,
+          "stage": "return-to-title",
+          "hudPhase": "idle",
+          "day": 0
+        },
+        {
+          "tMs": 356514,
+          "gapMs": 1316.8,
+          "stage": "return-to-title",
+          "hudPhase": "idle",
+          "day": 0
+        },
+        {
+          "tMs": 357747,
+          "gapMs": 1233.3,
+          "stage": "return-to-title",
+          "hudPhase": "idle",
+          "day": 0
+        }
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [
+    {
+      "t": 17326,
+      "text": "THREE.WebGLProgram: Shader Error 0 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+    },
+    {
+      "t": 17328,
+      "text": "THREE.WebGLProgram: Shader Error 1282 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+    }
+  ],
+  "consoleWarnings": [
+    {
+      "t": 25800,
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "t": 28250,
+      "text": "AttributeNode: Vertex attribute \"uv\" not found on geometry."
+    },
+    {
+      "t": 168715,
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    }
+  ],
+  "monitor": {
+    "rafCount": 14042,
+    "maxRafGapMs": 2633.1,
+    "hitches": [
+      {
+        "tMs": 43551,
+        "gapMs": 516.7,
+        "stage": "insertion",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 43751,
+        "gapMs": 200,
+        "stage": "insertion",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 51385,
+        "gapMs": 133.6,
+        "stage": "insertion",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 52901,
+        "gapMs": 150.1,
+        "stage": "insertion",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 91934,
+        "gapMs": 150,
+        "stage": "day1-prep",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 115117,
+        "gapMs": 216.7,
+        "stage": "night1-wave",
+        "hudPhase": "wave",
+        "day": 1
+      },
+      {
+        "tMs": 140967,
+        "gapMs": 166.5,
+        "stage": "night1-wave",
+        "hudPhase": "wave",
+        "day": 1
+      },
+      {
+        "tMs": 141300,
+        "gapMs": 316.6,
+        "stage": "night1-wave",
+        "hudPhase": "wave",
+        "day": 1
+      },
+      {
+        "tMs": 141483,
+        "gapMs": 183.4,
+        "stage": "night1-wave",
+        "hudPhase": "wave",
+        "day": 1
+      },
+      {
+        "tMs": 167000,
+        "gapMs": 300,
+        "stage": "day2-prep",
+        "hudPhase": "prep",
+        "day": 2
+      },
+      {
+        "tMs": 168867,
+        "gapMs": 200,
+        "stage": "day2-prep",
+        "hudPhase": "prep",
+        "day": 2
+      },
+      {
+        "tMs": 171350,
+        "gapMs": 149.9,
+        "stage": "day2-prep",
+        "hudPhase": "prep",
+        "day": 2
+      },
+      {
+        "tMs": 171983,
+        "gapMs": 166.6,
+        "stage": "day2-prep",
+        "hudPhase": "prep",
+        "day": 2
+      },
+      {
+        "tMs": 172233,
+        "gapMs": 133.4,
+        "stage": "day2-prep",
+        "hudPhase": "prep",
+        "day": 2
+      },
+      {
+        "tMs": 172467,
+        "gapMs": 133.4,
+        "stage": "day2-prep",
+        "hudPhase": "prep",
+        "day": 2
+      },
+      {
+        "tMs": 224682,
+        "gapMs": 316.7,
+        "stage": "night2-wave",
+        "hudPhase": "wave",
+        "day": 2
+      },
+      {
+        "tMs": 279298,
+        "gapMs": 183.3,
+        "stage": "night2-wave",
+        "hudPhase": "wave",
+        "day": 2
+      },
+      {
+        "tMs": 340764,
+        "gapMs": 233.4,
+        "stage": "day3-prep",
+        "hudPhase": "prep",
+        "day": 3
+      },
+      {
+        "tMs": 343331,
+        "gapMs": 216.9,
+        "stage": "day3-prep",
+        "hudPhase": "prep",
+        "day": 3
+      },
+      {
+        "tMs": 343814,
+        "gapMs": 266.6,
+        "stage": "day3-prep",
+        "hudPhase": "prep",
+        "day": 3
+      },
+      {
+        "tMs": 346431,
+        "gapMs": 250.1,
+        "stage": "day3-prep",
+        "hudPhase": "prep",
+        "day": 3
+      },
+      {
+        "tMs": 355197,
+        "gapMs": 2633.1,
+        "stage": "return-to-title",
+        "hudPhase": "idle",
+        "day": 0
+      },
+      {
+        "tMs": 356514,
+        "gapMs": 1316.8,
+        "stage": "return-to-title",
+        "hudPhase": "idle",
+        "day": 0
+      },
+      {
+        "tMs": 357747,
+        "gapMs": 1233.3,
+        "stage": "return-to-title",
+        "hudPhase": "idle",
+        "day": 0
+      }
+    ],
+    "fpsSamples": [
+      {
+        "tSec": 42,
+        "stage": "title",
+        "day": 0,
+        "phase": "idle",
+        "fps": 60,
+        "low": 45,
+        "worstMs": 22.4,
+        "draws": 299,
+        "trisK": 754,
+        "zombs": 0,
+        "weapon": "minigun"
+      },
+      {
+        "tSec": 43,
+        "stage": "insertion",
+        "day": 0,
+        "phase": "idle",
+        "fps": 60,
+        "low": 53,
+        "worstMs": 18.7,
+        "draws": 367,
+        "trisK": 776,
+        "zombs": 0,
+        "weapon": "minigun"
+      },
+      {
+        "tSec": 44,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 17,
+        "low": 2,
+        "worstMs": 524,
+        "draws": 985,
+        "trisK": 2380,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 45,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 32,
+        "low": 5,
+        "worstMs": 203.5,
+        "draws": 956,
+        "trisK": 2345,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 46,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 40,
+        "low": 29,
+        "worstMs": 34.4,
+        "draws": 936,
+        "trisK": 2339,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 47,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 33,
+        "low": 20,
+        "worstMs": 49.5,
+        "draws": 900,
+        "trisK": 2305,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 48,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 32,
+        "low": 24,
+        "worstMs": 41.3,
+        "draws": 966,
+        "trisK": 2286,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 49,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 35,
+        "low": 28,
+        "worstMs": 36.2,
+        "draws": 919,
+        "trisK": 2263,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 50,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 36,
+        "low": 29,
+        "worstMs": 34.3,
+        "draws": 845,
+        "trisK": 2229,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 51,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 33,
+        "low": 22,
+        "worstMs": 44.8,
+        "draws": 834,
+        "trisK": 2202,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 52,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 26,
+        "low": 8,
+        "worstMs": 126.2,
+        "draws": 838,
+        "trisK": 2092,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 53,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 37,
+        "low": 19,
+        "worstMs": 53,
+        "draws": 419,
+        "trisK": 739,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 54,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 36,
+        "low": 6,
+        "worstMs": 155.7,
+        "draws": 308,
+        "trisK": 706,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 55,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 47,
+        "low": 30,
+        "worstMs": 33.4,
+        "draws": 308,
+        "trisK": 709,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 56,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 39,
+        "low": 28,
+        "worstMs": 35.5,
+        "draws": 308,
+        "trisK": 711,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 57,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 45,
+        "low": 29,
+        "worstMs": 34.9,
+        "draws": 306,
+        "trisK": 711,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 58,
+        "stage": "insertion",
+        "day": 1,
+        "phase": "prep",
+        "fps": 43,
+        "low": 26,
+        "worstMs": 38.7,
+        "draws": 306,
+        "trisK": 711,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 59,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 37,
+        "low": 26,
+        "worstMs": 38.7,
+        "draws": 306,
+        "trisK": 711,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 60,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 36,
+        "low": 25,
+        "worstMs": 39.4,
+        "draws": 302,
+        "trisK": 706,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 61,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 40,
+        "low": 29,
+        "worstMs": 34.4,
+        "draws": 313,
+        "trisK": 714,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 62,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 38,
+        "low": 25,
+        "worstMs": 39.9,
+        "draws": 354,
+        "trisK": 753,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 63,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 32,
+        "low": 23,
+        "worstMs": 42.8,
+        "draws": 385,
+        "trisK": 827,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 64,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 28,
+        "low": 20,
+        "worstMs": 51,
+        "draws": 382,
+        "trisK": 917,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 65,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 28,
+        "low": 20,
+        "worstMs": 50.2,
+        "draws": 365,
+        "trisK": 860,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 66,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 25,
+        "low": 17,
+        "worstMs": 59.7,
+        "draws": 375,
+        "trisK": 963,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 67,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 18,
+        "low": 12,
+        "worstMs": 80.3,
+        "draws": 364,
+        "trisK": 838,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 68,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 24,
+        "low": 13,
+        "worstMs": 75.1,
+        "draws": 404,
+        "trisK": 894,
+        "zombs": 1,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 69,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 22,
+        "low": 8,
+        "worstMs": 127.3,
+        "draws": 402,
+        "trisK": 828,
+        "zombs": 1,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 70,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 25,
+        "low": 16,
+        "worstMs": 61.5,
+        "draws": 394,
+        "trisK": 820,
+        "zombs": 1,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 71,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 24,
+        "low": 13,
+        "worstMs": 78.8,
+        "draws": 386,
+        "trisK": 801,
+        "zombs": 1,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 72,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 31,
+        "low": 14,
+        "worstMs": 72.3,
+        "draws": 413,
+        "trisK": 818,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 73,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 32,
+        "low": 23,
+        "worstMs": 44.4,
+        "draws": 394,
+        "trisK": 762,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 74,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 32,
+        "low": 22,
+        "worstMs": 46.1,
+        "draws": 382,
+        "trisK": 780,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 75,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 33,
+        "low": 19,
+        "worstMs": 53.4,
+        "draws": 385,
+        "trisK": 831,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 76,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 38,
+        "low": 28,
+        "worstMs": 35.8,
+        "draws": 376,
+        "trisK": 719,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 77,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 33,
+        "low": 22,
+        "worstMs": 46.2,
+        "draws": 378,
+        "trisK": 716,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 78,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 31,
+        "low": 20,
+        "worstMs": 49.3,
+        "draws": 392,
+        "trisK": 717,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 79,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 34,
+        "low": 23,
+        "worstMs": 43.8,
+        "draws": 415,
+        "trisK": 759,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 80,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 32,
+        "low": 24,
+        "worstMs": 41.2,
+        "draws": 422,
+        "trisK": 795,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 81,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 28,
+        "low": 19,
+        "worstMs": 53.4,
+        "draws": 411,
+        "trisK": 792,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 82,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 35,
+        "low": 25,
+        "worstMs": 39.3,
+        "draws": 383,
+        "trisK": 772,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 83,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 36,
+        "low": 26,
+        "worstMs": 38.3,
+        "draws": 387,
+        "trisK": 793,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 84,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 35,
+        "low": 26,
+        "worstMs": 37.8,
+        "draws": 432,
+        "trisK": 779,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 85,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 38,
+        "low": 28,
+        "worstMs": 35.6,
+        "draws": 454,
+        "trisK": 806,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 86,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 36,
+        "low": 22,
+        "worstMs": 45.2,
+        "draws": 452,
+        "trisK": 799,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 87,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 42,
+        "low": 28,
+        "worstMs": 35.5,
+        "draws": 452,
+        "trisK": 799,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 88,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 41,
+        "low": 27,
+        "worstMs": 37,
+        "draws": 453,
+        "trisK": 799,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 89,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 39,
+        "low": 27,
+        "worstMs": 36.4,
+        "draws": 452,
+        "trisK": 799,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 90,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 38,
+        "low": 10,
+        "worstMs": 104.2,
+        "draws": 452,
+        "trisK": 799,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 91,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 49,
+        "low": 34,
+        "worstMs": 29.6,
+        "draws": 457,
+        "trisK": 817,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 92,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 46,
+        "low": 30,
+        "worstMs": 33.5,
+        "draws": 447,
+        "trisK": 805,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 93,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 49,
+        "low": 6,
+        "worstMs": 157.6,
+        "draws": 441,
+        "trisK": 795,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 94,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 50,
+        "low": 38,
+        "worstMs": 26.6,
+        "draws": 733,
+        "trisK": 1943,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 95,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 38,
+        "low": 29,
+        "worstMs": 34.5,
+        "draws": 730,
+        "trisK": 1942,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 96,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 31,
+        "low": 15,
+        "worstMs": 68.4,
+        "draws": 720,
+        "trisK": 844,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 97,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 33,
+        "low": 23,
+        "worstMs": 43.4,
+        "draws": 687,
+        "trisK": 840,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 98,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 42,
+        "low": 28,
+        "worstMs": 35.1,
+        "draws": 610,
+        "trisK": 842,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 99,
+        "stage": "day1-prep",
+        "day": 1,
+        "phase": "prep",
+        "fps": 46,
+        "low": 29,
+        "worstMs": 34.8,
+        "draws": 306,
+        "trisK": 597,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 100,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 45,
+        "low": 28,
+        "worstMs": 35.4,
+        "draws": 273,
+        "trisK": 586,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 101,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 56,
+        "low": 42,
+        "worstMs": 23.9,
+        "draws": 234,
+        "trisK": 561,
+        "zombs": 6,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 102,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 55,
+        "low": 43,
+        "worstMs": 23.5,
+        "draws": 306,
+        "trisK": 612,
+        "zombs": 7,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 103,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 56,
+        "low": 39,
+        "worstMs": 25.5,
+        "draws": 273,
+        "trisK": 561,
+        "zombs": 7,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 104,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 57,
+        "low": 42,
+        "worstMs": 23.7,
+        "draws": 297,
+        "trisK": 596,
+        "zombs": 8,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 105,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 53,
+        "low": 32,
+        "worstMs": 31.7,
+        "draws": 293,
+        "trisK": 583,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 106,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 53,
+        "low": 38,
+        "worstMs": 26.4,
+        "draws": 308,
+        "trisK": 600,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 107,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 53,
+        "low": 34,
+        "worstMs": 29.8,
+        "draws": 249,
+        "trisK": 569,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 108,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 56,
+        "low": 45,
+        "worstMs": 22,
+        "draws": 292,
+        "trisK": 586,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 109,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 48,
+        "low": 32,
+        "worstMs": 31.7,
+        "draws": 287,
+        "trisK": 590,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 110,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 57,
+        "low": 48,
+        "worstMs": 20.9,
+        "draws": 275,
+        "trisK": 594,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 111,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 59,
+        "low": 44,
+        "worstMs": 22.5,
+        "draws": 251,
+        "trisK": 568,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 112,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 58,
+        "low": 44,
+        "worstMs": 22.7,
+        "draws": 257,
+        "trisK": 613,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 113,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 60,
+        "low": 41,
+        "worstMs": 24.4,
+        "draws": 296,
+        "trisK": 601,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 114,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 57,
+        "low": 36,
+        "worstMs": 27.7,
+        "draws": 283,
+        "trisK": 824,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 115,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 51,
+        "low": 36,
+        "worstMs": 27.9,
+        "draws": 291,
+        "trisK": 776,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 116,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 32,
+        "low": 5,
+        "worstMs": 219,
+        "draws": 499,
+        "trisK": 1052,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 117,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 44,
+        "low": 21,
+        "worstMs": 48.6,
+        "draws": 563,
+        "trisK": 1173,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 118,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 47,
+        "low": 33,
+        "worstMs": 30.1,
+        "draws": 261,
+        "trisK": 900,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 119,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 42,
+        "low": 25,
+        "worstMs": 39.7,
+        "draws": 259,
+        "trisK": 897,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 120,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 46,
+        "low": 25,
+        "worstMs": 40.4,
+        "draws": 269,
+        "trisK": 1019,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 121,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 45,
+        "low": 25,
+        "worstMs": 39.9,
+        "draws": 252,
+        "trisK": 1013,
+        "zombs": 15,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 122,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 40,
+        "low": 24,
+        "worstMs": 42.3,
+        "draws": 253,
+        "trisK": 852,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 123,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 49,
+        "low": 34,
+        "worstMs": 29.3,
+        "draws": 230,
+        "trisK": 651,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 124,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 55,
+        "low": 38,
+        "worstMs": 26.4,
+        "draws": 228,
+        "trisK": 694,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 125,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 54,
+        "low": 22,
+        "worstMs": 46.3,
+        "draws": 236,
+        "trisK": 699,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 126,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 59,
+        "low": 44,
+        "worstMs": 22.6,
+        "draws": 230,
+        "trisK": 810,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 127,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 58,
+        "low": 41,
+        "worstMs": 24.6,
+        "draws": 226,
+        "trisK": 720,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 128,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 55,
+        "low": 41,
+        "worstMs": 24.1,
+        "draws": 200,
+        "trisK": 617,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 129,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 50,
+        "low": 38,
+        "worstMs": 26.3,
+        "draws": 236,
+        "trisK": 775,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 130,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 47,
+        "low": 35,
+        "worstMs": 28.5,
+        "draws": 291,
+        "trisK": 1013,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 131,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 43,
+        "low": 32,
+        "worstMs": 31.7,
+        "draws": 314,
+        "trisK": 1027,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 132,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 45,
+        "low": 33,
+        "worstMs": 30,
+        "draws": 317,
+        "trisK": 1044,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 133,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 45,
+        "low": 29,
+        "worstMs": 34,
+        "draws": 318,
+        "trisK": 1037,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 134,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 47,
+        "low": 36,
+        "worstMs": 28,
+        "draws": 291,
+        "trisK": 1048,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 135,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 49,
+        "low": 28,
+        "worstMs": 35.4,
+        "draws": 247,
+        "trisK": 1018,
+        "zombs": 12,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 136,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 52,
+        "low": 37,
+        "worstMs": 27.2,
+        "draws": 293,
+        "trisK": 1045,
+        "zombs": 12,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 137,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 37,
+        "low": 11,
+        "worstMs": 90.2,
+        "draws": 302,
+        "trisK": 1042,
+        "zombs": 11,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 138,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 41,
+        "low": 19,
+        "worstMs": 53.9,
+        "draws": 299,
+        "trisK": 1029,
+        "zombs": 11,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 139,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 44,
+        "low": 27,
+        "worstMs": 37.5,
+        "draws": 359,
+        "trisK": 1072,
+        "zombs": 10,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 140,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 46,
+        "low": 30,
+        "worstMs": 32.8,
+        "draws": 391,
+        "trisK": 1103,
+        "zombs": 8,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 141,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 49,
+        "low": 26,
+        "worstMs": 38.9,
+        "draws": 407,
+        "trisK": 1106,
+        "zombs": 7,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 142,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 18,
+        "low": 3,
+        "worstMs": 310.4,
+        "draws": 420,
+        "trisK": 1103,
+        "zombs": 7,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 143,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 51,
+        "low": 26,
+        "worstMs": 37.8,
+        "draws": 314,
+        "trisK": 1079,
+        "zombs": 7,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 144,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 50,
+        "low": 36,
+        "worstMs": 28,
+        "draws": 357,
+        "trisK": 1058,
+        "zombs": 7,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 145,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 45,
+        "low": 25,
+        "worstMs": 40.2,
+        "draws": 351,
+        "trisK": 1046,
+        "zombs": 5,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 146,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 55,
+        "low": 36,
+        "worstMs": 28,
+        "draws": 376,
+        "trisK": 1040,
+        "zombs": 5,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 147,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 51,
+        "low": 29,
+        "worstMs": 34.5,
+        "draws": 358,
+        "trisK": 1017,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 148,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 53,
+        "low": 25,
+        "worstMs": 40.7,
+        "draws": 384,
+        "trisK": 1024,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 149,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 55,
+        "low": 29,
+        "worstMs": 34.6,
+        "draws": 377,
+        "trisK": 1009,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 150,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 50,
+        "low": 25,
+        "worstMs": 40.5,
+        "draws": 557,
+        "trisK": 1066,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 151,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 54,
+        "low": 43,
+        "worstMs": 23.3,
+        "draws": 519,
+        "trisK": 1144,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 152,
+        "stage": "night1-wave",
+        "day": 1,
+        "phase": "wave",
+        "fps": 58,
+        "low": 44,
+        "worstMs": 22.7,
+        "draws": 547,
+        "trisK": 1072,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 153,
+        "stage": "night1-wave",
+        "day": 2,
+        "phase": "prep",
+        "fps": 51,
+        "low": 22,
+        "worstMs": 45.5,
+        "draws": 310,
+        "trisK": 862,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 154,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 50,
+        "low": 22,
+        "worstMs": 45.1,
+        "draws": 331,
+        "trisK": 858,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 155,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 60,
+        "low": 48,
+        "worstMs": 21,
+        "draws": 511,
+        "trisK": 1142,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 156,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 55,
+        "low": 44,
+        "worstMs": 22.9,
+        "draws": 494,
+        "trisK": 1086,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 157,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 55,
+        "low": 42,
+        "worstMs": 23.8,
+        "draws": 486,
+        "trisK": 1036,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 158,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 57,
+        "low": 43,
+        "worstMs": 23.3,
+        "draws": 483,
+        "trisK": 1000,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 159,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 55,
+        "low": 41,
+        "worstMs": 24.5,
+        "draws": 482,
+        "trisK": 996,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 160,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 57,
+        "low": 44,
+        "worstMs": 22.8,
+        "draws": 478,
+        "trisK": 923,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 161,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 56,
+        "low": 43,
+        "worstMs": 23.2,
+        "draws": 476,
+        "trisK": 890,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 162,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 56,
+        "low": 38,
+        "worstMs": 26,
+        "draws": 475,
+        "trisK": 889,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 163,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 52,
+        "low": 38,
+        "worstMs": 26.5,
+        "draws": 469,
+        "trisK": 806,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 164,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 50,
+        "low": 33,
+        "worstMs": 30.5,
+        "draws": 465,
+        "trisK": 804,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 165,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 52,
+        "low": 37,
+        "worstMs": 26.9,
+        "draws": 457,
+        "trisK": 818,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 166,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 47,
+        "low": 33,
+        "worstMs": 30.1,
+        "draws": 428,
+        "trisK": 862,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 167,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 44,
+        "low": 29,
+        "worstMs": 34,
+        "draws": 399,
+        "trisK": 812,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 168,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 37,
+        "low": 4,
+        "worstMs": 272.9,
+        "draws": 387,
+        "trisK": 803,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 169,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 52,
+        "low": 9,
+        "worstMs": 107.5,
+        "draws": 387,
+        "trisK": 803,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 170,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 49,
+        "low": 5,
+        "worstMs": 189.8,
+        "draws": 389,
+        "trisK": 814,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 171,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 60,
+        "low": 57,
+        "worstMs": 17.4,
+        "draws": 389,
+        "trisK": 814,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 172,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 49,
+        "low": 6,
+        "worstMs": 155.2,
+        "draws": 404,
+        "trisK": 830,
+        "zombs": 4,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 173,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 22,
+        "low": 6,
+        "worstMs": 168,
+        "draws": 534,
+        "trisK": 1610,
+        "zombs": 4,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 174,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 36,
+        "low": 8,
+        "worstMs": 124.5,
+        "draws": 531,
+        "trisK": 1595,
+        "zombs": 4,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 175,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 43,
+        "low": 21,
+        "worstMs": 47.5,
+        "draws": 405,
+        "trisK": 830,
+        "zombs": 4,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 176,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 37,
+        "low": 27,
+        "worstMs": 37.1,
+        "draws": 472,
+        "trisK": 832,
+        "zombs": 4,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 177,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 44,
+        "low": 23,
+        "worstMs": 43.7,
+        "draws": 472,
+        "trisK": 837,
+        "zombs": 4,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 178,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 43,
+        "low": 23,
+        "worstMs": 43.9,
+        "draws": 776,
+        "trisK": 1965,
+        "zombs": 0,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 179,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 26,
+        "low": 19,
+        "worstMs": 51.5,
+        "draws": 771,
+        "trisK": 1971,
+        "zombs": 0,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 180,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 24,
+        "low": 17,
+        "worstMs": 58.7,
+        "draws": 701,
+        "trisK": 862,
+        "zombs": 0,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 181,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 24,
+        "low": 19,
+        "worstMs": 53.5,
+        "draws": 746,
+        "trisK": 862,
+        "zombs": 0,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 182,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 30,
+        "low": 21,
+        "worstMs": 47.1,
+        "draws": 676,
+        "trisK": 864,
+        "zombs": 0,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 183,
+        "stage": "day2-prep",
+        "day": 2,
+        "phase": "prep",
+        "fps": 36,
+        "low": 26,
+        "worstMs": 38.1,
+        "draws": 322,
+        "trisK": 624,
+        "zombs": 0,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 184,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 43,
+        "low": 28,
+        "worstMs": 35.5,
+        "draws": 317,
+        "trisK": 600,
+        "zombs": 3,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 185,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 38,
+        "low": 24,
+        "worstMs": 41.8,
+        "draws": 318,
+        "trisK": 615,
+        "zombs": 5,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 186,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 34,
+        "low": 24,
+        "worstMs": 40.9,
+        "draws": 315,
+        "trisK": 616,
+        "zombs": 6,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 187,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 40,
+        "low": 27,
+        "worstMs": 36.9,
+        "draws": 312,
+        "trisK": 617,
+        "zombs": 7,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 188,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 38,
+        "low": 25,
+        "worstMs": 40.5,
+        "draws": 301,
+        "trisK": 584,
+        "zombs": 10,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 189,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 31,
+        "low": 19,
+        "worstMs": 51.3,
+        "draws": 306,
+        "trisK": 604,
+        "zombs": 10,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 190,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 36,
+        "low": 22,
+        "worstMs": 46.5,
+        "draws": 306,
+        "trisK": 615,
+        "zombs": 15,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 191,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 41,
+        "low": 25,
+        "worstMs": 40.5,
+        "draws": 311,
+        "trisK": 620,
+        "zombs": 16,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 192,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 40,
+        "low": 27,
+        "worstMs": 37.2,
+        "draws": 314,
+        "trisK": 622,
+        "zombs": 18,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 193,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 35,
+        "low": 25,
+        "worstMs": 39.5,
+        "draws": 313,
+        "trisK": 615,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 194,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 39,
+        "low": 29,
+        "worstMs": 34.7,
+        "draws": 314,
+        "trisK": 614,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 195,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 40,
+        "low": 27,
+        "worstMs": 37.5,
+        "draws": 313,
+        "trisK": 619,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 196,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 39,
+        "low": 26,
+        "worstMs": 38.2,
+        "draws": 307,
+        "trisK": 614,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 197,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 44,
+        "low": 27,
+        "worstMs": 36.6,
+        "draws": 313,
+        "trisK": 621,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 198,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 42,
+        "low": 31,
+        "worstMs": 32.2,
+        "draws": 312,
+        "trisK": 621,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 199,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 41,
+        "low": 27,
+        "worstMs": 36.4,
+        "draws": 310,
+        "trisK": 612,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 200,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 44,
+        "low": 33,
+        "worstMs": 30.3,
+        "draws": 311,
+        "trisK": 614,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 201,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 45,
+        "low": 32,
+        "worstMs": 30.9,
+        "draws": 310,
+        "trisK": 612,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 202,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 40,
+        "low": 26,
+        "worstMs": 38.2,
+        "draws": 322,
+        "trisK": 627,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 203,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 44,
+        "low": 26,
+        "worstMs": 37.8,
+        "draws": 310,
+        "trisK": 617,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 204,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 45,
+        "low": 27,
+        "worstMs": 37.5,
+        "draws": 316,
+        "trisK": 622,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 205,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 48,
+        "low": 34,
+        "worstMs": 29.6,
+        "draws": 300,
+        "trisK": 582,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 206,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 51,
+        "low": 34,
+        "worstMs": 29.2,
+        "draws": 311,
+        "trisK": 610,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 207,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 49,
+        "low": 34,
+        "worstMs": 29.8,
+        "draws": 312,
+        "trisK": 651,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 208,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 53,
+        "low": 28,
+        "worstMs": 36.2,
+        "draws": 307,
+        "trisK": 648,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 209,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 58,
+        "low": 40,
+        "worstMs": 25.2,
+        "draws": 342,
+        "trisK": 731,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 210,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 54,
+        "low": 42,
+        "worstMs": 23.6,
+        "draws": 343,
+        "trisK": 714,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 211,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 55,
+        "low": 43,
+        "worstMs": 23.1,
+        "draws": 269,
+        "trisK": 711,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 212,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 57,
+        "low": 42,
+        "worstMs": 23.6,
+        "draws": 294,
+        "trisK": 874,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 213,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 58,
+        "low": 43,
+        "worstMs": 23.1,
+        "draws": 350,
+        "trisK": 854,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 214,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 44,
+        "low": 28,
+        "worstMs": 36.1,
+        "draws": 290,
+        "trisK": 946,
+        "zombs": 19,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 215,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 37,
+        "low": 26,
+        "worstMs": 38.4,
+        "draws": 329,
+        "trisK": 833,
+        "zombs": 17,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 216,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 42,
+        "low": 27,
+        "worstMs": 36.9,
+        "draws": 530,
+        "trisK": 901,
+        "zombs": 16,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 217,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 41,
+        "low": 27,
+        "worstMs": 36.4,
+        "draws": 547,
+        "trisK": 915,
+        "zombs": 16,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 218,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 35,
+        "low": 20,
+        "worstMs": 50.8,
+        "draws": 563,
+        "trisK": 964,
+        "zombs": 16,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 219,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 34,
+        "low": 21,
+        "worstMs": 47,
+        "draws": 350,
+        "trisK": 749,
+        "zombs": 15,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 220,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 45,
+        "low": 30,
+        "worstMs": 33.8,
+        "draws": 372,
+        "trisK": 783,
+        "zombs": 15,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 221,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 49,
+        "low": 38,
+        "worstMs": 26.1,
+        "draws": 399,
+        "trisK": 739,
+        "zombs": 15,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 222,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 51,
+        "low": 29,
+        "worstMs": 34.2,
+        "draws": 318,
+        "trisK": 628,
+        "zombs": 15,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 223,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 46,
+        "low": 13,
+        "worstMs": 79.7,
+        "draws": 267,
+        "trisK": 603,
+        "zombs": 15,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 224,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 47,
+        "low": 13,
+        "worstMs": 79.7,
+        "draws": 252,
+        "trisK": 565,
+        "zombs": 18,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 225,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 44,
+        "low": 13,
+        "worstMs": 77.7,
+        "draws": 244,
+        "trisK": 535,
+        "zombs": 21,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 226,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 37,
+        "low": 3,
+        "worstMs": 302.1,
+        "draws": 248,
+        "trisK": 523,
+        "zombs": 23,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 227,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 48,
+        "low": 16,
+        "worstMs": 61.2,
+        "draws": 253,
+        "trisK": 530,
+        "zombs": 27,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 228,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 49,
+        "low": 16,
+        "worstMs": 62.3,
+        "draws": 242,
+        "trisK": 573,
+        "zombs": 28,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 229,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 41,
+        "low": 16,
+        "worstMs": 63.2,
+        "draws": 242,
+        "trisK": 617,
+        "zombs": 33,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 230,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 49,
+        "low": 36,
+        "worstMs": 28,
+        "draws": 318,
+        "trisK": 638,
+        "zombs": 33,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 231,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 36,
+        "low": 15,
+        "worstMs": 65.5,
+        "draws": 344,
+        "trisK": 648,
+        "zombs": 38,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 232,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 43,
+        "low": 20,
+        "worstMs": 49.3,
+        "draws": 313,
+        "trisK": 621,
+        "zombs": 38,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 233,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 34,
+        "low": 10,
+        "worstMs": 99.6,
+        "draws": 313,
+        "trisK": 662,
+        "zombs": 43,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 234,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 41,
+        "low": 16,
+        "worstMs": 63.2,
+        "draws": 353,
+        "trisK": 765,
+        "zombs": 45,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 235,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 46,
+        "low": 17,
+        "worstMs": 58.2,
+        "draws": 327,
+        "trisK": 784,
+        "zombs": 46,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 236,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 51,
+        "low": 34,
+        "worstMs": 29.6,
+        "draws": 293,
+        "trisK": 749,
+        "zombs": 46,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 237,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 47,
+        "low": 32,
+        "worstMs": 31.3,
+        "draws": 270,
+        "trisK": 968,
+        "zombs": 46,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 238,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 51,
+        "low": 31,
+        "worstMs": 32.7,
+        "draws": 261,
+        "trisK": 762,
+        "zombs": 46,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 239,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 53,
+        "low": 34,
+        "worstMs": 29.4,
+        "draws": 267,
+        "trisK": 730,
+        "zombs": 46,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 240,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 56,
+        "low": 37,
+        "worstMs": 27.3,
+        "draws": 290,
+        "trisK": 725,
+        "zombs": 46,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 241,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 54,
+        "low": 40,
+        "worstMs": 25.2,
+        "draws": 342,
+        "trisK": 773,
+        "zombs": 46,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 242,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 53,
+        "low": 37,
+        "worstMs": 27.2,
+        "draws": 349,
+        "trisK": 776,
+        "zombs": 45,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 243,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 55,
+        "low": 40,
+        "worstMs": 25,
+        "draws": 349,
+        "trisK": 902,
+        "zombs": 45,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 244,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 50,
+        "low": 38,
+        "worstMs": 26.6,
+        "draws": 366,
+        "trisK": 962,
+        "zombs": 45,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 245,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 54,
+        "low": 40,
+        "worstMs": 24.7,
+        "draws": 365,
+        "trisK": 987,
+        "zombs": 45,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 246,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 54,
+        "low": 43,
+        "worstMs": 23.4,
+        "draws": 336,
+        "trisK": 955,
+        "zombs": 45,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 247,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 57,
+        "low": 43,
+        "worstMs": 23.4,
+        "draws": 281,
+        "trisK": 730,
+        "zombs": 45,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 248,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 53,
+        "low": 36,
+        "worstMs": 27.5,
+        "draws": 292,
+        "trisK": 865,
+        "zombs": 45,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 249,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 45,
+        "low": 12,
+        "worstMs": 86.5,
+        "draws": 311,
+        "trisK": 1041,
+        "zombs": 45,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 250,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 43,
+        "low": 10,
+        "worstMs": 99.6,
+        "draws": 333,
+        "trisK": 1109,
+        "zombs": 45,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 251,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 42,
+        "low": 10,
+        "worstMs": 96.3,
+        "draws": 293,
+        "trisK": 1146,
+        "zombs": 45,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 252,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 45,
+        "low": 27,
+        "worstMs": 36.7,
+        "draws": 340,
+        "trisK": 1190,
+        "zombs": 44,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 253,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 43,
+        "low": 29,
+        "worstMs": 33.9,
+        "draws": 427,
+        "trisK": 1267,
+        "zombs": 44,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 254,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 40,
+        "low": 12,
+        "worstMs": 82.1,
+        "draws": 392,
+        "trisK": 1176,
+        "zombs": 43,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 255,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 48,
+        "low": 33,
+        "worstMs": 30.2,
+        "draws": 390,
+        "trisK": 1177,
+        "zombs": 42,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 256,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 50,
+        "low": 39,
+        "worstMs": 25.8,
+        "draws": 369,
+        "trisK": 1177,
+        "zombs": 42,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 257,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 51,
+        "low": 40,
+        "worstMs": 25.1,
+        "draws": 362,
+        "trisK": 1205,
+        "zombs": 42,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 258,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 49,
+        "low": 36,
+        "worstMs": 27.7,
+        "draws": 379,
+        "trisK": 1128,
+        "zombs": 42,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 259,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 49,
+        "low": 34,
+        "worstMs": 29.3,
+        "draws": 366,
+        "trisK": 951,
+        "zombs": 42,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 260,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 45,
+        "low": 27,
+        "worstMs": 37.5,
+        "draws": 322,
+        "trisK": 788,
+        "zombs": 41,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 261,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 48,
+        "low": 22,
+        "worstMs": 46.4,
+        "draws": 347,
+        "trisK": 1052,
+        "zombs": 41,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 262,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 46,
+        "low": 21,
+        "worstMs": 48.5,
+        "draws": 288,
+        "trisK": 740,
+        "zombs": 41,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 263,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 49,
+        "low": 35,
+        "worstMs": 28.8,
+        "draws": 259,
+        "trisK": 661,
+        "zombs": 41,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 264,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 52,
+        "low": 39,
+        "worstMs": 25.5,
+        "draws": 271,
+        "trisK": 694,
+        "zombs": 41,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 265,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 49,
+        "low": 34,
+        "worstMs": 29.7,
+        "draws": 294,
+        "trisK": 827,
+        "zombs": 40,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 266,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 49,
+        "low": 37,
+        "worstMs": 27.1,
+        "draws": 298,
+        "trisK": 823,
+        "zombs": 40,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 267,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 47,
+        "low": 38,
+        "worstMs": 26.6,
+        "draws": 264,
+        "trisK": 700,
+        "zombs": 40,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 268,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 51,
+        "low": 37,
+        "worstMs": 26.7,
+        "draws": 311,
+        "trisK": 875,
+        "zombs": 40,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 269,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 34,
+        "low": 10,
+        "worstMs": 100.1,
+        "draws": 332,
+        "trisK": 1167,
+        "zombs": 40,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 270,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 43,
+        "low": 31,
+        "worstMs": 31.9,
+        "draws": 377,
+        "trisK": 1149,
+        "zombs": 40,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 271,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 38,
+        "low": 27,
+        "worstMs": 36.9,
+        "draws": 367,
+        "trisK": 1107,
+        "zombs": 40,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 272,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 38,
+        "low": 27,
+        "worstMs": 37.5,
+        "draws": 398,
+        "trisK": 1247,
+        "zombs": 40,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 273,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 41,
+        "low": 26,
+        "worstMs": 38.7,
+        "draws": 314,
+        "trisK": 1059,
+        "zombs": 39,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 274,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 30,
+        "low": 9,
+        "worstMs": 114.9,
+        "draws": 350,
+        "trisK": 1137,
+        "zombs": 38,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 275,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 38,
+        "low": 9,
+        "worstMs": 114.9,
+        "draws": 272,
+        "trisK": 1122,
+        "zombs": 38,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 276,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 45,
+        "low": 28,
+        "worstMs": 35.6,
+        "draws": 283,
+        "trisK": 1181,
+        "zombs": 38,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 277,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 41,
+        "low": 26,
+        "worstMs": 38.6,
+        "draws": 274,
+        "trisK": 1044,
+        "zombs": 38,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 278,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 40,
+        "low": 9,
+        "worstMs": 105.4,
+        "draws": 254,
+        "trisK": 966,
+        "zombs": 38,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 279,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 32,
+        "low": 9,
+        "worstMs": 111.2,
+        "draws": 249,
+        "trisK": 1096,
+        "zombs": 38,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 280,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 20,
+        "low": 6,
+        "worstMs": 174.6,
+        "draws": 256,
+        "trisK": 1539,
+        "zombs": 38,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 281,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 29,
+        "low": 9,
+        "worstMs": 112.9,
+        "draws": 249,
+        "trisK": 1539,
+        "zombs": 38,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 282,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 33,
+        "low": 22,
+        "worstMs": 44.5,
+        "draws": 258,
+        "trisK": 1763,
+        "zombs": 38,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 283,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 29,
+        "low": 9,
+        "worstMs": 107.8,
+        "draws": 267,
+        "trisK": 1837,
+        "zombs": 38,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 284,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 25,
+        "low": 9,
+        "worstMs": 107.3,
+        "draws": 262,
+        "trisK": 1823,
+        "zombs": 37,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 285,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 25,
+        "low": 14,
+        "worstMs": 72.8,
+        "draws": 294,
+        "trisK": 1797,
+        "zombs": 36,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 286,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 33,
+        "low": 26,
+        "worstMs": 38.2,
+        "draws": 303,
+        "trisK": 1871,
+        "zombs": 35,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 287,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 32,
+        "low": 18,
+        "worstMs": 55.5,
+        "draws": 290,
+        "trisK": 1876,
+        "zombs": 34,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 288,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 31,
+        "low": 21,
+        "worstMs": 47.5,
+        "draws": 271,
+        "trisK": 1861,
+        "zombs": 32,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 289,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 32,
+        "low": 18,
+        "worstMs": 54.3,
+        "draws": 245,
+        "trisK": 1837,
+        "zombs": 32,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 290,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 34,
+        "low": 28,
+        "worstMs": 36,
+        "draws": 252,
+        "trisK": 1818,
+        "zombs": 30,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 291,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 30,
+        "low": 15,
+        "worstMs": 64.6,
+        "draws": 282,
+        "trisK": 1855,
+        "zombs": 29,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 292,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 31,
+        "low": 24,
+        "worstMs": 42.5,
+        "draws": 268,
+        "trisK": 1842,
+        "zombs": 29,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 293,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 20,
+        "low": 8,
+        "worstMs": 131.9,
+        "draws": 262,
+        "trisK": 1773,
+        "zombs": 29,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 294,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 26,
+        "low": 8,
+        "worstMs": 120,
+        "draws": 254,
+        "trisK": 1813,
+        "zombs": 29,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 295,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 28,
+        "low": 17,
+        "worstMs": 57.9,
+        "draws": 267,
+        "trisK": 1816,
+        "zombs": 28,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 296,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 33,
+        "low": 17,
+        "worstMs": 57.2,
+        "draws": 298,
+        "trisK": 1864,
+        "zombs": 28,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 297,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 33,
+        "low": 15,
+        "worstMs": 68.5,
+        "draws": 252,
+        "trisK": 1790,
+        "zombs": 28,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 298,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 33,
+        "low": 21,
+        "worstMs": 47,
+        "draws": 289,
+        "trisK": 1806,
+        "zombs": 27,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 299,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 29,
+        "low": 17,
+        "worstMs": 57.5,
+        "draws": 240,
+        "trisK": 1663,
+        "zombs": 26,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 300,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 34,
+        "low": 18,
+        "worstMs": 55.6,
+        "draws": 261,
+        "trisK": 1661,
+        "zombs": 25,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 301,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 35,
+        "low": 24,
+        "worstMs": 42.5,
+        "draws": 262,
+        "trisK": 1629,
+        "zombs": 24,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 302,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 34,
+        "low": 17,
+        "worstMs": 58,
+        "draws": 242,
+        "trisK": 1562,
+        "zombs": 23,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 303,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 32,
+        "low": 17,
+        "worstMs": 58.6,
+        "draws": 251,
+        "trisK": 1563,
+        "zombs": 23,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 304,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 38,
+        "low": 24,
+        "worstMs": 41.2,
+        "draws": 245,
+        "trisK": 1545,
+        "zombs": 22,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 305,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 36,
+        "low": 20,
+        "worstMs": 49,
+        "draws": 259,
+        "trisK": 1585,
+        "zombs": 22,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 306,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 39,
+        "low": 22,
+        "worstMs": 46.2,
+        "draws": 253,
+        "trisK": 1368,
+        "zombs": 20,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 307,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 42,
+        "low": 31,
+        "worstMs": 32.1,
+        "draws": 251,
+        "trisK": 1504,
+        "zombs": 19,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 308,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 33,
+        "low": 17,
+        "worstMs": 58.2,
+        "draws": 250,
+        "trisK": 1555,
+        "zombs": 17,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 309,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 36,
+        "low": 22,
+        "worstMs": 46.2,
+        "draws": 256,
+        "trisK": 1485,
+        "zombs": 14,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 310,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 36,
+        "low": 23,
+        "worstMs": 43.1,
+        "draws": 249,
+        "trisK": 1438,
+        "zombs": 14,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 311,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 36,
+        "low": 20,
+        "worstMs": 50.8,
+        "draws": 245,
+        "trisK": 1398,
+        "zombs": 14,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 312,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 42,
+        "low": 20,
+        "worstMs": 50.8,
+        "draws": 261,
+        "trisK": 1401,
+        "zombs": 13,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 313,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 41,
+        "low": 20,
+        "worstMs": 49,
+        "draws": 251,
+        "trisK": 1341,
+        "zombs": 12,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 314,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 41,
+        "low": 27,
+        "worstMs": 37.1,
+        "draws": 245,
+        "trisK": 1344,
+        "zombs": 12,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 315,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 48,
+        "low": 23,
+        "worstMs": 43.5,
+        "draws": 263,
+        "trisK": 1330,
+        "zombs": 10,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 316,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 38,
+        "low": 20,
+        "worstMs": 50.8,
+        "draws": 249,
+        "trisK": 1261,
+        "zombs": 8,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 317,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 42,
+        "low": 20,
+        "worstMs": 50.8,
+        "draws": 261,
+        "trisK": 1235,
+        "zombs": 6,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 318,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 51,
+        "low": 37,
+        "worstMs": 27,
+        "draws": 235,
+        "trisK": 1127,
+        "zombs": 5,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 319,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 54,
+        "low": 41,
+        "worstMs": 24.1,
+        "draws": 238,
+        "trisK": 1086,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 320,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 55,
+        "low": 31,
+        "worstMs": 31.8,
+        "draws": 251,
+        "trisK": 1029,
+        "zombs": 2,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 321,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 57,
+        "low": 37,
+        "worstMs": 27.2,
+        "draws": 254,
+        "trisK": 1021,
+        "zombs": 1,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 322,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 54,
+        "low": 35,
+        "worstMs": 28.9,
+        "draws": 235,
+        "trisK": 975,
+        "zombs": 1,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 323,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 58,
+        "low": 30,
+        "worstMs": 33.2,
+        "draws": 439,
+        "trisK": 976,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 324,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 57,
+        "low": 30,
+        "worstMs": 33.3,
+        "draws": 505,
+        "trisK": 1194,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 325,
+        "stage": "night2-wave",
+        "day": 2,
+        "phase": "wave",
+        "fps": 59,
+        "low": 49,
+        "worstMs": 20.4,
+        "draws": 228,
+        "trisK": 984,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 326,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 56,
+        "low": 20,
+        "worstMs": 51.1,
+        "draws": 235,
+        "trisK": 917,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 327,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 60,
+        "low": 52,
+        "worstMs": 19.2,
+        "draws": 221,
+        "trisK": 918,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 328,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 60,
+        "low": 50,
+        "worstMs": 20,
+        "draws": 469,
+        "trisK": 1152,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 329,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 60,
+        "low": 42,
+        "worstMs": 23.9,
+        "draws": 519,
+        "trisK": 1111,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 330,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 58,
+        "low": 36,
+        "worstMs": 28,
+        "draws": 511,
+        "trisK": 1034,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 331,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 58,
+        "low": 38,
+        "worstMs": 26.5,
+        "draws": 507,
+        "trisK": 961,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 332,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 58,
+        "low": 42,
+        "worstMs": 24,
+        "draws": 505,
+        "trisK": 921,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 333,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 60,
+        "low": 48,
+        "worstMs": 20.8,
+        "draws": 502,
+        "trisK": 885,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 334,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 59,
+        "low": 35,
+        "worstMs": 28.6,
+        "draws": 502,
+        "trisK": 885,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 335,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 60,
+        "low": 53,
+        "worstMs": 19,
+        "draws": 496,
+        "trisK": 848,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 336,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 57,
+        "low": 36,
+        "worstMs": 28.1,
+        "draws": 504,
+        "trisK": 853,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 337,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 49,
+        "low": 38,
+        "worstMs": 26.6,
+        "draws": 424,
+        "trisK": 855,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 338,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 50,
+        "low": 31,
+        "worstMs": 32.7,
+        "draws": 400,
+        "trisK": 823,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 339,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 57,
+        "low": 42,
+        "worstMs": 23.9,
+        "draws": 406,
+        "trisK": 838,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 340,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 58,
+        "low": 25,
+        "worstMs": 40.1,
+        "draws": 401,
+        "trisK": 817,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 341,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 42,
+        "low": 5,
+        "worstMs": 220.8,
+        "draws": 403,
+        "trisK": 825,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 342,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 49,
+        "low": 5,
+        "worstMs": 220.8,
+        "draws": 403,
+        "trisK": 825,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 343,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 59,
+        "low": 34,
+        "worstMs": 29.1,
+        "draws": 403,
+        "trisK": 825,
+        "zombs": 3,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 344,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 29,
+        "low": 4,
+        "worstMs": 272.2,
+        "draws": 452,
+        "trisK": 857,
+        "zombs": 3,
+        "weapon": "shotgun"
+      },
+      {
+        "tSec": 345,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 20,
+        "low": 4,
+        "worstMs": 272.2,
+        "draws": 563,
+        "trisK": 1628,
+        "zombs": 3,
+        "weapon": "shotgun"
+      },
+      {
+        "tSec": 346,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 39,
+        "low": 22,
+        "worstMs": 44.9,
+        "draws": 545,
+        "trisK": 1628,
+        "zombs": 3,
+        "weapon": "shotgun"
+      },
+      {
+        "tSec": 347,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 21,
+        "low": 4,
+        "worstMs": 243.3,
+        "draws": 454,
+        "trisK": 868,
+        "zombs": 3,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 348,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 34,
+        "low": 8,
+        "worstMs": 122.9,
+        "draws": 456,
+        "trisK": 866,
+        "zombs": 3,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 349,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 34,
+        "low": 22,
+        "worstMs": 46,
+        "draws": 438,
+        "trisK": 846,
+        "zombs": 3,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 350,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 30,
+        "low": 17,
+        "worstMs": 60.5,
+        "draws": 511,
+        "trisK": 862,
+        "zombs": 3,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 351,
+        "stage": "day3-prep",
+        "day": 3,
+        "phase": "prep",
+        "fps": 42,
+        "low": 20,
+        "worstMs": 49.3,
+        "draws": 496,
+        "trisK": 829,
+        "zombs": 3,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 352,
+        "stage": "return-to-title",
+        "day": 3,
+        "phase": "prep",
+        "fps": 38,
+        "low": 22,
+        "worstMs": 45.5,
+        "draws": 500,
+        "trisK": 835,
+        "zombs": 3,
+        "weapon": "uzi"
+      },
+      {
+        "tSec": 357,
+        "stage": "return-to-title",
+        "day": 0,
+        "phase": "idle",
+        "fps": 0,
+        "low": 0,
+        "worstMs": 0,
+        "draws": 408,
+        "trisK": 625,
+        "zombs": 0,
+        "weapon": "pistol"
+      },
+      {
+        "tSec": 358,
+        "stage": "return-to-title",
+        "day": 0,
+        "phase": "idle",
+        "fps": 1,
+        "low": 1,
+        "worstMs": 1212.7,
+        "draws": 467,
+        "trisK": 584,
+        "zombs": 0,
+        "weapon": "pistol"
+      }
+    ],
+    "sub30Count": 28,
+    "prepHudEvents": 7344,
+    "prepStateEvents": 1117,
+    "dwEvents": [
+      {
+        "t": 8044,
+        "type": "quest",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 43039,
+        "type": "prep-checklist-view",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 43040,
+        "type": "run-reset",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 43042,
+        "type": "quest",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 43075,
+        "type": "hush-state",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 43118,
+        "type": "hush-state",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 43119,
+        "type": "prep-label",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52744,
+        "type": "controls-ready",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 52781,
+        "type": "poi-guards",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52783,
+        "type": "enemy-first-seen",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52927,
+        "type": "prep-checklist-view",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 70763,
+        "type": "poi-cleared",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 72795,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 75897,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 84232,
+        "type": "deposit-accepted",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 89357,
+        "type": "deposit-complete",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 91457,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 91560,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 91665,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 91756,
+        "type": "briefing-open",
+        "day": 1,
+        "panel": "alarm"
+      },
+      {
+        "t": 92929,
+        "type": "alarm-request",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 92931,
+        "type": "briefing-closed",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 92932,
+        "type": "prep-checklist-view",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 92932,
+        "type": "alarm-started",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 92941,
+        "type": "prep-label",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 92943,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 93061,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 93166,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 93283,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 93404,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 93527,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 93646,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 93766,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 93885,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 94013,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 94114,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 94235,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 94353,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 94473,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 94575,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 94682,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 94801,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 94931,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 95036,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 95195,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 95311,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 95431,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 95549,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 95667,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 95782,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 95901,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 96021,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 96133,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 96236,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 96339,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 96448,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 96550,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 96668,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 96787,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 96889,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 96993,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 97094,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 97197,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 97297,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 97398,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 97500,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 97618,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 97733,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 97849,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 97956,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 98060,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 98168,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 98272,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 98386,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 98492,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 98606,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 98698,
+        "type": "wave-push",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 98739,
+        "type": "prep-checklist-view",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 98740,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 98840,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 98966,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 136698,
+        "type": "player-damaged",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 144276,
+        "type": "player-damaged",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 144410,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 144795,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 146333,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 147330,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 147331,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 149205,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 149227,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 149364,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 149444,
+        "type": "wave-last-kill",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 149467,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 149515,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 149532,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 149731,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 150008,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 150522,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 150543,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 152472,
+        "type": "night-cleared",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 152472,
+        "type": "hush-state",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 152473,
+        "type": "story-lead",
+        "day": 2,
+        "panel": null
+      },
+      {
+        "t": 152475,
+        "type": "prep-label",
+        "day": 2,
+        "panel": null
+      },
+      {
+        "t": 152475,
+        "type": "dawn-summary",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 152516,
+        "type": "bounty-posted",
+        "day": 2,
+        "panel": null
+      },
+      {
+        "t": 152520,
+        "type": "prep-checklist-view",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 155107,
+        "type": "deposit-accepted",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 155851,
+        "type": "stock-arrived",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 160196,
+        "type": "prep-checklist-view",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 160196,
+        "type": "deposit-complete",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 164557,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 164672,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 166716,
+        "type": "shop-render",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 166716,
+        "type": "shop-render",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 167963,
+        "type": "purchase-delivered",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 167963,
+        "type": "shop-render",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 167964,
+        "type": "shop-render",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 175447,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 175568,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 175676,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 175808,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 175894,
+        "type": "briefing-open",
+        "day": 2,
+        "panel": "alarm"
+      },
+      {
+        "t": 177086,
+        "type": "alarm-request",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 177089,
+        "type": "briefing-closed",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 177090,
+        "type": "prep-checklist-view",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 177090,
+        "type": "alarm-started",
+        "day": 2,
+        "panel": null
+      },
+      {
+        "t": 177096,
+        "type": "bounty-expired",
+        "day": 2,
+        "panel": null
+      },
+      {
+        "t": 177108,
+        "type": "prep-label",
+        "day": 2,
+        "panel": null
+      },
+      {
+        "t": 177114,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 177240,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 177361,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 177489,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 177611,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 177724,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 177833,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 177942,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 178047,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 178164,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 178290,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 178419,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 178548,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 178662,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 178777,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 178887,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 179005,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 179126,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 179262,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 179402,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 179506,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 179609,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 179737,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 179877,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 180019,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 180122,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 180236,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 180378,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 180495,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 180627,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 180740,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 180848,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 180970,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 181070,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 181204,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 181331,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 181452,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 181567,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 181674,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 181796,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 181919,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 182034,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 182136,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 182259,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 182367,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 182476,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 182613,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 182727,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 182835,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 182855,
+        "type": "wave-push",
+        "day": 2,
+        "panel": null
+      },
+      {
+        "t": 182924,
+        "type": "prep-checklist-view",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 182945,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 183046,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 183155,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 183273,
+        "type": "hq-prompt",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 205013,
+        "type": "enemy-first-seen",
+        "day": 2,
+        "panel": null
+      },
+      {
+        "t": 213825,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 214162,
+        "type": "player-damaged",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 218579,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 221768,
+        "type": "wave-push",
+        "day": 2,
+        "panel": null
+      },
+      {
+        "t": 236887,
+        "type": "player-damaged",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 241324,
+        "type": "supply-drop",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 249487,
+        "type": "tip-shown",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 253160,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 255592,
+        "type": "supply-drop",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 271478,
+        "type": "player-damaged",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 275796,
+        "type": "skill-up",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 277288,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 282322,
+        "type": "player-damaged",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 282357,
+        "type": "player-damaged",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 282841,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 283603,
+        "type": "player-damaged",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 287613,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 290563,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 299136,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 302075,
+        "type": "player-damaged",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 305100,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 307017,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 308608,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 308910,
+        "type": "player-damaged",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 311762,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 315468,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 315905,
+        "type": "player-damaged",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 316466,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 317168,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 317765,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 319906,
+        "type": "skull-pickup",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 321952,
+        "type": "wave-last-kill",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 324968,
+        "type": "night-cleared",
+        "day": 2,
+        "panel": null
+      },
+      {
+        "t": 324968,
+        "type": "hush-state",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 324969,
+        "type": "prep-label",
+        "day": 3,
+        "panel": null
+      },
+      {
+        "t": 324969,
+        "type": "dawn-summary",
+        "day": 2,
+        "panel": null
+      }
+    ],
+    "hudState": {
+      "day": 0,
+      "phase": "idle",
+      "cash": 0,
+      "skulls": 0,
+      "hp": 100,
+      "maxHp": 100,
+      "medkits": 0,
+      "active": false,
+      "pendingDeposit": false
+    },
+    "winErrors": [],
+    "rejections": [],
+    "consoleErrs": [
+      {
+        "t": 17326,
+        "text": "THREE.WebGLProgram: Shader Error 0 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+      },
+      {
+        "t": 17328,
+        "text": "THREE.WebGLProgram: Shader Error 1282 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+      }
+    ],
+    "consoleWarns": [
+      {
+        "t": 25800,
+        "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+      },
+      {
+        "t": 28250,
+        "text": "AttributeNode: Vertex attribute \"uv\" not found on geometry."
+      },
+      {
+        "t": 168715,
+        "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+      }
+    ],
+    "gpuUncaptured": [],
+    "webglContextLost": 0,
+    "phaseLabel": "return-to-title",
+    "gpuHooked": true
+  },
+  "completedAt": "2026-11-21T07:42:35.239Z",
+  "durationSec": 359.3
+}

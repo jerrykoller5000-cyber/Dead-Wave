@@ -1,0 +1,283 @@
+{
+  "startedAt": "2026-11-21T03:38:33.707Z",
+  "backend": {
+    "isWebGPU": true,
+    "backendName": "WebGPUBackend",
+    "drawCalls": 394,
+    "triangles": 321473
+  },
+  "collisionChecks": [
+    {
+      "name": "firing-bench-center",
+      "start": {
+        "x": 0,
+        "z": -2
+      },
+      "hit": {
+        "x": 0,
+        "z": -0.67
+      },
+      "backed": {
+        "x": 0,
+        "z": -4.055
+      },
+      "backDist": 3.385,
+      "stuck": false
+    },
+    {
+      "name": "back-lockers",
+      "start": {
+        "x": -5.8,
+        "z": -9.8
+      },
+      "hit": {
+        "x": -5.8,
+        "z": -11.09
+      },
+      "backed": {
+        "x": -5.8,
+        "z": -7.634
+      },
+      "backDist": 3.456,
+      "stuck": false
+    },
+    {
+      "name": "cif-counter",
+      "start": {
+        "x": 5.2,
+        "z": -10.2
+      },
+      "hit": {
+        "x": 6.845,
+        "z": -10.2
+      },
+      "backed": {
+        "x": 3.269,
+        "z": -10.2
+      },
+      "backDist": 3.576,
+      "stuck": false
+    },
+    {
+      "name": "supply-kiosk",
+      "start": {
+        "x": 5.2,
+        "z": -6.6
+      },
+      "hit": {
+        "x": 6.782,
+        "z": -6.6
+      },
+      "backed": {
+        "x": 3.511,
+        "z": -6.6
+      },
+      "backDist": 3.271,
+      "stuck": false
+    },
+    {
+      "name": "armory-bench",
+      "start": {
+        "x": 5,
+        "z": -3
+      },
+      "hit": {
+        "x": 6.45,
+        "z": -3
+      },
+      "backed": {
+        "x": 2.88,
+        "z": -3
+      },
+      "backDist": 3.57,
+      "stuck": false
+    },
+    {
+      "name": "doorway-north-jamb",
+      "start": {
+        "x": -6.8,
+        "z": -6.6
+      },
+      "hit": {
+        "x": -7.2,
+        "z": -6.6
+      },
+      "backed": {
+        "x": -3.55,
+        "z": -6.6
+      },
+      "backDist": 3.65,
+      "stuck": false
+    },
+    {
+      "name": "infirmary-fence-east",
+      "start": {
+        "x": -35,
+        "z": -9.535
+      },
+      "hit": {
+        "x": -35.88,
+        "z": -9.535
+      },
+      "backed": {
+        "x": -32.453,
+        "z": -9.535
+      },
+      "backDist": 3.427,
+      "stuck": false
+    },
+    {
+      "name": "infirmary-fence-nw-wall",
+      "start": {
+        "x": -43.1,
+        "z": -6.8
+      },
+      "hit": {
+        "x": -43.1,
+        "z": -6.885
+      },
+      "backed": {
+        "x": -43.1,
+        "z": -5.515
+      },
+      "backDist": 1.37,
+      "stuck": false
+    },
+    {
+      "name": "infirmary-fence-se-wall",
+      "start": {
+        "x": -35,
+        "z": -11.15
+      },
+      "hit": {
+        "x": -35.335,
+        "z": -11.15
+      },
+      "backed": {
+        "x": -31.907,
+        "z": -11.15
+      },
+      "backDist": 3.428,
+      "stuck": false
+    },
+    {
+      "name": "containment-gate",
+      "start": {
+        "x": -26,
+        "z": 25
+      },
+      "hit": {
+        "x": -26,
+        "z": 26.85
+      },
+      "backed": {
+        "x": -26,
+        "z": 23.392
+      },
+      "backDist": 3.458,
+      "stuck": false
+    }
+  ],
+  "menuTextChecks": {
+    "pause": {
+      "text": "PAUSED Game paused. Quitting ends this run. Play starts a new run. RESUME SETTINGS TIPS SKILLS END RUN & QUIT TO MENU"
+    },
+    "hqPanel": {
+      "titleFont": "\"Black Ops One\", \"Chakra Petch\", system-ui, sans-serif",
+      "hasCaveGuard": false,
+      "kindButtons": [
+        "Shambler",
+        "Feral",
+        "Leaper",
+        "Spider",
+        "Drowned",
+        "Military",
+        "Brute",
+        "Spitter",
+        "Screamer",
+        "Bomber",
+        "Demon",
+        "Colossus",
+        "Guardian",
+        "1",
+        "3",
+        "5",
+        "10",
+        "SEND IN 3 · SHAMBLER",
+        "CLOSE",
+        "CLEAR ALL ZOMBIES",
+        "PLACE TEST DEFENSES",
+        "Clear test defenses"
+      ]
+    },
+    "rangeConsole": {
+      "text": "Choose a drill FIRING RANGE / DRILL CONTROL × Choose a weapon, pick a drill, read the four steps, then press Start. Work from Learn through Practice to Challenge. MELEE PRACTICE Reset dummy Hits: 0 Damage: 0 1. Learn → 2. Practice → 3. Challenge 1. Weapon Pistol Wasp SMG GW-4 Carbine KR-7 Rifle Shotgun Breacher-12 Revolver Sniper 2. Drill 1 LEARN First Five Five close plates, one at a time. Any scoring zone counts; take your time and learn the range. 2 LEARN Draw on the Beep Start holstered. After the beep, draw with Tab and clear one close plate. 3 PRACTICE Bullseye Circuit Clear five plates "
+    },
+    "cif": {
+      "text": "FOB THRESHOLD / PERSONAL EQUIPMENT CIF CENTRAL ISSUE FACILITY Try every camo and dress each piece here. The Training Ground kit is for practice. YOUR GRAVEWALKER Drag to turn. Scroll or pinch to zoom. Changes save as you choose. Rotate Front view HEAD CLOTHING EQUIPMENT APPEARANCE HAT HELMET BALACLAVA EYEWEAR Hat Equipped: Classic Woodland ISSUE COUNTER Combat helmet Ballistic protection. Adds 25 armor and mounts night vision. Owned Owned Night vision Flip-down night vision on the helmet rails. N toggles it. Owned Owned Cover Boonie Ballcap Ballcap, backwards Available · 49 PATTERNS CLASSIC WO"
+    },
+    "armory": {
+      "titleFont": "\"Black Ops One\", \"Chakra Petch\", system-ui, sans-serif",
+      "hasBlockChar": false
+    },
+    "kiosk": {
+      "hasBlockChar": false,
+      "mentionsFortifyTab": true,
+      "hasFieldIntel": false
+    }
+  },
+  "infirmaryWakeCheck": {
+    "wakeTiming": {
+      "msToLitWake": 5142,
+      "waking": false,
+      "recovering": false
+    },
+    "walkOut": {
+      "wakePos": {
+        "x": -40.93,
+        "z": -10
+      },
+      "exitedPos": {
+        "x": -40.25,
+        "z": -9.13
+      },
+      "distMoved": 1.1
+    }
+  },
+  "pageErrors": [],
+  "consoleErrorsAndWarnings": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "type": "warning",
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    }
+  ],
+  "finishedAt": "2026-11-21T03:40:51.339Z"
+}

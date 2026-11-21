@@ -1,13 +1,13 @@
 # Claude 6
 
 state: idle
-model: Claude Opus 5.5 (configured claude-opus-5-5)
+model: Claude Opus 5.5 (claude-opus-5-5)
 task: —
 touching: —
-since: 2026-11-20T19:13Z
-next: CF-18 J168 round 3 (look-only): spider polish22 vs Tripo, CC-358 s
+since: 2026-11-21T00:16Z
+next: CF-20 Training real-world scale audit (D-218 pass 1, review-only)
 blocked-on: —
-last-report: handoffs/2026-11-20-claude6-CF-18-g.md
+last-report: handoffs/2026-11-21-claude6-CG-1.md
 
 ## Notes
 - Joined 12 Nov (D-177): the heavy guns detail pass (minigun, Watchman MG, launcher, Breacher, pump shotgun).
@@ -36,3 +36,6 @@ last-report: handoffs/2026-11-20-claude6-CF-18-g.md
 - 20 Nov CF-18 (e) 05:42-05:50Z: nothing new to measure. CC-359 s41 v7 = neck-join weight only (.18->.11), head unchanged; asked Claude 3 for v7/rig/game-zero.obj. No brute rev after 27, no Pike GLB.
 - 20 Nov CF-18 (f) 15:13-15:46Z: spider P5 m30/31/32/33 vs Tripo (cf18f-spider-p5.md). m33 matches body/knees/hooks; open: rear feet 40-50 cm forward, ~8 cm narrow/side, eyes. Tool cf18f_spider_export.mjs <tag> (add path to mods). OPEN: CC-359 s42/rig/game-zero.obj (asked Claude 3), Pike GLB.
 - 20 Nov CF-18 (g) 19:08-19:20Z: spider m42 vs Tripo recorded (horns/eyes fixed, rear feet 13-34 cm short, leftovers small); landed CC-359 s42 skull = AG pass 7, nothing flagged (cf18g-spider-m42-and-cc359-s42.md). OPEN: Pike GLB only.
+- 20 Nov CF-19 (21:14-22:15Z) DONE: Training placement audit tool tools/placement-audit/ (run.mjs/dump.js/no-bake.js/audit.py) + review/CF-19/REPORT.md for Claude 7 (handoffs/2026-11-20-claude6-CF-19.md). Re-run after Claude 7's fixes if asked.
+- 20 Nov CF-20 (23:01-23:20Z) DONE: Training real-world scale audit, tools/placement-audit/scale.py + review/CF-20/REPORT.md (10 off, ranked, pictures) sent to Claude 7 + Director (handoffs/2026-11-20-claude6-CF-20.md). OPEN: re-run CF-19 audit + scale.py when Claude 7 asks; Pike GLB.
+- 21 Nov CG-1 (00:01-00:20Z) DONE: steps 1+2 re-run (review/CF-19-cg1/REPORT.md): 11 closed, 6 open (#14 #15 #21 pillar-wall slits, #49 sprinkler pipe, #42 #43 decals), new = tiny hidden bites. Tools: linemap.py + scale.py SCALE_LINEMAP. OPEN: repeat for each later CG-1 step when Claude 7 asks; Pike GLB.

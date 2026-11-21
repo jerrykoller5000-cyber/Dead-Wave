@@ -70,7 +70,7 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
   // GP-141 stays on the still picture until its owner supplies the renderer and catalogue copy.
   const previewKeys = ['label','hint','left','right','unavailable'];
   const previewer = typeof preview === 'function' && previewKeys.every(key=>hasText('armory.preview.'+key))
-    ? createArmoryPreview({doc, render:preview, labels:{
+    ? createArmoryPreview({doc, render:preview, placeholder:kind=>gunIcon(kind,'armory-pic armory-preview-standin'), labels:{
       hint:text('armory.preview.hint'), left:text('armory.preview.left'), right:text('armory.preview.right'),
       front:text('cif.menu.front'), unavailable:text('armory.preview.unavailable')
     }}) : null;
@@ -367,7 +367,18 @@ export function mountArmory({ doc = document, bus = window, cif = doc.getElement
       item.append(gunIcon(gun.kind), el('strong', 'armory-name', gun.name), el('small', null, gunCost));
       const buy = el('button', 'armory-offer-buy', t('armory.store.buy', {}, 'Buy')); buy.type = 'button'; buy.dataset.buyGun = gun.kind;
       buy.disabled = !gun.available || !gun.affordable;
-      buy.addEventListener('click', () => { if (onBuyGun(gun.kind)) { syncOwned(); bench = gun.kind; render(); } });
+      buy.addEventListener('click', () => {
+        if (armory.has(gun.kind) || !onBuyGun(gun.kind)) return;
+        syncOwned();
+        const type = slotType(gun.kind);
+        const index = armory.read().slots[type]?.findIndex(entry => !entry) ?? -1;
+        if (index >= 0 && armory.take(gun.kind, type, index).ok) {
+          selected = { type, index };
+          onApply(armory.loadout(), armory.read());
+        }
+        bench = gun.kind;
+        render();
+      });
       item.append(buy); gunOffers.append(item);
     }
     gunOffersTitle.hidden = gunOffers.hidden = !gunOffers.childElementCount;

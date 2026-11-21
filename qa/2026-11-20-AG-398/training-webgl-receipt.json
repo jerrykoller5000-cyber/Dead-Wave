@@ -1,0 +1,1888 @@
+{
+  "startedAt": "2026-11-20T23:33:18.060Z",
+  "sourceJob": "Claude outputs/CH-1-menus/job-CH1-training-menus.json",
+  "backendRequested": "webgl",
+  "changesAppliedInMemory": [
+    "DisplayCamera (strip ?raf=1, renderer: webgl, onscreen: true) to bypass RTX 5080 WebGPU 0-draw-call stale Training canvas (GP-20164)",
+    "reset(): cancel active #rangeDrillHud (Escape) and clear pending countdown/live zombies via #trainingPanel .tp-clear:not(.tp-clear-layout)",
+    "14-range-drill-hud: poll up to 13.2s for active #rangeDrillHud .rd-numbers after clicking [data-start]",
+    "sheet tile labels populated from shot.note while PNGs stay caption-free (top-left HEALTH HUD unobstructed)"
+  ],
+  "mode": "training",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "backend": "WebGL2 fallback",
+  "result": {
+    "ok": true,
+    "shots": [
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/01-hud-3p-1920.png",
+        "cam": {
+          "x": 0,
+          "y": -190.0917269092057,
+          "z": -649.0304805121658,
+          "tx": 0,
+          "ty": -197.26528781820105,
+          "tz": -642.0634134186943,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2159,
+        "caption": "01-hud-3p HUD third person, lights on @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/01-hud-3p-1366.png",
+        "cam": {
+          "x": 0,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": 0,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1931,
+        "caption": "01-hud-3p HUD third person, lights on @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/01-hud-3p-narrow960.png",
+        "cam": {
+          "x": 0,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": 0,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1973,
+        "caption": "01-hud-3p HUD third person, lights on @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/02-hud-1p-1920.png",
+        "cam": {
+          "x": -0.006700579080975611,
+          "y": -198.52230888584893,
+          "z": -640.6138931174448,
+          "tx": -0.006700579080975611,
+          "ty": -198.5321442071702,
+          "tz": -630.6138979541233,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2460,
+        "caption": "02-hud-1p HUD first person, lights on @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/02-hud-1p-1366.png",
+        "cam": {
+          "x": -0.0056177855129402494,
+          "y": -198.57968111809643,
+          "z": -640.5533111049934,
+          "tx": -0.0056177855129402494,
+          "ty": -198.57968111809643,
+          "tz": -630.5533111049934,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2333,
+        "caption": "02-hud-1p HUD first person, lights on @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/02-hud-1p-narrow960.png",
+        "cam": {
+          "x": 0.0007971812077447259,
+          "y": -198.577149220444,
+          "z": -640.5594550319702,
+          "tx": 0.0007971812077447259,
+          "ty": -198.577149220444,
+          "tz": -630.5594550319702,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2287,
+        "caption": "02-hud-1p HUD first person, lights on @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/03-hud-3p-dark-1920.png",
+        "cam": {
+          "x": -0.0011422173714690335,
+          "y": -190.10666466787816,
+          "z": -649.0204207449118,
+          "tx": -0.0011422173714690335,
+          "ty": -197.23424354966872,
+          "tz": -642.0063192854336,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2098,
+        "caption": "03-hud-3p-dark HUD third person, lights OFF (readability on dark) @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/03-hud-3p-dark-1366.png",
+        "cam": {
+          "x": 0,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": 0,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1965,
+        "caption": "03-hud-3p-dark HUD third person, lights OFF (readability on dark) @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/03-hud-3p-dark-narrow960.png",
+        "cam": {
+          "x": 0,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": 0,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1928,
+        "caption": "03-hud-3p-dark HUD third person, lights OFF (readability on dark) @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/04-prompt-kiosk-1920.png",
+        "cam": {
+          "x": 6.780886807537368,
+          "y": -190.0917269092057,
+          "z": -654.959493104062,
+          "tx": 6.781827926357942,
+          "ty": -197.2656990421239,
+          "tz": -647.9928495111682,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2422,
+        "caption": "04-prompt-kiosk E prompt at the supply terminal @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/04-prompt-kiosk-1366.png",
+        "cam": {
+          "x": 6.782016085048958,
+          "y": -190.0917269092057,
+          "z": -654.960480511871,
+          "tx": 6.782016085330056,
+          "ty": -197.26528781832383,
+          "tz": -647.9934134185258,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2316,
+        "caption": "04-prompt-kiosk E prompt at the supply terminal @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/04-prompt-kiosk-narrow960.png",
+        "cam": {
+          "x": 6.782016085386273,
+          "y": -190.0917269092057,
+          "z": -654.9604805121655,
+          "tx": 6.782016085386275,
+          "ty": -197.26528781820113,
+          "tz": -647.9934134186941,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2351,
+        "caption": "04-prompt-kiosk E prompt at the supply terminal @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/05-prompt-bank-1920.png",
+        "cam": {
+          "x": -42.74512347433432,
+          "y": -190.0917269092057,
+          "z": -651.3611450923639,
+          "tx": -42.75274374141872,
+          "ty": -197.26500895016852,
+          "tz": -644.3937950442947,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2449,
+        "caption": "05-prompt-bank E prompt at the HQ skull window @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/05-prompt-bank-1366.png",
+        "cam": {
+          "x": -42.754268148317635,
+          "y": -190.0917269092057,
+          "z": -651.3604805123123,
+          "tx": -42.75426814999426,
+          "ty": -197.26528781814,
+          "tz": -644.3934134187779,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2345,
+        "caption": "05-prompt-bank E prompt at the HQ skull window @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/05-prompt-bank-narrow960.png",
+        "cam": {
+          "x": -42.75426815032955,
+          "y": -190.0917269092057,
+          "z": -651.3604805121664,
+          "tx": -42.75426815032958,
+          "ty": -197.26528781820076,
+          "tz": -644.3934134186945,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2307,
+        "caption": "05-prompt-bank E prompt at the HQ skull window @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/06-prompt-hqpanel-1920.png",
+        "cam": {
+          "x": -42.77999524680315,
+          "y": -190.0917269092057,
+          "z": -645.3615888343941,
+          "tx": -42.77999920754564,
+          "ty": -197.26482622814189,
+          "tz": -638.3940465015006,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2415,
+        "caption": "06-prompt-hqpanel E prompt at the HQ panel @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/06-prompt-hqpanel-1366.png",
+        "cam": {
+          "x": -42.77999999999841,
+          "y": -190.0917269092057,
+          "z": -645.3604805125345,
+          "tx": -42.77999999999973,
+          "ty": -197.26528781804743,
+          "tz": -638.3934134189049,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2299,
+        "caption": "06-prompt-hqpanel E prompt at the HQ panel @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/06-prompt-hqpanel-narrow960.png",
+        "cam": {
+          "x": -42.77999999999997,
+          "y": -190.0917269092057,
+          "z": -645.3604805121663,
+          "tx": -42.77999999999999,
+          "ty": -197.26528781820082,
+          "tz": -638.3934134186945,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2322,
+        "caption": "06-prompt-hqpanel E prompt at the HQ panel @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/07-shop-supplies-1920.png",
+        "cam": {
+          "x": -42.77999999999997,
+          "y": -190.0917269092057,
+          "z": -645.3604805121663,
+          "tx": -42.77999999999999,
+          "ty": -197.26528781820082,
+          "tz": -638.3934134186945,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1899,
+        "caption": "07-shop-supplies Supply terminal, Supplies tab @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/07-shop-supplies-1366.png",
+        "cam": {
+          "x": -5.3310889859178126,
+          "y": -190.0917269092057,
+          "z": -648.5731383761605,
+          "tx": -1.1806213752231107,
+          "ty": -196.79361441131525,
+          "tz": -642.4202266653002,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1880,
+        "caption": "07-shop-supplies Supply terminal, Supplies tab @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/07-shop-supplies-narrow960.png",
+        "cam": {
+          "x": -0.6456182842215463,
+          "y": -190.0917269092057,
+          "z": -648.9750943713738,
+          "tx": -0.10665487490080316,
+          "ty": -197.27793016082617,
+          "tz": -642.041985309069,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1850,
+        "caption": "07-shop-supplies Supply terminal, Supplies tab @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/08-shop-builds-1920.png",
+        "cam": {
+          "x": -0.08335566141026357,
+          "y": -190.0917269092057,
+          "z": -649.0233296174167,
+          "tx": -0.013865443290122431,
+          "ty": -197.2680933922552,
+          "tz": -642.0594991190093,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2419,
+        "caption": "08-shop-builds Supply terminal, Builds tab @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/08-shop-builds-1366.png",
+        "cam": {
+          "x": -0.011157025058191454,
+          "y": -190.0917269092057,
+          "z": -649.0295233760753,
+          "tx": -0.0018589915164458001,
+          "ty": -197.26568336419697,
+          "tz": -642.062869779946,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2297,
+        "caption": "08-shop-builds Supply terminal, Builds tab @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/08-shop-builds-narrow960.png",
+        "cam": {
+          "x": -0.001328682084015435,
+          "y": -190.0917269092057,
+          "z": -649.0303665275179,
+          "tx": -0.00022143969328202416,
+          "ty": -197.26533524772714,
+          "tz": -642.0633483576328,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2305,
+        "caption": "08-shop-builds Supply terminal, Builds tab @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/09-cif-1920.png",
+        "cam": {
+          "x": -0.000172722623760263,
+          "y": -190.0917269092057,
+          "z": -649.0304656946806,
+          "tx": -0.000028786980149077073,
+          "ty": -197.26529398878006,
+          "tz": -642.0634049561676,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2582,
+        "caption": "09-cif CIF wardrobe @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/09-cif-1366.png",
+        "cam": {
+          "x": -0.00002317619419312385,
+          "y": -190.0917269092057,
+          "z": -649.0304785239324,
+          "tx": -0.000003862696802776779,
+          "ty": -197.26528864626505,
+          "tz": -642.0634122830944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2456,
+        "caption": "09-cif CIF wardrobe @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/09-cif-narrow960.png",
+        "cam": {
+          "x": -0.000002675592325984809,
+          "y": -190.0917269092057,
+          "z": -649.0304802826331,
+          "tx": -4.459320246174497e-7,
+          "ty": -197.26528791379872,
+          "tz": -642.063413287593,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2433,
+        "caption": "09-cif CIF wardrobe @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/10-armory-1920.png",
+        "cam": {
+          "x": -3.570127803308157e-7,
+          "y": -190.0917269092057,
+          "z": -649.0304804815389,
+          "tx": -5.950212952610949e-8,
+          "ty": -197.2652878309568,
+          "tz": -642.0634134012012,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2831,
+        "caption": "10-armory Armory @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/10-armory-1366.png",
+        "cam": {
+          "x": -4.886673938546647e-8,
+          "y": -190.0917269092057,
+          "z": -649.0304805079738,
+          "tx": -8.144456554332814e-9,
+          "ty": -197.26528781994696,
+          "tz": -642.0634134162999,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2644,
+        "caption": "10-armory Armory @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/10-armory-narrow960.png",
+        "cam": {
+          "x": -6.6390233555185395e-9,
+          "y": -190.0917269092057,
+          "z": -649.0304805115965,
+          "tx": -1.106503892403468e-9,
+          "ty": -197.26528781843817,
+          "tz": -642.0634134183691,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2650,
+        "caption": "10-armory Armory @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/11-training-panel-1920.png",
+        "cam": {
+          "x": -8.68962852393126e-10,
+          "y": -190.0917269092057,
+          "z": -649.0304805120915,
+          "tx": -1.448271420623853e-10,
+          "ty": -197.265287818232,
+          "tz": -642.0634134186517,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1983,
+        "caption": "11-training-panel HQ panel: call in zombies @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/11-training-panel-1366.png",
+        "cam": {
+          "x": -1.1170463983406391e-10,
+          "y": -190.0917269092057,
+          "z": -649.0304805121565,
+          "tx": -1.861743997229231e-11,
+          "ty": -197.2652878182049,
+          "tz": -642.0634134186889,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1870,
+        "caption": "11-training-panel HQ panel: call in zombies @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/11-training-panel-narrow960.png",
+        "cam": {
+          "x": -1.4693572601920662e-11,
+          "y": -190.0917269092057,
+          "z": -649.0304805121648,
+          "tx": -2.448928766985883e-12,
+          "ty": -197.26528781820147,
+          "tz": -642.0634134186937,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1838,
+        "caption": "11-training-panel HQ panel: call in zombies @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/12-countdown-1920.png",
+        "cam": {
+          "x": -2.9911691185930637e-18,
+          "y": -190.0917269092057,
+          "z": -649.0304805121658,
+          "tx": -4.985281864321424e-19,
+          "ty": -197.26528781820105,
+          "tz": -642.0634134186943,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 3831,
+        "caption": "12-countdown After Send in: countdown + strip @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/12-countdown-1366.png",
+        "cam": {
+          "x": -7.7463927611825245e-28,
+          "y": -190.0917269092057,
+          "z": -649.0304805121658,
+          "tx": -1.2910654601969974e-28,
+          "ty": -197.26528781820105,
+          "tz": -642.0634134186943,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 5949,
+        "caption": "12-countdown After Send in: countdown + strip @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/12-countdown-narrow960.png",
+        "cam": {
+          "x": -5.06098081785618e-37,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -8.434968029759994e-38,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 4493,
+        "caption": "12-countdown After Send in: countdown + strip @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/13-range-console-1920.png",
+        "cam": {
+          "x": -7.914383454469515e-41,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -1.3190639090782044e-41,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 3286,
+        "caption": "13-range-console Range console (drills) @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/13-range-console-1366.png",
+        "cam": {
+          "x": -9.366790108887255e-42,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -1.5611316848144862e-42,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2300,
+        "caption": "13-range-console Range console (drills) @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/13-range-console-narrow960.png",
+        "cam": {
+          "x": -1.2275172312736103e-42,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -2.0458620521226082e-43,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2301,
+        "caption": "13-range-console Range console (drills) @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/14-range-drill-hud-1920.png",
+        "cam": {
+          "x": -4.917222457951387e-68,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -8.195370763252007e-69,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 11966,
+        "caption": "14-range-drill-hud Range drill running (drill HUD) @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/14-range-drill-hud-1366.png",
+        "cam": {
+          "x": -4.137747398869819e-96,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -6.896245664782778e-97,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 12119,
+        "caption": "14-range-drill-hud Range drill running (drill HUD) @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/14-range-drill-hud-narrow960.png",
+        "cam": {
+          "x": -1.8539623930812978e-123,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -3.089937321802048e-124,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 12302,
+        "caption": "14-range-drill-hud Range drill running (drill HUD) @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/15-pause-1920.png",
+        "cam": {
+          "x": -1.576712982020555e-126,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -2.6278549700341624e-127,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2276,
+        "caption": "15-pause Pause @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/15-pause-1366.png",
+        "cam": {
+          "x": -2.15681226756172e-127,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -3.594687112602731e-128,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1685,
+        "caption": "15-pause Pause @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/15-pause-narrow960.png",
+        "cam": {
+          "x": -3.0133428315017946e-128,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -5.0222380525028064e-129,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1635,
+        "caption": "15-pause Pause @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/16-settings-1920.png",
+        "cam": {
+          "x": -4.2126428530315786e-129,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -7.021071421719048e-130,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2032,
+        "caption": "16-settings Pause > Settings @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/16-settings-1366.png",
+        "cam": {
+          "x": -5.852774180510931e-130,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -9.75462363418453e-131,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1933,
+        "caption": "16-settings Pause > Settings @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/16-settings-narrow960.png",
+        "cam": {
+          "x": -7.819255126483904e-131,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -1.30320918774727e-131,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1949,
+        "caption": "16-settings Pause > Settings @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/17-tips-1920.png",
+        "cam": {
+          "x": -1.0931291614169374e-131,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -1.821881935694829e-132,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2083,
+        "caption": "17-tips Pause > Tips @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/17-tips-1366.png",
+        "cam": {
+          "x": -1.4906706365093637e-132,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -2.4844510608488473e-133,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1967,
+        "caption": "17-tips Pause > Tips @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/17-tips-narrow960.png",
+        "cam": {
+          "x": -2.0518252422613043e-133,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -3.419708737102048e-134,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1981,
+        "caption": "17-tips Pause > Tips @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/18-skills-1920.png",
+        "cam": {
+          "x": -2.494133179773367e-134,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -4.1568886329554565e-135,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2101,
+        "caption": "18-skills Pause > Skills @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/18-skills-1366.png",
+        "cam": {
+          "x": -3.863302735338207e-135,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -6.438837892230106e-136,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1982,
+        "caption": "18-skills Pause > Skills @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/18-skills-narrow960.png",
+        "cam": {
+          "x": -5.397528462972508e-136,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -8.995880771620518e-137,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1954,
+        "caption": "18-skills Pause > Skills @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/19-quit-1920.png",
+        "cam": {
+          "x": -7.39255282942353e-137,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -1.2320921382372104e-137,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2112,
+        "caption": "19-quit Pause > Quit confirm view (forced: in Training the Quit button quits at once, no confirm) @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/19-quit-1366.png",
+        "cam": {
+          "x": -9.166644994969418e-138,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -1.5277741658281815e-138,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1926,
+        "caption": "19-quit Pause > Quit confirm view (forced: in Training the Quit button quits at once, no confirm) @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/19-quit-narrow960.png",
+        "cam": {
+          "x": -1.2185822614660995e-138,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -2.030970435776759e-139,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 1848,
+        "caption": "19-quit Pause > Quit confirm view (forced: in Training the Quit button quits at once, no confirm) @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/20-reset-1920.png",
+        "cam": {
+          "x": -1.5053983839493673e-139,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -2.508997306582186e-140,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2463,
+        "caption": "20-reset Settings > Reset profile confirm (do NOT press Yes) @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/20-reset-1366.png",
+        "cam": {
+          "x": -2.1575130044951486e-140,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -3.595855007491783e-141,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2345,
+        "caption": "20-reset Settings > Reset profile confirm (do NOT press Yes) @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/20-reset-narrow960.png",
+        "cam": {
+          "x": -2.756287107543564e-141,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -4.593811845905772e-142,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2317,
+        "caption": "20-reset Settings > Reset profile confirm (do NOT press Yes) @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/21-map-1920.png",
+        "cam": {
+          "x": -4.144797712230843e-145,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -6.9079961870511435e-146,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2489,
+        "caption": "21-map Full map (Tab held) @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/21-map-1366.png",
+        "cam": {
+          "x": -4.822914961342015e-152,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -8.038191602236397e-153,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2270,
+        "caption": "21-map Full map (Tab held) @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/21-map-narrow960.png",
+        "cam": {
+          "x": -6.599748302718617e-158,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -1.0999580504530628e-158,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2334,
+        "caption": "21-map Full map (Tab held) @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/22-weapon-wheel-1920.png",
+        "cam": {
+          "x": -7.695988433002666e-162,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -1.2826647388337306e-162,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2633,
+        "caption": "22-weapon-wheel Weapon wheel (Q held) @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/22-weapon-wheel-1366.png",
+        "cam": {
+          "x": -1.0002924810915402e-163,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -1.6671541351525069e-164,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2490,
+        "caption": "22-weapon-wheel Weapon wheel (Q held) @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/22-weapon-wheel-narrow960.png",
+        "cam": {
+          "x": -1.6848383657265607e-165,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -2.808063942877499e-166,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2420,
+        "caption": "22-weapon-wheel Weapon wheel (Q held) @ 960x1040"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/23-build-wheel-1920.png",
+        "cam": {
+          "x": -4.667426568433182e-170,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -7.779044280721689e-171,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2533,
+        "caption": "23-build-wheel Build wheel (B held) @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/23-build-wheel-1366.png",
+        "cam": {
+          "x": -5.431049472565957e-177,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -9.051749120942925e-178,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2330,
+        "caption": "23-build-wheel Build wheel (B held) @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/23-build-wheel-narrow960.png",
+        "cam": {
+          "x": -5.774619130596939e-183,
+          "y": -190.0917269092057,
+          "z": -649.0304805121659,
+          "tx": -9.624365217661214e-184,
+          "ty": -197.265287818201,
+          "tz": -642.0634134186944,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "ms": 2182,
+        "caption": "23-build-wheel Build wheel (B held) @ 960x1040"
+      }
+    ],
+    "sheet": "Claude outputs/CH-1-menus/native/training/sheet.jpg",
+    "ms": 191752
+  },
+  "proof": [
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/01-hud-3p-1920.png",
+      "note": "01-hud-3p HUD third person, lights on @ 1920x1080",
+      "drawCalls": 6085,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/01-hud-3p-1366.png",
+      "note": "01-hud-3p HUD third person, lights on @ 1366x768",
+      "drawCalls": 7855,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/01-hud-3p-narrow960.png",
+      "note": "01-hud-3p HUD third person, lights on @ 960x1040",
+      "drawCalls": 9280,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/02-hud-1p-1920.png",
+      "note": "02-hud-1p HUD first person, lights on @ 1920x1080",
+      "drawCalls": 10750,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/02-hud-1p-1366.png",
+      "note": "02-hud-1p HUD first person, lights on @ 1366x768",
+      "drawCalls": 12910,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/02-hud-1p-narrow960.png",
+      "note": "02-hud-1p HUD first person, lights on @ 960x1040",
+      "drawCalls": 14995,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/03-hud-3p-dark-1920.png",
+      "note": "03-hud-3p-dark HUD third person, lights OFF (readability on dark) @ 1920x1080",
+      "drawCalls": 16600,
+      "lightsOn": false,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/03-hud-3p-dark-1366.png",
+      "note": "03-hud-3p-dark HUD third person, lights OFF (readability on dark) @ 1366x768",
+      "drawCalls": 18355,
+      "lightsOn": false,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/03-hud-3p-dark-narrow960.png",
+      "note": "03-hud-3p-dark HUD third person, lights OFF (readability on dark) @ 960x1040",
+      "drawCalls": 20027,
+      "lightsOn": false,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/04-prompt-kiosk-1920.png",
+      "note": "04-prompt-kiosk E prompt at the supply terminal @ 1920x1080",
+      "drawCalls": 22092,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/04-prompt-kiosk-1366.png",
+      "note": "04-prompt-kiosk E prompt at the supply terminal @ 1366x768",
+      "drawCalls": 24267,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/04-prompt-kiosk-narrow960.png",
+      "note": "04-prompt-kiosk E prompt at the supply terminal @ 960x1040",
+      "drawCalls": 26382,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/05-prompt-bank-1920.png",
+      "note": "05-prompt-bank E prompt at the HQ skull window @ 1920x1080",
+      "drawCalls": 28452,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/05-prompt-bank-1366.png",
+      "note": "05-prompt-bank E prompt at the HQ skull window @ 1366x768",
+      "drawCalls": 30672,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/05-prompt-bank-narrow960.png",
+      "note": "05-prompt-bank E prompt at the HQ skull window @ 960x1040",
+      "drawCalls": 32757,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/06-prompt-hqpanel-1920.png",
+      "note": "06-prompt-hqpanel E prompt at the HQ panel @ 1920x1080",
+      "drawCalls": 34842,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/06-prompt-hqpanel-1366.png",
+      "note": "06-prompt-hqpanel E prompt at the HQ panel @ 1366x768",
+      "drawCalls": 37002,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/06-prompt-hqpanel-narrow960.png",
+      "note": "06-prompt-hqpanel E prompt at the HQ panel @ 960x1040",
+      "drawCalls": 39072,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/07-shop-supplies-1920.png",
+      "note": "07-shop-supplies Supply terminal, Supplies tab @ 1920x1080",
+      "drawCalls": 40647,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/07-shop-supplies-1366.png",
+      "note": "07-shop-supplies Supply terminal, Supplies tab @ 1366x768",
+      "drawCalls": 42342,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/07-shop-supplies-narrow960.png",
+      "note": "07-shop-supplies Supply terminal, Supplies tab @ 960x1040",
+      "drawCalls": 43992,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/08-shop-builds-1920.png",
+      "note": "08-shop-builds Supply terminal, Builds tab @ 1920x1080",
+      "drawCalls": 45822,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/08-shop-builds-1366.png",
+      "note": "08-shop-builds Supply terminal, Builds tab @ 1366x768",
+      "drawCalls": 47817,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/08-shop-builds-narrow960.png",
+      "note": "08-shop-builds Supply terminal, Builds tab @ 960x1040",
+      "drawCalls": 49827,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/09-cif-1920.png",
+      "note": "09-cif CIF wardrobe @ 1920x1080",
+      "drawCalls": 51747,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/09-cif-1366.png",
+      "note": "09-cif CIF wardrobe @ 1366x768",
+      "drawCalls": 53787,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/09-cif-narrow960.png",
+      "note": "09-cif CIF wardrobe @ 960x1040",
+      "drawCalls": 55752,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/10-armory-1920.png",
+      "note": "10-armory Armory @ 1920x1080",
+      "drawCalls": 57867,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/10-armory-1366.png",
+      "note": "10-armory Armory @ 1366x768",
+      "drawCalls": 60177,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/10-armory-narrow960.png",
+      "note": "10-armory Armory @ 960x1040",
+      "drawCalls": 62427,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/11-training-panel-1920.png",
+      "note": "11-training-panel HQ panel: call in zombies @ 1920x1080",
+      "drawCalls": 64047,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/11-training-panel-1366.png",
+      "note": "11-training-panel HQ panel: call in zombies @ 1366x768",
+      "drawCalls": 65757,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/11-training-panel-narrow960.png",
+      "note": "11-training-panel HQ panel: call in zombies @ 960x1040",
+      "drawCalls": 67392,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/12-countdown-1920.png",
+      "note": "12-countdown After Send in: countdown + strip @ 1920x1080",
+      "drawCalls": 69852,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": true,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/12-countdown-1366.png",
+      "note": "12-countdown After Send in: countdown + strip @ 1366x768",
+      "drawCalls": 72972,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": true,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/12-countdown-narrow960.png",
+      "note": "12-countdown After Send in: countdown + strip @ 960x1040",
+      "drawCalls": 76197,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": true,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/13-range-console-1920.png",
+      "note": "13-range-console Range console (drills) @ 1920x1080",
+      "drawCalls": 78792,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": true,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/13-range-console-1366.png",
+      "note": "13-range-console Range console (drills) @ 1366x768",
+      "drawCalls": 80847,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": true,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/13-range-console-narrow960.png",
+      "note": "13-range-console Range console (drills) @ 960x1040",
+      "drawCalls": 82842,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": true,
+      "rangeDrillHud": false,
+      "rangeDrillActive": false,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/14-range-drill-hud-1920.png",
+      "note": "14-range-drill-hud Range drill running (drill HUD) @ 1920x1080",
+      "drawCalls": 90177,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": true,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/14-range-drill-hud-1366.png",
+      "note": "14-range-drill-hud Range drill running (drill HUD) @ 1366x768",
+      "drawCalls": 97857,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": true,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/14-range-drill-hud-narrow960.png",
+      "note": "14-range-drill-hud Range drill running (drill HUD) @ 960x1040",
+      "drawCalls": 105747,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": true,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/15-pause-1920.png",
+      "note": "15-pause Pause @ 1920x1080",
+      "drawCalls": 107217,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/15-pause-1366.png",
+      "note": "15-pause Pause @ 1366x768",
+      "drawCalls": 108777,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/15-pause-narrow960.png",
+      "note": "15-pause Pause @ 960x1040",
+      "drawCalls": 110232,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/16-settings-1920.png",
+      "note": "16-settings Pause > Settings @ 1920x1080",
+      "drawCalls": 111972,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/16-settings-1366.png",
+      "note": "16-settings Pause > Settings @ 1366x768",
+      "drawCalls": 113772,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/16-settings-narrow960.png",
+      "note": "16-settings Pause > Settings @ 960x1040",
+      "drawCalls": 115512,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/17-tips-1920.png",
+      "note": "17-tips Pause > Tips @ 1920x1080",
+      "drawCalls": 117237,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/17-tips-1366.png",
+      "note": "17-tips Pause > Tips @ 1366x768",
+      "drawCalls": 119097,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/17-tips-narrow960.png",
+      "note": "17-tips Pause > Tips @ 960x1040",
+      "drawCalls": 120837,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/18-skills-1920.png",
+      "note": "18-skills Pause > Skills @ 1920x1080",
+      "drawCalls": 122487,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/18-skills-1366.png",
+      "note": "18-skills Pause > Skills @ 1366x768",
+      "drawCalls": 124332,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/18-skills-narrow960.png",
+      "note": "18-skills Pause > Skills @ 960x1040",
+      "drawCalls": 126102,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/19-quit-1920.png",
+      "note": "19-quit Pause > Quit confirm view (forced: in Training the Quit button quits at once, no confirm) @ 1920x1080",
+      "drawCalls": 127737,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/19-quit-1366.png",
+      "note": "19-quit Pause > Quit confirm view (forced: in Training the Quit button quits at once, no confirm) @ 1366x768",
+      "drawCalls": 129477,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/19-quit-narrow960.png",
+      "note": "19-quit Pause > Quit confirm view (forced: in Training the Quit button quits at once, no confirm) @ 960x1040",
+      "drawCalls": 131142,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/20-reset-1920.png",
+      "note": "20-reset Settings > Reset profile confirm (do NOT press Yes) @ 1920x1080",
+      "drawCalls": 133077,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/20-reset-1366.png",
+      "note": "20-reset Settings > Reset profile confirm (do NOT press Yes) @ 1366x768",
+      "drawCalls": 135102,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/20-reset-narrow960.png",
+      "note": "20-reset Settings > Reset profile confirm (do NOT press Yes) @ 960x1040",
+      "drawCalls": 137067,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/21-map-1920.png",
+      "note": "21-map Full map (Tab held) @ 1920x1080",
+      "drawCalls": 138627,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/21-map-1366.png",
+      "note": "21-map Full map (Tab held) @ 1366x768",
+      "drawCalls": 140337,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/21-map-narrow960.png",
+      "note": "21-map Full map (Tab held) @ 960x1040",
+      "drawCalls": 141882,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/22-weapon-wheel-1920.png",
+      "note": "22-weapon-wheel Weapon wheel (Q held) @ 1920x1080",
+      "drawCalls": 143337,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/22-weapon-wheel-1366.png",
+      "note": "22-weapon-wheel Weapon wheel (Q held) @ 1366x768",
+      "drawCalls": 144852,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/22-weapon-wheel-narrow960.png",
+      "note": "22-weapon-wheel Weapon wheel (Q held) @ 960x1040",
+      "drawCalls": 146367,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/23-build-wheel-1920.png",
+      "note": "23-build-wheel Build wheel (B held) @ 1920x1080",
+      "drawCalls": 147957,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/23-build-wheel-1366.png",
+      "note": "23-build-wheel Build wheel (B held) @ 1366x768",
+      "drawCalls": 149562,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/23-build-wheel-narrow960.png",
+      "note": "23-build-wheel Build wheel (B held) @ 960x1040",
+      "drawCalls": 151317,
+      "lightsOn": true,
+      "zombiesAlive": 0,
+      "countdown": false,
+      "rangeConsole": false,
+      "rangeDrillHud": false,
+      "rangeDrillActive": true,
+      "buildWheel": false
+    }
+  ],
+  "pageErrors": [],
+  "finishedAt": "2026-11-20T23:37:31.309Z"
+}

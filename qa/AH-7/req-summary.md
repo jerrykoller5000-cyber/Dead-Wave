@@ -1,0 +1,18 @@
+AH-7 longer normal-player P0 & `<30 FPS` hunt through **Night 2** and **Night 3** is complete across solo `--exclusive` **WebGPU** (`index.html`, `11.2 min` continuous run: `158` kills, `streak 24`, `Badges 2/16`, `Wasp SMG` + `Shotgun`, `shambler`/`feral`/`leaper`/`drowned` up to `48` live) and a shorter **WebGL2** run (`index.html?renderer=webgl`, `6.0 min` through Night 2 -> Day 3: `67` kills, `streak 29`, `Wasp SMG` + `Shotgun` + `MedPen`), with NO `?debug=1`, `debugTouched === false`, and zero game file edits. Report: `qa/2026-11-21-AH-7.md` · Raw JSONs: `qa/AH-7/hunt-webgpu.json`, `qa/AH-7/hunt-webgl.json` · Screenshots: `qa/AH-7/*.png`.
+
+### P0 Verdict: ALL CLEAR (`0` freezes, `0` stuck/black frames, `0` uncaught JS/GPU crashes, `0` missing/invisible non-fog-culled models)
+
+### 7 Ranked P1–P3 Multi-Night Findings
+1. **[P1 · `< 30 FPS` Drops & `3.14M` Tris at 46–48 Zombies — `claude2` (Rule 12 / D-216)]:**
+   - Clarifies AH-6: 3rd-person near HQ with light load (`Night 1`, `15` shamblers, `449 draws, 1.09M tris`) holds **`48–60 FPS` (`avg 56.1 FPS`)** on solo RTX 5080 WebGPU.
+   - Two triggers drop solo RTX 5080 FPS below `30 FPS`:
+     1. **46–48 Live Zombies + Corpses on Night 2 & Night 3:** Triangles climb to **`3.02M` (Night 2)** and **`3.14M` (Night 3, `743` draws)**; `43.6%` of Night 3 (`140/321s`) ran `< 45 FPS`, dipping to **`13–14 FPS` (`356.0 ms` spike)** on WebGPU (`20 FPS` / `58.5%` `< 45 FPS` on Night 2 WebGL).
+     2. **1st-Person (`Digit5`) Horizontal Valley Frustum (even with `3` zombies):** `521–899 draws, 1.58M–2.00M tris` -> **`19–26 FPS` (`154–303 ms` worst)** (`webgpu-03-day2-wasp-smg-1p.png`, `webgpu-06-day3-shotgun-1p.png`). Insertion drop also hits **`989 draws / 2.38M tris` (`12–19 FPS`)**.
+2. **[P1 · Rule 24 Clipping at HQ Armory — `claude`/`chatgpt`, `index.html:34945`]:** Standing at `(5.50–5.73, 3.25–3.85)` to use HQ Armory puts the player **inside** the protruding black diamond-grille security cage (`4/4` repros on WebGPU & WebGL; switching to `Digit5` 1P shows the interior wire grille across the player's face: `webgpu-03-day2-wasp-smg-1p.png`, `webgpu-06-day3-shotgun-1p.png`).
+3. **[P1 · NEW Night 3 Missing-Normal TSL Warning + `Wasp SMG` `uv1` Warning — `claude2`/`chatgpt2`]:**
+   - Late Night 3 (`t = 630.0s`, WebGPU `48`-zombie `shambler`/`feral`/`leaper`/`drowned` wave) logged: `THREE.TSL: Vertex attribute "normal" not found on geometry.` (`×2`).
+   - Buying/previewing `Wasp SMG` (`uzi`) on the Armory Workbench (`t = 150.45s` WebGPU / `168.72s` WebGL) directly triggers `AttributeNode: Vertex attribute "uv1" not found on geometry.`
+4. **[P1 · `3.18s` `resetGame()` Stall After Night 3 — `claude2` (`GU-5` active)]:** `Quit to Title` after `158` kills froze for `1250 + 1000 + 933 ms` (`3.18s`, `1 FPS`) on WebGPU and `1213 ms` (`1 FPS`) on WebGL.
+5. **[P2 · Armory Purchase UX Trap — `chatgpt`/`claude`, `ui/armory.js:127`]:** Buying `Wasp SMG` or `Shotgun` calls `armory.buy(gun, { store: true })`, putting the newly bought gun onto **`STORED GUNS`** even when all 4 `CARRIED GUNS` slots are empty (`4/4` purchases). Clicking `BUY` then `DONE` leaves the player entering the wave without the gun they just bought.
+6. **[P2 · HQ Radio / Alarm Panel Reach Overlap — `claude2`/`chatgpt`, `index.html:34943, 35102`]:** Pressing `E` around `(2.84–2.95, -5.9)` while walking east toward `HQ Alarm Panel` opens `Radio` while the `100ms`-throttled prompt still reads `E HQ panel`.
+7. **[P3 · `120/sec` `prep-hud` CustomEvent Churn — `claude2`/`chatgpt`, `index.html:49083`]:** `publishUI('prep-hud')` fired **`8,228` DOM `CustomEvent`s** across short Day 1–3 preps (`2×` per frame without a dirty check).

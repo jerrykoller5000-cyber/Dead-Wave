@@ -52,6 +52,7 @@ export function prepareConvoySleeperAppearance(T, g) {
 const templates = new WeakMap();
 function bones(u){
   const out={hips:u.hips,torso:u.torso,head:u.head};
+  if (u.shamblerJaw) out.shamblerJaw = u.shamblerJaw;
   for(const S of ['L','R']){out['arm'+S]=u['arm'+S+'G'];out['elbow'+S]=out['arm'+S]?.userData.elbowG;out['leg'+S]=u['leg'+S+'G'];out['shin'+S]=out['leg'+S]?.userData.shinG;
     for(const [name,bone]of Object.entries(out['elbow'+S]?.userData.hand?.bones||{}))out['hand:'+S+':'+name]=bone;}
   (u.crawlLimbs||[]).forEach((l,i)=>{out['crawl'+i]=l.root;out['knee'+i]=l.knee;});return out;
@@ -99,11 +100,22 @@ function remember(T,g,key){
     parts.push({bone,node:cachePart(m,copy,keep)});
   }
   const tpl={sharedFit:{head:{cc355Crown:u.head.userData.cc355Crown,cc355CrownY:u.head.userData.cc355CrownY},torso:{cc355Scale:u.torso.userData.cc355Scale,cc355TorsoAt:u.torso.userData.cc355TorsoAt}},parts,body:u.bodyMats.map(copy),pulse:u.pulseMats.map(copy),ember:u.emberMat?copy(u.emberMat):null,concept:{...u.concept},eyes:u.eyes.map(e=>({position:e.position.clone(),scale:e.scale.clone(),color:e.material.color.clone(),emissive:e.material.emissive.clone(),emissiveIntensity:e.material.emissiveIntensity,baseEmissive:e.material.userData.baseEmissive}))};
+  if (u.shamblerJaw) tpl.shamblerJawPivot = u.shamblerJaw.position.clone();
   let map=templates.get(T);if(!map){map=new Map();templates.set(T,map);}map.set(key,tpl);
 }
 function restore(T,g,key,k){
   const tpl=templates.get(T)?.get(key);if(!tpl)return false;
-  const u=g.userData,bs=bones(u),materials=new Map(),copy=m=>{if(Array.isArray(m))return m.map(copy);if(!materials.has(m))materials.set(m,m.clone());return materials.get(m);};
+  const u = g.userData;
+  if (tpl.shamblerJawPivot) {
+    const jaw = u.shamblerJaw || new T.Group();
+    jaw.name = 'shambler-jaw';
+    jaw.position.copy(tpl.shamblerJawPivot);
+    jaw.rotation.set(0, 0, 0);
+    jaw.scale.setScalar(1);
+    if (jaw.parent !== u.head) u.head.add(jaw);
+    u.shamblerJaw = jaw;
+  }
+  const bs=bones(u),materials=new Map(),copy=m=>{if(Array.isArray(m))return m.map(copy);if(!materials.has(m))materials.set(m,m.clone());return materials.get(m);};
   stripMeshes(g,new Set(u.eyes));
   for(const p of tpl.parts){if(!bs[p.bone])throw new Error('Concept cache missing rig bone '+p.bone);const m=restorePart(T,p.node,copy);bs[p.bone].add(m);
     if(m.userData.compacted){if(p.bone.startsWith('leg'))bs[p.bone].userData.thigh=m;if(p.bone.startsWith('arm'))bs[p.bone].userData.upper=m;if(p.bone==='torso')bs.torso.userData.bodyMat=m.material;}}
@@ -871,16 +883,26 @@ function batchSurfaces(T,g,keep){
     // CC-359 (proposal, Claude 3): pieces painted from their own atlas (material.userData.cc359Atlas) keep their UVs and that material
     for(const meshes of [all.filter(o=>!o.material.userData.cc359Atlas),all.filter(o=>o.material.userData.cc359Atlas)]){if(!meshes.length)continue;const atlasMat=meshes[0].material.userData.cc359Atlas?meshes[0].material:null;
     const pos=[],norm=[],col=[],uv=[],bootAttachment=[];
+    let jawSkinRanges;
     const hasBootAttachment=meshes.some(o=>o.userData.bootAttachment||o.geometry.attributes.bootAttachment);
     for(const o of meshes){o.updateMatrix();const src=o.geometry.index?o.geometry.toNonIndexed():o.geometry.clone();src.applyMatrix4(o.matrix);
       const mapped=atlasMat?src.getAttribute('uv').array:detailUV(T,src,o.material.userData.surface||'skin');uv.push(...mapped);
       const a=src.getAttribute('position'),n=src.getAttribute('normal'),c=o.material.color,vc=o.material.vertexColors&&src.getAttribute('color'),binding=src.getAttribute('bootAttachment');
       if(hasBootAttachment)for(let i=0;i<a.count;i++)bootAttachment.push(o.userData.bootAttachment?1:(binding?.getX(i)||0));
+      if (o.userData.cc359JawSkin) {
+        const start = pos.length / 3;
+        (jawSkinRanges ??= []).push([start, start + a.count]);
+      }
       for(let i=0;i<a.count;i++){pos.push(a.getX(i),a.getY(i),a.getZ(i));norm.push(n.getX(i),n.getY(i),n.getZ(i));col.push(c.r*(vc?vc.getX(i):1),c.g*(vc?vc.getY(i):1),c.b*(vc?vc.getZ(i):1));}
       src.dispose();o.removeFromParent();
     }
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('normal',new T.Float32BufferAttribute(norm,3));geo.setAttribute('color',new T.Float32BufferAttribute(col,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));
     if(hasBootAttachment)geo.setAttribute('bootAttachment',new T.Float32BufferAttribute(bootAttachment,1));
+    if (jawSkinRanges) {
+      const mask = new Uint8Array(geo.attributes.position.count);
+      for (const [start, end] of jawSkinRanges) mask.fill(1, start, end);
+      geo.userData.cc359JawSkinMask = mask;
+    }
     const material=atlasMat||new T.MeshStandardMaterial({vertexColors:true,roughness:.86,...detailMaterial(T)});if(!mats.includes(material))mats.push(material);
     const m=new T.Mesh(geo,material);m.castShadow=true;m.name='concept-surface';m.userData.compacted=true;p.add(m);
     if(p.userData.thigh)p.userData.thigh=m;if(p.userData.upper)p.userData.upper=m;if(p.userData.bodyMat)p.userData.bodyMat=material;

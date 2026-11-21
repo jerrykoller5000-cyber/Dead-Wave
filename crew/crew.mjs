@@ -65,11 +65,12 @@ import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { parseNotes, reviewState, notesStub } from './notes.mjs';
 import { chooseReplyRequest, refindReplyRequest } from './reply-match.mjs';
+import { requestStatus } from './request-status.mjs';
 
 const CREW = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(CREW, '..');
-const AGENTS = { claude: 'CLAUDE DIRECTOR', claude2: 'Claude 2', claude3: 'Claude 3', claude4: 'Claude 1', claude5: 'Claude 5', claude6: 'Claude 6', claude7: 'Claude 7', claude8: 'Claude 8', claude9: 'Claude 9', claude10: 'Claude 10', chatgpt: 'ChatGPT', chatgpt2: 'ChatGPT 2', antigravity: 'Antigravity' };
-const PREFIX = { claude: 'CL', claude2: 'CB', claude3: 'CC', claude4: 'CD', claude5: 'CE', claude6: 'CF', claude7: 'CG', claude8: 'CH', claude9: 'CI', claude10: 'CJ', chatgpt: 'GP', chatgpt2: 'GT', antigravity: 'AG' };
+const AGENTS = { claude: 'CLAUDE DIRECTOR', claude2: 'Claude 2', claude3: 'Claude 3', claude4: 'Claude 1', claude5: 'Claude 5', claude6: 'Claude 6', claude7: 'Claude 7', claude8: 'Claude 8', claude9: 'Claude 9', claude10: 'Claude 10', chatgpt: 'ChatGPT', chatgpt2: 'ChatGPT 2', chatgpt3: 'ChatGPT 3', antigravity: 'Antigravity', antigravity2: 'Antigravity 2' };
+const PREFIX = { claude: 'CL', claude2: 'CB', claude3: 'CC', claude4: 'CD', claude5: 'CE', claude6: 'CF', claude7: 'CG', claude8: 'CH', claude9: 'CI', claude10: 'CJ', chatgpt: 'GP', chatgpt2: 'GT', chatgpt3: 'GU', antigravity: 'AG', antigravity2: 'AH' };
 const FIELDS = ['state', 'model', 'task', 'touching', 'since', 'next', 'blocked-on', 'last-report'];
 const STATES = ['active', 'idle', 'blocked', 'away'];
 // Append-only files everyone shares. Checking in on them never clashes with anyone.
@@ -532,10 +533,10 @@ function parseRequests(text) {
     const h = /^(\S+)\s*·\s*(.+?)\s*→\s*(.+?)\s*·\s*(.+)$/.exec(head.trim());
     if (!h) return;
     const to = h[3].split(/,|\band\b/).map((s) => s.trim().toLowerCase().replace(/\s*\(.*\)/, '')).map((s) => (s === 'all' || s === 'everyone' || s === 'crew') ? 'all' : NAME_TO[s] || s).filter(Boolean);
-    const st = [...body.matchAll(/\b(DONE|WONT|LATER)\b/g)].map((x) => x[1]);
-    const replied = to.some((a) => a !== 'all' && [AGENTS[a] || a, ...(ALIASES[a] || [])].some((n) => new RegExp('\\*\\*' + n + '[ ,*]', 'i').test(body)));
+    // CB-369 loan (Director, 21 Nov): only signed reply lines settle it (crew/request-status.mjs), not a DONE in the text.
+    const { status: st, replied } = requestStatus(body, to.filter((a) => a !== 'all').flatMap((a) => [AGENTS[a] || a, ...(ALIASES[a] || [])]));
     out.push({ start: i, end, date: h[1], from: h[2].replace(/\s*\(.*\)/, '').trim(), to, title: h[4].trim(),
-      status: i < settledAt ? 'SETTLED' : st.length ? st[st.length - 1] : replied ? 'ANSWERED' : (to.includes('all') || FYI_TITLE.test(h[4])) ? 'FYI' : 'OPEN' });
+      status: i < settledAt ? 'SETTLED' : st ? st : replied ? 'ANSWERED' : (to.includes('all') || FYI_TITLE.test(h[4])) ? 'FYI' : 'OPEN' });
   });
   return out;
 }

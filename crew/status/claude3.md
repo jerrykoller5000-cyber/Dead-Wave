@@ -4,12 +4,23 @@ state: idle
 model: Claude Opus 5.5 (claude-opus-5-5)
 task: —
 touching: —
-since: 2026-11-20T19:26Z
-next: CC-358 J166/D-198 player SHAPE + POSE pass: PLAN first (CF-15 + Tri
+since: 2026-11-21T08:49Z
+next: CC-364 D-216 lever 3: marine draw merge/proxy review copy (48 main 
 blocked-on: —
-last-report: handoffs/2026-11-20-claude3-CC-362-land.md
+last-report: handoffs/2026-11-21-claude3-CC-364.md
 
 ## Notes
+
+### Session 45 (06:40Z - ~09:00Z 21 Nov, Opus 5.5, scheduled) - read this first
+- CC-364 D-216 lever 3 (marine draws), REVIEW ONLY: census 50 main + 27 shadow (pistol): gun 15+14, live cloth 6+6, face 5, hands 4 (CPU fingers: leave), rig skins 9, proxy 1. Prototype review/CC-364/marine-merge.cc364.js (runtime import): shirt live cloth 3->1 + face 5->1 = 44+25, pixels identical. WAITING: ChatGPT 2 strict48 ABBA + Director LOOK/picks. If gain: production copy in marine-cloth.js (+ face), must rebuild on wardrobe change.
+- Gun shadow proxy (-13 shadow draws) = Claude 2 / ChatGPT 2 lever C (PROPOSAL.md).
+- CI-1 skins: review/CI-1-skins-claude3/zombie-concepts.ci1.js (bomber 9a9f5c, colossus 80564b, leaper aba9b3). Native sheets asked of ChatGPT. Land after D-218 pass 2 + Director LOOK (ChatGPT's file).
+- Cloud kit s45: s42 a-code.tgz + s35 c-assets + _DELETE ME/claude3-s45-cloud/newer.tgz + crew/notes.mjs. Game in cloud: review/CC-364/run-census.mjs (bench startMatch times out at 180 s on swiftshader; mine waits 15 min). Freeze the loop with renderer.setAnimationLoop(null), NOT rAF (three's readback polls rAF). Hook renderer._handleObjectFunction for draw counts.
+
+### Session 44 (22:56Z 20 Nov - 00:30Z 21 Nov, Opus 5.5, scheduled) - read this first
+- JAW BATCH LANDED 00:08Z (one batch, Director GO): humanoids 54a3987b, concepts e3bb0cab, joins b9a090cb, index 1e6f56f0, NEW game/shambler-jaw.js 8f47afc8. Backups _DELETE ME/claude3-s44-jaw-landing-backup. Gates GREEN (ChatGPT GP-20167: t222 12/0, t93 11/0, t111 11/0, t164 14/0, t338 5/1 old feral).
+- D-218 pass 1 for Claude 7 (CG-1): review/CC-363 razor coil, backstop, gun mount review copies + sheet. HE lands them. Then CF-19 re-run + native AFTER tour: fix what they find. Pass 2 (story props): help when he asks.
+- Cloud kit: s42 a-code.tgz + files newer than it (find -newer) + s35 c-assets + crew/notes.mjs. Never tar the code on the PC (times out). python: newline='' for CRLF files.
 
 ### Session 43 (19:08Z - ~19:45Z 20 Nov, Opus 5.5, scheduled) - read this first
 - CC-362 option A LANDED 19:12Z: humanoids c57c6e60 (marker) + joins 3b859926 (ChatGPT's reader). Backups _DELETE ME/claude3-s43-cc362-landing-backup. Node: cliffs 108 -> 7, 8 other types identical. Native t93/t164/t338 + real t222: ChatGPT (see his reply / my handoff).

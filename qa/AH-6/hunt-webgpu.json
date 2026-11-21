@@ -1,0 +1,2098 @@
+{
+  "backend": "webgpu",
+  "startedAt": "2026-11-21T05:32:13.327Z",
+  "steps": [
+    {
+      "tSec": 0.7,
+      "name": "Opening index.html (normal player URL, NO ?debug=1)"
+    },
+    {
+      "tSec": 37.4,
+      "name": "Title screen ready",
+      "meanLum": 61.28
+    },
+    {
+      "tSec": 40.5,
+      "name": "Renderer & Title verified",
+      "isWebGPU": true,
+      "backendName": "WebGPUBackend",
+      "gfx": "high",
+      "perfText": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 60 low 45 worst 22ms hitch 0 draws 304 tris 729k zombs 0"
+    },
+    {
+      "tSec": 42,
+      "name": "First-Run modal shown (#firstRunCard)",
+      "shot": "qa/AH-6/webgpu-02-first-run-card.png"
+    },
+    {
+      "tSec": 47.6,
+      "name": "Mid-insertion screenshot captured",
+      "meanLum": 90.89,
+      "shot": "qa/AH-6/webgpu-03a-insertion-mid.png"
+    },
+    {
+      "tSec": 57.1,
+      "name": "Frame/Input check [day1-spawn-3p]",
+      "changedPct": 88.84,
+      "frozen3D": false,
+      "distMoved": 3.667,
+      "meanLum": 67.76
+    },
+    {
+      "tSec": 57.2,
+      "name": "Day 1 scene & HQ station audit",
+      "totalMeshes": 3767,
+      "visibleMeshes": 2274,
+      "nanTransforms": 0,
+      "playerPos": {
+        "x": 38.33,
+        "y": -7.28,
+        "z": -20
+      },
+      "kioskPos": {
+        "x": -5.04,
+        "y": -3.17,
+        "z": 2.2,
+        "vis": false
+      },
+      "marineVis": true,
+      "weapon": "pistol"
+    },
+    {
+      "tSec": 58,
+      "name": "Entered 1st-person via Digit5",
+      "fp": true,
+      "vmActive": true
+    },
+    {
+      "tSec": 60.3,
+      "name": "Frame/Input check [day1-1p-view]",
+      "changedPct": 82.516,
+      "frozen3D": false,
+      "distMoved": 3.647,
+      "meanLum": 74.96
+    },
+    {
+      "tSec": 69.2,
+      "name": "Tested Digit5 1P, shot, reload, KeyV roll, Q-wheel, B-wheel, Map, Pause",
+      "fpCheck1": {
+        "fp": true,
+        "vmActive": true
+      },
+      "qWheelOpen": true,
+      "bWheelOpen": true,
+      "inPlaceAfterB": true,
+      "pauseOpen": true,
+      "mapShot": "qa/AH-6/webgpu-04b-full-map.png"
+    },
+    {
+      "tSec": 72.7,
+      "name": "Walked to HQ East Yard Approach",
+      "target": [
+        9,
+        -4
+      ],
+      "pos": [
+        8.87,
+        -3.17
+      ],
+      "dist": 0.84,
+      "prompt": ""
+    },
+    {
+      "tSec": 73.3,
+      "name": "Walked to CIF Window",
+      "target": [
+        5.9,
+        -3.3
+      ],
+      "pos": [
+        5.75,
+        -3.17
+      ],
+      "dist": 0.2,
+      "prompt": "ECIF"
+    },
+    {
+      "tSec": 76.4,
+      "name": "Walked to Armory Window",
+      "target": [
+        5.9,
+        3.3
+      ],
+      "pos": [
+        5.68,
+        3.64
+      ],
+      "dist": 0.4,
+      "prompt": "EArmory"
+    },
+    {
+      "tSec": 80.3,
+      "name": "Armory opened & Workbench preview checked",
+      "armState": {
+        "open": true,
+        "armoryRect": {
+          "w": 0,
+          "h": 0
+        },
+        "buttons": 0
+      },
+      "clickedPistol": true,
+      "shot2": "qa/AH-6/webgpu-05b2-station-armory-workbench.png"
+    },
+    {
+      "tSec": 84.4,
+      "name": "Walked to Supply Kiosk",
+      "target": [
+        -6.39,
+        2.2
+      ],
+      "pos": [
+        -5.57,
+        2
+      ],
+      "dist": 0.84,
+      "prompt": "ESupply Terminal"
+    },
+    {
+      "tSec": 88.6,
+      "name": "Walked to Skull Window",
+      "target": [
+        -5.9,
+        -2.2
+      ],
+      "pos": [
+        -5.95,
+        -1.88
+      ],
+      "dist": 0.32,
+      "prompt": "Skull window"
+    },
+    {
+      "tSec": 91.5,
+      "name": "Walked to Duty Board",
+      "target": [
+        -1.62,
+        -5.9
+      ],
+      "pos": [
+        -1.35,
+        -5.42
+      ],
+      "dist": 0.55,
+      "prompt": "EDuty board"
+    },
+    {
+      "tSec": 93.6,
+      "name": "Walked to HQ Radio",
+      "target": [
+        1.62,
+        -5.9
+      ],
+      "pos": [
+        1.74,
+        -5.42
+      ],
+      "dist": 0.49,
+      "prompt": "ERadio"
+    },
+    {
+      "tSec": 97.8,
+      "name": "Frame/Input check [post-all-hq-stations]",
+      "changedPct": 95.257,
+      "frozen3D": false,
+      "distMoved": 3.566,
+      "meanLum": 61.5
+    },
+    {
+      "tSec": 98.6,
+      "name": "Walked to HQ Alarm Panel",
+      "target": [
+        3.2,
+        -5.9
+      ],
+      "pos": [
+        4.01,
+        -5.42
+      ],
+      "dist": 0.94,
+      "prompt": "EHQ panel"
+    },
+    {
+      "tSec": 99.9,
+      "name": "Sounded HQ Alarm for Night 1!",
+      "prompt": "EHQ panel",
+      "btn": "Sound alarm",
+      "briefingShot": "qa/AH-6/webgpu-06a-hq-alarm-briefing.png"
+    },
+    {
+      "tSec": 102.9,
+      "name": "Captured Night 1 alarm cinematic",
+      "meanLum": 51.6,
+      "shot": "qa/AH-6/webgpu-06b-night1-alarm-cine.png"
+    },
+    {
+      "tSec": 116.2,
+      "name": "Walked to Kiosk Night Lockdown Check",
+      "target": [
+        -6.39,
+        2.2
+      ],
+      "pos": [
+        -4.67,
+        -5.42
+      ],
+      "dist": 7.81,
+      "prompt": ""
+    },
+    {
+      "tSec": 116.7,
+      "name": "Verified Night Lockdown on Kiosk",
+      "prompt": "",
+      "shopOpenedDuringLockdown": false
+    },
+    {
+      "tSec": 119.4,
+      "name": "Night 1 3P combat screenshot",
+      "liveZombies": 15,
+      "nearestDist": 17.44,
+      "shot": "qa/AH-6/webgpu-07a-night1-combat-3p.png",
+      "waveHud": "Night 1 · Zombies left: 15"
+    },
+    {
+      "tSec": 122.4,
+      "name": "Night 1 real 1P (Digit5) combat screenshot",
+      "liveZombies": 15,
+      "shot": "qa/AH-6/webgpu-07b-night1-combat-1p.png"
+    },
+    {
+      "tSec": 170,
+      "name": "ALL 15 Night 1 shamblers cleared -> Day 2 Dawn reached!",
+      "day": 2,
+      "hp": 94,
+      "skulls": 15,
+      "shotsFired": 99,
+      "knifeSwings": 24
+    },
+    {
+      "tSec": 171.4,
+      "name": "Day 2 Dawn verified!",
+      "hud": {
+        "day": 2,
+        "phase": "prep",
+        "cash": 40,
+        "skulls": 15,
+        "hp": 94,
+        "maxHp": 100,
+        "medkits": 0,
+        "active": true,
+        "pendingDeposit": false
+      },
+      "dawnCardVisible": false,
+      "dawnTitle": "",
+      "shot": "qa/AH-6/webgpu-08a-day2-dawn.png"
+    },
+    {
+      "tSec": 173.3,
+      "name": "Frame/Input check [day2-dawn-move]",
+      "changedPct": 99.71,
+      "frozen3D": false,
+      "distMoved": 3.681,
+      "meanLum": 46.83
+    },
+    {
+      "tSec": 176.2,
+      "name": "Walked to Day 2 Skull Window Turn-In",
+      "target": [
+        -5.9,
+        -2.2
+      ],
+      "pos": [
+        -5.96,
+        -2.55
+      ],
+      "dist": 0.36,
+      "prompt": "ETurn in 15 skulls"
+    },
+    {
+      "tSec": 181.7,
+      "name": "Banked Night 1 skulls into Cash at HQ Window!",
+      "skullsBefore": 15,
+      "cashBefore": 40,
+      "cashAfter": 72,
+      "shot": "qa/AH-6/webgpu-08c-day2-skull-deposit.png"
+    },
+    {
+      "tSec": 190,
+      "name": "Walked to Day 2 Supply Kiosk",
+      "target": [
+        -6.39,
+        2.2
+      ],
+      "pos": [
+        -5.4,
+        0
+      ],
+      "dist": 2.41,
+      "prompt": "Skull window"
+    },
+    {
+      "tSec": 193.7,
+      "name": "Walked to HQ Alarm Panel (Night 2 for Death Test)",
+      "target": [
+        3.2,
+        -5.9
+      ],
+      "pos": [
+        3.41,
+        -5.44
+      ],
+      "dist": 0.51,
+      "prompt": "EHQ panel"
+    },
+    {
+      "tSec": 194.4,
+      "name": "Sounded Night 2 alarm to test natural player death -> burial -> #again restart"
+    },
+    {
+      "tSec": 202.1,
+      "name": "Walked to Meet Zombie for Death Test",
+      "target": [
+        -186.98,
+        -7.16
+      ],
+      "pos": [
+        -10.8,
+        -5.44
+      ],
+      "dist": 176.19,
+      "prompt": ""
+    },
+    {
+      "tSec": 203.6,
+      "name": "Walked to Meet Zombie for Death Test",
+      "target": [
+        -183.32,
+        -3.6
+      ],
+      "pos": [
+        -22.05,
+        -6.26
+      ],
+      "dist": 161.29,
+      "prompt": ""
+    },
+    {
+      "tSec": 205.1,
+      "name": "Walked to Meet Zombie for Death Test",
+      "target": [
+        -178.64,
+        -6.26
+      ],
+      "pos": [
+        -26.28,
+        -7
+      ],
+      "dist": 152.36,
+      "prompt": ""
+    },
+    {
+      "tSec": 206.7,
+      "name": "Walked to Meet Zombie for Death Test",
+      "target": [
+        -169.98,
+        -5.8
+      ],
+      "pos": [
+        -32.96,
+        -7.94
+      ],
+      "dist": 137.04,
+      "prompt": ""
+    },
+    {
+      "tSec": 208.1,
+      "name": "Walked to Meet Zombie for Death Test",
+      "target": [
+        -160.96,
+        -5.28
+      ],
+      "pos": [
+        -45.27,
+        -8.92
+      ],
+      "dist": 115.75,
+      "prompt": ""
+    },
+    {
+      "tSec": 209.6,
+      "name": "Walked to Meet Zombie for Death Test",
+      "target": [
+        -152.8,
+        -5.35
+      ],
+      "pos": [
+        -58.77,
+        -8.23
+      ],
+      "dist": 94.08,
+      "prompt": ""
+    },
+    {
+      "tSec": 211.1,
+      "name": "Walked to Meet Zombie for Death Test",
+      "target": [
+        -144.37,
+        -4.72
+      ],
+      "pos": [
+        -71.53,
+        -7.14
+      ],
+      "dist": 72.88,
+      "prompt": ""
+    },
+    {
+      "tSec": 212.6,
+      "name": "Walked to Meet Zombie for Death Test",
+      "target": [
+        -136.49,
+        -3.33
+      ],
+      "pos": [
+        -84.63,
+        -5.52
+      ],
+      "dist": 51.9,
+      "prompt": ""
+    },
+    {
+      "tSec": 214.1,
+      "name": "Walked to Meet Zombie for Death Test",
+      "target": [
+        -127.65,
+        -2.4
+      ],
+      "pos": [
+        -97.28,
+        -3.09
+      ],
+      "dist": 30.38,
+      "prompt": ""
+    },
+    {
+      "tSec": 215.6,
+      "name": "Walked to Meet Zombie for Death Test",
+      "target": [
+        -119.1,
+        -0.78
+      ],
+      "pos": [
+        -107.07,
+        -1.86
+      ],
+      "dist": 12.08,
+      "prompt": ""
+    },
+    {
+      "tSec": 216.4,
+      "name": "Walked to Meet Zombie for Death Test",
+      "target": [
+        -112.02,
+        -0.4
+      ],
+      "pos": [
+        -112.01,
+        -0.35
+      ],
+      "dist": 0.06,
+      "prompt": ""
+    },
+    {
+      "tSec": 217.5,
+      "name": "Captured player taking zombie damage (#bloodScreen)",
+      "hp": 73,
+      "shot": "qa/AH-6/webgpu-09a-taking-damage-bloodscreen.png"
+    },
+    {
+      "tSec": 235.5,
+      "name": "Game Over (#win) card verified",
+      "title": "Rest easy, Jerry",
+      "skillsCount": 6,
+      "againText": "Play again",
+      "deathCause": "feral",
+      "shot": "qa/AH-6/webgpu-09c-game-over-screen.png"
+    },
+    {
+      "tSec": 239.9,
+      "name": "#again (\"PLAY AGAIN\") returned to Title Menu; now clicking #modeHunt to deploy Run #2!",
+      "shot": "qa/AH-6/webgpu-10a-after-play-again-menu.png"
+    },
+    {
+      "tSec": 254.2,
+      "name": "Frame/Input check [restarted-run2-day1]",
+      "changedPct": 98.141,
+      "frozen3D": false,
+      "distMoved": 0,
+      "meanLum": 63.35
+    },
+    {
+      "tSec": 254.3,
+      "name": "Post-restart Run #2 state audit",
+      "day": 1,
+      "phase": "prep",
+      "hp": 100,
+      "cash": 40,
+      "skulls": 0,
+      "bloodScreenOpacity": 0,
+      "leftoverWaveZombies": 0,
+      "previousRunGravePresent": false,
+      "cineStillActive": false
+    }
+  ],
+  "frameChecks": [
+    {
+      "tSec": 57.1,
+      "tag": "day1-spawn-3p",
+      "shotA": "qa/AH-6/webgpu-03b-day1-spawn-a.png",
+      "shotB": "qa/AH-6/webgpu-03b-day1-spawn-b.png",
+      "meanLumA": 65.1,
+      "meanLumB": 67.76,
+      "isBlackA": false,
+      "isBlackB": false,
+      "changedPct": 88.84,
+      "frozen3D": false,
+      "distMoved": 3.667,
+      "posBefore": {
+        "x": 42,
+        "y": -7.547,
+        "z": -20
+      },
+      "posAfter": {
+        "x": 38.333,
+        "y": -7.281,
+        "z": -20
+      },
+      "perfText": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 39 low 30 worst 33ms hitch 6 draws 338 tris 722k zombs 3"
+    },
+    {
+      "tSec": 60.3,
+      "tag": "day1-1p-view",
+      "shotA": "qa/AH-6/webgpu-04-day1-1p-a.png",
+      "shotB": "qa/AH-6/webgpu-04-day1-1p-b.png",
+      "meanLumA": 73.67,
+      "meanLumB": 74.96,
+      "isBlackA": false,
+      "isBlackB": false,
+      "changedPct": 82.516,
+      "frozen3D": false,
+      "distMoved": 3.647,
+      "posBefore": {
+        "x": 38.333,
+        "y": -7.281,
+        "z": -20
+      },
+      "posAfter": {
+        "x": 38.333,
+        "y": -7.018,
+        "z": -16.353
+      },
+      "perfText": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 37 low 20 worst 50ms hitch 8 draws 527 tris 1840k zombs 3"
+    },
+    {
+      "tSec": 97.8,
+      "tag": "post-all-hq-stations",
+      "shotA": "qa/AH-6/webgpu-05g-after-stations-a.png",
+      "shotB": "qa/AH-6/webgpu-05g-after-stations-b.png",
+      "meanLumA": 49.97,
+      "meanLumB": 61.5,
+      "isBlackA": false,
+      "isBlackB": false,
+      "changedPct": 95.257,
+      "frozen3D": false,
+      "distMoved": 3.566,
+      "posBefore": {
+        "x": 1.792,
+        "y": -3.169,
+        "z": -5.42
+      },
+      "posAfter": {
+        "x": 1.792,
+        "y": -3.169,
+        "z": -8.986
+      },
+      "perfText": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 27 low 21 worst 48ms hitch 33 draws 449 tris 816k zombs 3"
+    },
+    {
+      "tSec": 173.3,
+      "tag": "day2-dawn-move",
+      "shotA": "qa/AH-6/webgpu-08b-day2-move-a.png",
+      "shotB": "qa/AH-6/webgpu-08b-day2-move-b.png",
+      "meanLumA": 30.03,
+      "meanLumB": 46.83,
+      "isBlackA": false,
+      "isBlackB": false,
+      "changedPct": 99.71,
+      "frozen3D": false,
+      "distMoved": 3.681,
+      "posBefore": {
+        "x": 2.873,
+        "y": -3.169,
+        "z": 8.495
+      },
+      "posAfter": {
+        "x": 6.554,
+        "y": -3.169,
+        "z": 8.495
+      },
+      "perfText": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 58 low 39 worst 26ms hitch 191 draws 399 tris 983k zombs 4"
+    },
+    {
+      "tSec": 254.2,
+      "tag": "restarted-run2-day1",
+      "shotA": "qa/AH-6/webgpu-10b-restarted-day1-a.png",
+      "shotB": "qa/AH-6/webgpu-10b-restarted-day1-b.png",
+      "meanLumA": 65.98,
+      "meanLumB": 63.35,
+      "isBlackA": false,
+      "isBlackB": false,
+      "changedPct": 98.141,
+      "frozen3D": false,
+      "distMoved": 0,
+      "posBefore": {
+        "x": 42,
+        "y": -7.545,
+        "z": -20
+      },
+      "posAfter": {
+        "x": 42,
+        "y": -7.545,
+        "z": -20
+      },
+      "perfText": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 11 low 1 worst 1097ms hitch 236 draws 415 tris 600k zombs 0"
+    }
+  ],
+  "stationChecks": [
+    {
+      "station": "CIF",
+      "prompt": "ECIF",
+      "dist": 0.2,
+      "opened": true,
+      "closedCleanly": true,
+      "shot": "qa/AH-6/webgpu-05a-station-cif.png"
+    },
+    {
+      "station": "Armory",
+      "prompt": "EArmory",
+      "dist": 0.4,
+      "opened": true,
+      "closedCleanly": true,
+      "shot": "qa/AH-6/webgpu-05b-station-armory.png"
+    },
+    {
+      "station": "Supply Kiosk",
+      "prompt": "ESupply Terminal",
+      "dist": 0.84,
+      "opened": true,
+      "closedCleanly": true,
+      "shot": "qa/AH-6/webgpu-05c-station-kiosk.png"
+    },
+    {
+      "station": "Skull Window (0 skulls)",
+      "prompt": "Skull window",
+      "dist": 0.32,
+      "opened": true,
+      "closedCleanly": true,
+      "shot": "qa/AH-6/webgpu-05d-station-skull-window.png"
+    },
+    {
+      "station": "Duty Board",
+      "prompt": "EDuty board",
+      "dist": 0.55,
+      "opened": true,
+      "closedCleanly": true,
+      "shot": "qa/AH-6/webgpu-05e-station-duty-board.png"
+    },
+    {
+      "station": "HQ Radio",
+      "prompt": "ERadio",
+      "dist": 0.49,
+      "opened": true,
+      "closedCleanly": true,
+      "shot": "qa/AH-6/webgpu-05f-station-radio.png"
+    }
+  ],
+  "combatSummary": {
+    "shotsFired": 99,
+    "reloadsTriggered": 0,
+    "knifeSwings": 24,
+    "maxLiveSeen": 15,
+    "invisibleLiveZombies": 0,
+    "nanZombies": 0
+  },
+  "deathAndRestart": {
+    "gameOverInfo": {
+      "title": "Rest easy, Jerry",
+      "skillsCount": 6,
+      "againText": "Play again",
+      "deathCause": "feral"
+    },
+    "returnedToMenuOnAgain": true,
+    "postRestartAudit": {
+      "day": 1,
+      "phase": "prep",
+      "hp": 100,
+      "cash": 40,
+      "skulls": 0,
+      "bloodScreenOpacity": 0,
+      "leftoverWaveZombies": 0,
+      "previousRunGravePresent": false,
+      "cineStillActive": false
+    },
+    "restartMoveCheck": {
+      "tSec": 254.2,
+      "tag": "restarted-run2-day1",
+      "shotA": "qa/AH-6/webgpu-10b-restarted-day1-a.png",
+      "shotB": "qa/AH-6/webgpu-10b-restarted-day1-b.png",
+      "meanLumA": 65.98,
+      "meanLumB": 63.35,
+      "isBlackA": false,
+      "isBlackB": false,
+      "changedPct": 98.141,
+      "frozen3D": false,
+      "distMoved": 0,
+      "posBefore": {
+        "x": 42,
+        "y": -7.545,
+        "z": -20
+      },
+      "posAfter": {
+        "x": 42,
+        "y": -7.545,
+        "z": -20
+      },
+      "perfText": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 11 low 1 worst 1097ms hitch 236 draws 415 tris 600k zombs 0"
+    }
+  },
+  "anomalies": [
+    {
+      "severity": "P1",
+      "kind": "kiosk-stuck-locked-after-dawn",
+      "day2ShopOpen": false
+    },
+    {
+      "severity": "P1",
+      "kind": "movement-input-blocked",
+      "tag": "restarted-run2-day1",
+      "check": {
+        "tSec": 254.2,
+        "tag": "restarted-run2-day1",
+        "shotA": "qa/AH-6/webgpu-10b-restarted-day1-a.png",
+        "shotB": "qa/AH-6/webgpu-10b-restarted-day1-b.png",
+        "meanLumA": 65.98,
+        "meanLumB": 63.35,
+        "isBlackA": false,
+        "isBlackB": false,
+        "changedPct": 98.141,
+        "frozen3D": false,
+        "distMoved": 0,
+        "posBefore": {
+          "x": 42,
+          "y": -7.545,
+          "z": -20
+        },
+        "posAfter": {
+          "x": 42,
+          "y": -7.545,
+          "z": -20
+        },
+        "perfText": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 11 low 1 worst 1097ms hitch 236 draws 415 tris 600k zombs 0"
+      }
+    },
+    {
+      "severity": "P1",
+      "kind": "gameplay-raf-stalls-over-500ms",
+      "stalls": [
+        {
+          "tMs": 236366,
+          "gapMs": 1416.6,
+          "stage": "restart-run2",
+          "hudPhase": "idle",
+          "day": 0
+        },
+        {
+          "tMs": 237383,
+          "gapMs": 1016.6,
+          "stage": "restart-run2",
+          "hudPhase": "idle",
+          "day": 0
+        },
+        {
+          "tMs": 238500,
+          "gapMs": 1116.6,
+          "stage": "restart-run2",
+          "hudPhase": "idle",
+          "day": 0
+        },
+        {
+          "tMs": 240716,
+          "gapMs": 600,
+          "stage": "restart-run2",
+          "hudPhase": "prep",
+          "day": 1
+        }
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "consoleWarnings": [
+    {
+      "t": 22533,
+      "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+    },
+    {
+      "t": 24948,
+      "text": "AttributeNode: Vertex attribute \"uv\" not found on geometry."
+    }
+  ],
+  "fatalError": "AssertionError [ERR_ASSERTION]: Did not return to Title Screen after Quit to Menu\n    at file:///C:/Users/Zero/Desktop/Tiny%20Trek/qa/AH-6/play-night1-hunt.mjs:1323:3",
+  "monitor": {
+    "rafCount": 9184,
+    "maxRafGapMs": 1416.6,
+    "hitches": [
+      {
+        "tMs": 42419,
+        "gapMs": 416.8,
+        "stage": "marine-insertion",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 42702,
+        "gapMs": 283.3,
+        "stage": "marine-insertion",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 42869,
+        "gapMs": 166.6,
+        "stage": "marine-insertion",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 51952,
+        "gapMs": 166.6,
+        "stage": "marine-insertion",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 75969,
+        "gapMs": 133.3,
+        "stage": "hq-stations",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 76535,
+        "gapMs": 466.7,
+        "stage": "hq-stations",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 236366,
+        "gapMs": 1416.6,
+        "stage": "restart-run2",
+        "hudPhase": "idle",
+        "day": 0
+      },
+      {
+        "tMs": 237383,
+        "gapMs": 1016.6,
+        "stage": "restart-run2",
+        "hudPhase": "idle",
+        "day": 0
+      },
+      {
+        "tMs": 238500,
+        "gapMs": 1116.6,
+        "stage": "restart-run2",
+        "hudPhase": "idle",
+        "day": 0
+      },
+      {
+        "tMs": 240716,
+        "gapMs": 600,
+        "stage": "restart-run2",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 241166,
+        "gapMs": 450,
+        "stage": "restart-run2",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 241983,
+        "gapMs": 133.4,
+        "stage": "restart-run2",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 244966,
+        "gapMs": 133.5,
+        "stage": "restart-run2",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 245100,
+        "gapMs": 133.2,
+        "stage": "restart-run2",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 245800,
+        "gapMs": 149.7,
+        "stage": "restart-run2",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 253833,
+        "gapMs": 183.6,
+        "stage": "quit-to-menu",
+        "hudPhase": "prep",
+        "day": 1
+      },
+      {
+        "tMs": 254000,
+        "gapMs": 166.6,
+        "stage": "quit-to-menu",
+        "hudPhase": "prep",
+        "day": 1
+      }
+    ],
+    "dwEvents": [
+      {
+        "t": 8166,
+        "type": "quest",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 22969,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 30696,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 30953,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 31211,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 31478,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 31851,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 32252,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 32805,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 33075,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 33402,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 33723,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 34321,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 34723,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 34976,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 35265,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 35533,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 35790,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 36056,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 36313,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 36573,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 36838,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 37094,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 37360,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 37618,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 37869,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 38125,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 38379,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 38642,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 38899,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 39150,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 39408,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 39656,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 39914,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 40178,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 40438,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 40690,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 40944,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 41213,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 41466,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 41727,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 41996,
+        "type": "prep-state",
+        "day": 0,
+        "panel": null
+      },
+      {
+        "t": 42012,
+        "type": "prep-checklist-view",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 42012,
+        "type": "run-reset",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 42014,
+        "type": "quest",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 42062,
+        "type": "hush-state",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 42117,
+        "type": "hush-state",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 42118,
+        "type": "prep-label",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 42118,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 42119,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 42972,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 43254,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 43505,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 43770,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 44026,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 44282,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 44552,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 44827,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 45085,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 45350,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 45623,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 45888,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 46147,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 46398,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 46670,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 46923,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 47180,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 47446,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 47711,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 47962,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 48215,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 48477,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 48749,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 49016,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 49282,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 49551,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 49823,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 50087,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 50347,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 50633,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 50898,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 51159,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 51418,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 51679,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 51780,
+        "type": "controls-ready",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 51823,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 51833,
+        "type": "poi-guards",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 51835,
+        "type": "enemy-first-seen",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 51836,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 51969,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 51970,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 51995,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 51995,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52017,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52018,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52040,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52040,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52059,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52060,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52063,
+        "type": "prep-checklist-view",
+        "day": null,
+        "panel": null
+      },
+      {
+        "t": 52063,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52080,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52080,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52098,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52098,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52114,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52115,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52139,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52139,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52168,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52168,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52195,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52196,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52219,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52220,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52244,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52244,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52264,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52264,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52290,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52291,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52317,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52327,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52332,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52346,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52347,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52371,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52371,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52388,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52388,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52409,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52410,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52427,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52427,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52447,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52447,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52467,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52467,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52492,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52492,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52511,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52511,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52530,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52530,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52550,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52550,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52571,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52571,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52573,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52592,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52593,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52611,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52611,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52631,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52631,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52657,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52657,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52677,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52677,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52697,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52697,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52720,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52726,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52750,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52750,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52780,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52780,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52800,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52800,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52825,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52825,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52829,
+        "type": "prep-state",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52858,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52858,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52880,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52881,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52912,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52912,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52936,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      },
+      {
+        "t": 52937,
+        "type": "prep-hud",
+        "day": 1,
+        "panel": null
+      }
+    ],
+    "hudState": {
+      "day": 1,
+      "phase": "prep",
+      "cash": 40,
+      "skulls": 0,
+      "hp": 100,
+      "maxHp": 100,
+      "medkits": 0,
+      "active": true,
+      "pendingDeposit": false
+    },
+    "winErrors": [],
+    "rejections": [],
+    "consoleErrs": [],
+    "consoleWarns": [
+      {
+        "t": 22533,
+        "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+      },
+      {
+        "t": 24948,
+        "text": "AttributeNode: Vertex attribute \"uv\" not found on geometry."
+      }
+    ],
+    "gpuUncaptured": [],
+    "webglContextLost": 0,
+    "phaseLabel": "quit-to-menu",
+    "gpuHooked": true
+  },
+  "completedAt": "2026-11-21T05:36:43.670Z",
+  "durationSec": 270.7
+}

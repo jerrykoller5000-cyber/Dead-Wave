@@ -1,11 +1,15 @@
 import {detailUV} from '../studio/zombie-detail.js';
 // GP-19864: CIF cloth shares the existing skeleton; template geometry stays untouched.
 export const MILITARY_CAMOS = Object.freeze(['marpat','m81','ucp','multicam','dcu']);
-let variant = 0;
+let respawnVariant = 0;
 export function prepareMilitaryAppearance(T,g,camoTex){
   const u=g.userData;if(u.typeKey!=='military')return;
   const colors=[0x626448,0x8a805a,0x3c4633].map(n=>new T.Color(n));
-  const material=new T.MeshStandardMaterial({map:camoTex(MILITARY_CAMOS[variant++%5]),roughness:.98,vertexColors:true});
+  // Use the body's existing seeded phase so constructing a uniform consumes no RNG draw.
+  const phase = u.variant?.phase ?? 0;
+  const index = Math.floor(phase / (2 * Math.PI) * MILITARY_CAMOS.length);
+  const key = MILITARY_CAMOS[index] ?? MILITARY_CAMOS[0];
+  const material=new T.MeshStandardMaterial({map:camoTex(key),roughness:.98,vertexColors:true});
   material.userData.militaryUniform=true;
   const parts=[];g.traverse(o=>{if(o.isMesh&&o.geometry?.attributes.color)parts.push(o);});
   for(const m of parts){
@@ -40,11 +44,11 @@ export function prepareMilitaryAppearance(T,g,camoTex){
   if(sharedFit)fittedCarrier(T,u,material,scale,gearMaterial);
   else wornCarrier(T,u,material,scale,gearMaterial);
   batchWornGear(T,u.torso);batchWornGear(T,u.head);
-  u.militaryCamo=MILITARY_CAMOS[(variant-1)%5];u.militaryCamoTex=camoTex;
+  u.militaryCamo=key;u.militaryCamoTex=camoTex;
 }
 export function cycleMilitaryCamo(g){
   const u=g.userData;if(!u.militaryCamoTex)return;
-  const key=MILITARY_CAMOS[variant++%5];u.militaryCamo=key;
+  const key=MILITARY_CAMOS[respawnVariant++ % MILITARY_CAMOS.length];u.militaryCamo=key;
   g.traverse(o=>{if(o.isMesh&&o.material?.userData.militaryUniform&&!o.material.userData.militaryGear)o.material.map=u.militaryCamoTex(key);});
 }
 

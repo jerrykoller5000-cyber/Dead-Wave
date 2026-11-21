@@ -1250,19 +1250,27 @@ const SECTIONS = {
 // any animation). So the body at rest is AG's shape exactly; only the turning centres are the game's (all within 2 cm of
 // AG's after the v5 rig, except the knee: the game's thigh is 2 cm shorter, legs B owns that, D-197).
 // Not yet (later steps): the feature tags (tooth slots, wound twins, hair regions: step 2b), the atlas (step 3: AG's colours
-// ride in the vertex colours here), the moving jaw (ChatGPT's jawPiece; the jaw rides the head bone), LOD1/shadow (Claude 2).
+// ride in the vertex colours here), LOD1/shadow (Claude 2). The moving jaw: s42 below (u.shamblerJaw, review).
 let v5Template = null;
 function shamblerV5Section(A, T, g, s, P, M) {
   const u = g.userData, AG = v5Template || (v5Template = buildShamblerV5(T, { lod: 0 }));
   const ab = AG.bones, agHips = ab.hips.getWorldPosition(new T.Vector3());
   // the game's bone for each AG bone (by side: AG 'L' is at +x = the game's R)
   const elbow = (a) => a.userData.elbowG, shin = (l) => l.userData.shinG;
-  const map = new Map([[ab.hips, u.hips], [ab.torso, u.torso], [ab.head, u.head], [ab.jaw, u.head], [ab.armL, u.armRG], [ab.armR, u.armLG],
+  // a game bone's rest place in hips-space (positions and scales only)
+  const restAt = (b) => { const v = new T.Vector3(); for (let o = b; o && o !== u.hips; o = o.parent) { v.multiply(o.scale).add(o.position); } return v; };
+  // CC-359 s42 (review): the moving jaw. AG's jaw group (its hinge, head-local (0, .232, -.004): the lower face cut from the skull
+  // shell at the seam, the lower gums, teeth and the jaw's inside) goes onto its OWN joint, u.shamblerJaw, a child of the head
+  // bone at AG's hinge. At rotation 0 it is the head exactly. ChatGPT's joins line blends it with the head round the hinge;
+  // Claude 5 swings it (rotation.x: + opens). Not u.jaw: index.html swings any u.jaw by its own rule.
+  const jawG = u.shamblerJaw || new T.Group(); jawG.name = 'shambler-jaw';   // one joint, even if this body is built again
+  { AG.root.updateMatrixWorld(true); const h = ab.jaw.getWorldPosition(new T.Vector3()).applyMatrix4(new T.Matrix4().copy(AG.root.matrixWorld).invert());
+    h.sub(agHips).multiplyScalar(s); h.y += .025 * s; h.sub(restAt(u.head)).divideScalar(u.head.scale.x || 1); jawG.position.copy(h); }
+  if (jawG.parent !== u.head) u.head.add(jawG); u.shamblerJaw = jawG;
+  const map = new Map([[ab.hips, u.hips], [ab.torso, u.torso], [ab.head, u.head], [ab.jaw, jawG], [ab.armL, u.armRG], [ab.armR, u.armLG],
     [ab.elbowL, elbow(u.armRG)], [ab.elbowR, elbow(u.armLG)], [ab.legL, u.legRG], [ab.legR, u.legLG], [ab.shinL, shin(u.legRG)], [ab.shinR, shin(u.legLG)],
     [ab.ankleL, shin(u.legRG)], [ab.ankleR, shin(u.legLG)]]);
   const boots = new Set([ab.ankleL, ab.ankleR]);
-  // a game bone's rest place in hips-space (positions and scales only)
-  const restAt = (b) => { const v = new T.Vector3(); for (let o = b; o && o !== u.hips; o = o.parent) { v.multiply(o.scale).add(o.position); } return v; };
   const agBoneOf = (o) => { for (let n = o; n; n = n.parent) if (map.has(n)) return n; return null; };
   // CC-359 step 3: every piece paints from ONE shared atlas (AG's FINAL ATLAS 512: hair, blood, skin, cloth, leather), one material,
   // so the game's merge makes ONE skinned draw. Each piece's own 0..1 UVs go into its zone's rect (AG's atlasZoneForMesh); the
@@ -1281,6 +1289,7 @@ function shamblerV5Section(A, T, g, s, P, M) {
     const sc = gb.scale.x || 1; if (sc !== 1) geo.scale(1 / sc, 1 / sc, 1 / sc);
     const zone = cc359AtlasZone(name), uv = geo.attributes.uv; geo.setAttribute('uv', new T.Float32BufferAttribute(cc359AtlasUV(uv, geo.attributes.position.count, AT.rects[zone] || AT.rects.skin), 2));
     const m = A.put(gb, geo, mat(name)); m.name = 'v5 ' + name; m.userData.cc355 = true; m.userData.cc359v5 = name; m.userData.cc359Zone = zone;
+    if (name === 'shambler-skull-cranium' || name === 'shambler-lower-jaw') m.userData.cc359JawSkin = true;   // CC-359 jaw (review): the skin pieces the jaw's joins rule may bend (the shell + the jaw's piece of it; not teeth/gums/cavities); zombie-concepts' batchSurfaces turns it into geometry.userData.cc359JawSkinMask (GP-20162)
     if (boots.has(agB)) m.userData.bootAttachment = true;      // prepareShamblerFeet moves these to the ankle (not by colour)
     if (!first.has(gb)) first.set(gb, m);
   };
@@ -1315,7 +1324,7 @@ let v5Lod1 = null;
 export function shamblerLod1Parts(T, g, s = 1) {
   const u = g.userData, AG = v5Lod1 || (v5Lod1 = buildShamblerV5(T, { lod: 1 })), ab = AG.bones;
   const agHips = ab.hips.getWorldPosition(new T.Vector3()), elbow = (a) => a.userData.elbowG, shin = (l) => l.userData.shinG;
-  const map = new Map([[ab.hips, u.hips], [ab.torso, u.torso], [ab.head, u.head], [ab.jaw, u.head], [ab.armL, u.armRG], [ab.armR, u.armLG],
+  const map = new Map([[ab.hips, u.hips], [ab.torso, u.torso], [ab.head, u.head], [ab.jaw, u.shamblerJaw || u.head], [ab.armL, u.armRG], [ab.armR, u.armLG],
     [ab.elbowL, elbow(u.armRG)], [ab.elbowR, elbow(u.armLG)], [ab.legL, u.legRG], [ab.legR, u.legLG], [ab.shinL, shin(u.legRG)], [ab.shinR, shin(u.legLG)],
     [ab.ankleL, shin(u.legRG)], [ab.ankleR, shin(u.legLG)]]);
   const boots = new Set([ab.ankleL, ab.ankleR]), AT = shamblerAtlas(T, { size: 512 });

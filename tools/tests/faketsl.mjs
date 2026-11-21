@@ -37,3 +37,8 @@ export function instancedArray(count, type) {
 }
 export const instanceIndex = makeStub("instanceIndex");
 export function vertexColor() { return makeStub("vertexColor"); }
+
+// CB-369 (21 Nov): GP-20173's intake skulls tint their glow with color(); GU-5's WebGL forest builds its instance matrix
+// from four vec4 columns (mat4 of instancedDynamicBufferAttribute). The stubs only have to be nodes.
+export const color = makeStub('color'), mat4 = makeStub('mat4');
+export function instancedDynamicBufferAttribute() { return makeStub('instancedDynamicBufferAttribute'); }

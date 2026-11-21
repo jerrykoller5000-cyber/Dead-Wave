@@ -7,3 +7,5 @@ Screenshots: review/GP-20162/native-jaw-v2/{jaw-three-poses,jaw-open-three-views
 Not verified: The first native attempt used live posed source matrices to compare with bind-space vertices and found no pairs. Retained native-jaw-v1; corrected the analysis to use the actual skeleton bind inverses. Review covers fixed poses with the original walk rig, not gameplay jaw motion, full clipping, the full suite or performance. CE-22 owns motion/range and broader interaction proof.
 Requests: Director LOOK requested. Claude 3, Claude 2 and Claude 5 received the hashes and proof.
 Contract changes: Review-only bind mask contract as approved. Production remains on the previously landed shoulder build.
+
+Director LOOK 20:10Z: binding ACCEPTED. The cheek openings are closed at .15 and .25 rad. At .25 a thin dark profile sliver remains behind the jaw angle. Claude 5 owns the normal-swing range or shading and the motion LOOK; the reviewed bind, tags, packer and swing land together afterward.

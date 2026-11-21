@@ -1,5 +1,5 @@
 // On-demand presentation only. The owner supplies a picture of the actual gun at each angle.
-export function createArmoryPreview({doc=document, render, labels}) {
+export function createArmoryPreview({doc=document, render, placeholder, labels}) {
   const host=doc.defaultView, element=doc.createElement('div'); element.className='armory-preview';
   const stage=doc.createElement('div'); stage.className='armory-preview-stage'; stage.tabIndex=0;
   const picture=doc.createElement('img'); picture.alt='';picture.draggable=false;picture.hidden=true;stage.append(picture);
@@ -13,6 +13,17 @@ export function createArmoryPreview({doc=document, render, labels}) {
   const pointers=new Map();
   let pinch=null;
   const clampZoom=value=>Math.max(1,Math.min(2.5,value));
+  let standIn=null;
+  function removeStandIn() {
+    standIn?.remove();
+    standIn=null;
+  }
+  function showStandIn() {
+    if(!placeholder||standIn)return;
+    standIn=placeholder(kind);
+    standIn.setAttribute('aria-hidden','true');
+    stage.append(standIn);
+  }
   function schedule() {
     if(!active||disposed||!kind)return;
     dirty=true;
@@ -23,7 +34,7 @@ export function createArmoryPreview({doc=document, render, labels}) {
     dirty=false;busy=true;const request=revision,gun=kind,view={yaw,pitch,zoom};
     let url=null;try{url=await render(gun,view);}catch(_){/* A failed preview must not block the workbench. */}
     if(!disposed&&active&&request===revision){
-      picture.hidden=!url;if(url)picture.src=url;
+      picture.hidden=!url;if(url){picture.src=url;removeStandIn();}else showStandIn();
       hint.textContent=url?labels.hint:labels.unavailable;
       for(const b of buttons)b.disabled=!url;
       stage.dataset.ready=String(!!url);
@@ -92,7 +103,8 @@ export function createArmoryPreview({doc=document, render, labels}) {
       // A changed gun or fit invalidates pending artwork. Pointer angles do not:
       // present each completed angle while the next requested angle is rendering.
       revision++;
-      if(kind!==next){kind=next;yaw=0;pitch=0;zoom=zoomTo=1;picture.hidden=true;picture.removeAttribute('src');}
+      if(kind!==next){removeStandIn();kind=next;yaw=0;pitch=0;zoom=zoomTo=1;picture.hidden=true;picture.removeAttribute('src');}
+      if(picture.hidden)showStandIn();
       active=true;stage.dataset.ready='false';stage.setAttribute('aria-label',label);stage.setAttribute('role','group');
       for(const b of buttons)b.disabled=true;schedule();
     },

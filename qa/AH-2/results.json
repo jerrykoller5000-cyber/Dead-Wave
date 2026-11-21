@@ -1,0 +1,1076 @@
+{
+  "startedAt": "2026-11-21T00:46:55.884Z",
+  "trials": [
+    {
+      "id": "webgpu-run1",
+      "group": "webgpu",
+      "relUrl": "index.html?solid=1",
+      "enablePerfHudInStorage": false,
+      "elapsedMs": 51664,
+      "trainingBlackoutMs": 16771,
+      "screenshots": {
+        "title": "qa/AH-2/webgpu-run1-0-title.png",
+        "spawn": "qa/AH-2/webgpu-run1-a-spawn.png",
+        "afterMove1P": "qa/AH-2/webgpu-run1-b-after-move-1p.png"
+      },
+      "pixelComparison3D": {
+        "region": {
+          "x0": 320,
+          "y0": 180,
+          "x1": 1600,
+          "y1": 860
+        },
+        "totalPixels": 868719,
+        "changedPixels": 757549,
+        "changedPct": 87.203,
+        "meanChannelDiff": 65.125,
+        "maxChannelDiff": 236,
+        "frozen3D": false
+      },
+      "titleHooks": null,
+      "trainingHooks": {
+        "label": "webgpu-run1-training",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "openingPhase": "menu",
+        "openingHidden": true,
+        "visibilityState": "visible",
+        "hasFocus": true,
+        "perfHudTextBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 49 low 18 worst 56ms hitch 2 draws 305 tris 185k zombs 0",
+        "trainingBlackoutOn": false,
+        "backendIsWebGPU": true,
+        "backendName": "WebGPUBackend",
+        "trainingState": {
+          "active": true,
+          "warming": false,
+          "bgWarming": false,
+          "recovering": false
+        },
+        "flightHold": false,
+        "cutawayKeepersStillInScene": false,
+        "animLoopExists": true,
+        "animLoopType": "function",
+        "animLoopName": "tick",
+        "animRequestIdBefore": 2867,
+        "boundTargetBefore": null,
+        "infoBefore": {
+          "frame": 1078,
+          "calls": 8425,
+          "drawCalls": 305,
+          "triangles": 185225
+        },
+        "rafSampleCount": 20,
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "renderSceneEntries": 300,
+        "backendBeginRenderEntries": 300,
+        "backendDrawEntries": 6100,
+        "renderThrown": null,
+        "gpuScopedValidationErr": null,
+        "gpuScopedOomErr": null,
+        "gpuScopedInternalErr": null,
+        "uncapturedErrors": [],
+        "animRequestIdAfter": 2987,
+        "boundTargetAfter": null,
+        "perfHudTextAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 53 low 19 worst 53ms hitch 2 draws 305 tris 185k zombs 0",
+        "infoAfter": {
+          "frame": 1103,
+          "calls": 8800,
+          "drawCalls": 305,
+          "triangles": 185225
+        },
+        "stampedAfterPerfClick": true
+      },
+      "pageErrors": [],
+      "consoleErrorsAndWarnings": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        }
+      ]
+    },
+    {
+      "id": "webgpu-run2",
+      "group": "webgpu",
+      "relUrl": "index.html",
+      "enablePerfHudInStorage": false,
+      "elapsedMs": 53720,
+      "trainingBlackoutMs": 16841,
+      "screenshots": {
+        "title": "qa/AH-2/webgpu-run2-0-title.png",
+        "spawn": "qa/AH-2/webgpu-run2-a-spawn.png",
+        "afterMove1P": "qa/AH-2/webgpu-run2-b-after-move-1p.png"
+      },
+      "pixelComparison3D": {
+        "region": {
+          "x0": 320,
+          "y0": 180,
+          "x1": 1600,
+          "y1": 860
+        },
+        "totalPixels": 868719,
+        "changedPixels": 754010,
+        "changedPct": 86.796,
+        "meanChannelDiff": 65.124,
+        "maxChannelDiff": 243,
+        "frozen3D": false
+      },
+      "titleHooks": null,
+      "trainingHooks": {
+        "label": "webgpu-run2-training",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "openingPhase": "menu",
+        "openingHidden": true,
+        "visibilityState": "visible",
+        "hasFocus": true,
+        "perfHudTextBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 51 low 18 worst 54ms hitch 1 draws 304 tris 185k zombs 0",
+        "trainingBlackoutOn": false,
+        "backendIsWebGPU": true,
+        "backendName": "WebGPUBackend",
+        "trainingState": {
+          "active": true,
+          "warming": false,
+          "bgWarming": false,
+          "recovering": false
+        },
+        "flightHold": false,
+        "cutawayKeepersStillInScene": false,
+        "animLoopExists": true,
+        "animLoopType": "function",
+        "animLoopName": "tick",
+        "animRequestIdBefore": 2523,
+        "boundTargetBefore": null,
+        "infoBefore": {
+          "frame": 972,
+          "calls": 7570,
+          "drawCalls": 304,
+          "triangles": 185391
+        },
+        "rafSampleCount": 20,
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "renderSceneEntries": 300,
+        "backendBeginRenderEntries": 300,
+        "backendDrawEntries": 6080,
+        "renderThrown": null,
+        "gpuScopedValidationErr": null,
+        "gpuScopedOomErr": null,
+        "gpuScopedInternalErr": null,
+        "uncapturedErrors": [],
+        "animRequestIdAfter": 2647,
+        "boundTargetAfter": null,
+        "perfHudTextAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 55 low 18 worst 54ms hitch 1 draws 304 tris 185k zombs 0",
+        "infoAfter": {
+          "frame": 998,
+          "calls": 7960,
+          "drawCalls": 304,
+          "triangles": 185391
+        },
+        "stampedAfterPerfClick": true
+      },
+      "pageErrors": [],
+      "consoleErrorsAndWarnings": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        }
+      ]
+    },
+    {
+      "id": "webgpu-run3",
+      "group": "webgpu",
+      "relUrl": "index.html?solid=1",
+      "enablePerfHudInStorage": true,
+      "elapsedMs": 51988,
+      "trainingBlackoutMs": 16637,
+      "screenshots": {
+        "title": "qa/AH-2/webgpu-run3-0-title.png",
+        "spawn": "qa/AH-2/webgpu-run3-a-spawn.png",
+        "afterMove1P": "qa/AH-2/webgpu-run3-b-after-move-1p.png"
+      },
+      "pixelComparison3D": {
+        "region": {
+          "x0": 320,
+          "y0": 180,
+          "x1": 1600,
+          "y1": 860
+        },
+        "totalPixels": 868719,
+        "changedPixels": 756079,
+        "changedPct": 87.034,
+        "meanChannelDiff": 65.382,
+        "maxChannelDiff": 229,
+        "frozen3D": false
+      },
+      "titleHooks": {
+        "label": "webgpu-run3-title",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "openingPhase": "menu",
+        "openingHidden": true,
+        "visibilityState": "visible",
+        "hasFocus": true,
+        "perfHudTextBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 54 low 22 worst 45ms hitch 28 draws 362 tris 779k zombs 0",
+        "trainingBlackoutOn": false,
+        "backendIsWebGPU": true,
+        "backendName": "WebGPUBackend",
+        "trainingState": {
+          "active": false,
+          "warming": false,
+          "bgWarming": false,
+          "recovering": false
+        },
+        "flightHold": false,
+        "cutawayKeepersStillInScene": false,
+        "animLoopExists": true,
+        "animLoopType": "function",
+        "animLoopName": "tick",
+        "animRequestIdBefore": 1326,
+        "boundTargetBefore": null,
+        "infoBefore": {
+          "frame": 637,
+          "calls": 2917,
+          "drawCalls": 363,
+          "triangles": 778766
+        },
+        "rafSampleCount": 20,
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "renderSceneEntries": 300,
+        "backendBeginRenderEntries": 300,
+        "backendDrawEntries": 7302,
+        "renderThrown": null,
+        "gpuScopedValidationErr": null,
+        "gpuScopedOomErr": null,
+        "gpuScopedInternalErr": null,
+        "uncapturedErrors": [],
+        "animRequestIdAfter": 1415,
+        "boundTargetAfter": null,
+        "perfHudTextAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 55 low 22 worst 45ms hitch 28 draws 365 tris 761k zombs 0",
+        "infoAfter": {
+          "frame": 660,
+          "calls": 3262,
+          "drawCalls": 365,
+          "triangles": 760652
+        }
+      },
+      "trainingHooks": {
+        "label": "webgpu-run3-training",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "openingPhase": "menu",
+        "openingHidden": true,
+        "visibilityState": "visible",
+        "hasFocus": true,
+        "perfHudTextBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 43 low 4 worst 235ms hitch 36 draws 305 tris 208k zombs 0",
+        "trainingBlackoutOn": false,
+        "backendIsWebGPU": true,
+        "backendName": "WebGPUBackend",
+        "trainingState": {
+          "active": true,
+          "warming": false,
+          "bgWarming": false,
+          "recovering": false
+        },
+        "flightHold": false,
+        "cutawayKeepersStillInScene": false,
+        "animLoopExists": true,
+        "animLoopType": "function",
+        "animLoopName": "tick",
+        "animRequestIdBefore": 2358,
+        "boundTargetBefore": null,
+        "infoBefore": {
+          "frame": 931,
+          "calls": 6970,
+          "drawCalls": 305,
+          "triangles": 207841
+        },
+        "rafSampleCount": 20,
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "renderSceneEntries": 300,
+        "backendBeginRenderEntries": 300,
+        "backendDrawEntries": 6100,
+        "renderThrown": null,
+        "gpuScopedValidationErr": null,
+        "gpuScopedOomErr": null,
+        "gpuScopedInternalErr": null,
+        "uncapturedErrors": [],
+        "animRequestIdAfter": 2474,
+        "boundTargetAfter": null,
+        "perfHudTextAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 48 low 4 worst 235ms hitch 36 draws 305 tris 208k zombs 0",
+        "infoAfter": {
+          "frame": 955,
+          "calls": 7330,
+          "drawCalls": 305,
+          "triangles": 207841
+        },
+        "stampedAfterPerfClick": false
+      },
+      "pageErrors": [],
+      "consoleErrorsAndWarnings": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        }
+      ]
+    },
+    {
+      "id": "webgl-run1",
+      "group": "webgl",
+      "relUrl": "index.html?solid=1&renderer=webgl",
+      "enablePerfHudInStorage": false,
+      "elapsedMs": 63709,
+      "trainingBlackoutMs": 19905,
+      "screenshots": {
+        "title": "qa/AH-2/webgl-run1-0-title.png",
+        "spawn": "qa/AH-2/webgl-run1-a-spawn.png",
+        "afterMove1P": "qa/AH-2/webgl-run1-b-after-move-1p.png"
+      },
+      "pixelComparison3D": {
+        "region": {
+          "x0": 320,
+          "y0": 180,
+          "x1": 1600,
+          "y1": 860
+        },
+        "totalPixels": 868719,
+        "changedPixels": 752648,
+        "changedPct": 86.639,
+        "meanChannelDiff": 65.43,
+        "maxChannelDiff": 222,
+        "frozen3D": false
+      },
+      "titleHooks": null,
+      "trainingHooks": {
+        "label": "webgl-run1-training",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "openingPhase": "menu",
+        "openingHidden": true,
+        "visibilityState": "visible",
+        "hasFocus": true,
+        "perfHudTextBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGL2 fallback fps 45 low 8 worst 129ms hitch 1 draws 303 tris 208k zombs 0",
+        "trainingBlackoutOn": false,
+        "backendIsWebGPU": false,
+        "backendName": "WebGLBackend",
+        "trainingState": {
+          "active": true,
+          "warming": false,
+          "bgWarming": false,
+          "recovering": false
+        },
+        "flightHold": false,
+        "cutawayKeepersStillInScene": false,
+        "animLoopExists": true,
+        "animLoopType": "function",
+        "animLoopName": "tick",
+        "animRequestIdBefore": 3364,
+        "boundTargetBefore": null,
+        "infoBefore": {
+          "frame": 1031,
+          "calls": 8275,
+          "drawCalls": 303,
+          "triangles": 185375
+        },
+        "rafSampleCount": 20,
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "renderSceneEntries": 300,
+        "backendBeginRenderEntries": 300,
+        "backendDrawEntries": 6060,
+        "renderThrown": null,
+        "gpuScopedValidationErr": null,
+        "gpuScopedOomErr": null,
+        "gpuScopedInternalErr": null,
+        "uncapturedErrors": [],
+        "animRequestIdAfter": 3464,
+        "boundTargetAfter": null,
+        "perfHudTextAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGL2 fallback fps 41 low 7 worst 147ms hitch 2 draws 303 tris 185k zombs 0",
+        "infoAfter": {
+          "frame": 1051,
+          "calls": 8575,
+          "drawCalls": 303,
+          "triangles": 185375
+        },
+        "stampedAfterPerfClick": true
+      },
+      "pageErrors": [],
+      "consoleErrorsAndWarnings": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "error",
+          "text": "THREE.WebGLProgram: Shader Error 0 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: getUniformLocation: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: getUniformLocation: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: getUniformLocation: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "error",
+          "text": "THREE.WebGLProgram: Shader Error 1282 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        }
+      ]
+    },
+    {
+      "id": "webgl-run2",
+      "group": "webgl",
+      "relUrl": "index.html?renderer=webgl",
+      "enablePerfHudInStorage": false,
+      "elapsedMs": 64962,
+      "trainingBlackoutMs": 18772,
+      "screenshots": {
+        "title": "qa/AH-2/webgl-run2-0-title.png",
+        "spawn": "qa/AH-2/webgl-run2-a-spawn.png",
+        "afterMove1P": "qa/AH-2/webgl-run2-b-after-move-1p.png"
+      },
+      "pixelComparison3D": {
+        "region": {
+          "x0": 320,
+          "y0": 180,
+          "x1": 1600,
+          "y1": 860
+        },
+        "totalPixels": 868719,
+        "changedPixels": 755931,
+        "changedPct": 87.017,
+        "meanChannelDiff": 65.029,
+        "maxChannelDiff": 224,
+        "frozen3D": false
+      },
+      "titleHooks": null,
+      "trainingHooks": {
+        "label": "webgl-run2-training",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "openingPhase": "menu",
+        "openingHidden": true,
+        "visibilityState": "visible",
+        "hasFocus": true,
+        "perfHudTextBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGL2 fallback fps 42 low 8 worst 128ms hitch 3 draws 304 tris 185k zombs 0",
+        "trainingBlackoutOn": false,
+        "backendIsWebGPU": false,
+        "backendName": "WebGLBackend",
+        "trainingState": {
+          "active": true,
+          "warming": false,
+          "bgWarming": false,
+          "recovering": false
+        },
+        "flightHold": false,
+        "cutawayKeepersStillInScene": false,
+        "animLoopExists": true,
+        "animLoopType": "function",
+        "animLoopName": "tick",
+        "animRequestIdBefore": 3435,
+        "boundTargetBefore": null,
+        "infoBefore": {
+          "frame": 1043,
+          "calls": 8380,
+          "drawCalls": 304,
+          "triangles": 185105
+        },
+        "rafSampleCount": 20,
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "renderSceneEntries": 300,
+        "backendBeginRenderEntries": 300,
+        "backendDrawEntries": 6080,
+        "renderThrown": null,
+        "gpuScopedValidationErr": null,
+        "gpuScopedOomErr": null,
+        "gpuScopedInternalErr": null,
+        "uncapturedErrors": [],
+        "animRequestIdAfter": 3535,
+        "boundTargetAfter": null,
+        "perfHudTextAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGL2 fallback fps 43 low 9 worst 113ms hitch 3 draws 304 tris 185k zombs 0",
+        "infoAfter": {
+          "frame": 1063,
+          "calls": 8680,
+          "drawCalls": 304,
+          "triangles": 185105
+        },
+        "stampedAfterPerfClick": true
+      },
+      "pageErrors": [],
+      "consoleErrorsAndWarnings": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "error",
+          "text": "THREE.WebGLProgram: Shader Error 0 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: getUniformLocation: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: getUniformLocation: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: getUniformLocation: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "error",
+          "text": "THREE.WebGLProgram: Shader Error 1282 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        }
+      ]
+    },
+    {
+      "id": "webgl-run3",
+      "group": "webgl",
+      "relUrl": "index.html?solid=1&renderer=webgl",
+      "enablePerfHudInStorage": true,
+      "elapsedMs": 60864,
+      "trainingBlackoutMs": 18940,
+      "screenshots": {
+        "title": "qa/AH-2/webgl-run3-0-title.png",
+        "spawn": "qa/AH-2/webgl-run3-a-spawn.png",
+        "afterMove1P": "qa/AH-2/webgl-run3-b-after-move-1p.png"
+      },
+      "pixelComparison3D": {
+        "region": {
+          "x0": 320,
+          "y0": 180,
+          "x1": 1600,
+          "y1": 860
+        },
+        "totalPixels": 868719,
+        "changedPixels": 757960,
+        "changedPct": 87.25,
+        "meanChannelDiff": 68.398,
+        "maxChannelDiff": 245,
+        "frozen3D": false
+      },
+      "titleHooks": {
+        "label": "webgl-run3-title",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "openingPhase": "menu",
+        "openingHidden": true,
+        "visibilityState": "visible",
+        "hasFocus": true,
+        "perfHudTextBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGL2 fallback fps 57 low 31 worst 33ms hitch 24 draws 373 tris 769k zombs 0",
+        "trainingBlackoutOn": false,
+        "backendIsWebGPU": false,
+        "backendName": "WebGLBackend",
+        "trainingState": {
+          "active": false,
+          "warming": false,
+          "bgWarming": false,
+          "recovering": false
+        },
+        "flightHold": false,
+        "cutawayKeepersStillInScene": false,
+        "animLoopExists": true,
+        "animLoopType": "function",
+        "animLoopName": "tick",
+        "animRequestIdBefore": 1899,
+        "boundTargetBefore": null,
+        "infoBefore": {
+          "frame": 679,
+          "calls": 3142,
+          "drawCalls": 373,
+          "triangles": 768597
+        },
+        "rafSampleCount": 20,
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "renderSceneEntries": 300,
+        "backendBeginRenderEntries": 300,
+        "backendDrawEntries": 7455,
+        "renderThrown": null,
+        "gpuScopedValidationErr": null,
+        "gpuScopedOomErr": null,
+        "gpuScopedInternalErr": null,
+        "uncapturedErrors": [],
+        "animRequestIdAfter": 1979,
+        "boundTargetAfter": null,
+        "perfHudTextAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGL2 fallback fps 57 low 31 worst 33ms hitch 24 draws 373 tris 769k zombs 0",
+        "infoAfter": {
+          "frame": 699,
+          "calls": 3442,
+          "drawCalls": 374,
+          "triangles": 766568
+        }
+      },
+      "trainingHooks": {
+        "label": "webgl-run3-training",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "openingPhase": "menu",
+        "openingHidden": true,
+        "visibilityState": "visible",
+        "hasFocus": true,
+        "perfHudTextBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGL2 fallback fps 39 low 3 worst 336ms hitch 31 draws 306 tris 208k zombs 0",
+        "trainingBlackoutOn": false,
+        "backendIsWebGPU": false,
+        "backendName": "WebGLBackend",
+        "trainingState": {
+          "active": true,
+          "warming": false,
+          "bgWarming": false,
+          "recovering": false
+        },
+        "flightHold": false,
+        "cutawayKeepersStillInScene": false,
+        "animLoopExists": true,
+        "animLoopType": "function",
+        "animLoopName": "tick",
+        "animRequestIdBefore": 3182,
+        "boundTargetBefore": null,
+        "infoBefore": {
+          "frame": 981,
+          "calls": 7600,
+          "drawCalls": 304,
+          "triangles": 207839
+        },
+        "rafSampleCount": 20,
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "renderSceneEntries": 300,
+        "backendBeginRenderEntries": 300,
+        "backendDrawEntries": 6080,
+        "renderThrown": null,
+        "gpuScopedValidationErr": null,
+        "gpuScopedOomErr": null,
+        "gpuScopedInternalErr": null,
+        "uncapturedErrors": [],
+        "animRequestIdAfter": 3282,
+        "boundTargetAfter": null,
+        "perfHudTextAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGL2 fallback fps 24 low 3 worst 336ms hitch 33 draws 304 tris 208k zombs 0",
+        "infoAfter": {
+          "frame": 1001,
+          "calls": 7900,
+          "drawCalls": 304,
+          "triangles": 207839
+        },
+        "stampedAfterPerfClick": false
+      },
+      "pageErrors": [],
+      "consoleErrorsAndWarnings": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "error",
+          "text": "THREE.WebGLProgram: Shader Error 0 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: getUniformLocation: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: getUniformLocation: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: getUniformLocation: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "error",
+          "text": "THREE.WebGLProgram: Shader Error 1282 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        },
+        {
+          "type": "warning",
+          "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+        }
+      ]
+    }
+  ],
+  "finishedAt": "2026-11-21T00:52:49.401Z"
+}

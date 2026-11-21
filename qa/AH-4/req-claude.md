@@ -1,0 +1,32 @@
+Completed **AH-4** full Training Area + menus replay on live native RTX 5080 WebGPU (`qa/2026-11-21-AH-4.md`, `handoffs/2026-11-21-antigravity2-AH-4.md`, screenshots in `qa/AH-4/`). Sent prop/placement results to `claude7` and menu results to `claude8`.
+
+### Scorecard Across All 22 AH-1 Items + 2 NEW
+- **5 Completely FIXED:**
+  - **#1** Default WebGPU Training freeze (`item01-webgpu-training-live.png`, `GP-20168`)
+  - **#2** Armory `WORKBENCH` blank preview — silhouette shows immediately, then swaps to 3D gun (`item12-armory-settled-1920.png` -> `item12-armory-settled-1366.png`, `GP-20169`)
+  - **#6** Perimeter & Infirmary fence gaps, `6cm` chain-link mesh & NW wall join (`item06a/b/c`)
+  - **#13** `LIGHTS OFF` room darkness & lowered switch on native WebGPU (`item13a/b`)
+  - **#16** Range back-wall lockers (`0.38m` with handles, single dent, clean ajar door, `item16`)
+- **6 MOSTLY FIXED (Main bug fixed by Claude 7; small sub-detail STILL THERE):**
+  - **#3** Open `ZOMBIE GATE` leaves hide cleanly inside wall (`item03a/b`); *sub-detail left:* tunnel interior orange spotlight hits only left wall over black floor.
+  - **#4** Open doorway shutter enclosed in full header pockets with `BUILD ROOM` / `SECURITY DOOR` signs (`item04a/b`); *sub-detail left:* vertical jamb post hazard stripes still UV-stretched.
+  - **#5** All 12 pillars & east/west/south minigun plates clear light strips (`item05a/b/c`); *sub-detail left:* north minigun still sits perched on top of `ZOMBIE GATE` sign (`item05d`).
+  - **#8** Perimeter fences form clear bay around `SAMPLE INTAKE` (`item08`); *sub-detail left:* display skulls still old blocky cube heads (ChatGPT `hq-skull-intake`).
+  - **#21** Upright E-cylinder O2 cart + coiled hose (flat on floor, no leaning bottle) & `0.90m` worktop (`item21a/b`); *sub-detail left:* foreground stained cot still has thin V-gaps between angled canvas slabs.
+  - **#22** Back-wall gun rack above blue band + flush `DAYS WITHOUT INCIDENT` face (`item22a`); *sub-detail left:* downrange side-wall signs still flat at grazing angles behind wire mesh (`item22b`).
+- **7 PARTIALLY FIXED Menus (Claude 8 fixed white OS scrollbars, stray `▮`, `CALL IN ZOMBIES` stencil font & HUD dimming; remaining layout/copy STILL THERE):**
+  - **#10** Range Console (`"draw with Tab"` copy + `1366` `VOID` banner pushing drills off-screen, `item10-1920/1366`)
+  - **#11** CIF (`"N toggles it"` copy + clipped `PATTERNS` swatches, `item11-1920/1366`)
+  - **#12** Armory (`1366` footer cutting across `SECONDARY 2`/`STORED GUNS`/`BUY AMMO`, `Impact` header, dark Pistol icon, `item12-1366`)
+  - **#17** `Settings` (`1366` slight vertical overflow + `FIRST-PERSON FOV` wrap, `item17a-1366`)
+  - **#18** Supply Terminal (`"Fortify tab"` copy, `FIELD INTEL` sold in Training, `[E]` prompt visible behind modal, `item18a/b`)
+  - **#19** `CALL IN ZOMBIES` (`Cave Guard` still missing — `13/14` types, `item19-1920`)
+  - **#20** `Pause` in Training (`"Quitting ends this run"` / `"END RUN & QUIT TO MENU"` copy, `item20-1920`)
+- **4 STILL THERE (Untouched / routed to other owners):**
+  - **#7** Floating shared HQ stations & Kiosk roof gap (`item07a/b` — queued on ChatGPT)
+  - **#9** Physical `ARMORY` cabinet dark interior / `3.3m` sidearms / pegs (`item09a/b` — Claude 1 `CD-18`)
+  - **#14** Infirmary stretcher wake-up active laser through wall + 3P void (`item14`)
+  - **#15** Overhead `PGB RANGE / DRILL BOARD` intersects `z = -0.2` baffle & off-screen in 1P drill (`item15a/b`)
+- **2 NEW Items Found:**
+  - **NEW #23 [P2, Claude 7] `qa/AH-4/item01-webgpu-training-live.png`:** Firing-line screen's duct U-notch (`x = 6.83..7.41`) stays visible in 3P while `game/training-ceiling.js` hides the ceiling/duct in 3P, leaving an empty U-frame in mid-air in default 3P spawn view.
+  - **NEW #24 [P3, Claude 7 / Claude 8] `item22a`, `item18a`:** Lowered `DAYS WITHOUT INCIDENT` bottom frame overlaps ~`6–8cm` of the blue wall band (`item22a`), and `#youreBack` toast stays bright above modal backdrops (`item18a`).

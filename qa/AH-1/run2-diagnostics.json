@@ -1,0 +1,22 @@
+{
+  "pitchCheck": {
+    "beforePitch": 0,
+    "afterMouseUpPitch": 0.62
+  },
+  "infirmaryRecovery": {
+    "elapsedMs": 5878,
+    "wakePos": {
+      "x": -40.93,
+      "z": -10
+    },
+    "state": {
+      "active": true
+    }
+  },
+  "infirmaryWalkOut": {
+    "outPos": {
+      "x": -40.25,
+      "z": -8.84
+    }
+  }
+}

@@ -2,12 +2,12 @@
 
 state: active
 model: Gemini 4 Carbon
-task: AG-396 Commit job: run Claude Commit.bat (checkpoint 19:40Z)
+task: AG-400 run Claude Commit.bat (checkpoint 11:40Z)
 touching: git
-since: 2026-11-20T20:07Z
+since: 2026-11-21T11:40Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-20-antigravity-AG-395.md
+last-report: handoffs/2026-11-21-antigravity-AG-399.md
 
 ## Notes
 
@@ -42,19 +42,4 @@ a real GPU the way you can.
 - **AG-376**: DONE (`handoffs/2026-11-18-antigravity-AG-376.md`, `qa/2026-11-18-AG-376/report.md`): GP-20155 v14 (supersedes v13) CaveGuard look; chin fangs & brown gum bar/balls resolved (`15/15` lower teeth seated, `+18.79 mm` chin clearance, `13/13` Hunt clear); open jaw underside w/ small tan tips in `head-back-noon.png`, flat tray jaw, mild round eyes/rear side sliver, zigzag moss & step-3 body items remain.
 - **AG-377**: DONE (`handoffs/2026-11-18-antigravity-AG-377.md`, `qa/2026-11-18-AG-377/report.md`): Spider `naturalleg15` `death2` filmstrips (`0` contacts, `+0.117 mm` floor across `61` frames); flagged `f30..60` upright "coat-hook" tibias & pre-socket open neck/femur seams.
 - **AG-378**: DONE (`handoffs/2026-11-18-antigravity-AG-378.md`, `qa/2026-11-18-AG-378/report.md`): `Spider17` joint seats look (`58/58` rooted at `2 um`, `0` contacts across `90` poses, `+0.421 mm` corpse floor, `4,712` tris); flagged protruding ventral brown triangular shards under femur root cuffs (`close-side/3q-noon`) & abrupt rear cervical collar edge.
-- **Next**: Idle; waiting on next board/request assignment.
-r root cuffs (`close-side/3q-noon`) & abrupt rear cervical collar edge.
-- **Next**: Idle; waiting on next board/request assignment.
-& abrupt rear cervical collar edge.
-- **Next**: Idle; waiting on next board/request assignment.
-cervical collar edge.
-- **Next**: Idle; waiting on next board/request assignment.
-cal collar edge.
-- **Next**: Idle; waiting on next board/request assignment.
-equest assignment.
-cal collar edge.
-- **Next**: Idle; waiting on next board/request assignment.
-xt board/request assignment.
-equest assignment.
-cal collar edge.
 - **Next**: Idle; waiting on next board/request assignment.

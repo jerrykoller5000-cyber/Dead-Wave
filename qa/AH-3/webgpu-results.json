@@ -1,0 +1,409 @@
+{
+  "startedAt": "2026-11-21T01:55:47.831Z",
+  "trials": [
+    {
+      "id": "webgpu-run1",
+      "group": "webgpu",
+      "relUrl": "index.html?solid=1",
+      "enablePerfHudInStorage": false,
+      "elapsedMs": 56539,
+      "trainingBlackoutMs": 18022,
+      "screenshots": {
+        "title": "review/GP-20168/normal-player-webgpu/webgpu-run1-0-title.png",
+        "spawn": "review/GP-20168/normal-player-webgpu/webgpu-run1-a-spawn.png",
+        "afterMove1P": "review/GP-20168/normal-player-webgpu/webgpu-run1-b-after-move-1p.png"
+      },
+      "pixelComparison3D": {
+        "region": {
+          "x0": 320,
+          "y0": 180,
+          "x1": 1600,
+          "y1": 860
+        },
+        "totalPixels": 868719,
+        "changedPixels": 759609,
+        "changedPct": 87.44,
+        "meanChannelDiff": 66.3,
+        "maxChannelDiff": 221,
+        "frozen3D": false
+      },
+      "titleHooks": null,
+      "trainingHooks": {
+        "label": "webgpu-run1-training",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "openingPhase": "menu",
+        "openingHidden": true,
+        "visibilityState": "visible",
+        "hasFocus": true,
+        "perfHudTextBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 58 low 32 worst 31ms hitch 0 draws 305 tris 185k zombs 0",
+        "trainingBlackoutOn": false,
+        "backendIsWebGPU": true,
+        "backendName": "WebGPUBackend",
+        "trainingState": {
+          "active": true,
+          "warming": false,
+          "bgWarming": false,
+          "recovering": false
+        },
+        "flightHold": false,
+        "cutawayKeepersStillInScene": false,
+        "animLoopExists": true,
+        "animLoopType": "function",
+        "animLoopName": "tick",
+        "animRequestIdBefore": 2459,
+        "boundTargetBefore": null,
+        "infoBefore": {
+          "frame": 1030,
+          "calls": 7958,
+          "drawCalls": 305,
+          "triangles": 185393
+        },
+        "rafSampleCount": 20,
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "renderSceneEntries": 300,
+        "backendBeginRenderEntries": 300,
+        "backendDrawEntries": 6100,
+        "renderThrown": null,
+        "gpuScopedValidationErr": null,
+        "gpuScopedOomErr": null,
+        "gpuScopedInternalErr": null,
+        "uncapturedErrors": [],
+        "animRequestIdAfter": 2554,
+        "boundTargetAfter": null,
+        "perfHudTextAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 56 low 32 worst 31ms hitch 0 draws 305 tris 185k zombs 0",
+        "infoAfter": {
+          "frame": 1055,
+          "calls": 8333,
+          "drawCalls": 305,
+          "triangles": 185393
+        },
+        "stampedAfterPerfClick": true
+      },
+      "pageErrors": [],
+      "consoleErrorsAndWarnings": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        }
+      ]
+    },
+    {
+      "id": "webgpu-run2",
+      "group": "webgpu",
+      "relUrl": "index.html",
+      "enablePerfHudInStorage": false,
+      "elapsedMs": 49896,
+      "trainingBlackoutMs": 15677,
+      "screenshots": {
+        "title": "review/GP-20168/normal-player-webgpu/webgpu-run2-0-title.png",
+        "spawn": "review/GP-20168/normal-player-webgpu/webgpu-run2-a-spawn.png",
+        "afterMove1P": "review/GP-20168/normal-player-webgpu/webgpu-run2-b-after-move-1p.png"
+      },
+      "pixelComparison3D": {
+        "region": {
+          "x0": 320,
+          "y0": 180,
+          "x1": 1600,
+          "y1": 860
+        },
+        "totalPixels": 868719,
+        "changedPixels": 755550,
+        "changedPct": 86.973,
+        "meanChannelDiff": 64.963,
+        "maxChannelDiff": 243,
+        "frozen3D": false
+      },
+      "titleHooks": null,
+      "trainingHooks": {
+        "label": "webgpu-run2-training",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "openingPhase": "menu",
+        "openingHidden": true,
+        "visibilityState": "visible",
+        "hasFocus": true,
+        "perfHudTextBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 59 low 34 worst 30ms hitch 0 draws 303 tris 185k zombs 0",
+        "trainingBlackoutOn": false,
+        "backendIsWebGPU": true,
+        "backendName": "WebGPUBackend",
+        "trainingState": {
+          "active": true,
+          "warming": false,
+          "bgWarming": false,
+          "recovering": false
+        },
+        "flightHold": false,
+        "cutawayKeepersStillInScene": false,
+        "animLoopExists": true,
+        "animLoopType": "function",
+        "animLoopName": "tick",
+        "animRequestIdBefore": 3262,
+        "boundTargetBefore": null,
+        "infoBefore": {
+          "frame": 1183,
+          "calls": 9370,
+          "drawCalls": 303,
+          "triangles": 185375
+        },
+        "rafSampleCount": 20,
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "renderSceneEntries": 300,
+        "backendBeginRenderEntries": 300,
+        "backendDrawEntries": 6060,
+        "renderThrown": null,
+        "gpuScopedValidationErr": null,
+        "gpuScopedOomErr": null,
+        "gpuScopedInternalErr": null,
+        "uncapturedErrors": [],
+        "animRequestIdAfter": 3378,
+        "boundTargetAfter": null,
+        "perfHudTextAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 59 low 34 worst 30ms hitch 0 draws 303 tris 185k zombs 0",
+        "infoAfter": {
+          "frame": 1207,
+          "calls": 9730,
+          "drawCalls": 303,
+          "triangles": 185375
+        },
+        "stampedAfterPerfClick": true
+      },
+      "pageErrors": [],
+      "consoleErrorsAndWarnings": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        }
+      ]
+    },
+    {
+      "id": "webgpu-run3",
+      "group": "webgpu",
+      "relUrl": "index.html?solid=1",
+      "enablePerfHudInStorage": true,
+      "elapsedMs": 49336,
+      "trainingBlackoutMs": 16286,
+      "screenshots": {
+        "title": "review/GP-20168/normal-player-webgpu/webgpu-run3-0-title.png",
+        "spawn": "review/GP-20168/normal-player-webgpu/webgpu-run3-a-spawn.png",
+        "afterMove1P": "review/GP-20168/normal-player-webgpu/webgpu-run3-b-after-move-1p.png"
+      },
+      "pixelComparison3D": {
+        "region": {
+          "x0": 320,
+          "y0": 180,
+          "x1": 1600,
+          "y1": 860
+        },
+        "totalPixels": 868719,
+        "changedPixels": 755064,
+        "changedPct": 86.917,
+        "meanChannelDiff": 65.208,
+        "maxChannelDiff": 243,
+        "frozen3D": false
+      },
+      "titleHooks": {
+        "label": "webgpu-run3-title",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "openingPhase": "menu",
+        "openingHidden": true,
+        "visibilityState": "visible",
+        "hasFocus": true,
+        "perfHudTextBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 57 low 27 worst 37ms hitch 28 draws 366 tris 789k zombs 0",
+        "trainingBlackoutOn": false,
+        "backendIsWebGPU": true,
+        "backendName": "WebGPUBackend",
+        "trainingState": {
+          "active": false,
+          "warming": false,
+          "bgWarming": false,
+          "recovering": false
+        },
+        "flightHold": false,
+        "cutawayKeepersStillInScene": false,
+        "animLoopExists": true,
+        "animLoopType": "function",
+        "animLoopName": "tick",
+        "animRequestIdBefore": 1404,
+        "boundTargetBefore": null,
+        "infoBefore": {
+          "frame": 658,
+          "calls": 3172,
+          "drawCalls": 369,
+          "triangles": 773289
+        },
+        "rafSampleCount": 20,
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "renderSceneEntries": 300,
+        "backendBeginRenderEntries": 300,
+        "backendDrawEntries": 7375,
+        "renderThrown": null,
+        "gpuScopedValidationErr": null,
+        "gpuScopedOomErr": null,
+        "gpuScopedInternalErr": null,
+        "uncapturedErrors": [],
+        "animRequestIdAfter": 1484,
+        "boundTargetAfter": null,
+        "perfHudTextAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 58 low 27 worst 37ms hitch 28 draws 368 tris 771k zombs 0",
+        "infoAfter": {
+          "frame": 678,
+          "calls": 3472,
+          "drawCalls": 370,
+          "triangles": 771260
+        }
+      },
+      "trainingHooks": {
+        "label": "webgpu-run3-training",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "openingPhase": "menu",
+        "openingHidden": true,
+        "visibilityState": "visible",
+        "hasFocus": true,
+        "perfHudTextBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 39 low 4 worst 282ms hitch 34 draws 304 tris 208k zombs 0",
+        "trainingBlackoutOn": false,
+        "backendIsWebGPU": true,
+        "backendName": "WebGPUBackend",
+        "trainingState": {
+          "active": true,
+          "warming": false,
+          "bgWarming": false,
+          "recovering": false
+        },
+        "flightHold": false,
+        "cutawayKeepersStillInScene": false,
+        "animLoopExists": true,
+        "animLoopType": "function",
+        "animLoopName": "tick",
+        "animRequestIdBefore": 2911,
+        "boundTargetBefore": null,
+        "infoBefore": {
+          "frame": 1084,
+          "calls": 8365,
+          "drawCalls": 304,
+          "triangles": 207839
+        },
+        "rafSampleCount": 20,
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "renderSceneEntries": 300,
+        "backendBeginRenderEntries": 300,
+        "backendDrawEntries": 6080,
+        "renderThrown": null,
+        "gpuScopedValidationErr": null,
+        "gpuScopedOomErr": null,
+        "gpuScopedInternalErr": null,
+        "uncapturedErrors": [],
+        "animRequestIdAfter": 3035,
+        "boundTargetAfter": null,
+        "perfHudTextAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 54 low 18 worst 57ms hitch 36 draws 304 tris 208k zombs 0",
+        "infoAfter": {
+          "frame": 1110,
+          "calls": 8755,
+          "drawCalls": 304,
+          "triangles": 207839
+        },
+        "stampedAfterPerfClick": false
+      },
+      "pageErrors": [],
+      "consoleErrorsAndWarnings": [
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "warning",
+          "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "Calling [RenderPassEncoder (unlabeled)].Draw with a vertex count of 0 is unusual."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        },
+        {
+          "type": "warning",
+          "text": "AttributeNode: Vertex attribute \"uv1\" not found on geometry."
+        }
+      ]
+    }
+  ],
+  "finishedAt": "2026-11-21T01:58:26.907Z"
+}

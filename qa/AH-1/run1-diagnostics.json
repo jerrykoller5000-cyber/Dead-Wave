@@ -1,0 +1,1680 @@
+{
+  "startedAt": "2026-11-21T00:10:50.076Z",
+  "playtestBackend": "WebGL2 fallback",
+  "rendererString": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "consoleErrors": [
+    {
+      "type": "warning",
+      "text": "The powerPreference option is currently ignored when calling requestAdapter() on Windows. See https://crbug.com/369219127"
+    },
+    {
+      "type": "error",
+      "text": "THREE.WebGLProgram: Shader Error 0 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: getUniformLocation: program not linked"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: getUniformLocation: program not linked"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: getUniformLocation: program not linked"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+    },
+    {
+      "type": "error",
+      "text": "THREE.WebGLProgram: Shader Error 1282 - VALIDATE_STATUS false\n\nProgram Info Log: Attribute 'nodeAttribute1' aliases attribute 'nodeAttribute0' at location 5\n\n"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: uniformBlockBinding: program not linked"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    },
+    {
+      "type": "warning",
+      "text": "WebGL: INVALID_OPERATION: useProgram: program not valid"
+    }
+  ],
+  "pageErrors": [],
+  "collisionChecks": [
+    {
+      "name": "firing-bench-center",
+      "start": {
+        "x": 0,
+        "z": -2,
+        "y": 0
+      },
+      "hit": {
+        "x": 0,
+        "z": -0.67,
+        "y": 0
+      },
+      "backed": {
+        "x": 0,
+        "z": -3.963,
+        "y": 0
+      },
+      "backDist": 3.293,
+      "stuck": false
+    },
+    {
+      "name": "firing-bench-jump",
+      "start": {
+        "x": 0,
+        "z": -2,
+        "y": 0
+      },
+      "hit": {
+        "x": 0,
+        "z": -0.67,
+        "y": 0
+      },
+      "backed": {
+        "x": 0,
+        "z": -4.207,
+        "y": 0
+      },
+      "backDist": 3.537,
+      "stuck": false
+    },
+    {
+      "name": "firing-bench-crouch",
+      "start": {
+        "x": 0,
+        "z": -2,
+        "y": 0
+      },
+      "hit": {
+        "x": 0,
+        "z": -0.67,
+        "y": 0
+      },
+      "backed": {
+        "x": 0,
+        "z": -4.09,
+        "y": 0
+      },
+      "backDist": 3.42,
+      "stuck": false
+    },
+    {
+      "name": "range-console",
+      "start": {
+        "x": -6.2,
+        "z": -2.8,
+        "y": 0
+      },
+      "hit": {
+        "x": -6.112,
+        "z": -0.67,
+        "y": 0
+      },
+      "backed": {
+        "x": -6.112,
+        "z": -4.182,
+        "y": 0
+      },
+      "backDist": 3.512,
+      "stuck": false
+    },
+    {
+      "name": "melee-dummy",
+      "start": {
+        "x": -4.5,
+        "z": -4.5,
+        "y": 0
+      },
+      "hit": {
+        "x": 1.045,
+        "z": -0.67,
+        "y": 0
+      },
+      "backed": {
+        "x": -1.626,
+        "z": -3.397,
+        "y": 0
+      },
+      "backDist": 3.817,
+      "stuck": false
+    },
+    {
+      "name": "back-lockers",
+      "start": {
+        "x": -5.8,
+        "z": -9.8,
+        "y": 0
+      },
+      "hit": {
+        "x": -5.8,
+        "z": -11.09,
+        "y": 0
+      },
+      "backed": {
+        "x": -5.8,
+        "z": -7.461,
+        "y": 0
+      },
+      "backDist": 3.629,
+      "stuck": false
+    },
+    {
+      "name": "locker-swing-door",
+      "start": {
+        "x": -5.9,
+        "z": -10.2,
+        "y": 0
+      },
+      "hit": {
+        "x": -5.9,
+        "z": -11.09,
+        "y": 0
+      },
+      "backed": {
+        "x": -5.9,
+        "z": -7.694,
+        "y": 0
+      },
+      "backDist": 3.396,
+      "stuck": false
+    },
+    {
+      "name": "back-weapon-rack",
+      "start": {
+        "x": 2.3,
+        "z": -10,
+        "y": 0
+      },
+      "hit": {
+        "x": 2.3,
+        "z": -11.2,
+        "y": 0
+      },
+      "backed": {
+        "x": 2.3,
+        "z": -7.734,
+        "y": 0
+      },
+      "backDist": 3.466,
+      "stuck": false
+    },
+    {
+      "name": "cif-counter",
+      "start": {
+        "x": 5.2,
+        "z": -10.2,
+        "y": 0
+      },
+      "hit": {
+        "x": 6.845,
+        "z": -10.2,
+        "y": 0
+      },
+      "backed": {
+        "x": 3.532,
+        "z": -10.2,
+        "y": 0
+      },
+      "backDist": 3.313,
+      "stuck": false
+    },
+    {
+      "name": "supply-kiosk",
+      "start": {
+        "x": 5.2,
+        "z": -6.6,
+        "y": 0
+      },
+      "hit": {
+        "x": 6.782,
+        "z": -6.6,
+        "y": 0
+      },
+      "backed": {
+        "x": 3.321,
+        "z": -6.6,
+        "y": 0
+      },
+      "backDist": 3.461,
+      "stuck": false
+    },
+    {
+      "name": "armory-bench",
+      "start": {
+        "x": 5,
+        "z": -3,
+        "y": 0
+      },
+      "hit": {
+        "x": 6.45,
+        "z": -3,
+        "y": 0
+      },
+      "backed": {
+        "x": 2.977,
+        "z": -3,
+        "y": 0
+      },
+      "backDist": 3.473,
+      "stuck": false
+    },
+    {
+      "name": "doorway-through-west",
+      "start": {
+        "x": -6.8,
+        "z": -8,
+        "y": 0
+      },
+      "hit": {
+        "x": -7.4,
+        "z": -8,
+        "y": 0
+      },
+      "backed": {
+        "x": -3.89,
+        "z": -8,
+        "y": 0
+      },
+      "backDist": 3.51,
+      "stuck": false
+    },
+    {
+      "name": "doorway-north-jamb",
+      "start": {
+        "x": -6.8,
+        "z": -6.6,
+        "y": 0
+      },
+      "hit": {
+        "x": -7.2,
+        "z": -6.6,
+        "y": 0
+      },
+      "backed": {
+        "x": -3.903,
+        "z": -6.6,
+        "y": 0
+      },
+      "backDist": 3.297,
+      "stuck": false
+    },
+    {
+      "name": "infirmary-fence-east",
+      "start": {
+        "x": -35,
+        "z": -9.535,
+        "y": 0
+      },
+      "hit": {
+        "x": -35.88,
+        "z": -9.535,
+        "y": 0
+      },
+      "backed": {
+        "x": -32.458,
+        "z": -9.535,
+        "y": 0
+      },
+      "backDist": 3.422,
+      "stuck": false
+    },
+    {
+      "name": "infirmary-fence-north",
+      "start": {
+        "x": -40,
+        "z": -6.8,
+        "y": 0
+      },
+      "hit": {
+        "x": -40,
+        "z": -7.43,
+        "y": 0
+      },
+      "backed": {
+        "x": -40,
+        "z": -4.024,
+        "y": 0
+      },
+      "backDist": 3.406,
+      "stuck": false
+    },
+    {
+      "name": "infirmary-fence-nw-gap",
+      "start": {
+        "x": -43.1,
+        "z": -6.8,
+        "y": 0
+      },
+      "hit": {
+        "x": -43.1,
+        "z": -6.885,
+        "y": 0
+      },
+      "backed": {
+        "x": -43.1,
+        "z": -5.065,
+        "y": 0
+      },
+      "backDist": 1.82,
+      "stuck": false
+    },
+    {
+      "name": "infirmary-fence-se-gap",
+      "start": {
+        "x": -35,
+        "z": -11.15,
+        "y": 0
+      },
+      "hit": {
+        "x": -35.335,
+        "z": -11.15,
+        "y": 0
+      },
+      "backed": {
+        "x": -32.069,
+        "z": -11.15,
+        "y": 0
+      },
+      "backDist": 3.266,
+      "stuck": false
+    },
+    {
+      "name": "skull-window",
+      "start": {
+        "x": -41.5,
+        "z": -3,
+        "y": 0
+      },
+      "hit": {
+        "x": -42.754,
+        "z": -3,
+        "y": 0
+      },
+      "backed": {
+        "x": -39.672,
+        "z": -3,
+        "y": 0
+      },
+      "backDist": 3.082,
+      "stuck": false
+    },
+    {
+      "name": "hq-zombie-panel",
+      "start": {
+        "x": -41.5,
+        "z": 3,
+        "y": 0
+      },
+      "hit": {
+        "x": -42.958,
+        "z": 3,
+        "y": 0
+      },
+      "backed": {
+        "x": -39.896,
+        "z": 3,
+        "y": 0
+      },
+      "backDist": 3.062,
+      "stuck": false
+    },
+    {
+      "name": "containment-gate",
+      "start": {
+        "x": -26,
+        "z": 25,
+        "y": 0
+      },
+      "hit": {
+        "x": -26,
+        "z": 26.85,
+        "y": 0
+      },
+      "backed": {
+        "x": -26,
+        "z": 23.845,
+        "y": 0
+      },
+      "backDist": 3.005,
+      "stuck": false
+    },
+    {
+      "name": "east-pillar-z0",
+      "start": {
+        "x": -9.535,
+        "z": 0,
+        "y": 0
+      },
+      "hit": {
+        "x": -8.8,
+        "z": 0,
+        "y": 0
+      },
+      "backed": {
+        "x": -9.535,
+        "z": 0,
+        "y": 0
+      },
+      "backDist": 0.735,
+      "stuck": false
+    }
+  ],
+  "domAudits": [
+    {
+      "menuName": "01-hud-1p@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 11,
+      "issues": [
+        {
+          "kind": "tiny-font",
+          "el": "div#hpLabel",
+          "px": 9,
+          "text": "HEALTH"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "div#diveMeterLabel",
+          "px": 9,
+          "text": "SLOW-MO"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "div.l",
+          "px": 10,
+          "text": "KILL STREAK"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.gchip",
+          "px": 10,
+          "text": "G×0"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.gchip",
+          "px": 10,
+          "text": "H×0"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.mag-count",
+          "px": 10,
+          "text": "5 mags"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.mag-glyph",
+          "px": 10,
+          "text": "12"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.mag-glyph",
+          "px": 10,
+          "text": "12"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.mag-glyph",
+          "px": 10,
+          "text": "12"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.mag-glyph",
+          "px": 10,
+          "text": "12"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.mag-glyph.partial",
+          "px": 10,
+          "text": "2"
+        }
+      ],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-01-hud-1p-1920x1080.png"
+    },
+    {
+      "menuName": "02-pause@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-02-pause-1920x1080.png"
+    },
+    {
+      "menuName": "03-settings@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-03-settings-1920x1080.png"
+    },
+    {
+      "menuName": "04-tips@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-04-tips-1920x1080.png"
+    },
+    {
+      "menuName": "05-skills@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-05-skills-1920x1080.png"
+    },
+    {
+      "menuName": "06-hq-zombie-panel@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 3,
+      "issues": [
+        {
+          "kind": "tiny-font",
+          "el": "p.tp-eyebrow",
+          "px": 10,
+          "text": "TRAINING GROUND · HQ PANEL"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "h3",
+          "px": 10,
+          "text": "ZOMBIE KIND"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "h3",
+          "px": 10,
+          "text": "HOW MANY"
+        }
+      ],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        },
+        {
+          "sel": "#bigBanner",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 92,
+            "r": 184,
+            "b": 168
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-06-hq-zombie-panel-1920x1080.png"
+    },
+    {
+      "menuName": "07-range-console@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        },
+        {
+          "sel": "#bigBanner",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 92,
+            "r": 184,
+            "b": 168
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-07-range-console-1920x1080.png"
+    },
+    {
+      "menuName": "08-armory@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-08-armory-1920x1080.png"
+    },
+    {
+      "menuName": "09-cif@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 7,
+      "issues": [
+        {
+          "kind": "tiny-font",
+          "el": "p.cif-eyebrow",
+          "px": 10,
+          "text": "FOB THRESHOLD / PERSONAL EQUIPMENT"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.cif-available-count",
+          "px": 10,
+          "text": "Available · 49"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "div.cif-group",
+          "px": 10,
+          "text": "PATTERNS"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "div.cif-group",
+          "px": 10,
+          "text": "PLAIN COLORS"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "button#cifReset",
+          "px": 10,
+          "text": "RESET HEAD"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span#cifSaved",
+          "px": 10,
+          "text": "Appearance saved automatically"
+        },
+        {
+          "kind": "button-overlap",
+          "a": "DESERT DIGITAL\nEarned",
+          "b": "DONE · E / ESC",
+          "overlap": {
+            "x": 125,
+            "y": 40
+          }
+        }
+      ],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        },
+        {
+          "sel": "#bigBanner",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 92,
+            "r": 184,
+            "b": 168
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-09-cif-1920x1080.png"
+    },
+    {
+      "menuName": "10-supply-kiosk-supplies@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-10-supply-kiosk-supplies-1920x1080.png"
+    },
+    {
+      "menuName": "11-supply-kiosk-builds@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 1,
+      "issues": [
+        {
+          "kind": "button-overlap",
+          "a": "$45",
+          "b": "BACK TO THE FIGHT (E / ES",
+          "overlap": {
+            "x": 84,
+            "y": 11
+          }
+        }
+      ],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-11-supply-kiosk-builds-1920x1080.png"
+    },
+    {
+      "menuName": "12-weapon-wheel@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-12-weapon-wheel-1920x1080.png"
+    },
+    {
+      "menuName": "13-build-wheel@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-13-build-wheel-1920x1080.png"
+    },
+    {
+      "menuName": "14-full-map@1920x1080",
+      "vw": 1920,
+      "vh": 1080,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-14-full-map-1920x1080.png"
+    },
+    {
+      "menuName": "01-hud-1p@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 11,
+      "issues": [
+        {
+          "kind": "tiny-font",
+          "el": "div#hpLabel",
+          "px": 9,
+          "text": "HEALTH"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "div#diveMeterLabel",
+          "px": 9,
+          "text": "SLOW-MO"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "div.l",
+          "px": 10,
+          "text": "KILL STREAK"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.gchip",
+          "px": 10,
+          "text": "G×0"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.gchip",
+          "px": 10,
+          "text": "H×0"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.mag-count",
+          "px": 10,
+          "text": "5 mags"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.mag-glyph",
+          "px": 10,
+          "text": "12"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.mag-glyph",
+          "px": 10,
+          "text": "12"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.mag-glyph",
+          "px": 10,
+          "text": "12"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.mag-glyph",
+          "px": 10,
+          "text": "12"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.mag-glyph.partial",
+          "px": 10,
+          "text": "2"
+        }
+      ],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-01-hud-1p-1366x768.png"
+    },
+    {
+      "menuName": "02-pause@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-02-pause-1366x768.png"
+    },
+    {
+      "menuName": "03-settings@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-03-settings-1366x768.png"
+    },
+    {
+      "menuName": "04-tips@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-04-tips-1366x768.png"
+    },
+    {
+      "menuName": "05-skills@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-05-skills-1366x768.png"
+    },
+    {
+      "menuName": "06-hq-zombie-panel@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 3,
+      "issues": [
+        {
+          "kind": "tiny-font",
+          "el": "p.tp-eyebrow",
+          "px": 10,
+          "text": "TRAINING GROUND · HQ PANEL"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "h3",
+          "px": 10,
+          "text": "ZOMBIE KIND"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "h3",
+          "px": 10,
+          "text": "HOW MANY"
+        }
+      ],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-06-hq-zombie-panel-1366x768.png"
+    },
+    {
+      "menuName": "07-range-console@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-07-range-console-1366x768.png"
+    },
+    {
+      "menuName": "08-armory@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 1,
+      "issues": [
+        {
+          "kind": "button-overlap",
+          "a": "SECONDARY 2\nEmpty slot",
+          "b": "MOVE TO SHELF",
+          "overlap": {
+            "x": 281,
+            "y": 24
+          }
+        }
+      ],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-08-armory-1366x768.png"
+    },
+    {
+      "menuName": "09-cif@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 7,
+      "issues": [
+        {
+          "kind": "tiny-font",
+          "el": "p.cif-eyebrow",
+          "px": 10,
+          "text": "FOB THRESHOLD / PERSONAL EQUIPMENT"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span.cif-available-count",
+          "px": 10,
+          "text": "Available · 49"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "div.cif-group",
+          "px": 10,
+          "text": "PATTERNS"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "div.cif-group",
+          "px": 10,
+          "text": "PLAIN COLORS"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "button#cifReset",
+          "px": 10,
+          "text": "RESET HEAD"
+        },
+        {
+          "kind": "tiny-font",
+          "el": "span#cifSaved",
+          "px": 10,
+          "text": "Appearance saved automatically"
+        },
+        {
+          "kind": "button-overlap",
+          "a": "DESERT DIGITAL\nEarned",
+          "b": "DONE · E / ESC",
+          "overlap": {
+            "x": 125,
+            "y": 40
+          }
+        }
+      ],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-09-cif-1366x768.png"
+    },
+    {
+      "menuName": "10-supply-kiosk-supplies@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-10-supply-kiosk-supplies-1366x768.png"
+    },
+    {
+      "menuName": "11-supply-kiosk-builds@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 1,
+      "issues": [
+        {
+          "kind": "button-overlap",
+          "a": "$45",
+          "b": "BACK TO THE FIGHT (E / ES",
+          "overlap": {
+            "x": 84,
+            "y": 5
+          }
+        }
+      ],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-11-supply-kiosk-builds-1366x768.png"
+    },
+    {
+      "menuName": "12-weapon-wheel@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-12-weapon-wheel-1366x768.png"
+    },
+    {
+      "menuName": "13-build-wheel@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-13-build-wheel-1366x768.png"
+    },
+    {
+      "menuName": "14-full-map@1366x768",
+      "vw": 1366,
+      "vh": 768,
+      "visible": true,
+      "issueCount": 0,
+      "issues": [],
+      "visibleHuds": [
+        {
+          "sel": "#hudTopLeft",
+          "zIndex": "auto",
+          "rect": {
+            "l": 16,
+            "t": 14,
+            "r": 184,
+            "b": 90
+          }
+        }
+      ],
+      "screenshot": "qa/AH-1/raw/menu-14-full-map-1366x768.png"
+    }
+  ],
+  "notes": [
+    {
+      "infirmaryExit": {
+        "wakePos": {
+          "x": -40.97,
+          "z": -10
+        },
+        "exitedPos": {
+          "x": -40.91,
+          "z": -10
+        },
+        "distMoved": 0.06
+      }
+    }
+  ],
+  "finishedAt": "2026-11-21T00:14:10.924Z"
+}

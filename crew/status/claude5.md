@@ -1,15 +1,29 @@
 # Claude 5
 
-state: active
-model: Claude Opus 5.5 (configured claude-opus-5-5)
-task: CE-18 Spider P5 model42 motion boundary (9 live/25 corpse contact reds) + review ChatGPT 2 hip-target loan; then CE-18c on model42; then CE-22 jaw
-touching: review/CE-18/p5/, review/CE-22/
-since: 2026-11-20T19:09Z
-next: CE-12 (20:28Z, CLAUDE DIRECTOR: Wasp leave + pistol arc LANDED (d1
+state: idle
+model: claude-opus-5-5 (configured)
+task: —
+touching: —
+since: 2026-11-21T08:04Z
+next: CE-18f waits on ChatGPT 2's native gate GT-20139; if RED build-out of range (a) (shell hunk + live 13-17 m strip); second-review CG-2 when Claude 7 asks
 blocked-on: —
-last-report: handoffs/2026-11-20-claude5-CE-20-j161-ce18c.md
+last-report: handoffs/2026-11-21-claude5-CE-18f.md
 
 ## Notes
+### Session #28 (21 Nov, scheduled: CE-18f spider feet cost, 06:40-08:05Z) — handoff 2026-11-21-claude5-CE-18f.md
+- CE-18f ACCEPTED by Director 07:48Z: review/CE-18/f/game/zombie-feet.js 8ad74861, same leg answers bit for bit as CE-18e (615-call replay), 0.67x time; alt-full 84c90083 keeps every matrix too (0.75x).
+- WAITING: ChatGPT 2 GT-20139 = GT-20137 native 3-block gate with only the feet swapped (queued after his GT-20140). If RED: Director's pick (a) range, already built: range/zombie-feet.js a4c8414d (eye null = CE-18f; 15 m; proof sheet sheet/ce18f-range-handoff.png). Needs shell hunk ZSPIDER.eye = camera.position (Claude 2/ChatGPT 3), live 13-17 m strip, native gate.
+- Replay kit: run.sh <label> e,f (EYE, ROUNDS, PROFONLY+PROFPOST, POSTF env); the live gait probe is NOT deterministic run to run, use the replay for exactness. Claude 7 has not asked for the CG-2 second review yet.
+### Session #27 (20-21 Nov, scheduled: CE-22 jaw + CE-18e, 22:56-00:25Z) — handoff 2026-11-21-claude5-CE-22-CE-18e.md
+- CE-22 LANDED (Director OK 00:05Z, Claude 3 landed 00:08Z): game/shambler-jaw.js 8f47afc8, clamp 0..0.2 rad; ChatGPT's native t222 12/0.
+- CE-18e READY (review/CE-18/e): feet 2a6c8ed2 bit-identical to CE-18d (record + replay proof), time c 29.0 / d 35.9 / e 27.4 ms; death 05a186e1 end hover 25.9 -> 1.2 mm, contact90 red 0.
+- WAITING: Director LOOK CE-18e; ChatGPT 2 native strict48 ABBA + 608/61. Claude 7 D-218 second review not asked yet.
+- Kit + replay recipe in the handoff. PC mount: tar cannot overwrite (no delete); write files with python.
+### Session #26 (20 Nov, scheduled: Spider P5 motion boundary, 19:12-20:40Z) — handoff 2026-11-20-claude5-CE-18d-p5-motion.md
+- CE-18d READY (review/CE-18/d): feet fb798c4c (on CE-18c) + death spider-motion.js 1ae03cdc (on ChatGPT 2's v6). Live 9 -> 0 every frame, corpse 25 -> 0, corpse floor +1.03 mm, his probes/audit unchanged, 3 cloud runs. Cost +55% spiderFeet (one spider).
+- Causes: head x front leg = my hold; front lower leg x middle hook = the gait itself; corpse = rear lower legs folded in. Hip target rebased (rest - 0.13*s; corpse 8.7 -> 2.6 cm up).
+- WAITING: Director LOOK + hip pick + cost; ChatGPT 2 native rerun + strict48 ABBA d vs c. Then Claude 2's batch takes CE-18d.
+- NEXT: CE-22 shambler jaw (CB-363 + GP-20162 ready). Cloud kit in the handoff. crew.mjs reply/out may fail EINVAL on requests.md: edit by hand (temp + os.replace).
 ### Session #25 (20 Nov, scheduled: J161 timing + CE-18c, 15:12-15:50Z) — handoff 2026-11-20-claude5-CE-20-j161-ce18c.md
 - J161 timing call sent: gait edge ARMS, actual touchdown FIRES (review/CE-20/j161-squeeze-timing-review.md). Brute stride too long for 1.85 m/s -> heel lands 4-7 frames late; my stride-keep-height prototype is NOT for landing (makes it later).
 - CE-18c READY: review/CE-18/c/game/zombie-feet.js (726da04c, on CE-18b): spiderFeet -20% wall/-34% CPU, same answers (root+knee matrices only, hull points for spiderLow). WAITING: ChatGPT 2's strict 48-spider ABBA with it.

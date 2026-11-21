@@ -6,6 +6,7 @@ export function dressTrainingProps(T, { B, gate, bedAt, box: roomBox, add: roomA
   const route = m => { const parent = moving || staticGate; if (parent) parent.add(m); if (medicalFurniture) m.userData.trainingProp = true; return m; };
   const add = (...args) => route(roomAdd(...args));
   const box = (...args) => route(roomBox(...args));
+  const GATE_POCKET = .62;
   const gateLeaves = [-1, 1].map(side => {
     const leaf = new T.Group(); leaf.name = 'training-gate-leaf-' + side;
     leaf.userData.side = side; leaf.scale.y = 1.4; return leaf;
@@ -117,6 +118,11 @@ export function dressTrainingProps(T, { B, gate, bedAt, box: roomBox, add: roomA
   for(const y of [1.86,2.24])box(1.12,.07,.06,steelLight,gx,y,gz-.56);
   bolt(gx,2.05,gz-.555,.09,.05);
   moving = null;
+  // CG-1 (AH-1 #3): the leaves slid 3.5 m sideways in front of the wall, through the pilasters, the hydraulics and the
+  // wall's face, cutting their PGB / CONTAINMENT plate in half. They now run in the wall's pocket: every leaf part
+  // stands 0.62 m further back, wholly behind the wall line (front at +2 cm), so opening, they slide out of sight
+  // behind the wall and the tunnel's sides. The pilasters, guides and lintel stay in front as the frame.
+  for (const leaf of gateLeaves) leaf.position.z = GATE_POCKET;
   if(labels.gate) {
     box(4.18,.56,.06,dark,gx,5.12,gz-.61);
     gateFrame.add(sign(labels.gate,4.1,.54,gx,5.12,gz-.6403,Math.PI,{bg:'#1e2923',color:'#ddd6b1',size:150}));
@@ -153,64 +159,73 @@ export function dressTrainingProps(T, { B, gate, bedAt, box: roomBox, add: roomA
   // GP-19893: furniture near a wall must not become part of its architectural fade.
   medicalFurniture = true;
   // Reinforced wheeled stretcher, segmented pad, canvas blanket and stitched hem (seated on y = 0.020 m mat).
-  rounded(2.48,.1,1.0,dark,bx,.47,bz,.045);
-  for(const dz of [-.535,.535])rod([bx-1.18,.47,bz+dz],[bx+1.18,.47,bz+dz],.035,steelLight);
+  // CG-1 (CF-20 #4): it was 2.48 m long; a hospital stretcher is 2.0-2.1 m. Lengths and offsets along it (x) are 0.85
+  // of the old ones (pad 2.0 m), heights, wheels, tubes and the pad top (0.68 m, the lying height) unchanged, so the
+  // wake-up spot (training.js bed: the hip at the centre, feet 0.9 m and head 0.9 m from it) still lies on the pad.
+  // Its width (SZ) stays 1 for now: the bed-exit pose sits his hip 0.46 m off the centre line (the old pad's edge), so
+  // a narrower pad needs that pose changed with it (studio/marine-bed-exit.js; asked of its owner).
+  const SX=.85,SZ=1;
+  rounded(2.48*SX,.1,1.0*SZ,dark,bx,.47,bz,.045);
+  for(const dz of [-.535,.535])rod([bx-1.18*SX,.47,bz+dz*SZ],[bx+1.18*SX,.47,bz+dz*SZ],.035,steelLight);
   for(const dx of [-.93,.93])for(const dz of [-.39,.39]) {
-    const wheel=cyl(.095,.052,rubber,bx+dx,.115,bz+dz);wheel.rotation.x=Math.PI/2;
+    const wx=bx+dx*SX,wz=bz+dz*SZ;
+    const wheel=cyl(.095,.052,rubber,wx,.115,wz);wheel.rotation.x=Math.PI/2;
     for(const sz of [-1,1]) {
-      const hub=cyl(.034,.008,steelLight,bx+dx,.115,bz+dz+sz*.03);hub.rotation.x=Math.PI/2;
-      box(.05,.125,.012,steel,bx+dx,.1625,bz+dz+sz*.04);
+      const hub=cyl(.034,.008,steelLight,wx,.115,wz+sz*.03);hub.rotation.x=Math.PI/2;
+      box(.05,.125,.012,steel,wx,.1625,wz+sz*.04);
     }
-    box(.11,.025,.092,steel,bx+dx,.2375,bz+dz);
-    cyl(.036,.17,steel,bx+dx,.335,bz+dz);
+    box(.11,.025,.092,steel,wx,.2375,wz);
+    cyl(.036,.17,steel,wx,.335,wz);
   }
-  for(const dx of [-.93,.93])box(.045,.045,.708,steel,bx+dx,.285,bz);
-  for(const dz of [-.18,.18])box(1.815,.03,.035,steel,bx,.285,bz+dz);
+  for(const dx of [-.93,.93])box(.045,.045,.78*SZ-.072,steel,bx+dx*SX,.285,bz);
+  for(const dz of [-.18,.18])box(1.86*SX-.045,.03,.035,steel,bx,.285,bz+dz*SZ);
   for(const dz of [-.39,.39]) {
-    box(1.788,.028,.028,steelLight,bx,.335,bz+dz);
-    box(.028,.071,.028,steelLight,bx,.3845,bz+dz);
+    box(1.86*SX-.072,.028,.028,steelLight,bx,.335,bz+dz*SZ);
+    box(.028,.071,.028,steelLight,bx,.3845,bz+dz*SZ);
   }
-  rounded(2.36,.16,.94,canvas,bx,.6,bz,.045);
-  box(.014,.006,.86,dark,bx-.52,.683,bz);
-  rounded(.46,.076,.65,bone,bx-.88,.718,bz,.03);
-  rounded(1.3,.024,.94,canvas,bx+.34,.692,bz,.008);
-  for(const sz of [-1,1])box(1.24,.075,.014,canvas,bx+.34,.6665,bz+sz*.477);
-  for(let i=0;i<9;i++)box(.85,.004,.006,bone,bx+.33,.706,bz-.36+i*.09);
+  rounded(2.36*SX,.16,.94*SZ,canvas,bx,.6,bz,.045);
+  box(.014,.006,.86*SZ,dark,bx-.52*SX,.683,bz);
+  rounded(.46,.076,.65*SZ,bone,bx-.77,.718,bz,.03);   // under his head (about 0.9 m from the hip)
+  rounded(1.3*SX,.024,.94*SZ,canvas,bx+.34*SX,.692,bz,.008);
+  for(const sz of [-1,1])box(1.24*SX,.075,.014,canvas,bx+.34*SX,.6665,bz+sz*(.47*SZ+.007));
+  for(let i=0;i<9;i++)box(.85*SX,.004,.006,bone,bx+.33*SX,.706,bz+(-.36+i*.09)*SZ);
   // Tubular ends and a low side rail; the wake-up side remains clear.
   for(const dx of [-1.21,1.21]) {
     for(const dz of [-.42,.42]) {
-      cyl(.024,.336,steelLight,bx+dx,.688,bz+dz);
-      box(.052,.048,.052,steelLight,bx+dx,.88,bz+dz);
+      cyl(.024,.336,steelLight,bx+dx*SX,.688,bz+dz*SZ);
+      box(.052,.048,.052,steelLight,bx+dx*SX,.88,bz+dz*SZ);
     }
-    box(.036,.036,.788,steelLight,bx+dx,.88,bz);
+    box(.036,.036,.84*SZ-.052,steelLight,bx+dx*SX,.88,bz);
   }
   for(const dx of [-.83,.83]) {
-    box(.048,.025,.048,steel,bx+dx,.5175,bz-.535);
-    cyl(.02,.26,steel,bx+dx,.66,bz-.535);
-    box(.048,.048,.048,steelLight,bx+dx,.814,bz-.535);
+    box(.048,.025,.048,steel,bx+dx*SX,.5175,bz-.535*SZ);
+    cyl(.02,.26,steel,bx+dx*SX,.66,bz-.535*SZ);
+    box(.048,.048,.048,steelLight,bx+dx*SX,.814,bz-.535*SZ);
   }
-  box(1.612,.036,.036,steelLight,bx,.814,bz-.535);
+  box(1.66*SX-.048,.036,.036,steelLight,bx,.814,bz-.535*SZ);
   // Under-bed supplies, fastening straps and folded dressings on the shelf rails.
-  rounded(.74,.11,.47,olive,bx+.2,.355,bz,.028);
+  rounded(.74,.11,.47*SZ,olive,bx+.2*SX,.355,bz,.028);
   for(const dx of [-.05,.4]) {
-    box(.05,.008,.47,dark,bx+dx,.414,bz);
-    for(const sz of [-1,1])box(.05,.118,.008,dark,bx+dx,.359,bz+sz*.239);
+    box(.05,.008,.47*SZ,dark,bx+dx*SX,.414,bz);
+    for(const sz of [-1,1])box(.05,.118,.008,dark,bx+dx*SX,.359,bz+sz*(.235*SZ+.004));
   }
-  cross(bx+.18,.355,bz+.242,.09,.014);
+  cross(bx+.18*SX,.355,bz+.235*SZ+.007,.09,.014);
 
   // Lockable medical cabinet and worktop on four steel legs seated on y = 0.020 m mat.
-  const cx=bx+2.72,cz=back+.64;
-  for(const dx of [-.68,.68])for(const dz of [-.31,.31])box(.08,.09,.08,steel,cx+dx,.065,cz+dz);
-  rounded(1.65,.9825,.83,olive,cx,.60125,cz,.035);
-  box(1.78,.075,.94,steelLight,cx,1.13,cz);
-  for(const y of [.25,.53,.81]) {
-    box(1.5,.22,.016,dark,cx,y,cz+.423);
-    box(1.42,.17,.018,olive,cx,y,cz+.44);
-    for(const hx of [-.22,.22])box(.022,.022,.026,steelLight,cx+hx,y+.015,cz+.462);
-    rod([cx-.25,y+.015,cz+.489],[cx+.25,y+.015,cz+.489],.014,steelLight);
+  // CG-1 (CF-20 #1): the worktop stood at 1.17 m (a man's ribs) and 0.94 m deep; a lab bench is 0.90 m high and a base
+  // unit 0.60 m deep. Same width and back line; the body is 0.715 m on its 9 cm legs, the top 0.65 m deep at 0.90 m.
+  const cx=bx+2.72,cz=back+.525,wz=back+.55,top=.90,lift=top-1.1675;
+  for(const dx of [-.68,.68])for(const dz of [-.22,.22])box(.08,.09,.08,steel,cx+dx,.065,cz+dz);
+  rounded(1.65,.715,.60,olive,cx,.4675,cz,.035);
+  box(1.78,.075,.65,steelLight,cx,top-.0375,wz);
+  for(const y of [.205,.39,.575]) {
+    box(1.5,.17,.016,dark,cx,y,cz+.308);
+    box(1.42,.13,.018,olive,cx,y,cz+.3255);
+    for(const hx of [-.22,.22])box(.022,.022,.026,steelLight,cx+hx,y+.015,cz+.347);
+    rod([cx-.25,y+.015,cz+.374],[cx+.25,y+.015,cz+.374],.014,steelLight);
   }
-  rounded(.48,.24,.35,bone,cx-.5,1.2875,cz+.05,.025);cross(cx-.5,1.2875,cz+.233,.15,.016);
-  for(let i=0;i<3;i++)rounded(.26,.068,.23,bone,cx-.04,1.2015+i*.068,cz-.16,.014);
+  rounded(.48,.24,.35,bone,cx-.5,1.2875+lift,wz,.025);cross(cx-.5,1.2875+lift,wz+.183,.15,.016);
+  for(let i=0;i<3;i++)rounded(.26,.068,.23,bone,cx-.04,1.2015+lift+i*.068,wz-.16,.014);
   // Portable monitor with a baked waveform display (no animated extra draw).
   const screen=texture(384,256,c=>{
     c.fillStyle='#081a14';c.fillRect(0,0,384,256);c.strokeStyle='#a8d2ad';c.lineWidth=4;
@@ -218,10 +233,10 @@ export function dressTrainingProps(T, { B, gate, bedAt, box: roomBox, add: roomA
     c.fillStyle='#709c7d';for(let i=0;i<12;i++)c.fillRect(18+i*29,192,19,10);
   });
   const screenMat=std({map:screen,color:0xffffff,emissiveMap:screen,emissive:0xffffff,emissiveIntensity:.35,roughness:.48});
-  box(.38,.0525,.25,steel,cx+.48,1.19375,cz-.08);
-  rounded(.58,.44,.24,dark,cx+.48,1.44,cz-.08,.035);
-  box(.46,.28,.012,screenMat,cx+.48,1.48,cz+.046);
-  for(const dx of [-.17,0,.17])cyl(.024,.02,bone,cx+.48+dx,1.28,cz+.05).rotation.x=Math.PI/2;
+  box(.38,.0525,.25,steel,cx+.48,1.19375+lift,wz-.08);
+  rounded(.58,.44,.24,dark,cx+.48,1.44+lift,wz-.08,.035);
+  box(.46,.28,.012,screenMat,cx+.48,1.48+lift,wz+.046);
+  for(const dx of [-.17,0,.17])cyl(.024,.02,bone,cx+.48+dx,1.28+lift,wz+.05).rotation.x=Math.PI/2;
   // Wall supply case, visible hinges and red cross seated flush on wall panels.
   rounded(1.55,.7,.3,olive,cx,2.08,back+.2425,.03);
   for(const dx of [-.36,.36])box(.62,.57,.02,dark,cx+dx,2.08,back+.4025);
@@ -239,38 +254,51 @@ export function dressTrainingProps(T, { B, gate, bedAt, box: roomBox, add: roomA
   cyl(.02,1.7875,steelLight,ix,1.01625,iz);
   box(.044,.028,.044,steelLight,ix,1.924,iz);
   for(const sx of [-1,1])box(.218,.018,.018,steelLight,ix+sx*.131,1.924,iz);
-  const bagX=ix+.22, tubeW=(bx-1.0-bagX)-.022;
+  const bagX=ix+.22, tubeW=(bx-.92-bagX)-.022;
   cyl(.01,.11,steelLight,bagX,1.86,iz,8);
   rounded(.17,.27,.075,bone,bagX,1.67,iz,.02);
   box(.13,.16,.01,std({color:0x91aaa0,roughness:.5}),bagX,1.64,iz+.0425);
   box(.028,.04,.028,bone,bagX,1.515,iz);
   cyl(.008,.585,rubber,bagX,1.2025,iz,8);
   box(.022,.022,.022,rubber,bagX,.899,iz);
-  box(tubeW,.014,.014,rubber,(bagX+bx-1.0)/2,.899,iz);
-  box(.022,.022,.022,rubber,bx-1.0,.899,iz);
-  box(.014,.014,.258,rubber,bx-1.0,.899,(iz+bz-.38)/2);
-  box(.022,.022,.022,rubber,bx-1.0,.899,bz-.38);
-  cyl(.008,.196,rubber,bx-1.0,.79,bz-.38,8);
-  box(.04,.012,.04,bone,bx-1.0,.686,bz-.38);
+  box(tubeW,.014,.014,rubber,(bagX+bx-.92)/2,.899,iz);
+  box(.022,.022,.022,rubber,bx-.92,.899,iz);
+  box(.014,.014,.258,rubber,bx-.92,.899,(iz+bz-.38)/2);
+  box(.022,.022,.022,rubber,bx-.92,.899,bz-.38);
+  cyl(.008,.196,rubber,bx-.92,.79,bz-.38,8);
+  box(.04,.012,.04,bone,bx-.92,.686,bz-.38);
   // Closed flat-bottom oxygen bottle with hollow bands, valve, gauge and supply hose (on y = 0.020 m mat).
-  const ox=bx-1.49,oz=bz+.8;
+  // CG-1 (CF-20 #5, AH-1 #21): it was 0.28 m across on 0.79 m (a keg); a medical E cylinder is 0.11 m by 0.74 m. It now
+  // stands in a small wheeled cylinder cart (base, two wheels, a handle post and a strap round it), and its hose is
+  // coiled and hung on the cart's handle instead of running through the air into the stretcher's head rail.
+  const ox=bx-1.49,oz=bz+.8,MT=.02,base=.069;
+  for(const dz of [-.075,.075]){const w=cyl(.03,.02,rubber,ox-.07,MT+.03,oz+dz,10);w.rotation.x=Math.PI/2;}
+  box(.03,.006,.17,steel,ox-.07,MT+.03,oz);                     // the wheels' axle (top 5.3 cm)
+  box(.17,.016,.13,steel,ox,.061,oz);                           // base plate, resting on the axle and a front foot
+  box(.03,.033,.11,rubber,ox+.07,MT+.0165,oz);
   const bottle=add(new T.LatheGeometry([
-    new T.Vector2(0,0),new T.Vector2(.115,0),new T.Vector2(.14,.035),
-    new T.Vector2(.14,.6),new T.Vector2(.11,.72),new T.Vector2(.038,.79),new T.Vector2(0,.79)
-  ],16),olive,ox,.02,oz);
+    new T.Vector2(0,0),new T.Vector2(.048,0),new T.Vector2(.058,.02),
+    new T.Vector2(.058,.6),new T.Vector2(.05,.69),new T.Vector2(.034,.75),new T.Vector2(.034,.77),new T.Vector2(0,.77)
+  ],16),olive,ox,base,oz);
   bottle.castShadow=true;
-  for(const y of [.18,.54])bandRing(.14,.148,.045,dark,ox,y,oz,16);
-  cyl(.035,.03,steelLight,ox,.825,oz);
-  box(.056,.05,.056,steelLight,ox,.865,oz);
-  cyl(.03,.023,steelLight,ox,.9015,oz);
-  box(.18,.026,.07,steel,ox,.926,oz);
-  const gStem=cyl(.014,.039,steel,ox+.0475,.865,oz,8);gStem.rotation.z=Math.PI/2;
-  const gauge=cyl(.048,.028,bone,ox+.115,.865,oz);gauge.rotation.x=Math.PI/2;
-  box(.024,.02,.362,rubber,ox,.865,oz-.209);
-  box(.242,.02,.02,rubber,ox+.133,.865,bz+.42);
+  for(const y of [.18,.54])bandRing(.058,.064,.04,dark,ox,base+y,oz,16);
+  const V=base+.77-.81;                                         // the valve set sits on the new neck
+  cyl(.035,.03,steelLight,ox,.825+V,oz);
+  box(.056,.05,.056,steelLight,ox,.865+V,oz);
+  cyl(.03,.023,steelLight,ox,.9015+V,oz);
+  box(.1,.022,.05,steel,ox,.924+V,oz);                          // valve key (E cylinders use a small one)
+  const gStem=cyl(.012,.034,steel,ox+.045,.865+V,oz,8);gStem.rotation.z=Math.PI/2;
+  const gauge=cyl(.03,.022,bone,ox+.073,.865+V,oz);gauge.rotation.x=Math.PI/2;   // a 6 cm regulator gauge
+  // Cart handle post behind the bottle, strap ring round it, the hose coiled on a hook.
+  rod([ox-.085,.061,oz],[ox-.085,1.0,oz],.012,steelLight);
+  box(.034,.02,.02,steel,ox-.07,base+.45,oz);
+  bandRing(.059,.066,.03,steel,ox,base+.435,oz,16);
+  box(.03,.012,.012,steel,ox-.1,.92,oz);
+  const coil=add(new T.TorusGeometry(.075,.009,6,18),rubber,ox-.117,.84,oz);coil.rotation.y=Math.PI/2;
+  rod([ox-.028,.865+V,oz],[ox-.113,.905,oz+.025],.008,rubber);  // regulator to the coil
   if(labels.medical) {
-    box(.76,.14,.014,dark,cx,1.0,cz+.422);
-    sign(labels.medical,.74,.13,cx,1.0,cz+.4293,0,{bg:'#25312b',color:'#d2cfb2',size:110});
+    box(.76,.14,.014,dark,cx,.745,cz+.307);
+    sign(labels.medical,.74,.13,cx,.745,cz+.3143,0,{bg:'#25312b',color:'#d2cfb2',size:110});
   }
   return { gateLeaves, gateFrame, gateLamp: amber };
 }

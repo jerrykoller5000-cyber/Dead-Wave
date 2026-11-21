@@ -1,0 +1,80 @@
+{
+  "startedAt": "2026-11-20T23:38:59.068Z",
+  "shots": [],
+  "backend": "WebGL2 fallback",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "result": {
+    "ok": true,
+    "shots": [
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/23-build-wheel-1920.png",
+        "cam": {
+          "x": -25.996171205099433,
+          "y": -190.0917269092057,
+          "z": -640.3617572680035,
+          "tx": -25.99936163084811,
+          "ty": -197.26475571689738,
+          "tz": -633.3941430748088,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "thumb": null,
+        "ms": 3621,
+        "caption": "23-build-wheel Build wheel (B held) @ 1920x1080"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/23-build-wheel-1366.png",
+        "cam": {
+          "x": -25.999999949058644,
+          "y": -190.0917269092057,
+          "z": -640.360480529153,
+          "tx": -25.999999991509775,
+          "ty": -197.265287811126,
+          "tz": -633.3934134283968,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "thumb": null,
+        "ms": 3414,
+        "caption": "23-build-wheel Build wheel (B held) @ 1366x768"
+      },
+      {
+        "file": "Claude outputs/CH-1-menus/native/training/23-build-wheel-narrow960.png",
+        "cam": {
+          "x": -25.99999999999926,
+          "y": -190.0917269092057,
+          "z": -640.3604805121668,
+          "tx": -25.999999999999876,
+          "ty": -197.26528781820062,
+          "tz": -633.3934134186948,
+          "fov": 59.99999999999999
+        },
+        "label": "the play camera",
+        "thumb": null,
+        "ms": 3309,
+        "caption": "23-build-wheel Build wheel (B held) @ 960x1040"
+      }
+    ],
+    "sheet": null,
+    "ms": 10344
+  },
+  "proof": [
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/23-build-wheel-1920.png",
+      "wheelShow": true,
+      "wheelText": "1 · STRUCTURE2 · DEFENSES3 · TURRETSscroll or 1-2-3 for more\n        Upgradepric"
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/23-build-wheel-1366.png",
+      "wheelShow": true,
+      "wheelText": "1 · STRUCTURE2 · DEFENSES3 · TURRETSscroll or 1-2-3 for more\n        Upgradepric"
+    },
+    {
+      "out": "Claude outputs/CH-1-menus/native/training/23-build-wheel-narrow960.png",
+      "wheelShow": true,
+      "wheelText": "1 · STRUCTURE2 · DEFENSES3 · TURRETSscroll or 1-2-3 for more\n        Upgradepric"
+    }
+  ],
+  "sheet": "Claude outputs/CH-1-menus/native/training/sheet.jpg",
+  "finishedAt": "2026-11-20T23:40:09.242Z"
+}

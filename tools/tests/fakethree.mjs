@@ -473,6 +473,13 @@ export class BufferAttribute {
 export class Float32BufferAttribute extends BufferAttribute { constructor(a, s, n) { super(a instanceof Float32Array ? a : new Float32Array(a), s, n); } }
 export class Uint16BufferAttribute extends BufferAttribute { constructor(a, s) { super(new Uint16Array(a), s); } }
 export class Uint32BufferAttribute extends BufferAttribute { constructor(a, s) { super(new Uint32Array(a), s); } }
+// CB-369 (21 Nov): GU-5's WebGL forest packs its instance matrices in an instanced interleaved buffer.
+export class InterleavedBuffer {
+  constructor(array, stride) { this.isInterleavedBuffer = true; this.array = array; this.stride = stride; this.count = array ? array.length / stride : 0; this.version = 0; this.usage = 35044; }
+  set needsUpdate(v) { if (v === true) this.version++; }
+  setUsage(u) { this.usage = u; return this; }
+}
+export class InstancedInterleavedBuffer extends InterleavedBuffer { constructor(array, stride, m = 1) { super(array, stride); this.isInstancedInterleavedBuffer = true; this.meshPerAttribute = m; } }
 export class InstancedBufferAttribute extends BufferAttribute { constructor(a, s, n, m) { super(a, s, n); this.meshPerAttribute = m || 1; } }
 export class BufferGeometry {
   constructor() { this.attributes = {}; this.morphAttributes = {}; this.morphTargetsRelative = false; this.index = null; this.groups = []; this.userData = {}; this.boundingBox = null; this.boundingSphere = null; this.isBufferGeometry = true; this.drawRange = { start: 0, count: Infinity }; }

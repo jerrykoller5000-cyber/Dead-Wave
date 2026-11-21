@@ -1,6 +1,7 @@
 // GP-19893: a retracting enclosure on the two open sides of the medical bay.
 import {bakeStatic} from '../world/bake.js';
 import {createTrainingBlockers} from './training-infirmary.js';
+import {chainLinkTexture,CHAIN_LINK_TILE} from './training-perimeter.js';
 
 export const INFIRMARY_FENCE = Object.freeze({height:3, clearDistance:.6096, travel:.65});
 export function createTrainingInfirmaryFence(T,tg,{onMotion=()=>{}}={}) {
@@ -9,7 +10,9 @@ export function createTrainingInfirmaryFence(T,tg,{onMotion=()=>{}}={}) {
   const root=new T.Group();root.name='training-infirmary-fence';root.position.set(x-origin.x,0,z-origin.z);tg.group.add(root);
   const panels=new T.Group();root.add(panels);
   const frame=new T.MeshStandardMaterial({color:0x39453e,roughness:.78,metalness:.5});
-  const wire=new T.MeshStandardMaterial({color:0x828d82,roughness:.72,metalness:.55,side:T.DoubleSide});
+  // CG-1 (CF-20 #9, Director 00:35Z): the same 6 cm chain-link alpha pattern as the perimeter (it was 28 cm strips).
+  const linkTex=chainLinkTexture(T);
+  const wire=new T.MeshStandardMaterial({color:0x828d82,roughness:.72,metalness:.55,side:T.DoubleSide,map:linkTex,transparent:true,alphaTest:.04});
   const geometries=[];
   const box=(w,h,d,px,py,pz,parent=panels)=>{
     const geo=new T.BoxGeometry(w,h,d);geometries.push(geo);
@@ -17,7 +20,9 @@ export function createTrainingInfirmaryFence(T,tg,{onMotion=()=>{}}={}) {
   };
   // The south run seats against the existing steel corner post's front face;
   // that post is its anchor, so it needs no overlapping second post or plate.
-  const sides=[{axis:'x',at:bay.maxX,lo:bay.minZ+.2175,hi:bay.maxZ},{axis:'z',at:bay.maxZ,lo:bay.minX+.24,hi:bay.maxX}];
+  // CG-1 (AH-1 #6): the north run started 0.24 m off the west wall (a 20 cm slit past the bay's return panel); its first
+  // post now stands on the wall's face.
+  const sides=[{axis:'x',at:bay.maxX,lo:bay.minZ+.2175,hi:bay.maxZ},{axis:'z',at:bay.maxZ,lo:bay.minX+.045,hi:bay.maxX}];
   const plated=new Set();
   for(const s of sides) {
     const length=s.hi-s.lo,mid=(s.lo+s.hi)/2;
@@ -31,17 +36,15 @@ export function createTrainingInfirmaryFence(T,tg,{onMotion=()=>{}}={}) {
       box(.09,INFIRMARY_FENCE.height,.09,px,INFIRMARY_FENCE.height/2,pz);
       box(.24,.035,.24,px,.0175,pz,root);
     }
-    for(const y of [.16,INFIRMARY_FENCE.height-.12]) box(s.axis==='x'?.065:length,.075,s.axis==='x'?length:.065,s.axis==='x'?s.at:mid,y,s.axis==='x'?mid:s.at);
-    // Thin diamond strips are real geometry: no alpha texture or distant mip popping.
-    const pos=[], low=.23, high=INFIRMARY_FENCE.height-.21, thickness=.012;
-    for(const slope of [-1,1]) for(let c=-length-high;c<length+high;c+=.28) {
-      const a=Math.max(0,slope===1?low-c:c-high),b=Math.min(length,slope===1?high-c:c-low);
-      if(b-a<.015)continue;
-      const av=slope*a+c,bv=slope*b+c,du=thickness/Math.sqrt(2),dv=-slope*du;
-      const vertices=[at(a+du,av+dv),at(b+du,bv+dv),at(b-du,bv-dv),at(a-du,av-dv)];
-      for(const i of [0,1,2,0,2,3])pos.push(...vertices[i]);
-    }
-    const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.computeVertexNormals();geometries.push(geo);panels.add(new T.Mesh(geo,wire));
+    // CG-1: the rails' outer face flush with the posts' (.045 out), the fabric 1 mm outside them, between the rails:
+    // one flat quad a side, uv in metres / CHAIN_LINK_TILE.
+    const off=.0125,face=.046,railH=.075;
+    for(const y of [.16,INFIRMARY_FENCE.height-.12]) box(s.axis==='x'?.065:length,railH,s.axis==='x'?length:.065,s.axis==='x'?s.at+off:mid,y,s.axis==='x'?mid:s.at+off);
+    const low=.16+railH/2, high=INFIRMARY_FENCE.height-.12-railH/2, ua=s.axis==='x'?.11:0, ub=length;   // the x run's fabric starts clear of the bay's top header beam at the back wall
+    const P=(u,v)=>s.axis==='x'?[s.at+face-x,v,u+s.lo-z]:[u+s.lo-x,v,s.at+face-z];
+    const q=[P(ua,low),P(ub,low),P(ub,high),P(ua,high)],uv=[[ua,low],[ub,low],[ub,high],[ua,high]].map(([u,v])=>[u/CHAIN_LINK_TILE,v/CHAIN_LINK_TILE]);
+    const pos=[],uvs=[];for(const i of [0,1,2,0,2,3]){pos.push(...q[i]);uvs.push(...uv[i]);}
+    const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));geo.computeVertexNormals();geometries.push(geo);panels.add(new T.Mesh(geo,wire));
   }
   bakeStatic(T,panels);bakeStatic(T,root,{skip:o=>o===panels});
   const solids=sides.map(s=>({minX:s.axis==='x'?s.at-.06:s.lo,maxX:s.axis==='x'?s.at+.06:s.hi,minZ:s.axis==='z'?s.at-.06:s.lo,maxZ:s.axis==='z'?s.at+.06:s.hi,minY:floor,maxY:bay.maxY,prop:true,infirmaryFence:true}));
@@ -72,7 +75,7 @@ export function createTrainingInfirmaryFence(T,tg,{onMotion=()=>{}}={}) {
       previous.set(zombie,{x:p.x,y:p.y,z:p.z});
     },
     state:()=>({raised,amount,awaitExit}),
-    dispose(){setRaised(false);root.removeFromParent();const all=new Set(geometries);root.traverse(m=>{if(m.geometry)all.add(m.geometry);});all.forEach(g=>g.dispose());frame.dispose();wire.dispose();}
+    dispose(){setRaised(false);root.removeFromParent();const all=new Set(geometries);root.traverse(m=>{if(m.geometry)all.add(m.geometry);});all.forEach(g=>g.dispose());frame.dispose();wire.dispose();linkTex.dispose();}
   };
   api.reset();return api;
 }

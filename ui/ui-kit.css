@@ -1,0 +1,117 @@
+/* CH-1 (Claude 8, D-218 pass 4): shared UI pieces for every menu and panel. Owner: Claude 8.
+   Landing 1: the layer scale, styled scrollbars, a keyboard focus ring. Loaded LAST (after ui/*.css) from index.html.
+   The colour and font tokens stay in index.html :root (style guide: Claude outputs/CH-1-menus/CH-1-plan.md). */
+
+/* --- Layers --------------------------------------------------------------------------------------------
+   #pause, #shop and #cif live inside #hud (z-index 4, its own stacking context), so any overlay outside #hud
+   with a higher z-index drew over the pause menu, and the training countdown (z 6 inside #hud) beat the pause
+   card (z 5). While the pause is up, #hud rises above the HUD notices and the pause card above its siblings. */
+body:has(#pause.show) #hud { z-index: 300; }
+#hud > #pause { z-index: 20; }
+#errorCard { z-index: 1000; }
+body #rangeConsole { z-index: 60; }
+
+/* --- Scrollbars: thin olive track, sand thumb, the same in every panel ---------------------------------- */
+#pause, #pause *, #shop *, #cif *, #rangeConsole, #rangeConsole *, #trainingPanel * {
+  scrollbar-width: thin; scrollbar-color: #6b6a4e rgba(19,23,15,.9);
+}
+
+/* --- Keyboard focus: one visible ring on every control (mouse clicks do not show it) -------------------- */
+#modeSelect button:focus-visible, #pause button:focus-visible, #pause input:focus-visible, #shop button:focus-visible,
+#cif button:focus-visible, #trainingPanel button:focus-visible, #rangeConsole button:focus-visible,
+#menuCredits button:focus-visible, #firstRunCard button:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+
+/* --- Tokens added by CH-1 (style guide; the existing ones stay in index.html :root) -------------------- */
+:root {
+  --panel-raised: #1c211a; --panel-line: rgba(232,226,200,.16);
+  --accent-deep: #e8b50c; --danger-text: #ff7a66; --ok: #51db8b;
+}
+
+/* --- The terminal cursor after the SUPPLY TERMINAL title: landing 1 let it blink once and go, but every shot taken
+   in its first second still showed a stray "I" (AH-6 #7). Gone, like the range console's (AH-4 #16). */
+#shop .shop-heading::after { display: none; }
+
+/* ===== CH-1 landing 3 (AH-4 / AH-6 menu replay, 21 Nov) ================================================ */
+
+/* AH-4 #17 Settings: "FIRST-PERSON FOV" wrapped (label column was 7vw = 96 px at 1366) and the list ran 4 px past
+   its box at 768 tall, so a scrollbar showed. One line per label; rows a little closer on short screens. */
+@media (min-width: 900px) {
+  #pauseSettingsView .volumes label { grid-template-columns: 128px 200px 40px; }
+  #pauseSettingsView .volumes label span { white-space: nowrap; }
+}
+@media (max-height: 860px) {
+  #pauseSettingsView .volumes { gap: 9px; }
+  #pauseSettingsView .settingRow { margin-top: 10px; }
+  #pauseSettingsView .modes { margin-top: 6px; }
+}
+
+/* AH-4 #10 Range console at 768 tall: the melee box and the last-drill box (VOID) took 400 px, so "2. Drill" sat
+   below the fold. On short screens both boxes become slim strips: title, numbers and score on few lines. */
+@media (max-height: 860px) and (min-width: 651px) {
+  body #rangeConsole .rd-panel { padding: 16px 22px; }
+  body #rangeConsole .rd-panel > header + p { margin: 6px 0 0; }
+  body #rangeConsole .rd-last-run { margin-top: 10px; padding: 8px 14px; }
+  body #rangeConsole .rd-last-run h3 { margin: 0; }
+  body #rangeConsole .rd-last-run p { margin: 2px 0; font-size: 12px; }
+  body #rangeConsole .rd-last-run .rd-run-score { font-size: 26px; line-height: 1; }
+  body #rangeConsole .rd-last-run .rd-result-metrics { grid-template-columns: repeat(4, auto); justify-content: start; gap: 2px 28px; padding: 6px 10px; margin: 4px 0; font-size: 12px; }
+  body #rangeConsole #rangeDummyCounter { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 0 24px; }
+  body #rangeConsole #rangeDummyCounter header { display: contents; }
+  body #rangeConsole #rangeDummyCounter .rd-result-metrics { order: 2; margin: 0; padding: 4px 10px; background: none; }
+  body #rangeConsole #rangeDummyCounter button { order: 3; padding-block: 6px; }
+  body #rangeConsole .rd-path { margin: 10px 0; }
+  body #rangeConsole .rd-path span { padding: 5px 12px; }
+}
+
+/* AH-4 #11 CIF: the PATTERNS swatches sat under the footer (half a row at 1080, a 2 px sliver at 768). Tall screens
+   get a taller locker; short screens get tighter header, tabs and issue rows, so the first swatch row shows. */
+#cif:not(.armory-only) > .card { height: min(900px, calc(100dvh - 48px)); }
+@media (max-height: 860px) {
+  #cif:not(.armory-only) .cif-header { padding: 12px 26px 10px; }
+  #cif:not(.armory-only) .cif-eyebrow { margin-bottom: 3px; }
+  #cif:not(.armory-only) #cifHint { margin-top: 3px; }
+  #cif:not(.armory-only) #cifTabs button { padding: 11px 12px 9px; }
+  #cif:not(.armory-only) #cifItems { padding: 8px 22px; }
+  #cif:not(.armory-only) .cif-selection { padding: 8px 22px; }
+  #cif:not(.armory-only) #cifSelection { font-size: 20px; margin-bottom: 2px; }
+  #cif:not(.armory-only) .cif-scroll { padding-top: 10px; }
+  #cif:not(.armory-only) #cifIssue { gap: 5px; padding-bottom: 10px; margin-bottom: 10px; }
+  #cif:not(.armory-only) #cifIssue .cif-issue-row { padding: 6px 12px; }
+  #cif:not(.armory-only) #cifIssue .cif-issue-info { gap: 1px; }
+  #cif:not(.armory-only) #cifIssue button { min-height: 30px; padding: 5px 12px; }
+  #cif:not(.armory-only) #cifOptions { padding-bottom: 10px; }
+}
+
+/* AH-4 #12 Armory. (a) ARMORY and RESUPPLY drew in white Impact; every other menu title is the gold stencil face. */
+#cif #armoryPanel h2 { font-family: var(--font-display); font-weight: 400; letter-spacing: .04em; color: var(--accent); }
+/* (b) The hip-holster pistol picture was a black gun on a dark tile: give it a lit backdrop and lift the picture. */
+#cif .armory-hip .armory-pic { border-radius: 3px; background: radial-gradient(ellipse at 50% 55%, #d9d2b4a6, #d9d2b42e 62%, transparent 78%); }
+#cif .armory-hip .armory-pic img { filter: brightness(1.5) contrast(1.15); }
+#cif .armory-hip .armory-pic svg { fill: #cfd8c0b3; }
+/* (c) At 768 tall the Done / Move to shelf bar covered SECONDARY 2, the hip holster and BUY AMMO. Short screens:
+   tighter head, resupply rows and slot cards, so the carried guns and the workbench's ammo row sit above the bar. */
+@media (max-height: 860px) {
+  #cif.armory-only .armory-head { padding: 10px 16px 6px; }
+  #cif.armory-only .armory-head .hint { margin-top: 2px; }
+  #cif #armoryPanel #shop.armory-inline h2 { padding-bottom: 5px; }
+  #cif #armoryPanel #shop.armory-inline p.hint { margin-bottom: 4px; }
+  #cif #armoryPanel #shop.armory-inline #shopList { gap: 5px; }
+  #cif #armoryPanel #shop.armory-inline #shopList .shop-section { margin: 6px 0 0; padding-bottom: 3px; }
+  #cif #armoryPanel #shop.armory-inline .perk { padding: 5px 12px; }
+  #cif #armoryPanel #shop.armory-inline .perk .shop-icon { width: 32px; height: 32px; font-size: 18px; }
+  #cif #armoryPanel #shop.armory-inline .perk button { padding: 7px 14px; }
+  #cif.armory-only #armoryPanel h3 { margin: 6px 0 5px; }
+  #cif.armory-only .armory-slots button { min-height: 60px; padding: 5px 7px; }
+  #cif.armory-only .armory-slots .armory-pic { height: 30px; }
+  #cif.armory-only .armory-hip { margin-top: 5px; }
+}
+
+/* AH-4 #18: the floating "[E] SUPPLY TERMINAL" prompt stayed on screen, dimmed, behind the open menu. While any
+   menu or panel is open the E prompt hides (it comes back when the menu closes). */
+body:has(#shop.show) #kioskPrompt, body:has(#cif.show) #kioskPrompt, body:has(#pause.show) #kioskPrompt,
+body:has(#rangeConsole:not([hidden])) #kioskPrompt, body:has(#trainingPanel:not([hidden])) #kioskPrompt { visibility: hidden; }
+
+/* AH-6 #7: the MedPen line in the supply terminal was cut to one line ("climbs back t..."). Up to three lines. */
+#shop .perk .desc { -webkit-line-clamp: 3; }

@@ -897,6 +897,7 @@
   <link rel="stylesheet" href="ui/skills-panel.css">
   <link rel="stylesheet" href="ui/supply-notice.css">
   <link rel="stylesheet" href="ui/supply-terminal.css">
+  <link rel="stylesheet" href="ui/ui-kit.css">   <!-- CH-1 (Claude 8): shared UI pieces, loaded last -->
   <style>
     #errorCard {
       position: fixed; left: 16px; right: 16px; bottom: 16px; z-index: 80;
@@ -1496,6 +1497,7 @@
     import * as CaveGuardian from './world/cave-guardian.js';
     import { ZOMBIE_LIMITS as GP156_CORPSE_LIMITS } from './game/zombie-limits.js'; // GP-20156 REVIEW, unchanged original limits
     import { applyZombieConcept, prepareConvoySleeperAppearance } from './studio/zombie-concepts.js';
+    import { makeIntakeSpecimen } from './studio/zombie-intake-skulls.js';
     import { blendZombieJoins, refreshZombieJoinLoss } from './combat/zombie-joins.js';
     import { ringGapSpots, shortcutSpot, ironPush, ironBlockCircles, ironSegs, nearestSpot, createIronGaps } from './combat/iron-gaps.js';   // GB-266
     import { createMarineIdle } from './studio/marine-idle.js';
@@ -1536,10 +1538,12 @@ import { fetchBruteGetUp, createBruteGetUp } from './combat/brute-getup.js'; // 
     import { planStoryRings, storyRingAt, clipFenceToRing, winchSpots } from './game/story-gates.js';   // CL-296 (?gates=1); CL-303 winchSpots
     import { createUtilities } from './game/utilities.js';   // CU-201
     import { makeVaultModel, VAULT_SIZE } from './studio/relay-vault-model.js';   // CL-184
+    import { staticBatchTree } from './core/static-batch.js';   // CB-369 (D-216): a static prop's meshes drawn per material
     import { makeKatanaModel, makeSheathedKatana } from './studio/katana.js';   // CL-184: the red katana
     import { makeFragGrenade } from './studio/frag-grenade.js';   // GB-171: the M67-style frag grenade
     import { shamblerLungeResult, tickShamblerRecovery, shamblerRecoveryStep, applyShamblerRecovery } from './game/shambler-recovery.js';   // GP-19853
     import { prepareShamblerFeet, resetShamblerMotion, applyShamblerMotion } from './game/shambler-motion.js';   // GP-19852
+    import { applyShamblerJaw } from './game/shambler-jaw.js';   // CE-22: the shambler's jaw swing (CC-359 joint)
     import { prepareZombieFeet, applyZombieFeet, applyZombieLean, ZFEET, ZLEAN } from './game/zombie-feet.js';   // CL-187: ankles for the rest, the roll of every step, the lean of a start and a stop
     import { stepReact, FAR_M as REACT_FAR_M } from './game/zombie-react.js';   // J154 ZP4 (Claude 5): the reaction layer, springs added over the pose
     import { reactHit, reactShove, reactQueue, applyPosture } from './game/zombie-clips.js';   // J154 ZP4: hits by part and weapon, shoves, the queue, posture
@@ -1649,6 +1653,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     const fullscreenToggleBtn = document.getElementById('fullscreenToggle');
     const pauseCard = document.getElementById('pauseCard');
     const pauseMainView = document.getElementById('pauseMainView');
+    const pauseDescription = pauseMainView.querySelector('[data-dw-text="pause.description"]');
     const pauseTipsView = document.getElementById('pauseTipsView');
     const pauseSettingsView = document.getElementById('pauseSettingsView');
     const pauseSkillsView = document.getElementById('pauseSkillsView');
@@ -19235,6 +19240,17 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       arr[o + 8] = -n * s; arr[o + 9] = 0; arr[o + 10] = c * s;
       arr[o + 12] = x; arr[o + 13] = y; arr[o + 14] = z; arr[o + 15] = 1;
     }
+    function treeInstanceMatrices(count) {
+      if (!renderer.backend.isWebGLBackend) {
+        const storage = TSL.instancedArray(count, 'mat4');
+        return { buffer: storage.value, matrix: storage.element(TSL.instanceIndex) };
+      }
+      // The GLSL fallback reserves one slot per input. Use four vec4 inputs to
+      // avoid a mat4 overlapping the tint or being bound as one size-16 input.
+      const buffer = new THREE.InstancedInterleavedBuffer(new Float32Array(count * 16), 16);
+      const column = offset => TSL.instancedDynamicBufferAttribute(buffer, 'vec4', 16, offset);
+      return { buffer, matrix: TSL.mat4(column(0), column(4), column(8), column(12)) };
+    }
     function buildUnderstory(treesPlaced, rnd) {
       if (typeof TSL.instancedArray !== 'function' || !treeCanopyMat) return;
       const items = [];
@@ -19257,22 +19273,22 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for (const kind of ['brush', 'sap', 'log']) {
         const list = items.filter((it) => it.kind === kind);
         if (!list.length) continue;
-        const matrices = TSL.instancedArray(list.length, 'mat4');
+        const { matrix, buffer } = treeInstanceMatrices(list.length);
         const mat = (kind === 'log' ? treeWoodMat : treeCanopyMat).clone();
-        mat.positionNode = matrices.element(TSL.instanceIndex).mul(TSL.positionLocal).xyz;
+        mat.positionNode = matrix.mul(TSL.positionLocal).xyz;
         const mesh = new THREE.Mesh(geos[kind], mat);
         mesh.count = list.length; mesh.frustumCulled = false; mesh.castShadow = false; mesh.receiveShadow = false;
         mesh.matrixAutoUpdate = false;
         mesh.userData.treeBatch = 'understory:' + kind;
-        const arr = matrices.value.array;
+        const arr = buffer.array;
         for (let i = 0; i < list.length; i++) {
           const it = list[i];
           writeUnderMat(arr, i, it.x, sampleHeight(it.x, it.z) + (kind === 'log' ? 0.12 : 0), it.z, it.yaw, it.s);
         }
-        matrices.value.needsUpdate = true;
-        if (matrices.value.version != null) matrices.value.version++;
+        buffer.needsUpdate = true;
+        if (buffer.version != null) buffer.version++;
         scene.add(mesh);
-        understoryPacks.push({ mesh, buf: matrices.value, cpu: arr.slice(), list });
+        understoryPacks.push({ mesh, buf: buffer, cpu: arr.slice(), list });
         UNDERSTORY_DRAWS++;
       }
     }
@@ -19404,20 +19420,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for (const kind of ['brush', 'sap', 'log', 'rock']) {
         const list = lists[kind];
         if (!list.length) continue;
-        const matrices = TSL.instancedArray(list.length, 'mat4');
+        const { matrix, buffer } = treeInstanceMatrices(list.length);
         const mat = (kind === 'log' || kind === 'rock' ? treeWoodMat : treeCanopyMat).clone();
-        mat.positionNode = matrices.element(TSL.instanceIndex).mul(TSL.positionLocal).xyz;
+        mat.positionNode = matrix.mul(TSL.positionLocal).xyz;
         const mesh = new THREE.Mesh(geos[kind], mat);
         mesh.count = list.length; mesh.frustumCulled = false;
         mesh.castShadow = false; mesh.receiveShadow = false; mesh.matrixAutoUpdate = false;
         mesh.userData.wallBand = kind;
-        const arr = matrices.value.array;
+        const arr = buffer.array;
         for (let i = 0; i < list.length; i++) {
           const it = list[i];
           writeUnderMat(arr, i, it.x, sampleHeight(it.x, it.z) + (kind === 'log' ? 0.19 : kind === 'rock' ? 0.35 : 0), it.z, it.yaw, it.s);
         }
-        matrices.value.needsUpdate = true;
-        if (matrices.value.version != null) matrices.value.version++;
+        buffer.needsUpdate = true;
+        if (buffer.version != null) buffer.version++;
         scene.add(mesh); wallBandMeshes.push(mesh);
       }
     }
@@ -19428,16 +19444,16 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     function buildShortcutLogVisuals() {
       if (!shortcutBands.length || typeof TSL.instancedArray !== 'function') return;
       const count = shortcutBands.length * 9;
-      const matrices = TSL.instancedArray(count, 'mat4');
+      const { matrix, buffer } = treeInstanceMatrices(count);
       const geo = paintUnderGeo(new THREE.CylinderGeometry(0.23, 0.25, 1, 7), 0x574636);
       geo.rotateZ(Math.PI / 2);
       const mat = treeWoodMat.clone();
-      mat.positionNode = matrices.element(TSL.instanceIndex).mul(TSL.positionLocal).xyz;
+      mat.positionNode = matrix.mul(TSL.positionLocal).xyz;
       const mesh = new THREE.Mesh(geo, mat);
       mesh.count = count; mesh.frustumCulled = false;
       mesh.castShadow = false; mesh.receiveShadow = false; mesh.matrixAutoUpdate = false;
       mesh.userData.shortcutLogs = true;
-      const arr = matrices.value.array;
+      const arr = buffer.array;
       shortcutVisualSync = () => {
         let i = 0;
         for (const band of shortcutBands) for (const p of shortcutLogPieces(band)) {
@@ -19448,8 +19464,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           arr[o + 8] = -s * R; arr[o + 9] = 0; arr[o + 10] = c * R; arr[o + 11] = 0;
           arr[o + 12] = p.x; arr[o + 13] = p.visible ? p.y : -1000; arr[o + 14] = p.z; arr[o + 15] = 1;
         }
-        matrices.value.needsUpdate = true;
-        if (matrices.value.version != null) matrices.value.version++;
+        buffer.needsUpdate = true;
+        if (buffer.version != null) buffer.version++;
       };
       shortcutVisualSync();
       scene.add(mesh);
@@ -19736,7 +19752,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       }
       let shown = 0;
       for (const pack of forestPacks) {
-        const gpu = pack.matNode.value.array, gt = pack.tintNode.value.array;
+        const gpu = pack.matBuffer.array, gt = pack.tintNode.value.array;
         let n = 0;
         for (const m of pack.members) {
           if (!m.inBatch || !m.forest.shown) continue;
@@ -19758,7 +19774,7 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           n++;
         }
         pack.wood.count = n; pack.leaf.count = n; pack.dirty = false; shown += n;
-        const buf = pack.matNode.value, tintBuf = pack.tintNode.value;
+        const buf = pack.matBuffer, tintBuf = pack.tintNode.value;
         buf.needsUpdate = true; tintBuf.needsUpdate = true;
         if (buf.version != null) buf.version++;
         if (tintBuf.version != null) tintBuf.version++;
@@ -19825,9 +19841,8 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       m.snap = tbSnapshot(m.tree);
       tbFreeze(m.tree, true);
     }
-    function forestMaterial(base, matrices, tints) {
+    function forestMaterial(base, M, tints) {
       const mat = base.clone();
-      const M = matrices.element(TSL.instanceIndex);
       mat.positionNode = M.mul(TSL.positionLocal).xyz;
       if (typeof TSL.vertexColor === 'function') mat.colorNode = TSL.vertexColor().mul(tints.element(TSL.instanceIndex));
       return mat;
@@ -19878,14 +19893,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for (const pack of groups.values()) {
         const tpl = pack.template, list = pack.trees, n = list.length;
         forestTemplates++;
-        const matrices = TSL.instancedArray(n, 'mat4');
+        const { matrix, buffer: matBuffer } = treeInstanceMatrices(n);
         const tints = TSL.instancedArray(n, 'vec3');
         const holder = {
-          template: tpl, members: [], matNode: matrices, tintNode: tints,
+          template: tpl, members: [], matBuffer, tintNode: tints,
           cpu: new Float32Array(n * 16), cpuTint: new Float32Array(n * 3), wood: null, leaf: null
         };
-        const wood = new THREE.Mesh(tpl.wood, forestMaterial(treeWoodMat, matrices, tints));
-        const leaf = new THREE.Mesh(tpl.leaf, forestMaterial(treeCanopyMat, matrices, tints));
+        const wood = new THREE.Mesh(tpl.wood, forestMaterial(treeWoodMat, matrix, tints));
+        const leaf = new THREE.Mesh(tpl.leaf, forestMaterial(treeCanopyMat, matrix, tints));
         for (const mesh of [wood, leaf]) {
           mesh.count = n; mesh.castShadow = false; mesh.receiveShadow = mesh === wood;
           mesh.frustumCulled = false; mesh.matrixAutoUpdate = false;
@@ -28696,6 +28711,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const intakeSteel=new THREE.MeshStandardMaterial({color:0x70756a,roughness:0.79,metalness:0.38});
       const throatMat=new THREE.MeshStandardMaterial({color:0x060a08,roughness:1});
       box(2.06,1.56,0.12,steelDark,0,1.66,0.06,win); // outer gasket
+      // Offset the footing clear of the HQ plinth and the moving tray.
+      for (const x of [-0.975, 0.975]) {
+        box(0.105, 0.825, 0.18, intakeSteel, x, 0.4675, 0.30, win);
+        box(0.105, 0.08, 0.17, intakeSteel, x, 0.84, 0.125, win);
+        box(0.18, 0.055, 0.19, steelDark, x, 0.0275, 0.30, win);
+      }
       box(1.43,1.17,0.035,throatMat,0,1.65,0.13,win);
       for(const sx of [-0.87,0.87]){
         box(0.24,1.46,0.46,intakeSteel,sx,1.66,0.25,win);
@@ -28757,12 +28778,14 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       for(const y of [3.22,3.52])box(.29,.025,.18,steelDark,0,y,.25,win);
       // Existing skulls become mounted specimens, with metal backing and engraved tags.
       for(const [kind,sx,number] of [['shambler',-1,'01'],['demon',1,'02']]){
+        // Seat the specimen plaques on the wall at the cabinet's existing rear datum.
+        box(.31,.49,.138014,intakeSteel,sx*1.34,1.66,-.019007,win);
         box(.63,.81,.10,intakeSteel,sx*1.34,1.66,.10,win);
         box(.54,.71,.03,steelDark,sx*1.34,1.66,.165,win);
         for(const dx of [-.25,.25])for(const y of [1.34,1.98]){
           const bolt=cyl(.025,.025,.018,steel,sx*1.34+dx,y,.20,6,win);bolt.rotation.x=Math.PI/2;
         }
-        const sk=makeSkullMesh(kind,true);sk.scale.setScalar(2.0);sk.position.set(sx*1.34,1.53,.23);win.add(sk);
+        const sk=makeIntakeSpecimen(THREE,kind);sk.scale.setScalar(2);sk.position.set(sx*1.34,1.53,.38);win.add(sk);
         intakePlate(.63,.12,sx*1.34,1.19,.17,ctx=>{
           ctx.fillStyle='#a7a992';ctx.fillRect(0,0,768,192);ctx.fillStyle='#1b241d';ctx.textAlign='center';ctx.font='bold 67px monospace';ctx.fillText(dwText('intake.specimen',{number}),384,120);
         });
@@ -30448,7 +30471,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
           if (shopMode === 'armory' || WEAPON_BUILD_PLANS.has(k)) continue;
           const owned = !!buildUnlocked[k];
           const price = BUILD_UNLOCK_PRICE[k];
-          shopRow(BUILD_NAMES[k] + ' blueprint', owned ? 'owned' : '', BUILD_BLURB[k] + ' Places for $' + COST[k] + '.',
+          const detail = k === 'upgrade' ? dwText('shop.upgradeBlueprintHelp', { tab: dwText('shop.tabs.builds') })
+            : (k === 'window' ? dwText('build.window.description') : BUILD_BLURB[k]) + ' Places for $' + COST[k] + '.';
+          shopRow(BUILD_NAMES[k] + ' blueprint', owned ? 'owned' : '', detail,
             owned ? 'OWNED' : '$' + price, !owned && bank >= price, owned ? null : () => buyBuild(k), owned ? 'owned' : '');
         }
       }
@@ -33160,6 +33185,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const S = VAULT_SIZE, spot = pickVaultSpot(prop.centre), T = vaultLocal(spot.yaw);
       const V = makeVaultModel({ THREE, makeKatana: () => makeKatanaModel({ THREE }) });
       const g = V.group;
+      // CB-369 (D-216): ~120 meshes drew ~120 draws and ~115 shadow draws; inside each of its groups (the door, the lift,
+      // the roof, the front, the walls) the parts that share a material now draw as one, about 40 and 38. Same look.
+      staticBatchTree(THREE, g, { skip: new Set([V.rewards.katanaStand.userData.katana].filter(Boolean)) });
       g.position.set(spot.x, spot.gy, spot.z);
       g.rotation.y = spot.yaw;
       scene.add(g);
@@ -34847,6 +34875,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       add(new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.12, 0.34), wood), 0, 0.72, -0.1);  // sill
       for (const sx of [-0.69, 0.69]) add(new THREE.Mesh(new THREE.BoxGeometry(0.14, 1.9, 0.34), wood), sx, 1.6, -0.1);
       add(new THREE.Mesh(new THREE.BoxGeometry(1.24, 1.66, 0.3), steel), 0, 1.6, -0.14);
+      // Offset the uprights past the HQ kick rail. The upper links meet the jambs.
+      for (const x of [-0.69, 0.69]) {
+        add(new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.725, 0.14), wood), x, 0.4175, 0.30);
+        add(new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.10, 0.16), wood), x, 0.73, 0.15);
+        add(new THREE.Mesh(new THREE.BoxGeometry(0.20, 0.055, 0.15), dark), x, 0.0275, 0.30);
+      }
       // Yellow hazard band across the top, and a SUPPLY plate.
       add(new THREE.Mesh(new THREE.BoxGeometry(1.26, 0.16, 0.05), paint), 0, 2.32, 0.03);
       add(new THREE.Mesh(new THREE.BoxGeometry(0.56, 0.12, 0.03), dark), 0, 2.32, 0.065);
@@ -34869,6 +34903,18 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       // Little tin awning and a warning light on a stalk.
       const awning = add(new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.05, 0.62), dark), 0, 2.68, 0.2);
       awning.rotation.x = 0.22;
+      // Folded cheek brackets land on the lintel and follow the awning's underside.
+      const lintelTop = 2.58;
+      const roofPitch = awning.rotation.x;
+      const cheek = new THREE.BoxGeometry(0.12, 0.14, 0.14);
+      const corners = cheek.attributes.position;
+      for (let i = 0; i < corners.count; i++) {
+        const underside = awning.position.y - 0.025 / Math.cos(roofPitch) -
+          (corners.getZ(i) - awning.position.z) * Math.tan(roofPitch);
+        corners.setY(i, corners.getY(i) > 0 ? underside - lintelTop : 0);
+      }
+      cheek.computeVertexNormals();
+      for (const x of [-0.62, 0.62]) add(new THREE.Mesh(cheek, wood), x, lintelTop, 0);
       add(new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.4, 6), steel), 0.62, 2.9, 0.05);
       const bulb = new THREE.Mesh(new THREE.SphereGeometry(0.05, 8, 6), new THREE.MeshStandardMaterial({ color: 0xff5533, emissive: 0xff2200, emissiveIntensity: 1.6 }));
       bulb.position.set(0.62, 3.12, 0.05); g.add(bulb);
@@ -35068,11 +35114,20 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const station = hqStation(panel), p = station?.approach || station?.centre;
       return !!p && Number.isFinite(station.reach) && hypot(localPlayer.position.x-p.x, localPlayer.position.z-p.z) < station.reach && Math.abs(localPlayer.position.y-p.y) < 1.6;
     }
-    function nearestStoryStation() {
-      return ['duty','radio'].filter(nearHQStation).sort((a,b) => {
-        const pa=hqStation(a).approach || hqStation(a).centre, pb=hqStation(b).approach || hqStation(b).centre;
-        return hypot(localPlayer.position.x-pa.x,localPlayer.position.z-pa.z)-hypot(localPlayer.position.x-pb.x,localPlayer.position.z-pb.z);
-      })[0] || null;
+    function nearestHqSouthStation() {
+      const playerPosition = localPlayer.position;
+      let nearest = null, bestDistance = Infinity;
+      for (const panel of ['duty', 'radio', 'alarm']) {
+        if (!nearHQStation(panel)) continue;
+        const station = panel === 'alarm' ? null : hqStation(panel);
+        const front = panel === 'alarm' ? HQ_PANEL_FRONT : station.approach || station.centre;
+        const distance = hypot(playerPosition.x - front.x, playerPosition.z - front.z);
+        if (distance < bestDistance) {
+          bestDistance = distance;
+          nearest = panel;
+        }
+      }
+      return nearest;
     }
     const dailyRadioCall = createDailyCall({
       claim: request => objectiveRuntime?.beginRadioCall(request),
@@ -35461,28 +35516,37 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       KIOSK.group.userData.bulb.emissiveIntensity = okNow ? 0.4 : 1.4 + Math.sin(t * 9) * 0.8;
       hudPromptElapsed += Math.max(0, dt);
       const promptNowMs = performance.now();
-      if (dt > 0 && promptNowMs - hudPromptLastMs < 100) {
+      const refreshHud = dt <= 0 || promptNowMs - hudPromptLastMs >= 100;
+      const p = localPlayer.position;
+      // Track changes at the overlapping HQ stations on the next frame, including when leaving their reach.
+      const nearSouthWall = !training.active && Math.abs(p.z - HQ_PANEL_FRONT.z) < 2.2 && Math.abs(p.x) < HQ_HALF + 0.5;
+      const hadSouthPrompt = hudPromptAction === 'hqPanel' || hudPromptAction === 'dutyBoard' ||
+        hudPromptAction === 'hqRadio' || hudPromptAction === 'hushWire';
+      const trackSouthPrompt = nearSouthWall || hadSouthPrompt;
+      const a = !shopOpen && (refreshHud || trackSouthPrompt) ? actionTarget() : null;
+      if (!refreshHud && (!trackSouthPrompt || a === hudPromptAction)) {
         if (kioskPromptShown) placePrompt(hudPromptAction);
         return;
       }
-      hudPromptLastMs = promptNowMs;
+      if (refreshHud) hudPromptLastMs = promptNowMs;
       if (kioskPromptEl) {
-        // One prompt for whatever E would do right now (see actionTarget).
-        const a = shopOpen ? null : actionTarget();
+        // The prompt reads the same action target used by E.
         hudPromptAction = a;
-        if (uiRunId !== trailRun) { trailRun = uiRunId; trailJoined = false; }
-        if (Math.hypot(player.position.x, player.position.z) < 24) trailJoined = true;
-        const hudState = { dt: hudPromptElapsed, active: gameStarted && !gameOver && !won && !paused && !shopOpen,
-          nearWindow: a === 'hqWindow', skulls: skullBag.count,
-          day, phase, cash: bank, hp: playerHp, maxHp: PLAYER_MAX_HP, medkits,
-          building: !!(buildMode || placeMode), hasPair: !!dualOwned[currentWeapon], akimbo: akimboOn(),
-          pendingDeposit: hq.dep !== 'idle' && hq.dep !== 'green',
-          firstRun: !(runRecords.read().runs > 0), atHq: trailJoined };
-        const stateKey = [uiRunId, hudState.active, hudState.nearWindow, hudState.skulls, day, phase, bank, playerHp, medkits,
-          hudState.building, hudState.hasPair, hudState.akimbo, hudState.pendingDeposit, hudState.firstRun, hudState.atHq].join('|');
-        if (stateKey !== hudStateKey || promptNowMs - hudStateLastMs >= 200 || dt <= 0) {
-          publishUI('hud-state', hudState);
-          hudStateKey = stateKey; hudStateLastMs = promptNowMs; hudPromptElapsed = 0;
+        if (refreshHud) {
+          if (uiRunId !== trailRun) { trailRun = uiRunId; trailJoined = false; }
+          if (Math.hypot(player.position.x, player.position.z) < 24) trailJoined = true;
+          const hudState = { dt: hudPromptElapsed, active: gameStarted && !gameOver && !won && !paused && !shopOpen,
+            nearWindow: a === 'hqWindow', skulls: skullBag.count,
+            day, phase, cash: bank, hp: playerHp, maxHp: PLAYER_MAX_HP, medkits,
+            building: !!(buildMode || placeMode), hasPair: !!dualOwned[currentWeapon], akimbo: akimboOn(),
+            pendingDeposit: hq.dep !== 'idle' && hq.dep !== 'green',
+            firstRun: !(runRecords.read().runs > 0), atHq: trailJoined };
+          const stateKey = [uiRunId, hudState.active, hudState.nearWindow, hudState.skulls, day, phase, bank, playerHp, medkits,
+            hudState.building, hudState.hasPair, hudState.akimbo, hudState.pendingDeposit, hudState.firstRun, hudState.atHq].join('|');
+          if (stateKey !== hudStateKey || promptNowMs - hudStateLastMs >= 200 || dt <= 0) {
+            publishUI('hud-state', hudState);
+            hudStateKey = stateKey; hudStateLastMs = promptNowMs; hudPromptElapsed = 0;
+          }
         }
         let text = '';
         if (a === 'kiosk') text = okNow ? dwText('interaction.kiosk') : dwText('interaction.kioskLocked');
@@ -35691,8 +35755,12 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
       const st = nearestFoldStairs();
       const sd = st ? hypot(st.x - px, st.z - pz) : Infinity;
       if (!placeMode && !buildMode && nearHQWindow() && kd > 1.2) return 'hqWindow';
-      if (!placeMode && !buildMode) { const station=nearestStoryStation(); if(station)return station==='duty'?'dutyBoard':hush.board==='carried'?'hushWire':'hqRadio'; }   // CL-259: the spare board first
-      if (!placeMode && !buildMode && nearHQPanel()) return 'hqPanel';
+      if (!placeMode && !buildMode) {
+        const station = nearestHqSouthStation();
+        if (station === 'alarm') return 'hqPanel';
+        if (station === 'duty') return 'dutyBoard';
+        if (station === 'radio') return hush.board === 'carried' ? 'hushWire' : 'hqRadio';   // CL-259: the spare board first
+      }
       if (!placeMode && !buildMode) { const uAct = utilityAction(); if (uAct) return uAct; }   // CU-201: fit the pump, the battery or the siren
       if (!placeMode && !buildMode && nearArmory()) return 'armory';   // CL-103: checked first, the two hatches are side by side
       if (!placeMode && !buildMode && nearCIF()) return 'cif';
@@ -37320,11 +37388,9 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
     // bought at the kiosk. Placing one still costs COST[type] per piece.
     const BUILD_UNLOCK_PRICE = { upgrade: 0, gate: 60, pillar: 50, shovel: 0, window: 45, door: 55, platform: 60, floor: 70, stairs: 65, wire: 35, railing: 40, barricade: 0, wall: 25, sandbag: 20, spikes: 30, barrel: 40, mine: 45, lure: 70, light: 55, flame: 75, heavy: 110, mortar: 120, m240: 260 };
     const BUILD_BLURB = {
-      upgrade: 'Point at something you built and click to take it up a tier: walls to stone and steel, doors to iron, turrets to Mk II and III, floors, gates, bars for windows. Each tier\'s blueprint is bought in the kiosk\'s Fortify tab; R picks which part of a wall (its door or window, or the wall itself).',
       gate: 'Cuts a gate into a run of barbed wire, a barricade or a railing \u2014 point at it. E opens and shuts it like a door. Shut, it holds like the run it replaced; upgrade it to iron and steel.',
       pillar: 'Steel post for the corner where four squares meet. On its own it holds up a floor or platform in each of those four squares; with a wall within three squares, in twelve. Its cap takes a turret.',
       shovel: 'Levels the cell you point at, and fills in any rabbit burrow in it, blending it into the ground around it. Rough or sloping ground refuses a build; this is how you fix it. Works on a cell that already has something standing in it.',
-      window: 'Cuts a firing window in a wall. Ground-level windows let smaller zombies climb inside: fit steel mesh in Fortify to stop them. Weakens the wall.',
       door: 'Hangs a pair of doors in a wall \u2014 point at the wall. E opens and shuts them: shut, they are as solid as the wall; open, anything can walk through \u2014 so close them behind you. Weakens the wall more than a window does.',
       platform: 'Steel deck on the walls of its square \u2014 or bolted onto a wooden floor as a gun mount (one per floor). Its raised middle lifts a turret over the rail line, and all four edges can take a railing.',
       floor: 'Wooden boards on the walls of its square, or bridging out from the wall of the square next door: a floor for the storey above and a roof for the one below. A platform can go on a floor; a floor never goes on a platform.',
@@ -45573,10 +45639,13 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         const uvs = textured ? new Float32Array(total * 2) : null;
         const si = new Uint16Array(total * 4), sw = new Float32Array(total * 4);
         let k = 0, rough = 0, metal = 0, surfaceCount = 0, eyeRange = null;
+        let jawMask = null;   // CB-363: CPU-only jaw shell mask (CC-359), built only if a part carries one
         for (const { o, geo } of prep) {
           M.multiplyMatrices(inv, o.matrixWorld); NM.getNormalMatrix(M);
           const P = geo.attributes.position, N = geo.attributes.normal, C = geo.attributes.color, U = geo.attributes.uv, b = boneIdx.get(o.parent);
           if (o === ud.eyeBatch) eyeRange = [k, P.count];
+          const jm = o.geometry.userData && o.geometry.userData.cc359JawSkinMask;   // CB-363: expanded (non-indexed) order
+          if (jm && jm.length === P.count) (jawMask || (jawMask = new Uint8Array(total))).set(jm, k);
           const isGlow = glow && glowParts.includes(o), em = isGlow ? o.material.emissive : null;
           const byte = (x) => Math.round(Math.max(0, Math.min(1, x || 0)) * 255);
           const mc = o.material.color; if (mc) c.copy(mc); else c.setRGB(1, 1, 1);
@@ -45627,7 +45696,10 @@ import { THROW as GRENADE_THROW, throwSpeed as grenadeThrowSpeed, flyArc, arcDot
         g.add(skin);
         g.updateMatrixWorld(true);
         skin.bind(new THREE.Skeleton(bones));
+        // CB-363: the joins read the jaw shell mask during this bind only; never a GPU attribute, never kept or cloned.
+        if (jawMask) skin.userData.cc359JawSkinMask = jawMask;
         blendZombieJoins(THREE, g, skin, s); // GP-19924: continuous deformation across body joins
+        if (jawMask) delete skin.userData.cc359JawSkinMask;
         // CL-227: three writes the skeleton's length into the skinning vertex shader (an array of N bone matrices), so
         // every new bone count was a new shader and a new pipeline, built on the frame that zombie was first drawn:
         // AG-106 found 20-22 of night 20's long frames (25-45 ms each) were zombie skins with a new count. The skeleton
@@ -62111,6 +62183,8 @@ function gp156SetWorldQuaternion(bone, desired) {
     }
 
     function restoreTree(tree) {
+      const forestMember = tree._forestMember;
+      const inForest = forestMember?.inBatch;
       removeLogSolids(tree);
       tree.burnT = 0;
       tree.smoulder = 0;
@@ -62134,8 +62208,15 @@ function gp156SetWorldQuaternion(bone, desired) {
       if (tree.stumpMesh) { scene.remove(tree.stumpMesh); tree.stumpMesh = null; }
       tree.stump = false;
       tree.stumpHp = 10;
-      if (!tree.group.parent) scene.add(tree.group);
-      tree.group.visible = true;
+      // The instanced forest already draws these far trees. Keep their own meshes
+      // detached so the next batch update does not mistake reset for 2,000 swaps.
+      if (inForest) {
+        tree.group.removeFromParent();
+        tree.group.visible = false;
+      } else {
+        if (!tree.group.parent) scene.add(tree.group);
+        tree.group.visible = true;
+      }
       tree.group.position.set(tree.x, groundMinAround(tree.x, tree.z, tree.trunkRadius * 2.2), tree.z);
       tree.group.rotation.set(tree.baseRotX, tree.baseRotY, tree.baseRotZ);
       tree.canopy.scale.set(1, 1, 1);
@@ -62162,6 +62243,11 @@ function gp156SetWorldQuaternion(bone, desired) {
       for (const mat of tree.leafMats) mat.opacity = 1;
       for (const ch of tree.canopy.children) if (ch.isMesh) ch.castShadow = true;
       tree._tbRestored = true; // CL-10: pristine again, so it may rejoin its batch once far away
+      if (inForest && !tbSame(forestMember.snap, tbSnapshot(tree, _tbScratch))) {
+        // A restored pose must agree with both the instance data and its change check.
+        forestWrite(forestMember, false);
+        forestMember.snap = _tbScratch.slice();
+      }
     }
 
     // === Knockdown ==============================================================
@@ -67767,7 +67853,7 @@ function gp156SetWorldQuaternion(bone, desired) {
         }
         if (z.spiderShot) { const shot = z.spiderShot; z.spiderShot = null; spawnAcidGlob(z, shot.x, shot.z, true); }
         if (poseWork && kind === 'leaper') applyLeaperMotion(THREE, z, dt, standing ? 0 : walkAmt, dist); // GP-19856
-        if (poseWork && kind === 'shambler') { applyShamblerMotion(z, dt, phase, standing ? 0 : walkAmt, marineGait); applyShamblerRecovery(z); }
+        if (poseWork && kind === 'shambler') { applyShamblerMotion(z, dt, phase, standing ? 0 : walkAmt, marineGait); applyShamblerRecovery(z); applyShamblerJaw(z, dt); }
         if (poseWork && kind === 'bomber') applyBomberPose(z, dt, zTarget(z).position); // GP-19890: belly-side arms flap faster near the player
         if (poseWork && kind === 'brute') applyBrutePose(z, dt); // GP-19866: heavy planted stride and committed smash
         if (poseWork && kind === 'military') applyMilitaryPose(z, dt); // GP-19864: planted combat stride, guard, bash and kick
@@ -67975,6 +68061,15 @@ function gp156SetWorldQuaternion(bone, desired) {
     const tmp = new THREE.Vector3();
 
     function showPauseView(view) {
+      if (view === 'main') {
+        const trainingPause = training.active;
+        const description = trainingPause ? 'pause.training.description' : 'pause.description';
+        const leave = trainingPause ? 'pause.training.leave' : 'pause.quit';
+        pauseDescription.dataset.dwText = description;
+        pauseDescription.textContent = dwText(description);
+        quitMenuBtn.dataset.dwText = leave;
+        quitMenuBtn.textContent = dwText(leave);
+      }
       pauseMainView.classList.toggle('hide', view !== 'main');
       pauseTipsView.classList.toggle('on', view === 'tips');
       pauseSettingsView.classList.toggle('on', view === 'settings');
@@ -69178,7 +69273,7 @@ function gp156SetWorldQuaternion(bone, desired) {
             for (const m of meshes) m.frustumCulled = true;
           }
 
-          if (postProcessing && !origPPRender) {
+          if (!done && training.active && postProcessing && !origPPRender) {
             origPPRender = postProcessing.render;
             postProcessing.render = () => {};
           }

@@ -4,13 +4,19 @@ state: idle
 model: Claude Opus 5.5 (configured claude-opus-5-5)
 task: —
 touching: —
-since: 2026-11-20T19:19Z
+since: 2026-11-21T08:08Z
 next: CD-14 (22:44Z: pistol high grip = option A AFTER the freeze: ChatG
 blocked-on: —
-last-report: handoffs/2026-11-20-claude4-CD-14-8-diag.md
+last-report: handoffs/2026-11-21-claude4-CD-19.md
 
 ## Notes
 
+### Session #33 (21 Nov 06:40Z - ~08:15Z, Opus 5.5): CD-19 first-person gun + glove colours for CI-1, review only (handoff handoffs/2026-11-21-claude4-CD-19.md). Nothing landed.
+- Gloves black, black guns crush to black (no env map + folded lift half of vmFinish), no shine, torch burns muzzles, KR-7 wood orange, greys blue. Review copy of the viewmodel.js lift fix: small gain only (review/CD-19/copy/). Waiting: Director A/B/C; Claude 2's ask for CD-18 A1/A5 (review/CD-19/cd18-A1-A5-hunks.md).
+- Cloud: eye4.mjs (review/CD-19/tools/) = game's real light, EYE_MODE=match|training. My CD-18 lamps-off crops were wrong (inspector light).
+### Session #32 (20 Nov 23:00Z - 21 Nov ~00:55Z, Opus 5.5): CD-18 D-218 weapons pass 1, review only (handoff handoffs/2026-11-21-claude4-CD-18.md). Nothing landed.
+- 7 defects, all in others' files (index.html Claude 2: rack pegs, sidearm height, loose long guns, cabinet 0.43 m off floor, rack pistol camo mismatch; world wear rack). Sent to Claude 7 + Director; FP crops to Claude 9.
+- Cloud: eye tools need the cloud slot (423 otherwise): crew.mjs slot run ... -- node s29tools/eye3.mjs. Notes go on the PC.
 ### Session #31 (20 Nov 19:08Z - 19:20Z, Opus 5.5): CD-14 #8 follow-up DIAG (handoff handoffs/2026-11-20-claude4-CD-14-8-diag.md). Nothing landed.
 - t184 old reds = fixed 18 Nov (CB-356, eb4fc243), 29/0 again today. t214 (7) red = stale test after GP-20136 loose revolver rounds; proposed review/CD-14/8/diag/t214.PROPOSED-cd14diag.js (ae7dfa77) 31/0. Asked the Director A/B/C (mine A, A); Claude 2 lands on A.
 

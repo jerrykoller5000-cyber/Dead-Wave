@@ -49,14 +49,26 @@ export function buildTrainingTunnel(T, passage, floorY) {
   g.userData.noCull = true;
   const W = passage.halfWidth * 2 + 0.6, H = passage.height + 0.4, L = TUNNEL.length, cx = passage.x, z0 = passage.wallZ + 0.05;
   const dark = new T.MeshBasicMaterial({ color: 0x07070a });   // unlit: the room's lights (and the red alarm) never brighten it
-  const floor = new T.MeshBasicMaterial({ color: 0x0c0c0e });
+  const floor = new T.MeshStandardMaterial({ color: 0xffffff, emissive: 0x0c0c0e, emissiveIntensity: 1, vertexColors: true, roughness: 0.9 });
   const black = new T.MeshBasicMaterial({ color: 0x000000 });
-  const plane = (w, h, mat, x, y, z, rx, ry) => {
-    const m = new T.Mesh(new T.PlaneGeometry(w, h), mat);
+  const plane = (w, h, mat, x, y, z, rx, ry, heightSegments = 1) => {
+    const m = new T.Mesh(new T.PlaneGeometry(w, h, 1, heightSegments), mat);
     m.position.set(x, y, z); m.rotation.set(rx, ry, 0); m.castShadow = false; m.receiveShadow = false; g.add(m); return m;
   };
   // A plane faces +z before it is turned. Floor up, ceiling down, the side walls inward, the back wall at the room.
-  plane(W, L, floor, cx, floorY + 0.01, z0 + L / 2, -Math.PI / 2, 0);
+  // The first four metres of steel receive the existing alarm light. Farther in,
+  // diffuse response falls to zero, leaving the original unlit tone behind the veils.
+  const mouthFloor = plane(W, L, floor, cx, floorY + 0.01, z0 + L / 2, -Math.PI / 2, 0, 14);
+  mouthFloor.name = 'training-tunnel-floor';
+  const floorPoints = mouthFloor.geometry.attributes.position;
+  const diffuse = new Float32Array(floorPoints.count * 3);
+  const steel = new T.Color(0x747b82);
+  for (let i = 0; i < floorPoints.count; i++) {
+    const depth = L / 2 - floorPoints.getY(i);
+    const gain = Math.max(0, 1 - Math.max(0, depth - 1) / 3);
+    diffuse.set([steel.r * gain, steel.g * gain, steel.b * gain], i * 3);
+  }
+  mouthFloor.geometry.setAttribute('color', new T.BufferAttribute(diffuse, 3));
   plane(W, L, dark, cx, floorY + H, z0 + L / 2, Math.PI / 2, 0);
   plane(L, H, dark, cx - W / 2, floorY + H / 2, z0 + L / 2, 0, Math.PI / 2);
   plane(L, H, dark, cx + W / 2, floorY + H / 2, z0 + L / 2, 0, -Math.PI / 2);

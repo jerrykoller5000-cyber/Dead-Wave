@@ -24,6 +24,11 @@ export function dressCifExterior(THREE, root, text, lampMaterial) {
   box(1.92,.12,.67,steel,0,1.04,.37);
   box(1.79,.026,.58,edge,0,1.115,.38);
   box(1.66,.34,.26,steel,0,.81,.20);
+  // The lower jambs bear on inset steel shoes at floor level.
+  for(const x of [-.88,.88]){
+    box(.14,.575,.18,steel,x,.3425,.345);
+    box(.22,.055,.22,dark,x,.0275,.35);
+  }
   // Corbels meet the rail and jamb outside the return plaque's full width.
   for(const x of [-.86,.86]){
     const corbel=box(.07,.23,.18,dark,x,.865,.54);

@@ -1,0 +1,52 @@
+{
+  "startedAt": "2026-11-21T00:54:43.882Z",
+  "checks": [
+    {
+      "id": "webgpu-reenter-from-menu",
+      "blackoutMs": 3682,
+      "diff": {
+        "changedPct": 96.097,
+        "frozen3D": false
+      },
+      "hooks": {
+        "label": "webgpu-reenter-from-menu",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "animLoopExists": true,
+        "animLoopName": "tick",
+        "trainingWarming": false,
+        "trainingActive": true,
+        "perfBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 50 low 6 worst 156ms hitch 41 draws 259 tris 230k zombs 0",
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "backendDrawEntries": 5180,
+        "perfAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 57 low 29 worst 35ms hitch 41 draws 259 tris 207k zombs 0"
+      }
+    },
+    {
+      "id": "webgpu-samebrowser-page2",
+      "blackoutMs": 16673,
+      "diff": {
+        "changedPct": 93.044,
+        "frozen3D": false
+      },
+      "hooks": {
+        "label": "webgpu-samebrowser-page2",
+        "hasTT": true,
+        "dwOpeningExists": true,
+        "dwOpeningActive": false,
+        "animLoopExists": true,
+        "animLoopName": "tick",
+        "trainingWarming": false,
+        "trainingActive": true,
+        "perfBefore": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 40 low 4 worst 254ms hitch 35 draws 261 tris 230k zombs 0",
+        "animLoopEntries": 20,
+        "rendererRenderEntries": 300,
+        "backendDrawEntries": 5180,
+        "perfAfter": "gpu NVIDIA GeForce RTX 5080 cpu 24 threads · 32GB res 1920x1080 @1.00x rend WebGPU fps 57 low 28 worst 36ms hitch 35 draws 259 tris 207k zombs 0"
+      }
+    }
+  ],
+  "finishedAt": "2026-11-21T00:56:32.568Z"
+}

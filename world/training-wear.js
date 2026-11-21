@@ -26,7 +26,30 @@ export const WEAR = Object.freeze({
   DOOR: Object.freeze({ rest: 0.5, min: 0.22, max: 2.2, k: 16, damp: 2.0 }),   // GB-161: the dented door's spring (rad, 1/s^2, 1/s)
   FLOOR_PX: 48,                                        // the floor sheet: pixels a metre (768 x 2016)
   WALL_PX: 64,                                         // the backstop and the tile above it: pixels a metre
-  LANE_USE: Object.freeze([0.35, 1.0, 0.55, 0.08, 0.22])   // lane 1..5: lane 2 the favourite, lane 4 barely touched
+  LANE_USE: Object.freeze([0.35, 1.0, 0.55, 0.08, 0.22]),  // lane 1..5: lane 2 the favourite, lane 4 barely touched
+  // CG-2 (D-218 pass 2): the story props. Names only from docs/story.md (the twelve of FOB Threshold, their ranks).
+  STORY: Object.freeze({
+    ROSTER_HEAD: 'ROTATION: THRESHOLD \u00b7 12', ROSTER_SUB: 'PGB RANGE \u00b7 RIDGELINE ANNEX',
+    ROSTER: Object.freeze([['CPT', 'HALE M.'], ['LT', 'ADE S.'], ['SGT', 'SATO K.'], ['SGT', 'BRANDT E.'], ['CPL', 'DELGADO R.'],
+      ['CPL', 'CLARKE I.'], ['CPL', 'OKAFOR D.'], ['SPC', 'MENSAH A.'], ['SPC', 'PIKE'], ['PFC', 'PRICE J.'], ['PVT', 'LINDQVIST T.'],
+      ['PVT', 'KOWALSKI D.']]),
+    LOCKERS: Object.freeze(['HALE', 'PRICE', 'OKAFOR']),
+    CARD_HEAD: 'QUALIFICATION',
+    CARD: Object.freeze([[2, '38/40', 'MH'], [2, '36/40', 'JP'], [1, '33/40', 'KS'], [2, '39/40', 'EB'], [3, '31/40', 'RD'],
+      [2, '35/40', 'DO'], [2, '37/40', 'P'], [5, '29/40', 'DK']]),
+    BOARD_HEAD: 'DRILLS WK 3', BOARD_DAYS: Object.freeze(['MON', 'TUE', 'WED', 'THU', 'FRI']),
+    TALLY_HEAD: 'REVIVALS THIS ROTATION', TALLY: 23, CHART_HEAD: 'OBS',
+    SWATCH_NAMES: Object.freeze(['mug', 'coffee', 'hardboard', 'clip', 'bristle', 'broomhead', 'handle', 'pail', 'brass', 'tote',
+      'earcup', 'earband', 'alu', 'marker', 'pin', 'blanket', 'sharpslid', 'whitemug']),
+    SWATCH: Object.freeze(['#4c5a45', '#2a1a10', '#7a5a3a', '#9aa0a3', '#2b2622', '#8a2a22', '#c9a654', '#55595c', '#b8893a', '#2c3236',
+      '#3f5a3a', '#1c1f21', '#b9bec1', '#1b3c8c', '#b3261e', '#5f6b4a', '#e3c21a', '#d9d6cc']),
+    ROSTER_AT: Object.freeze({ x: 6.0, y: 1.55 }),
+    MUG: Object.freeze({ x: -7.4, z: 0.62 }), CLIP: Object.freeze({ x: -7.02, z: 0.48, ry: 0.18 }),
+    BROOM: Object.freeze({ x: -7.72 }), BUCKET: Object.freeze({ x: -7.25, z: 0.02 }), TOTE: Object.freeze({ x: -7.805, z: -3.3 }),   // clear of the dummy (-6.85, -2.1)
+    WHITEBOARD: Object.freeze({ x: -3.85, y: 1.55 }),
+    // Beat 5, the infirmary (offsets from bedAt, the wake stretcher; the bay's back wall is B.minZ)
+    MEDIC: Object.freeze({ tallyDX: -1.55, tallyY: 1.6, sharpsDX: 1.62, sharpsY: 1.2, mugDX: 3.4, mugZ: 0.88 })
+  })
 });
 
 function rng(seed) { let s = seed; return () => { s = (s * 16807) % 2147483647; return s / 2147483647; }; }
@@ -423,6 +446,20 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
     c.fillStyle = dg; c.fillRect(910, 430, 90, 90);
     c.strokeStyle = 'rgba(170,175,160,0.55)'; c.lineWidth = 2; c.beginPath(); c.arc(956, 470, 22, 3.6, 5.4); c.stroke();
     for (let i = 0; i < 30; i++) { c.fillStyle = `rgba(120,70,40,${r() * 0.35})`; c.fillRect(896 + r() * 128, 256 + r() * 384, 2 + r() * 4, 2 + r() * 6); }
+    { // CG-2 beat 1: this locker's name, masking tape at the plain doors' card height (cell 128 px = 0.33 m, 384 px = 1.62 m)
+      const n = WEAR.STORY.LOCKERS[1], tx = 896 + 64 - 35, ty = 256 + 120, tw = 70, th = 16;
+      c.fillStyle = '#d8c896'; c.fillRect(tx, ty, tw, th); c.fillStyle = 'rgba(120,100,50,0.3)'; c.fillRect(tx, ty, tw, 1); c.fillRect(tx, ty + th - 1, tw, 1);
+      c.fillStyle = '#16181b'; c.textAlign = 'center'; c.textBaseline = 'middle';
+      let px = 15; c.font = `bold ${px}px "Segoe Print", "Comic Sans MS", Arial, sans-serif`;
+      while (px > 6 && c.measureText(n).width > tw - 6) { px -= 1; c.font = `bold ${px}px "Segoe Print", "Comic Sans MS", Arial, sans-serif`; }
+      c.fillText(n, tx + tw / 2, ty + th / 2 + 1); }
+    // CG-1 (AH-1 #16): the lockers that are not dented get their own door: 128 x 384 at (512, 640): the same steel and
+    // louvres, a paper name strip, its own scuffs; no dent.
+    c.fillStyle = '#5d6b5f'; c.fillRect(512, 640, 128, 384);
+    c.fillStyle = '#4b574d'; for (let i = 0; i < 6; i++) c.fillRect(532, 664 + i * 12, 88, 5);
+    c.fillStyle = '#d9d3bb'; c.fillRect(546, 760, 60, 16); c.fillStyle = 'rgba(40,40,40,0.55)'; c.fillRect(552, 766, 40, 4);
+    for (let i = 0; i < 22; i++) { c.fillStyle = `rgba(120,70,40,${r() * 0.3})`; c.fillRect(512 + r() * 128, 640 + r() * 384, 2 + r() * 4, 2 + r() * 5); }
+    for (let i = 0; i < 5; i++) { c.fillStyle = 'rgba(170,175,160,0.25)'; c.fillRect(520 + r() * 110, 900 + r() * 110, 10 + r() * 20, 2); }
     // The mattress: 512 x 256 at (0, 640): ticking stripes, stains.
     c.fillStyle = '#d8d3c2'; c.fillRect(0, 640, 512, 256);
     c.fillStyle = '#9fa6b4'; for (let x = 0; x < 512; x += 22) c.fillRect(x, 640, 6, 256);
@@ -441,31 +478,57 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
   };
   const printed = (name, w, h, c4, x, y, z, ry) => { const m = add(cell(new T.PlaneGeometry(w, h), ...c4), sheetMat, x, y, z); m.rotation.y = ry; parts.push(name); return m; };
 
-  // Safety signs on the side walls (the +x wall's terminals end at z -2).
-  printed('wear-sign-ears', 1.0, 0.7, [0, 0, 256, 180], R.maxX - 0.02, 2.2, 2.2, yawOf.px);
-  printed('wear-sign-muzzle', 1.0, 0.7, [256, 0, 256, 180], R.maxX - 0.02, 2.2, 9.5, yawOf.px);
-  printed('wear-sign-cease', 1.0, 0.7, [512, 0, 256, 180], R.minX + 0.02, 2.2, 2.5, yawOf.nx);
-  printed('wear-sign-forward', 1.0, 0.7, [768, 0, 256, 180], R.minX + 0.02, 2.2, 11, yawOf.nx);
+  // Safety signs on the side walls (the +x wall's terminals end at z -2). CG-1 (CF-20 #10): 0.6 x 0.42 m at 1.8 m (were
+  // 1.0 x 0.7 m at 2.2 m: a wall made for a taller man).
+  // CG-2 (AH-4 #22): flat on the side walls they were thin slivers from the bench, behind the screen's mesh. Ranges hang
+  // these on a swing-out bracket turned toward the line: a steel plate hinged on a wall strip at its near edge, swung
+  // SIGN_SWING out, two struts back to the wall at its far edge. The face looks back up the range at the shooter.
+  const SIGN_SWING = 0.7, SW = 0.6, SH = 0.42, PW = SW + 0.04, PH = SH + 0.04, PT = 0.012;
+  const swungSign = (name, c4, side, y, z0) => {
+    const n = nrm[side], sa = Math.sin(SIGN_SWING), ca = Math.cos(SIGN_SWING), wx = sideX[side];
+    const ry = side === 'px' ? -Math.PI / 2 - SIGN_SWING : Math.PI / 2 + SIGN_SWING;
+    const fx = -Math.cos(SIGN_SWING) * -n, fz = -sa;   // the face's normal: off the wall and back toward the line
+    const hinge = 0.03;                                 // the plate's near edge stands on the wall strip's face
+    const cxp = wx + n * (hinge + (PW / 2) * sa), czp = z0 + (PW / 2) * ca;
+    box(0.03, PH, 0.03, steel, wx + n * 0.015, y, z0);  // the wall strip it hinges on
+    const plate = box(PW, PH, PT, steel, cxp, y, czp); plate.rotation.y = ry;
+    const face = printed(name, SW, SH, c4, cxp + fx * (PT / 2 + 0.002), y, czp + fz * (PT / 2 + 0.002), ry);
+    const farX = wx + n * (hinge + PW * sa), farZ = z0 + PW * ca, reach = Math.abs(farX - wx) - 0.006;
+    for (const dy of [-PH / 2 + 0.04, PH / 2 - 0.04]) box(reach, 0.02, 0.02, steel, wx + n * reach / 2, y + dy, farZ + 0.012);   // struts, behind the plate
+    return face;
+  };
+  swungSign('wear-sign-ears', [0, 0, 256, 180], 'px', 1.8, 2.2);
+  swungSign('wear-sign-muzzle', [256, 0, 256, 180], 'px', 1.8, 9.5);
+  swungSign('wear-sign-cease', [512, 0, 256, 180], 'nx', 1.8, 2.5);
+  swungSign('wear-sign-forward', [768, 0, 256, 180], 'nx', 1.8, 11);
 
   const BZ = R.minZ;   // the back wall (faces +z)
   // The board, framed, right of the rack (seated 0.0 mm flush on BZ).
-  box(1.18, 0.86, 0.03, steel, 5.0, 1.85, BZ + 0.015);
-  printed('wear-days-board', 1.1, 0.77, [0, 256, 512, 360], 5.0, 1.85, BZ + 0.045, 0);   // GB-163: 1.5 cm proud of its frame (it fought it)
+  // CG-1 (CF-20 #10, AH-1 #22): centre 1.5 m (was 1.85); the face 2 mm on its frame (it stood 1.5 cm off it, floating;
+  // the sheet's polygonOffset keeps it from fighting the frame).
+  box(1.18, 0.86, 0.03, steel, 5.0, 1.5, BZ + 0.015);
+  printed('wear-days-board', 1.1, 0.77, [0, 256, 512, 360], 5.0, 1.5, BZ + 0.032, 0);
   // The weapon rack: steel rails seated 0.0 mm flush on BZ, hooks flush on rails with zero stem/tip overlap.
-  box(2.2, 0.12, 0.04, steel, 2.3, 1.55, BZ + 0.02); box(2.2, 0.12, 0.04, steel, 2.3, 1.05, BZ + 0.02);
+  // CG-1 (CD-18 B1, AH-1 #22): the lower rail sat on the blue band (1.05 m) and the 2.5 cm dark hooks vanished. Rails
+  // now at 1.25 and 1.75 m, hooks 3.5 cm in a lighter zinc steel with a turned-up tip, so the rack reads as a rack.
+  const hookMat = std({ color: 0x8c9398, roughness: 0.45, metalness: 0.6 });
+  const RY = [1.75, 1.25];
+  box(2.2, 0.12, 0.04, steel, 2.3, RY[0], BZ + 0.02); box(2.2, 0.12, 0.04, steel, 2.3, RY[1], BZ + 0.02);
   for (let i = 0; i < 7; i++) {
     const x = 1.4 + i * 0.3;
-    if (i === WEAR.MISSING_HOOK) { for (const dy of [-0.025, 0.025]) box(0.012, 0.012, 0.004, std({ color: 0x0c0d0e }), x, 1.55 + dy, BZ + 0.042); continue; }
-    for (const y of [1.55, 1.05]) { box(0.025, 0.025, 0.11, steel, x, y, BZ + 0.095); box(0.025, 0.06, 0.025, steel, x, y + 0.0175, BZ + 0.1625); }
+    if (i === WEAR.MISSING_HOOK) { for (const dy of [-0.025, 0.025]) box(0.012, 0.012, 0.004, std({ color: 0x0c0d0e }), x, RY[0] + dy, BZ + 0.042); continue; }
+    for (const y of RY) { box(0.035, 0.035, 0.12, hookMat, x, y, BZ + 0.1); box(0.035, 0.07, 0.035, hookMat, x, y + 0.0175, BZ + 0.1775); }
   }
   parts.push('wear-rack-missing-hook');
   // The cracked monitor on its bracket, seated 0.0 mm flush on BZ and taped right across the screen face.
-  box(0.08, 0.08, 0.155, steel, -2.2, 1.75, BZ + 0.0775);
-  box(0.66, 0.44, 0.05, std({ color: 0x1b1d1f, roughness: 0.6 }), -2.2, 1.75, BZ + 0.18);
-  printed('wear-monitor-cracked', 0.6, 0.38, [512, 256, 384, 256], -2.2, 1.75, BZ + 0.208, 0);
+  // CG-1 (CF-20 #10): its centre at 1.5 m (was 1.75).
+  const MY = 1.5;
+  box(0.08, 0.08, 0.155, steel, -2.2, MY, BZ + 0.0775);
+  box(0.66, 0.44, 0.05, std({ color: 0x1b1d1f, roughness: 0.6 }), -2.2, MY, BZ + 0.18);
+  printed('wear-monitor-cracked', 0.6, 0.38, [512, 256, 384, 256], -2.2, MY, BZ + 0.208, 0);
   const tapeMat = std({ color: 0xc9b98a, roughness: 0.95, polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3, side: T.DoubleSide });
   for (const a of [0.55, -0.55]) {
-    const t = add(new T.PlaneGeometry(0.58, 0.038), tapeMat, -2.2, 1.75, BZ + 0.212);
+    const t = add(new T.PlaneGeometry(0.58, 0.038), tapeMat, -2.2, MY, BZ + 0.212);
     t.rotation.z = a; t.castShadow = false; (t.userData || (t.userData = {})).isDecal = true;
   }
   parts.push('wear-monitor-tape');
@@ -473,23 +536,33 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
   const lockerMat = std({ color: 0x5d6b5f, roughness: 0.55, metalness: 0.4 });
   const blockers = [];
   let door = null;
+  // CG-1 (CF-20 #6, AH-1 #16): the lockers were 0.60 m wide (real: about 0.38). Now 0.38 m on a 0.40 m pitch, the bank
+  // centred where the middle (dented) one stood, so the door still swings where a blade or a round finds it. Each door
+  // has a latch handle; only the middle one carries the dent, the others a plain door of their own.
+  const LP = 0.40, LW = 0.38, LD = 0.33, L0 = -5.78 - LP;
   for (let i = 0; i < 3; i++) {
-    const x = -6.4 + i * 0.62;
-    box(0.6, 1.85, 0.48, lockerMat, x, 0.925, BZ + 0.24);
-    if (i !== 1) { printed('wear-locker-door', 0.54, 1.62, [896, 256, 128, 384], x, 0.955, BZ + 0.488, 0); parts.pop(); continue; }
+    const x = L0 + i * LP;
+    box(LW, 1.85, 0.48, lockerMat, x, 0.925, BZ + 0.24);
+    if (i !== 1) {
+      printed('wear-locker-door', LD, 1.62, [512, 640, 128, 384], x, 0.955, BZ + 0.488, 0); parts.pop();
+      box(0.022, 0.13, 0.03, steel, x + LD / 2 - 0.05, 1.02, BZ + 0.503);
+      continue;
+    }
     const cavity = std({ color: 0x141614, roughness: 0.95 });
-    const cBack = add(new T.PlaneGeometry(0.5, 1.7), cavity, x, 0.955, BZ + 0.08); (cBack.userData || (cBack.userData = {})).isDecal = true;
-    for (const s of [-1, 1]) { const side = add(new T.PlaneGeometry(0.32, 1.7), cavity, x + s * 0.24, 0.955, BZ + 0.24); side.rotation.y = -s * Math.PI / 2; (side.userData || (side.userData = {})).isDecal = true; }
-    const sole = add(new T.PlaneGeometry(0.48, 0.3), cavity, x, 0.135, BZ + 0.24); sole.rotation.x = -Math.PI / 2; (sole.userData || (sole.userData = {})).isDecal = true;
-    const lid = add(new T.PlaneGeometry(0.48, 0.3), cavity, x, 1.755, BZ + 0.24); lid.rotation.x = Math.PI / 2; (lid.userData || (lid.userData = {})).isDecal = true;
-    const D = WEAR.DOOR, hx = x - 0.27, hz = BZ + 0.505, dw = 0.54;
+    const cw = LW - 0.08;   // the cavity, 4 cm walls
+    const cBack = add(new T.PlaneGeometry(cw, 1.7), cavity, x, 0.955, BZ + 0.08); (cBack.userData || (cBack.userData = {})).isDecal = true;
+    for (const s of [-1, 1]) { const side = add(new T.PlaneGeometry(0.32, 1.7), cavity, x + s * cw / 2, 0.955, BZ + 0.24); side.rotation.y = -s * Math.PI / 2; (side.userData || (side.userData = {})).isDecal = true; }
+    const sole = add(new T.PlaneGeometry(cw, 0.3), cavity, x, 0.135, BZ + 0.24); sole.rotation.x = -Math.PI / 2; (sole.userData || (sole.userData = {})).isDecal = true;
+    const lid = add(new T.PlaneGeometry(cw, 0.3), cavity, x, 1.755, BZ + 0.24); lid.rotation.x = Math.PI / 2; (lid.userData || (lid.userData = {})).isDecal = true;
+    const D = WEAR.DOOR, hx = x - LD / 2, hz = BZ + 0.505, dw = LD;
     box(0.036, 0.022, 0.038, steel, hx + 0.018, 0.1168, BZ + 0.499);
     const pivot = new T.Group(); pivot.name = 'training-wear-locker-door'; pivot.position.set(hx, 0, hz); pivot.rotation.y = -D.rest; root.add(pivot);
-    const leaf = box(dw, 1.62, 0.02, lockerMat, dw / 2 + 0.016, 0.945, 0, pivot); leaf.rotation.z = 0.025;
-    const face = add(cell(new T.PlaneGeometry(dw, 1.62), 896, 256, 128, 384), sheetMat, dw / 2 + 0.016, 0.945, 0.014, pivot); face.rotation.z = 0.025; (face.userData || (face.userData = {})).isDecal = true;
+    const leaf = box(dw, 1.62, 0.02, lockerMat, dw / 2 + 0.016, 0.945, 0, pivot); leaf.rotation.z = 0.015;   // CG-1: sags less (its top corner reached the next locker)
+    box(0.022, 0.13, 0.03, steel, dw - 0.034, 1.02, 0.025, pivot);   // its latch handle
+    const face = add(cell(new T.PlaneGeometry(dw, 1.62), 896, 256, 128, 384), sheetMat, dw / 2 + 0.016, 0.945, 0.014, pivot); face.rotation.z = 0.015; (face.userData || (face.userData = {})).isDecal = true;
     door = { pivot, hx, hz, w: dw, h: 1.65, angle: D.rest, vel: 0, solid: { minX: 0, maxX: 0, minY: 0, maxY: 1.78, minZ: 0, maxZ: 0, lockerDoor: true, prop: true } };
   }
-  blockers.push({ minX: -6.4 - 0.31, maxX: -6.4 + 2 * 0.62 + 0.31, minY: 0, maxY: 1.85, minZ: BZ, maxZ: BZ + 0.49, lockers: true });
+  blockers.push({ minX: L0 - LW / 2 - 0.01, maxX: L0 + 2 * LP + LW / 2 + 0.01, minY: 0, maxY: 1.85, minZ: BZ, maxZ: BZ + 0.49, lockers: true });
   const doorBox = () => {   // the leaf's box at its angle (local), a little thick so rounds find it
     const ex = door.hx + Math.cos(door.angle) * door.w, ez = door.hz + Math.sin(door.angle) * door.w;
     door.solid.minX = Math.min(door.hx, ex) - 0.03; door.solid.maxX = Math.max(door.hx, ex) + 0.03;
@@ -551,17 +624,200 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
     const canvas = std({ color: 0x6f6a4e, roughness: 0.95 });
     const mattress = std({ color: 0xffffff, map: sheet, roughness: 0.9 });
     const cLen = L - 0.12, seg = 5, sl = cLen / seg;
-    for (let i = 0; i < seg; i++) {   // it sags in the middle: a parabola, each piece tilted to follow it
-      const t = (i + 0.5) / seg - 0.5, y = 0.415 - 0.08 * (1 - 4 * t * t), slope = 0.08 * 8 * t / cLen;
-      const ang = Math.atan(slope), sx = cx + t * cLen, dn = 0.0575;
-      const f = box(sl - 0.006, 0.015, Wd - 0.071, canvas, sx, y, cz); f.rotation.z = ang;
+    // CG-2 (AH-4 #21): the canvas and the mattress were five tilted slabs each, with dark V-gaps between them. Each is now
+    // one piece bent along the same sag (a parabola, 8 cm at the middle): a box cut in 20 along its length, every point
+    // dropped by the sag under it, so the top runs on without a break. The straps still hang at the five old centres.
+    const sagY = (x) => { const t = x / cLen; return -0.08 * (1 - 4 * t * t); };   // x from the cot's centre
+    const bend = (geo) => { const p = geo.attributes && geo.attributes.position; if (!p) return geo;
+      for (let i = 0; i < p.count; i++) p.setY(i, p.getY(i) + sagY(Math.max(-cLen / 2, Math.min(cLen / 2, p.getX(i)))));
+      p.needsUpdate = true; if (geo.computeVertexNormals) geo.computeVertexNormals(); return geo; };
+    const sheetBox = (w, h, d) => new T.BoxGeometry(w, h, d, 20, 1, 1);
+    const f = add(bend(sheetBox(cLen - 0.006, 0.015, Wd - 0.071)), canvas, cx, 0.415, cz); f.castShadow = true; f.receiveShadow = true;
+    for (let i = 0; i < seg; i++) {
+      const t = (i + 0.5) / seg - 0.5, y = 0.415 + sagY(t * cLen), sx = cx + t * cLen;
       const strapH = 0.4375 - y;
       for (const sz of [-1, 1]) box(0.06, strapH, 0.018, canvas, sx, y + strapH / 2, cz + sz * 0.3335);
-      const m = add(cell(new T.BoxGeometry(sl - 0.022, 0.1, Wd - 0.11), i * 102, 640, 102, 256), mattress, sx - Math.sin(ang) * dn, y + Math.cos(ang) * dn, cz);
-      m.rotation.z = ang; m.castShadow = true; m.receiveShadow = true;
     }
+    const m = add(bend(cell(sheetBox(cLen - 0.022, 0.1, Wd - 0.11), 0, 640, 512, 256)), mattress, cx, 0.415 + 0.0575, cz);
+    m.castShadow = true; m.receiveShadow = true;
     parts.push('wear-cot-sagging', 'wear-mattress-stained');
   }
+
+  // ---------- (6) CG-2, Training pass 2: the story (review/CG-2-training/STORY-PLAN.md, Director LOOK 02:55Z). Who used
+  // this place, told by the things they left (docs/story.md: the history is in the world, no wall of text). One more
+  // atlas, one more material: the paper (the rotation roster, a qualification card, the whiteboard, the locker name
+  // strips) and a row of flat colour swatches that every small prop takes its colour from, so the whole pass bakes to
+  // one more draw. Names only from the story bible (the twelve of FOB Threshold); nothing here says what became of them.
+  const STORY = WEAR.STORY;
+  const kitTex = tex(1024, 1024, (c) => {
+    const r = rng(211);
+    c.fillStyle = '#7f8a80'; c.fillRect(0, 0, 1024, 1024);
+    const hand = (px) => `${px}px "Segoe Print", "Comic Sans MS", "Bradley Hand", cursive`;
+    const type = (px, b = '') => `${b} ${px}px "Courier New", Courier, monospace`;
+    c.textBaseline = 'middle'; c.textAlign = 'left';
+    // The roster: 256 x 384 at (0, 0): a typed sheet, a pen tick by eleven of the twelve lines ... and by the twelfth;
+    // under them a thirteenth line, left blank.
+    c.fillStyle = '#ece6d2'; c.fillRect(0, 0, 256, 384);
+    const fit = (t, x, y, maxW, px, bold = '') => { c.font = type(px, bold); while (px > 8 && c.measureText(t).width > maxW) { px -= 1; c.font = type(px, bold); } c.fillText(t, x, y); };
+    c.fillStyle = '#1f2326'; c.textAlign = 'center'; fit(STORY.ROSTER_HEAD, 128, 24, 228, 19, 'bold');
+    fit(STORY.ROSTER_SUB, 128, 44, 228, 11);
+    c.fillRect(14, 56, 228, 2);
+    c.textAlign = 'left';
+    STORY.ROSTER.forEach(([rank, name], i) => {
+      const y = 74 + i * 22;
+      c.fillStyle = '#23272a'; c.font = type(13); c.fillText(String(i + 1).padStart(2, ' '), 14, y); c.fillText(rank, 40, y); c.fillText(name, 82, y);
+      c.fillStyle = 'rgba(40,40,40,0.25)'; c.fillRect(14, y + 10, 228, 1);
+      c.strokeStyle = '#2b3f86'; c.lineWidth = 2.5; c.beginPath(); c.moveTo(212, y - 1); c.lineTo(218, y + 6); c.lineTo(232, y - 8); c.stroke();   // ticked
+    });
+    { const y = 74 + 12 * 22; c.fillStyle = '#23272a'; c.font = type(13); c.fillText('13', 14, y); c.fillStyle = 'rgba(40,40,40,0.55)'; c.fillRect(40, y + 6, 160, 1.5); }
+    for (const [x, y] of [[18, 8], [238, 8]]) { c.fillStyle = 'rgba(120,100,60,0.35)'; c.fillRect(x - 6, y - 4, 12, 9); }   // pin holes, old ones
+    for (let i = 0; i < 14; i++) { c.fillStyle = `rgba(150,130,90,${r() * 0.12})`; c.fillRect(r() * 250, r() * 380, 4 + r() * 10, 3 + r() * 8); }
+    // The qualification card: 256 x 192 at (256, 0): lane, score, initials, mostly lane 2.
+    c.fillStyle = '#f1ecdc'; c.fillRect(256, 0, 256, 192);
+    c.fillStyle = '#2a2e31'; c.textAlign = 'center'; fit(STORY.CARD_HEAD, 384, 16, 228, 14, 'bold');
+    c.font = type(11); c.fillText('LANE    SCORE    INIT', 384, 36); c.fillRect(268, 44, 232, 1);
+    STORY.CARD.forEach(([lane, score, init], i) => {
+      const y = 58 + i * 16; c.fillStyle = 'rgba(40,40,40,0.25)'; c.fillRect(268, y + 7, 232, 1);
+      c.fillStyle = '#1e2a6b'; c.font = hand(13); c.fillText(String(lane), 300, y); c.fillText(score, 384, y); c.fillText(init, 462, y);
+    });
+    // The whiteboard: 512 x 320 at (512, 0): the week's drills in marker, the right half wiped with a sleeve.
+    c.fillStyle = '#f4f6f5'; c.fillRect(512, 0, 512, 320);
+    c.textAlign = 'left'; c.fillStyle = '#1b2f73'; c.font = hand(30); c.fillText(STORY.BOARD_HEAD, 536, 34);
+    c.strokeStyle = '#1b2f73'; c.lineWidth = 3; c.beginPath(); c.moveTo(536, 54); c.lineTo(700, 54); c.stroke();
+    STORY.BOARD_DAYS.forEach((d, i) => {
+      const x = 540 + i * 94; c.fillStyle = '#1b2f73'; c.font = hand(20); c.fillText(d, x, 84);
+      c.strokeStyle = i < 3 ? '#a3241e' : '#1b2f73'; c.lineWidth = 3;
+      for (let k = 0; k < 3 + (i % 2); k++) { const y = 116 + k * 40; c.beginPath(); c.moveTo(x, y); c.lineTo(x + 18 + r() * 40, y + (r() - 0.5) * 6); c.stroke(); }
+      if (i < 3) { c.beginPath(); c.moveTo(x + 4, 270); c.lineTo(x + 14, 282); c.lineTo(x + 34, 258); c.stroke(); }
+    });
+    c.fillStyle = '#a3241e'; c.font = hand(24); c.fillText('25m', 900, 120);
+    c.strokeStyle = '#a3241e'; c.lineWidth = 3; c.beginPath(); c.ellipse(922, 120, 36, 20, 0, 0, 7); c.stroke();
+    const wipe = c.createLinearGradient(780, 0, 1024, 0); wipe.addColorStop(0, 'rgba(244,246,245,0)'); wipe.addColorStop(0.35, 'rgba(244,246,245,0.82)'); wipe.addColorStop(1, 'rgba(244,246,245,0.9)');
+    c.fillStyle = wipe; c.fillRect(760, 60, 264, 250);
+    for (let i = 0; i < 8; i++) { c.fillStyle = 'rgba(60,80,140,0.12)'; c.fillRect(780 + r() * 220, 70 + r() * 230, 30 + r() * 80, 5 + r() * 9); }   // ghosts of old marker
+    // The locker name strips: 256 x 96 each at (0, 400 + 96 i): masking tape over the door's old card, marker.
+    STORY.LOCKERS.forEach((n, i) => {
+      const y = 400 + i * 96; c.fillStyle = '#d8c896'; c.fillRect(0, y, 256, 96);
+      c.fillStyle = 'rgba(120,100,50,0.3)'; c.fillRect(0, y, 256, 4); c.fillRect(0, y + 92, 256, 4);
+      c.fillStyle = '#16181b'; c.textAlign = 'center';
+      let px = 62; c.font = `bold ${px}px "Segoe Print", "Comic Sans MS", Arial, sans-serif`;
+      while (px > 20 && c.measureText(n).width > 232) { px -= 2; c.font = `bold ${px}px "Segoe Print", "Comic Sans MS", Arial, sans-serif`; }
+      c.fillText(n, 128, y + 50);
+    });
+    // The Medic's count: 320 x 256 at (512, 320): REVIVALS THIS ROTATION, ticks in five-bar gates (a fixed number in pass 2).
+    c.fillStyle = '#eef0ec'; c.fillRect(512, 320, 320, 256);
+    c.fillStyle = '#7d1d18'; c.fillRect(512, 320, 320, 46);
+    c.fillStyle = '#f4f1e6'; c.textAlign = 'center'; fit(STORY.TALLY_HEAD, 672, 343, 296, 21, 'bold');
+    c.strokeStyle = '#1b2f73'; c.lineWidth = 4; c.lineCap = 'round';
+    for (let k = 0; k < STORY.TALLY; k++) {
+      const g = Math.floor(k / 5), j = k % 5, gx = 536 + (g % 5) * 58, gy = 392 + Math.floor(g / 5) * 76;
+      c.beginPath(); if (j < 4) { c.moveTo(gx + j * 11, gy); c.lineTo(gx + j * 11 + (r() - 0.5) * 3, gy + 52); } else { c.moveTo(gx - 6, gy + 44); c.lineTo(gx + 42, gy + 8); } c.stroke();
+    }
+    // The stretcher's chart: 256 x 192 at (256, 192): an obs grid and a pulse line in pen.
+    c.fillStyle = '#f1ecdc'; c.fillRect(256, 192, 256, 192);
+    c.fillStyle = '#2a2e31'; c.font = type(15, 'bold'); c.textAlign = 'left'; c.fillText(STORY.CHART_HEAD, 270, 212);
+    c.strokeStyle = 'rgba(40,40,40,0.3)'; c.lineWidth = 1;
+    for (let i = 0; i <= 6; i++) { c.beginPath(); c.moveTo(270, 232 + i * 22); c.lineTo(498, 232 + i * 22); c.stroke(); }
+    for (let i = 0; i <= 8; i++) { c.beginPath(); c.moveTo(270 + i * 28.5, 232); c.lineTo(270 + i * 28.5, 364); c.stroke(); }
+    c.strokeStyle = '#1e2a6b'; c.lineWidth = 2.5; c.beginPath(); c.moveTo(272, 300);
+    for (let i = 1; i <= 16; i++) c.lineTo(272 + i * 14, 286 + Math.sin(i * 1.7) * 14 + r() * 8); c.stroke();
+    // Flat swatches, 64 x 64 from (0, 768): what every small prop of the pass is painted with.
+    STORY.SWATCH.forEach((col, k) => { c.fillStyle = col; c.fillRect((k % 16) * 64, 768 + Math.floor(k / 16) * 64, 64, 64); });
+  });
+  const kitMat = std({ color: 0xffffff, map: kitTex, roughness: 0.72, metalness: 0.12 });
+  const SW_ = Object.fromEntries(STORY.SWATCH_NAMES.map((n, k) => [n, k]));
+  const flat = (geo, name) => { const uv = geo.attributes && geo.attributes.uv, k = SW_[name]; if (!uv) return geo;
+    const u = ((k % 16) * 64 + 32) / 1024, v = 1 - (768 + Math.floor(k / 16) * 64 + 32) / 1024;
+    for (let i = 0; i < uv.count; i++) uv.setXY(i, u, v); uv.needsUpdate = true; return geo; };
+  const kitCell = (geo, x, y, w, h) => { const uv = geo.attributes && geo.attributes.uv; if (!uv) return geo;
+    for (let i = 0; i < uv.count; i++) uv.setXY(i, (x + uv.getX(i) * w) / 1024, 1 - (y + (1 - uv.getY(i)) * h) / 1024);
+    uv.needsUpdate = true; return geo; };
+  const G = { cyl: (rt, rb, h, seg = 12, open = false) => (T.CylinderGeometry ? new T.CylinderGeometry(rt, rb, h, seg, 1, open) : new T.BoxGeometry(2 * rb, h, 2 * rb)),
+    torus: (R0, r0, arc = Math.PI * 2) => (T.TorusGeometry ? new T.TorusGeometry(R0, r0, 6, 14, arc) : new T.BoxGeometry(2 * R0, 2 * R0, 2 * r0)) };
+  // Draws: the cutaway (training-cutaway.js) bakes each wall's hangings with its wall, so a material costs one draw per
+  // wall group it is in. The infirmary's pieces are its furniture (GP-19893: trainingProp, like props.js's medical bay),
+  // the bench-end pieces stand clear of the east wall's group, and the dented door's name is printed on its own face:
+  // the kit is two draws (the room, the range's back wall).
+  let kitProp = false;
+  const kit = (geo, name, x, y, z, parent, shadow = true) => { const m = add(flat(geo, name), kitMat, x, y, z, parent); if (shadow) { m.castShadow = true; m.receiveShadow = true; } if (kitProp) (m.userData || (m.userData = {})).trainingProp = true; return m; };
+  const kbox = (w, h, d, name, x, y, z, parent) => kit(new T.BoxGeometry(w, h, d), name, x, y, z, parent);
+  const tiny = (m) => { (m.userData || (m.userData = {})).isDecal = true; m.castShadow = false; return m; };   // pins, tape: not solids
+  const paper = (name, w, h, c4, x, y, z, ry = 0, rx = 0, parent) => {
+    const m = add(kitCell(new T.PlaneGeometry(w, h), ...c4), kitMat, x, y, z, parent); m.rotation.set(rx, ry, 0, 'YXZ'); tiny(m); m.receiveShadow = true; if (kitProp) (m.userData || (m.userData = {})).trainingProp = true; parts.push(name); return m; };
+
+  // Beat 1: the twelve came through. The roster pinned right of the DAYS WITHOUT INCIDENT board, and three lockers
+  // carrying names from it.
+  { const P = STORY.ROSTER_AT, w = 0.3, h = 0.45;
+    paper('story-roster', w, h, [0, 0, 256, 384], P.x, P.y, BZ + 0.003, 0);
+    for (const [dx, dy] of [[-w / 2 + 0.018, h / 2 - 0.012], [w / 2 - 0.018, h / 2 - 0.012]]) tiny(kbox(0.012, 0.012, 0.01, 'pin', P.x + dx, P.y + dy, BZ + 0.008)); }
+  for (let i = 0; i < 3; i++) {
+    const x = L0 + i * LP, c4 = [0, 400 + 96 * i, 256, 96], sw = 0.18, sh = 0.0675;   // covers the door's printed card
+    if (i !== 1) { paper('story-locker-name', sw, sh, c4, x, 1.225, BZ + 0.4925); continue; }
+    parts.push('story-locker-name');   // the dented door's (PRICE) is taped on in the wear sheet's door cell: no mesh of its own
+  }
+
+  // Beat 3: the Range Master's lane. His mug and the qualification clipboard at the bench's wall end, the brass bucket
+  // and a push broom leaning on the bench, ear defenders in a tote by the wall, the week's drills on a whiteboard.
+  { const top = 0.86, M = STORY.MUG;
+    kit(G.cyl(0.04, 0.036, 0.095, 14), 'mug', M.x, top + 0.0475, M.z);
+    kit(G.cyl(0.033, 0.033, 0.004, 14), 'coffee', M.x, top + 0.088, M.z);
+    const hd = kit(G.torus(0.024, 0.0065, Math.PI), 'mug', M.x + 0.039, top + 0.05, M.z); hd.rotation.z = -Math.PI / 2;
+    const C = STORY.CLIP;   // the clipboard, flat on the worktop, a card under its clip
+    const board = kbox(0.23, 0.008, 0.31, 'hardboard', C.x, top + 0.004, C.z); board.rotation.y = C.ry;
+    const at = (dz) => [C.x + dz * Math.sin(C.ry), C.z + dz * Math.cos(C.ry)];   // along the board (its top end at +z, away from him)
+    const [px, pz] = at(-0.03), [kx, kz] = at(0.125);
+    paper('story-qual-card', 0.2, 0.15, [256, 0, 256, 192], px, top + 0.0085, pz, C.ry + Math.PI, -Math.PI / 2);   // reads from behind the line
+    const clip = kbox(0.09, 0.012, 0.035, 'clip', kx, top + 0.014, kz); clip.rotation.y = C.ry; }
+  { const B0 = STORY.BROOM, edge = 0.162 - 0.0135, topY = 0.83,   // the handle rests on the worktop's steel lip (z 0.162-0.18)
+      L = 1.35, rise = topY - 0.075, run = Math.sqrt(L * L - rise * rise);
+    kbox(0.45, 0.04, 0.05, 'bristle', B0.x, 0.02, edge - run);
+    kbox(0.47, 0.035, 0.07, 'broomhead', B0.x, 0.0575, edge - run);
+    const hz = edge - run / 2, h = kit(G.cyl(0.0135, 0.0135, L, 8), 'handle', B0.x, 0.075 + rise / 2, hz); h.rotation.x = Math.atan2(run, rise); }
+  { const K = STORY.BUCKET, H0 = 0.27;
+    kit(G.cyl(0.15, 0.12, H0, 16, true), 'pail', K.x, H0 / 2, K.z);
+    kit(G.cyl(0.12, 0.12, 0.012, 16), 'pail', K.x, 0.006, K.z);
+    kit(G.cyl(0.141, 0.141, 0.02, 16), 'brass', K.x, 0.24, K.z);                    // the brass in it, near the brim
+    const bail = kit(G.torus(0.15, 0.004, Math.PI), 'clip', K.x, H0, K.z); bail.rotation.y = 0.6;
+    const rb = rng(5);
+    for (let i = 0; i < 5; i++) { const a = -0.4 - rb() * 2.3, d = 0.22 + rb() * 0.25,   // toward the shooter's side, never under the bench
+       s = kit(G.cyl(0.0055, 0.0055, 0.019, 6), 'brass', K.x + Math.cos(a) * d, 0.0055, K.z + Math.sin(a) * d, undefined, false);
+      s.rotation.set(Math.PI / 2, 0, rb() * 3); tiny(s); } }
+  { const E = STORY.TOTE, w = 0.36, d = 0.52, h = 0.12, t = 0.012;   // ear defenders in a shallow open tote against the wall
+    kbox(w, t, d, 'tote', E.x, t / 2, E.z);
+    for (const s of [-1, 1]) { kbox(t, h - t, d, 'tote', E.x + s * (w - t) / 2, t + (h - t) / 2, E.z); kbox(w - 2 * t, h - t, t, 'tote', E.x, t + (h - t) / 2, E.z + s * (d - t) / 2); }
+    for (let i = 0; i < 3; i++) {
+      const z = E.z - 0.15 + i * 0.15, y = t + 0.042;   // the cups lie on the tote's floor (the audit found them floating)
+      for (const s of [-1, 1]) { const cup = kit(G.cyl(0.042, 0.042, 0.038, 12), 'earcup', E.x + s * 0.07, y, z); cup.rotation.z = Math.PI / 2; }
+      const band = kit(G.torus(0.07, 0.009, Math.PI), 'earband', E.x, y + 0.01, z); band.rotation.set(0, 0, 0); } }
+  { const Wb = STORY.WHITEBOARD, w = 0.9, h = 0.56;
+    kbox(w + 0.04, h + 0.04, 0.018, 'alu', Wb.x, Wb.y, BZ + 0.009);
+    paper('story-whiteboard', w, h, [512, 0, 512, 320], Wb.x, Wb.y, BZ + 0.0205, 0);
+    kbox(0.6, 0.02, 0.05, 'alu', Wb.x, Wb.y - h / 2 - 0.03, BZ + 0.025);                     // marker tray on the frame
+    const mk = kit(G.cyl(0.009, 0.009, 0.13, 8), 'marker', Wb.x + 0.12, Wb.y - h / 2 - 0.011, BZ + 0.03); mk.rotation.z = Math.PI / 2; tiny(mk); }
+
+  // Beat 5: the Medic's count. Everybody who "dies" here wakes on that stretcher; she keeps count on the wall, a chart
+  // hangs on its foot rail, a blanket lies folded on the old cot, a sharps bin by the cabinet, her mug by the monitor.
+  kitProp = true;
+  { const M = STORY.MEDIC, bx = bedAt.x, bz = bedAt.z, wall = B.minZ + 0.08 + 0.0925;   // the olive panels' face
+    { const w = 0.5, h = 0.42, x = bx + M.tallyDX, y = M.tallyY;
+      kbox(w + 0.03, h + 0.03, 0.016, 'alu', x, y, wall + 0.008);
+      paper('story-revivals', w, h, [512, 320, 320, 256], x, y, wall + 0.0175, 0); }
+    { const x = bx + M.sharpsDX, y = M.sharpsY;                                    // a wall bracket, the bin on it
+      kbox(0.17, 0.03, 0.12, 'clip', x, y - 0.115, wall + 0.06);                  // seated: its top is the bin's floor
+      kbox(0.15, 0.2, 0.1, 'pin', x, y, wall + 0.05);
+      kbox(0.155, 0.03, 0.105, 'sharpslid', x, y + 0.115, wall + 0.0525); }
+    { const x = bx + M.mugDX, z = B.minZ + M.mugZ, top = 0.9;                       // on the worktop, in front of the monitor
+      kit(G.cyl(0.04, 0.036, 0.095, 14), 'whitemug', x, top + 0.0475, z);
+      kit(G.cyl(0.033, 0.033, 0.004, 14), 'coffee', x, top + 0.085, z);
+      const hd = kit(G.torus(0.024, 0.0065, Math.PI), 'whitemug', x + 0.039, top + 0.05, z); hd.rotation.z = -Math.PI / 2; }
+    { const fx = bx + 1.21 * 0.85 + 0.018 + 0.004, y0 = 0.88 + 0.03 - 0.155;       // the chart, hung on the stretcher's foot rail
+      kbox(0.008, 0.31, 0.23, 'hardboard', fx, y0, bz);
+      paper('story-obs-chart', 0.2, 0.15, [256, 192, 256, 192], fx + 0.0055, y0 + 0.04, bz, Math.PI / 2);
+      kbox(0.016, 0.03, 0.09, 'clip', fx + 0.009, 0.88 + 0.015, bz); }
+    { const cx = bedAt.x + 3.25, cz = B.minZ + 3.25, cLen = 1.9 - 0.12, off = 0.71, w = 0.34, h = 0.07;   // the cot (above)
+      const sag = (x) => { const t = x / cLen; return -0.08 * (1 - 4 * t * t); }, slope = 0.08 * 8 * off / (cLen * cLen);
+      const fold = kbox(w, h, 0.5, 'blanket', cx + off, 0.4725 + 0.05 + sag(off) + h / 2 + 0.005, cz); fold.rotation.z = Math.atan(slope); } }   // +5 mm: its flat bottom rides the curve's ends (audit)
+  kitProp = false;
 
   return { parts, decals, dead, flicker, flickerMat: flickMat, update, blockers, door, kickDoor, pushDoor, bumpDoor };
 }

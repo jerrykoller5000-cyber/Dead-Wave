@@ -42,6 +42,10 @@ export function zombieJoinRules(T, g, scale = 1) {
     if(u.head?.userData.cc359NeckJoin){const q=u.head.userData.cc359NeckJoin;add(u.torso,u.head,'y',q[0],q[1],q[2],'neck');}else add(u.torso,u.head,'y',-.20,-.025,.17,'neck');   // GP-20157 REVIEW: explicit neck-base metadata; legacy unchanged.
     add(u.head,u.spitterJaw,'z',-.045,.075,.14,'spitter jaw hinge');
     add(u.head,u.screamerJaw,'z',-.05,.08,.15,'screamer jaw hinge');
+    if (u.head && u.shamblerJaw) {
+      add(u.head,u.shamblerJaw,'z',-.08,.115,.17,'shambler jaw hinge');
+      rules.at(-1).jawBelow = -.004 * scale;
+    }
     const shoulder = u.torso?.userData.cc359ShoulderJoin;
     for (const S of ['L','R']) {
       const arm=u['arm'+S+'G'],leg=u['leg'+S+'G'];
@@ -66,13 +70,16 @@ export function blendZombieJoins(T, g, skin, scale = 1) {
   if (!skin?.isSkinnedMesh || skin.userData.joinBlend) return 0;
   const geo=skin.geometry,P=geo.attributes.position,I=geo.attributes.skinIndex,W=geo.attributes.skinWeight;
   const bones=skin.skeleton.bones,indices=new Map(bones.map((b,i)=>[b,i]));
-  const rules=zombieJoinRules(T,g,scale).filter(r=>indices.has(r.parent)&&indices.has(r.child));
+  const jawMask = skin.userData.cc359JawSkinMask;
+  const rules=zombieJoinRules(T,g,scale).filter(r=>indices.has(r.parent)&&indices.has(r.child)
+    && (r.jawBelow === undefined || jawMask?.length === P.count));
   const owners=new Uint16Array(P.count),p=new T.Vector3();let changed=0;
   for(let i=0;i<P.count;i++) {
     const owner=owners[i]=I.getX(i),bone=bones[owner];let best=null,bestDistance=Infinity;
     for(const r of rules) {
       if(bone!==r.parent&&bone!==r.child)continue;
       p.fromBufferAttribute(P,i).applyMatrix4(r.local);
+      if (r.jawBelow !== undefined && (!jawMask[i] || p.y >= r.jawBelow)) continue;
       const along=p[r.axis],lo=Math.min(r.low,r.high),hi=Math.max(r.low,r.high);
       if(along<lo||along>hi)continue;
       const radial2=p.lengthSq()-along*along;
