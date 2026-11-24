@@ -30,7 +30,7 @@ export const GAIT_WEIGHT = {
   strikeToeUp: { walk: 0.18, run: 0.12 },   // the heel lands toe-up (the heel sinks heelLen * sin of it: kept small)
   strikeWidth: 0.08,       // ...for this much of a cycle either side of the strike (centred a touch after it: the heel is down, the ball is not yet)
   pushMax: 0.5,            // the heel off the ground ahead of the toe, at most
-  footLen: 0.17,           // ankle to the ball of the foot: the push-off from the ankle's lift keeps the toe down
+  footLen: 0.1392,           // ankle to the ball of the foot: the push-off from the ankle's lift keeps the toe down
   swingToeDown: 0.14,      // the toe hangs through the swing (scaled by how free the clip's `level` says the foot is)
   // Where each foot touches down, in cycles (the walk clip's left foot is lowest from 0.05, the run's at 0.036), and
   // where its stance ends (the toe leaves the ground): the push-off from the ankle's lift runs from pushFrom to there.
@@ -60,7 +60,9 @@ export function footRoll(du, lift, level, rw, F = GAIT_WEIGHT) {
   du = dcyc(du, 0);
   const toeUp = mix(F.strikeToeUp.walk, F.strikeToeUp.run, rw) * bump(du - 0.02, F.strikeWidth);
   const end = mix(F.stanceEnd.walk, F.stanceEnd.run, rw);
-  const win = smoothstep(F.pushFrom, F.pushFrom + 0.08, du) * (1 - smoothstep(end - 0.04, end + 0.08, du));
+  // Heel strike wraps around zero. Push-off follows time since strike and can extend beyond half a walk cycle.
+  const sinceStrike = du < 0 ? du + 1 : du;
+  const win = smoothstep(F.pushFrom, F.pushFrom + 0.08, sinceStrike) * (1 - smoothstep(end - 0.04, end + 0.08, sinceStrike));
   const push = Math.min(F.pushMax, Math.asin(clamp(Math.max(0, lift) / F.footLen, 0, 1))) * win;
   const free = 1 - smoothstep(0.35, 0.8, level == null ? 1 : level);
   const hang = F.swingToeDown * free * (1 - win) * (1 - rw * 0.3);

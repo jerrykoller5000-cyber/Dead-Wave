@@ -106,7 +106,7 @@ test('actual record hook awards once, suppresses debug moments and gives the dea
 
 test('Silence is awarded once from a completed eligible true ending, never an evacuation or debug run',()=>{
  const {adapter,store}=fixture();const r=record({evacuated:false,trueEnding:true});
- assert(adapter.finish(1,r).includes('silence'));assert(!store.read().unlocked.includes('out-on-the-boat'));
+ assert(adapter.finish(1,r).includes('silence'));assert(store.read().unlocked.includes('out-on-the-boat'));   // CK-1 (D-8): the true ending boards Heron too
  assert.deepEqual(adapter.finish(1,r),[]);
  const debug=fixture(()=>false);assert.deepEqual(debug.adapter.finish(1,r),[]);
 });

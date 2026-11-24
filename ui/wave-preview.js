@@ -130,7 +130,9 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
     if(data.relayStory?.line) {
       const relay=doc.createElement('section');relay.className='briefing-relay';relayPage.append(relay);
       line(relay,'h3',text('story.relay.title'));
-      const dispatches = data.relayStory.lines?.length ? data.relayStory.lines : [{ line: data.relayStory.line }];
+      const raw = data.relayStory.lines?.length ? data.relayStory.lines : [{ line: data.relayStory.line }];
+      // CK-1 (A8, D-22): read in the order Ridgeline sent them (line 1 before line 2); the asides follow.
+      const dispatches = [...raw.filter(d => Number.isInteger(d.number)).sort((a, b) => a.number - b.number), ...raw.filter(d => !Number.isInteger(d.number))];
       for (const dispatch of dispatches) line(relay,'p',dispatch.line,'relay-story-line');
     }
     renderQuestPanel(relayPage,{...data,canUsePanel:data.canUsePanel===true},{doc,send});
@@ -210,6 +212,7 @@ export function mountBriefing({ doc = document, bus = window } = {}) {
     if(data.canSoundAlarm === false)line(reportPage,'p',text('wavePreview.atHQ'),'briefing-muted');
     alarm.hidden=mode!=='alarm';alarm.disabled = mode!=='alarm' || data.phase !== 'prep' || data.alarmActive || data.disabled || data.canSoundAlarm === false;
     const boatView=boatCallView({...data,canSoundAlarm:data.canUsePanel===true});
+    if(mode==='alarm'&&boatView.offered)line(reportPage,'p',text('wavePreview.heronFirst'),'briefing-warning');   // CK-1: the alarm alone is 'stay'
     boat.hidden=mode!=='radio'||!boatView.offered;boat.disabled=!boatView.enabled;
     if(boatView.relayDown)line(relayPage,'p',text('wavePreview.relayDown'),'briefing-warning');
     consequence.textContent=text(mode==='alarm'?'alarm.consequence':'story.heron.warning');

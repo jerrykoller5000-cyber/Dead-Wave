@@ -356,7 +356,12 @@ export function stepFall(z, t) {
   if (t == null) t = (z.knockDur || F.total) - Math.max(0, z.knockT || 0);
   F.t = t;
   // what the animation wrote this frame (the blend's other side)
-  for (let j = 0; j < NJ; j++) { const b = F.bones[j]; F.anim[j] = b ? b.rotation[FALL_JOINTS[j].ax] * (FALL_JOINTS[j].sign || 1) : 0; }
+  // The warren has a reduced gait that writes only four joints. Blend its get-up back
+  // to the standing pose captured on entry, so the rest cannot retain a prone angle.
+  if (!F.belowBase) {
+    for (let j = 0; j < NJ; j++) { const b = F.bones[j]; F.anim[j] = b ? b.rotation[FALL_JOINTS[j].ax] * (FALL_JOINTS[j].sign || 1) : 0; }
+    F.belowBase = !!z.below;
+  }
   fallPoseAt(F, Math.min(t, F.total), F.pose);
   const w = t < BLEND_IN ? ease(t / BLEND_IN) : t > F.total - BLEND_OUT ? ease(Math.max(0, F.total - t) / BLEND_OUT) : 1;
   if (w < 1) for (let j = 0; j < NJ; j++) F.pose[j] = F.anim[j] + (F.pose[j] - F.anim[j]) * w;

@@ -27,7 +27,7 @@ export function renderQuestPanel(parent, data, {doc, send}) {
   };
   for(let k=0;k<8;k++){
     const b=doc.createElement('button');b.type='button';b.className='quest-glyph';b.dataset.glyph=String(k);b.setAttribute('aria-label',text('quest.glyph.'+k));b.title=text('quest.glyph.'+k);
-    b.style.left=(50+37*Math.cos(k*Math.PI/4))+'%';b.style.top=(50-37*Math.sin(k*Math.PI/4))+'%';glyph(b,k);
+    b.style.left=(50-37*Math.cos(k*Math.PI/4))+'%';/* CK-1: stone k stands at +x=west in the world, so glyph k goes left (it was mirrored east-west) */b.style.top=(50-37*Math.sin(k*Math.PI/4))+'%';glyph(b,k);
     b.addEventListener('click',()=>{if(b.disabled)return;selected.push(k);repaint();if(selected.length===5)submit.focus();});buttons.push(b);ring.append(b);
   }
   clear.addEventListener('click',()=>{selected=[];repaint();buttons[0].focus();});

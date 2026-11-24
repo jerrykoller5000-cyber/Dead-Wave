@@ -1,10 +1,14 @@
 import {text} from './strings.js';
 import {drillInstruction,targetGoal} from './range-guide.js';
 import {bakeStatic} from '../world/bake.js';
+import {getTrainingPBR,applyWorldUVByMaterial} from '../world/training-textures.js';
 export function createRangeMonitor(T,tg){
  const height=3.3448; // Jerry: raise the overhead scoreboard by one foot.
  const g=new T.Group();g.name='range-drill-monitor';g.position.set(0,height,.58);g.rotation.y=Math.PI;tg.group.add(g);
- const owned=new Set(),keep=o=>(owned.add(o),o),dark=keep(new T.MeshStandardMaterial({color:0x202a27,metalness:.65,roughness:.6})),steel=keep(new T.MeshStandardMaterial({color:0x67776d,metalness:.8,roughness:.55}));
+ const pbr=getTrainingPBR(T);
+ const owned=new Set(),keep=o=>(owned.add(o),o);
+ const dark=keep(new T.MeshStandardMaterial(pbr?pbr.steelDark.opts({color:0x82908c}):{color:0x202a27,metalness:.65,roughness:.6}));
+ const steel=keep(new T.MeshStandardMaterial(pbr?pbr.steelLight.opts({color:0xb6c6bc}):{color:0x67776d,metalness:.8,roughness:.55}));
  const box=(w,h,d,m,x,y,z)=>{const o=new T.Mesh(keep(new T.BoxGeometry(w,h,d)),m);o.position.set(x,y,z);g.add(o);};
  box(3.55,1.4,.15,dark,0,0,0);
  for(const x of [-1.5,1.5]){
@@ -14,8 +18,9 @@ export function createRangeMonitor(T,tg){
   for(const y of [-.63,.63])box(.05,.05,.04,steel,x,y,.09);
  }
  for(const y of [-.669,.669])box(3.5,.06,.04,steel,0,y,.09); // CJ-1: rails 1 mm inside the box's top and bottom, not on their planes (they flickered)
- const cv=document.createElement('canvas');cv.width=1024;cv.height=400;const c=cv.getContext('2d'),tex=keep(new T.CanvasTexture(cv));tex.colorSpace=T.SRGBColorSpace;
+ const cv=document.createElement('canvas');cv.width=1024;cv.height=400;const c=cv.getContext('2d'),tex=keep(new T.CanvasTexture(cv));tex.colorSpace=T.SRGBColorSpace;tex.anisotropy=8;tex.generateMipmaps=true;
  const mat=keep(new T.MeshBasicMaterial({map:tex,toneMapped:false})),screen=new T.Mesh(keep(new T.PlaneGeometry(3.35,1.25)),mat);screen.name='range-monitor-screen';screen.position.z=.084;g.add(screen);
+ applyWorldUVByMaterial(g,new Map([[dark,1.2],[steel,.9]]));
  bakeStatic(T,g);g.traverse(o=>{if(o.geometry)keep(o.geometry);});
  let key='',lastResult=null,updates=0,cooldown=0,lastState='',lastAction='',lastWeapon='';
  const line=(s,y,size,color='#d8ece1')=>{c.fillStyle=color;c.font=`bold ${size}px monospace`;c.fillText(s,512,y,950);};
@@ -27,7 +32,13 @@ export function createRangeMonitor(T,tg){
   if(s.result)lastResult={...s.result,drill:s.drill};
   const live=['PREPARING','COUNTDOWN','ACTIVE'].includes(s.state),r=live?null:lastResult,d=live?s.drill:r?.drill;
   const next=JSON.stringify([s.state,Math.ceil(s.countdown),Math.ceil((d?.duration||0)-s.elapsed),s.score,s.wave,s.expectedWeapon,s.action,s.plan?.zone,s.plan?.priority,s.stats?.cleared,r?.id]);if(next===key)return;key=next;
-  c.fillStyle='#061714';c.fillRect(0,0,1024,400);c.fillStyle='#c9b755';c.fillRect(0,0,1024,8);c.textAlign='center';
+  const bg=c.createRadialGradient(512,190,40,512,200,560);bg.addColorStop(0,'#0a221d');bg.addColorStop(1,'#04100d');
+  c.fillStyle=bg;c.fillRect(0,0,1024,400);
+  c.fillStyle='rgba(0,0,0,0.22)';for(let y=12;y<400;y+=6)c.fillRect(0,y,1024,2);
+  c.strokeStyle='rgba(120,180,152,0.18)';c.lineWidth=3;c.strokeRect(10,16,1004,374);
+  c.fillStyle='#c9b755';c.fillRect(0,0,1024,8);
+  c.fillStyle='rgba(201,183,85,0.26)';c.fillRect(28,88,968,2);
+  c.textAlign='center';
   line(d?text(`range.drill.${d.weapon}.${d.id}.name`).toUpperCase():text('range.monitor.title'),65,42,'#ebd970');
   if(s.state==='COUNTDOWN'){line(String(Math.ceil(s.countdown)),268,176,'#f4e486');wrap(d.startHolstered?text('range.guide.holster'):d.requireReload?text('range.guide.empty'):text('range.monitor.beep'),338);}
   else if(s.state==='PREPARING'){line(text('range.preparing'),220,66);wrap(text('range.monitor.beep'),310);}

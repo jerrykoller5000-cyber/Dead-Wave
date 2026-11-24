@@ -467,8 +467,9 @@ function makeClothTexelEval({ weaveFreq = 96, seed = 211, withHoles = false, sti
     if (stitchSeams) {
       const nearSide = Math.min(Math.abs(u - 0.25), Math.abs(u - 0.75));
       if (nearSide < 0.014) {
-        seamBump = gauss(nearSide, 0.005) * 0.30 * (0.5 + 0.5 * Math.sin(v * 240));
-        r *= 0.86; g *= 0.86; b *= 0.86;
+        // CC-369 (D-242 #8): a sewn side seam, not a zipper-like ladder down the leg (was .30 bump, x.86 dark)
+        seamBump = gauss(nearSide, 0.004) * 0.12 * (0.7 + 0.3 * Math.sin(v * 240));
+        r *= 0.94; g *= 0.94; b *= 0.94;
       }
     }
 
@@ -513,7 +514,7 @@ function makeClothTexelEval({ weaveFreq = 96, seed = 211, withHoles = false, sti
 function evalBootTexel(u, v) {
   const grain = cylFbm(u * 3, v * 3, 4.5, 10.0, 307, 3);
   const scuff = sstep(0.15, 0.45, cylFbm(u, v, 2.2, 5.0, 319, 3));
-  const seam = gauss((v * 5) % 1 - 0.5, 0.04) * 0.25;
+  const seam = gauss((v * 5) % 1 - 0.5, 0.04) * 0.04;   // CC-369 (D-242 #7): faint stitch welts, not hoops round a barrel (was .25)
 
   let r = lerp(218, 248, 0.5 + grain * 0.35 + scuff * 0.25);
   let g = lerp(210, 238, 0.5 + grain * 0.35 + scuff * 0.20);
@@ -527,7 +528,7 @@ function evalBootTexel(u, v) {
     g: clamp(Math.round(g), 0, 255),
     b: clamp(Math.round(b), 0, 255),
     a: 255,
-    h: 0.5 + grain * 0.22 + seam - scuff * 0.12,
+    h: 0.5 + grain * 0.08 + seam - scuff * 0.08,   // CC-369 (D-242 #6): smoother grain (was .22 / .12)
     rgh: lerp(0.50 + grain * 0.10, 0.86, scuff * 0.75),
     metal: 0.04
   };

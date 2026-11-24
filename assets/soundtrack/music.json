@@ -252,18 +252,23 @@
     "gh/gh-place-menu": 0.966,
     "gh/gh-place-hq": 0.912,
     "gh/gh-place-dusk": 0.832,
-    "gh/gh-place-dawn": 0.832,
+    "gh/gh-place-dawn": 0.966,
     "gh/gh-place-fallen": 0.822,
-    "gh/gh-cue-last-kill": 2.489,
-    "gh/gh-cue-night-fall": 2.094,
-    "gh/gh-cue-boss-entrance": 1.607,
-    "gh/gh-cue-discovery": 1.824,
-    "gh/gh-cue-mission-done": 3.639,
-    "gh/gh-cue-dawn": 2.924,
+    "gh/gh-cue-last-kill": 1.808,
+    "gh/gh-cue-night-fall": 1.642,
+    "gh/gh-cue-boss-entrance": 1.681,
+    "gh/gh-cue-discovery": 1.956,
+    "gh/gh-cue-mission-done": 1.401,
+    "gh/gh-cue-dawn": 1.627,
     "gh/gh-place-graveyard": 0.813,
     "gh/gh-place-relay": 0.822,
     "gh/gh-place-hikers": 0.832,
-    "gh/gh-place-alarm-build": 0.822
+    "gh/gh-place-alarm-build": 1.0,
+    "gh/dayfight-1": 2.106,
+    "gh/dayfight-2": 2.106,
+    "gh/dayfight-3": 2.106,
+    "gh/gh-place-wilds": 1.245,
+    "gh/gh-place-anomaly": 1.0
   },
   "dayFight": {
     "tracks": [
@@ -1632,7 +1637,7 @@
     }
   },
   "score": {
-    "about": "CL-275 (D-97): the 1.2 score from F:\\Music. Each night a suite of Hellshot kits, three layers each (gh/*.ogg, git-ignored: made on Jerry's PC by tools/music-make.py). Opt-in until it covers every moment: ?score=1 or localStorage tt_score=1. A night's gain matches the loudness of the song it replaces; fallback is that song (played when the gh files are not on this machine).",
+    "about": "CL-275 (D-97) / AH-11 (Jerry direct music cue & pacing overhaul): cohesive Ghosthack Anomaly world score, layered Hellshot night & day-fight suites, and ear-audited Mystery Nightfall / Anomaly cues.",
     "layered": {
       "gh/night-01": {
         "fallback": "elevenlabs/night-01",
@@ -2340,6 +2345,53 @@
           }
         ]
       },
+      "gh/dayfight-1": {
+        "fallback": "chip_skirmish_b",
+        "kits": [
+          {
+            "name": "joker",
+            "bpm": 107,
+            "barS": 2.242991,
+            "loopS": 35.887854,
+            "files": {
+              "drums": "gh/gh-hs-joker-drums.ogg",
+              "rhythm": "gh/gh-hs-joker-rhythm.ogg"
+            }
+          }
+        ]
+      },
+      "gh/dayfight-2": {
+        "fallback": "chip_skirmish_a",
+        "kits": [
+          {
+            "name": "nihility",
+            "bpm": 135,
+            "barS": 1.777778,
+            "loopS": 28.444437,
+            "files": {
+              "drums": "gh/gh-hs2-nihility-drums.ogg",
+              "rhythm": "gh/gh-hs2-nihility-rhythm.ogg",
+              "lead": "gh/gh-hs2-nihility-lead.ogg"
+            }
+          }
+        ]
+      },
+      "gh/dayfight-3": {
+        "fallback": "chip_fight_1",
+        "kits": [
+          {
+            "name": "retribution",
+            "bpm": 150,
+            "barS": 1.6,
+            "loopS": 25.6,
+            "files": {
+              "drums": "gh/gh-hs3-retribution-drums.ogg",
+              "rhythm": "gh/gh-hs3-retribution-rhythm.ogg",
+              "lead": "gh/gh-hs3-retribution-lead.ogg"
+            }
+          }
+        ]
+      },
       "gh/motif-shambler": {
         "fallback": null,
         "kits": [
@@ -2641,20 +2693,27 @@
         "gh/gh-place-menu"
       ],
       "dawnprep": [
-        "gh/gh-place-dawn"
+        "gh/gh-place-menu",
+        "gh/gh-place-hq",
+        "gh/gh-place-wilds"
       ],
       "day": [
         "gh/gh-place-hq",
-        "gh/gh-place-menu"
-      ],
-      "dusk": [
-        "gh/gh-place-alarm-build"
-      ],
-      "night": [
+        "gh/gh-place-wilds",
+        "gh/gh-place-menu",
         "gh/gh-place-dusk"
       ],
+      "dusk": [
+        "gh/gh-place-dusk",
+        "gh/gh-place-anomaly"
+      ],
+      "night": [
+        "gh/gh-place-dusk",
+        "gh/gh-place-anomaly"
+      ],
       "aftermath": [
-        "gh/gh-place-hq"
+        "gh/gh-place-hq",
+        "gh/gh-place-menu"
       ],
       "dawn": [
         "gh/gh-place-dawn"
@@ -2683,6 +2742,18 @@
       "poi_cleared": "gh/gh-cue-mission-done",
       "camp": "gh/gh-cue-mission-done",
       "dawn": "gh/gh-cue-dawn"
+    },
+    "dayFight": {
+      "tracks": [
+        "gh/dayfight-1",
+        "gh/dayfight-2",
+        "gh/dayfight-3"
+      ],
+      "sizes": [
+        1,
+        5,
+        11
+      ]
     }
   }
 }

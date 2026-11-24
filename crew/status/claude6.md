@@ -1,13 +1,13 @@
 # Claude 6
 
-state: idle
-model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-21T00:16Z
-next: CF-20 Training real-world scale audit (D-218 pass 1, review-only)
+state: active
+model: Claude Opus 5.5 (configured claude-opus-5-5)
+task: CF-28 D-243 player measure vs 1.80 m; D-242 brute P2 #4 #5 #8 #9 #10; spitter P3; scoreboard
+touching: review/D-243-measure/, review/D-242/brute/, review/D-242/spitter/, review/CF-28/
+since: 2026-11-23T18:44Z
+next: CF-27 brute P2 #4 #5 #8 #9 #10; spitter P2 land after LOOK; D-243 measure (Claude 9 copy); bomber P1
 blocked-on: —
-last-report: handoffs/2026-11-21-claude6-CG-1.md
+last-report: handoffs/2026-11-23-claude6-CF-27.md
 
 ## Notes
 - Joined 12 Nov (D-177): the heavy guns detail pass (minigun, Watchman MG, launcher, Breacher, pump shotgun).
@@ -39,3 +39,9 @@ last-report: handoffs/2026-11-21-claude6-CG-1.md
 - 20 Nov CF-19 (21:14-22:15Z) DONE: Training placement audit tool tools/placement-audit/ (run.mjs/dump.js/no-bake.js/audit.py) + review/CF-19/REPORT.md for Claude 7 (handoffs/2026-11-20-claude6-CF-19.md). Re-run after Claude 7's fixes if asked.
 - 20 Nov CF-20 (23:01-23:20Z) DONE: Training real-world scale audit, tools/placement-audit/scale.py + review/CF-20/REPORT.md (10 off, ranked, pictures) sent to Claude 7 + Director (handoffs/2026-11-20-claude6-CF-20.md). OPEN: re-run CF-19 audit + scale.py when Claude 7 asks; Pike GLB.
 - 21 Nov CG-1 (00:01-00:20Z) DONE: steps 1+2 re-run (review/CF-19-cg1/REPORT.md): 11 closed, 6 open (#14 #15 #21 pillar-wall slits, #49 sprinkler pipe, #42 #43 decals), new = tiny hidden bites. Tools: linemap.py + scale.py SCALE_LINEMAP. OPEN: repeat for each later CG-1 step when Claude 7 asks; Pike GLB.
+- 21 Nov CF-21 (21:28-23:05Z) DONE + LANDED: keypad units, shutter top gap, D-228 flicker post (handoffs/2026-11-21-claude6-CF-21.md, review/CF-21/). OPEN: ChatGPT's native look (review/CF-21/native/). NEXT (Director 22:52Z): CH-3 items #4 #5 #8 #9 #10 #19 (loan of those training.js blocks; read CH-3 report), then D-237 #4 marine 3P proportion numbers for Claude 3/9. Cloud: tarball code dirs minus assets/soundtrack+disclaimer (64 MB), camera start --training --soft takes ~9 min.
+- 22 Nov CF-22 (04:53-06:40Z) DONE + LANDED: CH-3 #4 #5 #8 #9 #10 #19 (training.js 537e1f32, training-props.js 80f3ca7e; handoffs/2026-11-22-claude6-CF-22.md, review/CF-22/). D-237 #4 numbers sent (Claude outputs/J168/proportions/d237-4-marine-real-numbers.md). OPEN: ChatGPT native pair (review/CF-22/native/); Claude 3's answer on what his 0.284 m head height spans. crew.mjs EINVAL on status: node -r ~/c6/fsfix.cjs (recreate: catch EINVAL -> open r+, write, ftruncate).
+- 22 Nov CF-23 (17:17-18:20Z): D-237 #4 marine vs 1.80 m (cf23-marine-vs-1.8m.md; Director picked A/B/C), #13 list with Claude 8 (accepted), CF-22 natives OK. OPEN: shutter slat satin steel copy review/CF-23/training.js.cf23 fc3e8ff0 on 34e0f016: wait ChatGPT native pair + Director LOOK, then land (handoffs/2026-11-22-claude6-CF-23.md). Cloud inspector measure tools review/CF-23/tools.
+- 23 Nov CF-24 (01:57-03:28Z): CF-23 satin confirmed live (training.js f797a6ff). #4 A+B+C numbers + test review/CF-24/tcf24.js (live 8/14 = the bar; Claude 2 takes A on the 3P path, Claude 3 B/C). CH-3 #3 ceiling copy review/CF-24/ceiling/training-ceiling.js.cf24 e550d07c on f2a1ad5d (0 draws): waiting ChatGPT native + Director LOOK/loan, then land. Ceiling shows only in FP: camera eval T.setViewFirstDbg(true).
+- 23 Nov CF-25 (05:15-06:00Z) DONE: CF-24 ceiling live e550d07c confirmed; D-241 joins list review/D-241/joins-list.md (28 joins in mm, tools review/D-241/cf25/). CF-26 (06:03-06:25Z): D-242 lead spitter/bomber/brute + SCOREBOARD; spitter P1 10 found (review/D-242/spitter/pass1.md), review copy next. Cloud walk poses: setShotView near the zombie + T.stepFrame(1/30), export C6Z(m,{rel:true}).
+- 23 Nov CF-27 (16:07-16:35Z): spitter P2 10/10 + brute P2 5/10 in review (handoffs/2026-11-23-claude6-CF-27.md): concepts 774cb258, brute 7db77b11; Director LOOK asked. OPEN: brute #4 #5 #8 #9 #10, D-243 measure Claude 9's player copy (asked him for the path), bomber P1. Cloud harness review/CF-27/tools (fake rig with game scale 1.38/1.05 and brute shoulders .42).

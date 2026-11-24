@@ -66,7 +66,9 @@ try{
    const y=await page.locator('#shopTabs button').evaluateAll(bs=>bs.map(b=>Math.round(b.getBoundingClientRect().y)));assert(y.every(v=>v===y[0]),'three Armory categories fit in one row at 390px');
    await page.locator('#shopTabs button').filter({hasText:/^Weapon builds$/}).click();assert.match(await page.locator('#shopList').innerText(),/blueprint/i);await shot('builds');
    await page.evaluate(()=>{TT.closeShop();TT.openShop(true);});
-   assert.deepEqual(await page.locator('#shopTabs button').allTextContents(),['Supplies','Builds']);
+   assert.deepEqual(await page.locator('#shopTabs button').allTextContents(),['Builds','Supplies']);
+   assert.equal(await page.locator('#shopTabs [data-shop-page=builds]').getAttribute('aria-pressed'),'true');
+   await page.locator('#shopTabs [data-shop-page=supplies]').click();
    assert.match(await page.locator('#shopList').textContent(),/MedPen/);
    assert(await page.locator('[data-item="field-intel"]').isVisible());await shot('gear');
    await page.evaluate(()=>{TT.closeShop();TT.openShop(true,'armory');});

@@ -1,0 +1,329 @@
+{
+  "tag": "after",
+  "backend": "WebGPU",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 71.62,
+  "pageErrors": 0,
+  "errors": [],
+  "audit": {
+    "twelveColdMeshes": 319,
+    "coldMeshesByGun": {
+      "minigun": 28,
+      "m4": 37,
+      "ak": 29,
+      "aa12": 27,
+      "pistol": 23,
+      "uzi": 27,
+      "shotgun": 26,
+      "revolver": 26,
+      "sniper": 38,
+      "launcher": 27,
+      "flamer": 18,
+      "chainsaw": 13
+    },
+    "totalAuditedMeshes": 571,
+    "uniqueMaterials": 233,
+    "materialsWithMap": 48,
+    "materialsWithNormal": 196,
+    "materialsWithRoughness": 196,
+    "materialsWithMetalness": 43,
+    "materialsWithAO": 196,
+    "weaponFoldPBRMats": 5,
+    "uniqueTextures": 50,
+    "estimatedVramMB": 39.25,
+    "textures": [
+      {
+        "name": "wpn-parkerized-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-parkerized-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-polymer-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-polymer-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-anodized-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-anodized-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-machinedSteel-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-machinedSteel-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-enamel-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-enamel-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "lacquered birch grain and cut edges",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-birch-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-birch-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "oiled gunstock walnut grain",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-walnut-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-walnut-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-enamel-col",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-bladeSteel-col",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-bladeSteel-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-bladeSteel-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-katanaBlade-col",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-katanaBlade-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-katanaBlade-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-machinedSteel-col",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-opticalGlass-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-opticalGlass-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-brass-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-brass-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-woodStipple-col",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-woodStipple-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-woodStipple-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-rubber-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-rubber-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-katanaWrap-col",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-katanaWrap-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-katanaWrap-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-chasedGold-col",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-chasedGold-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-chasedGold-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "wpn-katanaLacquer-col",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      }
+    ]
+  },
+  "perf": {
+    "frames": 150,
+    "meanMs": 60.89,
+    "meanFps": 16.4,
+    "medianMs": 66.5,
+    "p99Ms": 83.6,
+    "worstMs": 83.7,
+    "hitches": 105,
+    "callsPerFrame": 15.1,
+    "tris": 2143025,
+    "lateCompiles": 0
+  }
+}

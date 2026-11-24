@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "backend": "WebGPU",
+    "destructCount": 30,
+    "destructBound": 30,
+    "kitCount": 12,
+    "spillsVisibleAtRest": false,
+    "moundsVisibleAtRest": false
+  },
+  "perfIdle": {
+    "avgMs": 138.57,
+    "p95Ms": 43.5,
+    "maxMs": 4203.8,
+    "fps": 7.2,
+    "avgCalls": 336,
+    "maxCalls": 336,
+    "maxTris": 448613
+  },
+  "firstHitMs": {
+    "dt1": 57.9,
+    "dt2": 87.9
+  },
+  "perfActive": {
+    "avgMs": 24.23,
+    "p95Ms": 32.3,
+    "maxMs": 34.4,
+    "fps": 41.3,
+    "avgCalls": 319,
+    "maxCalls": 320,
+    "maxTris": 383851
+  },
+  "perfReset": {
+    "avgMs": 21.98,
+    "p95Ms": 30.7,
+    "maxMs": 33.9,
+    "fps": 45.5,
+    "avgCalls": 337,
+    "maxCalls": 337,
+    "maxTris": 448615
+  },
+  "resetStats": {
+    "loose": 0,
+    "spills": 0,
+    "mounds": 0,
+    "kitLoose": 0,
+    "spillsVis": false,
+    "moundsVis": false,
+    "allStill": true
+  },
+  "errors": []
+}

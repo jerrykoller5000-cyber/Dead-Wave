@@ -45,7 +45,8 @@ export function createBadgeAdapter({store,getEligible=()=>undefined,onAward=()=>
       if(id!==runId||finished.has(id)||!record||!['day','kills','streak','headshots','skulls'].every(k=>count(record[k]))||record.day<1||typeof record.evacuated!=='boolean')return [];
       finished.add(id);
       return award({nightReached:record.day,kills:record.kills,headshots:record.headshots,
-        streak:record.streak,skullsBanked:record.skulls,evacuated:record.evacuated,trueEnding:record.trueEnding===true,survivorsAboard:record.survivorsAboard},false,record.eligible);
+        streak:record.streak,skullsBanked:record.skulls,evacuated:record.evacuated,trueEnding:record.trueEnding===true,survivorsAboard:record.survivorsAboard,
+        tagsRecovered:count(record.tagsRecovered)?record.tagsRecovered:undefined},false,record.eligible);   // CK-1: 'Brought them home' had no source
     }
   };
 }

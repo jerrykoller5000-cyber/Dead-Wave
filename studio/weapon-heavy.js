@@ -2,6 +2,7 @@
 import { attachLaserLight } from './weapon-attachments.js';
 import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup, setArtworkHeatRange } from './weapon-model-hooks.js';
 import { markPaintSurface } from './weapon-finish.js';
+import { applyWeaponPBR, getWeaponPBR, projectWeaponUVs } from './weapon-textures.js';
 import { roundGeometry, spentCaseGeometry } from './weapon-casings.js';
 import { clipArtworkProfile, fitCollarFaces, trimPanelBack } from './weapon-longarms.js';
 import { boxProjectUV } from '../core/geometry.js';
@@ -269,9 +270,9 @@ export function makeMinigunModel(ctx) {
   const K = gunKit(gun), W = sharedDetail(ctx);
   // CF-1 (J149): screw heads with real drives, one draw a kind; gunAccent keeps them out of the body-metal merge.
   const hexHeads = [], slotHeads = [];
-  const panelSteel = new THREE.MeshStandardMaterial({color: 0x3b4245, metalness: .17, roughness: .72});
-  const drumFinish = new THREE.MeshStandardMaterial({color: 0x545a3e, metalness: .15, roughness: .67});
-  const lidFinish = new THREE.MeshStandardMaterial({color: 0x565e60, metalness: .33, roughness: .54});
+  const panelSteel = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({color: 0x3b4245, metalness: .17, roughness: .72}), 'parkerized', { useMap: false, markFoldable: true });
+  const drumFinish = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({color: 0x545a3e, metalness: .15, roughness: .67}), 'enamel', { useMap: false, markFoldable: true });
+  const lidFinish = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({color: 0x565e60, metalness: .33, roughness: .54}), 'anodized', { useMap: false, markFoldable: true });
   // Housing: one moulded body with a round back end, bolted side plates, cooling slots, the hub showing.
   // Ease the rear shell between its original top and bottom attachment points.
   // The posed glove pad reaches this face; the separate rear handle stays in its socket.
@@ -1118,8 +1119,10 @@ export function makeFlamerModel(ctx) {
   sleeve.metalness = 0;
   const dial = gaugeFace.clone();
   dial.name = 'flamer dial enamel';
-  dial.color.setHex(0xbabaab);
-  dial.roughness = .76;
+  dial.color.setHex(0xd6d4c8);
+  dial.roughness = .62;
+  dial.userData = { ...(gaugeFace.userData || {}) };
+  applyWeaponPBR(THREE, dial, 'enamel', { useMap: false, markFoldable: true, overwrite: true });
   // Angular sheet-metal case and inset blank service panels: no rail or lettering.
   const housing = K.slab([[-0.17, 0.076], [-0.17, -0.028], [-0.152, -0.035], [0.321, -0.035], [0.336, -0.022], [0.336, 0.078], [0.316, 0.095], [-0.142, 0.095]], 0.11, fieldCoat, { bevel: 0.007 });
   K.box(0.074, 0.0015, 0.28, fieldCoat, 0, 0.096, 0.076, 0, 0, 0, null, 0.002); // inset top service skin
@@ -1363,6 +1366,8 @@ function chainsawBlurBand(T, L, R) {
 const sawCoverMaps = new WeakMap();
 function sawCoverTexture(T) {
   if (sawCoverMaps.has(T)) return sawCoverMaps.get(T);
+  const epbr = getWeaponPBR(T, 'enamel');
+  if (epbr?.map) { sawCoverMaps.set(T, epbr.map); return epbr.map; }
   const size = 128, data = new Uint8Array(size * size * 4);
   let seed = 0x428e9;
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
@@ -1577,6 +1582,8 @@ export function makeChainsawModel(ctx) {
   coverMat.roughness = .74;
   coverMat.metalness = .025;
   coverMat.map = sawCoverTexture(THREE);
+  coverMat.userData = { ...(bodyMat.userData || {}) };
+  applyWeaponPBR(THREE, coverMat, 'enamel', { useMap: false, markFoldable: false });
   gun.userData.partFinish = true;
   coverMat.userData.weaponFinishRole = 'furniture';
   const barMat = steelMat.clone();
@@ -1584,6 +1591,7 @@ export function makeChainsawModel(ctx) {
   barMat.color.setHex(0x87908c);
   barMat.roughness = .65;
   barMat.metalness = .47;
+  barMat.userData = { ...(steelMat.userData || {}), weaponBasePBR: true };
   K.slab([[-0.27, 0.105], [-0.28, 0.083], [-0.28, -0.024], [-0.248, -0.06], [0.088, -0.06], [0.11, -0.038], [0.11, 0.112], [0.09, 0.14], [-0.24, 0.14]], 0.24, bodyMat, { bevel: 0.012, segs: 3 });
   // Orange cowling steps down at the front, leaving a clear grip over the engine.
   const cowl = K.slab([[-0.25, 0.132], [-0.247, 0.132], [-0.24, 0.14], [0.073, 0.14], [0.073, 0.148], [-0.01, 0.154], [-0.03, 0.177], [-0.214, 0.18], [-0.25, 0.155]], 0.22, coverMat, { bevel: 0.010, segs: 3 });
@@ -1871,7 +1879,7 @@ export function makeMortarModel(ctx, matOverride = null, collapsed = false) {
   if (!collapsed) g.rotation.y = Math.PI;
   root.add(g);
   const K = gunKit(g), material = (m) => matOverride || m;
-  const steel = matOverride || new THREE.MeshStandardMaterial({ color: 0x3e4a3a, metalness: 0.08, roughness: 0.7 });   // GB-233: painted
+  const steel = matOverride || applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x3e4a3a, metalness: 0.08, roughness: 0.7 }), 'enamel', { useMap: false });   // GB-233: painted
   const plate = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.46, 0.08, 12), steel);
   // M3 baseplate: 21 inches across. Scale the existing pressed webs with the plate.
   plate.scale.set(0.58, 0.75, 0.58);
@@ -1927,7 +1935,12 @@ export function makeMortarModel(ctx, matOverride = null, collapsed = false) {
   // Optical level and elevation wheel are mounted on the tube clamp, so they follow its aim.
   K.box(0.038, 0.105, 0.034, steel, -0.135, 0.246, 0, 0, 0, 0, tubeDetail, 0.006);
   K.cyl(0.012, 0.012, 0.043, material(gunDark), -0.135, 0.269, 0, tubeDetail, 10, 'x');
-  K.disc(0.0085, material(gaugeFace), -0.1566, 0.269, 0, -Math.PI / 2, tubeDetail, 12);
+  const mortarDial = matOverride || (() => {
+    const d = gaugeFace.clone();
+    d.userData = { ...(gaugeFace.userData || {}), preserveArtworkUV: true };
+    return applyWeaponPBR(THREE, d, 'pressureGauge', { useMap: true, markFoldable: false, overwrite: true });
+  })();
+  K.disc(0.0085, mortarDial, -0.1566, 0.269, 0, -Math.PI / 2, tubeDetail, 12);
   K.cyl(0.018, 0.018, 0.103, steel, 0.177, 0.102, 0, tubeDetail, 12, 'x');
   K.tor(0.059, 0.007, steel, 0.232, 0.102, 0, 0, Math.PI / 2, 0, tubeDetail, Math.PI * 2, 20);
   for (let i = 0; i < 3; i++) {
@@ -1997,6 +2010,7 @@ export function makeMortarModel(ctx, matOverride = null, collapsed = false) {
   for (const branch of g.children.slice()) if (branch !== tube) branch.traverse(o => { if (o.isMesh) fixed.push(o); });
   for (const mesh of fixed) g.attach(mesh);
   for (const mesh of fixed) for (const child of mesh.children.slice()) if (child.isGroup && child.children.length === 0) mesh.remove(child);
+  projectWeaponUVs(root, { tileMeters: 0.42 });
   return finishGun(root);
 }
 
@@ -2198,7 +2212,7 @@ export function makeM240Model(ctx, folded = false) {
     // forward, each in its link, at a 12.3 mm link pitch on the same path (7 rounds; the 10 before were 8.6 mm thin).
     const beltRound = roundGeometry(THREE, 'm240');
     beltRound.userData.shared = true;   // cached and reused: a removed Watchman must not dispose it
-    const beltFinish = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: .42, metalness: .55 });
+    const beltFinish = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: .42, metalness: .55 }), 'brass', { useMap: false, useMetalMap: true });
     beltFinish.name = 'm240 belt rounds';
     for (let i = 0; i < 7; i++) {
       const u = i / 6, x = -0.122 + 0.074 * u, y = 0.873 + 0.037 * Math.sin(u * Math.PI / 2);
@@ -2233,5 +2247,6 @@ export function makeM240Model(ctx, folded = false) {
   bindModelArtwork(g, 'controls', 'feedCoverLatch', feedCoverLatch);
   bindModelArtwork(g, 'controls', 'barrelLatch', barrelLatch);
   bindModelArtwork(g, 'controls', 'barrelHandle', barrelHandle);
+  projectWeaponUVs(g, { tileMeters: 0.42 });
   return finishGun(g);
 }

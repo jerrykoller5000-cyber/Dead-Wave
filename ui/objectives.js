@@ -112,9 +112,18 @@ export function mountObjectives({mapRoot,hudRoot,project,onTrack=()=>{},onChoose
   const stop=doc.createElement('button');stop.type='button';stop.textContent=text('objectives.untrack');
   const choiceLabel=doc.createElement('label'),choice=doc.createElement('select');
   choiceLabel.className='objective-choice';choiceLabel.append(doc.createTextNode(text('objectives.choosePack')),choice);choiceLabel.hidden=true;
-  let choiceSignature='',trackedId=null,inReady=false;
+  let choiceSignature='',trackedId=null,inReady=false,briefingEl=null,reportEl=null;
+  function getBriefing() {
+    if(!briefingEl||briefingEl.isConnected===false)briefingEl=doc.getElementById?doc.getElementById('hqBriefing'):doc.querySelector('#hqBriefing');
+    return briefingEl;
+  }
   function placeCard() {
-    const ready=doc.querySelector('#hqBriefing[open][data-panel="alarm"] #briefing-report');
+    const hq=getBriefing();
+    let ready=null;
+    if(hq&&hq.hasAttribute('open')&&hq.getAttribute('data-panel')==='alarm') {
+      if(!reportEl||reportEl.isConnected===false)reportEl=doc.getElementById?doc.getElementById('briefing-report'):hq.querySelector('#briefing-report');
+      if(reportEl&&(!hq.contains||hq.contains(reportEl)))ready=reportEl;
+    }
     const parent=ready||hudRoot;
     inReady=!!ready;
     if(card.parentNode!==parent)parent.append(card);

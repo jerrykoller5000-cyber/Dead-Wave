@@ -1,0 +1,119 @@
+{
+  "tag": "before",
+  "backend": "WebGPU",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 75.5,
+  "pageErrors": 0,
+  "errors": [],
+  "audit": {
+    "twelveColdMeshes": 319,
+    "coldMeshesByGun": {
+      "minigun": 28,
+      "m4": 37,
+      "ak": 29,
+      "aa12": 27,
+      "pistol": 23,
+      "uzi": 27,
+      "shotgun": 26,
+      "revolver": 26,
+      "sniper": 38,
+      "launcher": 27,
+      "flamer": 18,
+      "chainsaw": 13
+    },
+    "totalAuditedMeshes": 571,
+    "uniqueMaterials": 233,
+    "materialsWithMap": 16,
+    "materialsWithNormal": 0,
+    "materialsWithRoughness": 1,
+    "materialsWithMetalness": 0,
+    "materialsWithAO": 0,
+    "weaponFoldPBRMats": 0,
+    "uniqueTextures": 10,
+    "estimatedVramMB": 1.13,
+    "textures": [
+      {
+        "name": "lacquered birch grain and cut edges",
+        "w": 512,
+        "h": 256,
+        "bytes": 699033,
+        "aniso": 4
+      },
+      {
+        "name": "weapon-muzzle-gas-plume",
+        "w": 256,
+        "h": 128,
+        "bytes": 174758,
+        "aniso": 1
+      },
+      {
+        "name": "tex",
+        "w": 128,
+        "h": 128,
+        "bytes": 87379,
+        "aniso": 1
+      },
+      {
+        "name": "tex",
+        "w": 128,
+        "h": 128,
+        "bytes": 87379,
+        "aniso": 1
+      },
+      {
+        "name": "moulded tool cover stipple",
+        "w": 128,
+        "h": 128,
+        "bytes": 87379,
+        "aniso": 1
+      },
+      {
+        "name": "tex",
+        "w": 64,
+        "h": 64,
+        "bytes": 21845,
+        "aniso": 1
+      },
+      {
+        "name": "field enamel stipple",
+        "w": 64,
+        "h": 64,
+        "bytes": 21845,
+        "aniso": 1
+      },
+      {
+        "name": "tex",
+        "w": 64,
+        "h": 4,
+        "bytes": 1024,
+        "aniso": 1
+      },
+      {
+        "name": "tex",
+        "w": 64,
+        "h": 4,
+        "bytes": 1024,
+        "aniso": 1
+      },
+      {
+        "name": "tex",
+        "w": 64,
+        "h": 4,
+        "bytes": 1024,
+        "aniso": 1
+      }
+    ]
+  },
+  "perf": {
+    "frames": 150,
+    "meanMs": 56.11,
+    "meanFps": 17.8,
+    "medianMs": 50.1,
+    "p99Ms": 83.4,
+    "worstMs": 83.5,
+    "hitches": 90,
+    "callsPerFrame": 15.1,
+    "tris": 1753836,
+    "lateCompiles": 0
+  }
+}

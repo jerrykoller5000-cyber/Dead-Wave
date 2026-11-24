@@ -1,0 +1,105 @@
+{
+  "tag": "after",
+  "backend": "WebGPU",
+  "loadSec": 71.79,
+  "pageErrors": 0,
+  "pageErrorList": [],
+  "caves": [
+    {
+      "theme": "root",
+      "x": 164.48,
+      "gy": 3.71,
+      "z": 69.65,
+      "yaw": -1.7759,
+      "w": 3.4,
+      "h": 6.6,
+      "groupTris": 10378,
+      "groupMeshes": 5,
+      "rMax": 195.68
+    },
+    {
+      "theme": "shale",
+      "x": -19,
+      "gy": 3.95,
+      "z": 187.79,
+      "yaw": 3.2006,
+      "w": 3.4,
+      "h": 8.8,
+      "groupTris": 8149,
+      "groupMeshes": 4,
+      "rMax": 209.24
+    },
+    {
+      "theme": "iron",
+      "x": -161.35,
+      "gy": 0.68,
+      "z": 90.29,
+      "yaw": 2.1192,
+      "w": 4.3,
+      "h": 6.1,
+      "groupTris": 7975,
+      "groupMeshes": 4,
+      "rMax": 203.75
+    },
+    {
+      "theme": "wet",
+      "x": -186.76,
+      "gy": 1.92,
+      "z": -7.22,
+      "yaw": 1.7283,
+      "w": 3.7,
+      "h": 6,
+      "groupTris": 10645,
+      "groupMeshes": 4,
+      "rMax": 199.76
+    },
+    {
+      "theme": "hill",
+      "x": -12.42,
+      "gy": 3.64,
+      "z": -187.23,
+      "yaw": 0.0052,
+      "w": 3.3,
+      "h": 6.3,
+      "groupTris": 9055,
+      "groupMeshes": 20,
+      "rMax": 200.19
+    },
+    {
+      "theme": "chalk",
+      "x": 162.24,
+      "gy": -2.1,
+      "z": -96.62,
+      "yaw": -0.969,
+      "w": 3.4,
+      "h": 7.2,
+      "groupTris": 10025,
+      "groupMeshes": 11,
+      "rMax": 207.79
+    }
+  ],
+  "totalCaveGroupTris": 56227,
+  "dressTris": 32676,
+  "dressMeshes": 117,
+  "dressRMax": 190.79,
+  "memTextures": 399,
+  "memGeos": 3545,
+  "perf": {
+    "iron": {
+      "name": "iron_hero_noon",
+      "frames": 90,
+      "meanMs": 29.69,
+      "meanFps": 33.7,
+      "medianMs": 33.3,
+      "p99Ms": 50
+    },
+    "root": {
+      "name": "root_hero_noon",
+      "frames": 90,
+      "meanMs": 32.85,
+      "meanFps": 30.4,
+      "medianMs": 33.4,
+      "p99Ms": 50.1
+    }
+  }
+}

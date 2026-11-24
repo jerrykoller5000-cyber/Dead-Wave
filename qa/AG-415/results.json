@@ -1,0 +1,31 @@
+{
+  "pass": true,
+  "backend": "webgpu",
+  "errors": [],
+  "screenshots": 12,
+  "narrow": {
+    "left": 8,
+    "right": 382,
+    "width": 374,
+    "vw": 390,
+    "overflow": false
+  },
+  "m1": {
+    "stepId": "move.walk",
+    "beaconVisible": true,
+    "overlapHud": false,
+    "overlapHp": false,
+    "overlapAmmo": false,
+    "trRect": {
+      "x": 916,
+      "y": 12,
+      "w": 348,
+      "h": 376
+    }
+  },
+  "drawerInfo": {
+    "open": true,
+    "moduleCards": 10,
+    "stepChips": 37
+  }
+}

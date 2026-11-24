@@ -88,7 +88,7 @@ function refineBruteBody(A,T,g,s,M,dry){
  for(const bone of [u.torso,u.armLG,u.armRG])for(const o of [...bone.children])if(o.isMesh&&o.material?.color?.getHex()===pale)o.removeFromParent();
  const vein=A.mat(skin.color.clone().multiplyScalar(.68),false,0,'skin');vein.userData.zombieColorRole='skin';vein.userData.zombieColorBase=skin.color.getHex();
  const rawSeat=(probe,x,y,lift=0)=>{const ray=new T.Raycaster(new T.Vector3(x*s,y*s,1*s),new T.Vector3(0,0,-1)),hit=ray.intersectObject(probe,false)[0];if(!hit)throw Error('Unseated brute muscle detail '+x+','+y);return[x,y,hit.point.z/s+lift];};
- const upperRows=[[-.355,.0848,.096,0],[-.29,.100,.103,0],[-.20,.142,.155,.014],[-.10,.168,.170,.008],[0,.176,.165,0],[.08,.110,.120,0]];
+ const upperRows=[[-.373,.089,.096,-.002],[-.337,.093,.099,-.002],[-.29,.100,.103,0],[-.20,.142,.155,.014],[-.10,.168,.170,.008],[0,.176,.165,0],[.08,.110,.120,0]];
  for(const [side,arm]of [[-1,u.armLG],[1,u.armRG]]){
   arm.userData.upper.removeFromParent();
   const rows=[];for(let j=0;j<upperRows.length-1;j++)for(const t of [0,.5])rows.push(upperRows[j].map((v,k)=>v+(upperRows[j+1][k]-v)*t));rows.push(upperRows.at(-1));
@@ -120,10 +120,11 @@ function refineBruteBody(A,T,g,s,M,dry){
   for(const [n,path]of [[[side*.018,-.055],[side*.026,-.105],[side*.018,-.19],[side*.035,-.28]],[[side*.018,-.17],[-side*.015,-.21],[-side*.032,-.26]]].entries())A.path(arm,vein,path.map(([x,y])=>rawSeat(probe,x,y,.001)),.0035,.0015).name='brute brachial vein '+side+' '+n;
  }
  // Long quadriceps and fascia carry the same native leg joints, under the retained skirt and guards.
- for(const[side,leg]of[[-1,u.legLG],[1,u.legRG]]){leg.userData.thigh.removeFromParent();const rows=[[-.38,.09045,.09045,.010],[-.335,.100,.112,.005],[-.29,.108,.135,0],[-.21,.130,.156,-.006],[-.13,.1404,.16065,-.010],[-.055,.138,.144,-.005],[.02,.1323,.1215,0]],P=[],I=[],N=28;
+ for(const[side,leg]of[[-1,u.legLG],[1,u.legRG]]){leg.userData.thigh.removeFromParent();const rows=[[-.405,.069,.075,.008],[-.379,.078,.084,.009],[-.335,.096,.107,.005],[-.29,.108,.135,0],[-.21,.130,.156,-.006],[-.13,.1404,.16065,-.010],[-.055,.138,.144,-.005],[.02,.1323,.1215,0]],P=[],I=[],N=28;
   for(const[y,rx,rz,cz]of rows)for(let i=0;i<N;i++){const a=i/N*Math.PI*2,x=Math.sin(a)*rx,front=Math.max(0,Math.cos(a)),mass=.010*ga(Math.abs(x)-.055,.032)*ga(y+.18,.11),seam=-.007*ga(x,.015)*ga(y+.21,.12);P.push(x*s,y*s,(cz+Math.cos(a)*rz+front*(mass+seam))*s);}
   for(let r=0;r<rows.length-1;r++)for(let i=0;i<N;i++){const a=r*N+i,b=r*N+(i+1)%N;I.push(a,b,a+N,b,b+N,a+N);}for(const r of[0,rows.length-1]){const c=P.length/3;P.push(0,rows[r][0]*s,rows[r][3]*s);for(let i=0;i<N;i++)I.push(c,...(r?[r*N+i,r*N+(i+1)%N]:[r*N+(i+1)%N,r*N+i]));}
-  const thigh=mesh(leg,dry,P,I,'brute quadriceps and fascia '+side);leg.userData.thigh=thigh;const probe=new T.Mesh(thigh.geometry,dry);probe.updateMatrixWorld(true);A.path(leg,vein,[[side*.04,-.10],[side*.055,-.19],[side*.035,-.28]].map(([x,y])=>rawSeat(probe,x,y,.001)),.003,.0012).name='brute quadriceps vein '+side;
+  const thigh=mesh(leg,dry,P,I,'brute quadriceps and fascia '+side);leg.userData.thigh=thigh;
+  const probe=new T.Mesh(thigh.geometry,dry);probe.updateMatrixWorld(true);A.path(leg,vein,[[side*.04,-.10],[side*.055,-.19],[side*.035,-.28]].map(([x,y])=>rawSeat(probe,x,y,.001)),.003,.0012).name='brute quadriceps vein '+side;
  }
  // Neck and traps form one thick load-bearing volume, with seated sternocleidomastoid ridges.
  const neckRows=[[.40,.210,.140,-.025],[.46,.200,.140,-.040],[.55,.170,.150,-.065],[.635,.145,.140,-.090],[.695,.100,.100,-.105]],P=[],I=[],N=32;
@@ -174,7 +175,7 @@ function refineBruteLowerLimbs(A,T,g,s,M,dry){
  // One carved thorax carries pectorals, obliques and back masses under the retained plate.
  for(const o of [...u.torso.children])if(o.isMesh&&o.material===M.skin){const P=o.geometry.attributes.position,b=bruteBounds(T,P);if(b.min.y/s<-.075&&b.max.y/s>.50)o.removeFromParent();}
  const thorax=humanoidTube(A,T,s,u.torso,dry,{n:32,sub:2,warp:.14,keys:[{y:-.08,w:.1972,d:.128},{y:.03,w:.2448,d:.160},{y:.17,w:.2924,d:.188},{y:.31,w:.340,d:.200},{y:.42,w:.2992,d:.168},{y:.48,w:.1496,d:.112},{y:.51,w:.064,d:.065}],
-  bumps:[{t:.65,y:.28,at:.45,ay:.10,a:.014},{t:-.65,y:.28,at:.45,ay:.10,a:.014},{t:1.15,y:.13,at:.5,ay:.15,a:.008},{t:-1.15,y:.13,at:.5,ay:.15,a:.008},{t:2.6,y:.31,at:.45,ay:.13,a:.008},{t:-2.6,y:.31,at:.45,ay:.13,a:.008},{t:0,y:.28,at:.16,ay:.15,a:-.004}]});
+  bumps:[{t:.65,y:.28,at:.45,ay:.10,a:.014},{t:-.65,y:.28,at:.45,ay:.10,a:.014},{t:1.15,y:.13,at:.5,ay:.15,a:.008},{t:-1.15,y:.13,at:.5,ay:.15,a:.008},{t:2.6,y:.31,at:.45,ay:.13,a:.008},{t:-2.6,y:.31,at:.45,ay:.13,a:.008},{t:2.39,y:.13,at:.49,ay:.10,a:.017},{t:-2.39,y:.13,at:.49,ay:.10,a:.017},{t:0,y:.28,at:.16,ay:.15,a:-.004}]});
  thorax.meshes.forEach(o=>o.name='brute continuous pectoral oblique and back mass');
  for(const[side,el,shin]of[[-1,u.armLG.userData.elbowG,u.legLG.userData.shinG],[1,u.armRG.userData.elbowG,u.legRG.userData.shinG]]){
   for(const o of [...el.children])if(o.isMesh&&o.material===M.leather)o.removeFromParent();
@@ -185,22 +186,29 @@ function refineBruteLowerLimbs(A,T,g,s,M,dry){
    const jointCap=o.material===M.skin&&o.geometry.type==='SphereGeometry'&&Math.abs(o.position.y/s)<.025;
    if(foundational||pale||jointCap)o.removeFromParent();
   }
-  const fore=humanoidTube(A,T,s,el,dry,{n:26,sub:2,warp:.18,keys:[
+  const fore=humanoidTube(A,T,s,el,dry,{n:24,sub:2,warp:.18,keys:[
    {y:-.425,w:.0544,d:.0448,cz:.024},{y:-.39,w:.1088,d:.072,cz:.020},{y:-.35,w:.120,d:.080,cz:.020},
    {y:-.308,w:.0832,d:.0784,cz:.012},{y:-.26,w:.088,d:.0928},{y:-.17,w:.1232,d:.112,cz:-.010},
-   {y:-.07,w:.1312,d:.120},{y:.005,w:.110,d:.102,cz:-.008},{y:.055,w:.0848,d:.096}],
+   {y:-.07,w:.114,d:.107},{y:-.017,w:.103,d:.101,cz:-.006},{y:.030,w:.091,d:.097,cz:-.005},{y:.060,w:.082,d:.092}],
    bumps:[{t:side*.8,y:-.10,at:.55,ay:.08,a:.010},{t:-side*.4,y:-.14,at:.4,ay:.07,a:.007},{t:0,y:-.275,at:.3,ay:.04,a:.004},{t:Math.PI,y:.006,at:.4,ay:.025,a:.008}]});
   fore.meshes.forEach(o=>o.name='brute continuous elbow forearm wrist and palm '+side);
   // Fasten the existing curved guard from its sides and back; broad front bars
   // made the entire arm read as stacked rings instead of one forearm.
-  for(const y of[-.12,-.225]){const points=[];for(let i=0;i<=12;i++){const q=fore.at(.85+(Math.PI*2-1.7)*i/12,y);points.push(q.p.addScaledVector(q.n,.003).toArray());}A.path(el,M.leather,points,.006,.006).name='brute rear forearm guard strap '+side+' '+y;}
+  for(const y of [-.116,-.22]){
+   const points=[];
+   for(let i=0;i<=12;i++){
+    const q=fore.at(.85+(Math.PI*2-1.7)*i/12,y+.009*Math.sin(i/12*Math.PI));
+    points.push(q.p.addScaledVector(q.n,.001).toArray());
+   }
+   A.path(el,M.leather,points,.005,.004).name='brute rear forearm guard strap '+side+' '+y;
+  }
   const vessel=A.mat(M.skin.color.clone().multiplyScalar(.58),false,0,'skin');vessel.userData.zombieColorRole='skin';vessel.userData.zombieColorBase=M.skin.color.getHex();
   const vein=[];for(const[t,y]of[[side*.35,-.045],[side*.45,-.12],[side*.30,-.21],[side*.22,-.28]]){const q=fore.at(t,y);vein.push(q.p.addScaledVector(q.n,.001).toArray());}A.path(el,vessel,vein,.004,.002).name='brute coloured superficial forearm vein '+side;
 
-  const calf=humanoidTube(A,T,s,shin,dry,{n:24,sub:2,warp:.12,keys:[
+  const calf=humanoidTube(A,T,s,shin,dry,{n:22,sub:2,warp:.12,keys:[
    {y:-.34,w:.048,d:.051,cz:.010},{y:-.29,w:.054,d:.061,cz:.002},{y:-.23,w:.054,d:.066,cz:-.015},
-   {y:-.16,w:.072,d:.080,cz:-.019},{y:-.12,w:.083,d:.085,cz:-.020},{y:-.045,w:.067,d:.069},
-   {y:.018,w:.063,d:.070},{y:.045,w:.060,d:.066}],
+   {y:-.16,w:.072,d:.080,cz:-.019},{y:-.12,w:.083,d:.085,cz:-.020},{y:-.045,w:.072,d:.074,cz:.002},
+   {y:.018,w:.074,d:.078,cz:.005},{y:.059,w:.077,d:.079,cz:.008}],
    bumps:[{t:Math.PI-side*.35,y:-.135,at:.6,ay:.075,a:.006},{t:0,y:-.025,at:.36,ay:.035,a:.004},{t:0,y:-.18,at:.15,ay:.10,a:.003}]});
   calf.meshes.forEach(o=>o.name='brute continuous knee calf tibia and ankle '+side);
  }
@@ -209,14 +217,24 @@ function refineBruteLowerLimbs(A,T,g,s,M,dry){
 // Paint belongs to the actual skin triangles. Small nearby colour steps soften
 // mottling; pressure bruises sit at the joints, harness and existing upper-arm tears.
 function paintBruteSkin(A,T,g,s,M,dry){
- const u=g.userData,materials=new Map(),targets=[];g.traverse(o=>{if(o.isMesh&&(o.material===M.skin||o.material===dry))targets.push(o);});
+ const u=g.userData,materials=new Map(),targets=[];
+ const cloth=new T.Color(0x49473f);
+ g.traverse(o=>{if(o.isMesh&&(o.material===M.skin||o.material===dry))targets.push(o);});
  for(const o of targets){
   const base=o.material.color,geo=o.geometry.clone(),P=geo.attributes.position;if(!P)continue;
   let material=materials.get(o.material);if(!material){material=A.mat(base.clone(),false,0,'skin');material.vertexColors=true;material.userData.zombieColorRole='skin';material.userData.zombieColorBase=M.skin.color.getHex();materials.set(o.material,material);}
   const bone=o.parent,side=[u.armLG,u.armLG.userData.elbowG,u.legLG,u.legLG.userData.shinG].includes(bone)?-1:1,C=[],bruise=new T.Color(0x514a56);
+  const thigh=bone.userData.thigh===o;
   for(let i=0;i<P.count;i++){
    const x=P.getX(i)/s,y=P.getY(i)/s,z=P.getZ(i)/s,cloud=.22*Math.sin(x*13+side*2.3)*Math.sin(y*17+z*9)+.14*Math.sin(x*23-y*11+z*17),joint=Math.exp(-Math.pow((y+.03)/.05,2)),tear=bone===u.armLG||bone===u.armRG?Math.exp(-Math.pow((x-side*.068)/.045,2)-Math.pow((y+.13)/.085,2)):0,headMark=bone===u.head?Math.exp(-Math.pow((x-(-.052-(.07-y)*.20))/.014,2)-Math.pow((y-.07)/.05,2)):0,legMark=bone===u.legLG||bone===u.legRG?Math.exp(-Math.pow((x-side*.045)/.022,2)-Math.pow((y+.21)/.12,2)):0;
    const f=Math.max(0,Math.min(1,.16+cloud*.65+joint*.11+tear*.65+headMark*.55+legMark*.40)),colour=base.clone().lerp(bruise,.38*f).multiplyScalar(1.02-.20*f);
+   if(thigh){
+    // The close cloth takes the thigh's own surface, with a broken, asymmetric hem.
+    const angle=Math.atan2(x,z),fray=Math.sin(angle*4+side)*.016+Math.cos(angle*7-side)*.010;
+    const hem=-.113-.040*Math.max(0,Math.cos(angle))+fray;
+    const cover=Math.max(0,Math.min(1,(y-hem)/.029));
+    colour.lerp(cloth,.94*cover);
+   }
    C.push(colour.r/base.r,colour.g/base.g,colour.b/base.b);
   }
   geo.setAttribute('color',new T.Float32BufferAttribute(C,3));o.geometry=geo;o.material=material;
@@ -246,7 +264,11 @@ function seatBruteRearHarness(T,g,s,M){
    const a=read(5*4+edge+1),b=read(7*4+edge+1),t=j/8,x=a.x+(b.x-a.x)*t,y=a.y+(b.y-a.y)*t,q=back(x,y),outer=q.p.clone().addScaledVector(q.n,.008*s);
    V.push(...outer.toArray(),...q.p.toArray());
   }
-  row(8);row(9);const rows=V.length/12;if(rows!==16)throw Error('Sixteen supported harness rings required');
+  for(const r of [8,9])for(const edge of [0,2]){
+   const p=read(r*4+edge+1),q=back(p.x,p.y),outer=q.p.clone().addScaledVector(q.n,.006*s);
+   V.push(...outer.toArray(),...q.p.toArray());
+  }
+  const rows=V.length/12;if(rows!==16)throw Error('Sixteen supported harness rings required');
   for(let j=0;j<rows-1;j++){const a=j*4,b=a+4;I.push(a,b,a+1,a+1,b,b+1,a+2,a+3,b+2,a+3,b+3,b+2,a,a+2,b,a+2,b+2,b,a+1,b+1,a+3,a+3,b+1,b+3);}
   I.push(0,1,2,1,3,2);const e=V.length/3-4;I.push(e,e+2,e+1,e+1,e+2,e+3);
   const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(V,3));geo.setIndex(I);geo.computeVertexNormals();o.geometry=geo;old.dispose();

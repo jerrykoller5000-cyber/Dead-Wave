@@ -25105,6 +25105,10 @@ class ChainMap {
 
 let _id$9 = 0;
 
+// A material's key still reads every live value. Avoid recreating its fixed
+// property filter for each shadow caster and each property.
+const _materialKeySkip = /^(is[A-Z]|_)|^(visible|version|uuid|name|opacity|userData)$/;
+
 function getKeys( obj ) {
 
 	const keys = Object.keys( obj );
@@ -25732,53 +25736,29 @@ class RenderObject {
 
 		const { object, material } = this;
 
-		let cacheKey = material.customProgramCacheKey();
+		const programKey = material.customProgramCacheKey();
+		const parts = getKeys( material );
+		let count = 0;
 
-		for ( const property of getKeys( material ) ) {
+		for ( let i = 0; i < parts.length; i ++ ) {
 
-			if ( /^(is[A-Z]|_)|^(visible|version|uuid|name|opacity|userData)$/.test( property ) ) continue;
+			const property = parts[ i ];
+			if ( _materialKeySkip.test( property ) ) continue;
 
 			const value = material[ property ];
+			const type = typeof value;
 
-			let valueKey;
-
-			if ( value !== null ) {
-
-				// some material values require a formatting
-
-				const type = typeof value;
-
-				if ( type === 'number' ) {
-
-					valueKey = value !== 0 ? '1' : '0'; // Convert to on/off, important for clearcoat, transmission, etc
-
-				} else if ( type === 'object' ) {
-
-					valueKey = '{';
-
-					if ( value.isTexture ) {
-
-						valueKey += value.mapping;
-
-					}
-
-					valueKey += '}';
-
-				} else {
-
-					valueKey = String( value );
-
-				}
-
-			} else {
-
-				valueKey = String( value );
-
-			}
-
-			cacheKey += /*property + ':' +*/ valueKey + ',';
+			// Reuse the key list as a string builder. Keep original order and
+			// separators so the existing material hash remains identical.
+			if ( value === null ) parts[ count ++ ] = 'null,';
+			else if ( type === 'number' ) parts[ count ++ ] = value !== 0 ? '1,' : '0,';
+			else if ( type === 'object' ) parts[ count ++ ] = value.isTexture ? '{' + value.mapping + '},' : '{},';
+			else parts[ count ++ ] = String( value ) + ',';
 
 		}
+
+		parts.length = count;
+		let cacheKey = programKey + parts.join( '' );
 
 		cacheKey += this.clippingContextCacheKey + ',';
 
@@ -52156,6 +52136,7 @@ class Renderer {
 		let overridePositionNode;
 		let overrideColorNode;
 		let overrideDepthNode;
+		let overrideAlphaTest, overrideAlphaBump = 0;   // CB-378
 
 		//
 
@@ -52174,7 +52155,12 @@ class Renderer {
 
 			}
 
+			// CB-378 (D-240 #1): the alphaTest setter steps the shared override's version when the value crosses 0; that step is
+			// undone after this object is drawn, so the next caster does not see a new version (and rebuild its material key).
+			overrideAlphaTest = overrideMaterial._alphaTest;
+			const overrideVersion0 = overrideMaterial.version;
 			overrideMaterial.alphaTest = material.alphaTest;
+			overrideAlphaBump = overrideMaterial.version - overrideVersion0;
 			overrideMaterial.alphaMap = material.alphaMap;
 			overrideMaterial.transparent = material.transparent || material.transmission > 0;
 
@@ -52237,6 +52223,13 @@ class Renderer {
 		if ( overrideColorNode !== undefined ) {
 
 			scene.overrideMaterial.colorNode = overrideColorNode;
+
+		}
+
+		if ( overrideAlphaBump !== 0 ) {   // CB-378
+
+			scene.overrideMaterial._alphaTest = overrideAlphaTest;
+			scene.overrideMaterial.version -= overrideAlphaBump;
 
 		}
 

@@ -56,7 +56,7 @@
     const samples = [];
     { const t0 = T.getSimTime(); const w0 = Date.now(); while (T.getSimTime() - t0 < 0.6 && Date.now() - w0 < 20000) { await wait(8); samples.push([T.getSimTime() - t0, speed()]); } }
     const at = (s) => { let best = null; for (const [t, v] of samples) if (t <= s) best = v; return best == null ? 0 : best; };
-    const walk = 7.4;
+    const walk = 2.05; // Armed forward walk on level ground.
     ok(at(0.08) < walk * 0.45, 'the first beat of a start is soft (' + at(0.08).toFixed(2) + ' m/s at 80 ms, walk ' + walk + ')');
     ok(at(0.45) > walk * 0.85, 'and he is up to speed inside half a second (' + at(0.45).toFixed(2) + ' m/s at 450 ms)');
     ok(S.xfade().fades > fades0 && S.xfade().key === 'loco', 'standing to walking started a cross-fade (key ' + S.xfade().key + ')');

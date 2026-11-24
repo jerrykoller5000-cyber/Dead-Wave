@@ -372,7 +372,8 @@ window.buildLandmarkDetails = (THREE, o) => {
       panel([[a[0]-ox,ground(...a)+.045,a[1]-oz],[a[0]+ox,ground(...a)+.045,a[1]+oz],[b[0]+ox,ground(...b)+.045,b[1]+oz],[b[0]-ox,ground(...b)+.045,b[1]-oz]],0x8c7050);
     }
     const gx=-4.2,gz=-2.45,gy=ground(gx,gz);
-    const rock=mesh(new THREE.DodecahedronGeometry(.55,0),0x626d5c,gx,gy-.1,gz);rock.scale.set(1.5,.62,1.05);
+    const rGeo=typeof window!=='undefined'&&window.DWRockSculpt?window.DWRockSculpt(THREE,{rx:.84,ry:.36,rz:.59,detail:2,seed:0x90a57,style:'granite',uvTile:.95}):(()=>{const g=new THREE.DodecahedronGeometry(.55,0);g.scale(1.5,.62,1.05);return g;})();
+    const rock=mesh(rGeo,0x6a7263,gx,gy-.04,gz);rock.userData.rockPbr='granite';
     box(.22,.028,.17,C.steel,gx,gy+.24,gz);bolt(gx,gy+.266,gz,'y');
     bar([gx,gy-.05,gz],[gx,gy+.25,gz],.027,0x8c7050);
     // Sato's abandoned headset and an open tool roll beside the repair cabinet.
@@ -389,108 +390,327 @@ window.buildLandmarkDetails = (THREE, o) => {
   if(o.kind==='bridge') {
     theme=variant%2?'reinforced emergency crossing':'patched timber footbridge';
     const L=o.halfLen,W=o.halfWidth;
+    const B=o.buckets||null;
+    const orientBox=o.orientBox||null;
+    const waterY=o.waterY!=null?o.waterY:-2.2;
+    const put=(kind,m)=>{
+      if(B&&B[kind]){ parts.pop(); B[kind].push(m); }
+      return m;
+    };
+    const bBox=(kind,w,h,d,c,x,y,z,ry=0,rz=0,rx=0,gAxis='auto',uOff=0,vOff=0)=>{
+      const g=new THREE.BoxGeometry(w,h,d);
+      if(orientBox)orientBox(g,w,h,d,{grainAxis:gAxis,uOff,vOff});
+      const m=mesh(g,c,x,y,z); m.rotation.set(rx,ry,rz);
+      return put(kind,m);
+    };
+    const bBar=(kind,a,b,r,c,sides=8)=>{
+      const av=new THREE.Vector3(...a),bv=new THREE.Vector3(...b),delta=bv.clone().sub(av);
+      const len=delta.length();
+      if(len<1e-4)return null;
+      const m=mesh(new THREE.CylinderGeometry(r,r,len,sides),c);
+      m.position.copy(av).add(bv).multiplyScalar(.5);
+      m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),delta.normalize());
+      return put(kind,m);
+    };
+    const bBolt=(x,y,z,axis='y')=>{
+      const m=cyl(.026,.016,C.steel,x,y,z,6);
+      if(axis==='z')m.rotation.x=Math.PI/2;
+      if(axis==='x')m.rotation.z=Math.PI/2;
+      return put('iron',m);
+    };
+    // Handrail post iron base saddle brackets, through-bolts, and beveled pyramidal timber caps.
+    const postZs=[-L+.24,-L*.64,-L*.32,0,L*.32,L*.64,L-.24];
     for(const side of [-1,1]){
-      for(const z of [-L+.4,-L/2,0,L/2,L-.4]){
-        box(.16,.16,.16,C.steel,side*(W-.06),.25,z);
-        bolt(side*(W-.06),.28,z+.085);
-        box(.18,.055,.18,C.cut,side*(W-.06),.95,z);
+      const px=side*(W-.08);
+      for(const z of postZs){
+        // Galvanized base saddle wrapping the post foot cleanly above the wheel-guard curb
+        bBox('iron',.155,.15,.155,0x737b78,px,.23,z);
+        bBolt(px+side*.082,.23,z,'x');
+        bBolt(px-side*.082,.23,z,'x');
+        // Chamfered pyramidal rain cap on top of each rail post
+        bBox('deck',.165,.045,.165,0x8d7252,px,1.03,z,0,0,0,'x',z*.2);
+        bBox('deck',.115,.028,.115,0x7d6346,px,1.062,z,0,0,0,'x',z*.3);
+        // Outside angled timber knee-brace tying each rail post down to the stringer fascia
+        bBar('deck',[px+side*.03,.54,z],[px+side*.06,-.24,z],.042,0x6e563c,6);
+        bBox('iron',.09,.09,.075,0x676f6c,px+side*.05,.46,z);
       }
-      for(const z of [-L*.55,0,L*.55]){
-        bar([side*(W-.2),-1.6,z],[side*(W-.2),-.5,z-1.5],.08,C.old,4);
-        bar([side*(W-.2),-1.6,z],[side*(W-.2),-.5,z+1.5],.08,C.old,4);
+      // Flush low-profile carriage bolts along the deck stringer lines (never floating)
+      for(let i=0;i<20;i++){
+        const bz=-L+.42+i*((L*2-.84)/19);
+        bBolt(side*(W-.30),.074,bz,'y');
       }
     }
-    // Replaced boards, split ends and nail heads stay flush with the walking deck.
-    for(let i=0;i<21;i++)for(const side of [-1,1])bolt(side*(W-.36),.085,-L+.4+i*.79,'y');
-    for(let i=0;i<4;i++)box(W*1.62,.035,.21,i%2?C.cut:C.old,0,.089,-L+1.9+i*.23,.025);
-    for(let i=0;i<3;i++)box(.022,.015,.34,C.dark,.5-i*.21,.078,L-1.2,i*.12);
-    if(variant%2){
+    // Grounded structural transverse X-bracing between left & right pilings (strictly above riverbed & water!)
+    const bentZs=[-L*.52,0,L*.52];
+    const pileX=W-.24;
+    for(const bz of bentZs){
+      const gL=ground(-pileX,bz), gR=ground(pileX,bz);
+      const botY=Math.max(Math.max(gL,gR)+.22, waterY+.16, -1.68);
+      const topY=-.48;
+      if(topY-botY>.35){
+        bBar('deck',[-pileX,topY,bz],[pileX,botY,bz],.058,0x5f4933,6);
+        bBar('deck',[pileX,topY,bz],[-pileX,botY,bz],.058,0x5f4933,6);
+        // Center bolted iron X-brace gusset plate
+        bBox('iron',.20,.20,.14,0x636a67,0,(topY+botY)*.5,bz);
+        bBolt(0,(topY+botY)*.5,bz+.075,'z');
+        bBolt(0,(topY+botY)*.5,bz-.075,'z');
+      }
+      // Compact piling-to-stringer longitudinal knee struts (clamped safely above ground & water)
       for(const side of [-1,1]){
-        box(.09,.25,L*.7,C.steel,side*(W+.025),-.38,0);
-        for(const z of [-L*.3,0,L*.3])bolt(side*(W+.08),-.34,z,'x');
+        const sx=side*pileX;
+        const gS=ground(sx,bz);
+        const kBot=Math.max(gS+.25, waterY+.18, -1.18);
+        if(-.42-kBot>.28){
+          for(const dir of [-1,1]){
+            bBar('deck',[sx,kBot,bz],[sx,-.40,bz+dir*.82],.055,0x644d35,6);
+          }
+          // Galvanized piling collar strap below the bent cap
+          bBox('iron',.38,.085,.38,0x626966,sx,-.52,bz);
+        }
       }
     }
-    // Faded diagonal caution paint on end posts; no barricade across the walkway.
-    for(const side of [-1,1])for(const z of [-L+.4,L-.4])for(let k=0;k<3;k++){
-      box(.145,.075,.018,k%2?C.dark:0xb2a05e,side*(W-.06),.42+k*.14,z+.08,0,-.35);
+    if(variant%2){
+      // Variant 1 ("reinforced emergency crossing"): true 3D steel I-beam side girders with flanges, stiffeners & bolts
+      const gSpan=L*1.64;
+      for(const side of [-1,1]){
+        const gx=side*(W+.045);
+        // Web plate + projecting top & bottom flanges (weathered galvanized steel)
+        bBox('iron',.042,.34,gSpan,0x8d9693,gx,-.27,0,0,0,0,'z');
+        bBox('iron',.15,.046,gSpan,0x9ea7a4,gx,-.10,0,0,0,0,'z');
+        bBox('iron',.15,.046,gSpan,0x7c8582,gx,-.44,0,0,0,0,'z');
+        // Vertical web stiffener ribs & bolted splice plates
+        for(let i=-4;i<=4;i++){
+          const sz=i*(gSpan/9);
+          bBox('iron',.13,.30,.045,0x858e8b,gx,-.27,sz);
+          bBolt(gx+side*.065,-.20,sz,'x');
+          bBolt(gx+side*.065,-.34,sz,'x');
+        }
+        // Steel end-post lower corner armor collar (below caution reflector so stripes stay crisp!)
+        for(const end of [-1,1]){
+          bBox('iron',.155,.28,.155,0x858e8b,side*(W-.08),.23,end*(L-.24));
+        }
+      }
+      // Under-deck steel cross tie-rods connecting the two girders
+      for(const tz of [-L*.52,-L*.22,L*.22,L*.52]){
+        bBar('iron',[-(W+.06),-.42,tz],[W+.06,-.42,tz],.022,0x78807d,6);
+      }
+    }else{
+      // Variant 0 ("patched timber footbridge"): bolted sister-timber splice beams reinforcing mid-span stringers
+      for(const side of [-1,1]){
+        const sx=side*(W-.09);
+        bBox('deck',.085,.26,4.2,0x8b6e4e,sx,-.28,.45,0,0,0,'z',side*.7);
+        for(const bz of [-1.25,-.25,.75,1.75,2.25]){
+          bBox('iron',.11,.22,.12,0x848d8a,sx,-.28,bz);
+          bBolt(sx+side*.055,-.22,bz,'x');
+          bBolt(sx+side*.055,-.34,bz,'x');
+        }
+      }
+    }
+    // Crisp outward-facing caution reflector bands on all 4 end posts (facing incoming traffic, zero clipping)
+    for(const side of [-1,1])for(const end of [-1,1]){
+      const px=side*(W-.08);
+      const faceZ=end*(L-.24)+end*.074;
+      bBox('deck',.125,.38,.014,0x2b302b,px,.60,faceZ);
+      for(let k=0;k<3;k++){
+        bBox('deck',.112,.064,.018,k%2?0x2c302c:0xc9a853,px,.48+k*.115,faceZ+end*.004);
+      }
     }
   }
 
   if(o.kind==='dock') {
     theme='evacuation landing left in haste';
     const W=o.halfWidth,L=o.length,side=o.boatSide||1;
-    for(let i=0;i<12;i++){
-      const z=-L/2+.8+i*.78;
-      box(W*2-.03,.008,.018,C.old,0,.065,z);
-      box(.3,.009,.017,C.old,(i%3-1)*.51,.066,z-.22,i*.13);
-      for(const x of [-W+.19,W-.19]){bolt(x,.067,z-.32,'y');bolt(x,.067,z+.19,'y');}
-      for(let k=0;k<4;k++)box(.28+(k%2)*.17,.005,.008,i%2?0x655e48:0x4c4a3b,-.77+k*.48,.068,z-.46+(k%3)*.16);
-      // Short end-grain cracks and scars stay flush with the walking surface.
-      for(const s of [-1,1])bar([s*(W-.02),.071,z-.36],[s*(W-.24),.071,z-.33+(i%3)*.013],.004,0x393c32,4);
+    const B=o.buckets||null;
+    const orientBox=o.orientBox||null;
+    const waterY=o.waterY!=null?o.waterY:-.55;
+    const put=(kind,m)=>{
+      if(B&&B[kind]){ parts.pop(); B[kind].push(m); }
+      return m;
+    };
+    const bBox=(kind,w,h,d,c,x,y,z,ry=0,rz=0,rx=0,gAxis='auto',uOff=0,vOff=0)=>{
+      const g=new THREE.BoxGeometry(w,h,d);
+      if(orientBox)orientBox(g,w,h,d,{grainAxis:gAxis,uOff,vOff});
+      const m=mesh(g,c,x,y,z); m.rotation.set(rx,ry,rz);
+      return put(kind,m);
+    };
+    const bBar=(kind,a,b,r,c,sides=8)=>{
+      const av=new THREE.Vector3(...a),bv=new THREE.Vector3(...b),delta=bv.clone().sub(av);
+      const len=delta.length();
+      if(len<1e-4)return null;
+      const m=mesh(new THREE.CylinderGeometry(r,r,len,sides),c);
+      m.position.copy(av).add(bv).multiplyScalar(.5);
+      m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),delta.normalize());
+      return put(kind,m);
+    };
+    const bCyl=(kind,r,h,c,x,y,z,sides=10)=>put(kind,cyl(r,h,c,x,y,z,sides));
+    const bRing=(kind,r,t,c,x,y,z,tubSeg=8,radSeg=20)=>put(kind,mesh(new THREE.TorusGeometry(r,t,tubSeg,radSeg),c,x,y,z));
+    const bCable=(kind,pts,r=.016,c=C.rope)=>{ for(let i=1;i<pts.length;i++)bBar(kind,pts[i-1],pts[i],r,c,6); };
+    const bBolt=(x,y,z,axis='y')=>{
+      const m=cyl(.022,.014,C.steel,x,y,z,6);
+      if(axis==='z')m.rotation.x=Math.PI/2;
+      if(axis==='x')m.rotation.z=Math.PI/2;
+      return put('iron',m);
+    };
+    // Structural transverse X-braces strictly between the waterward piling pairs (zero floating sticks!)
+    for(const bz of [1.45,L/2-.45]){
+      const px=W-.04;
+      const gL=ground(-px,bz), gR=ground(px,bz);
+      const botY=Math.max(Math.max(gL,gR)+.22, waterY-.55, -1.22);
+      const topY=-.24;
+      if(topY-botY>.35){
+        bBar('deck',[-px,topY,bz],[px,botY,bz],.048,0x5a4a35,6);
+        bBar('deck',[px,topY,bz],[-px,botY,bz],.048,0x5a4a35,6);
+        bBox('iron',.17,.17,.12,0x5d6562,0,(topY+botY)*.5,bz);
+      }
+      // Iron cross-bearer tie straps at piling bents
+      for(const s of [-1,1]){
+        bBox('iron',.04,.22,.20,0x666e6b,s*(W+.06),-.14,bz);
+        bBolt(s*(W+.085),-.10,bz,'x');
+        bBolt(s*(W+.085),-.18,bz,'x');
+      }
     }
-    // Aged bearers and diagonal repairs, all below the established deck height.
-    for(const x of [-W+.16,W-.16]){
-      box(.18,.24,L,0x4f4b39,x,-.16,0);
-      for(const z of [1.1,3.2]){bar([x,-1.02,z-.73],[x,-.19,z+.7],.055,0x8b7651,4);box(.05,.25,.22,C.steel,x*1.04,-.21,z+.7);}
-      box(.16,.026,2.3,C.steel,x,.069,L/2-1.18);
-      for(let j=0;j<6;j++)bolt(x,.087,L/2-2.1+j*.37,'y');
+    // Iron edge reinforcement straps near the waterward Heron landing end
+    for(const s of [-1,1]){
+      bBox('iron',.10,.014,2.1,0x6a726f,s*(W-.10),.067,L/2-1.15,0,0,0,'z');
+      for(let j=0;j<5;j++)bBolt(s*(W-.10),.076,L/2-2.0+j*.42,'y');
     }
-    for(const z of [L/2-.12,L/2-1.6])box(W*2,.22,.17,0x69604a,0,-.21,z);
-    // Coiled mooring lines remain outside the middle of the narrow walkway.
-    for(const [x,z]of [[W-.28,-1.9],[-W+.3,3.1]]){
-      for(let i=0;i<4;i++){const m=ring(.18-i*.034,.014,C.rope,x,.088+i*.008,z);m.rotation.x=Math.PI/2;}
-      pipeCable([[x,.105,z],[x-.12,.1,z+.3],[x+.05,.1,z+.43]],.012,C.rope);
+    // Cast-iron twin-horn mooring cleats cleanly along outer edges (zero Z-fighting)
+    for(const [cx,cz] of [[side*(W-.18),-1.75],[side*(W-.18),2.65],[-side*(W-.18),1.15]]){
+      bBox('iron',.22,.024,.11,0x49504e,cx,.072,cz);
+      bCyl('iron',.022,.06,0x3c4240,cx-.045,.105,cz,8);
+      bCyl('iron',.022,.06,0x3c4240,cx+.045,.105,cz,8);
+      bBar('iron',[cx-.14,.138,cz],[cx+.14,.138,cz],.022,0x3b413f,8);
+      for(const dx of [-.085,.085])bBolt(cx+dx,.086,cz,'y');
     }
-    for(const z of [-L/2+.5,0,L/2-.5])for(const side of [-1,1]){
-      cyl(.16,.08,C.cut,side*(W-.1),.11,z,8);
-      for(const h of [-.12,-.28])ring(.15,.022,C.dark,side*(W-.1),h,z).rotation.x=Math.PI/2;
+    // Coiled braided hemp mooring lines tucked neatly near the outer edges (leaving full walkway clear)
+    for(const [x,z] of [[W-.29,-2.05],[-W+.29,3.25]]){
+      for(let i=0;i<4;i++){
+        const m=bRing('rope',.17-i*.032,.015,0xb4a47f,x,.076+i*.007,z,6,18);
+        m.rotation.x=Math.PI/2;
+      }
+      bCable('rope',[[x,.084,z],[x-.08,.076,z+.24],[x+.04,.074,z+.38]],.013,0xb4a47f);
     }
-    for(const z of [-2.3,2.6]){
-      box(.25,.035,.14,C.steel,side*(W-.27),.085,z);
-      bar([side*(W-.36),.18,z],[side*(W-.12),.18,z],.027,C.dark);
-      bar([side*(W-.24),.1,z],[side*(W-.24),.19,z],.022,C.dark);
+    // Rubber boat-fender tires mounted FLAT against the outer DEEP-WATER rub-rail, strictly BELOW deck top & clear of shore dirt!
+    const fendSide=-side;
+    for(const fz of [2.15,3.70]){
+      const fx=fendSide*(W+.095);
+      const t=bRing('deck',.18,.055,0x2b2f2d,fx,-.24,fz,8,18);
+      t.rotation.y=Math.PI/2;
+      // Twin hemp suspension ropes from iron fascia eye-bolts down to tire rim
+      for(const dz of [-.08,.08]){
+        bBar('rope',[fendSide*(W+.065),.01,fz+dz],[fx,-.09,fz+dz],.011,0xa79873,5);
+        bBolt(fendSide*(W+.07),.01,fz+dz,'x');
+      }
     }
-    // A swamped clinker hull: an open split, absent floorboards and broken seating.
-    const bx=side*(W+1.2),bz=1.8;
-    const sections=[[-1.6,.03],[-1.1,.43],[0,.57],[1.05,.48],[1.3,.35]];
+    // Hanging drying fishing net draped cleanly over OPEN DEEP WATER (lz=2.45..3.42, never touching shore mud!)
+    const netX=fendSide*(W+.085);
+    for(let i=0;i<8;i++){
+      const nz=2.45+i*.135;
+      const u=(i/7)*2-1;
+      const sag=.16*(1-u*u);
+      bBar('rope',[netX,-.02,nz],[netX+fendSide*.03,-.46-sag,nz],.0085,0xa49674,5);
+    }
+    for(let j=0;j<4;j++){
+      const pts=[];
+      for(let i=0;i<=6;i++){
+        const t=i/6, u=t*2-1;
+        pts.push([netX+fendSide*(.01+j*.006),-.09-j*.11-.13*(1-u*u),2.45+t*.945]);
+      }
+      bCable('rope',pts,.0085,0xa49674);
+    }
+    // Dedicated outer-edge timber post & weathered maritime life ring (clear of corner bollard!)
+    const ringX=-W-.04, ringZ=L/2-1.10;
+    bBox('deck',.095,1.18,.095,0x735b41,ringX,.54,ringZ,0,0,0,'y');
+    bBox('deck',.12,.035,.12,0x846a4d,ringX,1.14,ringZ);
+    bBox('iron',.12,.14,.12,0x5f6764,ringX,.04,ringZ);
+    bBar('iron',[ringX,.96,ringZ],[ringX,.96,ringZ+.10],.018,0x58605d,6);
+    const lr=bRing('rope',.26,.054,0xb8663e,ringX,.76,ringZ+.075,10,24);
+    lr.rotation.y=0;
+    // Flush snug reflective white-canvas collar bands wrapped cleanly around the life ring tube
+    for(const a of [0,Math.PI/2,Math.PI,Math.PI*1.5]){
+      const band=bCyl('rope',.058,.095,0xd4cfc0,ringX+Math.sin(a)*.26,.76+Math.cos(a)*.26,ringZ+.075,10);
+      band.rotation.z=a+Math.PI/2;
+    }
+    solid(ringX,ringZ,.10,.04,1.25);
+    // Swamped clinker rowboat alongside the waterward dock: weathered lapstrake hull, gunwales, ribs, broken oar & smooth catenary painter
+    const bx=side*(W+1.22),bz=1.80;
+    const sections=[[-1.58,.04],[-1.08,.44],[0,.58],[1.05,.49],[1.32,.36]];
     for(let i=1;i<sections.length;i++)for(const hullSide of [-1,1])for(let row=0;row<3;row++){
       const [za,wa]=sections[i-1],[zb,wb]=sections[i],lo=row/3,hi=(row+1)/3;
-      const p=(t,h)=>[bx+hullSide*(wa+(wb-wa)*t)*(.55+h*.45),-.74+h*.58,bz+za+(zb-za)*t];
+      const p=(t,h)=>[bx+hullSide*(wa+(wb-wa)*t)*(.54+h*.46),-.74+h*.58,bz+za+(zb-za)*t];
+      const strakeCol=row===2?0x667375:(row===1?0x726b56:0x585343);
       if(i===2&&hullSide===side){
-        panel([p(0,lo),p(.14+(row%2)*.08,lo),p(.3-(row%2)*.12,hi),p(0,hi)],C.old);
-        panel([p(.82,lo),p(1,lo),p(1,hi),p(.67+(row%2)*.11,hi)],0x7a7156);
-      }else panel([p(0,lo),p(1,lo),p(1,hi),p(0,hi)],row%2?0x615e49:0x7d7357);
+        put('deck',panel([p(0,lo),p(.15+(row%2)*.07,lo),p(.28-(row%2)*.10,hi),p(0,hi)],strakeCol));
+        put('deck',panel([p(.81,lo),p(1,lo),p(1,hi),p(.68+(row%2)*.10,hi)],0x7d745a));
+      }else put('deck',panel([p(0,lo),p(1,lo),p(1,hi),p(0,hi)],strakeCol));
     }
-    // The actual lake surface shows through the missing bilge and the open side.
-    for(const [x,z,a]of [[-.18,.43,.15],[.2,.8,-.13]])box(.15,.035,.64,0x6c634a,bx+x,-.56,bz+z,a);
-    box(.7,.5,.075,C.old,bx,-.41,bz+1.3);
-    box(.39,.06,.22,0x91815c,bx-.29,-.23,bz-.7,0,.13);box(.26,.055,.19,0x817557,bx+.33,-.33,bz-.72,0,-.5);
-    box(.91,.055,.2,0x8a7d5d,bx,-.2,bz+.55,0,.08);
-    for(const [z,w]of sections)if(w>.1){bar([bx-w,-.18,bz+z],[bx-w*.6,-.68,bz+z],.025,C.old,5);bar([bx+w,-.18,bz+z],[bx+w*.6,-.68,bz+z],.025,C.old,5);}
-    // The oar is snapped; neither a sound hull nor a usable paddle is promised.
-    bar([bx-.26,-.35,bz+.15],[bx+.15,-.29,bz+.88],.023,C.cut);
-    bar([bx+.12,-.5,bz-.2],[bx+.3,-.49,bz-.67],.024,C.cut);box(.15,.026,.34,C.cut,bx+.34,-.48,bz-.78,-.3);
-    pipeCable([[side*(W-.24),.18,2.6],[side*(W+.12),-.12,2.4],[bx-.02,-.18,bz+1.25]],.018,C.rope);
-    for(const z of [-1.2,1.2])ring(.27,.075,C.dark,-W-.08,-.22,z);
-    const crateZ=-L/2+.85;
-    // Stowed emergency flare case replaces the old small crate in its exact solid footprint.
-    const fx=-W+.3;
-    box(.48,.33,.43,0x515d46,fx,.25,crateZ);box(.51,.075,.46,0x687159,fx,.45,crateZ);
-    for(const x of [fx-.17,fx+.17]){box(.055,.038,.47,C.dark,x,.5,crateZ);box(.06,.09,.025,C.steel,x,.37,crateZ-.227);}
-    box(.17,.012,.31,0xa2583d,fx,.495,crateZ);
-    bar([fx-.1,.29,crateZ-.252],[fx+.1,.29,crateZ-.252],.016,C.dark);
-    solid(-W+.3,crateZ,.3,.08,.45);
-    // Laminated timetable frame, facing across the landward approach (lettering is keyed in buildDock).
-    const signX=W+.17,signZ=-3.7;
-    bar([signX,ground(signX,signZ)-.08,signZ],[signX,1.67,signZ],.045,C.old,6);
-    box(.07,.74,1.08,C.dark,signX,1.25,signZ);box(.075,.66,1,C.pale,signX-.007,1.25,signZ);
-    for(const z of [signZ-.48,signZ+.48])box(.09,.045,.045,C.steel,signX-.025,1.55,z);
-    // Life ring on its own post and a hanging drying net outside the walking edge.
-    bar([-W+.08,.05,L/2-.6],[-W+.08,1.15,L/2-.6],.045,C.old);
-    ring(.29,.062,0xaa6f48,-W+.08,.78,L/2-.56);
-    for(const a of [0,Math.PI/2,Math.PI,Math.PI*1.5])box(.11,.14,.04,C.pale,-W+.08+Math.sin(a)*.29,.78+Math.cos(a)*.29,L/2-.5,0,-a);
-    for(let i=0;i<8;i++)bar([-W-.1,-.07,-.5+i*.14],[-W-.13,-.75+Math.abs(i-3.5)*.07,-.5+i*.14],.009,C.rope,4);
-    for(let j=0;j<4;j++)bar([-W-.12,-.19-j*.12,-.5],[-W-.12,-.19-j*.12,.48],.009,C.rope,4);
+    // Solid timber gunwale rails along the top rim so the hull never reads wafer-thin
+    for(let i=1;i<sections.length;i++)for(const hullSide of [-1,1]){
+      if(i===2&&hullSide===side)continue;
+      const [za,wa]=sections[i-1],[zb,wb]=sections[i];
+      bBar('deck',[bx+hullSide*wa,-.15,bz+za],[bx+hullSide*wb,-.15,bz+zb],.032,0x856d4f,6);
+    }
+    // Keel, broken bilge floorboards, transom, thwarts, and curved ribs
+    bBar('deck',[bx,-.76,bz-1.56],[bx,-.74,bz+1.32],.042,0x493b2a,6);
+    for(const [x,z,a] of [[-.18,.42,.14],[.19,.78,-.12],[-.04,-.35,.06]])bBox('deck',.15,.032,.66,0x6e6248,bx+x,-.57,bz+z,a,0,0,'z');
+    bBox('deck',.72,.52,.075,0x5f5542,bx,-.42,bz+1.31,0,0,0,'x');
+    bBox('deck',.39,.055,.22,0x91805d,bx-.28,-.23,bz-.70,0,.12,0,'x');
+    bBox('deck',.27,.052,.19,0x817355,bx+.32,-.33,bz-.72,0,-.46,0,'x');
+    bBox('deck',.92,.052,.21,0x8b7b59,bx,-.20,bz+.54,0,.07,0,'x');
+    for(const [z,w] of sections)if(w>.1){
+      bBar('deck',[bx-w,-.16,bz+z],[bx-w*.58,-.70,bz+z],.024,0x564632,6);
+      bBar('deck',[bx+w,-.16,bz+z],[bx+w*.58,-.70,bz+z],.024,0x564632,6);
+    }
+    // Iron bow mooring ring + snapped wooden oar resting inside hull
+    bRing('iron',.045,.012,0x515856,bx,-.20,bz+1.35,6,12);
+    bBar('deck',[bx-.25,-.36,bz+.14],[bx+.16,-.30,bz+.88],.022,0x9e845c,8);
+    bBar('deck',[bx+.12,-.50,bz-.22],[bx+.30,-.49,bz-.67],.023,0x9e845c,8);
+    bBox('deck',.15,.024,.36,0x9e845c,bx+.34,-.48,bz-.80,-.28,0,0,'z');
+    // Smooth 8-segment catenary braided hemp painter rope from dock cleat to rowboat bow ring
+    const p0=[side*(W-.18),.138,2.65], p1=[bx,-.20,bz+1.34];
+    const painterPts=[];
+    for(let i=0;i<=8;i++){
+      const t=i/8;
+      const sag=.22*4*t*(1-t);
+      painterPts.push([
+        p0[0]+(p1[0]-p0[0])*t,
+        p0[1]+(p1[1]-p0[1])*t-sag,
+        p0[2]+(p1[2]-p0[2])*t
+      ]);
+    }
+    bCable('rope',painterPts,.016,0xb2a27d);
+    // Military emergency flare case seated on a cantilevered timber utility shelf OUTSIDE the landward edge
+    // so the entire 2.30 m dock entrance stays 100% unobstructed (zero snagging!) and matte olive reads crisply!
+    const crateZ=-L/2+1.02, fx=-W-.24;
+    bBox('deck',.44,.08,.50,0x67553c,fx+.03,.02,crateZ,0,0,0,'z');
+    for(const dz of [-.18,.18])bBar('deck',[fx-.10,-.01,crateZ+dz],[-W,.0-.26,crateZ+dz],.038,0x554632,6);
+    bBox('deck',.38,.27,.36,0x637254,fx,.195,crateZ);
+    bBox('deck',.41,.062,.39,0x768466,fx,.358,crateZ);
+    for(const x of [fx-.12,fx+.12]){
+      bBox('iron',.045,.030,.40,0x454c49,x,.40,crateZ);
+      bBox('iron',.048,.076,.024,0x8c9491,x,.29,crateZ-.19);
+    }
+    bBox('deck',.15,.012,.25,0xb35d3e,fx,.394,crateZ);
+    bBar('iron',[fx-.09,.23,crateZ-.205],[fx+.09,.23,crateZ-.205],.014,0x464d4a,6);
+    solid(fx,crateZ,.18,.04,.38);
+    // Proper two-post weathered timber extraction timetable board with pitched rain hood & planked wood back (never a black void!)
+    const signX=W+.17, signZ=-3.7;
+    for(const dz of [-.52,.52]){
+      const gy=ground(signX,signZ+dz);
+      bBox('deck',.085,1.72-gy+.25,.085,0x634d35,signX,(gy-.25+1.72)*.5,signZ+dz,0,0,0,'y');
+      bBox('iron',.105,.12,.105,0x7c8582,signX,Math.max(.04,gy+.06),signZ+dz);
+    }
+    // Weathered timber backing frame & tongue-and-groove back planks behind the laminated schedule
+    bBox('deck',.055,.76,1.10,0x5f4b36,signX+.012,1.25,signZ,0,0,0,'z');
+    for(let k=0;k<5;k++){
+      bBox('deck',.022,.135,1.04,k%2?0x776045:0x6b553d,signX+.046,.97+k*.14,signZ,0,0,0,'z',k*.3);
+    }
+    // Horizontal cross-battens & iron corner brackets on back face
+    for(const dz of [-.38,.38])bBox('deck',.03,.70,.08,0x54422f,signX+.062,1.25,signZ+dz,0,0,0,'y');
+    bBox('deck',.06,.66,1.00,0xb9b4a1,signX-.014,1.25,signZ,0,0,0,'z');
+    // Pitched weathered timber rain-hood cap overhanging top of signboard
+    bBox('deck',.30,.048,1.22,0x5c4732,signX+.01,1.665,signZ,0,.16,0,'z');
+    for(const dz of [-.48,.48])bBox('iron',.085,.045,.055,0x676f6c,signX-.025,1.56,signZ+dz);
   }
 
   if(o.kind==='wreck') {

@@ -122,7 +122,7 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
     for(let iteration=0;iteration<12;iteration++){
       iterations++;
       solveArm('R',want,wr.position);
-      marine.updateWorldMatrix(true,true);
+      // The world-space reads below refresh their ancestor chains.
       u.elbowRG.getWorldQuaternion(parentQ);
       wr.quaternion.copy(parentQ.invert()).multiply(handQ);
       axis.copy(wr.position).normalize();
@@ -134,7 +134,6 @@ export function createMarineIdle({ THREE, marine, scene, solveArm, smoke, ground
       u.elbowRG.getWorldQuaternion(parentQ);wr.quaternion.copy(parentQ.invert()).multiply(handQ);
       // The actual anatomical ellipse, not the old spherical 60-degree cap.
       clampWrist(wr.quaternion,1,-forearmRoll);
-      marine.updateWorldMatrix(true,true);
       wr.getWorldQuaternion(parentQ);cigQ.copy(parentQ).multiply(handCigQ);
       pinchTarget.copy(target).add(axis.set(0,0,PINCH_FROM_LIP).applyQuaternion(cigQ));
       pointOnHand(wr,'indexTip',pinch);pointOnHand(wr,'middleTip',middle);pinch.multiplyScalar(weight).addScaledVector(middle,1-weight);

@@ -1,4 +1,6 @@
 // world/stone-wall-kit.js
+import { getRockTextureLibrary, applyRockPBR } from './rock-textures.js';
+import { buildCompactStoneGeometry, projectStoneBoxUV } from './rock-geometry.js';
 // AG-204b / J67 / CL-296: Dry field-stone wall kit for valley scenery barriers.
 // Replaces low-poly dark hedge blobs with coursed dry-stone walls (2.8 - 3.5 m)
 // providing natural choke points and blocking sightlines for sector culling.
@@ -50,13 +52,18 @@ export const IVY_PALETTE = [
 ];
 
 export function createStoneWallMaterials(THREE) {
+  const rockLib = getRockTextureLibrary(THREE);
   const stoneMat = new THREE.MeshStandardMaterial({
     color: 0xffffff,
     vertexColors: true,
     roughness: 0.88,
     metalness: 0.04,
-    flatShading: true,
   });
+  if (rockLib && rockLib.fieldstone) {
+    applyRockPBR(stoneMat, rockLib.fieldstone, { selfColored: false, normalMul: 0.96 });
+  } else {
+    stoneMat.flatShading = true;
+  }
   stoneMat.name = 'stone-wall-masonry';
 
   const mossMat = new THREE.MeshStandardMaterial({
@@ -173,7 +180,7 @@ export function buildStoneWallKit(params) {
 
   // Efficient primitives: single-segment Box (12 tris), low-poly rock (Dodecahedron/Box), Quad Card (2 tris)
   const boxGeo = new THREE.BoxGeometry(1, 1, 1, 1, 1, 1);
-  const rubbleGeo = new THREE.DodecahedronGeometry(0.4, 0);
+  const rubbleGeo = buildCompactStoneGeometry(THREE, { rx: 0.42, ry: 0.30, rz: 0.38, detail: 1, seed: 0x510e, style: 'granite', uvTile: 0.85 });
   const cardGeo = new THREE.PlaneGeometry(1, 1);
 
   const m4 = new THREE.Matrix4();
@@ -426,6 +433,7 @@ export function buildStoneWallKit(params) {
     geo.setAttribute('position', new THREE.Float32BufferAttribute(bucket.pos, 3));
     geo.setAttribute('normal', new THREE.Float32BufferAttribute(bucket.nrm, 3));
     geo.setAttribute('color', new THREE.Float32BufferAttribute(bucket.col, 3));
+    if (name === 'stone-wall-masonry') projectStoneBoxUV(geo, 1.15);
     geo.computeBoundingSphere();
     const mesh = new THREE.Mesh(geo, mat);
     mesh.name = name;
@@ -576,8 +584,11 @@ export function buildStoneWallKit(params) {
     if (n) {
       const slabGeo = new THREE.BoxGeometry(1, 1, 1);
       const slabMat = new THREE.MeshStandardMaterial({
-        color: 0xffffff, roughness: 0.88, metalness: 0.04, flatShading: true,
+        color: 0xffffff, roughness: 0.88, metalness: 0.04,
       });
+      const rLib = getRockTextureLibrary(THREE);
+      if (rLib && rLib.fieldstone) applyRockPBR(slabMat, rLib.fieldstone, { selfColored: false, normalMul: 0.85 });
+      else slabMat.flatShading = true;
       slabMat.name = 'stone-wall-slab';
       slabMesh = new THREE.InstancedMesh(slabGeo, slabMat, n);
       slabMesh.name = 'stone-wall-slabs';

@@ -42,9 +42,10 @@ function bakeable(o, m, live = false) {
 }
 
 // What a source looks like now, as a flat list compared item by item.
-const STATE_N = 29;
+const STATE_N = 31;
 // CL-220: written by index into a fixed-length array (emptying and pushing it again every source every frame cost
 // 24 kB a frame of backing stores at night 20, GP-19940's allocation profile).
+// AG-419: compare emissive r/g/b directly instead of calling e.getHex() 500x/frame.
 function stateOf(rig, o, out) {
   let shown = o.visible && !!o.parent;
   for (let p = o.parent; shown && p && p !== rig.root; p = p.parent) shown = p.visible;
@@ -52,10 +53,11 @@ function stateOf(rig, o, out) {
   out[0] = shown ? 1 : 0; out[1] = o.parent; out[2] = m; out[3] = g; out[4] = g && g.attributes.position.version;
   out[5] = g && g.attributes.color ? g.attributes.color.version : -1;
   out[6] = m && m.version; out[7] = c ? c.r : 0; out[8] = c ? c.g : 0; out[9] = c ? c.b : 0; out[10] = m && m.roughness; out[11] = m && m.metalness;
-  out[12] = e ? e.getHex() : 0; out[13] = m && m.emissiveIntensity; out[14] = m && m.transparent; out[15] = m && m.opacity; out[16] = m && m.side;
-  out[17] = m && m.flatShading; out[18] = m && m.vertexColors;
-  out[19] = o.position.x; out[20] = o.position.y; out[21] = o.position.z; out[22] = o.quaternion.x; out[23] = o.quaternion.y; out[24] = o.quaternion.z;
-  out[25] = o.quaternion.w; out[26] = o.scale.x; out[27] = o.scale.y; out[28] = o.scale.z;
+  out[12] = e ? e.r : 0; out[13] = e ? e.g : 0; out[14] = e ? e.b : 0;
+  out[15] = m && m.emissiveIntensity; out[16] = m && m.transparent; out[17] = m && m.opacity; out[18] = m && m.side;
+  out[19] = m && m.flatShading; out[20] = m && m.vertexColors;
+  out[21] = o.position.x; out[22] = o.position.y; out[23] = o.position.z; out[24] = o.quaternion.x; out[25] = o.quaternion.y; out[26] = o.quaternion.z;
+  out[27] = o.quaternion.w; out[28] = o.scale.x; out[29] = o.scale.y; out[30] = o.scale.z;
   if (out.length !== STATE_N) out.length = STATE_N;
   return out;
 }
@@ -77,12 +79,13 @@ function sameState(rig, o, s) {
     s[5] !== (g.attributes.color ? g.attributes.color.version : -1) ||
     s[6] !== m.version || s[7] !== (c ? c.r : 0) || s[8] !== (c ? c.g : 0) || s[9] !== (c ? c.b : 0) ||
     s[10] !== m.roughness || s[11] !== m.metalness ||
-    s[12] !== (e ? e.getHex() : 0) || s[13] !== m.emissiveIntensity ||
-    s[14] !== m.transparent || s[15] !== m.opacity || s[16] !== m.side ||
-    s[17] !== m.flatShading || s[18] !== m.vertexColors ||
-    s[19] !== o.position.x || s[20] !== o.position.y || s[21] !== o.position.z ||
-    s[22] !== o.quaternion.x || s[23] !== o.quaternion.y || s[24] !== o.quaternion.z || s[25] !== o.quaternion.w ||
-    s[26] !== o.scale.x || s[27] !== o.scale.y || s[28] !== o.scale.z) return false;
+    s[12] !== (e ? e.r : 0) || s[13] !== (e ? e.g : 0) || s[14] !== (e ? e.b : 0) ||
+    s[15] !== m.emissiveIntensity ||
+    s[16] !== m.transparent || s[17] !== m.opacity || s[18] !== m.side ||
+    s[19] !== m.flatShading || s[20] !== m.vertexColors ||
+    s[21] !== o.position.x || s[22] !== o.position.y || s[23] !== o.position.z ||
+    s[24] !== o.quaternion.x || s[25] !== o.quaternion.y || s[26] !== o.quaternion.z || s[27] !== o.quaternion.w ||
+    s[28] !== o.scale.x || s[29] !== o.scale.y || s[30] !== o.scale.z) return false;
   let shown = o.visible && !!o.parent;
   for (let p = o.parent; shown && p && p !== rig.root; p = p.parent) shown = p.visible;
   return s[0] === (shown ? 1 : 0);
@@ -99,7 +102,7 @@ function bendOf(root, o) {
   return null;
 }
 function hide(o) { if (o.userData.rigSkinMask == null) o.userData.rigSkinMask = o.layers.mask; o.layers.mask = 0; }
-function unhide(o) { if (o.userData.rigSkinMask != null) { o.layers.mask = o.userData.rigSkinMask; delete o.userData.rigSkinMask; } }
+function unhide(o) { if (o.userData.rigSkinMask != null) { o.layers.mask = o.userData.rigSkinMask; delete o.userData.rigSkinMask; o.matrixWorldNeedsUpdate = true; } }
 
 function buildSkins(THREE, TSL, rig) {
   const { root } = rig;

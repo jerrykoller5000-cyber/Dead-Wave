@@ -855,6 +855,117 @@ export const AudioSys = (() => {
     // The odd ricochet off stone and steel.
     if ((surface === 'rock' || surface === 'metal') && Math.random() < (surface === 'metal' ? 0.35 : 0.22)) foley('ricochet', v * (0.6 + Math.random() * 0.4), pan, 0.012, p);
   }
+  // AH-12: Material-specific Training prop impact, shatter/break, bounce, and pressurized O2 venting audio.
+  // Pure shaped noise + existing recorded banks (ZERO oscillators — respects CL-135 / t223 no-xylophone rule).
+  const propSfxCd = Object.create(null);
+  function propCdOk(key, gap) {
+    const c = ensure();
+    if (!c || muted) return false;
+    if (c.currentTime < (propSfxCd[key] || 0)) return false;
+    propSfxCd[key] = c.currentTime + gap;
+    return true;
+  }
+  function propImpact(kind = 'concrete', v = 0.85, pan = 0) {
+    const vol = Math.max(0, Math.min(1, +v || 0));
+    if (vol < 0.03 || !propCdOk('imp:' + kind, 0.038)) return;
+    const p = Math.max(-1, Math.min(1, +pan || 0));
+    if (kind === 'steel' || kind === 'metal' || kind === 'paint') { bulletImpact('metal', vol * 0.9, p); return; }
+    if (kind === 'brass') {
+      bulletImpact('metal', vol * 0.85, p);
+      for (let i = 0; i < 3; i++) foley('brass', vol * (0.45 + Math.random() * 0.25), Math.max(-1, Math.min(1, p + (Math.random() - 0.5) * 0.3)), 0.03 + i * 0.045, 0.9 + Math.random() * 0.24);
+      return;
+    }
+    if (kind === 'wood') { bulletImpact('wood', vol * 0.9, p); return; }
+    if (kind === 'sand' || kind === 'burlap') { bulletImpact('sand', vol * 0.95, p); return; }
+    if (kind === 'water' || kind === 'saline' || kind === 'coffee') {
+      bulletImpact('water', vol * 0.95, p);
+      playNoise({ dur: 0.14, vol: 0.075 * vol, filterFreq: 1650 + Math.random() * 600, filterType: 'bandpass', q: 0.85, when: 0.015, pan: p });
+      return;
+    }
+    if (kind === 'glass' || kind === 'amberGlass' || kind === 'phosphor' || kind === 'china') {
+      // Brittle crack + crisp high-frequency crystalline noise bursts (no oscillator tones)
+      playNoise({ dur: 0.028, vol: 0.16 * vol, filterFreq: 4200 + Math.random() * 1400, filterType: 'bandpass', q: 1.8, pan: p });
+      const n = kind === 'china' ? 3 : 4;
+      for (let i = 0; i < n; i++) {
+        playNoise({ dur: 0.02 + Math.random() * 0.022, vol: (0.065 + Math.random() * 0.045) * vol, filterFreq: 5200 + Math.random() * 3400, filterType: 'highpass', when: 0.012 + i * (0.02 + Math.random() * 0.022), pan: Math.max(-1, Math.min(1, p + (Math.random() - 0.5) * 0.35)) });
+      }
+      return;
+    }
+    if (kind === 'electronics') {
+      playNoise({ dur: 0.035, vol: 0.15 * vol, filterFreq: 3100, filterType: 'bandpass', q: 1.4, pan: p });
+      playNoise({ dur: 0.09, vol: 0.08 * vol, filterFreq: 5600 + Math.random() * 1600, filterType: 'highpass', when: 0.015, pan: p });
+      playNoise({ dur: 0.06, vol: 0.07 * vol, filterFreq: 420, filterType: 'lowpass', when: 0.008, pan: p });
+      return;
+    }
+    if (kind === 'plastic' || kind === 'chalk') {
+      playNoise({ dur: 0.032, vol: 0.12 * vol, filterFreq: 1750 + Math.random() * 550, filterType: 'bandpass', q: 1.6, pan: p });
+      playNoise({ dur: 0.045, vol: 0.06 * vol, filterFreq: 720, filterType: 'lowpass', pan: p });
+      return;
+    }
+    if (kind === 'paper' || kind === 'cloth') {
+      playNoise({ dur: 0.065, vol: 0.085 * vol, filterFreq: 3100 + Math.random() * 900, filterType: 'bandpass', q: 0.9, attack: 0.004, pan: p });
+      return;
+    }
+    if (kind === 'rubber') {
+      playNoise({ dur: 0.05, vol: 0.11 * vol, filterFreq: 380 + Math.random() * 120, filterType: 'lowpass', pan: p });
+      return;
+    }
+    bulletImpact('rock', vol * 0.8, p);
+  }
+  function propBreak(kind = 'plastic', v = 1, pan = 0) {
+    const vol = Math.max(0, Math.min(1, +v || 0));
+    if (vol < 0.03 || !propCdOk('brk:' + kind, 0.055)) return;
+    const p = Math.max(-1, Math.min(1, +pan || 0));
+    if (kind === 'glass' || kind === 'amberGlass' || kind === 'phosphor' || kind === 'china') {
+      playNoise({ dur: 0.055, vol: 0.22 * vol, filterFreq: 3800, filterType: 'bandpass', q: 1.1, pan: p, rev: 0.22 });
+      const shards = kind === 'china' ? 5 : 7;
+      for (let i = 0; i < shards; i++) {
+        playNoise({ dur: 0.022 + Math.random() * 0.035, vol: (0.05 + Math.random() * 0.055) * vol, filterFreq: 4800 + Math.random() * 4200, filterType: 'bandpass', q: 2.2, when: 0.015 + i * (0.022 + Math.random() * 0.026), pan: Math.max(-1, Math.min(1, p + (Math.random() - 0.5) * 0.45)) });
+      }
+      if (kind === 'phosphor') playNoise({ dur: 0.04, vol: 0.15 * vol, filterFreq: 950, filterType: 'bandpass', q: 1.2, pan: p }); // tube implosion pop
+      return;
+    }
+    if (kind === 'electronics') {
+      playNoise({ dur: 0.06, vol: 0.22 * vol, filterFreq: 2200, filterType: 'bandpass', q: 0.9, pan: p, rev: 0.2 });
+      for (let i = 0; i < 4; i++) {
+        playNoise({ dur: 0.018 + Math.random() * 0.025, vol: (0.07 + Math.random() * 0.04) * vol, filterFreq: 5200 + Math.random() * 2800, filterType: 'highpass', when: 0.02 + i * 0.045, pan: p });
+      }
+      playNoise({ dur: 0.14, vol: 0.09 * vol, filterFreq: 520, filterType: 'lowpass', when: 0.02, pan: p });
+      return;
+    }
+    if (kind === 'wood') { buildBreak('wood', vol * 0.85, p); return; }
+    if (kind === 'sand' || kind === 'burlap') { buildBreak('sand', vol * 0.9, p); return; }
+    if (kind === 'steel' || kind === 'metal' || kind === 'brass') {
+      bulletImpact('metal', vol * 0.95, p);
+      playNoise({ dur: 0.18, vol: 0.12 * vol, filterFreq: 2400, filterType: 'bandpass', q: 1.1, when: 0.02, pan: p, rev: 0.25 });
+      if (kind === 'brass') {
+        for (let i = 0; i < 5; i++) foley('brass', vol * (0.5 + Math.random() * 0.3), Math.max(-1, Math.min(1, p + (Math.random() - 0.5) * 0.5)), 0.04 + i * 0.055, 0.88 + Math.random() * 0.28);
+      }
+      return;
+    }
+    if (kind === 'water' || kind === 'saline' || kind === 'coffee') {
+      bulletImpact('water', vol, p);
+      playNoise({ dur: 0.26, vol: 0.11 * vol, filterFreq: 1350, filterType: 'bandpass', q: 0.7, when: 0.02, attack: 0.01, pan: p, rev: 0.18 });
+      return;
+    }
+    if (kind === 'paper' || kind === 'cloth') {
+      playNoise({ dur: 0.11, vol: 0.12 * vol, filterFreq: 3400, filterType: 'bandpass', q: 0.85, attack: 0.005, pan: p });
+      playNoise({ dur: 0.14, vol: 0.06 * vol, filterFreq: 2100, filterType: 'bandpass', q: 0.9, when: 0.05, pan: p });
+      return;
+    }
+    // plastic / chalk / generic hollow break
+    playNoise({ dur: 0.055, vol: 0.17 * vol, filterFreq: 1850, filterType: 'bandpass', q: 1.2, pan: p, rev: 0.15 });
+    for (let i = 0; i < 3; i++) {
+      playNoise({ dur: 0.028, vol: 0.065 * vol, filterFreq: 1400 + Math.random() * 1400, filterType: 'bandpass', q: 1.5, when: 0.04 + i * 0.045, pan: Math.max(-1, Math.min(1, p + (Math.random() - 0.5) * 0.35)) });
+    }
+  }
+  function propHiss(v = 0.9, pan = 0, dur = 0.45) {
+    const vol = Math.max(0, Math.min(1, +v || 0));
+    if (vol < 0.03 || !propCdOk('hiss', Math.max(0.14, dur * 0.6))) return;
+    const p = Math.max(-1, Math.min(1, +pan || 0));
+    playNoise({ dur, vol: 0.15 * vol, filterFreq: 4200 + Math.random() * 900, filterType: 'bandpass', q: 1.8, attack: 0.012, pan: p, rev: 0.22 });
+    playNoise({ dur: dur * 0.85, vol: 0.07 * vol, filterFreq: 1100, filterType: 'bandpass', q: 0.8, attack: 0.02, pan: p });
+  }
   // A blade that lands: the zip of the edge and a wet chunk.
   function knifeHit() { foley('knifeHit'); }
 
@@ -1071,16 +1182,16 @@ export const AudioSys = (() => {
   // CL-295 (J53, AG-239): the only sounds under his feet on a trail are the gravel takes, so their crunch is the 'chain'.
   // An A/B for Jerry: ?steps=grass puts the softer grass takes on plain dirt (the default stays gravel until he picks).
   const DIRT_SOFT = (() => { try { return typeof location !== 'undefined' && new URLSearchParams(location.search).get('steps') === 'grass'; } catch (_) { return false; } })();
-  function footstep(wet, running, ground = null) {
-    if (!wet && !ground && DIRT_SOFT && tk('player/footstep-leaves', (running ? 1 : 0.85) * 0.34)) return;   // CL-295: x0.34 = the dirt folder's pack trim over the leaves' (0.55 / 1.61), so both sides of the A/B play at the same level
-    if (!wet && (ground === 'stone' || ground === 'metal' || ground === 'leaves') && tk('player/footstep-' + ground, running ? 1 : 0.85)) return;
-    if (tk(wet ? 'player/footstep-water' : running ? 'player/footstep-run-dirt' : 'player/footstep-dirt', running ? 1 : 0.85)) return;   // CL-161
+  function footstep(wet, running, ground = null, gain = 1) {
+    if (!wet && !ground && DIRT_SOFT && tk('player/footstep-leaves', (running ? 1 : 0.85) * 0.34 * gain)) return;   // CL-295: x0.34 = the dirt folder's pack trim over the leaves' (0.55 / 1.61), so both sides of the A/B play at the same level
+    if (!wet && (ground === 'stone' || ground === 'metal' || ground === 'leaves') && tk('player/footstep-' + ground, (running ? 1 : 0.85) * gain)) return;
+    if (tk(wet ? 'player/footstep-water' : running ? 'player/footstep-run-dirt' : 'player/footstep-dirt', (running ? 1 : 0.85) * gain)) return;   // CL-161
     const p = 0.85 + Math.random() * 0.3;
     if (wet) {
-      playNoise({ dur: 0.07, vol: running ? 0.07 : 0.05, filterFreq: 1700 * p, filterType: 'bandpass' });
+      playNoise({ dur: 0.07, vol: (running ? 0.07 : 0.05) * gain, filterFreq: 1700 * p, filterType: 'bandpass' });
     } else {
-      playNoise({ dur: 0.045, vol: running ? 0.065 : 0.04, filterFreq: 380 * p, filterType: 'lowpass' });
-      playNoise({ dur: 0.02, vol: 0.02, filterFreq: 2600 * p, filterType: 'bandpass' });
+      playNoise({ dur: 0.045, vol: (running ? 0.065 : 0.04) * gain, filterFreq: 380 * p, filterType: 'lowpass' });
+      playNoise({ dur: 0.02, vol: 0.02 * gain, filterFreq: 2600 * p, filterType: 'bandpass' });
     }
   }
   function dodgeRoll() {
@@ -1280,6 +1391,8 @@ export const AudioSys = (() => {
   }
   // CL-275: the score's nights (music.json score.waveByDay) and the old ones, and which the waves use.
   let SCORE_WAVE = null, OLD_WAVE = null, scoreIsOn = false;
+  // AH-11: the score's day fights (layered Hellshot kits) and the old chiptune ones.
+  let SCORE_DAY_FIGHT = null, OLD_DAY_FIGHT = null;
   // CL-275: the score's specials (music.json score.specials): guardian, redsky, colossus, heart, wanderer -> a layered track.
   const SCORE_SPECIALS = {};
   // CL-275: the calm (music.json score.pools): the menu, dawn, the day, dusk, night, the end screens, as whole tracks.
@@ -1287,6 +1400,7 @@ export const AudioSys = (() => {
   // CL-275: the score's cues in place of the old stings (music.json score.stings); Jerry's alarm stinger is never swapped.
   const SCORE_STINGS = {};
   let OLD_POOLS = null, OLD_STINGS = null, scoreCalmLost = false;
+  let poolQueue = {};        // AH-11: no-repeat shuffle bag per calm pool
   function applyScorePools(on, changed) {
     if (!OLD_POOLS) OLD_POOLS = JSON.parse(JSON.stringify(MUSIC_POOLS));
     if (!OLD_STINGS) OLD_STINGS = Object.assign({}, MUSIC_STINGS);
@@ -1295,7 +1409,7 @@ export const AudioSys = (() => {
     for (const k of Object.keys(MUSIC_STINGS)) if (!(k in OLD_STINGS)) delete MUSIC_STINGS[k];
     Object.assign(MUSIC_STINGS, OLD_STINGS);
     if (on && !scoreCalmLost) { for (const k of Object.keys(SCORE_POOLS)) MUSIC_POOLS[k] = SCORE_POOLS[k].slice(); Object.assign(MUSIC_STINGS, SCORE_STINGS); }
-    if (changed && stage === 'calm') mood = null;   // switched: the calm moves to the new pool's song (fade out, then in); not on the first load (it broke t73's lull)
+    if (changed) { poolQueue = {}; if (stage === 'calm') { mood = null; savedCalm = null; } }   // switched: the calm moves to the new pool's song (fade out, then in); not on the first load (it broke t73's lull)
   }
   // CL-275: the Training Ground's motifs (music.json score.motifs): a type -> its kit, played while it practises.
   const SCORE_MOTIFS = {};
@@ -1324,7 +1438,10 @@ export const AudioSys = (() => {
     on = !!on && !!SCORE_WAVE;
     const was = scoreIsOn;
     if (!OLD_WAVE) OLD_WAVE = WAVE_BY_DAY.map((w) => Object.assign({}, w));
+    if (!OLD_DAY_FIGHT) OLD_DAY_FIGHT = { tracks: DAY_FIGHT.tracks.slice(), sizes: DAY_FIGHT.sizes.slice() };
     WAVE_BY_DAY = (on ? SCORE_WAVE : OLD_WAVE).map((w) => Object.assign({}, w));
+    const dfSrc = on && SCORE_DAY_FIGHT ? SCORE_DAY_FIGHT : OLD_DAY_FIGHT;
+    DAY_FIGHT.tracks = dfSrc.tracks.slice(); DAY_FIGHT.sizes = dfSrc.sizes.slice();
     scoreIsOn = on;
     applyScorePools(on, was !== on);   // CL-275
     if (ctx) secWantDay(lastDay);
@@ -1346,6 +1463,10 @@ export const AudioSys = (() => {
       if (m.specials && typeof m.specials === 'object') for (const k of Object.keys(m.specials)) if (typeof m.specials[k] === 'string') SPECIAL_TRACKS[k] = m.specials[k];
       if (Array.isArray(m.waveByDay) && m.waveByDay.length && m.waveByDay.every((w) => w && isFinite(+w.from) && typeof w.track === 'string')) {
         WAVE_BY_DAY = m.waveByDay.map((w) => ({ from: +w.from, track: w.track })).sort((a, b) => a.from - b.from);
+      }
+      const df = m.dayFight;
+      if (df && Array.isArray(df.tracks) && Array.isArray(df.sizes) && df.tracks.length && df.tracks.length === df.sizes.length) {
+        DAY_FIGHT.tracks = df.tracks.slice(); DAY_FIGHT.sizes = df.sizes.map(Number);
       }
       // CL-42: a track cut into sections the director moves between as the wave goes.
       if (m.sections && typeof m.sections === 'object') {
@@ -1375,21 +1496,22 @@ export const AudioSys = (() => {
           SECTIONED[k] = {
             layered: true, fallback: typeof L.fallback === 'string' ? L.fallback : null, kits, barS: kits[names[0]].barS,
             list: Object.fromEntries(names.map((n) => [n, { t0: 0, dur: kits[n].dur }])),
-            flow: Object.assign({ stalk: names[0], fight: names, lull: names[0], last, surge: last, lastAt: 3, near: 45, far: 70, lullAfter: 4, rhythmAt: 70, leadAt: 20 }, L.flow || {})
+            // AH-11: wider lullAfter (8 s) on layered suites prevents 4 s cluster gaps from yanking kits mid-wave; director breathers (pace.inLull) still cut on the next bar.
+            flow: Object.assign({ stalk: names[0], fight: names, lull: names[0], last, surge: last, lastAt: 3, near: 45, far: 70, lullAfter: 8, rhythmAt: 70, leadAt: 20 }, L.flow || {})
           };
         }
         if (Array.isArray(sc.waveByDay) && sc.waveByDay.length && sc.waveByDay.every((w) => w && isFinite(+w.from) && typeof w.track === 'string')) {
           SCORE_WAVE = sc.waveByDay.map((w) => ({ from: +w.from, track: w.track })).sort((a, b) => a.from - b.from);
+        }
+        const sdf = sc.dayFight;
+        if (sdf && Array.isArray(sdf.tracks) && Array.isArray(sdf.sizes) && sdf.tracks.length && sdf.tracks.length === sdf.sizes.length) {
+          SCORE_DAY_FIGHT = { tracks: sdf.tracks.slice(), sizes: sdf.sizes.map(Number) };
         }
         if (sc.specials && typeof sc.specials === 'object') for (const k of Object.keys(sc.specials)) if (SECTIONED[sc.specials[k]]) SCORE_SPECIALS[k] = sc.specials[k];
         if (sc.motifs && typeof sc.motifs === 'object') for (const k of Object.keys(sc.motifs)) if (SECTIONED[sc.motifs[k]]) SCORE_MOTIFS[k] = sc.motifs[k];
         if (sc.pools && typeof sc.pools === 'object') for (const k of Object.keys(sc.pools)) if (Array.isArray(sc.pools[k]) && sc.pools[k].length) SCORE_POOLS[k] = sc.pools[k].slice();
         if (sc.stings && typeof sc.stings === 'object') for (const k of Object.keys(sc.stings)) if (typeof sc.stings[k] === 'string' && k !== 'alarm') SCORE_STINGS[k] = sc.stings[k];   // never the alarm: Jerry's metal stinger stays
         setScore(scoreWanted());
-      }
-      const df = m.dayFight;
-      if (df && Array.isArray(df.tracks) && Array.isArray(df.sizes) && df.tracks.length && df.tracks.length === df.sizes.length) {
-        DAY_FIGHT.tracks = df.tracks.slice(); DAY_FIGHT.sizes = df.sizes.map(Number);
       }
     }).catch(() => {});
   }
@@ -1417,24 +1539,35 @@ export const AudioSys = (() => {
   const PROX_NEAR = 20, PROX_FAR = 150; // metres: full volume at NEAR
   const GAP_AFTER_ALARM = 0;         // the fight starts the moment the alarm sting ends
   const FAST_FADE_S = 0.35;          // the fight making way for the relief sting
-  const DAY_FIGHT_RANGE = 100;       // a zombie this close in daylight prep starts a day fight
-  const FADE_OUT_S = 2.0;            // calm music making way
+  const DAY_FIGHT_RANGE = 100;       // legacy (!scoreIsOn): a zombie this close in daylight prep starts a day fight
+  const FADE_OUT_S = 2.0;            // legacy calm music making way
+  const SCORE_FADE_OUT_S = 4.0;      // AH-11: smooth calm fade-out so world tracks never chop off abruptly
+  const SCORE_SWITCH_GAP_S = 2.0;    // AH-11: quiet valley breath between calm track switches
   const FADE_IN_S = 6.0;             // calm music arriving
   const FADE_IN_SLOW_S = 12.0;       // the first music after the relief sting: very slow
 
   let deck = null;          // the one <audio> element that plays music
+  let deckLp = null;        // AH-11: low-pass filter on the calm deck too, muffled through rock when underground
   let deckTrack = null;     // what it's playing
   let deckLevel = 0;        // 0..1 fade level
   let deckTarget = 0;       // where the fade is heading
   let deckRate = 1;         // fade speed, level units per second
   let deckLoopAt = -1;      // >= 0: loop from here when it ends (the fight)
-  let stage = 'idle';       // idle | calm | alarm | gap | fight | dayfight | campclear | release | relief | end
+  let stage = 'idle';       // idle | calm | alarm | gap | fight | dayfight | dayretreat | campclear | release | relief | end
   const CAMP_FADE_S = 1.6;   // CL-52: a camp cleared: the fight fades out under the camp stinger
-  const CAMP_S = 2.0;        //        which is this long, then the calm music comes back
+  const CAMP_S = 2.0;        //        legacy camp clear window
   const CAMP_FADE_IN_S = 6.0;
+  const SCORE_CAMP_FADE_S = 2.0;     // AH-11: smooth fade-out for layered day-fight clears
+  const SCORE_CAMP_S = 4.8;          // AH-11: full 3.2 s resolve cue + 1.6 s ambient breath before calm returns (zero overlap)
+  const SCORE_CAMP_FADE_IN_S = 8.0;
   let campUntil = 0;
   let dayBand = -1;         // the day fight's track index
   let pendingDay = -1;      // a day-fight band waiting for the deck to fade out
+  let dayEngageT = 0;       // AH-11: sustained close-combat timer before interrupting exploration music
+  let dayDisengageT = 0;    // AH-11: timer with all threats far off (>85 m) to disengage a day fight cleanly
+  let dayQuietT = 0;        // AH-11: brief confirmation when live threats drop to 0
+  let dayFightStartedAt = 0;// AH-11: prevents mid-skirmish track thrashing
+  let savedCalm = null;     // AH-11: { track, mood, time } saved when a day fight interrupts a long exploration track
   let lastCalm = 'day';
   let lastDay = 1;          // the day the story is on, for the wave's track
   let lastDeckError = null; // the last load error, for the tests     // the calm pool the story wants, for after the relief sting
@@ -1444,6 +1577,10 @@ export const AudioSys = (() => {
   let prox = FIGHT_FLOOR;   // 0.6..1, how close the nearest zombie is
   let briefingOpen = false;
   let briefDuck = 1;
+  let cueDuck = 1;          // AH-11: smooth background ducking while a short musicCue plays on cueEl
+  let cuePlaying = false;
+  let cuePlayingUntil = 0;
+  let lastClearAt = -1e9;   // AH-11: prevents redundant dawn cue colliding right after wave-clear relief sting
   let duck = 1;             // pause, shop, low health
   let lastTrack = {};       // pool -> last track (no immediate repeats)
   let sting = null;         // the one <audio> element for stings: never under music
@@ -1515,6 +1652,8 @@ export const AudioSys = (() => {
     for (const k of Object.keys(SECTIONED)) if (SECTIONED[k].layered) waveTracks.add(k);   // CL-275: the score's tracks load only when wanted
     if (motif && motif.track) keep.add(motif.track);
     if (scoreIsOn) {   // CL-275: the guardian's suite on its nights (6, 12, 18), any other special once a fight has asked for it
+      if (SCORE_DAY_FIGHT && SCORE_DAY_FIGHT.tracks[0]) keep.add(SCORE_DAY_FIGHT.tracks[0]);   // AH-11: keep day-fight suite 1 decoded so daylight fights stay on Hellshot stems
+      if (stage === 'dayfight') { const dtTrack = DAY_FIGHT.tracks[pendingDay >= 0 ? pendingDay : dayBand]; if (dtTrack) keep.add(dtTrack); }
       if (SCORE_SPECIALS.guardian && d % 6 === 0) keep.add(SCORE_SPECIALS.guardian);
       const k = scoreSpecialKey(lastState); if (k && SCORE_SPECIALS[k]) keep.add(SCORE_SPECIALS[k]);
       if (SCORE_SPECIALS.heart && lastState && (lastState.heartSoon || lastState.heart)) keep.add(SCORE_SPECIALS.heart);
@@ -1539,8 +1678,9 @@ export const AudioSys = (() => {
     const bufs = {};
     for (const [l, f] of Object.entries(kit.files)) { const b = secBuf[f]; if (!b || typeof b !== 'object') return false; bufs[l] = b; }
     secEnsureOut();
+    const swap = !!(sec && sec.src);
     const g = ctx.createGain();
-    g.gain.setValueAtTime(0, when); g.gain.linearRampToValueAtTime(1, when + 0.012);
+    g.gain.setValueAtTime(0, when); g.gain.linearRampToValueAtTime(1, when + (swap ? 0.14 : 0.012));   // AH-11: musical crossfade on layered kit swaps
     g.connect(secOut);
     const srcs = [], layers = {};
     for (const [l, b] of Object.entries(bufs)) {
@@ -1556,8 +1696,9 @@ export const AudioSys = (() => {
     secLoops = 0;
     return true;
   }
-  function secOldOut(old, when) {   // the old one out over 30 ms
-    try { old.g.gain.setValueAtTime(1, when); old.g.gain.linearRampToValueAtTime(0, when + 0.03); for (const s of old.srcs || [old.src]) s.stop(when + 0.05); } catch (_) {}
+  function secOldOut(old, when) {   // AH-11: 320 ms crossfade tail on layered kits; 30 ms on cut songs
+    const fade = old.layers ? 0.32 : 0.03;
+    try { old.g.gain.setValueAtTime(1, when); old.g.gain.linearRampToValueAtTime(0, when + fade); for (const s of old.srcs || [old.src]) s.stop(when + fade + 0.04); } catch (_) {}
   }
   function secEnsureOut() {
     if (secOut) return;
@@ -1567,16 +1708,21 @@ export const AudioSys = (() => {
   }
   // CL-275: how much of each layer the fight wants. The drums and bass always; the rhythm guitars once one is within
   // flow.rhythmAt (or the night's last push, or its last few); the leads once one is within flow.leadAt, or then.
-  // A little hysteresis (15 m, 10 m) so a zombie on the line doesn't flutter them.
+  // AH-11: wider hysteresis (20 m rhythm, 15 m lead) and daylight skirmish support so layers swell smoothly without flutter.
   function layerWant(layer, S, state) {
     if (layer === 'drums') return 1;
     const F = S.flow, mode = secMode, near = state && state.nearest != null ? state.nearest : 999, live = state ? state.threat || 0 : 0;
     const was = sec && sec.layers && sec.layers[layer] ? sec.layers[layer].v : 0;
+    if (stage === 'dayfight') {
+      if (!live) return 0;
+      if (layer === 'rhythm') return near <= 45 + (was > 0.5 ? 20 : 0) ? 1 : 0;
+      return near <= 20 + (was > 0.5 ? 15 : 0) ? 1 : 0;
+    }
     if (mode === 'last' || mode === 'surge') return 1;
     if (mode === 'stalk' || mode === 'lull' || !live) return 0;
     const pace = state && state.pace, peak = !!(pace && pace.pushes > 1 && pace.push === pace.pushes - 1 && !pace.inLull);
-    if (layer === 'rhythm') return peak || near <= F.rhythmAt + (was > 0.5 ? 15 : 0) ? 1 : 0;
-    return peak || near <= F.leadAt + (was > 0.5 ? 10 : 0) ? 1 : 0;
+    if (layer === 'rhythm') return peak || near <= F.rhythmAt + (was > 0.5 ? 20 : 0) ? 1 : 0;
+    return peak || near <= F.leadAt + (was > 0.5 ? 15 : 0) ? 1 : 0;
   }
   function secLayersUpdate(state) {
     const S = SECTIONED[sec.track]; if (!S || !S.layered || !sec.layers || !ctx) return;
@@ -1586,7 +1732,7 @@ export const AudioSys = (() => {
       const v = layerWant(l, S, state);
       if (v === o.v) continue;
       o.v = v;
-      try { o.g.gain.cancelScheduledValues(at); o.g.gain.setTargetAtTime(v, at, v > 0 ? 0.06 : 0.3); } catch (_) { o.g.gain.value = v; }
+      try { o.g.gain.cancelScheduledValues(at); o.g.gain.setTargetAtTime(v, at, v > 0 ? 0.14 : 0.42); } catch (_) { o.g.gain.value = v; }
     }
   }
   function secPlay(name, when) {
@@ -1617,6 +1763,7 @@ export const AudioSys = (() => {
   // Where in the flow the wave is, from what the page tells the director every frame.
   function secWant(state, dt) {
     const F = SECTIONED[sec.track].flow;
+    if (stage === 'dayfight') return 'fight';   // AH-11: daylight layered suites stay in fight mode, driven by layerWant
     if (stage === 'heart' && state.heart) {   // CL-85: the heart fight's phase, not the wave's
       if (state.heart.flat) return 'lull';
       return 'h' + Math.max(1, Math.min(3, (state.heart.phase | 0) || 1));
@@ -1693,7 +1840,8 @@ export const AudioSys = (() => {
     const W = SECTIONED[want];
     if (!W || !W.layered) return;
     if (!sectionsReady(want)) { loadSections(want); return; }
-    if (specialWantT < 1.5) return;
+    const holdNeed = k ? 1.5 : 3.0;   // AH-11: quick boss entrance (1.5 s), unhurried return to night suite (3.0 s)
+    if (specialWantT < holdNeed) return;
     const S = SECTIONED[sec.track], barS = sec.barS || (S && S.barS) || 2;
     const now = ctx.currentTime, at = sec.startAt + Math.max(1, Math.ceil((now + 0.08 - sec.startAt) / barS)) * barS;
     sec.track = want; deckTrack = want; secRot = -1;
@@ -1748,17 +1896,32 @@ export const AudioSys = (() => {
     return ok;
   }
   function gainOf(name) { return MUSIC_GAIN[name] || 1; }
+  // AH-11: no-repeat shuffle bag so every track in a calm pool is heard before any repeats.
   function pickTrack(pool) {
     const list = MUSIC_POOLS[pool] || MUSIC_POOLS.menu;
-    let choice = lastTrack[pool] === undefined ? list[0] : list[Math.floor(Math.random() * list.length)];
-    if (list.length > 1 && choice === lastTrack[pool]) choice = list[(list.indexOf(choice) + 1 + Math.floor(Math.random() * (list.length - 1))) % list.length];
+    if (!list || !list.length) return null;
+    if (list.length === 1) { lastTrack[pool] = list[0]; return list[0]; }
+    let q = poolQueue[pool];
+    if (!Array.isArray(q) || !q.length) {
+      if (lastTrack[pool] === undefined) {
+        const rest = list.slice(1);
+        for (let i = rest.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [rest[i], rest[j]] = [rest[j], rest[i]]; }
+        q = [list[0], ...rest];
+      } else {
+        q = list.slice();
+        for (let i = q.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [q[i], q[j]] = [q[j], q[i]]; }
+        if (q[0] === lastTrack[pool]) { const k = 1 + Math.floor(Math.random() * (q.length - 1)); [q[0], q[k]] = [q[k], q[0]]; }
+      }
+      poolQueue[pool] = q;
+    }
+    const choice = q.shift();
     lastTrack[pool] = choice;
     return choice;
   }
   function ensureDeck() {
     if (deck) return deck;
     deck = new Audio();
-    routeMusicElement(deck);
+    routeMusicElement(deck, true);   // AH-11: route calm deck through deckLp for underground rock muffling
     deck.preload = 'auto';
     deck.volume = 0;
     deck.addEventListener('ended', onDeckEnded);
@@ -1773,9 +1936,20 @@ export const AudioSys = (() => {
     });
     return deck;
   }
-  function routeMusicElement(el) {
+  function routeMusicElement(el, filtered) {
     const c = ensure();
-    if (c && userMusicGain && c.createMediaElementSource) c.createMediaElementSource(el).connect(userMusicGain);
+    if (!c || !userMusicGain || !c.createMediaElementSource) return;
+    const src = c.createMediaElementSource(el);
+    if (filtered) {
+      if (!deckLp) {
+        deckLp = c.createBiquadFilter();
+        deckLp.type = 'lowpass'; deckLp.frequency.value = 20000; deckLp.Q.value = 0.5;
+        deckLp.connect(userMusicGain);
+      }
+      src.connect(deckLp);
+    } else {
+      src.connect(userMusicGain);
+    }
   }
   function stopDeck() {
     secStop();
@@ -1786,7 +1960,16 @@ export const AudioSys = (() => {
   function startDeck(name, opts) {
     const o = opts || {};
     secStop();
-    { const L = SECTIONED[name]; if (L && L.layered && !sectionsReady(name) && L.fallback) name = L.fallback; }   // CL-275
+    {
+      const L = SECTIONED[name];
+      if (L && L.layered && !sectionsReady(name)) {
+        if (scoreIsOn && SCORE_DAY_FIGHT && SCORE_DAY_FIGHT.tracks.includes(name) && sectionsReady(SCORE_DAY_FIGHT.tracks[0])) {
+          name = SCORE_DAY_FIGHT.tracks[0];
+        } else if (L.fallback) {
+          name = L.fallback;
+        }
+      }
+    }   // CL-275 / AH-11
     if (sectionsReady(name) && secStart(name, o.state)) {
       if (deck) { try { deck.pause(); } catch (_) {} deck.volume = 0; }
       deckTrack = name;
@@ -1825,12 +2008,17 @@ export const AudioSys = (() => {
     }
     deckTrack = null; deckLevel = 0;
     if (mood === 'fallen' || mood === 'dawn') return;                         // endings play once
-    gapT = 2.5 + Math.random() * 4;                                           // calm pools breathe
+    // AH-11: let valley wind & ambience breathe naturally for 10-16 s between long world tracks, and release track commitment.
+    calmTrackStartedAt = -1e9;
+    gapT = scoreIsOn ? 10 + Math.random() * 6 : 2.5 + Math.random() * 4;
   }
   // A sting plays alone. Whatever else is on is cut first; then() runs when it's over.
   function playSting(name, then) {
     stopDeck();
     stopSting();
+    if (cueEl) { try { cueEl.pause(); } catch (_) {} }
+    cuePlaying = false; cuePlayingUntil = 0;
+    if (name === 'clear') lastClearAt = nowMs() / 1000;
     const file = MUSIC_STINGS[name];
     cueCount++;
     lastCue = { name, played: !!file && musicPlaying && !muted, at: cueCount };
@@ -1839,7 +2027,7 @@ export const AudioSys = (() => {
     try {
       if (!sting) {
         sting = new Audio();
-        routeMusicElement(sting);
+        routeMusicElement(sting, false);
         sting.addEventListener('ended', () => { if (stingName) finishSting(); });
         sting.addEventListener('error', () => { const e = sting.error; if (stingName && !(e && e.code === 1)) { if (/\/gh\/gh-cue-/.test(sting.src || '')) { scoreCalmLost = true; applyScorePools(false, true); } finishSting(); } });   // CL-275: no gh files here
       }
@@ -1875,9 +2063,11 @@ export const AudioSys = (() => {
     stopDeck();
     stage = 'relief';
     mood = null; nextMood = null; dayBand = -1; pendingDay = -1;
+    dayEngageT = 0; dayDisengageT = 0; dayQuietT = 0; savedCalm = null;
     playSting('clear', () => {
       stage = 'calm';
       mood = lastCalm; nextMood = null;
+      calmTrackStartedAt = nowMs() / 1000; calmSwitchedAt = calmTrackStartedAt;
       startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_SLOW_S });
     });
     if (stingName === 'clear') setSolo(true);
@@ -1901,8 +2091,8 @@ export const AudioSys = (() => {
     if (next) next();
   }
   // Small cues for other owners' moments (D-21): 'achievement', 'airdrop', 'objective',
-  // 'poi_cleared'. They're a couple of seconds, played like a sound effect, so they don't
-  // stop the music; the fight and the two stings above are the only music moments.
+  // 'poi_cleared'. They're a couple of seconds, ducking the bed cleanly so they never clash;
+  // solo stings ('alarm', 'clear') always take priority.
   let cueEl = null;
   function musicCue(name) {
     if (typeof name !== 'string' || !name) return;
@@ -1910,20 +2100,40 @@ export const AudioSys = (() => {
     cueCount++;
     lastCue = { name, played: !!file && musicPlaying && !muted, at: cueCount };
     if (!file || !musicPlaying || muted) return;
-    // CL-294: the same cue file again inside 20 s (three finds on one sprint) plays once
     const tNow = nowMs() / 1000;
+    // AH-11: never collide a cue with a solo sting or fire a redundant dawn cue right after wave-clear relief.
+    if (scoreIsOn && (stingName || (name === 'dawn' && tNow - lastClearAt < 12))) {
+      lastCue.played = false; lastCue.held = true; return;
+    }
+    // CL-294: the same cue file again inside 20 s (three finds on one sprint) plays once
     if (file === cueLastFile && tNow - cueLastAt < 20) { lastCue.played = false; lastCue.held = true; return; }
+    // AH-11: avoid stacking back-to-back minor discovery cues while one is still sounding; combat cues may supersede.
+    if (scoreIsOn && cuePlaying && tNow < cuePlayingUntil - 1.5 && name !== 'camp' && name !== 'guardian' && name !== 'ember') {
+      lastCue.played = false; lastCue.held = true; return;
+    }
     cueLastFile = file; cueLastAt = tNow;
     try {
-      if (!cueEl) { cueEl = new Audio(); routeMusicElement(cueEl); }
+      if (!cueEl) {
+        cueEl = new Audio();
+        routeMusicElement(cueEl, false);
+        const cueDone = () => { cuePlaying = false; cuePlayingUntil = 0; };
+        cueEl.addEventListener('ended', cueDone);
+        cueEl.addEventListener('error', cueDone);
+        cueEl.addEventListener('loadedmetadata', () => {
+          if (cuePlaying && cueEl.duration && isFinite(cueEl.duration)) cuePlayingUntil = nowMs() / 1000 + cueEl.duration + 0.15;
+        });
+      }
+      cuePlaying = true;
+      cuePlayingUntil = tNow + 5.5;
       cueEl.src = trackUrl(file);
-      cueEl.volume = Math.max(0, Math.min(1, MUSIC_VOL * gainOf(file)));
+      cueEl.volume = Math.max(0, Math.min(1, MUSIC_VOL * gainOf(file) * briefDuck));
       const p = cueEl.play(); if (p && typeof p.catch === 'function') p.catch(() => {});
-    } catch (_) {}
+    } catch (_) { cuePlaying = false; cuePlayingUntil = 0; }
   }
   function startAlarm() {
     alarmPending = false;
     dayBand = -1; pendingDay = -1;
+    dayEngageT = 0; dayDisengageT = 0; dayQuietT = 0; savedCalm = null;
     stage = 'alarm';
     mood = null; nextMood = null;
     // D-33 (Jerry): no alarm sting; the klaxon is the alarm. Silence under it, then the fight.
@@ -1980,16 +2190,19 @@ export const AudioSys = (() => {
   function startCampClear() {
     stage = 'campclear';
     mood = null; nextMood = null; dayBand = -1; pendingDay = -1;
-    deckTarget = 0; deckRate = 1 / CAMP_FADE_S;
+    dayEngageT = 0; dayDisengageT = 0; dayQuietT = 0;
+    deckTarget = 0; deckRate = 1 / (scoreIsOn ? SCORE_CAMP_FADE_S : CAMP_FADE_S);
     musicCue('camp');
-    campUntil = (typeof performance !== 'undefined' ? performance.now() : Date.now()) + CAMP_S * 1000;
+    campUntil = nowMs() + (scoreIsOn ? SCORE_CAMP_S : CAMP_S) * 1000;
   }
   function startRelief() {
     stopDeck();
     stage = 'relief';
+    dayEngageT = 0; dayDisengageT = 0; dayQuietT = 0; savedCalm = null;
     playSting('clear', () => {
       stage = 'calm';
       mood = lastCalm; nextMood = null;
+      calmTrackStartedAt = nowMs() / 1000; calmSwitchedAt = calmTrackStartedAt;
       startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_SLOW_S });
     });
   }
@@ -2001,17 +2214,24 @@ export const AudioSys = (() => {
   function startDayTrack(band) {
     stage = 'dayfight';
     dayBand = band; pendingDay = -1;
+    dayDisengageT = 0; dayQuietT = 0;
+    dayFightStartedAt = nowMs() / 1000;
     mood = 'dayfight';
     const name = DAY_FIGHT.tracks[band];
     const hit = MUSIC_HITS[name] || 0;
-    startDeck(name, { from: hit, loopAt: hit, level: 1, fadeIn: 0.5 });
+    if (scoreIsOn && SECTIONED[name] && SECTIONED[name].layered) {
+      startDeck(name, { level: 0, fadeIn: 2.0, state: lastState });
+    } else {
+      startDeck(name, { from: hit, loopAt: hit, level: 1, fadeIn: 0.5 });
+    }
   }
-  // CL-294 (Jerry's J65, 2026-11-02: "If you run around sprinting right off the bat you discover every location very
-  // quickly and the music switches tracks rapidly"): a place's music only once he has stayed there (dwellS inside it), and
-  // the calm music moves to or from a place's at most once every gapS. The day, dusk and night changes aren't held.
-  // Tests may shorten both (AudioSys.calmFlow); tcl294 holds the real numbers.
-  const calmFlow = { dwellS: 20, gapS: 60 };
-  let placeSeen = null, placeSeenAt = 0, placeSettled = null, calmSwitchedAt = -1e9, cueLastFile = null, cueLastAt = -1e9;
+  // CL-294 / AH-11 (Jerry's J65 & 2026-11-23 music overhaul): a small world explored at sprint speed must not flip tracks
+  // on every landmark or passing zombie. A place's underscore requires staying dwellS inside it, transitions into/out of
+  // a place happen at most once every gapS, and an active calm track stays committed for at least minTrackS before mood
+  // or time-of-day switches interrupt it (shared-pool tracks adopt seamlessly with zero cut).
+  // Tests may shorten these (AudioSys.calmFlow); tcl294 holds the real numbers.
+  const calmFlow = { dwellS: 45, gapS: 150, minTrackS: 90 };
+  let placeSeen = null, placeSeenAt = 0, placeSettled = null, calmSwitchedAt = -1e9, calmTrackStartedAt = -1e9, pendingDaySince = 0, cueLastFile = null, cueLastAt = -1e9;
   function settledPlace(state) {
     const p = (state && state.place) || null, now = nowMs() / 1000;
     if (p !== placeSeen) { placeSeen = p; placeSeenAt = now; }
@@ -2043,13 +2263,15 @@ export const AudioSys = (() => {
     if (!started) briefingOpen = false;
     if (!musicPlaying || muted) return;
 
+    const nowSec = nowMs() / 1000;
     // --- what the story says ---
     if (!started) {
+      dayEngageT = 0; dayDisengageT = 0; dayQuietT = 0; savedCalm = null;
       if (stage !== 'calm' || mood !== 'menu') { if (stage !== 'calm') { stopSting(); stage = 'calm'; } nextMood = 'menu'; }
     } else if (state.over && !state.won) {
-      if (stage !== 'end') { stopSting(); stopDeck(); stage = 'end'; mood = 'fallen'; startDeck(pickTrack('fallen'), { level: 0, fadeIn: 1 }); }
+      if (stage !== 'end') { stopSting(); stopDeck(); dayEngageT = 0; dayDisengageT = 0; dayQuietT = 0; savedCalm = null; stage = 'end'; mood = 'fallen'; startDeck(pickTrack('fallen'), { level: 0, fadeIn: 1 }); }
     } else if (state.won) {
-      if (stage !== 'end') { stopSting(); stopDeck(); stage = 'end'; mood = 'dawn'; startDeck(pickTrack('dawn'), { level: 0, fadeIn: 1 }); }
+      if (stage !== 'end') { stopSting(); stopDeck(); dayEngageT = 0; dayDisengageT = 0; dayQuietT = 0; savedCalm = null; stage = 'end'; mood = 'dawn'; startDeck(pickTrack('dawn'), { level: 0, fadeIn: 1 }); }
     } else if (finalePending) {
       startFinale();
     } else if (alarmPending || (waveBegan && stage !== 'alarm' && stage !== 'gap' && stage !== 'fight')) {
@@ -2058,7 +2280,7 @@ export const AudioSys = (() => {
       if (stage === 'fight') startRelease(); else { stopSting(); startRelief(); }
     } else if (state.heart && state.heart.on) {   // CL-85: the last fight
       if (state.heart.dead) { if (stage !== 'heartend') startHeartEnd(); }
-      else if (stage !== 'heart') startHeart();
+      else if (stage !== 'heart') { dayEngageT = 0; dayDisengageT = 0; dayQuietT = 0; savedCalm = null; startHeart(); }
     } else if (stage === 'heart' || (stage === 'heartend' && nowMs() >= heartEndUntil)) {
       stopDeck(); stage = 'calm'; mood = null; nextMood = null;   // back up the tunnel, or it's over: the calm again
     } else if (stage === 'end' || stage === 'idle') {
@@ -2069,34 +2291,107 @@ export const AudioSys = (() => {
     const liveN = state.threat || 0;
     const nearD = state.nearest == null ? 999 : state.nearest;
     if (started && !state.over && !state.won && state.phase === 'prep') {
-      if (stage === 'calm' && liveN > 0 && nearD < DAY_FIGHT_RANGE) {
-        pendingDay = bandFor(liveN);
-        stage = 'dayfight'; dayBand = -1; mood = null; nextMood = null;
-        if (deckTrack) { deckTarget = 0; deckRate = 1 / FAST_FADE_S; }
+      if (!scoreIsOn) {
+        if (stage === 'calm' && liveN > 0 && nearD < DAY_FIGHT_RANGE) {
+          pendingDay = bandFor(liveN);
+          stage = 'dayfight'; dayBand = -1; mood = null; nextMood = null;
+          if (deckTrack) { deckTarget = 0; deckRate = 1 / FAST_FADE_S; }
+        } else if (stage === 'dayfight') {
+          if (liveN === 0) startCampClear();
+          else {
+            const b = bandFor(liveN);
+            const cur = pendingDay >= 0 ? pendingDay : dayBand;
+            if (b > cur) { pendingDay = b; if (deckTrack) { deckTarget = 0; deckRate = 1 / FAST_FADE_S; } }   // step up, never down
+          }
+        }
+      } else if (stage === 'calm') {
+        // AH-11: running past a stray zombie while exploring must not hijack the soundtrack;
+        // enter a layered daylight fight only on sustained close-range combat.
+        const bossClose = !!(state.boss || state.guardian) && nearD < 65;
+        const need = !liveN ? 1e9
+          : (bossClose || (liveN >= 4 && nearD < 42)) ? 1.0
+          : (liveN >= 2 && nearD < 32) ? 2.0
+          : (nearD < 22 ? 3.5 : 1e9);
+        if (need < 1e8) dayEngageT += dt;
+        else dayEngageT = Math.max(0, dayEngageT - dt * 1.5);
+        if (dayEngageT >= need) {
+          dayEngageT = 0; dayDisengageT = 0; dayQuietT = 0;
+          if (deck && deckTrack && !sec && deck.duration && isFinite(deck.duration) && deck.duration - deck.currentTime > 45 && !isPlaceMood(mood)) {
+            savedCalm = { track: deckTrack, mood, time: deck.currentTime };
+          } else {
+            savedCalm = null;
+          }
+          pendingDay = bandFor(liveN); pendingDaySince = nowMs();
+          loadSections(DAY_FIGHT.tracks[pendingDay]);
+          stage = 'dayfight'; dayBand = -1; mood = null; nextMood = null;
+          if (deckTrack) { deckTarget = 0; deckRate = 1 / 1.6; }
+        }
       } else if (stage === 'dayfight') {
-        if (liveN === 0) startCampClear();
-        else {
-          const b = bandFor(liveN);
-          const cur = pendingDay >= 0 ? pendingDay : dayBand;
-          if (b > cur) { pendingDay = b; if (deckTrack) { deckTarget = 0; deckRate = 1 / FAST_FADE_S; } }   // step up, never down
+        if (liveN === 0) {
+          dayDisengageT = 0;
+          dayQuietT += dt;
+          if (dayQuietT >= 0.35) startCampClear();
+        } else {
+          dayQuietT = 0;
+          if (nearD > 85) {
+            dayDisengageT += dt;
+            if (dayDisengageT >= 8.0) {
+              stage = 'dayretreat'; dayBand = -1; pendingDay = -1; dayDisengageT = 0;
+              if (deckTrack) { deckTarget = 0; deckRate = 1 / 3.0; }
+            }
+          } else {
+            dayDisengageT = 0;
+            const b = bandFor(liveN);
+            const cur = pendingDay >= 0 ? pendingDay : dayBand;
+            if (b > cur && liveN >= 11 && nowSec - dayFightStartedAt >= 20) {
+              pendingDay = b; pendingDaySince = nowMs();
+              loadSections(DAY_FIGHT.tracks[pendingDay]);
+              if (deckTrack) { deckTarget = 0; deckRate = 1 / 1.6; }
+            }
+          }
         }
       }
     }
     if (stage === 'calm') {
       const want = lastCalm;
-      // CL-294: into or out of a place's music no sooner than gapS after the last such change
-      const held = mood && (isPlaceMood(want) || isPlaceMood(mood)) && nowMs() / 1000 - calmSwitchedAt < calmFlow.gapS;
-      if (want !== mood && !held) nextMood = want;
-      else if (want === mood && nextMood && nextMood !== mood) nextMood = null;   // he came back before it moved
+      if (scoreIsOn && want !== mood && deckTrack && (MUSIC_POOLS[want] || []).includes(deckTrack)) {
+        // AH-11: seamless pool adoption (menu -> dawnprep -> day, dusk -> night) with zero cut.
+        mood = want; nextMood = null; lastTrack[want] = deckTrack;
+        if (Array.isArray(poolQueue[want])) poolQueue[want] = poolQueue[want].filter((t) => t !== deckTrack);
+      } else if (want !== mood) {
+        // CL-294 / AH-11: into or out of a place's music no sooner than gapS; hold active calm tracks for minTrackS.
+        const placeHeld = !!(mood && (isPlaceMood(want) || isPlaceMood(mood)) && nowSec - calmSwitchedAt < calmFlow.gapS);
+        const commitHeld = !!(scoreIsOn && mood && deckTrack && want !== 'menu' && nowSec - calmTrackStartedAt < calmFlow.minTrackS);
+        if (!placeHeld && !commitHeld) nextMood = want;
+      } else if (want === mood && nextMood && nextMood !== mood) {
+        nextMood = null;   // he came back before it moved
+      }
+      if (!nextMood && deckTrack && deckTarget < 1) { deckTarget = 1; deckRate = 1 / FADE_IN_S; }   // AH-11: restore volume if a fade-out was cancelled
     }
     // --- the fast fades finishing ---
     if (stage === 'release' && (!deckTrack || deckLevel <= 0.001)) startRelief();
-    if (stage === 'campclear' && (typeof performance !== 'undefined' ? performance.now() : Date.now()) >= campUntil) {
+    if (stage === 'campclear' && nowMs() >= campUntil) {
       stopDeck();
       stage = 'calm'; mood = lastCalm; nextMood = null;
-      startDeck(pickTrack(mood), { level: 0, fadeIn: CAMP_FADE_IN_S });
+      calmTrackStartedAt = nowSec;
+      if (scoreIsOn && savedCalm && savedCalm.track && (MUSIC_POOLS[mood] || []).includes(savedCalm.track)) {
+        const resume = savedCalm; savedCalm = null;
+        startDeck(resume.track, { from: Math.max(0, resume.time - 2), level: 0, fadeIn: SCORE_CAMP_FADE_IN_S });
+      } else {
+        savedCalm = null;
+        startDeck(pickTrack(mood), { level: 0, fadeIn: scoreIsOn ? SCORE_CAMP_FADE_IN_S : CAMP_FADE_IN_S });
+      }
     }
-    if (stage === 'dayfight' && pendingDay >= 0 && (!deckTrack || deckLevel <= 0.001)) { stopDeck(); startDayTrack(pendingDay); }
+    if (stage === 'dayretreat' && (!deckTrack || deckLevel <= 0.001)) {
+      stopDeck();
+      stage = 'calm'; mood = lastCalm; nextMood = null;
+      gapT = 3.0;
+    }
+    if (stage === 'dayfight' && pendingDay >= 0 && (!deckTrack || deckLevel <= 0.001)) {
+      const pTrack = DAY_FIGHT.tracks[pendingDay];
+      const waitDecode = scoreIsOn && SECTIONED[pTrack] && SECTIONED[pTrack].layered && !sectionsReady(pTrack) && !secFailed(pTrack) && nowMs() - pendingDaySince < 2500;
+      if (!waitDecode) { stopDeck(); startDayTrack(pendingDay); }
+    }
 
     // --- the sting (alone) ---
     if (stingName) {
@@ -2107,12 +2402,35 @@ export const AudioSys = (() => {
     // --- the gap after the alarm sting ---
     if (stage === 'alarm' && !stingName && nowMs() >= alarmUntil) { stage = 'gap'; gapT = GAP_AFTER_ALARM; }
     if (stage === 'gap') { gapT -= dt; if (gapT <= 0) startFight(); }
-    // --- calm music: fade the old one right out, then the new one in ---
+    // --- calm music: fade the old one right out, let the valley breathe, then fade the new one in ---
     if (stage === 'calm') {
-      if (nextMood && deckTrack) { deckTarget = 0; deckRate = 1 / FADE_OUT_S; if (deckLevel <= 0.001) { stopDeck(); } }
-      if (nextMood && !deckTrack) { mood = nextMood; nextMood = null; gapT = 0; calmSwitchedAt = nowMs() / 1000; startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_S }); }
-      else if (!deckTrack && mood && gapT > 0) { gapT -= dt; if (gapT <= 0) startDeck(pickTrack(mood), { level: 0, fadeIn: 3 }); }
-      else if (!deckTrack && mood && gapT <= 0 && !nextMood) startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_S });
+      if (nextMood && deckTrack) {
+        deckTarget = 0; deckRate = 1 / (scoreIsOn ? SCORE_FADE_OUT_S : FADE_OUT_S);
+        if (deckLevel <= 0.001) { stopDeck(); if (scoreIsOn) gapT = SCORE_SWITCH_GAP_S; }
+      }
+      if (nextMood && !deckTrack) {
+        if (gapT > 0) { gapT -= dt; }
+        else {
+          mood = nextMood; nextMood = null; gapT = 0;
+          calmSwitchedAt = nowSec; calmTrackStartedAt = nowSec;
+          startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_S });
+        }
+      } else if (!deckTrack && mood && gapT > 0) {
+        gapT -= dt;
+        if (gapT <= 0) {
+          calmTrackStartedAt = nowSec;
+          if (scoreIsOn && savedCalm && savedCalm.track && (MUSIC_POOLS[mood] || []).includes(savedCalm.track)) {
+            const resume = savedCalm; savedCalm = null;
+            startDeck(resume.track, { from: Math.max(0, resume.time - 2), level: 0, fadeIn: SCORE_CAMP_FADE_IN_S });
+          } else {
+            savedCalm = null;
+            startDeck(pickTrack(mood), { level: 0, fadeIn: scoreIsOn ? FADE_IN_S : 3 });
+          }
+        }
+      } else if (!deckTrack && mood && gapT <= 0 && !nextMood) {
+        calmTrackStartedAt = nowSec;
+        startDeck(pickTrack(mood), { level: 0, fadeIn: FADE_IN_S });
+      }
     }
     // --- the fight follows the nearest zombie ---
     const live = state.threat || 0;
@@ -2126,6 +2444,9 @@ export const AudioSys = (() => {
     // --- levels ---
     const briefTarget = briefingOpen && started ? 0.5 : 1;
     briefDuck += (briefTarget - briefDuck) * Math.min(1, dt * 2);
+    const cueTarget = scoreIsOn && cuePlaying && nowSec < cuePlayingUntil ? 0.42 : 1;
+    if (cuePlaying && nowSec >= cuePlayingUntil) cuePlaying = false;
+    cueDuck += (cueTarget - cueDuck) * Math.min(1, dt * (cueTarget < cueDuck ? 5 : 1.8));
     const targetDuck = (state.paused ? 0.45 : 1) * (state.lowHp ? 0.8 : 1) * (state.shop ? 0.8 : 1);
     duck += (targetDuck - duck) * Math.min(1, dt * 2.5);
     musicShotDuck += (1 - musicShotDuck) * Math.min(1, dt * 1.8);
@@ -2137,20 +2458,22 @@ export const AudioSys = (() => {
       const dr = stage === 'calm' ? Math.max(0, Math.min(1, +state.dread || 0)) : 0;   // CL-82
       placeDread += ((1 - (1 - PLACE_DREAD) * dr) - placeDread) * Math.min(1, dt * 0.8);
       if (secLp && ctx) { try { secLp.frequency.setTargetAtTime(calmBelow ? BELOW_LP : 20000, ctx.currentTime, 0.5); } catch (_) {} }
+      if (deckLp && ctx) { try { deckLp.frequency.setTargetAtTime(calmBelow ? BELOW_LP : 20000, ctx.currentTime, 0.5); } catch (_) {} }
     }
     if (deckLevel !== deckTarget) {
       const step = deckRate * dt;
       deckLevel = deckLevel < deckTarget ? Math.min(deckTarget, deckLevel + step) : Math.max(deckTarget, deckLevel - step);
     }
     if (deckTrack && (deck || sec)) {
-      const fightMul = (stage === 'fight' || stage === 'dayfight' || stage === 'release' || stage === 'campclear') ? prox : 1;
+      const fightMul = (stage === 'fight' || stage === 'dayfight' || stage === 'dayretreat' || stage === 'release' || stage === 'campclear') ? prox : 1;
       const nightMul = (stage === 'fight' || stage === 'release') ? nm.gain : 1;   // CL-70: the wave only, not day fights
-      const v = MUSIC_VOL * gainOf(deckTrack) * deckLevel * fightMul * nightMul * briefDuck * duck * musicShotDuck * belowMusic * placeDread;
+      const v = MUSIC_VOL * gainOf(deckTrack) * deckLevel * fightMul * nightMul * briefDuck * duck * cueDuck * musicShotDuck * belowMusic * placeDread;
       const out = Math.max(0, Math.min(1, v));
       if (sec && secOut && ctx) {
         try { secOut.gain.setTargetAtTime(out, ctx.currentTime, 0.02); } catch (_) { secOut.gain.value = out; }
         if (stage === 'fight') secSpecialSwitch(state, dt);   // CL-275
         if (stage === 'fight' || stage === 'heart') secUpdate(state, dt);   // CL-85
+        else if (stage === 'dayfight') secLayersUpdate(state);   // AH-11: dynamic layers in daylight fights
       } else if (deck && Math.abs(out - deck.volume) > 0.0005) deck.volume = out;
     }
     if (stingName && deckTrack && ((deck && deck.volume > 0.001 && !deck.paused) || (sec && secOut && secOut.gain.value > 0.001))) overlapFrames++;
@@ -2164,7 +2487,7 @@ export const AudioSys = (() => {
       else if (d.type === 'wave-last-kill') finalePending = true;
       else if (d.type === 'briefing-open') briefingOpen = true;
       else if (d.type === 'briefing-closed') briefingOpen = false;
-      else if (d.type === 'run-reset') { briefingOpen = false; alarmPending = false; }
+      else if (d.type === 'run-reset') { briefingOpen = false; alarmPending = false; dayEngageT = 0; dayDisengageT = 0; dayQuietT = 0; savedCalm = null; lastClearAt = -1e9; }
     });
   }
   function setMood(next) { if (MUSIC_POOLS[next]) { stage = 'calm'; nextMood = next; } }
@@ -2192,6 +2515,7 @@ export const AudioSys = (() => {
     stopDeck(); stopSting();
     // The next updateMusic picks up the story from the game state.
     stage = 'idle'; mood = null; nextMood = null; gapT = 0;
+    dayEngageT = 0; dayDisengageT = 0; dayQuietT = 0; savedCalm = null; calmTrackStartedAt = -1e9; cuePlaying = false; cuePlayingUntil = 0;
     setTimeout(() => { try { cueLength('clear'); } catch (_) {} }, 1500);   // learn the sting's length early
   }
   function stopMusic() {
@@ -2207,15 +2531,15 @@ export const AudioSys = (() => {
         kit: sec && sec.layers ? sec.name : null, barS: sec ? sec.barS || null : null, failed: Object.keys(SECTIONED).filter((k) => SECTIONED[k].layered && secFailed(k)),
         specials: Object.assign({}, SCORE_SPECIALS), specialWant: specialWant, track: sec ? sec.track : null,
         motifs: Object.assign({}, SCORE_MOTIFS), motif: motif ? { kind: motif.kind, track: motif.track, started: motif.started } : null,
-        pools: Object.assign({}, SCORE_POOLS), stings: Object.assign({}, SCORE_STINGS), calmLost: scoreCalmLost,   // CL-275
-        place: { seen: placeSeen, settled: placeSettled, dwellS: calmFlow.dwellS, gapS: calmFlow.gapS, sinceSwitch: +(nowMs() / 1000 - calmSwitchedAt).toFixed(1) } },   // CL-294
-      deckTrack, deckLevel, volume: sec && secOut ? secOut.gain.value : (deck ? deck.volume : 0), prox, briefDuck, briefingOpen, day: lastDay, lastDeckError,
+        pools: Object.assign({}, SCORE_POOLS), stings: Object.assign({}, SCORE_STINGS), dayFight: SCORE_DAY_FIGHT ? Object.assign({}, SCORE_DAY_FIGHT) : null, calmLost: scoreCalmLost,   // CL-275 / AH-11
+        place: { seen: placeSeen, settled: placeSettled, dwellS: calmFlow.dwellS, gapS: calmFlow.gapS, minTrackS: calmFlow.minTrackS, sinceSwitch: +(nowMs() / 1000 - calmSwitchedAt).toFixed(1), trackAge: +(nowMs() / 1000 - calmTrackStartedAt).toFixed(1) } },   // CL-294 / AH-11
+      deckTrack, deckLevel, volume: sec && secOut ? secOut.gain.value : (deck ? deck.volume : 0), prox, briefDuck, cueDuck: +cueDuck.toFixed(3), briefingOpen, day: lastDay, lastDeckError,
       waveByDay: WAVE_BY_DAY.map((w) => Object.assign({}, w)),
       night: nightMusic(lastDay), nightCurve: Array.from({ length: 20 }, (_, i) => nightMusic(i + 1)),
       deckLoop: !!(sec || (deck && deck.loop)),
       section: sec ? sec.name : null, sectionMode: sec ? secMode : null, sectionPending: secPending ? secPending.name : null,
       specials: Object.assign({}, SPECIAL_TRACKS), special: lastState ? lastState.special || null : null,
-      below: { music: belowMusic, lp: secLp ? secLp.frequency.value : null },   // CL-101
+      below: { music: belowMusic, lp: sec ? (secLp ? secLp.frequency.value : null) : (deckLp ? deckLp.frequency.value : (secLp ? secLp.frequency.value : null)) },   // CL-101 / AH-11
       dread: placeDread,   // CL-82
       heartFalls,   // CL-85
       sectioned: Object.keys(SECTIONED), sectionsReady: Object.fromEntries(Object.keys(SECTIONED).map((k) => [k, sectionsReady(k)])),
@@ -3757,12 +4081,12 @@ export const AudioSys = (() => {
   }
 
   // --- Boots on boards: a hollow knock instead of the grass scuff.
-  function footstepWood(running) {
-    if (tk('player/footstep-wood', running ? 1 : 0.85)) return;   // CL-161
+  function footstepWood(running, gain = 1) {
+    if (tk('player/footstep-wood', (running ? 1 : 0.85) * gain)) return;   // CL-161
     const p = 0.9 + Math.random() * 0.2;
-    playTone({ freq: 150 * p, type: 'sine', dur: 0.06, vol: running ? 0.08 : 0.055, slideTo: 95 * p });
-    playNoise({ dur: 0.035, vol: running ? 0.06 : 0.04, filterFreq: 1100 * p, filterType: 'bandpass', q: 1.4 });
-    if (Math.random() < 0.15) playTone({ freq: rr(280, 340), type: 'sawtooth', dur: 0.12, vol: 0.012, when: 0.04, slideTo: 250 }); // a board creaks
+    playTone({ freq: 150 * p, type: 'sine', dur: 0.06, vol: (running ? 0.08 : 0.055) * gain, slideTo: 95 * p });
+    playNoise({ dur: 0.035, vol: (running ? 0.06 : 0.04) * gain, filterFreq: 1100 * p, filterType: 'bandpass', q: 1.4 });
+    if (Math.random() < 0.15) playTone({ freq: rr(280, 340), type: 'sawtooth', dur: 0.12, vol: 0.012 * gain, when: 0.04, slideTo: 250 }); // a board creaks
   }
 
   // --- HQ sounds ---------------------------------------------------------------
@@ -4132,6 +4456,69 @@ export const AudioSys = (() => {
     playTone({ freq: 1760, type: 'sine', dur: 0.3, vol: 0.015 * q.vol, attack: 0.005, pan: q.pan });
     playNoise({ dur: 0.04, vol: 0.02 * q.vol, filterFreq: 5000, filterType: 'highpass', pan: q.pan });
   }
+  // AH-15: tactile, immersive/impactful daytime quest audio cues (docs/sound-principles.md).
+  function jackPump(pumps = 1, volume = 1, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    const pitch = 1 + Math.min(8, Math.max(0, pumps | 0)) * 0.045;
+    playNoise({ dur: 0.055, vol: 0.14 * q.vol, filterFreq: 2100 * pitch, filterType: 'bandpass', attack: 0.002, pan: q.pan });
+    playTone({ freq: 145 * pitch, type: 'triangle', dur: 0.11, vol: 0.09 * q.vol, slideTo: 92 * pitch, attack: 0.004, pan: q.pan });
+    playNoise({ dur: 0.14, vol: 0.045 * q.vol, filterFreq: 1450, filterType: 'highpass', when: 0.04, attack: 0.015, pan: q.pan });
+    playTone({ freq: 210 * pitch, type: 'sawtooth', dur: 0.19, vol: 0.026 * q.vol, slideTo: 168 * pitch, when: 0.05, attack: 0.02, pan: q.pan });
+  }
+  function jackSlip(volume = 1, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    playNoise({ dur: 0.16, vol: 0.18 * q.vol, filterFreq: 1100, filterType: 'bandpass', attack: 0.002, pan: q.pan });
+    playTone({ freq: 185, type: 'sawtooth', dur: 0.22, vol: 0.08 * q.vol, slideTo: 62, attack: 0.004, pan: q.pan });
+    playTone({ freq: 520, type: 'square', dur: 0.07, vol: 0.035 * q.vol, slideTo: 290, when: 0.03, pan: q.pan });
+  }
+  function cabRattle(volume = 1, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    for (let i = 0; i < 3; i++) {
+      const w = i * 0.12;
+      playNoise({ dur: 0.075, vol: 0.16 * q.vol, filterFreq: 720 + i * 180, filterType: 'bandpass', when: w, attack: 0.002, pan: q.pan });
+      playTone({ freq: 92 + i * 14, type: 'square', dur: 0.08, vol: 0.07 * q.vol, slideTo: 54, when: w, pan: q.pan });
+    }
+  }
+  function acidSpray(volume = 1, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    playNoise({ dur: 0.34, vol: 0.19 * q.vol, filterFreq: 2600, filterType: 'bandpass', attack: 0.01, pan: q.pan });
+    playNoise({ dur: 0.28, vol: 0.11 * q.vol, filterFreq: 4800, filterType: 'highpass', when: 0.05, attack: 0.02, pan: q.pan });
+    playTone({ freq: 340, type: 'sawtooth', dur: 0.24, vol: 0.05 * q.vol, slideTo: 130, when: 0.02, pan: q.pan });
+  }
+  function stoneStep(volume = 0.85, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    const jit = 0.94 + Math.random() * 0.12;
+    playNoise({ dur: 0.05, vol: 0.11 * q.vol, filterFreq: 1350 * jit, filterType: 'bandpass', attack: 0.002, pan: q.pan });
+    playTone({ freq: 240 * jit, type: 'triangle', dur: 0.065, vol: 0.055 * q.vol, slideTo: 120 * jit, attack: 0.002, pan: q.pan });
+  }
+  function trapClamp(volume = 1, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    playNoise({ dur: 0.12, vol: 0.26 * q.vol, filterFreq: 3400, filterType: 'highpass', attack: 0.001, pan: q.pan });
+    playTone({ freq: 1120, type: 'triangle', dur: 0.28, vol: 0.085 * q.vol, slideTo: 540, attack: 0.001, pan: q.pan });
+    playTone({ freq: 145, type: 'sawtooth', dur: 0.14, vol: 0.11 * q.vol, slideTo: 58, attack: 0.002, pan: q.pan });
+  }
+  function trapPry(volume = 0.85, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    playNoise({ dur: 0.07, vol: 0.10 * q.vol, filterFreq: 2800, filterType: 'bandpass', attack: 0.003, pan: q.pan });
+    playTone({ freq: 420, type: 'sawtooth', dur: 0.11, vol: 0.045 * q.vol, slideTo: 610, attack: 0.01, pan: q.pan });
+  }
+  function fuelGlug(volume = 0.75, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    const jit = 0.92 + Math.random() * 0.16;
+    playTone({ freq: 210 * jit, type: 'sine', dur: 0.09, vol: 0.055 * q.vol, slideTo: 360 * jit, attack: 0.012, pan: q.pan });
+    playNoise({ dur: 0.08, vol: 0.04 * q.vol, filterFreq: 900, filterType: 'bandpass', when: 0.03, attack: 0.01, pan: q.pan });
+  }
+  function ropeSnap(volume = 1, pan = 0) {
+    const q = placeCue(volume, pan); if (!q) return;
+    playNoise({ dur: 0.06, vol: 0.22 * q.vol, filterFreq: 3600, filterType: 'highpass', attack: 0.001, pan: q.pan });
+    playTone({ freq: 680, type: 'triangle', dur: 0.11, vol: 0.075 * q.vol, slideTo: 190, attack: 0.001, pan: q.pan });
+  }
+  function bountyClear(volume = 0.9) {
+    const q = placeCue(volume, 0); if (!q) return;
+    playTone({ freq: 523.25, type: 'triangle', dur: 0.18, vol: 0.06 * q.vol, attack: 0.008 });
+    playTone({ freq: 659.25, type: 'triangle', dur: 0.22, vol: 0.065 * q.vol, when: 0.11, attack: 0.008 });
+    playTone({ freq: 783.99, type: 'sine', dur: 0.42, vol: 0.07 * q.vol, when: 0.22, attack: 0.01 });
+  }
   // GP-20005: a woods warning, synthesized (no pack). snap is a branch, brush/rustle the undergrowth, leaves a dry footfall.
   let woodsWarnCd = 0;
   function woodsWarning(kind, volume = 1, pan = 0) {
@@ -4154,7 +4541,7 @@ export const AudioSys = (() => {
     }
   }
   const api = {
-    setTraining,trainingMotif,trainingCue:(kind)=>{if(trainingMode&&!muted){if(trainingFacility?.cue(kind))return;if(TRAIN_TAKE[kind]&&tk(TRAIN_TAKE[kind],kind==='step'?0.85:1))return;trainingSound?.cue(kind);}},   // CL-161: Jerry's takes first
+    setTraining,trainingMotif,trainingCue:(kind,gain=1)=>{if(trainingMode&&!muted){if(trainingFacility?.cue(kind))return;if(TRAIN_TAKE[kind]&&tk(TRAIN_TAKE[kind],kind==='step'?0.85*gain:1))return;trainingSound?.cue(kind,gain);}},   // CL-161: Jerry's takes first
     trainingState:()=>({enabled:trainingMode,...trainingSound?.state(),facility:trainingFacility?.state()}),
     unlock, toggleMute, isMuted, setMuted,
     fire: W(fire, [0.5, 0.75]), fireWeapon: W(fireWeapon, (id) => SHOT_DUCK[id] || [0.45, 0.7]),
@@ -4182,7 +4569,7 @@ export const AudioSys = (() => {
     zombieVoice, nvgToggle, nvgHum, klaxon: W(klaxon, [0.3, 0.6, 0.3]), alarmRumble, caveScreech, caveGroan, pitRumble, flareWhistle, flareBurst, hqMachine, hqDing, bagThrow, skullPickup, kioskBuy, kioskTab, doorSound, footstepWood,
     spit, acidHit, scream, bossSlam: W(bossSlam, BIG), bossRoar, guardianGrowl, spikeSnap, flameBurst: W(flameBurst, [0.6, 0.82]), stopFlames, fireHiss, fireCrackle, generatorHum, lighterStrike,
     crateLand, pickup, repairClank, sellChime,
-    bulletImpact: W(bulletImpact), knifeHit: W(knifeHit), gore: W(gore), grenadeThrow: W(grenadeThrow),
+    bulletImpact: W(bulletImpact), propImpact: W(propImpact), propBreak: W(propBreak), propHiss, knifeHit: W(knifeHit), gore: W(gore), grenadeThrow: W(grenadeThrow),
     grenadeBounce: W(grenadeBounce), heavyStep, emerge, shutter, medkit, medPen, playerBreath, deadVoice, DEAD_VOICES, voiceCount, deadStep, stepCount, shotCount, planeFlyover, chuteOpen, gravePat, chisel, heave, bigSplash, graveAmbience, surface,
     // Read-only view of the mix, for tests and the perf overlay.
     mixState: () => ({ ctx: ctx ? ctx.state : 'none', weap: weapBus ? weapBus.gain.value : null, fx: fxBus ? fxBus.gain.value : null, amb: ambBus ? ambBus.gain.value : null, masterVolume: userMasterGain ? userMasterGain.gain.value : null, musicVolume: userMusicGain ? userMusicGain.gain.value : null, ambienceVolume: userAmbienceGain ? userAmbienceGain.gain.value : null, musicDuck: musicShotDuck, rain: rainLoop ? rainLoop.gain.gain.value : null }),
@@ -4194,6 +4581,7 @@ export const AudioSys = (() => {
     trainingAlarm,   // CL-159
     relayClunk, relaySpark, relayStatic, relayBeep, relayBoot, relayKey, relayOpen,   // CL-183
     boltCuttersTake, boltCutterBite, chainSnap, truckAlarm,   // CL-216
+    jackPump, jackSlip, cabRattle, acidSpray, stoneStep, trapClamp, trapPry, fuelGlug, ropeSnap, bountyClear,   // AH-15
     katanaSwing: W(katanaSwing), katanaHit: W(katanaHit), katanaDraw, vaultDoor, vaultLift, paperRustle, cameraClick,   // CL-184; cameraClick CL-272
     knockout, knockoutEnd, knockoutDbg: () => ({ gain: koGain ? koGain.gain.value : null, ringing: !!koRing }),   // CL-171
     take: playTake, takesInit: () => takes.init(), takesRefresh: () => takes.refresh(), takesState: () => takes.state(), takesPreload: (ids) => takes.preload(ids),   // CL-148
@@ -4250,6 +4638,6 @@ export const AudioSys = (() => {
     const original=api[name];api[name]=(...args)=>{if(!trainingMode)return original(...args);};
   }
   const outdoorStep=api.footstep;
-  api.footstep=(...args)=>trainingMode?api.trainingCue('step'):outdoorStep(...args);
+  api.footstep=(...args)=>trainingMode?api.trainingCue('step',args[3]):outdoorStep(...args);
   return api;
 })();

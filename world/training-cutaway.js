@@ -91,22 +91,37 @@ export function partitionTrainingShell(T, tgGroup, origin) {
     pair.usingFade = fade;
     for (const mesh of pair.meshes) mesh.material = fade ? pair.fade : pair.solid;
   }
-  function syncMaterials() {
-    for (const e of entries) for (let i = 0; i < e.pairs.length; i++) {
-      const { source, pair } = e.pairs[i];
-      pair.solid.opacity = source.opacity;
-      pair.fade.opacity = source.transparent ? source.opacity * e.opacity : Math.min(source.opacity * e.opacity, .999);
-      pair.solid.color?.copy(source.color);
-      pair.fade.color?.copy(source.color);
-      if (source.emissive) {
-        pair.solid.emissive.copy(source.emissive);
-        pair.solid.emissiveIntensity = source.emissiveIntensity;
-        pair.fade.emissive.copy(source.emissive);
-        pair.fade.emissiveIntensity = source.emissiveIntensity;
+  function syncMaterials(force = false) {
+    for (const e of entries) {
+      let dirty = force || e._lastOp !== e.opacity;
+      if (!dirty) {
+        for (let i = 0; i < e.pairs.length; i++) {
+          const { source, pair } = e.pairs[i];
+          if (pair._sOp !== source.opacity || (source.emissive && pair._sEmI !== source.emissiveIntensity)) {
+            dirty = true; break;
+          }
+        }
       }
-      // Keep both render states compiled. A fade only swaps the mesh's material;
-      // changing transparent on a live WebGPU material rebuilds its pipeline.
-      useFade(pair, e.opacity < .995 || source.transparent);
+      if (!dirty) continue;
+      e._lastOp = e.opacity;
+      for (let i = 0; i < e.pairs.length; i++) {
+        const { source, pair } = e.pairs[i];
+        pair._sOp = source.opacity;
+        pair.solid.opacity = source.opacity;
+        pair.fade.opacity = source.transparent ? source.opacity * e.opacity : Math.min(source.opacity * e.opacity, .999);
+        pair.solid.color?.copy(source.color);
+        pair.fade.color?.copy(source.color);
+        if (source.emissive) {
+          pair._sEmI = source.emissiveIntensity;
+          pair.solid.emissive.copy(source.emissive);
+          pair.solid.emissiveIntensity = source.emissiveIntensity;
+          pair.fade.emissive.copy(source.emissive);
+          pair.fade.emissiveIntensity = source.emissiveIntensity;
+        }
+        // Keep both render states compiled. A fade only swaps the mesh's material;
+        // changing transparent on a live WebGPU material rebuilds its pipeline.
+        useFade(pair, e.opacity < .995 || source.transparent);
+      }
     }
   }
   function update(camera, player, dt = 1 / 60) {

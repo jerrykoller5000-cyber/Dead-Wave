@@ -314,3 +314,25 @@ test('buildTrapperYardParts constructs 8-row trapper yard with 32 stones, 32 pos
   assert.equal(campLm.spawnColliders.includes(cabinSolid), true, 'cabin spawnCollider preserved');
   assert.equal(campGeo.attributes.position.array.length, 18, 'camp mesh triangles preserved (AG-149 / CL-256 commit b117bc44)');
 });
+
+test('pry() actively reduces bear trap hold time until freed while keeping initial 3.0s snap', () => {
+  const p = createTrapperPath(Math.random);
+  p.reset(Math.random, [0, 1, 2, 3, 0, 1, 2, 3]);
+  assert.equal(p.pry().kind, 'none');
+
+  const wrong = p.stoneLocal(0, 2);
+  const snap = p.step(wrong.x, wrong.z, 0.016, { grounded: true, day: 1 });
+  assert.equal(snap.kind, 'snap');
+  assert.equal(p.state.holdT, 3.0);
+
+  const r1 = p.pry(0.45);
+  assert.equal(r1.kind, 'pry');
+  assert.ok(Math.abs(r1.holdT - 2.55) < 1e-6);
+  assert.equal(p.state.pries, 1);
+
+  let last = r1;
+  for (let i = 0; i < 6 && p.held(); i++) last = p.pry(0.45);
+  assert.equal(last.kind, 'freed');
+  assert.equal(p.held(), false);
+  assert.equal(p.state.holdT, 0);
+});

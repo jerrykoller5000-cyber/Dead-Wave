@@ -1,0 +1,467 @@
+{
+  "cmd": "batch",
+  "shots": [
+    {
+      "target": "xyz:0,-200,-644.6",
+      "cam": {
+        "x": 0,
+        "y": -198.3,
+        "z": -646,
+        "tx": 0,
+        "ty": -200,
+        "tz": -644.6,
+        "fov": 65
+      },
+      "caption": "C01-floor-feet Floor tile at feet (~1.5 m, eye height)",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C01-floor-feet.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:0,-200,-639.5",
+      "cam": {
+        "x": 0,
+        "y": -198.3,
+        "z": -649.5,
+        "tx": 0,
+        "ty": -200,
+        "tz": -639.5,
+        "fov": 55
+      },
+      "caption": "C02-floor-10m Floor tile at 10 m grazing angle + firing line paint",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C02-floor-10m.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:0,-194.2,-635.5",
+      "cam": {
+        "x": 0,
+        "y": -197.4,
+        "z": -643.5,
+        "tx": 0,
+        "ty": -194.2,
+        "tz": -635.5,
+        "fov": 72
+      },
+      "caption": "C03-ceiling-baffles Range ceiling baffles, fixtures, duct and pipe",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C03-ceiling-baffles.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-7.1,-199.2,-639.5",
+      "cam": {
+        "x": -5.3,
+        "y": -198.3,
+        "z": -641.3,
+        "tx": -7.1,
+        "ty": -199.2,
+        "tz": -639.5,
+        "fov": 60
+      },
+      "caption": "C04-bench-top-props Firing bench west end: top, ear tray, mug, clipboard, bucket, broom",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C04-bench-top-props.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:2.6,-199.3,-639.2",
+      "cam": {
+        "x": 2,
+        "y": -198.3,
+        "z": -642,
+        "tx": 2.6,
+        "ty": -199.3,
+        "tz": -639.2,
+        "fov": 62
+      },
+      "caption": "C05-bench-front-lanes Firing bench front, stripe, glove, lane numbers and floor paint",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C05-bench-front-lanes.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-8,-199.3,-616",
+      "cam": {
+        "x": -10.4,
+        "y": -198.3,
+        "z": -617.4,
+        "tx": -8,
+        "ty": -199.3,
+        "tz": -616,
+        "fov": 60
+      },
+      "caption": "C06-column-base Hangar column base (unobstructed east pillar z=-616)",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C06-column-base.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-8.5,-177.5,-640",
+      "cam": {
+        "x": -14.5,
+        "y": -183,
+        "z": -635.5,
+        "tx": -8.5,
+        "ty": -177.5,
+        "tz": -640,
+        "fov": 65
+      },
+      "caption": "C07-truss-joint Hangar roof truss-to-column joint and roof deck",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C07-truss-joint.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:7.95,-198.6,-643",
+      "cam": {
+        "x": 5.4,
+        "y": -198.3,
+        "z": -643,
+        "tx": 7.95,
+        "ty": -198.6,
+        "tz": -643,
+        "fov": 62
+      },
+      "caption": "C08-armory-booth Armory booth front (mesh, window, racks behind)",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C08-armory-booth.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:7.95,-198.6,-650.2",
+      "cam": {
+        "x": 5.7,
+        "y": -198.3,
+        "z": -650.2,
+        "tx": 7.95,
+        "ty": -198.6,
+        "tz": -650.2,
+        "fov": 60
+      },
+      "caption": "C09a-cif-copy CIF terminal copy close-up",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C09a-cif-copy.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:7.95,-198.6,-646.6",
+      "cam": {
+        "x": 5.7,
+        "y": -198.3,
+        "z": -646.6,
+        "tx": 7.95,
+        "ty": -198.6,
+        "tz": -646.6,
+        "fov": 60
+      },
+      "caption": "C09b-kiosk-copy Supply kiosk copy + wall notice close-up",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C09b-kiosk-copy.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:0,-198.5,-610",
+      "cam": {
+        "x": 0,
+        "y": -198.3,
+        "z": -613.2,
+        "tx": 0,
+        "ty": -198.5,
+        "tz": -610,
+        "fov": 62
+      },
+      "caption": "C10-backstop Range backstop rubber blocks, frame and hood",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C10-backstop.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:6,-199.3,-632",
+      "cam": {
+        "x": 4.5,
+        "y": -198.4,
+        "z": -633.8,
+        "tx": 6,
+        "ty": -199.3,
+        "tz": -632,
+        "fov": 60
+      },
+      "caption": "C11-target-base Target stand base, pole and lower plate (lane 1)",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C11-target-base.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-8,-198.4,-648",
+      "cam": {
+        "x": -10.8,
+        "y": -198.3,
+        "z": -648,
+        "tx": -8,
+        "ty": -198.4,
+        "tz": -648,
+        "fov": 65
+      },
+      "caption": "C12-security-shutter Security shutter (half-down), door trim and keypad",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C12-security-shutter.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); T.trainingDbg.tg().securityDoor.setState({ amount: 0.45, locked: true, blocked: false }); await wait(450);"
+    },
+    {
+      "target": "xyz:3.4,-198.5,-652",
+      "cam": {
+        "x": 3.4,
+        "y": -198.3,
+        "z": -649.2,
+        "tx": 3.4,
+        "ty": -198.5,
+        "tz": -652,
+        "fov": 65
+      },
+      "caption": "C13-backwall-rack Back-wall weapon rack (missing hook), Days board and roster",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C13-backwall-rack.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); T.trainingDbg.tg().securityDoor.setState({ amount: 1, locked: false, blocked: false }); await wait(450);"
+    },
+    {
+      "target": "xyz:-4.4,-198.6,-652",
+      "cam": {
+        "x": -4.4,
+        "y": -198.3,
+        "z": -649,
+        "tx": -4.4,
+        "ty": -198.6,
+        "tz": -652,
+        "fov": 68
+      },
+      "caption": "C14-lockers-switch Back-wall lockers (dented door), whiteboard and CG-7 light switch",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C14-lockers-switch.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:7.7,-198.2,-637.6",
+      "cam": {
+        "x": 6.2,
+        "y": -198.2,
+        "z": -638.8,
+        "tx": 7.7,
+        "ty": -198.2,
+        "tz": -637.6,
+        "fov": 50
+      },
+      "caption": "C15a-poster-sign Range safety sign on swing bracket (~1.8 m)",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C15a-poster-sign.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-8,-198.6,-643.5",
+      "cam": {
+        "x": -5.4,
+        "y": -198.3,
+        "z": -643.8,
+        "tx": -8,
+        "ty": -198.6,
+        "tz": -643.5,
+        "fov": 68
+      },
+      "caption": "C15b-monitor-console Cracked taped monitor (west wall) + range console",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C15b-monitor-console.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-6.85,-198.8,-642.1",
+      "cam": {
+        "x": -4.7,
+        "y": -198.3,
+        "z": -641.6,
+        "tx": -6.85,
+        "ty": -198.8,
+        "tz": -642.1,
+        "fov": 58
+      },
+      "caption": "C16-dummy Training melee dummy torso, seams, post and base",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C16-dummy.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-43.98,-198.6,-643",
+      "cam": {
+        "x": -41.4,
+        "y": -198.3,
+        "z": -643,
+        "tx": -43.98,
+        "ty": -198.6,
+        "tz": -643,
+        "fov": 62
+      },
+      "caption": "C17-skull-window Skull intake window + mounted specimens",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C17-skull-window.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-43.98,-198.6,-637",
+      "cam": {
+        "x": -41.6,
+        "y": -198.3,
+        "z": -637,
+        "tx": -43.98,
+        "ty": -198.6,
+        "tz": -637,
+        "fov": 60
+      },
+      "caption": "C18-hq-panel HQ zombie alarm panel close-up",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C18-hq-panel.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-10,-197.6,-636",
+      "cam": {
+        "x": -11.9,
+        "y": -198.2,
+        "z": -636,
+        "tx": -10,
+        "ty": -197.6,
+        "tz": -636,
+        "fov": 58
+      },
+      "caption": "C19-razor-fence Perimeter fence post, rails, chain-link and razor coil",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C19-razor-fence.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-26,-198.2,-612",
+      "cam": {
+        "x": -26,
+        "y": -198.3,
+        "z": -616.5,
+        "tx": -26,
+        "ty": -198.2,
+        "tz": -612,
+        "fov": 68
+      },
+      "caption": "C20-zombie-gate Zombie gate leaves, frame and containment header (closed)",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C20-zombie-gate.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-26,-198.3,-604",
+      "cam": {
+        "x": -26,
+        "y": -198.3,
+        "z": -614.5,
+        "tx": -26,
+        "ty": -198.3,
+        "tz": -604,
+        "fov": 65
+      },
+      "caption": "C21-tunnel-open Zombie holding tunnel interior (gate open, from room side)",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C21-tunnel-open.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); T.trainingDbg.tg().releaseGate.setState({ amount: 1, lit: true }); await wait(450);"
+    },
+    {
+      "target": "xyz:-31.5,-199.1,-612",
+      "cam": {
+        "x": -30.4,
+        "y": -198.3,
+        "z": -615.4,
+        "tx": -31.5,
+        "ty": -199.1,
+        "tz": -612,
+        "fov": 62
+      },
+      "caption": "C22-gate-containment-props Gate end: hose reel, stencil plate, floor drain and grime",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C22-gate-containment-props.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); T.trainingDbg.tg().releaseGate.setState({ amount: 0, lit: false }); await wait(450);"
+    },
+    {
+      "target": "xyz:-41.2,-199.1,-650.3",
+      "cam": {
+        "x": -38,
+        "y": -198.3,
+        "z": -648.3,
+        "tx": -41.2,
+        "ty": -199.1,
+        "tz": -650.3,
+        "fov": 68
+      },
+      "caption": "C23-infirmary-bed Infirmary inside: bed, IV stand, O2 tank, revivals tally",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C23-infirmary-bed.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-37.8,-199.1,-650.4",
+      "cam": {
+        "x": -40.5,
+        "y": -198.3,
+        "z": -648.3,
+        "tx": -37.8,
+        "ty": -199.1,
+        "tz": -650.4,
+        "fov": 68
+      },
+      "caption": "C24-infirmary-cabinet Infirmary inside: medical cabinet, sharps bin, mug, cot",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C24-infirmary-cabinet.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    },
+    {
+      "target": "xyz:-43.2,-194.4,-632",
+      "cam": {
+        "x": -39.5,
+        "y": -195.2,
+        "z": -633.8,
+        "tx": -43.2,
+        "ty": -194.4,
+        "tz": -632,
+        "fov": 58
+      },
+      "caption": "C25-containment-gun Containment wall turret close-up (west wall)",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C25-containment-gun.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); T.trainingDbg.tg().setLights(true); await wait(450);"
+    }
+  ],
+  "sheet": true,
+  "cols": 3,
+  "sheetFile": "review/CH-3/walk/sheet-closeups.jpg"
+}

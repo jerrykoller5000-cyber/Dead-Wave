@@ -1359,15 +1359,17 @@ function buildFullLengthTrousers(THREE, BGU, {
   const sMat = skinMat || bodyMat;
   const isLod = lod >= 1;
   // 1. CONTINUOUS THIGH TROUSER (both Left AND Right run cleanly up over hip/pelvis with zero brief-line pinch!)
-  const hipIn = isLeft ? -0.012 : +0.012;
+  const hipIn = isLeft ? -0.016 : +0.016;   // CC-369: the thigh tops tuck in under the belt (was .012)
   const thighGeo = loftProfile(THREE, [
-    [-0.415, 0.068, 0.073, 0,  0.002, 0.86],
-    [-0.365, 0.071, 0.077, 0,  0.002, 0.86],
+    // CC-369 (D-242 #9): the shin's kneecap (rz .077 + knee pop .007) poked 1-1.3 cm out past the thigh's lower edge at the
+    // front, a hard rim across the knee: the thigh's last 5 cm now cover it (2-4 mm over it all round).
+    [-0.415, 0.070, 0.086, 0,  0.006, 0.84],
+    [-0.365, 0.072, 0.084, 0,  0.004, 0.85],
     [-0.275, 0.078, 0.084, 0,  0.001, 0.84],
     [-0.175, 0.086, 0.092, 0,  0.000, 0.82],
     [-0.075, 0.095, 0.100, hipIn * 0.25, -0.002, 0.80],
-    [ 0.005, 0.104, 0.112, hipIn * 0.65, -0.004, 0.80],
-    [ 0.058, 0.102, 0.112, hipIn,        -0.003, 0.84]
+    [ 0.005, 0.096, 0.110, hipIn * 0.65, -0.004, 0.80],   // CC-369 (D-241): the thigh's top no longer stands out past the
+    [ 0.058, 0.088, 0.110, hipIn,        -0.003, 0.84]    // belt (was .104/.102): the hip widens smoothly below it
   ], {
     radialSegs: isLod ? 12 : 18,
     deform: (x, y, z, a) => {
@@ -1381,7 +1383,8 @@ function buildFullLengthTrousers(THREE, BGU, {
 
   const thighParts = [thighGeo];
   if (isLeft) {
-    const pocket = loftBubble(THREE, +0.088, -0.195, 0.004, 0.017, 0.062, 0.044, {
+    // CC-369 (D-242 #10): a flat patch pocket sewn on the thigh (was a round bubble standing 1.7 cm off it, a stuck-on disc)
+    const pocket = loftBubble(THREE, +0.084, -0.195, 0.004, 0.011, 0.060, 0.042, {
       rings: isLod ? 5 : 10,
       segs: isLod ? 8 : 12,
       deform: (x, y, z) => {
@@ -1407,9 +1410,9 @@ function buildFullLengthTrousers(THREE, BGU, {
   const makeShinProfile = (rowYs, radSegs, deformFn, skipCellFn = null) => {
     const lerpSpec = (y) => {
       const specs = [
-        [-0.232, 0.042, 0.046, 0,  0.000, 0.90],
-        [-0.195, 0.049, 0.054, 0,  0.002, 0.88],
-        [-0.172, 0.057, 0.062, 0,  0.004, 0.85],
+        [-0.232, 0.040, 0.044, 0,  0.000, 0.90],
+        [-0.195, 0.046, 0.051, 0,  0.002, 0.88],   // CC-369: tucked inside the slimmer boot top (3-4 mm)
+        [-0.172, 0.055, 0.060, 0,  0.003, 0.85],   // a soft bloused roll just over the boot's edge
         [-0.085, 0.063, 0.070, 0,  0.003, 0.84],
         [ 0.002, 0.066, 0.077, 0,  0.004, 0.83],
         [ 0.072, 0.068, 0.074, 0,  0.002, 0.86]
@@ -1827,11 +1830,13 @@ function buildHipsAndTorso(THREE, BGU, hipsGroup, torsoGroup, bodyMat, mats = {}
   // HIPS: Trouser pelvis + waistband + glutes + BELT WITH METALLIC BUCKLE!
   const hipsMesh = loftProfile(THREE, [
     [-0.102, 0.038, 0.048, 0,  0.002, 0.92], // tucks cleanly inside upper thigh trouser tops!
-    [-0.065, 0.105, 0.082, 0,  0.000, 0.86],
-    [-0.025, 0.178, 0.114, 0, -0.004, 0.80], // widest hip ~0.404 m (seamless into thigh!)
-    [ 0.025, 0.180, 0.118, 0, -0.002, 0.80],
-    [ 0.068, 0.158, 0.112, 0,  0.000, 0.84], // trouser waistband
-    [ 0.095, 0.146, 0.105, 0,  0.000, 0.88]
+    [-0.065, 0.106, 0.083, 0,  0.000, 0.86],
+    // CC-369 (D-241, Jerry: "the hips jut out in a shelf"): the hips no longer bulge out right under the belt (was .180 at
+    // the belt's lower edge, 1.2 cm out past the belt): the waistband runs on under the belt and the hips widen below it.
+    [-0.028, 0.170, 0.112, 0, -0.004, 0.80],
+    [ 0.020, 0.167, 0.114, 0, -0.002, 0.80],
+    [ 0.066, 0.158, 0.111, 0,  0.000, 0.84], // trouser waistband
+    [ 0.095, 0.148, 0.105, 0,  0.000, 0.88]
   ], {
     radialSegs: isLod ? 12 : 20,
     deform: (x, y, z, a) => {
@@ -1854,14 +1859,14 @@ function buildHipsAndTorso(THREE, BGU, hipsGroup, torsoGroup, bodyMat, mats = {}
 
   // Worn Leather BELT + 5 Belt Loops sitting visibly around waist (y_hips = 0.032..0.076 -> world 0.887..0.931)
   const beltStrap = loftProfile(THREE, [
-    [0.030, 0.168, 0.119, 0, 0.000, 0.82],
-    [0.052, 0.171, 0.121, 0, 0.000, 0.82],
-    [0.074, 0.167, 0.118, 0, 0.000, 0.82]
+    [0.030, 0.170, 0.121, 0, 0.000, 0.82], // CC-369: a belt's thickness (3-6 mm) over the waistband, not a 1-2.5 cm ring
+    [0.052, 0.166, 0.120, 0, 0.000, 0.82],
+    [0.074, 0.161, 0.117, 0, 0.000, 0.82]
   ], { radialSegs: isLod ? 12 : 20 });
   const beltGeos = [beltStrap];
   if (!isLod) {
     for (const ang of [-2.4, -1.1, -0.42, 0.42, 1.1, 2.4]) {
-      const lx = Math.sin(ang) * 0.162, lz = Math.cos(ang) * 0.116;
+      const lx = Math.sin(ang) * 0.159, lz = Math.cos(ang) * 0.113;   // CC-369: on the slimmer belt
       beltGeos.push(loftBubble(THREE, lx, 0.052, lz, 0.009, 0.025, 0.009, { rings: 4, segs: 8 }));
     }
   }
@@ -1874,7 +1879,7 @@ function buildHipsAndTorso(THREE, BGU, hipsGroup, torsoGroup, bodyMat, mats = {}
   });
 
   // Weathered Rectangular BELT BUCKLE at front center (slightly tilted worn look)
-  const bklFrame = loftBubble(THREE, 0, 0.051, 0.123, 0.032, 0.024, 0.008, {
+  const bklFrame = loftBubble(THREE, 0, 0.051, 0.122, 0.032, 0.024, 0.008, {
     rings: isLod ? 3 : 6, segs: isLod ? 8 : 12,
     deform: (x, y, z) => {
       // Recessed central prong pit + squared beveled outer rim
@@ -2089,10 +2094,13 @@ function buildLeg(THREE, BGU, side, hipsGroup, bodyMat, mats = {}, lod = 0) {
 
   const shaft = loftProfile(THREE, [
     [-0.062, 0.056, 0.072, 0,  0.014, 0.78],
-    [ 0.000, 0.055, 0.063, 0,  0.002, 0.85],
-    [ 0.065, 0.055, 0.060, 0, -0.001, 0.88],
-    [ 0.115, 0.060, 0.065, 0,  0.002, 0.86], // sturdy boot top cuff wraps OUTSIDE tucked trouser hem!
-    [ 0.132, 0.058, 0.063, 0,  0.002, 0.88]
+    // CC-369 (D-241, Jerry: "how the boots connect to the body look bad"): the shaft was a straight barrel with a flared
+    // 6 x 6.5 cm cuff standing out past the trouser leg. Now it narrows at the ankle (sides) and its top hugs the tucked
+    // trouser (3-4 mm of leather over it) with the edge rolled in, so the trouser leg runs on into the boot.
+    [ 0.000, 0.051, 0.063, 0,  0.002, 0.85],
+    [ 0.065, 0.050, 0.059, 0, -0.001, 0.88],
+    [ 0.110, 0.053, 0.059, 0,  0.001, 0.88],
+    [ 0.126, 0.050, 0.056, 0,  0.001, 0.90]
   ], {
     radialSegs: isLod ? 10 : 18,
     deform: (x, y, z, a) => {
@@ -2135,7 +2143,7 @@ function buildLeg(THREE, BGU, side, hipsGroup, bodyMat, mats = {}, lod = 0) {
     baseHex: PALETTE.boot,
     tintDarkHex: PALETTE.bootDark,
     colorNoise: 0.08,
-    noiseAmp: isLod ? 0.0009 : 0.0018,
+    noiseAmp: isLod ? 0.0004 : 0.0005,   // CC-369 (D-242 #6): smooth worn leather, not a lumpy pebble skin (was .0018)
     noiseFreq: 38,
     seed: isLeft ? 406 : 407
   });
@@ -2558,6 +2566,7 @@ export function buildShamblerV5(THREE, { lod = 0 } = {}) {
   root.updateMatrixWorld(true);
   tuckChestUnderYoke(THREE, root);
   root.userData.cc359Seams = blendShoulderAndElbowSeams(THREE, root);
+  root.userData.cc369Hem = restTankHemOnHips(THREE, root);
   return { root, bones, eyeMat: u.eyeMat, palette: PALETTE };
 }
 // CC-359 step 3 (Director 10:20Z: "blend the visible seam where the upper arm meets the shoulder"; Claude 5's second review: the
@@ -2686,4 +2695,45 @@ function tuckChestUnderYoke(THREE, root) {
     root.userData.cc359TuckNormals = [upd[0].length, upd[1].length]; }
   root.userData.cc359Tuck = { moved, max: +max.toFixed(4) };
   return root.userData.cc359Tuck;
+}
+
+// CC-369 (D-241, Jerry: "on the shambler the hips jut out in a shelf... usually rounded shapes, nothing awkward or jutting"):
+// the tank hung off the chest down to its hem, so the hem stood 1.5-5 cm proud of the belt and trousers all round (a skirt-like
+// ledge over the hips in every view). In the bare-skeleton pose, once per template, shapes only: the tank's lower band is drawn
+// in toward what is under it so the hem RESTS on the belt and hips (7 mm off them), easing back to AG's drape by 12 cm above
+// the belt. Each (angle, height) cell of the tank moves as one (the outer and inner layers, the hole rims and the hem binding
+// together, so the cloth keeps its thickness); never outward; the moves are smoothed between cells (no ripples).
+function restTankHemOnHips(THREE, root) {
+  let tank = null; const body = [];
+  root.traverse((o) => { if (!o.isMesh) return; if (o.name === 'shambler-tank-top') tank = o; else if (/pelvis|belt|thigh-trouser|torso-skin/.test(o.name)) body.push(o); });
+  if (!tank || !body.length) return { moved: 0 };
+  const inv = new THREE.Matrix4().copy(root.matrixWorld).invert(), Mt = new THREE.Matrix4().multiplyMatrices(inv, tank.matrixWorld), Mti = Mt.clone().invert();
+  const ZC = -0.003, NA = 72, YS = 0.005, BELT0 = 0.88, BELT1 = 0.935, TOP = 1.06, OFF = 0.007;
+  const aBin = (x, z) => ((Math.round(Math.atan2(x, z - ZC) / (Math.PI * 2) * NA) % NA) + NA) % NA;
+  const v = new THREE.Vector3(), beltFloor = new Float32Array(NA), local = new Map();
+  for (const m of body) { const M = new THREE.Matrix4().multiplyMatrices(inv, m.matrixWorld), P = m.geometry.attributes.position;
+    for (let i = 0; i < P.count; i++) { v.fromBufferAttribute(P, i).applyMatrix4(M); if (v.y < 0.78 || v.y > TOP) continue;
+      const a = aBin(v.x, v.z), r = Math.hypot(v.x, v.z - ZC);
+      if (v.y >= BELT0 && v.y <= BELT1 && /pelvis|belt/.test(m.name)) beltFloor[a] = Math.max(beltFloor[a], r);   // the belt and waistband (not the thigh tops)
+      const k = a + ':' + Math.round(v.y / YS); local.set(k, Math.max(local.get(k) || 0, r)); } }
+  { const fill = new Float32Array(NA), has = [...beltFloor.keys()].filter((a) => beltFloor[a] > 0);   // empty angle cells (a coarse LOD loft): interpolate round the waist
+    if (has.length) for (let a = 0; a < NA; a++) if (!(beltFloor[a] > 0)) {
+      let l = a, r = a, dl = 0, dr = 0; do { l = (l + NA - 1) % NA; dl++; } while (!(beltFloor[l] > 0)); do { r = (r + 1) % NA; dr++; } while (!(beltFloor[r] > 0));
+      fill[a] = (beltFloor[l] * dr + beltFloor[r] * dl) / (dl + dr); }
+    for (let a = 0; a < NA; a++) if (fill[a]) beltFloor[a] = fill[a]; }
+  const floorAt = (a, yb) => { let f = 0; for (let da = -2; da <= 2; da++) { const aa = (a + da + NA) % NA; f = Math.max(f, beltFloor[aa]); for (let dy = -2; dy <= 2; dy++) f = Math.max(f, local.get(aa + ':' + (yb + dy)) || 0); } return f; };
+  const P = tank.geometry.attributes.position, cells = new Map(), vi = [];
+  for (let i = 0; i < P.count; i++) { v.fromBufferAttribute(P, i).applyMatrix4(Mt); if (v.y > TOP) continue;
+    const a = aBin(v.x, v.z), yb = Math.round(v.y / YS), k = a + ':' + yb, r = Math.hypot(v.x, v.z - ZC);
+    const c = cells.get(k) || { a, yb, r: 0 }; c.r = Math.max(c.r, r); cells.set(k, c); vi.push([i, k]); }
+  for (const c of cells.values()) { const y = c.yb * YS, w = 1 - sstep(BELT1, TOP, y), f = floorAt(c.a, c.yb);
+    c.d = f < 0.1 ? 0 : Math.min(0.04, w * Math.max(0, c.r - (f + OFF)));   }   // no body under it (or too far): leave it
+  const dS = new Map();
+  for (const [k, c] of cells) { let s = 0, n = 0; for (let da = -1; da <= 1; da++) for (let dy = -1; dy <= 1; dy++) { const o = cells.get(((c.a + da + NA) % NA) + ':' + (c.yb + dy)); if (o) { s += o.d; n++; } } dS.set(k, Math.min(c.d, s / n) * 0.5 + (s / n) * 0.5); }
+  let moved = 0, max = 0;
+  for (const [i, k] of vi) { const d = dS.get(k); if (!(d > 1e-5)) continue;
+    v.fromBufferAttribute(P, i).applyMatrix4(Mt); const r = Math.hypot(v.x, v.z - ZC); if (r < 1e-4) continue;
+    const s = Math.max(0, r - d) / r; v.x *= s; v.z = ZC + (v.z - ZC) * s; v.applyMatrix4(Mti); P.setXYZ(i, v.x, v.y, v.z); moved++; if (d > max) max = d; }
+  if (moved) { P.needsUpdate = true; tank.geometry.computeVertexNormals(); weldSeamNormals(tank.geometry); tank.geometry.computeBoundingSphere(); }
+  return { moved, max: +max.toFixed(4) };
 }

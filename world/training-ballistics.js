@@ -1,5 +1,5 @@
 import { TRAINING, segmentBox } from './training.js';
-import { exactLayer, exactTrace } from './training-exact.js';
+import { buildMeshParts, exactLayer, exactTrace } from './training-exact.js';
 import { createImpactAtlas, impactAppearance, impactUV, createSurfaceMarkBatch } from '../studio/weapon-effects.js';
 export const IMPACT_LIFE = 20, IMPACT_FADE = 4;
 
@@ -58,7 +58,7 @@ export function traceTraining(tg, a, b, opts) {
     const len=Math.hypot(d.x,d.y,d.z)||1,tie=.002/len;
     let outside=!!glass;   // a camera outside the rooms looks through the shell's pieces as through its walls
     if(outside)for(let i=0;i<TRAINING_ROOMS.length;i++){const r=TRAINING_ROOMS[i];if(a.x>=tg.origin.x+r.minX&&a.x<=tg.origin.x+r.maxX&&a.z>=tg.origin.z+r.minZ&&a.z<=tg.origin.z+r.maxZ){outside=false;break;}}
-    const t=exactTrace(exact,a,b,Math.min(fraction,1),_exact,outside);
+    const t=exactTrace(exact,a,b,Math.min(fraction,1),_exact,outside,glass ? tg.cutaway?.ignoreSolid : null);
     if(t!==null&&t<fraction-tie){fraction=t;hitSolid=_exact.solid;exactHit=true;}
   }
   const floor=trainingFloorHit(tg,a,d);
@@ -91,6 +91,89 @@ export function traceTraining(tg, a, b, opts) {
 
 // Fixed-size pools: one static batch and one small batch per moving target.
 // Marks inherit the target hinge, so they fall/rise with its plate.
+function createMovingTrainingMarks(T, tg, material) {
+  const layers = new WeakMap();
+  const batches = new Map();
+  const scratch = { solid: null, nx: 0, ny: 0, nz: 0 };
+
+  const parents = (solid) => {
+    if (solid.containment) return tg.releaseGate?.leaves || [];
+    const parent = solid.securityDoor ? tg.securityDoor?.shutter
+      : solid.infirmaryFence ? tg.group.getObjectByName('training-infirmary-panels')
+      : tg.wear?.door?.pivot;
+    return parent ? [parent] : [];
+  };
+
+  function layerFor(parent) {
+    parent.updateWorldMatrix(true, true);
+    const matrix = parent.matrixWorld.elements;
+    const cached = layers.get(parent);
+    if (cached?.matrix.every((v, i) => v === matrix[i])) return cached;
+    const parts = [];
+    parent.traverseVisible((mesh) => {
+      if (!mesh.isMesh || mesh.isInstancedMesh || mesh.userData.isDecal) return;
+      const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+      // A projected mark needs solid material underneath it. Thin alpha-masked
+      // fence fabric keeps its impact feedback without adding a floating patch.
+      if (!materials.every(m => m && m.visible !== false && !m.transparent && !(m.alphaTest > 0))) return;
+      for (const part of buildMeshParts(mesh, Infinity)) parts.push({ ...part, mesh });
+    });
+    const layer = {
+      matrix: matrix.slice(), parts, boxes: new Float64Array(parts.length * 6),
+      tris: parts.map(part => part.tri), solids: parts.map(part => part.mesh)
+    };
+    parts.forEach((part, index) => {
+      layer.boxes.set([part.minX, part.maxX, part.minY, part.maxY, part.minZ, part.maxZ], index * 6);
+    });
+    layers.set(parent, layer);
+    return layer;
+  }
+
+  return {
+    add(collision, shot, look) {
+      const { from, to } = shot;
+      if (!from || !to) return false;
+      const dx = to.x - from.x, dy = to.y - from.y, dz = to.z - from.z;
+      const length = Math.hypot(dx, dy, dz);
+      if (!length) return false;
+      // The collision box may stop the round just in front of the drawn face.
+      // Probe that surface locally without changing where the round stopped.
+      const p = collision.point;
+      const offset = (distance) => ({ x:p.x + dx * distance / length, y:p.y + dy * distance / length, z:p.z + dz * distance / length });
+      const a = offset(-.08), b = offset(.35);
+      let closest = 1, contact = null;
+      for (const parent of parents(collision.solid)) {
+        if (!parent.visible) continue;
+        const layer = layerFor(parent);
+        const fraction = exactTrace(layer, a, b, closest, scratch);
+        if (fraction === null) continue;
+        closest = fraction;
+        contact = { parent, layer, mesh: scratch.solid, normal: { x:scratch.nx, y:scratch.ny, z:scratch.nz } };
+      }
+      if (!contact) return false;
+      const point = { x:a.x+(b.x-a.x)*closest, y:a.y+(b.y-a.y)*closest, z:a.z+(b.z-a.z)*closest };
+      const radius = Math.hypot(look.width, look.height) * .5 + .08;
+      const banks = contact.layer.parts.filter(part => part.mesh === contact.mesh &&
+        part.minX <= point.x+radius && part.maxX >= point.x-radius &&
+        part.minY <= point.y+radius && part.maxY >= point.y-radius &&
+        part.minZ <= point.z+radius && part.maxZ >= point.z-radius).map(part => part.tri);
+      let batch = batches.get(contact.parent);
+      if (!batch) {
+        batch = createSurfaceMarkBatch(T, contact.parent, material, {
+          capacity: 12, maxTriangles: 24, life: IMPACT_LIFE, fade: IMPACT_FADE,
+          name: 'training-moving-impact-marks', order: 1.1
+        });
+        batches.set(contact.parent, batch);
+      }
+      return batch.add({ point, normal: contact.normal, solid: collision.solid }, banks, look);
+    },
+    update(dt) { for (const batch of batches.values()) batch.update(dt); },
+    clear() { for (const batch of batches.values()) batch.clear(); },
+    count() { let count = 0; for (const batch of batches.values()) count += batch.count(); return count; },
+    dispose() { for (const batch of batches.values()) batch.dispose(); batches.clear(); }
+  };
+}
+
 export function createTrainingImpacts(T,tg) {
   const map=createImpactAtlas(T);
   const mat=new T.MeshBasicMaterial({map,transparent:true,vertexColors:true,depthWrite:false,side:T.DoubleSide,forceSinglePass:true,polygonOffset:true,polygonOffsetFactor:-3,polygonOffsetUnits:-3});
@@ -111,6 +194,7 @@ export function createTrainingImpacts(T,tg) {
   };
   const batches=[make(tg.group,128),...tg.targets.map(t=>make(t.pivot,16))];
   const projected=createSurfaceMarkBatch(T,tg.group,mat,{capacity:64,maxTriangles:32,life:IMPACT_LIFE,fade:IMPACT_FADE,name:'training-impact-projected-marks',order:1.1});
+  const moving = createMovingTrainingMarks(T, tg, mat);
   let sequence=0;
   const pos=new T.Vector3(),normal=new T.Vector3(),q=new T.Quaternion(),rollQ=new T.Quaternion(),parentQ=new T.Quaternion(),vertex=new T.Vector3(),front=new T.Vector3(0,0,1);
   return {
@@ -127,7 +211,12 @@ export function createTrainingImpacts(T,tg) {
       return()=>batches.forEach((b,i)=>{b.mesh.geometry.setDrawRange(0,ranges[i]);b.mesh.visible=visible[i];});
     },
     add(hit,shot={}){
+      if (hit.solid.kitProp || hit.solid.destructible) return;   // CG-7 / AH-12: loose or breakable props cannot keep a world-space mark.
       const target=hit.solid.target, batch=batches[target==null?0:target+1],look=impactAppearance(sequence++,target!=null,shot);
+      if (hit.solid.containment || hit.solid.securityDoor || hit.solid.infirmaryFence || hit.solid.lockerDoor) {
+        moving.add(hit, shot, look);
+        return;
+      }
       if(hit.exact){
         const p=hit.point,r=Math.hypot(look.width,look.height)*.5+.08;
         const banks=exactLayer(tg).parts.filter(b=>b.solid===hit.solid&&b.minX<=p.x+r&&b.maxX>=p.x-r&&b.minY<=p.y+r&&b.maxY>=p.y-r&&b.minZ<=p.z+r&&b.maxZ>=p.z-r).map(b=>b.tri);
@@ -152,6 +241,7 @@ export function createTrainingImpacts(T,tg) {
     update(dt){
       if(!(dt>0))return;
       projected.update(dt);
+      moving.update(dt);
       for(const b of batches){let dirty=false,alive=0;
         for(let j=0;j<b.capacity;j++)if(b.life[j]>0){
           b.life[j]=Math.max(0,b.life[j]-dt);if(b.life[j]>0)alive++;
@@ -161,9 +251,9 @@ export function createTrainingImpacts(T,tg) {
         if(!alive){b.mesh.geometry.setDrawRange(0,0);b.mesh.visible=false;b.count=0;b.next=0;}
       }
     },
-    clear(){projected.clear();sequence=0;for(const b of batches){b.mesh.geometry.setDrawRange(0,0);b.mesh.visible=false;b.count=0;b.next=0;b.life.fill(0);}},
-    count:()=>projected.count()+batches.reduce((n,b)=>n+b.life.reduce((a,t)=>a+(t>0?1:0),0),0),
-    dispose(){projected.dispose();for(const b of batches){b.mesh.removeFromParent();b.mesh.geometry.dispose();}mat.dispose();map?.dispose();}
+    clear(){projected.clear();moving.clear();sequence=0;for(const b of batches){b.mesh.geometry.setDrawRange(0,0);b.mesh.visible=false;b.count=0;b.next=0;b.life.fill(0);}},
+    count:()=>projected.count()+moving.count()+batches.reduce((n,b)=>n+b.life.reduce((a,t)=>a+(t>0?1:0),0),0),
+    dispose(){projected.dispose();moving.dispose();for(const b of batches){b.mesh.removeFromParent();b.mesh.geometry.dispose();}mat.dispose();map?.dispose();}
   };
 }
 
@@ -257,6 +347,7 @@ export function createTrainingChar(T, tg) {
       return () => batches.forEach((b, i) => { b.mesh.geometry.setDrawRange(0, ranges[i]); b.mesh.visible = visible[i]; });
     },
     add(hit, strength = 0.82) {
+      if (hit.solid?.kitProp || hit.solid?.destructible) return;   // AH-12: do not leave floating char quads on breakable/loose props.
       const target = hit.solid?.target;
       if(hit.exact){
         const p=hit.point,n=hit.normal,isWall=Math.abs(n.y)<.45;

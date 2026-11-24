@@ -41,14 +41,16 @@ test('an early repair catches up before 18 and keeps both lines on the board, ne
 test('boat dispatches belong to mornings 18–20 even after a late repair', () => {
   const story=createRelayStory();story.reset('run');
   for(let day=1;day<=15;day++)story.morning({runId:'run',day,repaired:day>=12});
-  assert.equal(story.read(true).number,8);
-  assert.deepEqual(story.morning({runId:'run',day:16,repaired:true}).lines.map(x=>x.number),[10,9]);
-  assert.deepEqual(story.morning({runId:'run',day:17,repaired:true}).lines.map(x=>x.number),[12,11]);
+  // CK-1: catch-up takes up to three a morning, so a repair on day 12 still hears every line before the boat lines.
+  assert.equal(story.read(true).number,12);
+  assert.deepEqual(story.morning({runId:'run',day:16,repaired:true}).lines.map(x=>x.number),[15,14,13]);
+  assert.deepEqual(story.morning({runId:'run',day:17,repaired:true}).lines.map(x=>x.number),[17,16]);
   for(const day of [18,19,20])assert.equal(story.morning({runId:'run',day,repaired:true}).number,day);
   story.reset('late');
   for(let day=1;day<=18;day++)story.morning({runId:'late',day,repaired:false});
   const lateFirst=story.morning({runId:'late',day:19,repaired:true});
   assert.equal(lateFirst.lines[0].number,19);
+  assert.deepEqual(lateFirst.lines.map(x=>x.number),[19,14,12,1],'CK-1: a late repair still hears the key lines');
   assert.equal(story.morning({runId:'late',day:20,repaired:true}).number,20);
   assert.equal(story.morning({runId:'run',day:20,repaired:true}),null,'old run cannot advance new story');
   story.reset('fresh');assert.equal(story.read(true).status,'awaiting');
@@ -70,7 +72,7 @@ test('Hush guidance waits for the actual spare board and does not replace number
   assert.deepEqual(story.morning({runId:'board',day:5,repaired:true,board:'wired'}).lines.map(entry=>entry.number),[5]);
   story.reset('wired');
   const wired=story.morning({runId:'wired',day:19,repaired:true,board:'wired'});
-  assert.deepEqual(wired.lines.map(entry=>entry.number),[null,19]);
+  assert.deepEqual(wired.lines.map(entry=>entry.number),[null,19,14,12,1]);
   assert.equal(wired.line,text('story.relay.hushOriginWired'));
   assert.doesNotMatch(wired.line,/Bring it/);
   assert.equal(story.morning({runId:'wired',day:20,repaired:true,board:'wired'}).number,20);
@@ -88,4 +90,19 @@ test('first delve replaces unheard line eight or adds a dispatch next morning on
   story.firstDelve('b');
   assert.equal(story.morning({runId:'b',day:11,repaired:true}).lines[0].line,text('story.relay.delve'));
   assert.equal(story.morning({runId:'b',day:12,repaired:true}).lines.length,1);
+});
+
+test('CK-1: lines 1, 12 and 14 are heard whatever day the relay comes up, and a repair after 20 still speaks once', () => {
+  for (let repair = 1; repair <= 20; repair++) {
+    const story = createRelayStory(); story.reset(repair); const heard = new Set();
+    for (let day = 1; day <= 21; day++) {
+      const dispatch = story.morning({runId:repair,day,repaired:day>=repair});
+      if (dispatch) for (const entry of dispatch.lines) if (Number.isInteger(entry.number)) heard.add(entry.number);
+    }
+    for (const key of [1, 12, 14, 20]) assert(heard.has(key), `repair on day ${repair} never heard line ${key}`);
+  }
+  const late = createRelayStory(); late.reset('x');
+  for (let day = 1; day <= 20; day++) late.morning({runId:'x',day,repaired:false});
+  assert.deepEqual(late.morning({runId:'x',day:21,repaired:true}).lines.map(x=>x.number),[20,1]);
+  assert.equal(late.morning({runId:'x',day:22,repaired:true}),null);
 });

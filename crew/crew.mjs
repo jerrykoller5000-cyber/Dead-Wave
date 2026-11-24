@@ -69,8 +69,8 @@ import { requestStatus } from './request-status.mjs';
 
 const CREW = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(CREW, '..');
-const AGENTS = { claude: 'CLAUDE DIRECTOR', claude2: 'Claude 2', claude3: 'Claude 3', claude4: 'Claude 1', claude5: 'Claude 5', claude6: 'Claude 6', claude7: 'Claude 7', claude8: 'Claude 8', claude9: 'Claude 9', claude10: 'Claude 10', chatgpt: 'ChatGPT', chatgpt2: 'ChatGPT 2', chatgpt3: 'ChatGPT 3', antigravity: 'Antigravity', antigravity2: 'Antigravity 2' };
-const PREFIX = { claude: 'CL', claude2: 'CB', claude3: 'CC', claude4: 'CD', claude5: 'CE', claude6: 'CF', claude7: 'CG', claude8: 'CH', claude9: 'CI', claude10: 'CJ', chatgpt: 'GP', chatgpt2: 'GT', chatgpt3: 'GU', antigravity: 'AG', antigravity2: 'AH' };
+const AGENTS = { claude: 'CLAUDE DIRECTOR', claude2: 'Claude 2', claude3: 'Claude 3', claude4: 'Claude 1', claude5: 'Claude 5', claude6: 'Claude 6', claude7: 'Claude 7', claude8: 'Claude 8', claude9: 'Claude 9', claude10: 'Claude 10', claude11: 'Claude 11', claude12: 'Claude 12', claude13: 'Claude 13', claude14: 'Claude 14', chatgpt: 'ChatGPT', chatgpt2: 'ChatGPT 2', chatgpt3: 'ChatGPT 3', antigravity: 'Antigravity', antigravity2: 'Antigravity 2', antigravity3: 'Antigravity 3' };
+const PREFIX = { claude: 'CL', claude2: 'CB', claude3: 'CC', claude4: 'CD', claude5: 'CE', claude6: 'CF', claude7: 'CG', claude8: 'CH', claude9: 'CI', claude10: 'CJ', claude11: 'CK', claude12: 'CM', claude13: 'CN', claude14: 'CO', chatgpt: 'GP', chatgpt2: 'GT', chatgpt3: 'GU', antigravity: 'AG', antigravity2: 'AH', antigravity3: 'AI' };
 const FIELDS = ['state', 'model', 'task', 'touching', 'since', 'next', 'blocked-on', 'last-report'];
 const STATES = ['active', 'idle', 'blocked', 'away'];
 // Append-only files everyone shares. Checking in on them never clashes with anyone.
@@ -118,7 +118,7 @@ function readStatus(agent) {
 function writeCrewUtf8(file, text) {
   try { fs.writeFileSync(file, text, 'utf8'); }
   catch (error) {
-    if (error.code !== 'UNKNOWN') throw error;
+    if (error.code !== 'UNKNOWN' && error.code !== 'EINVAL') throw error;   // EINVAL: the same truncate-open refusal seen from the Linux VM (Claude 6, 22 Nov)
     const bytes = Buffer.from(text, 'utf8');
     const fd = fs.openSync(file, 'r+');
     try {

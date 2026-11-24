@@ -1971,6 +1971,97 @@
    "for": [
     "night-02"
    ]
+  },
+  "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Joker 107bpm Fmin": {
+   "kit": "Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Joker 107bpm Fmin",
+   "base": "gh-hs-joker",
+   "bpm": 107,
+   "bars": 16,
+   "loop_s": 35.887854,
+   "samples": 1722617,
+   "gain_db": 0.2,
+   "lufs": -16.0,
+   "peak_dbfs": -3.9,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs-joker-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs-joker-rhythm.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare": "drums"
+   },
+   "left": [],
+   "for": [
+    "dayfight-1"
+   ]
+  },
+  "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Nihility 135bpm A#min": {
+   "kit": "Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Nihility 135bpm A#min",
+   "base": "gh-hs2-nihility",
+   "bpm": 135,
+   "bars": 16,
+   "loop_s": 28.444437,
+   "samples": 1365333,
+   "gain_db": -2.2,
+   "lufs": -16.0,
+   "peak_dbfs": -1.8,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs2-nihility-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs2-nihility-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs2-nihility-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Crash FX",
+    "Crash Fill FX",
+    "Crowd Chant FX"
+   ],
+   "for": [
+    "dayfight-2"
+   ]
+  },
+  "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Retribution 150bpm F#min": {
+   "kit": "Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Retribution 150bpm F#min",
+   "base": "gh-hs3-retribution",
+   "bpm": 150,
+   "bars": 16,
+   "loop_s": 25.6,
+   "samples": 1228800,
+   "gain_db": -1.4,
+   "lufs": -16.0,
+   "peak_dbfs": -2.6,
+   "files": {
+    "drums": "assets/soundtrack/gh/gh-hs3-retribution-drums.ogg",
+    "rhythm": "assets/soundtrack/gh/gh-hs3-retribution-rhythm.ogg",
+    "lead": "assets/soundtrack/gh/gh-hs3-retribution-lead.ogg"
+   },
+   "stems": {
+    "Bass Guitar": "drums",
+    "Kick Drum": "drums",
+    "Lead Guitar": "lead",
+    "Open Hat": "drums",
+    "Rhythm Guitar": "rhythm",
+    "Ride": "drums",
+    "Snare Drum": "drums"
+   },
+   "left": [
+    "Impact_FX",
+    "Riser FX",
+    "White Noise FX"
+   ],
+   "for": [
+    "dayfight-3"
+   ]
   }
  },
  "places": {
@@ -1993,10 +2084,11 @@
    "gain_db": -0.9
   },
   "place-dawn": {
-   "src": "Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Blue Peace/GH_FS III_Songkits_Blue Peace_Cmaj_90bpm.wav",
+   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 05 - Clear Sky - Am 65Bpm/Ghosthack-A_Kit 05_Clear Sky_Am 65Bpm.wav",
    "file": "assets/soundtrack/gh/gh-place-dawn.ogg",
-   "seconds": 79.78,
-   "gain_db": -4.5
+   "seconds": 153.92,
+   "gain_db": -0.9,
+   "start_s": 27.0
   },
   "place-fallen": {
    "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 02 - Dark Valley - Cm 65Bpm/STEMS/WET/Ghosthack-A_Kit 02_Atmos Drone_Cm 65Bpm (WET).wav",
@@ -2011,60 +2103,72 @@
    "gain_db": -1.4
   },
   "place-relay": {
-   "src": "Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/Loops/Pulses/Ghosthack-MN_Pulse Loop 80_Abnormality_E.wav",
+   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Granular Underscores/DRY/Ghosthack-A_Facility Am 75Bpm (DRY).wav",
    "file": "assets/soundtrack/gh/gh-place-relay.ogg",
-   "seconds": 96.0,
-   "gain_db": -2.6
+   "seconds": 102.4,
+   "gain_db": -4.6
   },
   "place-hikers": {
-   "src": "Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Unapreciated/GH_FS III_Songkits_Unapreciated_Cm_140bpm.wav",
+   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Granular Underscores/DRY/Ghosthack-A_Environmental Problems Am 65Bpm (DRY).wav",
    "file": "assets/soundtrack/gh/gh-place-hikers.ogg",
-   "seconds": 119.74,
-   "gain_db": -6.1
+   "seconds": 96.92,
+   "gain_db": -1.2
   },
   "place-alarm-build": {
-   "src": "Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Pressure/GH_FS III_Songkits_Pressure_Em_150bpm.wav",
+   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 03 - The Anomaly D# 70Bpm/Ghosthack-A_Kit 03_The Anomaly D# 70Bpm.wav",
    "file": "assets/soundtrack/gh/gh-place-alarm-build.ogg",
-   "seconds": 128.34,
-   "gain_db": -6.5
+   "seconds": 160.29,
+   "gain_db": -0.9
+  },
+  "place-wilds": {
+   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 04 - The Brain Scorcher/Ghosthack-A_Kit 04_The Brain Scorcher_Em 70Bpm.wav",
+   "file": "assets/soundtrack/gh/gh-place-wilds.ogg",
+   "seconds": 209.14,
+   "gain_db": -1.5
+  },
+  "place-anomaly": {
+   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 03 - The Anomaly D# 70Bpm/Ghosthack-A_Kit 03_The Anomaly D# 70Bpm.wav",
+   "file": "assets/soundtrack/gh/gh-place-anomaly.ogg",
+   "seconds": 160.29,
+   "gain_db": -0.9
   }
  },
  "cues": {
   "discovery": {
-   "src": "Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Tonal/Ghosthack-MN_Tonal_Entangle_D.wav",
+   "src": "Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Tonal/Ghosthack-MN_Tonal_Endure_C.wav",
    "file": "assets/soundtrack/gh/gh-cue-discovery.ogg",
-   "seconds": 7.81,
-   "gain_db": -9.1
-  },
-  "mission-done": {
-   "src": "Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Captain_s Ship/GH_FS III_Songkits_Captains Ship_Cm_106bpm.wav",
-   "file": "assets/soundtrack/gh/gh-cue-mission-done.ogg",
-   "seconds": 11.0,
-   "gain_db": -0.7
-  },
-  "last-kill": {
-   "src": "Ghosthack - Anomaly/Ghosthack - Anomaly/Impacts/DRY/Ghosthack-A_Shocker Gm 65Bpm (DRY).wav",
-   "file": "assets/soundtrack/gh/gh-cue-last-kill.ogg",
-   "seconds": 4.62,
+   "seconds": 2.88,
    "gain_db": -0.9
   },
+  "mission-done": {
+   "src": "Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Tonal/Ghosthack-MN_Tonal_Equilibrium_D.wav",
+   "file": "assets/soundtrack/gh/gh-cue-mission-done.ogg",
+   "seconds": 3.21,
+   "gain_db": -3.0
+  },
+  "last-kill": {
+   "src": "Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Tonal/Ghosthack-MN_Tonal_Hope_C.wav",
+   "file": "assets/soundtrack/gh/gh-cue-last-kill.ogg",
+   "seconds": 4.72,
+   "gain_db": -1.2
+  },
   "boss-entrance": {
-   "src": "Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Risers/Ghosthack-MN_Riser_Collide.wav",
+   "src": "Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Braams/Ghosthack-MN_Braam_Hostile_C.wav",
    "file": "assets/soundtrack/gh/gh-cue-boss-entrance.ogg",
-   "seconds": 6.14,
-   "gain_db": 1.3
+   "seconds": 2.71,
+   "gain_db": -1.6
   },
   "night-fall": {
    "src": "Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Drones/Ghosthack-MN_Drone_Scavenge_C.wav",
    "file": "assets/soundtrack/gh/gh-cue-night-fall.ogg",
-   "seconds": 10.0,
-   "gain_db": -2.8
+   "seconds": 6.5,
+   "gain_db": -3.1
   },
   "dawn": {
-   "src": "Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Blue Peace/GH_FS III_Songkits_Blue Peace_Cmaj_90bpm.wav",
+   "src": "Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Melodic One Shots/String Chords/GH_FS III_String Chords_ 4_Am #13.wav",
    "file": "assets/soundtrack/gh/gh-cue-dawn.ogg",
-   "seconds": 10.7,
-   "gain_db": 7.4
+   "seconds": 3.12,
+   "gain_db": -1.0
   }
  }
 }

@@ -14,6 +14,8 @@
 // silenced day (the secret, D-56) they go nearly dark with the rest of the tone. Nothing here moves anything that
 // was already in the world (rule 10): the sites come from the terrain alone, the shapes from their own dice.
 import { drawGlyph, RUNE_COUNT } from './runes.js';
+import { getRockTextureLibrary, applyRockPBR } from './rock-textures.js';
+import { buildMenhirGeometry, buildCompactStoneGeometry, projectStoneBoxUV } from './rock-geometry.js';
 
 export const GLOW = Object.freeze({ NIGHT: 1, DAY: 0.04, SILENCED: 0.06, RATE: 1.2 });
 export const RUNE_LIGHT = 0x9eeeff;
@@ -176,23 +178,8 @@ export function makeRingCarving(doc, { px = 512, stone = '#d3cdb9', groove = '#5
 
 // ---------------------------------------------------------------------------------------------------------------
 // Meshes. `T` is three.js; `o.doc` the document for canvases; `o.rnd` the shape's dice.
-function roughBlock(T, w, h, t, rnd, { taper = 0.35, crown = 0.18, jitter = 0.05 } = {}) {
-  const geo = new T.BoxGeometry(w, h, t, 3, 6, 2);
-  geo.translate(0, h / 2, 0);
-  const p = geo.attributes.position;
-  const bumps = [rnd(), rnd(), rnd(), rnd()].map((v) => v * 6.28);
-  for (let i = 0; i < p.count; i++) {
-    let x = p.getX(i), y = p.getY(i), z = p.getZ(i);
-    const f = y / h;
-    const s = 1 - taper * f * f;
-    x *= s; z *= s;
-    if (f > 0.8) y -= crown * h * ((Math.abs(x) / (w / 2)) ** 2) * (f - 0.8) * 5;   // a worn, rounded top
-    const n = Math.sin(x * 3.1 + bumps[0]) * Math.cos(y * 2.3 + bumps[1]) + Math.sin(z * 4.7 + y * 1.7 + bumps[2]) * 0.6;
-    x += n * jitter; z += Math.cos(y * 2.9 + bumps[3]) * jitter * 0.8;
-    p.setXYZ(i, x, Math.max(0, y), z);
-  }
-  geo.computeVertexNormals();
-  return geo;
+function roughBlock(T, w, h, t, rnd, { taper = 0.35, crown = 0.18, jitter = 0.05, flatFront = false } = {}) {
+  return buildMenhirGeometry(T, w, h, t, rnd, { taper, crown, jitter, chipStrength: 0.045, flatFront });
 }
 
 function carvingMaterial(T, tex) {
@@ -207,7 +194,7 @@ export function buildStandingStone(T, { doc, rnd, k, stoneMat, carvingTex }) {
   const g = new T.Group();
   const h = 2.2 + rnd() * 0.8, w = 0.75 + rnd() * 0.25, t = 0.42 + rnd() * 0.12;
   const taper = 0.32;
-  const stone = new T.Mesh(roughBlock(T, w, h, t, rnd, { taper }), stoneMat);
+  const stone = new T.Mesh(roughBlock(T, w, h, t, rnd, { taper, flatFront: true }), stoneMat);
   stone.name = 'first-stone';
   stone.rotation.set((rnd() - 0.5) * 0.12, 0, (rnd() - 0.5) * 0.1);
   stone.position.y = -0.25;              // set into the ground
@@ -233,7 +220,7 @@ export function buildStandingStone(T, { doc, rnd, k, stoneMat, carvingTex }) {
 export function buildRingStone(T, { doc, rnd, stoneMat, ring }) {
   const g = new T.Group();
   const w = 3.4, h = 2.7, t = 0.7;
-  const slab = new T.Mesh(roughBlock(T, w, h, t, rnd, { taper: 0.12, crown: 0.1, jitter: 0.06 }), stoneMat);
+  const slab = new T.Mesh(roughBlock(T, w, h, t, rnd, { taper: 0.12, crown: 0.1, jitter: 0.06, flatFront: true }), stoneMat);
   slab.name = 'ring-stone';
   slab.position.y = -0.3;
   g.add(slab);
@@ -362,14 +349,28 @@ export function buildMarrowDoor(T, { doc, rnd, edge, height }) {
     tex.repeat.set(1 / (2 * Rc), 1 / (2 * Rc));
     tex.offset.set(0.5, 0.5 - ringCy / (2 * Rc));
   }
-  const face = new T.MeshStandardMaterial({ color: 0xffffff, map: colorTex, roughness: 0.95 });
+  const rockLib = getRockTextureLibrary(T);
+  const monoPbr = rockLib ? rockLib.monolith : null;
+  const face = new T.MeshStandardMaterial({ color: 0xffffff, map: colorTex, roughness: 0.92, metalness: 0.02 });
+  if (monoPbr && monoPbr.normalMap) {
+    face.normalMap = monoPbr.normalMap;
+    if (face.normalScale?.set) face.normalScale.set(1.05, 1.05);
+    if (monoPbr.ormMap) {
+      face.roughnessMap = monoPbr.ormMap;
+      face.aoMap = monoPbr.ormMap;
+      face.aoMapIntensity = 0.65;
+      face.roughness = 1.0;
+    }
+  }
   const overlay = carvingMaterial(T, glowTex);   // the grooves again, unlit: dark by day, cold light at night
-  const side = new T.MeshStandardMaterial({ color: 0x8a8678, roughness: 0.98, side: T.DoubleSide });
-  const relief = (x, y) => 0.035 * Math.sin(x * 1.7 + y * 0.9) * Math.sin(y * 2.3 - x * 0.6) + 0.012 * Math.sin(x * 7.1 + y * 5.3);
+  const side = new T.MeshStandardMaterial({ color: 0x9a9586, roughness: 0.95, metalness: 0.02, side: T.DoubleSide });
+  if (monoPbr) applyRockPBR(side, monoPbr, { selfColored: false, normalMul: 1.15 });
+  const relief = (x, y) => 0.042 * Math.sin(x * 1.7 + y * 0.9) * Math.sin(y * 2.3 - x * 0.6) + 0.015 * Math.sin(x * 7.1 + y * 5.3);
   const group = new T.Group();
   group.name = 'marrow-door';
   for (const [rows, name] of [[rowsR, 'marrow-door-right'], [rowsL, 'marrow-door-left']]) {
     const { face: fg, body: bg } = leafGeometries(T, rows, D.depth, 10, relief);
+    projectStoneBoxUV(bg, 1.15);
     const leaf = new T.Group();
     leaf.name = name;
     leaf.position.z = D.z;
@@ -399,7 +400,9 @@ export function buildMarrowDoor(T, { doc, rnd, edge, height }) {
 export function buildOfferings(T, { rnd, spots, stoneMat, carvingTex }) {
   const g = new T.Group();
   g.name = 'barrow-offerings';
-  const flat = new T.MeshStandardMaterial({ color: 0x8a8576, roughness: 0.95 });
+  const rockLib = getRockTextureLibrary(T);
+  const flat = new T.MeshStandardMaterial({ color: 0x908b7c, roughness: 0.92, metalness: 0.02 });
+  if (rockLib && rockLib.fieldstone) applyRockPBR(flat, rockLib.fieldstone, { selfColored: false, normalMul: 0.95 });
   const bone = new T.MeshStandardMaterial({ color: 0xd8d1bb, roughness: 0.85 });
   const ash = new T.MeshStandardMaterial({ color: 0x2a2724, roughness: 1 });
   const glow = [];
@@ -412,21 +415,27 @@ export function buildOfferings(T, { rnd, spots, stoneMat, carvingTex }) {
       let y = 0;
       for (let k = 0; k < 4; k++) {
         const r = 0.28 - k * 0.055;
-        const st = new T.Mesh(new T.DodecahedronGeometry(r, 0), flat);
-        st.scale.set(1, 0.42, 1 + rnd() * 0.2);
-        y += r * 0.42;
-        st.position.set((rnd() - 0.5) * 0.06, y, (rnd() - 0.5) * 0.06);
-        st.rotation.y = rnd() * 6.28;
-        y += r * 0.38;
+        const stGeo = buildCompactStoneGeometry(T, {
+          rx: r * 1.12, ry: r * 0.44, rz: r * (0.94 + rnd() * 0.22),
+          detail: 1, seed: (i * 97 + k * 31 + 17) | 0, style: 'river', uvTile: 0.55,
+        });
+        const st = new T.Mesh(stGeo, flat);
+        y += r * 0.34;
+        st.position.set((rnd() - 0.5) * 0.055, y, (rnd() - 0.5) * 0.055);
+        st.rotation.set((rnd() - 0.5) * 0.12, rnd() * 6.28, (rnd() - 0.5) * 0.12);
+        st.castShadow = true; st.receiveShadow = true;
+        y += r * 0.34;
         o.add(st);
       }
     } else if (kind === 'bowl') {
       const pts = [];
-      for (let k = 0; k <= 6; k++) { const a = (k / 6) * (Math.PI / 2); pts.push(new T.Vector2(0.06 + Math.sin(a) * 0.24, (1 - Math.cos(a)) * 0.16)); }
-      const bowl = new T.Mesh(new T.LatheGeometry(pts, 10), stoneMat);
-      bowl.material = flat;
+      for (let k = 0; k <= 8; k++) { const a = (k / 8) * (Math.PI / 2); pts.push(new T.Vector2(0.06 + Math.sin(a) * 0.25, (1 - Math.cos(a)) * 0.17)); }
+      pts.push(new T.Vector2(0.27, 0.17));
+      pts.push(new T.Vector2(0.23, 0.11));
+      const bowl = new T.Mesh(new T.LatheGeometry(pts, 16), flat);
+      bowl.castShadow = true; bowl.receiveShadow = true;
       o.add(bowl);
-      const cinders = new T.Mesh(new T.CircleGeometry(0.22, 10), ash);
+      const cinders = new T.Mesh(new T.CircleGeometry(0.22, 12), ash);
       cinders.rotation.x = -Math.PI / 2; cinders.position.y = 0.11;
       o.add(cinders);
     } else if (kind === 'antler') {

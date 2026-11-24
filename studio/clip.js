@@ -74,40 +74,48 @@ export function loadClip(json) {
   const errs = validateClip(json);
   if (errs.length) throw new Error(`clip ${json && json.name ? '"' + json.name + '" ' : ''}is not valid:\n  - ` + errs.join('\n  - '));
   const tracks = {};
+  const trackList = [];
   for (const [track, chans] of Object.entries(json.tracks)) {
-    tracks[track] = {};
+    const tObj = {};
     for (const [ch, keys] of Object.entries(chans)) {
-      tracks[track][ch] = keys.map(([t, v, e]) => ({ t, v, ease: EASES[e || 'smooth'], live: CHANNELS[ch] === 'point' ? liveOf(v) : null }));
+      tObj[ch] = keys.map(([t, v, e]) => ({ t, v, ease: EASES[e || 'smooth'], live: CHANNELS[ch] === 'point' ? liveOf(v) : null }));
     }
+    tracks[track] = tObj;
+    const isRoot = track === 'root';
+    const hasChain = !isRoot && !!(tObj.ik || tObj.pole || tObj.plant || tObj.level || tObj.grip || tObj.step);
+    trackList.push({ name: track, isRoot, chans: tObj, hasJoint: !isRoot && !!(tObj.rot || tObj.pos), hasChain });
   }
   const events = (json.events || []).map(([t, name, data]) => ({ t, name, data: data || {} })).sort((a, b) => a.t - b.t);
-  return { format: json.format, name: json.name, rig: json.rig, length: json.length, loop: !!json.loop, reference: json.reference || null, notes: json.notes || '', tracks, events, source: json };
+  return { format: json.format, name: json.name, rig: json.rig, length: json.length, loop: !!json.loop, reference: json.reference || null, notes: json.notes || '', tracks, _trackList: trackList, events, source: json };
 }
 
 // --- Sampling ---------------------------------------------------------------------------
 // Where t falls among the keys: the pair either side and how far between them (eased).
-function segment(keys, t) {
-  if (t <= keys[0].t || keys.length === 1) return [keys[0], keys[0], 0];
-  const last = keys[keys.length - 1];
-  if (t >= last.t) return [last, last, 0];
+// AG-419: scratch segment outputs eliminate per-channel 3-tuple array allocations on every frame.
+let _segA = null, _segB = null, _segU = 0;
+function findSegment(keys, t) {
+  const n = keys.length;
+  if (t <= keys[0].t || n === 1) { _segA = keys[0]; _segB = keys[0]; _segU = 0; return; }
+  const last = keys[n - 1];
+  if (t >= last.t) { _segA = last; _segB = last; _segU = 0; return; }
   let i = 1;
   while (keys[i].t < t) i++;
   const a = keys[i - 1], b = keys[i];
   const u = (t - a.t) / Math.max(1e-6, b.t - a.t);
-  return [a, b, b.ease(u)];
+  _segA = a; _segB = b; _segU = b.ease(u);
 }
 const lerp3 = (a, b, u) => [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u, a[2] + (b[2] - a[2]) * u];
-function sampleVec3(keys, t) { const [a, b, u] = segment(keys, t); return lerp3(a.v, b.v, u); }
-function sampleScalar(keys, t) { const [a, b, u] = segment(keys, t); return a.v + (b.v - a.v) * u; }
+function sampleVec3(keys, t) { findSegment(keys, t); const a = _segA.v, b = _segB.v, u = _segU; return [a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u, a[2] + (b[2] - a[2]) * u]; }
+function sampleScalar(keys, t) { findSegment(keys, t); return _segA.v + (_segB.v - _segA.v) * _segU; }
 // A point is kept as a weighted list of parts (fixed rig-frame points and live targets), and only
 // resolved to the world when it's applied: that's what lets a key blend from a spot on the ground
 // to the marine's moving ankle, and two clips blend through the same machinery.
 function samplePoint(keys, t) {
-  const [a, b, u] = segment(keys, t);
-  const part = (k, w) => (k.live ? { w, live: k.live } : { w, fixed: k.v });
-  if (a === b || u <= 0) return [part(a, 1)];
-  if (u >= 1) return [part(b, 1)];
-  return [part(a, 1 - u), part(b, u)];
+  findSegment(keys, t);
+  const a = _segA, b = _segB, u = _segU;
+  if (a === b || u <= 0) return [a.live ? { w: 1, live: a.live } : { w: 1, fixed: a.v }];
+  if (u >= 1) return [b.live ? { w: 1, live: b.live } : { w: 1, fixed: b.v }];
+  return [a.live ? { w: 1 - u, live: a.live } : { w: 1 - u, fixed: a.v }, b.live ? { w: u, live: b.live } : { w: u, fixed: b.v }];
 }
 // Clip time for a play time: wrapped for a loop, held at the ends otherwise.
 export function clipTime(clip, t) {
@@ -119,53 +127,99 @@ const _e = new THREE.Euler();
 export function sampleClip(clip, t) {
   const tt = clipTime(clip, t);
   const pose = { root: null, joints: {}, chains: {}, head: {} };
-  for (const [track, chans] of Object.entries(clip.tracks)) {
-    if (track === 'root') { if (chans.pos) pose.root = sampleVec3(chans.pos, tt); continue; }
-    const j = {};
-    if (chans.rot) { const r = sampleVec3(chans.rot, tt); j.rot = new THREE.Quaternion().setFromEuler(_e.set(r[0] * D2R, r[1] * D2R, r[2] * D2R, 'XYZ')); }
-    if (chans.pos) j.pos = sampleVec3(chans.pos, tt);
-    if (j.rot || j.pos) pose.joints[track] = j;
-    const c = {};
-    if (chans.ik) c.ik = samplePoint(chans.ik, tt);
-    if (chans.pole) c.pole = sampleVec3(chans.pole, tt);
-    for (const s of ['plant', 'level', 'grip', 'step']) if (chans[s]) c[s] = sampleScalar(chans[s], tt);
-    if (Object.keys(c).length) pose.chains[track] = c;
+  let list = clip._trackList;
+  if (!list) {
+    list = [];
+    for (const track in clip.tracks) {
+      const chans = clip.tracks[track];
+      const isRoot = track === 'root';
+      const hasChain = !isRoot && !!(chans.ik || chans.pole || chans.plant || chans.level || chans.grip || chans.step);
+      list.push({ name: track, isRoot, chans, hasJoint: !isRoot && !!(chans.rot || chans.pos), hasChain });
+    }
+    clip._trackList = list;
+  }
+  for (let i = 0; i < list.length; i++) {
+    const tr = list[i], chans = tr.chans;
+    if (tr.isRoot) { if (chans.pos) pose.root = sampleVec3(chans.pos, tt); continue; }
+    if (tr.hasJoint) {
+      const j = {};
+      if (chans.rot) {
+        findSegment(chans.rot, tt);
+        const a = _segA.v, b = _segB.v, u = _segU;
+        j.rot = new THREE.Quaternion().setFromEuler(_e.set((a[0] + (b[0] - a[0]) * u) * D2R, (a[1] + (b[1] - a[1]) * u) * D2R, (a[2] + (b[2] - a[2]) * u) * D2R, 'XYZ'));
+      }
+      if (chans.pos) j.pos = sampleVec3(chans.pos, tt);
+      pose.joints[tr.name] = j;
+    }
+    if (tr.hasChain) {
+      const c = {};
+      if (chans.ik) c.ik = samplePoint(chans.ik, tt);
+      if (chans.pole) c.pole = sampleVec3(chans.pole, tt);
+      if (chans.plant) c.plant = sampleScalar(chans.plant, tt);
+      if (chans.level) c.level = sampleScalar(chans.level, tt);
+      if (chans.grip) c.grip = sampleScalar(chans.grip, tt);
+      if (chans.step) c.step = sampleScalar(chans.step, tt);
+      pose.chains[tr.name] = c;
+    }
     if (chans.look) pose.head.look = samplePoint(chans.look, tt);
     if (chans.open) pose.head.open = sampleScalar(chans.open, tt);
   }
   return pose;
 }
 // Blend two poses: w 0 is all a, 1 is all b. A channel only one side has comes through whole.
+function mixPoints(pa, pb, w) {
+  if (!pa) return pb;
+  if (!pb) return pa;
+  const inv = 1 - w, na = pa.length, nb = pb.length;
+  const out = new Array(na + nb);
+  for (let i = 0; i < na; i++) { const p = pa[i]; out[i] = p.live ? { w: p.w * inv, live: p.live } : { w: p.w * inv, fixed: p.fixed }; }
+  for (let i = 0; i < nb; i++) { const p = pb[i]; out[na + i] = p.live ? { w: p.w * w, live: p.live } : { w: p.w * w, fixed: p.fixed }; }
+  return out;
+}
 export function blendPoses(a, b, w) {
   if (w <= 0) return a;
   if (w >= 1) return b;
   const out = { root: null, joints: {}, chains: {}, head: {} };
   out.root = a.root && b.root ? lerp3(a.root, b.root, w) : (b.root || a.root);
-  for (const n of new Set([...Object.keys(a.joints), ...Object.keys(b.joints)])) {
-    const ja = a.joints[n], jb = b.joints[n];
-    if (!ja || !jb) { out.joints[n] = ja || jb; continue; }
+  const aj = a.joints, bj = b.joints;
+  for (const n in aj) {
+    const ja = aj[n], jb = bj[n];
+    if (!jb) { out.joints[n] = ja; continue; }
     out.joints[n] = {
       rot: ja.rot && jb.rot ? slerpTo(ja.rot.clone(), jb.rot, w) : (jb.rot || ja.rot),
       pos: ja.pos && jb.pos ? lerp3(ja.pos, jb.pos, w) : (jb.pos || ja.pos)
     };
   }
-  const mixPts = (pa, pb) => (pa && pb ? pa.map((p) => ({ ...p, w: p.w * (1 - w) })).concat(pb.map((p) => ({ ...p, w: p.w * w }))) : (pb || pa));
-  const mixS = (x, y) => (x !== undefined && y !== undefined ? x + (y - x) * w : (y !== undefined ? y : x));
-  for (const n of new Set([...Object.keys(a.chains), ...Object.keys(b.chains)])) {
-    const ca = a.chains[n] || {}, cb = b.chains[n] || {};
-    // A limb only one side places fades its IK in or out over the blend (instead of dropping it at
-    // the end of the fade, which pops the limb back to its rest).
-    const ikW = ca.ik && !cb.ik ? (1 - w) * (ca.ikW ?? 1) : !ca.ik && cb.ik ? w * (cb.ikW ?? 1) : (ca.ikW ?? 1) * (1 - w) + (cb.ikW ?? 1) * w;
-    out.chains[n] = {
-      ik: mixPts(ca.ik, cb.ik), ikW,
+  for (const n in bj) {
+    if (n in aj) continue;
+    out.joints[n] = bj[n];
+  }
+  const ac = a.chains, bc = b.chains, inv = 1 - w;
+  for (const n in ac) {
+    const ca = ac[n], cb = bc[n];
+    const ikW = ca.ik && !(cb && cb.ik) ? inv * (ca.ikW ?? 1) : !ca.ik && cb && cb.ik ? w * (cb.ikW ?? 1) : (ca.ikW ?? 1) * inv + ((cb && cb.ikW) ?? 1) * w;
+    out.chains[n] = cb ? {
+      ik: mixPoints(ca.ik, cb.ik, w), ikW,
       pole: ca.pole && cb.pole ? lerp3(ca.pole, cb.pole, w) : (cb.pole || ca.pole),
-      plant: mixS(ca.plant, cb.plant), level: mixS(ca.level, cb.level), grip: mixS(ca.grip, cb.grip), step: mixS(ca.step, cb.step)
+      plant: ca.plant !== undefined && cb.plant !== undefined ? ca.plant + (cb.plant - ca.plant) * w : (cb.plant !== undefined ? cb.plant : ca.plant),
+      level: ca.level !== undefined && cb.level !== undefined ? ca.level + (cb.level - ca.level) * w : (cb.level !== undefined ? cb.level : ca.level),
+      grip: ca.grip !== undefined && cb.grip !== undefined ? ca.grip + (cb.grip - ca.grip) * w : (cb.grip !== undefined ? cb.grip : ca.grip),
+      step: ca.step !== undefined && cb.step !== undefined ? ca.step + (cb.step - ca.step) * w : (cb.step !== undefined ? cb.step : ca.step)
+    } : {
+      ik: ca.ik, ikW, pole: ca.pole, plant: ca.plant, level: ca.level, grip: ca.grip, step: ca.step
     };
+  }
+  for (const n in bc) {
+    if (n in ac) continue;
+    const cb = bc[n];
+    const ikW = cb.ik ? w * (cb.ikW ?? 1) : inv + (cb.ikW ?? 1) * w;
+    out.chains[n] = { ik: cb.ik, ikW, pole: cb.pole, plant: cb.plant, level: cb.level, grip: cb.grip, step: cb.step };
   }
   // Looking at something fades in or out over the blend too, when only one side looks.
   const la = a.head.look, lb = b.head.look;
-  const lookW = la && !lb ? (1 - w) * (a.head.lookW ?? 1) : !la && lb ? w * (b.head.lookW ?? 1) : (a.head.lookW ?? 1) * (1 - w) + (b.head.lookW ?? 1) * w;
-  out.head = { look: mixPts(la, lb), lookW, open: mixS(a.head.open, b.head.open) };
+  const lookW = la && !lb ? inv * (a.head.lookW ?? 1) : !la && lb ? w * (b.head.lookW ?? 1) : (a.head.lookW ?? 1) * inv + (b.head.lookW ?? 1) * w;
+  const oa = a.head.open, ob = b.head.open;
+  out.head = { look: mixPoints(la, lb, w), lookW, open: oa !== undefined && ob !== undefined ? oa + (ob - oa) * w : (ob !== undefined ? ob : oa) };
   return out;
 }
 // Events with a time in (t0, t1], for a clip played from t0 to t1 (loops wrap).

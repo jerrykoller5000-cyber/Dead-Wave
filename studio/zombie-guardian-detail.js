@@ -52,6 +52,10 @@ export function sculptGuardian(A,T,g,kind){
     });
     const m=path(R.chest,material,seated,width);m.userData.gp20153SeatedRoot={points:seated.length,source:'Own existing chest core triangles only; no reference mesh',sameTopology:true};return m;
   };
+  const onChest=(pts,w)=>onEgg(pts,w,[0,.015,.23],[.47,.36,.415]);
+  const onEgg=(pts,w,c,r)=>pts.map(([x,y,z])=>{const d=[x-c[0],y-c[1],z-c[2]];
+    const k=1/Math.hypot(d[0]/r[0],d[1]/r[1],d[2]/r[2]),L=Math.hypot(d[0]*k,d[1]*k,d[2]*k)||1,o=w*.3/L;
+    return d.map((v,i)=>c[i]+v*k*(1+o));});
   const wrapPlate=(p,m,y,angle,rx,rz,w,h,d,tilt=0)=>{
     const o=rock(p,m,Math.sin(angle)*rx,y,Math.cos(angle)*rz,w,h,d,tilt);
     o.rotation.y=angle;return o;
@@ -59,21 +63,23 @@ export function sculptGuardian(A,T,g,kind){
 
   // Continuous chest and pelvis volumes establish muscle beneath plates and tendons.
   egg(R.pelvis,skin,0,-.025,0,.63,.47,.54);
+  if(!cave)egg(R.pelvis,skin,0,.10,.16,.56,.36,.5);   // D-242 guardian P1 #6 (Q1): the pelvis met the belly in a shelf; a lower-belly mass bridges them
   stoneHost('spine1',egg(R.spine1,skin,0,.035,.09,.55,.51,.53));
   stoneHost('spine2',egg(R.spine2,skin,0,.045,.13,.65,.57,.59));
   stoneHost('chest',egg(R.chest,skin,0,.015,.23,.94,.72,.83));
   egg(R.chest,shadow,0,-.235,.26,.58,.20,.58);
   egg(R.chest,skin,0,.205,.27,1.31,.38,.53);
-  egg(R.neck,tendon,0,-.015,.21,.36,.31,.54);
+  if(cave)egg(R.neck,tendon,0,-.04,.2,.32,.25,.48);else egg(R.neck,tendon,0,-.015,.21,.36,.31,.54);   // D-242 caveguard P1 #9 (Q1): its round neck stood up behind the short stone skull (a ball); smaller and lower
   // Seat the rear jaw basket against the throat without filling the open maw.
   // These neck-local roots remain behind the hinged jaw as it opens.
   for(const side of [-1,1]){
-    egg(R.neck,cave?tendon:skin,side*.13,-.16,.41,.18,.26,.30,side*.12);
-    path(R.neck,cave?edge:plate,[[side*.16,-.29,.32],[side*.18,-.20,.47],
+    if(cave)egg(R.neck,tendon,side*.12,-.2,.27,.16,.22,.26,side*.12);else egg(R.neck,skin,side*.13,-.16,.41,.18,.26,.30,side*.12);   // D-242 caveguard P1 #1 (Q4): two bark balls sat inside its open maw (its skull is shorter); now behind the jaw
+    // D-242 caveguard P1 #1: its basket roots go back with the bark (they stood as two stone posts in the throat)
+    path(R.neck,cave?edge:plate,cave?[[side*.16,-.29,.2],[side*.18,-.22,.31],[side*.17,-.14,.38]]:[[side*.16,-.29,.32],[side*.18,-.20,.47],
       [side*.17,-.10,.56]],.047,.020);
   }
   // The quadruped pose exposes the underside: an inset sternum breaks up the old ball.
-  if(!cave)rock(R.chest,edge,0,-.325,.29,.23,.15,.58,.04);
+  if(!cave)egg(R.chest,edge,0,-.33,.26,.18,.09,.5);   // D-242 guardian P1 #2 (Q4): was a faceted rock: from the front a hex plug in the chest; now a smooth keel
   for(const p of [R.spine1,R.spine2])for(const side of [-1,1]){
     egg(p,cave?tendon:skin,side*.17,-.06,.10,.22,.41,.50,-side*.18);
     path(p,cave?tendon:edge,[[side*.12,-.20,-.13],[side*.245,-.15,.03],
@@ -82,15 +88,16 @@ export function sculptGuardian(A,T,g,kind){
   }
   for(const side of [-1,1]){
     // Pectoral and scapular masses overlap the existing shoulder socket.
-    egg(R.chest,cave?shadow:skin,side*.285,.085,.46,.49,.47,.34,side*.20);
-    egg(R.chest,cave?skin:plate,side*.31,.23,.05,.51,.25,.57,-side*.27);
+    egg(R.chest,skin,side*.285,.085,.46,.49,.47,.34,side*.20);   // D-242 caveguard P1 #2 (Q4): near-black on the cave kind: two holes in the chest; now bark
+    if(cave)egg(R.chest,skin,side*.30,.19,.04,.46,.32,.5,-side*.27);else egg(R.chest,plate,side*.31,.23,.05,.51,.25,.57,-side*.27);   // D-242 caveguard P1 #7 (Q1): flat saucers standing off the upper back; rounder and lower, a shoulder blade
     path(R.neck,tendon,[[side*.12,.08,.04],[side*.14,-.06,.23],[side*.12,-.09,.43]],.043);
     for(let i=0;i<4;i++){
       const z=.015+i*.15;
       if(cave)chestRoot(tendon,[[side*(.31-.03*i),.13-.08*i,0],[side*(.35-.04*i),.04-.08*i,0],
         [side*(.28-.035*i),-.05-.07*i,0],[side*(.18-.025*i),-.10-.065*i,0]],.047);
-      else path(R.chest,edge,[[side*.28,.16,z],[side*.45,.035,z+.055],
-        [side*.42,-.19,z+.072],[side*.26,-.31,z+.035]],.038);
+      // D-242 guardian P1 #1 (Q5): the rib arcs stood 2-4 cm off the chest (loose rods); each guide point now sits on the
+      // chest core's surface (its egg: centre 0,.015,.23, radii .47,.36,.415), raised by a third of the rod's width.
+      else path(R.chest,edge,onChest([[side*.28,.16,z],[side*.45,.035,z+.055],[side*.42,-.19,z+.072],[side*.26,-.31,z+.035]],.038),.038);
     }
     if(cave){
       // The caveguard's front splinters root into the chest instead of
@@ -102,10 +109,10 @@ export function sculptGuardian(A,T,g,kind){
       chestRoot(tendon,[[side*.16,-.18,0],[side*.13,-.25,0],
         [side*.07,-.31,0]],.045);
       weed(R.chest,side*.42,.24,.04,.64+side*.10,side);
-      weed(R.chest,side*.25,.02,.54,.47,side);
+      weed(R.chest,side*.25,.02,.57,.3,side);   // D-242 caveguard P1 #10 (Q5): the front moss hung .2 m below the chest in the air (straws in the front view); it stays on the chest now
     }else{
       path(R.chest,plate,[[side*.05,.34,.19],[side*.32,.36,.22],[side*.56,.19,.30]],.058);
-      path(R.chest,tendon,[[side*.10,-.24,.48],[side*.20,-.12,.58],[side*.36,.16,.51]],.027);
+      path(R.chest,tendon,onEgg([[side*.10,-.24,.48],[side*.20,-.12,.58],[side*.36,.16,.51]],.027,[side*.285,.085,.46],[.245,.235,.17]),.027);   // D-242 guardian P1 #7 (Q5): its top end stood in the air over the pec; now on the pec
       egg(R.chest,skin,side*.21,-.205,.31,.32,.25,.51,side*.27);
       path(R.chest,plate,[[side*.035,-.34,.03],[side*.16,-.35,.14],
         [side*.25,-.27,.28],[side*.28,-.18,.43]],.033);
@@ -121,7 +128,7 @@ export function sculptGuardian(A,T,g,kind){
       if(!cave||i===0)rock(p,cave?edge:plate,side*(.16+i*.018),y,.085,.34+i*.02,.18,.32,side*.30);
       if(cave&&i===0){
         path(p,tendon,[[side*.035,y+.04,-.055],[side*.18,y-.10,.03],[side*.27,y-.19,.15]],.042);
-        weed(p,side*.19,y-.015,-.08,.31+i*.045,side);
+        weed(p,side*.3,y-.015,-.12,.31+i*.045,side);   // D-242 caveguard P1 #6 (Q4): the lichen hung inside the pelvis (seating test); out on its flank now
       }else if(!cave){
         path(p,edge,[[side*.05,y-.07,-.10],[side*.22,y-.08,-.02],[side*.30,y-.12,.10]],.036);
       }
@@ -141,7 +148,7 @@ export function sculptGuardian(A,T,g,kind){
     egg(R.head,skin,0,.065,.105,.57,.36,.48);
     // Low beveled plates form the muzzle, leaving the dark maw and eye array dominant.
     box(R.head,plate,0,-.013,.49,.405,.135,.69);
-    box(R.head,edge,0,.182,.28,.66,.115,.34);
+    box(R.head,edge,0,.182,.28,.54,.115,.34);   // D-242 guardian P1 #9 (Q1): .66 wide on a .57 skull: a brim shelf past both temples
     box(R.head,plate,0,.057,.64,.225,.095,.31);
     box(R.head,shadow,0,.102,.635,.133,.012,.186);
     box(R.head,plate,0,-.032,.827,.355,.11,.085);
@@ -160,19 +167,22 @@ export function sculptGuardian(A,T,g,kind){
 
   // Curved mandibular edges, fleshy lining and opposing teeth surround a real opening.
   const upperZ=cave?.53:.845,jawZ=cave?.57:.795,jawDepth=cave?.50:.73;
-  egg(R.head,mouth,0,-.105,cave?.32:.48,.35,.062,jawDepth);
+  egg(R.head,mouth,0,cave?-.118:-.105,cave?.32:.48,.35,.062,jawDepth);   // D-242 caveguard P1 #3 (Q4): 75% inside the stone skull; 13 mm lower it shows as the roof of the maw
   if(!cave)egg(R.jaw,mouth,0,-.02,.40,.33,.062,jawDepth*.95);
   if(cave)makeCaveGuardStoneJaw(A,T,R,edge,mouth);
   else{
     egg(R.jaw,edge,0,-.075,.40,.39,.10,jawDepth);
-    path(R.jaw,plate,[[-.165,-.04,.08],[-.205,-.065,jawZ*.66],
-      [-.17,-.06,jawZ],[0,-.075,jawZ+.032],[.17,-.06,jawZ],[.205,-.065,jawZ*.66],[.165,-.04,.08]],.034);
+    // D-242 guardian P1 #3 (Q1): the rim's back ends ran 7 cm past the jaw to the hinge: loose rods under the cheeks when it
+    // opened. They now end on the jaw.
+    path(R.jaw,plate,[[-.1,-.05,.1],[-.205,-.065,jawZ*.66],
+      [-.17,-.06,jawZ],[0,-.075,jawZ+.032],[.17,-.06,jawZ],[.205,-.065,jawZ*.66],[.1,-.05,.1]],.034);
   }
   const lowerGumX=cave?.27:.175,lowerGumBack=cave?.26:.17,lowerGumY=cave?-.014:.006;
   path(R.jaw,gum,[[-lowerGumBack,lowerGumY,.13],[-lowerGumX,lowerGumY,jawZ-.06],[0,cave?lowerGumY:.004,jawZ+.002+(cave?.03:0)],
     [lowerGumX,lowerGumY,jawZ-.06],[lowerGumBack,lowerGumY,.13]],cave?.008:.018);
-  path(R.head,gum,[[-.18,-.095,.24],[-.205,-.095,upperZ-.07],[0,-.105,upperZ],
-    [.205,-.095,upperZ-.07],[.18,-.095,.24]],.021);
+  { const gy=cave?-.024:0;   // D-242 caveguard P1 #4 (Q4): the upper gum line was 95% inside the stone skull; lowered 24 mm to show at the tooth roots
+  path(R.head,gum,[[-.18,-.095+gy,.24],[-.205,-.095+gy,upperZ-.07],[0,-.105+gy,upperZ],
+    [.205,-.095+gy,upperZ-.07],[.18,-.095+gy,.24]],.021); }
   if(!cave){
     egg(R.jaw,gum,0,.012,.40,.15,.055,.48);
     path(R.jaw,tendon,[[0,-.11,.16],[0,-.12,.47],[0,-.09,.74]],.022);
@@ -223,7 +233,7 @@ export function sculptGuardian(A,T,g,kind){
     egg(el,edge,0,-.015,-.055,.26,.19,.22);
     if(cave){
       // GP155: one raised stone field on each original shoulder and forearm.
-      cords(sh,-side*.03,-.12,-.13,.91,4,.034,side);
+      cords(sh,-side*.03,-.12,-.185,.91,4,.034,side);   // D-242 caveguard P1 #5 (Q4): the raised cords were 80-90% inside the shoulder (seating test); on its surface now
       cords(el,side*.035,-.04,-.10,1.05,4,.031,-side);
       // Moss is a colour on the actual upper stone faces; no floating leaf ribbons.
     }else{
@@ -250,7 +260,9 @@ export function sculptGuardian(A,T,g,kind){
     }
     // Broad knuckles bridge the wrist to articulated fingers without covering the grip.
     // Continuous wrist heel into palm: the forearm no longer ends at a flat disk.
-    loft(wr,skin,[[.10,.095,.095,-.01],[.025,.108,.105,-.005],[-.04,.18,.17,.065],[-.105,.14,.13,.085]],12);
+    // D-242 guardian P1 #10 (Q1): the wrist loft stood out of the forearm (a flat ring step round the wrist).
+    // Its top now tapers up inside the forearm, so the two surfaces cross smoothly.
+    loft(wr,skin,[[.15,.084,.08,0],[.07,.097,.094,-.003],[.025,.108,.105,-.005],[-.04,.18,.17,.065],[-.105,.14,.13,.085]],12);   // D-242 caveguard P1 #8: the same wrist taper
     for(let f=0;f<4;f++){
       const x=(f-1.5)*.082;
       path(wr,cave?tendon:edge,[[x*.45,.016,-.065],[x,.025,.072],[x,-.01,.20]],.019);
@@ -303,12 +315,14 @@ export function sculptGuardian(A,T,g,kind){
     }else{
       egg(hip,plate,side*.02,-.24,.27,.235,.42,.105,-side*.18);
       rock(hip,edge,-side*.11,-.28,-.13,.20,.39,.12,side*.15);
-      path(kn,plate,[[side*.095,-.09,-.135],[side*.10,-.33,-.155],[side*.05,-.58,-.105]],.027);
+      path(kn,plate,[[side*.07,-.09,-.12],[side*.075,-.33,-.13],[side*.04,-.58,-.085]],.027);   // D-242 guardian P1 #5 (Q5): seated on the calf (stood off its back)
       path(kn,edge,[[0,-.10,.11],[.02,-.32,.13],[0,-.61,.071]],.031);
-      path(hip,tendon,[[side*.205,-.10,.105],[side*.22,-.41,.11],[side*.18,-.70,.07]],.024);
+      path(hip,tendon,[[side*.17,-.10,.105],[side*.14,-.41,.11],[side*.09,-.70,.06]],.024);   // D-242 guardian P1 #4 (Q5): the thigh tendon stood in the air beside the thigh; now on it
     }
     // Ankle socket tapers into the broad planted foot and embedded talon roots.
-    loft(ank,skin,[[.10,.094,.095],[.015,.112,.14,.06],[-.055,.14,.21,.13],[-.115,.10,.16,.13]],12);
+    // D-242 guardian P1 #8 (Q1): as at the wrist, the ankle's top ring stood out of the shin's end (a ring step); it now
+    // tapers up inside the shin.
+    loft(ank,skin,cave?[[.10,.094,.095],[.015,.112,.14,.06],[-.055,.14,.21,.13],[-.115,.10,.16,.13]]:[[.14,.074,.075],[.07,.087,.09,.01],[.015,.112,.14,.06],[-.055,.14,.21,.13],[-.115,.10,.16,.13]],12);
     if(cave)rock(ank,plate,0,-.005,.055,.28,.14,.29,side*.12);
     for(let j=0;j<3;j++){
       const x=(j-1)*.087;

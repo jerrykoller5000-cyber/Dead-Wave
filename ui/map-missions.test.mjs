@@ -8,6 +8,18 @@ test('briefed radio is a destination before discovery; unknown caches remain hid
   const m=mapMissionMarkers({...state,snapshot});assert.deepEqual(m.map(m=>m.id),[radio]);
   assert.equal(m[0].distance,120);assert.equal(JSON.stringify(snapshot),before);
 });
+test('CK-1: with the story chain, open leads show before discovery and closed ones do not, the radio included',()=>{
+  const fuel='objective:fuel-depot';
+  const snapshot={sites:[site(radio,'undiscovered'),site(fuel,'undiscovered',{x:30,z:0}),site(ranger,'undiscovered')]};
+  const day2=mapMissionMarkers({...state,snapshot,leadOpen:id=>id===fuel?true:id===radio||id===ranger?false:null});
+  assert.deepEqual(day2.map(m=>m.id),[fuel]);
+  const day3=mapMissionMarkers({...state,snapshot,leadOpen:id=>id===radio?true:id===fuel?false:id===ranger?false:null});
+  assert.deepEqual(day3.map(m=>m.id),[radio]);
+  const waiting=mapMissionMarkers({...state,snapshot:{sites:[site(ranger,'available')]},leadOpen:()=>false});
+  assert.deepEqual(waiting.map(m=>m.id),[],'a closed lead waits for its dawn');
+  const started=mapMissionMarkers({...state,snapshot:{sites:[site(ranger,'active')]},leadOpen:()=>false});
+  assert.deepEqual(started.map(m=>m.id),[ranger],'a site the player has started stays on the map');
+});
 test('discovered missions remain at any distance; terminal states remove them; no interaction changes',()=>{
   for(const status of ['available','active','ready-to-claim']){
     const s=site(ranger,status),m=mapMissionMarkers({...state,snapshot:{sites:[s]}});

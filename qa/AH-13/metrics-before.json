@@ -1,0 +1,543 @@
+{
+  "tag": "before",
+  "timestamp": "2026-11-24T05:14:06.069Z",
+  "perfByShot": {
+    "bridge-0-overview": {
+      "calls": 30671,
+      "triangles": 2052604,
+      "geometries": 3443,
+      "textures": 393
+    },
+    "bridge-0-approach": {
+      "calls": 31245,
+      "triangles": 2502480,
+      "geometries": 3443,
+      "textures": 393
+    },
+    "bridge-0-under": {
+      "calls": 31879,
+      "triangles": 1512767,
+      "geometries": 3443,
+      "textures": 393
+    },
+    "bridge-1-overview": {
+      "calls": 32378,
+      "triangles": 2540110,
+      "geometries": 3443,
+      "textures": 393
+    },
+    "bridge-1-approach": {
+      "calls": 32877,
+      "triangles": 2590738,
+      "geometries": 3443,
+      "textures": 393
+    },
+    "dock-overview": {
+      "calls": 33391,
+      "triangles": 1347391,
+      "geometries": 3443,
+      "textures": 393
+    },
+    "dock-approach": {
+      "calls": 33980,
+      "triangles": 1169139,
+      "geometries": 3443,
+      "textures": 393
+    },
+    "dock-end": {
+      "calls": 34479,
+      "triangles": 2600479,
+      "geometries": 3443,
+      "textures": 393
+    }
+  },
+  "diag": {
+    "bridges": [
+      {
+        "index": 0,
+        "pos": {
+          "x": 56.43,
+          "z": 72.85,
+          "yaw": 3.068,
+          "deckY": 4.555
+        },
+        "platform": {
+          "hw": 1.2000000000000002,
+          "hl": 8.2,
+          "deckY": 4.645,
+          "under": null
+        },
+        "railSolidCount": 46,
+        "railSolidRadiusSample": [
+          0.24,
+          0.24,
+          0.24,
+          0.24,
+          0.5,
+          0.5
+        ],
+        "terrain": {
+          "pokeAbove": 0,
+          "pokeInside": 131,
+          "underPoke": 50,
+          "maxOver": -0.01,
+          "maxOverAt": {
+            "lx": -0.9,
+            "lz": -8.1,
+            "g": 4.615
+          },
+          "endSteps": {
+            "negEnd": [
+              {
+                "lx": -0.94,
+                "gapAt20cm": 0.012,
+                "gapAt70cm": 0.017
+              },
+              {
+                "lx": 0,
+                "gapAt20cm": 0.015,
+                "gapAt70cm": 0.027
+              },
+              {
+                "lx": 0.94,
+                "gapAt20cm": 0.016,
+                "gapAt70cm": 0.037
+              }
+            ],
+            "posEnd": [
+              {
+                "lx": -0.94,
+                "gapAt20cm": 0.018,
+                "gapAt70cm": 0.027
+              },
+              {
+                "lx": 0,
+                "gapAt20cm": 0.019,
+                "gapAt70cm": 0.028
+              },
+              {
+                "lx": 0.94,
+                "gapAt20cm": 0.019,
+                "gapAt70cm": 0.032
+              }
+            ]
+          }
+        },
+        "clearWidthPlayerMid": {
+          "minClear": -0.37,
+          "maxClear": 0.37,
+          "clearWidth": 0.74
+        },
+        "clearWidthPlayerMouth": {
+          "minClear": -0.37,
+          "maxClear": 0.37,
+          "clearWidth": 0.74
+        },
+        "clearWidthZombieMid": {
+          "minClear": -0.39,
+          "maxClear": 0.39,
+          "clearWidth": 0.78
+        },
+        "underBridge": {
+          "channelGroundY": 1.18,
+          "playerY": 1.17,
+          "stringerBottom": 4.01,
+          "headClearance": 1.141
+        },
+        "walks": {
+          "center": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.04,
+            "yRange": [
+              4.12,
+              4.64
+            ],
+            "snagSpots": []
+          },
+          "leftLane65": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.039,
+            "yRange": [
+              4.26,
+              4.68
+            ],
+            "snagSpots": []
+          },
+          "rightLane65": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.04,
+            "yRange": [
+              4.22,
+              4.64
+            ],
+            "snagSpots": []
+          },
+          "diagApproach": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.032,
+            "yRange": [
+              4.61,
+              4.74
+            ],
+            "snagSpots": []
+          },
+          "sideBankWalk": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.166,
+            "yRange": [
+              3.27,
+              4.56
+            ],
+            "snagSpots": []
+          },
+          "underWade": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.002,
+            "yRange": [
+              1.14,
+              1.21
+            ],
+            "snagSpots": []
+          }
+        }
+      },
+      {
+        "index": 1,
+        "pos": {
+          "x": -46.85,
+          "z": 50.1,
+          "yaw": 2.554,
+          "deckY": 0.689
+        },
+        "platform": {
+          "hw": 1.2000000000000002,
+          "hl": 8.2,
+          "deckY": 0.779,
+          "under": null
+        },
+        "railSolidCount": 46,
+        "railSolidRadiusSample": [
+          0.24,
+          0.24,
+          0.24,
+          0.24,
+          0.5,
+          0.5
+        ],
+        "terrain": {
+          "pokeAbove": 0,
+          "pokeInside": 130,
+          "underPoke": 48,
+          "maxOver": -0.01,
+          "maxOverAt": {
+            "lx": -0.5,
+            "lz": -7.85,
+            "g": 0.749
+          },
+          "endSteps": {
+            "negEnd": [
+              {
+                "lx": -0.94,
+                "gapAt20cm": 0.016,
+                "gapAt70cm": 0.024
+              },
+              {
+                "lx": 0,
+                "gapAt20cm": 0.015,
+                "gapAt70cm": 0.028
+              },
+              {
+                "lx": 0.94,
+                "gapAt20cm": 0.017,
+                "gapAt70cm": 0.027
+              }
+            ],
+            "posEnd": [
+              {
+                "lx": -0.94,
+                "gapAt20cm": 0.018,
+                "gapAt70cm": 0.033
+              },
+              {
+                "lx": 0,
+                "gapAt20cm": 0.014,
+                "gapAt70cm": 0.035
+              },
+              {
+                "lx": 0.94,
+                "gapAt20cm": 0.017,
+                "gapAt70cm": 0.034
+              }
+            ]
+          }
+        },
+        "clearWidthPlayerMid": {
+          "minClear": -0.37,
+          "maxClear": 0.37,
+          "clearWidth": 0.74
+        },
+        "clearWidthPlayerMouth": {
+          "minClear": -0.37,
+          "maxClear": 0.37,
+          "clearWidth": 0.74
+        },
+        "clearWidthZombieMid": {
+          "minClear": -0.39,
+          "maxClear": 0.39,
+          "clearWidth": 0.78
+        },
+        "underBridge": {
+          "channelGroundY": -1.44,
+          "playerY": -1.45,
+          "stringerBottom": 0.15,
+          "headClearance": -0.104
+        },
+        "walks": {
+          "center": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.038,
+            "yRange": [
+              0.16,
+              0.78
+            ],
+            "snagSpots": []
+          },
+          "leftLane65": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.041,
+            "yRange": [
+              0.32,
+              0.78
+            ],
+            "snagSpots": []
+          },
+          "rightLane65": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.041,
+            "yRange": [
+              0.29,
+              0.78
+            ],
+            "snagSpots": []
+          },
+          "diagApproach": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.036,
+            "yRange": [
+              0.63,
+              0.78
+            ],
+            "snagSpots": []
+          },
+          "sideBankWalk": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.105,
+            "yRange": [
+              0.18,
+              0.74
+            ],
+            "snagSpots": []
+          },
+          "underWade": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.008,
+            "yRange": [
+              -1.58,
+              -1.31
+            ],
+            "snagSpots": []
+          }
+        }
+      }
+    ],
+    "dock": {
+      "pos": {
+        "x": -86.09,
+        "z": -64.88,
+        "yaw": -2.217,
+        "deckY": -2.85
+      },
+      "platform": {
+        "hw": 1.15,
+        "hl": 4.75,
+        "deckY": -2.77,
+        "under": null
+      },
+      "terrain": {
+        "pokeAbove": 0,
+        "pokeInside": 175,
+        "underPoke": 152,
+        "maxOver": -0.018,
+        "maxOverAt": {
+          "lx": 0.5,
+          "lz": -4.65,
+          "g": -2.808
+        },
+        "endSteps": {
+          "negEnd": [
+            {
+              "lx": -0.8,
+              "gapAt20cm": 0.015,
+              "gapAt70cm": 0.007
+            },
+            {
+              "lx": 0,
+              "gapAt20cm": 0.017,
+              "gapAt70cm": 0.003
+            },
+            {
+              "lx": 0.8,
+              "gapAt20cm": 0.014,
+              "gapAt70cm": 0.003
+            }
+          ],
+          "posEnd": [
+            {
+              "lx": -0.8,
+              "gapAt20cm": 2.44,
+              "gapAt70cm": 2.563
+            },
+            {
+              "lx": 0,
+              "gapAt20cm": 2.297,
+              "gapAt70cm": 2.432
+            },
+            {
+              "lx": 0.8,
+              "gapAt20cm": 2.1,
+              "gapAt70cm": 2.258
+            }
+          ]
+        }
+      },
+      "clearWidthMid": {
+        "minClear": -1.15,
+        "maxClear": 1.15,
+        "clearWidth": 2.3
+      },
+      "clearWidthEntrance": {
+        "minClear": -0.85,
+        "maxClear": 1.15,
+        "clearWidth": 2
+      },
+      "walks": {
+        "center": {
+          "reached": true,
+          "remDist": 0,
+          "snags": 0,
+          "maxShove": 0,
+          "maxLatErr": 0,
+          "maxVSnap": 0.039,
+          "yRange": [
+            -2.81,
+            -2.54
+          ],
+          "snagSpots": []
+        },
+        "leftLane55": {
+          "reached": true,
+          "remDist": 0,
+          "snags": 0,
+          "maxShove": 0,
+          "maxLatErr": 0,
+          "maxVSnap": 0.04,
+          "yRange": [
+            -2.81,
+            -2.64
+          ],
+          "snagSpots": []
+        },
+        "rightLane55": {
+          "reached": true,
+          "remDist": 0,
+          "snags": 0,
+          "maxShove": 0,
+          "maxLatErr": 0,
+          "maxVSnap": 0.038,
+          "yRange": [
+            -2.81,
+            -2.6
+          ],
+          "snagSpots": []
+        },
+        "diagShoreEntry": {
+          "reached": true,
+          "remDist": 0,
+          "snags": 0,
+          "maxShove": 0,
+          "maxLatErr": 0,
+          "maxVSnap": 0.039,
+          "yRange": [
+            -2.81,
+            -2.75
+          ],
+          "snagSpots": []
+        },
+        "shorePastCorner": {
+          "reached": true,
+          "remDist": 0,
+          "snags": 0,
+          "maxShove": 0,
+          "maxLatErr": 0,
+          "maxVSnap": 0.007,
+          "yRange": [
+            -2.81,
+            -2.75
+          ],
+          "snagSpots": []
+        }
+      }
+    },
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "errors": []
+  },
+  "pageErrors": []
+}

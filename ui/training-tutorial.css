@@ -1,0 +1,752 @@
+/* AG-415: PGB Field Orientation — Optional Training Ground Tutorial UI.
+   Follows docs/ui-principles.md: worn olive bezel, near-black CRT phosphor glass,
+   sodium amber active accents, Ridgeline green completion cues, subtle scanlines (<6%),
+   readable at 1280x720 and 390px wide, safe across 3P and 1P views. */
+
+#trainingHud {
+  pointer-events: none;
+}
+
+#trainingTutorialHudBtn {
+  pointer-events: auto;
+  margin-left: 6px;
+  padding: 2px 9px;
+  border: 1px solid rgba(242, 196, 24, 0.52);
+  border-radius: 2px;
+  background: rgba(20, 26, 20, 0.88);
+  color: var(--accent, #f2c418);
+  font: 700 11px/1.3 var(--font-hud, sans-serif);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.14s ease, border-color 0.14s ease, color 0.14s ease;
+}
+#trainingTutorialHudBtn:hover,
+#trainingTutorialHudBtn:focus-visible {
+  background: rgba(242, 196, 24, 0.16);
+  border-color: var(--accent, #f2c418);
+  outline: none;
+}
+#trainingTutorialHudBtn.is-active {
+  background: rgba(242, 196, 24, 0.22);
+  border-color: var(--accent, #f2c418);
+}
+#trainingTutorialHudBtn.is-done {
+  border-color: rgba(88, 224, 150, 0.55);
+  color: #7ee8ae;
+}
+#trainingTutorialHudBtn[hidden] {
+  display: none;
+}
+
+/* Shared CRT glass plate surface */
+.tt-plate {
+  position: relative;
+  background: rgba(8, 12, 10, 0.92);
+  border: 1px solid var(--panel-line, #2f3b31);
+  border-top: 3px solid var(--accent, #f2c418);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.62), inset 0 0 24px rgba(242, 196, 24, 0.04);
+  color: var(--ink, #e5e8dc);
+  font-family: var(--font-hud, sans-serif);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+}
+.tt-plate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0) 0px,
+    rgba(0, 0, 0, 0) 2px,
+    rgba(255, 255, 255, 0.03) 3px
+  );
+  opacity: 0.9;
+}
+
+/* Non-blocking Entry Offer Card (top-right, never locks movement or focus) */
+#trainingTutorialOffer {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  width: min(332px, calc(100vw - 32px));
+  box-sizing: border-box;
+  padding: 13px 15px 12px;
+  z-index: 26;
+  pointer-events: auto;
+  animation: ttSlideIn 0.18s ease-out;
+}
+#trainingTutorialOffer[hidden] {
+  display: none;
+}
+body:has(#pause.show) #trainingTutorialOffer,
+body:has(#pause.show) #trainingTutorial,
+body:has(#pause.show) #trainingTutorialPointer {
+  visibility: hidden;
+  pointer-events: none;
+}
+#trainingTutorialOffer .tt-eyebrow {
+  margin: 0 0 3px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent, #f2c418);
+}
+#trainingTutorialOffer h3 {
+  margin: 0 0 6px;
+  font: 400 21px/1.08 var(--font-display, sans-serif);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #f3f5ec;
+}
+#trainingTutorialOffer p {
+  margin: 0 0 11px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--ink-dim, #b2baa8);
+}
+#trainingTutorialOffer .tt-offer-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+#trainingTutorialOffer .tt-offer-actions .tt-primary {
+  grid-column: 1 / -1;
+}
+#trainingTutorialOffer .tt-shortcut {
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: #8f9b86;
+  text-align: center;
+}
+
+/* Live Orientation Tracker HUD (top-right, open slot in Training Ground) */
+#trainingTutorial {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  width: min(348px, calc(100vw - 32px));
+  max-height: calc(100vh - 236px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: 11px 14px 10px;
+  z-index: 28;
+  pointer-events: auto;
+  animation: ttSlideIn 0.18s ease-out;
+}
+#trainingTutorial[hidden] {
+  display: none;
+}
+.tt-body-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+.tt-body-scroll {
+  overflow-y: auto;
+  min-height: 0;
+  flex: 1 1 auto;
+  padding-right: 2px;
+}
+#trainingTutorial.is-done {
+  border-top-color: #58e096;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.62), inset 0 0 28px rgba(88, 224, 150, 0.09);
+}
+#trainingTutorial.is-collapsed {
+  width: auto;
+  max-width: min(300px, calc(100vw - 32px));
+  padding: 7px 10px;
+}
+#trainingTutorial.is-collapsed .tt-body-wrap {
+  display: none;
+}
+
+/* While Armory/CIF/Shop/HQ Panel is open, dock as a slim top-center ribbon so zero modal buttons are covered */
+body.training-tutorial-modal-open #trainingTutorial {
+  z-index: 64;
+  top: 6px;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: auto;
+  max-width: min(760px, calc(100vw - 24px));
+  max-height: none;
+  padding: 6px 12px;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  clip-path: none;
+  opacity: 0.97;
+}
+body.training-tutorial-modal-open #trainingTutorial .tt-head {
+  align-items: center;
+  flex-shrink: 0;
+}
+body.training-tutorial-modal-open #trainingTutorial .tt-mod-line,
+body.training-tutorial-modal-open #trainingTutorial .tt-progress-bar,
+body.training-tutorial-modal-open #trainingTutorial .tt-step-body,
+body.training-tutorial-modal-open #trainingTutorial .tt-note,
+body.training-tutorial-modal-open #trainingTutorial .tt-keys,
+body.training-tutorial-modal-open #trainingTutorial .tt-briefing,
+body.training-tutorial-modal-open #trainingTutorial .tt-done-banner,
+body.training-tutorial-modal-open #trainingTutorial .tt-actions,
+body.training-tutorial-modal-open #trainingTutorial .tt-btn.tt-assist {
+  display: none;
+}
+body.training-tutorial-modal-open #trainingTutorial .tt-body-wrap,
+body.training-tutorial-modal-open #trainingTutorial .tt-body-scroll {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  overflow: visible;
+  padding: 0;
+}
+body.training-tutorial-modal-open #trainingTutorial .tt-step-title {
+  margin: 0;
+  font-size: 14px;
+  white-space: nowrap;
+}
+body.training-tutorial-modal-open #trainingTutorial .tt-tasks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0;
+}
+body.training-tutorial-modal-open #trainingTutorial .tt-task {
+  padding: 2px 7px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.tt-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tt-head-meta {
+  min-width: 0;
+}
+.tt-eyebrow {
+  margin: 0;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent, #f2c418);
+}
+.tt-mod-line {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: #9ba892;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
+.tt-head-btns {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.tt-progress-bar {
+  height: 3px;
+  margin: 8px 0 9px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+.tt-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #c69a12, #f2c418);
+  transition: width 0.2s ease;
+}
+#trainingTutorial.is-done .tt-progress-fill {
+  background: linear-gradient(90deg, #32a866, #58e096);
+}
+
+.tt-step-title {
+  margin: 0 0 5px;
+  font: 400 20px/1.08 var(--font-display, sans-serif);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #f3f6ec;
+}
+#trainingTutorial.is-done .tt-step-title {
+  color: #7ee8ae;
+}
+
+.tt-step-body {
+  margin: 0 0 8px;
+  font-size: 12.5px;
+  line-height: 1.44;
+  color: #dde3d5;
+}
+
+/* Keycap badges */
+.tt-keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0 0 9px;
+}
+.tt-keys:empty {
+  display: none;
+}
+.tt-key-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 7px;
+  border: 1px solid rgba(242, 196, 24, 0.34);
+  background: rgba(242, 196, 24, 0.08);
+  border-radius: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #f4d878;
+  letter-spacing: 0.03em;
+}
+
+/* Sub-objective checklist */
+.tt-tasks {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+  display: grid;
+  gap: 5px;
+}
+.tt-tasks:empty {
+  display: none;
+}
+.tt-task {
+  display: grid;
+  grid-template-columns: 16px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(18, 25, 20, 0.72);
+  font-size: 12px;
+  line-height: 1.3;
+  color: #dfe4d7;
+  transition: border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
+}
+.tt-task.done {
+  border-color: rgba(88, 224, 150, 0.45);
+  background: rgba(24, 58, 38, 0.48);
+  color: #9af0be;
+}
+.tt-task-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(242, 196, 24, 0.65);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  color: transparent;
+}
+.tt-task.done .tt-task-box {
+  border-color: #58e096;
+  background: #58e096;
+  color: #06130b;
+}
+.tt-task-prog {
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent, #f2c418);
+}
+.tt-task.done .tt-task-prog {
+  color: #7ee8ae;
+}
+
+/* Briefing bullets for Campaign Readiness step */
+.tt-briefing {
+  margin: 0 0 7px;
+  padding: 0 0 0 15px;
+  display: grid;
+  gap: 4px;
+  font-size: 11.5px;
+  line-height: 1.35;
+  color: #d1dac6;
+}
+.tt-briefing:empty {
+  display: none;
+}
+.tt-briefing li::marker {
+  color: var(--accent, #f2c418);
+}
+
+/* Tactical note callout */
+.tt-note {
+  margin: 0 0 9px;
+  padding: 6px 9px;
+  border-left: 2px solid rgba(88, 224, 150, 0.55);
+  background: rgba(14, 24, 18, 0.72);
+  font-size: 11.5px;
+  line-height: 1.42;
+  color: #b4c7b0;
+}
+
+.tt-done-banner {
+  margin: 0 0 8px;
+  padding: 5px 8px;
+  border: 1px solid rgba(88, 224, 150, 0.55);
+  background: rgba(24, 62, 40, 0.65);
+  color: #8bf2b8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+}
+.tt-done-banner[hidden] {
+  display: none;
+}
+
+/* Buttons */
+.tt-btn {
+  border: 1px solid var(--panel-line, #384639);
+  border-radius: 2px;
+  background: rgba(20, 27, 21, 0.85);
+  color: var(--ink, #e2e6d9);
+  min-height: 28px;
+  padding: 4px 9px;
+  font: 700 11px/1.2 var(--font-hud, sans-serif);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.14s ease, border-color 0.14s ease, color 0.14s ease;
+}
+.tt-btn:hover:not(:disabled),
+.tt-btn:focus-visible {
+  border-color: var(--accent, #f2c418);
+  background: rgba(242, 196, 24, 0.14);
+  outline: none;
+}
+.tt-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.tt-btn.tt-primary {
+  background: var(--accent, #f2c418);
+  border-color: var(--accent, #f2c418);
+  color: #10140e;
+}
+.tt-btn.tt-primary:hover:not(:disabled),
+.tt-btn.tt-primary:focus-visible {
+  background: #ffd34d;
+  border-color: #ffd34d;
+}
+.tt-btn.tt-assist {
+  width: 100%;
+  margin-bottom: 8px;
+  border-style: dashed;
+  border-color: rgba(88, 224, 150, 0.58);
+  background: rgba(20, 48, 32, 0.58);
+  color: #9bf3c2;
+  min-height: 30px;
+}
+.tt-btn.tt-assist:hover:not(:disabled),
+.tt-btn.tt-assist:focus-visible {
+  border-color: #58e096;
+  background: rgba(34, 82, 54, 0.72);
+}
+.tt-btn.tt-danger {
+  border-color: rgba(224, 78, 56, 0.58);
+  color: #f39a8a;
+}
+.tt-btn.tt-danger:hover:not(:disabled),
+.tt-btn.tt-danger:focus-visible {
+  border-color: #e85540;
+  background: rgba(224, 78, 56, 0.16);
+}
+.tt-btn.tt-mini {
+  min-height: 22px;
+  padding: 2px 7px;
+  font-size: 10px;
+}
+
+.tt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.tt-actions .tt-spacer {
+  flex: 1 1 auto;
+}
+
+/* Floating screen-space directional waypoint indicator */
+#trainingTutorialPointer {
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  background: rgba(9, 14, 11, 0.88);
+  border: 1px solid rgba(242, 196, 24, 0.75);
+  border-radius: 2px;
+  color: #f6dc84;
+  font: 700 11px/1.1 var(--font-hud, sans-serif);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 18;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
+}
+#trainingTutorialPointer[hidden] {
+  display: none;
+}
+#trainingTutorialPointer.is-arrived {
+  border-color: rgba(88, 224, 150, 0.85);
+  color: #8bf2b8;
+}
+#trainingTutorialPointer .tt-ptr-arrow {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1;
+}
+
+/* Module Complete Toast */
+#trainingTutorialToast {
+  position: fixed;
+  top: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 7px 16px;
+  background: rgba(9, 22, 15, 0.94);
+  border: 1px solid rgba(88, 224, 150, 0.7);
+  border-top: 2px solid #58e096;
+  color: #9bf3c2;
+  font: 700 12px/1.2 var(--font-hud, sans-serif);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  pointer-events: none;
+  z-index: 35;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.58);
+}
+#trainingTutorialToast[hidden] {
+  display: none;
+}
+
+/* Full CRT Field Orientation Syllabus Drawer Modal */
+#trainingTutorialDrawer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(3, 6, 4, 0.78);
+  z-index: 68;
+  padding: 16px;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+#trainingTutorialDrawer[hidden] {
+  display: none;
+}
+#trainingTutorialDrawer .tt-drawer-card {
+  display: flex;
+  flex-direction: column;
+  width: min(920px, 95vw);
+  max-height: 90svh;
+  overflow: hidden;
+  padding: 0;
+}
+.tt-drawer-head {
+  padding: 16px 22px 12px;
+  border-bottom: 1px solid var(--panel-line, #2f3b31);
+  background: rgba(16, 22, 17, 0.92);
+}
+.tt-drawer-head h2 {
+  margin: 3px 0 4px;
+  font: 400 27px/1.05 var(--font-display, sans-serif);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent, #f2c418);
+}
+.tt-drawer-head p {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--ink-dim, #b2baa8);
+}
+.tt-drawer-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+.tt-drawer-summary .tt-progress-bar {
+  flex: 1 1 auto;
+  margin: 0;
+  height: 5px;
+}
+.tt-drawer-summary output {
+  font-size: 12px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #8bf2b8;
+  white-space: nowrap;
+}
+
+.tt-drawer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 14px 22px;
+  overflow-y: auto;
+  min-height: 0;
+}
+.tt-mod-card {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 11px 12px;
+  border: 1px solid var(--panel-line, #2f3b31);
+  background: rgba(14, 20, 16, 0.85);
+}
+.tt-mod-card.is-complete {
+  border-color: rgba(88, 224, 150, 0.48);
+}
+.tt-mod-card.is-current {
+  border-color: var(--accent, #f2c418);
+  box-shadow: inset 0 0 0 1px rgba(242, 196, 24, 0.32);
+}
+.tt-mod-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tt-mod-num {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent, #f2c418);
+}
+.tt-mod-card.is-complete .tt-mod-num {
+  color: #7ee8ae;
+}
+.tt-mod-card h3 {
+  margin: 2px 0 0;
+  font: 700 14px/1.2 var(--font-hud, sans-serif);
+  color: #f0f3e8;
+}
+.tt-mod-desc {
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: #aeb8a4;
+}
+.tt-step-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.tt-step-chip {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 2px;
+  background: rgba(8, 12, 10, 0.72);
+  color: #cad3c0;
+  padding: 3px 7px;
+  font: 600 11px/1.2 var(--font-hud, sans-serif);
+  cursor: pointer;
+}
+.tt-step-chip:hover,
+.tt-step-chip:focus-visible {
+  border-color: var(--accent, #f2c418);
+  color: #fff;
+  outline: none;
+}
+.tt-step-chip.done {
+  border-color: rgba(88, 224, 150, 0.48);
+  color: #8bf2b8;
+  background: rgba(20, 52, 34, 0.5);
+}
+.tt-step-chip.current {
+  border-color: var(--accent, #f2c418);
+  background: rgba(242, 196, 24, 0.22);
+  color: #ffe386;
+}
+
+.tt-drawer-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 11px 22px;
+  border-top: 1px solid var(--panel-line, #2f3b31);
+  background: rgba(16, 22, 17, 0.94);
+}
+.tt-drawer-foot-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+/* Hide tutorial HUD elements outside Training Ground or during blackout */
+body:not(.training) #trainingTutorial,
+body:not(.training) #trainingTutorialOffer,
+body:not(.training) #trainingTutorialPointer,
+body:not(.training) #trainingTutorialToast,
+body:not(.training) #trainingTutorialDrawer {
+  display: none !important;
+}
+
+@keyframes ttSlideIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 720px) {
+  .tt-drawer-grid {
+    grid-template-columns: 1fr;
+    padding: 10px 14px;
+  }
+  .tt-drawer-head,
+  .tt-drawer-foot {
+    padding-inline: 14px;
+  }
+}
+
+/* 390px narrow / portrait safety (docs/ui-principles.md §6) */
+@media (max-width: 600px) {
+  #trainingTutorial,
+  #trainingTutorialOffer {
+    top: auto;
+    bottom: 132px;
+    right: 8px;
+    left: 8px;
+    width: auto;
+    max-height: 44vh;
+    padding: 9px 11px;
+  }
+  #trainingTutorial.is-collapsed {
+    left: auto;
+    bottom: 132px;
+    max-width: calc(100vw - 16px);
+  }
+  .tt-step-title {
+    font-size: 17px;
+  }
+  .tt-note {
+    display: none;
+  }
+}

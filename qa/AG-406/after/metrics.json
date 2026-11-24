@@ -1,0 +1,583 @@
+{
+  "tag": "after",
+  "timestamp": "2026-11-23T23:09:50.964Z",
+  "backend": "WebGPU",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 32.01,
+  "pageErrors": [],
+  "audit": {
+    "placedCount": 40,
+    "meshes": 691,
+    "uniqueMaterials": 39,
+    "materialsWithMap": 26,
+    "materialsWithNormal": 35,
+    "materialsWithRoughness": 24,
+    "materialsWithMetalness": 24,
+    "materialsWithAO": 24,
+    "uniqueTextures": 36,
+    "estimatedVramMB": 23.75,
+    "textures": [
+      {
+        "name": "bd-steel-col",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "bd-steel-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "bd-steel-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "bd-wood-col",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "bd-wood-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "bd-wood-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "bd-stone-col",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "bd-stone-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "bd-stone-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "bd-burlap-col",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "bd-burlap-nrm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "bd-burlap-orm",
+        "w": 512,
+        "h": 512,
+        "bytes": 1398066,
+        "aniso": 4
+      },
+      {
+        "name": "bd-brass-col",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-brass-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-brass-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-gunmetal-col",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-gunmetal-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-gunmetal-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-paint-col",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-paint-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-paint-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-worn-steel-col",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-worn-steel-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-worn-steel-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-hazard-yellow-col",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-hazard-yellow-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-hazard-yellow-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-rubber-hose-col",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-rubber-hose-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-rubber-hose-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-rust-col",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-rust-nrm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-rust-orm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 4
+      },
+      {
+        "name": "bd-placard-fuel",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 8
+      },
+      {
+        "name": "bd-placard-napalm",
+        "w": 256,
+        "h": 256,
+        "bytes": 349517,
+        "aniso": 8
+      },
+      {
+        "name": "bd-optical-lens-nrm",
+        "w": 128,
+        "h": 128,
+        "bytes": 87379,
+        "aniso": 4
+      }
+    ],
+    "centerY": -3.7676215171813965
+  },
+  "perf": {
+    "frames": 150,
+    "meanMs": 41.11,
+    "meanFps": 24.3,
+    "medianMs": 33.5,
+    "p99Ms": 66.9,
+    "worstMs": 116.7,
+    "hitches": 28,
+    "callsPerFrame": 15.1,
+    "tris": 1491862,
+    "lateCompiles": 0
+  },
+  "shots": [
+    {
+      "id": "01-wall-t0",
+      "cap": "Wall T0 · Wood",
+      "file": "qa/AG-406/after/01-wall-t0.png",
+      "bytes": 1284195
+    },
+    {
+      "id": "02-wall-t1",
+      "cap": "Wall T1 · Reinforced Wood",
+      "file": "qa/AG-406/after/02-wall-t1.png",
+      "bytes": 1300595
+    },
+    {
+      "id": "03-wall-t2",
+      "cap": "Wall T2 · Stone",
+      "file": "qa/AG-406/after/03-wall-t2.png",
+      "bytes": 1334242
+    },
+    {
+      "id": "04-wall-t3",
+      "cap": "Wall T3 · Reinforced Stone",
+      "file": "qa/AG-406/after/04-wall-t3.png",
+      "bytes": 1323798
+    },
+    {
+      "id": "05-wall-t4",
+      "cap": "Wall T4 · Steel Plate",
+      "file": "qa/AG-406/after/05-wall-t4.png",
+      "bytes": 1298249
+    },
+    {
+      "id": "06-door-t0",
+      "cap": "Door T0 · Wood Door",
+      "file": "qa/AG-406/after/06-door-t0.png",
+      "bytes": 1127983
+    },
+    {
+      "id": "07-door-t2",
+      "cap": "Door T2 · Iron Door",
+      "file": "qa/AG-406/after/07-door-t2.png",
+      "bytes": 1326967
+    },
+    {
+      "id": "08-door-t4",
+      "cap": "Door T4 · Steel Vault Door",
+      "file": "qa/AG-406/after/08-door-t4.png",
+      "bytes": 1301865
+    },
+    {
+      "id": "09-window-bars",
+      "cap": "Window + Steel Mesh Bars",
+      "file": "qa/AG-406/after/09-window-bars.png",
+      "bytes": 1367210
+    },
+    {
+      "id": "10-gate-t0",
+      "cap": "Gate T0 · Wooden Gate",
+      "file": "qa/AG-406/after/10-gate-t0.png",
+      "bytes": 1153213
+    },
+    {
+      "id": "11-gate-t2",
+      "cap": "Gate T2 · Steel Gate",
+      "file": "qa/AG-406/after/11-gate-t2.png",
+      "bytes": 1254464
+    },
+    {
+      "id": "12-floor-t0",
+      "cap": "Floor T0 · Wood Planks",
+      "file": "qa/AG-406/after/12-floor-t0.png",
+      "bytes": 1244566
+    },
+    {
+      "id": "13-floor-t1",
+      "cap": "Floor T1 · Stone Flags",
+      "file": "qa/AG-406/after/13-floor-t1.png",
+      "bytes": 1244227
+    },
+    {
+      "id": "14-floor-t2",
+      "cap": "Floor T2 · Steel Tread Plate",
+      "file": "qa/AG-406/after/14-floor-t2.png",
+      "bytes": 1218644
+    },
+    {
+      "id": "15-barricade-t0",
+      "cap": "Barricade T0 · Timber & Steel",
+      "file": "qa/AG-406/after/15-barricade-t0.png",
+      "bytes": 1312265
+    },
+    {
+      "id": "16-barricade-t1",
+      "cap": "Barricade T1 · Braced Shield",
+      "file": "qa/AG-406/after/16-barricade-t1.png",
+      "bytes": 1297826
+    },
+    {
+      "id": "17-barricade-t2",
+      "cap": "Barricade T2 · Czech Hedgehog",
+      "file": "qa/AG-406/after/17-barricade-t2.png",
+      "bytes": 1267767
+    },
+    {
+      "id": "18-sandbag-t0",
+      "cap": "Sandbag T0 · Burlap Wall",
+      "file": "qa/AG-406/after/18-sandbag-t0.png",
+      "bytes": 1516964
+    },
+    {
+      "id": "19-sandbag-t1",
+      "cap": "Sandbag T1 · Double-Stacked",
+      "file": "qa/AG-406/after/19-sandbag-t1.png",
+      "bytes": 1425002
+    },
+    {
+      "id": "20-sandbag-t2",
+      "cap": "Sandbag T2 · Gabion Wall",
+      "file": "qa/AG-406/after/20-sandbag-t2.png",
+      "bytes": 1353441
+    },
+    {
+      "id": "21-wire-t0",
+      "cap": "Wire T0 · Barbed Wire",
+      "file": "qa/AG-406/after/21-wire-t0.png",
+      "bytes": 1207902
+    },
+    {
+      "id": "22-wire-t2",
+      "cap": "Wire T2 · Razor Wire",
+      "file": "qa/AG-406/after/22-wire-t2.png",
+      "bytes": 1228872
+    },
+    {
+      "id": "23-railing-t0",
+      "cap": "Railing T0 · Steel Rail",
+      "file": "qa/AG-406/after/23-railing-t0.png",
+      "bytes": 1236493
+    },
+    {
+      "id": "24-railing-t2",
+      "cap": "Railing T2 · Armoured Parapet",
+      "file": "qa/AG-406/after/24-railing-t2.png",
+      "bytes": 1256400
+    },
+    {
+      "id": "25-platform-t0",
+      "cap": "Platform T0 · Grated Deck",
+      "file": "qa/AG-406/after/25-platform-t0.png",
+      "bytes": 1204468
+    },
+    {
+      "id": "26-platform-t2",
+      "cap": "Platform T2 · Gun Emplacement",
+      "file": "qa/AG-406/after/26-platform-t2.png",
+      "bytes": 1253155
+    },
+    {
+      "id": "27-pillar-t0",
+      "cap": "Pillar T0 · Flanged Steel",
+      "file": "qa/AG-406/after/27-pillar-t0.png",
+      "bytes": 1218401
+    },
+    {
+      "id": "28-pillar-t1",
+      "cap": "Pillar T1 · Concrete Pillar",
+      "file": "qa/AG-406/after/28-pillar-t1.png",
+      "bytes": 1245264
+    },
+    {
+      "id": "29-pillar-t2",
+      "cap": "Pillar T2 · Steel H-Column",
+      "file": "qa/AG-406/after/29-pillar-t2.png",
+      "bytes": 1225738
+    },
+    {
+      "id": "30-stairs-t0",
+      "cap": "Stairs T0 · Timber Flight",
+      "file": "qa/AG-406/after/30-stairs-t0.png",
+      "bytes": 1235940
+    },
+    {
+      "id": "31-stairs-t2",
+      "cap": "Stairs T2 · Retractable Steel",
+      "file": "qa/AG-406/after/31-stairs-t2.png",
+      "bytes": 1230059
+    },
+    {
+      "id": "32-spikes-t0",
+      "cap": "Spikes T0 · Timber Trap",
+      "file": "qa/AG-406/after/32-spikes-t0.png",
+      "bytes": 1226804
+    },
+    {
+      "id": "33-spikes-t2",
+      "cap": "Spikes T2 · Steel Blade Bed",
+      "file": "qa/AG-406/after/33-spikes-t2.png",
+      "bytes": 1237951
+    },
+    {
+      "id": "34-mine-t0",
+      "cap": "Mine T0 · Pressure Mine",
+      "file": "qa/AG-406/after/34-mine-t0.png",
+      "bytes": 1150619
+    },
+    {
+      "id": "35-mine-t2",
+      "cap": "Mine T2 · Bounding Mine",
+      "file": "qa/AG-406/after/35-mine-t2.png",
+      "bytes": 1157332
+    },
+    {
+      "id": "36-lure-t0",
+      "cap": "Lure T0 · Decoy Beacon",
+      "file": "qa/AG-406/after/36-lure-t0.png",
+      "bytes": 1192881
+    },
+    {
+      "id": "37-lure-t2",
+      "cap": "Lure T2 · Shock Tesla Beacon",
+      "file": "qa/AG-406/after/37-lure-t2.png",
+      "bytes": 1193891
+    },
+    {
+      "id": "38-barrel-t0",
+      "cap": "Barrel T0 · Fuel Drum",
+      "file": "qa/AG-406/after/38-barrel-t0.png",
+      "bytes": 1188033
+    },
+    {
+      "id": "39-barrel-t1",
+      "cap": "Barrel T1 · Napalm Drum",
+      "file": "qa/AG-406/after/39-barrel-t1.png",
+      "bytes": 1187288
+    },
+    {
+      "id": "40-light-t0",
+      "cap": "Light Turret Mk I",
+      "file": "qa/AG-406/after/40-light-t0.png",
+      "bytes": 1181136
+    },
+    {
+      "id": "41-light-t2",
+      "cap": "Light Turret Mk III",
+      "file": "qa/AG-406/after/41-light-t2.png",
+      "bytes": 1179945
+    },
+    {
+      "id": "42-heavy-t0",
+      "cap": "Heavy Turret Mk I",
+      "file": "qa/AG-406/after/42-heavy-t0.png",
+      "bytes": 1199292
+    },
+    {
+      "id": "43-heavy-t2",
+      "cap": "Heavy Turret Mk III",
+      "file": "qa/AG-406/after/43-heavy-t2.png",
+      "bytes": 1190422
+    },
+    {
+      "id": "44-flame-t0",
+      "cap": "Flame Turret Mk I",
+      "file": "qa/AG-406/after/44-flame-t0.png",
+      "bytes": 1188329
+    },
+    {
+      "id": "45-flame-t2",
+      "cap": "Flame Turret Mk III",
+      "file": "qa/AG-406/after/45-flame-t2.png",
+      "bytes": 1193479
+    },
+    {
+      "id": "46-base-noon",
+      "cap": "40-Piece Base · Noon",
+      "file": "qa/AG-406/after/46-base-noon.png",
+      "bytes": 1853261
+    },
+    {
+      "id": "47-base-morning",
+      "cap": "40-Piece Base · Morning Grazing Light",
+      "file": "qa/AG-406/after/47-base-morning.png",
+      "bytes": 1605569
+    },
+    {
+      "id": "48-base-dusk",
+      "cap": "40-Piece Base · Dusk Warm Sun",
+      "file": "qa/AG-406/after/48-base-dusk.png",
+      "bytes": 1641199
+    },
+    {
+      "id": "49-base-night",
+      "cap": "40-Piece Base · Night Glows",
+      "file": "qa/AG-406/after/49-base-night.png",
+      "bytes": 1575855
+    }
+  ]
+}

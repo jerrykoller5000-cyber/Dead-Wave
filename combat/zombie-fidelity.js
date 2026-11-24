@@ -173,6 +173,8 @@ export function refineHeavyArmor(A,T,g,s,k,M) {
       :[[-.31,.065,.084],[-.23,.087,.112],[-.12,.102,.129],[-.005,.098,.118],[.045,.04,.095]];
     A.plate(shin,steel,shinGuard,.021);
     for(let j=0;j<2;j++)A.path(el,leather,[[-.1,-.12-j*.105,.09],[0,-.12-j*.105,.134],[.1,-.12-j*.105,.09]],.012);
+    // D-242 colossus P1 #10 (Q1): the pauldron cup was cut square at its open edge (a shelf); a rolled rim now finishes it
+    if(k==='colossus')A.path(arm,rust,Array.from({length:13},(_,i)=>{const a=i/12*Math.PI*2;return [Math.sin(a)*.171,.012,Math.cos(a)*.166];}),.013,.013);
     if(k==='colossus')for(let j=0;j<2;j++)A.sweep(arm,rust,[[side*.06,.10,-.08+j*.16],[side*.135,.21,-.10+j*.18],[side*.18,.32,-.14+j*.2]],.043,0);
   }
   if(k==='brute'){
@@ -189,6 +191,12 @@ export function refineHeavyArmor(A,T,g,s,k,M) {
     for(const x of [-.31-shieldOut,-.13-shieldOut])A.path(u.armLG,rust,[[x,.13,.10],[x-.02,.27,.06],[x+.07,.29,.06],[x+.09,.14,.10]],.014);
     for(let j=0;j<3;j++)A.plate(u.torso,steel,[[.145+j*.083,.19,.275],[.205+j*.083,.21,.274]],.008);
     for(let i=0;i<3;i++)A.egg(u.torso,fire,(i-1)*.105,.078,.21,.045,.077,.026);
+    if(k==='colossus'){   // D-242 colossus P1 #7 (Q4): the three furnace lights sat on bare skin (buttons); now a riveted grille holds them
+      A.plate(u.torso,rust,[[.032,.17,.196,.03],[.078,.185,.205,.03],[.124,.17,.199,.03]],.016);
+      for(let i=0;i<3;i++)A.egg(u.torso,hair,(i-1)*.105,.078,.209,.062,.094,.024);
+      for(let i=0;i<4;i++)A.path(u.torso,steel,[[(i-1.5)*.105,.038,.212],[(i-1.5)*.105,.118,.214]],.008,.008);
+      for(const x of [-.155,.155])for(const y of [.045,.11])A.egg(u.torso,steel,x,y,.214,.016,.016,.01);
+    }
     // A narrow brow follows the skull; no slab across the eye openings.
     A.path(u.head,steel,[[-.16,.11,.10],[-.08,.13,.14],[0,.13,.15],[.08,.13,.14],[.16,.11,.10]],.027);
   }

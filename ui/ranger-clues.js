@@ -46,28 +46,46 @@ export function paintRadioLcd(c, w, h, ch, words) {
 
 export function paintSearchLog(c, w, h, day, words) {
   const t = W(words), j = wobble(31 + day);
-  c.fillStyle = '#e8e0c2'; c.fillRect(0, 0, w, h);
-  c.fillStyle = 'rgba(120,96,50,.10)'; for (let i = 0; i < 26; i++) c.fillRect((i * 97) % w, (i * 53) % h, 3 + i % 7, 2 + i % 3);   // age spots
+  const bg = c.createLinearGradient(0, 0, w, h);
+  bg.addColorStop(0, '#eee5c8'); bg.addColorStop(0.55, '#e7dec0'); bg.addColorStop(1, '#dcd0ab');
+  c.fillStyle = bg; c.fillRect(0, 0, w, h);
+  // Subtle paper crease fold line across center + age speckles + faint coffee ring stain:
+  c.fillStyle = 'rgba(85,68,38,.09)'; c.fillRect(0, h * 0.51, w, Math.max(1, h * 0.004));
+  c.fillStyle = 'rgba(255,250,235,.18)'; c.fillRect(0, h * 0.515, w, Math.max(1, h * 0.004));
+  c.fillStyle = 'rgba(120,96,50,.10)'; for (let i = 0; i < 34; i++) c.fillRect((i * 97) % w, (i * 53) % h, 2 + i % 6, 2 + i % 3);
+  c.save();
+  c.strokeStyle = 'rgba(104,68,36,.16)'; c.lineWidth = Math.max(2, w * 0.012);
+  c.beginPath(); c.arc(w * 0.83, h * 0.86, w * 0.11, 0, Math.PI * 2); c.stroke();
+  c.strokeStyle = 'rgba(104,68,36,.08)'; c.lineWidth = Math.max(1, w * 0.005);
+  c.beginPath(); c.arc(w * 0.83 + 2, h * 0.86 - 2, w * 0.10, 0.4, Math.PI * 1.8); c.stroke();
+  c.restore();
+  // Header + Forestry Service SAR stamp
   c.fillStyle = '#2b2618'; c.textBaseline = 'alphabetic'; c.textAlign = 'center';
-  c.font = `700 ${Math.round(h * 0.085)}px ${TYPE}`; c.fillText(t.log, w / 2, h * 0.12);
-  c.fillRect(w * 0.1, h * 0.145, w * 0.8, Math.max(1, h * 0.006));
+  c.font = `700 ${Math.round(h * 0.076)}px ${TYPE}`; c.fillText(t.log, w / 2, h * 0.115);
+  c.fillStyle = '#5c523b'; c.font = `700 ${Math.round(h * 0.029)}px ${TYPE}`;
+  c.fillText('FORESTRY SAR · 6 HIKERS OVERDUE — NORTH RIDGE', w / 2, h * 0.145);
+  c.fillStyle = '#2b2618'; c.fillRect(w * 0.08, h * 0.16, w * 0.84, Math.max(1.5, h * 0.005));
   // CL-263: with its last entry the days sit a little closer, under it.
-  const rowH = h * (t.last ? 0.081 : 0.088), top = h * (t.last ? 0.29 : 0.235);
+  const rowH = h * (t.last ? 0.078 : 0.086), top = h * (t.last ? 0.305 : 0.24);
   c.textAlign = 'left';
   if (t.last) {   // CL-263: the last entry, added in red pencil between the title and the days, two lines at most
     c.fillStyle = '#9c2a20';
-    let size = Math.round(h * 0.04), lines = null;
+    let size = Math.round(h * 0.039), lines = null;
     for (; size >= 8; size--) {
       c.font = `${size}px ${HAND}`;
       const words = String(t.last).split(' '); lines = [''];
-      for (const wd of words) { const tryL = lines[lines.length - 1] ? lines[lines.length - 1] + ' ' + wd : wd; if (c.measureText(tryL).width <= w * 0.82 || !lines[lines.length - 1]) lines[lines.length - 1] = tryL; else lines.push(wd); }
+      for (const wd of words) { const tryL = lines[lines.length - 1] ? lines[lines.length - 1] + ' ' + wd : wd; if (c.measureText(tryL).width <= w * 0.78 || !lines[lines.length - 1]) lines[lines.length - 1] = tryL; else lines.push(wd); }
       if (lines.length <= 2) break;
     }
-    lines.slice(0, 2).forEach((ln, k) => c.fillText(ln, w * 0.09 + j(1), h * 0.195 + k * size * 1.12 + j(0.8)));
+    lines.slice(0, 2).forEach((ln, k) => c.fillText(ln, w * 0.09 + j(1), h * 0.208 + k * size * 1.12 + j(0.8)));
+    // Tiny hand-drawn horseshoe margin doodle beside the IRON note:
+    const hx = w * 0.90, hy = h * 0.225, hr = h * 0.022;
+    c.strokeStyle = '#9c2a20'; c.lineWidth = Math.max(1.4, h * 0.005);
+    c.beginPath(); c.arc(hx, hy, hr, Math.PI * 0.2, Math.PI * 0.8, true); c.stroke();
   }
   for (let i = 1; i <= 9; i++) {
     const y = top + (i - 1) * rowH;
-    c.fillStyle = 'rgba(70,90,120,.35)'; c.fillRect(w * 0.08, y + rowH * 0.28, w * 0.84, 1);   // ruled line
+    c.fillStyle = 'rgba(70,90,120,.34)'; c.fillRect(w * 0.08, y + rowH * 0.28, w * 0.84, 1);   // ruled line
     if (i > day) continue;                                                                       // the log stops there
     c.fillStyle = '#2b2618'; c.font = `700 ${Math.round(rowH * 0.62)}px ${TYPE}`;
     c.fillText(t.day + ' ' + i, w * 0.1, y + rowH * 0.12);
@@ -90,8 +108,10 @@ export function paintSearchLog(c, w, h, day, words) {
     c.ellipse(w * 0.1 + tw * 0.5 + j(2), y + j(1.5), tw * 0.64 + j(2), rowH * 0.62 + j(1.5), j(0.05), 0.15 + k * 0.4, Math.PI * 2 + 0.3 + k * 0.4);
     c.stroke();
   }
-  // a pin at the top
+  // Red push-pin at the top with soft drop shadow
+  c.fillStyle = 'rgba(0,0,0,.28)'; c.beginPath(); c.arc(w / 2 + h * 0.008, h * 0.042, h * 0.024, 0, Math.PI * 2); c.fill();
   c.fillStyle = '#b3261e'; c.beginPath(); c.arc(w / 2, h * 0.035, h * 0.022, 0, Math.PI * 2); c.fill();
+  c.fillStyle = 'rgba(255,210,200,.55)'; c.beginPath(); c.arc(w / 2 - h * 0.007, h * 0.029, h * 0.007, 0, Math.PI * 2); c.fill();
 }
 
 export function paintUnit(c, w, h, unit, words) {
@@ -161,25 +181,75 @@ export function lookImage(doc, kind, value, words) {
   const cv = doc.createElement('canvas'), c = cv.getContext('2d');
   if (!c) return '';
   if (kind === 'radio') {
-    cv.width = 520; cv.height = 250;
-    c.fillStyle = '#2b2e2a'; c.fillRect(0, 0, 520, 250);                       // the radio's face
-    c.fillStyle = '#1b1d1a'; for (let i = 0; i < 9; i++) c.fillRect(372 + (i % 3) * 36, 52 + Math.floor(i / 3) * 36, 24, 24);   // speaker grille
-    c.save(); c.translate(36, 60); paintRadioLcd(c, 300, 130, value, words); c.restore();
-    c.strokeStyle = '#555a52'; c.lineWidth = 4; c.strokeRect(34, 58, 304, 134);
+    cv.width = 520; cv.height = 260;
+    const gr = c.createLinearGradient(0, 0, 0, 260);
+    gr.addColorStop(0, '#323830'); gr.addColorStop(1, '#1e221d');
+    c.fillStyle = gr; c.fillRect(0, 0, 520, 260);
+    c.strokeStyle = '#555d4f'; c.lineWidth = 4; c.strokeRect(6, 6, 508, 248);
+    for (const [sx, sy] of [[20, 20], [500, 20], [20, 240], [500, 240]]) {
+      c.fillStyle = '#5a6156'; c.beginPath(); c.arc(sx, sy, 6, 0, Math.PI * 2); c.fill();
+      c.strokeStyle = '#181a17'; c.lineWidth = 2; c.beginPath(); c.moveTo(sx - 4, sy - 2); c.lineTo(sx + 4, sy + 2); c.stroke();
+    }
+    c.fillStyle = '#c8c3a6'; c.font = `700 13px ${TYPE}`; c.textAlign = 'left'; c.textBaseline = 'alphabetic';
+    c.fillText('FORESTRY SAR · VHF-FM TRANSCEIVER', 34, 34);
+    c.fillStyle = '#ff4d38'; c.shadowColor = '#ff4d38'; c.shadowBlur = 8;
+    c.beginPath(); c.arc(328, 29, 5, 0, Math.PI * 2); c.fill(); c.shadowBlur = 0;
+    c.fillStyle = '#141714'; c.fillRect(364, 44, 128, 128);
+    c.fillStyle = '#242924';
+    for (let r = 0; r < 5; r++) for (let col = 0; col < 5; col++) c.fillRect(374 + col * 22, 54 + r * 22, 14, 14);
+    for (const [kx, label, ang] of [[396, 'VOL', -0.9], [460, 'SQL', 0.6]]) {
+      c.fillStyle = '#171917'; c.beginPath(); c.arc(kx, 204, 19, 0, Math.PI * 2); c.fill();
+      c.strokeStyle = '#5c6358'; c.lineWidth = 2; c.stroke();
+      c.strokeStyle = '#d9d3b8'; c.lineWidth = 2.5;
+      c.beginPath(); c.moveTo(kx, 204); c.lineTo(kx + Math.cos(ang) * 14, 204 + Math.sin(ang) * 14); c.stroke();
+      c.fillStyle = '#9aa191'; c.font = `700 10px ${TYPE}`; c.textAlign = 'center'; c.fillText(label, kx, 236);
+    }
+    c.save(); c.translate(34, 48); paintRadioLcd(c, 304, 130, value, words); c.restore();
+    c.strokeStyle = '#555d52'; c.lineWidth = 4; c.strokeRect(32, 46, 308, 134);
+    c.save(); c.translate(34, 198); c.rotate(-0.015);
+    c.fillStyle = '#ded5b6'; c.fillRect(0, 0, 304, 34);
+    c.fillStyle = '#2e291d'; c.font = `700 14px ${TYPE}`; c.textAlign = 'center'; c.textBaseline = 'middle';
+    c.fillText('LAST CALL 01:42 — NO REPLY', 152, 18);
+    c.restore();
   } else if (kind === 'board') {
     cv.width = 420; cv.height = 420; paintSearchLog(c, 420, 420, value, words);
   } else if (kind === 'truck') {
-    cv.width = 520; cv.height = 230;
-    c.fillStyle = '#58684c'; c.fillRect(0, 0, 520, 230);                       // the door's paint
-    c.fillStyle = '#4d5c43'; for (let i = 0; i < 40; i++) c.fillRect((i * 89) % 520, (i * 41) % 230, 6 + i % 9, 2 + i % 4);
-    c.fillStyle = '#252d28'; c.fillRect(470, 0, 6, 230);                       // the door's seam
-    c.fillStyle = '#65543e'; c.fillRect(0, 196, 520, 34);                      // mud along the sill
-    const off = doc.createElement('canvas'); off.width = 400; off.height = 140;   // its own canvas: the stencil's cuts mustn't cut the paint
-    const oc = off.getContext('2d'); if (oc) { paintUnit(oc, 400, 140, value, words); c.drawImage(off, 40, 50); }
-  } else {   // the lid
-    cv.width = 480; cv.height = 150;
-    c.fillStyle = '#556043'; c.fillRect(0, 0, 480, 150);
-    paintLid(c, 480, 150, value, '#d6cfb1', false);
+    cv.width = 520; cv.height = 240;
+    const gr = c.createLinearGradient(0, 0, 0, 240);
+    gr.addColorStop(0, '#5d6e50'); gr.addColorStop(0.82, '#4f5e45'); gr.addColorStop(1, '#3d4935');
+    c.fillStyle = gr; c.fillRect(0, 0, 520, 240);
+    c.fillStyle = 'rgba(42,50,36,.35)';
+    for (let i = 0; i < 42; i++) c.fillRect((i * 89) % 520, (i * 41) % 210, 6 + i % 9, 2 + i % 4);
+    for (let i = 0; i < 12; i++) {
+      const rx = 24 + i * 42;
+      const rg = c.createLinearGradient(0, 0, 0, 120 + (i % 3) * 35);
+      rg.addColorStop(0, 'rgba(28,34,24,.32)'); rg.addColorStop(1, 'rgba(28,34,24,0)');
+      c.fillStyle = rg; c.fillRect(rx, 0, 3 + (i % 3), 120 + (i % 3) * 35);
+    }
+    c.fillStyle = '#252d28'; c.fillRect(472, 0, 6, 240);
+    c.fillStyle = '#2a3228'; c.fillRect(390, 26, 62, 16);
+    c.fillStyle = '#b9c0ba'; c.fillRect(396, 30, 50, 8);
+    c.save(); c.translate(64, 118);
+    c.strokeStyle = 'rgba(217,210,180,.78)'; c.lineWidth = 3;
+    c.beginPath(); c.moveTo(0, -38); c.lineTo(28, -24); c.lineTo(24, 18); c.lineTo(0, 38); c.lineTo(-24, 18); c.lineTo(-28, -24); c.closePath(); c.stroke();
+    c.fillStyle = 'rgba(217,210,180,.72)';
+    c.beginPath(); c.moveTo(0, -24); c.lineTo(14, 0); c.lineTo(6, 0); c.lineTo(16, 18); c.lineTo(-16, 18); c.lineTo(-6, 0); c.lineTo(-14, 0); c.closePath(); c.fill();
+    c.restore();
+    c.fillStyle = '#5c4b37'; c.fillRect(0, 200, 520, 40);
+    c.fillStyle = '#473928';
+    for (let i = 0; i < 24; i++) { c.beginPath(); c.ellipse(i * 23, 200 + (i % 5) * 4, 8 + i % 10, 4 + i % 5, 0, 0, Math.PI * 2); c.fill(); }
+    const off = doc.createElement('canvas'); off.width = 360; off.height = 136;
+    const oc = off.getContext('2d'); if (oc) { paintUnit(oc, 360, 136, value, words); c.drawImage(off, 100, 52); }
+  } else {
+    cv.width = 480; cv.height = 156;
+    const gr = c.createLinearGradient(0, 0, 0, 156);
+    gr.addColorStop(0, '#5a6648'); gr.addColorStop(1, '#434d35');
+    c.fillStyle = gr; c.fillRect(0, 0, 480, 156);
+    c.strokeStyle = '#2d3424'; c.lineWidth = 4; c.strokeRect(4, 4, 472, 148);
+    for (const [rx, ry] of [[16, 16], [464, 16], [16, 140], [464, 140]]) {
+      c.fillStyle = '#333b2a'; c.beginPath(); c.arc(rx, ry, 5, 0, Math.PI * 2); c.fill();
+    }
+    paintLid(c, 480, 156, value, '#dfd8ba', false);
   }
   try { return cv.toDataURL('image/png'); } catch (e) { return ''; }
 }

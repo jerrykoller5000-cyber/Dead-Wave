@@ -9,7 +9,8 @@ import { krHandguardBandGeometry } from './weapon-kr7-band.js';
 import { gunDetail } from './gun-detail.js';
 import { attachLaserLight } from './weapon-attachments.js';
 import { fitPortCarrier, roundGeometry } from './weapon-casings.js';
-import { birchTexture, mapBirchSlab, markPaintSurface } from './weapon-finish.js';
+import { birchTexture, birchPBR, mapBirchSlab, markPaintSurface } from './weapon-finish.js';
+import { applyWeaponPBR, getWeaponPBR } from './weapon-textures.js';
 import { addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup } from './weapon-model-hooks.js';
 import { weaponDetail } from './weapon-detail.js';
 
@@ -639,10 +640,22 @@ function krFinish(ctx) {
     birch.roughness = .46;
     birch.metalness = 0;
     birch.map = birchTexture(ctx.THREE);
+    const bpbr = birchPBR(ctx.THREE);
+    if (bpbr?.normalMap && bpbr?.ormMap) {
+      birch.normalMap = bpbr.normalMap;
+      birch.normalScale = new ctx.THREE.Vector2(bpbr.nrmScale, bpbr.nrmScale);
+      birch.roughnessMap = bpbr.ormMap;
+      birch.aoMap = bpbr.ormMap;
+      birch.aoMapIntensity = bpbr.aoInt;
+      birch.metalnessMap = null;
+      birch.userData.weaponPBRKind = 'birch';
+      birch.userData.weaponBasePBR = false;
+    }
     birch.userData.preserveArtworkUV = true;
     const cartridge = ctx.brassMat.clone();
     cartridge.color.setHex(0xffffff); cartridge.vertexColors = true;
     cartridge.roughness = .38; cartridge.metalness = .42;
+    cartridge.map = null;
     krFinishes.set(ctx.gunBody, {receiver, bracket, birch, cartridge});
   }
   return krFinishes.get(ctx.gunBody);
@@ -746,6 +759,8 @@ function akGripPanel(a0, a1, v0, v1, r) {
 const akStippleMaps = new WeakMap();
 function akStippleTexture(T) {
   if (akStippleMaps.has(T)) return akStippleMaps.get(T);
+  const spbr = getWeaponPBR(T, 'woodStipple');
+  if (spbr?.map) { akStippleMaps.set(T, spbr.map); return spbr.map; }
   const n = 64, data = new Uint8Array(n * n * 4);
   let seed = 0x2f6b51d3;
   const rnd = () => ((seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 4294967296);
@@ -1046,7 +1061,7 @@ export function makeAkModel(ctx) {
   const gripWood = K.slab(AK_GRIP_OUTLINE, AK_GRIP_WIDTH, woodMat, { bevel: 0.007, segs: 4 });
   gripWood.name = 'KR-7 grip';
   mapBirchSlab(gripWood, Math.PI / 2 - AK_GRIP_RAKE, .36);
-  const gripStipple = new THREE.MeshStandardMaterial({ color: 0xa4643c, map: akStippleTexture(THREE), roughness: 0.93, metalness: 0 });
+  const gripStipple = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0xa4643c, map: akStippleTexture(THREE), roughness: 0.93, metalness: 0 }), 'woodStipple', { useMap: false });
   gripStipple.name = 'KR-7 grip stipple';
   const gripCheeks = akGripCheeks(THREE, gun, woodMat, gripStipple);
   // Stock: the dropped wooden butt with its wrist, a steel buttplate, the tang, a sling loop. GB-269: one group, fpStock.
@@ -1600,8 +1615,8 @@ export function makeAa12Model(ctx) {
   // axis and radius (the magFoot), the stock's length and the handguard's underside (the support) are where they were.
   // The ejection port is on +x (the view's right); the charging handle in its slot and the selector on -x.
   const RW = 0.09;
-  const coverSteel = new THREE.MeshStandardMaterial({color: 0x49515a, metalness: .33, roughness: .43});
-  const plateSteel = new THREE.MeshStandardMaterial({color: 0x363c41, metalness: .26, roughness: .52});
+  const coverSteel = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({color: 0x49515a, metalness: .33, roughness: .43}), 'parkerized', { useMap: false, markFoldable: true });
+  const plateSteel = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({color: 0x363c41, metalness: .26, roughness: .52}), 'anodized', { useMap: false, markFoldable: true });
   // Receiver: the tall slab-sided box with its rounded top, the pressed side plates on their bolts, the seam lines, the
   // vents along the top edge, the rear's stock seam.
   // A short sloping corner closes the side under the rounded cover. The old
@@ -2514,7 +2529,7 @@ export function makeSniperModel(ctx) {
   const gun = new THREE.Group();
   const K = gunKit(gun);
   const D = gunDetail(ctx);
-  const cheekFinish = new THREE.MeshStandardMaterial({color: 0x695e47, metalness: .02, roughness: .86});
+  const cheekFinish = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({color: 0x695e47, metalness: .02, roughness: .86}), 'polymer', { useMap: false, markFoldable: true });
   // CL-314 (D-121, the fidelity upgrade): the sniper at a chassis rifle's widths. Builder's units (x 0.723 to metres):
   // the chassis 51 mm wide at the mag well (it was 72), the forend 50 across its rails (64), the action 39 (61), the
   // barrel 38 at the chamber to 27 at the muzzle (49 to 33), the brake 33, the stock 43 and its pad 48, the cheek
@@ -2598,7 +2613,7 @@ export function makeSniperModel(ctx) {
   issueArt.computeBoundingBox();
   const bounds = issueArt.boundingBox;
   const displayScale = 1 / issuedMetresPerLocalUnit;
-  const issueFinish = new THREE.MeshStandardMaterial({color: 0xffffff, vertexColors: true, roughness: .39, metalness: .42});
+  const issueFinish = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({color: 0xffffff, vertexColors: true, roughness: .39, metalness: .42}), 'brass', { useMap: false, useMetalMap: true });
   const displayArt = issueArt.clone();
   const displayBounds = bounds;
   const shelfTop = .070 - (displayBounds.max.z - displayBounds.min.z) * displayScale;

@@ -1,0 +1,466 @@
+{
+  "tag": "before",
+  "timestamp": "2026-11-24T08:22:03.203Z",
+  "renderer": {
+    "isWebGPU": true,
+    "name": "WebGPURenderer"
+  },
+  "warrens": {
+    "root": {
+      "cells": 37,
+      "meshCount": 242,
+      "triCount": 15348,
+      "hasCrateMeshes": false,
+      "hasTagMeshes": false,
+      "hasBoltMeshes": false,
+      "fog": {
+        "color": "#d8e8ff",
+        "near": 190,
+        "far": 640
+      },
+      "bg": "#87b7ff",
+      "activeLights": [
+        {
+          "type": "HemisphereLight",
+          "name": "",
+          "intensity": 0.659,
+          "color": "#f3f1ea"
+        },
+        {
+          "type": "DirectionalLight",
+          "name": "",
+          "intensity": 1.664,
+          "color": "#fffdfa"
+        },
+        {
+          "type": "DirectionalLight",
+          "name": "",
+          "intensity": 0.05,
+          "color": "#8899cc"
+        },
+        {
+          "type": "AmbientLight",
+          "name": "",
+          "intensity": 0.04,
+          "color": "#223344"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.35,
+          "color": "#ffa84a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 0.9,
+          "color": "#5cff9a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.6,
+          "color": "#7cffb0"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.6,
+          "color": "#7cffb0"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-0",
+          "intensity": 1.6,
+          "color": "#7cffb0"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-1",
+          "intensity": 1.6,
+          "color": "#7cffb0"
+        }
+      ],
+      "perfChamber": {
+        "fpsApprox": 13.2,
+        "calls": 6992,
+        "triangles": 592509,
+        "geometries": 3640
+      },
+      "perfDeep": {
+        "fpsApprox": 12.2,
+        "calls": 7982,
+        "triangles": 512092,
+        "geometries": 3708
+      }
+    },
+    "shale": {
+      "cells": 38,
+      "meshCount": 183,
+      "triCount": 10194,
+      "hasCrateMeshes": false,
+      "hasTagMeshes": false,
+      "hasBoltMeshes": false,
+      "fog": {
+        "color": "#d8e8ff",
+        "near": 190,
+        "far": 640
+      },
+      "bg": "#87b7ff",
+      "activeLights": [
+        {
+          "type": "HemisphereLight",
+          "name": "",
+          "intensity": 0.669,
+          "color": "#f3f1ea"
+        },
+        {
+          "type": "DirectionalLight",
+          "name": "",
+          "intensity": 1.696,
+          "color": "#fffdfa"
+        },
+        {
+          "type": "DirectionalLight",
+          "name": "",
+          "intensity": 0.05,
+          "color": "#8899cc"
+        },
+        {
+          "type": "AmbientLight",
+          "name": "",
+          "intensity": 0.04,
+          "color": "#223344"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.35,
+          "color": "#ffa84a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 0.9,
+          "color": "#5cff9a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.6,
+          "color": "#9ec8ff"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.6,
+          "color": "#9ec8ff"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-0",
+          "intensity": 1.6,
+          "color": "#9ec8ff"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-1",
+          "intensity": 1.6,
+          "color": "#9ec8ff"
+        }
+      ],
+      "perfChamber": {
+        "fpsApprox": 11.4,
+        "calls": 10847,
+        "triangles": 620873,
+        "geometries": 3714
+      },
+      "perfDeep": {
+        "fpsApprox": 11.5,
+        "calls": 11702,
+        "triangles": 898256,
+        "geometries": 3762
+      }
+    },
+    "iron": {
+      "cells": 39,
+      "meshCount": 241,
+      "triCount": 11802,
+      "hasCrateMeshes": false,
+      "hasTagMeshes": false,
+      "hasBoltMeshes": false,
+      "fog": {
+        "color": "#d8e8ff",
+        "near": 190,
+        "far": 640
+      },
+      "bg": "#87b7ff",
+      "activeLights": [
+        {
+          "type": "HemisphereLight",
+          "name": "",
+          "intensity": 0.674,
+          "color": "#f3f1ea"
+        },
+        {
+          "type": "DirectionalLight",
+          "name": "",
+          "intensity": 1.713,
+          "color": "#fffdfa"
+        },
+        {
+          "type": "DirectionalLight",
+          "name": "",
+          "intensity": 0.05,
+          "color": "#8899cc"
+        },
+        {
+          "type": "AmbientLight",
+          "name": "",
+          "intensity": 0.04,
+          "color": "#223344"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.35,
+          "color": "#ffa84a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 0.9,
+          "color": "#5cff9a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.6,
+          "color": "#ffb45a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.6,
+          "color": "#ffb45a"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-0",
+          "intensity": 1.6,
+          "color": "#ffb45a"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-1",
+          "intensity": 1.6,
+          "color": "#ffb45a"
+        }
+      ],
+      "perfChamber": {
+        "fpsApprox": 11.9,
+        "calls": 13502,
+        "triangles": 665020,
+        "geometries": 3846
+      },
+      "perfDeep": {
+        "fpsApprox": 10.8,
+        "calls": 14507,
+        "triangles": 585468,
+        "geometries": 3873
+      }
+    },
+    "wet": {
+      "cells": 37,
+      "meshCount": 196,
+      "triCount": 8900,
+      "hasCrateMeshes": false,
+      "hasTagMeshes": false,
+      "hasBoltMeshes": false,
+      "fog": {
+        "color": "#d8e8ff",
+        "near": 190,
+        "far": 640
+      },
+      "bg": "#87b7ff",
+      "activeLights": [
+        {
+          "type": "HemisphereLight",
+          "name": "",
+          "intensity": 0.679,
+          "color": "#f3f1ea"
+        },
+        {
+          "type": "DirectionalLight",
+          "name": "",
+          "intensity": 1.727,
+          "color": "#fffdfa"
+        },
+        {
+          "type": "DirectionalLight",
+          "name": "",
+          "intensity": 0.05,
+          "color": "#8899cc"
+        },
+        {
+          "type": "AmbientLight",
+          "name": "",
+          "intensity": 0.04,
+          "color": "#223344"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.35,
+          "color": "#ffa84a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 0.9,
+          "color": "#5cff9a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.6,
+          "color": "#7fe0e0"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.6,
+          "color": "#7fe0e0"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-0",
+          "intensity": 1.6,
+          "color": "#7fe0e0"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-1",
+          "intensity": 1.6,
+          "color": "#7fe0e0"
+        }
+      ],
+      "perfChamber": {
+        "fpsApprox": 10.9,
+        "calls": 17477,
+        "triangles": 400378,
+        "geometries": 3832
+      },
+      "perfDeep": {
+        "fpsApprox": 13.3,
+        "calls": 18512,
+        "triangles": 408308,
+        "geometries": 3879
+      }
+    },
+    "hill": {
+      "cells": 40,
+      "meshCount": 184,
+      "triCount": 10390,
+      "hasCrateMeshes": false,
+      "hasTagMeshes": false,
+      "hasBoltMeshes": false,
+      "fog": {
+        "color": "#d8e8ff",
+        "near": 190,
+        "far": 640
+      },
+      "bg": "#87b7ff",
+      "activeLights": [
+        {
+          "type": "HemisphereLight",
+          "name": "",
+          "intensity": 0.68,
+          "color": "#f3f1ea"
+        },
+        {
+          "type": "DirectionalLight",
+          "name": "",
+          "intensity": 1.73,
+          "color": "#fffdfa"
+        },
+        {
+          "type": "DirectionalLight",
+          "name": "",
+          "intensity": 0.05,
+          "color": "#8899cc"
+        },
+        {
+          "type": "AmbientLight",
+          "name": "",
+          "intensity": 0.04,
+          "color": "#223344"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.35,
+          "color": "#ffa84a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 0.9,
+          "color": "#5cff9a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.6,
+          "color": "#ffd89a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.6,
+          "color": "#ffd89a"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-0",
+          "intensity": 1.6,
+          "color": "#ffd89a"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-1",
+          "intensity": 1.6,
+          "color": "#ffd89a"
+        }
+      ],
+      "perfChamber": {
+        "fpsApprox": 11.3,
+        "calls": 20432,
+        "triangles": 716897,
+        "geometries": 3834
+      },
+      "perfDeep": {
+        "fpsApprox": 12.3,
+        "calls": 21422,
+        "triangles": 626290,
+        "geometries": 3893
+      }
+    }
+  },
+  "gameplayChecks": {
+    "exploredAfterWalk": 0,
+    "nvg": {
+      "hasPhosphor": false,
+      "hasWashout": false,
+      "tacticalText": "NVG - · Laser - · Light -"
+    },
+    "interact": {
+      "boltAction": null,
+      "boltPrompt": "E · Take supplies",
+      "sbBefore": "hollowHaul",
+      "gotBox": true,
+      "sbAfterClaim": "hollowHaul"
+    }
+  },
+  "errors": []
+}

@@ -45,8 +45,12 @@
     tg.group.traverse((o) => { if (o.isMesh && isLineSurface(o) && !o.isInstancedMesh && !o.isSkinnedMesh && vis(o) && o.material && (Array.isArray(o.material) ? o.material.some((q) => q.visible !== false) : o.material.visible !== false)) drawn.push(o); });
     const copies = drawn.filter((o) => { for (let x = o; x; x = x.parent) if (/^training-(cif|armory)$/.test(x.name || '')) return true; return false; });
     ok(drawn.length > 50 && copies.length > 15, 'the props propSolids walks are marked (' + drawn.length + ' meshes, ' + copies.length + ' in the CIF and Armory copies)');
+    const bakedDrawn = [];
+    tg.group.traverse(o => {
+      if (o.isMesh && o.userData.baked && vis(o) && o.material?.visible !== false) bakedDrawn.push(o);
+    });
     const rc = new THREE.Raycaster();
-    const surfaceAt = (a, d, L, top = fy + 3.2) => { rc.set(a, d); rc.near = 0; rc.far = L; const h = rc.intersectObjects(drawn, false).filter((x) => x.point.y <= top); return h[0] || null; };
+    const surfaceAt = (a, d, L, top = fy + 3.2, meshes = drawn) => { rc.set(a, d); rc.near = 0; rc.far = L; const h = rc.intersectObjects(meshes, false).filter((x) => x.point.y <= top); return h[0] || null; };
     const a = new THREE.Vector3(), d = new THREE.Vector3(), b = new THREE.Vector3(), c = new THREE.Vector3();
     const groupOf = (o) => { for (let x = o; x; x = x.parent) if (x.parent === tg.group) return x.name || '(unnamed)'; return '?'; };
 
@@ -114,7 +118,16 @@
         propHits++;
         const p = new THREE.Vector3(h.point.x, h.point.y, h.point.z);
         // the drawn surface right there: a short line through the hit point, both ways
-        c.copy(p).addScaledVector(d, -0.03); const s1 = surfaceAt(c, d, 0.06, Infinity);   // a face that dips under the roof line counts whole
+        c.copy(p).addScaledVector(d, -0.03);
+        let s1 = surfaceAt(c, d, 0.06, Infinity);
+        if (!s1 && h.solid.mesh && !h.solid.mesh.parent) {
+          // The bake drew this prop in a replacement mesh. Check those rendered triangles at the same tolerance.
+          s1 = surfaceAt(c, d, 0.06, Infinity, bakedDrawn);
+          if (!s1) {
+            c.copy(p).addScaledVector(d, 0.03);
+            s1 = surfaceAt(c, d.clone().negate(), 0.06, Infinity, bakedDrawn);
+          }
+        }   // a face that dips under the roof line counts whole
         if (!s1) { floaty++; floatAt.push((Object.keys(h.solid).filter((k) => h.solid[k] === true).join('+') || 'prop') + ' ' + (mt === Infinity ? 'nothing' : (mt - ht).toFixed(2) + ' m')); }
         else if (s1.face) {
           const fn = s1.face.normal.clone().transformDirection(s1.object.matrixWorld);

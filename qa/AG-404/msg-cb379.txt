@@ -1,0 +1,25 @@
+﻿AG-404 native exclusive ABBA of CB-379 (WebGPU 1600x900 RTX 5080, --secs 12 --cpu 0, 0 page errors) + original gates.
+Pinned MD5s: live index.html 22afb368 vs copy review/CB-379/index.cb379.html f137269d.
+
+ABBA Opening Probe (30 alive: 10 Shambler + 10 Feral + 10 Bomber, 30/30 kills each run):
+| Run | enterMs (blackout off) | warmDoneMs | median / p95 | worst 0-2 s | >50 ms (0-5 s) | compiles in fight | first-kill compiles |
+|---|---|---|---|---|---|---|---|
+| A1-live (22afb368) | 20072 ms | 18652 ms | 16.7 / 33.4 ms | 133.3 ms | 5 | 9 (0.3 ms) | 4 (t=132 ms, r:render 111 ms -> dt 133 ms) |
+| B1-copy (f137269d) | 20732 ms | 19368 ms | 16.7 / 33.4 ms | 333.4 ms | 5 | 4 (0.3 ms) | 1 (t=744 ms, r:render 65 ms -> dt 83.5 ms) |
+| B2-copy (f137269d) | 18572 ms | 18571 ms | 16.7 / 33.4 ms | 66.7 ms | 3 | 5 (0.3 ms) | 0 (t=405 ms, dt 16.7 ms; 2nd/3rd kills 0) |
+| A2-live (22afb368) | 17397 ms | 17301 ms | 16.7 / 33.4 ms | 366.8 ms | 8 | 9 (0.7 ms) | 4 (1st kill, r:render 122 ms) + 3 (2nd kill, r:render 68 ms) |
+
+Key findings:
+1. Training entry blackout time: live mean 18.73 s (20.07 / 17.40 s) vs copy mean 19.65 s (20.73 / 18.57 s, ~+0.9 s).
+2. Death-part compiles eliminated: BOTH live runs hit cc359-shambler-atlas + concept-surface compiles on kills (4-7 compiles across 1st-2nd kills, r:render 68-122 ms). BOTH copy runs had ZERO cc359-shambler-atlas and ZERO concept-surface compiles (total compiles 9/9 -> 4/5; >50 ms in first 5 s mean 6.5 -> 4.0).
+3. Remaining items seen natively on both sides: (a) 2-3 ShadowMaterial compiles (holster-thigh-band, fitted-pelvis) on the first 1P switch frame (r:render 53-60 ms -> dt 66.7 ms); (b) 2 MeshStandardMaterial compiles on Mesh<Group<Scene / Mesh<Group<Group<Scene; (c) an intermittent ~333-367 ms r:render spike appeared in 1 of 2 runs on both live (A2 t=546 ms, r:render 337.9 ms) and copy (B1 t=660 ms, dt 333.4 ms) unrelated to shader compiles.
+
+Original gates on copy f137269d (WebGPU, 0 page errors):
+- tcb332: 6 PASS / 0 FAIL
+- tcb340: 8 PASS / 0 FAIL
+- t215:   4 PASS / 0 FAIL
+
+Chart & traces:
+- qa/AG-404/cb379/CB-379-native-ABBA.jpg (looked at)
+- qa/AG-404/cb379/{A1-live,B1-copy,B2-copy,A2-live}/opening.{txt,json}
+- qa/AG-404/cb379/summary.json

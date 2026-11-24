@@ -8,6 +8,7 @@ window.buildCampsiteDetails = (THREE, {cx, cz, gy, variant, random, height, soli
   const ground=(x,z)=>{const p=world(x,z);return height(p.x,p.z)-gy;};
   const material=color=>{if(!materials.has(color))materials.set(color,new THREE.MeshStandardMaterial({color}));return materials.get(color);};
   const mesh=(geometry,color,x=0,y=0,z=0)=>{const m=new THREE.Mesh(geometry,material(color));m.position.set(x,y,z);parts.push(m);return m;};
+  const sculptStone=(rx,ry,rz,color,x,y,z,seed,style='granite',pbr='fieldstone')=>{const g=typeof window!=='undefined'&&window.DWRockSculpt?window.DWRockSculpt(THREE,{rx,ry,rz,detail:1,seed,style,uvTile:.72}):(()=>{const d=new THREE.DodecahedronGeometry(1,0);d.scale(rx,ry,rz);return d;})();const m=mesh(g,color,x,y,z);m.userData.rockPbr=pbr;return m;};
   const box=(w,h,d,color,x,y,z,angle=0)=>{const m=mesh(new THREE.BoxGeometry(w,h,d),color,x,y,z);m.rotation.y=angle;return m;};
   const bar=(a,b,r,color,sides=6)=>{
     a=new THREE.Vector3(...a);b=new THREE.Vector3(...b);
@@ -162,7 +163,9 @@ window.buildCampsiteDetails = (THREE, {cx, cz, gy, variant, random, height, soli
   mesh(new THREE.CylinderGeometry(.53,.58,.035,12),0x34332c,0,ground(0,0)+.025,0);
   for(let i=0;i<10;i++) {
     const a=i*Math.PI/5, r=.62+(random()-.5)*.08,x=Math.cos(a)*r,z=Math.sin(a)*r;
-    const stone=mesh(new THREE.DodecahedronGeometry(.16,0),i%2?0x77756b:0x62645a,x,ground(x,z)+.1,z);stone.scale.set(1.2,.75,.9);stone.rotation.y=random()*6;
+    const sc=.92+(i%3)*.11;
+    const stone=sculptStone(.19*sc,.13*sc,.15*sc,i%3===0?0x4b4943:i%2?0x66635a:0x58564e,x,ground(x,z)+.085,z,0xca01+i*37+variant*131,'granite','fieldstone');
+    stone.rotation.y=random()*6;
   }
   for(let i=0;i<3;i++){const a=i*Math.PI/3;bar([-.4*Math.cos(a),ground(0,0)+.09,-.4*Math.sin(a)],[.4*Math.cos(a),ground(0,0)+.11,.4*Math.sin(a)],.075,0x29251f);}
   const py=ground(.08,0)+.77;
@@ -266,7 +269,7 @@ window.buildCampsiteDetails = (THREE, {cx, cz, gy, variant, random, height, soli
       // Broken moss patches follow the crown's facets rather than a separate green cap.
       if(i%3!==1){const mix=(a,b,t)=>a.map((v,k)=>v+(b[k]-v)*t);const a=mix(crown,top[i],.38),b=mix(crown,top[j],.73),c=mix(top[i],top[j],.62);for(const v of[a,b,c])v[1]+=.013;panel([a,b,c],i%2?0x626d45:0x72784c);}
     }
-    const rock=(x,z,rx,ry,rz,color)=>{const h=sg(x,z),m=mesh(new THREE.DodecahedronGeometry(1,0),color,sx+x,h+ry*.33,sz+z);m.scale.set(rx,ry,rz);m.rotation.y=x*.6+z;return h;};
+    const rock=(x,z,rx,ry,rz,color)=>{const h=sg(x,z),m=sculptStone(rx,ry,rz,color,sx+x,h+ry*.32,sz+z,0xca55+Math.round(Math.abs(x*73+z*131)),'granite','granite');m.rotation.y=x*.6+z;return h;};
     const left=rock(-1.2,-.65,.66,.67,.72,0x727668),right=rock(1.12,.23,.79,.68,.76,0x686e60);
     for(const [x,z,r]of[[-1.75,.27,.25],[1.75,.65,.29],[.35,1.26,.25],[-1.4,-1.42,.14],[.85,-1.62,.13]])rock(x,z,r*1.2,r*.65,r,0x747568);
     const groundPatch=(x,z,w,d,color,lift=.035)=>{
@@ -300,7 +303,7 @@ window.buildCampsiteDetails = (THREE, {cx, cz, gy, variant, random, height, soli
     const shoe=(a,b,c,r=.13)=>{const h=mesh(new THREE.TorusGeometry(r,.025,4,14,Math.PI*1.5),iron,a,b,c);h.rotation.z=Math.PI*.75;for(const s of [-1,1])nail(a+s*r*.77,b+r*.45,c+.025);};
     for(const a of [-1.22,1.22])for(const b of [-.91,.91]){
       const floor=ground(x+a,z+b);box(.23,y+2.05-floor,.23,0x514632,x+a,(floor+y+2.05)/2,z+b);
-      const rock=mesh(new THREE.DodecahedronGeometry(.23,0),0x6b6c60,x+a,floor+.1,z+b);rock.scale.set(1,.7,1);
+      sculptStone(.24,.16,.22,0x6d6e62,x+a,floor+.09,z+b,0xca99+Math.round(Math.abs(a*47+b*83)),'granite','fieldstone');
     }
     // Close dark backing behind uneven boards prevents pinholes without bright interior lighting.
     box(2.45,1.95,.045,dark,x,y+1.04,z-.93);

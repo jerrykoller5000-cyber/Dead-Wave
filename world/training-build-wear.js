@@ -20,9 +20,38 @@
 //   dressBuildWear(THREE, { B, D, gate, add, std, texture }) -> { parts: [name], decals: [mesh], mounts }
 
 import { containmentMounts } from '../game/training-containment.js';
+import { WEAR } from './training-wear.js';
+import { getTrainingPBR, makeDataTexture } from './training-textures.js';
+
+const BUILD_ROUGH_CACHE = new WeakMap();
+function getBuildFloorRoughMap(T, B) {
+  let tex = BUILD_ROUGH_CACHE.get(T);
+  if (tex) return tex;
+  const S = 256, W = B.maxX - B.minX, L = B.maxZ - B.minZ;
+  const buf = new Uint8Array(S * S * 4);
+  for (let y = 0; y < S; y++) {
+    const z = B.minZ + (y / S) * L;
+    for (let x = 0; x < S; x++) {
+      const wx = B.minX + (x / S) * W;
+      let rgh = 0.90;
+      // Wet damp concrete sheen around floor drains
+      for (const [dx, dz] of WEAR.STORY.DRAINS) {
+        const d = Math.hypot(wx - dx, z - dz);
+        if (d < 1.9) rgh = Math.min(rgh, 0.16 + Math.pow(d / 1.9, 1.35) * 0.72);
+      }
+      // Subtle satin sheen on dried blood & melted patch
+      if (Math.hypot(wx - (-31.5), z - 16.5) < 0.7) rgh = Math.min(rgh, 0.30);
+      const o = (y * S + x) * 4, v = Math.round(rgh * 255);
+      buf[o] = 255; buf[o + 1] = v; buf[o + 2] = 0; buf[o + 3] = 255;
+    }
+  }
+  tex = makeDataTexture(T, buf, S, S, { name: 'tg-build-wear-rough', srgb: false, repeat: false, aniso: 8 });
+  BUILD_ROUGH_CACHE.set(T, tex);
+  return tex;
+}
 
 export const BUILD_WEAR = Object.freeze({
-  FLOOR_PX: 40, WALL_PX: 64, WALL_H: 5.9, FLOOR_Y: 0.001,
+  FLOOR_PX: 44, WALL_PX: 64, WALL_H: 5.9, FLOOR_Y: 0.001,
   KILL: Object.freeze([                                   // where they fall: [x, z, spread, weight] (room local, metres)
     Object.freeze([-26, 16.5, 3.4, 1.0]),                 // just past the gate's hazard paint, where they come through
     Object.freeze([-26, 13, 5.0, 0.8]),                   // the middle of the room
@@ -36,7 +65,8 @@ const gauss = (r) => Math.sqrt(-2 * Math.log(r() + 1e-9)) * Math.cos(6.2832 * r(
 
 export function dressBuildWear(T, { B, D, gate, add, std, texture }) {
   const parts = [], decals = [];
-  const tex = (w, h, draw) => (texture ? texture(w, h, draw) : null);
+  const pbr = getTrainingPBR(T);
+  const tex = (w, h, draw) => { const t = texture ? texture(w, h, draw) : null; if (t) { t.anisotropy = 8; t.generateMipmaps = true; } return t; };
   // CJ-1 (J151 note 63): the floor's wear lies on the same plane as the no-build paint (-1) and its yellow edge (-2);
   // one polygonOffset step above both, or the depth buffer picks a winner pixel by pixel and the marks flicker.
   const mat = (map) => std({ color: 0xffffff, map, transparent: true, depthWrite: false, roughness: 0.92, metalness: 0,
@@ -166,9 +196,28 @@ export function dressBuildWear(T, { B, D, gate, add, std, texture }) {
     for (let n = 0; n < 30; n++) { const [x, z] = killAt(r); const [u, v] = P(x, z); c.strokeStyle = `rgba(${18 + (r() * 14 | 0)},${18 + (r() * 10 | 0)},${20 + (r() * 8 | 0)},${0.08 + r() * 0.18})`; c.lineWidth = 1 + r() * 2; c.beginPath(); const a = r() * 6.28, l = (0.06 + r() * 0.2) * FS; c.moveTo(u, v); c.lineTo(u + Math.cos(a) * l, v + Math.sin(a) * l); c.stroke(); }
     for (const off of [-0.25, 0.25]) { c.strokeStyle = 'rgba(60,56,50,0.16)'; c.lineWidth = 2.5; c.beginPath(); for (let t = 0; t <= 1; t += 0.04) { const [u, v] = P(-14 - t * 9 + off * 0.2, 20 - t * 14 + off); t ? c.lineTo(u, v) : c.moveTo(u, v); } c.stroke(); }
     for (let n = 0; n < 380; n++) { const [u, v] = P(B.minX + r() * W, B.minZ + r() * L); c.fillStyle = `rgba(${50 + (r() * 50 | 0)},${46 + (r() * 40 | 0)},${36 + (r() * 12 | 0)},${0.06 + r() * 0.2})`; c.fillRect(u, v, 1 + r() * 2, 1 + r() * 1.5); }
+    // CG-2 beat 4 (the Containment crew hose the floor down after every session): round each floor drain a rust ring and
+    // the damp that never quite dries, a wet fan where the water runs to it, and boot prints walked through the wet.
+    { const q = rng(219);
+      for (const [dx, dz] of WEAR.STORY.DRAINS) {
+        const [u, v] = P(dx, dz);
+        K.soft(u, v, 1.6 * FS, '44,48,50', 0.28);
+        K.soft(u, v - 0.2 * FS, 0.9 * FS, '40,44,46', 0.22, 1.6);
+        c.strokeStyle = 'rgba(112,62,30,0.5)'; c.lineWidth = 0.08 * FS; c.strokeRect(u - 0.2 * FS, v - 0.2 * FS, 0.4 * FS, 0.4 * FS);
+        K.soft(u, v, 0.45 * FS, '120,66,32', 0.32);
+        for (let k = 0; k < 6; k++) { const a = q() * 6.28, d = (0.25 + q() * 0.3) * FS; K.soft(u + Math.cos(a) * d, v + Math.sin(a) * d, (0.05 + q() * 0.08) * FS, '110,60,30', 0.15); }
+      }
+      const boot = (x, z, ang, left) => { const [u, v] = P(x, z); c.save(); c.translate(u, v); c.rotate(ang); c.fillStyle = 'rgba(34,38,40,0.55)';
+        c.beginPath(); c.ellipse(left ? -1 : 1, -3.2, 2.3, 3.6, 0, 0, 6.28); c.fill(); c.beginPath(); c.ellipse(left ? -1 : 1, 3.8, 1.9, 2.2, 0, 0, 6.28); c.fill(); c.restore(); };
+      const [d0x, d0z] = WEAR.STORY.DRAINS[0];
+      for (let k = 0; k < 7; k++) { const t = k / 6, x = d0x + 0.3 + t * 3.2 + (k % 2 ? 0.12 : -0.12), z = d0z - 0.4 - t * 2.6;   // away from the drain, fading
+        c.globalAlpha = 1 - t * 0.75; boot(x, z, Math.atan2(-2.6, 3.2) + Math.PI / 2 + (q() - 0.5) * 0.2, k % 2 === 0); }
+      c.globalAlpha = 1; }
     c.__holes = holes;
   });
-  const floor = add(new T.PlaneGeometry(W, L), mat(floorTex), (B.minX + B.maxX) / 2, BUILD_WEAR.FLOOR_Y, (B.minZ + B.maxZ) / 2);
+  const floorRough = pbr ? getBuildFloorRoughMap(T, B) : null;
+  const floorDecalMat = std({ color: 0xffffff, map: floorTex, ...(floorRough ? { roughnessMap: floorRough, roughness: 1.0 } : { roughness: 0.92 }), transparent: true, depthWrite: false, metalness: 0, polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3 });
+  const floor = add(new T.PlaneGeometry(W, L), floorDecalMat, (B.minX + B.maxX) / 2, BUILD_WEAR.FLOOR_Y, (B.minZ + B.maxZ) / 2);
   floor.rotation.set(-Math.PI / 2, 0, 0); floor.renderOrder = 0; decals.push(floor); parts.push('build-floor');
 
   // ---------- the walls: low and mid, split round the doorway and the gate, each in its wall's cutaway side
@@ -199,14 +248,33 @@ export function dressBuildWear(T, { B, D, gate, add, std, texture }) {
   }
 
   // ---------- old cobwebs: one texture, a handful of quads (baked to one draw)
-  const webTex = tex(256, 256, (c) => {
+  const webTex = tex(512, 512, (c) => {
     const r = rng(7);
-    c.strokeStyle = 'rgba(225,228,230,0.32)'; c.lineWidth = 1;
-    const spokes = 9, ang = []; for (let k = 0; k < spokes; k++) ang.push(k / (spokes - 1) * Math.PI / 2 + (r() - 0.5) * 0.08);   // a corner web: a quarter fan from (0,0)
-    for (const a of ang) { c.beginPath(); c.moveTo(0, 0); c.lineTo(Math.cos(a) * 250, Math.sin(a) * 250); c.stroke(); }
-    for (let d = 14; d < 240; d += 9 + r() * 10) { c.beginPath(); ang.forEach((a, i) => { const rr = d * (0.9 + r() * 0.2); const x = Math.cos(a) * rr, y = Math.sin(a) * rr; i ? c.quadraticCurveTo(Math.cos(a - 0.1) * rr * 0.92, Math.sin(a - 0.1) * rr * 0.92, x, y) : c.moveTo(x, y); }); c.stroke(); }
-    c.strokeStyle = 'rgba(220,222,224,0.22)'; for (let k = 0; k < 6; k++) { c.beginPath(); c.moveTo(r() * 200, r() * 200); c.lineTo(r() * 256, r() * 256); c.stroke(); }   // torn strands
-    c.fillStyle = 'rgba(200,200,196,0.25)'; for (let k = 0; k < 20; k++) c.fillRect(r() * 180, r() * 180, 1.5, 1.5);   // dust caught in it
+    const spokes = 11, ang = []; for (let k = 0; k < spokes; k++) ang.push(k / (spokes - 1) * Math.PI / 2 + (r() - 0.5) * 0.06);
+    for (const a of ang) {
+      const g = c.createLinearGradient(0, 0, Math.cos(a) * 490, Math.sin(a) * 490);
+      g.addColorStop(0, 'rgba(232,235,236,0.44)'); g.addColorStop(0.65, 'rgba(218,222,224,0.26)'); g.addColorStop(1, 'rgba(205,210,212,0.0)');
+      c.strokeStyle = g; c.lineWidth = 1.2 + r() * 0.6;
+      c.beginPath(); c.moveTo(0, 0); c.lineTo(Math.cos(a) * 496, Math.sin(a) * 496); c.stroke();
+    }
+    for (let d = 24; d < 465; d += 15 + r() * 18) {
+      const fade = Math.max(0.06, 0.34 * (1 - d / 500));
+      c.strokeStyle = `rgba(226,229,230,${fade.toFixed(3)})`; c.lineWidth = 0.8 + r() * 0.7;
+      c.beginPath();
+      ang.forEach((a, i) => {
+        const rr = d * (0.92 + r() * 0.16), x = Math.cos(a) * rr, y = Math.sin(a) * rr;
+        const pa = ang[Math.max(0, i - 1)], midA = (pa + a) * 0.5;
+        i ? c.quadraticCurveTo(Math.cos(midA) * rr * 0.87, Math.sin(midA) * rr * 0.87, x, y) : c.moveTo(x, y);
+      });
+      c.stroke();
+    }
+    c.strokeStyle = 'rgba(215,218,220,0.20)'; c.lineWidth = 0.9;
+    for (let k = 0; k < 10; k++) { c.beginPath(); c.moveTo(r() * 380, r() * 380); c.lineTo(r() * 490, r() * 490); c.stroke(); }
+    for (let k = 0; k < 48; k++) {
+      const d = 25 + r() * 340, a = r() * Math.PI * 0.5;
+      c.fillStyle = `rgba(210,208,200,${0.14 + r() * 0.24})`;
+      c.beginPath(); c.arc(Math.cos(a) * d, Math.sin(a) * d, 0.8 + r() * 2.2, 0, Math.PI * 2); c.fill();
+    }
   });
   const webMat = std({ color: 0xffffff, map: webTex, transparent: true, depthWrite: false, side: T.DoubleSide, roughness: 1, metalness: 0 });
   // A corner web spans the corner diagonally: its (0,0) in the corner itself.

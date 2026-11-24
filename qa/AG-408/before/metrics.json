@@ -1,0 +1,303 @@
+{
+  "tag": "before",
+  "timestamp": "2026-11-24T01:02:38.238Z",
+  "backend": "WebGPU",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 43.9,
+  "pageErrors": [],
+  "outerStats": {
+    "outerMeshes": 0,
+    "outerTris": 0,
+    "memTextures": 235,
+    "memGeos": 3358
+  },
+  "perf": {
+    "hq": {
+      "name": "vista_hq_high",
+      "frames": 120,
+      "meanMs": 18.2,
+      "meanFps": 55,
+      "medianMs": 16.7,
+      "p99Ms": 33.5,
+      "p99Fps": 29.9,
+      "worstMs": 33.6,
+      "hitches": 0,
+      "callsPerFrame": 15.1,
+      "tris": 1466803,
+      "geometries": 3356,
+      "textures": 235
+    },
+    "cordon": {
+      "name": "vista_cordon_out",
+      "frames": 120,
+      "meanMs": 16.81,
+      "meanFps": 59.5,
+      "medianMs": 16.7,
+      "p99Ms": 17.1,
+      "p99Fps": 58.5,
+      "worstMs": 33.3,
+      "hitches": 0,
+      "callsPerFrame": 15.1,
+      "tris": 549712,
+      "geometries": 3356,
+      "textures": 235
+    },
+    "lake": {
+      "name": "vista_lake_west",
+      "frames": 120,
+      "meanMs": 16.67,
+      "meanFps": 60,
+      "medianMs": 16.7,
+      "p99Ms": 16.9,
+      "p99Fps": 59.2,
+      "worstMs": 17,
+      "hitches": 0,
+      "callsPerFrame": 15.1,
+      "tris": 526540,
+      "geometries": 3356,
+      "textures": 235
+    }
+  },
+  "shots": [
+    {
+      "id": "01-cordon-gate-out",
+      "cap": "Cordon Gate looking outward past checkpoint & exterior road (Noon)",
+      "file": "qa/AG-408/before/01-cordon-gate-out.png",
+      "bytes": 1310800,
+      "cam": {
+        "x": -204.63,
+        "y": 12.91,
+        "z": -23.68,
+        "tx": -367.55,
+        "ty": 126.68,
+        "tz": -42.53,
+        "fov": 62
+      }
+    },
+    {
+      "id": "02-river-gate-out",
+      "cap": "River Gate arch looking up outer mountain valley (Noon)",
+      "file": "qa/AG-408/before/02-river-gate-out.png",
+      "bytes": 1020748,
+      "cam": {
+        "x": 173.75,
+        "y": 10.78,
+        "z": 106.89,
+        "tx": 306.62,
+        "ty": 86.73,
+        "tz": 188.63,
+        "fov": 62
+      }
+    },
+    {
+      "id": "03-north-wall-vista",
+      "cap": "North perimeter looking out toward Ridgeline & high peaks (Noon)",
+      "file": "qa/AG-408/before/03-north-wall-vista.png",
+      "bytes": 1664722,
+      "cam": {
+        "x": 14.23,
+        "y": 12.66,
+        "z": -203.5,
+        "tx": 27.21,
+        "ty": 83.96,
+        "tz": -389.05,
+        "fov": 64
+      }
+    },
+    {
+      "id": "04-northeast-wall-vista",
+      "cap": "Northeast perimeter looking out over foothills & pass (Noon)",
+      "file": "qa/AG-408/before/04-northeast-wall-vista.png",
+      "bytes": 1241285,
+      "cam": {
+        "x": 131.13,
+        "y": 14.04,
+        "z": -156.27,
+        "tx": 250.69,
+        "ty": 114.46,
+        "tz": -298.76,
+        "fov": 64
+      }
+    },
+    {
+      "id": "05-east-wall-vista",
+      "cap": "East perimeter looking out over ridges & timberline (Noon)",
+      "file": "qa/AG-408/before/05-east-wall-vista.png",
+      "bytes": 1114436,
+      "cam": {
+        "x": 203.22,
+        "y": 4.6,
+        "z": 17.78,
+        "tx": 388.52,
+        "ty": 96.74,
+        "tz": 33.99,
+        "fov": 64
+      }
+    },
+    {
+      "id": "06-southeast-wall-vista",
+      "cap": "Southeast perimeter looking over gorge & far mountains (Noon)",
+      "file": "qa/AG-408/before/06-southeast-wall-vista.png",
+      "bytes": 1290322,
+      "cam": {
+        "x": 149.2,
+        "y": 9.12,
+        "z": 139.13,
+        "tx": 285.23,
+        "ty": 96.17,
+        "tz": 265.98,
+        "fov": 64
+      }
+    },
+    {
+      "id": "07-south-wall-vista",
+      "cap": "South perimeter looking out toward southern valleys (Noon)",
+      "file": "qa/AG-408/before/07-south-wall-vista.png",
+      "bytes": 1387088,
+      "cam": {
+        "x": 10.68,
+        "y": 11.19,
+        "z": 203.72,
+        "tx": 20.41,
+        "ty": 98.04,
+        "tz": 389.47,
+        "fov": 64
+      }
+    },
+    {
+      "id": "08-southwest-lake-vista",
+      "cap": "Southwest Lake looking across wall to distant alpine peaks (Noon)",
+      "file": "qa/AG-408/before/08-southwest-lake-vista.png",
+      "bytes": 1325999,
+      "cam": {
+        "x": -135.16,
+        "y": 5,
+        "z": -94.64,
+        "tx": -315.37,
+        "ty": 104.23,
+        "tz": -220.83,
+        "fov": 64
+      }
+    },
+    {
+      "id": "09-west-wall-vista",
+      "cap": "West perimeter looking out across outer foothills (Noon)",
+      "file": "qa/AG-408/before/09-west-wall-vista.png",
+      "bytes": 1333957,
+      "cam": {
+        "x": -203.5,
+        "y": 12.36,
+        "z": -14.23,
+        "tx": -389.05,
+        "ty": 138.27,
+        "tz": -27.21,
+        "fov": 64
+      }
+    },
+    {
+      "id": "10-northwest-wall-vista",
+      "cap": "Northwest perimeter looking out toward saddles & peaks (Noon)",
+      "file": "qa/AG-408/before/10-northwest-wall-vista.png",
+      "bytes": 1479523,
+      "cam": {
+        "x": -144.25,
+        "y": 4.6,
+        "z": -144.25,
+        "tx": -275.77,
+        "ty": 124.86,
+        "tz": -275.77,
+        "fov": 64
+      }
+    },
+    {
+      "id": "11-hq-roof-north-pano",
+      "cap": "FOB Threshold high overlook looking North across valley & wall (Noon)",
+      "file": "qa/AG-408/before/11-hq-roof-north-pano.png",
+      "bytes": 1386268,
+      "cam": {
+        "x": 0,
+        "y": 14.83,
+        "z": 0,
+        "tx": 0,
+        "ty": 96.83,
+        "tz": -380,
+        "fov": 66
+      }
+    },
+    {
+      "id": "12-hq-roof-south-pano",
+      "cap": "FOB Threshold high overlook looking SE across valley & wall (Noon)",
+      "file": "qa/AG-408/before/12-hq-roof-south-pano.png",
+      "bytes": 1385248,
+      "cam": {
+        "x": 0,
+        "y": 14.83,
+        "z": 0,
+        "tx": 220,
+        "ty": 81.74,
+        "tz": 310,
+        "fov": 66
+      }
+    },
+    {
+      "id": "13-cordon-gate-dusk",
+      "cap": "Cordon Gate outward vista at golden Dusk (atmosphere & depth)",
+      "file": "qa/AG-408/before/13-cordon-gate-dusk.png",
+      "bytes": 683209,
+      "cam": {
+        "x": -204.63,
+        "y": 12.91,
+        "z": -23.68,
+        "tx": -367.55,
+        "ty": 126.68,
+        "tz": -42.53,
+        "fov": 62
+      }
+    },
+    {
+      "id": "14-north-ridgeline-dusk",
+      "cap": "North high vista at golden Dusk (alpenglow & silhouettes)",
+      "file": "qa/AG-408/before/14-north-ridgeline-dusk.png",
+      "bytes": 901091,
+      "cam": {
+        "x": 14.23,
+        "y": 12.66,
+        "z": -203.5,
+        "tx": 27.21,
+        "ty": 83.96,
+        "tz": -389.05,
+        "fov": 64
+      }
+    },
+    {
+      "id": "15-north-ridgeline-night",
+      "cap": "North high vista at Night (distant Ridgeline beacons & horizon)",
+      "file": "qa/AG-408/before/15-north-ridgeline-night.png",
+      "bytes": 250171,
+      "cam": {
+        "x": 14.23,
+        "y": 12.66,
+        "z": -203.5,
+        "tx": 27.21,
+        "ty": 83.96,
+        "tz": -389.05,
+        "fov": 64
+      }
+    },
+    {
+      "id": "16-cordon-gate-night",
+      "cap": "Cordon Gate outward vista at Night (exterior pass & distant lights)",
+      "file": "qa/AG-408/before/16-cordon-gate-night.png",
+      "bytes": 227957,
+      "cam": {
+        "x": -204.63,
+        "y": 12.91,
+        "z": -23.68,
+        "tx": -367.55,
+        "ty": 126.68,
+        "tz": -42.53,
+        "fov": 62
+      }
+    }
+  ]
+}

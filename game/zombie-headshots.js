@@ -25,11 +25,18 @@ export function headSurface(T,z,a,b){
 }
 export function zombieSurface(T,z,a,b){
  if(!z.mesh)return null;const r=scratch(T);r.dir.subVectors(b,a);const len=r.dir.length();if(!(len>0))return null;r.dir.divideScalar(len);r.ray.set(a,r.dir);r.ray.near=0;r.ray.far=len;
- const u=z.mesh.userData,root=u.bossRig||z.mesh,head=headRoot(z),bones=new Set([u.hips,u.torso,u.head,u.armLG,u.armRG,u.legLG,u.legRG]);root.updateWorldMatrix(true,true);
- let list=meshes.get(root);if(!list){list=[];root.traverse(m=>{if(!m.isMesh||m.isSkinnedMesh||m.isInstancedMesh||m.userData.stump||m.material?.transparent||!(m.userData.skinSrc||m.visible))return;let body=!!u.bossRig;for(let n=m.parent;n&&n!==z.mesh;n=n.parent)if(bones.has(n))body=true;if(body)list.push(m);});meshes.set(root,list);}
+ const u=z.mesh.userData,root=u.bossRig||z.mesh,head=headRoot(z);root.updateWorldMatrix(true,true);
+ let list=meshes.get(root);if(!list){const bones=new Set([u.hips,u.torso,u.head,u.armLG,u.armRG,u.legLG,u.legRG]);list=[];root.traverse(m=>{if(!m.isMesh||m.isSkinnedMesh||m.isInstancedMesh||m.userData.stump||m.material?.transparent||!(m.userData.skinSrc||m.visible))return;let body=!!u.bossRig;for(let n=m.parent;n&&n!==z.mesh;n=n.parent)if(bones.has(n))body=true;if(body)list.push(m);});meshes.set(root,list);}
  r.active.length=0;for(const m of list){let hidden=false;for(let n=m.parent;n&&n!==root;n=n.parent)if(n.visible===false||n.userData._skinCollapsed){hidden=true;break;}if(!hidden)r.active.push(m);}
  r.hits.length=0;r.ray.intersectObjects(r.active,false,r.hits);const hit=r.hits[0];if(!hit)return null;
- let onHead=false;for(let n=hit.object.parent;n&&n!==z.mesh;n=n.parent)if(n===head)onHead=true;
- let precise=false;if(onHead&&!z.partsLost?.head){r.inv.copy(head.matrixWorld).invert();r.local.copy(hit.point).applyMatrix4(r.inv);precise=inHeadCore(r.local,headCore(z));}
- return {t:hit.distance/len,headHit:precise,point:{x:hit.point.x,y:hit.point.y,z:hit.point.z}};
+ // The closest articulated ancestor owns this surface, even when a forearm overlaps the chest.
+ let part='torso';
+ for(let n=hit.object;n&&n!==z.mesh;n=n.parent){
+   if(n===head){part='head';break;}
+   if(n===u.armLG){part='armL';break;} if(n===u.armRG){part='armR';break;}
+   if(n===u.legLG){part='legL';break;} if(n===u.legRG){part='legR';break;}
+   if(n===u.torso||n===u.hips)break;
+ }
+ let precise=false;if(part==='head'&&!z.partsLost?.head){r.inv.copy(head.matrixWorld).invert();r.local.copy(hit.point).applyMatrix4(r.inv);precise=inHeadCore(r.local,headCore(z));}
+ return {t:hit.distance/len,part,headHit:precise,point:{x:hit.point.x,y:hit.point.y,z:hit.point.z}};
 }

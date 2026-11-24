@@ -1,13 +1,13 @@
 # Antigravity
 
 state: active
-model: Gemini 4 Carbon
-task: AG-400 run Claude Commit.bat (checkpoint 11:40Z)
-touching: git
-since: 2026-11-21T11:40Z
+model: Gemini 4 Neon
+task: AG-419 Jerry direct: performance profiling & zero-downgrade optimization
+touching: qa/AG-419/ (new), game/training-infirmary.js, game/training-containment.js, world/outer-world.js, world/light-pool.js, studio/marine-skin.js, studio/clip.js, ui/minimap-kit.js, index.html (perf: holdFrameMatrices, walkShown, holdsCaster, fastskel, tick alloc/DOM)
+since: 2026-11-24T09:26Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-21-antigravity-AG-399.md
+last-report: handoffs/2026-11-24-antigravity-AG-414.md
 
 ## Notes
 
@@ -42,4 +42,6 @@ a real GPU the way you can.
 - **AG-376**: DONE (`handoffs/2026-11-18-antigravity-AG-376.md`, `qa/2026-11-18-AG-376/report.md`): GP-20155 v14 (supersedes v13) CaveGuard look; chin fangs & brown gum bar/balls resolved (`15/15` lower teeth seated, `+18.79 mm` chin clearance, `13/13` Hunt clear); open jaw underside w/ small tan tips in `head-back-noon.png`, flat tray jaw, mild round eyes/rear side sliver, zigzag moss & step-3 body items remain.
 - **AG-377**: DONE (`handoffs/2026-11-18-antigravity-AG-377.md`, `qa/2026-11-18-AG-377/report.md`): Spider `naturalleg15` `death2` filmstrips (`0` contacts, `+0.117 mm` floor across `61` frames); flagged `f30..60` upright "coat-hook" tibias & pre-socket open neck/femur seams.
 - **AG-378**: DONE (`handoffs/2026-11-18-antigravity-AG-378.md`, `qa/2026-11-18-AG-378/report.md`): `Spider17` joint seats look (`58/58` rooted at `2 um`, `0` contacts across `90` poses, `+0.421 mm` corpse floor, `4,712` tris); flagged protruding ventral brown triangular shards under femur root cuffs (`close-side/3q-noon`) & abrupt rear cervical collar edge.
+- **Next**: Idle; waiting on next board/request assignment.
+ventral brown triangular shards under femur root cuffs (`close-side/3q-noon`) & abrupt rear cervical collar edge.
 - **Next**: Idle; waiting on next board/request assignment.

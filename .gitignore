@@ -48,3 +48,13 @@ assets/soundtrack/**/gh-*
 # D-219 (2026-11-20): the crew's review artifacts (sheets, captures, bench results) stay on Jerry's PC.
 # Too big for GitHub (the 13-checkpoint push failed with HTTP 500). Files already on GitHub stay tracked.
 review/
+
+# CN-3 (Jerry, 2026-11-24): new QA pictures and clips stay on the PC, like review/ (D-219): 3,200 new shots (1.3 GB)
+# since the Nov 21 push. The ones already on GitHub stay tracked; the QA notes (.md, .json) still go up.
+qa/**/*.png
+qa/**/*.jpg
+qa/**/*.jpeg
+qa/**/*.webp
+qa/**/*.gif
+qa/**/*.mp4
+qa/**/*.webm

@@ -53,7 +53,11 @@ const mods = flags('--mod').map((spec) => {
   const served = rel(m[1]), a = m[2] ? rel(m[2]) : served, b = rel(m[3]);
   return { served, a, b };
 });
-if (!mods.length) throw new Error('at least one --mod');
+// --page <file> (CB-369): serve that file as /index.html. A page that switches its own code on globalThis.__AB (a measurement
+// copy, e.g. review/CB-369/hidden/index.hidwalk2-ab.html) needs no --mod.
+const PAGE_FILE = flag('--page');
+const pageBody = PAGE_FILE ? fs.readFileSync(path.join(ROOT, PAGE_FILE)) : null;
+if (!mods.length && !PAGE_FILE) throw new Error('at least one --mod (or a --page that switches on globalThis.__AB)');
 // Relative imports inside a variant are made absolute, so both variants share every other module (one three, one game).
 function absolutize(src, servedPath) {
   const dir = path.posix.dirname('/' + servedPath);
@@ -97,6 +101,7 @@ const backUrl = new URL(back.origin);
 const front = http.createServer((req, res) => {
   const u = new URL(req.url, 'http://x');
   if (fakeHtml && u.pathname === '/tools/tests/' + FAKE_PAGE) { res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' }).end(fakeHtml); return; }
+  if (pageBody && u.pathname === '/index.html') { res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-store' }).end(pageBody); return; }
   const body = shims.get(u.pathname) ?? variants.get(u.pathname);
   if (body != null) { res.writeHead(200, { 'Content-Type': 'text/javascript; charset=utf-8', 'Cache-Control': 'no-store' }).end(body); return; }
   const p = http.request({ hostname: backUrl.hostname, port: backUrl.port, path: req.url, method: req.method, headers: req.headers }, (r) => { res.writeHead(r.statusCode, r.headers); r.pipe(res); });
@@ -108,7 +113,7 @@ const origin = `http://127.0.0.1:${front.address().port}`;
 
 // The fake-three page, built the way tools/tests/run-all.mjs builds it.
 function buildFakePage() {
-  const src = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
+  const src = fs.readFileSync(path.join(ROOT, PAGE_FILE || 'index.html'), 'utf8');
   const map = src.match(/<script type="importmap">([\s\S]*?)<\/script>/);
   if (!map) throw new Error('no import map in index.html');
   let out = src.replace(map[0], `<script type="importmap">

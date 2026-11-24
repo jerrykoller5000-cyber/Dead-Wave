@@ -115,3 +115,152 @@ body:has(#rangeConsole:not([hidden])) #kioskPrompt, body:has(#trainingPanel:not(
 
 /* AH-6 #7: the MedPen line in the supply terminal was cut to one line ("climbs back t..."). Up to three lines. */
 #shop .perk .desc { -webkit-line-clamp: 3; }
+
+/* ===== CH-1 landing 4 (pause + settings buttons on the style guide, 21 Nov) ============================ */
+
+/* Pause and settings: one amber primary per view (Resume, Back). The rest are outlined secondaries with full-strength
+   text (ink on the panel 14:1, border 3.7:1) so they never look switched off; they light up on hover. Leave / End run
+   and Reset profile are a red OUTLINE; only the final "Yes" of a confirm is filled red (dark text, 5:1). */
+#pause .modes button.secondary, #pause .modes button.danger {
+  clip-path: none; background: rgba(232,226,200,.05); color: var(--ink);
+  border: 1px solid rgba(232,226,200,.45); padding: 12px 18px;
+}
+#pause .modes button.secondary:hover {
+  filter: none; background: rgba(232,226,200,.12); border-color: var(--accent); color: #fff;
+}
+#pause .modes button.danger { color: var(--danger-text); border-color: var(--danger); background: transparent; }
+#pause .modes button.danger:hover { filter: none; background: rgba(221,91,76,.16); color: #ffa596; }
+#pause .modes #quitConfirmBtn, #pause .modes #resetConfirmBtn {
+  clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
+  background: var(--danger); color: var(--danger-ink); border: 0; padding: 13px 18px;
+}
+#pause .modes #quitConfirmBtn:hover, #pause .modes #resetConfirmBtn:hover { filter: brightness(1.1); color: var(--danger-ink); }
+
+/* The cut corner (clip-path) also cut away the focus ring, so Tab showed nothing on the pause buttons. Filled buttons
+   get the ring inside their edge; outlined ones keep the 2 px amber ring outside. */
+#pause .modes button:not(.secondary):not(.danger):focus-visible, #pause .modes #quitConfirmBtn:focus-visible,
+#pause .modes #resetConfirmBtn:focus-visible {
+  outline: none; box-shadow: inset 0 0 0 3px var(--accent-ink), inset 0 0 0 5px rgba(255,255,255,.55);
+}
+
+/* Settings toggles and segments: the chosen option was a full amber fill, so the view showed up to six amber blocks
+   next to the amber Back. Chosen is now an amber outline + amber text on a light amber tint; the others are outlined. */
+#pauseSettingsView .settingBtn, #pauseSettingsView .seg button { border-color: rgba(232,226,200,.30); }
+#pauseSettingsView .settingBtn.on, #pauseSettingsView .seg button.on {
+  background: rgba(216,194,90,.18); border-color: var(--accent); color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent); position: relative; z-index: 1;
+}
+#pauseSettingsView .settingBtn:hover, #pauseSettingsView .seg button:not(.on):hover { border-color: rgba(232,226,200,.6); }
+
+/* AH-4 #24b: the top-left notice card (#bigBanner, "YOU'RE BACK") stayed bright on top of the open menus. It hides
+   while a menu or panel is open (visibility only; it shows again when the menu closes, if still on its timer). */
+body:has(#shop.show) #bigBanner, body:has(#cif.show) #bigBanner, body:has(#pause.show) #bigBanner,
+body:has(#rangeConsole:not([hidden])) #bigBanner, body:has(#trainingPanel:not([hidden])) #bigBanner { visibility: hidden; }
+
+/* ===== CH-1 landing 6 (weapon wheel and build wheel in the family colours) ============================== */
+
+/* The wheels were slate blue-black with a blue-white rim and icons: the only blue panel in the game. Now the olive
+   panel glass with the sand line, sand icons and the amber pick, like every other plate. Shapes and sizes unchanged. */
+.wSeg { fill: rgba(19,23,15,.84); stroke: rgba(232,226,200,.20); }
+.wSeg.sel { fill: rgba(216,194,90,.24); stroke: var(--accent); stroke-width: 1.6; }
+.wSeg.locked { fill: rgba(19,23,15,.58); }
+.wIcon { fill: rgba(232,226,200,.88); }
+.wIcon.locked { fill: rgba(232,226,200,.30); }
+/* The hub had no backing: its name sat on the floor text and the scene behind it. A dark disc under the hub,
+   amber-lit when Unarmed (the hub itself) is the pick. */
+#wheelStage::before {
+  content: ""; position: absolute; left: 50%; top: 50%; width: 160px; height: 160px; margin: -80px 0 0 -80px;
+  border-radius: 50%; background: rgba(13,16,10,.86); box-shadow: inset 0 0 0 1px rgba(232,226,200,.20);
+}
+#wheelStage:has(#wheelHub.unarmed)::before {
+  background: radial-gradient(circle, rgba(216,194,90,.30), rgba(216,194,90,.10) 70%), rgba(13,16,10,.86);
+  box-shadow: inset 0 0 0 1.6px var(--accent);
+}
+#wheelHubMeta { color: var(--ink); opacity: .92; }
+/* Build wheel page tabs and hint: blue-white at half strength, the hint at 11 px and 45 %. Sand, readable. */
+#wheelSvg text { fill: rgba(232,226,200,.80); paint-order: stroke; stroke: rgba(13,16,10,.9); stroke-width: 3.5px; stroke-linejoin: round; }
+#wheelSvg text[font-weight="700"] { fill: var(--accent); }
+#wheelSvg text[y="230"] { fill: rgba(232,226,200,.85); font-size: 12px; }
+
+/* ===== CH-1 landing 7 (HUD plates: the 11 px floor) ==================================================== */
+/* ui-principles 3: nothing under 11 px. The HUD labels were 9-10 px (HEALTH, ARMOR, SLOW-MO, the armour number,
+   the stat labels, grenade/MedPen chips, the magazine count, the combo label, the time and tactical lines).
+   All to 11 px; the armour bar grows 11 -> 13 px so its number still sits inside it. */
+#hpLabel, #armorLabel, body #diveMeterLabel, #stats .stat-row .label, .gchip, #combo .l,
+#ammoMags .mag-count, #timeLine, #tacticalLine, #hudNotices #placeBanner .place-control,
+#noticeRail #stockNotice b { font-size: 11px; }
+#armorNum { font-size: 11px; }
+#armorBarBg { height: 13px; }
+
+/* ===== CH-1 landing 8 (Armory: buttons on the style guide, 11 px floor) ================================= */
+
+/* Buttons. "Take this" (buy a gun, buy ammo, fit an attachment) was teal here and amber at Resupply, on the same
+   screen. Now all amber, like Restock and the supply terminal. Done and Move to shelf are the outlined secondaries
+   every menu uses for leaving; a switched-off button is plainly dim (45 %).
+   GP-20182 (native): Move to shelf kept its olive fill (armory.css button:first-child wins), so it is named too. */
+#cif .armory-offer-buy, #cif .armory-offer-ammo, #cif .armory-ammo-offer button, #cif .armory-typed-list button,
+#cif .armory-mods button { background: var(--accent); color: var(--accent-ink); }
+#cif .armory-mods li.fitted button { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px rgba(232,226,200,.45); }
+#cif .armory-offer-buy:disabled, #cif .armory-offer-ammo:disabled, #cif .armory-ammo-offer button:disabled,
+#cif .armory-typed-list button:disabled, #cif .armory-mods button:disabled {
+  background: transparent; color: var(--ink-dim); box-shadow: inset 0 0 0 1px rgba(232,226,200,.30); opacity: .45; cursor: default;
+}
+#cif .armory-actions button, #cif .armory-actions button:first-child { background: rgba(232,226,200,.05); color: var(--ink); box-shadow: inset 0 0 0 1px rgba(232,226,200,.45); }
+#cif .armory-actions button:hover:not(:disabled), #cif .armory-actions button:first-child:hover:not(:disabled) { background: rgba(232,226,200,.12); box-shadow: inset 0 0 0 1px var(--accent); color: #fff; }
+#cif .armory-actions button:disabled { opacity: .45; cursor: default; }
+
+/* 11 px floor: slot names, attachment chips, attachment state, the WORKBENCH tag, the attachment notes. */
+#cif .armory-slots strong, #cif .armory-chips i, #cif .armory-mod-state, #cif .armory-tune,
+#cif.armory-only .armory-tune, #cif.armory-only .armory-chips i, #cif.armory-only .armory-mod-text small { font-size: 11px; }
+
+/* ===== CH-1 landing 9 (title menu: callsign whole at 768 / 720 high, 11 px floor) ========================== */
+
+/* The callsign is required, but on 1366x768 its line sat on the bottom edge and the error line was cut off
+   (at 1280x720 the field itself was cut). The menu is pushed 60 px down on purpose (opening camera), so on
+   short desktop screens the five rows get 12 px padding instead of 17, the callsign 20 px gap instead of 30, and
+   the push is 20 px instead of 60 (the block is centred, so the push alone moved it off the bottom). The field
+   and its error line now show whole. Tall screens (over 860 px high) are unchanged. */
+@media (min-width: 601px) and (min-height: 651px) and (max-height: 860px) {
+  #modeSelect .modes button { padding-top: 12px; padding-bottom: 12px; }
+  #modeSelect #nameRow { margin-top: 20px; }
+  #modeSelect .menu-content { transform: translateY(20px); }
+}
+
+/* 11 px floor (ui-principles 3): CALLSIGN label, its error line, the SIGNAL / version footer. */
+#modeSelect #nameRow { font-size: 11px; }
+#modeSelect #nameError { font-size: 11px; }
+#modeSelect .menu-footer { font-size: 11px; }
+
+/* ===== CH-1 landing 5 (CIF wardrobe: first swatch row at 768, 11 px floor, Done on the style guide) ====== */
+
+/* GU-6: at 1366x768 the first PATTERNS row still ran 8.4 px under the footer. Short screens: swatch picture 52 -> 40 px. */
+/* GP-20179 (native): with 40 px swatches the row still ran 1.375 px under at 1366x768. GP-20189: v2 set these bands
+   back UP (it missed that landing 3 had already tightened them to 8/8/10). v3 tightens them a little more from the
+   landing-3 values on short, wide screens: item chips 8 -> 6, selection 8 -> 6, list top 10 -> 6, issue counter
+   10+10 -> 8+8. About 16 px back, so the first row clears by about 14 px. */
+@media (max-height: 860px) { #cif:not(.armory-only) #cifList button canvas { height: 40px; } }
+@media (max-height: 860px) and (min-width: 721px) {
+  #cif:not(.armory-only) #cifItems { padding-top: 6px; padding-bottom: 6px; }
+  #cif:not(.armory-only) .cif-selection { padding-top: 6px; padding-bottom: 6px; }
+  #cif:not(.armory-only) .cif-scroll { padding-top: 6px; }
+  #cif:not(.armory-only) #cifIssue { padding-bottom: 8px; margin-bottom: 8px; }
+}
+
+/* 11 px floor (ui-principles 3): group titles, swatch status, lock tag, count chip, Reset and the saved note. */
+#cif:not(.armory-only) #cifList .cif-group, #cif:not(.armory-only) #cifOptions .cif-group,
+#cif:not(.armory-only) #cifList button b, #cif:not(.armory-only) #cifList .cif-lock,
+#cif:not(.armory-only) .cif-available-count, #cif:not(.armory-only) .cif-footer #cifReset,
+#cif:not(.armory-only) #cifSaved { font-size: 11px; }
+@media (max-width: 720px) {
+  #cif:not(.armory-only) .card h2 small, #cif:not(.armory-only) .cif-eyebrow, #cif:not(.armory-only) #cifHint,
+  #cif:not(.armory-only) .cif-preview h3, #cif:not(.armory-only) #cifPreviewNote,
+  #cif:not(.armory-only) .cif-preview-actions button, #cif:not(.armory-only) #cifTabs button,
+  #cif:not(.armory-only) .cif-footer #cifClose { font-size: 11px; }
+}
+
+/* Done (the CIF's close) was a teal fill with a cut corner that also cut off its focus ring. Now the outlined
+   secondary every close uses; hover lights it, Tab shows the ring. */
+#cif:not(.armory-only) .cif-footer #cifClose {
+  clip-path: none; background: rgba(232,226,200,.05); color: var(--ink); border: 1px solid rgba(232,226,200,.45);
+}
+#cif:not(.armory-only) .cif-footer #cifClose:hover { background: rgba(232,226,200,.12); border-color: var(--accent); color: #fff; }

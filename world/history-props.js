@@ -33,6 +33,9 @@ import { paintHikerPosters, loadHikerPortraits, drawHikerPoster, drawHikerRoster
 //   buildTraps(T)                            two leghold traps
 //   buildCellarHatch(T)                      the trapper's root-cellar hatch with its iron ring
 import { mulberry } from './first-people.js';
+import { getDragMarksPBR } from './ground-textures.js';
+import { getFobPBR, applyWorldUVByMaterial } from './fob-textures.js';
+import { getCaveEntrancePBR } from './cave-entrance-textures.js';
 
 export const STORY_SPOTS = Object.freeze({ WARREN_ORDER: ['root', 'shale', 'iron', 'wet', 'hill'] });
 
@@ -115,39 +118,148 @@ export function stencilCanvas(doc, w, h, lines, o = {}) {
 
 export function buildSurveyBoard(T, doc, { n, theme }) {
   const g = new T.Group(); g.name = 'survey-board:' + theme;
-  const wood = std(T, 0x6b5034), steel = std(T, 0x454d45, 0.6, 0.4);
+  const cPbr = getCaveEntrancePBR(T);
+  const wood = cPbr ? new T.MeshStandardMaterial(cPbr.creosoteTimber.opts({ color: 0xba9c78, normalScale: 1.0 })) : std(T, 0x6b5034);
+  const steel = cPbr ? new T.MeshStandardMaterial(cPbr.forgedIron.opts({ color: 0xa6aea6, normalScale: 0.9 })) : std(T, 0x454d45, 0.6, 0.4);
   const cv = stencilCanvas(doc, 512, 320, [
     { text: 'PGB · SURVEY', size: 46, y: 0.24 },
     { text: `WARREN ${n} · ${String(theme).toUpperCase()}`, size: 52, y: 0.5 },
     { text: 'DO NOT ENTER', size: 58, y: 0.77, colour: '#7d1a12' }
   ], { ground: '#c9b384', stripe: true, seed: n * 13 });
   const face = texMat(T, cv, 0xc9b384);
-  const edge = std(T, 0xa8916a);
-  const board = new T.Mesh(new T.BoxGeometry(1.25, 0.78, 0.04), [edge, edge, edge, edge, face, edge]);
-  board.position.set(0, 1.45, 0); board.castShadow = true; g.add(board);
-  for (const sx of [-0.5, 0.5]) box(T, g, 0.09, 1.9, 0.09, wood, sx, 0.95, -0.05);
-  box(T, g, 0.06, 0.06, 0.06, steel, 0.5, 1.7, 0.03);
-  box(T, g, 0.06, 0.06, 0.06, steel, -0.5, 1.7, 0.03);
+  const edge = std(T, 0x8f7a58, 0.9);
+  const board = new T.Mesh(new T.BoxGeometry(1.25, 0.78, 0.045), [edge, edge, edge, edge, face, edge]);
+  board.position.set(0, 1.45, 0); board.castShadow = true; board.receiveShadow = true; g.add(board);
+  box(T, g, 1.34, 0.055, 0.14, wood, 0, 1.88, -0.01, 0.18);
+  for (const sx of [-0.5, 0.5]) {
+    box(T, g, 0.095, 1.92, 0.095, wood, sx, 0.96, -0.055);
+    box(T, g, 0.065, 0.78, 0.065, wood, sx, 0.36, -0.26, -0.52);
+    box(T, g, 0.075, 0.075, 0.055, steel, sx, 1.72, 0.025);
+    box(T, g, 0.075, 0.075, 0.055, steel, sx, 1.18, 0.025);
+  }
   g.rotation.z = 0.03 * (n % 2 ? 1 : -1);
   return g;
 }
 
 export function buildLockdownDoor(T, doc) {
   const g = new T.Group(); g.name = 'fob-lockdown-door';
-  const frame = std(T, 0x2c3036, 0.6, 0.5), rivet = std(T, 0x5a6068, 0.45, 0.6);
-  const cv = stencilCanvas(doc, 384, 640, [
-    { text: text('hq.designation.name'), size: 52, y: 0.19, colour: '#d9cfa8' },
-    { text: text('hq.rear.lockdown'), size: 56, y: 0.5, colour: '#c43a1f' },
-    { text: text('hq.rear.sealed'), size: 46, y: 0.6, colour: '#c43a1f' }
-  ], { ground: '#3d434a', seed: 3, scratches: [[60, 330, 0.35], [190, 420, -0.2]] });
-  const face = texMat(T, cv, 0x3d434a, 0.6);
+  const pbr = getFobPBR(T);
+  const frame = pbr
+    ? new T.MeshStandardMaterial(pbr.bunkerSteel.opts({ color: 0x5c646d, normalScale: 1.05 }))
+    : std(T, 0x2c3036, 0.6, 0.5);
+  const rivet = pbr
+    ? new T.MeshStandardMaterial(pbr.armorPlate.opts({ color: 0x8e98a2, normalScale: 1.0 }))
+    : std(T, 0x5a6068, 0.45, 0.6);
+  let face = null;
+  if (doc && doc.createElement) {
+    const W = 768, H = 1280;
+    const cv = doc.createElement('canvas'); cv.width = W; cv.height = H;
+    const c = cv.getContext && cv.getContext('2d');
+    if (c) {
+      const rnd = mulberry(3017);
+      // Heavy painted battleship-steel bulkhead door gradient
+      const bg = c.createLinearGradient(0, 0, 0, H);
+      bg.addColorStop(0, '#474f57'); bg.addColorStop(0.5, '#3b4249'); bg.addColorStop(1, '#2f353b');
+      c.fillStyle = bg; c.fillRect(0, 0, W, H);
+      // Horizontal brushed steel mill texture
+      for (let i = 0; i < 480; i++) {
+        c.fillStyle = i % 2 ? 'rgba(255,255,255,0.03)' : 'rgba(0,0,0,0.06)';
+        c.fillRect((i * 137) % W, (i * 53) % H, 28 + (i % 64), 2);
+      }
+      // Recessed upper & lower structural bulkhead panels + center cross-rib
+      const panel = (x, y, w, h) => {
+        c.fillStyle = 'rgba(18,22,26,0.34)'; c.fillRect(x, y, w, h);
+        c.strokeStyle = 'rgba(15,18,20,0.75)'; c.lineWidth = 6; c.strokeRect(x, y, w, h);
+        c.strokeStyle = 'rgba(165,176,184,0.22)'; c.lineWidth = 2.5; c.strokeRect(x + 5, y + 5, w - 10, h - 10);
+      };
+      panel(64, 96, W - 128, 368);
+      panel(64, 560, W - 128, 568);
+      // Welded center horizontal reinforcement rib
+      const rib = c.createLinearGradient(0, 480, 0, 544);
+      rib.addColorStop(0, '#555e67'); rib.addColorStop(0.5, '#424a52'); rib.addColorStop(1, '#2e343a');
+      c.fillStyle = rib; c.fillRect(16, 482, W - 32, 60);
+      c.strokeStyle = 'rgba(0,0,0,0.55)'; c.lineWidth = 4; c.strokeRect(16, 482, W - 32, 60);
+      // Perimeter hex bolts + rust weep below bolts
+      for (const bx of [32, W - 32]) for (let by = 76; by < H - 40; by += 128) {
+        const weep = c.createLinearGradient(0, by, 0, by + 48);
+        weep.addColorStop(0, 'rgba(96,52,28,0.42)'); weep.addColorStop(1, 'rgba(96,52,28,0)');
+        c.fillStyle = weep; c.fillRect(bx - 5, by, 10, 48);
+        c.fillStyle = 'rgba(0,0,0,0.55)'; c.beginPath(); c.arc(bx + 2, by + 3, 11, 0, Math.PI * 2); c.fill();
+        c.fillStyle = '#8b949d'; c.beginPath(); c.arc(bx, by, 9.5, 0, Math.PI * 2); c.fill();
+        c.fillStyle = 'rgba(255,255,255,0.32)'; c.beginPath(); c.arc(bx - 3, by - 3, 3.2, 0, Math.PI * 2); c.fill();
+      }
+      // Subtle yellow-black caution strip along center rib
+      c.save(); c.beginPath(); c.rect(64, 494, W - 128, 36); c.clip();
+      c.fillStyle = '#22262a'; c.fillRect(64, 494, W - 128, 36);
+      c.fillStyle = '#a88a42';
+      for (let sx = 24; sx < W; sx += 56) {
+        c.beginPath(); c.moveTo(sx, 530); c.lineTo(sx + 26, 530); c.lineTo(sx + 46, 494); c.lineTo(sx + 20, 494); c.closePath(); c.fill();
+      }
+      c.restore();
+      // Military stencil lettering (exact strings.js keys)
+      c.textAlign = 'center'; c.textBaseline = 'middle';
+      c.font = 'bold 92px Impact, "Arial Black", sans-serif';
+      c.fillStyle = 'rgba(0,0,0,0.42)'; c.fillText(text('hq.designation.name'), W / 2 + 3, 256);
+      c.fillStyle = '#dcd2b0'; c.fillText(text('hq.designation.name'), W / 2, 252);
+      c.font = 'bold 34px monospace'; c.fillStyle = '#a5ad9f';
+      c.fillText('SECTOR 01 · BULKHEAD', W / 2, 344);
+      // Warning red stencils inside lower bay
+      c.font = 'bold 104px Impact, "Arial Black", sans-serif';
+      c.fillStyle = 'rgba(0,0,0,0.45)'; c.fillText(text('hq.rear.lockdown'), W / 2 + 3, 660);
+      c.fillStyle = '#bd351d'; c.fillText(text('hq.rear.lockdown'), W / 2, 656);
+      c.font = 'bold 74px Impact, "Arial Black", sans-serif';
+      c.fillStyle = 'rgba(0,0,0,0.45)'; c.fillText(text('hq.rear.sealed'), W / 2 + 3, 766);
+      c.fillStyle = '#bd351d'; c.fillText(text('hq.rear.sealed'), W / 2, 762);
+      // Deep jagged creature claw gouges aligned with fobPbr.lockdownDoorRelief (bare gleaming steel + dark groove + rust)
+      const gouges = [
+        [124, 632, 410, 736, 7.5], [116, 668, 396, 768, 8.5], [132, 704, 380, 796, 7.0],
+        [344, 868, 652, 800, 8.0], [356, 904, 660, 836, 9.0], [372, 940, 644, 876, 6.5],
+      ];
+      c.lineCap = 'round';
+      for (const [x0, y0, x1, y1, lw] of gouges) {
+        const mx = (x0 + x1) * 0.5 + (rnd() - 0.5) * 14, my = (y0 + y1) * 0.5 + (rnd() - 0.5) * 12;
+        // Chipped paint / rust halo
+        c.strokeStyle = 'rgba(72,38,22,0.55)'; c.lineWidth = lw * 2.1;
+        c.beginPath(); c.moveTo(x0, y0); c.quadraticCurveTo(mx, my, x1, y1); c.stroke();
+        // Torn gleaming bare steel bevel
+        c.strokeStyle = '#c5ced6'; c.lineWidth = lw * 1.15;
+        c.beginPath(); c.moveTo(x0, y0); c.quadraticCurveTo(mx, my, x1, y1); c.stroke();
+        // Deep shadowed scratch trough
+        c.strokeStyle = '#181c20'; c.lineWidth = lw * 0.52;
+        c.beginPath(); c.moveTo(x0 + 1, y0 + 2); c.quadraticCurveTo(mx + 1, my + 2, x1 + 1, y1 + 2); c.stroke();
+      }
+      // Rust pockets, mud splash along lower skirt & general siege grime
+      for (let i = 0; i < 650; i++) {
+        c.fillStyle = rnd() < 0.5 ? 'rgba(18,22,20,0.16)' : (rnd() < 0.65 ? 'rgba(98,56,30,0.14)' : 'rgba(210,214,205,0.08)');
+        c.fillRect(rnd() * W, rnd() * H, 2 + rnd() * 10, 2 + rnd() * 7);
+      }
+      const skirt = c.createLinearGradient(0, H - 220, 0, H);
+      skirt.addColorStop(0, 'rgba(34,30,24,0)'); skirt.addColorStop(1, 'rgba(34,30,24,0.52)');
+      c.fillStyle = skirt; c.fillRect(0, H - 220, W, 220);
+    }
+    const tx = new T.CanvasTexture(cv);
+    if (T.SRGBColorSpace) tx.colorSpace = T.SRGBColorSpace;
+    tx.anisotropy = 8; tx.generateMipmaps = true;
+    const rel = pbr && pbr.lockdownDoorRelief;
+    face = new T.MeshStandardMaterial({
+      map: tx,
+      ...(rel ? {
+        normalMap: rel.normalMap, normalScale: new T.Vector2(1.25, 1.25),
+        roughnessMap: rel.ormMap, metalnessMap: rel.ormMap, aoMap: rel.ormMap, aoMapIntensity: 0.75,
+        roughness: 1.0, metalness: 1.0,
+      } : { roughness: 0.6, metalness: 0.35 }),
+    });
+  } else {
+    face = std(T, 0x3d434a, 0.6, 0.35);
+  }
   const slab = new T.Mesh(new T.BoxGeometry(1.5, 2.5, 0.08), [frame, frame, frame, frame, face, frame]);
-  slab.position.set(0, 1.25, 0.04); slab.castShadow = true; g.add(slab);
+  slab.position.set(0, 1.25, 0.04); slab.castShadow = true; slab.receiveShadow = true; g.add(slab);
   box(T, g, 1.75, 0.14, 0.14, frame, 0, 2.57, 0.05);
   for (const sx of [-0.82, 0.82]) box(T, g, 0.14, 2.6, 0.14, frame, sx, 1.3, 0.05);
   for (const y of [0.5, 1.25, 2.0]) for (const sx of [-0.62, 0.62]) cyl(T, g, 0.025, 0.025, 0.03, rivet, sx, y, 0.095, Math.PI / 2);
   // A bar across it, chained.
   box(T, g, 1.9, 0.12, 0.1, rivet, 0, 0.82, 0.16);
+  applyWorldUVByMaterial(g, new Map([[frame, 1.1], [rivet, 0.9]]));
   return g;
 }
 
@@ -630,18 +742,44 @@ function joinGeometries(T, geos, colours) {
 
 // Two furrows a hand's width apart, following pts ([{ x, z }], world) with groundAt(x, z): heels dragged to a cave.
 export function buildDragMarks(T, pts, groundAt) {
-  const pos = [], idx = [];
+  const pos = [], uv = [], idx = [];
   for (const off of [-0.18, 0.18]) {
+    let vDist = 0;
     for (let i = 0; i + 1 < pts.length; i++) {
-      const a = pts[i], b = pts[i + 1], dx = b.x - a.x, dz = b.z - a.z, L = Math.hypot(dx, dz) || 1, nx = -dz / L, nz = dx / L, hw = 0.06 * (1 - i / pts.length * 0.5);
+      const a = pts[i], b = pts[i + 1], dx = b.x - a.x, dz = b.z - a.z, L = Math.hypot(dx, dz) || 1, nx = -dz / L, nz = dx / L;
+      const hw = 0.085 * (1 - i / pts.length * 0.45);
+      const v0 = vDist / 0.75, v1 = (vDist + L) / 0.75;
+      vDist += L;
       const base = pos.length / 3;
-      for (const [p, s] of [[a, -1], [a, 1], [b, 1], [b, -1]]) { const x = p.x + nx * (off + s * hw), z = p.z + nz * (off + s * hw); pos.push(x, groundAt(x, z) + 0.025, z); }
+      const verts = [[a, -1, 0, v0], [a, 1, 1, v0], [b, 1, 1, v1], [b, -1, 0, v1]];
+      for (const [pt, s, u, v] of verts) {
+        const x = pt.x + nx * (off + s * hw), z = pt.z + nz * (off + s * hw);
+        pos.push(x, groundAt(x, z) + 0.025, z);
+        uv.push(u, v);
+      }
       idx.push(base, base + 2, base + 1, base, base + 3, base + 2);
     }
   }
   const geo = new T.BufferGeometry();
-  geo.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); geo.setIndex(idx); geo.computeVertexNormals();
-  const m = new T.Mesh(geo, new T.MeshStandardMaterial({ color: 0x261d14, roughness: 1, transparent: true, opacity: 0.75, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 }));
+  geo.setAttribute('position', new T.Float32BufferAttribute(pos, 3));
+  geo.setAttribute('uv', new T.Float32BufferAttribute(uv, 2));
+  geo.setIndex(idx);
+  geo.computeVertexNormals();
+  const pbr = getDragMarksPBR(T);
+  const matOpts = {
+    color: pbr && pbr.map ? 0xffffff : 0x261d14,
+    map: pbr && pbr.map ? pbr.map : null,
+    normalMap: pbr && pbr.normalMap ? pbr.normalMap : null,
+    roughnessMap: pbr && pbr.roughnessMap ? pbr.roughnessMap : null,
+    roughness: 1,
+    transparent: true,
+    opacity: pbr && pbr.map ? 0.92 : 0.75,
+    depthWrite: false,
+    polygonOffset: true,
+    polygonOffsetFactor: -2,
+  };
+  if (matOpts.normalMap && T.Vector2) matOpts.normalScale = new T.Vector2(1.2, 1.2);
+  const m = new T.Mesh(geo, new T.MeshStandardMaterial(matOpts));
   m.name = 'drag-marks'; m.renderOrder = 2; m.receiveShadow = true;
   return m;
 }

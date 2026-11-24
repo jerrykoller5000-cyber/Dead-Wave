@@ -1,0 +1,170 @@
+CB-379 B1-copy (review/CB-379/index.cb379.html) webgpu enterMs=20732 warmDoneMs=19368
+frames=540 median=16.7 p95=33.4 worst2s=333.4 over50_5s=5 worstAll=333.4
+compiles in the fight: 4 (0.3 ms), rebuilds: 1 (1.3 ms)
+first kills: [{"idx":14,"t":743.6,"dt":16.6,"alive":29,"compiles":1,"compileMs":0.1,"rebuildMs":0},{"idx":34,"t":1293.7,"dt":33.4,"alive":28,"compiles":0,"compileMs":0,"rebuildMs":0},{"idx":52,"t":1777,"dt":33.3,"alive":27,"compiles":0,"compileMs":0,"rebuildMs":0}]
+
+   -6.3 dt= 16.7 alive=30/30 heap=1507.3 NEW=2(0.1ms) PROF=62.1:r:render 53.2, zombies 3.6, m:hold 2.1, r:matrices 0.8, aim+climb 0.6
+          createRenderPipeline 0.1ms ShadowMaterial @ Mesh<Group<Group<Group<Group
+          createRenderPipeline 0ms ShadowMaterial @ holster-thigh-band<Group<Group<Group<Group
+   60.4 dt= 66.7 alive=30/30 heap=1509.8 PROF=23.7:r:render 16.2, zombies 2.4, m:hold 1.6, r:matrices 1.0, aim+climb 0.7
+  110.4 dt= 33.4 alive=30/30 heap=1516.4 PROF=21.9:r:render 14.0, zombies 3.5, m:hold 1.4, r:matrices 0.8, aim+climb 0.4
+  143.7 dt= 33.3 alive=30/30 heap=1490.5 PROF=21.9:r:render 12.8, zombies 3.7, m:hold 1.7, r:matrices 1.0, aim+climb 0.7
+    177 dt= 33.3 alive=30/30 heap=1492.9 PROF=24.5:r:render 15.7, zombies 3.8, m:hold 1.3, r:matrices 1.0, projectiles 0.6
+  243.6 dt= 33.3 alive=30/30 heap=1510.8 PROF=34.4:zombies 17.2, r:render 11.7, m:hold 1.7, r:matrices 1.1, effects 0.7
+    277 dt= 33.4 alive=30/30 heap=1513.5 PROF=20.2:r:render 11.0, zombies 3.0, m:hold 1.6, projectiles 1.6, r:matrices 0.9
+  327.1 dt= 33.3 alive=30/30 heap=1495.8 PROF=343.4:r:render 323.8, viewmodel 11.4, zombies 3.4, m:hold 1.4, r:matrices 1.0
+  660.5 dt=333.4 alive=30/30 heap=1513.6 NEW=1(0.1ms) PROF=57.6:r:render 42.5, projectiles 4.7, zombies 2.8, viewmodel 2.0, m:hold 1.9
+          createRenderPipeline 0.1ms MeshStandardMaterial @ Mesh<Group<Scene
+    727 dt= 66.5 alive=30/30 heap=1516.7 PROF=21.5:r:render 11.7, zombies 3.3, m:hold 1.5, viewmodel 1.0, r:matrices 0.9
+  743.6 dt= 16.6 alive=29/29 heap=1512.6 NEW=1(0.1ms) PROF=78:r:render 64.6, projectiles 3.9, zombies 3.1, m:hold 1.8, r:matrices 1.3
+          createRenderPipeline 0.1ms MeshStandardMaterial @ Mesh<Group<Group<Scene
+  827.1 dt= 83.5 alive=29/29 heap=1517.3 PROF=27.5:r:render 12.6, combat misc 6.8, zombies 2.8, m:hold 1.5, r:matrices 0.9
+  860.4 dt= 33.3 alive=29/29 heap=1519.5 PROF=20:r:render 11.5, zombies 3.2, m:hold 1.4, r:matrices 1.1, viewmodel 0.8
+    927 dt= 33.3 alive=29/29 heap=1526.9 PROF=23.3:r:render 12.1, zombies 3.4, m:hold 1.5, viewmodel 1.1, m:hold2+arms 1.0
+  993.7 dt= 33.3 alive=29/29 heap=1503.1 PROF=28.8:r:render 12.9, zombies 10.5, m:hold 1.5, r:matrices 0.9, viewmodel 0.7
+ 1027.1 dt= 33.4 alive=29/29 heap=1505.9 PROF=24.6:r:render 14.0, zombies 2.6, m:hold 1.8, m:hold2+arms 1.1, r:matrices 0.9
+ 1077.1 dt= 33.4 alive=29/29 heap=1511.6 PROF=22:r:render 12.5, zombies 3.1, m:hold 2.1, r:matrices 0.8, aim+climb 0.7
+   1127 dt= 33.3 alive=29/29 heap=1520.4 PROF=23.3:r:render 11.9, zombies 3.7, m:hold 2.2, m:hold2+arms 1.0, r:matrices 0.8
+   1177 dt= 33.3 alive=29/29 heap=1528.9 PROF=22.3:r:render 14.0, zombies 2.8, m:hold 1.6, r:matrices 0.7, aim+climb 0.6
+ 1227.2 dt= 33.6 alive=29/29 heap=1534.1 PROF=20.2:r:render 11.6, zombies 3.1, m:hold 1.8, r:matrices 0.8, aim+climb 0.6
+ 1293.7 dt= 33.4 alive=28/28 heap=1510.2 PROF=24.8:r:render 13.9, zombies 3.0, projectiles 2.3, m:hold 2.2, r:matrices 0.8
+ 1343.7 dt= 33.3 alive=28/28 heap=1516.5 PROF=24.3:r:render 15.5, zombies 2.5, m:hold 1.9, r:matrices 0.9, viewmodel 0.6
+   1377 dt= 33.3 alive=28/28 heap=1519.1 PROF=22.4:r:render 11.6, zombies 4.0, m:hold 1.6, r:matrices 1.4, viewmodel 1.0
+   1427 dt= 33.3 alive=28/28 heap=1524.2 PROF=19.7:r:render 11.4, zombies 3.4, m:hold 1.4, r:matrices 0.8, viewmodel 0.5
+ 1493.8 dt= 33.4 alive=28/28 heap=1531.2 PROF=20.1:r:render 12.4, zombies 2.3, m:hold 1.5, aim+climb 0.8, r:matrices 0.8
+ 1560.4 dt= 33.4 alive=28/28 heap=1538.3 PROF=33.1:r:render 19.9, zombies 5.1, m:hold 2.4, r:matrices 1.4, effects 0.9
+ 1593.7 dt= 33.3 alive=28/28 heap=1507.6 PROF=31.9:r:render 17.0, zombies 5.1, m:hold 2.2, r:matrices 1.9, m:pose 1.1
+ 1627.1 dt= 33.4 alive=28/28 heap=1517.7 PROF=32.1:r:render 16.2, m:hold 3.3, zombies 2.8, viewmodel 2.6, m:hold2+arms 1.6
+   1677 dt= 49.9 alive=28/28 heap=1520.3 PROF=23.5:r:render 13.3, zombies 3.3, m:hold 2.2, r:matrices 1.0, aim+climb 0.5
+ 1727.2 dt= 33.5 alive=28/28 heap=1525.3 PROF=21.2:r:render 13.1, zombies 2.8, m:hold 1.5, r:matrices 0.8, projectiles 0.6
+   1777 dt= 33.3 alive=27/27 heap=1533.2 PROF=27.1:r:render 15.7, zombies 3.3, projectiles 3.2, m:hold 1.4, r:matrices 0.8
+   1827 dt= 33.3 alive=27/27 heap=1538.2 PROF=20.3:r:render 12.5, zombies 2.8, m:hold 1.5, r:matrices 1.0, viewmodel 0.5
+ 1860.4 dt= 33.4 alive=27/27 heap=1509.3 PROF=23:r:render 12.7, zombies 2.9, m:hold 1.7, m:hold2+arms 1.1, r:matrices 0.8
+ 1910.4 dt= 33.4 alive=27/27 heap=1513.9 PROF=19.7:r:render 12.1, zombies 2.8, m:hold 1.4, r:matrices 1.1, viewmodel 0.5
+ 1960.4 dt= 33.4 alive=27/27 heap=1521.5 PROF=21:r:render 12.7, zombies 3.5, m:hold 1.5, r:matrices 0.8, aim+climb 0.5
+ 2027.1 dt= 33.4 alive=27/27 heap=1529.1 PROF=21.6:r:render 13.7, zombies 3.0, m:hold 1.5, r:matrices 0.9, viewmodel 0.5
+   2077 dt= 33.3 alive=27/27 heap=1513.4 PROF=25.1:r:render 13.3, viewmodel 4.4, zombies 2.8, m:hold 1.5, r:matrices 1.0
+   2127 dt= 33.3 alive=27/27 heap=1530.4 PROF=24.2:r:render 13.0, zombies 2.8, viewmodel 2.8, m:hold 1.7, r:matrices 1.2
+   2177 dt= 33.3 alive=27/27 heap=1534.8 PROF=20.5:r:render 13.2, zombies 2.4, m:hold 1.5, r:matrices 0.9, aim+climb 0.6
+   2227 dt= 33.3 alive=27/27 heap=1539.2 PROF=22.8:r:render 12.3, zombies 5.3, m:hold 1.7, r:matrices 0.8, aim+climb 0.5
+   2277 dt= 33.3 alive=27/27 heap=1510.8 PROF=21.2:r:render 13.3, zombies 2.7, m:hold 1.5, r:matrices 0.9, aim+climb 0.7
+ 2343.7 dt= 33.4 alive=27/27 heap=1517.3 PROF=20:r:render 11.9, zombies 3.0, m:hold 1.4, r:matrices 0.9, aim+climb 0.5
+ 2393.7 dt= 33.3 alive=27/27 heap=1529.5 PROF=20.3:r:render 11.8, zombies 2.7, m:hold 1.7, r:matrices 0.8, aim+climb 0.6
+ 2460.4 dt= 33.5 alive=27/27 heap=1538.9 PROF=19.4:r:render 12.2, zombies 2.7, m:hold 1.3, r:matrices 0.8, drops+hud 0.4
+ 2510.3 dt= 33.3 alive=26/26 heap=1511.6 PROF=22:r:render 12.0, zombies 3.2, combat misc 2.2, m:hold 1.6, r:matrices 0.9
+ 2560.4 dt= 50.1 alive=26/26 heap=1514.2 PROF=21.5:r:render 13.0, zombies 2.6, m:hold 1.8, r:matrices 0.8, aim+climb 0.5
+ 2593.7 dt= 33.3 alive=25/25 heap=1531.8 PROF=38.2:r:render 13.9, marine 12.2, projectiles 3.0, zombies 2.4, m:hold 1.4
+   2627 dt= 33.3 alive=25/25 heap=1533.9 PROF=25:r:render 11.4, zombies 6.5, combat misc 2.2, m:hold 1.5, r:matrices 0.7
+ 2660.3 dt= 33.3 alive=25/25 heap=1535.8 PROF=18.2:r:render 11.0, zombies 2.4, m:hold 1.6, r:matrices 0.9, aim+climb 0.5
+ 2726.9 dt= 33.2 alive=24/24 heap=1546.5 PROF=26.6:r:render 10.6, combat misc 9.0, zombies 2.3, m:hold 1.3, r:matrices 1.0
+ 2776.9 dt= 33.2 alive=24/24 heap=1522.4 PROF=19.5:r:render 10.8, viewmodel 2.4, zombies 2.1, m:hold 1.3, r:matrices 0.9
+ 2843.6 dt= 33.3 alive=24/24 heap=1514 PROF=23.6:r:render 13.8, viewmodel 2.5, zombies 2.3, m:hold 1.8, r:matrices 1.2
+ 2893.7 dt= 33.3 alive=24/24 heap=1517.9 PROF=20:r:render 12.5, zombies 2.3, m:hold 1.6, r:matrices 0.9, aim+climb 0.5
+ 2943.7 dt= 33.4 alive=24/24 heap=1521.5 PROF=18.1:r:render 11.0, zombies 2.2, m:hold 1.6, r:matrices 0.8, aim+climb 0.5
+   3027 dt= 33.3 alive=24/24 heap=1528.7 PROF=17.1:r:render 10.6, zombies 1.9, m:hold 1.4, r:matrices 0.7, viewmodel 0.5
+   3077 dt= 33.3 alive=23/23 heap=1540.8 PROF=18.9:r:render 10.4, combat misc 2.2, zombies 1.9, m:hold 1.5, r:matrices 0.9
+ 3160.4 dt= 33.4 alive=22/22 heap=1516.5 PROF=24.9:r:render 12.6, zombies 3.6, projectiles 2.5, m:hold 1.3, m:hold2+arms 1.1
+ 3210.3 dt= 33.3 alive=22/22 heap=1520.1 PROF=18.4:r:render 10.9, zombies 2.1, m:hold 1.6, r:matrices 1.0, viewmodel 0.6
+ 3293.7 dt= 33.4 alive=22/22 heap=1528 PROF=18.1:r:render 11.0, zombies 2.1, m:hold 1.5, r:matrices 0.8, aim+climb 0.5
+ 3410.3 dt= 33.3 alive=22/22 heap=1539.1 PROF=18:r:render 10.6, zombies 2.4, m:hold 1.4, r:matrices 0.8, viewmodel 0.6
+   3477 dt= 33.4 alive=22/22 heap=1523.9 PROF=22.1:r:render 11.7, viewmodel 2.6, zombies 2.3, m:hold 2.1, r:matrices 1.1
+   3527 dt= 33.3 alive=22/22 heap=1540.6 PROF=23.9:r:render 14.5, viewmodel 2.6, zombies 2.0, m:hold 1.6, r:matrices 1.0
+   3577 dt= 33.3 alive=22/22 heap=1546.8 PROF=31.1:r:render 14.9, combat misc 6.8, m:hold 2.4, zombies 2.1, aim+climb 1.1
+ 3610.3 dt= 33.3 alive=22/22 heap=1518 PROF=29.4:r:render 13.4, combat misc 8.0, zombies 2.2, m:hold 1.7, r:matrices 1.3
+ 3643.7 dt= 33.4 alive=22/22 heap=1519.7 PROF=26.1:r:render 13.8, zombies 3.8, m:hold 3.3, r:matrices 1.4, aim+climb 0.6
+   3677 dt= 33.3 alive=22/22 heap=1524.1 PROF=26.3:r:render 12.2, combat misc 6.7, zombies 2.2, m:hold 1.5, r:matrices 1.1
+ 3727.1 dt= 33.4 alive=21/21 heap=1536.2 PROF=20.6:r:render 10.9, combat misc 2.5, zombies 2.4, m:hold 1.5, r:matrices 0.8
+ 3760.4 dt= 33.3 alive=21/21 heap=1537.8 PROF=21.8:r:render 12.1, zombies 3.0, m:hold 1.8, r:matrices 1.3, viewmodel 0.7
+   3827 dt= 33.3 alive=20/20 heap=1543.8 PROF=25.9:r:render 12.7, projectiles 3.3, m:hold 2.2, zombies 1.9, m:hold2+arms 1.1
+   3877 dt= 33.4 alive=20/20 heap=1547.2 PROF=19.2:r:render 12.3, zombies 1.8, m:hold 1.3, r:matrices 0.9, viewmodel 0.6
+ 3960.5 dt= 33.6 alive=20/20 heap=1523.7 PROF=17.5:r:render 10.6, zombies 1.7, m:hold 1.4, r:matrices 0.8, aim+climb 0.4
+ 4043.6 dt= 33.3 alive=19/19 heap=1534.6 PROF=33.3:r:render 14.4, combat misc 6.5, projectiles 3.2, zombies 2.1, m:hold 1.6
+ 4076.9 dt= 33.3 alive=19/19 heap=1536.2 PROF=23.8:r:render 11.9, combat misc 4.5, zombies 2.3, m:hold 1.8, r:matrices 1.0
+   4127 dt= 33.4 alive=19/19 heap=1519.8 PROF=22:r:render 11.6, viewmodel 3.7, m:hold 2.0, zombies 1.7, r:matrices 1.0
+   4177 dt= 33.3 alive=19/19 heap=1538.1 PROF=22:r:render 11.9, viewmodel 2.6, zombies 1.9, m:hold 1.6, r:matrices 1.3
+ 4210.3 dt= 33.3 alive=19/19 heap=1539.8 PROF=19.9:r:render 10.9, zombies 2.7, m:hold 1.8, r:matrices 1.1, aim+climb 0.6
+ 4293.7 dt= 33.4 alive=19/19 heap=1546.3 PROF=18.4:r:render 11.6, zombies 1.7, m:hold 1.4, r:matrices 0.8, m:idle 0.5
+ 4360.3 dt= 33.3 alive=19/19 heap=1518 PROF=18.7:r:render 11.3, zombies 2.2, m:hold 1.7, r:matrices 1.0, aim+climb 0.4
+ 4410.3 dt= 33.4 alive=19/19 heap=1529.2 PROF=20.5:r:render 12.3, zombies 2.5, m:hold 2.0, r:matrices 0.9, aim+climb 0.5
+ 4493.7 dt= 33.4 alive=19/19 heap=1535.7 PROF=19.1:r:render 11.1, zombies 1.7, m:hold 1.4, m:hold2+arms 1.0, r:matrices 0.8
+   4577 dt= 33.3 alive=19/19 heap=1541.8 PROF=18.1:r:render 10.8, zombies 2.6, m:hold 1.6, r:matrices 0.9, viewmodel 0.4
+ 4643.6 dt= 33.3 alive=18/18 heap=1548.1 PROF=19.2:r:render 11.6, m:hold 2.0, zombies 2.0, r:matrices 0.9, viewmodel 0.5
+ 4693.6 dt= 33.3 alive=18/18 heap=1522.6 PROF=27.1:r:render 13.3, zombies 4.8, projectiles 1.7, m:hold 1.6, m:hold2+arms 1.1
+   4727 dt= 33.4 alive=18/18 heap=1524.1 PROF=22.5:r:render 14.7, zombies 2.3, m:hold 1.8, r:matrices 0.9, aim+climb 0.5
+   4777 dt= 33.3 alive=18/18 heap=1532.8 PROF=30.3:r:render 17.3, viewmodel 3.7, zombies 2.7, m:hold 2.0, r:matrices 1.8
+ 4843.7 dt=   50 alive=17/17 heap=1518.1 PROF=25.1:r:render 12.8, viewmodel 4.2, zombies 3.0, m:hold 1.5, r:matrices 1.1
+ 4893.7 dt= 33.4 alive=17/17 heap=1524.2 PROF=24.3:r:render 11.0, combat misc 6.4, zombies 1.9, m:hold 1.6, r:matrices 0.9
+ 4976.9 dt= 49.9 alive=17/17 heap=1537.2 PROF=31.5:combat misc 12.3, r:render 11.4, zombies 2.0, m:hold 1.7, r:matrices 1.0
+   5027 dt= 33.4 alive=17/17 heap=1540.6 PROF=17.6:r:render 10.7, zombies 2.0, m:hold 1.7, r:matrices 0.9, aim+climb 0.5
+ 5093.7 dt= 33.4 alive=17/17 heap=1532.5 PROF=22.2:r:render 10.8, zombies 4.6, viewmodel 2.3, m:hold 1.5, r:matrices 0.9
+   5127 dt= 33.3 alive=17/17 heap=1539.4 PROF=18.9:r:render 10.3, viewmodel 2.3, zombies 2.0, m:hold 1.4, r:matrices 1.0
+ 5276.9 dt= 33.3 alive=17/17 heap=1552.2 PROF=16.2:r:render 10.1, zombies 1.7, m:hold 1.2, r:matrices 0.9, viewmodel 0.4
+   5477 dt= 33.4 alive=17/17 heap=1536 PROF=16.5:r:render 10.4, zombies 1.7, m:hold 1.4, r:matrices 0.9, viewmodel 0.5
+ 5610.3 dt= 33.4 alive=17/17 heap=1547.5 PROF=16.2:r:render 10.2, zombies 1.5, m:hold 1.4, r:matrices 0.8, viewmodel 0.6
+ 5743.8 dt= 33.5 alive=17/17 heap=1529.7 PROF=19.9:r:render 11.6, zombies 1.7, m:hold 1.6, r:lightPool 1.0, r:matrices 0.9
+ 5793.7 dt= 33.4 alive=17/17 heap=1532.5 PROF=16.8:r:render 10.7, zombies 1.5, m:hold 1.3, r:matrices 1.0, viewmodel 0.5
+ 5876.9 dt= 33.3 alive=17/17 heap=1538.2 PROF=18.6:r:render 12.0, zombies 1.8, m:hold 1.2, r:matrices 1.0, aim+climb 0.6
+ 6076.9 dt=133.3 alive=7/7 heap=1550.2 REBUILD=1(1.3ms) PROF=26.7:r:render 17.6, m:hold 1.4, zombies 1.4, m:reload+knife 1.3, r:matrices 1.1
+          rebuilt 1.3ms MeshBasicMaterial @ Mesh<Scene
+ 6110.2 dt= 33.3 alive=7/7 heap=1551.5 PROF=18.7:r:render 12.8, m:hold 1.5, zombies 0.9, r:matrices 0.8, viewmodel 0.6
+   6177 dt= 33.4 alive=7/7 heap=1529 PROF=19.4:r:render 12.7, m:hold 1.5, r:matrices 1.5, zombies 0.9, effects 0.5
+ 6310.3 dt= 33.3 alive=7/7 heap=1535.8 PROF=19.1:r:render 13.6, m:hold 1.4, r:matrices 0.9, zombies 0.8, viewmodel 0.4
+ 6360.3 dt= 33.3 alive=7/7 heap=1546.1 PROF=22.8:r:render 13.6, projectiles 2.3, m:hold 1.7, zombies 1.2, r:matrices 1.2
+ 6443.6 dt= 33.4 alive=7/7 heap=1550.5 PROF=17.8:r:render 11.2, m:hold 1.5, m:hold2+arms 0.8, zombies 0.8, r:matrices 0.8
+ 6510.3 dt= 33.3 alive=6/6 heap=1554.9 PROF=16.2:r:render 10.3, m:hold 1.7, zombies 0.8, r:matrices 0.8, effects 0.5
+   6627 dt= 33.4 alive=6/6 heap=1529.5 PROF=18.8:r:render 12.9, m:hold 1.4, r:matrices 1.1, zombies 0.9, viewmodel 0.5
+   6727 dt= 33.3 alive=5/5 heap=1542.8 PROF=20.1:r:render 11.3, viewmodel 2.8, m:hold 1.5, r:matrices 1.1, zombies 1.0
+   6777 dt= 33.4 alive=5/5 heap=1557.4 PROF=21:r:render 11.9, viewmodel 2.7, m:hold 2.1, r:matrices 0.9, zombies 0.7
+ 6826.9 dt= 33.3 alive=5/5 heap=1532.4 PROF=21.2:r:render 11.4, zombies 4.4, m:hold 1.5, r:matrices 1.0, viewmodel 0.9
+ 6993.6 dt= 33.3 alive=5/5 heap=1547 PROF=19.8:r:render 10.2, viewmodel 2.5, m:hold 1.7, m:hold2+arms 1.2, r:matrices 1.1
+   7177 dt= 33.4 alive=5/5 heap=1557.9 PROF=15.2:r:render 10.0, m:hold 1.4, r:matrices 0.8, zombies 0.5, viewmodel 0.5
+ 7293.6 dt= 33.3 alive=5/5 heap=1530.9 PROF=17:r:render 11.4, m:hold 1.4, r:matrices 0.8, zombies 0.5, viewmodel 0.5
+ 7393.6 dt= 33.3 alive=3/3 heap=1544.3 PROF=20.8:r:render 11.9, viewmodel 2.7, m:hold 1.6, zombies 1.2, r:matrices 1.1
+   7427 dt= 33.4 alive=3/3 heap=1551.5 PROF=20.6:r:render 11.6, viewmodel 3.0, m:hold 1.6, r:matrices 1.3, zombies 0.6
+ 7493.7 dt= 33.5 alive=3/3 heap=1533.7 PROF=24.2:r:render 16.0, m:hold 2.6, r:matrices 1.1, zombies 0.7, effects 0.7
+ 7543.6 dt= 33.3 alive=3/3 heap=1535.3 PROF=18.5:r:render 12.7, m:hold 1.6, r:matrices 0.9, zombies 0.6, effects 0.5
+ 7626.9 dt= 33.3 alive=3/3 heap=1538.4 PROF=17.2:r:render 11.9, m:hold 1.5, r:matrices 1.0, zombies 0.5, effects 0.5
+ 7710.3 dt= 33.3 alive=3/3 heap=1548.5 PROF=20.2:r:render 14.5, m:hold 1.5, r:matrices 0.9, zombies 0.6, effects 0.5
+ 7793.8 dt= 33.6 alive=3/3 heap=1552.1 PROF=16.1:r:render 10.9, m:hold 1.5, r:matrices 0.8, aim+climb 0.4, zombies 0.4
+ 7893.6 dt= 33.3 alive=3/3 heap=1556.5 PROF=22:r:render 11.8, m:hold 2.9, m:hold2+arms 1.3, r:matrices 0.9, zombies 0.7
+ 7943.7 dt= 33.4 alive=3/3 heap=1558.2 PROF=19.1:r:render 12.9, m:hold 1.6, r:matrices 0.8, aim+climb 0.7, zombies 0.5
+ 7993.6 dt= 33.2 alive=3/3 heap=1559.7 PROF=18.5:r:render 12.9, m:hold 1.7, r:matrices 0.8, aim+climb 0.6, zombies 0.5
+ 8043.6 dt= 33.3 alive=3/3 heap=1528.4 PROF=19:r:render 11.4, m:hold 1.9, r:matrices 1.1, zombies 0.7, viewmodel 0.7
+ 8093.6 dt= 33.3 alive=3/3 heap=1543.1 PROF=22.2:r:render 13.7, viewmodel 2.6, m:hold 2.0, r:matrices 0.9, zombies 0.6
+ 8160.3 dt= 33.4 alive=3/3 heap=1558.7 PROF=14.7:r:render 9.9, m:hold 1.4, r:matrices 0.8, viewmodel 0.5, zombies 0.4
+ 8493.6 dt= 33.3 alive=3/3 heap=1545.3 PROF=15.2:r:render 10.2, m:hold 1.2, r:matrices 0.7, viewmodel 0.6, zombies 0.5
+ 8793.6 dt= 33.3 alive=3/3 heap=1543.8 PROF=17.2:r:render 10.2, viewmodel 2.4, m:hold 1.4, r:matrices 0.8, zombies 0.6
+ 9076.9 dt= 33.4 alive=3/3 heap=1543.4 PROF=14.8:r:render 10.0, m:hold 1.4, r:matrices 0.9, zombies 0.6, viewmodel 0.5
+ 9193.6 dt=   50 alive=1/1 heap=1550.3 PROF=16.8:r:render 12.2, m:hold 1.4, r:matrices 0.8, aim+climb 0.5, viewmodel 0.5
+ 9293.7 dt= 33.5 alive=1/1 heap=1553.9 PROF=28.7:r:render 15.8, m:hold 3.5, zombies 3.0, r:matrices 1.2, aim+climb 1.1
+ 9343.6 dt= 33.3 alive=1/1 heap=1556.3 PROF=19.4:r:render 12.5, m:hold 1.6, m:hold2+arms 1.5, r:matrices 0.8, viewmodel 0.5
+ 9443.6 dt= 33.2 alive=0/0 heap=1540.2 PROF=17.6:r:render 10.8, viewmodel 2.7, m:hold 1.6, r:matrices 0.9, effects 0.5
+   9527 dt= 33.5 alive=0/0 heap=1529.8 PROF=15.2:r:render 10.7, m:hold 1.6, r:matrices 0.9, effects 0.5, viewmodel 0.5
+ 9710.2 dt= 33.3 alive=0/0 heap=1542.4 PROF=19:r:render 12.8, m:hold 3.1, r:matrices 1.0, effects 0.5, m:pose 0.2
+   9827 dt= 33.4 alive=0/0 heap=1546.2 PROF=16.8:r:render 13.2, m:hold 1.4, r:matrices 0.6, effects 0.3, projectiles 0.2
+ 9926.9 dt= 33.4 alive=0/0 heap=1550.4 PROF=19:r:render 15.2, m:hold 1.3, r:matrices 0.7, effects 0.6, r:rigSkin 0.2
+10026.9 dt= 33.3 alive=0/0 heap=1554.8 PROF=17.4:r:render 13.8, m:hold 1.3, r:matrices 0.7, effects 0.4, drops+hud 0.2
+10126.9 dt= 33.3 alive=0/0 heap=1559.1 PROF=18.6:r:render 14.8, m:hold 1.6, r:matrices 0.6, effects 0.3, projectiles 0.2
+10243.6 dt= 33.4 alive=0/0 heap=1531 PROF=17.4:r:render 14.1, m:hold 1.2, r:matrices 0.6, effects 0.4, m:pose 0.2
+10343.5 dt= 33.3 alive=0/0 heap=1535.4 PROF=18.5:r:render 15.0, m:hold 1.3, r:matrices 0.6, effects 0.4, r:rigSkin 0.2
+10426.9 dt= 33.3 alive=0/0 heap=1538.9 PROF=22.4:r:render 18.7, m:hold 1.2, r:matrices 0.6, effects 0.4, m:pose 0.3
+10510.2 dt= 33.3 alive=0/0 heap=1542.4 PROF=23.8:r:render 19.3, m:hold 1.6, r:matrices 0.9, effects 0.4, drops+hud 0.4
+10593.5 dt= 33.2 alive=0/0 heap=1545.9 PROF=17.6:r:render 14.0, m:hold 1.4, r:matrices 0.7, effects 0.4, m:pose 0.2
+10710.2 dt= 33.3 alive=0/0 heap=1551 PROF=21.7:r:render 18.0, m:hold 1.4, r:matrices 0.6, effects 0.5, m:pose 0.2
+10793.6 dt= 33.3 alive=0/0 heap=1554.4 PROF=24.2:r:render 20.3, m:hold 1.5, r:matrices 0.7, effects 0.5, m:pose 0.2
+10893.6 dt= 33.4 alive=0/0 heap=1558.5 PROF=18.2:r:render 14.5, m:hold 1.4, r:matrices 0.6, effects 0.4, m:idle 0.3
+10993.5 dt= 33.2 alive=0/0 heap=1529.4 PROF=26.3:r:render 21.3, m:hold 1.9, r:matrices 1.3, effects 0.4, m:pose 0.2
+11060.2 dt= 33.3 alive=0/0 heap=1531.8 PROF=17.5:r:render 14.3, m:hold 1.3, r:matrices 0.6, effects 0.2, m:pose 0.2
+11110.3 dt= 33.4 alive=0/0 heap=1558.6 PROF=18:r:render 14.4, m:hold 1.5, r:matrices 0.7, effects 0.4, w:rest 0.2
+11143.6 dt= 33.3 alive=0/0 heap=1559.4 PROF=20.6:r:render 16.9, m:hold 1.4, r:matrices 0.8, effects 0.4, m:pose 0.2
+11210.3 dt= 33.4 alive=0/0 heap=1561.8 PROF=21.1:r:render 16.9, m:hold 1.9, r:matrices 0.7, effects 0.5, m:pose 0.2
+11260.2 dt= 33.3 alive=0/0 heap=1563.4 PROF=18:r:render 13.9, m:hold 1.7, r:matrices 0.7, effects 0.4, m:pose 0.2
+11343.7 dt= 33.5 alive=0/0 heap=1566.6 PROF=17.5:r:render 13.7, m:hold 1.4, r:matrices 0.7, effects 0.3, m:pose 0.2
+11443.5 dt= 33.2 alive=0/0 heap=1570.7 PROF=16.8:r:render 13.4, m:hold 1.3, r:matrices 0.7, effects 0.3, move 0.1
+11543.5 dt= 33.3 alive=0/0 heap=1574.7 PROF=18.5:r:render 13.9, m:hold 1.8, r:matrices 0.7, effects 0.4, daynight 0.2
+  11627 dt= 33.4 alive=0/0 heap=1544.5 PROF=23.6:r:render 17.8, m:hold 1.5, r:matrices 1.5, effects 0.7, w:rest 0.3
+11693.5 dt= 33.3 alive=0/0 heap=1546.9 PROF=18.9:r:render 15.3, m:hold 1.4, r:matrices 0.8, effects 0.3, drops+hud 0.2
+11760.2 dt= 33.3 alive=0/0 heap=1549.4 PROF=21.5:r:render 17.7, m:hold 1.4, r:matrices 0.8, effects 0.4, w:rest 0.2
+11826.9 dt= 33.4 alive=0/0 heap=1551.8 PROF=17.5:r:render 13.9, m:hold 1.3, r:matrices 0.8, effects 0.3, drops+hud 0.3
+11976.8 dt= 33.2 alive=0/0 heap=1558.1 PROF=17.9:r:render 13.6, m:hold 1.8, r:matrices 0.8, w:rest 0.3, drops+hud 0.2
+12126.9 dt= 33.3 alive=0/0 heap=1564.2 PROF=17.5:r:render 13.7, m:hold 1.7, r:matrices 0.6, m:pose 0.2, effects 0.2

@@ -11,7 +11,7 @@ export function webbingGeometry(T, points, width, thickness=.008, {closed=false,
     }
   }
   for(let j=0;j<segments;j++)for(const[a,b]of[[0,1],[1,3],[3,2],[2,0]]){
-    const x=j*4+a,y=j*4+b;indices.push(x,y,x+4,y,y+4,x+4);
+    const x=j*4+a,y=j*4+b;indices.push(x,x+4,y,y,x+4,y+4);
   }
   const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(positions,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));geo.setIndex(indices);geo.computeVertexNormals();return geo;
 }
@@ -26,13 +26,13 @@ const profile=(rows,y)=>{
 const frontBare=[[.70,.105],[.78,.132],[.84,.175],[.89,.2],[.945,.196],[1.0,.151],[1.10,.15],[1.15,.122],[1.2,.063]];
 const frontVest=[[.70,.11],[.78,.152],[.84,.213],[.90,.235],[.98,.237],[1.015,.219],[1.10,.223],[1.15,.177],[1.2,.063]];
 const back=[[.70,.12],[.79,.20],[.85,.285],[.90,.322],[1.05,.322],[1.12,.286],[1.17,.18],[1.21,.07]];
-export function bandolierFit(dir,vest,layer=0) {
+export function bandolierFit(dir,vest,layer=0,kz=1) {
   const a=dir*.62,c=Math.cos(a),s=Math.sin(a);
   return p=>{
     const y=.98+p.x*s+p.y*c;
     const overlap=layer*Math.max(0,1-Math.abs(y-.98)/.19);
-    if(p.z>.075)p.z=profile(vest?frontVest:frontBare,y)+.008+overlap;
-    else if(p.z<-.075)p.z=-profile(back,y)-.008-overlap;
+    if(p.z>.075)p.z=profile(vest?frontVest:frontBare,y)*kz+.008+overlap;
+    else if(p.z<-.075)p.z=-profile(back,y)*kz-.008-overlap;
     return p;
   };
 }

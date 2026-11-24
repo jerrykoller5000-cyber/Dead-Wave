@@ -1,10 +1,16 @@
 // GP-150: static dressing for the exterior CIF. Local +Z faces the player.
 // The caller owns placement and keeps the returned sign in its night-lock list.
+import { getTrainingPBR, applyWorldUVByMaterial } from '../world/training-textures.js';
 export function dressCifExterior(THREE, root, text, lampMaterial) {
+  const pbr = getTrainingPBR(THREE);
   const mat=(color,metalness=.25)=>new THREE.MeshStandardMaterial({color,roughness:.78,metalness});
-  const steel=mat(0x47534c), dark=mat(0x172421), edge=mat(0x899285,.55);
-  const cloth=[mat(0x62704d,0),mat(0xb49e76,0),mat(0x6e7e80,0)];
-  const rubber=mat(0x232a24,0);
+  const steel=pbr?new THREE.MeshStandardMaterial(pbr.benchPanel.opts({color:0xffffff})):mat(0x47534c);
+  const dark=pbr?new THREE.MeshStandardMaterial(pbr.steelDark.opts({color:0x5e706c})):mat(0x172421);
+  const edge=pbr?new THREE.MeshStandardMaterial(pbr.steelLight.opts({color:0xd6dfd2})):mat(0x899285,.55);
+  const cloth=pbr
+    ?[0x6d7d57,0xc7b084,0x7a8c8e].map(c=>new THREE.MeshStandardMaterial(pbr.canvasMilitary.opts({color:c,normalScale:.95})))
+    :[mat(0x62704d,0),mat(0xb49e76,0),mat(0x6e7e80,0)];
+  const rubber=pbr?new THREE.MeshStandardMaterial(pbr.rubberCrumb.opts({color:0x3b453d,normalScale:.9})):mat(0x232a24,0);
   const box=(w,h,d,m,x,y,z,rz=0)=>{
     const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);
     o.position.set(x,y,z);o.rotation.z=rz;o.receiveShadow=true;root.add(o);return o;
@@ -43,9 +49,12 @@ export function dressCifExterior(THREE, root, text, lampMaterial) {
   // so the existing HQ static bake combines it into a single material batch.
   for(let i=0;i<4;i++)box(1.64,.035,.05,edge,0,2.60+i*.055,.46);
   box(1.53,.026,.035,edge,0,2.32,.27);
-  // GP-151: soft bevelled silhouettes and seam curves, all still baked by HQ.
-  const clothSeam=cloth.map(m=>mat(m.color.clone().multiplyScalar(.67),0));
-  const leather=mat(0x42463a,0), lace=mat(0x8a8168,0);
+  // GP-151 / AG-405: soft bevelled silhouettes with ripstop weave seams and pebbled combat-boot leather.
+  const clothSeam=cloth.map(m=>pbr
+    ?new THREE.MeshStandardMaterial(pbr.canvasMilitary.opts({color:m.color.clone().multiplyScalar(.67),normalScale:.85}))
+    :mat(m.color.clone().multiplyScalar(.67),0));
+  const leather=pbr?new THREE.MeshStandardMaterial(pbr.leatherPebble.opts({color:0x585d4e,normalScale:1.0})):mat(0x42463a,0);
+  const lace=pbr?new THREE.MeshStandardMaterial(pbr.canvasMilitary.opts({color:0x9b9276,normalScale:.8})):mat(0x8a8168,0);
   const mesh=(geo,m,x,y,z)=>{const o=new THREE.Mesh(geo,m);o.position.set(x,y,z);o.receiveShadow=true;root.add(o);return o;};
   const profile=(points,depth,bevel,m,x,y,z)=>{
     const shape=new THREE.Shape();points.forEach(([px,py],i)=>i?shape.lineTo(px,py):shape.moveTo(px,py));shape.closePath();
@@ -148,26 +157,42 @@ export function dressCifExterior(THREE, root, text, lampMaterial) {
     const cv=document.createElement('canvas');cv.width=1024;cv.height=256;
     const c=cv.getContext('2d');if(c)paint(c);
     const texture=new THREE.CanvasTexture(cv);texture.colorSpace=THREE.SRGBColorSpace;
-    const material=new THREE.MeshStandardMaterial({map:texture,emissiveMap:texture,emissive:0xffffff,emissiveIntensity:emission,roughness:.8,metalness:.12});
+    texture.anisotropy=8;texture.generateMipmaps=true;
+    const material=new THREE.MeshStandardMaterial({map:texture,emissiveMap:texture,emissive:0xffffff,emissiveIntensity:emission,roughness:.66,metalness:.22});
     const p=new THREE.Mesh(new THREE.PlaneGeometry(w,h),material);p.position.set(x,y,z);root.add(p);return p;
   };
+  const rivets=(c)=>{for(const [rx,ry] of [[24,24],[1000,24],[24,232],[1000,232]]){c.fillStyle='rgba(0,0,0,0.45)';c.beginPath();c.arc(rx+2,ry+2,7,0,Math.PI*2);c.fill();c.fillStyle='#9fa89c';c.beginPath();c.arc(rx,ry,6,0,Math.PI*2);c.fill();c.fillStyle='rgba(255,255,255,0.35)';c.beginPath();c.arc(rx-2,ry-2,2.2,0,Math.PI*2);c.fill();}};
   // All lettering is catalogue-owned; weathering uses a fixed pattern, no RNG.
   const sign=plate(1.66,.38,0,2.90,.466,c=>{
-    c.fillStyle='#263a33';c.fillRect(0,0,1024,256);
+    const gr=c.createLinearGradient(0,0,0,256);gr.addColorStop(0,'#2d443c');gr.addColorStop(.5,'#253831');gr.addColorStop(1,'#1c2c26');
+    c.fillStyle=gr;c.fillRect(0,0,1024,256);
+    for(let i=0;i<110;i++){c.fillStyle=i%2?'rgba(255,255,255,0.03)':'rgba(0,0,0,0.06)';c.fillRect((i*97)%1024,(i*53)%256,14+i%28,2);}
     c.strokeStyle='#98a28b';c.lineWidth=4;c.strokeRect(10,10,1004,236);
-    c.fillStyle='#d8c795';c.fillRect(28,29,9,198);
-    c.textAlign='left';c.fillStyle='#f0e6c7';c.font='bold 155px Impact, Arial Black, sans-serif';c.fillText(text('cif.title'),55,178,340);
+    c.strokeStyle='rgba(0,0,0,0.35)';c.lineWidth=2;c.strokeRect(15,15,994,226);
+    c.fillStyle='#d8c795';c.fillRect(36,29,9,198);
+    c.textAlign='left';c.fillStyle='rgba(0,0,0,0.32)';c.font='bold 155px Impact, Arial Black, sans-serif';c.fillText(text('cif.title'),62,182,340);
+    c.fillStyle='#f0e6c7';c.fillText(text('cif.title'),58,178,340);
     c.fillStyle='#9fb3a1';c.font='bold 31px Arial';c.fillText(text('cif.exterior.unit'),425,70,560);
     c.fillStyle='#f0e6c7';c.font='bold 40px Arial';c.fillText(text('cif.exterior.issue'),425,129,560);
     c.fillStyle='#c7c29d';c.font='bold 27px Arial';c.fillText(text('cif.exterior.kit'),425,190,560);
-    for(let i=0;i<50;i++){c.fillStyle='#101a1740';c.fillRect((i*137)%1024,(i*71)%256,6+i%17,2);}
+    for(let i=0;i<60;i++){c.fillStyle='#101a1745';c.fillRect((i*137)%1024,(i*71)%256,6+i%17,2);}
+    rivets(c);
   },.45);
   sign.name='cif-exterior-sign';
   plate(1.62,.20,0,.75,.336,c=>{
-    c.fillStyle='#26332b';c.fillRect(0,0,1024,256);
+    const gr=c.createLinearGradient(0,0,0,256);gr.addColorStop(0,'#2d3b32');gr.addColorStop(1,'#1e2922');
+    c.fillStyle=gr;c.fillRect(0,0,1024,256);
+    for(let i=0;i<90;i++){c.fillStyle=i%2?'rgba(255,255,255,0.025)':'rgba(0,0,0,0.06)';c.fillRect((i*89)%1024,(i*43)%256,12+i%24,2);}
+    c.strokeStyle='rgba(160,170,150,0.32)';c.lineWidth=3;c.strokeRect(8,8,1008,240);
     c.fillStyle='#bfb287';
-    for(let i=-1;i<15;i++){c.beginPath();c.moveTo(i*85,210);c.lineTo(i*85+35,210);c.lineTo(i*85+70,256);c.lineTo(i*85+35,256);c.fill();}
-    c.textAlign='center';c.font='bold 65px Arial';c.fillStyle='#d8d4b6';c.fillText(text('cif.exterior.return'),512,125,960);
+    for(let i=-1;i<15;i++){c.beginPath();c.moveTo(i*85,208);c.lineTo(i*85+35,208);c.lineTo(i*85+70,256);c.lineTo(i*85+35,256);c.fill();}
+    c.fillStyle='rgba(0,0,0,0.34)';c.textAlign='center';c.font='bold 65px Arial';c.fillText(text('cif.exterior.return'),514,128,940);
+    c.fillStyle='#d8d4b6';c.fillText(text('cif.exterior.return'),512,125,940);
+    rivets(c);
   });
+  applyWorldUVByMaterial(root, new Map([
+    [steel, 1.1], [dark, 1.0], [edge, 0.8], [rubber, 0.35], [leather, 0.28], [lace, 0.25],
+    ...cloth.map(m => [m, 0.30]), ...clothSeam.map(m => [m, 0.30]),
+  ]));
   return sign.material;
 }

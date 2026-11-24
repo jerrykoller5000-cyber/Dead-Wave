@@ -1,15 +1,46 @@
 # Claude 1
 
-state: idle
+state: active
 model: Claude Opus 5.5 (configured claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-21T08:08Z
-next: CD-14 (22:44Z: pistol high grip = option A AFTER the freeze: ChatG
+task: CD-28 D-240 R4 #2: first Wasp Q 531 ms (362 ms carry re-seat before the draw) -> warm the carry seats at loadout; review copy + LOOK. Then t224 Wasp pack- depth, CD-26 A, CD-24 C foreHold
+touching: review/CD-28/
+since: 2026-11-23T16:05Z
+next: CD-24 D-237 #8 rank 5 A+B review copy: first-person gun change on
 blocked-on: —
-last-report: handoffs/2026-11-21-claude4-CD-19.md
+last-report: handoffs/2026-11-23-claude4-CD-24C-fit.md
 
 ## Notes
+
+### Session #38 (23 Nov 05:12Z - ~09:30Z, Opus 5.5): CD-25 checked out (landed 05:00Z by the parallel session), CD-24 C/C2 fit, CD-26 plan. Handoff handoffs/2026-11-23-claude4-CD-24C-fit.md.
+- SLIP: two Claude 1 sessions ran at once (04:59 one was alive in its cloud 05:07-06:42). Next time: wait 45 min of silence AND no new files under my review dirs.
+- CD-24 C: review/CD-24/C/fit/README.md. Wasp/pump/Breacher reload 'fore' = bare socket 24-31 mm in the gun (live too) -> foreHold on smg/drum/tube (asked Claude 5). KR-7 try 3 best (one close frame .945 9.7 mm), M4 C2 close .935 3.9 mm: one key each, then Director LOOK. Wasp rack 'work' thumb 32 mm (old): needs a way round (like CD-23).
+- CD-26 (D-240 feel, mine): review/CD-26/PLAN.md: A sprint->fire snap, B ADS curve, C kick shape+recovery. Waiting Director OK on order.
+- Live: viewmodel.js 180f1fa0, viewmodel-poses.js 7c2b0db3, t344 308b0258. ChatGPT GP-20271: CD-25 native OK (round 3 rows in review/CF-FEEL/scorecard.md).
+- Cloud: kit review/CD-22/kit + review/CD-24/C/cloud/delta-0540.tgz; tools review/CD-24/C/fit/cd24c-fit-tools.tgz (eye.mjs = all guns, run4.sh restarts, mkc.py jobs) + review/CD-26/cd26-feel-tools.tgz.
+
+### Session #37 (23 Nov 01:55Z - ~07:00Z, Opus 5.5): CD-25 LANDED (D-240 #3 Wasp draw). Handoff handoffs/2026-11-23-claude4-CD-25.md.
+- Live now: index.html 127e509a (c695ae97 + my 2 carry-seat hunks, Director named loan; make-cd25.py), viewmodel.js 180f1fa0, t344 308b0258. Backups _DELETE ME/claude4-cd25-*.
+- CD-24 C fit checks sent to Claude 5 (review/CD-24/C/claude4/): KR-7 way back + M4 need keys; re-run tcd24cfit*.js when he has them.
+- Open: follow-up C (warm carry seats at loadout time); ChatGPT native for CD-25. My mistake: bogus request 'Claude 2 -> Claude 1: x' 05:00Z (closed WONT).
+
+### Session #36 (22 Nov 17:15Z - ~22:10Z, Opus 5.5): CD-22, CD-21b, CD-23, CD-24 A+B ALL LANDED. Handoffs 2026-11-22-claude4-CD-22-land / CD-21b-land / CD-23 / CD-24.
+- Live now: viewmodel-poses.js 7c2b0db3, viewmodel.js 46ba4a04, index.html 059af075 (st.want line, Director loan), t344 new. Backups _DELETE ME/claude4-cd22-*, cd21b-*, cd23-*, cd24-*.
+- Natives asked of ChatGPT: CD-23 (review/CD-23/native job), CD-24 (t344 + swap numbers). CD-22 + CD-21b natives came back good.
+- Open: CD-24 C (reload hands on the fire gate) waits on Claude 5; D (reload-end fire buffer) is Claude 2's. Claude 5 has the KR-7 mag-cup follow-up (.67 thumb 11 mm).
+- Cloud: the eye page OOMs on the KR-7 unless the low preset (EYE_GFX=low); tools review/CD-23/cd23-cloud-tools.tgz (eye7ak.mjs writes steps.jsonl after each step; tce10-contact-arm.js adds the sleeve). Kit = review/CD-22/kit + _DELETE ME/claude4-ak-delta-1725.tgz.
+
+### Session #35 (22 Nov 04:52Z - ~08:30Z, Opus 5.5): CD-22 + CD-21b review copies (nothing landed). Handoff handoffs/2026-11-22-claude4-CD-22.md.
+- CD-22 M4 slap: review/CD-22/game/viewmodel-poses.js e06c4c05 (carbine: elbowL, foreHold, low/out/work/clear z+y, slap thumb; Claude 5's loan). Director ACCEPTED: LAND next session (guard live 13cbd0ea, backup) even if Claude 5 is still away; then ChatGPT native.
+- CD-21b unarmed grenade arm: review/CD-21b/game/viewmodel.js 0193299e (live e8a8bb77) + t343 (review/CD-21b/tools/tests). LOOK asked. Land after OK; Claude 2 places t343.
+- Then CD-20 B (pistol support thumb flat), D-237 #5 AK bolt if ChatGPT 2 says FREE (asked 04:5xZ, no answer).
+- Cloud: review/CD-22/cd22-cloud-tools.tgz (run.sh restarts the crashing eye page; never clip-check + screenshot in one job).
+
+### Session #34 (21 Nov 21:25Z - 22 Nov ~00:45Z, Opus 5.5): CD-20 + CD-21 LANDED, CD-22 first look.
+- CD-20 (D-224 hooked left thumb): game/viewmodel-fit.js b3dc2c98 (pistol/sniper/KR-7 support thumbs straight). Backup _DELETE ME/claude4-cd20-viewmodel-fit-794b2514.js. Native job with ChatGPT (review/CD-20/native, inject e544ef2d). Follow-up B (Director): re-place the pistol support hand so the thumb lies flat along the frame (the elbow twist turns the palm back; now the straight thumb points forward-up ~45 deg).
+- CD-21 (D-236 arms in unarmed): game/viewmodel.js e8a8bb77 (HN skips 'empty'; eyeOn on st.hands). Backup _DELETE ME/claude4-cd21-viewmodel-3c552298.js. t342 in review/CD-21/tools/tests (Claude 2 to place). Native job with ChatGPT. Follow-up: unarmed grenade throw shows ONLY the throwing arm (~0.5 s).
+- CD-22 (M4 bolt slap arm/elbow, with Claude 5): live strip review/CD-22/cd22-m4-slap-live-strip.png: forearm near vertical, fingers in a V, elbow low. Places are Claude 5's (viewmodel-poses.js VM_RELOADS m4 'slap'); arm/elbow mine.
+- CD-18 A1/A5 pictures for Claude 2: asked him if still needed after CB-372.
+- Cloud kit: review/CD-20/kit/*.tgz (+ review/CD-21/delta.tgz) -> /home/claude/gs; tools: review/CD-20/tools (thumb solver vs the export: score/search/refine.mjs, mksteps.py), tools/handfit/c4 (mkpage + fptune5 + g9-steps exports), review/CD-19/tools/eye4.mjs (real renderer; jobs review/CD-21/eye-job-cd21.json, review/CD-22/eye-job-cd22.json; T.reloadClipDbg.hold(u) works in first person). Set DW_CHECK_MS=900000 for run-all in the cloud.
 
 ### Session #33 (21 Nov 06:40Z - ~08:15Z, Opus 5.5): CD-19 first-person gun + glove colours for CI-1, review only (handoff handoffs/2026-11-21-claude4-CD-19.md). Nothing landed.
 - Gloves black, black guns crush to black (no env map + folded lift half of vmFinish), no shine, torch burns muzzles, KR-7 wood orange, greys blue. Review copy of the viewmodel.js lift fix: small gain only (review/CD-19/copy/). Waiting: Director A/B/C; Claude 2's ask for CD-18 A1/A5 (review/CD-19/cd18-A1-A5-hunks.md).

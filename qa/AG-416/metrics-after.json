@@ -1,0 +1,529 @@
+{
+  "tag": "after",
+  "timestamp": "2026-11-24T09:33:36.473Z",
+  "renderer": {
+    "isWebGPU": true,
+    "name": "WebGPURenderer"
+  },
+  "warrens": {
+    "root": {
+      "cells": 37,
+      "meshCount": 215,
+      "triCount": 49816,
+      "hasCrateMeshes": true,
+      "hasTagMeshes": true,
+      "hasBoltMeshes": true,
+      "fog": {
+        "color": "#090d08",
+        "near": 5.5,
+        "far": 33
+      },
+      "bg": "#090d08",
+      "activeLights": [
+        {
+          "type": "HemisphereLight",
+          "name": "",
+          "intensity": 0.44,
+          "color": "#2a3a24"
+        },
+        {
+          "type": "AmbientLight",
+          "name": "",
+          "intensity": 0.22,
+          "color": "#161c12"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.35,
+          "color": "#ffa84a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 0.9,
+          "color": "#5cff9a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 10.151,
+          "color": "#ffb866"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 9.5,
+          "color": "#6ce89c"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 11.455,
+          "color": "#ffb866"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 9.5,
+          "color": "#6ce89c"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-0",
+          "intensity": 10.151,
+          "color": "#ffb866"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-1",
+          "intensity": 9.5,
+          "color": "#6ce89c"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-2",
+          "intensity": 11.455,
+          "color": "#ffb866"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-3",
+          "intensity": 9.5,
+          "color": "#6ce89c"
+        }
+      ],
+      "perfChamber": {
+        "fpsApprox": 3.1,
+        "callsPerFrame": 266,
+        "triangles": 216131,
+        "geometries": 4150
+      },
+      "perfDeep": {
+        "fpsApprox": 2.6,
+        "callsPerFrame": 308,
+        "triangles": 130299,
+        "geometries": 4189
+      }
+    },
+    "shale": {
+      "cells": 38,
+      "meshCount": 257,
+      "triCount": 51010,
+      "hasCrateMeshes": true,
+      "hasTagMeshes": true,
+      "hasBoltMeshes": true,
+      "fog": {
+        "color": "#070a10",
+        "near": 6,
+        "far": 36
+      },
+      "bg": "#070a10",
+      "activeLights": [
+        {
+          "type": "HemisphereLight",
+          "name": "",
+          "intensity": 0.46,
+          "color": "#283648"
+        },
+        {
+          "type": "AmbientLight",
+          "name": "",
+          "intensity": 0.22,
+          "color": "#131820"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.35,
+          "color": "#ffa84a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 0.9,
+          "color": "#5cff9a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 11.442,
+          "color": "#ffbe74"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 9.5,
+          "color": "#8ec0f2"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 7.5,
+          "color": "#e8f4ff"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 9.829,
+          "color": "#ffbe74"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-0",
+          "intensity": 11.442,
+          "color": "#ffbe74"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-1",
+          "intensity": 9.5,
+          "color": "#8ec0f2"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-2",
+          "intensity": 7.5,
+          "color": "#e8f4ff"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-3",
+          "intensity": 9.829,
+          "color": "#ffbe74"
+        }
+      ],
+      "perfChamber": {
+        "fpsApprox": 2.4,
+        "callsPerFrame": 350,
+        "triangles": 222983,
+        "geometries": 4255
+      },
+      "perfDeep": {
+        "fpsApprox": 2.4,
+        "callsPerFrame": 350,
+        "triangles": 364679,
+        "geometries": 4297
+      }
+    },
+    "iron": {
+      "cells": 39,
+      "meshCount": 285,
+      "triCount": 52180,
+      "hasCrateMeshes": true,
+      "hasTagMeshes": true,
+      "hasBoltMeshes": true,
+      "fog": {
+        "color": "#0d0906",
+        "near": 5.5,
+        "far": 35
+      },
+      "bg": "#0d0906",
+      "activeLights": [
+        {
+          "type": "HemisphereLight",
+          "name": "",
+          "intensity": 0.48,
+          "color": "#3a281c"
+        },
+        {
+          "type": "AmbientLight",
+          "name": "",
+          "intensity": 0.24,
+          "color": "#1c140e"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.35,
+          "color": "#ffa84a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 0.9,
+          "color": "#5cff9a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 11.374,
+          "color": "#ffaa50"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 9.5,
+          "color": "#ffaa56"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 8.537,
+          "color": "#ffaa50"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 9.092,
+          "color": "#ffaa50"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-0",
+          "intensity": 11.374,
+          "color": "#ffaa50"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-1",
+          "intensity": 9.5,
+          "color": "#ffaa56"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-2",
+          "intensity": 9.092,
+          "color": "#ffaa50"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-3",
+          "intensity": 8.537,
+          "color": "#ffaa50"
+        }
+      ],
+      "perfChamber": {
+        "fpsApprox": 1.8,
+        "callsPerFrame": 378,
+        "triangles": 215735,
+        "geometries": 4371
+      },
+      "perfDeep": {
+        "fpsApprox": 1.5,
+        "callsPerFrame": 378,
+        "triangles": 221555,
+        "geometries": 4380
+      }
+    },
+    "wet": {
+      "cells": 37,
+      "meshCount": 219,
+      "triCount": 44980,
+      "hasCrateMeshes": true,
+      "hasTagMeshes": true,
+      "hasBoltMeshes": true,
+      "fog": {
+        "color": "#060c0e",
+        "near": 5,
+        "far": 31
+      },
+      "bg": "#060c0e",
+      "activeLights": [
+        {
+          "type": "HemisphereLight",
+          "name": "",
+          "intensity": 0.46,
+          "color": "#1e363c"
+        },
+        {
+          "type": "AmbientLight",
+          "name": "",
+          "intensity": 0.22,
+          "color": "#101a1c"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.35,
+          "color": "#ffa84a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 0.9,
+          "color": "#5cff9a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 4.2,
+          "color": "#ffbe54"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 11.966,
+          "color": "#ffbc70"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 9.5,
+          "color": "#6cd4d8"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 4.2,
+          "color": "#ffbe54"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-0",
+          "intensity": 11.966,
+          "color": "#ffbc70"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-1",
+          "intensity": 9.5,
+          "color": "#6cd4d8"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-2",
+          "intensity": 4.2,
+          "color": "#ffbe54"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-3",
+          "intensity": 4.2,
+          "color": "#ffbe54"
+        }
+      ],
+      "perfChamber": {
+        "fpsApprox": 1.2,
+        "callsPerFrame": 392,
+        "triangles": 139469,
+        "geometries": 4430
+      },
+      "perfDeep": {
+        "fpsApprox": 1.3,
+        "callsPerFrame": 392,
+        "triangles": 157983,
+        "geometries": 4436
+      }
+    },
+    "hill": {
+      "cells": 40,
+      "meshCount": 274,
+      "triCount": 48792,
+      "hasCrateMeshes": true,
+      "hasTagMeshes": true,
+      "hasBoltMeshes": true,
+      "fog": {
+        "color": "#0c0b08",
+        "near": 5.5,
+        "far": 35
+      },
+      "bg": "#0c0b08",
+      "activeLights": [
+        {
+          "type": "HemisphereLight",
+          "name": "",
+          "intensity": 0.48,
+          "color": "#363228"
+        },
+        {
+          "type": "AmbientLight",
+          "name": "",
+          "intensity": 0.24,
+          "color": "#1a1813"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 1.35,
+          "color": "#ffa84a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 0.9,
+          "color": "#5cff9a"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 12.724,
+          "color": "#ffc674"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 9.5,
+          "color": "#ffd28c"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 11.561,
+          "color": "#ffc674"
+        },
+        {
+          "type": "PointLight",
+          "name": "",
+          "intensity": 9.5,
+          "color": "#ffd28c"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-0",
+          "intensity": 12.724,
+          "color": "#ffc674"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-1",
+          "intensity": 9.5,
+          "color": "#ffd28c"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-2",
+          "intensity": 11.561,
+          "color": "#ffc674"
+        },
+        {
+          "type": "PointLight",
+          "name": "light-pool-3",
+          "intensity": 9.5,
+          "color": "#ffd28c"
+        }
+      ],
+      "perfChamber": {
+        "fpsApprox": 1.5,
+        "callsPerFrame": 392,
+        "triangles": 217001,
+        "geometries": 4452
+      },
+      "perfDeep": {
+        "fpsApprox": 1.4,
+        "callsPerFrame": 392,
+        "triangles": 249739,
+        "geometries": 4453
+      }
+    }
+  },
+  "gameplayChecks": {
+    "exploredAfterWalk": 2,
+    "nvg": {
+      "hasPhosphor": true,
+      "hasWashout": false,
+      "tacticalText": "NVG ON · Laser off · Light ON"
+    },
+    "interact": {
+      "hidWorldCount": 326,
+      "wallRayHit": true,
+      "wetWaterDepth": 0.44,
+      "boltAction": "hollowBolt",
+      "boltPrompt": "Hold E · Squeeze out of the rock",
+      "sbBefore": "hollowHaul",
+      "gotBox": true,
+      "sbAfterClaim": null
+    }
+  },
+  "errors": []
+}

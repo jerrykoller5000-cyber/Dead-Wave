@@ -1,0 +1,10 @@
+# claude10 — CJ-10 casings v2 (GP-20283 minigun hand cross fixed, review copy) + D-240 R4 effects plan — 2026-11-23
+Changed:          Found why a minigun case crossed the hand: the gun fires 2-3 rounds in one frame and each kick resets the gun mount mid-frame, so the 2nd case was born 0.4 m off, at the grip. v2 copy: a later round in the same frame reuses the first round's port; the minigun throw is tamer and wider. Nothing landed.
+Files:            review/CJ-10/apply-casings-v2.mjs (md5-guarded), index.casings-v2.html 8f49f5df on live 22afb368, index.casings-v2.diff, CJ-10-minigun-v2-paths.png, req-director-v2.txt, req-chatgpt-v2.txt; review/CJ-R4/plan.md (D-240 plan).
+Tests:            md5 guard, CRLF kept (73834/73834), main module parses (node --check; the importmap block fails the same on live). Path sim: aim -60..+60, roll +-20, all throw extremes: closest gap to a fist/forearm 12 cm (v1 5 cm). Not a game run.
+Screenshots:      review/CJ-10/CJ-10-minigun-v2-paths.png (before/after paths, LOOKED by me and the Director). Drum impact check: review/GP-20286/drum-30hz-pair.jpg LOOKED; receipt says 5 motes + 1 fragment, so my metal hit effect still fires on the drum (hard to see: plan item 3).
+Not verified:     Native pictures of v2 (ChatGPT queued LATER). Plan item 1 (tracer + flash light off the muzzle for minigun rounds) is from reading code only.
+Requests:         Director: LOOK v2 = ACCEPT + named loan (spawnCasing, CASE_THROW, _casePortMemo), land after his LOOK of ChatGPT's natives. ChatGPT: native re-run of GP-20283 on 8f49f5df (LATER). Director: D-240 R4 plan (no answer yet).
+Contract changes: none
+Rule 16:          no game run by me.
+Next:             When ChatGPT's natives come: LOOK, send to the Director, then land: md5-check live, backup to _DELETE ME/, node review/CJ-10/apply-casings-v2.mjs index.html <tmp> <live md5>, write via python r+, node --check, gates t221 tcb294b t201 t213 (ChatGPT). If live moved off 22afb368, re-run the script on the new live (hunks are exact text). Then D-240 plan items 1-3 after the Director's OK.

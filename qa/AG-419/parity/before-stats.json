@@ -1,0 +1,206 @@
+{
+  "tag": "before",
+  "dayStats": {
+    "calls": 396,
+    "tris": 1488081,
+    "owMeshes": 17,
+    "owSprites": 48
+  },
+  "nightStats": {
+    "calls": 317,
+    "tris": 1115716,
+    "amberVis": true,
+    "amberType": "Group",
+    "amberCount": 44
+  },
+  "trStats": {
+    "calls": 286,
+    "tris": 296581,
+    "tcDraws": 38,
+    "topTg": [
+      {
+        "k": "training-ground",
+        "n": 48,
+        "cast": 23,
+        "tris": 49698
+      },
+      {
+        "k": "training-containment-gun",
+        "n": 30,
+        "cast": 0,
+        "tris": 62688
+      },
+      {
+        "k": "training-cutaway-east",
+        "n": 23,
+        "cast": 10,
+        "tris": 6270
+      },
+      {
+        "k": "anon",
+        "n": 14,
+        "cast": 13,
+        "tris": 650
+      },
+      {
+        "k": "training-cif",
+        "n": 14,
+        "cast": 0,
+        "tris": 11822
+      },
+      {
+        "k": "training-cutaway-rangeSouth",
+        "n": 13,
+        "cast": 6,
+        "tris": 1354
+      },
+      {
+        "k": "training-cutaway-west",
+        "n": 12,
+        "cast": 6,
+        "tris": 3762
+      },
+      {
+        "k": "target-backing-side",
+        "n": 10,
+        "cast": 0,
+        "tris": 120
+      },
+      {
+        "k": "target-backing-crossbar",
+        "n": 10,
+        "cast": 0,
+        "tris": 120
+      },
+      {
+        "k": "training-cutaway-south",
+        "n": 10,
+        "cast": 4,
+        "tris": 136
+      },
+      {
+        "k": "training-skullWindow",
+        "n": 10,
+        "cast": 4,
+        "tris": 934
+      },
+      {
+        "k": "training-cutaway-north",
+        "n": 8,
+        "cast": 2,
+        "tris": 3448
+      },
+      {
+        "k": "training-hqPanel",
+        "n": 8,
+        "cast": 7,
+        "tris": 746
+      },
+      {
+        "k": "training-gate-frame",
+        "n": 7,
+        "cast": 6,
+        "tris": 1286
+      },
+      {
+        "k": "training-firing-bench",
+        "n": 6,
+        "cast": 5,
+        "tris": 6178
+      },
+      {
+        "k": "training-kiosk",
+        "n": 6,
+        "cast": 4,
+        "tris": 3356
+      },
+      {
+        "k": "training-range-console",
+        "n": 6,
+        "cast": 5,
+        "tris": 960
+      },
+      {
+        "k": "target-lower-stem",
+        "n": 5,
+        "cast": 5,
+        "tris": 60
+      }
+    ],
+    "topTri": [
+      {
+        "k": "training-containment-gun",
+        "n": 30,
+        "cast": 0,
+        "tris": 62688
+      },
+      {
+        "k": "training-ground",
+        "n": 48,
+        "cast": 23,
+        "tris": 49698
+      },
+      {
+        "k": "training-containment-rotor",
+        "n": 3,
+        "cast": 0,
+        "tris": 19168
+      },
+      {
+        "k": "training-cif",
+        "n": 14,
+        "cast": 0,
+        "tris": 11822
+      },
+      {
+        "k": "training-perimeter-south",
+        "n": 2,
+        "cast": 0,
+        "tris": 7960
+      },
+      {
+        "k": "training-perimeter-west",
+        "n": 2,
+        "cast": 0,
+        "tris": 7058
+      },
+      {
+        "k": "training-perimeter-east",
+        "n": 2,
+        "cast": 0,
+        "tris": 6736
+      },
+      {
+        "k": "training-cutaway-east",
+        "n": 23,
+        "cast": 10,
+        "tris": 6270
+      },
+      {
+        "k": "training-firing-bench",
+        "n": 6,
+        "cast": 5,
+        "tris": 6178
+      },
+      {
+        "k": "training-cutaway-west",
+        "n": 12,
+        "cast": 6,
+        "tris": 3762
+      },
+      {
+        "k": "training-cutaway-north",
+        "n": 8,
+        "cast": 2,
+        "tris": 3448
+      },
+      {
+        "k": "training-kiosk",
+        "n": 6,
+        "cast": 4,
+        "tris": 3356
+      }
+    ]
+  },
+  "errors": []
+}

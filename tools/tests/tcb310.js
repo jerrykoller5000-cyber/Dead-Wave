@@ -28,24 +28,30 @@
     ok(!!stairs && !!stairs.deck, 'a flight of stairs is built (rise ' + (stairs && stairs.rise) + ' m)');
     if (!stairs || !stairs.deck) return out.join('\n');
     const d = stairs.deck, cx = d.x, cz = d.z, half = d.hl;   // it climbs towards +z from the cell's -z side
-    // Walk (or sprint) along x = cx from z0 the way yaw faces for n frames: the horizontal pace each frame, where he is.
-    const walk = (z0, yaw, sprint, n) => {
+    // Cover the whole flight and enough runout for six full-speed sprint samples.
+    const walk = (z0, yaw, sprint) => {
       key('KeyW', false); key('ShiftLeft', false); T.setVelDbg(0, 0);
       p.set(cx, T.entityGroundY(cx, z0, p.y + 3), z0); aimAt(yaw); p.set(cx, T.entityGroundY(cx, z0, p.y + 3), z0); step(3);
       key('KeyW', true); if (sprint) key('ShiftLeft', true);
       const rows = []; let last = p.clone();
-      for (let i = 0; i < n; i++) { step(1); const v = Math.hypot(p.x - last.x, p.z - last.z) * 30; last = p.clone(); rows.push({ z: p.z, y: p.y, v, w: T.stairSpeedDbg().w, on: T.stairSpeedDbg().on }); }
+      const sign = Math.cos(yaw), finish = half + 3.2;
+      for (let i = 0; i < 360 && (p.z - cz) * sign < finish; i++) {
+        step(1);
+        const v = Math.hypot(p.x - last.x, p.z - last.z) * 30, stair = T.stairSpeedDbg();
+        last.copy(p);
+        rows.push({ z: p.z, y: p.y, v, w: stair.w, on: stair.on, grounded: T.jumpFeelDbg().grounded });
+      }
       key('KeyW', false); key('ShiftLeft', false); step(10);
       return rows;
     };
     const med = (a) => { const b = a.slice().sort((x, y) => x - y); return b.length ? b[b.length >> 1] : NaN; };
     for (const sprint of [false, true]) {
-      const how = sprint ? 'sprinting' : 'walking';
-      // Up: from 3 m before the foot, on past the top onto the deck behind (the floor beyond the flight is the ground,
-      // the flight lands on its own top step); the pace on the flat before it, on the flight's middle, and off it again.
-      for (const [dir, z0, yaw] of [['up', cz - half - 3, 0], ['down', cz + half - 0.15, Math.PI]]) {
-        const rows = walk(z0, yaw, sprint, sprint ? 40 : 55);
-        const flat = rows.filter((r) => !r.on && r.w < 0.02 && Math.abs(r.z - cz) > half + 0.6);
+      const how = sprint ? 'sprinting' : 'walking', fullPace = sprint ? 8 : 2.05;
+      // Start far enough back to reach full forward speed before the stairs. The bare flight ends in a real fall.
+      for (const [dir, z0, yaw] of [['up', cz - half - 8, 0], ['down', cz + half - 0.15, Math.PI]]) {
+        const rows = walk(z0, yaw, sprint);
+        const flat = rows.filter((r) => r.grounded && !r.on && r.w < .02 && (dir === 'up'
+          ? r.z > cz-half-5 && r.z < cz-half-2 : Math.abs(r.z-cz) > half+.6));
         const mid = rows.filter((r) => r.on && r.w > 0.9 && Math.abs(r.z - cz) < half * 0.6);
         const vFlat = med(flat.map((r) => r.v)), vMid = med(mid.map((r) => r.v));
         const after = dir === 'down' ? rows.filter((r) => r.z < cz - half - 1.2) : [];
@@ -53,12 +59,12 @@
         if (dir === 'up') ok(flat.length >= 5 && mid.length >= 2 && Math.abs(vMid / vFlat - 0.5) < 0.08, how + ' up the stairs: half his pace on the flat (' + vMid.toFixed(2) + ' of ' + vFlat.toFixed(2) + ' m/s, ' + (vMid / vFlat).toFixed(2) + ')');
         else {
           const vAfter = med(after.slice(-6).map((r) => r.v)), vOn = vMid;
-          ok(mid.length >= 2 && after.length >= 6 && Math.abs(vOn / vAfter - 0.5) < 0.08 && vAfter > 0.95 * (sprint ? 11.8 : 7.4) * 0.9, how + ' down the stairs: half pace on them (' + vOn.toFixed(2) + ' m/s), and full pace again on the floor after (' + vAfter.toFixed(2) + ' m/s)');
+          ok(mid.length >= 2 && after.length >= 6 && Math.abs(vOn / vAfter - 0.5) < 0.08 && vAfter > 0.95 * fullPace * 0.9, how + ' down the stairs: half pace on them (' + vOn.toFixed(2) + ' m/s), and full pace again on the floor after (' + vAfter.toFixed(2) + ' m/s)');
         }
         // Eased: no frame's pace jumps by more than a quarter of the flat pace at the foot or the top.
-        // (not the frames he drops off the top of this lone flight and lands, which has no deck behind it: a fall, not the pace)
-        let jump = 0; for (let i = 1; i < rows.length; i++) if (rows[i - 1].v > 0.5 && rows[i].v > 0.5 && !rows.slice(Math.max(1, i - 2), i + 1).some((r, k, a) => Math.abs(r.y - rows[Math.max(1, i - 2) + k - 1].y) > 0.3)) jump = Math.max(jump, Math.abs(rows[i].v - rows[i - 1].v));
-        ok(jump < 0.3 * (sprint ? 11.8 : 7.4), how + ' ' + dir + ': the pace eases at the foot and the top (the biggest change in a frame ' + jump.toFixed(2) + ' m/s)');
+        // Include the real fall off the back: it must not kick him sideways or forward.
+        let jump = 0; for (let i = 1; i < rows.length; i++) if (rows[i - 1].v > 0.5 && rows[i].v > 0.5) jump = Math.max(jump, Math.abs(rows[i].v - rows[i - 1].v));
+        ok(jump < 0.3 * fullPace, how + ' ' + dir + ': the pace eases at the foot and the top (the biggest change in a frame ' + jump.toFixed(2) + ' m/s)');
       }
     }
   } catch (e) { out.push('FAIL threw: ' + (e && (e.stack || e.message))); }

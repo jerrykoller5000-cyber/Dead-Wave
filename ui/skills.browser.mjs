@@ -30,6 +30,7 @@ try {
  await page.evaluate(()=>{window.skillEvents=[];addEventListener('dw-game',({detail})=>{if(detail.type==='skill-up')skillEvents.push(detail);});TT.addCash(500);TT.openShop(true);});
  assert(await page.locator('#shop').isVisible());
  assert.equal(await page.locator('[data-shop-page="perks"]').count(),0,'paid Perks tab is gone');
+ await page.locator('#shopTabs [data-shop-page=supplies]').click();
  assert.equal(await page.locator('#shopList button:has-text("Vitality")').count(),0);
  for(const width of [1280,390]){
   await page.setViewportSize({width,height:width===390?844:720});

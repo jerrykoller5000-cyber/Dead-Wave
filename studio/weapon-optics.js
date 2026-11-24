@@ -2,14 +2,16 @@
 // Gun-local convention: +Z muzzle, +Y up. Origin: centre of the mounting foot.
 import * as THREE from 'three';
 import { markPaintSurface } from './weapon-finish.js';
+import { applyWeaponPBR } from './weapon-textures.js';
 
 // CL-329 (J92): black optics (paint was 0x303633; alloy 0x4b5354 at 0.83 metal: a light grey-green; edge 0x858b83 at 0.9)
-const paint = new THREE.MeshStandardMaterial({ color: 0x24282a, metalness: 0.05, roughness: 0.74 });
-const alloy = new THREE.MeshStandardMaterial({ color: 0x2e3234, metalness: 0.55, roughness: 0.5 });
-const edge = new THREE.MeshStandardMaterial({ color: 0x70767a, metalness: 0.7, roughness: 0.45 });
-const rimMetal = edge.clone(); rimMetal.side = THREE.DoubleSide;
-const rubber = new THREE.MeshStandardMaterial({ color: 0x171c1c, metalness: 0, roughness: 0.9 });
+const paint = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x24282a, metalness: 0.05, roughness: 0.74 }), 'anodized', { useMap: false, markFoldable: true });
+const alloy = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x2e3234, metalness: 0.55, roughness: 0.5 }), 'anodized', { useMap: false, useMetalMap: true, markFoldable: true });
+const edge = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x70767a, metalness: 0.7, roughness: 0.45 }), 'machinedSteel', { useMap: false, useMetalMap: true, markFoldable: true });
+const rimMetal = edge.clone(); rimMetal.side = THREE.DoubleSide; rimMetal.userData = { ...edge.userData };
+const rubber = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x171c1c, metalness: 0, roughness: 0.9 }), 'rubber', { useMap: false, markFoldable: true });
 const lens = new THREE.MeshPhysicalMaterial({ color: 0x77989a, metalness: 0, roughness: 0.14, transparent: true, opacity: 0.28, depthWrite: false, side: THREE.DoubleSide });
+applyWeaponPBR(THREE, lens, 'opticalGlass', { useMap: false, normalScale: 0.10, aoIntensity: 0.20 });
 const reticle = new THREE.MeshBasicMaterial({ color: 0xb1392c, transparent: true, opacity: 0.86, depthWrite: false, side: THREE.DoubleSide });
 // CL-332 c: the inside of every open tube (seen through the lenses), dark and matte
 const bore = new THREE.MeshStandardMaterial({ color: 0x0f1414, metalness: 0.08, roughness: 0.88, side: THREE.BackSide });
@@ -293,7 +295,7 @@ function scopeSidePlate(root, side) {
 
 // 4-32x50 NX8: 340 mm, 30 mm tube, 59 mm objective, exposed ZeroStop and side parallax control.
 function nx8(root) {
-  const graphite = new THREE.MeshStandardMaterial({color: 0x424a4f, metalness: .24, roughness: .52});
+  const graphite = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({color: 0x424a4f, metalness: .24, roughness: .52}), 'anodized', { useMap: false, markFoldable: true });
   // On the issued rifle the root is the rail centre. The teeth rise 11 mm above it.
   beveledBox(root, 'scope rail bridge', paint, [0.042, 0.006, 0.132], [0, 0.014, 0]);
   for (const side of [-1,1]) {

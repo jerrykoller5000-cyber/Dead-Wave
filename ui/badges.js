@@ -14,7 +14,7 @@ const RULES = Object.freeze({
   'night-twenty': f => atLeast(f.nightReached,20),
   'fog-survivor': f => f.nightCleared === 14 && f.nightKind === 'fog',
   'kicked-free': f => f.kickedFree === true,
-  'out-on-the-boat': f => f.evacuated === true,
+  'out-on-the-boat': f => f.evacuated === true || f.trueEnding === true,   // CK-1 (D-8): the true ending boards Heron too
   'thousand-skulls': f => atLeast(f.skullsBanked,1000),
   'thousand-kills': f => atLeast(f.kills,1000),
   'hundred-headshots': f => atLeast(f.headshots,100),

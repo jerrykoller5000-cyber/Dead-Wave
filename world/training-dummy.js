@@ -5,6 +5,62 @@
 // 2-axis + torsion wobble when struck.
 
 import { bakeStatic } from './bake.js';
+import { getTrainingPBR, heightToNormalRGBA, makeDataTexture, tileFbm } from './training-textures.js';
+const DUMMY_PBR_CACHE = new WeakMap();
+function getDummyVinylPBR(THREE) {
+  let c = DUMMY_PBR_CACHE.get(THREE);
+  if (c) return c;
+  const S = 256;
+  const hf = new Float32Array(S * S);
+  const orm = new Uint8Array(S * S * 4);
+  for (let y = 0; y < S; y++) {
+    const v = 1 - y / S; // match canvas flipY
+    for (let x = 0; x < S; x++) {
+      const u = x / S, i = y * S + x, o = i * 4;
+      // Fine heavy duck-canvas weave + organic vinyl hide grain
+      const weave = (Math.sin(u * Math.PI * 180) * 0.5 + Math.sin(v * Math.PI * 180) * 0.5) * 0.055;
+      const hide = (tileFbm(u, v, 18, 18, 809, 3) - 0.5) * 0.14;
+      let hv = 0.54 + weave + hide, ao = 0.94, rgh = 0.86, met = 0.02;
+      // Vertical stitched welt seams at u = 0.25, 0.75, 0/1
+      const dSeamV = Math.min(Math.abs(u - 0.25), Math.abs(u - 0.75), Math.min(u, 1 - u));
+      if (dSeamV < 0.012) {
+        const k = 1 - dSeamV / 0.012;
+        hv -= k * 0.28; ao -= k * 0.34; rgh = 0.92;
+      } else if (dSeamV < 0.022 && ((y >> 2) & 1) === 0) {
+        hv += 0.10; // saddle-stitch thread ridge
+      }
+      // Horizontal neck collar (0.695) & lower hem (0.115) seams
+      const dSeamH = Math.min(Math.abs(v - 0.695), Math.abs(v - 0.115));
+      if (dSeamH < 0.010) {
+        const k = 1 - dSeamH / 0.010;
+        hv -= k * 0.26; ao -= k * 0.30;
+      }
+      // Nylon cinch belt at v ~ 0.055
+      if (Math.abs(v - 0.055) < 0.032) {
+        const rib = Math.sin(v * Math.PI * 240) * 0.14;
+        hv = 0.62 + rib; rgh = 0.84; ao = 0.88 + rib * 0.4;
+      }
+      // Burnished smoother strike zones (chest & head)
+      const dChest = Math.hypot((u - 0.5) / 0.18, (v - 0.53) / 0.16);
+      const dHead = Math.hypot((u - 0.5) / 0.14, (v - 0.88) / 0.09);
+      const strike = Math.max(0, 1 - Math.min(dChest, dHead));
+      rgh -= strike * 0.26;
+      hf[i] = hv;
+      orm[o] = Math.max(30, Math.min(255, Math.round(ao * 255)));
+      orm[o + 1] = Math.max(40, Math.min(252, Math.round(rgh * 255)));
+      orm[o + 2] = Math.round(met * 255);
+      orm[o + 3] = 255;
+    }
+  }
+  c = {
+    nrm: makeDataTexture(THREE, heightToNormalRGBA(hf, S, S, 2.4, true, false), S, S, { name: 'tg-dummy-vinyl-nrm', srgb: false, repeat: false, aniso: 8 }),
+    orm: makeDataTexture(THREE, orm, S, S, { name: 'tg-dummy-vinyl-orm', srgb: false, repeat: false, aniso: 8 }),
+  };
+  if (c.nrm) c.nrm.wrapS = THREE.RepeatWrapping;
+  if (c.orm) c.orm.wrapS = THREE.RepeatWrapping;
+  DUMMY_PBR_CACHE.set(THREE, c);
+  return c;
+}
 
 export const DUMMY_SPEC = Object.freeze({
   height: 1.790,
@@ -234,9 +290,10 @@ function buildVinylCanvasTexture(THREE) {
   if (typeof document === 'undefined') return null;
   const W = 512, H = 512;
   const cv = document.createElement('canvas');
-  cv.width = W;
-  cv.height = H;
+  cv.width = W * 2;
+  cv.height = H * 2;
   const c = cv.getContext('2d');
+  c.scale(2, 2);
 
   let seed = 308137;
   const rnd = () => {
@@ -367,6 +424,8 @@ function buildVinylCanvasTexture(THREE) {
   tex.colorSpace = THREE.SRGBColorSpace;
   tex.wrapS = THREE.RepeatWrapping;
   tex.wrapT = THREE.ClampToEdgeWrapping;
+  tex.anisotropy = 8;
+  tex.generateMipmaps = true;
   tex.needsUpdate = true;
   return tex;
 }
@@ -923,27 +982,24 @@ export function buildTrainingDummy(THREE, opts = {}) {
   const vinylTex = keepTex(buildVinylCanvasTexture(THREE));
   const marksTex = keepTex(buildMarksAtlasTexture(THREE));
 
+  const pbr = getTrainingPBR(THREE);
+  const dvPbr = pbr ? getDummyVinylPBR(THREE) : null;
   const vinylMat = keepMat(new THREE.MeshStandardMaterial({
     name: 'training-dummy-vinyl',
     color: vinylTex ? 0xffffff : 0x756e5a,
     map: vinylTex || null,
-    roughness: 0.78,
-    metalness: 0.02
+    ...(dvPbr ? { normalMap: dvPbr.nrm, normalScale: THREE.Vector2 ? new THREE.Vector2(0.62, 0.62) : undefined, roughnessMap: dvPbr.orm, metalnessMap: dvPbr.orm, aoMap: dvPbr.orm, aoMapIntensity: 0.65, roughness: 1.0, metalness: 1.0 } : { roughness: 0.78, metalness: 0.02 })
   }));
 
-  const rubberMat = keepMat(new THREE.MeshStandardMaterial({
-    name: 'training-dummy-rubber',
-    color: 0x202523,
-    roughness: 0.90,
-    metalness: 0.04
-  }));
+  const rubberMat = keepMat(new THREE.MeshStandardMaterial(
+    pbr ? { name: 'training-dummy-rubber', ...pbr.rubberCrumb.opts({ color: 0x363e3b, normalScale: 0.95 }) }
+      : { name: 'training-dummy-rubber', color: 0x202523, roughness: 0.90, metalness: 0.04 }
+  ));
 
-  const steelMat = keepMat(new THREE.MeshStandardMaterial({
-    name: 'training-dummy-steel',
-    color: 0x565f5b,
-    roughness: 0.42,
-    metalness: 0.82
-  }));
+  const steelMat = keepMat(new THREE.MeshStandardMaterial(
+    pbr ? { name: 'training-dummy-steel', ...pbr.steelDark.opts({ color: 0xb0bab6, normalScale: 0.75 }) }
+      : { name: 'training-dummy-steel', color: 0x565f5b, roughness: 0.42, metalness: 0.82 }
+  ));
 
   // Decal material: lit MeshStandardMaterial so exposed tan foam & dark scorch respond naturally
   // across noon, overcast, dusk, and night (+ flashlight), sorted strictly BEFORE all transparent effects!

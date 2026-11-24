@@ -119,6 +119,7 @@ export function createTrapperPath(rand = Math.random, config = {}) {
     unlocked: false,    // true once all 6 rows are crossed to the hatch
     holdT: 0,           // remaining seconds held in a bear trap
     snaps: 0,           // total bear trap snaps this run
+    pries: 0,           // active pry attempts while caught in jaws
     escapeRow: null,    // row just snapped so he can step off the sprung trap after the 3 s hold
     sprung: [],         // [{ row, reason, x, z }]
   };
@@ -148,6 +149,7 @@ export function createTrapperPath(rand = Math.random, config = {}) {
     state.unlocked = false;
     state.holdT = 0;
     state.snaps = 0;
+    state.pries = 0;
     state.escapeRow = null;
     state.sprung = [];
   }
@@ -314,6 +316,18 @@ export function createTrapperPath(rand = Math.random, config = {}) {
     };
   }
 
+  function pry(amount = 0.38) {
+    if (state.holdT <= 0) return { kind: 'none', holdT: 0, pries: state.pries };
+    const cut = Number.isFinite(amount) && amount > 0 ? amount : 0.38;
+    state.holdT = Math.max(0, state.holdT - cut);
+    state.pries += 1;
+    return {
+      kind: state.holdT <= 0 ? 'freed' : 'pry',
+      holdT: state.holdT,
+      pries: state.pries,
+    };
+  }
+
   return {
     rule,
     state,
@@ -323,6 +337,7 @@ export function createTrapperPath(rand = Math.random, config = {}) {
     postLocal,
     classifyPoint,
     step,
+    pry,
     unlock() {
       state.progress = rule.ROWS;
       state.unlocked = true;
@@ -345,7 +360,7 @@ function hash01(a, b) {
 
 // Builds the static geometry parts, stepping-stone descriptors, fence-post descriptors, and solid collider spots
 // for the rebuilt trapper's yard (AG-124, N28; docs/world-design.md rules 1, 2, 9, 12).
-export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorPivotY = 0.18, toWorld, cy0 = 0, trapperPart, trapperBar, rule = TRAPPER }) {
+export function buildTrapperYardParts(THREE, { groundAtLocal, plantAtLocal=groundAtLocal, surfAtLocal, doorPivotY = 0.18, toWorld, cy0 = 0, trapperPart, trapperBar, rule = TRAPPER }) {
   const surfY = typeof surfAtLocal === 'function' ? surfAtLocal : () => 0;
   const parts = [];
   const stones = [];
@@ -513,29 +528,48 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
     }
   }
 
-  // 4. Trapper's yard fence: 32 sturdy row posts (4 per row) with chamfered caps, iron bands, and backing boards for horseshoes;
-  //    plus heavy entrance gate posts with overhead crossbeam, hanging lantern, split-log rails, and sealed back half.
+  // 4. Trapper's yard fence: 32 sturdy row posts (4 per row) with chamfered caps, iron bands, and dark charred backing boards
+  //    so bright forged-iron horseshoes read clearly in all lighting; inner lane markers are shorter trail bollards (0.78 m)
+  //    so sightlines stay open down all 8 rows of stepping stones.
   const postBox = new THREE.BoxGeometry(0.16, 1.28, 0.16);
+  const innerPostBox = new THREE.BoxGeometry(0.13, 0.78, 0.13);
   const postBase = new THREE.BoxGeometry(0.19, 0.24, 0.19);
+  const innerPostBase = new THREE.BoxGeometry(0.16, 0.18, 0.16);
   const postCap = new THREE.BoxGeometry(0.19, 0.045, 0.19);
+  const innerPostCap = new THREE.BoxGeometry(0.16, 0.04, 0.16);
   const postBand = new THREE.BoxGeometry(0.172, 0.028, 0.172);
-  const postPlaque = new THREE.BoxGeometry(0.14, 0.25, 0.022);
+  const innerPostBand = new THREE.BoxGeometry(0.144, 0.024, 0.144);
+  const postPlaque = new THREE.BoxGeometry(0.20, 0.26, 0.024);
+  const plaqueRim = new THREE.BoxGeometry(0.22, 0.28, 0.014);
+  const charredWood = 0x201b16;
   for (let r = 0; r < rule.ROWS; r++) {
     const lz = rowZ(r, rule);
     for (let col = 0; col < cols; col++) {
       const lx = postX(col, rule);
       const gy = groundAtLocal(lx, lz);
+      const isInner = Math.abs(lx) < 1.2;
       const wCol = woodPalette[(r + col) % woodPalette.length];
-      parts.push(trapperPart(postBase.clone(), barkPalette[(r + col) % barkPalette.length], lx, gy + 0.12, lz));
-      parts.push(trapperPart(postBox.clone(), wCol, lx, gy + 0.64, lz));
-      parts.push(trapperPart(postCap.clone(), barkPalette[0], lx, gy + 1.29, lz));
-      parts.push(trapperPart(postBand.clone(), ironDark, lx, gy + 1.12, lz));
+      if (isInner) {
+        parts.push(trapperPart(innerPostBase.clone(), barkPalette[(r + col) % barkPalette.length], lx, gy + 0.09, lz));
+        parts.push(trapperPart(innerPostBox.clone(), wCol, lx, gy + 0.39, lz));
+        parts.push(trapperPart(innerPostCap.clone(), barkPalette[0], lx, gy + 0.79, lz));
+        parts.push(trapperPart(innerPostBand.clone(), ironDark, lx, gy + 0.67, lz));
+      } else {
+        parts.push(trapperPart(postBase.clone(), barkPalette[(r + col) % barkPalette.length], lx, gy + 0.12, lz));
+        parts.push(trapperPart(postBox.clone(), wCol, lx, gy + 0.64, lz));
+        parts.push(trapperPart(postCap.clone(), barkPalette[0], lx, gy + 1.29, lz));
+        parts.push(trapperPart(postBand.clone(), ironDark, lx, gy + 1.12, lz));
+      }
       const sgn = col >= 2 ? 1 : -1;
-      const rotY = Math.abs(lx) > 1.2 ? -sgn * 0.20 : 0;
-      // Pale weathered backing board facing approach (+z):
-      parts.push(trapperPart(postPlaque.clone(), 0xc8b68e, lx - sgn * 0.005, gy + 0.88, lz + 0.068, 0, rotY, 0));
+      const rotY = isInner ? 0 : -sgn * 0.18;
+      const rotX = isInner ? -0.14 : 0;
+      const mountY = isInner ? 0.56 : 0.90;
+      const plaqueZ = lz + (isInner ? 0.072 : 0.086);
+      // Dark charred-oak backing plaque with pale weathered rim facing approach (+z) for crisp forged-iron horseshoe contrast:
+      parts.push(trapperPart(plaqueRim.clone(), 0x7b6a52, lx - sgn * 0.004, gy + mountY, plaqueZ - 0.008, rotX, rotY, 0));
+      parts.push(trapperPart(postPlaque.clone(), charredWood, lx - sgn * 0.004, gy + mountY, plaqueZ, rotX, rotY, 0));
       const w = toWorld(lx, lz);
-      posts.push({ row: r, side: col, lx, lz, x: w.x, y: cy0 + gy, z: w.z });
+      posts.push({ row: r, side: col, lx, lz, x: w.x, y: cy0 + gy, z: w.z, isInner, mountY });
     }
   }
 
@@ -591,9 +625,9 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
       const gyS = sgn < 0 ? yL : yR;
       trapperBar(parts, [sgn * rule.POST_X, gyS + 1.55, gateZ], [sgn * (rule.POST_X - 0.48), beamY - 0.04, gateZ], 0.042, woodPalette[0], 5);
     }
-    // Weathered plank sign board on the gate lintel:
-    parts.push(trapperPart(new THREE.BoxGeometry(1.48, 0.24, 0.04), 0x6b533b, 0, beamY - 0.18, gateZ + 0.05, 0, 0, -0.02));
-    parts.push(trapperPart(new THREE.BoxGeometry(1.38, 0.17, 0.046), 0xb8a37a, 0, beamY - 0.18, gateZ + 0.052, 0, 0, -0.02));
+    // Weathered plank sign board backing on the gate lintel (painted face mounted in setupTrapperMission):
+    parts.push(trapperPart(new THREE.BoxGeometry(1.52, 0.28, 0.044), 0x4b3826, 0, beamY - 0.19, gateZ + 0.05, 0, 0, -0.018));
+    parts.push(trapperPart(new THREE.BoxGeometry(1.42, 0.21, 0.046), 0x2d241b, 0, beamY - 0.19, gateZ + 0.052, 0, 0, -0.018));
     // Hanging iron lantern & spare leghold trap on the right gate post:
     const lxLan = rule.POST_X - 0.24, lyLan = yR + 1.72;
     trapperBar(parts, [rule.POST_X, yR + 1.82, gateZ + 0.08], [lxLan, lyLan + 0.12, gateZ + 0.22], 0.016, ironDark, 5);
@@ -604,6 +638,35 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
   // 5. Trapper's drying frame, stacked firewood, and thorny deadfall hedge flanking the outside of the fence
   //    and behind the cellar mound:
   const brambleSpots = [];
+  function bramble(bx,bz,size,seed,onCap=false) {
+    const y=(onCap ? Math.max(plantAtLocal(bx,bz),surfY(bx,bz)) : plantAtLocal(bx,bz))-.025;
+    const blades=[];
+    for (let cane=0; cane<3; cane++) {
+      const a=seed*1.7+cane*2.4, dx=Math.cos(a), dz=Math.sin(a);
+      const h=size*(.68+.09*cane);
+      const knee=[bx+dx*size*.12,y+h,bz+dz*size*.12];
+      const end=[bx+dx*size*.48,y+h*.76,bz+dz*size*.48];
+      trapperBar(parts,[bx,y,bz],knee,.016*size,barkPalette[cane],5);
+      trapperBar(parts,knee,end,.011*size,barkPalette[cane],5);
+      for (let k=0; k<4; k++) {
+        const t=.12+k*.26, sign=k%2 ? 1 : -1;
+        const x=knee[0]+(end[0]-knee[0])*t, z=knee[2]+(end[2]-knee[2])*t;
+        const by=knee[1]+(end[1]-knee[1])*t;
+        const lx=Math.cos(a+sign*.77), lz=Math.sin(a+sign*.77), len=size*(.22+.04*(3-k));
+        const leafBase=[x,by,z], mid=[x+lx*len*.5,by+len*.14,z+lz*len*.5];
+        const left=[mid[0]-lz*len*.25,mid[1]-len*.12,mid[2]+lx*len*.25];
+        const right=[mid[0]+lz*len*.25,mid[1]-len*.12,mid[2]-lx*len*.25];
+        const tip=[x+lx*len,by+len*.06,z+lz*len];
+        blades.push(...leafBase,...left,...mid,...mid,...left,...tip,...leafBase,...mid,...right,...mid,...tip,...right);
+      }
+      const thorn=[knee[0]+dx*.05,y+h+.065*size,knee[2]+dz*.05];
+      trapperBar(parts,knee,thorn,.008*size,woodPalette[0],3);
+    }
+    const leaves=new THREE.BufferGeometry();
+    leaves.setAttribute('position',new THREE.Float32BufferAttribute(blades,3));
+    leaves.computeVertexNormals();
+    parts.push(trapperPart(leaves,bramblePalette[Math.abs(seed)%bramblePalette.length],0,0,0));
+  }
   for (const sgn of [-1, 1]) {
     for (let lz = 0.96; lz <= gateZ - 0.75; lz += 0.64) {
       brambleSpots.push([sgn * (rule.POST_X + 0.42), lz]);
@@ -619,17 +682,7 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
   }
   for (let i = 0; i < brambleSpots.length; i++) {
     const [bx, bz] = brambleSpots[i];
-    const gy = groundAtLocal(bx, bz);
-    parts.push(trapperPart(new THREE.DodecahedronGeometry(0.38, 0), bramblePalette[i % bramblePalette.length],
-      bx, gy + 0.28, bz, (i * 0.7) % 3, (i * 1.3) % 6, 0, 1.18, 0.84, 1.12));
-    parts.push(trapperPart(new THREE.DodecahedronGeometry(0.28, 0), bramblePalette[(i + 2) % bramblePalette.length],
-      bx + ((i % 2) ? 0.14 : -0.14), gy + 0.56, bz + 0.08, 0.4, i * 1.9, 0.2, 1.08, 0.80, 1.05));
-    for (let c = 0; c < 2; c++) {
-      const a = i * 1.5 + c * 2.4;
-      const x2 = bx + Math.cos(a) * 0.36, z2 = bz + Math.sin(a) * 0.36;
-      trapperBar(parts, [bx, gy + 0.08, bz], [x2, gy + 0.72, z2], 0.018, barkPalette[0], 5);
-      parts.push(trapperPart(new THREE.ConeGeometry(0.012, 0.048, 4), 0xc2b490, (bx + x2) * 0.5, gy + 0.44, (bz + z2) * 0.5, 0.5, a, 0));
-    }
+    bramble(bx,bz,.65+.24*hash01(i,29),i);
   }
 
   // Solid colliders closing both fence sides (keeping prop.approach at (0, 1.44), (0, 0), and the cellar stairwell clear):
@@ -651,8 +704,7 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
       parts.push(trapperPart(postBox.clone(), woodPalette[1], lxFlank, gy + 0.64, lz));
       parts.push(trapperPart(postCap.clone(), barkPalette[0], lxFlank, gy + 1.29, lz));
       parts.push(trapperPart(postBand.clone(), ironDark, lxFlank, gy + 1.12, lz));
-      parts.push(trapperPart(new THREE.DodecahedronGeometry(0.42, 0), bramblePalette[Math.abs(Math.floor(lz * 2)) % bramblePalette.length],
-        lxFlank + sgn * 0.28, gy + 0.32, lz, 0.2, lz * 1.5, 0.1, 1.2, 0.85, 1.1));
+      bramble(lxFlank+sgn*.28,lz,.79,Math.floor(lz*2),true);
     }
     for (let lz = 0.42; lz > sealBackZ; lz -= 1.45) {
       const za = lz, zb = Math.max(sealBackZ, lz - 1.45);
@@ -671,8 +723,7 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
     const gy = groundAtLocal(lx, sealBackZ);
     parts.push(trapperPart(postBox.clone(), woodPalette[2], lx, gy + 0.64, sealBackZ));
     parts.push(trapperPart(postCap.clone(), barkPalette[0], lx, gy + 1.29, sealBackZ));
-    parts.push(trapperPart(new THREE.DodecahedronGeometry(0.44, 0), bramblePalette[Math.abs(Math.floor(lx * 3)) % bramblePalette.length],
-      lx, gy + 0.35, sealBackZ - 0.25, 0.1, lx * 2.1, 0.2, 1.15, 0.88, 1.1));
+    bramble(lx,sealBackZ-.25,.76,Math.floor(lx*3),true);
   }
   for (let lx = -sealHalfW; lx < sealHalfW - 0.01; lx += 1.40) {
     const xa = lx, xb = Math.min(sealHalfW, lx + 1.40);
@@ -1062,7 +1113,7 @@ export function buildTrapperYardParts(THREE, { groundAtLocal, surfAtLocal, doorP
  * stay shut until trapperPath.unlocked() and open into the underground iron-lined cellar where Okafor shelters.
  */
 export function setupTrapperMission(THREE, {
-  prop, camp, trapper, sampleHeight, sampleNaturalHeight, addSolid, mergeParts, scene,
+  prop, camp, trapper, sampleHeight, sampleNaturalHeight, plantHeight=sampleHeight, addSolid, mergeParts, scene,
   historyProps, foliage, windSwayables, clearFoliageInSquare, trees, rocks, worldSolids,
   platforms, excavateCellar, buildCellarTerrainCap, trapperPath,
   trapperPart, trapperBar, syncTrapperHorseshoes, rule = TRAPPER
@@ -1235,7 +1286,8 @@ export function setupTrapperMission(THREE, {
 
   // Build yard & cellar parts before excavateCellar so surface props sample natural clearing terrain:
   const built = buildTrapperYardParts(THREE, {
-    groundAtLocal, surfAtLocal: surfLocalY, doorPivotY, toWorld, cy0, trapperPart, trapperBar, rule
+    groundAtLocal, plantAtLocal:(lx,lz)=>{const w=toWorld(lx,lz);return plantHeight(w.x,w.z)-cy0;},
+    surfAtLocal: surfLocalY, doorPivotY, toWorld, cy0, trapperPart, trapperBar, rule
   });
   trapper.stones = built.stones;
   trapper.posts = built.posts;
@@ -1471,28 +1523,185 @@ export function setupTrapperMission(THREE, {
   };
   trapper.syncCellar(trapperPath?.unlocked?.() || false);
 
-  // Eight forged iron horseshoes (one per row, moved to the safe post on each run reset):
-  const hsMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.42, metalness: 0.68 });
+  // Eight bright hammered forged-iron horseshoes (one per row, moved to the safe post on each run reset):
+  // High contrast against the dark charred-oak backing plaques so every row reads cleanly in all lighting.
   const hsParts = [];
-  const shoeArc = trapperPart(new THREE.TorusGeometry(0.068, 0.016, 5, 14, Math.PI * 1.38), 0x454a4f, 0, 0, 0);
-  shoeArc.rotation.z = Math.PI * 0.81;   // U-shape horns pointing UP (luck held in)
+  const shoeArc = trapperPart(new THREE.TorusGeometry(0.078, 0.019, 6, 16, Math.PI * 1.40), 0xc8d0d6, 0, 0, 0);
+  shoeArc.rotation.z = Math.PI * 0.80;   // U-shape horns pointing UP (luck held in)
   hsParts.push(shoeArc);
   for (const sgn of [-1, 1]) {
-    hsParts.push(trapperPart(new THREE.BoxGeometry(0.026, 0.024, 0.022), 0x5c6268, sgn * 0.056, 0.044, 0));
-    hsParts.push(trapperPart(new THREE.BoxGeometry(0.012, 0.012, 0.014), 0x9aa0a6, sgn * 0.058, 0.018, 0.012));
-    hsParts.push(trapperPart(new THREE.BoxGeometry(0.012, 0.012, 0.014), 0x9aa0a6, sgn * 0.042, -0.036, 0.012));
+    hsParts.push(trapperPart(new THREE.BoxGeometry(0.030, 0.026, 0.024), 0xdce3e8, sgn * 0.064, 0.050, 0));
+    hsParts.push(trapperPart(new THREE.BoxGeometry(0.013, 0.013, 0.016), 0xeef3f7, sgn * 0.064, 0.020, 0.014));
+    hsParts.push(trapperPart(new THREE.BoxGeometry(0.013, 0.013, 0.016), 0xeef3f7, sgn * 0.048, -0.042, 0.014));
   }
-  const hsProto = mergeParts(hsParts, hsMat, { castShadow: true, receiveShadow: true });
+  const hsBaseMat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.28, metalness: 0.78 });
+  const hsProto = mergeParts(hsParts, hsBaseMat, { castShadow: true, receiveShadow: true });
   for (const p of hsParts) p.geometry.dispose();
   trapper.horseshoes = [];
   for (let r = 0; r < rule.ROWS; r++) {
-    const hs = new THREE.Mesh(hsProto.geometry, hsMat);
+    const mat = new THREE.MeshStandardMaterial({ vertexColors: true, roughness: 0.28, metalness: 0.78, emissive: 0x000000, emissiveIntensity: 0 });
+    const hs = new THREE.Mesh(hsProto.geometry, mat);
     hs.name = 'trapper-horseshoe';
     hs.castShadow = true; hs.receiveShadow = true;
+    hs.userData.glint = 0;
     group.add(hs);
     trapper.horseshoes.push(hs);
   }
   syncTrapperHorseshoes();
+
+  // Gate arch storytelling: weathered timber sign ("KEEP OUT — WALK THE IRON"), glowing gate oil lantern,
+  // hanging iron horseshoe wind-chimes, and Okafor's cellar storytelling (chalk tally wall + glowing cellar lantern + medic pouch).
+  const gateZ = rule.BED_Z_MAX + 0.08;
+  const yGateL = groundAtLocal(-rule.POST_X, gateZ);
+  const yGateR = groundAtLocal(rule.POST_X, gateZ);
+  const beamY = Math.max(yGateL, yGateR) + 2.12;
+
+  // Glowing oil lantern mantles (gate post & cellar crate table) for warm flicker:
+  const gateLanternMat = new THREE.MeshStandardMaterial({
+    color: 0xffc86a, emissive: 0xff9b2f, emissiveIntensity: 1.5, roughness: 0.35, metalness: 0.05
+  });
+  const gateLanternGlobe = new THREE.Mesh(new THREE.CylinderGeometry(0.047, 0.047, 0.095, 8), gateLanternMat);
+  gateLanternGlobe.name = 'trapper-gate-lantern-glow';
+  gateLanternGlobe.position.set(rule.POST_X - 0.24, yGateR + 1.72, gateZ + 0.22);
+  group.add(gateLanternGlobe);
+  trapper.gateLanternMat = gateLanternMat;
+
+  const cellarLanternMat = new THREE.MeshStandardMaterial({
+    color: 0xffd17a, emissive: 0xffa63d, emissiveIntensity: 1.8, roughness: 0.3, metalness: 0.05
+  });
+  const cellarLanternGlobe = new THREE.Mesh(new THREE.CylinderGeometry(0.059, 0.068, 0.142, 8), cellarLanternMat);
+  cellarLanternGlobe.name = 'trapper-cellar-lantern-glow';
+  cellarLanternGlobe.position.set(-1.12, rule.CELLAR_FLOOR_Y + 0.60, -2.75);
+  group.add(cellarLanternGlobe);
+  trapper.cellarLanternMat = cellarLanternMat;
+
+  // Three forged-iron horseshoe wind-chimes hanging under the left gate beam (animated in updateTrapper):
+  const chimeWireMat = new THREE.MeshStandardMaterial({ color: 0x3b3e42, roughness: 0.6, metalness: 0.7 });
+  const chimeShoeMat = new THREE.MeshStandardMaterial({ color: 0xb6bec4, roughness: 0.34, metalness: 0.78 });
+  trapper.chimes = [];
+  for (let c = 0; c < 3; c++) {
+    const piv = new THREE.Group();
+    const len = 0.28 + (c % 2) * 0.08 + c * 0.03;
+    piv.position.set(-1.16 + c * 0.18, beamY - 0.05, gateZ + 0.02);
+    const wire = new THREE.Mesh(new THREE.CylinderGeometry(0.005, 0.005, len, 4), chimeWireMat);
+    wire.position.set(0, -len * 0.5, 0);
+    const shoe = new THREE.Mesh(new THREE.TorusGeometry(0.056, 0.013, 5, 12, Math.PI * 1.38), chimeShoeMat);
+    shoe.position.set(0, -len - 0.04, 0);
+    shoe.rotation.set(0, c * 0.45, Math.PI * 0.81);
+    piv.add(wire, shoe);
+    piv.userData.phase = c * 1.85;
+    group.add(piv);
+    trapper.chimes.push(piv);
+  }
+
+  // PGB Medic field pouch on Okafor's cellar crate table:
+  const pouchMat = new THREE.MeshStandardMaterial({ color: 0x4b563c, roughness: 0.88, metalness: 0.04 });
+  const crossMat = new THREE.MeshStandardMaterial({ color: 0x9b2d26, roughness: 0.78, metalness: 0.02 });
+  const pouch = new THREE.Mesh(new THREE.BoxGeometry(0.20, 0.11, 0.14), pouchMat);
+  pouch.position.set(-1.23, rule.CELLAR_FLOOR_Y + 0.54, -2.86);
+  pouch.rotation.set(0, 0.36, 0);
+  const cBar1 = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.008, 0.022), crossMat);
+  cBar1.position.set(0, 0.058, 0);
+  const cBar2 = new THREE.Mesh(new THREE.BoxGeometry(0.022, 0.008, 0.07), crossMat);
+  cBar2.position.set(0, 0.058, 0);
+  pouch.add(cBar1, cBar2);
+  group.add(pouch);
+
+  if (typeof document !== 'undefined' && typeof THREE.CanvasTexture === 'function') {
+    // 1. Weathered timber warning board mounted over the yard gate: "KEEP OUT — WALK THE IRON"
+    const signCanvas = document.createElement('canvas');
+    signCanvas.width = 512; signCanvas.height = 96;
+    const sctx = signCanvas.getContext('2d');
+    if (sctx) {
+      sctx.fillStyle = '#33261b';
+      sctx.fillRect(0, 0, 512, 96);
+      for (let i = 0; i < 36; i++) {
+        sctx.fillStyle = i % 2 ? 'rgba(18,12,8,0.28)' : 'rgba(98,74,48,0.16)';
+        sctx.fillRect(0, i * 2.7, 512, 1.5);
+      }
+      sctx.strokeStyle = '#1b140e';
+      sctx.lineWidth = 4;
+      sctx.strokeRect(4, 4, 504, 88);
+      // Hand-painted iron horseshoe icons flanking the text with generous margin:
+      for (const hx of [34, 478]) {
+        sctx.strokeStyle = '#d4d9dc';
+        sctx.lineWidth = 4.5;
+        sctx.beginPath();
+        sctx.arc(hx, 48, 15, Math.PI * 0.22, Math.PI * 0.78, true);
+        sctx.stroke();
+        sctx.fillStyle = '#b4bcc2';
+        sctx.fillRect(hx - 14, 30, 5, 6);
+        sctx.fillRect(hx + 9, 30, 5, 6);
+      }
+      sctx.fillStyle = '#e5dac2';
+      sctx.font = 'bold 24px "Courier New", monospace';
+      sctx.textAlign = 'center';
+      sctx.textBaseline = 'middle';
+      sctx.fillText('KEEP OUT \u2014 WALK THE IRON', 256, 40);
+      sctx.fillStyle = '#b89f78';
+      sctx.font = 'bold 13px "Courier New", monospace';
+      sctx.fillText('FOLLOW THE HORSESHOES \u00B7 MIND THE LEAVES', 256, 69);
+      // Rust nail heads in corners:
+      sctx.fillStyle = '#5e432f';
+      for (const [nx, ny] of [[14, 14], [498, 14], [14, 82], [498, 82]]) {
+        sctx.beginPath(); sctx.arc(nx, ny, 4, 0, Math.PI * 2); sctx.fill();
+      }
+      const signTex = new THREE.CanvasTexture(signCanvas);
+      if ('colorSpace' in signTex && THREE.SRGBColorSpace) signTex.colorSpace = THREE.SRGBColorSpace;
+      const signMat = new THREE.MeshStandardMaterial({ map: signTex, roughness: 0.88, metalness: 0.06 });
+      const signPlane = new THREE.Mesh(new THREE.PlaneGeometry(1.42, 0.22), signMat);
+      signPlane.name = 'trapper-gate-sign';
+      signPlane.position.set(0, beamY - 0.19, gateZ + 0.080);
+      signPlane.rotation.set(0, 0, -0.018);
+      group.add(signPlane);
+    }
+
+    // 2. Okafor's 21-day chalk tally scratched onto the iron back wall of the cellar:
+    const chalkCanvas = document.createElement('canvas');
+    chalkCanvas.width = 384; chalkCanvas.height = 192;
+    const cctx = chalkCanvas.getContext('2d');
+    if (cctx) {
+      cctx.fillStyle = '#2c312e';
+      cctx.fillRect(0, 0, 384, 192);
+      cctx.strokeStyle = 'rgba(232,230,220,0.82)';
+      cctx.lineCap = 'round';
+      // 4 crossed 5-day bundles + 1 stroke = 21 days ("three weeks")
+      for (let g = 0; g < 4; g++) {
+        const gx = 32 + g * 74;
+        cctx.lineWidth = 3.2;
+        for (let k = 0; k < 4; k++) {
+          cctx.beginPath();
+          cctx.moveTo(gx + k * 12, 26);
+          cctx.lineTo(gx + k * 12 - 2, 78);
+          cctx.stroke();
+        }
+        cctx.lineWidth = 3.5;
+        cctx.beginPath();
+        cctx.moveTo(gx - 6, 68);
+        cctx.lineTo(gx + 44, 34);
+        cctx.stroke();
+      }
+      // Day 21:
+      cctx.lineWidth = 3.2;
+      cctx.beginPath(); cctx.moveTo(334, 28); cctx.lineTo(332, 78); cctx.stroke();
+      cctx.fillStyle = 'rgba(235,232,218,0.86)';
+      cctx.font = 'bold 21px "Courier New", monospace';
+      cctx.fillText('IRON HOLDS.', 28, 122);
+      cctx.font = '18px "Courier New", monospace';
+      cctx.fillStyle = 'rgba(218,214,198,0.78)';
+      cctx.fillText('THEY WALK RIGHT OVER.', 28, 152);
+      cctx.font = '14px "Courier New", monospace';
+      cctx.fillStyle = 'rgba(182,178,162,0.72)';
+      cctx.fillText('\u2014 CPL. OKAFOR  (3 WKS)', 28, 178);
+      const chalkTex = new THREE.CanvasTexture(chalkCanvas);
+      if ('colorSpace' in chalkTex && THREE.SRGBColorSpace) chalkTex.colorSpace = THREE.SRGBColorSpace;
+      const chalkMat = new THREE.MeshStandardMaterial({ map: chalkTex, roughness: 0.92, metalness: 0.14 });
+      const chalkBoard = new THREE.Mesh(new THREE.PlaneGeometry(0.92, 0.46), chalkMat);
+      chalkBoard.name = 'trapper-cellar-chalk-tally';
+      chalkBoard.position.set(0.68, rule.CELLAR_FLOOR_Y + 1.32, -4.98);
+      group.add(chalkBoard);
+    }
+  }
 
   const sprungGroup = new THREE.Group();
   sprungGroup.name = 'trapper-sprung-traps';

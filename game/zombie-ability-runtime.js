@@ -1,8 +1,8 @@
 // GP-179: bounded special attacks. The host supplies its established world and damage contracts.
-import {ABILITY_CONFIG,createRangedAbility,stepRangedAbility,createAcidTrail,sampleAcidTrail,solveBallisticLaunch,stepBallistic,sweptSphereHit,colossusImpactDamage} from './zombie-abilities.js';
+import {ABILITY_CONFIG,createRangedAbility,stepRangedAbility,createAcidTrail,sampleAcidTrail,solveBallisticLaunch,stepBallistic,sweptSphereHit,colossusImpactDamage,colossusThrowFlight,colossusAimLock} from './zombie-abilities.js';
 import {makeAcidTexture,acidJoin,acidTrailDissolveNode} from './spitter-acid.js'; // GP-19870
 import {createAbilityCollision} from './zombie-ability-collision.js';
-import {updateZombieAbilityVisuals,getZombieAbilityLaunch} from './zombie-ability-visuals.js';
+import {updateZombieAbilityVisuals,getZombieAbilityLaunch,getZombieAbilityRock,getZombieAbilityRockRadius} from './zombie-ability-visuals.js';
 
 export function createZombieAbilityRuntime(env){
   const T=env.THREE,scene=env.scene,collision=createAbilityCollision(env);
@@ -11,6 +11,7 @@ export function createZombieAbilityRuntime(env){
   const trailCorners=[[-.8,-.8],[.8,-.8],[.8,.8],[-.8,-.8],[.8,.8],[-.8,.8]];
   let hurtAt=new WeakMap(),states=new WeakMap();
   const launch=new T.Vector3(),from=new T.Vector3(),aim=new T.Vector3();
+  const launchRotation=new T.Quaternion();
   const counts={fireballs:0,stones:0,trailDrops:0,directHits:0,blocked:0,acidHits:0};
   let clock=0,domain=null,assets=null,epoch=0,trailBatch=null;
   let demonTurns=[],nextDemonCast=0; // GP-181: ready demons take fair, spaced turns.
@@ -18,7 +19,7 @@ export function createZombieAbilityRuntime(env){
   function resources(){
     if(assets)return assets;
     const map=makeAcidTexture(T,'trail');
-    assets={stoneGeo:new T.DodecahedronGeometry(.8,1),stoneMat:new T.MeshStandardMaterial({color:0x786e61,roughness:.96}),fireGeo:new T.SphereGeometry(.27,10,6),fireMat:new T.MeshBasicMaterial({color:0xffcf54}),haloGeo:new T.SphereGeometry(.4,8,5),haloMat:new T.MeshBasicMaterial({color:0xff5b0c,transparent:true,opacity:.48,depthWrite:false,blending:T.AdditiveBlending}),map};
+    assets={fireGeo:new T.SphereGeometry(.27,10,6),fireMat:new T.MeshBasicMaterial({color:0xffcf54}),haloGeo:new T.SphereGeometry(.4,8,5),haloMat:new T.MeshBasicMaterial({color:0xff5b0c,transparent:true,opacity:.48,depthWrite:false,blending:T.AdditiveBlending}),map};
     return assets;
   }
   function acidBatch(){
@@ -58,7 +59,10 @@ export function createZombieAbilityRuntime(env){
   function shotMesh(kind){
     let mesh=shotPools[kind].pop();if(mesh){mesh.visible=true;return mesh;}
     const a=resources();mesh=new T.Group();mesh.name='zombie-'+kind;
-    mesh.add(new T.Mesh(kind==='stone'?a.stoneGeo:a.fireGeo,kind==='stone'?a.stoneMat:a.fireMat));
+    const rock=kind==='stone'?getZombieAbilityRock(T):null; // D-244: the held rock's own unit-radius shape (shared, never disposed)
+    const body=new T.Mesh(rock?rock.geometry:a.fireGeo,rock?rock.material:a.fireMat);body.name=kind==='stone'?'zombie-stone-rock':'';
+    if(rock)body.scale.setScalar(ABILITY_CONFIG.colossus.throw.radius);
+    mesh.add(body);
     if(kind==='fireball'){const halo=new T.Mesh(a.haloGeo,a.haloMat);mesh.add(halo);}
     mesh.userData.enemyAbility=true;scene.add(mesh);return mesh;
   }
@@ -110,13 +114,20 @@ export function createZombieAbilityRuntime(env){
   function fire(z,s){
     const kind=z.typeKey==='demon'?'fireball':'stone';
     if(shots.length>=32)return;
-    if(!getZombieAbilityLaunch(z,kind,launch))launch.copy(z.mesh.position).add(new T.Vector3(0,z.hitH*.7,0));
+    launchRotation.identity();
+    if(!getZombieAbilityLaunch(z,kind,launch,launchRotation))launch.copy(z.mesh.position).add(new T.Vector3(0,z.hitH*.7,0));
     const distance=Math.hypot(s.aim.x-launch.x,s.aim.z-launch.z);
-    const flight=kind==='stone'?1.0+distance*.018:.75+distance*.018;
-    const gravity=kind==='stone'?8:3;
+    const pitch=ABILITY_CONFIG.colossus.throw; // D-244: fast flat pitch (was a 1.0 s + 18 ms/m lob, gravity 8)
+    const flight=kind==='stone'?colossusThrowFlight(distance):.75+distance*.018;
+    const gravity=kind==='stone'?pitch.gravity:3;
     const velocity=solveBallisticLaunch(launch,s.aim,flight,gravity),mesh=shotMesh(kind);
     mesh.position.copy(launch);
-    const shot={kind,owner:z,mesh,x:launch.x,y:launch.y,z:launch.z,...velocity,gravity,age:0,radius:kind==='stone'?.8:.27,trail:0};
+    const rockR=kind==='stone'?(getZombieAbilityRockRadius(z)||pitch.radius):.27;
+    if(kind==='stone'){
+      mesh.children[0].scale.setScalar(rockR);
+      mesh.quaternion.copy(launchRotation);
+    }
+    const shot={kind,owner:z,mesh,x:launch.x,y:launch.y,z:launch.z,...velocity,gravity,age:0,radius:rockR,trail:0};
     shots.push(shot);counts[kind==='stone'?'stones':'fireballs']++;env.sound?.(z,kind==='stone'?'throw':'cast');
   }
   // CL-171: each drop is a segment of one ribbon, from the spitter's last drop to this one (a short one, pointing the way
@@ -172,6 +183,8 @@ export function createZombieAbilityRuntime(env){
     const hands=z.typeKey==='colossus'?!parts.armL&&!parts.armR:!parts.armL||!parts.armR;
     const actionAllowed=allowed&&hands&&!(z.chargeT>0||z.chargeWind>0||z.slamWind>0||z.attackWindup>0||z.swingT>0);
     s.lineT-=dt;
+    if(z.typeKey==='colossus'&&dt>0){const lp=s.tp;if(lp&&lp.who===target&&Math.hypot(position.x-lp.x,position.z-lp.z)<3){const k=Math.min(1,dt/.1),vx=(position.x-lp.x)/dt,vz=(position.z-lp.z)/dt;s.tv=s.tv||{x:0,z:0};s.tv.x+=(vx-s.tv.x)*k;s.tv.z+=(vz-s.tv.z)*k;}else s.tv={x:0,z:0};
+      s.tp={who:target,x:position.x,z:position.z};} // D-244: for the pitch's lead
     if(s.lineT<=0&&(a.stage==='windup'||d<=ABILITY_CONFIG[z.typeKey].maxDistance)){
       s.lineT=.2;from.copy(z.mesh.position);from.y+=(z.hitH||2)*.65;
       aim.copy(position);aim.y+=.9;
@@ -191,7 +204,14 @@ export function createZombieAbilityRuntime(env){
     if(event.started&&z.typeKey==='demon'){
       demonTurns.shift();nextDemonCast=clock+ABILITY_CONFIG.demon.castSpacing;
     }
-    if(event.started){s.aim={x:position.x,y:position.y+.9,z:position.z};s.slot=a.shots%3;env.sound?.(z,'windup');if(!live(token))return;}
+    // Lock earlier on nearby players to compensate for the shorter incoming flight.
+    if(!event.started&&z.typeKey==='colossus'&&a.stage==='windup'&&s.aim&&!s.locked){const P=ABILITY_CONFIG.colossus.throw;s.aim.x=position.x;s.aim.y=position.y+.9;s.aim.z=position.z;
+      // At the lock: lead by P.lead x his velocity (measured from his last frames) x the time left until the rock arrives.
+      if(a.remaining<=colossusAimLock(d)){s.locked=true;const v=s.tv,sp=v?Math.hypot(v.x,v.z):0;if(sp>1e-3){const k=Math.min(1,P.leadMaxSpeed/sp),lf=launch.copy(z.mesh.position);
+        // time left = the wind-up's rest + the flight to the led point (which is further): three fixed-point steps settle it.
+        let t=a.remaining;for(let n=0;n<3;n++)t=a.remaining+colossusThrowFlight(Math.hypot(position.x+v.x*k*P.lead*t-lf.x,position.z+v.z*k*P.lead*t-lf.z));
+        s.aim.x+=v.x*k*P.lead*t;s.aim.z+=v.z*k*P.lead*t;}}}
+    if(event.started){s.aim={x:position.x,y:position.y+.9,z:position.z};s.locked=false;s.slot=a.shots%3;env.sound?.(z,'windup');if(!live(token))return;}
     z.abilityBusy=a.stage==='windup'||a.stage==='recovery';
     if(z.abilityBusy){env.preparePose?.(z);if(!live(token))return;}
     if(z.abilityBusy&&s.aim)z.mesh.rotation.y=Math.atan2(s.aim.x-z.mesh.position.x,s.aim.z-z.mesh.position.z);
@@ -227,6 +247,7 @@ export function createZombieAbilityRuntime(env){
       if(ended){releaseShot(i);continue;}
       s.mesh.position.set(s.x,s.y,s.z);s.mesh.rotation.x+=dt*2.4;s.mesh.rotation.z+=dt*1.7;
       if(s.kind==='fireball'){s.trail-=dt;if(s.trail<=0){s.trail=.075;env.fireMote?.(s);if(!live(token))return;}}
+      else if(s.kind==='stone'&&env.stoneMote){s.trail-=dt;if(s.trail<=0){s.trail=.03;env.stoneMote(s);if(!live(token))return;}} // D-244 (Claude 10): the pitch's dust trail
     }
   }
   function updateTrails(dt,token){

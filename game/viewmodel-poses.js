@@ -20,6 +20,8 @@ export const VM = Object.freeze({
   // sees it) and the palm's facing in the saw's own axes
   sawStart: { elbow: [0.16, -0.26, 0.24], palm: [-0.3, -0.9, -0.3] },
   boltElbowR: [0.14, -0.24, 0.22],   // CL-326: the firing elbow's hint working a bolt, from the knob (as the eye sees it: out, down, back)   // CL-326: the support elbow's hint during a reload, from the hold's wrist (as the eye sees it: out, down, back)
+  // Release the fitted grip, then sweep outside the stock. The raised knob runs beside the scope.
+  boltReach: { arc: [-.021, -.096, -.003], peel: [.088, -.037, -.032], liftClearance: .019, release: .094 },
   wristMax: 0.87,     // radians (50 degrees; the spec's 35 left the forearms pointing at the eye, AG-168 v2): the most a wrist bends between the forearm and the hand
   mirror: true,       // AG-168: his left-handed hold (D-75) shown mirrored, a traditional right-handed view (J12)
   twistMax: 0.6,      // radians: how far a hand may turn round the grip in its fist toward its elbow (AG-168: the forearms came at the eye)
@@ -69,7 +71,7 @@ export const VM = Object.freeze({
     // pistol or a Wasp drops out of the view to the pouch (the mag change happens below the frame, as Warzone's pair
     // does); a revolver stays in the view, muzzle up and rolled in, so its cylinder (GB-300) swings out to the eye.
     dipBy: {
-      pistol: { down: 0.42, back: 0.10, out: 0.03, pitch: 0.30, roll: 0.5 },
+      pistol: { down: 0.42, back: 0.10, out: 0.03, pitch: 0.30, roll: 0.5, slideTravel: 0.07 },
       uzi: { down: 0.54, back: 0.10, out: 0.03, pitch: 0.18, roll: 0.45 },   // long: a muzzle sliver showed at the bottom edge at .46/.28
       revolver: { down: 0.10, back: 0.02, out: 0, pitch: 0.45, roll: 0.95 }
     }
@@ -111,7 +113,7 @@ export const VM_POSES = Object.freeze({
     // AR-pattern charging handle does not ride the carrier (it was kicked 0.025 each shot), so it stays put
     action: { bolt: { travel: 'port', t: [0.028, 0.034, 0.085] } },
     elbows: { r: [0.33, -0.61, -0.10], l: [-0.36, -0.95, -0.26] },
-    elbowRel: { r: [0.218, -0.083, 0.31], l: [-0.16, -0.26, 0.20] },   // CL-325 f: the wrists straighter, each elbow toward its hand's line (was r [0.16, -0.26, 0.24])
+    elbowRel: { r: [0.218, -0.083, 0.31], l: [-.2235, -.2619, .144] },
     reload: 'carbine'
   },
   ak: {
@@ -121,7 +123,7 @@ export const VM_POSES = Object.freeze({
     // CE-1 (GT-20075): the AK-pattern handle is the carrier's: both go back the port's 0.066 and home inside the 0.11 s interval
     action: { bolt: { travel: 'port', t: [0.03, 0.036, 0.092] }, work: { travel: 0.066, t: [0.03, 0.036, 0.092] } },
     elbows: { r: [0.35, -0.63, -0.12], l: [-0.40, -1.10, -0.27] },
-    elbowRel: { r: [0.22, -0.086, 0.308], l: [-0.16, -0.26, 0.20] },   // CL-325 f: the wrists straighter, each elbow toward its hand's line (was r [0.16, -0.26, 0.24])
+    elbowRel: { r: [0.22, -0.086, 0.308], l: [-0.26281, -0.27441, 0.10945] },   // CL-325 f: the wrists straighter, each elbow toward its hand's line (was r [0.16, -0.26, 0.24])
     reload: 'ak'
   },
   uzi: {
@@ -140,7 +142,7 @@ export const VM_POSES = Object.freeze({
     ads: { rear: 0.26 },
     kick: { back: 0.075, up: 0.19, side: 0.035, ads: 0.58 },
     elbows: { r: [0.36, -0.64, -0.10], l: [-0.40, -1.02, -0.24] },
-    elbowRel: { r: [0.215, -0.056, 0.318], l: [-0.16, -0.26, 0.20] },   // CL-325 f: the wrists straighter, each elbow toward its hand's line (was r [0.16, -0.26, 0.24])
+    elbowRel: { r: [0.215, -0.056, 0.318], l: [-0.2693, -0.2126, 0.0684] },   // CL-325 f: the wrists straighter, each elbow toward its hand's line (was r [0.16, -0.26, 0.24])
     reload: 'tube'
   },
   aa12: {
@@ -226,27 +228,42 @@ const VM_STAGE2_RELOADS = Object.freeze({
     // already turned palm to the gun and slaps the catch's paddle with the heel of the palm (fingers up, the little-finger
     // edge in, the thumb clear of the upper), then goes out to the left and forward round the well to the fore end. (It
     // turned 180 deg in .05 u with the back of the hand on the paddle: the glove 12.8-14.9 mm in the gun mid-turn.)
-    hand: [[0, 'fore', 'fore'], [.045, 'below', 'open'], [.08, 'well', 'mag'], [.19, 'below', 'mag'],
+    hand: [[0, 'fore', 'fore'], [.019, 'depart', 'fore'], [.045, 'below', 'open'], [.08, 'well', 'mag'], [.19, 'below', 'mag'],
       [.34, 'pouch', 'mag'], [.38, 'pouch', 'pouch'], [.52, 'below', 'mag'],
       [.62, 'well', 'mag'], [.66, 'well', 'mag'], [.672, 'drop', 'open'], [.69, 'low', 'slap'], [.71, 'out', 'slap'],
-      [.76, 'work', 'slap'], [.82, 'work', 'slap'], [.85, 'clear', 'slap'], [.89, 'fore', 'fore'], [1, 'fore', 'fore']],
+      [.76, 'work', 'slap'], [.82, 'work', 'slap'], [.85, 'clear', 'slap'], [.874, 'depart', 'fore'], [.89, 'fore', 'fore'], [1, 'fore', 'fore']],
     mag: { grab: .12, swapOut: .335, swapIn: .385, seat: .62 },
+    // CD-22 (Jerry D-237 #6): the support elbow low, out to the left and back toward him as the hand leaves the hold (the path
+    // fell back to VM.reloadElbowL, 34 cm straight under the fore hold: the forearm stood up through the view, the elbow under
+    // and in front of the hand at the slap, and the wrist bent 32 times past its limit at the seat)
+    elbowL: [-0.165, -0.417, 0.435],
+    // CD-22: 'fore' is the hold as it stands (VM_FIT's support frame and fingers, its elbow), as the revolver's (CD-14 #8): the
+    // way back from the slap lifted the elbow over the hand and bent the wrist 29 times past its limit at .87-.89
+    foreHold: true,
     // CE-10 (J151 note 17, Jerry: "GW-4: the arm clips throughout the reload"): the palm 20 gun mm under the magazine's foot
     // and a looser hold round it (its thumb up the side), so the hand carries the magazine instead of going through it (6-12 mm)
     // CE-13 (J153 11): 'slap', the hand open and flat for the heel strike, the thumb along the palm's plane
-    poses: { mag: { f: [0.55, 0.6, 0.65, 0.7], t: [0.2, 0.3, 0.1] }, slap: { f: [0.1, 0.08, 0.05, 0], t: [0, 0, 0.05] } },
-    places: { well: { z: [0, .94, .34], y: [-.55, -.34, -.76], off: [0, -0.02, 0] }, below: { drop: .14 },
+    // CD-22 (Jerry D-237 #6): 'slap' with the thumb lifted off the gun and in beside the index, the fingers closed up (the
+    // thumb stood out in a V; turned flat along the lower it went 3.6 mm into the upper and up into the sight's housing)
+    poses: { mag: { f: [0.55, 0.6, 0.65, 0.7], t: [0.2, 0.3, 0.1] }, slap: { f: [0.1, 0.08, 0.05, 0], t: [-0.45, -0.2, 0.05], s: [-0.04, 0, 0.03, 0.08] } },
+    places: { depart: { slide: [.033, -.116, .057] },
+      well: { z: [0, .94, .34], y: [-.55, -.34, -.76], off: [-.0475, -.009, .0505] }, below: { drop: .14 },
+      // CD-22 (Jerry D-237 #6, 21 Nov: "Weird arm bend and elbow thing whenever slapping the bolt on M4", Claude 1 on Claude 5's
+      // loan): low, out, work and clear turned so the hand lies flat along the lower's left side (z straight into it, not turned
+      // back), the fingers forward and up along it (y), so the forearm comes from the lower left and the wrist stays near
+      // straight (0.31-0.45 rad, was 0.44-0.59 and bent sideways 0.43-0.55, 0.91 of its limit; was z [1, .15, -.40], y [-.25, -.9, -.3])
       // CE-13 (J153 11): the palm to the gun (z), the fingers up and a little back (y), the little-finger edge turned in so
       // the heel leads and the thumb stays off the upper; the palm 0.8-1.4 mm off the paddle, nothing of the glove more
       // than 0.7 mm in the gun from the seat to .85 (was z [-1, .05, .1]: the back of the hand on the paddle)
-      work: { at: [-.052, -.008, .125], z: [1, .15, -.40], y: [-.25, -.9, -.3] },   // CL-310: the bolt catch on the slim lower
-      out: { at: [-.09, -.028, .115], z: [1, .15, -.40], y: [-.25, -.9, -.3] },   // beside the magazine well's left, 4 cm off the paddle: the slap's wind-up
+      work: { at: [-.06, -.008, .125], z: [1, .12, -.05], y: [.036, -.628, -.778] },   // CL-310: the bolt catch on the slim lower
+      out: { at: [-.09, -.028, .115], z: [1, .12, -.05], y: [.036, -.628, -.778] },   // beside the magazine well's left, 4 cm off the paddle: the slap's wind-up
       drop: { at: [-.035, -.338, .074], z: [0, .94, .34], y: [-.55, -.34, -.76] },   // CE-13: off the seated magazine's foot, down and left (it turned through the magazine, 6-12 mm)
-      low: { at: [-.075, -.16, .09], z: [1, .15, -.40], y: [-.25, -.9, -.3] },   // CE-13: up beside the magazine, already turned
-      clear: { at: [-.10, -.07, .26], z: [1, .15, -.40], y: [-.25, -.9, -.3] },   // CE-13: off the paddle out to the left and forward, round the well to the fore end (it went through the lower, 7-9 mm)
+      low: { at: [-.075, -.16, .09], z: [1, .12, -.05], y: [.036, -.628, -.778] },   // CE-13: up beside the magazine, already turned
+      clear: { at: [-.10, -.07, .26], z: [1, .12, -.05], y: [.036, -.628, -.778] },   // CE-13: off the paddle out to the left and forward, round the well to the fore end (it went through the lower, 7-9 mm)
       pouch: { at: [-.29, -.51, -.32], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
   ak: {
+    tacticalReturn: [[.956, 'tacticalPeel', 'fore'], [.984, 'depart', 'fore']],
     gun: [[0, null], [.12, { pos: [-.065, .065, .012], rot: [.15, .25, -.32] }],
       [.34, { pos: [-.07, .07, .01], rot: [.18, .26, -.36] }],
       [.50, { pos: [-.07, .07, .01], rot: [.18, .26, -.36] }],
@@ -259,24 +276,50 @@ const VM_STAGE2_RELOADS = Object.freeze({
     // CL-322 (the AK manual, GP-20056's lugs): out, the catch pressed, the magazine rocks forward on its front lug at the
     // well (.12-.17) and only then comes down; in, it arrives tilted with the front lug in the well (.555) and rocks back
     // on it until the rear lug catches (.585-.64). The palm turns about the lug with it (rock.pivot, mag-local).
-    hand: [[0, 'fore', 'fore'], [.05, 'below', 'open'], [.10, 'well', 'mag'], [.17, 'well', 'mag'], [.22, 'below', 'mag'],   // CE-10: [.05] up from under the magazine, not through it
-      [.34, 'pouch', 'mag'], [.38, 'pouch', 'pouch'], [.50, 'below', 'mag'],
-      [.555, 'well', 'mag'], [.64, 'well', 'mag'], [.67, 'well', 'cup'], [.76, 'work', 'pinch'],
-      [.83, 'work', 'pinch'], [.90, 'fore', 'fore'], [1, 'fore', 'fore']],
+    hand: [[0, 'fore', 'fore'], [.012, 'depart', 'fore'], [.036, 'peel', 'fore'], [.088, 'magClear', 'open'],
+      [.115, 'well', 'mag'], [.17, 'well', 'mag'], [.22, 'below', 'mag'], [.34, 'pouch', 'mag'],
+      [.357, 'pouch', 'pouch'], [.385, 'pouch', 'mag'], [.5, 'below', 'mag'], [.555, 'well', 'mag'],
+      [.64, 'well', 'mag'], [.67, 'magClear', 'open'], [.69, 'llow', 'open'], [.715, 'lside', 'flat'],
+      [.728, 'ltop', 'flat'], [.74, 'top', 'flat'], [.76, 'work', 'hook'], [.83, 'work', 'hook'],
+      [.843, 'top', 'flat'], [.858, 'ltop', 'flat'], [.92, 'lfwd', 'flat'], [.954, 'lhold', 'fore'],
+      [.966, 'peel', 'fore'], [.984, 'depart', 'fore'], [.999, 'fore', 'fore'], [1, 'fore', 'fore']],
     mag: { grab: .12, swapOut: .335, swapIn: .385, seat: .64 },
-    elbowL: [-0.28, -0.30, 0.04],   // CE-3: the support elbow low and out to the left as the hand leaves the hold
+    elbowL: [-0.28, -0.30, 0.04],
+    rackWay: ['llow', 'lside', 'ltop', 'top', 'lfwd', 'lhold'],   // CD-23: on the way to the knob and back only (a reload with rounds left skips them)
+    foreHold: true,   // CD-23: 'fore' is the hold as it stands (VM_FIT's support frame, its fingers), as the M4's (CD-22)   // CE-3: the support elbow low and out to the left as the hand leaves the hold
     rock: { out: [.12, .17], in: [.585, .64], angle: .27, pivot: [0, .012, .066] },
     rack: [.76, .80, .83, .045],
     // CE-10 (J151 notes 23, 28: the forearm through the KR-7's magazine, the arm through its reload): the palm under the
-    // magazine's foot and to its left, a looser hold round it (was 9-12 mm of thumb and palm inside it)
-    poses: { mag: { f: [0.55, 0.6, 0.65, 0.7], t: [0.2, 0.3, 0.1] } },
-    places: { well: { z: [.15, .90, .41], y: [-.60, -.28, -.75], off: [-0.006, -0.018, 0] }, below: { drop: .16 },
-      work: { at: [.041, .02, .13], z: [.65, .25, -.72], y: [-.7, .15, -.4] },   // CL-311: the knob on the slim receiver
+    // magazine's lower body in the fingers, thumb on the opposite edge. magClear approaches and releases from its front left.
+    // CD-23: 'flat' (the hand open, the thumb in beside the index, off the gun) round the outside; 'hook' (the fingers curled
+    // round the knob from above, the thumb in) on it
+    poses: { mag: { f: [0.7295, 0.7342, 0.8444, 1.1028], t: [0.3874, 0.04, 0.2537] }, flat: { f: [0.15, 0.15, 0.15, 0.15], t: [-0.45, -0.2, 0.05], s: [-0.04, 0, 0.03, 0.08] },
+      hook: { f: [0.95, 1.05, 1.05, 1.0], t: [-0.45, -0.2, 0.05] } },
+    places: { depart: { slide: [.01, -.0006, .1017] },
+      tacticalPeel: { slide: [.147, -.1451, .2322] },
+      peel: { slide: [.1412, -.1479, .1979] },
+      well: { z: [0.6132, 0.1565, -0.7743], y: [-0.1829, -0.9254, -0.332], off: [-0.0499, 0.0848, 0.08105] }, below: { drop: .16 },
+      magClear: { at: [-0.1169, -0.2442, 0.25555], z: [0.6132, 0.1565, -0.7743], y: [-0.1829, -0.9254, -0.332] },
+      // CD-23: the palm over the receiver's top right edge, turned down onto the knob, the forearm from the left over the top
+      // (was at [.041, .02, .13], z [.65, .25, -.72], y [-.7, .15, -.4]: the palm on the knob turned away from it, the hand
+      // in the magazine's top and the receiver, the wrist 4-6 times past its limit)
+      work: { at: [.046, .104, .13], z: [.35, -.94, 0], y: [-.94, -.35, .05] },   // CL-311: the knob on the slim receiver
+      top: { at: [-.01, .115, .13], z: [0, -1, 0], y: [-1, -.1, .05] },   // CD-23: flat over the top cover, the forearm from the left
+      ltop: { at: [-.07, .11, .13], z: [.7, -.7, 0], y: [-.7, -.7, .1] },   // CD-23: at the top cover's left edge, turning over it
+      lside: { at: [-.10, -.03, .13], z: [1, 0, 0], y: [0, -1, .15] },   // CD-23: flat beside the receiver's left side, fingers up
+      llow: { at: [-.065, -.30, .10], z: [1, .2, 0], y: [0, -1, .2] },   // CD-23: out to the magazine's left, low
+      lfwd: { at: [-.1638, -.1287, .3001], z: [.5, .85, 0], y: [-.73, .2, -.65] },   // CD-23: below the handguard's left side
+      lhold: { slide: [.07, -.17, .15] },
       pouch: { at: [-.31, -.54, -.35], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
   smg: {
     // CL-306 (the audit): for the rack the gun goes out and down (ahead 9 cm, down 4) so the top knob is away from the eye
     // and the support forearm comes up to it from the lower left instead of across the view.
+    rackWay: ['leftLow', 'leftHigh', 'highSide'],
+    poses: { release: { f: [[.88384, .41265, -.08, .337], [1.07212, .29995, .069, .05], [.75278, .30637, -.08, -.35],
+          [.82433, .11231, -.068, -.3]], t: [1.23823, .775, .45, .2, -.1, .2] },
+      loose: { f: [.28, .33, .35, .37], t: [.45, -.12, .34] } },
+    tacticalReturn: [[.945, 'lowSide', 'open'], [.976, 'peel', 'release']],
     gun: [[0, null], [.10, { pos: [-.035, .05, .015], rot: [.10, .20, -.23] }],
       [.51, { pos: [-.035, .055, .015], rot: [.10, .22, -.23] }],
       [.58, { pos: [-.03, .065, .008], rot: [.08, .16, -.18] }],
@@ -285,15 +328,27 @@ const VM_STAGE2_RELOADS = Object.freeze({
       [.66, { pos: [-.03, 0, -.04], rot: [.10, .10, .55] }],
       [.80, { pos: [-.03, 0, -.04], rot: [.10, .10, .55] }],
       [.90, { pos: [-.018, .02, -.01], rot: [.12, .06, -.05] }], [1, null]],
-    hand: [[0, 'fore', 'fore'], [.08, 'well', 'mag'], [.17, 'below', 'mag'],
-      [.32, 'pouch', 'mag'], [.36, 'pouch', 'pouch'], [.49, 'below', 'mag'],
-      [.58, 'well', 'mag'], [.62, 'well', 'cup'], [.70, 'work', 'pinch'],
-      [.78, 'work', 'pinch'], [.82, 'fore', 'fore'], [1, 'fore', 'fore']],
+    hand: [[0, 'fore', 'fore'], [.019, 'peel', 'release'], [.046, 'lowSide', 'open'], [.069, 'pickup', 'mag'],
+      [.08, 'well', 'mag'], [.17, 'below', 'mag'], [.32, 'pouch', 'mag'], [.36, 'pouch', 'pouch'],
+      [.49, 'below', 'mag'], [.58, 'well', 'mag'], [.605, 'well', 'cup'], [.625, 'below', 'mag'],
+      [.645, 'leftLow', 'loose'], [.687, 'leftHigh', 'pinch'], [.698, 'highSide', 'pinch'], [.715, 'work', 'pinch'],
+      [.78, 'work', 'pinch'], [.803, 'highSide', 'pinch'], [.833, 'leftHigh', 'pinch'], [.88, 'leftLow', 'loose'],
+      [.91, 'lowSide', 'open'], [.95, 'peel', 'release'], [.993, 'fore', 'fore'], [1, 'fore', 'fore']],
     mag: { grab: .10, swapOut: .315, swapIn: .365, seat: .58 },
     rack: [.70, .74, .78, .045],
     elbowL: [-0.28, -0.30, 0.04],   // CE-3: the support elbow low and out to the left as the hand leaves the hold (VM.reloadElbowL's [-0.04, -0.34, 0.14] stood it up through the view)
-    places: { well: { z: [0, .98, .20], y: [-.7, -.2, -.68] }, below: { drop: .12 },
-      work: { at: [0, .115, .11], z: [0, -1, 0], y: [-.72, -.38, -.58] },   // CL-306: the forearm from the lower left
+    places: { pickup: { at: [.012, -.38, .033], z: [0, .98, .2], y: [-.7, -.2, -.68] },
+      peel: { hold: [0, 0, 0], slide: [-.05147, -.09584, .15013] },
+      lowSide: { at: [.025, -.3, .11], z: [0, .98, .2], y: [-.7, -.2, -.68] },
+      highSide: { at: [-.11, .23, .12], z: [0, -1, 0], y: [-.72, -.38, -.58] },
+      leftLow: { at: [-.23, -.3, .09], z: [0, .98, .2], y: [-.7, -.2, -.68] },
+      leftHigh: { at: [-.2, .23, .13], z: [0, -1, 0], y: [-.72, -.38, -.58] },
+      well: { off: [0, -.012, .012],
+        z: [0, .98, .20], y: [-.7, -.2, -.68] }, below: { at: [0, -.48, -.077],
+        z: [0, .98, .2],
+        y: [-.7, -.2, -.68],
+        drop: .12 },
+      work: { at: [-.08, .207, .12], z: [0, -1, 0], y: [-.72, -.38, -.58] },   // CL-306: the forearm from the lower left
       pouch: { at: [-.24, -.46, -.29], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   }
 });
@@ -303,20 +358,31 @@ const VM_STAGE2_RELOADS = Object.freeze({
 // motion. The view hands follow those copied moving parts.
 const VM_STAGE3_RELOADS = Object.freeze({
   drum: {
+    rackWay: ['outer', 'forward', 'lowerSide'],
+    tacticalReturn: [[.975, 'depart', 'fore']],
     gun: [[0, null], [.12, { pos: [-.065, .075, .025], rot: [.12, .24, -.27] }],
       [.52, { pos: [-.065, .075, .025], rot: [.12, .24, -.27] }],
       [.62, { pos: [-.055, .085, .018], rot: [.10, .19, -.22] }],
       [.78, { pos: [-.035, .05, .01], rot: [.13, .08, -.09] }], [1, null]],
-    hand: [[0, 'fore', 'fore'], [.12, 'well', 'mag'], [.19, 'below', 'mag'],
-      [.34, 'pouch', 'mag'], [.38, 'pouch', 'pouch'], [.53, 'below', 'mag'],
-      [.62, 'well', 'mag'], [.66, 'well', 'cup'], [.745, 'work', 'cup'],
-      [.80, 'work', 'cup'], [.83, 'workBack', 'open'], [.90, 'fore', 'fore'], [1, 'fore', 'fore']],
+    hand: [[0, 'fore', 'fore'], [.022, 'depart', 'fore'], [.103, 'lower', 'mag'], [.12, 'well', 'mag'],
+      [.19, 'below', 'mag'], [.34, 'pouch', 'mag'], [.38, 'pouch', 'pouch'], [.384, 'pouch', 'mag'],
+      [.53, 'below', 'mag'], [.62, 'well', 'mag'], [.625, 'well', 'cup'], [.649, 'lower', 'mag'],
+      [.674, 'lowerSide', 'mag'], [.714, 'outer', 'cup'], [.735, 'workLead', 'cup'], [.745, 'work', 'cup'],
+      [.8, 'work', 'cup'], [.83, 'workBack', 'open'], [.874, 'forward', 'open'], [.95, 'depart', 'fore'],
+      [.992, 'fore', 'fore'], [1, 'fore', 'fore']],
     mag: { grab: .12, swapOut: .335, swapIn: .385, seat: .62 },
     // CL-326 (J77): the handle hooked from the gun's left, pulled back along its slot and let fly (the hand stays back)
     rack: [.75, .80, .825, .11],
-    places: { well: { z: [0, .94, .34], y: [.62, -.28, -.73] }, below: { drop: .19 },
-      work: { at: [-.078, .012, .185], z: [.9, -.2, -.3], y: [-.35, -.75, -.55] },   // CL-313: the handle on the slim receiver; CL-326: the palm to the gun under the handle, the fingers hooked up over it, the forearm from the lower left (it pointed to the gun's right, through the receiver)
-      workBack: { at: [-.078, .012, .075], z: [.9, -.2, -.3], y: [-.35, -.75, -.55] },
+    places: { workLead: { at: [-.19, .018, .178], z: [.9, -.2, -.3], y: [-.35, -.75, -.55] },
+      depart: { slide: [.022, -.123, .139] },
+      outer: { at: [-.235, -.17, .15], z: [.9, -.2, -.3], y: [-.35, -.75, -.55] },
+      lower: { at: [-.059, -.66, .05], z: [0, .94, .34], y: [.62, -.28, -.73] },
+      lowerSide: { at: [-.3, -.6, .055], z: [0, .94, .34], y: [.62, -.28, -.73] },
+      forward: { at: [-.21, -.08, .38], z: [.9, -.2, -.3], y: [-.35, -.75, -.55] },
+      well: { off: [-.0601, -.0926, -.0035],
+        z: [0, .94, .34], y: [.62, -.28, -.73] }, below: { drop: .19 },
+      work: { at: [-.162, .013, .185], z: [.9, -.2, -.3], y: [-.35, -.75, -.55] },   // CL-313: the handle on the slim receiver; CL-326: the palm to the gun under the handle, the fingers hooked up over it, the forearm from the lower left (it pointed to the gun's right, through the receiver)
+      workBack: { at: [-.162, .013, .075], z: [.9, -.2, -.3], y: [-.35, -.75, -.55] },
       pouch: { at: [-.32, -.60, -.38], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
   sniper: {
@@ -325,25 +391,26 @@ const VM_STAGE3_RELOADS = Object.freeze({
       [.62, { pos: [-.045, .07, .02], rot: [.08, .16, -.20] }],
       [.78, { pos: [-.035, .055, .02], rot: [.17, .06, -.10] }],
       [.94, { pos: [-.025, .035, .01], rot: [.11, .03, -.05] }], [1, null]],
-    hand: [[0, 'fore', 'fore'], [.05, 'below', 'open'], [.10, 'well', 'mag'], [.17, 'below', 'mag'],   // CE-10: [.05] up from under the magazine, not through it
-      [.30, 'pouch', 'mag'], [.34, 'pouch', 'pouch'], [.45, 'below', 'mag'],
-      [.54, 'well', 'mag'], [.58, 'well', 'cup'], [.62, 'work', 'pinch'],
-      [.72, 'work', 'pinch'], [.83, 'work', 'pinch'], [.94, 'work', 'pinch'],
-      [1, 'fore', 'fore']],
+    hand: [[0, 'fore', 'fore'], [.02, 'depart', 'fore'], [.05, 'below', 'open'], [.10, 'well', 'mag'], [.17, 'below', 'mag'],   // CE-10: [.05] up from under the magazine, not through it
+      [.30, 'pouch', 'mag'], [.34, 'pouch', 'pouch'], [.344, 'pouch', 'mag'], [.45, 'below', 'mag'],
+      [.54, 'well', 'mag'], [.58, 'well', 'cup'], [.597, 'below', 'mag'], [.65, 'depart', 'fore'], [.72, 'fore', 'fore'],
+      [1, 'fore', 'fore']],   // The support hand stays here while the firing hand works the bolt.
     mag: { grab: .10, swapOut: .295, swapIn: .345, seat: .54 },
     // CE-10 (J151 note 43: "the left hand does something weird when reloading"): the palm 30 gun mm under the magazine's
     // foot, a looser hold round it (its thumb was 18 mm inside the magazine)
     poses: { mag: { f: [0.55, 0.6, 0.65, 0.7], t: [0.2, 0.3, 0.1] } },
-    places: { well: { z: [0, .96, .28], y: [.60, -.28, -.75], off: [0, -0.03, 0] }, below: { drop: .14 },
+    places: { depart: { slide: [.05, -.123, -.11] },
+      well: { z: [0, .96, .28], y: [.60, -.28, -.75], off: [-.057, -.0215, -.0225] }, below: { drop: .14 },
       work: { part: 'bolt', grab: [-.075, .012, .02], z: [-.8, .1, -.6], y: [.6, -.25, -.76] },
       pouch: { at: [-.32, -.54, -.34], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
   tube: {
+    poses: { pinch: { f: [.7, 1, 1.05, 1.1], t: [.67803, -.46186, .0194] } },
     kind: 'shell',
     // CE-3 (J133: "If the player changes ammunition types he will first have to unload the current ammunition and put in
     // the new ones"): X's change of type (index.html st.ammoSwitch, CB-294). Its load is this path, a shell a trip, at the
-    // reload's pace. Its unload works each shell out through the action (docs/ammo.md, 0.36 s a shell): the gun rolled 20
-    // degrees to its left (as the tube's load, less), which lifts the ejection port on its right toward the eye over the
+    // reload's pace. Its unload works each shell out through the action (docs/ammo.md, 0.36 s a shell): a slight roll
+    // lifts the ejection port on its right toward the eye over the
     // receiver, the support hand on the forend: back (the shell up out of the port and away, up and right), home.
     // pump: [back from, back by, home from, home by] of each shell's 0..1, travel the forend's stroke (index.html's 0.12);
     // shell: [out of the port from, clear by, gone], fly its flight (gun space); ease the roll's in/out time (s).
@@ -353,35 +420,41 @@ const VM_STAGE3_RELOADS = Object.freeze({
     // (index.html's forend keys from pump through viewmodel.unloadPump(), Claude 2's line) (hand: a reload's keys over
     // each shell's 0..1; take: [pop out of the port, pop by], into the hand from..by, gone at the pouch; at/rot the shell
     // in the palm). With take the old flight (shell, fly) is not used.
-    unload: { pos: [-.01, .035, .015], rot: [-.10, .04, .34], ease: .12, pump: [.03, .20, .80, .95], travel: .12,
+    unload: { pos: [-.01, .035, .015], rot: [-.072, -.06, .1], ease: .12, pump: [.03, .20, .80, .95], travel: .12,
       shell: [.24, .44, .64], fly: [.06, .08, -.03],
-      // CE-13 (J151 15 FIX, Claude 6): the shell lies across the palm (at: 12 mm off it toward the port, rot: across the
-      // fingers), in the hand by .288; the hand arrives cupped (.282) and closes round it, thumb over (cradle) to the pouch;
-      // off and back onto the forend through peel (the thumb clear of the barrel's heat shield; was 4.8 / 4.5 mm in it)
-      take: { pop: [.14, .26], rise: .025, from: .25, by: .288, gone: .59, at: [0, .012, .012], rot: [0, 0, 1.57] },
+      // The shell settles between the thumb and fingers, stays in the cupped hand to the pouch, and clears the heat shield.
+      take: { pop: [.14, .26], rise: .025, from: .265, by: .305, gone: .59, at: [-.00041, -.0105, .02709], rot: [.09624, .4746, 1.24289] },
       poses: { cradle: { f: [.8, .8, .8, .8], t: [.6, -.1, .45] } },
-      hand: [[0, 'fore', 'fore'], [.19, 'fore', 'fore'], [.205, 'slide', 'fore'], [.212, 'slide', 'fore'], [.222, 'peel', 'fore'], [.237, 'offF', 'open'], [.262, 'under', 'open'], [.282, 'catch', 'cup'], [.30, 'catch', 'cradle'],
-        [.35, 'catch', 'cradle'], [.42, 'under2', 'cradle'], [.54, 'pouch', 'cradle'], [.59, 'pouch', 'pouch'], [.67, 'under3', 'open'], [.708, 'offF', 'open'], [.726, 'peel', 'fore'], [.738, 'slide', 'fore'], [.745, 'slide', 'fore'], [.765, 'fore', 'fore'], [1, 'fore', 'fore']],
+      hand: [[0, 'fore', 'fore'], [.19, 'fore', 'fore'], [.205, 'slide', 'fore'], [.212, 'slide', 'fore'],
+        [.222, 'peel', 'fore'], [.237, 'offF', 'open'], [.262, 'under', 'open'], [.279, 'catch', 'cradle'],
+        [.3, 'catch', 'cradle'], [.35, 'catch', 'cradle'], [.42, 'under2', 'cradle'], [.54, 'pouch', 'cradle'],
+        [.588, 'pouch', 'cradle'], [.59, 'pouch', 'pouch'], [.67, 'under3', 'open'], [.708, 'offF', 'open'],
+        [.726, 'peel', 'fore'], [.738, 'slide', 'fore'], [.745, 'slide', 'fore'], [.765, 'fore', 'fore'],
+        [1, 'fore', 'fore']],
       elbowL: [-.2, -.4, -.1],   // the support elbow low and forward while the hand is under the gun (the forearm clear of the trigger group)
       // slide: off the forend's front along the gun, still round it (fingers wrapped: any other way out goes through it);
       // peel: 6 mm to the gun's left, 11 cm on at the forend's front, the thumb off the top before the fingers open; offF: open, down off the tube; under / catch / under2: the hand comes UNDER the gun to its right side, palm up under
       // the port (the forearm hidden under the gun, not across the view), the shell drops in, back under to the pouch
-      places: { slide: { slide: [0, 0, .1] }, peel: { slide: [-.006, 0, .11] }, offF: { part: 'pump', at: [0, -.085, .16], z: [.15, 1, 0], y: [-.6, -.6, -.5] },
+      places: { slide: { slide: [0, 0, .1] }, peel: { slide: [-.003, .002, .076] }, offF: { part: 'pump', at: [0, -.085, .16], z: [.15, 1, 0], y: [-.6, -.6, -.5] },
         under: { at: [.04, -.11, .19], z: [0, 1, 0], y: [-.6, -.75, -.3] },
-        catch: { at: [.11, -.045, .165], z: [-.3, 1, 0], y: [-.55, -.8, -.25] },
+        catch: { at: [.081, -.046, .236], z: [-.3, 1, 0], y: [-.55, -.8, -.25] },
         under2: { at: [.03, -.15, .17], z: [.1, 1, 0], y: [-.6, -.75, -.3] }, under3: { at: [-.02, -.13, .22], z: [.2, 1, 0], y: [-.6, -.75, -.3] } } },
     // CL-306 (the audit: the load happened unseen behind the receiver): the gun rolls 30 degrees to the left and lifts, so
     // the loading port under the receiver turns toward the eye and the shell is seen going in
     // CL-326 (J76): a little up and rolled 17 degrees toward the support hand (was 43); the shell pinched from the pouch,
     // up from the lower left into the port, pushed in, the hand straight back to the forend (no pump beat)
-    gun: [[0, null], [.12, { pos: [-.03, .04, .02], rot: [-.16, .08, .50] }],
-      [.76, { pos: [-.03, .04, .02], rot: [-.16, .08, .50] }],
-      [.90, { pos: [-.015, .02, .01], rot: [-.08, .04, .25] }], [1, null]],
-    hand: [[0, 'fore', 'fore'], [.12, 'pouch', 'pouch'], [.24, 'pouch', 'pinch'],
-      [.44, 'port', 'pinch'], [.60, 'port', 'pinch'], [.70, 'port', 'open'],
-      [.84, 'fore', 'fore'], [1, 'fore', 'fore']],
-    shell: { inHand: [.24, .52], push: [.52, .62], depth: .05 },
-    places: { port: { at: [-.015, -.08, .07], z: [0, .9, .43], y: [-.62, -.30, -.72] },   // CL-312: the port under the receiver's front; CL-326: the forearm from the lower left (y was +x)
+    gun: [[0, null], [.04, null], [.12, { pos: [-.03, .04, .02], rot: [-.16, .08, .5] }],
+      [.65, { pos: [-.03, .04, .02], rot: [-.16, .08, .5] }], [.785, null], [1, null]],
+    hand: [[0, 'fore', 'fore'], [.025, 'depart', 'fore'], [.05, 'offF', 'open'], [.205, 'pouch', 'pouch'],
+      [.24, 'pouch', 'pinch'], [.395, 'lowPort', 'pinch'], [.44, 'port', 'pinch'], [.6, 'port', 'pinch'],
+      [.7, 'port', 'open'], [.843, 'offF', 'open'], [.9, 'depart', 'fore'], [.938, 'fore', 'fore'],
+      [1, 'fore', 'fore']],
+    shell: { offset: [-.00217, .00005, .02342],
+      inHand: [.24, .52], push: [.52, .62], depth: .05 },
+    places: { lowPort: { at: [-.03, -.19, .08], z: [0, .9, .43], y: [-.62, -.3, -.72] },
+      depart: { slide: [0, 0, .11] },
+      offF: { slide: [-.0134, -.1061, .1594] },
+      port: { at: [.0837, -.1097, .0731], z: [-.83443, .26311, .48426], y: [-.05266, -.91273, .40516] },   // CL-312: the port under the receiver's front; CL-326: the forearm from the lower left (y was +x)
       pump: { part: 'pump', at: [0, -.022, .09], z: [0, .5, .866], y: [.65, -.42, -.64] },
       pouch: { at: [-.28, -.52, -.30], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
@@ -411,23 +484,26 @@ const VM_STAGE3_RELOADS = Object.freeze({
       pinchC: { f: [0.473, 0.65, 0.679, 0.691], t: [0.85, -0.35, 0.35] } },   // CD-14 #8 s29 (the Director's option C, 19:08Z): the loader held from below, a small hand, thumb and index on its ring
     // the fired cases (st.rounds.spent of them) slide out of the back and are the game's own brass from there (index.html
     // drops them from the view's cylinder at .212); the unfired (st.rounds.live) out into the palm, gone at the pouch
-    live: { out: [.262, .29], toPalm: [.285, .305], gone: .35, travel: .05 },
+    live: { palm: [.03, 0, .027],
+      out: [.262, .29], toPalm: [.285, .305], gone: .35, travel: .05 },
     // CL-306 (GB-302's parts): the six empties show once the cylinder is out, slide out of its back under the ejector's
     // press (.18-.26) and are gone (the body drops the real ones); the loader comes up in the palm from the pouch (.38),
     // goes onto the cylinder's back (.46-.52), pushes the rounds home (.58-.70) and is gone with the hand's release.
     empties: { show: .10, out: [.18, .212], travel: .05, gone: .212 },
     // CD-14 #8 s29: back .072 (was .085) and toPart [.42, .48] (was [.44, .52]): the ring clear of the firing thumb (it was 0.4-1.7 mm in it .48-.60)
-    loader: { show: .38, toPart: [.42, .48], back: .072, seat: .045, push: [.58, .70], gone: .76 },
+    loader: { arc: [.018, -.055, .035],
+      palm: [.055, 0, 0],
+      show: .38, toPart: [.425, .452], back: .072, seat: .045, push: [.58, .70], gone: .76 },
     // CL-326 (J78): the forearm from the lower left (y was +x: from the right, across under the gun)
     // CD-14 #8 (Claude 1, solved in the cloud against t341's own test, the elbow kept below and behind the wrist): part, the palm
     // on the cylinder's left side (was [0, -.035, -.04] z [0, .95, .31] y [-.65, -.3, -.7]: the fingers across the frame, 15 mm in
     // the walnut grip); catch, the cupped palm turned to the cylinder's left (was
     // [0, -.062, -.075] z [0, 1, .1]: 15 mm in the grip)
-    places: { part: { part: 'cylinder', at: [-0.0647, -0.0217, -0.023], z: [0.9158, 0.3304, -0.2252], y: [-0.5553, -0.4556, -0.6977] },
+    places: { part: { part: 'cylinder', rootAt: [-.0827, -.0217, -.023], z: [0.9158, 0.3304, -0.2252], y: [-0.5553, -0.4556, -0.6977] },
       // CL-320: the ejector rod's head (two inches short of the muzzle). CD-14 #8 s28 (solved): the elbow below it, so the
       // forearm comes up from the lower left (was z [0, .8, .6] y [-.65, -.3, -.7]: long and flat across the view; 7.9 mm in the barrel)
-      ejector: { part: 'cylinder', at: [0.0116, -0.0248, 0.2361], z: [-0.3251, 0.9378, 0.1221], y: [-0.3324, -0.7424, -0.5816] },   // s29: re-solved with the way in (the forearm was 6.2 mm in the grip at .14)
-      viaE: { part: 'cylinder', at: [-0.0963, -0.0342, 0.1016], z: [-0.0152, 0.9128, -0.4081], y: [-0.143, -0.9044, -0.4021] },   // CD-14 #8 s28: on the way, left of and under the cylinder (s29: re-solved, the palm up; was 2-3.6 mm in the ejector rod and barrel .10-.12)
+      ejector: { part: 'cylinder', rootAt: [-.01, -.102, .236], z: [-0.3251, 0.9378, 0.1221], y: [-0.3324, -0.7424, -0.5816] },
+      viaE: { part: 'cylinder', rootAt: [-.109, -.04, .1016], z: [-0.0152, 0.9128, -0.4081], y: [-0.143, -0.9044, -0.4021] },
       // CD-14 #8 s28 (solved, t341): the speedloader held from its left side, the palm toward the frame, the fingers up round its
       // rim (rootAt: off the cylinder's origin in the gun's own axes, so the cylinder's turn does not carry the hand round);
       // was at [0, 0, -.06] z [0, .9, .44] y [-.65, -.3, -.7]: the fingers through the frame behind the cylinder, 14-16 mm
@@ -435,12 +511,12 @@ const VM_STAGE3_RELOADS = Object.freeze({
       // hand on the loader's left side covered them); solved with t341's own check plus the eye's rays to the loader's rounds and the cylinder
       loader: { part: 'cylinder', rootAt: [-0.0732, -0.1012, -0.1405], z: [0.6756, 0.707, -0.209], y: [0.5183, -0.8144, -0.2609] },
       loaderIn: { part: 'cylinder', rootAt: [-0.0731, -0.0951, -0.1129], z: [0.6474, 0.632, -0.4259], y: [0.4542, -0.8688, -0.1972] },   // with the loader pushed home (.70); s29: the same hold from below
-      catch: { part: 'cylinder', at: [-0.0735, -0.1036, -0.0147], z: [-0.3406, 0.503, 0.7943], y: [-0.5281, 0.2104, -0.8227] },   // CL-326: the palm up under the cylinder's back (CD-14 #8 s29: re-solved, lower; was 4 mm in the frame, 6 mm into the firing hand)
+      catch: { part: 'cylinder', rootAt: [-.086, -.11, -.0147], z: [-0.3406, 0.503, 0.7943], y: [-0.5281, 0.2104, -0.8227] },
       // CD-14 #8: pushing the cylinder home. s29: rootAt, not at: a tactical reload spins the cylinder as it closes, and an 'at' rode the
       // spin round its axis into the gun (15 mm at .80-.84, the forearm 12 mm in the grip)
-      close: { part: 'cylinder', rootAt: [-0.0582, -0.03, -0.0237], z: [0.8257, 0.5243, -0.2084], y: [-0.1246, -0.914, -0.3861] },
+      close: { part: 'cylinder', rootAt: [-.085, -.025, -.025], z: [0.8257, 0.5243, -0.2084], y: [-0.1246, -0.914, -0.3861] },
       peel: { hold: [0, -0.01, -0.045], slide: [-0.025, 0, 0] },   // CD-14 #8: off the hold as it stands, its fingers as they are: 4.5 cm back off its palm's side, out to the left
-      peel2: { hold: [0, -0.01, -0.045], slide: [-0.0397, -0.0108, -0.0192] },   // CD-14 #8: the way back (s29: solved; was 4.8 mm in the walnut at .92)
+      peel2: { hold: [0, -0.01, -0.045], slide: [-.065, -.0108, -.0192] },   // CD-14 #8: the way back (s29: solved; was 4.8 mm in the walnut at .92)
       pouch: { at: [-.24, -.49, -.27], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
   // The source gun opens and closes its ammo box. Follow that direct child
@@ -455,27 +531,42 @@ const VM_STAGE3_RELOADS = Object.freeze({
     // 3 of 48 phases through the fitted right plate): the drum keeps to its own side. The palm under it draws it straight
     // out of its seat to the right and down (as the world drum goes), then drops it below the frame on the right; the
     // fresh one comes up the same way and is pushed home (tce8: 0 of 48 crossing, never inboard of its seat)
-    hand: [[0, 'fore', 'fore'], [.14, 'box', 'cup'], [.28, 'box', 'cup'],
-      [.32, 'out', 'cup'], [.36, 'drop', 'pouch'], [.49, 'drop', 'cup'], [.56, 'out', 'cup'], [.62, 'box', 'cup'],
-      [.80, 'box', 'open'], [.90, 'fore', 'fore'], [1, 'fore', 'fore']],
+    hand: [[0, 'fore', 'fore'], [.018, 'offFore', 'fore'], [.04, 'underLeft', 'open'], [.073, 'under', 'open'],
+      [.11, 'freeBox', 'cup'], [.14, 'box', 'cup'], [.28, 'box', 'cup'], [.32, 'out', 'cup'], [.365, 'drop', 'cup'],
+      [.406, 'drop', 'pouch'], [.49, 'drop', 'cup'], [.56, 'out', 'cup'], [.62, 'box', 'cup'], [.64, 'box', 'cup'],
+      [.69, 'freeBox', 'cup'], [.75, 'under', 'open'], [.83, 'underLeft', 'open'], [.89, 'offFore', 'fore'],
+      [.94, 'fore', 'fore'], [1, 'fore', 'fore']],
     // CL-306 (the audit: nothing on the gun changed): the box comes off in the palm, goes to the pouch, a fresh one back on
     mag: { grab: .16, swapOut: .37, swapIn: .49, seat: .64 }, magPlace: 'box',
-    places: { box: { part: 'mag', at: [-.015, -.13, -.005], z: [-.25, .88, -.37], y: [-.5, -.45, -.74] },   // CL-326: the palm up under the box's floor, the forearm from the lower left (it faced down, in the box)
+    places: { underLeft: { at: [-.235, -.28, .1], z: [.15, .94, -.3], y: [-.38, -.42, -.82] },
+      offFore: { slide: [0, -.165, .0001] },
+      under: { at: [.015, -.33, .06], z: [.0914, .9751, .1212], y: [.0576, .1206, -.9911] },
+      freeBox: { at: [.11, -.29, .08], z: [.0914, .9751, .1212], y: [.0576, .1206, -.9911] },
+      box: { part: 'mag', at: [-.0208, -.1902, .0202], z: [.0914, .9751, .1212], y: [.0576, .1206, -.9911] },   // CL-326: the palm up under the box's floor, the forearm from the lower left (it faced down, in the box)
       // CE-8: out: the drum clear of its seat, 6 cm out and 9 down in the gun's space (was: on to a pouch on the left, across
       // the receiver); drop: 52 cm below it on the right, out of the frame, where the drums are swapped (same palm frame)
-      out: { part: 'mag', at: [.0547, -.2679, .0236], z: [-.25, .88, -.37], y: [-.5, -.45, -.74] },
-      drop: { part: 'mag', at: [.0663, -.888, -.005], z: [-.25, .88, -.37], y: [-.5, -.45, -.74] } }
+      out: { part: 'mag', at: [.0489, -.3281, .0488], z: [.0914, .9751, .1212], y: [.0576, .1206, -.9911] },
+      drop: { part: 'mag', at: [.0605, -.9482, .0202], z: [.0914, .9751, .1212], y: [.0576, .1206, -.9911] } }
   },
   flamerTank: {
     // CL-326 (J81): lifted and rolled top-right, so the tanks under the receiver come out to the left of the firing hand
+    // The thumb clears the vertical grip's rim before the other fingers release it.
+    poses: { release: { holdThumb: [.58814, .94494, .09839, .88202, .13250, .24425] },
+      around: { holdThumb: [.25455, .96492, -.03231, 1.08200, .22859, .34878] } },
     gun: [[0, null], [.22, { pos: [-.02, .13, .03], rot: [-.24, 0, -.62] }],
       [.80, { pos: [-.02, .13, .03], rot: [-.24, 0, -.62] }], [1, null]],
-    hand: [[0, 'fore', 'fore'], [.20, 'tank', 'cup'], [.35, 'tank', 'cup'],
-      [.45, 'pouch', 'pouch'], [.55, 'pouch', 'cup'], [.70, 'tank', 'cup'],
-      [.86, 'tank', 'open'], [.96, 'fore', 'fore'], [1, 'fore', 'fore']],
+    hand: [[0, 'fore', 'fore'], [.007, 'release', 'release'], [.02, 'around', 'around'], [.035, 'liftOff', 'fore'], [.095, 'clearTank', 'open'], [.2, 'tank', 'cup'],
+      [.31, 'tank', 'cup'], [.37, 'outTank', 'cup'], [.44, 'pouch', 'cup'], [.49, 'pouch', 'pouch'],
+      [.56, 'pouch', 'cup'], [.64, 'outTank', 'cup'], [.72, 'tank', 'cup'], [.74, 'tank', 'cup'],
+      [.84, 'clearTank', 'open'], [.915, 'liftOff', 'fore'], [.935, 'around', 'around'], [.95, 'release', 'release'], [.96, 'fore', 'fore'], [1, 'fore', 'fore']],
     // CL-306 (the audit: the can never moved): the can comes off in the palm, goes to the belt, a fresh one back on
     mag: { grab: .24, swapOut: .44, swapIn: .56, seat: .74 }, magPlace: 'tank',
-    places: { tank: { part: 'mag', at: [0, -.172, .08], z: [-.25, .88, -.37], y: [-.5, -.45, -.74] },   // CL-326 (J81): the palm up under the main tank (its bottom y -0.165), the forearm from the lower left (it was in the tank's middle, facing down)
+    places: { release: { slide: [-.0033142198092886246, -.026772606045473366, .010568463341481983] },
+      around: { slide: [-.0015790118777821772, -.0568726069136709, .0009010677073989063] },
+      liftOff: { slide: [-.0024, -.165, -.0014] },
+      clearTank: { at: [-.2, -.27, .095], z: [.3715, .8643, .2979], y: [.0062, .3263, -.9453] },
+      outTank: { at: [-.28, -.34, .055], z: [.3715, .8643, .2979], y: [.0062, .3263, -.9453] },
+      tank: { part: 'mag', at: [-.0896, -.182, .038], z: [.3715, .8643, .2979], y: [.0062, .3263, -.9453] },   // CL-326 (J81): the palm up under the main tank (its bottom y -0.165), the forearm from the lower left (it was in the tank's middle, facing down)
       pouch: { at: [-.29, -.50, -.31], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   },
   // CL-306 (GP-20039, J18: the six-shot swing-out MGL; ChatGPT's beats: open to .18, eject to .28, the rounds in one at a
@@ -488,26 +579,40 @@ const VM_STAGE3_RELOADS = Object.freeze({
     gun: [[0, null], [.14, { pos: [-.03, .03, 0], rot: [-.18, .12, .22] }],
       [.86, { pos: [-.03, .03, 0], rot: [-.18, .12, .22] }],
       [.95, { pos: [-.015, .015, 0], rot: [-.08, .05, .08] }], [1, null]],
-    hand: [[0, 'fore', 'fore'], [.05, 'latch', 'pinch'], [.10, 'latch', 'pinch'], [.14, 'drumOut', 'cup'], [.24, 'drumOut', 'cup'],
-      [.29, 'pouch', 'pouch'], [.33, 'pouch', 'pinch'], [.40, 'loadIn', 'pinch'], [.44, 'load', 'pinch'], [.47, 'load', 'open'],
-      [.51, 'pouch', 'pinch'], [.57, 'loadIn', 'pinch'], [.61, 'load', 'pinch'], [.64, 'load', 'open'],
-      [.67, 'pouch', 'pinch'], [.73, 'loadIn', 'pinch'], [.76, 'load', 'pinch'], [.79, 'load', 'open'],
-      [.81, 'wind', 'pinch'], [.86, 'wind', 'pinch'], [.89, 'drumOut', 'cup'], [.96, 'fore', 'fore'], [1, 'fore', 'fore']],
+    hand: [[0, 'fore', 'fore'], [.011, 'liftOff', 'fore'], [.039, 'lowFore', 'open'], [.084, 'sideLatch', 'pinch'],
+      [.095, 'latch', 'pinch'], [.103, 'latch', 'pinch'], [.124, 'sideLatch', 'pinch'], [.156, 'sideLow', 'cup'],
+      [.182, 'belowDrum', 'cup'], [.203, 'drumOut', 'cup'], [.24, 'drumOut', 'cup'], [.29, 'roundPouch', 'pinch'],
+      [.33, 'roundPouch', 'pinch'], [.4, 'loadIn', 'pinch'], [.44, 'load', 'pinch'], [.47, 'load', 'open'],
+      [.51, 'roundPouch', 'pinch'], [.57, 'loadIn', 'pinch'], [.61, 'load', 'pinch'], [.64, 'load', 'open'],
+      [.67, 'roundPouch', 'pinch'], [.73, 'loadIn', 'pinch'], [.76, 'load', 'pinch'], [.79, 'load', 'open'],
+      [.81, 'wind', 'pinch'], [.85, 'wind', 'pinch'], [.868, 'belowDrum', 'cup'], [.89, 'drumOut', 'cup'],
+      [.903, 'belowDrum', 'cup'], [.927, 'lowFore', 'open'], [.945, 'liftOff', 'fore'], [.97, 'fore', 'fore'],
+      [1, 'fore', 'fore']],
     // CL-326 (J80): one trip a round to load (st.rounds.need), on the game's beats: its loading runs .28 to .78 in equal
     // slices, the round counted in at each slice's middle. pre/post: the keys before and after; trip: a slice's keys
     // (slice time 0-1); round: the loose round in the fingers over a slice.
     perRound: { start: .28, end: .78,
-      pre: [[0, 'fore', 'fore'], [.05, 'latch', 'pinch'], [.10, 'latch', 'pinch'], [.14, 'drumOut', 'cup'], [.24, 'drumOut', 'cup']],
-      trip: [[0, 'pouch', 'pinch'], [.36, 'loadIn', 'pinch'], [.50, 'load', 'pinch'], [.62, 'load', 'open']],
-      post: [[.81, 'wind', 'pinch'], [.86, 'wind', 'pinch'], [.89, 'drumOut', 'cup'], [.96, 'fore', 'fore'], [1, 'fore', 'fore']],
+      pre: [[0, 'fore', 'fore'], [.011, 'liftOff', 'fore'], [.039, 'lowFore', 'open'], [.084, 'sideLatch', 'pinch'],
+        [.095, 'latch', 'pinch'], [.103, 'latch', 'pinch'], [.124, 'sideLatch', 'pinch'], [.156, 'sideLow', 'cup'],
+        [.182, 'belowDrum', 'cup'], [.203, 'drumOut', 'cup'], [.24, 'drumOut', 'cup']],
+      trip: [[0, 'roundPouch', 'pinch'], [.36, 'loadIn', 'pinch'], [.5, 'load', 'pinch'], [.62, 'load', 'open']],
+      post: [[.81, 'wind', 'pinch'], [.85, 'wind', 'pinch'], [.868, 'belowDrum', 'cup'], [.89, 'drumOut', 'cup'],
+        [.903, 'belowDrum', 'cup'], [.927, 'lowFore', 'open'], [.945, 'liftOff', 'fore'], [.97, 'fore', 'fore'],
+        [1, 'fore', 'fore']],
       round: [.04, .50] },
-    round: { trips: [[.33, .46], [.51, .63], [.67, .78]], ahead: .09, up: .04 },   // GP-20039's loadRound ahead of the fingertips (the pinch reaches ~6 cm past the palm), each trip, until the push home
+    round: { trips: [[.33, .44], [.51, .61], [.67, .76]], ahead: .113926, up: .06638 },   // GP-20039's loadRound ahead of the fingertips (the pinch reaches ~6 cm past the palm), each trip, until the push home
     places: {
-      latch: { part: 'latch', rootAt: [-.02, -.015, -.025], z: [-.5, .85, 0], y: [-.5, -.5, -.7] },
-      drumOut: { part: 'drum', rootAt: [0, -.122, 0], z: [0, 1, 0], y: [-.45, -.55, -.7] },   // cupping its underside through the swing   // CL-322: GP-20063 narrowed the drum (r .14 -> .112, orbit .075 -> .065): drumOut -.15 -> -.122, loadIn/load -.115 -> -.105
-      loadIn: { part: 'drum', rootAt: [0, -.105, -.20], z: [0, .3, 1], y: [-.5, -.5, -.7] },   // the round at the chamber's mouth: the palm 13 cm behind the drum's back and 4 cm under the chamber, the round above the fingertips (seen past the glove)
-      load: { part: 'drum', rootAt: [0, -.105, -.145], z: [0, .3, 1], y: [-.5, -.5, -.7] },    // pushed home: the fingertips at the back face (ChatGPT, 13:03Z: at -.105 the glove was through the drum)
-      wind: { part: 'winder', rootAt: [.01, 0, -.03], z: [0, 0, 1], y: [-.5, -.5, -.7] },
+      sideLow: { at: [-.36, -.25, -.1], z: [.35, .65, .08], y: [-.55, -.55, -.7] },
+      liftOff: { slide: [.0096, -.165, .0099] },
+      lowFore: { at: [-.17, -.32, .275], z: [.65, .5, -.2], y: [-.7, -.55, -.5] },
+      sideLatch: { at: [-.27, .015, -.07], z: [.84, .15, .4], y: [-.45, -.58, -.67] },
+      belowDrum: { part: 'drum', rootAt: [-.092, -.23, -.13], z: [.08, .96, .12], y: [-.45, -.55, -.7] },
+      roundPouch: { at: [-.73, -.34, -.35], z: [-.0943, .2848, 1], y: [-.3174, -.6319, -.7] },
+      latch: { part: 'latch', rootAt: [-.129, .004, -.076], z: [.84, .15, .4], y: [-.45, -.58, -.67] },
+      drumOut: { part: 'drum', rootAt: [-.025, -.193, -.018], z: [0, 1, 0], y: [-.45, -.55, -.7] },   // cupping its underside through the swing   // CL-322: GP-20063 narrowed the drum (r .14 -> .112, orbit .075 -> .065): drumOut -.15 -> -.122, loadIn/load -.115 -> -.105
+      loadIn: { part: 'drum', rootAt: [0, -.1314, -.2239], z: [-.0943, .2848, 1], y: [-.3174, -.6319, -.7] },   // the round at the chamber's mouth: the palm 13 cm behind the drum's back and 4 cm under the chamber, the round above the fingertips (seen past the glove)
+      load: { part: 'drum', rootAt: [0, -.1314, -.1689], z: [-.0943, .2848, 1], y: [-.3174, -.6319, -.7] },    // pushed home: the fingertips at the back face (ChatGPT, 13:03Z: at -.105 the glove was through the drum)
+      wind: { part: 'winder', rootAt: [-.078, -.025, -.108], z: [0, 0, 1], y: [-.5, -.5, -.7] },
       pouch: { at: [-.29, -.51, -.32], z: [.25, .9, .3], y: [-.4, -.6, .65] } }
   }
 });
@@ -696,11 +801,12 @@ export const VM_RELOADS = Object.freeze({
       [0.90, { pos: [-0.02, 0.0, 0.0], rot: [0.2, 0.06, 0.3] }],
       [1.00, null]
     ],
-    hand: [
-      [0.00, 'fore', 'fore'], [0.10, 'well', 'mag'], [0.17, 'below', 'mag'], [0.31, 'pouch', 'mag'], [0.36, 'pouch', 'pouch'],
-      [0.50, 'below', 'mag'], [0.60, 'well', 'mag'], [0.64, 'well', 'cup'], [0.655, 'low', 'open'], [0.675, 'side', 'open'], [0.695, 'over', 'open'], [0.715, 'work', 'rack'],
-      [0.89, 'work', 'rack'], [0.925, 'work', 'open'], [0.94, 'over', 'loose'], [0.955, 'side', 'loose'], [0.975, 'low', 'open'], [1.00, 'fore', 'fore']
-    ],
+    hand: [[0, 'fore', 'fore'], [.025, 'peel', 'fore'], [.048, 'wellSide', 'open'], [.072, 'below', 'mag'],
+      [.1, 'well', 'mag'], [.17, 'below', 'mag'], [.31, 'pouch', 'mag'], [.36, 'pouch', 'pouch'],
+      [.5, 'below', 'mag'], [.6, 'well', 'mag'], [.605, 'well', 'cup'], [.62, 'liftFromSeat', 'cup'],
+      [.661, 'low', 'open'], [.68, 'side', 'open'], [.705, 'over', 'open'], [.72, 'work', 'rack'],
+      [.89, 'work', 'rack'], [.904, 'work', 'open'], [.928, 'over', 'loose'], [.946, 'side', 'loose'],
+      [.964, 'low', 'open'], [.986, 'peel', 'fore'], [1, 'fore', 'fore']],
     // CE-9 (GT-20101, ChatGPT 2's witness: the support ring finger 2.2 mm into the .45 live round at 75%; and, measured
     // against the slide's whole outer shape, the palm and the pinch's curled fingers went right through the slide all
     // through the rack): the overhand rack grip, the fingers laid along the slide's right side behind the port, the thumb
@@ -717,8 +823,15 @@ export const VM_RELOADS = Object.freeze({
     lockBack: 0.08,
     places: {
       // gun-local (the model's own units): palm normal (z) and the forearm's way (y) as directions
-      well: { z: [0, 0.955, 0.296], y: [-0.55, -0.45, -0.7] },       // the support forearm toward its own side, the gun's -x
-      below: { drop: 0.13 },
+      peel: { hold: [0, 0, -.041], slide: [-.03789, -.01231, .01043] },
+      wellSide: { at: [-.1, -.32, -.06], z: [0, .955, .296], y: [-.55, -.45, -.7] },
+      liftFromSeat: { at: [-.004, -.291, -.047], z: [0, .955, .296], y: [-.55, -.45, -.7] },
+      well: { off: [.01841, -.03469, .05736],
+        z: [-.31725, .78452, .53246], y: [-.44834, -.48654, -.7465] },       // the support forearm toward its own side, the gun's -x
+      below: { at: [.01841, -.37869, -.02289],
+        z: [-.31725, .78452, .53246],
+        y: [-.44834, -.48654, -.7465],
+        drop: 0.13 },
       work: { z: [0.15, -1, 0.05], y: [-0.7, -0.2, -0.68], grab: [0, 0.032, -0.06] },   // AG-168: the forearm down, not up over the slide; CE-9 (GT-20101): the palm on the slide's top over its rear serrations, the fingers behind the port (was [0, -0.012, 0.01]: 17 mm into it)
       pouch: { at: [-0.24, -0.46, -0.24], z: [0.25, 0.9, 0.3], y: [-0.4, -0.6, 0.65] },   // view space, out of sight
       // CE-9 (GT-20101): on the way up to the rack and back down to the hold the hand goes round the slide's left side, open
@@ -789,8 +902,8 @@ export const VM_TRIGGER = Object.freeze({
   // face), 0.27 mm at most into the blade (the pad's give), the other hand clear (was [-0.3, 1.1, -0.035, 0.21] / 0.1623)
   // CE-13 (J153 13: "KR-7 trigger finger pulls"; the Director's (a), 15 Nov): a deeper pull that reads at the eye: the blade back
   // 0.26 rad on its pin (was 0.1594), the index curling with it (its pad 0.05 mm off the blade, 0.48 mm into it at full travel, the
-  // pad's give; the blade clear of the guard), held back 0.10 s after each shot (was 0.06)
-  ak: { part: 'trigger', rest: [-0.192, 0.8, 0.437, 0.19], pull: [-0.192, 0.86, 0.68, 0.198], pivot: null, turn: 0.26, hold: 0.1, release: 0.09 },
+  // pad's give; the blade clear of the guard). Each visible shot drives one stroke of both meshes, including successive shots.
+  ak: { part: 'trigger', rest: [-0.192, 0.8, 0.437, 0.19], pull: [-0.192, 0.86, 0.66, 0.198], pivot: null, turn: 0.26, shotCycle: [0.021, 0.041, 0.095] },
   // the sniper (CD-14, J153 16, 14 Nov, Claude 1 on Claude 5's loan): on Claude 1's refit fist (the GW-4 fist transplanted, 8 gun mm up
   // the grip) under the guard whose front came 6 mm forward (ChatGPT 2's file, the Director's loan): the index from the side of
   // the frame into the guard, its pad on the blade's front about 60% down, ~2.6 mm off it at rest, nothing of the glove in the
@@ -829,8 +942,8 @@ export const VM_LIGHT = Object.freeze({
   // cloud per gun, nothing of the glove or sleeve in the gun at any sample); r re-solved where the press itself went in
   // (the pistol's index in its guard: r[0] .4906 -> .3406; the KR-7's thumb: r[1] .1447 -> .2947, o .673 -> .273; the
   // rotary gun: r[1] -1.2729 -> -1.4229; the revolver part way, -.5304 -> -.3804, until its refit, GT-20104)
-  pistol: { k: 15, fi: -1, pad: [0, -0.0138, 0.009], r: [0.3406, -0.429, 0.1204], v: [0, 0.0051, -0.17, -0.3, -0.1, -0.1], o: 1, arc: [-0.15, -0.15, 0.05] },   // the pistol: the thumb's pad
-  revolver: { k: 15, fi: -1, pad: [0.002, -0.0254, -0.004], r: [-0.2304, -0.2804, 0.3436], v: [0, 0.2131, 0.7499, 0.9182, 0.5273, 0.8229], o: 1.075, grip: 0.2, off: [-0.1, 0, 0], arc: [-0.15, -0.15, 0.05] },   // the revolver: the thumb's tip (CD-14 s19, tce4: slides out off the cylinder first (grip, off), then the thumb's pad onto the switch; glove 0.10 mm at the press, 0 on the way, was 5.0 mm in the barrel)
+  pistol: { k: 15, fi: -1, pad: [0, -0.0138, 0.009], r: [0.1500, 0.0800, 0.3000], v: [0, 0.0051, -0.17, -0.3, -0.1, -0.1], o: 1, arc: [-0.15, -0.15, 0.05] },   // the pistol: the thumb's pad
+  revolver: { k: 15, fi: -1, pad: [0.002, -0.0254, -0.004], r: [-0.2304, -0.2500, 0.3436], v: [0, 0.2131, 0.7499, 0.9182, 0.5273, 0.8229], o: 0.750, grip: 0.2, off: [-0.1, 0, 0], arc: [-0.15, -0.15, 0.05] },   // the revolver: the thumb's tip (CD-14 s19, tce4: slides out off the cylinder first (grip, off), then the thumb's pad onto the switch; glove 0.10 mm at the press, 0 on the way, was 5.0 mm in the barrel)
   uzi: { k: 6, fi: 1, pad: [0, -0.021, 0], r: [0.0288, 0.0276, -0.0489], v: [1.2595, 1.1558, 0, 0.04], o: 1, arc: [0.05, -0.15, 0.05] },   // the Wasp: the middle finger's tip
   shotgun: { k: 3, fi: 0, pad: [0, -0.0202, 0], r: [-0.3134, 1.4416, 0.1726], v: [1.3819, 0.6504, 0.6656, -0.03], o: 1.125, grip: 0.325, arc: [0.15, -0.15, 0.1] },   // the pump gun: the index finger's tip (CD-14 s20, tce4: the hand stays on the pump a moment (grip), then the press pose re-solved and the arc in closer: glove 0.05 mm at most, was 9.6 mm in the light unit and 15 mm in the pump)
   aa12: { k: 15, fi: -1, pad: [0, -0.0138, 0.009], r: [-0.0572, 0.4507, -0.1727], v: [0, -0.6, 0.4171, -0.3, -0.1, 0.2213], o: 1, arc: [0, -0.1, 0.1] },   // the Breacher: the thumb's pad
@@ -929,16 +1042,90 @@ export const VM_CONTROLS = Object.freeze({
 // move at at[i] (dx, dy, dz in the gun's space, phi about the gun's z through the palm); v[i]: the digit's values there.
 // reach / hold / back (s): onto the lever, kept on it after it stops, back to the grip. upAt: a safety with a hand comes
 // off once the raise is past this (the digit reaches it on the way up).
-// The KR-7's index leaves the trigger for the long lever's tab and pushes it down (auto) or up (semi); the sniper's thumb
-// rocks its safety off as the gun comes up. Left without a hand for now (the parts move as in CE-9): the GW-4's selector
-// and the rotary gun's safety (solved, but the glove as drawn stays 7-14 mm off the GW-4's lever and goes 2-9 mm into the
-// guns: next), the Breacher's selector (the thumb or index is 19-41 mm short of it, or 12-15 mm into the receiver,
-// without the hand leaving the grip), the flamer's and the launcher's safeties (12-50 mm short, or the thumb through the
-// grip), the pump gun's cross-bolt, the rotary gun's arming switch, the Wasp's grip safety (the palm squeezes it).
+// Selector poses follow the ends and middle of each mesh's travel. A paired pistol has a
+// separate fit for each hand. An optional index pose frees the firing finger during the reach.
+// Only the fitted pistol adds a mode switch to the stock weapon controls.
+export const VM_FITTED_PISTOL = Object.freeze({
+  controls: {
+    ...VM_CONTROLS.pistol,
+    selector: { axis: 'x', turns: { semi: 0, auto: 0.75 }, time: 0.13 }
+  },
+  hands: {
+    selector: { reach: 0.16, hold: 0.055, back: 0.18, at: [0, 0.375, 0.75],
+      supportShift: [-0.024, 0, 0.025],
+      palm: [0.03341, -0.09794, -0.02198],
+      x: [[-0.00372, 0.00148, 0.00167, 0.0581], [-0.00241, 0.00153, 0.00159, 0.1228], [-0.00237, 0.00105, 0.00292, 0.118]],
+      v: [[0.24659, 0.65907, 0.68774, 0.98291, 0.56625, 0.33509], [0.31998, 0.72818, 0.69987, 1.01403, 0.59595, 0.30246], [0.22105, 0.68554, 0.8024, 0.92528, 0.64214, 0.41032]],
+      pair: {
+        r: { palm: [0.0333, -0.09791, -0.0215],
+          x: [[-0.00302, 0.00144, 0.00224, 0.07018], [-0.00302, -0.00369, 0.00127, 0.07018], [-6e-05, -0.00484, 0.00408, 0.15245]],
+          v: [[0.41024, 0.78088, 0.12745, 0.65552, 0.80335, 0.38418], [0.41024, 0.78088, 0.12745, 0.65552, 0.80335, 0.38418], [0.59607, 0.7976, 0.05446, 0.73621, 0.71881, 0.26602]] },
+        l: { palm: [-0.0333, -0.09791, -0.0215],
+          x: [[0.00009, 0.00796, 0.00793, -0.17775], [-0.00057, 0.0044, 0.00774, -0.19014], [0.00081, 0.003, 0.00659, -0.15423]],
+          v: [[0.02543, 0.78473, 0.74049, 0.79273, 0.79098, 0.43712], [0.05505, 0.75313, 0.73788, 0.81156, 0.78624, 0.43477], [0.0278, 0.7129, 0.71803, 0.82524, 0.8402, 0.50425]] },
+      } }
+  }
+});
+
 export const VM_SELECT = Object.freeze({
   upAt: 0.3,
+  m4: {
+    selector: { reach: 0.34, hold: 0.06, back: 0.32, at: [0, Math.PI / 4, Math.PI / 2],
+      approach: [
+        [0, 0, 0, 0, 0, 0, 0, 0], [0.03125, -0.00104, -0.00342, -0.0136, -0.196, 0.015, -0.283, 0.095],
+        [0.0625, -0.0001, -0.00533, -0.02268, -0.054, -0.41, 0.132, 0.16], [0.125, 0.00338, -0.00521, -0.02317, -0.059, -0.351, 0.046, 0.153],
+        [0.15625, 0.01099, -0.00488, -0.01901, -0.247, -0.07, 0.212, 0.115], [0.1875, 0.02205, -0.00816, -0.01262, -0.077, -0.001, 0.029, 0.039],
+        [0.1927, 0.03912, -0.01961, -0.011, -0.446, 0.141, -0.013, 0.17], [0.196, 0.03181, -0.01647, -0.01067, -0.13, -0.039, -0.017, 0.077],
+        [0.21875, 0.02393, -0.01142, -0.00855, -0.368, -0.193, -0.116, 0.231], [0.25, 0.01844, -0.00109, -0.02664, -0.396, -0.21, -0.13, 0.246],
+        [0.28125, 0.01767, 0.00019, -0.02637, -0.37, -0.213, -0.168, 0.203], [0.295, 0.02044, -0.00013, -0.02466, -0.334, -0.264, -0.242, 0.2],
+        [0.3125, 0.02045, -0.00059, -0.02497, -0.317, -0.35, -0.324, 0.201], [0.32292, 0.02572, -0.00206, -0.02545, -0.409, -0.312, -0.421, 0.267],
+        [0.34375, 0.02336, -0.03079, -0.02987, -0.806, -0.153, -0.291, 0.337], [0.375, 0.02361, -0.05422, -0.02781, -0.562, -0.497, -0.218, 0.177],
+        [0.40625, 0.02618, -0.06501, -0.0265, -0.562, -0.497, -0.218, 0.177], [0.4375, 0.02661, -0.07322, -0.02481, -0.503, -0.486, -0.212, 0.151],
+        [0.46875, 0.04109, -0.09984, -0.04748, 0.107, -0.345, -0.133, -0.108], [0.479, 0.02184, -0.08049, -0.02045, 0.125, -0.239, -0.093, -0.101],
+        [0.5, 0.01098, -0.07575, -0.02066, 0.003, -0.033, -0.025, -0.019], [0.535, 0.00596, -0.07533, -0.01897, 0.048, -0.421, 0.059, -0.127],
+        [0.55729, 0.001, -0.07531, -0.02042, -0.007, -0.223, -0.096, -0.118], [0.5625, -0.00063, -0.0754, -0.02072, -0.075, -0.138, -0.144, -0.11],
+        [0.5833, -0.01031, -0.07646, -0.02097, -0.769, 0.383, -0.364, -0.057], [0.59375, -0.00986, -0.07338, -0.02103, -0.829, 0.528, -0.303, 0.223],
+        [0.6115, -0.00709, -0.07601, -0.01977, -0.548, 0.126, -0.721, -0.254], [0.625, -0.0146, -0.06628, -0.01003, -0.089, 0.032, -0.041, 0.03],
+        [0.638, -0.03502, -0.06398, -0.01258, -0.618, 0.394, -0.087, 0.172], [0.6875, -0.02173, -0.05108, -0.01003, 0.027, 0.021, -0.095, 0.09],
+        [0.8125, -0.009, -0.027, -0.001, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0]
+      ],
+      index: [-0.1, 0.16, 0.06, -0.28], palm: [0.03734, -0.15506, -0.12436],
+      x: [[-0.12977, -0.01148, 0.03572, -0.22628], [-0.12068, -0.01073, 0.0232, -0.27728], [-0.12134, -0.00807, 0.00202, -0.26432]],
+      v: [[-0.52454, 1.29451, 0.03105, -0.68548, 0.09708, -1.22374], [-0.33136, 0.98765, 0.1987, -0.69687, 0.40062, -0.84641], [-0.36298, 0.97299, 0.23561, -0.69012, 0.36488, -0.82202]] }
+  },
+  aa12: {
+    selector: { reach: 0.34, hold: 0.06, back: 0.32, at: [0, Math.PI / 4, Math.PI / 2],
+      approach: [
+        [0, 0, 0, 0, 0, 0, 0, 0], [0.012, 0.00067, -0.00104, 0.00065, 0.222, 0.411, 0.234, 0.036],
+        [0.02451, 0.00318, 0.00488, 0.00154, -0.167, 0.383, 0.344, -0.202], [0.03125, -0.00028, 0.00043, 0.00016, 0.397, -0.06, -0.19, 0.264],
+        [0.03646, 0.00156, 0.00338, 0.00142, 0.361, 0.312, -0.151, 0.109], [0.049, 0.00274, -0.00032, 0.00082, 0.234, 0.369, 0.253, 0.316],
+        [0.0625, 0.00234, -0.01407, -0.00307, -0.122, -0.098, 0.332, 0.084], [0.07353, 0.00256, -0.01369, -0.00288, -0.585, -0.43, 0.709, 0.246],
+        [0.08854, 0.00265, -0.04612, -0.01456, -0.308, -0.142, 1.054, -0.083], [0.09375, 0.0023, -0.06908, -0.02247, 0.102, -0.222, 0.867, -0.075],
+        [0.115, 0.00254, -0.10167, -0.03458, 0.083, -0.055, 0.341, -0.482], [0.125, 0.00054, -0.09977, -0.03547, -0.067, 0.055, 0.306, -0.35],
+        [0.1875, 0.00079, -0.13084, -0.05067, -0.085, 0.09, 0.249, -0.383], [0.21875, -0.0018, -0.14498, -0.05476, -0.085, 0.09, 0.249, -0.383],
+        [0.25, -0.00721, -0.15684, -0.05767, -0.079, 0.083, 0.229, -0.352], [0.28125, -0.01228, -0.14222, -0.0503, -0.007, 0.007, 0.02, -0.031],
+        [0.294, -0.01786, -0.14298, -0.04961, 0, -0.001, -0.001, 0.002], [0.34375, -0.03232, -0.14454, -0.05083, 0, 0, 0, 0],
+        [0.375, -0.041, -0.142, -0.05, 0, 0, 0, 0], [0.40625, -0.05095, -0.13467, -0.04881, 0, 0, 0, 0],
+        [0.427, -0.0558, -0.1255, -0.04735, 0, 0, 0, 0], [0.4375, -0.05613, -0.12082, -0.04493, 0, 0, 0, 0],
+        [0.46875, -0.05387, -0.11006, -0.04201, 0, 0, 0, 0], [0.59375, -0.03694, -0.06782, -0.03154, 0, 0, 0, 0],
+        [0.625, -0.033, -0.058, -0.029, 0, 0, 0, 0], [0.6875, -0.026, -0.042, -0.024, 0, 0, 0, 0],
+        [0.8125, -0.015, -0.017, -0.015, 0, 0, 0, 0], [0.9375, -0.004, -0.004, -0.004, 0, 0, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0, 0]
+      ],
+      index: [-0.07796, 0.17223, 0.04889, -0.32304], palm: [0.0307, -0.18649, -0.17561],
+      x: [[-0.14549, 0.04564, 0.01656, -0.69144], [-0.14956, 0.04574, 0.01758, -0.85132], [-0.14765, 0.0481, 0.01765, -0.76167]],
+      v: [[-0.26693, -0.17228, -0.00638, 0.69706, -0.36372, -1.15081], [0.09105, -0.14026, -0.15695, 0.55884, -0.32912, -0.94224], [0.16242, -0.03865, -0.14782, 0.47818, -0.57512, -1.01012]] }
+  },
   ak: {
-    selector: { digit: 'index', reach: 0.09, hold: 0.06, back: 0.14, palm: [0.0285, -0.1532, -0.1285], at: [0.05, 0.075, 0.1],
+    selector: { digit: 'index', reach: 0.16, hold: 0.06, back: 0.18, palm: [0.0285, -0.1532, -0.1285], at: [0.05, 0.075, 0.1],
+      approach: [
+        [0, 0, 0, 0, 0, 0, 0, 0], [0.0625, 0, 0, 0, -0.003, 0.006, -0.008, 0.004],
+        [0.125, 0.00054, -0.0042, -0.00141, -0.054, 0.03, -0.055, 0.049], [0.1875, 0.00032, -0.00307, -0.00106, -0.243, -0.406, 0.37, 0.059],
+        [0.5, 0.00032, -0.00307, -0.00106, -0.279, -0.458, 0.416, 0.065], [0.5625, 0.00028, -0.00141, -0.00156, -0.466, -0.523, 0.428, 0.107],
+        [0.625, 0.00082, -0.00068, -0.00173, -0.532, -0.099, -0.002, -0.124], [0.6875, 0.00198, -0.00131, -0.00274, -0.966, 0.067, 0.021, -0.323],
+        [0.75, 0.00341, -0.00034, -0.0033, -0.911, 0.193, 0.183, -0.058], [0.9375, 0.00446, 0.00198, -0.00455, -0.342, -0.035, 0.281, -0.074],
+        [1, 0, 0, 0, 0, 0, 0, 0]
+      ],
       x: [[-0.0057, 0.0125, 0.0192, 0.0276], [-0.0047, 0.0121, 0.0147, -0.0312], [-0.0061, 0.0096, 0.0114, 0.0344]],
       v: [[-0.186, 0, 0.042, 0.254], [-0.086, 0, -0.08, 0.168], [-0.18, 0, -0.08, 0.18]] }   // the pad 0.01 mm off the lever, the hand moved 16.2 mm; 0.05 mm off the lever, the hand moved 13.5 mm; 0.01 mm off the lever, the hand moved 11 mm
   },

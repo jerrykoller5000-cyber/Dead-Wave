@@ -62,8 +62,9 @@ export function trainingStationShoulder(head,eye,look,stations,pull,forward){
 // Material copies keep the world gun, other marines and shared clothing opaque.
 export function createTrainingMarineFade(marine){
   const head=marine.userData.headG;
-  let parts=null,keeperRoot=null;
-  const materials=new Set(),copies=new Map();
+  let parts=null,keeperRoot=null,headOpacity=1,bodyOpacity=1;
+  const tracked=new Set();
+  const materials=new Set(),copies=new Map(),sources=new WeakMap();
   const fadeCopy=(source,helmet)=>{
     if(!source||source.transparent)return source;
     let pair=copies.get(source);
@@ -72,30 +73,39 @@ export function createTrainingMarineFade(marine){
     if(!pair[key]){
       const fade=source.clone();
       fade.transparent=true;fade.depthWrite=false;fade.opacity=Math.min(source.opacity,.999);
-      pair[key]=fade;materials.add(fade);
+      pair[key]=fade;materials.add(fade);sources.set(fade,source);
     }
     const fade=pair[key];
     fade.color?.copy(source.color);
     if(source.emissive){fade.emissive.copy(source.emissive);fade.emissiveIntensity=source.emissiveIntensity;}
     return fade;
   };
-  function begin(){
-    if(parts)return;
-    parts=[];
-    marine.traverse(mesh=>{
-      if(!mesh.isMesh||!mesh.material)return;
+  function track(root){
+    if(!parts)return;
+    let owner=root;
+    while(owner && owner!==marine)owner=owner.parent;
+    if(!owner)return;
+    root.traverse(mesh=>{
+      if(!mesh.isMesh||!mesh.material||tracked.has(mesh))return;
+      tracked.add(mesh);
       let p=mesh,helmet=false;
       while(p&&p!==marine){if(p===head){helmet=true;break;}p=p.parent;}
       const original=mesh.material;
       const faded=Array.isArray(original)?original.map(m=>fadeCopy(m,helmet)):fadeCopy(original,helmet);
       mesh.material=faded;
+      for(const m of Array.isArray(faded)?faded:[faded])
+        if(materials.has(m))m.opacity=Math.min(helmet?headOpacity:bodyOpacity,.999);
       parts.push({mesh,original,faded,helmet});
     });
+  }
+  function begin(){
+    if(parts)return;
+    parts=[];track(marine);
   }
   function end(){
     if(!parts)return;
     for(const p of parts)p.mesh.material=p.original;
-    parts=null;
+    parts=null;tracked.clear();
   }
   function prepareWarmup(viewFirst = false){
     if (viewFirst) return () => {};
@@ -148,6 +158,7 @@ export function createTrainingMarineFade(marine){
     update(distance){
       const helmet=Math.max(0,Math.min(1,(distance-.35)/.45));
       const body=Math.max(0,Math.min(1,(distance-.25)/.35));
+      headOpacity=helmet;bodyOpacity=body;
       if(helmet>=1&&body>=1){end();return {helmet:1,body:1};}
       if(!parts)begin();
       const seen=new Set();
@@ -162,7 +173,10 @@ export function createTrainingMarineFade(marine){
       }
       return {helmet,body};
     },
-    reset:end,prepareWarmup
+    sourceMaterial(material){
+      return Array.isArray(material) ? material.map(m=>sources.get(m)||m) : sources.get(material)||material;
+    },
+    track,reset:end,prepareWarmup
   };
 }
 

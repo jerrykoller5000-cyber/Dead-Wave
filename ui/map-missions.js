@@ -8,7 +8,10 @@ const open = new Set(['available','active','ready-to-claim']);
 
 // Navigation is independent of interaction reach. Read only owner state; never
 // reveal a cache, grant a reward, complete an objective, or synthesize an E press.
-export function mapMissionMarkers({active, snapshot, selected = [], player, skulls = 0, bank, extraction, dock} = {}) {
+// CK-1: leadOpen(siteId) (optional) is the story chain's word on a site: true while its lead is open, false while it is
+// closed or done, null for a site that is not on the chain. With it, an open lead is a destination before discovery (the
+// day's job shows on the map) and a closed one is not (the radio no longer points at a mast the player can't use yet).
+export function mapMissionMarkers({active, snapshot, selected = [], player, skulls = 0, bank, extraction, dock, leadOpen} = {}) {
   if (!active || !point(player)) return [];
   const rows = [], ids = new Set();
   const add = (id, position, title, urgent = false) => {
@@ -21,7 +24,10 @@ export function mapMissionMarkers({active, snapshot, selected = [], player, skul
     // Restoring the radio is the briefing's first destination. Other unknown
     // sites stay hidden until the owner discovers/reveals them.
     const radio = site.id === 'objective:radio-repair';
-    if (!open.has(site.state) && !(radio && site.state === 'undiscovered')) continue;
+    const lead = typeof leadOpen === 'function' ? leadOpen(site.id) : null;
+    const briefed = lead == null ? radio : lead === true;
+    if (!open.has(site.state) && !(briefed && site.state === 'undiscovered')) continue;
+    if (lead === false && site.state === 'available') continue;   // CK-1: a closed lead's site waits for its dawn (day 2 listed the rangers and the trapper)
     const key = radio && site.state === 'ready-to-claim' ? 'map.mission.radioSupplies' : def.titleKey;
     add(site.id,site.position,text(key));
   }

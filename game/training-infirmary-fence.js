@@ -2,17 +2,19 @@
 import {bakeStatic} from '../world/bake.js';
 import {createTrainingBlockers} from './training-infirmary.js';
 import {chainLinkTexture,CHAIN_LINK_TILE} from './training-perimeter.js';
+import {getTrainingPBR,applyWorldUVByMaterial} from '../world/training-textures.js';
 
 export const INFIRMARY_FENCE = Object.freeze({height:3, clearDistance:.6096, travel:.65});
 export function createTrainingInfirmaryFence(T,tg,{onMotion=()=>{}}={}) {
   const {x,z}=tg.bed.centre, floor=tg.floorY, origin=tg.origin;
   const bay={minX:x-3.15,maxX:x+4.55,minZ:z-2,maxZ:z+2.15,minY:floor,maxY:floor+INFIRMARY_FENCE.height,exitFaces:['maxX','maxZ']};
   const root=new T.Group();root.name='training-infirmary-fence';root.position.set(x-origin.x,0,z-origin.z);tg.group.add(root);
-  const panels=new T.Group();root.add(panels);
-  const frame=new T.MeshStandardMaterial({color:0x39453e,roughness:.78,metalness:.5});
+  const panels=new T.Group();panels.name='training-infirmary-panels';root.add(panels);
+  const pbr=getTrainingPBR(T);
+  const frame=new T.MeshStandardMaterial(pbr?pbr.benchPanel.opts({color:0xa8b6ad,normalScale:.75}):{color:0x39453e,roughness:.78,metalness:.5});
   // CG-1 (CF-20 #9, Director 00:35Z): the same 6 cm chain-link alpha pattern as the perimeter (it was 28 cm strips).
   const linkTex=chainLinkTexture(T);
-  const wire=new T.MeshStandardMaterial({color:0x828d82,roughness:.72,metalness:.55,side:T.DoubleSide,map:linkTex,transparent:true,alphaTest:.04});
+  const wire=new T.MeshStandardMaterial({color:0x9aa89e,roughness:.52,metalness:.68,side:T.DoubleSide,map:linkTex,transparent:true,alphaTest:.04});
   const geometries=[];
   const box=(w,h,d,px,py,pz,parent=panels)=>{
     const geo=new T.BoxGeometry(w,h,d);geometries.push(geo);
@@ -46,6 +48,7 @@ export function createTrainingInfirmaryFence(T,tg,{onMotion=()=>{}}={}) {
     const pos=[],uvs=[];for(const i of [0,1,2,0,2,3]){pos.push(...q[i]);uvs.push(...uv[i]);}
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));geo.computeVertexNormals();geometries.push(geo);panels.add(new T.Mesh(geo,wire));
   }
+  applyWorldUVByMaterial(root,new Map([[frame,1.0]]));
   bakeStatic(T,panels);bakeStatic(T,root,{skip:o=>o===panels});
   const solids=sides.map(s=>({minX:s.axis==='x'?s.at-.06:s.lo,maxX:s.axis==='x'?s.at+.06:s.hi,minZ:s.axis==='z'?s.at-.06:s.lo,maxZ:s.axis==='z'?s.at+.06:s.hi,minY:floor,maxY:bay.maxY,prop:true,infirmaryFence:true}));
   const blocker=createTrainingBlockers([bay]);

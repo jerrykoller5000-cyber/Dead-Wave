@@ -1,0 +1,93 @@
+{
+  "at": "2026-11-23T19:23:49.013Z",
+  "renderer": {
+    "backend": "WebGPU",
+    "detail": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+  },
+  "viewport": [
+    1920,
+    1080
+  ],
+  "proportions": {
+    "m4": {
+      "weapon": "m4",
+      "unarmed": false,
+      "bodyHeight": 1.499,
+      "bodyWidth": 0.75,
+      "bodyDepth": 1.514,
+      "headSize": [
+        0.228,
+        0.353,
+        0.322
+      ],
+      "headToHeightRatio": 0.235,
+      "headWidthToBodyWidth": 0.304,
+      "playerPos": [
+        -26,
+        -200,
+        -632
+      ],
+      "marineYaw": 0
+    },
+    "unarmed": {
+      "weapon": "m4",
+      "unarmed": true,
+      "bodyHeight": 1.595,
+      "bodyWidth": 0.854,
+      "bodyDepth": 1.038,
+      "headSize": [
+        0.226,
+        0.351,
+        0.322
+      ],
+      "headToHeightRatio": 0.22,
+      "headWidthToBodyWidth": 0.264,
+      "playerPos": [
+        -26,
+        -200,
+        -632
+      ],
+      "marineYaw": 0
+    }
+  },
+  "shots": {
+    "01-front-m4": {
+      "file": "qa/AG-403/01-front-m4.png",
+      "bytes": 951177
+    },
+    "02-side-right-m4": {
+      "file": "qa/AG-403/02-side-right-m4.png",
+      "bytes": 932377
+    },
+    "03-back-m4": {
+      "file": "qa/AG-403/03-back-m4.png",
+      "bytes": 708983
+    },
+    "04-front-unarmed": {
+      "file": "qa/AG-403/04-front-unarmed.png",
+      "bytes": 959316
+    },
+    "05-closeup-head-collar-front": {
+      "file": "qa/AG-403/05-closeup-head-collar-front.png",
+      "bytes": 1286202
+    },
+    "06-closeup-head-collar-back": {
+      "file": "qa/AG-403/06-closeup-head-collar-back.png",
+      "bytes": 814328
+    },
+    "07-inplay-3p-training-follow": {
+      "file": "qa/AG-403/07-inplay-3p-training-follow.png",
+      "bytes": 951877
+    },
+    "08-inplay-3p-day-default-cam": {
+      "file": "qa/AG-403/08-inplay-3p-day-default-cam.png",
+      "bytes": 2172301
+    },
+    "09-inplay-3p-combat-scale": {
+      "file": "qa/AG-403/09-inplay-3p-combat-scale.png",
+      "bytes": 1694073
+    }
+  },
+  "errors": [],
+  "sheet": "qa/AG-403/player-baseline-sheet.jpg"
+}

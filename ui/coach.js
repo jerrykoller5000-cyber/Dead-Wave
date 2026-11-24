@@ -114,8 +114,18 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     const panel = document.createElement('aside'); panel.id = 'firstMinuteCoach'; panel.hidden = true;
     panel.setAttribute('role', 'status'); panel.setAttribute('aria-live', 'polite'); panel.setAttribute('aria-atomic', 'true');
     const title = document.createElement('strong'), body = document.createElement('span'); panel.append(title, body); hud.append(panel);
-    const suppressed = () => document.hidden || ['opening','frontend','deploying','cine'].some(c => document.body.classList.contains(c)) ||
-      !!document.querySelector('#pause.show, #shop.show, #win.show, #bigBanner.show, #devConsole.show');
+    const bodyCL = document.body.classList;
+    const overlayIds = ['pause', 'shop', 'win', 'bigBanner', 'devConsole'];
+    const overlayEls = overlayIds.map(id => document.getElementById(id));
+    const suppressed = () => {
+      if (document.hidden || bodyCL.contains('opening') || bodyCL.contains('frontend') || bodyCL.contains('deploying') || bodyCL.contains('cine')) return true;
+      for (let i = 0; i < overlayEls.length; i++) {
+        let el = overlayEls[i];
+        if (!el) el = overlayEls[i] = document.getElementById(overlayIds[i]);
+        if (el && el.classList.contains('show')) return true;
+      }
+      return false;
+    };
     let frame = { active: false }, lastId = null;
     function render(view) {
       panel.hidden = !view;

@@ -1,0 +1,59 @@
+{
+  "cmd": "batch",
+  "shots": [
+    {
+      "target": "xyz:3,-200,-638.9",
+      "cam": {
+        "x": 3,
+        "y": -198.3,
+        "z": -640.5,
+        "tx": 3,
+        "ty": -200,
+        "tz": -638.7,
+        "fov": 62
+      },
+      "caption": "C05b-lane-numbers Lane numbers on floor downrange of firing bench",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C05b-lane-numbers.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); if (!T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);"
+    },
+    {
+      "target": "xyz:-43.5,-199.4,-613.3",
+      "cam": {
+        "x": -41,
+        "y": -198.3,
+        "z": -615.8,
+        "tx": -43.5,
+        "ty": -199.4,
+        "tz": -613.3,
+        "fov": 62
+      },
+      "caption": "C22b-mop-corner Gate-end west corner: mop bucket, squeegee and wall",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C22b-mop-corner.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); if (!T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);"
+    },
+    {
+      "target": "xyz:-26,-198.3,-604",
+      "cam": {
+        "x": -26,
+        "y": -198.3,
+        "z": -614.5,
+        "tx": -26,
+        "ty": -198.3,
+        "tz": -604,
+        "fov": 65
+      },
+      "caption": "C21-tunnel-open Zombie holding tunnel interior (gate open via deployNow)",
+      "size": "1920x1080",
+      "out": "review/CH-3/walk/closeups/C21-tunnel-open.png",
+      "time": "noon",
+      "pre": "T.setViewFirstDbg(true); if (!T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); T.trainingDbg.deployNow(\"shambler\", 1); await wait(1800);"
+    }
+  ],
+  "sheet": true,
+  "cols": 3,
+  "sheetFile": "review/CH-3/walk/sheet-closeups-extra.jpg"
+}

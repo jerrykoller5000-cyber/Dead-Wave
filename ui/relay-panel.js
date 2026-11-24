@@ -15,47 +15,65 @@
 
 const PANEL_IDS = ['relayPanel', 'rangerPanel'];
 const CSS_SRC = `
-#relayPanel{position:fixed;left:50%;bottom:118px;transform:translateX(-50%);z-index:30;width:min(372px,calc(100vw - 32px));box-sizing:border-box;
-  padding:12px 14px 10px;border-radius:6px;background:linear-gradient(180deg,#2b302a,#1a1d18);border:1px solid #59604f;
-  box-shadow:0 12px 34px #000b, inset 0 1px 0 #ffffff14;color:#dfe3d2;font-family:var(--font-hud,sans-serif);pointer-events:auto;display:none}
+#relayPanel{position:fixed;left:50%;bottom:118px;transform:translateX(-50%);z-index:30;width:min(384px,calc(100vw - 32px));box-sizing:border-box;
+  padding:13px 16px 11px;border-radius:4px;
+  background:linear-gradient(180deg,#272d25 0%,#181c17 65%,#131612 100%);
+  border:2px solid #59624e;
+  box-shadow:0 16px 40px rgba(0,0,0,.84), inset 0 1px 0 rgba(255,255,255,.12), inset 0 -2px 0 rgba(0,0,0,.55);
+  color:#dfe3d2;font-family:'Courier New',ui-monospace,monospace;pointer-events:auto;display:none}
+#relayPanel::before,#relayPanel::after{content:'';position:absolute;left:7px;right:7px;height:6px;pointer-events:none;
+  background:radial-gradient(circle at 4px 3px,#6d7564 0 2.4px,#1b1f1a 2.8px,transparent 3.2px),
+             radial-gradient(circle at calc(100% - 4px) 3px,#6d7564 0 2.4px,#1b1f1a 2.8px,transparent 3.2px)}
+#relayPanel::before{top:6px}
+#relayPanel::after{bottom:6px}
 #relayPanel.on{display:block}
-#relayPanel h3{margin:0 0 8px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#cdbb7c}
+#relayPanel h3{margin:0 0 9px;padding:0 14px 6px;border-bottom:1px solid rgba(154,166,134,.22);font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#d6c486;text-align:center}
 #relayPanel .tag{margin:0 0 4px;padding:6px 8px;background:#e9e1c4;color:#2b2618;font:600 11px/1.35 'Courier New',monospace;transform:rotate(-.6deg);box-shadow:0 2px 4px #0007}
-#relayPanel .row{display:flex;gap:10px;justify-content:center}
-#relayPanel .brk{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;user-select:none}
-#relayPanel .brk .lamp{width:12px;height:12px;border-radius:50%;background:#3a1a16;box-shadow:inset 0 1px 2px #000}
-#relayPanel .brk.on .lamp{background:#5dff7a;box-shadow:0 0 8px #5dff7a}
-#relayPanel .brk .sw{width:34px;height:52px;border-radius:4px;background:#111;border:1px solid #444;position:relative}
-#relayPanel .brk .sw i{position:absolute;left:5px;right:5px;height:22px;bottom:5px;border-radius:3px;background:linear-gradient(#777,#3c3c3c);transition:bottom .08s}
-#relayPanel .brk.on .sw i{bottom:25px;background:linear-gradient(#e8e2c4,#9a9479)}
-#relayPanel .brk b{font-size:13px}
-#relayPanel.hot .brk .sw{border-color:#ff5a2a;box-shadow:0 0 10px #ff5a2a88}
-#relayPanel .scale{position:relative;height:30px;margin:4px 2px 6px;border-radius:3px;background:#0d100c;border:1px solid #3f463a;overflow:hidden}
-#relayPanel .scale .ticks{position:absolute;inset:0;background:repeating-linear-gradient(90deg,#4a5240 0 1px,transparent 1px 5%)}
-#relayPanel .scale .needle{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:#ff6a3a;box-shadow:0 0 6px #ff6a3a}
-#relayPanel .freq{display:flex;justify-content:space-between;font:700 13px/1 'Courier New',monospace;color:#9fe0a0}
-#relayPanel .meter{display:flex;gap:3px;height:12px;margin:6px 0}
-#relayPanel .meter i{flex:1;background:#253020;border-radius:1px}
-#relayPanel .meter i.lit{background:#7cff8a;box-shadow:0 0 5px #7cff8a88}
-#relayPanel .lcd{margin:6px 0 2px;padding:7px 10px;background:#0b130c;border:1px solid #2f4a30;border-radius:3px;font:700 20px/1 'Courier New',monospace;letter-spacing:.35em;color:#8dff95;text-align:center;text-shadow:0 0 6px #8dff9588;min-height:20px}
-#relayPanel .lcd.bad{color:#ff6a5a;border-color:#6a2a24;text-shadow:0 0 6px #ff6a5a88}
+#relayPanel .row{display:flex;gap:10px;justify-content:center;padding:4px 2px 2px}
+#relayPanel .brk{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;user-select:none;padding:6px 4px;border-radius:3px;background:rgba(0,0,0,.22);border:1px solid rgba(120,130,108,.18);transition:border-color .1s,background .1s}
+#relayPanel .brk:hover{border-color:rgba(214,196,134,.45);background:rgba(255,255,255,.04)}
+#relayPanel .brk .lamp{width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#5a2822,#28100d);border:1px solid #161814;box-shadow:inset 0 1px 2px #000}
+#relayPanel .brk.on .lamp{background:radial-gradient(circle at 35% 35%,#baffc6,#3be85d);box-shadow:0 0 10px rgba(93,255,122,.8),inset 0 1px 1px #fff8}
+#relayPanel .brk .sw{width:36px;height:54px;border-radius:3px;background:linear-gradient(180deg,#0c0e0c,#181b17);border:1px solid #484f42;box-shadow:inset 0 2px 5px rgba(0,0,0,.85);position:relative}
+#relayPanel .brk .sw i{position:absolute;left:4px;right:4px;height:22px;bottom:4px;border-radius:2px;background:linear-gradient(180deg,#7c8276,#3d413a);border:1px solid #242722;box-shadow:0 2px 3px rgba(0,0,0,.65);transition:bottom .08s ease-out}
+#relayPanel .brk.on .sw i{bottom:26px;background:linear-gradient(180deg,#f0e9cc,#9e977b);border-color:#d4cca9}
+#relayPanel .brk b{font-size:12px;letter-spacing:.12em;color:#c9cdb8}
+#relayPanel.hot .brk .sw{border-color:#ff5a2a;box-shadow:0 0 14px rgba(255,90,42,.65),inset 0 0 8px rgba(255,90,42,.35)}
+#relayPanel .scope-wrap{position:relative;height:54px;margin:0 0 7px;border-radius:3px;background:#071009;border:1px solid #2f4a32;box-shadow:inset 0 0 14px rgba(0,0,0,.85);overflow:hidden}
+#relayPanel .scope-wrap::after{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(140,255,155,.045) 0 1px,transparent 1px 3px)}
+#relayPanel .scope{display:block;width:100%;height:100%}
+#relayPanel .scope-led{position:absolute;top:5px;right:7px;width:7px;height:7px;border-radius:50%;background:#263828;border:1px solid #101911}
+#relayPanel .scope-led.lock{background:#7cff8a;box-shadow:0 0 8px #7cff8a}
+#relayPanel .scale{position:relative;height:28px;margin:4px 0 6px;border-radius:3px;background:linear-gradient(180deg,#0b100b,#111711);border:1px solid #3f4a3a;overflow:hidden;box-shadow:inset 0 2px 5px rgba(0,0,0,.8)}
+#relayPanel .scale .ticks{position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(155,175,140,.42) 0 1px,transparent 1px 5%),repeating-linear-gradient(90deg,rgba(216,196,134,.55) 0 1px,transparent 1px 25%)}
+#relayPanel .scale .needle{position:absolute;top:0;bottom:0;width:2px;margin-left:-1px;background:#ff6a3a;box-shadow:0 0 8px #ff6a3a}
+#relayPanel .freq{display:flex;justify-content:space-between;align-items:center;font:700 13px/1 'Courier New',monospace;color:#9fe0a0;text-shadow:0 0 5px rgba(124,255,138,.35)}
+#relayPanel .freq span:first-child,#relayPanel .freq span:last-child{font-size:10px;color:#89947d;text-shadow:none}
+#relayPanel .meter{display:flex;gap:3px;height:11px;margin:6px 0 4px}
+#relayPanel .meter i{flex:1;background:#1c2519;border:1px solid rgba(110,130,96,.18);border-radius:1px;transition:background .08s}
+#relayPanel .meter i.lit{background:#7cff8a;border-color:#aaffb4;box-shadow:0 0 6px rgba(124,255,138,.6)}
+#relayPanel .lcd{position:relative;margin:6px 0 4px;padding:8px 10px;background:linear-gradient(180deg,#081209,#0d1a0e);border:1px solid #345436;border-radius:3px;font:700 20px/1 'Courier New',monospace;letter-spacing:.35em;color:#8dff95;text-align:center;text-shadow:0 0 8px rgba(141,255,149,.6);box-shadow:inset 0 2px 8px rgba(0,0,0,.85);min-height:22px}
+#relayPanel .lcd.bad{color:#ff6a5a;border-color:#743028;text-shadow:0 0 8px rgba(255,106,90,.65)}
 #relayPanel .keys{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}
-#relayPanel .keys button{padding:7px 0;border-radius:4px;border:1px solid #4d5545;background:#252a22;color:#e6e9da;font:700 15px/1 var(--font-hud,sans-serif);cursor:pointer}
-#relayPanel .keys button:active{background:#3a4234}
+#relayPanel .keys button{padding:8px 0;border-radius:3px;border:1px solid #525b49;background:linear-gradient(180deg,#30372c,#20251e);color:#e6e9da;font:700 15px/1 'Courier New',monospace;cursor:pointer;box-shadow:0 2px 0 #10130f,inset 0 1px 0 rgba(255,255,255,.1);transition:transform .05s,background .08s}
+#relayPanel .keys button:hover{background:linear-gradient(180deg,#3b4436,#272d24);border-color:#8a947a}
+#relayPanel .keys button:active{transform:translateY(1px);background:#3a4234;box-shadow:none}
 #relayPanel .note{margin-top:8px;font-size:11px;line-height:1.4;color:#c9cdb8}
-#relayPanel.paper{background:#e6dfc3;border-color:#b9ae86;color:#2b2618;box-shadow:0 12px 34px #000b}
-#relayPanel.paper h3{color:#6d6040}
+#relayPanel.paper{background:radial-gradient(circle at 82% 18%,rgba(148,108,62,.16),transparent 42%),linear-gradient(180deg,#ebe3c7,#ded4b2);border:2px solid #9e9069;color:#2b2618;box-shadow:0 16px 40px rgba(0,0,0,.82),inset 0 0 24px rgba(120,96,58,.22)}
+#relayPanel.paper::before,#relayPanel.paper::after{display:none}
+#relayPanel.paper h3{color:#6d6040;border-bottom-color:rgba(109,96,64,.25)}
 #relayPanel.paper .tag{background:none;box-shadow:none;font-size:13px;padding:2px 0 6px}
-#relayPanel.paper .sketch{margin:2px 0 0;transform:rotate(-1.2deg)}
-#relayPanel.paper .help{color:#7d7253}
-#relayPanel .help{margin-top:8px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8b917d}
-#relayPanel .look img,#relayPanel .strip img{display:block;width:100%;height:auto;border-radius:3px;box-shadow:0 2px 6px #0008}
+#relayPanel.paper .sketch{margin:2px 0 0;transform:rotate(-1.0deg)}
+#relayPanel.paper .help{color:#695d40}
+#relayPanel .help{margin-top:9px;padding-top:6px;border-top:1px solid rgba(154,166,134,.16);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#a8b099;text-align:center}
+#relayPanel .look img,#relayPanel .strip img{display:block;width:100%;height:auto;border-radius:3px;box-shadow:0 2px 8px rgba(0,0,0,.6)}
 #relayPanel .strip{margin:0 0 8px}
-#relayPanel.wide{width:min(440px,calc(100vw - 32px))}
+#relayPanel.wide{width:min(448px,calc(100vw - 32px))}
 #relayPanel{transform:translateX(-50%) scale(var(--relay-panel-scale,1));transform-origin:50% 100%}
 @media (min-width:900px) and (min-height:640px){#relayPanel{--relay-panel-scale:1.35}}
 @media (min-width:1500px) and (min-height:860px){#relayPanel{--relay-panel-scale:1.6}}
-#relayPanel .help{font-size:11px;color:#b9bfa8}
+#relayPanel .help{font-size:10.5px;color:#b9bfa8}
+#relayPanel.paper .help{color:#62563a;border-top-color:rgba(109,96,64,.22)}
 `;   // CL-258 (Jerry's N2): bigger on a desktop screen, so its switches, dial and keys are easy to hit and read
 const CSS = CSS_SRC.replaceAll('#relayPanel', ':is(' + PANEL_IDS.map((i) => '#' + i).join(',') + ')');   // id specificity kept
 
@@ -134,10 +152,15 @@ export function createRelayPanel({ doc = document, onAction = () => {}, id = 're
       }
       const help = doc.createElement('div'); help.className = 'help'; help.textContent = '1-4 flip a breaker · E leave'; el.append(help);
     } else if (m === 'radio') {
-      h.textContent = 'Relay radio';
+      h.textContent = 'Relay radio · VHF receiver';
+      const swrap = doc.createElement('div'); swrap.className = 'scope-wrap';
+      const canvas = doc.createElement('canvas'); canvas.className = 'scope'; canvas.width = 320; canvas.height = 54;
+      const led = doc.createElement('span'); led.className = 'scope-led';
+      swrap.append(canvas, led); el.append(swrap);
+      built.scope = canvas; built.scopeLed = led; built.clarity = 0; built.dial = 88;
       const scale = doc.createElement('div'); scale.className = 'scale'; scale.innerHTML = '<div class="ticks"></div><div class="needle"></div>'; el.append(scale);
       built.needle = scale.querySelector('.needle');
-      const freq = doc.createElement('div'); freq.className = 'freq'; freq.innerHTML = '<span>88</span><span class="f"></span><span>108</span>'; el.append(freq);
+      const freq = doc.createElement('div'); freq.className = 'freq'; freq.innerHTML = '<span>88.0</span><span class="f"></span><span>108.0</span>'; el.append(freq);
       built.f = freq.querySelector('.f');
       const meter = doc.createElement('div'); meter.className = 'meter'; for (let i = 0; i < 12; i++) meter.append(doc.createElement('i')); el.append(meter);
       built.bars = [...meter.children];
@@ -159,6 +182,51 @@ export function createRelayPanel({ doc = document, onAction = () => {}, id = 're
       const help = doc.createElement('div'); help.className = 'help'; help.textContent = opts.help || '1-9 enter the code · E leave'; el.append(help);
     }
   }
+  let rafId = 0;
+  function drawScope(tMs) {
+    if (mode !== 'radio' || !built || !built.scope) return;
+    const ctx = typeof built.scope.getContext === 'function' ? built.scope.getContext('2d') : null;
+    if (!ctx) return;
+    const w = built.scope.width, h = built.scope.height, mid = h * 0.5;
+    const clarity = Math.max(0, Math.min(1, built.clarity || 0));
+    const t = (tMs || 0) * 0.004;
+    ctx.fillStyle = '#071109';
+    ctx.fillRect(0, 0, w, h);
+    ctx.strokeStyle = 'rgba(110, 175, 118, 0.14)';
+    ctx.lineWidth = 1;
+    for (let x = 32; x < w; x += 32) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke(); }
+    ctx.beginPath(); ctx.moveTo(0, mid); ctx.lineTo(w, mid); ctx.stroke();
+    const noiseAmp = (1 - clarity) * 16 + 1.2;
+    const sigAmp = clarity * 15 + 2.5;
+    const freq = 0.045 + (built.dial || 88) * 0.0005;
+    ctx.strokeStyle = clarity > 0.85 ? '#96ffa6' : '#6ce07c';
+    ctx.lineWidth = clarity > 0.85 ? 2.1 : 1.5;
+    ctx.shadowColor = clarity > 0.85 ? '#7cff8a' : '#42b852';
+    ctx.shadowBlur = clarity > 0.85 ? 8 : 4;
+    ctx.beginPath();
+    for (let x = 0; x <= w; x += 2) {
+      const n = Math.sin(x * 0.67 + t * 17.3) * Math.cos(x * 0.29 - t * 11.1) + Math.sin(x * 1.13 + t * 23.7) * 0.5;
+      const carrier = Math.sin(x * freq + t * 4.2) * Math.cos(x * 0.012 - t * 1.1);
+      const y = mid + carrier * sigAmp + n * noiseAmp * 0.62;
+      if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+  }
+  function stopScope() {
+    if (rafId && typeof win.cancelAnimationFrame === 'function') win.cancelAnimationFrame(rafId);
+    rafId = 0;
+  }
+  function startScope() {
+    stopScope();
+    if (typeof win.requestAnimationFrame !== 'function') return;
+    const tick = (now) => {
+      if (mode !== 'radio') { rafId = 0; return; }
+      drawScope(now);
+      rafId = win.requestAnimationFrame(tick);
+    };
+    rafId = win.requestAnimationFrame(tick);
+  }
   return {
     element: el,
     open(m, o = {}) {
@@ -167,8 +235,9 @@ export function createRelayPanel({ doc = document, onAction = () => {}, id = 're
       mode = m; el.classList.add('on');
       el.classList.toggle('paper', m === 'note' || (m === 'look' && !!o.paper));
       el.classList.toggle('wide', m === 'look');
+      if (m === 'radio') startScope(); else stopScope();
     },
-    close() { mode = null; el.classList.remove('on', 'hot', 'paper', 'wide'); },
+    close() { stopScope(); mode = null; el.classList.remove('on', 'hot', 'paper', 'wide'); },
     isOpen: () => !!mode,
     mode: () => mode,
     // view: breakers { on, hot } · radio { dial, band, clarity } · keypad { entry, len, bad, open } · note { order, count } · look (none)
@@ -184,12 +253,15 @@ export function createRelayPanel({ doc = document, onAction = () => {}, id = 're
         built.f.textContent = v.dial.toFixed(1) + ' MHz';
         const lit = Math.round(v.clarity * built.bars.length);
         built.bars.forEach((b, i) => b.classList.toggle('lit', i < lit));
+        built.clarity = v.clarity; built.dial = v.dial;
+        if (built.scopeLed) built.scopeLed.classList.toggle('lock', v.clarity >= 0.88);
+        drawScope(typeof performance !== 'undefined' ? performance.now() : 0);
       } else {
         const s = Array.from({ length: v.len }, (_, i) => (v.entry[i] != null ? String(v.entry[i]) : '_')).join(' ');
         built.lcd.textContent = v.bad ? 'WRONG' : v.open ? 'OPEN' : s;
         built.lcd.classList.toggle('bad', !!v.bad);
       }
     },
-    destroy() { win.removeEventListener('keydown', onKey, true); win.removeEventListener('wheel', onWheel, { capture: true }); el.remove(); }
+    destroy() { stopScope(); win.removeEventListener('keydown', onKey, true); win.removeEventListener('wheel', onWheel, { capture: true }); el.remove(); }
   };
 }

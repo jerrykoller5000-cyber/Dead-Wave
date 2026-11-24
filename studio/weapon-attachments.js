@@ -5,6 +5,7 @@
 import {bindModelArtwork} from './weapon-model-hooks.js';
 import {createLightSwitch} from './weapon-light-switch.js';
 import {weaponDetail} from './weapon-detail.js';
+import {applyWeaponPBR} from './weapon-textures.js';
 
 const MOUNTS = Object.freeze({
   pistol:   { kind: 'guard', x: 0, y: -0.035, z: 0.202, length: 0.16, width: 0.045, height: 0.034 },
@@ -34,7 +35,7 @@ export function attachLaserLight(gun, kind, ctx) {
   gun.add(unit);
   const body = kind === 'm240' ? gunTan : gunPoly;
   const metal = kind === 'm240' ? gunTan : gunMid;
-  const lens = glassMat || new THREE.MeshStandardMaterial({ color: 0xb7c9d0, roughness: 0.17, metalness: 0.05 });
+  const lens = glassMat || applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0xb7c9d0, roughness: 0.17, metalness: 0.05 }), 'opticalGlass', { useMap: true });
   const put = (geo, mat, x, y, z, name = '') => {
     const o = new THREE.Mesh(geo, mat);
     o.position.set(x, y, z); o.name = name;

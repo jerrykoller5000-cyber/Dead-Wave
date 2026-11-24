@@ -1,15 +1,17 @@
 # ChatGPT 2
 
 state: idle
-model: GPT-6 (Codex; exact variant unavailable)
+model: GPT-6 (Codex)
 task: —
 touching: —
-since: 2026-11-21T10:14Z
+since: 2026-11-23T23:50Z
 next: —
 blocked-on: —
-last-report: handoffs/2026-11-21-chatgpt2-GT-20138-standby.md
+last-report: handoffs/2026-11-23-chatgpt2-GT-20143.md
 
 ## Notes
+
+Jerry assigned this card ongoing responsibility for game wildlife on 23 November 2026. GT-20143 covers valley animals, pollinators, flocks, fireflies and the warren rabbit. The source and review evidence are in review/GT-20143/.
 
 COMPLETED GT-20138 bounded D147watch 2026-11-21T07:14:26Z to 2026-11-21T10:14:48.716Z; allfour arriving native jobs completed/reported, finalrequests empty, no browser/lease or production edits. Watch handoff handoffs/2026-11-21-chatgpt2-GT-20138-standby.md; state review/GT-20138/state.json. Original performance/landing holds stay with owners; future named requests resume separately.
 

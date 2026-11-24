@@ -9,9 +9,9 @@
     T.setDay(4);
     T.addCash(1000);
     T.openShop(true);
-    T.setShopTabDbg('upgrades');
+    document.querySelector('#shopTabs [data-shop-page=supplies]').click();
     const names = () => [...document.querySelectorAll('#shopList .perk .name')].map((e) => e.textContent.trim());
-    ok(!names().some((name) => /^Machete\b/i.test(name)), 'gated kiosk has no machete row');
+    ok(document.querySelector('#shopTabs [data-shop-page=supplies]').getAttribute('aria-pressed') === 'true' && !names().some((name) => /^Machete\b/i.test(name)), 'gated kiosk Supplies has no machete row');
     const cash = T.getBank();
     T.buyMachete();
     ok(T.getBank() === cash && !T.isMacheteOwned(), 'direct kiosk purchase cannot grant the gated machete');

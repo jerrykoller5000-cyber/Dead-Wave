@@ -1,0 +1,231 @@
+{
+  "liveMd5": "22afb3688759e39a1d64074f7e25fc95",
+  "copyMd5": "f137269d04c84fceeb02b4343449bdfa",
+  "abba": [
+    {
+      "tag": "A1-live",
+      "page": "index.html",
+      "enterMs": 20072,
+      "warmDoneMs": 18652,
+      "frames": 572,
+      "medianMs": 16.7,
+      "p95Ms": 33.4,
+      "worstAllMs": 133.3,
+      "worstFirst2sMs": 133.3,
+      "over50msFirst5s": 5,
+      "over33msFirst5s": 87,
+      "over50msAll": 7,
+      "compilesInFight": 9,
+      "compileMsInFight": 0.3,
+      "rebuildsInFight": 1,
+      "rebuildMsInFight": 0.6,
+      "first3KillFrames": [
+        {
+          "idx": 3,
+          "t": 132.2,
+          "dt": 33.5,
+          "alive": 29,
+          "compiles": 4,
+          "compileMs": 0.2,
+          "rebuildMs": 0
+        },
+        {
+          "idx": 36,
+          "t": 1082.2,
+          "dt": 16.8,
+          "alive": 28,
+          "compiles": 0,
+          "compileMs": 0,
+          "rebuildMs": 0
+        },
+        {
+          "idx": 47,
+          "t": 1348.9,
+          "dt": 16.7,
+          "alive": 27,
+          "compiles": 0,
+          "compileMs": 0,
+          "rebuildMs": 0
+        }
+      ],
+      "totalKills": 30,
+      "errors": 0
+    },
+    {
+      "tag": "B1-copy",
+      "page": "review/CB-379/index.cb379.html",
+      "enterMs": 20732,
+      "warmDoneMs": 19368,
+      "frames": 540,
+      "medianMs": 16.7,
+      "p95Ms": 33.4,
+      "worstAllMs": 333.4,
+      "worstFirst2sMs": 333.4,
+      "over50msFirst5s": 5,
+      "over33msFirst5s": 86,
+      "over50msAll": 6,
+      "compilesInFight": 4,
+      "compileMsInFight": 0.3,
+      "rebuildsInFight": 1,
+      "rebuildMsInFight": 1.3,
+      "first3KillFrames": [
+        {
+          "idx": 14,
+          "t": 743.6,
+          "dt": 16.6,
+          "alive": 29,
+          "compiles": 1,
+          "compileMs": 0.1,
+          "rebuildMs": 0
+        },
+        {
+          "idx": 34,
+          "t": 1293.7,
+          "dt": 33.4,
+          "alive": 28,
+          "compiles": 0,
+          "compileMs": 0,
+          "rebuildMs": 0
+        },
+        {
+          "idx": 52,
+          "t": 1777,
+          "dt": 33.3,
+          "alive": 27,
+          "compiles": 0,
+          "compileMs": 0,
+          "rebuildMs": 0
+        }
+      ],
+      "totalKills": 30,
+      "errors": 0
+    },
+    {
+      "tag": "B2-copy",
+      "page": "review/CB-379/index.cb379.html",
+      "enterMs": 18572,
+      "warmDoneMs": 18571,
+      "frames": 562,
+      "medianMs": 16.7,
+      "p95Ms": 33.4,
+      "worstAllMs": 100,
+      "worstFirst2sMs": 66.7,
+      "over50msFirst5s": 3,
+      "over33msFirst5s": 87,
+      "over50msAll": 6,
+      "compilesInFight": 5,
+      "compileMsInFight": 0.3,
+      "rebuildsInFight": 1,
+      "rebuildMsInFight": 0.9,
+      "first3KillFrames": [
+        {
+          "idx": 13,
+          "t": 405.4,
+          "dt": 16.7,
+          "alive": 29,
+          "compiles": 0,
+          "compileMs": 0,
+          "rebuildMs": 0
+        },
+        {
+          "idx": 34,
+          "t": 855.4,
+          "dt": 16.7,
+          "alive": 28,
+          "compiles": 0,
+          "compileMs": 0,
+          "rebuildMs": 0
+        },
+        {
+          "idx": 72,
+          "t": 1655.4,
+          "dt": 16.6,
+          "alive": 27,
+          "compiles": 0,
+          "compileMs": 0,
+          "rebuildMs": 0
+        }
+      ],
+      "totalKills": 30,
+      "errors": 0
+    },
+    {
+      "tag": "A2-live",
+      "page": "index.html",
+      "enterMs": 17397,
+      "warmDoneMs": 17301,
+      "frames": 510,
+      "medianMs": 16.7,
+      "p95Ms": 33.4,
+      "worstAllMs": 366.8,
+      "worstFirst2sMs": 366.8,
+      "over50msFirst5s": 8,
+      "over33msFirst5s": 81,
+      "over50msAll": 9,
+      "compilesInFight": 9,
+      "compileMsInFight": 0.7,
+      "rebuildsInFight": 2,
+      "rebuildMsInFight": 1.3,
+      "first3KillFrames": [
+        {
+          "idx": 7,
+          "t": 246.3,
+          "dt": 16.6,
+          "alive": 29,
+          "compiles": 4,
+          "compileMs": 0.4,
+          "rebuildMs": 0
+        },
+        {
+          "idx": 16,
+          "t": 1046.4,
+          "dt": 16.7,
+          "alive": 28,
+          "compiles": 3,
+          "compileMs": 0.2,
+          "rebuildMs": 0
+        },
+        {
+          "idx": 38,
+          "t": 1763,
+          "dt": 33.3,
+          "alive": 27,
+          "compiles": 0,
+          "compileMs": 0,
+          "rebuildMs": 0
+        }
+      ],
+      "totalKills": 30,
+      "errors": 0
+    }
+  ],
+  "gates": {
+    "tcb332": {
+      "name": "tcb332",
+      "copy": "review/CB-379/index.cb379.html",
+      "md5": "f137269d04c84fceeb02b4343449bdfa",
+      "pass": 6,
+      "fail": [],
+      "errors": [],
+      "output": "PASS the Training Ground is up and its warm is done\nPASS the warm drew the cases while it ran (11)\nPASS one case per caliber and the plain cylinder (minigun, m4, ak, aa12, pistol, uzi, shotgun, revolver, launcher, sniper, plain)\nPASS none of them culled, each with its geometry and material\nINFO 10 case geometries in the warm\nPASS and they are out of the scene once the warm is done\nPASS no page errors"
+    },
+    "tcb340": {
+      "name": "tcb340",
+      "copy": "review/CB-379/index.cb379.html",
+      "md5": "f137269d04c84fceeb02b4343449bdfa",
+      "pass": 8,
+      "fail": [],
+      "errors": [],
+      "output": "PASS Training Ground opened\nPASS entry blackout cleared\nPASS ten bombers called in (countdown running: {\"kind\":\"bomber\",\"count\":10,\"remaining\":5,\"seconds\":5})\nPASS the gate released them (150 frames of 1/30 s)\nPASS before the gate opened the pool held the whole call-in (10, was 2)\nPASS a body at a time, never two in one frame (8 frames built one)\nPASS the release frame built no body: all ten came out of the pool (pool 10, built 0)\nPASS and ten are in play"
+    },
+    "t215": {
+      "name": "t215",
+      "copy": "review/CB-379/index.cb379.html",
+      "md5": "f137269d04c84fceeb02b4343449bdfa",
+      "pass": 4,
+      "fail": [],
+      "errors": [],
+      "output": "PASS read index.html and the scripts and styles the game loaded (224 files)\nPASS no broken characters in them\nPASS the HUD reads clean: timeLine \"Daylight · 08:16 · Grace\", tacticalLine \"NVG - · Laser - · Light -\", grenadeChips \"G×3H×0\", ammoDetail \"12 / 12  ·  50 Bullets  ·  SEMI\", hpNum \"100 / 100\"\nPASS and shows its dots and times signs (NVG - · Laser - · Light - / G×3H×0)"
+    }
+  }
+}

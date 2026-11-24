@@ -1,0 +1,922 @@
+{
+  "tag": "after",
+  "timestamp": "2026-11-24T05:30:07.423Z",
+  "perfByShot": {
+    "bridge-0-overview": {
+      "calls": 8291,
+      "triangles": 2309237,
+      "geometries": 3697,
+      "textures": 408
+    },
+    "bridge-0-approach": {
+      "calls": 8925,
+      "triangles": 2776263,
+      "geometries": 3708,
+      "textures": 410
+    },
+    "bridge-0-under": {
+      "calls": 9544,
+      "triangles": 1727547,
+      "geometries": 3708,
+      "textures": 410
+    },
+    "bridge-1-overview": {
+      "calls": 10148,
+      "triangles": 2858096,
+      "geometries": 3708,
+      "textures": 410
+    },
+    "bridge-1-approach": {
+      "calls": 10707,
+      "triangles": 2878260,
+      "geometries": 3708,
+      "textures": 410
+    },
+    "dock-overview": {
+      "calls": 11326,
+      "triangles": 1567270,
+      "geometries": 3708,
+      "textures": 410
+    },
+    "dock-approach": {
+      "calls": 11945,
+      "triangles": 1382213,
+      "geometries": 3708,
+      "textures": 410
+    },
+    "dock-end": {
+      "calls": 12504,
+      "triangles": 2840369,
+      "geometries": 3708,
+      "textures": 410
+    }
+  },
+  "diag": {
+    "bridges": [
+      {
+        "index": 0,
+        "pos": {
+          "x": 56.43,
+          "z": 72.85,
+          "yaw": 3.068,
+          "deckY": 4.555
+        },
+        "platform": {
+          "hw": 1.21,
+          "hl": 8.2,
+          "deckY": 4.625,
+          "under": 4.0347367113332755
+        },
+        "railSolidCount": 12,
+        "railSolidRadiusSample": [
+          0.07,
+          0.07,
+          0.07,
+          0.07,
+          0.07,
+          0.07
+        ],
+        "terrain": {
+          "pokeAbove": 0,
+          "pokeInside": 0,
+          "underPoke": 0,
+          "maxOver": -0.123,
+          "maxOverAt": {
+            "lx": -1.1,
+            "lz": -8.1,
+            "g": 4.502
+          },
+          "endSteps": {
+            "negEnd": [
+              {
+                "lx": -0.94,
+                "gapAt20cm": 0.119,
+                "gapAt70cm": 0.113
+              },
+              {
+                "lx": 0,
+                "gapAt20cm": 0.121,
+                "gapAt70cm": 0.123
+              },
+              {
+                "lx": 0.94,
+                "gapAt20cm": 0.123,
+                "gapAt70cm": 0.133
+              }
+            ],
+            "posEnd": [
+              {
+                "lx": -0.94,
+                "gapAt20cm": 0.132,
+                "gapAt70cm": 0.126
+              },
+              {
+                "lx": 0,
+                "gapAt20cm": 0.135,
+                "gapAt70cm": 0.127
+              },
+              {
+                "lx": 0.94,
+                "gapAt20cm": 0.137,
+                "gapAt70cm": 0.13
+              }
+            ]
+          }
+        },
+        "clearWidthPlayerMid": {
+          "minClear": -0.77,
+          "maxClear": 0.77,
+          "clearWidth": 1.54
+        },
+        "clearWidthPlayerMouth": {
+          "minClear": -0.77,
+          "maxClear": 0.77,
+          "clearWidth": 1.54
+        },
+        "clearWidthZombieMid": {
+          "minClear": -0.79,
+          "maxClear": 0.79,
+          "clearWidth": 1.58
+        },
+        "underBridge": {
+          "channelGroundY": 1.18,
+          "playerY": 1.17,
+          "stringerBottom": 4.04,
+          "headClearance": 1.171
+        },
+        "walks": {
+          "center": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.037,
+            "yRange": [
+              4.06,
+              4.62
+            ],
+            "snagSpots": []
+          },
+          "leftLane65": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.037,
+            "yRange": [
+              4.19,
+              4.63
+            ],
+            "snagSpots": []
+          },
+          "rightLane65": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.044,
+            "yRange": [
+              4.15,
+              4.62
+            ],
+            "snagSpots": []
+          },
+          "diagApproach": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 14,
+            "maxShove": 0.16,
+            "maxLatErr": 0.41,
+            "maxVSnap": 0.075,
+            "yRange": [
+              4.5,
+              4.68
+            ],
+            "snagSpots": [
+              {
+                "lx": -1.23,
+                "lz": -8.31,
+                "y": 4.5,
+                "shove": 0.112
+              },
+              {
+                "lx": -1.22,
+                "lz": -8.26,
+                "y": 4.5,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.21,
+                "lz": -8.26,
+                "y": 4.58,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.2,
+                "lz": -8.26,
+                "y": 4.58,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.19,
+                "lz": -8.26,
+                "y": 4.58,
+                "shove": 0.159
+              },
+              {
+                "lx": -1.17,
+                "lz": -8.26,
+                "y": 4.58,
+                "shove": 0.159
+              }
+            ]
+          },
+          "sideBankWalk": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.111,
+            "yRange": [
+              3.14,
+              4.45
+            ],
+            "snagSpots": []
+          },
+          "underWadeClear": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.004,
+            "yRange": [
+              1.36,
+              1.51
+            ],
+            "snagSpots": []
+          },
+          "underPilingStop": {
+            "reached": false,
+            "remDist": 5.22,
+            "snags": 44,
+            "maxShove": 0.16,
+            "maxLatErr": 0,
+            "maxVSnap": 0.002,
+            "yRange": [
+              1.19,
+              1.21
+            ],
+            "snagSpots": [
+              {
+                "lx": -1.6,
+                "lz": 0,
+                "y": 1.19,
+                "shove": 0.118
+              },
+              {
+                "lx": -1.56,
+                "lz": 0,
+                "y": 1.19,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.56,
+                "lz": 0,
+                "y": 1.19,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.56,
+                "lz": 0,
+                "y": 1.19,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.56,
+                "lz": 0,
+                "y": 1.19,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.56,
+                "lz": 0,
+                "y": 1.19,
+                "shove": 0.16
+              }
+            ]
+          },
+          "railStopTest": {
+            "reached": false,
+            "remDist": 0.72,
+            "snags": 19,
+            "maxShove": 0.16,
+            "maxLatErr": 0,
+            "maxVSnap": 0,
+            "yRange": [
+              4.62,
+              4.62
+            ],
+            "snagSpots": [
+              {
+                "lx": 0.82,
+                "lz": 0,
+                "y": 4.62,
+                "shove": 0.045
+              },
+              {
+                "lx": 0.86,
+                "lz": 0,
+                "y": 4.62,
+                "shove": 0.083
+              },
+              {
+                "lx": 0.9,
+                "lz": 0,
+                "y": 4.62,
+                "shove": 0.12
+              },
+              {
+                "lx": 0.94,
+                "lz": 0,
+                "y": 4.62,
+                "shove": 0.158
+              },
+              {
+                "lx": 0.94,
+                "lz": 0,
+                "y": 4.62,
+                "shove": 0.16
+              },
+              {
+                "lx": 0.94,
+                "lz": 0,
+                "y": 4.62,
+                "shove": 0.16
+              }
+            ]
+          }
+        }
+      },
+      {
+        "index": 1,
+        "pos": {
+          "x": -46.85,
+          "z": 50.1,
+          "yaw": 2.554,
+          "deckY": 0.689
+        },
+        "platform": {
+          "hw": 1.21,
+          "hl": 8.2,
+          "deckY": 0.759,
+          "under": 0.169175186146715
+        },
+        "railSolidCount": 12,
+        "railSolidRadiusSample": [
+          0.07,
+          0.07,
+          0.07,
+          0.07,
+          0.07,
+          0.07
+        ],
+        "terrain": {
+          "pokeAbove": 0,
+          "pokeInside": 0,
+          "underPoke": 0,
+          "maxOver": -0.126,
+          "maxOverAt": {
+            "lx": -0.3,
+            "lz": -8.1,
+            "g": 0.633
+          },
+          "endSteps": {
+            "negEnd": [
+              {
+                "lx": -0.94,
+                "gapAt20cm": 0.162,
+                "gapAt70cm": 0.119
+              },
+              {
+                "lx": 0,
+                "gapAt20cm": 0.123,
+                "gapAt70cm": 0.125
+              },
+              {
+                "lx": 0.94,
+                "gapAt20cm": 0.134,
+                "gapAt70cm": 0.124
+              }
+            ],
+            "posEnd": [
+              {
+                "lx": -0.94,
+                "gapAt20cm": 0.135,
+                "gapAt70cm": 0.133
+              },
+              {
+                "lx": 0,
+                "gapAt20cm": 0.137,
+                "gapAt70cm": 0.134
+              },
+              {
+                "lx": 0.94,
+                "gapAt20cm": 0.126,
+                "gapAt70cm": 0.132
+              }
+            ]
+          }
+        },
+        "clearWidthPlayerMid": {
+          "minClear": -0.77,
+          "maxClear": 0.77,
+          "clearWidth": 1.54
+        },
+        "clearWidthPlayerMouth": {
+          "minClear": -0.77,
+          "maxClear": 0.77,
+          "clearWidth": 1.54
+        },
+        "clearWidthZombieMid": {
+          "minClear": -0.79,
+          "maxClear": 0.79,
+          "clearWidth": 1.58
+        },
+        "underBridge": {
+          "channelGroundY": -1.44,
+          "playerY": -1.51,
+          "stringerBottom": 0.18,
+          "headClearance": -0.01
+        },
+        "walks": {
+          "center": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.045,
+            "yRange": [
+              0.12,
+              0.76
+            ],
+            "snagSpots": []
+          },
+          "leftLane65": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.044,
+            "yRange": [
+              0.26,
+              0.76
+            ],
+            "snagSpots": []
+          },
+          "rightLane65": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.044,
+            "yRange": [
+              0.24,
+              0.76
+            ],
+            "snagSpots": []
+          },
+          "diagApproach": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 14,
+            "maxShove": 0.16,
+            "maxLatErr": 0.41,
+            "maxVSnap": 0.189,
+            "yRange": [
+              0.52,
+              0.76
+            ],
+            "snagSpots": [
+              {
+                "lx": -1.23,
+                "lz": -8.31,
+                "y": 0.52,
+                "shove": 0.112
+              },
+              {
+                "lx": -1.22,
+                "lz": -8.26,
+                "y": 0.52,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.21,
+                "lz": -8.26,
+                "y": 0.71,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.2,
+                "lz": -8.26,
+                "y": 0.71,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.19,
+                "lz": -8.26,
+                "y": 0.71,
+                "shove": 0.159
+              },
+              {
+                "lx": -1.17,
+                "lz": -8.26,
+                "y": 0.71,
+                "shove": 0.159
+              }
+            ]
+          },
+          "sideBankWalk": {
+            "reached": true,
+            "remDist": 0,
+            "snags": 0,
+            "maxShove": 0,
+            "maxLatErr": 0,
+            "maxVSnap": 0.05,
+            "yRange": [
+              -0.05,
+              0.63
+            ],
+            "snagSpots": []
+          },
+          "underWadeClear": {
+            "reached": false,
+            "remDist": 5.13,
+            "snags": 43,
+            "maxShove": 0.16,
+            "maxLatErr": 0,
+            "maxVSnap": 0.007,
+            "yRange": [
+              -1.18,
+              -1.11
+            ],
+            "snagSpots": [
+              {
+                "lx": -1.48,
+                "lz": 2.1,
+                "y": -1.18,
+                "shove": 0.147
+              },
+              {
+                "lx": -1.47,
+                "lz": 2.1,
+                "y": -1.18,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.47,
+                "lz": 2.1,
+                "y": -1.18,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.47,
+                "lz": 2.1,
+                "y": -1.18,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.47,
+                "lz": 2.1,
+                "y": -1.18,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.47,
+                "lz": 2.1,
+                "y": -1.18,
+                "shove": 0.16
+              }
+            ]
+          },
+          "underPilingStop": {
+            "reached": false,
+            "remDist": 5.22,
+            "snags": 44,
+            "maxShove": 0.16,
+            "maxLatErr": 0,
+            "maxVSnap": 0.008,
+            "yRange": [
+              -1.38,
+              -1.31
+            ],
+            "snagSpots": [
+              {
+                "lx": -1.6,
+                "lz": 0,
+                "y": -1.38,
+                "shove": 0.118
+              },
+              {
+                "lx": -1.56,
+                "lz": 0,
+                "y": -1.38,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.56,
+                "lz": 0,
+                "y": -1.38,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.56,
+                "lz": 0,
+                "y": -1.38,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.56,
+                "lz": 0,
+                "y": -1.38,
+                "shove": 0.16
+              },
+              {
+                "lx": -1.56,
+                "lz": 0,
+                "y": -1.38,
+                "shove": 0.16
+              }
+            ]
+          },
+          "railStopTest": {
+            "reached": false,
+            "remDist": 0.72,
+            "snags": 19,
+            "maxShove": 0.16,
+            "maxLatErr": 0,
+            "maxVSnap": 0,
+            "yRange": [
+              0.76,
+              0.76
+            ],
+            "snagSpots": [
+              {
+                "lx": 0.83,
+                "lz": 0,
+                "y": 0.76,
+                "shove": 0.045
+              },
+              {
+                "lx": 0.86,
+                "lz": 0,
+                "y": 0.76,
+                "shove": 0.083
+              },
+              {
+                "lx": 0.9,
+                "lz": 0,
+                "y": 0.76,
+                "shove": 0.12
+              },
+              {
+                "lx": 0.94,
+                "lz": 0,
+                "y": 0.76,
+                "shove": 0.157
+              },
+              {
+                "lx": 0.94,
+                "lz": 0,
+                "y": 0.76,
+                "shove": 0.16
+              },
+              {
+                "lx": 0.94,
+                "lz": 0,
+                "y": 0.76,
+                "shove": 0.16
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "dock": {
+      "pos": {
+        "x": -86.09,
+        "z": -64.88,
+        "yaw": -2.217,
+        "deckY": -2.85
+      },
+      "platform": {
+        "hw": 1.15,
+        "hl": 4.75,
+        "deckY": -2.79,
+        "under": -3.1499999999999995
+      },
+      "terrain": {
+        "pokeAbove": 0,
+        "pokeInside": 0,
+        "underPoke": 0,
+        "maxOver": -0.124,
+        "maxOverAt": {
+          "lx": -1.1,
+          "lz": -4.65,
+          "g": -2.914
+        },
+        "endSteps": {
+          "negEnd": [
+            {
+              "lx": -0.8,
+              "gapAt20cm": 0.111,
+              "gapAt70cm": 0.088
+            },
+            {
+              "lx": 0,
+              "gapAt20cm": 0.114,
+              "gapAt70cm": 0.085
+            },
+            {
+              "lx": 0.8,
+              "gapAt20cm": 0.11,
+              "gapAt70cm": 0.082
+            }
+          ],
+          "posEnd": [
+            {
+              "lx": -0.8,
+              "gapAt20cm": 2.44,
+              "gapAt70cm": 2.563
+            },
+            {
+              "lx": 0,
+              "gapAt20cm": 2.297,
+              "gapAt70cm": 2.432
+            },
+            {
+              "lx": 0.8,
+              "gapAt20cm": 2.1,
+              "gapAt70cm": 2.258
+            }
+          ]
+        }
+      },
+      "clearWidthMid": {
+        "minClear": -1.15,
+        "maxClear": 1.15,
+        "clearWidth": 2.3
+      },
+      "clearWidthEntrance": {
+        "minClear": -0.81,
+        "maxClear": 1.15,
+        "clearWidth": 1.96
+      },
+      "walks": {
+        "center": {
+          "reached": true,
+          "remDist": 0,
+          "snags": 0,
+          "maxShove": 0,
+          "maxLatErr": 0,
+          "maxVSnap": 0.022,
+          "yRange": [
+            -2.9,
+            -2.58
+          ],
+          "snagSpots": []
+        },
+        "leftLane55": {
+          "reached": true,
+          "remDist": 0,
+          "snags": 0,
+          "maxShove": 0,
+          "maxLatErr": 0,
+          "maxVSnap": 0.028,
+          "yRange": [
+            -2.9,
+            -2.69
+          ],
+          "snagSpots": []
+        },
+        "rightLane55": {
+          "reached": true,
+          "remDist": 0,
+          "snags": 0,
+          "maxShove": 0,
+          "maxLatErr": 0,
+          "maxVSnap": 0.027,
+          "yRange": [
+            -2.9,
+            -2.65
+          ],
+          "snagSpots": []
+        },
+        "diagShoreEntry": {
+          "reached": true,
+          "remDist": 0,
+          "snags": 5,
+          "maxShove": 0.096,
+          "maxLatErr": 0.1,
+          "maxVSnap": 0.063,
+          "yRange": [
+            -2.9,
+            -2.79
+          ],
+          "snagSpots": [
+            {
+              "lx": -0.94,
+              "lz": -4.06,
+              "y": -2.79,
+              "shove": 0.045
+            },
+            {
+              "lx": -0.92,
+              "lz": -3.94,
+              "y": -2.79,
+              "shove": 0.083
+            },
+            {
+              "lx": -0.9,
+              "lz": -3.83,
+              "y": -2.79,
+              "shove": 0.096
+            },
+            {
+              "lx": -0.87,
+              "lz": -3.71,
+              "y": -2.79,
+              "shove": 0.081
+            },
+            {
+              "lx": -0.85,
+              "lz": -3.59,
+              "y": -2.79,
+              "shove": 0.04
+            }
+          ]
+        },
+        "shorePastCorner": {
+          "reached": true,
+          "remDist": 0,
+          "snags": 8,
+          "maxShove": 0.138,
+          "maxLatErr": 0.19,
+          "maxVSnap": 0.014,
+          "yRange": [
+            -3.05,
+            -2.81
+          ],
+          "snagSpots": [
+            {
+              "lx": -1.8,
+              "lz": -4.05,
+              "y": -3.02,
+              "shove": 0.08
+            },
+            {
+              "lx": -1.8,
+              "lz": -3.95,
+              "y": -3.03,
+              "shove": 0.133
+            },
+            {
+              "lx": -1.82,
+              "lz": -3.88,
+              "y": -3.01,
+              "shove": 0.138
+            },
+            {
+              "lx": -1.85,
+              "lz": -3.81,
+              "y": -3.02,
+              "shove": 0.132
+            },
+            {
+              "lx": -1.87,
+              "lz": -3.72,
+              "y": -3.03,
+              "shove": 0.121
+            },
+            {
+              "lx": -1.87,
+              "lz": -3.61,
+              "y": -3.03,
+              "shove": 0.106
+            }
+          ]
+        }
+      }
+    },
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "errors": []
+  },
+  "pageErrors": []
+}

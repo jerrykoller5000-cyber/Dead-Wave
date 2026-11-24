@@ -359,51 +359,145 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
   const deep=heavy?.4:acid?.48:.3;
   torso.userData.bodyMat=skin;u.bodyMats=[skin];
   // A continuous pelvic waistband reaches inside the abdomen and both hip sockets.
-  loft(hips,cloth,[[-.035,wide*.34,deep*.36],[.04,wide*.41,deep*.43],[.17,wide*.40,deep*.43],[.255,wide*.30,deep*.34]],12);
-  loft(torso,skin,[[-.08,wide*.29,deep*.32],[.03,wide*.36,deep*.40],[.17,wide*.43,deep*.47],[.31,wide*.5,deep*.5],[.42,wide*.44,deep*.42],[.48,wide*.22,deep*.28],[.51,.064,.065]],12);
+  const spitter=k==='spitter', drowned=k==='drowned', brute=k==='brute';
+  let spitterBody, drownedBody;
+  if(spitter){
+    // The pelvis narrows into two thigh-local cuffs that travel with the stride.
+    loft(hips,cloth,[[-.035,.188,.108],[-.006,.206,.127],[.043,.244,.176],[.105,.250,.181,.012],[.171,.236,.168,.012],[.216,.206,.142,.006],[.248,.178,.119]],12);
+    const wetSkin=mat(skin.color.clone().lerp(new T.Color(0xb8b18b),.35),false,0,'wet');
+    // One continuous skin shell from the tucked abdomen to the shoulder line.
+    spitterBody=loft(torso,wetSkin,[[-.215,.154,.143,.027],[-.175,.220,.202,.057],
+      [-.110,.281,.248,.084],[0,.325,.277,.085],[.150,.312,.271,.052],
+      [.30,.314,.237,.002],[.385,.278,.199,-.002],[.446,.175,.143,-.008],[.481,.105,.101,-.020]],12);
+    loft(torso,skin,[[.412,.135,.114,-.03],[.458,.109,.104,-.031],[.513,.097,.092,-.027],[.554,.089,.077,-.020]],10);
+  }else if(drowned){
+    // Soaked cloth follows the hips, while the long torso fills the seam above it.
+    loft(hips,cloth,[[-.065,.151,.096],[-.028,.183,.120],[.044,.196,.139],[.12,.190,.139],[.174,.175,.125],[.238,.139,.104]],10);
+    drownedBody=loft(torso,skin,[[-.123,.122,.101],[-.08,.145,.119],[.025,.177,.140],[.16,.214,.152],[.29,.242,.156],
+      [.365,.257,.148,-.007],[.412,.235,.134,-.015],[.446,.186,.119,-.020],[.463,.140,.112,-.023],[.504,.091,.082,-.026],[.55,.076,.072,-.022]],12);
+  }else if(brute){
+    loft(hips,cloth,[[-.068,.179,.127],[-.030,.202,.152],[.048,.249,.170],[.113,.261,.176],
+      [.171,.251,.171],[.231,.219,.143],[.257,.192,.129]],12);
+  }else{
+    loft(hips,cloth,[[-.035,wide*.34,deep*.36],[.04,wide*.41,deep*.43],[.17,wide*.40,deep*.43],[.255,wide*.30,deep*.34]],12);
+    loft(torso,skin,[[-.08,wide*.29,deep*.32],[.03,wide*.36,deep*.40],[.17,wide*.43,deep*.47],[.31,wide*.5,deep*.5],[.42,wide*.44,deep*.42],[.48,wide*.22,deep*.28],[.51,.064,.065]],12);
+  }
   // Trapezius and collarbone flow into the shoulders instead of exposing ball joints.
   for(const side of [-1,1]){
-    egg(torso,skin,side*wide*.25,.425,-.015,wide*.51,.18,deep*.8,side*.27);
-    // A deltoid root reaches the actual shoulder pivot; no detached upper arm.
-    path(torso,skin,[[side*wide*.29,.40,0],[side*.255,.42,0],[side*.32,.42,0]],.082,.09);
-    path(torso,pale,[[side*.025,.455,.078],[side*.11,.435,.12],[side*wide*.39,.40,.08]],.019);
-    egg(torso,skin,side*wide*.19,.27,-deep*.43,wide*.33,.30,.07,side*.3);
+    if(spitter){
+      // A low trapezius overlaps the rounded, moving cap at the arm pivot.
+      egg(torso,skin,side*.216,.391,-.012,.276,.165,.224,side*.24);
+    }else if(drowned){
+      egg(torso,skin,side*.226,.392,-.008,.222,.131,.177,side*.21);
+    }else{
+      egg(torso,skin,side*wide*.25,.425,-.015,wide*.51,.18,deep*.8,side*.27);
+      // A deltoid root reaches the actual shoulder pivot; no detached upper arm.
+      path(torso,skin,[[side*wide*.29,.40,0],[side*.255,.42,0],[side*.32,.42,0]],.082,.09);
+      path(torso,pale,[[side*.025,.455,.078],[side*.11,.435,.12],[side*wide*.39,.40,.08]],.019);
+    }
+    if(!spitter&&!drowned)egg(torso,skin,side*wide*.19,.27,-deep*.43,wide*.33,.30,.07,side*.3);
   }
   for(const side of [-1,1]){
-    egg(torso,pale,side*wide*.23,.36,.035,wide*.47,.21,deep*.9,side*.1);
+    if(!spitter&&!drowned&&k!=='colossus')egg(torso,pale,side*wide*.23,.36,.035,wide*.47,.21,deep*.9,side*.1);   // D-242 colossus P1 #8 (Q4): its pale pecs showed as torn flaps at the plate's top corners
     const arm=side<0?armLG:armRG,el=arm.userData.elbowG,leg=side<0?legLG:legRG,shin=leg.userData.shinG;
     const muscle=heavy?1.6:k==='feral'||k==='leaper'?1.08:.92;
-    arm.userData.upper=loft(arm,skin,[[-.355,.053*muscle,.06*muscle],[-.29,.06*muscle,.063*muscle],[-.20,.085*muscle,.095*muscle,.014],[-.10,.102*muscle,.104*muscle,.008],[0,.11*muscle,.103*muscle],[.08,.063*muscle,.075*muscle]],10);
-    egg(el,skin,0,0,-.015,.14*muscle,.13,.15*muscle);
+    arm.userData.upper=loft(arm,skin,spitter?
+      [[-.366,.062,.064],[-.34,.066,.067],[-.26,.074,.078,.006],[-.17,.092,.094,.012],[-.075,.108,.109,.006],[.018,.103,.097],[.074,.075,.073],[.106,.036,.044]]:
+      drowned?[[-.367,.058,.060],[-.34,.061,.064],[-.265,.068,.075,.005],[-.166,.082,.089,.011],
+        [-.068,.099,.099,.006],[.022,.096,.093],[.076,.065,.065],[.097,.032,.037]]:
+      [[-.355,.053*muscle,.06*muscle],[-.29,.06*muscle,.063*muscle],[-.20,.085*muscle,.095*muscle,.014],[-.10,.102*muscle,.104*muscle,.008],[0,.11*muscle,.103*muscle],[.08,.063*muscle,.075*muscle]],10);
+    if(spitter){const ball=A.put(el,new T.SphereGeometry(1,8,4),skin,0,-.002,-.010);ball.scale.set(.118*s/2,.104*s/2,.122*s/2);} // D-242 P2 #5: round elbow, no facet ring
+    else if(drowned)egg(el,skin,0,-.003,-.006,.113,.112,.116);
+    else egg(el,skin,0,0,-.015,.14*muscle,.13,.15*muscle);
     // The wrist and palm are one continuous surface, with a gentle heel flare.
-    loft(el,skin,[[-.425,.034*muscle,.028*muscle,.024],[-.39,.068*muscle,.045*muscle,.02],[-.35,.075*muscle,.050*muscle,.02],[-.308,.052*muscle,.049*muscle,.012],[-.26,.055*muscle,.058*muscle],[-.17,.077*muscle,.070*muscle,-.01],[-.07,.082*muscle,.075*muscle],[.025,.055*muscle,.061*muscle]],10);
-    rod(el,pale,[-.018,-.03,.063],[.018,-.29,.042],.021,.014);
+    const forearm=loft(el,skin,spitter?
+      [[-.425,.031,.026,.024],[-.39,.063,.041,.02],[-.35,.069,.046,.02],[-.308,.048,.045,.012],[-.26,.051,.053],[-.17,.071,.064,-.01],[-.07,.074,.067],[-.025,.066,.065],[.03,.056,.055]]:
+      drowned?[[-.425,.029,.026,.023],[-.39,.058,.040,.02],[-.35,.066,.045,.018],[-.308,.046,.045,.009],
+        [-.24,.048,.052,-.006],[-.15,.061,.059,-.011],[-.063,.065,.065,-.006],[-.016,.061,.065],[.026,.057,.059]]:
+      [[-.425,.034*muscle,.028*muscle,.024],[-.39,.068*muscle,.045*muscle,.02],[-.35,.075*muscle,.050*muscle,.02],[-.308,.052*muscle,.049*muscle,.012],[-.26,.055*muscle,.058*muscle],[-.17,.077*muscle,.070*muscle,-.01],[-.07,.082*muscle,.075*muscle],[.025,.055*muscle,.061*muscle]],10);
+    if(!drowned&&!brute&&!spitter)rod(el,pale,[-.018,-.03,.063],[.018,-.29,.042],.021,.014); // D-242 P2 #3: no pale stick on the spitter's forearm
     // Palm volume is included in the forearm loft above.
     for(let f=0;f<4;f++){
       const x=(f-1.5)*.031*muscle,len=(f===0||f===3)?.08:.11;
-      path(el,skin,[[x,-.37,.025],[x,-.4-len*.45,.047],[x,-.4-len,.015]],.021*muscle);
+      if(spitter)roundPath(A,T,el,skin,s,[[x,-.37,.025],[x,-.4-len*.45,.047],[x,-.4-len,.015]],.020,.015,6); // D-242 P2 #9: round fingers
+      else path(el,skin,[[x,-.37,.025],[x,-.4-len*.45,.047],[x,-.4-len,.015]],.021*muscle);
       if(['feral','leaper','demon','screamer','guardian','caveguard'].includes(k))
         path(el,hair,[[x,-.4-len,.015],[x,-.47-len,.052],[x,-.50-len,.10],[x*.8,-.48-len,.13]],.018);
-      else box(el,teeth,x,-.4-len,.030,.021,.032,.008);
-      egg(el,pale,x,-.37,.056,.035,.037,.018);
+      else if(spitter||drowned){
+        const nailY=-.4-len;
+        path(el,hair,[[x,nailY+.014,.029],[x,nailY+.002,.030],[x,nailY-.011,.026]],.009,.005);
+      }else if(brute){
+        const tip=-.4-len;
+        path(el,hair,[[x,tip+.018,.024],[x,tip+.005,.029],[x,tip-.010,.024]],.013,.007);
+      }else box(el,teeth,x,-.4-len,.030,.021,.032,.008);
+      if(spitter)egg(el,skin,x,-.375,.051-Math.abs(x)*.31,.023,.027,.022);
+      else if(drowned)egg(el,skin,x,-.375,.049-Math.abs(x)*.29,.023,.027,.022);
+      else if(brute)egg(el,skin,x,-.379,.050-Math.abs(x)*.24,.030,.036,.028);
+      else egg(el,pale,x,-.37,.056,.035,.037,.018);
     }
-    path(el,skin,[[side*.065,-.33,.025],[side*.096,-.39,.065],[side*.066,-.43,.072]],.026);
+    if(spitter)roundPath(A,T,el,skin,s,[[side*.065,-.33,.025],[side*.096,-.39,.065],[side*.066,-.43,.072]],.025,.017,6);
+    else path(el,skin,[[side*.065,-.33,.025],[side*.096,-.39,.065],[side*.066,-.43,.072]],.026);
     const legcloth=['military','shambler','feral','screamer','drowned'].includes(k);
     egg(leg,legcloth?cloth:skin,0,-.045,0,.175*(heavy?1.3:1),.21,.20);
     const lm=heavy?1.35:1;
-    leg.userData.thigh=loft(leg,legcloth?cloth:skin,[[-.38,.067*lm,.067*lm,.01],[-.29,.080*lm,.10*lm],[-.13,.104*lm,.119*lm,-.01],[.02,.098*lm,.09*lm]],10);
-    egg(shin,pale,0,-.015,.03,.15,.13,.16);
+    leg.userData.thigh=loft(leg,legcloth?cloth:skin,spitter?
+      [[-.403,.069,.074,-.001],[-.38,.071,.077,-.003],[-.30,.080,.092,-.006],[-.20,.096,.109,-.008],[-.13,.104,.119,-.01],[.02,.098,.09]]:
+      drowned?[[-.402,.065,.071,.004],[-.374,.067,.073,.003],[-.29,.079,.094,.001],
+        [-.20,.099,.112,-.004],[-.11,.113,.122,-.008],[.006,.103,.105],[.048,.085,.087]]:
+      [[-.38,.067*lm,.067*lm,.01],[-.29,.080*lm,.10*lm],[-.13,.104*lm,.119*lm,-.01],[.02,.098*lm,.09*lm]],10);
+    if(spitter){
+      loft(leg,cloth,[[-.160,.097,.110,-.009],[-.150,.102,.118,-.009],[-.123,.110,.128,-.008],[-.065,.119,.130,-.004],[.007,.121,.125],[.059,.105,.108]],10);
+      {const cap=A.put(shin,new T.SphereGeometry(1,8,4),skin,0,-.016,.050);cap.scale.set(.074*s/2,.088*s/2,.066*s/2);} // D-242 P2 #6: round kneecap set into the leg
+    }else if(drowned)egg(shin,skin,0,-.015,.032,.089,.103,.087);
+    else egg(shin,pale,0,-.015,.03,.15,.13,.16);
     const bareFoot=['feral','leaper','demon','guardian','caveguard'].includes(k);
-    loft(shin,skin,[...(bareFoot?[[-.405,.065*lm,.102,.055],[-.375,.092*lm,.139,.043],[-.34,.061*lm,.080,.016],[-.29,.048*lm,.057]]:[[-.34,.048*lm,.051,.01]]),[-.23,.054*lm,.066,-.015],[-.12,.083*lm,.085,-.02],[-.045,.067*lm,.069],[.018,.063*lm,.07]],10);
+    loft(shin,skin,spitter?
+      [[-.34,.048,.051,.01],[-.23,.054,.066,-.015],[-.13,.076,.078,-.012],[-.063,.073,.076,-.008],[-.018,.071,.077,-.003],[.034,.069,.074,-.001]]:
+      drowned?[[-.34,.049,.054,.013],[-.236,.055,.065,-.01],[-.148,.073,.075,-.013],
+        [-.085,.070,.074,-.011],[-.030,.067,.071,-.003],[.024,.064,.071,.004]]:
+      [...(bareFoot?[[-.405,.065*lm,.102,.055],[-.375,.092*lm,.139,.043],[-.34,.061*lm,.080,.016],[-.29,.048*lm,.057]]:[[-.34,.048*lm,.051,.01]]),[-.23,.054*lm,.066,-.015],[-.12,.083*lm,.085,-.02],[-.045,.067*lm,.069],[.018,.063*lm,.07]],10);
     // On lean types the straight shin rod bridges the concave calf.
     if(['shambler','feral','leaper'].includes(k)){
       const inset=k==='feral'?.005:0;
       path(shin,shadow,[[.02,-.06,.064],[.018,-.14,.054-inset],[.013,-.23,.048-inset],[.008,-.31,.052-inset]],.010,.006);
     }
-    else rod(shin,shadow,[.02,-.06,.066],[.008,-.31,.052],.015,.01);
+    else if(!drowned&&!brute&&!spitter)rod(shin,shadow,[.02,-.06,.066],[.008,-.31,.052],.015,.01); // D-242 P2 #2: no dark rod down the spitter's shin
     const booted=!['feral','leaper','demon','guardian','caveguard'].includes(k);
-    if(booted)egg(shin,leather,0,-.355,.043,.185*(heavy?1.35:1),.114,.278);
-    if(booted){
+    if(spitter){
+      // Keep the old ground contact while replacing the square sole plate.
+      loft(shin,hair,[[-.4165,.073,.118,.042],[-.411,.083,.132,.043],[-.399,.087,.139,.043],[-.391,.084,.134,.043]],10);
+      loft(shin,leather,[[-.403,.084,.134,.043],[-.377,.092,.140,.043],[-.345,.083,.117,.033],[-.313,.073,.094,.015],[-.258,.069,.079,-.001],[-.224,.065,.073,-.009],[-.195,.063,.071,-.015]],10);
+      for(let j=0;j<3;j++){
+        const y=-.259-j*.031,z=.074+j*.023;
+        path(shin,shadow,[[-.040,y,z-.014],[0,y-.007,z+.005],[.040,y-.013,z-.005]],.004);
+        path(shin,pale,[[.039,y,z-.014],[0,y-.011,z+.006],[-.040,y-.014,z-.005]],.003);
+      }
+    }else if(drowned){
+      loft(shin,hair,[[-.4165,.069,.119,.040],[-.409,.083,.132,.041],[-.397,.086,.135,.042],[-.388,.082,.128,.040]],10);
+      const boot=loft(shin,leather,[[-.401,.082,.130,.043],[-.382,.091,.139,.045],[-.348,.082,.119,.033],
+        [-.307,.072,.094,.017],[-.264,.070,.083,.003],[-.231,.067,.077,-.006],[-.205,.061,.069,-.010]],10);
+      const bootFront=conceptSurface(T,boot.geometry,s);
+      for(let lace=0;lace<3;lace++){
+        const y=-.265-lace*.029;
+        const points=[[-.035,y],[-.018,y-.004],[0,y-.008],[.018,y-.010],[.035,y-.012]];
+        const cord=path(shin,shadow,points.map(([x,y])=>[x,y,bootFront(x,y,1)+.001]),.004);
+        // Keep the cord and its boot on the same animated ankle after skin batching.
+        cord.userData.bootAttachment=true;
+      }
+    }else if(brute||k==='colossus'){   // D-242 colossus P1 #5 (Q1): the colossus stood on a square slab sole; now the brute's lofted boot
+      // The sole footprint stays inside the existing boot contact envelope.
+      loft(shin,hair,[[-.4165,.100,.121,.040],[-.410,.113,.133,.040],[-.399,.117,.136,.041],[-.391,.113,.132,.042]],12);
+      const boot=loft(shin,leather,[[-.402,.112,.132,.043],[-.378,.124,.140,.045],[-.348,.108,.117,.034],
+        [-.314,.094,.092,.018],[-.265,.083,.076,.003],[-.224,.075,.072,-.010],[-.197,.068,.066,-.015]],12);
+      const face=conceptSurface(T,boot.geometry,s);
+      for(let row=0;row<3;row++){
+        const y=-.267-row*.023;
+        const points=[[-.040,y],[0,y-.006],[.040,y-.011]].map(([x,py])=>[x,py,face(x,py,1)-.002]);
+        const cord=path(shin,shadow,points,.006,.004);
+        cord.userData.bootAttachment=true;
+      }
+    }else if(booted){
+      egg(shin,leather,0,-.355,.043,.185*(heavy?1.35:1),.114,.278);
       box(shin,hair,0,-.403,.04,.176*(heavy?1.35:1),.027,.263);
       loft(shin,leather,[[-.38,.083,.10,.045],[-.32,.077,.089,.005],[-.235,.078,.080],[ -.20,.066,.069]],9);
       egg(shin,leather,0,-.363,.116,.166*(heavy?1.35:1),.088,.136);
@@ -411,13 +505,24 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
       for(const sign of [-1,1])path(shin,pale,[[sign*.065,-.374,-.055],[sign*.077,-.384,.065],[sign*.061,-.379,.160]],.003);
     }
     else for(let f=0;f<3;f++)spike(shin,hair,[(f-1)*.055,-.37,.15],[(f-1)*.065,-.395,.245],.021);
-    if(legcloth)for(let j=0;j<3;j++){
+    if(legcloth&&!drowned)for(let j=0;j<3;j++){
       const fittedHem=k==='shambler'||k==='feral';
       rag(leg,cloth,(j-1)*.052,-.23,fittedHem?.11:.104,fittedHem?.056:.064,fittedHem?.08+(j%2)*.025:.1+(j%2)*.05,(j-1)*.15);
     }
     // Torn muscle and mottling: surface chips, not floating decals.
     egg(arm,shadow,side*.042,-.16,.069*muscle,.05,.14,.018,-side*.35);
-    if(k==='leaper'||k==='shambler'||k==='feral'){
+    if(drowned){
+      const sample=conceptSurface(T,forearm.geometry,s);
+      const front=(x,y)=>sample(x,y,1);
+      const scars=[
+        [[-.036,-.108],[-.022,-.143],[-.014,-.158]],
+        [[.018,-.162],[.010,-.186],[.012,-.207]]
+      ];
+      for(const scratch of scars){
+        const points=scratch.map(([x,y])=>[x*side,y,front(x*side,y)+.002]);
+        ribbon(el,shadow,points,.005,front);
+      }
+    }else if(k==='leaper'||k==='shambler'||k==='feral'){
       const rings=[[-.26,.055*muscle,.058*muscle,0],[-.17,.077*muscle,.070*muscle,-.01],[-.07,.082*muscle,.075*muscle,0]];
       const forearmFront=(x,y)=>{
         const i=y<rings[1][0]?0:1,lo=rings[i],hi=rings[i+1],t=(y-lo[0])/(hi[0]-lo[0]);
@@ -429,6 +534,12 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
       const ribbonPoints=k==='leaper'?slash.flatMap((p,i)=>i<slash.length-1?[p,[(p[0]+slash[i+1][0])/2,(p[1]+slash[i+1][1])/2]]:[p]):slash;
       ribbon(el,wound,onForearm(ribbonPoints,k==='leaper'?.004:.003),k==='leaper'?.013:.017,k==='leaper'?forearmFront:null);
       path(el,pale,onForearm([[-side*.022,-.11],[-side*.040,-.15],[-side*.024,-.201]],.006),.004);
+    }else if(spitter){
+      // D-242 P2 #4: the forearm scar follows the skin instead of floating as a painted chevron.
+      const sample=conceptSurface(T,forearm.geometry,s),front=(x,y)=>sample(x,y,1);
+      const slash=[[-side*.018,-.105],[-side*.034,-.125],[-side*.040,-.150],[-side*.030,-.178],[-side*.016,-.205]];
+      ribbon(el,wound,slash.map(([x,y])=>[x,y,front(x,y)+.0015]),.011,front);
+      path(el,pale,slash.slice(1,4).map(([x,y])=>[x*1.1,y,front(x*1.1,y)+.0025]),.0028);
     }else{
       ribbon(el,wound,[[-side*.020,-.105,.074*muscle],[-side*.046,-.143,.075*muscle],[-side*.018,-.21,.066*muscle]],.017);
       path(el,pale,[[-side*.022,-.11,.078*muscle],[-side*.040,-.15,.079*muscle],[-side*.024,-.201,.071*muscle]],.004);
@@ -488,7 +599,8 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
       path(head,hair,[[x,.175,z],[side*(.124+i*.008),.085,z-.023],[side*(.126-i*.009),-.064-i*.018,z-.042]],.019);
     }
   }else if(['shambler','feral','spitter','drowned'].includes(k)){
-    egg(head,hair,-.032,.183,-.045,.24,.040,.23);
+    if(spitter){const crown=A.put(head,new T.SphereGeometry(1,8,4),hair,-.010,.176,-.042);crown.scale.set(.104*s,.038*s,.088*s);} // D-242 P2 #7
+    else egg(head,hair,-.032,.183,-.045,.24,.040,.23);
     for(let i=0;i<9;i++){
       const row=Math.floor(i/4),x=(i%4-1.5)*.050;
       // Bend the rear row down at the temples instead of bridging level across the dome.
@@ -515,7 +627,8 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
     }
   }
   // Dirt patches follow the skin's contours and repeat deterministically per type.
-  for(let i=0;i<5;i++){
+  // D-242 P2 #1: the spitter's rear skull keeps its mottled skin texture, without six-sided chips.
+  if(!spitter)for(let i=0;i<5;i++){
     const x=(i%3-1)*.077,y=-.03+Math.floor(i/3)*.15;
     const z=['shambler','military','drowned','spitter','bomber'].includes(k)?headDepth(x,y,-1)-.004:-.148;
     egg(head,i%2?shadow:pale,x,y,z,.065,.067,.016,i*.8);
@@ -565,33 +678,48 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
   }
   if(acid){
     const acidMat=mat(k==='bomber'?0xb5b757:0xb8b18b,false,0,'wet'),sac=mat(0xc4c573,false,0,'wet'),ooze=mat(0xb6cb38,true);
-    const spitterRings=[[-.20,.11,.11,.13],[-.13,.245,.21,.14],[0,.325,.262,.10],[.15,.312,.246,.08],[.32,.23,.185,.055],[.43,.15,.12,.015]];
-    const bellyZ=(x,y)=>{
-      if(k==='bomber')return .12+.335*Math.sqrt(Math.max(0,1-(x/.415)**2-((y-.095)/.36)**2));
-      const n=spitterRings.findIndex((r,i)=>i&&y<=r[0]),hi=Math.max(1,n<0?spitterRings.length-1:n),lo=hi-1;
-      const a=spitterRings[lo],b=spitterRings[hi],f=Math.max(0,Math.min(1,(y-a[0])/(b[0]-a[0])));
-      const rx=a[1]+(b[1]-a[1])*f,rz=a[2]+(b[2]-a[2])*f,cz=a[3]+(b[3]-a[3])*f;
-      return cz+rz*Math.sqrt(Math.max(0,1-(x/rx)**2));
-    };
+    const surface=spitter?conceptSurface(T,spitterBody.geometry,s):null;
+    const bellyZ=(x,y)=>surface?surface(x,y,1):.12+.335*Math.sqrt(Math.max(0,1-(x/.415)**2-((y-.095)/.36)**2));
     if(k==='bomber'){
       // The old eight-by-four sphere made an angular belly cone in the gameplay silhouette.
       const belly=A.put(torso,new T.SphereGeometry(1,16,10),acidMat,0,.095,.12);
       belly.scale.set(.415*s,.36*s,.335*s);
-    }else loft(torso,acidMat,spitterRings,16);
-    for(let i=0;i<12;i++){
+    }
+    if(spitter){
+      const blisters=[[-.126,.219,.028,.022],[-.212,.110,.034,.025],[-.105,.062,.024,.025],[-.156,-.063,.027,.020],
+        [.117,.252,.024,.020],[.197,.138,.033,.024],[.109,.039,.025,.021],[.161,-.052,.027,.022]];
+      const sphere=new T.SphereGeometry(1,8,5),forward=new T.Vector3(0,0,1);
+      for(const [i,[x,y,rx,ry]] of blisters.entries()){
+        const dx=(bellyZ(x+.005,y)-bellyZ(x-.005,y))/.010;
+        const dy=(bellyZ(x,y+.005)-bellyZ(x,y-.005))/.010;
+        const normal=new T.Vector3(-dx,-dy,1).normalize();
+        const blister=A.put(torso,sphere,i%3===0?sac:acidMat,x+normal.x*.002,y+normal.y*.002,bellyZ(x,y)+normal.z*.002);
+        blister.scale.set(rx*s,ry*s,.023*s);
+        blister.quaternion.setFromUnitVectors(forward,normal);
+      }
+    }else for(let i=0;i<12;i++){
       const a=i*2.399,r=.12+(i%3)*.055,x=Math.cos(a)*r,y=.12+Math.sin(a)*r;
       const z=bellyZ(x,y);
       egg(torso,i%3?shadow:sac,x,y,z+.005,.036+(i%3)*.014,.04+(i%2)*.02,.023);
-      if(k==='spitter'&&i%3===0){egg(torso,wound,x,y,z+.012,.047,.043,.012);egg(torso,mouth,x,y,z+.019,.023,.025,.008);}
     }
-    if(k==='spitter'){
-      for(const side of [-1,1])ribbon(torso,cloth,[[side*.22,.46,.11],[side*.26,.35,.15],[side*.27,.24,.18],[side*.27,.11,.17],[side*.25,.04,.15]],.047);
-      const vestBack=A.plate(torso,cloth,[[.10,.15,.29,.04],[.25,.235,.32,.085],[.42,.21,.29,.07]],.014);
-      vestBack.rotation.y=Math.PI;
-      for(const side of [-1,1])path(torso,wound,[[side*.06,.43,.13],[side*.16,.39,.19],[side*.24,.27,.18]],.025);
+    if(spitter){
+      for(const side of [-1,1]){
+        const anchors=[[.150,.430],[.218,.371],[.260,.282],[.271,.156],[.250,.067]];
+        const strap=anchors.flatMap(([x,y],j)=>j===anchors.length-1?[[x,y]]:
+          Array.from({length:4},(_,i)=>[x+(anchors[j+1][0]-x)*i/4,y+(anchors[j+1][1]-y)*i/4]));
+        ribbon(torso,cloth,strap.map(([x,y])=>[side*x,y,bellyZ(side*x,y)+.010]),.041,bellyZ);
+        // D-242 P2 #8: the abrasion is a flat graze on the skin, not a rod standing off the chest.
+        const abrasion=[[.080,.400],[.108,.385],[.135,.368],[.176,.330],[.217,.285]].map(([x,y])=>[side*x,y,bellyZ(side*x,y)+.0015]);
+        ribbon(torso,wound,abrasion,.010,bellyZ);
+      }
+      spitterVest(A,T,torso,cloth,s,surface);
       // End the chin drips against the upper chest rather than spanning its throat hollow.
       for(let i=0;i<4;i++)path(head,ooze,[[(i-1.5)*.037,-.15,.185],[(i-1.5)*.04,-.21-(i%2)*.025,.172],[(i-1.5)*.03,-.25-(i%2)*.03,.153]],.009);
-      path(torso,ooze,[[.04,.26],[.02,.13],[.05,-.02],[.045,-.14],[.015,-.19]].map(([x,y])=>[x,y,bellyZ(x,y)+.009]),.009);
+      const vein=Array.from({length:17},(_,i)=>{
+        const y=.258-i*.026,x=.034+.013*Math.sin(i*.58);
+        return [x,y,bellyZ(x,y)+.009];
+      });
+      path(torso,ooze,vein,.008,.004);
     }else{
       // The existing fuse animation drives a belly material and a separate vein material.
       acidMat.emissive.setHex(0x758c21);acidMat.emissiveIntensity=.3;u.pulseMats=[acidMat,ooze];
@@ -609,35 +737,52 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
       for(let j=0;j<7;j++)rag(hips,leather,(j-3)*.067,.11,.245,.075,.18+(j%2)*.05);
     }
   }
-  if(k==='drowned'){
-    egg(torso,cloth,0,.24,0,.46,.46,.32);
-    // GP-20146: weeds and tabs root on the base torso/cloth envelope.
-    const backRings=[[-.08,wide*.29,deep*.32],[.03,wide*.36,deep*.40],[.17,wide*.43,deep*.47],[.31,wide*.5,deep*.5],[.42,wide*.44,deep*.42],[.48,wide*.22,deep*.28],[.51,.064,.065]];
-    const backPoint=(x,y)=>{let a=backRings[0],b=backRings.at(-1);for(let j=1;j<backRings.length;j++)if(y<=backRings[j][0]){a=backRings[j-1];b=backRings[j];break;}
-      const f=Math.max(0,Math.min(1,(y-a[0])/(b[0]-a[0]))),rx=a[1]+(b[1]-a[1])*f,rz=a[2]+(b[2]-a[2])*f,xx=Math.max(-rx*.9,Math.min(rx*.9,x));
-      const flesh=rz*Math.sqrt(Math.max(0,1-(xx/rx)**2)),clothZ=.16*Math.sqrt(Math.max(0,1-(xx/.23)**2-((y-.24)/.23)**2));
-      return[xx,y,-Math.max(flesh,clothZ)-.001];};
-    const backPath=pts=>pts.map(([x,y])=>backPoint(x,y));
-
-    // Lay the washboard into the rounded chest, clear of the lowered chin.
-    for(const side of [-1,1])box(torso,leather,side*.14,.23,.135,.032,.42,.025,side*.09);
-    for(let i=0;i<4;i++){box(torso,rust,0,.35-i*.072,.171,.278,.052,.069,(i%2?1:-1)*.03);for(const side of [-1,1])egg(torso,steel,side*.107,.35-i*.072,.208,.022,.022,.009);}
-    for(let i=0;i<9;i++){
-      const side=i%2?1:-1,p=i<4?head:torso,x=side*(i<4?.13:.14),y=i<4?.19:.43,z=i<4?-.06:-.075;
-      // The torso strands root on the tapered upper back before trailing down it.
-      path(p,moss,[[x,y,z],[x+side*.025,y-.16,z-.025],[x-side*.028,y-.34-(i%3)*.08,z-.035]],.017);
+  if(drowned){
+    const body=conceptSurface(T,drownedBody.geometry,s);
+    const front=(x,y)=>body(x,y,1),back=(x,y)=>body(x,y,-1);
+    // The slats remain the Drowned's front tell, with the straps holding them against the chest.
+    const wood=mat(0x74513a,false,0,'wood');
+    for(const side of [-1,1]){
+      const harness=[[.096,.455],[.116,.391],[.132,.317],[.128,.229],[.110,.137]];
+      path(torso,leather,harness.map(([x,y])=>[x*side,y,front(x*side,y)+.006]),.017,.015);
+      path(torso,leather,harness.map(([x,y])=>[x*side,y,back(x*side,y)-.005]),.012,.010);
     }
-    for(let i=0;i<8;i++){
-      const p=i<4?armLG:head,x=i<4?-.07:(i-5)*.045,y=i<4?-.05-(i%4)*.047:.09,z=i<4?.08:(i===5?-.19:-.17);
-      const seatZ=i<4?z:headDepth(x,y,-1)-.008;
-      const b=A.put(p,new T.CylinderGeometry(.018*s,.027*s,.023*s,6),pale,x,y,seatZ,Math.PI/2);
-      egg(p,hair,x,y,seatZ+.015,.017,.017,.009);
+    for(let row=0;row<4;row++){
+      const y=.337-row*.057,w=.118+(row%2)*.010,z=front(0,y)+.026;
+      plate(torso,wood,[[y-.021,w*.95,z-.005,.025],[y-.016,w,z,.023],
+        [y+.015,w,z+.003,.023],[y+.019,w*.93,z-.003,.024]],.026);
+      for(const side of [-1,1])egg(torso,rust,side*w*.77,y,z-.006,.018,.018,.014);
     }
-    for(let i=0;i<7;i++){
-      const x=(i-3)*.061,y=.47-(i%3)*.065;path(torso,moss,backPath([[x,y],[x+.032,y-.15],[x-.024,y-.34],[x+.013,y-.51]]),.012);
-      ribbon(torso,moss,backPath([[x,y],[x+.05,y-.19],[x-.017,y-.38],[x+.028,y-.52]]),.023,(x,y)=>backPoint(x,y)[2]);
+    // Each frond starts within the hull and follows its surface before trailing.
+    const fronds=[
+      [[-.114,.43],[-.126,.315],[-.142,.178],[-.112,.068]],
+      [[-.082,.42],[-.106,.29],[-.087,.16],[-.104,.043]],
+      [[-.038,.389],[-.046,.272],[-.029,.145],[-.064,.025]],
+      [[.041,.438],[.019,.34],[.044,.264],[.024,.173],[.063,.066],[.039,.036]],
+      [[.093,.413],[.085,.348],[.112,.284],[.121,.198],[.098,.112],[.086,.047]],
+      [[.118,.38],[.146,.252],[.146,.144],[.111,.069]]
+    ];
+    for(const frond of fronds){
+      const points=frond.map(([x,y],i)=>[x,y,back(x,y)+(i===0?.003:-.005-i*.004)]);
+      ribbon(torso,moss,points,.016,back);
     }
-    for(let i=0;i<5;i++){const m=rag(torso,cloth,(i-2)*.064,.055,-.153,.056,.12+(i%2)*.05,i*.1),P=m.geometry.attributes.position,v=new T.Vector3();m.updateMatrix();for(let j=0;j<P.count;j++){const depth=P.getZ(j)/s;v.fromBufferAttribute(P,j).applyMatrix4(m.matrix);const q=backPoint(v.x/s,v.y/s);P.setXYZ(j,q[0]*s,q[1]*s,(q[2]-depth)*s);}m.position.set(0,0,0);m.rotation.set(0,0,0);m.scale.set(1,1,1);m.geometry.computeVertexNormals();}
+    for(const side of [-1,1]){
+      const x=side*.110;
+      const points=[[x,.161],[x*1.1,.088],[x*.92,.028]].map(([x,y])=>[x,y,headDepth(x,y,-1)-.003]);
+      path(head,moss,points,.011,.005);
+    }
+    const armSurface=conceptSurface(T,armLG.userData.upper.geometry,s);
+    for(const [parent,depth,spots] of [
+      [armLG,(x,y)=>armSurface(x,y,1),[[-.049,-.039,.026],[-.058,-.083,.020],[-.042,-.124,.023],[-.047,-.166,.016]]],
+      [head,(x,y)=>headDepth(x,y,-1),[[-.054,.090,.023],[.026,.124,.019],[.076,.077,.022],[-.083,.038,.016]]],
+    ]){
+      const sign=parent===head?-1:1;
+      for(const [x,y,r] of spots){
+        const z=depth(x,y);
+        egg(parent,pale,x,y,z-sign*.003,r*1.78,r*1.58,r*.93);
+        egg(parent,shadow,x,y,z+sign*r*.34,r*.78,r*.66,r*.39);
+      }
+    }
   }
   if(k==='leaper'){
     // Root the dorsal ridge on the taper of the hunched back; the older fixed
@@ -668,27 +813,26 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
       box(torso,rust,side*wide*.405,.29,.28,.025,.30,.024);
       for(let i=0;i<3;i++)egg(torso,steel,side*wide*.40,.17+i*.11,.30,.023,.024,.014);
       egg(torso,skin,side*.19,.475,-.04,.29,.20,.24,side*.35);
-      const arm=side<0?armLG:armRG;egg(arm,pale,side*.075,-.16,.025,.17,.27,.18,side*.25);
+      const arm=side<0?armLG:armRG;if(k!=='colossus')egg(arm,pale,side*.075,-.16,.025,.17,.27,.18,side*.25);   // D-242 colossus P1 #9 (Q4): a flat pale disc on the upper arm (a sticker); its wound slashes stay
       for(let j=0;j<(k==='brute'?1:3);j++)path(arm,wound,[[side*.075,-.04-j*.04,.16],[side*.11,-.12-j*.045,.13],[side*.08,-.19-j*.04,.12]],.009);
     }
     for(const side of [-1,1]){
       const arm=side<0?armLG:armRG,el=arm.userData.elbowG,shin=(side<0?legLG:legRG).userData.shinG;
       if(k==='brute')path(torso,leather,[[side*.205,.47,.172],[side*.227,.39,.211],[side*.239,.29,.225],[side*.222,.18,.204],[side*.151,.105,.177]],.025,.023);
-      else box(torso,leather,side*.265,.27,.23,.058,.47,.04,side*.12);
+      else if(k!=='colossus')box(torso,leather,side*.265,.27,.23,.058,.47,.04,side*.12);   // D-242 colossus P1 #3 (Q5): flat boards standing off the plate's edge; its stone carrier's straps run down the plate instead
       box(torso,rust,side*.264,.34,.263,.083,.062,.024);
       box(torso,hair,side*.264,.341,.28,.047,.029,.009);box(torso,rust,side*.263,.341,.289,.007,.041,.008);
       rock(arm,armor,side*.04,.055,0,.34,.16,.36,-side*.2);
       box(el,armor,0,-.2,.117,.24,.20,.065,side*.1);
-      for(let j=0;j<3;j++){box(shin,j%2?rust:armor,0,-.035-j*.092,.112,.205-j*.017,.12,.07,side*.04);box(el,leather,0,-.10-j*.06,.13,.24,.025,.02);}
+      for(let j=0;j<3;j++){box(shin,j%2?rust:armor,0,-.035-j*.092,.112,.205-j*.017,.12,.07,side*.04);if(k!=='colossus')box(el,leather,0,-.10-j*.06,.13,.24,.025,.02);}   // D-242 colossus P1 #6 (Q5): flat straps wider than the forearm stuck out both sides; the curved straps (zombie-fidelity) stay
       for(let j=0;j<3;j++)for(const sign of [-1,1]){egg(el,steel,sign*.087,-.10-j*.06,.151,.017,.018,.011);egg(shin,rust,sign*.071,-.047-j*.092,.151,.018,.019,.011);}
       box(shin,armor,0,-.35,.065,.23,.1,.29);
-      for(let j=0;j<3;j++)rag(hips,k==='brute'?wound:cloth,side*(.05+j*.065),.12,.20,.083,.24+(j%2)*.06,side*.1);
+      if(!brute)for(let j=0;j<3;j++)rag(hips,cloth,side*(.05+j*.065),.12,.20,.083,.24+(j%2)*.06,side*.1);
       if(k!=='brute')for(let j=0;j<3;j++)spike(arm,rust,[side*.06,.09,-.1+j*.09],[side*(.15+j*.015),.28+(j%2)*.1,-.16+j*.1],.047);
     }
     if(k==='brute'){
       fire.userData.surface='metal';
       spike(armLG,steel,[-.08,.06,0],[-.29,.37,-.03],.12);
-      for(let i=0;i<4;i++)egg(torso,shadow,(i%2?1:-1)*(.16+(i%3)*.04),.08+Math.floor(i/2)*.13,-.2,.13,.16,.07);
       box(torso,steel,0,.29,-.223,.52,.33,.09,-.06);
       for(const side of [-1,1]){path(torso,leather,[[side*.205,.47,.172],[side*.233,.49,-.035],[side*.228,.40,-.203],[side*.192,.26,-.216],[side*.148,.12,-.164]],.027,.023);box(torso,rust,side*.21,.35,-.281,.04,.045,.019);}
       for(let j=0;j<3;j++)rock(head,skin,(j-1)*.09,.10,-.06+(j%2)*.10,.077,.07,.07,j*.8);
@@ -757,6 +901,67 @@ export function applyZombieConcept({THREE:T,g,typeKey:k,scale:s,rbox,audit=null}
   remember(T,g,cacheKey);
   mergeEyes(T,g);
   return true;
+}
+
+// Sample the triangulated surface so attached details can follow the skin.
+function conceptSurface(T,geometry,s){
+  const vertices=geometry.attributes.position,index=geometry.index.array;
+  const a=new T.Vector3(),b=new T.Vector3(),c=new T.Vector3(),hit=new T.Vector3(),ray=new T.Ray();
+  return (x,y,side)=>{
+    ray.origin.set(x*s,y*s,side*s);
+    ray.direction.set(0,0,-side);
+    let best=-Infinity;
+    for(let i=0;i<index.length;i+=3){
+      a.fromBufferAttribute(vertices,index[i]);
+      b.fromBufferAttribute(vertices,index[i+1]);
+      c.fromBufferAttribute(vertices,index[i+2]);
+      if(ray.intersectTriangle(a,b,c,false,hit))best=Math.max(best,hit.z*side);
+    }
+    if(!Number.isFinite(best))throw new Error('Concept surface sample outside the mesh: '+x+', '+y);
+    return best*side/s;
+  };
+}
+// D-242 P2: a path with round sections for the spitter's fingers (path() is four-sided).
+function roundPath(A,T,p,m,s,pts,r,end,sides=6){
+  const curve=new T.CatmullRomCurve3(pts.map(v=>new T.Vector3(...v))),steps=Math.max(1,pts.length-1);
+  const pos=[],idx=[],N=new T.Vector3(),B=new T.Vector3();
+  for(let j=0;j<=steps;j++){
+    const t=j/steps,P=curve.getPoint(t),D=curve.getTangent(t),radius=Math.max(.0002,r+(end-r)*t);
+    if(!j)N.set(0,Math.abs(D.y)<.9?1:0,Math.abs(D.y)<.9?0:1).cross(D).normalize();
+    else N.addScaledVector(D,-N.dot(D)).normalize();
+    B.crossVectors(D,N).normalize();
+    for(let i=0;i<sides;i++){const a=i/sides*Math.PI*2,V=P.clone().addScaledVector(N,Math.cos(a)*radius).addScaledVector(B,Math.sin(a)*radius);pos.push(V.x*s,V.y*s,V.z*s);
+      if(j<steps){const x=j*sides+i,y=j*sides+(i+1)%sides;idx.push(x,y,x+sides,y,y+sides,x+sides);}}
+  }
+  for(const edge of [0,steps]){const P=curve.getPoint(edge/steps),c=pos.length/3;pos.push(P.x*s,P.y*s,P.z*s);for(let i=0;i<sides;i++){const a=edge*sides+i,b=edge*sides+(i+1)%sides;idx.push(c,...(edge?[a,b]:[b,a]));}}
+  const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setIndex(idx);geo.computeVertexNormals();return A.put(p,geo,m);
+}
+function spitterVest(A,T,torso,cloth,s,surface){
+  const rows=[[.085,.135],[.170,.168],[.235,.211],[.31,.212],[.3475,.207],[.385,.188],[.426,.137]];
+  const positions=[],indices=[],across=7;
+  const count=rows.length*across;
+  for(const inner of [false,true])for(const [y,w] of rows)for(let i=0;i<across;i++){
+    const x=w*(2*i/(across-1)-1),z=surface(x,y,-1);
+    positions.push(x*s,y*s,(z+(inner?.004:-.009))*s);
+  }
+  for(let row=0;row<rows.length-1;row++)for(let i=0;i<across-1;i++){
+    const a=row*across+i,b=a+across;
+    indices.push(a,b,a+1,b,b+1,a+1,a+count,a+1+count,b+count,b+count,a+1+count,b+1+count);
+  }
+  const rim=[];
+  for(let i=0;i<across;i++)rim.push(i);
+  for(let row=1;row<rows.length;row++)rim.push(row*across+across-1);
+  for(let i=across-2;i>=0;i--)rim.push((rows.length-1)*across+i);
+  for(let row=rows.length-2;row>0;row--)rim.push(row*across);
+  for(let i=0;i<rim.length;i++){
+    const a=rim[i],b=rim[(i+1)%rim.length];
+    indices.push(a,b,a+count,b,b+count,a+count);
+  }
+  const geometry=new T.BufferGeometry();
+  geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));
+  geometry.setIndex(indices);
+  geometry.computeVertexNormals();
+  A.put(torso,geometry,cloth);
 }
 
 function hairLock(A,T,p,m,s,points,width){
@@ -882,22 +1087,30 @@ function batchSurfaces(T,g,keep){
     const all=p.children.filter(o=>o.isMesh&&!keep.has(o.material));if(!all.length)continue;
     // CC-359 (proposal, Claude 3): pieces painted from their own atlas (material.userData.cc359Atlas) keep their UVs and that material
     for(const meshes of [all.filter(o=>!o.material.userData.cc359Atlas),all.filter(o=>o.material.userData.cc359Atlas)]){if(!meshes.length)continue;const atlasMat=meshes[0].material.userData.cc359Atlas?meshes[0].material:null;
-    const pos=[],norm=[],col=[],uv=[],bootAttachment=[];
-    let jawSkinRanges;
+    const count=meshes.reduce((sum,o)=>sum+(o.geometry.index?.count??o.geometry.attributes.position.count),0);
+    const pos=new Float32Array(count*3),norm=new Float32Array(count*3),col=new Float32Array(count*3),uv=new Float32Array(count*2);
     const hasBootAttachment=meshes.some(o=>o.userData.bootAttachment||o.geometry.attributes.bootAttachment);
+    const bootAttachment=hasBootAttachment?new Float32Array(count):null;
+    let jawSkinRanges, start=0;
     for(const o of meshes){o.updateMatrix();const src=o.geometry.index?o.geometry.toNonIndexed():o.geometry.clone();src.applyMatrix4(o.matrix);
-      const mapped=atlasMat?src.getAttribute('uv').array:detailUV(T,src,o.material.userData.surface||'skin');uv.push(...mapped);
+      const mapped=atlasMat?src.getAttribute('uv').array:detailUV(T,src,o.material.userData.surface||'skin');
+      uv.set(mapped,start*2);
       const a=src.getAttribute('position'),n=src.getAttribute('normal'),c=o.material.color,vc=o.material.vertexColors&&src.getAttribute('color'),binding=src.getAttribute('bootAttachment');
-      if(hasBootAttachment)for(let i=0;i<a.count;i++)bootAttachment.push(o.userData.bootAttachment?1:(binding?.getX(i)||0));
-      if (o.userData.cc359JawSkin) {
-        const start = pos.length / 3;
-        (jawSkinRanges ??= []).push([start, start + a.count]);
+      if (o.userData.cc359JawSkin) (jawSkinRanges ??= []).push([start, start + a.count]);
+      for(let i=0;i<a.count;i++){
+        const v=start+i,k=v*3;
+        pos[k]=a.getX(i);pos[k+1]=a.getY(i);pos[k+2]=a.getZ(i);
+        norm[k]=n.getX(i);norm[k+1]=n.getY(i);norm[k+2]=n.getZ(i);
+        col[k]=c.r*(vc?vc.getX(i):1);col[k+1]=c.g*(vc?vc.getY(i):1);col[k+2]=c.b*(vc?vc.getZ(i):1);
+        if(bootAttachment)bootAttachment[v]=o.userData.bootAttachment?1:(binding?.getX(i)||0);
       }
-      for(let i=0;i<a.count;i++){pos.push(a.getX(i),a.getY(i),a.getZ(i));norm.push(n.getX(i),n.getY(i),n.getZ(i));col.push(c.r*(vc?vc.getX(i):1),c.g*(vc?vc.getY(i):1),c.b*(vc?vc.getZ(i):1));}
+      start+=a.count;
       src.dispose();o.removeFromParent();
     }
-    const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('normal',new T.Float32BufferAttribute(norm,3));geo.setAttribute('color',new T.Float32BufferAttribute(col,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));
-    if(hasBootAttachment)geo.setAttribute('bootAttachment',new T.Float32BufferAttribute(bootAttachment,1));
+    const geo=new T.BufferGeometry();
+    geo.setAttribute('position',new T.BufferAttribute(pos,3));geo.setAttribute('normal',new T.BufferAttribute(norm,3));
+    geo.setAttribute('color',new T.BufferAttribute(col,3));geo.setAttribute('uv',new T.BufferAttribute(uv,2));
+    if(bootAttachment)geo.setAttribute('bootAttachment',new T.BufferAttribute(bootAttachment,1));
     if (jawSkinRanges) {
       const mask = new Uint8Array(geo.attributes.position.count);
       for (const [start, end] of jawSkinRanges) mask.fill(1, start, end);

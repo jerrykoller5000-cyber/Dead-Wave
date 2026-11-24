@@ -11,15 +11,24 @@
 // Exports:
 //   buildTeleprinter(THREE) -> { group, print(text), sheetTaken(), stamp(), update(dt), isPrinting, hasSheet, isStamping }
 
+import { getFobPBR } from '../world/fob-textures.js';
+
 function createAccumulator() {
-  const pos = [], nrm = [], idx = [];
+  const pos = [], nrm = [], uv = [], idx = [];
+  const uvScale = 1 / 0.55;
   return {
-    pos, nrm, idx,
+    pos, nrm, uv, idx,
     addQuad(p0, p1, p2, p3, normal) {
       const b = pos.length / 3;
       pos.push(p0.x, p0.y, p0.z, p1.x, p1.y, p1.z, p2.x, p2.y, p2.z, p3.x, p3.y, p3.z);
       const nx = normal ? normal.x : 0, ny = normal ? normal.y : 0, nz = normal ? normal.z : 1;
       nrm.push(nx, ny, nz, nx, ny, nz, nx, ny, nz, nx, ny, nz);
+      const ax = Math.abs(nx), ay = Math.abs(ny), az = Math.abs(nz);
+      for (const p of [p0, p1, p2, p3]) {
+        if (ay >= ax && ay >= az) uv.push(p.x * uvScale, p.z * uvScale);
+        else if (ax >= ay && ax >= az) uv.push(p.z * uvScale, p.y * uvScale);
+        else uv.push(p.x * uvScale, p.y * uvScale);
+      }
       idx.push(b, b + 1, b + 2, b, b + 2, b + 3);
     },
     addBox(cx, cy, cz, w, h, d, yaw = 0, pitch = 0, roll = 0) {
@@ -82,6 +91,7 @@ function createAccumulator() {
       const geo = new THREE.BufferGeometry();
       if (pos.length) geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
       if (nrm.length) geo.setAttribute('normal', new THREE.Float32BufferAttribute(nrm, 3));
+      if (uv.length) geo.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
       if (idx.length) geo.setIndex(idx);
       geo.computeVertexNormals();
       return geo;
@@ -90,14 +100,15 @@ function createAccumulator() {
 }
 
 export function getTeleprinterMaterials(THREE) {
+  const pbr = getFobPBR(THREE);
   return {
-    olive: new THREE.MeshStandardMaterial({ color: 0x3d4636, roughness: 0.74, metalness: 0.22 }),
-    darkOlive: new THREE.MeshStandardMaterial({ color: 0x2b3326, roughness: 0.82, metalness: 0.16 }),
-    steel: new THREE.MeshStandardMaterial({ color: 0x565e64, roughness: 0.44, metalness: 0.72 }),
-    iron: new THREE.MeshStandardMaterial({ color: 0x23272c, roughness: 0.70, metalness: 0.55 }),
-    brass: new THREE.MeshStandardMaterial({ color: 0xb5954a, roughness: 0.42, metalness: 0.75 }),
-    wood: new THREE.MeshStandardMaterial({ color: 0x583e2a, roughness: 0.70, metalness: 0.06 }),
-    darkWood: new THREE.MeshStandardMaterial({ color: 0x3e2b1d, roughness: 0.75, metalness: 0.05 }),
+    olive: new THREE.MeshStandardMaterial(pbr ? pbr.wrinkleOlive.opts({ color: 0x627057, normalScale: 0.45 }) : { color: 0x3d4636, roughness: 0.74, metalness: 0.22 }),
+    darkOlive: new THREE.MeshStandardMaterial(pbr ? pbr.wrinkleOlive.opts({ color: 0x485440, normalScale: 0.48 }) : { color: 0x2b3326, roughness: 0.82, metalness: 0.16 }),
+    steel: new THREE.MeshStandardMaterial(pbr ? pbr.bunkerSteel.opts({ color: 0x9aa4ac, normalScale: 0.8 }) : { color: 0x565e64, roughness: 0.44, metalness: 0.72 }),
+    iron: new THREE.MeshStandardMaterial(pbr ? pbr.bunkerSteel.opts({ color: 0x4c545c, normalScale: 0.85 }) : { color: 0x23272c, roughness: 0.70, metalness: 0.55 }),
+    brass: new THREE.MeshStandardMaterial(pbr ? pbr.galvSteel.opts({ color: 0xd9b662, normalScale: 0.5 }) : { color: 0xb5954a, roughness: 0.42, metalness: 0.75 }),
+    wood: new THREE.MeshStandardMaterial(pbr ? pbr.deskWood.opts({ color: 0x926e4e, normalScale: 0.95 }) : { color: 0x583e2a, roughness: 0.70, metalness: 0.06 }),
+    darkWood: new THREE.MeshStandardMaterial(pbr ? pbr.deskWood.opts({ color: 0x684b34, normalScale: 0.95 }) : { color: 0x3e2b1d, roughness: 0.75, metalness: 0.05 }),
     rubber: new THREE.MeshStandardMaterial({ color: 0x1a1c1d, roughness: 0.90, metalness: 0.04 }),
     paper: new THREE.MeshStandardMaterial({ color: 0xeee7d3, roughness: 0.88, metalness: 0.02 }),
     inkRed: new THREE.MeshStandardMaterial({ color: 0x9e241c, roughness: 0.82, metalness: 0.05 }),
@@ -248,7 +259,7 @@ export function buildTeleprinter(THREE) {
   paperGroup.position.set(tpX, platenY + 0.025, platenZ);
 
   // Procedural canvas for printed teletype text
-  let paperTexture = null;
+  let paperTexture = null, redrawSlip = null;   // CK-1 (B-03): print(lines) draws that order
   try {
     if (typeof document !== 'undefined' && document.createElement) {
       const cv = document.createElement('canvas');
@@ -284,6 +295,21 @@ export function buildTeleprinter(THREE) {
         }
         paperTexture = new THREE.CanvasTexture(cv);
         if (THREE.SRGBColorSpace) paperTexture.colorSpace = THREE.SRGBColorSpace;
+        redrawSlip = (lines) => {
+          ctx.fillStyle = '#eee6d2'; ctx.fillRect(0, 0, 256, 512);
+          ctx.fillStyle = '#222';
+          for (let y = 12; y < 500; y += 24) {
+            ctx.beginPath(); ctx.arc(12, y, 4, 0, Math.PI * 2); ctx.fill();
+            ctx.beginPath(); ctx.arc(244, y, 4, 0, Math.PI * 2); ctx.fill();
+          }
+          let y = 36;
+          lines.slice(0, 24).forEach((ln, i) => {
+            ctx.fillStyle = i === 0 ? '#222824' : i === 1 ? '#8b2016' : '#1e2220';
+            ctx.font = i < 2 ? 'bold 12px monospace' : '12px monospace';
+            ctx.fillText(String(ln).slice(0, 32), 22, y); y += ln ? 18 : 10;
+          });
+          paperTexture.needsUpdate = true;
+        };
       }
     }
   } catch (_) {}
@@ -378,6 +404,7 @@ export function buildTeleprinter(THREE) {
     isStamping: false,
 
     print(text = null) {
+      if (Array.isArray(text) && redrawSlip) { try { redrawSlip(text); } catch (_) {} }
       isPrinting = true;
       this.isPrinting = true;
       printTime = 0;

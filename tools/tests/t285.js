@@ -9,7 +9,9 @@
     const wait = (ms) => new Promise((r) => setTimeout(r, ms));
     const tabNames = () => [...document.querySelectorAll('#shopTabs button')].map(el => el.textContent.trim()).join('|');
     T.openShop(true);
-    ok(tabNames() === 'Supplies|Builds', 'the kiosk has two plain-language top views, Supplies and Builds (D-124; was three)');
+    ok(tabNames() === 'Builds|Supplies', 'the kiosk puts Builds before Supplies (D-231)');
+    ok(page('builds')?.getAttribute('aria-pressed') === 'true' && names().join('|') === 'Blueprints|Fortify', 'the kiosk opens on Builds');
+    page('supplies').click();
     ok(document.getElementById('shopSubtabs').hidden, 'no nested tabs');
     ok(!!document.querySelector('#shopList [data-item="field-intel"]'), 'field intel is sold at the kiosk supplies view');
     ok(!/Combat helmet|Night vision|Armor plates|Ballistic/i.test(document.getElementById('shopList').textContent) && !document.querySelector('#shopList [data-item="field-intel"]').textContent.includes('LOCKED'),
@@ -38,8 +40,7 @@
     T.closeMenuDbg('shop'); T.closeMenuDbg('armory');
 
     T.openShop(true);
-    page('builds').click();
-    ok(names().join('|') === 'Blueprints|Fortify', 'kiosk builds show plans and fortification together');
+    ok(page('builds')?.getAttribute('aria-pressed') === 'true' && names().join('|') === 'Blueprints|Fortify', 'reopening selects Builds with plans and fortification together');
     const buildText = document.getElementById('shopList').textContent;
     ok(/Light turret/.test(buildText) && /Flame turret/.test(buildText) && /Heavy turret/.test(buildText) && /Land mine/.test(buildText),
       'the turret and mine plans are back at the kiosk');

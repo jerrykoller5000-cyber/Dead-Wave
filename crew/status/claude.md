@@ -1,10 +1,10 @@
 # CLAUDE DIRECTOR
 
 state: active
-model: claude-opus-5-5
-task: CL-DIR Director (fresh session)
-touching: —
-since: 2026-11-18T17:11Z
+model: Claude Fable 5.2
+task: GP-20318 Jerry direct: pick up the zombie audit from ChatGPT - animation, movement, interaction, visuals, top to bottom
+touching: index.html (zombie sections: models, AI, combat, corpses), game/zombie-*.js, combat/zombie-*.js, studio/zombie-*.js, review/GP-20318/
+since: 2026-11-24T08:09Z
 next: —
 blocked-on: —
 last-report: handoffs/2026-11-10-claude-CL-359.md

@@ -1,0 +1,27 @@
+﻿AG-404 native WebGPU reviews for CJ R4 #1 and CJ R4 #3 (RTX 5080, 1600x900, 0 page errors, review only).
+
+=== 1) CJ R4 #1: Minigun 3P flash light + tracer + drawn pose ===
+Pinned MD5s: live index.html 22afb368, probe BEFORE index.r4-1-probe.html c123ad98, probe AFTER index.r4-1-both.html 42225af8, clean FIX index.r4-1-fix.html 51d45eb1.
+1. probe-eval.js on real GPU (Training, 3P minigun):
+   - BEFORE (c123ad98):
+     * dt60: tracer_round1 0 (23), tracer_later 0.520 m max/mean (1), light 0.531 m max / 0.521 m mean (24)
+     * dt30: tracer_round1 0 (23), tracer_later 0.532 m max/mean (1), light 0.546 m max / 0.536 m mean (24)
+     * dt12: tracer_round1 0 (13), tracer_later 0.543 m max/mean (2), light 0.550 m max / 0.545 m mean (15)
+   - AFTER (42225af8):
+     * dt60 / dt30 / dt12: tracer_round1 = 0, tracer_later = 0, light = 0 on EVERY round (24 / 24 / 15).
+2. Dark Training glow pair (live 22afb368 vs clean fix 51d45eb1, same side camera ~2.5 m, looked at):
+   - Frame 0 flash light (intensity 2.8): BEFORE sits at [-26.090, -199.125, -630.901] vs muzzle [-25.747, -199.019, -630.760] (0.386 m off — shifted back/left onto the receiver/waist; orange floor pool sits under the player's body/receiver). AFTER sits at [-25.751, -199.020, -630.502] = +0.258 m straight ahead of the muzzle along aim; orange floor pool moves cleanly under the muzzle tip.
+   - Sheet: qa/AG-404/cj-r4/CJ-R4-1-glow-pair.jpg
+3. 1 s (61-frame, 60 Hz) burst trace (live 22afb368 vs clean fix 51d45eb1, seeded PRNG):
+   - 0 ammo mismatches (288..273 identical every frame).
+   - Drawn gun pose matches: frame 0 muzzle delta 0.0009 m, max across all 61 frames 0.0052 m (mount pos max 0.0044 m, mount quat max 0.0051 — small breathing-phase offset from 46 ms boot simTime difference between fresh page loads; zero recoil/mount drift).
+
+=== 2) CJ R4 #3: Metal hit pop (drum shot, 30 Hz) ===
+Pinned MD5s: live index.html 22afb368 vs copy review/CJ-R4/index.r4-3.html 25bd1f40.
+Exact GP-20286 drum (-104.2, -42.4) & camera (1600x900, noon, 30 Hz launch, seeded PRNG):
+- Hit-frame motes + debris:
+  * LIVE 22afb368: 5 sparks (scale 0.33..0.76, speed 4.04..6.54) + 1 metal fragment.
+  * COPY 25bd1f40: 9 motes (1 spark ball: life 0.1 s, scale 1.8, speed 0; + 8 faster sparks: speed 4.40..9.00) + 1 metal fragment.
+- Visual check (frames 1, 2, 3, 5 = 33/67/100/167 ms, looked at): live f1 is a barely visible speck; copy f1-f2 pops clearly on the drum with the bright impact ball, and f3-f5 shows a crisp wider 8-spark burst.
+- Sheet: qa/AG-404/cj-r4/CJ-R4-3-drum-30hz-pair.jpg
+- Receipt: qa/AG-404/cj-r4/results.json

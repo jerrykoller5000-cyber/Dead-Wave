@@ -8,7 +8,7 @@ test('scouting shows all named planned caves and pushes without exact enemy coun
  const data=fixture(),snapshot=JSON.stringify(data);Object.freeze(data.preview.night.pushes);Object.freeze(data.preview);
  const v=buildScoutingReport(data);assert.equal(v.title,'Night 9 · Eight Packs');assert.equal(v.caves,'Caves: North Cave · East Cave');assert.equal(v.pushes,'2 pushes');assert.equal(v.trick,'Runners from two caves · keep moving between packs');assert.equal(v.rest,null);assert.equal(JSON.stringify(data),snapshot);
  data.preview={...data.preview,night:{pushes:[10],trick:'woods',rest:true}};
- assert.equal(buildScoutingReport(data).pushes,'1 push');assert.equal(buildScoutingReport(data).rest,'Rest night · lighter mix, still a fight');
+ assert.equal(buildScoutingReport(data).pushes,'1 push');assert.equal(buildScoutingReport(data).rest,'Rest night · no tricks tonight, just the numbers');   // CK-1: rest nights are never lighter
 });
 test('every planned night has one useful scouting line, including plates, screamers and bomber chains',()=>{
  const tricks=['claw-up','runners','lake','two-fronts','nest','guardian','woods','bomber-pack','runners-two-caves','brute-night','surround','guardian-ember','artillery','lake-surge','nest-colossus','demon-night','surround-fast','siege','gauntlet','last-stand'];

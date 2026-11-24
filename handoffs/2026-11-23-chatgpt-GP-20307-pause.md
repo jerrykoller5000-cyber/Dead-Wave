@@ -1,0 +1,8 @@
+# ChatGPT — GP-20307 Drowned Pass 2 review paused for regroup — 2026-11-23
+Changed:          Prepared the eight Director-approved Drowned hunks on current b0b5141b. Exact candidate 6988a3ca / SHA b2265eb0 reverses byte for byte to live. All 13 other model meshes and every joint match in the Node isolation fixture.
+Files:            review/GP-20307/ (candidate, pins, native receipts, prepared close-boots and guarded landing). Live concepts are still b0b5141b.
+Tests:            Official PC slots, one WebGPU browser at a time. All five original candidate tests passed, 54/54. t338 6/6 with zero Drowned floating groups in 186 frames, t222 12/12, t93 11/11, t111 11/11, t164 14/14. Node originals 36/15 per side with the same failing names and Drowned seating green.
+Screenshots:      review/GP-20307/matched-turn-pair.jpg locks all 32 joints, scale, origin and exact cameras across four angles. motion-pair.jpg matches walk, grab wind-up, drag and fall. knee-pair.jpg and lights-pair.jpg show the sampled bend and four settings. The first turn had different gait poses and the first motion runner stopped at its pre-capture shell check. The matched turn and active-page hash receipts supersede those attempts.
+Not verified:     Paused at Jerry's request after the running browser batch released. On resume, recheck current pins, then run matched-boots.mjs before/after, original-motion.mjs before/after (504-frame archive) and spawn.mjs in an exclusive pair. If green, verify then execute the prepared D-211 guard, rerun the live originals and prepare the landed sheet.
+Requests:         Exact rebase and isolation sent FYI to Claude 3 and the Director. The original Drowned request remains pending. Waiting for Jerry's regroup.
+Contract changes: none

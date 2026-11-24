@@ -32,10 +32,10 @@ function drawnMaterial(m) {
   return Array.isArray(m) ? m.some(one) : one(m);
 }
 
-function buildMeshParts(mesh, topY) {
+export function buildMeshParts(mesh, topY, { baked = false } = {}) {
   const g = mesh.geometry, pos = g && g.attributes && g.attributes.position;
   if (!pos) return [];
-  mesh.updateWorldMatrix(true, false);
+  if (!baked) mesh.updateWorldMatrix(true, false);
   const e = mesh.matrixWorld.elements, idx = g.index ? g.index.array : null;
   const n = idx ? g.index.count : pos.count, cells = new Map();
   const P = new Float64Array(9);
@@ -78,10 +78,10 @@ export function exactLayer(tg, { maxTop = 3.2 } = {}) {
   const banks = tg.solids.filter((s) => s.metal && s.block);   // GB-163: the lockers' bank is steel
   const parts = [], topY = tg.floorY + maxTop;
   tg.group.updateMatrixWorld(true);
-  tg.group.traverse((o) => {
+  const add = (o, baked = false) => {
     if (!o.isMesh || !isLineSurface(o) || o.isInstancedMesh || o.isSkinnedMesh || !visibleChain(o) || !drawnMaterial(o.material)) return;
     let list = meshParts.get(o);
-    if (!list) { list = buildMeshParts(o, topY); meshParts.set(o, list); }
+    if (!list) { list = buildMeshParts(o, topY, { baked }); meshParts.set(o, list); }
     if (!list.length) return;
     let solid = byMesh.get(o);
     if (!solid) {
@@ -93,20 +93,24 @@ export function exactLayer(tg, { maxTop = 3.2 } = {}) {
     // A piece of the shell (the cutaway's groups: the walls and what hangs on them) is looked through from outside, as its
     // wall is (traceTraining's throughGlass).
     let shell = false; for (let x = o.parent; x && x !== tg.group; x = x.parent) if (/^training-cutaway-/.test(x.name || '')) { shell = true; break; }
-    for (const p of list) parts.push({ ...p, solid, mesh: o, shell });
-  });
+    for (const p of list) parts.push({ ...p, solid, mesh: o, shell, baked });
+  };
+  tg.group.traverse(add);
+  // The render bake detached these original props after copying their triangles into a material batch.
+  // Their collision solids retain the source geometry and its last world matrix.
+  for (const mesh of byMesh.keys()) if (!mesh.parent && lineMeshes.has(mesh)) add(mesh, true);
   // Every mesh's box is broad phase only now: a hidden mesh's, or one whose triangles are all over the roof line, stops
   // nothing (a box with nothing drawn in it put marks in the air).
   // Flat for the trace's loop: six floats a part's box, its triangles, its solid, whether it is the shell's.
-  const P = parts.length, boxes = new Float64Array(P * 6), tris = new Array(P), solids = new Array(P), shells = new Uint8Array(P);
-  parts.forEach((p, i) => { boxes.set([p.minX, p.maxX, p.minY, p.maxY, p.minZ, p.maxZ], i * 6); tris[i] = p.tri; solids[i] = p.solid; shells[i] = p.shell ? 1 : 0; });
-  const layer = { parts, boxes, tris, solids, shells, count: tg.solids.length, meshes: new Set(byMesh.keys()) };
+  const P = parts.length, boxes = new Float64Array(P * 6), tris = new Array(P), solids = new Array(P), shells = new Uint8Array(P), baked = new Uint8Array(P);
+  parts.forEach((p, i) => { boxes.set([p.minX, p.maxX, p.minY, p.maxY, p.minZ, p.maxZ], i * 6); tris[i] = p.tri; solids[i] = p.solid; shells[i] = p.shell ? 1 : 0; baked[i] = p.baked ? 1 : 0; });
+  const layer = { parts, boxes, tris, solids, shells, baked, count: tg.solids.length, meshes: new Set(byMesh.keys()) };
   tg._exactLayer = layer;
   return layer;
 }
 
 // Moller-Trumbore on each triangle of each part whose box the segment enters before the best so far. No allocation.
-export function exactTrace(layer, a, b, before, out, outside = false) {
+export function exactTrace(layer, a, b, before, out, outside = false, hideBaked = null) {
   const dx = b.x - a.x, dy = b.y - a.y, dz = b.z - a.z, ax = a.x, ay = a.y, az = a.z;
   const ix = Math.abs(dx) < 1e-12 ? 0 : 1 / dx, iy = Math.abs(dy) < 1e-12 ? 0 : 1 / dy, iz = Math.abs(dz) < 1e-12 ? 0 : 1 / dz;
   const B = layer.boxes, TR = layer.tris, SH = layer.shells, n = layer.solids.length;
@@ -121,6 +125,7 @@ export function exactTrace(layer, a, b, before, out, outside = false) {
     else { u = (B[o + 2] - ay) * iy; v = (B[o + 3] - ay) * iy; if (u > v) { s = u; u = v; v = s; } if (u > t0) t0 = u; if (v < t1) t1 = v; if (t0 > t1) continue; }
     if (iz === 0) { if (az < B[o + 4] || az > B[o + 5]) continue; }
     else { u = (B[o + 4] - az) * iz; v = (B[o + 5] - az) * iz; if (u > v) { s = u; u = v; v = s; } if (u > t0) t0 = u; if (v < t1) t1 = v; if (t0 > t1) continue; }
+    if (hideBaked && layer.baked?.[i] && hideBaked(layer.solids[i])) continue;
     // Moller-Trumbore on its triangles
     const T = TR[i];
     for (let k = 0; k < T.length; k += 12) {

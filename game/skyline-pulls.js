@@ -86,7 +86,7 @@ export function createSkylinePulls(THREE, { scene, poi, landmarks = [], height, 
 
   const crowMat = new THREE.MeshBasicMaterial({ color: 0x11151a, side: THREE.DoubleSide, fog: true });
   const bodyGeo = new THREE.SphereGeometry(1, 6, 4);
-  bodyGeo.scale(0.09, 0.055, 0.31);
+  bodyGeo.scale(0.12, 0.105, 0.36);
   const wingGeo = new THREE.BufferGeometry();
   wingGeo.setAttribute('position', new THREE.Float32BufferAttribute([
     0.04, 0, 0.14, 0.08, 0, -0.17, 0.72, 0.035, -0.12,
@@ -113,17 +113,20 @@ export function createSkylinePulls(THREE, { scene, poi, landmarks = [], height, 
     for (let i = 0; i < crowCount; i++) {
       const a = t * 0.14 + i * TAU / crowCount;
       const r = 8.5 + 1.8 * Math.sin(t * 0.21 + i * 1.9);
-      const heading = -a + Math.PI * 0.5;
+      // +Z is forward. Bank through the arc and glide between short bursts.
+      const heading = -a;
+      const glide = Math.sin(t * 0.86 + i * 1.7) > 0.23;
+      const size = 0.57 + i * 0.012;
       position.set(sites.hikers.x + Math.cos(a) * r + wind.dirX * wind.strength * 1.4,
         sites.hikers.y + 2.0 * Math.sin(t * 0.43 + i * 1.3),
         sites.hikers.z + Math.sin(a) * r + wind.dirZ * wind.strength * 1.4);
-      const flap = 0.2 + 0.47 * Math.sin(t * (5.1 + i * 0.09) + i * 1.7);
+      const flap = 0.12 + (glide ? 0.035 : 0.49) * Math.sin(t * (15.1 + i * 0.19) + i * 1.7);
       euler.set(0, heading, 0.09, 'YXZ'); rotation.setFromEuler(euler);
-      scale.set(1.22, 1.22, 1.22); matrix.compose(position, rotation, scale); bodies.setMatrixAt(i, matrix);
+      scale.set(size, size, size); matrix.compose(position, rotation, scale); bodies.setMatrixAt(i, matrix);
       for (let side = 0; side < 2; side++) {
         const sign = side ? -1 : 1;
-        euler.set(0, heading, sign * flap, 'YXZ'); rotation.setFromEuler(euler);
-        scale.set(sign * 1.22, 1.22, 1.22);
+        euler.set(0, heading, 0.09 + sign * flap, 'YXZ'); rotation.setFromEuler(euler);
+        scale.set(sign * size, size, size);
         matrix.compose(position, rotation, scale); wings.setMatrixAt(i * 2 + side, matrix);
       }
     }

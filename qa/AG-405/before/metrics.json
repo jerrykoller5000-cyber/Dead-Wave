@@ -1,0 +1,356 @@
+{
+  "tag": "before",
+  "timestamp": "2026-11-23T21:52:28.664Z",
+  "backend": "WebGPU",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 44.71,
+  "enterMs": 17347,
+  "lateCompiles": 3,
+  "lateDetails": [
+    {
+      "kind": "program",
+      "name": "rig-skin-plain",
+      "stage": "vertex"
+    },
+    {
+      "kind": "pipeline",
+      "mat": "rig-skin-plain",
+      "obj": "rig-skin"
+    },
+    {
+      "kind": "pipeline",
+      "mat": "MeshBasicMaterial",
+      "obj": "Mesh"
+    }
+  ],
+  "pageErrors": [],
+  "texAudit": {
+    "meshes": 310,
+    "uniqueMaterials": 240,
+    "materialsWithMap": 93,
+    "materialsWithNormal": 0,
+    "materialsWithRoughness": 0,
+    "materialsWithMetalness": 0,
+    "materialsWithAO": 0,
+    "uniqueTextures": 66,
+    "estimatedVramMB": 124.55,
+    "largestTextures": [
+      {
+        "name": "map",
+        "w": 1280,
+        "h": 3360,
+        "bytes": 22937027,
+        "aniso": 8
+      },
+      {
+        "name": "map",
+        "w": 1440,
+        "h": 1600,
+        "bytes": 12287693,
+        "aniso": 1
+      },
+      {
+        "name": "map",
+        "w": 1024,
+        "h": 1024,
+        "bytes": 5592266,
+        "aniso": 8
+      },
+      {
+        "name": "map",
+        "w": 1024,
+        "h": 1024,
+        "bytes": 5592266,
+        "aniso": 8
+      },
+      {
+        "name": "map",
+        "w": 1024,
+        "h": 1024,
+        "bytes": 5592266,
+        "aniso": 8
+      },
+      {
+        "name": "map",
+        "w": 1024,
+        "h": 1024,
+        "bytes": 5592266,
+        "aniso": 8
+      },
+      {
+        "name": "map",
+        "w": 1024,
+        "h": 1024,
+        "bytes": 5592266,
+        "aniso": 8
+      },
+      {
+        "name": "map",
+        "w": 2048,
+        "h": 378,
+        "bytes": 4128665,
+        "aniso": 1
+      },
+      {
+        "name": "map",
+        "w": 2048,
+        "h": 378,
+        "bytes": 4128665,
+        "aniso": 1
+      },
+      {
+        "name": "map",
+        "w": 2048,
+        "h": 378,
+        "bytes": 4128665,
+        "aniso": 1
+      },
+      {
+        "name": "map",
+        "w": 1024,
+        "h": 512,
+        "bytes": 2796133,
+        "aniso": 8
+      },
+      {
+        "name": "map",
+        "w": 1689,
+        "h": 283,
+        "bytes": 2549200,
+        "aniso": 8
+      },
+      {
+        "name": "map",
+        "w": 1280,
+        "h": 360,
+        "bytes": 2457539,
+        "aniso": 1
+      },
+      {
+        "name": "map",
+        "w": 512,
+        "h": 896,
+        "bytes": 2446616,
+        "aniso": 1
+      },
+      {
+        "name": "map",
+        "w": 512,
+        "h": 896,
+        "bytes": 2446616,
+        "aniso": 1
+      }
+    ]
+  },
+  "perf": {
+    "range": {
+      "name": "range_overview",
+      "frames": 150,
+      "meanMs": 25.78,
+      "meanFps": 38.8,
+      "medianMs": 33.2,
+      "p99Ms": 33.6,
+      "p99Fps": 29.8,
+      "worstMs": 33.6,
+      "hitches": 0,
+      "draws": 24068,
+      "tris": 385121,
+      "geometries": 3971,
+      "textures": 202
+    },
+    "build": {
+      "name": "build_overview",
+      "frames": 150,
+      "meanMs": 26.44,
+      "meanFps": 37.8,
+      "medianMs": 33.3,
+      "p99Ms": 50,
+      "p99Fps": 20,
+      "worstMs": 50.1,
+      "hitches": 1,
+      "draws": 26768,
+      "tris": 400793,
+      "geometries": 3971,
+      "textures": 202
+    },
+    "rangeOff": {
+      "name": "range_lightsoff",
+      "frames": 150,
+      "meanMs": 26.33,
+      "meanFps": 38,
+      "medianMs": 33.3,
+      "p99Ms": 33.5,
+      "p99Fps": 29.9,
+      "worstMs": 49.9,
+      "hitches": 0,
+      "draws": 29483,
+      "tris": 404419,
+      "geometries": 3971,
+      "textures": 202
+    }
+  },
+  "shots": [
+    {
+      "id": "01-range-overview",
+      "cap": "Range overview from spawn",
+      "file": "qa/AG-405/before/01-range-overview.png",
+      "bytes": 1430864
+    },
+    {
+      "id": "02-range-backwall",
+      "cap": "Range back wall (PGB stencil, lockers, rack, board, switch)",
+      "file": "qa/AG-405/before/02-range-backwall.png",
+      "bytes": 806415
+    },
+    {
+      "id": "03-range-stations",
+      "cap": "Range east terminal wall (CIF, Kiosk, Armory)",
+      "file": "qa/AG-405/before/03-range-stations.png",
+      "bytes": 781297
+    },
+    {
+      "id": "04-build-overview",
+      "cap": "Build room overview from doorway",
+      "file": "qa/AG-405/before/04-build-overview.png",
+      "bytes": 876444
+    },
+    {
+      "id": "05-build-west-infirmary",
+      "cap": "Build room west wall, infirmary, skull window & HQ panel",
+      "file": "qa/AG-405/before/05-build-west-infirmary.png",
+      "bytes": 997349
+    },
+    {
+      "id": "06-floor-tiles-line",
+      "cap": "Floor tiles, grout, boot scuffs, FIRING LINE & chips",
+      "file": "qa/AG-405/before/06-floor-tiles-line.png",
+      "bytes": 1186938
+    },
+    {
+      "id": "07-bench-props",
+      "cap": "Firing bench west end, rubber mat, kick panel & kit props",
+      "file": "qa/AG-405/before/07-bench-props.png",
+      "bytes": 619693
+    },
+    {
+      "id": "08-ceiling-baffles",
+      "cap": "Range ceiling acoustic panels, baffles, duct, pipe & board",
+      "file": "qa/AG-405/before/08-ceiling-baffles.png",
+      "bytes": 1538698
+    },
+    {
+      "id": "09-targets-backstop",
+      "cap": "Target plate, bevelled hazard base & rubber backstop",
+      "file": "qa/AG-405/before/09-targets-backstop.png",
+      "bytes": 759291
+    },
+    {
+      "id": "10-backstop-close",
+      "cap": "Rubber-crumb backstop blocks, steel posts & wear",
+      "file": "qa/AG-405/before/10-backstop-close.png",
+      "bytes": 104324
+    },
+    {
+      "id": "11-shutter-keypad",
+      "cap": "Security shutter half-down, slats, hazard jamb & keypad",
+      "file": "qa/AG-405/before/11-shutter-keypad.png",
+      "bytes": 862467
+    },
+    {
+      "id": "12-lockers-switch",
+      "cap": "Lockers (dented door + tapes), whiteboard & light switch",
+      "file": "qa/AG-405/before/12-lockers-switch.png",
+      "bytes": 332271
+    },
+    {
+      "id": "13-rack-board-roster",
+      "cap": "Weapon rack, Days Without Incident board & roster",
+      "file": "qa/AG-405/before/13-rack-board-roster.png",
+      "bytes": 279732
+    },
+    {
+      "id": "14-signs-console-dummy",
+      "cap": "Cracked taped monitor, range console & melee dummy",
+      "file": "qa/AG-405/before/14-signs-console-dummy.png",
+      "bytes": 553794
+    },
+    {
+      "id": "15-safety-sign-close",
+      "cap": "Swinging safety sign & tiled wall wear",
+      "file": "qa/AG-405/before/15-safety-sign-close.png",
+      "bytes": 213249
+    },
+    {
+      "id": "16-cif-kiosk",
+      "cap": "CIF terminal (garments/boots/signs) & Supply Kiosk",
+      "file": "qa/AG-405/before/16-cif-kiosk.png",
+      "bytes": 500027
+    },
+    {
+      "id": "17-armory-booth",
+      "cap": "Armory booth steel surround, mesh screen & sign",
+      "file": "qa/AG-405/before/17-armory-booth.png",
+      "bytes": 249883
+    },
+    {
+      "id": "18-zombie-gate",
+      "cap": "Zombie containment gate leaves, ribs, patch & threshold",
+      "file": "qa/AG-405/before/18-zombie-gate.png",
+      "bytes": 359167
+    },
+    {
+      "id": "19-gate-props-drains",
+      "cap": "Hose reel, HOSE DOWN stencil, wet drain & build floor wear",
+      "file": "qa/AG-405/before/19-gate-props-drains.png",
+      "bytes": 777140
+    },
+    {
+      "id": "20-tunnel-open",
+      "cap": "Zombie holding tunnel interior (gate open)",
+      "file": "qa/AG-405/before/20-tunnel-open.png",
+      "bytes": 61515
+    },
+    {
+      "id": "21-infirmary-bed",
+      "cap": "Infirmary vinyl floor, olive panels, stretcher, IV & O2",
+      "file": "qa/AG-405/before/21-infirmary-bed.png",
+      "bytes": 1160284
+    },
+    {
+      "id": "22-infirmary-cabinet",
+      "cap": "Infirmary cabinet, ECG monitor, sharps bin & sagging cot",
+      "file": "qa/AG-405/before/22-infirmary-cabinet.png",
+      "bytes": 1722952
+    },
+    {
+      "id": "23-skull-hq-fence",
+      "cap": "Skull intake window, HQ alarm panel & perimeter fence",
+      "file": "qa/AG-405/before/23-skull-hq-fence.png",
+      "bytes": 1252850
+    },
+    {
+      "id": "24-hangar-truss-mount",
+      "cap": "Hangar siding, H-column, roof truss, deck & turret bracket",
+      "file": "qa/AG-405/before/24-hangar-truss-mount.png",
+      "bytes": 695179
+    },
+    {
+      "id": "25-dark-range",
+      "cap": "Range lights OFF (EXIT sign, emergency lamps, readability)",
+      "file": "qa/AG-405/before/25-dark-range.png",
+      "bytes": 1537519
+    },
+    {
+      "id": "26-dark-build",
+      "cap": "Build room lights OFF (emergency lamps, floor, gate)",
+      "file": "qa/AG-405/before/26-dark-build.png",
+      "bytes": 1123994
+    },
+    {
+      "id": "27-dark-infirmary",
+      "cap": "Infirmary & west wall lights OFF",
+      "file": "qa/AG-405/before/27-dark-infirmary.png",
+      "bytes": 1651218
+    }
+  ]
+}

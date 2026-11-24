@@ -327,7 +327,7 @@ function body(A, T, g, s, B, M, V) {
   };
   const spine = (t, y) => B.spine ? B.spine * .006 * G(angd(t, Math.PI) / .09) * Math.max(0, Math.cos((y - .02) / .042 * TAU)) * (y > -.05 && y < .5 ? 1 : 0) : 0;
   out.torso = tube(A, T, s, torso, M.skin, {
-    n: 28, sub: 2, warp: .3, bumps: tb, field: (t, y, x, z) => ribField(t, y) + spine(t, y) + profile(t, y) + (B.torsoField ? B.torsoField(t, y, x, z) : 0), paint: skinPaint, variants: V.torso,
+    n: 28, sub: 2, warp: .3, bumps: tb, field: (t, y, x, z) => ribField(t, y) + spine(t, y) + profile(t, y) + (B.torsoField ? B.torsoField(t, y, x, z) : 0), paint: B.torsoVPaint ? [] : skinPaint, vpaint: B.torsoVPaint, variants: V.torso,
     keys: [{ y: -.1, w: .146 * W, d: .116 * Dp, cz: .004 }, { y: .0, w: .15 * W, d: .12 * Dp, cz: .008 }, { y: .1, w: .156 * W, d: .126 * Dp, cz: .008 },
       { y: .19, w: cW * .97, d: .134 * Dp, cz: .008, p: 2.2 }, { y: .26, w: cW, d: .14 * Dp, cz: .01, p: 2.3 }, { y: sy - .05, w: cW * .99, d: .136 * Dp, cz: .004, p: 2.4 },
       // s27 (J158): the shoulder: the ribcage's top-outer corner over the joint, the acromion just above it, then the
@@ -341,7 +341,7 @@ function body(A, T, g, s, B, M, V) {
   out.pelvis = tube(A, T, s, hips, B.pelvisMat || M.cloth, {
     n: 26, sub: 2, paint: B.pelvisPaint,
     bumps: [-1, 1].flatMap((k) => [{ t: k * (Math.PI - .5), y: .03, at: .45, ay: .08, a: .022 }, { t: k * 1.2, y: .15, at: .3, ay: .04, a: .006 }]),
-    field: B.clothField ? (t, y, x, z) => B.clothField(t, y, x, z, 1) : null,
+    field: B.pelvisField || (B.clothField ? (t, y, x, z) => B.clothField(t, y, x, z, 1) : null),
     // s27 (J158): sized from the hip joints (lx) so the thighs leave from INSIDE its sides: the widest ring at the
     // greater trochanter (lx + the thigh's top + a little), the iliac crest above it, in to the waist; B.hip widens a woman's
     keys: [{ y: -.05, w: .05, d: .055, cz: -.012 }, { y: -.02, w: (lx + .07) * (B.hip || 1), d: .104 * Dp, cz: -.006 }, { y: .035, w: (lx + .094) * (B.hip || 1), d: .126 * Dp, p: 2.3 },
@@ -360,7 +360,7 @@ function body(A, T, g, s, B, M, V) {
     });
     // FOREARM: the elbow point behind, the flexor and brachioradialis mass high, tapering to a flat wrist
     out['fore' + S] = tube(A, T, s, el, M.skin, {
-      n: 18, sub: 2, paint: skinPaint, variants: V['fore' + S],
+      n: 18, sub: 2, paint: skinPaint, field: B.foreField, variants: V['fore' + S],
       bumps: [{ t: Math.PI, y: .005, at: .38, ay: .022, a: .02 }, { t: Math.PI + side * .5, y: -.02, at: .3, ay: .02, a: .006 }, { t: o * .55, y: -.075, at: .62, ay: .055, a: .019 * mu }, { t: -o * .5, y: -.095, at: .62, ay: .06, a: .012 * mu }, { t: 0, y: -.085, at: .3, ay: .05, a: .006 * mu },
         { t: 0, y: -.28, at: .3, ay: .03, a: .003 }],
       keys: [{ y: -.322, w: .032 * mu, d: .02 }, { y: -.29, w: .031 * mu, d: .021 }, { y: -.22, w: .036 * mu, d: .028 * mu }, { y: -.14, w: .046 * mu, d: .039 * mu },
@@ -369,7 +369,7 @@ function body(A, T, g, s, B, M, V) {
     // HAND: palm, knuckles, four fingers in three joints curling forward, the thumb; nails at the tips
     const hw = B.hand;
     out['palm' + S] = tube(A, T, s, el, M.skin, {
-      n: 16, sub: 2, paint: [{ m: M.skinDark, f: (t, y) => y < -.39 && Math.cos(t) < -.2 }],
+      n: 16, sub: 2, field: B.palmField, paint: [{ m: M.skinDark, f: (t, y) => y < -.39 && Math.cos(t) < -.2 }],
       bumps: [{ t: 0, y: -.395, at: 1.1, ay: .008, a: .004 }, { t: o, y: -.35, at: .5, ay: .03, a: .006 }],
       keys: [{ y: -.405, w: .043 * hw, d: .017, cz: .006, p: 2.6 }, { y: -.37, w: .047 * hw, d: .021, cz: .004, p: 2.6 }, { y: -.335, w: .041 * hw, d: .022, p: 2.4 }, { y: -.3, w: .032, d: .021 }]
     });
@@ -387,7 +387,7 @@ function body(A, T, g, s, B, M, V) {
     // knee inside, hamstrings, adductors; rounded at the knee
     const inn = -side * Math.PI / 2;
     out['thigh' + S] = tube(A, T, s, leg, B.thighMat || M.cloth, {
-      n: 20, sub: 2, paint: B.thighPaint,
+      n: 20, sub: 2, paint: B.thighPaint, vpaint: B.thighVPaint,
       bumps: [{ t: 0, y: -.14, at: .6, ay: .12, a: .011 * mu }, { t: inn * .6, y: -.31, at: .35, ay: .04, a: .009 }, { t: -inn, y: -.17, at: .5, ay: .12, a: .006 },
         { t: Math.PI, y: -.15, at: .7, ay: .12, a: .01 }, { t: inn, y: -.03, at: .45, ay: .08, a: .008 }],
       field: B.clothField ? (t, y, x, z) => B.clothField(t, y, x, z, 2 + side) : null,
@@ -401,7 +401,7 @@ function body(A, T, g, s, B, M, V) {
     });
     // SHIN: the kneecap and its tendon, the calf behind, the tibia's front edge, the ankle; down into the boot
     out['shin' + S] = tube(A, T, s, shin, M.skin, {
-      n: 18, sub: 2, paint: [...(B.shinPaint || []), ...skinPaint],
+      n: 18, sub: 2, paint: B.shinVPaint ? [] : [...(B.shinPaint || []), ...skinPaint], vpaint: B.shinVPaint,
       bumps: [{ t: 0, y: -.005, at: .45, ay: .03, a: .012 }, { t: 0, y: -.06, at: .2, ay: .025, a: .004 }, { t: Math.PI - side * .35, y: -.11, at: .45, ay: .06, a: .013 * mu },
         { t: Math.PI + side * .4, y: -.13, at: .4, ay: .06, a: .01 * mu }, { t: 0, y: -.18, at: .14, ay: .12, a: .004 }, { t: o, y: -.335, at: .35, ay: .015, a: .005 }, { t: inn, y: -.33, at: .35, ay: .015, a: .006 }],
       keys: [{ y: -.375, w: .036, d: .04, cz: .004 }, { y: -.34, w: .034, d: .038, cz: .004 }, { y: -.28, w: .037, d: .041, cz: -.002 }, { y: -.2, w: .047 * mu, d: .054 * mu, cz: -.006 },
@@ -615,7 +615,7 @@ function humanHead(A, T, g, s, H, M, seed) {
     shell(A, T, s, head, M.hair, hd, { lo: (t) => Math.max(.0 + .095 * Math.max(0, Math.cos(t)) ** 2, H.hairTrim ? hline(t) - .012 : -1), hi: () => Rt((H.crown ? .234 : .2225) * H.h), rows: 12, off: height, rimIn: 0, rim: [false, false], tagFor: (t, y) => ({ kind: 'hair', slot: region(t, y) }) });
     // a few long greasy strands lying down the back and the temples
     for (let i = 0; i < H.strands; i++) {
-      const t0 = (hash3(i, hs, 3, 9) - .5) * (H.longHair ? (H.hairTrim ? 1.9 : 3.4) : 2) + Math.PI, y0 = Rt(.16 + .04 * hash3(i, 2, hs, 9)), ln = H.longHair ? .16 + .14 * hash3(i, 5, hs, 1) : .08 + .07 * hash3(i, 5, hs, 1);
+      const t0 = (hash3(i, hs, 3, 9) - .5) * (H.longHair ? (H.hairTrim ? 1.9 : 3.4) : 2) + Math.PI, y0 = Rt(.16 + .04 * hash3(i, 2, hs, 9)), ln = (H.longHair ? .16 + .14 * hash3(i, 5, hs, 1) : .08 + .07 * hash3(i, 5, hs, 1)) * (H.strandLength || 1);
       cord(A, T, s, head, M.hair, onTube(hd, [[t0, y0], [t0 + .05, y0 - ln * .35], [t0 + .03, y0 - ln * .7], [t0 + .01, y0 - ln]], .0035 + (H.longHair ? .004 : 0)), H.longHair ? [.006, .005, .004, .002] : [.0035, .003, .0025, .0018], 4, { kind: 'hair', slot: region(t0, y0) });
     }
   }
@@ -683,7 +683,7 @@ HUMANOID.feral = {
     w: .14, h: 1, depth: 1.02, jaw: .96, brow: 1.3, sunk: 1.15, hollow: 1.5, gape: .058, nose: .95, crown: true, eyeScale: [.78, .56, .3],
     teeth: [1, 1, 1, 1, 1, 1, 1, 1, 0, 1], lowerTeeth: [1, 1, 1, 0, 1, 1, 1, 1], fangs: true,
     wounds: { 8: false, 16: true, 32: false }, cheek: { side: -1 }, scalp: { t: -.6, y: .19 }, lipSide: 1,
-    hair: 1, hairSeed: 41, strands: 34, longHair: true, hairTrim: true, ears: [.75, 0], feather: true, vcol: true, tongueLift: .0025
+    hair: 1, hairSeed: 41, strands: 28, strandLength: .84, longHair: true, hairTrim: true, ears: [.75, 0], feather: true, vcol: true, tongueLift: .0025
   },
   veins: 9, dirt: .85, wear: .9
 };
@@ -785,22 +785,30 @@ const SECTIONS = {
     if (W[2]) { const k = 'fore' + (P.armBite.side < 0 ? 'L' : 'R'); V[k] = [woundVariant(2, P.armBite.t, P.armBite.y, .55, .028, .012, M, seed + 3)]; }
     // claw scratches: three parallel carved grooves, painted raw
     const scr = (t, y) => P.scratches.reduce((a, [t0, y0]) => { const dt = angd(t, t0), v = y - y0 + dt * .12; return Math.abs(dt) < .45 ? Math.max(a, ...[-1, 0, 1].map((k) => G((v - k * .018) / .0035))) : a; }, 0);
-    const grime = [{ m: M.dirt, f: (t, y, x, z) => fbm(x * 10, y * 10, z * 10, seed + 9) > 1.05 - dirt * .5 }];
-    const B = body(A, T, g, s, { ...P.body, thighMat: M.skin, pelvisMat: M.cloth, thighPaint: [{ m: M.cloth, f: (t, y) => y > .0 }, ...grime], shinPaint: [{ m: M.dirt, f: (t, y, x, z) => y < -.15 && fbm(x * 18, y * 12, z * 18, seed + 9) + (-.15 - y) * 2 > 1 - dirt * .6 }],
-      torsoField: (t, y) => -.004 * scr(t, y) }, M, V);
-    // the scratches' paint rides on its own pass: re-tint the torso's triangles inside the grooves
-    // (done as thin cords in the grooves so the torso loft keeps one paint set)
-    for (const [t0, y0] of P.scratches) for (const k of [-1, 0, 1]) cord(A, T, s, torso, M.flesh, onTube(B.torso, [[t0 - .4, y0 + k * .018 + .048], [t0, y0 + k * .018], [t0 + .4, y0 + k * .018 - .048]], -.0015), [.0016, .0028, .0012], 4);
+    const grime = (t, y, x, z) => sstep(1.05 - dirt * .5, 1.26 - dirt * .5, fbm(x * 10, y * 10, z * 10, seed + 9));
+    const legGrime = [{ m: M.dirt, w: (t, y, x, z) => .66 * grime(t, y, x, z) }];
+    const shinGrime = [{ m: M.dirt, w: (t, y, x, z) => .65 * sstep(-.10, .18, -.15 - y)
+      * sstep(.62, .90, fbm(x * 15, y * 12, z * 15, seed + 9) + (-.15 - y) * 1.5) }];
+    const B = body(A, T, g, s, { ...P.body, thighMat: M.skin, pelvisMat: M.cloth,
+      thighPaint: [{ m: M.cloth, f: (t, y) => y > 0 }], thighVPaint: legGrime, shinVPaint: shinGrime,
+      pelvisField: (t, y) => -.006 * Math.max(0, -Math.cos(t)) * G((y - .035) / .064),
+      foreField: (t, y) => -.006 * G(angd(t, Math.PI) / .50) * G((y - .008) / .034),
+      palmField: (t, y) => -.003 * G((y + .32) / .031) * (.45 + .55 * Math.abs(Math.sin(t))),
+      torsoField: (t, y) => -.004 * scr(t, y), torsoVPaint: [{ m: M.flesh, w: (t, y) => .72 * scr(t, y) }] }, M, V);
     // the shorts: the seat is cloth (pelvis loft); a shell on each thigh with a ragged cut hem and threads
     for (const side of [-1, 1]) {
       const S = side < 0 ? 'L' : 'R', leg = side < 0 ? u.legLG : u.legRG, th = B['thigh' + S], h0 = P.shortsHem[side < 0 ? 0 : 1];
-      const hem = (t) => h0 + .06 * (noise3(Math.cos(t) * 5, Math.sin(t) * 5, side, seed + 30) - .5) * 2 + .09 * Math.max(0, Math.cos(t * 3 + side)) ** 6 + .05 * Math.max(0, Math.cos(t * 7 - side)) ** 8;
-      shell(A, T, s, leg, M.cloth, th, { lo: hem, hi: () => .055, rows: 9, rim: [true, false], off: (t, y) => .0045 + .0045 * (1 - clamp((y - hem(t)) / .08, 0, 1)) ** 2 + .0025 * noise3(t * 3, y * 30, side, seed), rimIn: .004, rimMat: M.clothDark,
+      const hem = (t) => h0 + .038 * (noise3(Math.cos(t) * 5, Math.sin(t) * 5, side, seed + 30) - .5) * 2
+        + .062 * Math.max(0, Math.cos(t * 3 + side)) ** 4 + .029 * Math.max(0, Math.cos(t * 7 - side)) ** 6;
+      shell(A, T, s, leg, M.cloth, th, { lo: hem, hi: () => .055, rows: 9, rim: [true, false], off: (t, y) => .0035 + .0022 * (1 - clamp((y - hem(t)) / .08, 0, 1)) ** 2 + .002 * noise3(t * 3, y * 30, side, seed), rimIn: .0025, rimMat: M.clothDark,
         paint: [{ m: M.clothDark, f: (t, y) => y < hem(t) + .025 }, { m: M.clothMid, f: (t, y, x, z) => fbm(x * 9, y * 9, z * 9, seed + 5) > .6 }] });
       // CC-355 (zombie-seating): the threads hang from the hem's edge down onto the thigh (they floated 2-4 mm off it)
-      for (let i = 0; i < 9; i++) { const t = side * (i * .74 + .3), y = hem(t); cord(A, T, s, leg, M.clothDark, [[t, y + .004, .008], [t + .03, y - .03 - .016 * (i % 3), .0025]].map(([t1, y1, l]) => { const h = th.at(t1, y1); return h.p.addScaledVector(h.n, l).toArray(); }), [.0022, .0012], 3); }
+      for (let i = 0; i < 6; i++) { const t = side * (i * 1.03 + .3), y = hem(t); cord(A, T, s, leg, M.clothDark, [[t, y + .004, .005], [t + .035, y - .014 - .009 * (i % 3), .0018]].map(([t1, y1, l]) => { const h = th.at(t1, y1); return h.p.addScaledVector(h.n, l).toArray(); }), [.0018, .0009], 3); }
       // a bare foot on the shin bone: heel, arch, the ball and five toes with dark claws (below the ankle cut)
       const shin = leg.userData.shinG;
+      // The buried socket keeps the bare foot and shin seated at the existing ankle pivot.
+      tube(A, T, s, shin, M.skin, { n: 14, sub: 1, caps: [false, false],
+        keys: [{ y: -.338, w: .033, d: .039, cz: .004 }, { y: -.238, w: .032, d: .034, cz: .001 }] });
       tube(A, T, s, shin, M.skin, { axis: 'z', n: 14, sub: 2, paint: [{ m: M.dirt, f: (t, y) => Math.cos(t) < -.2 || y > .08 }],
         keys: [{ y: -.06, w: .032, d: .03, cz: -.385 }, { y: -.035, w: .04, d: .036, cz: -.378 }, { y: .01, w: .04, d: .035, cz: -.375 }, { y: .06, w: .046, d: .026, cz: -.392 },
           { y: .1, w: .05, d: .019, cz: -.4 }, { y: .118, w: .044, d: .014, cz: -.404 }].map((q) => ({ ...q, cx: side * .004 })), capBulge: [.004, .002] });
@@ -817,8 +825,8 @@ const SECTIONS = {
       // claws: long dark horny nails off every fingertip and the thumb
       const el = (side < 0 ? u.armLG : u.armRG).userData.elbowG;
       for (const tp of [...B['tips' + S], B['thumb' + S]]) {
-        const d = new T.Vector3(...tp.d).normalize(), a0 = new T.Vector3(...tp.p), a1 = a0.clone().addScaledVector(d, .022).add(new T.Vector3(0, -.004, .006)), a2 = a0.clone().addScaledVector(d, .038).add(new T.Vector3(0, -.012, .016));
-        cord(A, T, s, el, M.claw, [a0.toArray(), a1.toArray(), a2.toArray()], [.0065, .004, .0008], 5);
+        const d = new T.Vector3(...tp.d).normalize(), tip = new T.Vector3(...tp.p), a0 = tip.clone().addScaledVector(d, -.003), a1 = tip.clone().addScaledVector(d, .020).add(new T.Vector3(0, -.004, .005)), a2 = tip.clone().addScaledVector(d, .035).add(new T.Vector3(0, -.011, .014));
+        cord(A, T, s, el, M.claw, [a0.toArray(), a1.toArray(), a2.toArray()], [.0055, .0037, .0008], 5);
       }
     }
     // the bite and its veins; tendons standing in the neck
@@ -832,7 +840,7 @@ const SECTIONS = {
     if (W[2]) { const ab = P.armBite, el = (ab.side < 0 ? u.armLG : u.armRG).userData.elbowG; woundDetail(A, T, s, el, B['fore' + (ab.side < 0 ? 'L' : 'R')], ab.t, ab.y, .045, .055, M, 2, { flaps: 6, strings: 2 }); }
     for (const side of [-1, 1]) cord(A, T, s, torso, M.skinDark, onTube(tb, [[side * .5, .55], [side * .42, .5], [side * .2, .45]], .001), [.006, .007, .004], 5);
     // a rope belt holding the shorts up
-    const pv = B.pelvis; cord(A, T, s, hips, M.rope, Array.from({ length: 17 }, (_, i) => { const h = pv.at(i / 16 * TAU, .21); return h.p.addScaledVector(h.n, .005).toArray(); }), [.008], 5);
+    const pv = B.pelvis; cord(A, T, s, hips, M.rope, Array.from({ length: 17 }, (_, i) => { const t = i / 16 * TAU, h = pv.at(t, .208 + .008 * Math.sin(t) + .004 * Math.sin(t * 3)); return h.p.addScaledVector(h.n, .003).toArray(); }), [.006], 5);
     humanHead(A, T, g, s, P.head, M, seed + 40);
   },
 

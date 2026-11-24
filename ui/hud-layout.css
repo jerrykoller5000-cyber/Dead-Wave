@@ -157,11 +157,15 @@ body:is(.opening,.frontend,.deploying,.cine) #noticeRail { visibility:hidden !im
 /* GP-144: per-spare fullness alongside the preserved Bullets total. */
 #ammoMags { grid-column:1 / -1; display:flex; gap:7px; align-items:flex-start; padding-top:5px; border-top:1px solid #72896766; max-width:380px; }
 #ammoMags[hidden] { display:none; }
-#ammoMags .mag-count { font-size:10px; line-height:24px; color:#becdab; flex:none; }
+#ammoMags .mag-summary { display:grid; align-content:center; min-height:24px; flex:none; gap:2px; }
+#ammoMags .mag-count, #ammoMags .mag-advice { font-size:11px; line-height:13px; }
+#ammoMags .mag-count { color:#becdab; }
+#ammoMags .mag-advice { color:#f1d985; }
 #ammoMags .mag-list { display:flex; flex-wrap:wrap; gap:3px; min-width:0; }
 #ammoMags .mag-glyph { display:inline-flex; justify-content:center; align-items:center; width:24px; height:24px; flex:none; border:1px solid #a4b988; border-radius:2px 2px 5px 2px; background:linear-gradient(to top,#455c31 var(--fill),#101a12 var(--fill)); font-size:10px; font-weight:700; font-variant-numeric:tabular-nums; color:#f5f1d7; text-shadow:0 1px 2px #000; }
 #ammoMags .mag-glyph.partial { border-style:dashed; }
 #ammoMags .mag-glyph.loader { border-radius:50%; }
+#ammoMags .mag-glyph.mag-next { border-color:#f1d985; box-shadow:inset 0 0 0 1px #f1d985; }
 #hud { --ammo-notice-bottom:max(112px,calc(var(--ammo-hud-height,80px) + 28px)); }
 #hudNotices { bottom:var(--ammo-notice-bottom); }
 @media(max-width:600px) {

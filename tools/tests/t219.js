@@ -17,9 +17,10 @@
     ok(!!sw && typeof D.lights === 'function', 'the Training Ground has a light switch');
     // --- where it is
     const door = TR.DOOR;
-    ok(Math.abs(sw.x - (O.x + TR.RANGE.minX)) < 0.1 && sw.front.x > sw.x, 'on the range side of the build room wall, facing in (x ' + (sw.x - O.x).toFixed(2) + ')');
-    const fromFrame = (sw.z - O.z) - door.maxZ;
-    ok(fromFrame > 0.2 && fromFrame < 1.0, 'right beside the doorway, downrange of its frame (' + fromFrame.toFixed(2) + ' m)');
+    // CG-7 (Jerry D-229, 21 Nov: "Put the light switch here instead"): on the range's back wall, where the cracked monitor hung.
+    ok(Math.abs(sw.z - (O.z + TR.RANGE.minZ)) < 0.1 && sw.front.z > sw.z, 'on the range back wall, facing in (z ' + (sw.z - O.z).toFixed(2) + ')');
+    ok(sw.x - O.x > TR.RANGE.minX + 1 && sw.x - O.x < TR.RANGE.maxX - 1, 'clear of the side walls (x ' + (sw.x - O.x).toFixed(2) + ')');
+    void door;
     const lever = tg.group.getObjectByName('training-light-switch-lever');
     const lp = lever ? lever.getWorldPosition(new T.THREE.Vector3()) : null;
     ok(lp && lp.y - tg.floorY > 1.1 && lp.y - tg.floorY < 1.6, 'at hand height (' + (lp ? (lp.y - tg.floorY).toFixed(2) : '?') + ' m)');
@@ -32,7 +33,7 @@
       if (Math.hypot(f.x - sw.front.x, f.z - sw.front.z) < 3.4) ok(false, 'too near the ' + k + ': their E reaches overlap');
     }
     const s = tg.spawn, toSpawn = Math.hypot(sw.front.x - s.x, sw.front.z - s.z);
-    ok(toSpawn < 10, 'a few steps from where he starts (' + toSpawn.toFixed(1) + ' m)');
+    ok(toSpawn < 12, 'a few steps from where he starts (' + toSpawn.toFixed(1) + ' m)');
     const promptEl = document.getElementById('kioskPrompt');
     await until(() => /lights off/i.test(promptEl.textContent), 1500);
     ok(/lights off/i.test(promptEl.textContent), 'the prompt says so (' + promptEl.textContent + ')');

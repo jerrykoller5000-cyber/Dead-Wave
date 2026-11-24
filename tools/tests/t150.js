@@ -10,6 +10,11 @@
   try {
     await startMatch(T, 'Draw90');
     T.grantAllWeapons();
+    // The M4 must be the actual spare on his back for the hip-to-back move.
+    for (const weapon of ['m4','ak','uzi']) {
+      T.handInGun(weapon);
+      if (!T.takeOutGun(weapon)) throw Error('Could not equip ' + weapon);
+    }
     T.setWeapon(idx('pistol'));
     await until(() => !T.drawDbg().active, 20000);
     await wait(200);
@@ -45,14 +50,25 @@
     ok(!!d2 && d2.segs.join() === 'reach,raise' && d2.to === 'm4', 'U again draws it off his back (' + (d2 && d2.segs.join()) + ')');
     await until(() => !T.drawDbg().active, 30000);
     // A gun he doesn't carry (the third primary of a debug grant): no move.
+    if (!T.getWeaponOwned().flamer || T.getCurrentWeapon() !== 'm4' || !T.weaponMeshes.m4.visible ||
+        T.carryDbg().slung.includes('flamer')) throw Error('The off-body switch needs a held M4 and an owned, unslung flamer');
     T.setWeapon(idx('flamer'));
+    if (T.getCurrentWeapon() !== 'flamer') throw Error('The off-body switch was not accepted');
     await wait(400);
     const d3 = T.drawDbg();
     ok(!d3.active || d3.to !== 'flamer' || d3.segs.join() === 'stow,raise', 'the flamer, not carried, is no draw: ' + d3.segs.join());
     await until(() => !T.drawDbg().active, 30000);
     // A move never stops a shot: switch, and the gun can fire at once.
+    // Start this switch with the hip pistol in hand so it actually plays a stow.
+    if (!T.weaponMeshes.flamer.visible || T.weaponMeshes.m4.visible) throw Error('The off-body flamer never reached his hands');
+    T.setWeapon(idx('pistol'));
+    T.stepFrame(1 / 60);
+    if (!(await until(() => !T.drawDbg().active && T.weaponMeshes.pistol.visible, 30000))) throw Error('The hip pistol never reached his hands');
     T.setWeapon(idx('uzi'));
-    await until(() => T.drawDbg().active, 8000);
+    T.stepFrame(1 / 60);
+    const moving = T.drawDbg();
+    if (!moving.active || moving.from !== 'pistol' || moving.to !== 'uzi' || !moving.segs.includes('stow'))
+      throw Error('The cooldown check needs a live pistol-to-Uzi stow');
     const sw = T.getSwapDbg();
     ok(sw.fireCooldown <= 0.001, 'the draw leaves the fire cooldown alone (' + sw.fireCooldown + ')');
     await until(() => !T.drawDbg().active, 30000);

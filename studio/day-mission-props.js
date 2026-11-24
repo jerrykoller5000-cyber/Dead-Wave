@@ -1,4 +1,6 @@
 // studio/day-mission-props.js - GB-199: the props of Grokbot's two day missions (D-82), modelled to real references.
+import { getRockTextureLibrary, applyRockPBR } from '../world/rock-textures.js';
+import { buildCompactStoneGeometry } from '../world/rock-geometry.js';
 //   Hikers' first-aid kit (GB-196): a khaki canvas first-aid bag with a white patch and a red cross, a hanging loop,
 //   grab handle, front pocket and compression straps; a frayed rope end; a bough that fits any tree; snag dressing
 //   (rocks and bleached driftwood) for the pool where the bag catches.
@@ -47,19 +49,68 @@ function mats(THREE) {
     x.fillStyle = '#c4161c'; const a = w * 0.2, b = w * 0.6; x.fillRect((w - a) / 2, (h - b) / 2, a, b); x.fillRect((w - b) / 2, (h - a) / 2, b, a);
     x.strokeStyle = 'rgba(80,60,40,0.35)'; x.setLineDash([3, 3]); x.lineWidth = 2; x.strokeRect(9, 9, w - 18, h - 18);
   });
+  const pumpBody = canvasTex(THREE, 256, 256, (x, w, h) => {
+    const r = rng(19);
+    const g = x.createLinearGradient(0, 0, 0, h);
+    g.addColorStop(0, '#ba291f'); g.addColorStop(0.75, '#9d2018'); g.addColorStop(1, '#781912');
+    x.fillStyle = g; x.fillRect(0, 0, w, h);
+    for (let i = 0; i < 60; i++) {
+      x.fillStyle = `rgba(32,14,10,${0.08 + r() * 0.14})`;
+      x.beginPath(); x.ellipse(r() * w, r() * h, 4 + r() * 14, 3 + r() * 10, r() * 3, 0, 6.3); x.fill();
+    }
+    const rustGrad = x.createLinearGradient(0, h * 0.78, 0, h);
+    rustGrad.addColorStop(0, 'rgba(92,42,18,0)'); rustGrad.addColorStop(1, 'rgba(72,30,14,0.72)');
+    x.fillStyle = rustGrad; x.fillRect(0, h * 0.78, w, h * 0.22);
+    x.strokeStyle = 'rgba(20,8,6,0.45)'; x.lineWidth = 3; x.strokeRect(14, 14, w - 28, h - 28);
+    x.fillStyle = 'rgba(235,224,196,0.82)'; x.font = 'bold 20px "Courier New", monospace'; x.textAlign = 'center';
+    x.fillText('PGB DEPOT 02', w / 2, 186);
+    x.font = 'bold 14px "Courier New", monospace';
+    x.fillStyle = 'rgba(242,198,84,0.86)';
+    x.fillText('FLAMMABLE · DIESEL', w / 2, 208);
+    for (const [rx, ry] of [[22, 22], [w - 22, 22], [22, h - 22], [w - 22, h - 22]]) {
+      x.fillStyle = '#3c251c'; x.beginPath(); x.arc(rx, ry, 4, 0, 6.3); x.fill();
+    }
+  });
+  const pumpGlobe = canvasTex(THREE, 256, 128, (x, w, h) => {
+    const gr = x.createLinearGradient(0, 0, 0, h);
+    gr.addColorStop(0, '#d8aa58'); gr.addColorStop(0.35, '#fbf0cc'); gr.addColorStop(0.65, '#f6e1a8'); gr.addColorStop(1, '#c99746');
+    x.fillStyle = gr; x.fillRect(0, 0, w, h);
+    x.fillStyle = '#9c241b'; x.fillRect(0, 26, w, 6); x.fillRect(0, h - 32, w, 6);
+    x.fillStyle = '#1b1a16'; x.font = 'bold 21px sans-serif'; x.textAlign = 'center'; x.textBaseline = 'middle';
+    for (const cx of [w * 0.25, w * 0.75]) {
+      x.strokeStyle = '#9c241b'; x.lineWidth = 3;
+      x.beginPath(); x.ellipse(cx, h / 2, 44, 24, 0, 0, 6.3); x.stroke();
+      x.fillText('DIESEL', cx, h / 2 + 1);
+    }
+  });
+  const clipboardTex = canvasTex(THREE, 128, 160, (x, w, h) => {
+    x.fillStyle = '#5a432a'; x.fillRect(0, 0, w, h);
+    x.fillStyle = '#e5dcc0'; x.fillRect(10, 18, w - 20, h - 28);
+    x.fillStyle = '#4c5054'; x.fillRect(36, 6, 56, 18);
+    x.fillStyle = '#2a261c'; x.font = 'bold 12px monospace'; x.fillText('DEPOT 02 LOG', 18, 38);
+    x.fillStyle = '#484234'; x.font = '10px monospace';
+    x.fillText('PUMP: MANUAL', 18, 56);
+    x.fillText('SEALS: LEAKING', 18, 72);
+    x.fillStyle = '#9e261e'; x.fillText('NO OPEN FLAME', 18, 94);
+    x.fillStyle = '#333026'; x.fillText('— PRICE', 18, 126);
+    x.fillStyle = 'rgba(40,28,16,0.3)'; x.beginPath(); x.arc(92, 118, 18, 0, 6.3); x.fill();
+  });
   const pumpFace = canvasTex(THREE, 128, 192, (x, w, h) => {
-    x.fillStyle = '#f1ede2'; x.fillRect(0, 0, w, h);
-    x.fillStyle = '#1d1d1d'; x.font = 'bold 22px sans-serif'; x.textAlign = 'center'; x.fillText('DIESEL', w / 2, 30);
-    x.beginPath(); x.arc(w / 2, 92, 42, 0, 6.3); x.fillStyle = '#fbfaf5'; x.fill(); x.lineWidth = 4; x.strokeStyle = '#222'; x.stroke();
-    for (let i = 0; i <= 10; i++) { const a = Math.PI * (0.8 + i * 0.14); x.beginPath(); x.moveTo(w / 2 + Math.cos(a) * 34, 92 + Math.sin(a) * 34); x.lineTo(w / 2 + Math.cos(a) * 40, 92 + Math.sin(a) * 40); x.lineWidth = 2; x.stroke(); }
-    x.beginPath(); x.moveTo(w / 2, 92); x.lineTo(w / 2 + 26, 70); x.strokeStyle = '#c4161c'; x.lineWidth = 3; x.stroke();
-    x.fillStyle = '#111'; x.fillRect(18, 146, w - 36, 28); x.fillStyle = '#e8a33a'; x.font = 'bold 20px monospace'; x.fillText('0 0 4 2 7', w / 2, 168);
+    x.fillStyle = '#ede5d2'; x.fillRect(0, 0, w, h);
+    x.strokeStyle = '#4a4337'; x.lineWidth = 4; x.strokeRect(4, 4, w - 8, h - 8);
+    x.fillStyle = '#9e2018'; x.fillRect(10, 10, w - 20, 26);
+    x.fillStyle = '#f5eedc'; x.font = 'bold 18px sans-serif'; x.textAlign = 'center'; x.fillText('DIESEL', w / 2, 29);
+    x.beginPath(); x.arc(w / 2, 92, 41, 0, 6.3); x.fillStyle = '#faf6ea'; x.fill(); x.lineWidth = 4; x.strokeStyle = '#262420'; x.stroke();
+    for (let i = 0; i <= 10; i++) { const a = Math.PI * (0.8 + i * 0.14); x.beginPath(); x.moveTo(w / 2 + Math.cos(a) * 33, 92 + Math.sin(a) * 33); x.lineTo(w / 2 + Math.cos(a) * 39, 92 + Math.sin(a) * 39); x.lineWidth = 2; x.strokeStyle = i >= 8 ? '#b3221a' : '#262420'; x.stroke(); }
+    x.beginPath(); x.moveTo(w / 2, 92); x.lineTo(w / 2 + 25, 70); x.strokeStyle = '#c4161c'; x.lineWidth = 3; x.stroke();
+    x.beginPath(); x.arc(w / 2, 92, 5, 0, 6.3); x.fillStyle = '#262420'; x.fill();
+    x.fillStyle = '#141512'; x.fillRect(16, 146, w - 32, 28); x.fillStyle = '#f0ae3e'; x.font = 'bold 19px monospace'; x.fillText('0 0 4 2 7', w / 2, 167);
   });
   const genPanel = canvasTex(THREE, 128, 64, (x, w, h) => {
-    x.fillStyle = '#2b2b2b'; x.fillRect(0, 0, w, h);
-    x.fillStyle = '#d9d4c4'; x.font = 'bold 11px sans-serif'; x.fillText('230V  50Hz  5.5kVA', 8, 14);
+    x.fillStyle = '#262925'; x.fillRect(0, 0, w, h);
+    x.fillStyle = '#dfd8c4'; x.font = 'bold 10px monospace'; x.fillText('PGB GEN · 5.5kVA', 8, 14);
     for (const cx of [26, 64]) { x.beginPath(); x.arc(cx, 40, 13, 0, 6.3); x.fillStyle = '#111'; x.fill(); x.fillStyle = '#555'; x.fillRect(cx - 5, 36, 3, 8); x.fillRect(cx + 2, 36, 3, 8); }
-    x.fillStyle = '#c4161c'; x.fillRect(92, 28, 24, 24); x.fillStyle = '#fff'; x.font = 'bold 9px sans-serif'; x.fillText('OFF', 96, 44);
+    x.fillStyle = '#c4161c'; x.fillRect(92, 28, 24, 24); x.fillStyle = '#fff'; x.font = 'bold 9px sans-serif'; x.fillText('RUN', 95, 44);
   });
   const drip = canvasTex(THREE, 64, 64, (x, w, h) => {
     const g = x.createRadialGradient(w / 2, h / 2, 2, w / 2, h / 2, w / 2);
@@ -69,12 +120,21 @@ function mats(THREE) {
   });
   M = {
     canvas: std(THREE, 0xffffff, 0.92, 0, { map: canvasWeave }), cross: std(THREE, 0xffffff, 0.85, 0, { map: crossPatch }),
+    hikerOrange: std(THREE, 0xe06d22, 0.72, 0.04, { emissive: 0x260f02, emissiveIntensity: 0.4 }),
+    hikerBlue: std(THREE, 0x3b586e, 0.88, 0.02),
     webbing: std(THREE, 0x2c2a22, 0.9), buckle: std(THREE, 0x161616, 0.5, 0.2), zip: std(THREE, 0x3a3a3a, 0.4, 0.6),
     rope: std(THREE, 0xcdb98a, 0.95), fray: std(THREE, 0xe2d4ac, 1),
     bark: std(THREE, 0x4e3b2a, 1), barkDark: std(THREE, 0x3a2c20, 1), leaf: std(THREE, 0x3f6b2e, 0.9),
-    rock: std(THREE, 0x77746c, 0.95), rockDark: std(THREE, 0x5a5850, 0.95), drift: std(THREE, 0xb7ab95, 0.95),
-    pumpRed: std(THREE, 0xb3221a, 0.55, 0.15), pumpFace: std(THREE, 0xffffff, 0.6, 0, { map: pumpFace }), steel: std(THREE, 0x8d9196, 0.35, 0.8),
-    dark: std(THREE, 0x1c1c1c, 0.7, 0.1), hose: std(THREE, 0x151515, 0.75), concrete: std(THREE, 0x9c978c, 0.95), glass: std(THREE, 0xf5f1e0, 0.2, 0, { emissive: 0x332a10 }),
+    rock: (() => { const m = std(THREE, 0x858278, 0.65); const rl = getRockTextureLibrary(THREE); if (rl && rl.riverCobble) applyRockPBR(m, rl.riverCobble, { selfColored: false, normalMul: 0.9 }); return m; })(),
+    rockDark: (() => { const m = std(THREE, 0x626058, 0.62); const rl = getRockTextureLibrary(THREE); if (rl && rl.riverCobble) applyRockPBR(m, rl.riverCobble, { selfColored: false, normalMul: 0.95 }); return m; })(),
+    drift: std(THREE, 0xb7ab95, 0.95),
+    pumpRed: std(THREE, 0xffffff, 0.58, 0.18, { map: pumpBody }),
+    pumpRedSolid: std(THREE, 0xa22119, 0.58, 0.18),
+    pumpFace: std(THREE, 0xffffff, 0.55, 0, { map: pumpFace }),
+    pumpClipboard: std(THREE, 0xffffff, 0.85, 0, { map: clipboardTex }),
+    steel: std(THREE, 0x8d9196, 0.35, 0.8),
+    dark: std(THREE, 0x1c1c1c, 0.7, 0.1), hose: std(THREE, 0x151515, 0.75), concrete: std(THREE, 0x8c877c, 0.95),
+    glass: std(THREE, 0xffffff, 0.25, 0.05, { map: pumpGlobe, emissive: 0xffb858, emissiveIntensity: 0.65 }),
     olive: std(THREE, 0x4b5323, 0.6, 0.25), oliveDark: std(THREE, 0x3a4019, 0.6, 0.25),
     genFrame: std(THREE, 0xd8a420, 0.5, 0.3), genEngine: std(THREE, 0x50545a, 0.55, 0.5), genTank: std(THREE, 0xb3221a, 0.45, 0.2), genPanel: std(THREE, 0xffffff, 0.6, 0, { map: genPanel }),
     drip: new THREE.MeshBasicMaterial({ map: drip, transparent: true, depthWrite: false, polygonOffset: true, polygonOffsetFactor: -2 })
@@ -87,14 +147,18 @@ function mats(THREE) {
 export function makeHikersBag({ THREE }) {
   const m = mats(THREE), g = new THREE.Group(); g.name = 'hikers-bag';
   const body = box(THREE, 0.36, 0.42, 0.2, m.canvas, 0, -0.02, 0); g.add(body);
-  const roll = cyl(THREE, 0.1, 0.1, 0.36, m.canvas, 12, 0, 0.19, 0); roll.rotation.z = Math.PI / 2; roll.scale.set(1, 1, 1); g.add(roll);   // the rounded top
-  g.add(box(THREE, 0.3, 0.2, 0.06, m.canvas, 0, -0.1, 0.12));                      // front pocket
-  g.add(box(THREE, 0.15, 0.15, 0.005, m.cross, 0, -0.08, 0.153));                    // the white patch, red cross
+  const roll = cyl(THREE, 0.1, 0.1, 0.36, m.canvas, 12, 0, 0.19, 0); roll.rotation.z = Math.PI / 2; roll.scale.set(1, 1, 1); g.add(roll);
+  const pad = cyl(THREE, 0.068, 0.068, 0.38, m.hikerBlue, 10, 0, -0.26, 0); pad.rotation.z = Math.PI / 2; g.add(pad);
+  g.add(box(THREE, 0.3, 0.2, 0.06, m.canvas, 0, -0.1, 0.12));
+  g.add(box(THREE, 0.15, 0.15, 0.005, m.cross, 0, -0.08, 0.153));
   const back = box(THREE, 0.15, 0.15, 0.005, m.cross, 0, -0.02, -0.103); back.rotation.y = Math.PI; g.add(back);
-  g.add(box(THREE, 0.34, 0.008, 0.012, m.zip, 0, 0.11, 0.1));                        // the zip
-  for (const sx of [-0.19, 0.19]) { g.add(box(THREE, 0.012, 0.36, 0.21, m.webbing, sx, -0.03, 0)); g.add(box(THREE, 0.016, 0.04, 0.05, m.buckle, sx * 1.04, 0.05, 0.08)); }
+  g.add(box(THREE, 0.34, 0.008, 0.012, m.zip, 0, 0.11, 0.1));
+  for (const sx of [-0.19, 0.19]) { g.add(box(THREE, 0.012, 0.42, 0.21, m.webbing, sx, -0.06, 0)); g.add(box(THREE, 0.016, 0.04, 0.05, m.buckle, sx * 1.04, 0.05, 0.08)); }
   for (const sz of [-0.07, 0.07]) g.add(box(THREE, 0.37, 0.02, 0.01, m.webbing, 0, -0.18, sz < 0 ? -0.103 : 0.155));
-  const loop = new THREE.Mesh(new THREE.TorusGeometry(0.05, 0.012, 6, 12, Math.PI), m.webbing); loop.position.set(0, 0.26, 0); g.add(loop);   // the hanging loop
+  const loop = new THREE.Mesh(new THREE.TorusGeometry(0.05, 0.012, 6, 12, Math.PI), m.webbing); loop.position.set(0, 0.26, 0); g.add(loop);
+  const carabiner = new THREE.Mesh(new THREE.TorusGeometry(0.032, 0.007, 6, 12), m.steel); carabiner.position.set(0, 0.30, 0); carabiner.rotation.y = Math.PI * 0.25; g.add(carabiner);
+  const flagA = box(THREE, 0.045, 0.26, 0.008, m.hikerOrange, 0.06, 0.17, 0.03); flagA.rotation.set(0.12, 0.2, 0.26); g.add(flagA);
+  const flagB = box(THREE, 0.040, 0.21, 0.008, m.hikerOrange, -0.05, 0.19, -0.03); flagB.rotation.set(-0.1, -0.25, -0.22); g.add(flagB);
   const handle = new THREE.Mesh(new THREE.TorusGeometry(0.07, 0.01, 6, 12, Math.PI), m.webbing); handle.position.set(0, 0.26, 0); handle.rotation.y = Math.PI / 2; g.add(handle);
   return g;
 }
@@ -128,8 +192,9 @@ export function makeSnag({ THREE }) {
   const m = mats(THREE), g = new THREE.Group(); g.name = 'hikers-snag'; const r = rng(5);
   for (let i = 0; i < 6; i++) {
     const a = i / 6 * Math.PI * 2 + r() * 0.4, d = 0.7 + r() * 0.8, s = 0.25 + r() * 0.35;
-    const k = new THREE.Mesh(facet(new THREE.DodecahedronGeometry(s, 0)), i % 2 ? m.rock : m.rockDark);
-    k.position.set(Math.cos(a) * d, -s * 0.35, Math.sin(a) * d); k.scale.set(1.3, 0.7, 1); k.rotation.set(r() * 3, r() * 3, r() * 3); g.add(k);
+    const rg = buildCompactStoneGeometry(THREE, { rx: s * 1.28, ry: s * 0.68, rz: s * 1.02, detail: 1, seed: 0x5a60 + i * 31, style: 'river', uvTile: 0.75 });
+    const k = new THREE.Mesh(rg, i % 2 ? m.rock : m.rockDark);
+    k.position.set(Math.cos(a) * d, -s * 0.28, Math.sin(a) * d); k.rotation.set((r() - 0.5) * 0.35, r() * 6.28, (r() - 0.5) * 0.35); g.add(k);
   }
   for (let i = 0; i < 4; i++) {
     const a = r() * 6.3, l = 1 + r() * 1.2, c = { x: Math.cos(a) * 0.4, z: Math.sin(a) * 0.4 }, d = { x: Math.cos(a + 1.6), z: Math.sin(a + 1.6) };
@@ -139,28 +204,32 @@ export function makeSnag({ THREE }) {
 }
 
 // --- Fuel depot ---
-// The pump: on the ground at the origin, the face toward +z; about 1.75 m tall.
+// The pump: on the ground at the origin, double-sided dial faces (+z and -z), live animated hand crank, about 1.75 m tall.
 export function makeFuelPump({ THREE }) {
   const m = mats(THREE), g = new THREE.Group(); g.name = 'fuel-pump';
-  g.add(box(THREE, 0.9, 0.16, 0.7, m.concrete, 0, 0.08, 0));                               // the plinth
-  g.add(box(THREE, 0.56, 1.2, 0.42, m.pumpRed, 0, 0.76, 0));                               // the cabinet
-  const cap = cyl(THREE, 0.21, 0.21, 0.56, m.pumpRed, 14, 0, 1.36, 0); cap.rotation.z = Math.PI / 2; cap.scale.set(1, 1, 1); g.add(cap);   // the rounded top
-  g.add(box(THREE, 0.4, 0.6, 0.01, m.pumpFace, 0, 0.98, 0.215));                           // dial face
-  g.add(box(THREE, 0.44, 0.64, 0.012, m.steel, 0, 0.98, 0.209));                           // its bezel
-  g.add(box(THREE, 0.58, 0.04, 0.44, m.steel, 0, 0.18, 0));                                // kick plate
-  const globe = new THREE.Mesh(new THREE.SphereGeometry(0.15, 14, 10), m.glass); globe.position.set(0, 1.68, 0); g.add(globe);
+  g.add(box(THREE, 0.96, 0.16, 0.76, m.concrete, 0, 0.08, 0));
+  g.add(box(THREE, 0.56, 1.2, 0.42, m.pumpRed, 0, 0.76, 0));
+  const cap = cyl(THREE, 0.21, 0.21, 0.56, m.pumpRedSolid, 14, 0, 1.36, 0); cap.rotation.z = Math.PI / 2; cap.scale.set(1, 1, 1); g.add(cap);
+  g.add(box(THREE, 0.4, 0.6, 0.01, m.pumpFace, 0, 0.98, 0.215));
+  g.add(box(THREE, 0.44, 0.64, 0.012, m.steel, 0, 0.98, 0.209));
+  const backFace = box(THREE, 0.4, 0.6, 0.01, m.pumpFace, 0, 0.98, -0.215); backFace.rotation.y = Math.PI; g.add(backFace);
+  g.add(box(THREE, 0.44, 0.64, 0.012, m.steel, 0, 0.98, -0.209));
+  g.add(box(THREE, 0.60, 0.05, 0.46, m.steel, 0, 0.18, 0));
+  const globe = new THREE.Mesh(new THREE.SphereGeometry(0.155, 16, 12), m.glass); globe.position.set(0, 1.69, 0); globe.rotation.y = -Math.PI * 0.5; g.add(globe);
   g.add(cyl(THREE, 0.08, 0.1, 0.08, m.steel, 12, 0, 1.55, 0));
-  // Hand crank on the right side.
+  const clip = box(THREE, 0.22, 0.014, 0.28, m.pumpClipboard, 0.30, 0.168, 0.22); clip.rotation.y = -0.35; g.add(clip);
   const hub = cyl(THREE, 0.05, 0.05, 0.06, m.steel, 10, 0.31, 0.9, 0); hub.rotation.z = Math.PI / 2; g.add(hub);
-  g.add(rod(THREE, { x: 0.33, y: 0.9, z: 0 }, { x: 0.36, y: 0.72, z: 0.05 }, 0.015, m.steel));
-  g.add(rod(THREE, { x: 0.36, y: 0.72, z: 0.05 }, { x: 0.46, y: 0.72, z: 0.05 }, 0.02, m.dark));
-  // The hose: out of the left side, a loop down and up to the nozzle on its holster.
+  const crank = new THREE.Group(); crank.name = 'fuel-pump-crank'; crank.position.set(0.33, 0.9, 0);
+  crank.add(rod(THREE, { x: 0, y: 0, z: 0 }, { x: 0.03, y: -0.18, z: 0.05 }, 0.015, m.steel));
+  crank.add(rod(THREE, { x: 0.03, y: -0.18, z: 0.05 }, { x: 0.13, y: -0.18, z: 0.05 }, 0.02, m.dark));
+  g.add(crank);
+  g.userData.crank = crank;
   const curve = new THREE.CatmullRomCurve3([new THREE.Vector3(-0.28, 1.05, 0.05), new THREE.Vector3(-0.42, 0.75, 0.12), new THREE.Vector3(-0.4, 0.32, 0.22),
     new THREE.Vector3(-0.33, 0.45, 0.3), new THREE.Vector3(-0.3, 0.8, 0.26)]);
   g.add(new THREE.Mesh(new THREE.TubeGeometry(curve, 24, 0.022, 6), m.hose));
-  g.add(box(THREE, 0.06, 0.1, 0.12, m.steel, -0.3, 0.85, 0.24));                           // holster
-  g.add(rod(THREE, { x: -0.3, y: 0.8, z: 0.26 }, { x: -0.3, y: 0.9, z: 0.36 }, 0.025, m.dark));   // nozzle grip
-  g.add(rod(THREE, { x: -0.3, y: 0.9, z: 0.36 }, { x: -0.3, y: 0.82, z: 0.48 }, 0.012, m.steel));   // spout
+  g.add(box(THREE, 0.06, 0.1, 0.12, m.steel, -0.3, 0.85, 0.24));
+  g.add(rod(THREE, { x: -0.3, y: 0.8, z: 0.26 }, { x: -0.3, y: 0.9, z: 0.36 }, 0.025, m.dark));
+  g.add(rod(THREE, { x: -0.3, y: 0.9, z: 0.36 }, { x: -0.3, y: 0.82, z: 0.48 }, 0.012, m.steel));
   return g;
 }
 // The NATO jerrycan: standing at the origin, 0.47 tall, 0.345 long (x), 0.165 thick (z); handles on top.
@@ -168,24 +237,21 @@ export function makeJerrycan({ THREE }) {
   const m = mats(THREE), g = new THREE.Group(); g.name = 'jerrycan';
   const H = 0.43, L = 0.345, T = 0.165;
   g.add(box(THREE, L, H, T, m.olive, 0, H / 2, 0));
-  g.add(box(THREE, L + 0.012, 0.018, T + 0.012, m.oliveDark, 0, H, 0));                    // the welded seam at the top
+  g.add(box(THREE, L + 0.012, 0.018, T + 0.012, m.oliveDark, 0, H, 0));
   g.add(box(THREE, L + 0.012, 0.012, T + 0.012, m.oliveDark, 0, 0.006, 0));
   g.add(box(THREE, 0.012, H, T + 0.012, m.oliveDark, -L / 2, H / 2, 0));
   g.add(box(THREE, 0.012, H, T + 0.012, m.oliveDark, L / 2, H / 2, 0));
-  // The X stamped into each broad side (raised ribs), with the rim round it.
   const ang = Math.atan2(H * 0.8, L * 0.8), len = Math.hypot(H * 0.8, L * 0.8);
   for (const s of [-1, 1]) {
     for (const a of [ang, -ang]) { const x = box(THREE, len, 0.022, 0.008, m.oliveDark, 0, H / 2, s * (T / 2 + 0.003)); x.rotation.z = a; g.add(x); }
     g.add(box(THREE, L * 0.86, 0.012, 0.008, m.oliveDark, 0, H * 0.92, s * (T / 2 + 0.003)));
     g.add(box(THREE, L * 0.86, 0.012, 0.008, m.oliveDark, 0, H * 0.08, s * (T / 2 + 0.003)));
   }
-  // Three handles across the top.
   for (const hx of [-0.1, 0, 0.1]) {
     g.add(box(THREE, 0.026, 0.012, T * 0.8, m.oliveDark, hx, H + 0.06, 0));
     g.add(box(THREE, 0.026, 0.06, 0.012, m.oliveDark, hx, H + 0.03, T * 0.36));
     g.add(box(THREE, 0.026, 0.06, 0.012, m.oliveDark, hx, H + 0.03, -T * 0.36));
   }
-  // The spout at the front corner: neck, cap and its cam lever.
   const neck = cyl(THREE, 0.026, 0.03, 0.04, m.oliveDark, 10, -L / 2 + 0.05, H + 0.02, 0); neck.rotation.z = 0.5; g.add(neck);
   const capM = cyl(THREE, 0.034, 0.034, 0.025, m.olive, 12, -L / 2 + 0.035, H + 0.045, 0); capM.rotation.z = 0.5; g.add(capM);
   g.add(rod(THREE, { x: -L / 2 + 0.06, y: H + 0.06, z: 0 }, { x: -L / 2 + 0.13, y: H + 0.035, z: 0 }, 0.007, m.steel));
@@ -199,14 +265,22 @@ export function makeGenerator({ THREE }) {
   for (const sx of [-L / 2, L / 2]) for (const sz of [-W / 2, W / 2]) g.add(rod(THREE, c(sx, 0, sz), c(sx, Ht, sz), r, m.genFrame));
   for (const y of [0.02, Ht]) for (const sz of [-W / 2, W / 2]) g.add(rod(THREE, c(-L / 2, y, sz), c(L / 2, y, sz), r, m.genFrame));
   for (const y of [0.02, Ht]) for (const sx of [-L / 2, L / 2]) g.add(rod(THREE, c(sx, y, -W / 2), c(sx, y, W / 2), r, m.genFrame));
-  g.add(box(THREE, 0.4, 0.34, 0.36, m.genEngine, -0.12, 0.22, 0));                        // engine
-  const alt = cyl(THREE, 0.15, 0.15, 0.32, m.genEngine, 14, 0.22, 0.22, 0); alt.rotation.z = Math.PI / 2; g.add(alt);   // alternator
-  g.add(box(THREE, 0.62, 0.18, 0.44, m.genTank, 0, Ht + 0.1, 0));                         // fuel tank on top
-  g.add(cyl(THREE, 0.05, 0.05, 0.04, m.dark, 12, -0.18, Ht + 0.21, 0.05));                 // filler cap
+  g.add(box(THREE, 0.4, 0.34, 0.36, m.genEngine, -0.12, 0.22, 0));
+  const alt = cyl(THREE, 0.15, 0.15, 0.32, m.genEngine, 14, 0.22, 0.22, 0); alt.rotation.z = Math.PI / 2; g.add(alt);
+  g.add(box(THREE, 0.62, 0.18, 0.44, m.genTank, 0, Ht + 0.1, 0));
+  g.add(cyl(THREE, 0.05, 0.05, 0.04, m.dark, 12, -0.18, Ht + 0.21, 0.05));
   g.add(cyl(THREE, 0.012, 0.012, 0.02, m.steel, 6, -0.18, Ht + 0.24, 0.05));
   const muff = cyl(THREE, 0.07, 0.07, 0.3, m.steel, 12, -0.25, 0.45, -0.18); muff.rotation.z = Math.PI / 2; g.add(muff);
-  g.add(box(THREE, 0.34, 0.17, 0.01, m.genPanel, 0.18, 0.42, W / 2 - 0.02));              // control panel
-  g.add(box(THREE, 0.08, 0.06, 0.06, m.dark, -0.32, 0.36, W / 2 - 0.08));                  // recoil starter
+  g.add(box(THREE, 0.34, 0.17, 0.01, m.genPanel, 0.18, 0.42, W / 2 - 0.02));
+  g.add(box(THREE, 0.08, 0.06, 0.06, m.dark, -0.32, 0.36, W / 2 - 0.08));
+  const statusMat = std(THREE, 0x2a1814, 0.3, 0.2, { emissive: 0x3b180e, emissiveIntensity: 0.4 });
+  const statusLamp = new THREE.Mesh(new THREE.SphereGeometry(0.026, 8, 8), statusMat);
+  statusLamp.name = 'hq-generator-status';
+  statusLamp.position.set(0.37, 0.49, W / 2 - 0.01);
+  g.add(statusLamp);
+  g.userData.statusMesh = statusLamp;
+  g.userData.statusMat = statusMat;
+  g.userData.exhaust = { x: -0.40, y: 0.48, z: -0.18 };
   return g;
 }
 // The drip: a flat decal, 0.44 across (lay it on the ground).

@@ -1,0 +1,314 @@
+{
+  "cmd": "batch",
+  "shots": [
+    {
+      "target": "xyz:0,-198.6,-620",
+      "cam": {
+        "x": 0,
+        "y": -198.3,
+        "z": -650.5,
+        "tx": 0,
+        "ty": -198.6,
+        "tz": -620,
+        "fov": 70
+      },
+      "caption": "A1 Range: spawn, looking downrange (lights off)",
+      "out": "review/CH-3/walk/lightsoff/A1-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:0,-198.8,-652",
+      "cam": {
+        "x": 1,
+        "y": -198,
+        "z": -642,
+        "tx": 0,
+        "ty": -198.8,
+        "tz": -652,
+        "fov": 75
+      },
+      "caption": "A2 Range: back wall (lockers, board, monitor, rack) (lights off)",
+      "out": "review/CH-3/walk/lightsoff/A2-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:8,-198.6,-646.5",
+      "cam": {
+        "x": -2.5,
+        "y": -198.2,
+        "z": -646.5,
+        "tx": 8,
+        "ty": -198.6,
+        "tz": -646.5,
+        "fov": 75
+      },
+      "caption": "A3 Range: terminal wall (CIF, kiosk, Armory) (lights off)",
+      "out": "review/CH-3/walk/lightsoff/A3-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:-8,-198.7,-646",
+      "cam": {
+        "x": 3,
+        "y": -198.2,
+        "z": -642.5,
+        "tx": -8,
+        "ty": -198.7,
+        "tz": -646,
+        "fov": 75
+      },
+      "caption": "A4 Range: doorway side (console, switch, dummy) (lights off)",
+      "out": "review/CH-3/walk/lightsoff/A4-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:0,-194,-636",
+      "cam": {
+        "x": 0,
+        "y": -198.4,
+        "z": -649,
+        "tx": 0,
+        "ty": -194,
+        "tz": -636,
+        "fov": 80
+      },
+      "caption": "A5 Range: ceiling and its lamps (lights off)",
+      "out": "review/CH-3/walk/lightsoff/A5-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:0,-199,-640",
+      "cam": {
+        "x": 3,
+        "y": -198.4,
+        "z": -634,
+        "tx": 0,
+        "ty": -199,
+        "tz": -640,
+        "fov": 70
+      },
+      "caption": "B1 Range: firing bench from downrange (lights off)",
+      "out": "review/CH-3/walk/lightsoff/B1-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:0,-198.8,-610",
+      "cam": {
+        "x": 0,
+        "y": -198.2,
+        "z": -631,
+        "tx": 0,
+        "ty": -198.8,
+        "tz": -610,
+        "fov": 70
+      },
+      "caption": "C1 Range: targets and backstop (lights off)",
+      "out": "review/CH-3/walk/lightsoff/C1-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:-8,-198.2,-648",
+      "cam": {
+        "x": -14,
+        "y": -198.2,
+        "z": -648,
+        "tx": -8,
+        "ty": -198.2,
+        "tz": -648,
+        "fov": 75
+      },
+      "caption": "D1 Doorway from the build room (shutter, keypads) (lights off)",
+      "out": "review/CH-3/walk/lightsoff/D1-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:-30,-196,-628",
+      "cam": {
+        "x": -10,
+        "y": -197.8,
+        "z": -648,
+        "tx": -30,
+        "ty": -196,
+        "tz": -628,
+        "fov": 80
+      },
+      "caption": "E1 Build room: overview from the doorway (lights off)",
+      "out": "review/CH-3/walk/lightsoff/E1-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:-26,-180,-632",
+      "cam": {
+        "x": -26,
+        "y": -198.3,
+        "z": -648,
+        "tx": -26,
+        "ty": -180,
+        "tz": -632,
+        "fov": 80
+      },
+      "caption": "E2 Build room: roof, trusses, high-bay lamps (lights off)",
+      "out": "review/CH-3/walk/lightsoff/E2-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:-44,-194.5,-641",
+      "cam": {
+        "x": -30,
+        "y": -195.5,
+        "z": -638,
+        "tx": -44,
+        "ty": -194.5,
+        "tz": -641,
+        "fov": 70
+      },
+      "caption": "E3 Build room: wall lamps against the pillars (lights off)",
+      "out": "review/CH-3/walk/lightsoff/E3-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:-8,-198.6,-647",
+      "cam": {
+        "x": -20,
+        "y": -198.2,
+        "z": -641,
+        "tx": -8,
+        "ty": -198.6,
+        "tz": -647,
+        "fov": 75
+      },
+      "caption": "E4 Build room: east fence, pillars, doorway recess (lights off)",
+      "out": "review/CH-3/walk/lightsoff/E4-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:-43.2,-194.4,-632",
+      "cam": {
+        "x": -36,
+        "y": -196.5,
+        "z": -636,
+        "tx": -43.2,
+        "ty": -194.4,
+        "tz": -632,
+        "fov": 70
+      },
+      "caption": "E5 Build room: containment gun on the west wall (lights off)",
+      "out": "review/CH-3/walk/lightsoff/E5-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:-41,-199,-650",
+      "cam": {
+        "x": -32,
+        "y": -197.8,
+        "z": -644,
+        "tx": -41,
+        "ty": -199,
+        "tz": -650,
+        "fov": 75
+      },
+      "caption": "F1 Medical bay: bed, cabinet, fence (lights off)",
+      "out": "review/CH-3/walk/lightsoff/F1-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:-44,-199,-641",
+      "cam": {
+        "x": -36,
+        "y": -198.3,
+        "z": -645,
+        "tx": -44,
+        "ty": -199,
+        "tz": -641,
+        "fov": 60
+      },
+      "caption": "F2 West wall: fence returns, skull intake, alarm (lights off)",
+      "out": "review/CH-3/walk/lightsoff/F2-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:-26,-196,-612",
+      "cam": {
+        "x": -26,
+        "y": -198,
+        "z": -628,
+        "tx": -26,
+        "ty": -196,
+        "tz": -612,
+        "fov": 75
+      },
+      "caption": "G1 Zombie gate and its frame (lights off)",
+      "out": "review/CH-3/walk/lightsoff/G1-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:-44,-198,-622",
+      "cam": {
+        "x": -34,
+        "y": -198,
+        "z": -628,
+        "tx": -44,
+        "ty": -198,
+        "tz": -622,
+        "fov": 70
+      },
+      "caption": "G2 Gate corner: north fence return and wall (lights off)",
+      "out": "review/CH-3/walk/lightsoff/G2-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    },
+    {
+      "target": "xyz:-8,-198,-622",
+      "cam": {
+        "x": -18,
+        "y": -198,
+        "z": -628,
+        "tx": -8,
+        "ty": -198,
+        "tz": -622,
+        "fov": 70
+      },
+      "caption": "G3 Gate corner east: fence return and wall (lights off)",
+      "out": "review/CH-3/walk/lightsoff/G3-lightsoff.png",
+      "time": "midnight",
+      "pre": "T.setViewFirstDbg(true); if (T.trainingDbg.lights().on) T.trainingDbg.toggleLights(); await wait(450);",
+      "size": "1920x1080"
+    }
+  ],
+  "sheet": true,
+  "cols": 3,
+  "sheetFile": "review/CH-3/walk/sheet-tour-lightsoff.jpg"
+}

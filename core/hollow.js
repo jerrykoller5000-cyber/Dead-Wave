@@ -88,9 +88,12 @@ export function createHollow({ where = null, ring = null } = {}) {
     reset() { cleared.clear(); explored.clear(); },
     note(x, z) {
       if (!warren) return;
-      const cell = 6;
-      const i = Math.floor((x - (warren.plan ? 0 : 0)) / cell);
-      explored.add(i + ',' + Math.floor(z / cell));
+      const cell = (warren.cell > 0 ? warren.cell : 6);
+      const ox = (warren.nav && Number.isFinite(warren.nav.ox)) ? warren.nav.ox : (warren.group && warren.group.position ? warren.group.position.x : 0);
+      const oz = (warren.nav && Number.isFinite(warren.nav.oz)) ? warren.nav.oz : (warren.group && warren.group.position ? warren.group.position.z : 0);
+      const i = Math.floor((x - ox) / cell);
+      const j = Math.floor((z - oz) / cell);
+      explored.add(i + ',' + j);
     },
   };
 }

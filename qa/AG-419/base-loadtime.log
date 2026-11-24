@@ -1,0 +1,21 @@
+loadtime: headed (real GPU), tab in front, cache warm
+loadtime: http://127.0.0.1:63467/index.html?debug=1
+
+run 1: visibility=visible  TT at 42.4s  title at 53.1s
+   terrain+water+sky built                  0 ms  (+     0)
+   rocks                                  751 ms  (+   751)
+   trees                                 2109 ms  (+  1358)
+   player+weapons+zombie types           5655 ms  (+  3546)
+   foliage scattered                     7341 ms  (+  1686)
+   POIs+minimap+foliage chunks          11784 ms  (+  4443)
+   contact shading + rest of setup      12965 ms  (+  1181)
+   post + pools + compile + warm frame   37593 ms  (+ 24628)
+   ready                                37598 ms  (+     5)
+   log: Grave Shift warm-up: 536 shader variants compiled, 16 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 13ms pools 4091ms compile 11895ms 
+   log: Grave Shift load: terrain+water+sky built 0ms | rocks 751ms | trees 2109ms | player+weapons+zombie types 5655ms | foliage scattered 7341ms | POIs+minimap+foliag
+   log: Grave Shift first minute: 562 variants after 13 warm frames | load:409 fire-hot:534 fire-cold:534 fire-resources:100/8 fire-pool-falling-leaves:536 fire-leaf-re
+   log: Grave Shift pre-roll: 662 shader variants compiled after 35 warm frames | load:409 fire-hot:534 fire-cold:534 fire-resources:100/8 fire-pool-falling-leaves:536 
+   log: Grave Shift title: menu up after 35 warm frames, 662 variants | load:409 fire-hot:534 fire-cold:534 fire-resources:100/8 fire-pool-falling-leaves:536 fire-leaf-
+
+title screen: best 53.1s, worst 53.1s, mean 53.1s over 1 run(s)
+budget (AGENTS.md rule 12): 15 s cold, 5 s warm — OVER the cold budget.

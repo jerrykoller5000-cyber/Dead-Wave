@@ -1,0 +1,435 @@
+{
+  "tag": "before",
+  "timestamp": "2026-11-23T23:34:13.480Z",
+  "backend": "WebGPU",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 41.91,
+  "pageErrors": [],
+  "rockStats": {
+    "rockCount": 150,
+    "byKind": {
+      "erratic": 38,
+      "cluster": 29,
+      "angular": 44,
+      "slab": 28,
+      "spire": 11
+    },
+    "byGeo": {
+      "generic": 150
+    },
+    "totalRockTris": 17872,
+    "batchMeshes": 48,
+    "batchTris": 17768,
+    "memTextures": 203,
+    "memGeos": 3324
+  },
+  "perf": {
+    "field": {
+      "name": "valley_rock_field",
+      "frames": 120,
+      "meanMs": 23.75,
+      "meanFps": 42.1,
+      "medianMs": 16.8,
+      "p99Ms": 33.6,
+      "p99Fps": 29.8,
+      "worstMs": 33.7,
+      "hitches": 0,
+      "callsPerFrame": 15.1,
+      "tris": 1196857,
+      "geometries": 3286,
+      "textures": 199
+    },
+    "close": {
+      "name": "valley_erratic_close",
+      "frames": 120,
+      "meanMs": 22.08,
+      "meanFps": 45.3,
+      "medianMs": 16.7,
+      "p99Ms": 33.8,
+      "p99Fps": 29.6,
+      "worstMs": 49.9,
+      "hitches": 0,
+      "callsPerFrame": 15.1,
+      "tris": 667992,
+      "geometries": 3286,
+      "textures": 199
+    },
+    "cave": {
+      "name": "cave_shale_mouth",
+      "frames": 120,
+      "meanMs": 20.14,
+      "meanFps": 49.7,
+      "medianMs": 16.7,
+      "p99Ms": 33.6,
+      "p99Fps": 29.8,
+      "worstMs": 33.7,
+      "hitches": 0,
+      "callsPerFrame": 15.1,
+      "tris": 597986,
+      "geometries": 3286,
+      "textures": 199
+    }
+  },
+  "shots": [
+    {
+      "id": "01-valley-erratic-close",
+      "cap": "Valley Erratic boulder close-up (Noon, 1P scale)",
+      "file": "qa/AG-407/before/01-valley-erratic-close.png",
+      "bytes": 2159855,
+      "cam": {
+        "x": -52.93,
+        "y": -0.67,
+        "z": -84.68,
+        "tx": -55.41,
+        "ty": -1.3,
+        "tz": -87.36,
+        "fov": 52
+      }
+    },
+    {
+      "id": "02-valley-angular-close",
+      "cap": "Valley Angular fractured boulder close-up (Noon)",
+      "file": "qa/AG-407/before/02-valley-angular-close.png",
+      "bytes": 2594313,
+      "cam": {
+        "x": -140.36,
+        "y": 1.39,
+        "z": -2.14,
+        "tx": -143.11,
+        "ty": 0.32,
+        "tz": -5.11,
+        "fov": 52
+      }
+    },
+    {
+      "id": "03-valley-slab-close",
+      "cap": "Valley Stratified Slab outcrop close-up (Noon)",
+      "file": "qa/AG-407/before/03-valley-slab-close.png",
+      "bytes": 2050299,
+      "cam": {
+        "x": -82.37,
+        "y": 1.17,
+        "z": 70.86,
+        "tx": -83.22,
+        "ty": -0.08,
+        "tz": 67.13,
+        "fov": 52
+      }
+    },
+    {
+      "id": "04-valley-spire-close",
+      "cap": "Valley Spire crag blade close-up (Noon)",
+      "file": "qa/AG-407/before/04-valley-spire-close.png",
+      "bytes": 2550550,
+      "cam": {
+        "x": -164.05,
+        "y": 3.17,
+        "z": 4.46,
+        "tx": -166.1,
+        "ty": 2.38,
+        "tz": 2.25,
+        "fov": 54
+      }
+    },
+    {
+      "id": "05-valley-cluster-close",
+      "cap": "Valley Rock Cluster close-up (Noon)",
+      "file": "qa/AG-407/before/05-valley-cluster-close.png",
+      "bytes": 2068159,
+      "cam": {
+        "x": 74.21,
+        "y": 2.04,
+        "z": -54.57,
+        "tx": 72.24,
+        "ty": 2.12,
+        "tz": -56.69,
+        "fov": 54
+      }
+    },
+    {
+      "id": "06-valley-rock-field",
+      "cap": "Hillside rock field: multi-rock identity at 3P scale (Noon)",
+      "file": "qa/AG-407/before/06-valley-rock-field.png",
+      "bytes": 2724027,
+      "cam": {
+        "x": -44.96,
+        "y": 1.16,
+        "z": -84.82,
+        "tx": -41.86,
+        "ty": -0.8,
+        "tz": -87.69,
+        "fov": 60
+      }
+    },
+    {
+      "id": "07-valley-rock-dusk",
+      "cap": "Dusk raking light on Erratic boulder (normal & silhouette test)",
+      "file": "qa/AG-407/before/07-valley-rock-dusk.png",
+      "bytes": 1569709,
+      "cam": {
+        "x": -52.93,
+        "y": -0.67,
+        "z": -84.68,
+        "tx": -55.41,
+        "ty": -1.3,
+        "tz": -87.36,
+        "fov": 52
+      }
+    },
+    {
+      "id": "08-valley-rock-night",
+      "cap": "Night flashlight readability on Angular boulder",
+      "file": "qa/AG-407/before/08-valley-rock-night.png",
+      "bytes": 1786107,
+      "cam": {
+        "x": -140.36,
+        "y": 1.39,
+        "z": -2.14,
+        "tx": -143.11,
+        "ty": 0.32,
+        "tz": -5.11,
+        "fov": 52
+      }
+    },
+    {
+      "id": "09-cave-wet",
+      "cap": "Wet Grotto cave: dripping dark basalt face & mossy boulders",
+      "file": "qa/AG-407/before/09-cave-wet.png",
+      "bytes": 2267572,
+      "cam": {
+        "x": -176.04,
+        "y": 4.42,
+        "z": -11.15,
+        "tx": -186.17,
+        "ty": 4.22,
+        "tz": -7.31,
+        "fov": 60
+      }
+    },
+    {
+      "id": "10-cave-hill-dolmen",
+      "cap": "Hill Barrow cave: megalithic dolmen & offering cairns/bowl/crown",
+      "file": "qa/AG-407/before/10-cave-hill-dolmen.png",
+      "bytes": 2169276,
+      "cam": {
+        "x": -8.57,
+        "y": 5.83,
+        "z": -179.45,
+        "tx": -11,
+        "ty": 4.22,
+        "tz": -185.04,
+        "fov": 54
+      }
+    },
+    {
+      "id": "11-cave-root",
+      "cap": "Root Hollow cave: craggy earth-bound ledges & root-clasped rock",
+      "file": "qa/AG-407/before/11-cave-root.png",
+      "bytes": 2199918,
+      "cam": {
+        "x": 154,
+        "y": 6.31,
+        "z": 65.02,
+        "tx": 163.89,
+        "ty": 6.01,
+        "tz": 69.53,
+        "fov": 60
+      }
+    },
+    {
+      "id": "12-cave-shale",
+      "cap": "Split Rock cave: foliated slate cleft & bladed scree fan",
+      "file": "qa/AG-407/before/12-cave-shale.png",
+      "bytes": 2492048,
+      "cam": {
+        "x": -22.32,
+        "y": 9.06,
+        "z": 175.77,
+        "tx": -19.04,
+        "ty": 6.25,
+        "tz": 187.19,
+        "fov": 60
+      }
+    },
+    {
+      "id": "13-cave-iron",
+      "cap": "Rust Maw cave: iron-stained ore outcrop & fractured red stones",
+      "file": "qa/AG-407/before/13-cave-iron.png",
+      "bytes": 2137263,
+      "cam": {
+        "x": -152.54,
+        "y": 3.09,
+        "z": 82.09,
+        "tx": -160.84,
+        "ty": 2.98,
+        "tz": 89.97,
+        "fov": 60
+      }
+    },
+    {
+      "id": "14-cave-chalk-marrow",
+      "cap": "Bone Arch / Marrow cave: karst limestone, stalactites & cracked door",
+      "file": "qa/AG-407/before/14-cave-chalk-marrow.png",
+      "bytes": 2384697,
+      "cam": {
+        "x": 156.39,
+        "y": 1.01,
+        "z": -90.66,
+        "tx": 162.07,
+        "ty": 0.4,
+        "tz": -96.51,
+        "fov": 58
+      }
+    },
+    {
+      "id": "15-river-pebbles-close",
+      "cap": "Riverbank tumbled cobbles & wet stream-bed stones close-up",
+      "file": "qa/AG-407/before/15-river-pebbles-close.png",
+      "bytes": 2470768,
+      "cam": {
+        "x": 8.43,
+        "y": 6.3,
+        "z": 137.61,
+        "tx": 5.83,
+        "ty": 4.36,
+        "tz": 135.21,
+        "fov": 54
+      }
+    },
+    {
+      "id": "16-lake-pit-stones",
+      "cap": "Lake Pit rim monoliths & scoured abyssal shelf stones",
+      "file": "qa/AG-407/before/16-lake-pit-stones.png",
+      "bytes": 1119226,
+      "cam": {
+        "x": -117,
+        "y": 1.4,
+        "z": -91,
+        "tx": -134,
+        "ty": -5.8,
+        "tz": -107,
+        "fov": 58
+      }
+    },
+    {
+      "id": "17-first-ring-stone",
+      "cap": "First People Ring Stone & kerbstones close-up (Noon)",
+      "file": "qa/AG-407/before/17-first-ring-stone.png",
+      "bytes": 1788049,
+      "cam": {
+        "x": 89.26,
+        "y": 14.52,
+        "z": -176.96,
+        "tx": 93.98,
+        "ty": 15.55,
+        "tz": -179.94,
+        "fov": 54
+      }
+    },
+    {
+      "id": "18-first-standing-stone",
+      "cap": "First People Standing Stone menhir & fallen stone (Noon)",
+      "file": "qa/AG-407/before/18-first-standing-stone.png",
+      "bytes": 705772,
+      "cam": {
+        "x": 56.8,
+        "y": 13.87,
+        "z": 115.69,
+        "tx": 60.87,
+        "ty": 14.83,
+        "tz": 118.25,
+        "fov": 54
+      }
+    },
+    {
+      "id": "19-camp-hearth-stones",
+      "cap": "Ranger Campfire hearth stone ring close-up (Noon)",
+      "file": "qa/AG-407/before/19-camp-hearth-stones.png",
+      "bytes": 1877749,
+      "cam": {
+        "x": 130.5,
+        "y": -2.34,
+        "z": 2.4,
+        "tx": 128,
+        "ty": -3.7,
+        "tz": 0,
+        "fov": 52
+      }
+    },
+    {
+      "id": "20-coldwater-ruins-stone",
+      "cap": "Coldwater church ruin: fieldstone walls, slabs & rubble",
+      "file": "qa/AG-407/before/20-coldwater-ruins-stone.png",
+      "bytes": 1787068,
+      "cam": {
+        "x": -79.67,
+        "y": 7.09,
+        "z": 121.28,
+        "tx": -88.17,
+        "ty": 3.41,
+        "tz": 112.08,
+        "fov": 58
+      }
+    },
+    {
+      "id": "21-sato-note-stone",
+      "cap": "Sato note flat stone & pebble close-up (1P scale)",
+      "file": "qa/AG-407/before/21-sato-note-stone.png",
+      "bytes": 2221667,
+      "cam": {
+        "x": -133.06,
+        "y": 0.83,
+        "z": -8.71,
+        "tx": -134.21,
+        "ty": 0.06,
+        "tz": -9.86,
+        "fov": 52
+      }
+    },
+    {
+      "id": "22-valley-rock-rain",
+      "cap": "Overcast / Rainstorm (wetness=1.0): Slab rock wet sheen",
+      "file": "qa/AG-407/before/22-valley-rock-rain.png",
+      "bytes": 1770861,
+      "cam": {
+        "x": -82.37,
+        "y": 1.17,
+        "z": 70.86,
+        "tx": -83.22,
+        "ty": -0.08,
+        "tz": 67.13,
+        "fov": 52
+      }
+    },
+    {
+      "id": "23-first-ring-night",
+      "cap": "Night view: First People Ring Stone & glowing runes",
+      "file": "qa/AG-407/before/23-first-ring-night.png",
+      "bytes": 933764,
+      "cam": {
+        "x": 89.26,
+        "y": 14.52,
+        "z": -176.96,
+        "tx": 93.98,
+        "ty": 15.55,
+        "tz": -179.94,
+        "fov": 54
+      }
+    },
+    {
+      "id": "24-hikers-camp-outcrop",
+      "cap": "Hikers camp hearth & mossy rock boulders overview (Noon)",
+      "file": "qa/AG-407/before/24-hikers-camp-outcrop.png",
+      "bytes": 2056540,
+      "cam": {
+        "x": 28.2,
+        "y": 13.5,
+        "z": -120.2,
+        "tx": 22,
+        "ty": 10.18,
+        "tz": -126,
+        "fov": 58
+      }
+    }
+  ]
+}

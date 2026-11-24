@@ -1,6 +1,7 @@
 import {bakeStatic} from '../world/bake.js';
 import {viewCrossesPlane} from '../world/training-cutaway.js';
 import {createTrainingBlockers} from './training-infirmary.js';
+import {getTrainingPBR,applyWorldUVByMaterial} from '../world/training-textures.js';
 
 export function isTrainingBorderCell(b,gx,gz) {
   return gx>=b.minGX&&gx<=b.maxGX&&gz>=b.minGZ&&gz<=b.maxGZ&&
@@ -71,14 +72,24 @@ export function trainingPerimeterLayout(tg) {
 // = 4 x 4 diamonds = 0.24 m. The wire and razor share this material (one draw a side): the razor's strips sample one
 // constant texel on a wire crossing, which is solid at every distance (no uv change across a triangle = the top mip).
 export const CHAIN_LINK_TILE=.24;
-export function chainLinkTexture(T,size=256,diamonds=4,wire=.005) {
+export function chainLinkTexture(T,size=512,diamonds=4,wire=.0055) {
+  // AG-405: 512px galvanized woven steel wire — cylindrical cross-section highlight + specular twist knots;
+  // preserves exact wire crossing at CHAIN_LINK_SOLID_UV [1/8, 1/8] so razor ribbon stays 100% solid.
   const data=new Uint8Array(size*size*4),P=size/diamonds,half=wire/CHAIN_LINK_TILE*size/2;
+  const wrap=v=>{v%=P;if(v<0)v+=P;return Math.min(v,P-v);};
   for(let y=0;y<size;y++)for(let x=0;x<size;x++){
-    const px=x+.5,py=y+.5,wrap=v=>{v%=P;if(v<0)v+=P;return Math.min(v,P-v);};
-    const d=Math.min(wrap(px+py),wrap(px-py))/Math.SQRT2,a=Math.max(0,Math.min(1,half+.5-d));
-    const i=(y*size+x)*4;data[i]=data[i+1]=data[i+2]=255;data[i+3]=Math.round(a*255);
+    const px=x+.5,py=y+.5;
+    const dA=wrap(px+py)/Math.SQRT2,dB=wrap(px-py)/Math.SQRT2;
+    const d=Math.min(dA,dB),a=Math.max(0,Math.min(1,half+.75-d));
+    // Cylindrical highlight across wire radius + brighter zinc glint at wire crossings
+    const core=Math.max(0,1-d/Math.max(1,half));
+    const crossing=Math.max(0,1-Math.max(dA,dB)/Math.max(1.5,half*1.4));
+    const grain=(((Math.imul(x,374761393)+Math.imul(y,668265263))>>>24)&31)/31-0.5;
+    const lum=Math.max(135,Math.min(255,Math.round(182+core*56+crossing*26+grain*14)));
+    const i=(y*size+x)*4;data[i]=lum;data[i+1]=Math.min(255,lum+3);data[i+2]=Math.min(255,lum+5);data[i+3]=Math.round(a*255);
   }
   const t=new T.DataTexture(data,size,size);
+  if(T.SRGBColorSpace)t.colorSpace=T.SRGBColorSpace;
   t.wrapS=t.wrapT=T.RepeatWrapping;t.magFilter=T.LinearFilter;t.minFilter=T.LinearMipmapLinearFilter;t.generateMipmaps=true;t.anisotropy=8;t.needsUpdate=true;
   return t;
 }
@@ -95,17 +106,24 @@ export function createTrainingPerimeter(T,tg) {
   // those reach 0.30 m into the room, so ten runs ended 0.64-0.91 m short of a wall or pillar. Now a run ends with its
   // post touching the wall face or the pillar's flange (a clamp at each touch, no foot plate there); keypads keep
   // their clearance and the razor coils still break cleanly at the pillars (trainingRazorSpans).
+  // CF-21 (Jerry D-228, the flickering black line right of the keypad): a wall solid's face is its wall LINE, and the
+  // build room's side of the shared x = -8 wall stands 4 mm in (CJ-1), so a post ending on the line put its back face on
+  // the range's own tile plane (a 7.5 cm dark strip fighting the tile, seen from the range) and its clamps 7.5 mm through
+  // it. A post now stops 5 mm short of a wall line (1 mm off the build room's face), and its clamps sit flush with its
+  // wall side.
+  const WALL_GAP=.005;
   const post=.075/2,near=(ax,az,bx,bz)=>Math.hypot(ax-bx,az-bz)<1e-4;
   const faces=tg.solids.filter(s=>s.wall).map(trainingWallFace);
   const pillars=columns.map(c=>({...c,minX:c.minX-.05,maxX:c.maxX+.05}));   // the solid stops 5 cm inside the flange
   const renderSpans=layout.segments.flatMap(s=>trainingFenceSpans(s,keypads)
-    .flatMap(q=>trainingFenceSpans(q,pillars,post)).flatMap(q=>trainingFenceSpans(q,faces,post))
+    .flatMap(q=>trainingFenceSpans(q,pillars,post)).flatMap(q=>trainingFenceSpans(q,faces,post+WALL_GAP))
     .map(q=>({...q,fixedA:!near(q.x0,q.z0,s.x0,s.z0),fixedB:!near(q.x1,q.z1,s.x1,s.z1)})));
+  const pbr=getTrainingPBR(T);
   const linkTex=chainLinkTexture(T);owned.push(linkTex);
   for(const side of ['west','south','east']) {
     const group=new T.Group();group.name='training-perimeter-'+side;root.add(group);
-    const frame=new T.MeshStandardMaterial({color:0x39453e,roughness:.78,metalness:.5});
-    const wire=new T.MeshStandardMaterial({color:0x7c8980,roughness:.72,metalness:.55,side:T.DoubleSide,map:linkTex,transparent:true,alphaTest:.04});
+    const frame=new T.MeshStandardMaterial(pbr?pbr.benchPanel.opts({color:0xa8b6ad,normalScale:.75}):{color:0x39453e,roughness:.78,metalness:.5});
+    const wire=new T.MeshStandardMaterial({color:0x98a69e,roughness:.52,metalness:.68,side:T.DoubleSide,map:linkTex,transparent:true,alphaTest:.04});
     const frameFade=frame.clone(),wireFade=wire.clone();
     for(const m of [frameFade,wireFade]){m.transparent=true;m.depthWrite=false;m.opacity=.999;}
     owned.push(frame,wire,frameFade,wireFade);const pos=[],uvs=[];
@@ -124,12 +142,12 @@ export function createTrainingPerimeter(T,tg) {
       const box=(u,y,w,h,d,v=0)=>{const geo=new T.BoxGeometry(w,h,d);owned.push(geo);const m=new T.Mesh(geo,frame);m.position.fromArray(at(u,y,v));m.rotation.y=-Math.atan2(uz,ux);group.add(m);};
       const n=Math.ceil(len/2.5);for(let i=0;i<=n;i++){
         const fixed=(i===0&&s.fixedA)||(i===n&&s.fixedB);box(len*i/n,height/2,.075,height,.075);
-        if(!fixed)box(len*i/n,.02,.22,.04,.22);else for(const y of [.6,1.9])box(len*i/n,y,.09,.06,.14);   // CG-1: clamped to the wall/pillar
+        if(!fixed)box(len*i/n,.02,.22,.04,.22);else for(const y of [.6,1.9])box(len*i/n+(i===0?.0075:-.0075),y,.09,.06,.14);   // CG-1: clamped to the wall/pillar
       }
       // CG-1: the fabric hangs 1 mm off the posts' and rails' face (v = 3.85 cm), between the two rails; it stops
       // at a clamped end's clamps. One flat quad a run, uv in metres / CHAIN_LINK_TILE (5-8 cm diamonds, J: CF-20 #9).
       const face=.0385,rail=.06,railV=.0075;for(const y of [.15,height-.08])box(len/2,y,len,rail,rail,railV);   // the rails' face flush with the posts'
-      const low=.15+rail/2,high=height-.08-rail/2,ua=s.fixedA?.045:0,ub=len-(s.fixedB?.045:0);
+      const low=.15+rail/2,high=height-.08-rail/2,ua=s.fixedA?.0525:0,ub=len-(s.fixedB?.0525:0);
       fabric([at(ua,low,face),at(ub,low,face),at(ub,high,face),at(ua,high,face)],
         [[ua,low],[ub,low],[ub,high],[ua,high]].map(([u,y])=>[u/CHAIN_LINK_TILE,y/CHAIN_LINK_TILE]));
       // CC-363 (D-218 P2, for Claude 7): a real concertina coil, 0.45 m across, sitting ON the top rail. The tape is a
@@ -174,6 +192,7 @@ export function createTrainingPerimeter(T,tg) {
     }
     padUv();
     const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));geo.computeVertexNormals();owned.push(geo);group.add(new T.Mesh(geo,wire));
+    applyWorldUVByMaterial(group,new Map([[frame,1.0]]));
     bakeStatic(T,group);const frameMeshes=[],wireMeshes=[];
     group.traverse(m=>{if(m.geometry)owned.push(m.geometry);if(m.material===frame)frameMeshes.push(m);if(m.material===wire)wireMeshes.push(m);});
     const box=new T.Box3().setFromObject(group);

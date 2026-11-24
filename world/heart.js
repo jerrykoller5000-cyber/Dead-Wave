@@ -20,6 +20,8 @@
 // Coordinates: the cave's middle at the origin; the tunnel comes in from -z (south), its top TUNNEL.LEN out, DROP up.
 import * as THREE from 'three';
 import { drawGlyph, RUNE_COUNT } from './runes.js';
+import { getRockTextureLibrary, applyRockPBR } from './rock-textures.js';
+import { buildMenhirGeometry, buildFlutedColumnGeometry, projectStoneBoxUV } from './rock-geometry.js';
 
 export const HEART = Object.freeze({
   R: 22,                 // m, the cave's floor
@@ -103,22 +105,32 @@ export function buildHeart(opts = {}) {
   const rnd = mulberry32(0x4ea27);
   const group = new THREE.Group(); group.name = 'heart';
   group.position.set(origin.x, origin.y, origin.z);
+  const rockLib = getRockTextureLibrary(THREE);
+  const chalkPbr = rockLib ? rockLib.marrowChalk : null;
   const mats = {
-    rock: new THREE.MeshStandardMaterial({ color: H.ROCK, roughness: 0.95, side: THREE.BackSide }),
-    rockOut: new THREE.MeshStandardMaterial({ color: H.ROCK_DARK, roughness: 0.95 }),
-    floor: new THREE.MeshStandardMaterial({ color: H.FLOOR, roughness: 1 }),
-    column: new THREE.MeshStandardMaterial({ color: 0xe8e2d0, roughness: 0.85 }),
+    rock: new THREE.MeshStandardMaterial({ color: H.ROCK, roughness: 0.95, metalness: 0.01, side: THREE.BackSide }),
+    rockOut: new THREE.MeshStandardMaterial({ color: H.ROCK_DARK, roughness: 0.95, metalness: 0.01 }),
+    floor: new THREE.MeshStandardMaterial({ color: H.FLOOR, roughness: 0.96, metalness: 0.01 }),
+    column: new THREE.MeshStandardMaterial({ color: 0xe8e2d0, roughness: 0.85, metalness: 0.01 }),
     groove: new THREE.MeshBasicMaterial({ color: H.RUNE, transparent: true, opacity: 0.85, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false }),
     shaft: new THREE.MeshBasicMaterial({ color: H.RUNE, transparent: true, opacity: 0.22, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false, side: THREE.DoubleSide }),
     deep: new THREE.MeshBasicMaterial({ color: 0x030608 }),
     lip: new THREE.MeshBasicMaterial({ color: H.RUNE, toneMapped: false }),
     bone: new THREE.MeshStandardMaterial({ color: 0xd8cfb8, roughness: 0.9 })
   };
+  if (chalkPbr) {
+    applyRockPBR(mats.rock, chalkPbr, { selfColored: false, normalMul: 1.05 });
+    applyRockPBR(mats.rockOut, chalkPbr, { selfColored: false, normalMul: 1.0 });
+    applyRockPBR(mats.floor, chalkPbr, { selfColored: false, normalMul: 0.85 });
+    applyRockPBR(mats.column, chalkPbr, { selfColored: false, normalMul: 1.1 });
+  }
   // The floor: a disc with the source's hole cut in it, and the tunnel's ramp.
   const floorGeo = new THREE.RingGeometry(H.SOURCE_R, H.R + 0.6, 64, 3);
+  projectStoneBoxUV(floorGeo, 2.8);
   const floor = new THREE.Mesh(floorGeo, mats.floor); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; floor.name = 'heart-floor'; group.add(floor);
   const rampLen = Math.hypot(T.LEN, T.DROP);
-  const ramp = new THREE.Mesh(new THREE.BoxGeometry(T.HALF * 2 + 0.4, 0.4, rampLen), mats.rockOut);
+  const rampGeo = projectStoneBoxUV(new THREE.BoxGeometry(T.HALF * 2 + 0.4, 0.4, rampLen), 2.6);
+  const ramp = new THREE.Mesh(rampGeo, mats.rockOut);
   ramp.position.set(0, T.DROP / 2 - 0.2, -H.R - T.LEN / 2); ramp.rotation.x = Math.atan2(T.DROP, T.LEN); group.add(ramp);
   // The walls and the dome (seen from inside).
   const wall = new THREE.Mesh(new THREE.CylinderGeometry(H.R + 1.2, H.R + 1.6, H.WALL_H + 1, 48, 1, true), mats.rock);
@@ -126,8 +138,8 @@ export function buildHeart(opts = {}) {
   const dome = new THREE.Mesh(new THREE.SphereGeometry(H.R + 1.2, 48, 16, 0, Math.PI * 2, 0, Math.PI / 2), mats.rock);
   dome.scale.y = (H.ROOF - H.WALL_H + 0.5) / (H.R + 1.2); dome.position.y = H.WALL_H - 0.5; dome.userData.roof = true; group.add(dome);
   // The tunnel: walls and a low roof down to the cave.
-  for (const sx of [-1, 1]) { const tw = new THREE.Mesh(new THREE.BoxGeometry(1, 4.5, rampLen + 1), mats.rockOut); tw.position.set(sx * (T.HALF + 0.5), T.DROP / 2 + 1.8, -H.R - T.LEN / 2); tw.rotation.x = Math.atan2(T.DROP, T.LEN); group.add(tw); }
-  const troof = new THREE.Mesh(new THREE.BoxGeometry(T.HALF * 2 + 2, 0.6, rampLen + 1), mats.rockOut); troof.position.set(0, T.DROP / 2 + 3.9, -H.R - T.LEN / 2); troof.rotation.x = Math.atan2(T.DROP, T.LEN); troof.userData.roof = true; group.add(troof);
+  for (const sx of [-1, 1]) { const tw = new THREE.Mesh(projectStoneBoxUV(new THREE.BoxGeometry(1, 4.5, rampLen + 1), 2.6), mats.rockOut); tw.position.set(sx * (T.HALF + 0.5), T.DROP / 2 + 1.8, -H.R - T.LEN / 2); tw.rotation.x = Math.atan2(T.DROP, T.LEN); group.add(tw); }
+  const troof = new THREE.Mesh(projectStoneBoxUV(new THREE.BoxGeometry(T.HALF * 2 + 2, 0.6, rampLen + 1), 2.6), mats.rockOut); troof.position.set(0, T.DROP / 2 + 3.9, -H.R - T.LEN / 2); troof.rotation.x = Math.atan2(T.DROP, T.LEN); troof.userData.roof = true; group.add(troof);
   // The source: the hole's dark throat, a lit lip, a shaft of cold light standing up out of it.
   const throat = new THREE.Mesh(new THREE.CylinderGeometry(H.SOURCE_R, H.SOURCE_R * 0.7, 30, 32, 1, true), mats.deep); throat.material.side = THREE.BackSide; throat.position.y = -15; group.add(throat);
   const lip = new THREE.Mesh(new THREE.TorusGeometry(H.SOURCE_R + 0.05, 0.06, 6, 48), mats.lip); lip.rotation.x = Math.PI / 2; lip.position.y = 0.04; lip.name = 'source-lip'; group.add(lip);
@@ -135,15 +147,17 @@ export function buildHeart(opts = {}) {
   // Stones round the lip, eight, each with its glyph lit (the Pit's ring, down here where it began).
   for (let k = 0; k < RUNE_COUNT; k++) {
     const a = k / RUNE_COUNT * Math.PI * 2, x = Math.cos(a) * (H.SOURCE_R + 1.1), z = Math.sin(a) * (H.SOURCE_R + 1.1);
-    const st = new THREE.Mesh(new THREE.BoxGeometry(0.5, 1.1 + rnd() * 0.4, 0.35), mats.rockOut); st.position.set(x, 0.55, z); st.rotation.y = -a + Math.PI / 2; st.castShadow = true; group.add(st);
+    const stH = 1.1 + rnd() * 0.4;
+    const st = new THREE.Mesh(buildMenhirGeometry(THREE, 0.54, stH, 0.36, rnd, { taper: 0.28, crown: 0.16, jitter: 0.025 }), mats.rockOut);
+    st.position.set(x, -0.05, z); st.rotation.y = -a + Math.PI / 2; st.castShadow = true; st.receiveShadow = true; group.add(st);
   }
   // The columns: the Pit's roots come through the roof as white rock, banded with lit glyphs.
   const cols = heartColumns();
   const solids = heartSolids(cols);
   for (const c of cols) {
     const g = new THREE.Group(); g.name = 'heart-column'; g.position.set(c.x, 0, c.z);
-    const shaftM = new THREE.Mesh(new THREE.CylinderGeometry(c.r * 0.8, c.r * 1.15, H.ROOF + 1, 10), mats.column); shaftM.position.y = (H.ROOF + 1) / 2; shaftM.castShadow = true; g.add(shaftM);
-    const foot = new THREE.Mesh(new THREE.CylinderGeometry(c.r * 1.2, c.r * 1.7, 1.0, 10), mats.column); foot.position.y = 0.5; g.add(foot);
+    const shaftM = new THREE.Mesh(buildFlutedColumnGeometry(THREE, c.r * 0.8, c.r * 1.15, H.ROOF + 1, 0x4ea0 + c.k * 23), mats.column); shaftM.position.y = (H.ROOF + 1) / 2; shaftM.castShadow = true; shaftM.receiveShadow = true; g.add(shaftM);
+    const foot = new THREE.Mesh(buildFlutedColumnGeometry(THREE, c.r * 1.2, c.r * 1.7, 1.0, 0x4eb0 + c.k * 31), mats.column); foot.position.y = 0.5; foot.receiveShadow = true; g.add(foot);
     const tex = runeBandTexture(doc, c.k);
     for (const y of [2.2, 5.2]) {
       const band = new THREE.Mesh(new THREE.CylinderGeometry(c.r * 1.02, c.r * 1.06, 0.9, 16, 1, true), tex ? new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, toneMapped: false, color: H.RUNE }) : mats.groove);

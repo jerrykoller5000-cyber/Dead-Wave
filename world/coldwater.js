@@ -1,6 +1,8 @@
 // GP-110: Coldwater's static, terrain-seated ruin kit. No world RNG, colliders or text.
 // The history-props wrappers preserve their original random-stream consumption.
 import { mulberry } from './first-people.js';
+import { getRockTextureLibrary, applyRockPBR } from './rock-textures.js';
+import { buildCompactStoneGeometry, projectStoneBoxUV } from './rock-geometry.js';
 
 const P={stone:[0x77766b,0x898579,0x6b7067,0x989181,0x65665c],mortar:0x55594e,
  wood:0x514737,end:0x73634c,iron:0x373b37,rust:0x704a30,soil:0x554a35,moss:0x596448,
@@ -18,20 +20,26 @@ function wornBlock(T,w,h,d){
 }
 
 function kit(T,name,seed){
- const g=new T.Group();g.name=name;const rnd=mulberry(seed),parts=[];
- const add=(geo,color,x,y,z,rx=0,ry=0,rz=0,shadow=true)=>{
+ const g=new T.Group();g.name=name;const rnd=mulberry(seed),parts=[];let rockSeq=0;
+ const add=(geo,color,x,y,z,rx=0,ry=0,rz=0,shadow=true,isStone=false)=>{
   const m=new T.Mesh(geo);m.position.set(x,y,z);m.rotation.set(rx,ry,rz);m.updateMatrix();
-  parts.push({m,color,shadow});return m;
+  parts.push({m,color,shadow,isStone});return m;
  };
- const box=(w,h,d,c,x,y,z,rx=0,ry=0,rz=0)=>add(new T.BoxGeometry(w,h,d),c,x,y,z,rx,ry,rz);
- const rock=(w,h,d,c,x,y,z,ry=0)=>{const geo=new T.DodecahedronGeometry(1,0);geo.scale(w*.59,h*.59,d*.59);return add(geo,c,x,y,z,0,ry,0);};
+ const box=(w,h,d,c,x,y,z,rx=0,ry=0,rz=0)=>add(new T.BoxGeometry(w,h,d),c,x,y,z,rx,ry,rz,true,c===P.mortar);
+ const rock=(w,h,d,c,x,y,z,ry=0)=>{
+  const isMoss=c===P.moss,isPot=c===P.pottery;
+  const geo=isMoss||isPot
+   ? (()=>{const dg=new T.DodecahedronGeometry(1,0);dg.scale(w*.59,h*.59,d*.59);return dg;})()
+   : buildCompactStoneGeometry(T,{rx:w*.56,ry:h*.56,rz:d*.56,detail:1,seed:(seed^0x5011)+(rockSeq++)*29,style:'granite',uvTile:.85});
+  return add(geo,c,x,y,z,0,ry,0,true,!isMoss&&!isPot);
+ };
  const stone=(w,h,d,x,y,z,ry=0)=>{
   const geo=wornBlock(T,w,h,d),a=geo.attributes.position;
   // Shared-corner jitter keeps the six stone faces closed, while breaking perfect courses.
   const corners=new Map();for(let i=0;i<a.count;i++){const x=a.getX(i),y=a.getY(i),z=a.getZ(i),key=[x,y,z].join(',');if(!corners.has(key))corners.set(key,[(rnd()-.5)*.022,(rnd()-.5)*.018,(rnd()-.5)*.02]);const q=corners.get(key);a.setXYZ(i,x+q[0],y+q[1],z+q[2]);}geo.computeVertexNormals();
-  return add(geo,y<.5&&rnd()<.3?P.mortar:P.stone[Math.floor(rnd()*P.stone.length)],x,y,z,(rnd()-.5)*.04,ry+(rnd()-.5)*.045,(rnd()-.5)*.04);
+  return add(geo,y<.5&&rnd()<.3?P.mortar:P.stone[Math.floor(rnd()*P.stone.length)],x,y,z,(rnd()-.5)*.04,ry+(rnd()-.5)*.045,(rnd()-.5)*.04,true,true);
  };
- const beam=(a,b,w=.15,d=.18,c=P.wood)=>{const v=new T.Vector3(...a),end=new T.Vector3(...b),delta=end.clone().sub(v);const m=new T.Mesh(new T.BoxGeometry(w,delta.length(),d));m.position.copy(v).add(end).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.normalize());m.updateMatrix();parts.push({m,color:c,shadow:true});};
+ const beam=(a,b,w=.15,d=.18,c=P.wood)=>{const v=new T.Vector3(...a),end=new T.Vector3(...b),delta=end.clone().sub(v);const m=new T.Mesh(new T.BoxGeometry(w,delta.length(),d));m.position.copy(v).add(end).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.normalize());m.updateMatrix();parts.push({m,color:c,shadow:true,isStone:false});};
  const ring=(r,t,c,x,y,z,rx=0,ry=0,rz=0,arc=Math.PI*2)=>add(new T.TorusGeometry(r,t,4,12,arc),c,x,y,z,rx,ry,rz);
  const cylinder=(rt,rb,h,c,x,y,z,rx=0,ry=0,rz=0)=>add(new T.CylinderGeometry(rt,rb,h,8),c,x,y,z,rx,ry,rz);
  function wall(x0,z0,x1,z1,maxH,heightAt=()=>maxH,opening=()=>false){
@@ -57,14 +65,18 @@ function kit(T,name,seed){
   beam([x-.45*size,.12,z+.12],[x+.35*size,.17,z+.25],.075,.08,P.soot);pot(x+.8*size,z+.6,.7);
  }
  function finish(){
-  const p=[],n=[],c=[],darkP=[],darkN=[];
-  for(const {m,color,shadow}of parts){const geo=m.geometry.index?m.geometry.toNonIndexed():m.geometry.clone();geo.applyMatrix4(m.matrix);geo.computeVertexNormals();const pos=geo.attributes.position.array,norm=geo.attributes.normal.array;
-   if(shadow){const col=new T.Color(color);for(let i=0;i<pos.length;i++)p.push(pos[i]);for(let i=0;i<norm.length;i++)n.push(norm[i]);for(let i=0;i<pos.length/3;i++)c.push(col.r,col.g,col.b);}
+  const sp=[],sn=[],sc=[],op=[],on=[],oc=[],darkP=[],darkN=[];
+  for(const {m,color,shadow,isStone}of parts){const geo=m.geometry.index?m.geometry.toNonIndexed():m.geometry.clone();geo.applyMatrix4(m.matrix);geo.computeVertexNormals();const pos=geo.attributes.position.array,norm=geo.attributes.normal.array;
+   if(shadow){const col=new T.Color(color);const tp=isStone?sp:op,tn=isStone?sn:on,tc=isStone?sc:oc;for(let i=0;i<pos.length;i++)tp.push(pos[i]);for(let i=0;i<norm.length;i++)tn.push(norm[i]);for(let i=0;i<pos.length/3;i++)tc.push(col.r,col.g,col.b);}
    else{darkP.push(...pos);darkN.push(...norm);}geo.dispose();m.geometry.dispose();
   }
-  const put=(pos,norm,colors,mat,label)=>{if(!pos.length)return;const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('normal',new T.Float32BufferAttribute(norm,3));if(colors)geo.setAttribute('color',new T.Float32BufferAttribute(colors,3));geo.computeBoundingBox();geo.computeBoundingSphere();const m=new T.Mesh(geo,mat);m.name=label;m.castShadow=!!colors;m.receiveShadow=!!colors;g.add(m);};
-  put(p,n,c,new T.MeshStandardMaterial({vertexColors:true,roughness:.96,metalness:.04}),name+'-stone-timber-iron');
-  if(darkP.length)put(darkP,darkN,null,new T.MeshBasicMaterial({color:0x100e0b}),'grave-shadow');
+  const put=(pos,norm,colors,mat,label,boxUv)=>{if(!pos.length)return;const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('normal',new T.Float32BufferAttribute(norm,3));if(colors)geo.setAttribute('color',new T.Float32BufferAttribute(colors,3));if(boxUv)projectStoneBoxUV(geo,1.05);geo.computeBoundingBox();geo.computeBoundingSphere();const m=new T.Mesh(geo,mat);m.name=label;m.castShadow=!!colors;m.receiveShadow=!!colors;g.add(m);};
+  const rLib=getRockTextureLibrary(T);
+  const stoneMat=new T.MeshStandardMaterial({vertexColors:true,roughness:.94,metalness:.03});
+  if(rLib&&rLib.fieldstone)applyRockPBR(stoneMat,rLib.fieldstone,{selfColored:false,normalMul:.92});
+  put(sp,sn,sc,stoneMat,name+'-stone',true);
+  put(op,on,oc,new T.MeshStandardMaterial({vertexColors:true,roughness:.96,metalness:.04}),name+'-timber-iron',false);
+  if(darkP.length)put(darkP,darkN,null,new T.MeshBasicMaterial({color:0x100e0b}),'grave-shadow',false);
   // A single build-time seating pass. Warp only the visual batch to the existing ground;
   // never edits terrain or the parent's deterministic placement/reserved footprint.
   g.userData.seatHistoryTerrain=height=>{

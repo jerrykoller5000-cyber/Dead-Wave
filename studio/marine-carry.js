@@ -153,9 +153,9 @@ export const SLING_POSITIVE = {
   chainsaw: { 1: [.160483, .06, .02, .995732, .084361, -.037433] }
 };
 
-export function surfaceZ(table, x, y) {
+export function surfaceZ(table, x, y, kx = 1, kz = 1) {
   if (!table) return null;
-  const fx = (x - SURF_X0) / SURF_DX, fy = (y - SURF_Y0) / SURF_DY;
+  const fx = (x / kx - SURF_X0) / SURF_DX, fy = (y - SURF_Y0) / SURF_DY;
   if (fx < 0 || fy < 0 || fx > SURF_NX - 1 || fy > SURF_NY - 1) return null;
   const i = Math.min(SURF_NX - 2, Math.floor(fx)), j = Math.min(SURF_NY - 2, Math.floor(fy)), u = fx - i, v = fy - j;
   const a = table[j][i], b = table[j][i + 1], c = table[j + 1][i], d = table[j + 1][i + 1];
@@ -163,9 +163,9 @@ export function surfaceZ(table, x, y) {
   if (k.length < 4) {   // at the outline: the nearest known corner, so the edge of the body still counts
     if (!k.length) return null;
     const w = [[a, (1 - u) * (1 - v)], [b, u * (1 - v)], [c, (1 - u) * v], [d, u * v]].filter((q) => q[0] !== null).sort((p, q) => q[1] - p[1]);
-    return w[0][1] > 0.25 ? w[0][0] : null;
+    return w[0][1] > 0.25 ? w[0][0] * kz : null;
   }
-  return (a * (1 - u) + b * u) * (1 - v) + (c * (1 - u) + d * u) * v;
+  return ((a * (1 - u) + b * u) * (1 - v) + (c * (1 - u) + d * u) * v) * kz;
 }
 
 // The rotation that lays a gun flat on his back on `side` (+1 his +x half, the gun hand's; -1 the other): muzzle (+z of the
@@ -285,7 +285,8 @@ export function seatOnBack(T, spot, side, tp, vest, P = BACK_CARRY, under = null
   const lowest = opt.lowest !== undefined ? opt.lowest : P.lowest, upright = !!opt.upright;
   const PB = upright ? { ...P, tilt: PAIR_CARRY.uprightTilt } : P;
   spot.g.quaternion.setFromRotationMatrix(CARRY_FACE[spot.kind] === 'bottom' ? bottomBasis(T, side, PB) : backBasis(T, side, PB));
-  spot.g.position.set(side * P.x, P.y - tp, -0.3);
+  const { KX = 1, KZ = 1 } = spot.g.parent.userData.d243 || {};
+  spot.g.position.set(side * P.x * KX, P.y - tp, -0.3 * KZ);
   spot.gun.position.set(0, 0, 0);
   spot.g.parent.updateWorldMatrix(true, false);
   spot.g.updateMatrixWorld(true);
@@ -297,7 +298,7 @@ export function seatOnBack(T, spot, side, tp, vest, P = BACK_CARRY, under = null
   const depth = (ox, oy, use = pts) => {   // how far back the gun must go, slid by (ox, oy) in his back's plane; body: for his body alone
     let dz = Infinity, body = Infinity, on = 'body';
     for (const p of use) {
-      const x = p.x + ox, y = p.y + oy, s = surfaceZ(table, x, y + tp);
+      const x = p.x + ox, y = p.y + oy, s = surfaceZ(table, x, y + tp, KX, KZ);
       if (s !== null && s - P.clear - p.z < dz) { dz = s - P.clear - p.z; on = 'body'; }
       if (s !== null && s - P.clear - p.z < body) body = s - P.clear - p.z;
       if (map.size) { const u = map.get(key(x, y)); if (u !== undefined && u - P.clear - p.z < dz) { dz = u - P.clear - p.z; on = 'gun'; } }
@@ -317,7 +318,7 @@ export function seatOnBack(T, spot, side, tp, vest, P = BACK_CARRY, under = null
     let sum = 0, n = 0;
     for (const [k, z] of near) {
       const [i, j] = k.split(',').map(Number), x = i * 0.03, y = j * 0.03;
-      let under = surfaceZ(table, x, y + tp); if (under === null) under = -0.12;   // past his outline: as far as his side
+      let under = surfaceZ(table, x, y + tp, KX, KZ); if (under === null) under = -0.12;   // past his outline: as far as his side
       if (map.size) { const u = map.get(key(x, y)); if (u !== undefined && u < under) under = u; }
       sum += Math.min(0.3, Math.max(0, under - P.clear - (z + dz))); n++;
     }
@@ -386,7 +387,7 @@ export function seatOnBack(T, spot, side, tp, vest, P = BACK_CARRY, under = null
   // off the pack end to end). The tip (dz per metre along its length, its middle the pivot) with the least air under it.
   let hinge = 0;
   if (opt.hinge && map.size) {
-    const lim = (p) => { let L = Infinity; const s = surfaceZ(table, p.x, p.y + tp); if (s !== null) L = s - P.clear; const u = map.get(key(p.x, p.y)); if (u !== undefined) L = Math.min(L, u - P.clear); return L; };
+    const lim = (p) => { let L = Infinity; const s = surfaceZ(table, p.x, p.y + tp, KX, KZ); if (s !== null) L = s - P.clear; const u = map.get(key(p.x, p.y)); if (u !== undefined) L = Math.min(L, u - P.clear); return L; };
     const c0 = new T.Vector3(); for (const p of pts) c0.add(p); c0.divideScalar(pts.length);
     const L = pts.map(lim), t = pts.map((p) => (p.x - c0.x) * ax.x + (p.y - c0.y) * ax.y + (p.z - c0.z) * ax.z);
     let bestAir = Infinity;
@@ -515,7 +516,8 @@ export function fitBackSling(T, spot, side, tp, vest, clipMaterial, layer = 0, b
   const faces = spec.map((p, i) => (only[i] ? p : toward > 0 ? (SLING_POSITIVE[spot.kind] && SLING_POSITIVE[spot.kind][i]) || p : (SLING_NEGATIVE[spot.kind] && SLING_NEGATIVE[spot.kind][i]) || p));
   const seats = faces.map((p, i) => new T.Vector3(sgn[i] * Math.abs(p[0]), p[1], p[2]));
   const inv = new T.Matrix4().copy(spot.g.matrix).invert();
-  const body = slingPath(T, side, vest, layer, band).map((p) => p.setY(p.y - tp));
+  const { KX = 1, KZ = 1 } = spot.g.parent.userData.d243 || {};
+  const body = slingPath(T, side, vest, layer, band).map((p) => p.set(p.x * KX, p.y - tp, p.z * KZ));
   const major = 0.015, minor = 0.0035;
   const frames = seats.map((seat, i) => {
     const s = faces[i];

@@ -10,7 +10,8 @@ import { boxProjectUV } from '../core/geometry.js';
 import * as TSL from 'three/tsl';
 import { foldStatic } from '../world/bake.js';
 import { addArtworkInstances, addTriggerArtwork, bindModelArtwork, groupArtwork, optionalArtworkGroup, setArtworkHeatRange } from './weapon-model-hooks.js';
-import { markPaintSurface, walnutTexture } from './weapon-finish.js';
+import { markPaintSurface, walnutTexture, walnutPBR } from './weapon-finish.js';
+import { applyWeaponPBR, projectWeaponUVs } from './weapon-textures.js';
 import { attachLaserLight } from './weapon-attachments.js';
 import { fitPortCarrier, roundGeometry, spentCaseGeometry } from './weapon-casings.js';
 
@@ -1034,18 +1035,29 @@ export function makeRevolverModel(ctx) {
   const D = gunDetail(ctx);
   const W = weaponDetail(ctx);
   // The fixed frame takes the armory coating. The action and walnut retain their factory finishes.
-  const blued = new THREE.MeshStandardMaterial({ color: 0x404955, metalness: 0.68, roughness: 0.32 });
+  const blued = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x404955, metalness: 0.68, roughness: 0.32 }), 'machinedSteel', { useMap: false, useMetalMap: true, markFoldable: true });
   const frameFinish = blued.clone();
+  frameFinish.userData = { ...blued.userData };
   // A satin finish keeps the curve visible above the walnut grip in direct sun.
   frameFinish.roughness = .58;
   frameFinish.metalness = .53;
   frameFinish.userData.weaponFinishRole = 'frame';
-  const caseCol = new THREE.MeshStandardMaterial({ color: 0x62584d, metalness: 0.68, roughness: 0.40 });
+  const caseCol = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x62584d, metalness: 0.68, roughness: 0.40 }), 'machinedSteel', { useMap: false, useMetalMap: true, markFoldable: true });
   const walnut = new THREE.MeshStandardMaterial({ color: 0x76492f, map: revolverWalnutTexture(THREE), metalness: 0, roughness: 0.48 });
   const walnutDark = new THREE.MeshStandardMaterial({ color: 0x573922, map: revolverWalnutTexture(THREE), metalness: 0, roughness: 0.65 });
+  const wPbr = walnutPBR(THREE);
+  if (wPbr?.normalMap && wPbr?.ormMap) {
+    const syncWalnut = (t) => { const c = t.clone(); c.repeat.set(6.8, 3.1); c.offset.set(0.21, 0.18); c.rotation = -0.12; c.channel = 0; c.needsUpdate = true; return c; };
+    const wn = syncWalnut(wPbr.normalMap), wo = syncWalnut(wPbr.ormMap);
+    for (const wm of [walnut, walnutDark]) {
+      wm.normalMap = wn; wm.normalScale = new THREE.Vector2(0.56, 0.56);
+      wm.roughnessMap = wo; wm.aoMap = wo; wm.aoMapIntensity = 0.72;
+      wm.userData.weaponPBRKind = 'walnut'; wm.needsUpdate = true;
+    }
+  }
   walnut.name = 'Revolver walnut';
   walnutDark.name = 'Revolver walnut inset';
-  const nickel = new THREE.MeshStandardMaterial({ color: 0xc9c6bd, metalness: 0.9, roughness: 0.22 });
+  const nickel = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0xc9c6bd, metalness: 0.9, roughness: 0.22 }), 'machinedSteel', { useMap: false, useMetalMap: true, markFoldable: true });
   const BY = 0.083, MZ = 0.332;                      // the bore's height and the muzzle
   const CY = 0.057, CZ = 0.02, CR = 0.044, CH = 0.039, RC = 0.026;   // larger J78 cylinder; the chamber circle still meets the bore
 
@@ -1165,7 +1177,7 @@ export function makeRevolverModel(ctx) {
   // Keep the artist's existing palm-round width on all three loose props.
   // Their carriers set the pose. Only the child artwork has an offset.
   const artScale = .0184 / (liveArt.boundingBox.max.x - liveArt.boundingBox.min.x);
-  const cartridge = new THREE.MeshStandardMaterial({color: 0xffffff, vertexColors: true, metalness: .58, roughness: .32});
+  const cartridge = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({color: 0xffffff, vertexColors: true, metalness: .58, roughness: .32}), 'brass', { useMap: false, useMetalMap: true });
 
   const looseRound = (geometry, rear) => {
     const mesh = new THREE.Mesh(geometry, cartridge);
@@ -1568,9 +1580,9 @@ export function makeUziModel(ctx) {
   const K = gunKit(gun);
   const D = gunDetail(ctx);   // GB-309 / CL-309 helpers
   const W = weaponDetail(ctx);
-  const stamped = new THREE.MeshStandardMaterial({color: 0x495157, metalness: .28, roughness: .48});
-  const coverSteel = new THREE.MeshStandardMaterial({color: 0x555e64, metalness: .36, roughness: .38});
-  const loopSteel = new THREE.MeshStandardMaterial({color: 0x555a59, metalness: .65, roughness: .35});
+  const stamped = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({color: 0x495157, metalness: .28, roughness: .48}), 'parkerized', { useMap: false, markFoldable: true });
+  const coverSteel = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({color: 0x555e64, metalness: .36, roughness: .38}), 'parkerized', { useMap: false, markFoldable: true });
+  const loopSteel = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({color: 0x555a59, metalness: .65, roughness: .35}), 'machinedSteel', { useMap: false, useMetalMap: true, markFoldable: true });
   // Stamped receiver with pressed ribs; the top cover and its cocking knob.
   const receiverWidth = .098, receiverTop = .078;
   K.slab([[-.14, -.031], [-.132, -.04], [.211, -.04], [.22, -.032], [.22, .067], [.215, receiverTop], [-.122, receiverTop], [-.134, .072], [-.14, .06]], receiverWidth, stamped, {bevel: .009, segs: 3});
@@ -1950,6 +1962,8 @@ export function makeKnifeModel(ctx) {
   }
   g.userData.knifeModel = kn;
   g.userData.macheteModel = mc;
+  projectWeaponUVs(kn, { tileMeters: 0.24 });
+  projectWeaponUVs(mc, { tileMeters: 0.32 });
   mergeRigidMeshes(g, {}, new Set([kn, mc]));
   g.visible = false;
   return g;

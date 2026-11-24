@@ -59,6 +59,7 @@ export function zombieJoinRules(T, g, scale = 1) {
       add(arm,arm?.userData.elbowG,'y',.075,-.095,.105*m,'elbow'+S);
       add(u.hips,leg,'y',.065,-.105,.14*m,'hip'+S);
       add(leg,leg?.userData.shinG,'y',.07,-.10,.115*m,'knee'+S);
+      if (u.typeKey === 'feral') add(leg?.userData.shinG,leg?.userData.shamblerAnkle,'y',.065,-.060,.125,'ankle'+S);
     }
   }
   g.updateMatrixWorld(true);

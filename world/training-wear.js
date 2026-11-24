@@ -16,6 +16,153 @@
 //   }
 //   texture(w, h, draw) -> CanvasTexture | null (null in Node: the shapes are still built)
 
+import { buildKitProp, createKitPropRuntime } from './training-kitprops.js';   // CG-7 (D-226)
+import { getTrainingPBR, heightToNormalRGBA, makeDataTexture, makeFbmGrid, tileFbm } from './training-textures.js';
+
+const WEAR_PBR_CACHE = new WeakMap();
+// Procedural normal + ORM for sheet (1024->512) and kitTex (1024->512), pure math so Node stand-in tests stay instant
+function getWearAtlases(T) {
+  let c = WEAR_PBR_CACHE.get(T);
+  if (c) return c;
+  const S = 512;
+  const shFineGrid = makeFbmGrid(64, 32, 32, 503, 2);
+  const shBrushGrid = makeFbmGrid(64, 8, 48, 521, 2);
+  const ktFineGrid = makeFbmGrid(64, 32, 32, 607, 2);
+  // 1) Printed sheet normal + ORM (coords are half of 1024x1024 sheet)
+  const shH = new Float32Array(S * S);
+  const shOrm = new Uint8Array(S * S * 4);
+  for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) {
+    const i = y * S + x, o = i * 4, u = x / S, v = y / S;
+    const fine = shFineGrid(u, v) - 0.5;
+    let hv = 0.52 + fine * 0.04, ao = 0.95, rgh = 0.72, met = 0.05;
+    if (y < 90) {
+      // Four safety signs (each 128x90): semi-gloss enameled aluminum with rim bevel & rust corner
+      const lx = x % 128, ly = y;
+      const rim = Math.min(Math.min(lx, 127 - lx), Math.min(ly, 89 - ly));
+      hv = rim < 3 ? 0.64 : 0.52 + fine * 0.05;
+      rgh = 0.44 + Math.abs(fine) * 0.14; met = 0.18;
+      if (lx > 102 && ly < 24) { hv = 0.72; rgh = 0.85; met = 0.02; ao = 0.75; }
+    } else if (x < 256 && y >= 128 && y < 308) {
+      // Days Without Incident board (0..256, 128..308): metal frame + glossy dry-erase inset
+      const inWhite = x >= 73 && x <= 183 && y >= 192 && y <= 292;
+      rgh = inWhite ? 0.24 + Math.abs(fine) * 0.08 : 0.48 + Math.abs(fine) * 0.1;
+      met = inWhite ? 0.04 : 0.22;
+      hv = inWhite ? 0.48 : 0.56 + fine * 0.04;
+    } else if (x >= 256 && x < 448 && y >= 128 && y < 256) {
+      // Cracked monitor glass (256..448, 128..256): glossy CRT glass + radial crack relief
+      const dx = x - (256 + 150), dy = y - (128 + 35), d = Math.hypot(dx, dy);
+      const ang = Math.atan2(dy, dx);
+      const ray = Math.abs(Math.sin(ang * 4.5 + 0.4));
+      const crack = (d < 85 && ray < 0.07) || Math.abs(d - 5) < 1.5 ? 1 : 0;
+      hv = crack ? 0.26 : 0.60;
+      rgh = crack ? 0.78 : 0.16;
+      met = 0.06;
+      ao = crack ? 0.62 : 0.98;
+    } else if ((x >= 448 && y >= 128 && y < 320) || (x >= 256 && x < 320 && y >= 320)) {
+      // Locker doors (dented at 448..512, 128..320; plain at 256..320, 320..512)
+      const isDent = x >= 448;
+      const lx = isDent ? x - 448 : x - 256;
+      const ly = isDent ? y - 128 : y - 320;
+      const brush = shBrushGrid(u, v) - 0.5;
+      hv = 0.56 + brush * 0.05; rgh = 0.54 + Math.abs(brush) * 0.14; met = 0.36;
+      // Six louvered vent slots
+      if (lx >= 10 && lx <= 54 && ly >= 12 && ly <= 46 && ((ly - 12) % 6) < 2.5) {
+        hv = 0.20; ao = 0.45; rgh = 0.78;
+      }
+      // Fist dent depression on dented door
+      if (isDent) {
+        const dd = Math.hypot(lx - 30, ly - 109) / 18;
+        if (dd < 1) {
+          const dep = Math.cos(dd * Math.PI * 0.5);
+          hv -= dep * 0.36; ao -= dep * 0.22;
+          if (dd > 0.65 && dd < 0.92) { rgh = 0.34; met = 0.74; } // scuffed bare steel rim on dent
+        }
+      }
+    } else if (x < 256 && y >= 320 && y < 448) {
+      // Cot mattress ticking (0..256, 320..448): woven cloth + subtle button-tuft dimples
+      const weave = Math.sin(x * 1.8) * Math.sin(y * 1.8) * 0.08;
+      const tx = ((x - 32) % 64) - 32, ty = ((y - 352) % 64) - 32;
+      const td = Math.hypot(tx, ty) / 12;
+      const tuft = td < 1 ? Math.cos(td * Math.PI * 0.5) * 0.26 : 0;
+      hv = 0.55 + weave - tuft + fine * 0.06;
+      ao = 0.95 - tuft * 0.9;
+      rgh = 0.93; met = 0.0;
+    }
+    shH[i] = hv;
+    shOrm[o] = Math.max(30, Math.min(255, Math.round(ao * 255)));
+    shOrm[o + 1] = Math.max(24, Math.min(252, Math.round(rgh * 255)));
+    shOrm[o + 2] = Math.max(0, Math.min(255, Math.round(met * 255)));
+    shOrm[o + 3] = 255;
+  }
+
+  // 2) Story & 33-swatch kit atlas normal + ORM (512x512 = half of 1024x1024 kitTex)
+  // Per-swatch physical properties indexed by WEAR.STORY.SWATCH_NAMES order (0..32):
+  // [roughness, metalness, patternKind]  pattern: 0=smooth/ceramic, 1=wood, 2=brushedMetal, 3=wovenCloth, 4=plastic, 5=rubber, 6=foam
+  const SW_PBR = [
+    [0.24, 0.02, 0], [0.08, 0.00, 0], [0.84, 0.00, 1], [0.30, 0.86, 2], [0.92, 0.00, 3], [0.64, 0.00, 1], [0.58, 0.00, 1],
+    [0.44, 0.78, 2], [0.28, 0.90, 2], [0.54, 0.02, 4], [0.52, 0.02, 4], [0.82, 0.00, 5], [0.32, 0.88, 2], [0.46, 0.02, 4],
+    [0.36, 0.80, 2], [0.94, 0.00, 3], [0.50, 0.02, 4], [0.22, 0.02, 0], [0.78, 0.00, 5], [0.52, 0.72, 2], [0.94, 0.00, 3],
+    [0.96, 0.00, 3], [0.56, 0.08, 4], [0.90, 0.00, 3], [0.46, 0.56, 2], [0.90, 0.00, 3], [0.46, 0.20, 2], [0.60, 0.00, 0],
+    [0.92, 0.00, 0], [0.38, 0.82, 2], [0.60, 0.00, 1], [0.96, 0.00, 6], [0.48, 0.02, 4],
+  ];
+  const ktH = new Float32Array(S * S);
+  const ktOrm = new Uint8Array(S * S * 4);
+  for (let y = 0; y < S; y++) for (let x = 0; x < S; x++) {
+    const i = y * S + x, o = i * 4, u = x / S, v = y / S;
+    const fine = ktFineGrid(u, v) - 0.5;
+    let hv = 0.52 + fine * 0.03, ao = 0.96, rgh = 0.88, met = 0.0;
+    if (y >= 384) {
+      // Swatch grid: 16 cols x 3 rows of 32x32 px (half of 64x64)
+      const col = x >> 5, row = (y - 384) >> 5, idx = row * 16 + col;
+      const spec = SW_PBR[idx] || [0.72, 0.12, 4];
+      rgh = spec[0]; met = spec[1];
+      const pat = spec[2];
+      const lx = (x & 31) / 32, ly = (y & 31) / 32;
+      if (pat === 1) { // wood grain
+        const g = Math.sin((lx * 14 + Math.sin(ly * 6) * 0.8) * Math.PI);
+        hv = 0.52 + g * 0.10 + fine * 0.05; rgh += g * 0.06; ao = 0.94 + g * 0.05;
+      } else if (pat === 2) { // brushed metal
+        const b = tileFbm(lx, ly, 4, 24, 613 + idx, 2) - 0.5;
+        hv = 0.52 + b * 0.08; rgh += b * 0.08;
+      } else if (pat === 3) { // woven cloth / burlap
+        const wv = Math.sin(lx * Math.PI * 16) * Math.sin(ly * Math.PI * 16);
+        hv = 0.52 + wv * 0.20 + fine * 0.06; ao = 0.90 + wv * 0.08;
+      } else if (pat === 5) { // ribbed rubber
+        const rb = Math.sin(ly * Math.PI * 12);
+        hv = 0.52 + rb * 0.14; ao = 0.92 + rb * 0.06;
+      } else if (pat === 6) { // porous foam
+        const fm = tileFbm(lx, ly, 16, 16, 631, 2) - 0.5;
+        hv = 0.52 + fm * 0.24; ao = 0.84 + fm * 0.16;
+      } else { // ceramic / plastic
+        hv = 0.52 + fine * 0.03;
+      }
+    } else if (x >= 256 && y < 160) {
+      // Whiteboard (512..1024, 0..320 -> half 256..512, 0..160): glossy dry-erase melamine
+      rgh = 0.24 + Math.abs(fine) * 0.08; met = 0.02; hv = 0.54;
+    } else if (x >= 256 && y >= 352 && y < 384) {
+      // HOSE DOWN enamel steel plate (512..1024, 704..768 -> half 256..512, 352..384)
+      rgh = 0.46 + Math.abs(fine) * 0.12; met = 0.22; hv = 0.55 + fine * 0.06;
+    } else {
+      // Paper notices, roster, qualification card, obs chart, calendar, tape
+      rgh = 0.90 + fine * 0.06; met = 0.0; hv = 0.50 + fine * 0.06;
+    }
+    ktH[i] = hv;
+    ktOrm[o] = Math.max(30, Math.min(255, Math.round(ao * 255)));
+    ktOrm[o + 1] = Math.max(18, Math.min(252, Math.round(rgh * 255)));
+    ktOrm[o + 2] = Math.max(0, Math.min(255, Math.round(met * 255)));
+    ktOrm[o + 3] = 255;
+  }
+
+  c = {
+    sheetNrm: makeDataTexture(T, heightToNormalRGBA(shH, S, S, 2.2, false, false), S, S, { name: 'tg-sheet-nrm', srgb: false, repeat: false, aniso: 8 }),
+    sheetOrm: makeDataTexture(T, shOrm, S, S, { name: 'tg-sheet-orm', srgb: false, repeat: false, aniso: 8 }),
+    kitNrm: makeDataTexture(T, heightToNormalRGBA(ktH, S, S, 2.0, false, false), S, S, { name: 'tg-kit-nrm', srgb: false, repeat: false, aniso: 8 }),
+    kitOrm: makeDataTexture(T, ktOrm, S, S, { name: 'tg-kit-orm', srgb: false, repeat: false, aniso: 8 }),
+  };
+  WEAR_PBR_CACHE.set(T, c);
+  return c;
+}
+
 export const WEAR = Object.freeze({
   PX: 32,                                              // floor and wall decals: pixels a metre
   FLICKER: Object.freeze({ wall: 'px', z: 14, len: 3.2 }),
@@ -24,7 +171,7 @@ export const WEAR = Object.freeze({
   MISSING_HOOK: 4,
   SIGN_MARGIN: 20,                                     // px each side inside a 256 px sign (GB-161)
   DOOR: Object.freeze({ rest: 0.5, min: 0.22, max: 2.2, k: 16, damp: 2.0 }),   // GB-161: the dented door's spring (rad, 1/s^2, 1/s)
-  FLOOR_PX: 48,                                        // the floor sheet: pixels a metre (768 x 2016)
+  FLOOR_PX: 80,                                        // the floor sheet: pixels a metre (1280 x 3360; CH-3 #9: was 48, chunky)
   WALL_PX: 64,                                         // the backstop and the tile above it: pixels a metre
   LANE_USE: Object.freeze([0.35, 1.0, 0.55, 0.08, 0.22]),  // lane 1..5: lane 2 the favourite, lane 4 barely touched
   // CG-2 (D-218 pass 2): the story props. Names only from docs/story.md (the twelve of FOB Threshold, their ranks).
@@ -40,15 +187,58 @@ export const WEAR = Object.freeze({
     BOARD_HEAD: 'DRILLS WK 3', BOARD_DAYS: Object.freeze(['MON', 'TUE', 'WED', 'THU', 'FRI']),
     TALLY_HEAD: 'REVIVALS THIS ROTATION', TALLY: 23, CHART_HEAD: 'OBS',
     SWATCH_NAMES: Object.freeze(['mug', 'coffee', 'hardboard', 'clip', 'bristle', 'broomhead', 'handle', 'pail', 'brass', 'tote',
-      'earcup', 'earband', 'alu', 'marker', 'pin', 'blanket', 'sharpslid', 'whitemug']),
+      'earcup', 'earband', 'alu', 'marker', 'pin', 'blanket', 'sharpslid', 'whitemug',
+      'hose', 'drain', 'mophead', 'sandbag', 'radio', 'glove', 'reel', 'scuff', 'plate',
+      'stain', 'paper', 'brassdk', 'broomwood', 'foam', 'mopyellow']),
+    // CG-7 step 5 (D-237 #11): each swatch's material for the hit effects (world/training-hitfx.js reads mesh.userData.fx)
+    SWATCH_FX: Object.freeze({ mug: 'china', whitemug: 'china', coffee: 'china', stain: 'china', hardboard: 'wood', clip: 'steel', bristle: 'wood',
+      broomhead: 'wood', handle: 'wood', broomwood: 'wood', pail: 'steel', brass: 'steel', brassdk: 'steel', tote: 'plastic', earcup: 'plastic',
+      earband: 'plastic', alu: 'steel', marker: 'plastic', pin: 'steel', blanket: 'cloth', sharpslid: 'plastic', hose: 'plastic', drain: 'steel',
+      mophead: 'cloth', sandbag: 'sand', radio: 'plastic', glove: 'cloth', reel: 'steel', scuff: 'cloth', plate: 'steel', paper: 'paper',
+      foam: 'cloth', mopyellow: 'plastic' }),
     SWATCH: Object.freeze(['#4c5a45', '#2a1a10', '#7a5a3a', '#9aa0a3', '#2b2622', '#8a2a22', '#c9a654', '#55595c', '#b8893a', '#2c3236',
-      '#3f5a3a', '#1c1f21', '#b9bec1', '#1b3c8c', '#b3261e', '#5f6b4a', '#e3c21a', '#d9d6cc']),
+      '#3f5a3a', '#1c1f21', '#b9bec1', '#1b3c8c', '#b3261e', '#5f6b4a', '#c9a654', '#d9d6cc',
+      '#25301f', '#2a2c2d', '#bdb6a0', '#8c7b58', '#36413a', '#4a4535', '#66403a', '#46413a', '#e0b81c',
+      '#4a3322', '#e8e3d4', '#6e5426', '#7a5634', '#18191a', '#a48c4c']),
+    // CG-7 (D-226): the rebuilt bench props' new swatches: a coffee stain, plain paper, the shadowed brass under the loose
+    // cases, the broom's lacquered block, black ear-cushion foam; the mop bucket's dusty yellow (Claude 9, 22:5xZ: off the
+    // hazard paint it stands on).
+    // CI-2 (Claude 9's colour notes, Director 20:24Z): the sharps lid and mop bucket faded out of the amber take band,
+    // the glove matches the issued glove, the reel a muted dark red (not a danger red by the gate); the HOSE DOWN plate
+    // keeps its own safety yellow ('plate').
     ROSTER_AT: Object.freeze({ x: 6.0, y: 1.55 }),
-    MUG: Object.freeze({ x: -7.4, z: 0.62 }), CLIP: Object.freeze({ x: -7.02, z: 0.48, ry: 0.18 }),
-    BROOM: Object.freeze({ x: -7.72 }), BUCKET: Object.freeze({ x: -7.25, z: 0.02 }), TOTE: Object.freeze({ x: -7.805, z: -3.3 }),   // clear of the dummy (-6.85, -2.1)
+    MUG: Object.freeze({ x: -7.0, z: 0.6 }), CLIP: Object.freeze({ x: -6.68, z: 0.47, ry: 0.18 }),
+    BROOM: Object.freeze({ x: -7.72 }), BUCKET: Object.freeze({ x: -7.25, z: 0.02 }),
+    // CG-7 (Jerry D-230: "Move this prop to the range counter"): the ear-defender tray lies on the bench's worktop at the
+    // wall end (it stood on the floor by the range console); the mug and the clipboard step along to make room.
+    TOTE: Object.freeze({ x: -7.52, z: 0.45, ry: 0.04, bench: true }),
+    // CG-7 (Jerry D-229: "Move this prop somewhere else. Put the light switch here instead."): the cracked monitor moves
+    // to the range's west wall, downrange of the RANGE CONTROL console (the old screen it replaced, still waiting on its
+    // replacement); the switch takes its old spot on the back wall.
+    MONITOR: Object.freeze({ wall: 'west', z: -2.75, y: 1.5 }),
     WHITEBOARD: Object.freeze({ x: -3.85, y: 1.55 }),
     // Beat 5, the infirmary (offsets from bedAt, the wake stretcher; the bay's back wall is B.minZ)
-    MEDIC: Object.freeze({ tallyDX: -1.55, tallyY: 1.6, sharpsDX: 1.62, sharpsY: 1.2, mugDX: 3.4, mugZ: 0.88 })
+    MEDIC: Object.freeze({ tallyDX: -1.55, tallyY: 1.6, sharpsDX: 1.62, sharpsY: 1.2, mugDX: 3.4, mugZ: 0.88 }),
+    // CG-2 sheet 2. Beat 4, the Containment crew (build room, the gate end; B.maxZ is the gate's wall): the hose reel on
+    // the wall west of the gate and its stencilled plate, the hose run to a floor drain, a mop bucket and squeegee in the
+    // west corner, three sandbags east of the gate. The drains themselves: BUILD_WEAR.DRAINS (their rust and wet floor).
+    STENCIL: 'HOSE DOWN AFTER EVERY SESSION',
+    REEL: Object.freeze({ x: -31.2, y: 1.05 }), MOP: Object.freeze({ x: -43.5, z: 26.75 }), SQUEEGEE_Z: 25.55,
+    SANDBAGS: Object.freeze({ x: -20.95, z: 27.62 }),
+    DRAINS: Object.freeze([Object.freeze([-31.75, 25.15]), Object.freeze([-24.45, 16.25])]),
+    // Beat 6, the Branch's paper (words: ChatGPT, 21 Nov, by request; the Director: keep them here). Never about the dead.
+    NOTE_HEAD: 'PGB \u00b7 NOTICE',
+    NOTES: Object.freeze([
+      'Replacement request 3 received. Tape approved.',              // 0 taped on the cracked monitor
+      'Specimen names are assigned by Inventory.',                   // 1 on the gate's west pilaster
+      'Training cash. Reimbursements require a different kind of money.',   // 2 on the wall by the supply kiosk
+      'Return board markers to the tray. Caps count.',               // 3 by the REVIVALS board
+      'Return hose to reel. Initial the box marked RETURNED.'        // 4 on the hose reel's backboard
+    ]),
+    // Beat 7, small life: a calendar on the range's back wall (days crossed off up to a circled one), a silent radio at
+    // the bench's east end, a glove left on the bench.
+    CAL_MARK: 'ROTATION OUT', CAL_DAYS: 30, CAL_FIRST: 3, CAL_CROSSED: 19, CAL_CIRCLE: 24,
+    CAL: Object.freeze({ x: -0.6, y: 1.5 }), RADIO: Object.freeze({ x: 6.85, z: 0.58, ry: -0.25 }), GLOVE: Object.freeze({ x: 2.3, z: 0.42, ry: 0.6 })
   })
 });
 
@@ -57,8 +247,10 @@ function rng(seed) { let s = seed; return () => { s = (s * 16807) % 2147483647; 
 const TRAINING_RANGES = [8, 12, 16, 20, 25];   // TRAINING.RANGES (not imported: training.js imports this file)
 
 export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lampMat, root }) {
-  const parts = [], decals = [], dead = [];
-  const tex = (w, h, draw) => (texture ? texture(w, h, draw) : null);
+  const parts = [], decals = [], dead = [], destructSpecs = [];
+  // CH-3 #9 (the native walk: "chunky pixel wear"): every sheet here is mipmapped with anisotropic filtering, so the wear
+  // stays sharp at the low angles the floor is seen at (as Claude 8's tiles, CH-3 #1)
+  const tex = (w, h, draw) => { const t = texture ? texture(w, h, draw) : null; if (t) { t.anisotropy = 8; t.generateMipmaps = true; } return t; };
   const decalMat = (map) => std({ color: 0xffffff, map, transparent: true, depthWrite: false, roughness: 0.9, metalness: 0,
     polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
   const decal = (name, w, h, map, x, y, z, ry, rx = 0) => {
@@ -183,9 +375,10 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
   decal('wear-floor', RW, RD, floorTex, (R.minX + R.maxX) / 2, 0.001, (R.minZ + R.maxZ) / 2, 0, -Math.PI / 2);
 
   // The yellow line: faded unevenly, and chipped to the tile in ragged flakes where people stand (more where more do).
-  const chipTex = tex(RW * 64, 32, (c, w, h) => {
+  const CP = 128;   // CH-3 #9: the chip sheet's pixels a metre (was 64, 32 px tall: the line's fade read as blocks)
+  const chipTex = tex(RW * CP, 64, (c, w, h) => {
     const r = rng(77);
-    for (let x = 0; x < w; x += 8) { c.fillStyle = `rgba(205,208,210,${0.08 + r() * 0.25})`; c.fillRect(x, 0, 8 + r() * 8, h); }
+    for (let x = 0; x < w; x += 6) { c.fillStyle = `rgba(205,208,210,${0.05 + r() * 0.2})`; c.fillRect(x, 0, 6 + r() * 10, h); }
     const flake = (u, v, s) => {
       c.beginPath(); const n = 5 + (r() * 4 | 0);
       for (let k = 0; k < n; k++) { const a = k / n * 6.28, d = s * (0.4 + r() * 0.8); k ? c.lineTo(u + Math.cos(a) * d * 1.5, v + Math.sin(a) * d) : c.moveTo(u + Math.cos(a) * d * 1.5, v + Math.sin(a) * d); }
@@ -195,10 +388,10 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
       const n = Math.round(4 + WEAR.LANE_USE[i] * 50);
       for (let k = 0; k < n; k++) {
         c.fillStyle = r() < 0.75 ? `rgba(196,200,202,${0.75 + r() * 0.25})` : 'rgba(150,146,136,0.85)';
-        flake((lx - R.minX + (r() - 0.5) * (0.6 + WEAR.LANE_USE[i] * 1.4)) * 64, r() * h, 1.5 + r() * (3 + WEAR.LANE_USE[i] * 7));
+        flake((lx - R.minX + (r() - 0.5) * (0.6 + WEAR.LANE_USE[i] * 1.4)) * CP, r() * h, (1.5 + r() * (3 + WEAR.LANE_USE[i] * 7)) * CP / 64);
       }
     });
-    for (let k = 0; k < 25; k++) { c.fillStyle = 'rgba(196,200,202,0.85)'; flake(r() * w, r() * h, 1 + r() * 3); }   // strays along it
+    for (let k = 0; k < 25; k++) { c.fillStyle = 'rgba(196,200,202,0.85)'; flake(r() * w, r() * h, (1 + r() * 3) * CP / 64); }   // strays along it
   });
   decal('wear-line-chips', RW, 0.27, chipTex, 0, 0.0015, 0, 0, -Math.PI / 2).renderOrder = 1.05;   // CJ-1: over the floor sheet in a fixed order
 
@@ -207,9 +400,12 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
   const sideX = { px: R.maxX, nx: R.minX };
   const yawOf = { px: -Math.PI / 2, nx: Math.PI / 2 };
   const nrm = { px: -1, nx: 1 };
-  const ventMat = std({ color: 0x8c9398, roughness: 0.6, metalness: 0.5 });
-  const boltMat = std({ color: 0x6d5a48, roughness: 0.8, metalness: 0.4 });
-  const steel = std({ color: 0x3a4046, roughness: 0.45, metalness: 0.6 });
+  const pbr = getTrainingPBR(T);
+  const worldUvMats = new Map();
+  const ventMat = std(pbr ? pbr.galvDuct.opts({ color: 0xd0d6da }) : { color: 0x8c9398, roughness: 0.6, metalness: 0.5 });
+  const boltMat = std(pbr ? pbr.steelDark.opts({ color: 0xc89a78 }) : { color: 0x6d5a48, roughness: 0.8, metalness: 0.4 });
+  const steel = std(pbr ? pbr.steelDark.opts() : { color: 0x3a4046, roughness: 0.45, metalness: 0.6 });
+  worldUvMats.set(ventMat, 0.8); worldUvMats.set(boltMat, 0.5); worldUvMats.set(steel, 1.0);
   const bolts = { px: [], nx: [] }, vents = { px: [], nx: [] };
   for (const [side, z] of WEAR.VENTS) {
     const x = sideX[side] + nrm[side] * 0.02;
@@ -375,9 +571,11 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
   const flicker = add(new T.PlaneGeometry(WEAR.FLICKER.len, 0.11), flickMat, fa.x, STRIP_Y, fa.z);
   flicker.rotation.y = fa.ry; flicker.name = 'training-wear-flicker'; parts.push('wear-flicker-strip');
   const fr = rng(97);
-  let wait = 3 + fr() * 6, burst = 0, tick = 0, on = true;
+  let wait = 3 + fr() * 6, burst = 0, tick = 0, on = true, flickerBroken = false, lastLit = true;
   function update(dt, lit) {
+    lastLit = !!lit;
     if (door) stepDoor(dt);   // GB-161
+    if (flickerBroken) { flickMat.emissiveIntensity = 0; flickMat.color.setHex(0x222629); return; }
     if (!lit) { flickMat.emissiveIntensity = lampMat.emissiveIntensity; flickMat.color.copy(lampMat.color); return; }
     if (burst > 0) {
       burst -= dt; tick -= dt;
@@ -387,6 +585,7 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
     flickMat.emissiveIntensity = on ? lampMat.emissiveIntensity : 0.04;
     flickMat.color.setHex(on ? 0xffffff : 0x6a7074);
   }
+  destructSpecs.push({ id: 'flickerStrip', kind: 'flickerTube', meshes: [flicker], wallNormal: { x: nrm[WEAR.FLICKER.wall], z: 0 }, onShatter: (b) => { flickerBroken = !!b; if (b) { flickMat.emissiveIntensity = 0; flickMat.color.setHex(0x222629); } else { update(0, lastLit); } } });
 
   // ---------- (3) and (5): the back wall's kit (behind him at the line) and the side walls' signs
   // One printed sheet for the signs, the board and the monitor: 1024 x 1024, cells by uv.
@@ -470,13 +669,16 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
       c.fillStyle = g; c.beginPath(); c.ellipse(x, y, rad, rad * 0.7, r() * 3, 0, 7); c.fill();
     }
   });
-  const sheetMat = std({ color: 0xffffff, map: sheet, transparent: true, alphaTest: 0.5, roughness: 0.8, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
+  const wearAtlases = pbr ? getWearAtlases(T) : null;
+  const sheetMat = std({ color: 0xffffff, map: sheet,
+    ...(wearAtlases ? { normalMap: wearAtlases.sheetNrm, normalScale: T.Vector2 ? new T.Vector2(0.85, 0.85) : undefined, roughnessMap: wearAtlases.sheetOrm, metalnessMap: wearAtlases.sheetOrm, aoMap: wearAtlases.sheetOrm, aoMapIntensity: 0.65, roughness: 1.0, metalness: 1.0 } : { roughness: 0.8 }),
+    transparent: true, alphaTest: 0.5, polygonOffset: true, polygonOffsetFactor: -2, polygonOffsetUnits: -2 });
   const cell = (geo, x, y, w, h) => {   // map a plane's uvs onto one cell of the sheet (pixels, y down)
     const uv = geo.attributes && geo.attributes.uv; if (!uv) return geo;
     for (let i = 0; i < uv.count; i++) uv.setXY(i, (x + uv.getX(i) * w) / 1024, 1 - (y + (1 - uv.getY(i)) * h) / 1024);
     uv.needsUpdate = true; return geo;
   };
-  const printed = (name, w, h, c4, x, y, z, ry) => { const m = add(cell(new T.PlaneGeometry(w, h), ...c4), sheetMat, x, y, z); m.rotation.y = ry; parts.push(name); return m; };
+  const printed = (name, w, h, c4, x, y, z, ry, parent) => { const m = add(cell(new T.PlaneGeometry(w, h), ...c4), sheetMat, x, y, z, parent); m.rotation.y = ry; parts.push(name); return m; };
 
   // Safety signs on the side walls (the +x wall's terminals end at z -2). CG-1 (CF-20 #10): 0.6 x 0.42 m at 1.8 m (were
   // 1.0 x 0.7 m at 2.2 m: a wall made for a taller man).
@@ -484,7 +686,7 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
   // these on a swing-out bracket turned toward the line: a steel plate hinged on a wall strip at its near edge, swung
   // SIGN_SWING out, two struts back to the wall at its far edge. The face looks back up the range at the shooter.
   const SIGN_SWING = 0.7, SW = 0.6, SH = 0.42, PW = SW + 0.04, PH = SH + 0.04, PT = 0.012;
-  const swungSign = (name, c4, side, y, z0) => {
+  const swungSign = (name, c4, side, y, z0, destructId) => {
     const n = nrm[side], sa = Math.sin(SIGN_SWING), ca = Math.cos(SIGN_SWING), wx = sideX[side];
     const ry = side === 'px' ? -Math.PI / 2 - SIGN_SWING : Math.PI / 2 + SIGN_SWING;
     const fx = -Math.cos(SIGN_SWING) * -n, fz = -sa;   // the face's normal: off the wall and back toward the line
@@ -495,45 +697,63 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
     const face = printed(name, SW, SH, c4, cxp + fx * (PT / 2 + 0.002), y, czp + fz * (PT / 2 + 0.002), ry);
     const farX = wx + n * (hinge + PW * sa), farZ = z0 + PW * ca, reach = Math.abs(farX - wx) - 0.006;
     for (const dy of [-PH / 2 + 0.04, PH / 2 - 0.04]) box(reach, 0.02, 0.02, steel, wx + n * reach / 2, y + dy, farZ + 0.012);   // struts, behind the plate
+    if (destructId) destructSpecs.push({ id: destructId, kind: 'sign', meshes: [plate, face], wallNormal: { x: fx, z: fz } });
     return face;
   };
-  swungSign('wear-sign-ears', [0, 0, 256, 180], 'px', 1.8, 2.2);
-  swungSign('wear-sign-muzzle', [256, 0, 256, 180], 'px', 1.8, 9.5);
-  swungSign('wear-sign-cease', [512, 0, 256, 180], 'nx', 1.8, 2.5);
-  swungSign('wear-sign-forward', [768, 0, 256, 180], 'nx', 1.8, 11);
+  swungSign('wear-sign-ears', [0, 0, 256, 180], 'px', 1.8, 2.2, 'signEars');
+  swungSign('wear-sign-muzzle', [256, 0, 256, 180], 'px', 1.8, 9.5, 'signMuzzle');
+  swungSign('wear-sign-cease', [512, 0, 256, 180], 'nx', 1.8, 2.5, 'signCease');
+  swungSign('wear-sign-forward', [768, 0, 256, 180], 'nx', 1.8, 11, 'signForward');
 
   const BZ = R.minZ;   // the back wall (faces +z)
   // The board, framed, right of the rack (seated 0.0 mm flush on BZ).
   // CG-1 (CF-20 #10, AH-1 #22): centre 1.5 m (was 1.85); the face 2 mm on its frame (it stood 1.5 cm off it, floating;
   // the sheet's polygonOffset keeps it from fighting the frame).
-  box(1.18, 0.86, 0.03, steel, 5.0, 1.5, BZ + 0.015);
-  printed('wear-days-board', 1.1, 0.77, [0, 256, 512, 360], 5.0, 1.5, BZ + 0.032, 0);
+  const dbFrame = box(1.18, 0.86, 0.03, steel, 5.0, 1.5, BZ + 0.015);
+  const dbFace = printed('wear-days-board', 1.1, 0.77, [0, 256, 512, 360], 5.0, 1.5, BZ + 0.032, 0);
+  destructSpecs.push({ id: 'daysBoard', kind: 'sign', meshes: [dbFrame, dbFace], wallNormal: { x: 0, z: 1 } });
   // The weapon rack: steel rails seated 0.0 mm flush on BZ, hooks flush on rails with zero stem/tip overlap.
   // CG-1 (CD-18 B1, AH-1 #22): the lower rail sat on the blue band (1.05 m) and the 2.5 cm dark hooks vanished. Rails
   // now at 1.25 and 1.75 m, hooks 3.5 cm in a lighter zinc steel with a turned-up tip, so the rack reads as a rack.
-  const hookMat = std({ color: 0x8c9398, roughness: 0.45, metalness: 0.6 });
+  const hookMat = std(pbr ? pbr.steelLight.opts({ color: 0xd8dfe3 }) : { color: 0x8c9398, roughness: 0.45, metalness: 0.6 });
+  worldUvMats.set(hookMat, 0.7);
   const RY = [1.75, 1.25];
-  box(2.2, 0.12, 0.04, steel, 2.3, RY[0], BZ + 0.02); box(2.2, 0.12, 0.04, steel, 2.3, RY[1], BZ + 0.02);
+  // CH-3 #16 (the native walk: "two flat straps"): each rail is a pressed steel channel now, its web on the wall and two
+  // lips standing out top and bottom, held by bolts at the ends and the middle; the hooks are round bar, bent up at the tip.
+  for (const y of RY) {
+    box(2.2, 0.12, 0.012, steel, 2.3, y, BZ + 0.006);                                         // the web, flush on the wall
+    for (const s of [-1, 1]) box(2.2, 0.01, 0.045, steel, 2.3, y + s * 0.055, BZ + 0.0225);  // its lips
+    if (T.CylinderGeometry) for (const bx of [1.25, 2.3, 3.35]) { const b = add(new T.CylinderGeometry(0.011, 0.011, 0.012, 8), hookMat, bx, y, BZ + 0.018); b.rotation.x = Math.PI / 2; }
+  }
+  const bar = (len, x, y, z, rx) => { const m = T.CylinderGeometry ? add(new T.CylinderGeometry(0.0085, 0.0085, len, 8), hookMat, x, y, z) : box(0.017, len, 0.017, hookMat, x, y, z); m.rotation.x = rx; m.castShadow = true; return m; };
   for (let i = 0; i < 7; i++) {
     const x = 1.4 + i * 0.3;
     if (i === WEAR.MISSING_HOOK) { for (const dy of [-0.025, 0.025]) box(0.012, 0.012, 0.004, std({ color: 0x0c0d0e }), x, RY[0] + dy, BZ + 0.042); continue; }
-    for (const y of RY) { box(0.035, 0.035, 0.12, hookMat, x, y, BZ + 0.1); box(0.035, 0.07, 0.035, hookMat, x, y + 0.0175, BZ + 0.1775); }
+    for (const y of RY) { bar(0.14, x, y, BZ + 0.082, Math.PI / 2); bar(0.06, x, y + 0.022, BZ + 0.152, -0.35); }
   }
   parts.push('wear-rack-missing-hook');
-  // The cracked monitor on its bracket, seated 0.0 mm flush on BZ and taped right across the screen face.
-  // CG-1 (CF-20 #10): its centre at 1.5 m (was 1.75).
-  const MY = 1.5;
-  box(0.08, 0.08, 0.155, steel, -2.2, MY, BZ + 0.0775);
-  box(0.66, 0.44, 0.05, std({ color: 0x1b1d1f, roughness: 0.6 }), -2.2, MY, BZ + 0.18);
-  printed('wear-monitor-cracked', 0.6, 0.38, [512, 256, 384, 256], -2.2, MY, BZ + 0.208, 0);
-  const tapeMat = std({ color: 0xc9b98a, roughness: 0.95, polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3, side: T.DoubleSide });
-  for (const a of [0.55, -0.55]) {
-    const t = add(new T.PlaneGeometry(0.58, 0.038), tapeMat, -2.2, MY, BZ + 0.212);
-    t.rotation.z = a; t.castShadow = false; (t.userData || (t.userData = {})).isDecal = true;
-  }
+  // The cracked monitor on its bracket, seated 0.0 mm flush on its wall and taped right across the screen face.
+  // CG-1 (CF-20 #10): its centre at 1.5 m (was 1.75). CG-7 (Jerry D-229): moved off the back wall (the light switch is
+  // there now) to the range's west wall, beside the RANGE CONTROL console: WEAR.STORY.MONITOR. Built facing +z, then turned.
+  const MY = WEAR.STORY.MONITOR.y;
+  const monX = WEAR.STORY.MONITOR.wall === 'east' ? R.maxX : R.minX, monRy = WEAR.STORY.MONITOR.wall === 'east' ? -Math.PI / 2 : Math.PI / 2;
+  { const mon = new T.Group(); mon.position.set(monX, 0, WEAR.STORY.MONITOR.z); mon.rotation.y = monRy; if (root) root.add(mon);   // its +z faces into the range
+    box(0.08, 0.08, 0.155, steel, 0, MY, 0.0775, mon);
+    const mCase = box(0.66, 0.44, 0.05, std({ color: 0x1b1d1f, roughness: 0.6 }), 0, MY, 0.18, mon);
+    const mScr = printed('wear-monitor-cracked', 0.6, 0.38, [512, 256, 384, 256], 0, MY, 0.208, 0, mon);
+    const tapeMat = std(pbr ? pbr.medicalEnamel.opts({ color: 0xd8c694, extra: { polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3, side: T.DoubleSide } }) : { color: 0xc9b98a, roughness: 0.95, polygonOffset: true, polygonOffsetFactor: -3, polygonOffsetUnits: -3, side: T.DoubleSide });
+    const mTapes = [];
+    for (const a of [0.55, -0.55]) {
+      const t = add(new T.PlaneGeometry(0.58, 0.038), tapeMat, 0, MY, 0.212, mon);
+      t.rotation.z = a; t.castShadow = false; (t.userData || (t.userData = {})).isDecal = true;
+      mTapes.push(t);
+    }
+    destructSpecs.push({ id: 'crackedMonitor', kind: 'monitor', meshes: [mCase, mScr, ...mTapes], extraMeshes: { screen: [mScr], tape: mTapes }, wallNormal: { x: WEAR.STORY.MONITOR.wall === 'east' ? -1 : 1, z: 0 }, linked: 'note0' }); }
   parts.push('wear-monitor-tape');
   // Three lockers seated 0.0 mm flush on y=0 and z=BZ; middle door hung on lower pivot bracket clear of carcass.
-  const lockerMat = std({ color: 0x5d6b5f, roughness: 0.55, metalness: 0.4 });
+  const lockerMat = std(pbr ? pbr.oliveSteel.opts({ color: 0xb6c8b9 }) : { color: 0x5d6b5f, roughness: 0.55, metalness: 0.4 });
+  const plinthMat = std(pbr ? pbr.steelDark.opts({ color: 0x585e5a }) : { color: 0x1d211e, roughness: 0.8, metalness: 0.3 });
+  worldUvMats.set(lockerMat, 1.2); worldUvMats.set(plinthMat, 0.8);
   const blockers = [];
   let door = null;
   // CG-1 (CF-20 #6, AH-1 #16): the lockers were 0.60 m wide (real: about 0.38). Now 0.38 m on a 0.40 m pitch, the bank
@@ -543,6 +763,11 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
   for (let i = 0; i < 3; i++) {
     const x = L0 + i * LP;
     box(LW, 1.85, 0.48, lockerMat, x, 0.925, BZ + 0.24);
+    // CH-3 #16 ("flat boxes"): a dark recessed plinth, a rolled cap along the top front, and the hinge strip with its
+    // three knuckles down the hinge side of each door, so each reads as a pressed-steel locker, not a block
+    box(LW - 0.03, 0.1, 0.012, plinthMat, x, 0.05, BZ + 0.486);
+    box(LW + 0.004, 0.03, 0.03, lockerMat, x, 1.835, BZ + 0.47);
+    if (i !== 1) for (const hy of [0.32, 0.95, 1.58]) box(0.012, 0.07, 0.014, steel, x - LD / 2 - 0.008, hy, BZ + 0.493);
     if (i !== 1) {
       printed('wear-locker-door', LD, 1.62, [512, 640, 128, 384], x, 0.955, BZ + 0.488, 0); parts.pop();
       box(0.022, 0.13, 0.03, steel, x + LD / 2 - 0.05, 1.02, BZ + 0.503);
@@ -621,8 +846,10 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
         const cap = cylOrBox(0.012, 0.008, steel, cx + dx + s * 0.033, yMid, cz); cap.rotation.z = Math.PI / 2;
       }
     }
-    const canvas = std({ color: 0x6f6a4e, roughness: 0.95 });
-    const mattress = std({ color: 0xffffff, map: sheet, roughness: 0.9 });
+    const canvas = std(pbr ? pbr.canvasMilitary.opts({ color: 0x7e785a, normalScale: 1.0 }) : { color: 0x6f6a4e, roughness: 0.95 });
+    worldUvMats.set(canvas, 0.5);
+    const mattress = std({ color: 0xffffff, map: sheet,
+      ...(wearAtlases ? { normalMap: wearAtlases.sheetNrm, normalScale: T.Vector2 ? new T.Vector2(0.95, 0.95) : undefined, roughnessMap: wearAtlases.sheetOrm, metalnessMap: wearAtlases.sheetOrm, aoMap: wearAtlases.sheetOrm, aoMapIntensity: 0.72, roughness: 1.0, metalness: 1.0 } : { roughness: 0.9 }) });
     const cLen = L - 0.12, seg = 5, sl = cLen / seg;
     // CG-2 (AH-4 #21): the canvas and the mattress were five tilted slabs each, with dark V-gaps between them. Each is now
     // one piece bent along the same sag (a parabola, 8 cm at the middle): a box cut in 20 along its length, every point
@@ -721,14 +948,97 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
     for (let i = 0; i <= 8; i++) { c.beginPath(); c.moveTo(270 + i * 28.5, 232); c.lineTo(270 + i * 28.5, 364); c.stroke(); }
     c.strokeStyle = '#1e2a6b'; c.lineWidth = 2.5; c.beginPath(); c.moveTo(272, 300);
     for (let i = 1; i <= 16; i++) c.lineTo(272 + i * 14, 286 + Math.sin(i * 1.7) * 14 + r() * 8); c.stroke();
-    // Flat swatches, 64 x 64 from (0, 768): what every small prop of the pass is painted with.
-    STORY.SWATCH.forEach((col, k) => { c.fillStyle = col; c.fillRect((k % 16) * 64, 768 + Math.floor(k / 16) * 64, 64, 64); });
+    // CG-2 sheet 2. The Branch's notes (beat 6): 256 x 128 cells, typed slips with a thin header, words wrapped to fit.
+    const NOTE_CELLS = [[256, 384], [256, 512], [256, 640], [512, 576], [768, 576]];
+    STORY.NOTES.forEach((t, i) => {
+      const [x0, y0] = NOTE_CELLS[i];
+      c.fillStyle = i === 4 ? '#f3e7a0' : '#f1ede0'; c.fillRect(x0, y0, 256, 128);
+      c.fillStyle = 'rgba(40,40,40,0.18)'; c.fillRect(x0, y0 + 126, 256, 2);
+      c.fillStyle = '#7d1d18'; c.fillRect(x0 + 10, y0 + 8, 236, 18);
+      c.fillStyle = '#f4f1e6'; c.textAlign = 'center'; c.font = type(12, 'bold'); c.fillText(STORY.NOTE_HEAD, x0 + 128, y0 + 17);
+      c.fillStyle = '#1d2124'; c.textAlign = 'left';
+      let px = 21, lines;
+      for (;; px -= 1) {
+        c.font = type(px, 'bold'); lines = []; let line = '';
+        for (const w of t.split(' ')) { const tryL = line ? line + ' ' + w : w; if (c.measureText(tryL).width > 232 && line) { lines.push(line); line = w; } else line = tryL; }
+        lines.push(line);
+        if ((lines.length * px * 1.15 <= 92 && lines.every((l) => c.measureText(l).width <= 236)) || px <= 10) break;
+      }
+      const lh = px * 1.15, top = y0 + 32 + (92 - lines.length * lh) / 2 + lh / 2;
+      lines.forEach((l, k) => c.fillText(l, x0 + 12, top + k * lh));
+      for (let k = 0; k < 6; k++) { c.fillStyle = `rgba(150,130,90,${r() * 0.1})`; c.fillRect(x0 + r() * 240, y0 + r() * 120, 3 + r() * 8, 2 + r() * 6); }
+    });
+    // The stencilled plate by the hose reel (beat 4): 512 x 64 at (512, 704), black stencil on safety yellow.
+    { const x0 = 512, y0 = 704; c.fillStyle = '#e0b81c'; c.fillRect(x0, y0, 512, 64);
+      for (let k = 0; k < 40; k++) { c.fillStyle = `rgba(60,50,20,${r() * 0.12})`; c.fillRect(x0 + r() * 500, y0 + r() * 60, 2 + r() * 14, 1 + r() * 4); }
+      c.fillStyle = '#17181a'; c.textAlign = 'center'; let px = 40;
+      const st = (q) => `bold ${q}px Impact, "Arial Narrow", "Arial Black", Arial, sans-serif`;
+      c.font = st(px); while (px > 14 && c.measureText(STORY.STENCIL).width > 480) { px -= 1; c.font = st(px); }
+      c.fillText(STORY.STENCIL, x0 + 256, y0 + 33);
+      // CH-3 #17 (the native walk read "HCSE DCWN": a row of bridges at one height cut the bottom out of every O, so it read
+      // as a C): a stencil's bridges go where the letter needs them, top and bottom of the round ones (O, D, Q, 0), so the
+      // two halves still read as one letter; the straight letters have none.
+      { const w = c.measureText(STORY.STENCIL).width, m = c.measureText('O'), up = m.actualBoundingBoxAscent || px * 0.72, dn = m.actualBoundingBoxDescent || 0;
+        let at = x0 + 256 - w / 2; c.fillStyle = '#e0b81c';
+        for (const ch of STORY.STENCIL) {
+          const cw = c.measureText(ch).width;
+          if ('ODQ0'.includes(ch)) { const bx = at + cw * (ch === 'D' ? 0.42 : 0.5) - 1.25, th = Math.max(3, px * 0.16);
+            c.fillRect(bx, y0 + 33 - up - 1, 2.5, th); c.fillRect(bx, y0 + 33 + dn - th + 1, 2.5, th); }
+          at += cw; } }
+      c.fillStyle = 'rgba(23,24,26,0.25)'; for (let k = 0; k < 10; k++) c.fillRect(x0 + 20 + r() * 470, y0 + 46 + r() * 12, 1, 3 + r() * 6); }   // overspray runs
+    // The calendar page (beat 7): 192 x 256 at (832, 320): a photo band, the month's grid, days crossed off, one circled.
+    { const x0 = 832, y0 = 320; c.fillStyle = '#f2efe6'; c.fillRect(x0, y0, 192, 256);
+      const sky = c.createLinearGradient(0, y0 + 8, 0, y0 + 84); sky.addColorStop(0, '#8ea7b4'); sky.addColorStop(1, '#c9cfc4');
+      c.fillStyle = sky; c.fillRect(x0 + 8, y0 + 8, 176, 76);
+      c.fillStyle = '#4f5d52'; c.beginPath(); c.moveTo(x0 + 8, y0 + 84); c.lineTo(x0 + 48, y0 + 44); c.lineTo(x0 + 82, y0 + 66); c.lineTo(x0 + 124, y0 + 30); c.lineTo(x0 + 184, y0 + 72); c.lineTo(x0 + 184, y0 + 84); c.fill();
+      c.fillStyle = '#e9ece9'; c.beginPath(); c.moveTo(x0 + 114, y0 + 40); c.lineTo(x0 + 124, y0 + 30); c.lineTo(x0 + 134, y0 + 37); c.fill();
+      c.fillStyle = '#9aa0a3'; c.fillRect(x0 + 8, y0 + 92, 176, 1);
+      const cw = 24.5, ch = 22, gx = x0 + 10, gy = y0 + 102;
+      c.font = type(10, 'bold'); c.textAlign = 'center'; c.fillStyle = '#5a5e60';
+      ['M', 'T', 'W', 'T', 'F', 'S', 'S'].forEach((d, k) => c.fillText(d, gx + k * cw + cw / 2, gy));
+      for (let d = 1; d <= STORY.CAL_DAYS; d++) {
+        const cell = d - 1 + STORY.CAL_FIRST, cx = gx + (cell % 7) * cw + cw / 2, cy = gy + 16 + Math.floor(cell / 7) * ch;
+        c.fillStyle = cell % 7 > 4 ? '#8a2a22' : '#2a2e31'; c.font = type(11); c.fillText(String(d), cx, cy);
+        if (d <= STORY.CAL_CROSSED) { c.strokeStyle = '#1b2f73'; c.lineWidth = 1.6; c.beginPath(); c.moveTo(cx - 8, cy - 7); c.lineTo(cx + 8, cy + 7); c.moveTo(cx + 8, cy - 7); c.lineTo(cx - 8, cy + 7); c.stroke(); }
+        if (d === STORY.CAL_CIRCLE) { c.strokeStyle = '#a3241e'; c.lineWidth = 2.5; c.beginPath(); c.ellipse(cx, cy, 11, 9, 0, 0, 7); c.stroke();
+          c.fillStyle = '#a3241e'; c.font = hand(15); c.textAlign = 'center'; c.fillText(STORY.CAL_MARK, x0 + 96, y0 + 241);
+          c.beginPath(); c.moveTo(x0 + 96 + 30, y0 + 232); c.quadraticCurveTo(cx + 14, y0 + 226, cx + 4, cy + 10); c.stroke(); } } }
+    // AG-405: Textured material swatches (64 x 64 from (0, 768)): wood grain, burlap weave, brushed brass/steel,
+    // ceramic glaze, rubber ribs, cloth weave — paired with per-swatch normal + ORM maps (0 extra draw calls!).
+    STORY.SWATCH.forEach((col, k) => {
+      const sx = (k % 16) * 64, sy = 768 + Math.floor(k / 16) * 64, nm = STORY.SWATCH_NAMES[k] || '';
+      c.fillStyle = col; c.fillRect(sx, sy, 64, 64);
+      if (nm === 'handle' || nm === 'broomwood' || nm === 'broomhead' || nm === 'hardboard') {
+        for (let i = 0; i < 64; i += 3) { c.fillStyle = i % 6 ? 'rgba(0,0,0,0.11)' : 'rgba(255,245,220,0.08)'; c.fillRect(sx + i, sy, 2, 64); }
+      } else if (nm === 'sandbag' || nm === 'blanket' || nm === 'glove' || nm === 'mophead' || nm === 'bristle') {
+        c.fillStyle = 'rgba(0,0,0,0.13)'; for (let i = 0; i < 64; i += 4) c.fillRect(sx + i, sy, 1.5, 64);
+        c.fillStyle = 'rgba(255,255,255,0.08)'; for (let i = 0; i < 64; i += 4) c.fillRect(sx, sy + i, 64, 1.5);
+      } else if (nm === 'brass' || nm === 'brassdk' || nm === 'alu' || nm === 'clip' || nm === 'pail' || nm === 'drain' || nm === 'reel') {
+        for (let i = 0; i < 42; i++) {
+          c.fillStyle = i % 2 ? 'rgba(255,255,255,0.10)' : 'rgba(0,0,0,0.12)';
+          c.fillRect(sx + ((i * 19) % 52), sy + ((i * 7) % 62), 12 + (i % 14), 1.5);
+        }
+      } else if (nm === 'hose' || nm === 'earband') {
+        c.fillStyle = 'rgba(255,255,255,0.06)'; for (let i = 0; i < 64; i += 6) c.fillRect(sx, sy + i, 64, 2);
+      } else {
+        for (let i = 0; i < 28; i++) {
+          c.fillStyle = i % 2 ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.07)';
+          c.fillRect(sx + ((i * 23) % 58), sy + ((i * 17) % 58), 3 + (i % 6), 2 + (i % 4));
+        }
+      }
+    });
   });
-  const kitMat = std({ color: 0xffffff, map: kitTex, roughness: 0.72, metalness: 0.12 });
+  const kitMat = std({ color: 0xffffff, map: kitTex,
+    ...(wearAtlases ? { normalMap: wearAtlases.kitNrm, normalScale: T.Vector2 ? new T.Vector2(0.85, 0.85) : undefined, roughnessMap: wearAtlases.kitOrm, metalnessMap: wearAtlases.kitOrm, aoMap: wearAtlases.kitOrm, aoMapIntensity: 0.68, roughness: 1.0, metalness: 1.0 } : { roughness: 0.72, metalness: 0.12 }) });
   const SW_ = Object.fromEntries(STORY.SWATCH_NAMES.map((n, k) => [n, k]));
   const flat = (geo, name) => { const uv = geo.attributes && geo.attributes.uv, k = SW_[name]; if (!uv) return geo;
-    const u = ((k % 16) * 64 + 32) / 1024, v = 1 - (768 + Math.floor(k / 16) * 64 + 32) / 1024;
-    for (let i = 0; i < uv.count; i++) uv.setXY(i, u, v); uv.needsUpdate = true; return geo; };
+    const x0 = (k % 16) * 64 + 6, y0 = 768 + Math.floor(k / 16) * 64 + 6, span = 52;
+    const wrap01 = (v) => (v >= 0 && v <= 1 ? v : ((v % 1) + 1) % 1);
+    for (let i = 0; i < uv.count; i++) {
+      const lu = wrap01(uv.getX(i)), lv = wrap01(uv.getY(i));
+      uv.setXY(i, (x0 + lu * span) / 1024, 1 - (y0 + (1 - lv) * span) / 1024);
+    }
+    uv.needsUpdate = true; return geo; };
   const kitCell = (geo, x, y, w, h) => { const uv = geo.attributes && geo.attributes.uv; if (!uv) return geo;
     for (let i = 0; i < uv.count; i++) uv.setXY(i, (x + uv.getX(i) * w) / 1024, 1 - (y + (1 - uv.getY(i)) * h) / 1024);
     uv.needsUpdate = true; return geo; };
@@ -739,16 +1049,18 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
   // the bench-end pieces stand clear of the east wall's group, and the dented door's name is printed on its own face:
   // the kit is two draws (the room, the range's back wall).
   let kitProp = false;
-  const kit = (geo, name, x, y, z, parent, shadow = true) => { const m = add(flat(geo, name), kitMat, x, y, z, parent); if (shadow) { m.castShadow = true; m.receiveShadow = true; } if (kitProp) (m.userData || (m.userData = {})).trainingProp = true; return m; };
+  const kit = (geo, name, x, y, z, parent, shadow = true) => { const m = add(flat(geo, name), kitMat, x, y, z, parent); if (shadow) { m.castShadow = true; m.receiveShadow = true; } if (kitProp) (m.userData || (m.userData = {})).trainingProp = true;
+    if (STORY.SWATCH_FX[name]) (m.userData || (m.userData = {})).fx = STORY.SWATCH_FX[name]; return m; };   // CG-7 step 5: what a round knocks off it (world/training-hitfx.js)
   const kbox = (w, h, d, name, x, y, z, parent) => kit(new T.BoxGeometry(w, h, d), name, x, y, z, parent);
   const tiny = (m) => { (m.userData || (m.userData = {})).isDecal = true; m.castShadow = false; return m; };   // pins, tape: not solids
   const paper = (name, w, h, c4, x, y, z, ry = 0, rx = 0, parent) => {
-    const m = add(kitCell(new T.PlaneGeometry(w, h), ...c4), kitMat, x, y, z, parent); m.rotation.set(rx, ry, 0, 'YXZ'); tiny(m); m.receiveShadow = true; if (kitProp) (m.userData || (m.userData = {})).trainingProp = true; parts.push(name); return m; };
+    const m = add(kitCell(new T.PlaneGeometry(w, h), ...c4), kitMat, x, y, z, parent); m.rotation.set(rx, ry, 0, 'YXZ'); tiny(m); m.receiveShadow = true; if (kitProp) (m.userData || (m.userData = {})).trainingProp = true; m.userData.fx = 'paper'; parts.push(name); return m; };
 
   // Beat 1: the twelve came through. The roster pinned right of the DAYS WITHOUT INCIDENT board, and three lockers
   // carrying names from it.
   { const P = STORY.ROSTER_AT, w = 0.3, h = 0.45;
-    paper('story-roster', w, h, [0, 0, 256, 384], P.x, P.y, BZ + 0.003, 0);
+    const rp = paper('story-roster', w, h, [0, 0, 256, 384], P.x, P.y, BZ + 0.003, 0);
+    destructSpecs.push({ id: 'roster', kind: 'paper', meshes: [rp], wallNormal: { x: 0, z: 1 }, flammable: true });
     for (const [dx, dy] of [[-w / 2 + 0.018, h / 2 - 0.012], [w / 2 - 0.018, h / 2 - 0.012]]) tiny(kbox(0.012, 0.012, 0.01, 'pin', P.x + dx, P.y + dy, BZ + 0.008)); }
   for (let i = 0; i < 3; i++) {
     const x = L0 + i * LP, c4 = [0, 400 + 96 * i, 256, 96], sw = 0.18, sh = 0.0675;   // covers the door's printed card
@@ -757,43 +1069,51 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
   }
 
   // Beat 3: the Range Master's lane. His mug and the qualification clipboard at the bench's wall end, the brass bucket
-  // and a push broom leaning on the bench, ear defenders in a tote by the wall, the week's drills on a whiteboard.
-  { const top = 0.86, M = STORY.MUG;
-    kit(G.cyl(0.04, 0.036, 0.095, 14), 'mug', M.x, top + 0.0475, M.z);
-    kit(G.cyl(0.033, 0.033, 0.004, 14), 'coffee', M.x, top + 0.088, M.z);
-    const hd = kit(G.torus(0.024, 0.0065, Math.PI), 'mug', M.x + 0.039, top + 0.05, M.z); hd.rotation.z = -Math.PI / 2;
-    const C = STORY.CLIP;   // the clipboard, flat on the worktop, a card under its clip
-    const board = kbox(0.23, 0.008, 0.31, 'hardboard', C.x, top + 0.004, C.z); board.rotation.y = C.ry;
-    const at = (dz) => [C.x + dz * Math.sin(C.ry), C.z + dz * Math.cos(C.ry)];   // along the board (its top end at +z, away from him)
-    const [px, pz] = at(-0.03), [kx, kz] = at(0.125);
-    paper('story-qual-card', 0.2, 0.15, [256, 0, 256, 192], px, top + 0.0085, pz, C.ry + Math.PI, -Math.PI / 2);   // reads from behind the line
-    const clip = kbox(0.09, 0.012, 0.035, 'clip', kx, top + 0.014, kz); clip.rotation.y = C.ry; }
-  { const B0 = STORY.BROOM, edge = 0.162 - 0.0135, topY = 0.83,   // the handle rests on the worktop's steel lip (z 0.162-0.18)
-      L = 1.35, rise = topY - 0.075, run = Math.sqrt(L * L - rise * rise);
-    kbox(0.45, 0.04, 0.05, 'bristle', B0.x, 0.02, edge - run);
-    kbox(0.47, 0.035, 0.07, 'broomhead', B0.x, 0.0575, edge - run);
-    const hz = edge - run / 2, h = kit(G.cyl(0.0135, 0.0135, L, 8), 'handle', B0.x, 0.075 + rise / 2, hz); h.rotation.x = Math.atan2(run, rise); }
-  { const K = STORY.BUCKET, H0 = 0.27;
-    kit(G.cyl(0.15, 0.12, H0, 16, true), 'pail', K.x, H0 / 2, K.z);
-    kit(G.cyl(0.12, 0.12, 0.012, 16), 'pail', K.x, 0.006, K.z);
-    kit(G.cyl(0.141, 0.141, 0.02, 16), 'brass', K.x, 0.24, K.z);                    // the brass in it, near the brim
-    const bail = kit(G.torus(0.15, 0.004, Math.PI), 'clip', K.x, H0, K.z); bail.rotation.y = 0.6;
+  // and a push broom leaning on the bench, ear defenders in a tray on the worktop, the week's drills on a whiteboard.
+  // CG-7 (Jerry D-226: "these props need higher fidelity"): each one is built by world/training-kitprops.js (rolled rims,
+  // wall thickness, a real clip, bristle tufts and brace, cups and foam), still in the room's one kit draw.
+  const kitGroups = {};   // CG-7 step 2: what can be shot loose (createKitPropRuntime, below)
+  const prop = (id, x, y, z, ry = 0, opts) => {
+    const grp = buildKitProp(T, id, { mk: (geo, sw, px, py, pz, parent, shadow) => kit(geo, sw, px, py, pz, parent, shadow), tiny, opts });
+    grp.position.set(x, y, z); grp.rotation.y = ry; if (root) root.add(grp);
+    if (kitProp) grp.traverse((o) => { if (o.isMesh) o.userData.trainingProp = true; });
+    kitGroups[id] = { group: grp, opts };
+    return grp; };
+  // CH-3 #16 follow-up (Claude 8: "two clean channels on a bare wall still read as a gap"): two ear defenders hung by
+  // their crowns on the rack, one on each rail (the hooks' bars: radius 8.5 mm, 0.012-0.152 m off the wall).
+  let rmIdx = 0;
+  for (const [i, y] of [[5, 1.75], [1, 1.25]]) {
+    const rmMeshes = [];
+    const ed = buildKitProp(T, 'earDefender', { mk: (geo, sw, px, py, pz, parent, shadow) => { const m = kit(geo, sw, px, py, pz, parent, shadow); rmMeshes.push(m); return m; }, tiny });
+    ed.position.set(1.4 + i * 0.3, y + 0.0085, BZ + 0.11); ed.rotation.y = (i === 5 ? 0.05 : -0.04); if (root) root.add(ed);
+    destructSpecs.push({ id: 'rackMuff' + (rmIdx++), kind: 'rackProp', meshes: rmMeshes, wallNormal: { x: 0, z: 1 } });
+  }
+  { const top = 0.86, M = STORY.MUG, C = STORY.CLIP;
+    prop('mug', M.x, top, M.z, -0.5);                                                  // the handle toward his right hand
+    const cb = prop('clipboard', C.x, top, C.z, C.ry);                                   // flat on the worktop, its clip away from him
+    const ud = cb.userData || {}; const card = paper('story-qual-card', 0.2, 0.15, [256, 0, 256, 192], 0, ud.cardY, ud.cardZ, Math.PI, -Math.PI / 2, cb); card.userData.part = 'sheet'; }   // reads from behind the line
+  kitProp = true;   // CG-2 sheet 2: the bench-end pieces ride the room's kit draw (the broom and tote reached into the east wall's group)
+  { // the push broom: its head on the floor on his side, the handle resting on the worktop's steel lip (front-top corner
+    // z 0.162, y 0.86), its end a hand past it. lean: the handle's angle off the floor.
+    const B0 = STORY.BROOM, lean = 0.65, base = 0.114, over = 0.014 / Math.cos(lean);
+    const dc = (0.86 + over - base) / Math.sin(lean), run = dc * Math.cos(lean);
+    prop('pushBroom', B0.x, 0, 0.162 - run, Math.PI, { lean }); }
+  { const K = STORY.BUCKET;
+    prop('brassBucket', K.x, 0, K.z, 0.6);
     const rb = rng(5);
     for (let i = 0; i < 5; i++) { const a = -0.4 - rb() * 2.3, d = 0.22 + rb() * 0.25,   // toward the shooter's side, never under the bench
-       s = kit(G.cyl(0.0055, 0.0055, 0.019, 6), 'brass', K.x + Math.cos(a) * d, 0.0055, K.z + Math.sin(a) * d, undefined, false);
+       s = kit(G.cyl(0.0048, i % 2 ? 0.0048 : 0.0032, i % 2 ? 0.019 : 0.045, 7), 'brass', K.x + Math.cos(a) * d, 0.0048, K.z + Math.sin(a) * d, undefined, false);
       s.rotation.set(Math.PI / 2, 0, rb() * 3); tiny(s); } }
-  { const E = STORY.TOTE, w = 0.36, d = 0.52, h = 0.12, t = 0.012;   // ear defenders in a shallow open tote against the wall
-    kbox(w, t, d, 'tote', E.x, t / 2, E.z);
-    for (const s of [-1, 1]) { kbox(t, h - t, d, 'tote', E.x + s * (w - t) / 2, t + (h - t) / 2, E.z); kbox(w - 2 * t, h - t, t, 'tote', E.x, t + (h - t) / 2, E.z + s * (d - t) / 2); }
-    for (let i = 0; i < 3; i++) {
-      const z = E.z - 0.15 + i * 0.15, y = t + 0.042;   // the cups lie on the tote's floor (the audit found them floating)
-      for (const s of [-1, 1]) { const cup = kit(G.cyl(0.042, 0.042, 0.038, 12), 'earcup', E.x + s * 0.07, y, z); cup.rotation.z = Math.PI / 2; }
-      const band = kit(G.torus(0.07, 0.009, Math.PI), 'earband', E.x, y + 0.01, z); band.rotation.set(0, 0, 0); } }
+  { const E = STORY.TOTE; prop('earTray', E.x, 0.86, E.z, E.ry); }                    // CG-7 (D-230): on the worktop
+  kitProp = false;
   { const Wb = STORY.WHITEBOARD, w = 0.9, h = 0.56;
-    kbox(w + 0.04, h + 0.04, 0.018, 'alu', Wb.x, Wb.y, BZ + 0.009);
+    // CG-7 s2 (CF-23 "one flat sheet: no frame depth, no pen tray, no fixings"): a real frame, corner caps with their
+    // screws, a pen tray (built in world/training-kitprops.js); the markers and eraser in it can be shot out.
+    const wb = buildKitProp(T, 'whiteboard', { mk: (geo, sw, px, py, pz, parent, shadow) => kit(geo, sw, px, py, pz, parent, shadow), tiny, opts: { w, h } });
+    wb.position.set(Wb.x, Wb.y, BZ); if (root) root.add(wb);
     paper('story-whiteboard', w, h, [512, 0, 512, 320], Wb.x, Wb.y, BZ + 0.0205, 0);
-    kbox(0.6, 0.02, 0.05, 'alu', Wb.x, Wb.y - h / 2 - 0.03, BZ + 0.025);                     // marker tray on the frame
-    const mk = kit(G.cyl(0.009, 0.009, 0.13, 8), 'marker', Wb.x + 0.12, Wb.y - h / 2 - 0.011, BZ + 0.03); mk.rotation.z = Math.PI / 2; tiny(mk); }
+    const ud = wb.userData || {};
+    kitProp = true; prop('markers', Wb.x + 0.02, Wb.y + ud.trayY, BZ + ud.trayZ, 0); kitProp = false; }
 
   // Beat 5: the Medic's count. Everybody who "dies" here wakes on that stretcher; she keeps count on the wall, a chart
   // hangs on its foot rail, a blanket lies folded on the old cot, a sharps bin by the cabinet, her mug by the monitor.
@@ -802,22 +1122,159 @@ export function dressTrainingWear(T, { R, B, bedAt, add, box, std, texture, lamp
     { const w = 0.5, h = 0.42, x = bx + M.tallyDX, y = M.tallyY;
       kbox(w + 0.03, h + 0.03, 0.016, 'alu', x, y, wall + 0.008);
       paper('story-revivals', w, h, [512, 320, 320, 256], x, y, wall + 0.0175, 0); }
-    { const x = bx + M.sharpsDX, y = M.sharpsY;                                    // a wall bracket, the bin on it
-      kbox(0.17, 0.03, 0.12, 'clip', x, y - 0.115, wall + 0.06);                  // seated: its top is the bin's floor
-      kbox(0.15, 0.2, 0.1, 'pin', x, y, wall + 0.05);
-      kbox(0.155, 0.03, 0.105, 'sharpslid', x, y + 0.115, wall + 0.0525); }
+    { const x = bx + M.sharpsDX, y0 = M.sharpsY - 0.1;                            // a wall bracket, the bin on it
+      // CG-7 s2 (CF-23 "primitive sharps bin"): built in world/training-kitprops.js; the bin can be shot off its bracket
+      const br = buildKitProp(T, 'sharpsBracket', { mk: (geo, sw, px, py, pz, parent, shadow) => kit(geo, sw, px, py, pz, parent, shadow), tiny });
+      br.position.set(x, y0, wall); if (root) root.add(br);
+      prop('sharpsBin', x, y0, wall + ((br.userData && br.userData.binZ) || 0), 0); }
     { const x = bx + M.mugDX, z = B.minZ + M.mugZ, top = 0.9;                       // on the worktop, in front of the monitor
-      kit(G.cyl(0.04, 0.036, 0.095, 14), 'whitemug', x, top + 0.0475, z);
-      kit(G.cyl(0.033, 0.033, 0.004, 14), 'coffee', x, top + 0.085, z);
-      const hd = kit(G.torus(0.024, 0.0065, Math.PI), 'whitemug', x + 0.039, top + 0.05, z); hd.rotation.z = -Math.PI / 2; }
+      prop('medMug', x, top, z, 0); }   // CG-7 s2: the real mug (white), shootable: it shatters like the range master's
     { const fx = bx + 1.21 * 0.85 + 0.018 + 0.004, y0 = 0.88 + 0.03 - 0.155;       // the chart, hung on the stretcher's foot rail
-      kbox(0.008, 0.31, 0.23, 'hardboard', fx, y0, bz);
-      paper('story-obs-chart', 0.2, 0.15, [256, 192, 256, 192], fx + 0.0055, y0 + 0.04, bz, Math.PI / 2);
-      kbox(0.016, 0.03, 0.09, 'clip', fx + 0.009, 0.88 + 0.015, bz); }
+      const ocBoard = kbox(0.008, 0.31, 0.23, 'hardboard', fx, y0, bz);
+      const ocSheet = paper('story-obs-chart', 0.2, 0.15, [256, 192, 256, 192], fx + 0.0055, y0 + 0.04, bz, Math.PI / 2);
+      const ocClip = kbox(0.016, 0.03, 0.09, 'clip', fx + 0.009, 0.88 + 0.015, bz);
+      destructSpecs.push({ id: 'obsChart', kind: 'obsChart', meshes: [ocBoard, ocSheet, ocClip], extraMeshes: { sheet: [ocSheet] }, wallNormal: { x: 1, z: 0 }, flammable: true }); }
     { const cx = bedAt.x + 3.25, cz = B.minZ + 3.25, cLen = 1.9 - 0.12, off = 0.71, w = 0.34, h = 0.07;   // the cot (above)
       const sag = (x) => { const t = x / cLen; return -0.08 * (1 - 4 * t * t); }, slope = 0.08 * 8 * off / (cLen * cLen);
-      const fold = kbox(w, h, 0.5, 'blanket', cx + off, 0.4725 + 0.05 + sag(off) + h / 2 + 0.005, cz); fold.rotation.z = Math.atan(slope); } }   // +5 mm: its flat bottom rides the curve's ends (audit)
+      const fold = kbox(w, h, 0.5, 'blanket', cx + off, 0.4725 + 0.05 + sag(off) + h / 2 + 0.005, cz); fold.rotation.z = Math.atan(slope);
+      destructSpecs.push({ id: 'cotBlanket', kind: 'blanket', meshes: [fold], flammable: true }); } }   // +5 mm: its flat bottom rides the curve's ends (audit)
   kitProp = false;
 
-  return { parts, decals, dead, flicker, flickerMat: flickMat, update, blockers, door, kickDoor, pushDoor, bumpDoor };
+  // ---------- CG-2 sheet 2: beat 4 (the Containment crew), beat 6 (the Branch's paper), beat 7 (small life). Same kit
+  // material: what hangs on the gate's wall is one more draw (the north wall's cutaway group, so it fades with the
+  // wall); everything else rides the room's and the range back wall's kit draws.
+  const NOTE_C = [[256, 384], [256, 512], [256, 640], [512, 576], [768, 576]];
+  const note = (i, w, x, y, z, ry, rz = 0) => {
+    const m = paper('story-note', w, w / 2, [...NOTE_C[i], 256, 128], x, y, z, ry); m.rotation.z = rz;
+    const dz = Math.cos(ry) * 0.0006, dx = Math.sin(ry) * 0.0006;   // a strip of tape over its top edge
+    const t = paper('story-note-tape', 0.05, 0.016, [256 + 31, 832 + 31, 2, 2], x + dx - Math.sin(rz) * w / 4, y + w / 4 - 0.002, z + dz, ry); t.rotation.z = rz;
+    destructSpecs.push({ id: 'note' + i, kind: 'paper', meshes: [m, t], wallNormal: { x: Math.sin(ry), z: Math.cos(ry) }, flammable: true });
+    return m; };
+  const tube = (pts, r, name, seg) => kit(new T.TubeGeometry(new T.CatmullRomCurve3(pts), seg, r, 8), name, 0, 0, 0);
+  const V3 = (x, y, z) => new T.Vector3(x, y, z), curves = !!(T.Vector3 && T.CatmullRomCurve3 && T.TubeGeometry);   // (stand-in tests have none)
+
+  // Beat 4: the Containment crew. They hose the floor down after every session: a reel on a backboard west of the gate
+  // (the hose wound round its drum in six coils), its stencilled plate over it, the hose run down and across to the
+  // nearer drain, a mop bucket and squeegee in the west corner, three sandbags against the wall east of the gate.
+  { const Rl = STORY.REEL, wz = B.maxZ, x = Rl.x, y = Rl.y;
+    kbox(0.75, 0.46, 0.02, 'pail', x + 0.175, y, wz - 0.01);                                   // backboard, on the tile
+    for (const [dx, dy] of [[-0.17, -0.19], [0.52, -0.19], [-0.17, 0.19], [0.52, 0.19]]) { const b = kit(G.cyl(0.014, 0.014, 0.008, 8), 'alu', x + dx, y + dy, wz - 0.024); b.rotation.x = Math.PI / 2; }
+    const sp = kit(G.cyl(0.03, 0.03, 0.3, 10), 'pail', x, y, wz - 0.17); sp.rotation.x = Math.PI / 2;           // spindle, board to the crank
+    { const f = kit(G.cyl(0.27, 0.27, 0.012, 28), 'reel', x, y, wz - 0.07); f.rotation.x = Math.PI / 2; }   // the back flange, solid
+    // CH-3 #17 ("flat hose reel": a solid front disc hid the hose): the front flange is open, a rolled rim on four spokes
+    // and a hub, so the six coils show through it as on a real wall reel
+    { const zf = wz - 0.29;
+      if (T.TorusGeometry) kit(new T.TorusGeometry(0.262, 0.009, 6, 36), 'reel', x, y, zf);
+      else kbox(0.54, 0.54, 0.018, 'reel', x, y, zf);
+      for (let k = 0; k < 4; k++) { const a = Math.PI / 4 + k * Math.PI / 2, sp = kbox(0.022, 0.21, 0.01, 'reel', x + Math.cos(a) * 0.15, y + Math.sin(a) * 0.15, zf); sp.rotation.z = a - Math.PI / 2; }
+      const hub = kit(G.cyl(0.05, 0.05, 0.016, 16), 'reel', x, y, zf); hub.rotation.x = Math.PI / 2; }
+    kit(G.cyl(0.18, 0.18, 0.2, 20), 'reel', x, y, wz - 0.18).rotation.x = Math.PI / 2;      // the drum under the hose
+    for (let k = 0; k < 6; k++) kit(T.TorusGeometry ? new T.TorusGeometry(0.2, 0.0173, 5, 26) : new T.BoxGeometry(0.43, 0.43, 0.035), 'hose', x, y, wz - 0.076 - 0.0173 - 0.0346 * k);
+    kbox(0.03, 0.14, 0.012, 'pail', x, y + 0.07, wz - 0.302);                                  // crank arm
+    kit(G.cyl(0.012, 0.012, 0.09, 8), 'handle', x, y + 0.13, wz - 0.353).rotation.x = Math.PI / 2;
+    // the hose: off the drum's bottom, down the wall, across the floor to drain 1; split where the north group ends
+    const D0 = STORY.DRAINS[0];
+    if (curves) {
+    const path = new T.CatmullRomCurve3([V3(x + 0.03, y - 0.226, wz - 0.19), V3(x + 0.06, y - 0.52, wz - 0.2), V3(x + 0.08, 0.2, wz - 0.25),
+      V3(x + 0.05, 0.019, wz - 0.55), V3(x - 0.08, 0.019, wz - 1.05), V3(x - 0.3, 0.019, wz - 1.55), V3(D0[0], 0.019, D0[1] + 0.8),
+      V3(D0[0] - 0.1, 0.019, D0[1] + 0.45), V3(D0[0] + 0.18, 0.019, D0[1] + 0.22)]);
+    const pts = path.getPoints(96).map((p) => V3(p.x, Math.max(0.019, p.y), p.z));
+    const cut = pts.findIndex((p) => p.z < wz - 1.45);
+    tube(pts.slice(0, cut + 1), 0.019, 'hose', 48);
+    kitProp = true; tube(pts.slice(cut), 0.019, 'hose', 40);
+    const e = pts[pts.length - 1], q = pts[pts.length - 4], dl = Math.hypot(e.x - q.x, e.z - q.z) || 1, ux = (e.x - q.x) / dl, uz = (e.z - q.z) / dl;
+    const nz = kit(G.cyl(0.024, 0.016, 0.14, 10), 'brass', e.x + ux * 0.07, 0.024, e.z + uz * 0.07);   // the nozzle, on the floor
+    nz.rotation.set(Math.PI / 2, Math.atan2(ux, uz), 0, 'YXZ');
+    kitProp = false; }
+    // the plate over the reel, and the note on the backboard's free end
+    kbox(1.2, 0.16, 0.02, 'plate', x, 1.62, wz - 0.01);
+    paper('story-stencil', 1.18, 0.1475, [512, 704, 512, 64], x, 1.62, wz - 0.0205, Math.PI);
+    note(4, 0.15, x + 0.44, y - 0.08, wz - 0.0206, Math.PI, 0.04); }
+  kitProp = true;
+  for (const [dx, dz] of STORY.DRAINS) {                                                        // two cast floor drains
+    kbox(0.32, 0.006, 0.32, 'drain', dx, 0.003, dz);
+    for (let k = 0; k < 5; k++) tiny(kbox(0.25, 0.002, 0.022, 'earband', dx, 0.007, dz + (k - 2) * 0.05)); }
+  { // CG-7 (D-226): the mop bucket on its casters, the wringer at the +x end, grey water; the mop soaking in it, its
+    // clamp just over the water, the handle leaning on the west wall (world/training-kitprops.js).
+    const M = STORY.MOP, x = M.x, z = M.z;
+    prop('mopBucket', x, 0, z, 0);
+    if (curves) {
+      const clamp = V3(x - 0.07, 0.06 + 0.215, z), top = V3(B.minX + 0.028, 1.3, z + 0.06), up = top.clone().sub(clamp);
+      const mg = prop('mop', clamp.x, clamp.y, clamp.z, 0, { len: up.length() - 0.06, strands: 0.19 });
+      mg.quaternion.setFromUnitVectors(V3(0, 1, 0), up.normalize()); } }
+  { // the floor squeegee against the west wall: its blade along z on the floor, the handle's end on the tile
+    const lean = 1.28, run = 1.4 * Math.cos(lean);
+    prop('squeegee', B.minX + 0.028 + run, 0, STORY.SQUEEGEE_Z, Math.PI / 2, { lean }); }
+  { // the sandbags (Director 19:58Z: fat stacked bags, pillow-shaped, a crease at the tied end, two under one): a
+    // subdivided box pushed into a filled sack; its floor is flat (it sits), its top bulges, the seams thin out.
+    const S = STORY.SANDBAGS, L = 0.6, Wd = 0.34, H = 0.15;
+    const sack = (sag) => { const g = new T.BoxGeometry(1, 1, 1, 12, 3, 8), P = g.attributes && g.attributes.position;
+      if (!P || !P.getX) return g;
+      for (let i = 0; i < P.count; i++) {
+        const x = P.getX(i), y = P.getY(i), z = P.getZ(i), t = y + 0.5;
+        const fx = 1 - Math.pow(2 * x, 4) * 0.55, fz = 1 - Math.pow(2 * z, 4) * 0.7, crease = 1 - 0.3 * Math.exp(-Math.pow((x - 0.36) / 0.045, 2));
+        const top = H * (0.3 + 0.7 * fx * fz) * crease, bot = -sag * fx * fz, fat = Math.sin(Math.PI * t);
+        P.setXYZ(i, x * L * (1 + 0.04 * fat) * (x > 0.4 ? 0.97 : 1), bot + t * (top - bot), z * Wd * (1 + 0.12 * fat) * (1 - 0.25 * Math.max(0, 2 * x - 0.8)));
+      }
+      P.needsUpdate = true; if (g.computeVertexNormals) g.computeVertexNormals(); return g; };
+    const bag = (x, y, z, ry, sag = 0) => { const m = kit(sack(sag), 'sandbag', x, y, z); m.rotation.y = ry; return m; };
+    const sb0 = bag(S.x - 0.3, 0, S.z, 0.03), sb1 = bag(S.x + 0.3, 0, S.z - 0.01, Math.PI - 0.04);
+    const sb2 = bag(S.x + 0.01, 0.159, S.z + 0.005, 0.06, 0.015);
+    destructSpecs.push({ id: 'sandbag0', kind: 'sandbag', meshes: [sb0], flammable: true }, { id: 'sandbag1', kind: 'sandbag', meshes: [sb1], flammable: true }, { id: 'sandbag2', kind: 'sandbag', meshes: [sb2], supports: ['sandbag0', 'sandbag1'], flammable: true }); }   // rests on both crests (squashed under 4 mm, like a real sack)
+  kitProp = false;
+
+  // Beat 6: the Branch's paper. Typed slips, taped where the joke lands; nothing about the dead.
+  { const Mo = STORY.MONITOR, e = Mo.wall === 'east' ? -1 : 1, was = kitProp; kitProp = true;   // (rides with the monitor: not in a wall's cutaway group)
+    note(0, 0.16, (e < 0 ? R.maxX : R.minX) + e * 0.2105, Mo.y - 0.135, Mo.z, e * Math.PI / 2, -0.03); kitProp = was; }   // the cracked monitor (CG-7: moved), under the tape's X
+  note(1, 0.17, -29.64, 1.45, B.maxZ - 0.02 - 0.56 - 0.0008, Math.PI, 0.03);                  // the gate's west pilaster face
+  kitProp = true;
+  note(2, 0.18, 8 - 0.0012, 1.45, -5.55, -Math.PI / 2, -0.03);                                // on the wall by the supply kiosk
+  note(3, 0.18, bedAt.x + STORY.MEDIC.tallyDX + 0.42, 1.52, B.minZ + 0.08 + 0.0925 + 0.0012, 0, 0.05);   // by the REVIVALS board
+
+  // Beat 7: small life. The calendar, the radio at the bench's east end (silent), a glove left on the bench.
+  kitProp = false;
+  { const C = STORY.CAL; const cp = paper('story-calendar', 0.21, 0.28, [832, 320, 192, 256], C.x, C.y, BZ + 0.003, 0);
+    destructSpecs.push({ id: 'calendar', kind: 'paper', meshes: [cp], wallNormal: { x: 0, z: 1 }, flammable: true });
+    tiny(kbox(0.012, 0.012, 0.01, 'pin', C.x, C.y + 0.128, BZ + 0.008)); }
+  kitProp = true;
+  { const Rd = STORY.RADIO, g2 = new T.Group(); g2.position.set(Rd.x, 0.86, Rd.z); g2.rotation.y = Rd.ry; if (root) root.add(g2);
+    const rdMeshes = [
+      kbox(0.26, 0.15, 0.09, 'radio', 0, 0.075, 0, g2),
+      tiny(kbox(0.13, 0.1, 0.002, 'earband', -0.05, 0.07, -0.046, g2)),                         // speaker grille (it faces him)
+      tiny(kbox(0.07, 0.028, 0.002, 'alu', 0.075, 0.1, -0.046, g2))                            // the dial window
+    ];
+    for (const kx of [0.05, 0.1]) { const k = kit(G.cyl(0.012, 0.012, 0.014, 10), 'earband', kx, 0.04, -0.052, g2); k.rotation.x = Math.PI / 2; rdMeshes.push(k); }
+    for (const sx of [-0.1, 0.1]) rdMeshes.push(kbox(0.012, 0.04, 0.012, 'earband', sx, 0.17, 0, g2));
+    rdMeshes.push(kbox(0.212, 0.012, 0.012, 'earband', 0, 0.196, 0, g2));
+    const an = kit(G.cyl(0.004, 0.003, 0.32, 6), 'alu', 0.11 + 0.16 * Math.sin(0.35), 0.15 + 0.16 * Math.cos(0.35), 0.02, g2); an.rotation.z = -0.35;
+    rdMeshes.push(an);
+    destructSpecs.push({ id: 'radio', kind: 'electronics', meshes: rdMeshes, extraMeshes: { antenna: [an] } }); }
+  { const Gl = STORY.GLOVE; prop('glove', Gl.x, 0.86, Gl.z, Gl.ry); }   // CH-3 #18: built in world/training-kitprops.js (was five boxes)
+  kitProp = false;
+
+  // CG-7 step 3 (D-237 #11): the other five too: the broom, mop and squeegee snap (handle in two, the head off), the ear
+  // tray's defenders fly out and it cracks, the mop bucket is knocked over and never breaks (the mop goes with it).
+  // CG-7 step 2 (D-226: shot and destroyed). First three: the mug shatters, the clipboard's sheets fly and it breaks on
+  // the third round, the brass bucket is knocked over (its cases spill) and dents, never breaks. Their still shapes stay in
+  // the kit draw; world/training-kitprops.js swaps a hit one for its loose copy.
+  let kitProps = null;
+  // CG-7 s2: the sharps bin falls past the infirmary cabinet's worktop (world/training-props.js: 1.78 m wide at bedAt.x
+  // + 2.72, 0.65 deep from the panels + 0.225, its top at 0.90 m): a knocked bin lands on it, never inside it.
+  const MEDMAT = { minX: bedAt.x + 0.82 - 3.6, maxX: bedAt.x + 0.82 + 3.6, minZ: B.minZ + 0.08 + 2.0775 - 1.92, maxZ: B.minZ + 0.08 + 2.0775 + 1.92, y: 0.02 };
+  const MEDTOP = { minX: bedAt.x + 2.72 - 0.89, maxX: bedAt.x + 2.72 + 0.89, minZ: B.minZ + 0.08 + 0.225, maxZ: B.minZ + 0.08 + 0.875, y: 0.9 };
+  const MEDKIT = { minX: bedAt.x + 2.22 - 0.24, maxX: bedAt.x + 2.22 + 0.24, minZ: B.minZ + 0.08 + 0.375, maxZ: B.minZ + 0.08 + 0.725, y: 1.14 };   // the kit case on it
+  const MEDMON = { minX: bedAt.x + 3.2 - 0.29, maxX: bedAt.x + 3.2 + 0.29, minZ: B.minZ + 0.08 + 0.35, maxZ: B.minZ + 0.08 + 0.59, y: 1.39 };   // and the monitor (the medic's mug's shards stay out of it)
+  if (root && T.Box3 && T.Matrix4 && T.Matrix3 && T.BufferGeometry && T.BufferAttribute && T.Quaternion && T.Vector3 && kitGroups.mug) {
+    const build = (id, opts) => {
+      const g2 = buildKitProp(T, id, { mk: (geo, sw, px, py, pz, parent, shadow = true) => { const m = new T.Mesh(flat(geo, sw), kitMat); m.position.set(px, py, pz); m.castShadow = shadow; parent.add(m); return m; }, tiny, opts });
+      if (id === 'clipboard') { const ud = g2.userData; const m = new T.Mesh(kitCell(new T.PlaneGeometry(0.2, 0.15), 256, 0, 256, 192), kitMat); m.position.set(0, ud.cardY, ud.cardZ); m.rotation.set(-Math.PI / 2, Math.PI, 0, 'YXZ'); m.userData.part = 'sheet'; g2.add(m); }
+      return g2; };
+    kitProps = createKitPropRuntime(T, { root, mat: kitMat, origin: root.position, build,
+      props: ['mug', 'clipboard', 'brassBucket', 'pushBroom', 'earTray', 'mopBucket', 'mop', 'squeegee', 'glove', 'markers', 'sharpsBin', 'medMug'].filter((id) => kitGroups[id])   // CG-7 step 3: all eight (+ the glove, CH-3 #18; + the board's markers, the sharps bin, the medic's mug, CG-7 s2)
+        .map((id) => ({ id, ...kitGroups[id], metal: id === 'brassBucket', rides: id === 'mop' ? 'mopBucket' : undefined })),
+      surfaces: [{ minX: R.minX, maxX: R.maxX, minZ: 0.18, maxZ: 0.82, y: 0.86 }, MEDMAT, MEDTOP, MEDKIT, MEDMON],   // the bench's worktop (world/training-firing-line.js); the infirmary cabinet's (CG-7 s2)
+      blocks: [{ minX: R.minX, maxX: R.maxX, minZ: 0.18, maxZ: 0.82, maxY: 0.79 }, { ...MEDTOP, maxY: 0.86, sides: true }, { ...MEDKIT, maxY: 1.12, sides: true }, { ...MEDMON, maxY: 1.37, sides: true }],   // under the worktop (kick panel), CG-7 step 3; the cabinet
+      rooms: [R, B] }); }
+
+  return { parts, decals, dead, flicker, flickerMat: flickMat, update, blockers, door, kickDoor, pushDoor, bumpDoor, kitProps, worldUvMats, destructSpecs };
 }

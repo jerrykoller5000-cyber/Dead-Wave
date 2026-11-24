@@ -1,6 +1,8 @@
 // Props and pose overlays for the ranged zombie abilities. Attach after mesh
 // compaction/skinning; the animated props must remain separate rigid objects.
 // No game state, damage, lights, randomness, or scene ownership lives here.
+import { poseColossusPitch, swingColossusSack } from './colossus-pitch.js';
+import { COLOSSUS_ROCK_RADIUS } from './zombie-abilities.js';   // D-244 (Claude 5)
 const caches = new WeakMap();
 const clamp = x => Math.max(0, Math.min(1, Number.isFinite(x) ? x : 0));
 const ease = x => { const t = clamp(x); return t * t * (3 - 2 * t); };
@@ -29,7 +31,11 @@ function coloredGeometry(THREE, entries) {
     if (entry.matrix) source.applyMatrix4(entry.matrix);
     const geo = source.index ? source.toNonIndexed() : source;
     xyz.push(...geo.attributes.position.array); normals.push(...geo.attributes.normal.array);
-    for (let i = 0; i < geo.attributes.position.count; i++) colors.push(entry.color.r, entry.color.g, entry.color.b);
+    const shade = geo.attributes.shade, tint = geo.attributes.tint;   // D-244: optional per-vertex darkening / tint (sack)
+    for (let i = 0; i < geo.attributes.position.count; i++) {
+      const k = shade ? shade.getX(i) : 1;
+      colors.push(entry.color.r * k * (tint ? tint.getX(i) : 1), entry.color.g * k * (tint ? tint.getY(i) : 1), entry.color.b * k * (tint ? tint.getZ(i) : 1));
+    }
     if (geo !== source) geo.dispose(); source.dispose();
   }
   const geo = new THREE.BufferGeometry();
@@ -99,6 +105,175 @@ function flameGeometry(THREE) {
   return geo;
 }
 
+// D-244: the colossus's rock sack, in torso units before the sculpture scale. +x is his right, -z his back.
+// The sack and its tether swing from the knot fixed to the waist belt.
+const SACK = Object.freeze({ center: [.315, -.115, -.310], radii: [.269, .265, .221], tilt: [-.22, .35, -.14] });
+// Shared by the held and the thrown rock: unit-radius lumpy rock, scaled to radius x sculpture scale.
+export const COLOSSUS_ROCK = Object.freeze({
+  radius: COLOSSUS_ROCK_RADIUS, // ~.89 m across beside the live palm at ~.44 m
+  palm: [0, -.65, .05]        // rock centre in the right elbow's frame, before the sculpture scale (the wrist is -.354)
+});
+
+function sackGeometry(THREE) {
+  const entries = [], Vec = THREE.Vector3;
+  function inside(geometry) {
+    const normal = geometry.attributes.normal;
+    for (let i = 0; i < normal.count; i++) {
+      normal.setXYZ(i, -normal.getX(i), -normal.getY(i), -normal.getZ(i));
+    }
+    const index = geometry.index.array;
+    for (let i = 0; i < index.length; i += 3) {
+      const b = index[i + 1];
+      index[i + 1] = index[i + 2];
+      index[i + 2] = b;
+    }
+    return geometry;
+  }
+  const burlap = new THREE.Color(0x7d6747), burlapDark = new THREE.Color(0x5c4a32), mouth = new THREE.Color(0x231b13);
+  const rope = new THREE.Color(0x8e7a55);
+  const [rx, ry, rz] = SACK.radii;
+  const opening = .70, lipR = COLOSSUS_ROCK_RADIUS + .029, neckBaseR = COLOSSUS_ROCK_RADIUS + .014;
+  const mouthStart = Math.acos(opening);
+  const beltKnot = new Vec(.215, -.012, -.125);
+  const place = new THREE.Matrix4().compose(new Vec(...SACK.center),
+    new THREE.Quaternion().setFromEuler(new THREE.Euler(...SACK.tilt)), new Vec(1, 1, 1));
+  // Body: a sphere that sags full at the bottom, gathers to a neck at the top and bulges where rocks press out.
+  const body = new THREE.SphereGeometry(1, 20, 14, 0, Math.PI * 2, mouthStart, Math.PI - mouthStart);
+  const p = body.attributes.position, v = new Vec(), shade = [], tint = [];
+  // Two sewn-on patches (grey sacking, brown hide) with a dark stitched edge; no marks or logos.
+  const patches = [[new Vec(.50, -.08, -.86), .22, new THREE.Color(0x58544a), .3], [new Vec(.93, -.10, .35), .20, new THREE.Color(0x6e4b33), -.5]];
+  // Toward his waist from the sack centre, in the sack's own frame.
+  const toBody = new Vec(-.72, 0, .69).normalize()
+    .applyQuaternion(new THREE.Quaternion().setFromEuler(new THREE.Euler(...SACK.tilt)).invert());
+  const lumps = [[.75, -.35, -.45], [.15, -.55, -.80], [.85, .10, .30], [-.25, -.70, -.45], [.45, .25, -.80],
+    [.40, -.85, .30], [-.10, .05, -.95], [.95, -.45, -.10], [.20, -.20, .95], [.60, -.05, -.75], [-.35, -.35, -.85],
+    [.70, -.70, -.20], [.05, -.95, -.25], [.90, .30, -.30]].map(d => new Vec(...d).normalize());
+  const shape = (u, out) => {
+    // Each rock inside pushes a rounded, slightly squared lump through the cloth; the cloth between them sinks.
+    let k = .97;
+    for (const d of lumps) { const t = Math.max(0, (u.dot(d) - .83) / .17); k += .20 * Math.sqrt(t) * (1 - .3 * t); }
+    const y = u.y, angle = Math.atan2(u.z, u.x);
+    const gather = y > 0 ? 1 - .52 * y * y * y : 1 + .16 * -y;          // neck pulled in, belly sags full
+    const folds = 1 + (y > .3 ? .13 * (y - .3) * Math.sin(angle * 9 + y * 4) : .018 * Math.sin(angle * 5 + y * 7));
+    out.set(u.x * rx * k * gather * folds, (y < 0 ? y * (.88 + .1 * (k - .97)) : y) * ry, u.z * rz * k * gather * folds);
+    const rimBlend = Math.max(0, (y - .46) / (opening - .46));
+    const d = out.dot(toBody);
+    if (d > .095) out.addScaledVector(toBody, -(d - .095) * .8 * (1 - rimBlend));
+    // Blend the fabric body onto the open collar at its seam.
+    out.x += (Math.cos(angle) * neckBaseR - out.x) * rimBlend;
+    out.z += (Math.sin(angle) * neckBaseR - out.z) * rimBlend;
+    return { k, folds };
+  };
+  for (let i = 0; i < p.count; i++) {
+    const u = new Vec().fromBufferAttribute(p, i), y = u.y;
+    const { k, folds } = shape(u, v);
+    p.setXYZ(i, v.x, v.y, v.z);
+    // Creases between the rocks read darker and the tops of the lumps catch the light; the bottom is dirty
+    // (darker, greyer) where it drags and sits in the mud.
+    const dirt = y < -.05 ? Math.min(1, (-.05 - y) / .8) : 0;
+    shade.push(Math.min(1.1, .58 + 2.6 * (k - .97)) * (1 - .55 * dirt) * (y > .3 ? folds : 1));
+    tint.push(1 - .04 * dirt, 1 - .10 * dirt, 1 - .18 * dirt);
+  }
+  // Two sewn-on patches (grey sacking, brown hide) with a dark stitched edge, lying on the cloth. No marks or logos.
+  for (const [dir, size, color, twist] of patches) {
+    const n = dir.clone().normalize(), t1 = new Vec(0, 1, 0).cross(n).normalize(), t2 = n.clone().cross(t1);
+    t1.applyAxisAngle(n, twist); t2.applyAxisAngle(n, twist);
+    for (const [grow, lift, c] of [[1.16, .003, new THREE.Color(0x2e241a)], [1, .0065, color]]) {
+      const G = 6, xyz = [], idx = [], q = new Vec(), w = new Vec();
+      for (let i = 0; i <= G; i++) for (let j = 0; j <= G; j++) {
+        const a = (i / G - .5) * 2, b = (j / G - .5) * 2;
+        const ragged = 1 + .06 * Math.sin(i * 2.1 + j * 1.3 + twist * 5);   // hand-cut, uneven edges
+        q.copy(n).addScaledVector(t1, a * size * grow * ragged).addScaledVector(t2, b * size * grow * .8 * ragged).normalize();
+        shape(q, w); w.addScaledVector(q, lift); xyz.push(w.x, w.y, w.z);
+        if (i < G && j < G) { const o = i * (G + 1) + j; idx.push(o, o + 1, o + G + 1, o + 1, o + G + 2, o + G + 1); }
+      }
+      const patch = new THREE.BufferGeometry(); patch.setAttribute('position', new THREE.Float32BufferAttribute(xyz, 3));
+      patch.setIndex(idx); patch.computeVertexNormals();
+      // Make sure it faces out (the grid winding depends on the tangent frame).
+      const nz = patch.attributes.normal; if (nz.getX(24) * n.x + nz.getY(24) * n.y + nz.getZ(24) * n.z < 0) { patch.index.array.reverse(); patch.computeVertexNormals(); }
+      entries.push({ geometry: patch, color: c, matrix: place });
+    }
+  }
+  body.setAttribute('shade', new THREE.Float32BufferAttribute(shade, 1));
+  body.setAttribute('tint', new THREE.Float32BufferAttribute(tint, 3));
+  body.computeVertexNormals();
+  entries.push({ geometry: body, color: burlap, matrix: place });
+  const lining = inside(body.clone().scale(.976, .996, .976));
+  entries.push({ geometry: lining, color: mouth, matrix: place });
+  // The open collar is wide enough for the same stone the hand will carry.
+  const neckY = ry * opening, lipY = ry + .035;
+  const neck = new THREE.CylinderGeometry(lipR, neckBaseR, lipY - neckY, 20, 2, true), np = neck.attributes.position;
+  for (let i = 0; i < np.count; i++) if (np.getY(i) > (lipY - neckY) * .4) {
+    // The cloth above the cinch ends in loose, uneven flaps that fold out.
+    const a = Math.atan2(np.getZ(i), np.getX(i)), j = Math.round((a + Math.PI) / (Math.PI * 2) * 20);
+    const out = 1.03 + .07 * (j % 2) + .026 * Math.sin(j * 2.7);
+    np.setXYZ(i, np.getX(i) * out, np.getY(i) + .018 * ((j * 7) % 3) - .01, np.getZ(i) * out);
+  }
+  neck.translate(0, (neckY + lipY) / 2, 0); neck.computeVertexNormals();
+  entries.push({ geometry: neck, color: burlapDark, matrix: place });
+  const inner = inside(neck.clone().scale(.97, 1, .97));
+  entries.push({ geometry: inner, color: burlapDark, matrix: place });
+  const hem = new THREE.CatmullRomCurve3(
+    Array.from({ length: 20 }, (_, i) => new Vec().fromBufferAttribute(np, i)), true
+  );
+  entries.push({ geometry: new THREE.TubeGeometry(hem, 30, .0105, 5, true), color: burlap, matrix: place });
+  // Rope cinch below the lip.
+  const tie = new THREE.TorusGeometry(lipR * .86, .013, 4, 14); tie.rotateX(Math.PI / 2); tie.translate(0, neckY + .008, 0);
+  entries.push({ geometry: tie, color: rope, matrix: place });
+  // A short rope from the belt knot up to the cinch (it swings with the sack).
+  const cinch = new Vec(-lipR * .7, neckY + .008, lipR * .5).applyMatrix4(place);
+  const strap = new THREE.CatmullRomCurve3([
+    beltKnot, new Vec(.235, (cinch.y - .012) * .5 + .01, (cinch.z - .125) * .5), cinch
+  ]);
+  entries.push({ geometry: new THREE.TubeGeometry(strap, 6, .014, 4, false), color: rope });
+  const knot = new THREE.IcosahedronGeometry(.03, 0); knot.translate(...beltKnot.toArray());
+  entries.push({ geometry: knot, color: rope });
+  const pivot = beltKnot;
+  const shift = new THREE.Matrix4().makeTranslation(-pivot.x, -pivot.y, -pivot.z);
+  // At rest the cloth above the cinch folds shut. The rock uses the full open
+  // aperture in the pickup pose. The belt knot and tether stay put.
+  const folded = entries.map(entry => {
+    if (!entry.matrix) return entry;
+    const geometry = entry.geometry.clone();
+    const position = geometry.attributes.position;
+    for (let i = 0; i < position.count; i++) {
+      const y = position.getY(i);
+      const fold = ease((y - neckY + .04) / (lipY - neckY + .04));
+      position.setXYZ(i, position.getX(i) * (1 - .92 * fold) + .04 * fold,
+        y - .09 * fold, position.getZ(i) * (1 - .45 * fold) - .055 * fold);
+    }
+    geometry.computeVertexNormals();
+    return { ...entry, geometry };
+  });
+  for (const entry of new Set([...entries, ...folded])) {
+    entry.matrix = shift.clone().multiply(entry.matrix || new THREE.Matrix4());
+  }
+  const sack = coloredGeometry(THREE, entries);
+  const closed = coloredGeometry(THREE, folded);
+  sack.morphAttributes.position = [closed.attributes.position];
+  sack.morphAttributes.normal = [closed.attributes.normal];
+  sack.computeBoundingSphere();
+  closed.dispose();
+  for (const entry of new Set([...entries, ...folded])) entry.geometry.dispose();
+  sack.userData.pivot = pivot.toArray();
+  const mouthPosition = new Vec(0, lipY + .01, 0).applyMatrix4(place).sub(pivot);
+  const mouthAxis = new Vec(0, 1, 0).transformDirection(place);
+  sack.userData.mouth = mouthPosition.toArray();
+  sack.userData.rockEntry = mouthPosition.clone().addScaledVector(mouthAxis, -.98 * COLOSSUS_ROCK_RADIUS).toArray();
+  sack.userData.rockExit = mouthPosition.clone().addScaledVector(mouthAxis, 1.13 * COLOSSUS_ROCK_RADIUS).toArray();
+  // Rope belt round the waist, under the chest plate: static on the torso.
+  // Its radius follows the waist (cloud ray measure every 30 deg: .227 at the sides, .148 front and back) plus the rope.
+  const waist = [.227, .192, .148, .148], ring = [];
+  for (let i = 0; i < 36; i++) {
+    const a = i / 36 * Math.PI * 2, q = Math.abs(Math.atan2(Math.sin(a), Math.abs(Math.cos(a)))) / (Math.PI / 6);
+    const j = Math.min(2, Math.floor(q)), t = q - j, r = mix(waist[j], waist[j + 1], ease(t)) + .021;
+    ring.push(new Vec(Math.cos(a) * r, -.012 + .006 * Math.sin(a * 2), Math.sin(a) * r));
+  }
+  const tube = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(ring, true), 40, .019, 5, true);
+  const belt = coloredGeometry(THREE, [{ geometry: tube, color: rope }]); tube.dispose();
+  return { sack, belt };
+}
+
 function resources(THREE) {
   if (caches.has(THREE)) return caches.get(THREE);
   // Built-in material works in both the game's WebGPU renderer and its WebGL
@@ -114,51 +289,28 @@ function resources(THREE) {
   for (let i = 0; i < position.count; i++) {
     const x = position.getX(i), y = position.getY(i), z = position.getZ(i);
     // Coordinate-based deformation keeps shared vertices together without RNG.
-    const rough = 1 + .09 * Math.sin(x * 17 + y * 31 + z * 23) + .045 * Math.cos(x * 37 - z * 29);
-    position.setXYZ(i, x * rough, y * rough, z * rough);
+    // D-244: rough and lumpy, a little flat, like a field rock (lower-frequency lumps, then a fine chip).
+    const rough = 1 + .13 * Math.sin(x * 5.3 + y * 7.1 + z * 4.3) + .08 * Math.cos(x * 9.7 - z * 8.1 + y * 3) + .04 * Math.sin(x * 23 + y * 19 - z * 17);
+    position.setXYZ(i, x * rough * 1.04, y * rough * .84, z * rough * .96);
   }
+  rockGeo.center();
+  let extent = 0;
+  for (let i = 0; i < position.count; i++) extent = Math.max(extent, Math.hypot(position.getX(i), position.getY(i), position.getZ(i)));
+  rockGeo.scale(1 / extent, 1 / extent, 1 / extent);
   rockGeo.computeVertexNormals();
   rockGeo.computeBoundingSphere();
-  const rackPieces = [], strapPieces = [];
-  // Seat the stone carrier against the rounded upper back. The old rear plane
-  // left a visible gap at colossus scale; front strap anchors stay on the chest.
-  const rearInset = .12;
-  const rod = (into, a, b, width) => {
-    const av = new THREE.Vector3(...a), bv = new THREE.Vector3(...b);
-    const geo = into === strapPieces
-      ? new THREE.BoxGeometry(width * 3, av.distanceTo(bv), width * .65)
-      : new THREE.CylinderGeometry(width, width, av.distanceTo(bv), 5, 1);
-    geo.applyQuaternion(new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0, 1, 0), bv.clone().sub(av).normalize()));
-    geo.translate(...av.add(bv).multiplyScalar(.5).toArray()); into.push(geo);
-  };
-  for (const side of [-1, 1]) {
-    rod(rackPieces, [side * .48, .08, -.43 + rearInset], [side * .48, .88, -.43 + rearInset], .025);
-    rod(rackPieces, [side * .48, .08, -.43 + rearInset], [side * .48, .08, -.81 + rearInset], .025);
-    // Broad straps run over the shoulders, out to the pack and down its face.
-    const points = [[side * .28, .30, .23], [side * .30, .55, .12], [side * .31, .63, -.30 + rearInset], [side * .43, .66, -.84 + rearInset], [side * .43, .12, -.86 + rearInset]];
-    for (let i = 1; i < points.length; i++) rod(strapPieces, points[i - 1], points[i], .032);
-  }
-  for (const y of [.10, .43, .80]) rod(rackPieces, [-.48, y, -.43 + rearInset], [.48, y, -.43 + rearInset], .026);
-  for (const y of [.18, .51]) rod(strapPieces, [-.44, y, -.84 + rearInset], [.44, y, -.84 + rearInset], .026);
+  // D-244 (Jerry): the back rack and its three big stones are gone. He carries one heavy burlap sack on his right
+  // hip (the throwing side; the left arm has the shield), tied to a rope belt, and pulls rocks about twice the size
+  // of his fist out of it. Sack, belt and the rocks in its mouth are one static draw; the held rock is a second
+  // draw only while he throws. Units are the torso's, before the sculpture scale.
   const flameGeo = flameGeometry(THREE);
   flameGeo.boundingSphere.radius += .85; // includes rising embers and curling tips
-  const rackGeo = mergedGeometry(THREE, rackPieces), strapGeo = mergedGeometry(THREE, strapPieces);
+  const { sack: sackGeo, belt: beltGeo } = sackGeometry(THREE);
   const rockMat = new THREE.MeshStandardMaterial({ color: 0x77756c, roughness: 1, flatShading: true });
-  const rackMat = new THREE.MeshStandardMaterial({ color: 0x302b25, roughness: .82, metalness: .5 });
-  const strapMat = new THREE.MeshStandardMaterial({ color: 0x34261b, roughness: .97 });
-  const stonePositions = [[-.28, .30, -.60 + rearInset], [0, .71, -.60 + rearInset], [.28, .30, -.60 + rearInset]];
-  const entries = [{ geometry: rackGeo, color: rackMat.color }, { geometry: strapGeo, color: strapMat.color }];
-  for (let i = 0; i < stonePositions.length; i++) {
-    const matrix = new THREE.Matrix4().compose(new THREE.Vector3(...stonePositions[i]),
-      new THREE.Quaternion().setFromEuler(new THREE.Euler(.3 + i * .43, i * .61, i * .35)),
-      new THREE.Vector3(.29, .32, .28));
-    entries.push({ geometry: rockGeo, color: rockMat.color, matrix });
-  }
   const result = {
     flameGeo, flameMat, flameRest: flameGeo.attributes.position.array.slice(), flameTime: NaN,
-    rockGeo, rockMat, rackGeo, strapGeo, rackMat, strapMat, stonePositions,
-    idlePackGeo: coloredGeometry(THREE, entries),
-    idlePackMat: new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: .95, metalness: .08, flatShading: true })
+    rockGeo, rockMat, sackGeo, beltGeo,
+    sackMat: new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: .96, metalness: 0 })
   };
   caches.set(THREE, result);
   return result;
@@ -218,13 +370,6 @@ function castArm(rig, subject) {
   return usableArm(rig, subject, 0) ? 0 : -1;
 }
 
-function batchPack(rig, fullStock, stage) {
-  if (!rig.idlePack) return;
-  const batched = fullStock && !['windup', 'release', 'recovery'].includes(stage) && !rig.heldRock.visible;
-  rig.idlePack.visible = batched;
-  rig.packDetails.visible = !batched;
-}
-
 /** Attach once. scale is the sculpture's existing coordinate scale, not g.scale. */
 export function attachZombieAbilityVisuals(THREE, g, typeKey, scale = 1) {
   if (!g?.userData || !['demon', 'colossus'].includes(typeKey)) return null;
@@ -236,7 +381,7 @@ export function attachZombieAbilityVisuals(THREE, g, typeKey, scale = 1) {
   const arms = [g.userData.armLG, g.userData.armRG];
   const elbows = arms.map((a, i) => a?.userData?.elbowG || g.userData[i ? 'elbowRG' : 'elbowLG']);
   const rig = { THREE, g, torso, typeKey, scale: s, cache, arms, elbows, flameAnchors: [],
-    backRocks: [], stock: [], heldRock: null, lastSlot: 0, lastStage: 'idle',
+    heldRock: null, lastSlot: 0, lastStage: 'idle',
     v: Array.from({ length: 10 }, () => new THREE.Vector3()),
     q: Array.from({ length: 5 }, () => new THREE.Quaternion()),
     baselines: Array.from({ length: 4 }, () => new THREE.Quaternion()) };
@@ -257,22 +402,24 @@ export function attachZombieAbilityVisuals(THREE, g, typeKey, scale = 1) {
     batch.instanceMatrix.setUsage?.(THREE.DynamicDrawUsage); g.add(batch);
     rig.flameBatch = batch; rig.flameInverse = new THREE.Matrix4(); rig.flameMatrix = new THREE.Matrix4();
   } else {
-    const pack = new THREE.Group(); pack.name = 'colossus-stone-carrier'; pack.scale.setScalar(s); torso.add(pack);
-    const details = new THREE.Group(); details.name = 'colossus-carrier-moving-parts'; details.visible = false; pack.add(details);
-    details.add(new THREE.Mesh(cache.rackGeo, cache.rackMat), new THREE.Mesh(cache.strapGeo, cache.strapMat));
-    const idlePack = new THREE.Mesh(cache.idlePackGeo, cache.idlePackMat); idlePack.name = 'colossus-carrier-idle-batch';
-    idlePack.castShadow = true; idlePack.receiveShadow = true; pack.add(idlePack);
-    const positions = cache.stonePositions;
-    for (let i = 0; i < positions.length; i++) {
-      const rock = new THREE.Mesh(cache.rockGeo, cache.rockMat); rock.name = 'colossus-back-stone-' + i;
-      rock.position.set(...positions[i]); rock.rotation.set(.3 + i * .43, i * .61, i * .35);
-      rock.scale.set(.29, .32, .28); rock.castShadow = true; rock.receiveShadow = true; details.add(rock);
-      rig.backRocks.push(rock); rig.stock.push({ consumedAt: -Infinity });
-    }
-    const held = new THREE.Mesh(cache.rockGeo, cache.rockMat); held.name = 'colossus-held-stone';
-    held.scale.set(.29 * s, .32 * s, .28 * s); held.castShadow = true; held.receiveShadow = true;
-    held.visible = false; torso.add(held); rig.heldRock = held;
-    rig.pack = pack; rig.packDetails = details; rig.idlePack = idlePack;
+    // D-244: one static sack draw on the hip; the held rock is its own small draw, shown only in the hand.
+    // Sack + belt are two draws. The sack swings around its torso-fixed belt knot.
+    const belt = new THREE.Mesh(cache.beltGeo, cache.sackMat); belt.name = 'colossus-rope-belt';
+    belt.scale.setScalar(s); belt.castShadow = true; belt.receiveShadow = true; torso.add(belt);
+    const sack = new THREE.Group(); sack.name = 'colossus-sack';
+    sack.position.fromArray(cache.sackGeo.userData.pivot).multiplyScalar(s); sack.scale.setScalar(s);
+    sack.userData.mouth = new THREE.Vector3().fromArray(cache.sackGeo.userData.mouth);
+    sack.userData.rockEntry = new THREE.Vector3().fromArray(cache.sackGeo.userData.rockEntry);
+    sack.userData.rockExit = new THREE.Vector3().fromArray(cache.sackGeo.userData.rockExit);
+    const sackMesh = new THREE.Mesh(cache.sackGeo, cache.sackMat); sackMesh.name = 'colossus-rock-sack';
+    sackMesh.castShadow = true; sackMesh.receiveShadow = true; sack.add(sackMesh); torso.add(sack);
+    sackMesh.morphTargetInfluences[0] = 1;
+    sack.userData.closure = sackMesh.morphTargetInfluences;
+    const held = new THREE.Mesh(cache.rockGeo, cache.rockMat); held.name = 'colossus-held-rock';
+    held.scale.setScalar(COLOSSUS_ROCK.radius * s); held.castShadow = true; held.receiveShadow = true;
+    held.visible = false; torso.add(held); rig.heldRock = held; rig.sack = sack; rig.belt = belt;
+    rig.rockRadius = COLOSSUS_ROCK.radius * s;                                   // torso-parent units (metres in g)
+    rig.rockPalm = new THREE.Vector3(...COLOSSUS_ROCK.palm).multiplyScalar(s);  // right elbow frame
   }
   g.userData.abilityVisuals = rig;
   // The Inspector can render the build before its first animation tick. Seed
@@ -290,12 +437,15 @@ export function resetZombieAbilityVisuals(g) {
   const rig = rigOf(g); if (!rig) return;
   for (const anchor of rig.flameAnchors) { anchor.visible = true; anchor.scale.setScalar(1); }
   if (rig.flameBatch) rig.flameBatch.visible = true;
-  for (let i = 0; i < rig.backRocks.length; i++) {
-    rig.backRocks[i].visible = true; rig.backRocks[i].scale.set(.29, .32, .28);
-    rig.stock[i].consumedAt = -Infinity;
+  if (rig.sack) {
+    rig.sack.visible = true;
+    rig.sack.quaternion.identity();
+    rig.sack.userData.closure[0] = 1;
   }
+  if (rig.belt) rig.belt.visible = true;
   if (rig.heldRock) rig.heldRock.visible = false;
-  batchPack(rig, true, 'idle');
+  if (rig.pitch) { rig.pitch.active = false; rig.pitch.lastStage = 'idle'; }   // D-244: a pooled body starts with no pitch layer on
+  rig.sackSwing = null;                                                          // ...and its sack at rest
   rig.lastStage = 'idle'; rig.lastSlot = 0;
 }
 
@@ -322,22 +472,6 @@ function armTo(rig, i, target, weight) {
   local.x /= arm.scale.x; local.y /= arm.scale.y; local.z /= arm.scale.z;
   rig.q[2].setFromUnitVectors(down, local.normalize());
   elbow.quaternion.copy(rig.baselines[i * 2 + 1]).slerp(rig.q[2], weight);
-}
-
-function handsAt(rig, center, weight) {
-  const target = rig.v[5];
-  for (let i = 0; i < 2; i++) {
-    target.copy(center); target.x += (i ? 1 : -1) * .23 * rig.scale;
-    armTo(rig, i, target, weight);
-  }
-  rig.g.updateMatrixWorld(true);
-  // The carried stone follows the real palms, not a guessed independent path.
-  const middle = rig.v[6].set(0, 0, 0), palm = rig.v[7]; let count = 0;
-  for (const elbow of rig.elbows) {
-    if (!elbow) continue;
-    palm.set(0, -.354 * rig.scale, .02 * rig.scale); elbow.localToWorld(palm); middle.add(palm); count++;
-  }
-  if (count) { middle.multiplyScalar(1 / count); rig.torso.worldToLocal(middle); rig.heldRock.position.copy(middle); }
 }
 
 /**
@@ -392,51 +526,43 @@ export function updateZombieAbilityVisuals(z, time, state = {}) {
     rig.flameBatch.visible = active > 0;
     rig.flameBatch.instanceMatrix.needsUpdate = true;
   } else {
-    const slot = Number.isInteger(state.slot) ? ((state.slot % 3) + 3) % 3 : rig.lastSlot;
-    if (!alive) { rig.heldRock.visible = false; return; }
-    let fullStock = true;
-    for (let i = 0; i < rig.backRocks.length; i++) {
-      const fill = rig.stock[i].consumedAt === -Infinity ? 1 : ease((now - rig.stock[i].consumedAt - 6) / 2);
-      const rock = rig.backRocks[i]; rock.visible = fill > .001;
-      rock.scale.set(.29 * fill, .32 * fill, .28 * fill);
-      if (fill < 1) fullStock = false;
-    }
-    if (state.kind === 'stone' && stage === 'windup') {
-      rig.lastSlot = slot;
-      const back = rig.backRocks[slot].position, center = rig.v[8];
-      const grab = ease(progress / .30);
-      if (progress < .30) center.set(back.x, back.y, back.z).multiplyScalar(rig.scale);
-      else if (progress < .72) {
-        const t = ease((progress - .30) / .42);
-        center.set(mix(back.x, 0, t), mix(back.y, 1.08, t), mix(back.z, -.08, t)).multiplyScalar(rig.scale);
-      } else {
-        const t = ease((progress - .72) / .28);
-        center.set(0, mix(1.08, .99, t), mix(-.08, .43, t)).multiplyScalar(rig.scale);
-      }
-      handsAt(rig, center, grab);
-      rig.heldRock.rotation.set(-.2 + progress * .7, slot * .61, slot * .35);
-      const carrying = progress >= .30;
-      rig.heldRock.visible = carrying;
-      if (carrying) { rig.stock[slot].consumedAt = now; rig.backRocks[slot].visible = false; fullStock = false; }
-    } else if (state.kind === 'stone' && ['release', 'recovery'].includes(stage)) {
-      const p = clamp(state.progress);
-      const follow = ease(p / .28), settle = 1 - ease((p - .28) / .72);
-      const center = rig.v[8].set(0, mix(.99, .63, follow), mix(.43, .76, follow)).multiplyScalar(rig.scale);
-      handsAt(rig, center, settle);
+    if (!alive) {
       rig.heldRock.visible = false;
-      if (state.release || rig.lastStage === 'windup' || stage === 'release') { rig.stock[slot].consumedAt = now; fullStock = false; }
-    } else rig.heldRock.visible = false;
-    batchPack(rig, fullStock, stage);
+      rig.sack.userData.closure[0] = 1;
+      if (rig.pitch) rig.pitch.active = false;
+      rig.lastStage = stage;
+      return;
+    }
+    // D-244 (Claude 5, CE-26): the whole-body baseball pitch lives in game/colossus-pitch.js (the reach into the sack,
+    // the set, the knee-up tell, the stride and stomp, hips then shoulders, over the top, the follow-through and the
+    // step back), a layer over the walk; the rock rides the throwing palm (rig.rockPalm) from the sack to the release.
+    if (!poseColossusPitch(rig, z, state, now)) swingColossusSack(rig, z, now);
   }
   rig.lastStage = stage;
 }
 
+/** D-244: the one rock shape, for the thrown stone (runtime) to match the held one. Unit radius: scale it. */
+export function getZombieAbilityRock(THREE) {
+  const cache = resources(THREE);
+  return { geometry: cache.rockGeo, material: cache.rockMat };
+}
+
+/** D-244: the held/thrown rock's radius in the body's parent units (metres at mesh scale 1), or 0. */
+export function getZombieAbilityRockRadius(z) {
+  const rig = rigOf(z);
+  return rig?.typeKey === 'colossus' ? rig.rockRadius : 0;
+}
+
 /** Write an actual animated world-space launch position to the caller's vector. */
-export function getZombieAbilityLaunch(z, kind, out) {
+export function getZombieAbilityLaunch(z, kind, out, rotation) {
   const rig = rigOf(z); if (!rig || !out) return false;
   if (z?.alive === false) return false;
   rig.g.updateMatrixWorld(true);
-  if (kind === 'stone' && rig.heldRock) { rig.heldRock.getWorldPosition(out); return true; }
+  if (kind === 'stone' && rig.heldRock) {
+    rig.heldRock.getWorldPosition(out);
+    if (rotation) rig.heldRock.getWorldQuaternion(rotation);
+    return true;
+  }
   if (kind === 'fireball' && rig.flameAnchors.length) {
     // Pose and launch use the same surviving limb after dismemberment.
     const side = castArm(rig, z);

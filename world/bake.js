@@ -77,7 +77,15 @@ export function bakeStatic(THREE, group, { skip = () => false, enter = () => fal
 //     `hold` is a Set of materials something changes at runtime (never folded). Named objects are left as they are,
 //     with what is under them, unless `enter` says so. Shared by every fold: one material per side.
 const FOLD_MATS = new Map();   // side -> the node material
-function foldMaterial(THREE, TSL, side) {
+const FOLD_WEAPON_MATS = new WeakMap();   // weaponPBR -> Map(side -> node material)
+function foldMaterial(THREE, TSL, side, weaponPBR = null) {
+  if (weaponPBR && typeof weaponPBR.createMaterial === 'function') {
+    let bySide = FOLD_WEAPON_MATS.get(weaponPBR);
+    if (!bySide) { bySide = new Map(); FOLD_WEAPON_MATS.set(weaponPBR, bySide); }
+    let wm = bySide.get(side);
+    if (!wm) { wm = weaponPBR.createMaterial(side); bySide.set(side, wm); }
+    return wm;
+  }
   let m = FOLD_MATS.get(side);
   if (m) return m;
   m = new THREE.MeshStandardNodeMaterial({ vertexColors: true, side });
@@ -89,26 +97,29 @@ function foldMaterial(THREE, TSL, side) {
   return m;
 }
 const PLAIN_MAPS = ['map', 'normalMap', 'bumpMap', 'aoMap', 'lightMap', 'emissiveMap', 'roughnessMap', 'metalnessMap', 'alphaMap', 'displacementMap', 'envMap'];
-function plainMaterial(m, hold) {
+const WEAPON_BASE_SKIP_MAPS = ['map', 'lightMap', 'emissiveMap', 'alphaMap', 'displacementMap', 'envMap'];
+function plainMaterial(m, hold, allowWeaponBase = false) {
   if (!m || hold.has(m) || m.type !== 'MeshStandardMaterial' || m.transparent || m.opacity !== 1 || m.alphaTest > 0 || m.wireframe || m.flatShading) return false;
   if (m.vertexColors || m.polygonOffset || m.depthWrite === false || m.depthTest === false || m.visible === false) return false;
-  for (const k of PLAIN_MAPS) if (m[k]) return false;
+  const checkMaps = (allowWeaponBase && m.userData && m.userData.weaponBasePBR) ? WEAPON_BASE_SKIP_MAPS : PLAIN_MAPS;
+  for (const k of checkMaps) if (m[k]) return false;
   if (m.emissive && (m.emissive.r || m.emissive.g || m.emissive.b) && m.emissiveIntensity > 0) return false;   // a glow: lamps change theirs
   if (Object.prototype.hasOwnProperty.call(m, 'onBeforeCompile')) return false;   // someone customised its shader
   return true;
 }
-export function foldStatic(THREE, TSL, group, { skip = () => false, enter = () => false, hold = new Set() } = {}) {
+export function foldStatic(THREE, TSL, group, { skip = () => false, enter = () => false, hold = new Set(), weaponPBR = null, uvScale = 1 } = {}) {
   if (!THREE.MeshStandardNodeMaterial || !TSL || !TSL.attribute) return { folded: 0, removed: 0 };
   group.updateMatrixWorld(true);
   const invRoot = new THREE.Matrix4().copy(group.matrixWorld).invert();
   const buckets = new Map();   // key -> [{ mesh, rel }]
+  const allowWeaponBase = !!weaponPBR;
   const walk = (o, blocked) => {
     // (a hidden group's meshes are someone's to show later: a hidden thing and all under it stay as they are)
     const stop = blocked || !o.visible || skip(o) || (!!o.name && o !== group && !enter(o));
     if (o.isMesh && !stop && !o.isInstancedMesh && !o.isSkinnedMesh && !Array.isArray(o.material) && o.geometry
       && o.geometry.attributes && o.geometry.attributes.position && o.geometry.attributes.normal && !o.geometry.attributes.color
       && !o.morphTargetInfluences && !(o.geometry.morphAttributes && Object.keys(o.geometry.morphAttributes).length)
-      && plainMaterial(o.material, hold)) {
+      && plainMaterial(o.material, hold, allowWeaponBase)) {
       const key = o.material.side + '|' + !!o.castShadow + '|' + !!o.receiveShadow;
       let list = buckets.get(key); if (!list) { list = []; buckets.set(key, list); }
       list.push({ mesh: o, rel: new THREE.Matrix4().multiplyMatrices(invRoot, o.matrixWorld) });
@@ -118,11 +129,13 @@ export function foldStatic(THREE, TSL, group, { skip = () => false, enter = () =
   for (const c of group.children) walk(c, false);
   let folded = 0, removed = 0;
   const v = new THREE.Vector3(), n = new THREE.Vector3(), nm = new THREE.Matrix3();
+  const invTile = (uvScale || 1) / 0.42;
   for (const list of buckets.values()) {
     if (list.length < 2) continue;
     let total = 0;
     for (const { mesh } of list) { const g = mesh.geometry; total += g.index ? g.index.count : g.attributes.position.count; }
     const pos = new Float32Array(total * 3), nrm = new Float32Array(total * 3), col = new Float32Array(total * 3), rmv = new Float32Array(total * 2);
+    const uv = weaponPBR ? new Float32Array(total * 2) : null;
     let at = 0;
     for (const { mesh, rel: M } of list) {
       const g = mesh.geometry, P = g.attributes.position, N = g.attributes.normal, idx = g.index, mat = mesh.material;
@@ -136,6 +149,12 @@ export function foldStatic(THREE, TSL, group, { skip = () => false, enter = () =
         pos[j * 3] = v.x; pos[j * 3 + 1] = v.y; pos[j * 3 + 2] = v.z;
         n.fromBufferAttribute(N, i).applyMatrix3(nm).normalize();
         nrm[j * 3] = n.x; nrm[j * 3 + 1] = n.y; nrm[j * 3 + 2] = n.z;
+        if (uv) {
+          const ax = Math.abs(n.x), ay = Math.abs(n.y), az = Math.abs(n.z);
+          if (ax >= ay && ax >= az) { uv[j * 2] = v.z * invTile; uv[j * 2 + 1] = v.y * invTile; }
+          else if (ay >= az) { uv[j * 2] = v.x * invTile; uv[j * 2 + 1] = v.z * invTile; }
+          else { uv[j * 2] = v.x * invTile; uv[j * 2 + 1] = v.y * invTile; }
+        }
         col[j * 3] = cr; col[j * 3 + 1] = cg; col[j * 3 + 2] = cb;
         rmv[j * 2] = r; rmv[j * 2 + 1] = me;
       }
@@ -144,11 +163,12 @@ export function foldStatic(THREE, TSL, group, { skip = () => false, enter = () =
     const geo = new THREE.BufferGeometry();
     geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
     geo.setAttribute('normal', new THREE.BufferAttribute(nrm, 3));
+    if (uv) geo.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
     geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
     geo.setAttribute('foldRM', new THREE.BufferAttribute(rmv, 2));
     geo.computeBoundingSphere(); geo.computeBoundingBox();
     const first = list[0].mesh;
-    const out = new THREE.Mesh(geo, foldMaterial(THREE, TSL, first.material.side));
+    const out = new THREE.Mesh(geo, foldMaterial(THREE, TSL, first.material.side, weaponPBR));
     out.name = '';
     out.castShadow = !!first.castShadow; out.receiveShadow = !!first.receiveShadow;
     out.userData.folded = list.length;

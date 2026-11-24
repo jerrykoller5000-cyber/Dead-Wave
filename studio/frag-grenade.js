@@ -5,28 +5,19 @@
 // Built at body radius 1 inside a scaled group, so the caller's origin (the body's centre) and pivot are the old ones.
 // Parts are separate, named meshes (body, fuse, spoon, pin, ring) so a pin pull or spoon fly can move them; three
 // materials shared by every grenade built with the same THREE.
+import { applyWeaponPBR, projectWeaponUVs } from './weapon-textures.js';
+
 const MATS = new WeakMap();
 function mats(THREE) {
   let m = MATS.get(THREE);
   if (!m) {
-    const size = 64, grainPixels = new Uint8Array(size * size * 4);
-    let seed = 0x6f28d;
-    for (let i = 0; i < grainPixels.length; i += 4) {
-      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
-      const value = 214 + (seed >>> 27);
-      grainPixels[i] = value; grainPixels[i + 1] = value; grainPixels[i + 2] = value; grainPixels[i + 3] = 255;
-    }
-    const stipple = new THREE.DataTexture(grainPixels, size, size);
-    stipple.name = 'field enamel stipple';
-    stipple.wrapS = stipple.wrapT = THREE.RepeatWrapping;
-    stipple.repeat.set(4, 2);
-    stipple.magFilter = THREE.LinearFilter; stipple.minFilter = THREE.LinearMipmapLinearFilter;
-    stipple.generateMipmaps = true; stipple.needsUpdate = true;
-    m = {
-      body: new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.84, roughnessMap: stipple, metalness: 0.06 }),
-      metal: new THREE.MeshStandardMaterial({ color: 0x92958c, roughness: 0.56, metalness: 0.58 }),
-      spoon: new THREE.MeshStandardMaterial({ color: 0x79817b, roughness: 0.56, metalness: 0.67 })
-    };
+    const body = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, roughness: 0.84, metalness: 0.06 });
+    const metal = new THREE.MeshStandardMaterial({ color: 0x92958c, roughness: 0.56, metalness: 0.58 });
+    const spoon = new THREE.MeshStandardMaterial({ color: 0x79817b, roughness: 0.56, metalness: 0.67 });
+    applyWeaponPBR(THREE, body, 'enamel', { useMap: false, normalScale: 0.34, aoIntensity: 0.65 });
+    applyWeaponPBR(THREE, metal, 'machinedSteel', { useMap: true, useMetalMap: true });
+    applyWeaponPBR(THREE, spoon, 'machinedSteel', { useMap: true, useMetalMap: true });
+    m = { body, metal, spoon };
     MATS.set(THREE, m);
   }
   return m;
@@ -98,6 +89,7 @@ export function makeFragGrenade({ THREE, r = 0.05, tall = FRAG.TALL }) {
   const spoonGeo = new THREE.BufferGeometry();
   spoonGeo.setAttribute('position', new THREE.Float32BufferAttribute(sp, 3)); spoonGeo.setIndex(idx); spoonGeo.computeVertexNormals();
   const spoon = new THREE.Mesh(spoonGeo, M.spoon); spoon.name = 'spoon'; g.add(spoon);
+  projectWeaponUVs(spoon, { tileMeters: 2.2 });
 
   // Safety pin through the striker block (along z), the pull ring on its -z end, and the safety clip over the spoon.
   const pin = new THREE.Mesh(new THREE.CylinderGeometry(0.028, 0.028, 0.5, 6), M.metal); pin.name = 'pin';

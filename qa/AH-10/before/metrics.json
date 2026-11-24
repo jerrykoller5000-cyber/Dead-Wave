@@ -1,0 +1,29 @@
+{
+  "tag": "before",
+  "backend": "WebGPU",
+  "loadSec": 47.73,
+  "pageErrors": 0,
+  "pageErrorList": [],
+  "hqDrawCount": 116,
+  "hqTexturedDraws": 41,
+  "kioskDrawCount": 0,
+  "memTextures": 232,
+  "perf": {
+    "south": {
+      "name": "south_facade_wide",
+      "frames": 120,
+      "meanMs": 20.1,
+      "meanFps": 49.8,
+      "medianMs": 16.7,
+      "p99Ms": 33.4
+    },
+    "roof": {
+      "name": "roof_deck_overview",
+      "frames": 120,
+      "meanMs": 18.87,
+      "meanFps": 53,
+      "medianMs": 16.7,
+      "p99Ms": 33.5
+    }
+  }
+}

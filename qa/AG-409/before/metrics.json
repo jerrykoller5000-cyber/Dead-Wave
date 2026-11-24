@@ -1,0 +1,164 @@
+{
+  "tag": "before",
+  "timestamp": "2026-11-24T01:30:52.542Z",
+  "backend": "WebGPU",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 43.67,
+  "pageErrors": [],
+  "perf": {
+    "frames": 150,
+    "meanMs": 35.55,
+    "meanFps": 28.1,
+    "medianMs": 33.4,
+    "p99Ms": 50.3,
+    "worstMs": 66.9,
+    "hitches": 20,
+    "callsPerFrame": 15.1,
+    "tris": 843915,
+    "lateCompiles": 0
+  },
+  "shots": [
+    {
+      "id": "01-sky-day-clouds",
+      "cap": "Daytime Sky, Sun Halo & Clouds",
+      "file": "qa/AG-409/before/01-sky-day-clouds.png",
+      "bytes": 1065067,
+      "info": {
+        "fogFar": 640
+      }
+    },
+    {
+      "id": "02-sky-dusk-lake",
+      "cap": "Golden Dusk · Lake Reflection & Sun Path",
+      "file": "qa/AG-409/before/02-sky-dusk-lake.png",
+      "bytes": 585910,
+      "info": {
+        "fogFar": 258
+      }
+    },
+    {
+      "id": "03-sky-night-stars-moon",
+      "cap": "Midnight Sky · Stars & Moon Disc",
+      "file": "qa/AG-409/before/03-sky-night-stars-moon.png",
+      "bytes": 363348,
+      "info": {
+        "moonDir": [
+          -0.11,
+          0.95,
+          -0.27
+        ]
+      }
+    },
+    {
+      "id": "04-sky-blood-moon-lake",
+      "cap": "Blood Moon Night · Lake & Clouds",
+      "file": "qa/AG-409/before/04-sky-blood-moon-lake.png",
+      "bytes": 213621,
+      "info": {
+        "fogFar": 65
+      }
+    },
+    {
+      "id": "05-storm-day-rain",
+      "cap": "Daytime Rainstorm · Overcast, Streaks & Puddles",
+      "file": "qa/AG-409/before/05-storm-day-rain.png",
+      "bytes": 818199,
+      "info": {
+        "fogFar": 85,
+        "puddles": 4
+      }
+    },
+    {
+      "id": "06-storm-night-rain",
+      "cap": "Nighttime Rainstorm · Dark Storm Fog & Streaks",
+      "file": "qa/AG-409/before/06-storm-night-rain.png",
+      "bytes": 832090,
+      "info": {
+        "fogNear": 9,
+        "fogFar": 85
+      }
+    },
+    {
+      "id": "07-storm-lightning",
+      "cap": "Thunderstorm · Live Lightning Bolt & Sky Flash",
+      "file": "qa/AG-409/before/07-storm-lightning.png",
+      "bytes": 393148,
+      "info": {
+        "boltVisible": false
+      }
+    },
+    {
+      "id": "08-fog-night-lake",
+      "cap": "Fog Night · Creeping 30m Lake Mist",
+      "file": "qa/AG-409/before/08-fog-night-lake.png",
+      "bytes": 623317,
+      "info": {
+        "fogNear": 6,
+        "fogFar": 79.9
+      }
+    },
+    {
+      "id": "09-wind-gale-leaves",
+      "cap": "Wind Gale · Tumbling Leaves & Shoreline",
+      "file": "qa/AG-409/before/09-wind-gale-leaves.png",
+      "bytes": 1645941,
+      "info": {
+        "liveGaleLeaves": 87
+      }
+    },
+    {
+      "id": "10-water-river-rapids",
+      "cap": "River Rapids · Current, Foam & Water Ripples",
+      "file": "qa/AG-409/before/10-water-river-rapids.png",
+      "bytes": 1596504,
+      "info": {
+        "riverAt": [
+          -68,
+          -70
+        ]
+      }
+    },
+    {
+      "id": "11-pit-vortex-night",
+      "cap": "Lake Pit Vortex · Rising Bubbles at Night",
+      "file": "qa/AG-409/before/11-pit-vortex-night.png",
+      "bytes": 415475,
+      "info": {
+        "pitBubbles": {
+          "on": true,
+          "n": 22,
+          "visible": 16,
+          "popping": 0,
+          "maxY": -3.39
+        }
+      }
+    },
+    {
+      "id": "12-fire-campfire-scorch",
+      "cap": "Campfire, Ground Fire, Scorch Marks & Smoke",
+      "file": "qa/AG-409/before/12-fire-campfire-scorch.png",
+      "bytes": 1083480,
+      "info": {
+        "campfireLit": true
+      }
+    },
+    {
+      "id": "13-fire-napalm-rain",
+      "cap": "Napalm Pool & Fire Hit by Rain Steam",
+      "file": "qa/AG-409/before/13-fire-napalm-rain.png",
+      "bytes": 1426694,
+      "info": {
+        "groundFires": true
+      }
+    },
+    {
+      "id": "14-night-fireflies-bank",
+      "cap": "Night Riverbank · Bioluminescent Fireflies",
+      "file": "qa/AG-409/before/14-night-fireflies-bank.png",
+      "bytes": 592600,
+      "info": {
+        "motes": 6
+      }
+    }
+  ]
+}

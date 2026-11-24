@@ -1,0 +1,18 @@
+﻿AG-404 native WebGPU re-run of GP-20283 on exact CJ-10 casings v2 copy review/CJ-10/index.casings-v2.html (md5 8f49f5df) vs live index.html (22afb368), 1600x900 RTX 5080, 0 page errors.
+
+Results (same GP-20283 cameras + ray contact scan vs marine body/hands):
+- Minigun third-match: contacts 5 (Mesh, live-sleeve, marine-flexible-shirt) -> 0; same-frame case0-to-case1 port delta 0.482 m -> 0.0028 m (same port).
+- Minigun third-clear: contacts 4 (Mesh) -> 0; case0-to-case1 port delta 0.4848 m -> 0.0101 m.
+- Minigun 1 s burst (62 ticks, 16 cases, 1008 samples): 0 contacts.
+- Minigun aim-up (+12 m @ 30 m): contacts 1 -> 0; same-frame port delta 0.434 m -> 0.0038 m.
+- Minigun aim-down (-9 m @ 30 m): contacts 5 (Mesh, rig-skin, marine-fitted-helmet-cover) -> 0; same-frame port delta 0.5056 m -> 0.0084 m.
+- All other 6 guns (pistol, uzi, m4, ak, sniper, shotgun): 0 contacts in third-match and third-clear; first-person pistol/ak/minigun clean.
+
+Visual check (looked at sheets): in minigun-third-clear.jpg, live throws upward/forward across the arm; v2 pours cleanly down-right beside the boot with zero hand/body clipping.
+
+Sheets & receipt:
+- qa/AG-404/cj10-v2/sheets/minigun-third-clear.jpg
+- qa/AG-404/cj10-v2/sheets/minigun-third-match.jpg
+- qa/AG-404/cj10-v2/sheets/all7-v2-third-match.jpg
+- qa/AG-404/cj10-v2/sheets/first-person.jpg (plus per-gun {pistol,uzi,m4,ak,sniper,shotgun}-third-{match,clear}.jpg and {sniper,shotgun}-ejection.jpg)
+- qa/AG-404/cj10-v2/summary.json

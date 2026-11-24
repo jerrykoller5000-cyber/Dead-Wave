@@ -78,13 +78,14 @@
     T.closeCIF();
     T.openWheel('weapon'); keys = T.getWheelState().keys; T.closeWheelDbg();
     ok(!!want && keys.includes(want) && keys.length === 5, 'the gun taken from the shelf is on the wheel (' + want + ': ' + keys.join(',') + ')');
-    // --- the HQ hatch's rack: since GP-125 (Jerry, 2026-10-02) every owned firearm, stored or carried, real copies;
-    //     the chainsaw is melee and stays off it.
+    // --- the HQ hatch's rack: since GP-125 (Jerry, 2026-10-02) every owned firearm, real copies; the chainsaw is melee
+    //     and stays off it. Since D-235 (Jerry, 21 Nov, CB-372) a gun he carries is not on it: its own spot stays empty.
     A.refreshRack();
     const rack = A.rack() || [], storedKinds = A.stored();
     const carried = keys.filter((k) => !k.startsWith('empty') && k !== 'chainsaw');
     ok(storedKinds.length > 0 && storedKinds.filter((k) => k !== 'chainsaw').every((k) => rack.includes(k)), 'the HQ rack holds the stored guns (' + rack.join(',') + ')');
-    ok(carried.length > 0 && carried.every((k) => rack.includes(k)) && !rack.includes('chainsaw'), 'and the ones he carries too, never the chainsaw (' + carried.join(',') + ')');
+    const onHim = carried.filter((k) => !storedKinds.includes(k)), spots = A.spots ? A.spots() : [];
+    ok(onHim.length > 0 && onHim.every((k) => !rack.includes(k) && spots.some((s) => s.kind === k && !s.shown)) && !rack.includes('chainsaw'), 'the ones he carries are not on it, their spots left empty; never the chainsaw (D-235: ' + onHim.join(',') + ')');
     // --- unarmed is the hub
     T.openWheel('weapon');
     const cx = innerWidth / 2, cy = innerHeight / 2;

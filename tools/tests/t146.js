@@ -35,12 +35,26 @@
     // The parts are baked into one mesh per material, so read the vertices, not the mesh positions.
     const bill = (grp) => {
       const a = meshes(grp); m.updateMatrixWorld(true);
-      const v = a[0].position.clone(); let zMin = 9, zMax = -9;
-      for (const o of a) { const P = o.geometry.attributes.position; for (let i = 0; i < P.count; i++) { v.set(P.getX(i), P.getY(i), P.getZ(i)).applyMatrix4(o.matrixWorld); zMin = Math.min(zMin, v.z); zMax = Math.max(zMax, v.z); } }
+      const v = a[0].position.clone(); let zMin = 9, zMax = -9, yMin = 9, yMax = -9;
+      for (const o of a) { const P = o.geometry.attributes.position; for (let i = 0; i < P.count; i++) { v.set(P.getX(i), P.getY(i), P.getZ(i)).applyMatrix4(o.matrixWorld); zMin = Math.min(zMin, v.z); zMax = Math.max(zMax, v.z); yMin = Math.min(yMin, v.y); yMax = Math.max(yMax, v.y); } }
+      return { zMin, zMax, yMin, yMax };
+    };
+    // CC-368 (Director OK 22 Nov, pick a, --review): measured from his brow, not from his middle (the 0.15 m bar was the old
+    // head's bill tip; a smaller head sits nearer his middle with the same 8 cm bill): the bill stands > 4 cm out in front
+    // of the head's front at the bill's height, and the backwards bill > 4 cm behind the back of his head (the live head:
+    // 5.6 cm and 7.5 cm, measured in Claude 3's cloud, so 6 cm would have failed the live head too).
+    const brow = (yLo, yHi) => {
+      const skip = new Set(); for (const g of [...Object.values(d.hats), ...Object.values(d.eyes)]) g.traverse((o) => skip.add(o));
+      const v = new m.position.constructor(); let zMin = 9, zMax = -9; m.updateMatrixWorld(true);
+      m.userData.headG.traverse((o) => { if (!o.isMesh || skip.has(o) || !shown(o)) return; const P = o.geometry.attributes.position;
+        for (let i = 0; i < P.count; i++) { v.set(P.getX(i), P.getY(i), P.getZ(i)).applyMatrix4(o.matrixWorld); if (v.y >= yLo && v.y <= yHi) { zMin = Math.min(zMin, v.z); zMax = Math.max(zMax, v.z); } } });
       return { zMin, zMax };
     };
-    const fwd = bill(d.hats.ballcap), bck = bill(d.hats.ballcapBack);
-    ok(fwd.zMax > 0.15 && bck.zMin < -0.15, 'the ballcap bill forwards, and backwards behind (' + fwd.zMax.toFixed(2) + ', ' + bck.zMin.toFixed(2) + ')');
+    T.dressMarine(m, w({ cap: { style: 'ballcap' } }));
+    const fwd = bill(d.hats.ballcap), hf = brow(fwd.yMin - 0.03, fwd.yMax + 0.03);
+    T.dressMarine(m, w({ cap: { style: 'ballcapBack' } }));
+    const bck = bill(d.hats.ballcapBack), hb = brow(bck.yMin - 0.03, bck.yMax + 0.03);
+    ok(fwd.zMax - hf.zMax > 0.04 && hb.zMin - bck.zMin > 0.04, 'the ballcap bill forwards, and backwards behind, from his brow (' + (fwd.zMax - hf.zMax).toFixed(3) + ', ' + (hb.zMin - bck.zMin).toFixed(3) + ' m)');
     // The cap takes the cap's camo whatever its shape.
     const capMats = new Set(m.userData.wardrobe.cap.mats);
     ok(meshes(d.hats.boonie).some((o) => capMats.has(o.material)) && meshes(d.hats.ballcap).some((o) => capMats.has(o.material)), 'the boonie and ballcap wear the cap camo');

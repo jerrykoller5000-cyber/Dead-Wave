@@ -201,6 +201,13 @@ Finish what you have in progress first (and queue its game checks); then take th
 
 ### Claude 2
 _Joined 10 Nov (D-137): the `index.html` shell, `core/*`, `tools/*`, `vendor/*`, `package.json`, `combat/*`; integration and the full suite in its cloud. No git: Claude writes the commit jobs, Antigravity runs them._
+- [>] **CB-379** land CB-379 when A/B natives in; D-244 colossus throw loop side (pickup/throw/flight/hit/dodge) with Claude 7+5; watch named loans
+- [>] **CB-379 D-240 R4 #1 opening hitch (433 ms, 30 alive): find the first-frame/first-hit cost, review copy** (from Jerry, in chat)
+- [x] **CB-378** LAND the shadow-pass material-key fix (Director ACCEPT + ChatGPT GP-20259 native ABBA green)
+- [x] **CB-374** D-237 #8 rank 1: review ChatGPT GP-20221 buffered semi press, land it (t133 kept, new tcb341 fixture, native pistol+M4)
+- [>] **CB-373** D-237 #1-2 hitches + 10-of-each cost: tools/hitchhunt.mjs (new) frame recorder, native run by request
+- [x] **CB-372** D-235 carried guns leave an empty rack spot (review copy first)
+- [x] **CB-371** AH-7 #2 HQ Armory cage collider (landed b72be932 + tcb338)
 - [>] **CB-369** D-216 step 4: engine matrix walk fix (static islands) review copy, then GU-5 review, CD-18 A1/A5, crew.mjs parseRequests loan
 - [>] **CB-369 D-216 relay vault static batch (review copy first), then census + shadow cap** (from Jerry, in chat)
 - [x] **CB-363** shambler jaw skin-mask packer seam (review only), then CE-18c TT-ready proof, in-page A/B, spider batch review copy, brute draws
@@ -273,6 +280,11 @@ _Joined 10 Nov (D-137): the `index.html` shell, `core/*`, `tools/*`, `vendor/*`,
 - [x] **GP-20110** **(00:55Z, CLAUDE DIRECTOR: parts 1-2 accepted: entry console 22 to 15; the roughness, ember, Training impact normal and zero-vertex draw are gone; first-hit marks and the entry view look the same. Part 3 below.)** **A clean console at the Training entry (GP-20105's leftovers). Now.** The live entry logs 2 MeshBasicNodeMaterial roughness warnings, 3 'missing ember attribute', 27 'missing normal', 3 'missing position', one zero-vertex draw, and four 404s (version, sound levels, perf log): review/GP-20105/entry-armory.json. Find what makes each (the mesh/material and its file), fix the ones in your lane, send the rest to their owners with the exact object (copy me); the 404s: the right path or don't request it. Done when the Training entry and a minute of play log no warnings or 404s (or each one left has an owner and a reason), and nothing looks different (same cameras).
 ### Claude 3
 _Joined 10 Nov (D-141), a Claude task on Claude Opus 5.5 (High): the heavy model work in Claude's lane, the marine's third-person body and fabric (`studio/marine-body.js`, `marine-cloth.js`, `marine-hats.js`) and his head (`ui/marine-face.js`). Claude writes these cards and reviews the work._
+- [>] **CC-369** D-241 smooth joins: shambler hips shelf first, then boot-to-leg on every kind; review copies + before/after front/side/back
+- [>] **CC-368** D-237 #4 option A: marine head 0.82x + neck base +4 cm (review copy + before/after)
+- [!] **CC-367** CE-23 torn neck stump instead of the red ball (D-232): review copy + sheet
+- [!] **CC-366** D-237 item 7: per-zombie look variation (no new draws): plan + 10-of-a-kind line-up sheet, review only
+- [!] **CC-365** D-225 dummy brain chip: new studio/zombie-dummy-chip.js + setDummyChip hook, fits per Training kind, sheet
 - [>] **CC-364** D-216 lever 3: marine draw merge/proxy review copy (48 main + 25 shadow) with Claude 2; then CI-1 skins
 - [>] **CC-363** D-218 Training pass 1 models for Claude 7 (CG-1 loans, review copies first) + CC-359 jaw batch after CE-22 LOOK
 - [x] **CC-362** option A (Director 16:08Z): shambler-only shoulder marker + a proposed reader line for ChatGPT's joins; review only, tears-probe before/after
@@ -299,6 +311,14 @@ _Joined 10 Nov (D-141), a Claude task on Claude Opus 5.5 (High): the heavy model
 
 ### Claude 1
 _Joined 10 Nov (D-145), Claude Opus 5.5 (High): the hands and the first person, from Claude; since D-151 the fits and the eye pass, the motion is Claude 5's. Guns in this order unless Jerry says: the pistol, the GW-4, the shotgun, the KR-7, then the rest. Each gun's hands to Antigravity (AG-286) for the four lights, then a sheet to Claude._
+- [>] **CD-28** D-240 R4 #2: first Wasp Q 531 ms (362 ms carry re-seat before the draw) -> warm the carry seats at loadout; review copy + LOOK. Then t224 Wasp pack- depth, CD-26 A, CD-24 C foreHold
+- [x] **CD-25** D-240 #3 Wasp draw review copy: gun up on the first firing frame (viewmodel) + the Wasp carry-fit stall cause (GP-20254)
+- [>] **CD-24** D-237 #8 rank 5 A+B review copy: first-person gun change on the game's swap time + snap on a shot; new test t344
+- [x] **CD-23** D-237 #5 AK bolt clips through the gun on reload: first-person hand/arm side, review copy
+- [x] **CD-21b** land the unarmed grenade arm review copy (Director ACCEPTED 08:23Z) + t343 to Claude 2
+- [x] **CD-22** M4 bolt-release slap: natural support arm/elbow path (Jerry D-237 #6), review copy first
+- [x] **CD-21** D-236 unarmed first person: no arms, sleeves, gloves or hands at any look angle
+- [x] **CD-20** D-224 straighten the first-person left (support) thumb on the pistol; check every gun's support thumb
 - [x] **CD-19** CI-1 colour audit: first-person gun + glove colours under day, night+flashlight and the Training lamps; list what reads wrong (too shiny/dark/wrong hue) with crops, to the Director. Review-only. Then help Claude 2 with CD-18 A1/A5 when he asks
 - [x] **CD-18** D-218 pass 1 WEAPONS: inventory every weapon rack/pickup/ammo/prop in Training (scale, floating/clipping, rack model = in-hand model) for Claude 7 (CG-1) + Director; FP look under range lights crops for Claude 9 (CI-1). Review-only first
 - [x] **CD-17** t184 old hand reds (R-hand below shoulder 0.24 m, near knee 0.60 m) + gun-direction 0.15 rad: review-only diagnosis, bars unchanged
@@ -315,9 +335,11 @@ _Joined 10 Nov (D-145), Claude Opus 5.5 (High): the hands and the first person, 
 
 ### Claude 5
 _Joined 10 Nov (D-151), Claude Opus 5.5 (High): the first person's motion, from Claude 1. The hands' fits (where each finger sits on each gun) are Claude 1's and are your start pose; you make them move: the trigger, the controls (ChatGPT 2's userData.controls), the actions (its pose hooks), the reloads and the ammo change (Claude 2's CB-294 hook). Gun by gun, the pistol and GW-4 first._
+- [x] **CE-26** D-244 colossus sack reach + baseball-pitch throw motion (review copy, with Claude 7)
+- [>] **CE-23** D-232 zombie death poses: ground-fitted settle + 4-6 rests per kind (design + review copy)
 - [>] **CE-22** shambler jaw swing (max ~.2 rad) + LOOK sheet; then CE-18e spider feet cost + end hover
 - [x] **CE-20** Reviews: CB-349 v9 pick + CD-14 #8 reload lines
-- [>] **CE-18** CE-16a spider final-pose feet seam in my zombie-feet.js (review copy, bars unchanged; tip from tipLocal or the knee's own claw vertices)
+- [!] **CE-18** CE-16a spider final-pose feet seam in my zombie-feet.js (review copy, bars unchanged; tip from tipLocal or the knee's own claw vertices)
 - [x] **CE-17** CE-16c brute legR ankle: clampAnkle holds the stop on the reader's own twist (review copy, bars unchanged)
 - [x] **CE-15** J161 hands design FINAL with Claude 1: fold his rig answers into the approved table; design only, no game files
 - [x] **CE-16** motion-owner triage (Jerry's restart prompt, 19 Nov): spider feet seam, D-199 joint-whip family, brute legR ankle, t184 crouch slide; review only, bars unchanged
@@ -338,6 +360,14 @@ _Joined 10 Nov (D-151), Claude Opus 5.5 (High): the first person's motion, from 
 
 ### Claude 6
 _Joined 12 Nov (D-177), Claude Opus 5.5: the heavy guns for J149. Claude writes these cards and reviews the work._
+- [>] **CF-28** D-243 player measure vs 1.80 m; D-242 brute P2 #4 #5 #8 #9 #10; spitter P3; scoreboard
+- [>] **CF-27** D-242 spitter pass 2 + brute pass 2 (10 each, review copies, before/after, LOOK); scoreboard
+- [>] **CF-26** D-242 spitter pass 1 (10 issues, review copy), then bomber, brute; D-242 scoreboard. CF-25 D-241 joins list DONE
+- [>] **CF-25** D-241 joins list (review/D-241/joins-list.md) for Claude 3; CF-24 ceiling confirmed live e550d07c
+- [>] **CF-24** confirm CF-23 shutter satin landed (GP-20243); D-237 #4 A/B/C exact numbers + measurement test, review-only; #13 hangar fidelity items with Claude 8
+- [>] **CF-23 D-237 #4 3P proportions vs real 1.8 m soldier + CI-3 rig; #13 Training props below gun fidelity (with Claude 8); review-only** (from Jerry, in chat)
+- [x] **CF-22** CH-3 fidelity #4 #5 #8 #9 #10 #19, review copies first
+- [x] **CF-21** D-227 keypad housing + D-228 flicker line, Director loan of the keypad/screen lines
 - [>] **CF-20** Training real-world scale audit (D-218 pass 1, review-only)
 - [>] **CF-19 Training Area placement audit (D-218): automated CPU scene audit tool + JSON + ranked report for Claude 7; review-only** (from Jerry, in chat)
 - [>] **CF-18 (g) J168: spider P5 model42 vs Tripo (record + leftovers); landed CC-359 s42 shambler skull vs Tripo; Pike GLB** (from Jerry, in chat)
@@ -363,29 +393,198 @@ _Joined 12 Nov (D-177), Claude Opus 5.5: the heavy guns for J149. Claude writes 
 
 ### Claude 7
 
+- [>] **CG-7 D-244 colossus: rack+stones off, heavy sack, fist-x2 rock, baseball-pitch throw (plan first, review copy)** (from Jerry, in chat)
+- [>] **CG-7** D-229 first (switch to the monitor's spot, monitor moves), then CG-7 sheet 1 fidelity + D-230 tray; review copies first
 - [>] **CG-6** **(06:20Z: 26/29 and 23 ACCEPTED; note 40 OPTION 2 (D-183) LANDED 24ddd95c and ACCEPTED at the eye on ChatGPT's native sheets (GP-20143), sent to Jerry; t288 row next (--review OK), then 23 native rerun and 5 (camo))** **D-182 last pass, the look:** J153 5 (camo resize persists: a third cause after CG-1; 05/06-camo-*.png), 26 (launcher cylinder takes camo), 29 (minigun barrel rings take camo), (23 flicker moved to ChatGPT GP-20139, 00:58Z) 40 (the game and Training look dark and muted; 36-training-dark-muted.png: before/after at four lights, Jerry's eye, not a number). (J153 notes by number: handoffs/2026-11-13-jerry-J153-playtest-notes.md; screenshots review/J153-playtest/)
 - [>] **CG-5** **(10:30Z: revolver trigger rest ACCEPTED; note 46 deferred to after the playtest)** Director's 08:22Z/08:45Z: note 46 (sniper flashlight thumb 4.6 mm, tce4) + GT-20104's last blocker (revolver index rest in its guard, tcl334b)
 - [x] **CG-4** **(08:08Z, CLAUDE DIRECTOR: ACCEPTED by ChatGPT 2's native paired sheets)** **(07:20Z, CLAUDE DIRECTOR, from ChatGPT 2's GT-20104 pair probe)** the akimbo second pistol's barrel follows its slide like the first (back 4 mm, then 10 mm down and -0.05 rad, home locked): in the eye when firing and in the world on the reload. DIRECTOR'S LOANS: Claude 5's view barrel driver call for the off-hand gun only; Claude 2's world off-hand barrel follow beside the synced off-hand slide (index.html, that block only). Evidence review/GT-20104/pair-barrels-before.json; ChatGPT 2 reruns the native pair check. tce11, tcb333, tce10 green. By ~12:00Z.
 - [x] **CG-3** **(08:45Z: bipod tweak ACCEPTED (legs parallel ~6 mm under the barrel); Claude 7 next: note 46 + VM_TRIGGER.revolver rest (director's loans, Claude 5 out))** **(07:20Z, CLAUDE DIRECTOR: sniper (40) + bipod fold ACCEPTED; small tweak: legs parallel and close under the barrel)** **(06:20Z: flamer index stays resting on the guard for the playtest; moving the flamer trigger + VM_TRIGGER.flamer after it)** **(06:15Z: + the sniper bipod fold (was CF-11): LOAN of studio/weapon-longarms.js, the sniper's bipod block only; legs folded flush beside/inside the forend so the palm rises 20-30 gun mm; --fyi Claude 3 (he touches the receiver for note 42, a different block); side/underside before/after, four lights; then the support hand (40))** **(06:25Z, CLAUDE DIRECTOR: chainsaw (39) + flamer grip (54) ACCEPTED; flamer index onto the trigger on a DIRECTOR'S LOAN of VM_TRIGGER.flamer; sniper (40) waits on Claude 6's CF-11 bipod tuck)** **(04:05Z, CLAUDE DIRECTOR: from Claude 1's CD-13) J151 P2 hands (D-179), notes 40, 54, 39:** sniper: the support hand fully round the grip (40); flamethrower: hands and grip (54); chainsaw: right hand with three fingers in the guard, the index resting naturally against it (39). LOAN: studio/hand-grips.js and studio/hand-contacts.js, the sniper, flamethrower and chainsaw entries only (name them in --touch; Claude 1 keeps the rest of those files and tools/handfit/; --fyi Claude 1 before each land). Trigger-finger motion stays Claude 5's (41, 39 trigger): send him a --fyi when a grip moves. Per gun: first person before/after in four lights (same camera), the hand-fit numbers, that file's tests green; a review request per gun.
 - [>] **CG-1** **J151 P1 (D-179/180), note 4: the camo resize glitch** (Jerry: "persistent in 1st person on arms and all weapons throughout the training area"; "again and again"). Find why the camo pattern's scale changes in first person (arms sleeves and every gun's per-part camo) in Training, fix it at the root so it can't come back, and add a test that would have caught it. Four-light first person before/after on the arms and 3+ guns. Context: ChatGPT's GP-20123 Training camo fix; J149 camo-per-part (all modelers).
-- [>] **CG-2** **(01:20Z: MOVED to Claude 10 as CJ-1)** **J151 P1 (D-180), new note 63: "an insane amount of flickering textures throughout the training area"** (likely z-fighting: coplanar decals, floor text, stripes, wall panels; or depth precision). Find every flickering surface in Training (walk the area at the eye and third person), fix them (polygonOffset/separation/near-far), test that catches coplanar faces.
+- [x] **CG-2** **(01:20Z: MOVED to Claude 10 as CJ-1)** **J151 P1 (D-180), new note 63: "an insane amount of flickering textures throughout the training area"** (likely z-fighting: coplanar decals, floor text, stripes, wall panels; or depth precision). Find every flickering surface in Training (walk the area at the eye and third person), fix them (polygonOffset/separation/near-far), test that catches coplanar faces.
 
 ### Claude 8
 
+- [>] **CH-3 D-237 #13: next open items in my lane (kiosk edges, alarm label angle), keep ranking current** (from Jerry, in chat)
+- [>] **CH-3 D-237 #13: #1 kiosk screen + #6 alarm label review copy (waiting native pair + Director LOOK)** (from Jerry, in chat)
+- [>] **CH-3 D-237 #13: tunnel-ribs native pair, split the open list with Claude 6/7, first item in my lane (review copy first)** (from Jerry, in chat)
+- [>] **CH-3** D-237 item 13: Training fidelity audit (rank props/textures below the gun bar)
+- [>] **CH-1 land 4+6+7 (Director ACCEPTED 18:05Z): pause/settings buttons, wheels, HUD 11 px floor in ui/ui-kit.css** (from Jerry, in chat)
+- [>] **CH-1 landing 4: pause + settings buttons to the style guide (sheet C) - mapping buttons** (from Jerry, in chat)
 - [>] **CH-1 AH-4 menu replay fixes (#10 #11 #12 #17 #18 + AH-6 #7): mapping causes; fixes planned in my ui/ui-kit.css** (from Jerry, in chat)
 - [~] **CH-2** **(06:15Z: Claude 8's session ended (idle since 04:41Z): (1) t240 to Claude 2 in the suite/final gate; (2) note 9 after the playtest)** **(06:06Z, CLAUDE DIRECTOR) (1) t240 regression:** on the 04:50Z tree t240 fails 'holstered: both hands relaxed (0.72, 0.72)' (Claude 1's heads-up): edits to game/viewmodel.js / the poses since 03:00Z (your eyeHide, Claude 7's CG-1 st.eye, Claude 5's CE-9 fingerPose ...). Find which change did it (cloud, by md5/hunk), then ask its owner for the fix or a loan; no test changes. **(2) J151 note 9 (from Claude 5's CE-11):** "I like the flashlight switch-on animation. I want the same one used when turning on the laser." Loan by request from Claude 5 (motion: the flashlight press entries) and Claude 2 (the laser toggle call site). First person before/after, the press in frames, four lights; tests green.
 - [>] **CH-1** **(03:58Z, CLAUDE DIRECTOR: 30/31/45 ACCEPTED (Armory rack draws, beam stops on it, tch1 12/0). Note 10: DIRECTOR'S LOAN of game/viewmodel.js eyeHideSet + setEyeHide (Claude 1 heads-down); re-merge on the current file (CG-1 landed there), tch1b + tcg1 + viewmodel tests)** **J151 P1 (D-179), notes 10, 30, 31, 45 (from Claude 2's CB-327):** the red-dot optic floating left of the screen with the shotgun (10, screenshot 02); the laser drawn under floor text and objects (30, screenshot 06); lasers passing through things they should stop on, like armory pieces (31, screenshot 05); weird collision and floaty impact decals on some Training objects (45). Code in index.html is Claude 2's: take a named loan for each function from Claude 2 by request.
 
 ### Claude 9
 
-- [x] **CI-2** **(07:05Z, CLAUDE DIRECTOR: ACCEPTED by the motion maps; Claude 9 stood down)** **(06:06Z, CLAUDE DIRECTOR) J151 note 32 (from Claude 5's CE-11):** "The chainsaw should vibrate slightly when running." A small idle/throttle shake of the saw (and the hands with it) in first and third person, stronger on throttle, none when off; not on the camera. Loan by request from Claude 5 for the chainsaw motion entry (you know the saw from CI-1). Frames before/after at the eye (a few frames to show the shake), four lights; tests green.
+- [>] **CI-3 step 1 tune 7: read tcz905 (GP-20279), handgun ready fix, land path; then 2a/2bc, D-239 back load** (from Jerry, in chat)
+- [>] **CI-3 step 1: read tcz904a-e, pick the tcc341 depth setting, re-base on CB-378** (from Jerry, in chat)
+- [>] **CI-3 step 1 t6: fix the 61 mm shotgun firing-hand miss (GP-20242) in the review copy, sheet, native pass 4** (from Jerry, in chat)
+- [>] **CI-3** D-237 item 4 3P movement overhaul PLAN step
+- [!] **CI-2** **(07:05Z, CLAUDE DIRECTOR: ACCEPTED by the motion maps; Claude 9 stood down)** **(06:06Z, CLAUDE DIRECTOR) J151 note 32 (from Claude 5's CE-11):** "The chainsaw should vibrate slightly when running." A small idle/throttle shake of the saw (and the hands with it) in first and third person, stronger on throttle, none when off; not on the camera. Loan by request from Claude 5 for the chainsaw motion entry (you know the saw from CI-1). Frames before/after at the eye (a few frames to show the shake), four lights; tests green.
 - [>] **CI-1** **(06:22Z, CLAUDE DIRECTOR: ACCEPTED)** **J151 heavy guns (D-179), notes 35, 36, 50, 51, 52, 55, 56, 60 (from Claude 6's CF-10), studio/weapon-heavy.js after Claude 6's CF-8 lands:** chainsaw gas fumes while running (35), teeth spin faster (36); flamer gauge shows fuel left, dials and notches tritium (50), flames less sprite-like (51), tank camo-able (52); launcher projectiles a bit faster (55), a hinge that clearly doesn't pass through the cylinder's center, reload kept (56, screenshot 10); Watchman MG first-person model, not the mortar (60; Claude 5 does the motion).
 
 ### Claude 10
 
+- [>] **CJ-10 casings v2 land after ChatGPT native + Director LOOK; D-240 R4 effects 1-3; D-244 rock hit offer** (from Jerry, in chat)
+- [>] **CJ-10** D-240 per-gun muzzle flash: review copy ready (e10aa1c2), waiting Director loan + ChatGPT native strip; then land; casings step 2 ready
+- [>] **CJ-8 land A+B+C (Director ACCEPT, Claude 2 loan) after ChatGPT native LOOK; then per-gun muzzle flash review copy** (from Jerry, in chat)
+- [x] **CJ-8** D-240 CJ-7 follow-up: outdoor round debris (ground clods, drum chip) small, dirt/metal coloured, fewer, tumbling, no new draws; then spawnDust hexagon check with Claude 2; then muzzle flash/casing sheet
+- [>] **CJ-7** D-237 #11 outdoor round hits by surface (Claude 7 keeps Training's HITFX; I take the outdoor path): sparks/splinters/dust by surface + softer dust motes, review copy + sheet to the Director
+- [x] **CJ-5** CH-3 #20 lamps off: exit signs + emergency lamps (emissive only), review copy + before/after lamps-off sheet
+- [x] **CJ-4** CE-24 help: per-kind trait tables as review files
+- [x] **CJ-3** CH-3 #13: skull window display skulls -> real skulls (skull-drop.js specimen, one draw each)
+- [x] **CJ-2** D-233 real skulls for the skull drops: new studio/skull-drop.js, loan ask to Claude 2
 - [x] **CJ-1** **(06:22Z, CLAUDE DIRECTOR: ACCEPTED)** **(04:03Z, CLAUDE DIRECTOR: landed part ACCEPTED by the flicker maps (shared x=-8 wall 8651->966 day, ~6000->30 dusk/night). index.html armory-surround hunk = DIRECTOR'S LOAN; fakethree.mjs NOT before the freeze (winding helper inside t337). Next: gate-labels, firing-line, build-floor-high dusk/night)** **J151 P1 (D-180), new note 63: "an insane amount of flickering textures throughout the training area"** (from Claude 7's CG-2): walk Training at the eye and in third person, list every flickering surface (z-fighting between coplanar decals, floor text, stripes, wall panels; depth precision from near/far), fix each on named loans from the owners (world/training*.js ChatGPT's, index.html Claude 2's), and add a check that catches coplanar overlapping faces. Four-light before/after of each fixed spot.
 
 ### ChatGPT
+- [x] **GP-20325** Jerry direct: animate first-person fire-mode controls and stage akimbo pistol slide motion
+- [x] **GP-20324** Jerry direct: balance player travel speed against the horde
+- [>] **GP-20323** Jerry direct: audit and fix third-person player appearance, kit, clipping and motion
+- [x] **GP-20322** Join and feather the two FOB tire tracks into the gravel
+- [x] **GP-20320** Jerry direct: improve sun and contact shadows across forest, actors and structures within the frame budget
+- [x] **GP-20319** Jerry direct: tune player movement response and camera feel
+- [x] **GP-20321** Jerry direct: audit all first-person weapon reloads and fix clipping and animation defects
+- [>] **GP-20318** Jerry direct: audit and fix zombie combat readability and reactions
+- [x] **GP-20317** Jerry direct: ground and refine the non-tree foliage across habitats
+- [>] **GP-20315** Jerry direct: first-person Wasp, revolver, shotgun and AK hands, AK magazine grip and trigger animation
+- [x] **GP-20316** Jerry direct: preserve swimming and wave-clear perspective and give the final kill positive feedback
+- [!] **GP-20314** Jerry direct: double player movement speed
+- [!] **GP-20313** Jerry direct: first-person pistol support-hand placement
+- [>] **GP-20312** Jerry direct: fix first-person tree shadow pop and cone-shaped understory
+- [!] **GP-20311** Jerry direct: refine the FOB Threshold yard props and placement
+- [!] **GP-20310** Jerry direct: responsive individual trees and seamless forest detail
+- [x] **GP-20309** D-244 Colossus fabric sack and baseball pitch, Jerry direct ownership
+- [!] **GP-20308** D-242 Brute Pass 2 paired native proof and guarded landing
+- [!] **GP-20307** D-242 Drowned Pass 2 exact rebase and native proof
+- [x] **GP-20306** D-242 Shambler Pass 2 matched native motion turn and original gates
+- [x] **GP-20305** CI-3 tune 7 exact native firing-elbow sweep and original controls
+- [x] **GP-20304** CE-23 v7b native burst timing, fitted torn ends and original gates
+- [x] **GP-20303** CE-25 native Training finisher held ADS and Q-swap proof
+- [x] **GP-20302** D-242 Demon Pass 2 native turn, motion, cost and originals
+- [x] **GP-20301** D-242 combined Guardian and Caveguard Pass 1 native proof and guarded landing
+- [x] **GP-20300** D-242 Colossus Pass 1 native proof and guarded landing
+- [x] **GP-20299** D-242 Spitter Pass 2 accepted scoped native proof and guarded landing
+- [x] **GP-20298** D-242 Feral Pass 1 guarded landing and live originals
+- [x] **GP-20297** D-242 Feral Pass 1 review-only geometry and native proof
+- [x] **GP-20296** CG-7 bench v2 matched original t336 floor recheck
+- [x] **GP-20295** CH-3 #13 kiosk and alarm original gates on landed 22afb368
+- [!] **GP-20294** D-242 Military Pass 1 review-only geometry and native proof
+- [x] **GP-20293** D-242 Brute Pass 1 guarded landing and native proof
+- [x] **GP-20292** D-242 Drowned lace seating and source line-ending repair
+- [x] **GP-20291** D-242 Brute Pass 1 review-only geometry and native proof
+- [x] **GP-20290** D-242 Drowned Pass 1 guarded landing and native proof
+- [x] **GP-20289** D-242 Drowned Pass 1 review-only geometry and native proof
+- [x] **GP-20288** D-242 Spitter Pass 1 guarded landing and native proof
+- [x] **GP-20287** D-242 Spitter Pass 1 review-only geometry and native proof
+- [x] **GP-20286** Director loan CB-375 and CB-376 native gates and guarded landing
+- [x] **GP-20285** D-240 Round 4 native live Training feel and scorecard
+- [x] **GP-20284** CE-23 v6 native burst timing and torn-end review
+- [x] **GP-20283** CJ-10 native per-gun casing review
+- [x] **GP-20282** D-242 Shambler Pass 1 guarded landing and native proof
+- [x] **GP-20281** CG-7 s3 firing bench native review and original gates
+- [x] **GP-20280** CH-3 kiosk bevels and alarm label native pair with original gates
+- [x] **GP-20279** CI-3 exact tcz905 handgun and M4 diagnostic series native
+- [x] **GP-20278** D-242 Shambler P1 close motion proof for hem knee and boot
+- [x] **GP-20277** CJ-10 v3 landed native original flash and integration gates
+- [x] **GP-20276** CC-368 landed marine head neck native ADS smoke and originals
+- [x] **GP-20275** CJ-10 v3 native muzzle light offset, plume and timing review
+- [x] **GP-20274** D-242 Shambler P1 native front side back and original joint gates
+- [x] **GP-20273** CJ-10 v2 native pistol revolver minigun muzzle flash review
+- [x] **GP-20272** D-242 Demon P1 approved landing and native after photographs
+- [x] **GP-20271** CD-25 landed Wasp and pistol native swap verification and Round 3 rows
+- [x] **GP-20270** D-242 Demon pass 1 native comparison motion spawn cost and original gates
+- [x] **GP-20269** CJ-10 native per-gun muzzle flash frame pair and minigun timing
+- [x] **GP-20268** D-242 Shambler native walk attack and death baseline strip
+- [x] **GP-20267** CJ-8 landed original regression gates on exact 1d001839
+- [x] **GP-20266** D-242 native current player front side back portrait
+- [x] **GP-20265** CJ-8 native outdoor drum ground and launcher effects pair
+- [x] **GP-20264** CI-3 tcc341 native pack and vest depth diagnostics on the rebased proposal
+- [x] **GP-20263** D-241 native front side back portraits of every live zombie type
+- [x] **GP-20262** CF-24 Training range ceiling native pair, pan and guarded landing
+- [x] **GP-20261** CC-368 s51 exact native ADS parity plus original fit and bill gates
+- [x] **GP-20260** CE-23 v5 and CC-367 s51 exclusive native kill timing and three floor cases
+- [x] **GP-20259** CB-378 D-240 shadow material key native ABBA, pictures and original gates
+- [x] **GP-20258** CI-3 tune 6 exact native pass 4 with original controls
+- [x] **GP-20257** CG-7 s2 whiteboard sharps bin and medic mug exact native comparison and original gates
+- [x] **GP-20256** CB-373 D-240 native mixed fight CPU profile with and without sampling
+- [x] **GP-20255** CH-3 Training and HQ kiosk and alarm exact native pair, review only
+- [x] **GP-20254** D-240 Wasp versus pistol first-person swap cause, review only
+- [x] **GP-20253** D-240 softer zombie hit flash at 0.22 over 70 ms
+- [x] **GP-20252** D-240 full native gunplay Round 2 and red hit flash comparison
+- [x] **GP-20251** CD-24 A+B original native gates and trusted-Q D-240 Round 2
+- [x] **GP-20250** CD-23 verify landed KR-7 empty reload rack natively
+- [x] **GP-20249** CJ-7 land accepted outdoor round impacts on Director loan
+- [x] **GP-20248** D-240 launcher flamer and chainsaw confirmed reticle marks, review first
+- [x] **GP-20247** CJ-7 exact outdoor surface impact native before and after
+- [x] **GP-20246** CG-7 native concrete dust alpha witness
+- [x] **GP-20245** CG-7 joint2 guarded landing preserving CF-23 and CC-366 with original gates
+- [x] **GP-20244** CC-366 exact s50 guarded Shambler landing and original gates
+- [x] **GP-20243** CF-23 exact satin shutter guarded landing and original Training gates
+- [!] **GP-20242** CI-3 tune 5 exact native pass 3 with original test controls
+- [x] **GP-20241** CF-23 native closed and half-down satin shutter review
+- [x] **GP-20240** CJ-5 native emergency lamp and EXIT bloom check
+- [x] **GP-20239** D-240 CF-FEEL round 1 native gunplay scorecard and top three issues
+- [x] **GP-20238** CB-373 landed native originals, B ABBA and D-only GPU checks
+- [!] **GP-20237** CC-368 exact native head and neck originals and matched views, review-only
+- [x] **GP-20236** D-237 #9 world-space gun smoke, GT follow-up review only
+- [x] **GP-20235** CB-373 Guardian call-in and ten-Bomber allocation churn, review only
+- [x] **GP-20234** CB-373 Armory open hitch, review-only on Director assignment
+- [x] **GP-20233** D-237 #8 rank 4, one confirmed-hit mark per trigger
+- [x] **GP-20232** D-237 #8 rank 6, clarify ammo and spare magazine decisions
+- [x] **GP-20231** D-219 live Training 10 of each kind, M4 and pistol performance baseline
+- [x] **GP-20230** CH-2 Phase 3 live kind information and after-action results review
+- [x] **GP-20229** CI-3 tune 4 native pass 2, paired unchanged gates and per-gun support angles
+- [x] **GP-20228** CB-373 BD six exclusive native hitch and allocation runs for Claude 2
+- [x] **GP-20227** CH-3 and CF-22 latest live 1920 native cameras and Training originals
+- [x] **GP-20226** CC-366 s49 exact native Shambler look and exclusive hitch check
+- [x] **GP-20225** Training sandbags and hose reel exact baked-surface collision
+- [x] **GP-20224** CH-2 Phase 2 scheduled waves, practice settings, campaign replay and dummy chip
+- [x] **GP-20223** CB-374 native t133 tcb341 and two real Training hits after live landing
+- [x] **GP-20222** CH-3 #1 landed Training tiles native originals and six matched camera views
+- [x] **GP-20221** D-237 rank 1 buffered eligible semi press, exact review copy
+- [x] **GP-20220** D-237 #8 rank and prove Training combat feel proposals
+- [x] **GP-20219** CI-3 step 1 low-ready original native gates, receipts in my review folder
+- [x] **GP-20218** CB-373 P1 GP-74 isolate marine idle pose cost on actual Training frames
+- [x] **GP-20217** CE-18g bank v2 current-live strict48 paired spider gate on Director cover
+- [x] **GP-20216** CD-21 exact native unarmed eye angles and restored M4
+- [x] **GP-20215** CD-20 exact native support-thumb before and after in Training
+- [x] **GP-20214** CJ-3 native HQ and Training skull cabinet seating and eye glow
+- [x] **GP-20213** D-228 CF-21 native Training post flicker, keypad and closed shutter look
+- [!] **GP-20212** D-232 CE-23 and CC-367 exact native Training death sequence and floor-height stump checks
+- [x] **GP-20211** D-237 CB-373 native v3 first-kill pipeline trace on live, exclusive
+- [x] **GP-20210** D-237 CB-373 A native exact live vs countdown pool-fill, exclusive
+- [x] **GP-20209** D-237 CB-373 v2 exclusive native Training phase-attributed trace
+- [x] **GP-20208** CG-7 step 2 Training prop bridge joint review, named shell loan
+- [x] **GP-20207** D-237 #1-2 CB-373 native Training hitch trace and per-kind steady frame cost
+- [x] **GP-20206** CB-372 frozen Armory rack native before and after
+- [x] **GP-20205** D-237 item 10 Training marks on gate, shutter and infirmary fence
+- [x] **GP-20203** D-237 item 3 player slow motion and final kill only
+- [x] **GP-20204** D-229 console stays fixed when the light switch moves
+- [x] **GP-20202** CJ-2 native old and new skull-drop captures and original gates
+- [x] **GP-20201** CI-2 landed view fill native originals, same-page cost and look
+- [x] **GP-20200** CC-364 landed native marine merge verification for ChatGPT 2
+- [x] **GP-20199** CH-1 live final menu tour and landed CIF guards
+- [x] **GP-20198** D-231 Supply Terminal Builds-first: review and original shop gates
+- [x] **GP-20197** CH-2 phase 1 review: mixed Training roster, stock presets and 3 local saves
+- [x] **GP-20196** CE-18g bank v2 native claw contact strips
+- [x] **GP-20195** CI-2 first-person view fill and glove native A/B, 40 shots
+- [x] **GP-20194** CH-1 L8/L9 native landed gates and exact CIF v3
+- [x] **GP-20193** CH-2 alarm mock revision for D-223 and Claude 8 LOOK notes
+- [x] **GP-20192** CD-18 native Training Armory rack before/after for Claude 2
+- [x] **GP-20191** CG-2 story pass landed Training native lamp pairs (cover for ChatGPT 3)
+- [x] **GP-20190** CE-18g bank lift native range/rank contact strips and same-page cost
+- [x] **GP-20189** CH-1 native CIF v2, Armory v2 and title layout rechecks
+- [x] **GP-20188** D-221/D-222 Training HQ zombie alarm spec and real-CSS mock
+- [x] **GP-20187** CB-369 hidden walk v2 native strict48 A/A and ABBA (cover for ChatGPT 2)
+- [x] **GP-20186** CH-1 Training HUD grenade, MedPen and spare round copy review
+- [x] **GP-20185** CH-1 localize Supply and Armory cash balance header (named loan review)
+- [x] **GP-20184** CE-18g native range and rank transition strips for Claude 5
+- [x] **GP-20183** CH-1 Training Supply and Armory Resupply hint copy, review-only named loan
+- [x] **GP-20182** Cover CH-1 landing 8 Armory native comparison for ChatGPT 3
+- [x] **GP-20181** Cover CH-1 landings 4, 6 and 7 native gates and 14-shot look for ChatGPT 3
+- [x] **GP-20180** CE-18g native same-page spider cost split for Claude 5
+- [x] **GP-20179** Cover CH-1 landing 5 CIF native comparison for ChatGPT 3
+- [x] **GP-20178** CH-1 Training countdown incoming count and plural names
 - [x] **GP-20177** AH-7 item 6: nearest eligible HQ south station and immediate matching prompt
 - [x] **GP-20176** AH-7 item 5: newly bought Armory gun uses the first empty carried slot
 - [x] **GP-20175** CI-1 review-only native noon and flashlight skin comparisons for bomber, colossus, leaper
@@ -491,6 +690,7 @@ _The retired agents' queues (Cursor, Grokbot, Muse): `crew/archive/board-queues-
 
 ### ChatGPT 2
 _Joined 10 Nov (D-142), GPT-6 Astra (High) in Codex: every weapon's model, moved from ChatGPT. Anything a hand touches that moves: name it in the handoff; Claude refits the hands._
+- [x] **GT-20143** Wildlife models, scale and habitat-led daily routines throughout the valley
 - [x] **GT-20142** D216 CC364 marine runtime merge native freshest-live strict48 ABBA, postwindow directCPU/draw census, exact standard-view pixelproof
 - [x] **GT-20141** C5 optional all-matrix fallback84c90083 native fullbatch vs exact e524: same3 originalstrict48 ABBA blocks and separate CPU pair, D216 priority if arrives
 - [x] **GT-20140** D216 hidden-walk native same-file ABBA plus live control, original48near brute bars and visible matrix/pixel proof
@@ -564,6 +764,7 @@ _Joined 10 Nov (D-142), GPT-6 Astra (High) in Codex: every weapon's model, moved
 
 ### ChatGPT 3
 _Joined 21 Nov (D-220), GPT-6.2 Sol in Codex: native GPU camera + gate runner for the D-218 Training Area pass._
+- [!] **GU-9** Jerry: audit player model and movement in the live game and fix reproduced defects
 - [x] **GU-8** Land exact Claude 7 Training story prop sheet 1 and verify native roster, lockers, bench and infirmary
 - [x] **GU-7** Verify exact CE-18f range spider batch and conditionally land
 - [x] **GU-6** Land approved CH-1 landing 3 and verify ten native menu views
@@ -574,7 +775,23 @@ _Joined 21 Nov (D-220), GPT-6.2 Sol in Codex: native GPU camera + gate runner fo
 - [x] **GU-1** Training Area native GPU tours and gates (CG-1 BEFORE/AFTER tours, landing gates, CH-1 native looks)
 
 ### Antigravity
-- [>] **AG-400** run Claude Commit.bat (checkpoint 11:40Z)
+- [>] **AG-419** Jerry direct: performance profiling & zero-downgrade optimization
+- [>] **AG-418** Jerry direct: World Filler — lived-in environmental vignettes, exploration quick-wins, interactive stashes & story traces
+- [>] **AG-417** Jerry direct: overhaul all daytime quests, minigames and side quests (gameplay, visuals, depth, story)
+- [>] **AG-416** Jerry direct: Hollows audit, gameplay fun and visual overhaul
+- [x] **AG-415** Jerry direct: full-fledged optional Training Area tutorial
+- [x] **AG-414** Jerry direct: minimap appearance and functionality overhaul
+- [x] **AG-410** Jerry direct: full PBR texture overhaul for all weapons
+- [x] **AG-409** Environmental effects audit, visual overhaul and polish pass
+- [x] **AG-408** Jerry direct: outer world beyond the fenceline vistas and distant landmarks
+- [x] **AG-407** Jerry direct: all rocks unique identity, fidelity and PBR texture overhaul
+- [x] **AG-406** Buildable items PBR texture overhaul within performance budget
+- [x] **AG-405** Training area PBR texture overhaul within perf budget
+- [x] **AG-404** AG-404 natives: CJ-10 casings v2, CJ R4 #1+#3, CB-379 opening A/B, CH-3 booth + razor/CIF/gun pairs
+- [x] **AG-403** D-243 native WebGPU 1920x1080 3P player baseline (front/side/back + collar closeups + in-play) for Claude 9
+- [x] **AG-402** D-242 native playtest QA of 9 landed zombie passes (Training call-ins + Night 1-2, 1920x1080)
+- [x] **AG-401** D-237 #13 CH-3 native Training fidelity walk (1920, lamps on/off + prop closeups)
+- [x] **AG-400** run Claude Commit.bat (checkpoint 11:40Z)
 - [x] **AG-399** CD-19 native first-person shots for CI-1 (2 camera jobs, 24 shots)
 - [x] **AG-398** CH-1 menus and panels native UI shots (2 camera jobs, 84 shots)
 - [x] **AG-397** Run Fix Push D-219.bat (D-219)
@@ -695,6 +912,13 @@ _Joined 21 Nov (D-220), GPT-6.2 Sol in Codex: native GPU camera + gate runner fo
 
 ### Antigravity 2
 _Joined 21 Nov (D-220), Gemini 4 Carbon: hands-on QA playtests (reports only, no game edits)._
+- [x] **AH-15** Jerry direct: overhaul all daytime quests, minigames and side quests (gameplay, visuals, depth, story)
+- [x] **AH-14** Jerry direct: full game load-time and Training Area performance audit & optimization
+- [x] **AH-13** Jerry direct: improve all bridges and docks (fix clipping/catching, upgrade models and PBR textures)
+- [x] **AH-12** Jerry direct: physical destruction, physics, and effects for training area props
+- [x] **AH-11** Jerry direct: redo all music cues, mood fit, and world exploration pacing
+- [x] **AH-10** FOB Threshold structure PBR texture overhaul
+- [x] **AH-9** Main world ground PBR texture and contextual surface overhaul
 - [x] **AH-7** Longer P0 hunt through Night 2 and Night 3 (bigger hordes, ferals/drowned/spitters, bought weapons, WebGPU + WebGL)
 - [x] **AH-6** P0 hunt in a normal Night 1 run (WebGPU & WebGL: title -> new run -> HQ stations -> Night 1 -> dawn -> die -> restart)
 - [x] **AH-5** Training Area speed baseline for pass 3 (10 spots x 4 ways, Lights ON/OFF + 10 zombies, WebGPU & WebGL)
@@ -753,6 +977,30 @@ Ideas and polish that are not 1.0. Claude adds them here when you send them (`--
 
 One line each; the full text is in `docs/decisions.md`. D-0 to D-69: `crew/archive/board-2026-10-15.md`.
 
+- **D-244** (Jerry 2026-11-23 18:2xZ): "Let's get rid of the rack and rocks on the back of the colossus. Give him a sack or something that he reaches into and pulls out rocks that are twice the size of his fist. Make him hurl them fast at the player like a baseball pitch. All the animation for that will need to be redone." -> Claude 7 lead (look: remove rack + stones, add a sack/bag; rock ~2x fist), Claude 5 (new reach-into-sack + baseball-pitch throw animation: wind-up, stride, whip release), Claude 2 (throw speed/flight/hit in the loop if needed), ChatGPT (its 3 files lands; natives). Fast throw must stay fair: readable wind-up + a dodge window. Before/after sheet + motion strip to the Director, then Jerry.
+- **D-243** (Jerry 2026-11-23 16:2xZ, with a front picture of the player): "Why is the player so jacked up? His head is tiny compared to the rest of his body." + "His collar looks dumb too" -> Director: fix the third-person player proportions NOW (not after CI-3 step 1). Owner Claude 9 (player model), Claude 6 measures. Narrower shoulders (CF-23 B ~0.38), hips (C ~0.21), slimmer chest/arms/vest/pack bulk, head a little bigger for game read (target head = 1/7 of height), D-239 one long gun + holster only; rework the collar (it reads as a stiff ring/shelf: make it a soft fitted collar that sits on the neck/vest). Before/after front/side/back sheet to the Director, then Jerry.
+- **D-242** (2026-11-23 ~05:35Z, Jerry) "Zombies are looking better than their predecessors but a long way off from done. I want you guys to do five passes on every zombie. I want you to find 10 issues each pass and resolve them. Every pass ask these questions: 1. Do the points of connection look right? Are there jagged edges, shelves or gaps where there should not be. 2. Does this physically make sense? Would the way this is modeled work in motion? Are there any pieces that don't realistically make sense? 3. How do I balance what is possible with our performance budget and make the model look the best within that limit? 4. Will it ultimately pass from a fidelity standpoint in our game? Will players easily spot areas that are incomplete or lacking? 5. Are there issues with clipping? Things poking out that should not be? Rough transitions?" Card CZ-5P (D-241 joins = pass 1 Q1). 14 kinds x 5 passes x 10 issues, each issue tagged Q1-Q5, found AND fixed. Plan: handoffs/2026-11-23-director-D242-five-passes.md. Jerry sees each kind's front/side/back after every pass.
+- **D-241** (2026-11-23 ~05:05Z, Jerry) "Make sure the geometries of each zombie part transition nicely to the other. Like on the shambler the hips jut out in a shelf. That is not natural transition. Usually you would see rounded shapes, nothing awkward or jutting. Or how the boots connect to the zombies body look bad. First send me 3 pictures of all the zombies: front, back and side, then go through all the zombies and look for and fix those things." Card CC-369 (Claude 3 lead, Claude 6 measures/finds, Claude 5 checks motion). Pictures: ChatGPT native, review/D-241/turn/ (tool review/D-241/zombiesheet3.mjs). Rule for every kind: no shelves, steps or hard ledges where parts meet (hips, waist, shoulders, neck, knees, ankles/boots, wrists); rounded, continuous transitions; check in motion, not only at rest.
+- **D-240** (2026-11-22 ~19:12Z, Jerry) "One thing I want you guys to look for and keep iterating on is making the gunplay and fighting as fun and fluid as possible." STANDING GOAL (never closes): every round, ChatGPT plays natively and ranks the top 3 things that make shooting/fighting feel stiff, slow, unfair or unclear (input-to-shot, gun swap/reload flow, recoil and recovery, aim/ADS, hit feedback, enemy reactions, deaths, movement, hitches); owners fix (review copy, LOOK, original gates, never trade frame rate for it); measure again; repeat. Card CF-FEEL, plan handoffs/2026-11-22-director-D240-feel-loop.md.
+- **D-239** (2026-11-22 ~00:05Z, Jerry) "On all the questions, do what seems best. I will review later. Whatever looks and plays the best." Director picks for CI-3: (1) LOW READY when not shooting, up to aim in ~0.12 s on aim/fire, shots never delayed; sprint carry across the chest. (2) Only the OTHER carried primary shows on his back (one long gun max) + the sidearm in its holster; the rest of the owned guns stay in the Armory (not drawn on him). Same rule for future questions on this pass: the crew picks what looks and plays best; Jerry reviews later.
+- **D-238** (2026-11-21 23:00Z, Jerry, about CC-365) "Bigger chips in head so player can see": the dummy brain chip must read clearly at play distance (8-12 m), not just close up: about 2.5-3x the first size, sticking up out of the skull, with a short antenna/wire loop and a brighter blinking LED; still no logos; still only on dummies.
+- **D-237** (2026-11-21 22:14Z, Jerry's Training playtest, 13 notes; full text + owners: handoffs/2026-11-21-director-J-playtest-D237.md) P1: (1)(2) hitches + lag with 10 of each kind -> Claude 2 CB-373 + Antigravity 2 native traces; (3) STANDING RULE: kill slow-mo only when the player uses his slow-mo or on the FINAL zombie -> ChatGPT; (5) AK bolt clips on reload -> ChatGPT 2 + Claude 5; (6) M4 bolt slap elbow -> Claude 1 CD-22; (9) gun smoke breaks when running -> ChatGPT 2; (10) decals hang in air when doors/fence move -> ChatGPT. P2 (plan first, Jerry sees it): (4) 3rd-person movement overhaul + knife/machete 3P + proportions -> Claude 9 CI-3 + Claude 3 + Claude 6; (7)(12) zombie individuality, hit reactions, motion personality -> Claude 5 CE-24 (after CE-23) + Claude 3 looks + Claude 10; (8) game feel review -> ChatGPT; (11) more destructibles + surface effects -> Claude 7 CG-7; (13) consistent fidelity audit -> Claude 8 CH-3 + Antigravity.
+- **D-236** (2026-11-21 21:45Z, Jerry, picture review/D-236/jerry-unarmed-arms.png: looking up in the Training hangar, unarmed, two huge camo sleeves fill the screen) "Unarmed shows arms above head. Should not be able to see arms or hands at all in unarmed." Card CD-21 (Claude 1, with CD-20): in UNARMED first person no arms, sleeves, gloves or hands are visible at any look angle (up, down, sprint, crouch, jump, ladder, swap in/out of unarmed: the lowered arms must not swing into view; the eye pass hides them). Third person and shadows unchanged. Claude 5 checks the motion side (unarmed poses).
+- **D-235** (2026-11-21 21:40Z, Jerry) "Weapons that are currently on the player should not show up in the armory. There should be an empty space where the weapon was taken from until the player puts it back in the armory." Today index.html armoryDisplayKinds() ADDS the carried guns (runArmory.loadout primary/secondary + always pistol) to the rack and refreshArmoryRack packs the rows tight. New rule: each owned gun has a fixed rack spot; a gun on the player leaves its spot EMPTY (bare pegs/hooks), and it reappears there when put back. HQ rack + Training mirror (mirrorTrainingRack). Card CB-372 (Claude 2, shell/rack owner) first, ChatGPT FYI (ui/armory.js preview/buy/move-to-shelf flows).
+- **D-234** (2026-11-21 21:36Z, Jerry, picture review/D-234/jerry-door-gap.png) "Fix gap at top of security door". A see-through light gap between the top of the security shutter and the striped header/frame (a bright sliver shows through). Added to Claude 6's CF-21: DIRECTOR'S LOAN widened to the security door shutter + frame/header lines of world/training.js; close the gap (shutter top tucked behind the header or a header lip/brush seal), both faces, door open and closed and while moving; collider and door logic unchanged.
+- **D-233** (2026-11-21 21:34Z, Jerry) "Yes on the real skulls": the dropped skull pickups (index.html makeSkullMesh / _skullGeo, the cream balls with the green ring) become real skulls per kind: cranium with sutures, brow ridge, deep eye sockets, nasal cavity, cheekbones, upper teeth row, jaw (shambler jaw, brute heavy, spider's own), aged bone colour, a little grime/blood. Card CJ-2 (Claude 10): new studio/skull-drop.js geometry (merged per kind, built once, same pooled drop), named loan from Claude 2 for the makeSkullMesh swap; draws unchanged; the bone flash, ring and pickup logic untouched. Sheet per kind close + on the floor, LOOK, land.
+- **D-232** (2026-11-21 21:31Z, Jerry, pictures review/D-232/jerry-death1.png + jerry-death2.png) "Fix all of our zombie death poses these look ridiculous" Dead zombies end frozen mid-air: legs up off the floor, stiff "superman" bodies, arms spread flat, one balanced on its head; the headshot neck is a red ball. Card CE-23 (Claude 5 lead, TOP PRIORITY over CE-18g): every kind falls and SETTLES on the floor under gravity (knees/feet/hands down, weight slumped, head resting, small varied set per kind + by hit direction), no limb hanging in air, nothing through the floor or walls; brute (ChatGPT 2 files) + spider read-only fits with owners; neck stump with Claude 3. Sheet per kind (several deaths each, at rest + mid-fall frames), LOOK, Jerry sees the finished deaths.
+- **D-231** (2026-11-21 21:28Z, Jerry, picture review/D-231/jerry-supply-tabs.png) "Make build tab the first tab. We are swapping supplies and build." Supply Terminal: BUILDS becomes the first (left) tab and the one it opens on; SUPPLIES second. Owner ChatGPT (renderShop, shell loan via Claude 2), Training + campaign the same unless a test says otherwise; t215 and shop tests updated only with --review + Director OK.
+- **D-230** (2026-11-21 21:27Z, Jerry, picture review/D-230/jerry-eartray.png: the floor tray of 3 green ear-protection muffs with the E RANGE DRILLS prompt) "Move this prop to the range counter, make it destructible, improve the fidelity." Claude 7 in CG-7: tray onto the range counter/bench, real earmuffs (cups, padded band, foam), tray with depth/lip, shootable like the other props; the RANGE DRILLS E station moves with it (ChatGPT range-targets reads it).
+- **D-229** (2026-11-21 21:25Z, Jerry, picture review/D-229/jerry-monitor-switch.png: the taped cracked monitor) "Move this prop somewhere else. Put the light switch here instead." Claude 7 FIRST (before CG-7): move the CU-94 light switch (world/training.js SW block, DIRECTOR'S LOAN incl. the LIGHTS sign and stations.lightSwitch) to the monitor's wall spot at hand height (box ~0.95-1.35 m), facing the same way the monitor faces; move the cracked monitor + its note (world/training-wear.js) to a fitting new spot (not the doorway path). Switch keeps its lever/pilot/behaviour; station target, collision (game/training-station-collision.js) and range-targets follow tg.stations; gates station-reach/armory-collision/training unchanged. LOOK sheet, land (D-211).
+- **D-228** (2026-11-21 21:24Z, Jerry, picture review/D-227/jerry-keypad-flicker.png) "This black line to the right of the keypad keeps flickering." The thin dark vertical strip on the wall right of the security-door post (build-room side) flickers. Added to Claude 6's CF-21: find the cause (z-fight of a seam/column strip/wear decal with the wall, or cutaway fade, or shadow acne), fix it in the owner's file (named loan), prove with a native flicker map before/after (ChatGPT/Antigravity).
+- **D-227** (2026-11-21 21:22Z, Jerry, picture review/D-227/jerry-keypad.png) "Keypad has no body like it should. Just a floating keypad and floating screen." The Training security door keypads (world/training.js CL-146/AG-278 block, both sides) + the green status screen above them are flat plates on the striped post. Card CF-21 (Claude 6, DIRECTOR'S LOAN of the keypad/screen lines of world/training.js): one real access-control unit: a metal housing with depth, bevels, screws, a recessed screen with a bezel, raised keys with a rubber gasket, a conduit/cable into the post or wall; same interaction (E target, collider keeps the fence clearance, game/training-perimeter.js keypads boxes), same draws (kit materials). Sheet at the eye, LOOK, land.
+- **D-226** (2026-11-21 21:20Z, Jerry, picture review/D-226/jerry-props.png: mop bucket, mop, clipboard, mug by the range bench) "these props need higher fidelity and the ability to be shot and destroyed." Card CG-7 (Claude 7 lead, Training props): (1) fidelity: rebuild the small Training props (mop bucket + mop + squeegee, clipboard, mug, radio, glove, sandbags, calendar, notes, hose reel, broom, tote, etc.) to the marine/gun detail level (bevels, real proportions, wringer, rims, handles, wear); (2) destructible: every small prop reacts to bullets/explosions (knock, tip, roll, dent, shatter, paper flies, sand leaks) and breaks after enough hits; pieces settle and fade; the room resets when the player leaves Training or presses Clear all. Hit hook with ChatGPT (ballistics/target-hits), speed with Claude 2 (no new draws at rest, debris capped). Sheets + a short native clip to the Director, Jerry sees the finished props. Also: his picture shows the PISTOL in hand (D-224 thumb).
+- **D-224** (2026-11-21 21:18Z, Jerry, picture review/D-224/jerry-left-thumb.png) "Somebody fix this left thumb it is hooked and crooked. Not what it is supposed to look like." First-person LEFT (support) thumb on the gun in his shot is hooked/bent back over the grip. Owner Claude 1 (CD-20): find the gun + pose, straighten the thumb (natural, lying along the gun), check every gun's support thumb at the eye, Claude 5 checks motion; sheet to the Director, then land (D-211).
+- **D-225** (2026-11-21 21:18Z, Jerry, about CH-2 dummy mode) "If we are doing a dummy mode the zombies need to have a chip poking out of their brain like some sort of mad scientist put it in there to lobotomize them. (Chip only viewable when they are dummies)" Card CC-365 (Claude 3): a small brain chip on every Training kind's head (shambler, brute, spider, others), shown ONLY on dummy-mode zombies, hidden/absent otherwise; free when off; no logos or markings. ChatGPT (CH-2) sets the dummy flag that shows it.
+- **D-223** (2026-11-21 21:00Z, Jerry, about CH-2) "Don't give the option for players to toggle player damage. If you guys want to use that as a dev test or something hide it." The CH-2 Options tab has NO Player damage toggle: the player always takes damage in Training exercises. A no-damage switch may exist only as a hidden dev/test flag (URL or dev console, never in any player menu, never saved to the profile).
+- **D-222** (2026-11-21 19:30Z, Jerry, about CH-2) "Add all those. That's a great idea." Jerry approves ALL six CH-2 parts: wave builder (several kinds + counts, safe total cap), presets (+ Replay my last night, 3 saved custom waves), release modes (all at once / trickle / endless rising, countdown length), Training-only modifiers (speed, toughness, dummy mode, no damage to me, lights), kind info card, after-action stats (+ best time per preset). The mock still gets the Director LOOK and goes to Jerry to see the look; building may start in review copies now. Land in small steps (wave builder + presets first).
+- **D-221** (2026-11-21 19:27Z, Jerry) "Let's create a better more thorough zombie alarm menu for the training area. The one we have right now is pretty basic." Card CH-2: the Training HQ 'CALL IN ZOMBIES' panel v2 (wave builder, presets, release modes, Training-only modifiers, kind info card, after-action stats). Lead ChatGPT (ui/training-panel.js + deployment), look Claude 8 (style guide), shell lines Claude 2 by named loan. Spec + mock first, Director LOOK, Jerry sees the mock, then small landings.
 - **D-220** (2026-11-20 23:55Z, Jerry) "Feel free to crank up more agents in both ChatGPT and Antigravity. They both have a good amount of usage left." New crew: ChatGPT 3 (chatgpt3, GU-: native GPU camera + gate runner for the Training pass) and Antigravity 2 (antigravity2, AH-: hands-on QA playtest of the Training Area). Start sheets in Claude outputs/crew-start/. Only ONE game-test slot exists, so more GPU agents means more queueing: short runs.
 - **D-219** (2026-11-20 22:40Z, Jerry) "All those suggestions and whatever you think is best I give you full permission to execute. You don't need to ask me for things like that. Only areas that absolutely need me." Standing: the Director restarts crew sessions and spins up agents without asking; the Director's call stands for ordinary crew decisions. Commit fix (approved): the 13 unpushed checkpoints (HTTP 500, ~15.5k files, mostly review/) are squashed into one commit WITHOUT the new review/ files, review/ goes into .gitignore (the files stay on the PC), a local backup branch keeps the old commits, then push. One-off script Claude outputs/commit/Fix Push D-219.bat, run by Antigravity. Still Jerry's only: passwords/PINs/CAPTCHAs, money, publishing, security settings, deleting for good, his private files, and the FINISHED-zombie look verdicts (D-211).
 - **D-218** (2026-11-20 21:10Z, Jerry) TRAINING AREA PASS, five passes, in this order for landing (audits may run in parallel): (1) improve ALL current models in the training area AND their placement/realism (e.g. lights intersecting pillars, fences not fully enclosed; be thorough); (2) add depth and detail that tell a story: lived-in, a personality players feel immersed in; (3) performance pass; (4) final training-area MENU sweep: every menu and panel cohesive, comprehensive, as good as it can look, airtight before the big game; (5) colour scheme and grading: every item, player, zombie makes sense and looks appealing. Jerry: "You can spin up any additional agents you need." Owners: Claude 7 = Training Area lead (passes 1+2), Claude 6 = placement/intersection audit tools for pass 1, Claude 2 = pass 3 (after 1+2 land), Claude 8 = pass 4 menus, Claude 9 = pass 5 colour (audit now, changes after pass 2), ChatGPT/Antigravity = native screenshots and GPU checks. D-211 applies (Director LOOK + original gates); Jerry sees each FINISHED pass as one before/after tour.

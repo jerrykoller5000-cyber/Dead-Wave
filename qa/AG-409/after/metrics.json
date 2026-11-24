@@ -1,0 +1,190 @@
+{
+  "tag": "after",
+  "timestamp": "2026-11-24T01:54:03.373Z",
+  "backend": "WebGPU",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 41.02,
+  "pageErrors": [],
+  "perf": {
+    "frames": 150,
+    "meanMs": 27.89,
+    "meanFps": 35.9,
+    "medianMs": 33.2,
+    "p99Ms": 50.4,
+    "worstMs": 50.4,
+    "hitches": 5,
+    "callsPerFrame": 15.1,
+    "tris": 783901,
+    "lateCompiles": 0
+  },
+  "shots": [
+    {
+      "id": "01-sky-day-clouds",
+      "cap": "Daytime Sky, Sun Halo & Clouds",
+      "file": "qa/AG-409/after/01-sky-day-clouds.png",
+      "bytes": 1165763,
+      "info": {
+        "fogFar": 640
+      }
+    },
+    {
+      "id": "02-sky-dusk-lake",
+      "cap": "Golden Dusk · Lake Reflection & Sun Path",
+      "file": "qa/AG-409/after/02-sky-dusk-lake.png",
+      "bytes": 610035,
+      "info": {
+        "fogFar": 258
+      }
+    },
+    {
+      "id": "03-sky-night-stars-moon",
+      "cap": "Midnight Sky · Stars & Moon Disc",
+      "file": "qa/AG-409/after/03-sky-night-stars-moon.png",
+      "bytes": 150819,
+      "info": {
+        "moonDir": [
+          -0.11,
+          0.95,
+          -0.27
+        ]
+      }
+    },
+    {
+      "id": "04-sky-blood-moon-lake",
+      "cap": "Blood Moon Night · Lake & Clouds",
+      "file": "qa/AG-409/after/04-sky-blood-moon-lake.png",
+      "bytes": 228900,
+      "info": {
+        "fogFar": 65,
+        "day": 4
+      }
+    },
+    {
+      "id": "05-storm-day-rain",
+      "cap": "Daytime Rainstorm · Overcast, Streaks & Puddles",
+      "file": "qa/AG-409/after/05-storm-day-rain.png",
+      "bytes": 930562,
+      "info": {
+        "fogFar": 88,
+        "puddles": 7
+      }
+    },
+    {
+      "id": "06-storm-night-rain",
+      "cap": "Nighttime Rainstorm · Dark Storm Fog & Streaks",
+      "file": "qa/AG-409/after/06-storm-night-rain.png",
+      "bytes": 735586,
+      "info": {
+        "fogNear": 9,
+        "fogFar": 52
+      }
+    },
+    {
+      "id": "07-storm-lightning",
+      "cap": "Thunderstorm · Live Lightning Bolt & Sky Flash",
+      "file": "qa/AG-409/after/07-storm-lightning.png",
+      "bytes": 573631,
+      "info": {
+        "boltVisible": true
+      }
+    },
+    {
+      "id": "08-fog-night-lake",
+      "cap": "Fog Night · Creeping 30m Lake Mist",
+      "file": "qa/AG-409/after/08-fog-night-lake.png",
+      "bytes": 668304,
+      "info": {
+        "fogNear": 6,
+        "fogFar": 32
+      }
+    },
+    {
+      "id": "09-wind-gale-leaves",
+      "cap": "Wind Gale · Tumbling Leaves & Shoreline",
+      "file": "qa/AG-409/after/09-wind-gale-leaves.png",
+      "bytes": 1646979,
+      "info": {
+        "liveGaleLeaves": 87
+      }
+    },
+    {
+      "id": "10-water-river-rapids",
+      "cap": "River Rapids · Current, Foam & Water Ripples",
+      "file": "qa/AG-409/after/10-water-river-rapids.png",
+      "bytes": 1596928,
+      "info": {
+        "riverAt": [
+          -68,
+          -70
+        ]
+      }
+    },
+    {
+      "id": "11-pit-vortex-night",
+      "cap": "Lake Pit Vortex · Rising Bubbles at Night",
+      "file": "qa/AG-409/after/11-pit-vortex-night.png",
+      "bytes": 473133,
+      "info": {
+        "pitBubbles": {
+          "on": true,
+          "n": 22,
+          "visible": 18,
+          "popping": 2,
+          "maxY": -3.39
+        }
+      }
+    },
+    {
+      "id": "12-fire-campfire-scorch",
+      "cap": "Campfire, Ground Fire, Scorch Marks & Smoke",
+      "file": "qa/AG-409/after/12-fire-campfire-scorch.png",
+      "bytes": 1102987,
+      "info": {
+        "campfireLit": true
+      }
+    },
+    {
+      "id": "13-fire-napalm-rain",
+      "cap": "Napalm Pool & Fire Hit by Rain Steam",
+      "file": "qa/AG-409/after/13-fire-napalm-rain.png",
+      "bytes": 1384582,
+      "info": {
+        "groundFires": true
+      }
+    },
+    {
+      "id": "14-night-fireflies-bank",
+      "cap": "Night Riverbank · Bioluminescent Fireflies",
+      "file": "qa/AG-409/after/14-night-fireflies-bank.png",
+      "bytes": 673865,
+      "info": {
+        "motes": 5
+      }
+    },
+    {
+      "id": "15-storm-noon-verify",
+      "cap": "Noon Rainstorm · Overcast Sky Seam & Puddles",
+      "file": "qa/AG-409/after/15-storm-noon-verify.png",
+      "bytes": 975523,
+      "info": {
+        "fogNear": 9,
+        "fogFar": 88,
+        "puddles": 19
+      }
+    },
+    {
+      "id": "16-blood-moon-verify",
+      "cap": "True Blood Moon · Crimson Sky, Clouds & Lake",
+      "file": "qa/AG-409/after/16-blood-moon-verify.png",
+      "bytes": 224860,
+      "info": {
+        "fogFar": 65,
+        "day": 4,
+        "moonDir": [
+          -0.11,
+          0.95
+        ]
+      }
+    }
+  ]
+}

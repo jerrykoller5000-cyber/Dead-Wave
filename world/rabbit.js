@@ -15,6 +15,7 @@
 //   lobVelocity(from, to, g, t)              the throw that lands at `to` after `t` s under gravity `g` (pure)
 //   buildMound(T), buildKillerRabbit(T), buildHolyGrenade(T), buildReliquary(T)   the models (our own)
 import { mulberry } from './first-people.js';
+import { applyWeaponPBR, projectWeaponUVs } from '../studio/weapon-textures.js';
 
 export const RABBIT = Object.freeze({
   OUT_S: 0.45,          // s from the mouth to the grass
@@ -114,8 +115,10 @@ export function stepRabbit(r, dt, tgt) {
       if (live && d < RABBIT.GIVE_UP_R * 0.5) { r.mode = 'stare'; r.t = 0; break; }   // he followed it: it turns
       const step = Math.min(hd, RABBIT.HOME_SPEED * dt);
       if (hd > 1e-6) { r.x += hx / hd * step; r.z += hz / hd * step; r.yaw = Math.atan2(hx, hz); }
+      // Shorten the last bound as the animal tucks through the mouth.
       r.hop += dt * 4;
-      r.y = Math.abs(Math.sin(r.hop * Math.PI)) * 0.2;
+      const u = r.hop % 1;
+      r.y = 4 * u * (1 - u) * Math.min(0.2, hd * 0.45);
       if (hd - step < 0.05) { r.mode = 'asleep'; r.t = 0; r.y = -0.3; ev.push('asleep'); }
       break;
     }
@@ -224,7 +227,7 @@ export function buildMound(T, seed = 93) {
 export function buildKillerRabbit(T) {
   const g = new T.Group();
   g.name = 'killer-rabbit';
-  const fur = new T.MeshStandardMaterial({ color: 0xf4f2ee, roughness: 0.92 });
+  const fur = new T.MeshStandardMaterial({ color: 0xe7e2d7, roughness: 0.92 });
   const furShade = new T.MeshStandardMaterial({ color: 0xe6e2da, roughness: 0.95 });
   const pink = new T.MeshStandardMaterial({ color: 0xe9a0a8, roughness: 0.78 });
   const mawMat = new T.MeshStandardMaterial({ color: 0x4a0b10, roughness: 0.85 });
@@ -240,13 +243,13 @@ export function buildKillerRabbit(T) {
   };
 
   // Sculpted torso, muscular haunches, arched spine, and puffed chest ruff
-  const body = addM(g, new T.SphereGeometry(0.17, 14, 12), fur, 0, 0.17, -0.01, 0.92, 0.86, 1.28);
+  const body = addM(g, new T.SphereGeometry(0.17, 14, 12), fur, 0, 0.17, -0.025, 0.85, 0.88, 1.39);
   addM(g, new T.SphereGeometry(0.125, 12, 10), fur, 0, 0.21, 0.1, 0.96, 0.92, 0.95); // chest ruff
   addM(g, new T.SphereGeometry(0.095, 10, 8), furShade, 0, 0.12, 0.14, 0.85, 0.72, 0.85); // lower brisket
   addM(g, new T.SphereGeometry(0.05, 8, 6), bloodMat, 0, 0.15, 0.185, 0.65, 0.45, 0.32); // blood fleck on chest
 
   for (const s of [-1, 1]) {
-    addM(g, new T.SphereGeometry(0.115, 12, 10), fur, s * 0.088, 0.155, -0.075, 0.78, 1.05, 1.15, 0.12, 0, -s * 0.08); // muscular haunch
+    addM(g, new T.SphereGeometry(0.115, 12, 10), fur, s * 0.088, 0.155, -0.085, 0.86, 1.10, 1.26, 0.12, 0, -s * 0.08); // muscular haunch
     addM(g, new T.SphereGeometry(0.075, 10, 8), fur, s * 0.068, 0.16, 0.095, 0.72, 0.95, 0.88); // shoulder
   }
 
@@ -325,12 +328,12 @@ export function buildKillerRabbit(T) {
 export function buildHolyGrenade(T) {
   const g = new T.Group();
   g.name = 'holy-grenade';
-  const gold = new T.MeshStandardMaterial({ color: 0xd9a92b, roughness: 0.3, metalness: 0.85 });
-  const red = new T.MeshStandardMaterial({ color: 0xb3122a, roughness: 0.25, metalness: 0.3 });
-  const blue = new T.MeshStandardMaterial({ color: 0x1d4fb8, roughness: 0.25, metalness: 0.3 });
+  const gold = applyWeaponPBR(T, new T.MeshStandardMaterial({ color: 0xd9a92b, roughness: 0.3, metalness: 0.85 }), 'chasedGold', { useMap: true, useMetalMap: true });
+  const red = applyWeaponPBR(T, new T.MeshStandardMaterial({ color: 0xb3122a, roughness: 0.22, metalness: 0.3 }), 'opticalGlass', { useMap: false, normalScale: 0.06, aoIntensity: 0.18 });
+  const blue = applyWeaponPBR(T, new T.MeshStandardMaterial({ color: 0x1d4fb8, roughness: 0.22, metalness: 0.3 }), 'opticalGlass', { useMap: false, normalScale: 0.06, aoIntensity: 0.18 });
   // One gold skin carries the raised equator and the six coloured facets. The
   // jewels follow the outer profile, so their hidden backs cannot cut into it.
-  const pos=[], indices=[[],[],[]], sides=48;
+  const pos=[], uvs=[], indices=[[],[],[]], sides=48;
   const ys=[0,.005,.019,.041,.069,.083,.088,.092,.096,.10,.104,.108,.112,.117,.131,.159,.181,.195,.20];
   function surface(a,y) {
     const dy=y-.1, turn=Math.PI/3, sector=Math.round(a/turn);
@@ -344,6 +347,7 @@ export function buildHolyGrenade(T) {
   for(let row=0;row<ys.length;row++) for(let k=0;k<sides;k++) {
     const a=k*2*Math.PI/sides,y=ys[row],r=surface(a,y).r;
     pos.push(r*Math.cos(a),y,r*Math.sin(a));
+    uvs.push((k/sides)*2.0, (y/0.20)*1.0);
     if(row===ys.length-1) continue;
     const v=row*sides+k,w=row*sides+(k+1)%sides;
     const m=surface(a+Math.PI/sides,(y+ys[row+1])/2).mat;
@@ -351,6 +355,7 @@ export function buildHolyGrenade(T) {
   }
   const geometry=new T.BufferGeometry();
   geometry.setAttribute('position',new T.Float32BufferAttribute(pos,3));
+  geometry.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));
   let first=0;
   for(let i=0;i<indices.length;i++) {geometry.addGroup(first,indices[i].length,i); first+=indices[i].length;}
   geometry.setIndex(indices.flat()); geometry.computeVertexNormals();
@@ -358,6 +363,7 @@ export function buildHolyGrenade(T) {
   box(T,g,.02,.09,.02,gold,0,.245,0);
   for(const side of [-1,1]) box(T,g,.025,.02,.02,gold,side*.0225,.26,0);
   const ring = new T.Mesh(new T.TorusGeometry(0.022, 0.005, 5, 10), gold); ring.position.set(0.06, 0.2104, 0); ring.name = 'holy-grenade-pin'; g.add(ring);
+  projectWeaponUVs(g, { tileMeters: 0.14, skip: (o) => o === orb });
   return g;
 }
 

@@ -1,0 +1,443 @@
+{
+  "tag": "before",
+  "timestamp": "2026-11-23T22:38:26.495Z",
+  "backend": "WebGPU",
+  "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "loadSec": 44.39,
+  "pageErrors": [],
+  "groundInfo": {
+    "groundDetail": true,
+    "matType": "MeshStandardNodeMaterial",
+    "hasNormalNode": false,
+    "hasRoughnessNode": false,
+    "attrs": [
+      "position",
+      "color",
+      "gworn",
+      "gwear",
+      "normal"
+    ],
+    "detailTex": {
+      "w": 256,
+      "h": 256,
+      "name": ""
+    },
+    "memTextures": 191,
+    "memGeos": 3512
+  },
+  "perf": {
+    "hq": {
+      "name": "hq_yard_overview",
+      "frames": 120,
+      "meanMs": 24.86,
+      "meanFps": 40.2,
+      "medianMs": 16.9,
+      "p99Ms": 33.7,
+      "p99Fps": 29.7,
+      "worstMs": 50.1,
+      "hitches": 1,
+      "callsPerFrame": 15.1,
+      "tris": 1852631,
+      "geometries": 3393,
+      "textures": 183
+    },
+    "meadow": {
+      "name": "meadow_open_1p",
+      "frames": 120,
+      "meanMs": 19.58,
+      "meanFps": 51.1,
+      "medianMs": 16.7,
+      "p99Ms": 33.4,
+      "p99Fps": 29.9,
+      "worstMs": 33.5,
+      "hitches": 0,
+      "callsPerFrame": 15.1,
+      "tris": 1332683,
+      "geometries": 3402,
+      "textures": 183
+    },
+    "forest": {
+      "name": "forest_floor_pine",
+      "frames": 120,
+      "meanMs": 30.14,
+      "meanFps": 33.2,
+      "medianMs": 33.3,
+      "p99Ms": 50,
+      "p99Fps": 20,
+      "worstMs": 50.3,
+      "hitches": 1,
+      "callsPerFrame": 15.1,
+      "tris": 2076765,
+      "geometries": 3425,
+      "textures": 186
+    }
+  },
+  "shots": [
+    {
+      "id": "01-hq-yard-overview",
+      "cap": "HQ / FOB Threshold gravel yard & trail starts (Noon)",
+      "file": "qa/AH-9/before/01-hq-yard-overview.png",
+      "bytes": 2205163,
+      "cam": {
+        "x": 14.5,
+        "y": 5.59,
+        "z": -16.5,
+        "tx": 1,
+        "ty": -2.77,
+        "tz": -2.5,
+        "fov": 62
+      }
+    },
+    {
+      "id": "02-hq-ruts-close",
+      "cap": "1P close-up: FOB south tyre ruts, gravel & grass edge",
+      "file": "qa/AH-9/before/02-hq-ruts-close.png",
+      "bytes": 1462189,
+      "cam": {
+        "x": 6.8,
+        "y": -1.42,
+        "z": -14.8,
+        "tx": 4.4,
+        "ty": -3.12,
+        "tz": -8.2,
+        "fov": 58
+      }
+    },
+    {
+      "id": "03-hq-north-utility",
+      "cap": "HQ north utility yard: generator, drums & ground blend",
+      "file": "qa/AH-9/before/03-hq-north-utility.png",
+      "bytes": 1565629,
+      "cam": {
+        "x": -8.2,
+        "y": -0.57,
+        "z": 12.2,
+        "tx": -3.5,
+        "ty": -2.92,
+        "tz": 6.8,
+        "fov": 60
+      }
+    },
+    {
+      "id": "04-trunk-trail-close",
+      "cap": "1P close-up: trunk dirt trail, ruts, pebbles & trampled fringe",
+      "file": "qa/AH-9/before/04-trunk-trail-close.png",
+      "bytes": 1762160,
+      "cam": {
+        "x": 13.28,
+        "y": -1.41,
+        "z": 18.86,
+        "tx": 20.38,
+        "ty": -3.08,
+        "tz": 14.26,
+        "fov": 58
+      }
+    },
+    {
+      "id": "05-trail-junction",
+      "cap": "Trail junction hub & branching tracks through meadow",
+      "file": "qa/AH-9/before/05-trail-junction.png",
+      "bytes": 2016023,
+      "cam": {
+        "x": 42.23,
+        "y": 3.56,
+        "z": 25.07,
+        "tx": 33.73,
+        "ty": -1.4,
+        "tz": 33.57,
+        "fov": 62
+      }
+    },
+    {
+      "id": "06-meadow-open-1p",
+      "cap": "1P open valley meadow grass, tufts & distant ridge",
+      "file": "qa/AH-9/before/06-meadow-open-1p.png",
+      "bytes": 1449995,
+      "cam": {
+        "x": 28,
+        "y": -1.09,
+        "z": 18,
+        "tx": 58,
+        "ty": -0.81,
+        "tz": 34,
+        "fov": 64
+      }
+    },
+    {
+      "id": "07-forest-floor-pine",
+      "cap": "Dense pine forest floor: needles, moss & canopy contact",
+      "file": "qa/AH-9/before/07-forest-floor-pine.png",
+      "bytes": 1190591,
+      "cam": {
+        "x": 126.94,
+        "y": 2.03,
+        "z": 18.18,
+        "tx": 120.44,
+        "ty": -2.24,
+        "tz": 11.68,
+        "fov": 64
+      }
+    },
+    {
+      "id": "08-forest-floor-woods",
+      "cap": "Mixed oak/autumn woodland floor: leaf litter & humus",
+      "file": "qa/AH-9/before/08-forest-floor-woods.png",
+      "bytes": 1548809,
+      "cam": {
+        "x": -56.11,
+        "y": -0.89,
+        "z": -3.9,
+        "tx": -62.51,
+        "ty": -1.53,
+        "tz": -10.3,
+        "fov": 64
+      }
+    },
+    {
+      "id": "09-river-bridge-approach",
+      "cap": "River bridge graded dirt embankment & riverbank transition",
+      "file": "qa/AH-9/before/09-river-bridge-approach.png",
+      "bytes": 1996609,
+      "cam": {
+        "x": 47.27,
+        "y": 9.59,
+        "z": 88.21,
+        "tx": 56.21,
+        "ty": 2,
+        "tz": 75.84,
+        "fov": 62
+      }
+    },
+    {
+      "id": "10-riverbank-close",
+      "cap": "1P riverbank waterline: damp margin, silt, cobbles & grass",
+      "file": "qa/AH-9/before/10-riverbank-close.png",
+      "bytes": 1527228,
+      "cam": {
+        "x": 74.94,
+        "y": 6.71,
+        "z": 66.7,
+        "tx": 71.39,
+        "ty": 1.05,
+        "tz": 73.96,
+        "fov": 60
+      }
+    },
+    {
+      "id": "11-lake-shore-dock",
+      "cap": "Lake shingle shoreline, damp strip, dock & shallow bed",
+      "file": "qa/AH-9/before/11-lake-shore-dock.png",
+      "bytes": 1807227,
+      "cam": {
+        "x": -82.53,
+        "y": 2.72,
+        "z": -49.67,
+        "tx": -87.69,
+        "ty": -4,
+        "tz": -66.08,
+        "fov": 62
+      }
+    },
+    {
+      "id": "12-hillside-rock-heath",
+      "cap": "Valley slope: grass to alpine heath, bare soil, strata rock & snow",
+      "file": "qa/AH-9/before/12-hillside-rock-heath.png",
+      "bytes": 1868628,
+      "cam": {
+        "x": 150,
+        "y": 22.99,
+        "z": 145,
+        "tx": 195,
+        "ty": 25.3,
+        "tz": 190,
+        "fov": 60
+      }
+    },
+    {
+      "id": "13-camp-rangers",
+      "cap": "Rangers camp: pine needle floor, hearth & beaten clearing",
+      "file": "qa/AH-9/before/13-camp-rangers.png",
+      "bytes": 1857419,
+      "cam": {
+        "x": 139,
+        "y": 2.18,
+        "z": 10,
+        "tx": 128,
+        "ty": -3.55,
+        "tz": 0,
+        "fov": 62
+      }
+    },
+    {
+      "id": "14-camp-hikers",
+      "cap": "Hikers camp: mossy lakeside turf & worn clearing",
+      "file": "qa/AH-9/before/14-camp-hikers.png",
+      "bytes": 2073177,
+      "cam": {
+        "x": 33,
+        "y": 15.26,
+        "z": -116,
+        "tx": 22,
+        "ty": 10.13,
+        "tz": -126,
+        "fov": 62
+      }
+    },
+    {
+      "id": "15-camp-trapper",
+      "cap": "Trapper camp: autumn duff, leaf yard & cellar terrain cap",
+      "file": "qa/AH-9/before/15-camp-trapper.png",
+      "bytes": 2009137,
+      "cam": {
+        "x": 1,
+        "y": 12.77,
+        "z": 151,
+        "tx": -9,
+        "ty": 4.29,
+        "tz": 139,
+        "fov": 62
+      }
+    },
+    {
+      "id": "16-graveyard-ground",
+      "cap": "Graveyard: cold mossy turf, turned earth & dirt aisle",
+      "file": "qa/AH-9/before/16-graveyard-ground.png",
+      "bytes": 1984565,
+      "cam": {
+        "x": -78.96,
+        "y": 5.71,
+        "z": 100.15,
+        "tx": -89.96,
+        "ty": 0.72,
+        "tz": 89.15,
+        "fov": 62
+      }
+    },
+    {
+      "id": "17-coldwater-ruins",
+      "cap": "Coldwater church ruin: mossy stone walls & floor transition",
+      "file": "qa/AH-9/before/17-coldwater-ruins.png",
+      "bytes": 1819195,
+      "cam": {
+        "x": -78.17,
+        "y": 8.34,
+        "z": 123.08,
+        "tx": -88.17,
+        "ty": 3.11,
+        "tz": 112.08,
+        "fov": 62
+      }
+    },
+    {
+      "id": "18-fuel-depot-ground",
+      "cap": "Fuel depot: industrial gravel, oil/cinder yard & trail spur",
+      "file": "qa/AH-9/before/18-fuel-depot-ground.png",
+      "bytes": 2025284,
+      "cam": {
+        "x": -105,
+        "y": 4.85,
+        "z": 21,
+        "tx": -116,
+        "ty": 0.65,
+        "tz": 10,
+        "fov": 62
+      }
+    },
+    {
+      "id": "19-cordon-convoy-road",
+      "cap": "Cordon checkpoint & convoy gravel/rutted road junction",
+      "file": "qa/AH-9/before/19-cordon-convoy-road.png",
+      "bytes": 1359028,
+      "cam": {
+        "x": -203.7,
+        "y": 8.73,
+        "z": -11.52,
+        "tx": -215.86,
+        "ty": 3.88,
+        "tz": -5.84,
+        "fov": 62
+      }
+    },
+    {
+      "id": "20-cave-iron-mouth",
+      "cap": "Iron cave mouth: cap blend, ore-tailings apron & rock face",
+      "file": "qa/AH-9/before/20-cave-iron-mouth.png",
+      "bytes": 1554137,
+      "cam": {
+        "x": -152.09,
+        "y": 3.04,
+        "z": 80.52,
+        "tx": -159.65,
+        "ty": 1.28,
+        "tz": 89.25,
+        "fov": 62
+      }
+    },
+    {
+      "id": "21-cave-wet-mouth",
+      "cap": "Wet/root cave mouth: muddy dooryard & mossy rock collar",
+      "file": "qa/AH-9/before/21-cave-wet-mouth.png",
+      "bytes": 1627605,
+      "cam": {
+        "x": -174.47,
+        "y": 4.68,
+        "z": -12.71,
+        "tx": -184.78,
+        "ty": 2.52,
+        "tz": -7.53,
+        "fov": 62
+      }
+    },
+    {
+      "id": "22-valley-dusk",
+      "cap": "Dusk raking light: HQ yard, trunk trail & meadow relief",
+      "file": "qa/AH-9/before/22-valley-dusk.png",
+      "bytes": 1216254,
+      "cam": {
+        "x": 15.5,
+        "y": 1,
+        "z": -15.5,
+        "tx": 1.5,
+        "ty": -2.97,
+        "tz": -3.5,
+        "fov": 62
+      }
+    },
+    {
+      "id": "23-hq-trail-night",
+      "cap": "Night with FOB sodium lamps & marine flashlight on ground",
+      "file": "qa/AH-9/before/23-hq-trail-night.png",
+      "bytes": 1069789,
+      "cam": {
+        "x": 13,
+        "y": 0.63,
+        "z": -14.5,
+        "tx": 1,
+        "ty": -2.97,
+        "tz": -3.5,
+        "fov": 62
+      }
+    },
+    {
+      "id": "24-hq-overcast-rain",
+      "cap": "Overcast / Rainstorm (wetness = 1.0): damp ground & sheen",
+      "file": "qa/AH-9/before/24-hq-overcast-rain.png",
+      "bytes": 1416678,
+      "cam": {
+        "x": 11.5,
+        "y": 0.23,
+        "z": -14.5,
+        "tx": 2.5,
+        "ty": -3.07,
+        "tz": -6,
+        "fov": 62
+      }
+    },
+    {
+      "id": "25-hollow-iron-floor",
+      "cap": "Hollows underground iron warren floor & walls",
+      "file": "qa/AH-9/before/25-hollow-iron-floor.png",
+      "bytes": 331821
+    }
+  ]
+}

@@ -1,4 +1,31 @@
-.survivor-talk-card { z-index: 170; max-height: calc(100dvh - 100px); overflow-y: auto; }
-.survivor-talk-card button { pointer-events: auto; margin-top: 8px; min-height: 44px; padding: 8px 16px; border: 1px solid #e2c875;
-  background: #1a2019; color: #e2c875; font: 700 12px var(--font-hud); cursor: pointer; }
+.survivor-talk-card {
+  z-index: 170;
+  max-height: calc(100dvh - 100px);
+  overflow-y: auto;
+  border-left: 3px solid #c9b574;
+}
+.survivor-talk-card::before {
+  content: attr(data-role);
+  display: block;
+  margin-bottom: 4px;
+  font: 700 10px/1.2 var(--font-hud);
+  letter-spacing: 0.12em;
+  color: #9ba58e;
+}
+.survivor-talk-card[data-who="okafor"] { border-left-color: #6bc47e; }
+.survivor-talk-card[data-who="brandt"] { border-left-color: #d49c4f; }
+.survivor-talk-card[data-who="pike"]   { border-left-color: #82a9c4; }
+.survivor-talk-card[data-mood="combat"] { border-left-color: #d86448; }
+.survivor-talk-card[data-mood="heavy"]  { border-left-color: #c9bf9c; }
+.survivor-talk-card button {
+  pointer-events: auto;
+  margin-top: 8px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid #e2c875;
+  background: #1a2019;
+  color: #e2c875;
+  font: 700 12px var(--font-hud);
+  cursor: pointer;
+}
 .survivor-talk-card button:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }

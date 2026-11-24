@@ -1,10 +1,21 @@
+import { getWeaponPBR } from './weapon-textures.js';
+
 // Separate a coated surface from hardware using the same factory material before
 // the rigid-mesh batcher joins them. The armory owns each gun's mutable copies.
 const paintVariants = new WeakMap();
 
-let walnutGrain;
+const walnutCache = new WeakMap();
 export function walnutTexture(T) {
-  if (walnutGrain) return walnutGrain;
+  if (walnutCache.has(T)) return walnutCache.get(T);
+  const pbr = getWeaponPBR(T, 'walnut');
+  if (pbr?.map) {
+    const tex = pbr.map.clone();
+    tex.name = 'oiled gunstock walnut grain';
+    tex.repeat.set(3, 1.5);
+    tex.needsUpdate = true;
+    walnutCache.set(T, tex);
+    return tex;
+  }
   const size = 128, data = new Uint8Array(size * size * 4);
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
     const u = 2 * Math.PI * x / size, v = 2 * Math.PI * y / size;
@@ -14,18 +25,28 @@ export function walnutTexture(T) {
     const i = (y * size + x) * 4;
     data[i] = value; data[i + 1] = value; data[i + 2] = value; data[i + 3] = 255;
   }
-  walnutGrain = new T.DataTexture(data, size, size);
-  walnutGrain.wrapS = walnutGrain.wrapT = T.RepeatWrapping;
-  walnutGrain.magFilter = T.LinearFilter;
-  walnutGrain.minFilter = T.LinearMipmapLinearFilter;
-  walnutGrain.generateMipmaps = true; walnutGrain.needsUpdate = true;
-  walnutGrain.repeat.set(3, 1.5);
-  return walnutGrain;
+  const fallback = new T.DataTexture(data, size, size);
+  fallback.wrapS = fallback.wrapT = T.RepeatWrapping;
+  fallback.magFilter = T.LinearFilter;
+  fallback.minFilter = T.LinearMipmapLinearFilter;
+  fallback.generateMipmaps = true; fallback.needsUpdate = true;
+  fallback.repeat.set(3, 1.5);
+  walnutCache.set(T, fallback);
+  return fallback;
+}
+
+export function walnutPBR(T) {
+  return getWeaponPBR(T, 'walnut');
 }
 
 // Original, tileable lacquered birch. The lower half is long grain and the upper
 // half is the exposed laminate. Both share one texture and one render material.
 export function birchTexture(T) {
+  const pbr = getWeaponPBR(T, 'birch');
+  if (pbr?.map) {
+    pbr.map.name = 'lacquered birch grain and cut edges';
+    return pbr.map;
+  }
   const width = 512, half = 128, data = new Uint8Array(width * half * 2 * 4);
   const noise = new Uint8Array(256 * 256);
   let seed = 0x64a243f7;
@@ -65,6 +86,10 @@ export function birchTexture(T) {
   map.generateMipmaps = true;
   map.needsUpdate = true;
   return map;
+}
+
+export function birchPBR(T) {
+  return getWeaponPBR(T, 'birch');
 }
 
 // Slabs are unindexed, so cap and edge triangles can use separate atlas regions

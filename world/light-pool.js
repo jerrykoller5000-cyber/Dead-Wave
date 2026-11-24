@@ -57,28 +57,47 @@ export function createLightPool(THREE, scene, { size = 4, layer = 31, reach = 26
     });
     return n;
   }
-  const cands = [];
+  const topL = new Array(size), topS = new Float64Array(size), topX = new Float64Array(size), topY = new Float64Array(size), topZ = new Float64Array(size);
   function update(focus) {
-    cands.length = 0;
+    // AG-419: zero-allocation top-K selection (eliminates per-light Math.hypot/object + filter/sort/slice every frame).
+    let n = 0;
+    const fx = focus ? focus.x : 0, fy = focus ? focus.y : 0, fz = focus ? focus.z : 0;
     for (const L of stand) {
-      if (!(L.intensity > 0.001) || !live(L)) continue;
+      const intensity = L.intensity;
+      if (!(intensity > 0.001) || !live(L)) continue;
       L.updateWorldMatrix(true, false);
-      _p.setFromMatrixPosition(L.matrixWorld);
-      const d = focus ? Math.hypot(_p.x - focus.x, _p.y - focus.y, _p.z - focus.z) : 0;
-      const score = scoreLight({ intensity: L.intensity, distance: L.distance, d }, reach);
-      if (score > 0) cands.push({ light: L, score, x: _p.x, y: _p.y, z: _p.z });
+      const e = L.matrixWorld.elements;
+      const lx = e[12], ly = e[13], lz = e[14];
+      let d = 0;
+      if (focus) { const dx = lx - fx, dy = ly - fy, dz = lz - fz; d = Math.sqrt(dx * dx + dy * dy + dz * dz); }
+      const dist = L.distance;
+      const over = dist > 0 ? d - dist : 0;
+      if (over > reach) continue;
+      const fade = over > 0 ? 1 - over / reach : 1;
+      const score = intensity * fade / (1 + d * 0.04);
+      if (!(score > 0)) continue;
+      if (n < size || score > topS[n - 1]) {
+        let pos = n < size ? n++ : size - 1;
+        while (pos > 0 && score > topS[pos - 1]) {
+          topL[pos] = topL[pos - 1]; topS[pos] = topS[pos - 1];
+          topX[pos] = topX[pos - 1]; topY[pos] = topY[pos - 1]; topZ[pos] = topZ[pos - 1];
+          pos--;
+        }
+        topL[pos] = L; topS[pos] = score; topX[pos] = lx; topY[pos] = ly; topZ[pos] = lz;
+      }
     }
-    const chosen = pickLights(cands, size);
     for (let i = 0; i < size; i++) {
-      const R = lights[i], c = chosen[i];
-      if (!c) { if (R.intensity !== 0) R.intensity = 0; continue; }
-      R.position.set(c.x, c.y, c.z);
-      R.color.copy(c.light.color);
-      R.intensity = c.light.intensity;
-      R.distance = c.light.distance;
-      R.decay = c.light.decay;
+      const R = lights[i];
+      if (i >= n) { if (R.intensity !== 0) R.intensity = 0; continue; }
+      const L = topL[i];
+      R.position.set(topX[i], topY[i], topZ[i]);
+      R.color.copy(L.color);
+      R.intensity = L.intensity;
+      R.distance = L.distance;
+      R.decay = L.decay;
+      topL[i] = null;
     }
-    return chosen.length;
+    return n;
   }
   return { lights, adopt, update, standIns: () => [...stand] };
 }

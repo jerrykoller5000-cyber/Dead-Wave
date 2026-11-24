@@ -15,6 +15,15 @@ export function magazineHudItems(snapshot) {
   }));
 }
 
+// The snapshot can contain a second gun that is not currently drawn.
+function spareCue(weapon, snapshot) {
+  if (weapon === 'flamer' || snapshot?.loaded?.length !== 1 || snapshot.loaded[0] >= snapshot.size) return null;
+  if (!snapshot.spare.length) return {key:'noSpares'};
+  const fullest = Math.max(...snapshot.spare);
+  if (fullest <= snapshot.loaded[0]) return {key:'noFuller'};
+  return {key:'fuller', rounds:fullest, index:snapshot.spare.indexOf(fullest)};
+}
+
 // GP-144: restore GP-79 beside the later, explicitly requested Bullets total.
 // This view never writes the magazine store. Unchanged spare lists reuse the DOM.
 export function createMagazineHud({ammo, text}) {
@@ -28,20 +37,36 @@ export function createMagazineHud({ammo, text}) {
   return {
     render(weapon,snapshot) {
       if (weapon === 'revolver' || weapon === 'launcher' || snapshot?.reserveKind === 'rounds') snapshot = null;
-      const next=snapshot?weapon+':'+snapshot.size+':'+snapshot.spare.join(','):'';
+      const cue = spareCue(weapon,snapshot);
+      const next=snapshot?weapon+':'+snapshot.size+':'+snapshot.spare.join(',')+':'+(cue?.key??''):'';
       if(next===signature)return;signature=next;root.replaceChildren();root.hidden=!snapshot;
       if(!snapshot){root.removeAttribute('aria-label');measure();return;}
       const items=magazineHudItems(snapshot),unit=ammoReserveUnit(weapon,true);
-      const count=text('hud.ammo.magCount',{count:items.length,unit:text('hud.ammo.'+unit)});
-      const label=doc.createElement('span');label.className='mag-count';label.textContent=count;
+      const count = cue?.key === 'noSpares' ? text('hud.ammo.magNoSpares') :
+        text('hud.ammo.magCount',{count:items.length,unit:text('hud.ammo.'+unit)});
+      const summary = doc.createElement('span'); summary.className = 'mag-summary';
+      const label = doc.createElement('span'); label.className = 'mag-count'; label.textContent = count;
+      summary.append(label);
+      let advice = '';
+      if (cue && cue.key !== 'noSpares') {
+        advice = text(cue.key === 'fuller' ? 'hud.ammo.magFuller' : 'hud.ammo.magNoFuller',{rounds:cue.rounds});
+        const hint = doc.createElement('span');
+        hint.className = 'mag-advice';
+        hint.textContent = advice;
+        summary.append(hint);
+      }
       const list=doc.createElement('span');list.className='mag-list';list.setAttribute('aria-hidden','true');
-      for(const item of items){
+      for(const [index,item] of items.entries()){
         const glyph=doc.createElement('span');glyph.className='mag-glyph'+(weapon==='revolver'?' loader':'')+(item.fullness<100?' partial':'');
+        if (index === cue?.index) glyph.classList.add('mag-next');
         glyph.dataset.rounds=String(item.rounds);glyph.style.setProperty('--fill',item.fullness+'%');glyph.textContent=String(item.rounds);
         glyph.title=text('hud.ammo.magFill',item);list.append(glyph);
       }
-      root.setAttribute('aria-label',count+(items.length?': '+items.map(item=>text('hud.ammo.magFill',item)).join(', '):''));
-      root.append(label,list);measure();
+      const inventory = items.map(item=>text('hud.ammo.magFill',item)).join(', ');
+      root.setAttribute('aria-label',[count,advice,inventory].filter(Boolean).join('. '));
+      root.append(summary);
+      if (items.length) root.append(list);
+      measure();
     },
     dispose(){observer?.disconnect();root.remove();ammo.parentElement?.style.removeProperty('--ammo-hud-height');}
   };

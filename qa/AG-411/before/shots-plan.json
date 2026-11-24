@@ -1,0 +1,283 @@
+[
+  {
+    "id": "01-cordon-overwatch-pylons",
+    "cap": "West Cordon Gate: Overwatch, pass road & powerlines (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": -203.36,
+      "y": 11.92,
+      "z": -16.19,
+      "tx": -349.99,
+      "ty": 146.61,
+      "tz": 2.74,
+      "fov": 64
+    }
+  },
+  {
+    "id": "02-river-trestle-cascade",
+    "cap": "ESE River Gate: Broken logging trestle & alpine cascade (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": 173.68,
+      "y": 10.83,
+      "z": 107.01,
+      "tx": 236.41,
+      "ty": 28.76,
+      "tz": 134.51,
+      "fov": 62
+    }
+  },
+  {
+    "id": "03-north-ridgeline",
+    "cap": "North wall: Ridgeline PGB radar command & crags (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": 10.57,
+      "y": 13.88,
+      "z": -201.72,
+      "tx": 84.19,
+      "ty": 147.03,
+      "tz": -337.66,
+      "fov": 62
+    }
+  },
+  {
+    "id": "04-ne-pass-farm-viaduct",
+    "cap": "NE wall: Pass viaduct, farmstead barn/silo & far range (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": 176.67,
+      "y": 12.35,
+      "z": -97.93,
+      "tx": 301.1,
+      "ty": 52.36,
+      "tz": -146.85,
+      "fov": 62
+    }
+  },
+  {
+    "id": "05-se-lookout-gorge",
+    "cap": "SE wall: Wilderness Ranger Fire-Lookout & gorge peaks (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": 107.04,
+      "y": 12.12,
+      "z": 171.31,
+      "tx": 122.87,
+      "ty": 130.15,
+      "tz": 304.12,
+      "fov": 62
+    }
+  },
+  {
+    "id": "06-south-mill-headframe",
+    "cap": "South wall: Coldwater ore mill, smokestack & headframe (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": -69.09,
+      "y": 14.15,
+      "z": 189.82,
+      "tx": -81.59,
+      "ty": 59.13,
+      "tz": 284.53,
+      "fov": 60
+    }
+  },
+  {
+    "id": "07-sw-lake-waterfall-stones",
+    "cap": "SW Lake: Glacial waterfall, alpine ridges & pass (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": -136.79,
+      "y": 5,
+      "z": -92.27,
+      "tx": -310.89,
+      "ty": 102.12,
+      "tz": -209.7,
+      "fov": 64
+    }
+  },
+  {
+    "id": "08-nw-standing-stones-crags",
+    "cap": "NW wall: First People standing stones, crags & forest (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": -124.36,
+      "y": 4.3,
+      "z": -159.18,
+      "tx": -178.69,
+      "ty": 69.22,
+      "tz": -245.94,
+      "fov": 62
+    }
+  },
+  {
+    "id": "09-east-forest-timberline",
+    "cap": "East wall: Outer conifer/larch forest & far alpine range (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": 203.5,
+      "y": 4.45,
+      "z": -14.23,
+      "tx": 385,
+      "ty": 112.09,
+      "tz": 0,
+      "fov": 64
+    }
+  },
+  {
+    "id": "10-player-eye-west",
+    "cap": "Player eye-height inside West circle looking over wall (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": -193.39,
+      "y": 9.02,
+      "z": -15.39,
+      "tx": -263.16,
+      "ty": 44.4,
+      "tz": 31.18,
+      "fov": 68
+    }
+  },
+  {
+    "id": "11-player-eye-north",
+    "cap": "Player eye-height inside North circle toward Ridgeline (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": 49.06,
+      "y": 6.19,
+      "z": -171.1,
+      "tx": 84.19,
+      "ty": 151.03,
+      "tz": -337.66,
+      "fov": 68
+    }
+  },
+  {
+    "id": "12-hq-north-pano",
+    "cap": "HQ overlook: Full North valley panorama & alpine horizons (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": 0,
+      "y": 14.83,
+      "z": 0,
+      "tx": 0,
+      "ty": 96.83,
+      "tz": -380,
+      "fov": 66
+    }
+  },
+  {
+    "id": "13-hq-south-pano",
+    "cap": "HQ overlook: Full SE valley panorama, trestle & lookout (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": 0,
+      "y": 14.83,
+      "z": 0,
+      "tx": 220,
+      "ty": 81.74,
+      "tz": 310,
+      "fov": 66
+    }
+  },
+  {
+    "id": "14-tele-ridgeline",
+    "cap": "Telephoto zoom from inside circle: Ridgeline & crags (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": 10.68,
+      "y": 14.48,
+      "z": -203.72,
+      "tx": 84.19,
+      "ty": 151.03,
+      "tz": -337.66,
+      "fov": 30
+    }
+  },
+  {
+    "id": "15-tele-trestle-cascade",
+    "cap": "Telephoto zoom from inside circle: Trestle, cascade & pines (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": 173.68,
+      "y": 11.33,
+      "z": 107.01,
+      "tx": 236.41,
+      "ty": 24.76,
+      "tz": 134.51,
+      "fov": 34
+    }
+  },
+  {
+    "id": "16-tele-overwatch-pylon",
+    "cap": "Telephoto zoom from inside circle: Cordon Overwatch & pylon (Noon)",
+    "time": "noon",
+    "cam": {
+      "x": -201.79,
+      "y": 10.13,
+      "z": 29.97,
+      "tx": -263.16,
+      "ty": 34.4,
+      "tz": 31.18,
+      "fov": 34
+    }
+  },
+  {
+    "id": "17-overcast-rain-cordon",
+    "cap": "Overcast / Rain lighting: West pass, Overwatch & outer woods",
+    "time": "afternoon",
+    "rain": 0.85,
+    "cam": {
+      "x": -203.36,
+      "y": 11.92,
+      "z": -16.19,
+      "tx": -349.99,
+      "ty": 146.61,
+      "tz": 2.74,
+      "fov": 64
+    }
+  },
+  {
+    "id": "18-dusk-ridgeline",
+    "cap": "Golden Dusk: North Ridgeline alpenglow, haze & beacons",
+    "time": "dusk",
+    "cam": {
+      "x": 10.57,
+      "y": 13.88,
+      "z": -201.72,
+      "tx": 84.19,
+      "ty": 147.03,
+      "tz": -337.66,
+      "fov": 62
+    }
+  },
+  {
+    "id": "19-dusk-se-lookout",
+    "cap": "Golden Dusk: SE Fire Lookout lantern & misty gorge",
+    "time": "dusk",
+    "cam": {
+      "x": 107.04,
+      "y": 12.12,
+      "z": 171.31,
+      "tx": 122.87,
+      "ty": 130.15,
+      "tz": 304.12,
+      "fov": 62
+    }
+  },
+  {
+    "id": "20-night-ridgeline-ne",
+    "cap": "Clear Night: Ridgeline beacons, mountain silhouettes & NE lights",
+    "time": "night",
+    "cam": {
+      "x": 176.67,
+      "y": 12.35,
+      "z": -97.93,
+      "tx": 301.1,
+      "ty": 52.36,
+      "tz": -146.85,
+      "fov": 62
+    }
+  }
+]

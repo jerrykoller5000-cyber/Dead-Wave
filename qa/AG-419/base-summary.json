@@ -1,0 +1,31 @@
+{
+  "at": "2026-11-24T09:14:23.155Z",
+  "huntPage": "qa\\AG-419\\_hunt_shim.html",
+  "results": [
+    {
+      "label": "loadtime (warm fg)",
+      "code": 0,
+      "elapsedS": 62.7
+    },
+    {
+      "label": "training --fight (High, vsync off)",
+      "code": 0,
+      "elapsedS": 100.2
+    },
+    {
+      "label": "night 20 (High, vsync off)",
+      "code": 0,
+      "elapsedS": 87.4
+    },
+    {
+      "label": "day 5 (High, vsync off)",
+      "code": 0,
+      "elapsedS": 79.3
+    },
+    {
+      "label": "strict48 (48 near brutes, High, vsync off)",
+      "code": 0,
+      "elapsedS": 80.1
+    }
+  ]
+}

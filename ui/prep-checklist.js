@@ -93,8 +93,18 @@ export function mountPrepChecklist({doc=document,bus=window}={}) {
   panel.id='prepChecklist';panel.hidden=true;panel.setAttribute('aria-label',text('a11y.prep'));
   list.className='prep-goals';panel.append(summary,list);hud.append(panel);
   let ready=false, current=null, lastRender='', active=false;
-  const suppressed=()=>['opening','frontend','deploying','cine','briefing'].some(c=>doc.body.classList.contains(c))||
-    !!doc.querySelector('#pause.show,#shop.show,#win.show,#devConsole.show');
+  const bodyCL=doc.body.classList;
+  const overlayIds=['pause','shop','win','devConsole'];
+  const overlayEls=overlayIds.map(id=>doc.getElementById(id));
+  const suppressed=()=>{
+    if(bodyCL.contains('opening')||bodyCL.contains('frontend')||bodyCL.contains('deploying')||bodyCL.contains('cine')||bodyCL.contains('briefing'))return true;
+    for(let i=0;i<overlayEls.length;i++){
+      let el=overlayEls[i];
+      if(!el)el=overlayEls[i]=doc.getElementById(overlayIds[i]);
+      if(el&&el.classList.contains('show'))return true;
+    }
+    return false;
+  };
   function render(view) {
     current=view;panel.hidden=!ready||!active||!view.visible||suppressed();
     const signature=JSON.stringify(view);

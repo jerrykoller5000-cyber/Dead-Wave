@@ -1,85 +1,56 @@
 # Claude 3
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-21T08:49Z
-next: CC-364 D-216 lever 3: marine draw merge/proxy review copy (48 main 
+task: CC-369 D-242 shambler P3 + drowned P3 review copies (10 each), then military P2 when P1 lands, CC-366 speed
+touching: review/CC-369/p3/, review/D-242/shambler/, review/D-242/drowned/, review/CC-366/
+since: 2026-11-23T18:46Z
+next: shambler P2 land (after Director LOOK + ChatGPT natives + Claude 5 motion); drowned P2 ChatGPT lands; CC-366 s53 decision; shambler P3
 blocked-on: —
-last-report: handoffs/2026-11-21-claude3-CC-364.md
+last-report: handoffs/2026-11-23-claude3-CC-369-s53.md
 
 ## Notes
 
-### Session 45 (06:40Z - ~09:00Z 21 Nov, Opus 5.5, scheduled) - read this first
-- CC-364 D-216 lever 3 (marine draws), REVIEW ONLY: census 50 main + 27 shadow (pistol): gun 15+14, live cloth 6+6, face 5, hands 4 (CPU fingers: leave), rig skins 9, proxy 1. Prototype review/CC-364/marine-merge.cc364.js (runtime import): shirt live cloth 3->1 + face 5->1 = 44+25, pixels identical. WAITING: ChatGPT 2 strict48 ABBA + Director LOOK/picks. If gain: production copy in marine-cloth.js (+ face), must rebuild on wardrobe change.
-- Gun shadow proxy (-13 shadow draws) = Claude 2 / ChatGPT 2 lever C (PROPOSAL.md).
-- CI-1 skins: review/CI-1-skins-claude3/zombie-concepts.ci1.js (bomber 9a9f5c, colossus 80564b, leaper aba9b3). Native sheets asked of ChatGPT. Land after D-218 pass 2 + Director LOOK (ChatGPT's file).
-- Cloud kit s45: s42 a-code.tgz + s35 c-assets + _DELETE ME/claude3-s45-cloud/newer.tgz + crew/notes.mjs. Game in cloud: review/CC-364/run-census.mjs (bench startMatch times out at 180 s on swiftshader; mine waits 15 min). Freeze the loop with renderer.setAnimationLoop(null), NOT rAF (three's readback polls rAF). Hook renderer._handleObjectFunction for draw counts.
+### Session 53 (16:04Z - ~17:45Z 23 Nov, Opus 5.5, scheduled) - read this first
+- Shambler P1 was LANDED by ChatGPT GP-20282 (08:31Z). Shambler P2 SENT for LOOK: review/CC-369/p2 (3 copies, mine), table review/D-242/shambler/pass2.md, sheet p2-shambler-LOOK.jpg. New build passes: lowerShoulderDomes, settleYokeOnChest (before the seam blend). Claude 5 motion asked.
+- Drowned P2 SENT for LOOK: review/D-242/drowned/p2/zombie-concepts.d242p2.js 9321332d on live 2b7d79e6 (ChatGPT lands). LESSON: a slimmer drowned hem (or uneven hem points) sank into the kneecap and the stride pulled dark flaps over it: keep the hem width.
+- CC-366 s53 = s51 + rips hunk (12/12). Warm timing by feature: s50 3.5 vs s51 6.4 ms; the WEAR pass is the +3 ms; 21 ms was a cold page. Asked the Director: precompute or land as is.
+- CE-23 v6/v7 (Claude 5's copy of my neck-stump): OK given; my old bug: 'else { mesh.position.copy(u.head.position)' must be 'else if (!fit)'.
+- Cloud kit s53: s42 a-code + s35 c-assets + newer7 + newer8 + _DELETE ME/claude3-s53-cloud/newer9.tgz. Folder access had to be requested at start (connectedFolders was empty).
 
-### Session 44 (22:56Z 20 Nov - 00:30Z 21 Nov, Opus 5.5, scheduled) - read this first
-- JAW BATCH LANDED 00:08Z (one batch, Director GO): humanoids 54a3987b, concepts e3bb0cab, joins b9a090cb, index 1e6f56f0, NEW game/shambler-jaw.js 8f47afc8. Backups _DELETE ME/claude3-s44-jaw-landing-backup. Gates GREEN (ChatGPT GP-20167: t222 12/0, t93 11/0, t111 11/0, t164 14/0, t338 5/1 old feral).
-- D-218 pass 1 for Claude 7 (CG-1): review/CC-363 razor coil, backstop, gun mount review copies + sheet. HE lands them. Then CF-19 re-run + native AFTER tour: fix what they find. Pass 2 (story props): help when he asks.
-- Cloud kit: s42 a-code.tgz + files newer than it (find -newer) + s35 c-assets + crew/notes.mjs. Never tar the code on the PC (times out). python: newline='' for CRLF files.
+### Session 52 (05:12Z - ~06:30Z 23 Nov, Opus 5.5, scheduled) - read this first
+- CC-368 LANDED 05:17Z: index 0eab7b21, ui/marine-face.js 25b40d49, studio/marine-hats.js 0205c996, t146 12e013da (--review). ChatGPT landed-tree smoke asked.
+- D-242 (Jerry: 5 passes x 10 fixes per kind; my kinds shambler, military, feral, screamer, drowned; D-241 joins = pass 1 Q1). Shambler pass 1 SENT for LOOK: review/D-242/shambler/pass1.md + review/CC-369/d241 (cand zombie-shambler-v5 610f0afc, zombie-atlas 1eb5e4fd). New pass restTankHemOnHips (tank hem rests 7 mm off belt/hips). Claude 6's joins list: review/D-241/joins-list.md (my kinds' items listed in my handoff).
+- Card id note: CC-369 was also my old proportions id (review/CC-369/PROPORTIONS.md); D-241 work lives in review/CC-369/d241/.
+- WRITES: cp/cat > on some PC files fail with "Invalid argument" (ui/marine-face.js): write in place with python open(r+b), seek 0, write, truncate.
+- Cloud kit s52: s42 a-code + s35 c-assets + newer7 + _DELETE ME/claude3-s52-cloud/newer8.tgz (md5 = pc-md5.txt there, 326 files OK). node can build the shambler template directly (import vendor/three/three.core.js + studio/zombie-shambler-v5.js) for numbers. Pool bodies get their look at build: seeding Math.random does not give the same look.
 
-### Session 43 (19:08Z - ~19:45Z 20 Nov, Opus 5.5, scheduled) - read this first
-- CC-362 option A LANDED 19:12Z: humanoids c57c6e60 (marker) + joins 3b859926 (ChatGPT's reader). Backups _DELETE ME/claude3-s43-cc362-landing-backup. Node: cliffs 108 -> 7, 8 other types identical. Native t93/t164/t338 + real t222: ChatGPT (see his reply / my handoff).
-- EINVAL: cp onto a tracked file can fail (Windows truncate). Write in place with python r+b ONLY if the new file is not shorter; else ask Claude 2 / the Director.
-- Jaw: tagged source sent to ChatGPT + Claude 2: review/CC-359/s43/zombie-humanoids.s43.js 54a3987b (= c57c6e60 + s42 joint + cc359JawSkin on cranium + lower-jaw). Masks: head 20,277/29,169, jaw 2,811/7,635.
-- Military cache RED: camo counter (variant++%5) in game/military-appearance.js (ChatGPT's): review/CC-362/military-cache/DIAGNOSIS.md. Pick A (seeded camo) sent to the Director. Not in my files.
-- Jerry's shambler verdict (s41/s42 torch) still pending: NO look change until it comes.
+### Session 51 (01:55Z - ~03:15Z 23 Nov, Opus 5.5, scheduled) - read this first
+- CC-366 s51 SENT for LOOK: review/CC-366/s51 zombie-look.cc366.js fa720235 (soak from the front neckline + runs, knees 3-5 cm dark, beanie 13% / bandage 7% (head verts pushed), hairVol, tear strap/crop; own RNG stream, s50 picks same). 12/12 node. Cost cloud s50 8.9 vs s51 21 ms: speed pass if natives hitch. After LOOK: ask ChatGPT native pair + tcc366/t338/t222, then land (one file + test).
+- CC-367 s51 SENT for LOOK: makeLimbStump in review/CC-367/s51 ab1904eb (s50 + limb part). Claude 5 wires it (hunk 3). His neck SPEED ask: cached vertex list tried, little gain + cut misses on drowned/spitter: LATER, profile measureNeck (cost may be traverse/updateMatrixWorld, not the loop).
+- CC-368 s51: ADS cause = cheekWeld swung the lift + aimed the small head's eye. apply-neck 5 hunks 762bbd74 + face EYE_KEEP 25b40d49; weld-parity.mjs node proof 0.0000 mm. t146 copy 12e013da uses 4 cm (live bill only 5.6 cm past the brow): Director asked. ChatGPT natives asked. Claude 2 holds the loan.
+- CF-24 (Claude 6): B shoulders 0.38/deltoid 0.51, C hips 0.21 are mine with Claude 9 AFTER CI-3 step 1; bar = review/CF-24/tcf24.js.
+- Cloud kit s51: s42 a-code + s35 c-assets + _DELETE ME/claude3-s51-cloud/newer7.tgz + crew/notes.mjs (md5 = pc-md5.txt). hold-q.mjs (HOLD_QUERY='&nolook=1') + index line guarded by ?nolook=1 (cloud only) for bare bodies. NEVER run an eye/t146 job before shots in the same page (inspectHost held + startMatch break the camera): shots first, or a fresh page.
 
-### Session 42 (15:12Z - ~17:15Z 20 Nov, Opus 5.5, scheduled) - read this first
-- CC-359 step 4 LANDED ~17:02Z as ONE batch with GP-20157 v7 + GP-20158 (review/CC-359/s42/README.md; land-step4.sh; backups _DELETE ME/claude3-s42-cc359-landing-backup). Live: humanoids 02988427, NEW zombie-shambler-v5.js c3a04391 + zombie-atlas.js 46685cd6, concepts da1db60a, joins 2916dd02, headshots 918e517a, t338 03501bf7. Landed originals GREEN (ChatGPT 17:23Z: t93 11/0, t111 11/0, t164 14/0, t338 5/1 old feral, real t222 12/0).
-- Gates: run-candidate.mjs (run-all page + proxy for the 6 modules). Fake-three t222 times out even at 900 s natively (BEFORE too): use ChatGPT's real-WebGPU route (12/0 both). t338 needs DW_CHECK_MS 900000 (~400 s natively).
-- JAW: seam split review copies review/CC-359/s42 (*.s42.js on v7; rest = before to 1e-8 m; joint u.shamblerJaw; tag cc359JawSkin). Director ACCEPTED 16:08Z. Next: ChatGPT's joins line (z -.08..+.115 r .17, under the hinge, skin only) + Claude 2's CB-363 packer; Claude 5 swings it (CE-22); land after the Director's look on the game skin.
-- Torch sheet: cc359-shambler-sheet-s42-torch.jpg (Director sends it to Jerry instead of s41). Still WAIT for Jerry's verdict before any look change.
-- CC-362 shoulder tears: cause = the joins' 4.5 cm radial fade over 5 cm triangles; option A built (review/CC-362: marker + proposed reader; cliffs 108 -> 7, other types identical). BLOCKED on ChatGPT's reader + walk crops.
-- Cloud kit s42: _DELETE ME/claude3-s42-cloud/a-code.tgz (+ s35 c-assets.tgz); export-glb/rig-compare need review/J168 lib + review/AG-357 staged too. Start: request folder access to ~/Desktop/Tiny Trek. crew.mjs EINVAL on the card: retry after 5 s.
+### Session 50 (17:15Z - ~18:45Z 22 Nov, Opus 5.5, scheduled) - read this first
+- CC-366 s50 (ChatGPT GP-20226 reds) FIXED in my file: review/CC-366/s50 zombie-look.cc366.js ac28a31e. Cause: refreshZombieJoinLoss (pool reset, lost limb) writes joinBlend (taken in skinZombieMesh, BEFORE the look) back: anything editing skin after skinZombieMesh must update joinBlend (indices, weights, owners). Belly opened waist cut-outs: re-collapse after it. Look 18 -> 5.5 ms a body (cloud). WAITING: ChatGPT exact pair + gates, Director LOOK; then land (D-211, Claude 2's 2-line loan, apply-look.mjs on 26656706).
+- D-237 #7 plan: review/CC-366/s50/PLAN-variety.md + s51 plan copy (grime, fade, soak, torn knees; own RNG stream). TODO: soak darker/ragged, knee holes smaller/darker. Head tilt = Claude 5's CE-24. Then other kinds.
+- CC-368: ChatGPT HOLD fixed: review/CC-368/s50/apply-neck.mjs 9791c95f (eye correction along the torso's up; headG.userData.neckLift). t146 bill bar (world z > .15, now .14): asked the Director (my pick: measure from the brow, --review).
+- CC-367: review/CC-367/s50 stump 76e4b38a = + warmNeckStump(THREE) for Claude 2's countdown warm (CE-23 HOLD idea 3). Ideas 1-2 are Claude 5's.
+- Claude 6 CF-23 FYI: shoulders +61%, hips 0.32 vs 0.18: options B/C are mine later (with CI-3).
+- Cloud kit s50: s42 a-code + s35 c-assets + s45..s49 newer + _DELETE ME/claude3-s50-cloud/newer6.tgz + game/training-infirmary-fence.js (md5 vs pc-md5.txt there). Hold: game-test-slot.mjs run claude3 CC-366 -- node review/CC-365/hold.mjs. The renderer CRASHED twice after ~100+ zombie bodies in one page (pool drains): keep jobs small, restart the hold when load goes ~0.
 
-### Session 41 (05:27Z - ~06:35Z 20 Nov, Opus 5.5, scheduled) - read this first
-- J161 brute thumb ROOT: disposition sent (review/CC-355/s41). s34 cut = .02 SOURCE units; rev27 GREEN (8.40/8.64 mm source, scale-1 envelope 8.9); no waiver. Director asked to OK.
-- GP157 neck rim FIXED in review: marker [-.05,.05,.11] (was .18: neck rule over the traps fought the shoulder rule = 155 torn triangles -> 0). ChatGPT re-runs native crops with v7 (02988427).
-- CC-359 step 4 part 1: candidate (v7 + GP157 + GP158) t93/t111/t164 green, t338 shambler shared + 0 floating (shared() fix --review), t222 needs PC slot. LOD1: shamblerLod1Parts() (7.7k tris) -> Claude 2. Sheet for Jerry: review/CC-359/s41/cc359-shambler-sheet-s41.jpg (Director decides).
-- Jaw: AG chin is in the one skull shell; a moving jaw needs a seam split + joins line + motion owner (asked the Director).
-- CE-16 crouch slide NOT started. Cloud kit: _DELETE ME/claude3-s41-cloud. Start: request folder access to ~/Desktop/Tiny Trek.
-
-### Session 40 (15:37Z - ~17:05Z 19 Nov, Opus 5.5, fresh restart) - read this first
-- CC-359 STEP 3 sent to the Director 16:50Z (no answer yet): review/CC-359/v6/README.md, cc359-v6-sheet.jpg, seams-before-after.png. zombie-atlas.js 46685cd6 (NEW file; AG painters byte-exact), zombie-shambler-v5.js c3a04391 (blendShoulderAndElbowSeams), zombie-humanoids-v6.js 48c51666 (atlas UVs, ONE material, cc359NeckJoin now [-.05,.05,.18]: fixed a back ledge), zombie-concepts.atlas-proposal.js (batchSurfaces keeps atlas UVs: ChatGPT's, ask after Director's b). 2 picks asked: atlas paint 0.7 s (loading screen vs PNG), send batchSurfaces lines to ChatGPT.
-- t338: v6 shambler 0 floating, but t338 calls head-scale-1 bodies 'concept' (INFO not PASS): fix the test's shared() (also head.userData.cc355CrownY) in step 4. Feral 1 FAIL is OLD (live too).
-- NEXT CC-359 step 4: hit zones + tests (headCore = ChatGPT's), then the Director shows Jerry ONE in-game sheet.
-- Hands s40 DONE: review/CC-355/s40 (zombie-humanoids-hands-s40.js 3612239e = live 3d96fdb9 + s34 hands; NO concepts hunk needed; buildHumanoidHand + ensureHumanoidHandRig exported for ChatGPT 2's brute). Claude 5 shoots the J161 strip on it.
-- CE-16 d (crouch slide) first look: review/CC-358/s13: slide is mostly SIDEWAYS (hips' sway), not step/cap. NEXT: hold the planted boot laterally (leg.rotation.z) in "Crouch legs" on the CC-358 s12 tree, t184 x10 before/after. Then CF-18 shoulders, then the ONE player sheet.
-- Cloud kit s40: _DELETE ME/claude3-s40-cloud/a-code.tgz (+ s35 c-assets, e-crew.tgz) -> /home/claude/dw; then review/CC-359/v6 + v5 joins proposal over studio/combat. Close-ups: review/CC-359/v6/closeups.mjs (any GLB). Extract tgz on the PC into a temp dir and cp over (tar cannot overwrite: no delete). Use $HOME files in device_bash, not /tmp (/tmp/r.txt was not writable).
-
-### Session 39 (08:19Z - ~10:20Z 19 Nov, Opus 5.5, fresh restart) - read this first
-- CC-359 step 2 ACCEPTED (Director 08:53Z) + step 2b chest-line fix sent 10:14Z: review/CC-359/v5/README.md. v5 = AG pass 7 PORTED (zombie-shambler-v5.js 3c7b8c0e, would be NEW studio file) + zombie-humanoids-v5.js e9d43191 (shambler v5 section + rig knobs: torsoY .11, armY .454, upper .295, headAt [0,.494,.02], head 1). Zero-pose silhouettes 99.2-99.9% on AG; 1 draw 36,132 tris.
-- Chest line fix NEEDS ChatGPT's 1 line in combat/zombie-joins.js (head.userData.cc359NeckJoin [-.10,.05,.18]); asked 10:14Z with the headCore refit (he said LATER). Neck piece rides the TORSO bone.
-- NEXT: CC-359 step 3 = the atlas (port AG textures-step2 evals + atlas-step3 into studio/zombie-atlas.js with DataTexture; AG step3 atlasZoneForMesh + UV remap per piece; batchSurfaces overwrites UVs/material = ChatGPT's file: patch in cloud only for the review picture). Then step 2b feature tags (teeth slots, wound twins, hair).
-- CC-358 s12 weight shift sent (hipRoll .02 not .03: tcc344 sleeve 9 mm / tcc347 strap 4.1 cm at .03); D-198 all green. Still open in CC-358: CE-16d crouch step (derive CROUCH.step from the built leg, maxCad 16), CF-18 shoulders 12 cm wide, then the ONE player sheet.
-- Cloud kit s39: s38 tgz + s35 c-assets, then review/CC-359/v5 files over studio/ (+ zombie-joins proposal over combat/), review/CC-358/s12/index.s12.html over index.html, s11 body + s9 hats. Tests: node tools/tests/run-all.mjs <ids> --jobs 1 (>10 min: nohup in background). Never pkill: kill by PID only.
-- MISTAKE s39: a request went to Claude 1 titled "x" (I typed the wrong agent); fixed by hand in requests.md + LOG.md. Claude 6 = agent claude6.
-
-### Session 38 (02:18Z - ~05:30Z 19 Nov, Opus 5.5, fresh restart) - read this first
-- Director 02:23Z: Jerry signed off the shambler (D-213). ORDER: CC-359 production rebuild FIRST, then CC-358 point 5. The Director was silent 02:23Z-05:30Z: 3 requests from me WAIT for his answers.
-- CC-359 step 1 DONE (review only): review/CC-359/STEP1-RIG.md + rig/cc359-rig-overlay.png. Legs/hips/knees/elbow height/height match; game arms 10 cm longer (upper 34 vs 29.5, fore+hand 49.6 vs 43.6, shoulder 4-6 cm higher); game head bone = head centre (scale .76), AG = neck base; L/R names swapped (game armLG at -x). 4 picks sent. NEXT on his answer: step 2 = geometry review copy (review/CC-359/zombie-humanoids-v5.js) on the answered bones.
-- CC-358 all five J166 points have review copies: s9 (1,2,4), s10 (5: UNARMED_ARMS x .03 z .035 elbow -.24; z .02 failed tcc344 left sleeve in belt), s11 (3: inner-thigh V, crotch +1.8 cm, knees +4 mm; marine-body.s11.js 5020788c). D-198 green on each (t187 'ak butt aiming up' fails on LIVE in my cloud too = old). Open: s10 wrist turn (poseHands = Claude 1) and weight shift (CL-126 idle) need owners. NEXT on his accept: the D-211 finished player sheet (the inspector live marine carries every gun on his back: find a clean loadout for the sheet).
-- CC-361 step 1 done alongside: review/CC-361/step1 (fresh survivor sheets on the CC-358 body; survivor-export.mjs).
-- Cloud kit s38: _DELETE ME/claude3-s38-cloud/{a-code,b-ui-tools,e-crew,f-j168}.tgz + _DELETE ME/claude3-s35-cloud/c-assets.tgz -> /home/claude/dw; tree = s11 body + s9 hats + s10 index. Probes: review/CC-359/rig-compare.mjs, review/CC-358/stand-probe.mjs, leg-probe.mjs, stand-sheet.py (pip trimesh + review/J168/proportions/measure.py), review/J168/proof.mjs. DW_CHECK_MS=420000 for tcc343b. crew.mjs out can hit EINVAL on the card: just run it again.
-
-### Session 37 (17:15Z - 21:00Z 18 Nov, Opus 5.5, scheduled restart D-210) - read this first
-- Director 17:53Z APPROVED all three plans (CC-358, CC-359, CC-361; every pick yes; sides: the pictures win). CC-359 build waits for Jerry's 'good' on the final shambler (AG-368 pass 5).
-- CC-358 IN PROGRESS (ended ~21:00Z): latest = review/CC-358/s9 (body 46f634a0 + hats 812b9d20; points 1, 2, 4; D-198 tests green in my cloud, t187 flake, t184 old) sent to the Director. NEXT: his look on s9; then point 5 (UNARMED_ARMS stand: hands in, soft elbows; the arms hang far out today) and point 3 (thighs/crotch). Trees: build s10 on review/CC-358/s9 files.
-- Cloud kit s37: s36 tgz + s35 c-assets.tgz (assets/ needed or the page dies on buildCampsiteDetails) + today's changed files; CHROME=/opt/pw-browsers/chromium-1243/chrome-linux64/chrome CHROME_ARGS='--no-sandbox --enable-unsafe-swiftshader --use-angle=swiftshader --ignore-gpu-blocklist'. Exports: review/CC-358/export-pose.mjs --subject marine.fresh (arms hanging); review/J168/proof.mjs for colour sheets (WebGL2 works in the cloud).
-- tcc347 strap bar trips if the shoulder top under x .17-.19 drops: keep the shirt-shoulder ramp under the strap line (s4).
-- Three PLANS written, review-only, sent to the Director, waiting for his go/answers (no source touched):
-  CC-359 shambler production rebuild (+ CC-360 bomber section): review/CC-359/PLAN.md (6 questions).
-  CC-361 D-205 survivors Brandt/Okafor: review/CC-361/PLAN.md (5 questions; LEFT/RIGHT conflict D-205 text vs Tripo pictures).
-  CC-358 J166 player shape+pose: review/CC-358/PLAN.md (4 questions). Order picked: CC-358 build -> CC-361; CC-359 build after Jerry signs off AG-357 4b (AG-366 done 17:27Z, sheets 13-17).
-- Found for CC-359: skinZombieMesh skips alphaTest parts + builds NON-indexed buffers (~9 MB/zombie at 43.6k tris); prepareShamblerFeet finds boots by colour; batchSurfaces overwrites UVs; game shambler has no jaw bone.
-- CC-357: J164 landed via Claude 6's CF-16 loan (72e543b4); asked the Director to close the [!] card.
-- Folder access: the session must request ~/Desktop/Tiny Trek (device_request_folder_access) at start.
+### Session 49 (04:52Z - ~06:05Z 22 Nov, Opus 5.5, scheduled) - read this first
+- CC-366 s49 push ACCEPTED (Director 05:40Z): review/CC-366/s49/zombie-look.cc366.js b1479823 -> NEW studio/zombie-look.js, zombie-look.test.mjs (4/4), NEW tools/tests/tcc366.js, apply-look.mjs (Claude 2's 2-line loan, applies on a113bd7a). WAITING: ChatGPT natives (hitchhunt live vs look + t338/t222/t93/t111/t164/tcc366). Then LAND (md5 guard + backup), then the other kinds.
+- Hair is painted in the shambler ATLAS (head tile), not the vertex colours: the look reads each head vertex's texel. Bind pose differs per body (game bakes tilt/lean before skin): the shared layout cache is keyed on UVs + skin indices only; positions are per body.
+- Other kinds (m1 probe): feral/military/screamer/bomber/drowned/spitter all = ONE zombie-skin on the shared 1024x512 concept DATA atlas + vertex colours (military: + a 256 camo skin, bomber: + an untextured 5k skin + gut/vein meshes). Zones there: by vertex-colour clusters (skinColor vs cloth), not atlas rects.
+- CC-367 step 2 sent (LOOK + Claude 5): review/CC-367/s49/zombie-neck-stump.cc367.js b9744413 (replaces 41ab6e9c): low rim, flesh fills, NEW cutNeckSkin/restoreNeckCut (needs 1 line in resetZombieMesh, in Claude 5's CE-23 batch). Shambler NOT cut: its neck knob stands behind the cut in the hunch: own pass on the shambler neck piece next. Bomber head cap: asked ChatGPT.
+- CC-368 sent (LOOK): HEAD_SIZE .89 -> .73 + NECK_LIFT .04 (marine-face), ballcap bill .148 (marine-hats), index 3 lines (apply-neck.mjs, Claude 2 loan; FP eye kept). Pictures = live head set x0.82/+4 cm, copies not run in a game yet.
+- CC-364 LATER: shadow pass still draws 2 single sleeves (ChatGPT GP-20200).
+- Cloud kit s49: s42 a-code + s35 c-assets + s45..s48 newer + _DELETE ME/claude3-s49-cloud/newer5.tgz (+3 world/game files staged; whole-tree md5 = PC: pc-md5.txt there). hold.mjs as before. Cloud rm of a dir glob is refused by the safety check: use new dirs.
 
 ### Earlier (history in the handoffs)
-- s34: J161 hands done review-only (review/CC-355/s34); legs B/bomber B waiting on Claude 5 (ankle pivot), Claude 2, ChatGPT, ChatGPT 2. NEVER build twice on one Math.random seed in a job (s32).
-- s33: hem landed by ChatGPT (zombie-humanoids e67b8117); copies in review/CC-355/s33. t338/t222 need a bigger cloud than 2 cores.
+- s48-s38: CC-365 dummy chip, CC-366 s48/s49 looks, CC-367 neck stump, CC-364 marine draw merge (landed s46), CC-359 shambler rebuild + jaw (landed s42/s44), CC-358 player shape, CC-362 option A (landed s43). Details: handoffs/2026-11-2*-claude3-*.md.
+- Start: request folder access to ~/Desktop/Tiny Trek. crew.mjs EINVAL on the card: retry after 8 s. Never pkill: kill by PID. Never build twice on one Math.random seed in a job.
+
+- Start: request folder access to ~/Desktop/Tiny Trek. crew.mjs EINVAL on the card: retry after 8 s. Never pkill: kill by PID. Never build twice on one Math.random seed in a job.

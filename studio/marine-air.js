@@ -21,7 +21,7 @@
 
 export const AIR = {
   on: true,            // false: GP-172's air pose (both legs alike), for comparison
-  speed: 7.4,          // m/s at which a direction counts fully (his walk; a run counts a little over)
+  speed: 2.05,          // m/s at which a direction counts fully (his walk; a run counts a little over)
   jumpVel: 7.9,        // the take-off speed (PHYS.jumpVel): u = vy / this
   // Each pose at three points of the flight: leaving the ground, over the top, landing. [thigh, knee] per leg.
   still: { a: [[-0.06, 0.18], [-0.04, 0.16]], b: [[-0.48, 1.05], [-0.42, 0.98]], c: [[-0.14, 0.3], [-0.1, 0.26]] },
@@ -45,7 +45,9 @@ export function key3(k, t) {
 // leg led (was forward) as he left the ground, +1 the right.
 export function airPose(u, f, s, lead = -1, out = {}, A = AIR) {
   const t = (1 - clamp(u, -1, 1)) / 2;
-  const wf = clamp(f / A.speed, 0, 1.15), wb = clamp(-f / A.speed, 0, 1), ws = clamp(Math.abs(s) / A.speed, 0, 1);
+  // Keep the actual direction at sprint speed. Clipping each axis separately turns shallow diagonals sideways.
+  const pace = Math.max(A.speed, Math.hypot(f, s));
+  const wf = Math.max(0, f / pace), wb = Math.max(0, -f / pace), ws = Math.abs(s) / pace;
   const sum = wf + wb + ws, w0 = Math.max(0, 1 - sum), n = w0 + sum || 1;
   const k0 = w0 / n, kf = wf / n, kb = wb / n, ks = ws / n, sg = s >= 0 ? 1 : -1;
   // The legs, as lead and trail; which is which: forward and back, the leg that led; sideways, the leg on that side.
@@ -58,7 +60,7 @@ export function airPose(u, f, s, lead = -1, out = {}, A = AIR) {
     add(leadsStride ? A.fwd.lead : A.fwd.trail, kf);
     add(leadsStride ? A.back.lead : A.back.trail, kb);
     add(leadsSide ? A.side.lead : A.side.trail, ks);
-    legs[i].z = sg * key3(leadsSide ? A.side.leadOut : A.side.trailOut, t) * ks * n;
+    legs[i].z = sg * key3(leadsSide ? A.side.leadOut : A.side.trailOut, t) * ks;
   }
   out.thighL = legs[0].thigh; out.kneeL = legs[0].knee; out.legZL = legs[0].z;
   out.thighR = legs[1].thigh; out.kneeR = legs[1].knee; out.legZR = legs[1].z;

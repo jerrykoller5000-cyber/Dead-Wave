@@ -354,3 +354,233 @@ export function geoIn(T, space, bone, geo, x = 0, y = 0, z = 0, rx = 0, ry = 0, 
   if (!g.attributes.normal) g.computeVertexNormals();
   g.applyMatrix4(M); return g;
 }
+
+// CC-364 (D-216 lever 3, Director 09:15Z 21 Nov): the live cloth's GPU pieces that share one material drawn as ONE
+// SkinnedMesh, the same picture with fewer draws (review/CC-364: the prototype's native A/B, ChatGPT 2: 0 pixels changed).
+// The merged mesh's skeleton is the pieces' joints side by side (stand-ins, as gpuCloth's): before each draw every shown
+// piece runs its own update() (the very matrices it would have drawn with) and the merged mesh takes them, carried from
+// the piece's place into its own (C = Wmerged^-1 * Wpiece). Same vertices, same weights, same material.
+//  - The pieces stay where they are, their `visible` as the game sets it (the wardrobe shows and hides their holders);
+//    they are only taken off the render layers (layers.mask 0), as the rig skin does (studio/marine-skin.js).
+//  - Only the pieces drawn now are in its geometry: before each draw it checks every piece (shown or not, its material,
+//    its geometry and the versions of its attributes) and builds the geometry again when one changed (the sleeves rolled,
+//    a new AO bake); the skeleton keeps its size (padded), so the shader stays the same.
+//  - The arms' pieces (live-sleeve, live-sleeve-rolled, live-bare-arm) only merge among themselves and the merged mesh
+//    keeps their name: the first-person view leaves exactly those names out of the eye's pass (game/viewmodel.js ARM_CLOTH).
+//  - Not merged: a piece with `under` (the trouser legs: their fold under the kit is drawn on the CPU), one alone in its set.
+//  - Fewer than two of a set shown (the shorts' pieces in long trousers): it parks, off the render layers, and the pieces
+//    draw themselves as before; the first draw of a piece while two or more are shown wakes it.
+//  - A piece given another material than the merged mesh's, or pieces whose attributes no longer match, are handed back:
+//    they draw themselves again from then on (the merged mesh leaves the tree).
+//  - The warm-up's compiles (index.html compileInSlices: renderer.compileAsync, which shows and hides drawables by
+//    `visible`) are sat out: nothing is checked or changed during them.
+//  - Its userData.cloth gives posed()/posedNormals() of what it draws, as a piece's does (tools/tests/tcc344.js reads them).
+// armLiveMerge(T, root, extra) does it on the figure's first real draw (after makeMarine's AO bake and rig skin), and runs
+// `extra` (the face's merge, ui/marine-face.js) then too. On three without SkinnedMesh (the suite's fake three) nothing
+// changes. ?livemerge=0 turns it off. TT: getMarine().userData.liveMerge.info().
+const MERGE_ARM = { 'live-sleeve': 'live-sleeve', 'live-sleeve-rolled': 'live-sleeve', 'live-bare-arm': 'live-bare-arm' };
+const MERGE_PADS = [8, 16, 32];
+const mergeHide = (o) => { if (o.userData.liveMergeMask == null) o.userData.liveMergeMask = o.layers.mask; o.layers.mask = 0; };
+const mergeUnhide = (o) => { if (o.userData.liveMergeMask != null) { o.layers.mask = o.userData.liveMergeMask; delete o.userData.liveMergeMask; } };
+const later = (fn) => { if (typeof setTimeout === 'function') setTimeout(fn, 3000); };   // a geometry swapped out is disposed once no draw can still hold it
+const ATTRS = ['position', 'normal', 'uv', 'color', 'skinIndex', 'skinWeight'];
+// renderer.compileAsync (index.html's warm-up, compileInSlices) runs onBeforeRender too, while it shows and hides whole
+// slices of the scene: nothing here looks at the pieces or changes anything during it.
+export function compilingNow(r) { return !!(r && (r._compilationPromises != null || r._createObjectPipeline && r._handleObjectFunction === r._createObjectPipeline)); }
+
+export function mergeLiveCloth(T, root) {
+  if (!T || !T.SkinnedMesh || !T.Skeleton || !T.Bone || !root) return null;
+  if (root.userData.liveMerge) return root.userData.liveMerge;
+  const sets = new Map();
+  root.traverse((o) => {
+    const c = o.userData && o.userData.cloth;
+    if (!o.isSkinnedMesh || !c || !c.gpu || c.under || !c.skeleton || o.userData.liveMerged || !o.material || Array.isArray(o.material)) return;
+    const cls = MERGE_ARM[o.name] || 'live-merge', key = cls + '|' + o.material.uuid;
+    let s = sets.get(key); if (!s) sets.set(key, s = { cls, mat: o.material, list: [] });
+    s.list.push(o);
+  });
+  const merges = [];
+  for (const { cls, mat, list } of sets.values()) {
+    if (list.length < 2) continue;
+    const nb = list.reduce((n, p) => n + p.skeleton.bones.length, 0), pad = MERGE_PADS.find((n) => n >= nb);
+    if (!pad) continue;
+    merges.push(makeLiveMerge(T, root, list, mat, cls, pad));
+  }
+  const info = () => merges.map((m) => m.info());
+  return (root.userData.liveMerge = { merges, info });
+}
+
+function makeLiveMerge(T, root, list, mat, name, pad) {
+  const n = list.length, base = new Int32Array(n), shown = new Uint8Array(n);
+  { let b = 0; for (let i = 0; i < n; i++) { base[i] = b; b += list[i].skeleton.bones.length; } }
+  const bones = []; for (let k = 0; k < pad; k++) { const b = new T.Bone(); b.matrixAutoUpdate = false; b.matrixWorldAutoUpdate = false; bones.push(b); }
+  const skeleton = new T.Skeleton(bones, bones.map(() => new T.Matrix4()));
+  // what each piece was when the geometry was built: its geometry, its material and its attributes' versions
+  const seenGeo = new Array(n), seenMat = new Array(n), seenVer = new Float64Array(n * ATTRS.length);
+  const ver = (g, a) => { const x = g && g.attributes[a]; return x ? x.version + 1 : 0; };
+  const isShown = (p) => {
+    if (!p.parent || !p.visible) return false;
+    for (let q = p.parent; q && q !== root; q = q.parent) if (!q.visible) return false;
+    return (p.userData.liveMergeMask != null ? p.userData.liveMergeMask : p.layers.mask) !== 0;
+  };
+  // active: the merged mesh draws the shown pieces. parked (fewer than two shown: nothing to save): the pieces draw
+  // themselves as before and the merged mesh is off the render layers; the first draw of a piece while two or more are
+  // shown wakes it. (Not `visible`: the warm-up's compileInSlices shows and hides drawables by it, and puts it back true.)
+  let mesh = null, dead = false, active = false, builds = 0, updates = 0, parks = 0, drawn = [];
+  const whys = {};
+  const why = (w) => { whys[w] = (whys[w] || 0) + 1; return true; };
+  const shownCount = () => { let c = 0; for (const p of list) if (isShown(p)) c++; return c; };
+  function build() {   // the shown pieces as one geometry; null: hand back
+    drawn = [];
+    for (let i = 0; i < n; i++) {
+      const p = list[i];
+      shown[i] = isShown(p) ? 1 : 0;
+      seenGeo[i] = p.geometry; seenMat[i] = p.material;
+      for (let a = 0; a < ATTRS.length; a++) seenVer[i * ATTRS.length + a] = ver(p.geometry, ATTRS[a]);
+      if (shown[i]) drawn.push(i);
+    }
+    if (list.some((p) => p.material !== mesh.material)) return null;   // a piece given another material than the merged mesh's: hand back (a fade that swaps them all, game/training-camera-collision.js, swaps the merged mesh's too)
+    const ps = drawn.map((i) => list[i]);
+    if (ps.length < 2) return undefined;   // fewer than two shown: park
+    const names = Object.keys(ps[0].geometry.attributes).sort();
+    for (const p of ps) { const nm = Object.keys(p.geometry.attributes).sort(); if (nm.join() !== names.join()) return null; }   // attributes no longer alike: hand back
+    const geo = new T.BufferGeometry();
+    let verts = 0, idx = 0; const indexed = ps.some((p) => p.geometry.index);
+    for (const p of ps) { const c = p.geometry.attributes.position.count; verts += c; idx += p.geometry.index ? p.geometry.index.count : c; }
+    for (const nm of names) {
+      const a0 = ps[0].geometry.attributes[nm];
+      if (a0.isInterleavedBufferAttribute) return null;
+      const out = new a0.array.constructor(verts * a0.itemSize);
+      let at = 0;
+      for (let j = 0; j < ps.length; j++) {
+        const a = ps[j].geometry.attributes[nm];
+        if (a.itemSize !== a0.itemSize || a.array.constructor !== a0.array.constructor || a.normalized !== a0.normalized) return null;
+        if (nm === 'skinIndex') { const b = base[drawn[j]]; for (let i = 0; i < a.array.length; i++) out[at + i] = a.array[i] + b; }
+        else out.set(a.array, at);
+        at += a.array.length;
+      }
+      geo.setAttribute(nm, new T.BufferAttribute(out, a0.itemSize, a0.normalized));
+    }
+    if (indexed) {
+      const index = new Uint32Array(idx); let at = 0, off = 0;
+      for (const p of ps) { const g = p.geometry, c = g.attributes.position.count; if (g.index) { const s = g.index.array; for (let i = 0; i < s.length; i++) index[at + i] = s[i] + off; at += s.length; } else { for (let i = 0; i < c; i++) index[at + i] = off + i; at += c; } off += c; }
+      geo.setIndex(new T.BufferAttribute(index, 1));
+    }
+    // the pieces' padded rest spheres, joined (liveCloth keeps each: never culled, the sphere only orders the draw)
+    const sph = new T.Sphere(), tmp = new T.Sphere(), M = new T.Matrix4();
+    root.updateMatrixWorld(true);
+    const inv = new T.Matrix4().copy(root.matrixWorld).invert();
+    let first = true;
+    for (const p of ps) { const b = p.boundingSphere || p.geometry.boundingSphere; if (!b) continue; tmp.copy(b).applyMatrix4(M.multiplyMatrices(inv, p.matrixWorld)); if (first) { sph.copy(tmp); first = false; } else sph.union(tmp); }
+    if (first) sph.set(new T.Vector3(0, 0.9, 0), 1.6);
+    geo.boundingSphere = sph;
+    builds++;
+    return geo;
+  }
+  function handBack() {
+    dead = true; active = false;
+    for (const p of list) { mergeUnhide(p); delete p.userData.liveMerged; }
+    if (mesh) { mesh.layers.mask = 0; if (mesh.parent) mesh.parent.remove(mesh); const g = mesh.geometry; later(() => g.dispose()); }
+  }
+  function park() {
+    active = false; parks++;
+    mesh.layers.mask = 0;
+    for (const p of list) mergeUnhide(p);
+  }
+  // A new geometry for the shown pieces, swapped in (three takes a mesh's new geometry at its next draw).
+  function activate() {
+    const geo = build();
+    if (geo === undefined) { park(); return false; }
+    if (!geo) { handBack(); return false; }
+    const old = mesh.geometry; mesh.geometry = geo; mesh.boundingSphere = geo.boundingSphere.clone(); later(() => old.dispose());
+    for (const p of list) mergeHide(p);
+    mesh.layers.mask = MASK; active = true;
+    return true;
+  }
+  function wake() { if (!dead && !active && shownCount() >= 2) activate(); }
+  function changed() {
+    for (let i = 0; i < n; i++) {
+      const p = list[i];
+      if (p.layers.mask !== 0) { p.userData.liveMergeMask = p.layers.mask; p.layers.mask = 0; return why('layers ' + p.name); }   // something put it back on a layer: it stays off, and is looked at again
+      if (shown[i] !== (isShown(p) ? 1 : 0)) return why('shown ' + p.name);
+      if (seenGeo[i] !== p.geometry) return why('geometry ' + p.name);
+      if (seenMat[i] !== p.material) return why('material ' + p.name);
+      for (let a = 0; a < ATTRS.length; a++) if (seenVer[i * ATTRS.length + a] !== ver(p.geometry, ATTRS[a])) return why(ATTRS[a] + ' ' + p.name);
+    }
+    return false;
+  }
+  const BM = skeleton.boneMatrices, Wi = new T.Matrix4(), C = new T.Matrix4(), S = new T.Matrix4();
+  function update(r) {
+    if (dead || !active || compilingNow(r)) return;
+    if (changed()) {
+      if (shownCount() < 2) { park(); return; }
+      if (!activate()) return;
+    }
+    mesh.updateWorldMatrix(true, false);
+    Wi.copy(mesh.matrixWorld).invert();
+    for (const i of drawn) {
+      const p = list[i];
+      p.userData.cloth.bend();   // the piece's own update(): its joints' matrices in its own place
+      p.updateWorldMatrix(true, false);
+      C.multiplyMatrices(Wi, p.matrixWorld);
+      const pb = p.skeleton.boneMatrices, nb = p.skeleton.bones.length;
+      for (let k = 0, at = base[i]; k < nb; k++, at++) {
+        S.fromArray(pb, k * 16).premultiply(C);
+        S.toArray(BM, at * 16);
+        bones[at].matrixWorld.copy(S);   // three's CPU side (getVertexPosition, raycast) reads the bones' matrixWorld
+      }
+    }
+    if (skeleton.boneTexture) skeleton.boneTexture.needsUpdate = true;
+    updates++;
+  }
+  const MASK = list[0].userData.liveMergeMask != null ? list[0].userData.liveMergeMask : list[0].layers.mask || 1;   // the pieces' own layers
+  mesh = new T.SkinnedMesh(new T.BufferGeometry(), mat);
+  mesh.name = name; mesh.frustumCulled = false; mesh.layers.mask = 0;
+  mesh.castShadow = list.some((p) => p.castShadow); mesh.receiveShadow = list.some((p) => p.receiveShadow);
+  // liveShape: the shadow proxy (CL-140) and the rig skin leave it alone, as they do the pieces
+  mesh.userData.liveShape = true; mesh.userData.noRigSkin = true; mesh.userData.liveMergeOf = list;
+  mesh.userData.aoOwners = [...new Set(list.flatMap((p) => p.userData.aoOwners || []))];
+  mesh.add(new T.Object3D());   // a child: mergeRigidMeshes leaves it alone
+  mesh.bindMode = T.DetachedBindMode || 'detached';
+  root.add(mesh);
+  mesh.bind(skeleton, new T.Matrix4());
+  mesh.onBeforeRender = update; mesh.onBeforeShadow = update; skeleton.update = update;
+  // what is drawn, on the CPU (as a piece's userData.cloth.posed gives it), for tests and tools that read surfaces: the shown
+  // pieces' own bent positions, in the merged geometry's order (the pieces and the merged mesh all hang in `root`'s space)
+  const cat = (k) => { update(); if (!active) return new Float32Array(0); const parts = drawn.map((i) => list[i].userData.cloth[k]()); const o = new Float32Array(parts.reduce((a, b) => a + b.length, 0)); let at = 0; for (const q of parts) { o.set(q, at); at += q.length; } return o; };
+  mesh.userData.cloth = { gpu: true, merged: true, bend: () => update(), posed: () => cat('posed'), posedNormals: () => cat('posedNormals'), pieces: list };
+  // a piece drawn while parked looks whether it should wake the merge
+  for (const p of list) {
+    p.userData.liveMerged = mesh;
+    const r = p.onBeforeRender, sh = p.onBeforeShadow;
+    p.onBeforeRender = function (...a) { if (!active && !dead && !compilingNow(a[0])) wake(); return r.apply(this, a); };
+    p.onBeforeShadow = function (...a) { if (!active && !dead && !compilingNow(a[0])) wake(); return sh.apply(this, a); };
+  }
+  if (shownCount() >= 2) { if (activate()) update(); } else parks++;
+  const info = () => ({ name, pieces: list.map((p) => p.name), active, drawn: active ? drawn.map((i) => list[i].name) : [], verts: active ? mesh.geometry.attributes.position.count : 0, bones: base[n - 1] + list[n - 1].skeleton.bones.length, pad, builds, parks, updates, whys: { ...whys }, handedBack: dead });
+  return { mesh, list, info, handBack };
+}
+
+// On the figure's first real draw (any of its live cloth's, main pass or shadow; not a warm-up compile), once: the merges
+// above and `extra`.
+export function armLiveMerge(T, root, extra = []) {
+  if (!T || !T.SkinnedMesh || !root || root.userData.liveMergeArmed) return;
+  if (typeof location !== 'undefined' && location.search && new URLSearchParams(location.search).get('livemerge') === '0') return;
+  root.userData.liveMergeArmed = true;
+  const hooked = [];
+  let fired = false;
+  const fire = () => {
+    if (fired) return; fired = true;
+    for (const h of hooked) { h.o.onBeforeRender = h.r; h.o.onBeforeShadow = h.s; }
+    try { mergeLiveCloth(T, root); } catch (e) { if (typeof console !== 'undefined') console.warn('CC-364 live cloth merge failed', e); }
+    for (const fn of extra) { try { fn(); } catch (e) { if (typeof console !== 'undefined') console.warn('CC-364 merge failed', e); } }
+  };
+  root.traverse((o) => {
+    const c = o.userData && o.userData.cloth;
+    if (!o.isSkinnedMesh || !c || !c.gpu) return;
+    const r = o.onBeforeRender, s = o.onBeforeShadow;
+    hooked.push({ o, r, s });
+    o.onBeforeRender = function (...a) { if (!compilingNow(a[0])) fire(); return r.apply(this, a); };
+    o.onBeforeShadow = function (...a) { if (!compilingNow(a[0])) fire(); return s.apply(this, a); };
+  });
+}

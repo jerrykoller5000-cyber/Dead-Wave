@@ -34,14 +34,15 @@ export function createNightRecord() {
 const DAWN_BANNER_S = 14;
 export function mountDawn({doc=document,bus=window,onShow=()=>{}}={}) {
  mountNoticeRail(doc);
- const leads=createLeadNotices(),lead=doc.createElement('aside'),leadTitle=doc.createElement('h2'),leadLine=doc.createElement('p');
- lead.id='storyLeadCard';lead.hidden=true;lead.setAttribute('role','status');lead.setAttribute('aria-live','polite');lead.append(leadTitle,leadLine);doc.body.append(lead);
+ const leads=createLeadNotices(),lead=doc.createElement('aside'),leadTitle=doc.createElement('h2'),leadLine=doc.createElement('p'),leadWhere=doc.createElement('p');
+ leadWhere.className='story-lead-where';   // CK-1 (B-27): where the lead goes
+ lead.id='storyLeadCard';lead.hidden=true;lead.setAttribute('role','status');lead.setAttribute('aria-live','polite');lead.append(leadTitle,leadLine,leadWhere);doc.body.append(lead);
  let leadTimer=0;
  bus.addEventListener('dw-game',({detail})=>{
   const card=leads.receive(detail);
   if(detail?.type==='run-reset'){lead.hidden=true;clearTimeout(leadTimer);leadTimer=0;}
   if(!card)return;
-  lead.dataset.lead=card.id;leadTitle.textContent=text('story.lead.new',{lead:card.title});leadLine.textContent=card.line;lead.hidden=false;
+  lead.dataset.lead=card.id;leadTitle.textContent=text('story.lead.new',{lead:card.title});leadLine.textContent=card.line;leadWhere.textContent=card.location||'';leadWhere.hidden=!card.location;lead.hidden=false;
   clearTimeout(leadTimer);leadTimer=setTimeout(()=>{lead.hidden=true;leadTimer=0;},14000);
  });
  const el=doc.createElement('aside');el.id='dawnCard';el.className='dawn-banner';el.setAttribute('role','status');el.setAttribute('aria-live','polite');

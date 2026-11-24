@@ -1,0 +1,536 @@
+{
+  "pins": {
+    "live": {
+      "file": "index.html",
+      "md5": "22afb3688759e39a1d64074f7e25fc95",
+      "sha256": "20d8ce94db37c3efa3187b8de21c6d3ae92e133e20dab59e11c2aa18cf345523"
+    },
+    "r4_1_probe": {
+      "file": "review/CJ-R4/index.r4-1-probe.html",
+      "md5": "c123ad98841d50914410c53acd1e7154",
+      "sha256": "f61a967a0bec2e2eb60043eaf81131e96ee32dd9d3c99459ad56b8cbbf770778"
+    },
+    "r4_1_both": {
+      "file": "review/CJ-R4/index.r4-1-both.html",
+      "md5": "42225af804a8bf7967b223f3fa4f0dcd",
+      "sha256": "356028ba2c037da77f5348316620840e13d6272e726244c22bd3fce17661a877"
+    },
+    "r4_1_fix": {
+      "file": "review/CJ-R4/index.r4-1-fix.html",
+      "md5": "51d45eb184278f83cf813dbad84535fc",
+      "sha256": "2f5f7af71a825bf7ae00229a83bcfd7a04df8896e9fee0aa164f49128937d55e"
+    },
+    "r4_3": {
+      "file": "review/CJ-R4/index.r4-3.html",
+      "md5": "25bd1f405d0965771f9f566f2d9b1f78",
+      "sha256": "824752624de17c2de97ae80ea708bd36d6e68efac32233d7d2e2a56c6fae8749"
+    }
+  },
+  "r4_1_probe": {
+    "before": {
+      "dt60": {
+        "weapon": "minigun",
+        "ammoLeft": 266,
+        "first": false,
+        "tracer_round1": {
+          "n": 23,
+          "max": 0,
+          "mean": 0
+        },
+        "tracer_later": {
+          "n": 1,
+          "max": 0.52,
+          "mean": 0.52
+        },
+        "light": {
+          "n": 24,
+          "max": 0.531,
+          "mean": 0.521
+        },
+        "frames": 23
+      },
+      "dt30": {
+        "weapon": "minigun",
+        "ammoLeft": 266,
+        "first": false,
+        "tracer_round1": {
+          "n": 23,
+          "max": 0,
+          "mean": 0
+        },
+        "tracer_later": {
+          "n": 1,
+          "max": 0.532,
+          "mean": 0.532
+        },
+        "light": {
+          "n": 24,
+          "max": 0.546,
+          "mean": 0.536
+        },
+        "frames": 23
+      },
+      "dt12": {
+        "weapon": "minigun",
+        "ammoLeft": 275,
+        "first": false,
+        "tracer_round1": {
+          "n": 13,
+          "max": 0,
+          "mean": 0
+        },
+        "tracer_later": {
+          "n": 2,
+          "max": 0.543,
+          "mean": 0.543
+        },
+        "light": {
+          "n": 15,
+          "max": 0.55,
+          "mean": 0.545
+        },
+        "frames": 13
+      }
+    },
+    "after": {
+      "dt60": {
+        "weapon": "minigun",
+        "ammoLeft": 266,
+        "first": false,
+        "tracer_round1": {
+          "n": 23,
+          "max": 0,
+          "mean": 0
+        },
+        "tracer_later": {
+          "n": 1,
+          "max": 0,
+          "mean": 0
+        },
+        "light": {
+          "n": 24,
+          "max": 0,
+          "mean": 0
+        },
+        "frames": 23
+      },
+      "dt30": {
+        "weapon": "minigun",
+        "ammoLeft": 266,
+        "first": false,
+        "tracer_round1": {
+          "n": 23,
+          "max": 0,
+          "mean": 0
+        },
+        "tracer_later": {
+          "n": 1,
+          "max": 0,
+          "mean": 0
+        },
+        "light": {
+          "n": 24,
+          "max": 0,
+          "mean": 0
+        },
+        "frames": 23
+      },
+      "dt12": {
+        "weapon": "minigun",
+        "ammoLeft": 275,
+        "first": false,
+        "tracer_round1": {
+          "n": 13,
+          "max": 0,
+          "mean": 0
+        },
+        "tracer_later": {
+          "n": 2,
+          "max": 0,
+          "mean": 0
+        },
+        "light": {
+          "n": 15,
+          "max": 0,
+          "mean": 0
+        },
+        "frames": 13
+      }
+    }
+  },
+  "r4_1_visual_and_trace": {
+    "framesCompared": 61,
+    "ammoMismatches": 0,
+    "maxMuzzleDelta": 0.005207,
+    "maxMountPosDelta": 0.004402,
+    "maxMountQuatDelta": 0.005102,
+    "framesOver2mm": [
+      {
+        "frame": 5,
+        "dm": 0.00207,
+        "bAmmo": 287,
+        "aAmmo": 287,
+        "bSim": 3.9513,
+        "aSim": 3.9979
+      },
+      {
+        "frame": 8,
+        "dm": 0.00224,
+        "bAmmo": 286,
+        "aAmmo": 286,
+        "bSim": 4.0013,
+        "aSim": 4.0479
+      },
+      {
+        "frame": 11,
+        "dm": 0.00273,
+        "bAmmo": 285,
+        "aAmmo": 285,
+        "bSim": 4.0513,
+        "aSim": 4.0979
+      },
+      {
+        "frame": 14,
+        "dm": 0.00249,
+        "bAmmo": 284,
+        "aAmmo": 284,
+        "bSim": 4.1013,
+        "aSim": 4.1479
+      },
+      {
+        "frame": 15,
+        "dm": 0.00217,
+        "bAmmo": 284,
+        "aAmmo": 284,
+        "bSim": 4.118,
+        "aSim": 4.1646
+      },
+      {
+        "frame": 17,
+        "dm": 0.00288,
+        "bAmmo": 284,
+        "aAmmo": 284,
+        "bSim": 4.1513,
+        "aSim": 4.1979
+      },
+      {
+        "frame": 19,
+        "dm": 0.00258,
+        "bAmmo": 283,
+        "aAmmo": 283,
+        "bSim": 4.1846,
+        "aSim": 4.2312
+      },
+      {
+        "frame": 20,
+        "dm": 0.00374,
+        "bAmmo": 283,
+        "aAmmo": 283,
+        "bSim": 4.2013,
+        "aSim": 4.2479
+      },
+      {
+        "frame": 23,
+        "dm": 0.00431,
+        "bAmmo": 282,
+        "aAmmo": 282,
+        "bSim": 4.2513,
+        "aSim": 4.2979
+      },
+      {
+        "frame": 24,
+        "dm": 0.00275,
+        "bAmmo": 282,
+        "aAmmo": 282,
+        "bSim": 4.268,
+        "aSim": 4.3146
+      }
+    ],
+    "beforeGlow": {
+      "file": "qa/AG-404/cj-r4/r4-1-before/glow-frame0.png",
+      "state": {
+        "sim": 3.868,
+        "ammo": 288,
+        "muzzle": [
+          -25.747136980533877,
+          -199.01912936144114,
+          -630.7598877069212
+        ],
+        "mountPos": [
+          0.05949991958755163,
+          -0.303868856526492,
+          0.01626771851935871
+        ],
+        "mountQuat": [
+          0.40314078374402573,
+          0.5290402583430122,
+          -0.46855341985758764,
+          0.5814220552011858
+        ],
+        "lightInt": 2.8,
+        "lightPos": [
+          -26.089818450810483,
+          -199.12507884040966,
+          -630.9012059636443
+        ],
+        "lightDistToMuzzle": 0.3855
+      }
+    },
+    "afterGlow": {
+      "file": "qa/AG-404/cj-r4/r4-1-after/glow-frame0.png",
+      "state": {
+        "sim": 3.9146,
+        "ammo": 288,
+        "muzzle": [
+          -25.74686317917124,
+          -199.01996310251624,
+          -630.7599502551276
+        ],
+        "mountPos": [
+          0.05927909691354216,
+          -0.30391893481578336,
+          0.01617311605969718
+        ],
+        "mountQuat": [
+          0.40344998683882805,
+          0.5289816642109783,
+          -0.4685818631711615,
+          0.5812379414279287
+        ],
+        "lightInt": 2.8,
+        "lightPos": [
+          -25.751130622162307,
+          -199.0195755302899,
+          -630.5022266119424
+        ],
+        "lightDistToMuzzle": 0.2578
+      }
+    },
+    "beforeGlowMid": {
+      "frame": 8,
+      "state": {
+        "sim": 4.0013,
+        "ammo": 286,
+        "muzzle": [
+          -25.74600768317352,
+          -199.02174239528316,
+          -630.7550998863463
+        ],
+        "mountPos": [
+          0.0599648607421841,
+          -0.30886197991981135,
+          0.016766954983673088
+        ],
+        "mountQuat": [
+          0.4041415408617841,
+          0.5288187713273022,
+          -0.4686771483854862,
+          0.5808287635981835
+        ],
+        "lightInt": 0.6787878787878787,
+        "lightPos": [
+          -26.087156522900703,
+          -199.12510885793304,
+          -630.9010724841124
+        ],
+        "lightDistToMuzzle": 0.3852
+      }
+    },
+    "afterGlowMid": {
+      "frame": 8,
+      "state": {
+        "sim": 4.0479,
+        "ammo": 286,
+        "muzzle": [
+          -25.746004942879086,
+          -199.0195640825367,
+          -630.7545776709409
+        ],
+        "mountPos": [
+          0.06182129413059556,
+          -0.30841385316387004,
+          0.017486072739728797
+        ],
+        "mountQuat": [
+          0.401748915798806,
+          0.5295010225728447,
+          -0.4682203081150741,
+          0.5822338179953316
+        ],
+        "lightInt": 0.6787878787878787,
+        "lightPos": [
+          -25.75167885066085,
+          -199.02274814762345,
+          -630.5038631489748
+        ],
+        "lightDistToMuzzle": 0.2508
+      }
+    }
+  },
+  "r4_3_drum": {
+    "before": {
+      "hit": {
+        "drum": [
+          -104.18332167502548,
+          -42.407742143042825
+        ],
+        "dir": {
+          "ux": 0,
+          "uz": 1
+        },
+        "start": [
+          -104.18332167502548,
+          0.533729841082677,
+          -44.20774214304282
+        ],
+        "hp": 14,
+        "after": 13,
+        "active": false,
+        "stepsToHit": 1,
+        "newMotesCount": 5,
+        "newDebrisCount": 1,
+        "moteBreakdown": [
+          {
+            "life": 0.33,
+            "scale": 0.764,
+            "speed": 6.54
+          },
+          {
+            "life": 0.696,
+            "scale": 0.334,
+            "speed": 6.53
+          },
+          {
+            "life": 0.446,
+            "scale": 0.62,
+            "speed": 4.09
+          },
+          {
+            "life": 0.52,
+            "scale": 0.688,
+            "speed": 4.04
+          },
+          {
+            "life": 0.478,
+            "scale": 0.615,
+            "speed": 5.06
+          }
+        ]
+      },
+      "frameShots": {
+        "f1": {
+          "file": "qa/AG-404/cj-r4/r4-3-before/drum-f1.png",
+          "ms": 33,
+          "liveMotes": 33
+        },
+        "f2": {
+          "file": "qa/AG-404/cj-r4/r4-3-before/drum-f2.png",
+          "ms": 67,
+          "liveMotes": 34
+        },
+        "f3": {
+          "file": "qa/AG-404/cj-r4/r4-3-before/drum-f3.png",
+          "ms": 100,
+          "liveMotes": 34
+        },
+        "f5": {
+          "file": "qa/AG-404/cj-r4/r4-3-before/drum-f5.png",
+          "ms": 167,
+          "liveMotes": 34
+        }
+      }
+    },
+    "after": {
+      "hit": {
+        "drum": [
+          -104.18332167502548,
+          -42.407742143042825
+        ],
+        "dir": {
+          "ux": 0,
+          "uz": 1
+        },
+        "start": [
+          -104.18332167502548,
+          0.533729841082677,
+          -44.20774214304282
+        ],
+        "hp": 14,
+        "after": 13,
+        "active": false,
+        "stepsToHit": 1,
+        "newMotesCount": 9,
+        "newDebrisCount": 1,
+        "moteBreakdown": [
+          {
+            "life": 0.1,
+            "scale": 1.8,
+            "speed": 0
+          },
+          {
+            "life": 0.33,
+            "scale": 0.764,
+            "speed": 9
+          },
+          {
+            "life": 0.696,
+            "scale": 0.334,
+            "speed": 8.97
+          },
+          {
+            "life": 0.446,
+            "scale": 0.62,
+            "speed": 5.63
+          },
+          {
+            "life": 0.52,
+            "scale": 0.688,
+            "speed": 5.55
+          },
+          {
+            "life": 0.478,
+            "scale": 0.615,
+            "speed": 6.95
+          },
+          {
+            "life": 0.26,
+            "scale": 0.5,
+            "speed": 7.6
+          },
+          {
+            "life": 0.621,
+            "scale": 0.743,
+            "speed": 8.21
+          },
+          {
+            "life": 0.448,
+            "scale": 0.441,
+            "speed": 4.4
+          }
+        ]
+      },
+      "frameShots": {
+        "f1": {
+          "file": "qa/AG-404/cj-r4/r4-3-after/drum-f1.png",
+          "ms": 33,
+          "liveMotes": 34
+        },
+        "f2": {
+          "file": "qa/AG-404/cj-r4/r4-3-after/drum-f2.png",
+          "ms": 67,
+          "liveMotes": 34
+        },
+        "f3": {
+          "file": "qa/AG-404/cj-r4/r4-3-after/drum-f3.png",
+          "ms": 100,
+          "liveMotes": 31
+        },
+        "f5": {
+          "file": "qa/AG-404/cj-r4/r4-3-after/drum-f5.png",
+          "ms": 167,
+          "liveMotes": 32
+        }
+      }
+    }
+  }
+}

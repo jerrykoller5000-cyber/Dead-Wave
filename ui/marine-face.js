@@ -4,6 +4,7 @@
 // with a brow, sockets the eyes sit in, cheekbones, a nose, lips, a chin, the jaw's angle and a neck that carries it
 // forward. The head group is scaled by HEAD_GROUP_SCALE (index.html makeMarine uses it). The skull above the eyes is
 // HEAD_RINGS as it was, so everything fitted to it (the hats, the helmet, the hair, the eyewear) still fits.
+import { compilingNow } from '../studio/marine-cloth.js';   // CC-364
 import { HEAD_GROUP_SCALE as SKULL_SCALE, PIVOT_Y, EYE, lidMargin, skinPoint, offSkin, rowAt, rowSteps, columnAngles, faceZ, sideX, surfaceGeometry, worldGroup, toLocal, ROWS } from '../studio/marine-skull.js';
 // CC-357 (J164, D-196; Jerry 17 Nov: "Ok go for it. Let's do those 4 suggestions"): the head, everything worn on it and
 // everything fitted to it (face, balaclava, hair, hats, helmet, NVG, eyewear) 11% smaller, scaled about the head's pivot
@@ -11,7 +12,15 @@ import { HEAD_GROUP_SCALE as SKULL_SCALE, PIVOT_Y, EYE, lidMargin, skinPoint, of
 // and the kit are still authored in SKULL_SCALE's space (marine-skull.js toLocal), so all of it shrinks as one. A surface
 // change only: the pivot, the joint, its limits, the first-person eye (index.html divides FP_EYE by the group's scale) and
 // the hit volumes are as they were. Chin to crown 22.7 -> 20.2 cm: 6.7 -> 7.5 heads to his height.
-export const HEAD_SIZE = .89;
+// CC-368 (D-237 #4, Director GO 00:56Z, option A): the head and all on it to 0.82 of that (.89 -> .73): on his ~1.51 m body
+// the head and helmet were ~25-30% too big (review/CC-369/PROPORTIONS.md). And the neck's base 4 cm higher (NECK_LIFT:
+// makeMarine raises the head group's joint by it; the first-person eye is kept where it was). The neck is the head's own
+// surface, so it reaches down into the collar as before.
+export const HEAD_SIZE = .73;
+export const NECK_LIFT = .04;
+// CC-368 s51 (ChatGPT GP-20237: ADS eye 19-21 mm off): the cheek weld aims the .89 head's eye (where the first-person eye is kept),
+// so in every pose, aimed too, the head turns exactly as before and the eye stays where it was (index.html reads EYE_KEEP).
+export const EYE_KEEP = .89 / HEAD_SIZE;
 export const HEAD_GROUP_SCALE = SKULL_SCALE.map((s) => s * HEAD_SIZE);
 // GP-105. Head-local surfaces; the existing rig and wardrobe own their materials.
 // Rings run bottom to top. Front is +z. A shared vertex grid keeps cloth and skin
@@ -308,4 +317,111 @@ export function buildMarineFeatures(T, { skinW, skinShade, hairW, irisW, eyeWhit
   const scar = []; for (let j = 0; j < 5; j++) { const t = j / 4, x = -.0475 + .0028 * t, y = .186 + .0195 * t; scar.push([x, y, faceZ(x, y) + .0007]); }
   strip(scar, (t) => .00024 + .00048 * Math.sin(t * Math.PI), scarMat, 'brow-scar');
   return group;
+}
+
+// CC-364 (D-216 lever 3, Director 09:15Z 21 Nov; Claude 3 on a named loan): the face's unlit parts (the eyes' dark
+// caps and lash lines, the catchlights: opaque MeshBasicMaterial, which the rig skin does not bake) drawn as ONE skinned
+// mesh per material setting, each part's colour in its vertices (a white copy of the material), each part on the very
+// group it hangs on as its bone. It hangs in the face group, so it shows and hides with the head (first person, the
+// rabbit's bite). The parts stay where they are, off the render layers (layers.mask 0). Before each draw it checks them
+// (shown, parent, geometry, material and its colour): any change hands them back to draw themselves again, for good.
+// Same vertices, same colours, same settings: the same picture (review/CC-364). Run on the figure's first draw
+// (studio/marine-cloth.js armLiveMerge, from studio/marine-body.js).
+const faceHide = (o) => { if (o.userData.faceMergeMask == null) o.userData.faceMergeMask = o.layers.mask; o.layers.mask = 0; };
+const faceUnhide = (o) => { if (o.userData.faceMergeMask != null) { o.layers.mask = o.userData.faceMergeMask; delete o.userData.faceMergeMask; } };
+// Everything about an unlit material but its colour, its name and its id.
+function basicKey(m) {
+  return [m.type, m.side, m.fog, m.toneMapped, m.depthWrite, m.depthTest, m.colorWrite, m.blending, m.opacity, m.transparent, m.alphaTest, m.wireframe,
+    m.polygonOffset, m.polygonOffsetFactor, m.polygonOffsetUnits, m.dithering, m.premultipliedAlpha, m.forceSinglePass, m.combine, m.reflectivity,
+    m.envMap && m.envMap.uuid, m.lightMap && m.lightMap.uuid, m.aoMap && m.aoMap.uuid, m.specularMap && m.specularMap.uuid, m.isNodeMaterial ? 'N' : '',
+    m.colorNode ? 'node' : '', m.positionNode ? 'node' : '', m.visible].join('|');
+}
+export function mergeFaceFeatures(T, root) {
+  if (!T || !T.SkinnedMesh || !T.Skeleton || !root) return [];
+  const made = [];
+  const groups = []; root.traverse((g) => { if (g.name === 'marine-facial-features' && !g.userData.faceMerge) groups.push(g); });
+  for (const group of groups) {
+    group.userData.faceMerge = [];
+    const sets = new Map();
+    const shownIn = (o) => { for (let p = o; p && p !== group; p = p.parent) if (!p.visible) return false; return true; };
+    group.traverse((o) => {
+      if (!o.isMesh || o.isSkinnedMesh || o.isInstancedMesh || o.morphTargetInfluences || !o.layers.mask || !shownIn(o)) return;
+      const m = o.material;
+      if (!m || Array.isArray(m) || !m.isMeshBasicMaterial || m.transparent || m.alphaTest > 0 || m.map || m.alphaMap || m.vertexColors) return;
+      const g = o.geometry; if (!g || !g.attributes.position || g.attributes.position.isInterleavedBufferAttribute) return;
+      const k = basicKey(m);
+      if (!sets.has(k)) sets.set(k, []);
+      sets.get(k).push(o);
+    });
+    for (const list of sets.values()) {
+      if (list.length < 2) continue;
+      group.updateMatrixWorld(true);
+      const bones = [], boneIdx = new Map(), prep = [];
+      let total = 0;
+      for (const o of list) {
+        if (!boneIdx.has(o.parent)) { boneIdx.set(o.parent, bones.length); bones.push(o.parent); }
+        const g = o.geometry.index ? o.geometry.toNonIndexed() : o.geometry;
+        prep.push({ o, g }); total += g.attributes.position.count;
+      }
+      const mesh = new T.SkinnedMesh(new T.BufferGeometry(), list[0].material);   // placed first: its vertices are written in its own space
+      group.add(mesh); mesh.updateMatrixWorld(true);
+      const Wi = new T.Matrix4().copy(mesh.matrixWorld).invert(), M = new T.Matrix4(), NM = new T.Matrix3(), v = new T.Vector3(), nv = new T.Vector3();
+      const pos = new Float32Array(total * 3), nrm = new Float32Array(total * 3), col = new Float32Array(total * 3), si = new Uint16Array(total * 4), sw = new Float32Array(total * 4);
+      let k = 0;
+      for (const { o, g } of prep) {
+        M.multiplyMatrices(Wi, o.matrixWorld); NM.getNormalMatrix(M);
+        const P = g.attributes.position, N = g.attributes.normal, c = o.material.color, b = boneIdx.get(o.parent);
+        for (let i = 0; i < P.count; i++, k++) {
+          v.fromBufferAttribute(P, i).applyMatrix4(M); pos[k * 3] = v.x; pos[k * 3 + 1] = v.y; pos[k * 3 + 2] = v.z;
+          if (N) nv.fromBufferAttribute(N, i).applyMatrix3(NM).normalize(); else nv.set(0, 1, 0);
+          nrm[k * 3] = nv.x; nrm[k * 3 + 1] = nv.y; nrm[k * 3 + 2] = nv.z;
+          col[k * 3] = c.r; col[k * 3 + 1] = c.g; col[k * 3 + 2] = c.b;
+          si[k * 4] = b; sw[k * 4] = 1;
+        }
+        if (g !== o.geometry) g.dispose();
+      }
+      const geo = mesh.geometry;
+      geo.setAttribute('position', new T.BufferAttribute(pos, 3));
+      geo.setAttribute('normal', new T.BufferAttribute(nrm, 3));
+      geo.setAttribute('color', new T.BufferAttribute(col, 3));
+      geo.setAttribute('skinIndex', new T.Uint16BufferAttribute(si, 4));
+      geo.setAttribute('skinWeight', new T.BufferAttribute(sw, 4));
+      geo.computeBoundingSphere();
+      const mat = list[0].material.clone(); mat.vertexColors = true; mat.color.setRGB(1, 1, 1); mat.name = 'face-merge'; mat.userData = { ...(mat.userData || {}), faceMerge: true };
+      mesh.material = mat;
+      mesh.name = 'face-merge'; mesh.receiveShadow = list.some((o) => o.receiveShadow);
+      mesh.castShadow = false;   // the parts' shadow is the marine's shadow proxy's (index.html CL-140: it keeps taking them, they stay visible)
+      mesh.frustumCulled = false; mesh.userData.noRigSkin = true; mesh.userData.faceMergeOf = list;
+      mesh.bind(new T.Skeleton(bones));
+      mesh.boundingSphere = geo.boundingSphere.clone();
+      // what each part was: its parent, geometry, material and colour
+      const seen = list.map((o) => ({ o, parent: o.parent, geo: o.geometry, mat: o.material, r: o.material.color.r, g: o.material.color.g, b: o.material.color.b, mv: o.material.version }));
+      let dead = false;
+      const handBack = () => {
+        dead = true; mesh.layers.mask = 0;
+        for (const o of list) faceUnhide(o);
+        if (mesh.parent) mesh.parent.remove(mesh);
+        if (typeof setTimeout === 'function') setTimeout(() => { geo.dispose(); mat.dispose(); }, 3000);
+      };
+      // Before each draw (not a warm-up compile: index.html's compileInSlices shows and hides drawables while it runs): a part
+      // changed (parent, geometry, material, colour, put back on a layer) or hidden by the game hands the parts back for good;
+      // this draw is then left empty (drawRange 0) so no part shows that should not.
+      mesh.onBeforeRender = (r) => {
+        if (dead) return;
+        if (compilingNow(r)) return;
+        for (const s of seen) {
+          const o = s.o, m = o.material;
+          // a fade that swaps every material on him (game/training-camera-collision.js) swaps this mesh's too: both swapped is fine
+          const swapped = m !== s.mat;
+          if (swapped !== (mesh.material !== mat) || !swapped && m.version !== s.mv || o.parent !== s.parent || o.geometry !== s.geo || !m.color || m.color.r !== s.r || m.color.g !== s.g || m.color.b !== s.b || !o.visible || o.layers.mask !== 0 || !shownIn(o.parent)) {
+            geo.setDrawRange(0, 0); handBack(); return;
+          }
+        }
+      };
+      for (const o of list) faceHide(o);
+      const entry = { mesh, list, handBack, info: () => ({ parts: list.length, names: list.map((o) => o.name), colours: [...new Set(list.map((o) => o.material.color.getHexString()))], verts: total, handedBack: dead }) };
+      group.userData.faceMerge.push(entry); made.push(entry);
+    }
+  }
+  return made;
 }

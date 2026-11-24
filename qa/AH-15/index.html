@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AH-15 — Daytime Quests &amp; Minigames Overhaul (Before vs After)</title>
+<style>
+  body { margin: 0; padding: 24px 32px; background: #0b0f0c; color: #e7e3ce; font-family: Consolas, "Courier New", monospace; }
+  h1 { margin: 0 0 6px; color: #ffd24a; letter-spacing: 0.08em; font-size: 20px; }
+  p.lead { margin: 0 0 22px; color: #aeb6a0; font-size: 13px; max-width: 980px; line-height: 1.5; }
+  .pair { margin-bottom: 28px; padding: 14px; background: #121813; border: 1px solid #354132; border-left: 3px solid #ffd24a; }
+  .pair h2 { margin: 0 0 10px; font-size: 14px; color: #ffd24a; letter-spacing: 0.06em; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(460px, 1fr)); gap: 14px; }
+  figure { margin: 0; background: #090d0a; border: 1px solid #283326; padding: 8px; }
+  figcaption { font-size: 11px; color: #9aa58e; margin-bottom: 6px; letter-spacing: 0.08em; text-transform: uppercase; }
+  figcaption.after { color: #8dff95; }
+  img { width: 100%; height: auto; display: block; border: 1px solid #1d261c; }
+</style>
+</head>
+<body>
+  <h1>AH-15 · DAYTIME QUESTS, MINIGAMES &amp; SIDE QUESTS OVERHAUL</h1>
+  <p class="lead">Native NVIDIA RTX 5080 WebGPU captures (1280×720) taken before and after AH-15. Covers Medical Convoy (MED-04 hydraulic jack &amp; sleeper spitter), Trapper's Safe Path &amp; iron cellar (including terrain-bleed fix), Radio Relay CRT oscilloscope, Hikers' hanging bear bag &amp; Maya's camera viewfinder, Price's Diesel Pump &amp; HQ generator, Clarke's Utility Truck, and Ranger Camp search log / VHF transceiver / lockbox keypad.</p>
+
+  <section class="pair">
+    <h2>01 · Medical Convoy — Overturned MED-04 Ambulance &amp; Hydraulic Jack Rhythm HUD</h2>
+    <div class="grid">
+      <figure><figcaption>Before</figcaption><img src="before/01-convoy-jack.png" alt="Before convoy jack"></figure>
+      <figure><figcaption class="after">After</figcaption><img src="after/01-convoy-jack.png" alt="After convoy jack"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>02 · Medical Convoy — Cab Door Buckling &amp; Sleeper Spitter Acid Ambush</h2>
+    <div class="grid">
+      <figure><figcaption>Before</figcaption><img src="before/02-convoy-sleeper.png" alt="Before convoy sleeper"></figure>
+      <figure><figcaption class="after">After</figcaption><img src="after/02-convoy-sleeper.png" alt="After convoy sleeper"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>03 · Medical Convoy — PGB Field Transceiver Playback (Aftermath Radio Log)</h2>
+    <div class="grid">
+      <figure><figcaption>Before</figcaption><img src="before/03-convoy-radio.png" alt="Before convoy radio"></figure>
+      <figure><figcaption class="after">After</figcaption><img src="after/03-convoy-radio.png" alt="After convoy radio"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>04 · Trapper's Bear-Trap Yard — Gate Arch, Horseshoe Chimes &amp; Row Progress HUD</h2>
+    <div class="grid">
+      <figure><figcaption>Before</figcaption><img src="before/04-trapper-yard.png" alt="Before trapper yard"></figure>
+      <figure><figcaption class="after">After</figcaption><img src="after/04-trapper-yard.png" alt="After trapper yard"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>05 · Trapper's Bear-Trap — Active Pry-Free Mechanic &amp; Clamp Vignette</h2>
+    <div class="grid">
+      <figure><figcaption>Before</figcaption><img src="before/05-trapper-snapped.png" alt="Before trapper snapped"></figure>
+      <figure><figcaption class="after">After</figcaption><img src="after/05-trapper-snapped.png" alt="After trapper snapped"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>06 · Trapper's Iron-Lined Cellar — Terrain Bleed Eliminated + Cpl. Okafor's Tally Wall</h2>
+    <div class="grid">
+      <figure><figcaption>Before (Terrain Bleeding Through Cellar Floor)</figcaption><img src="before/06-trapper-cellar.png" alt="Before trapper cellar"></figure>
+      <figure><figcaption class="after">After (0% Terrain Bleed + Lantern + Tally Plaque)</figcaption><img src="after/06-trapper-cellar.png" alt="After trapper cellar"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>07 · Radio Relay — Riveted Branch CRT VHF Receiver &amp; Live Carrier Oscilloscope</h2>
+    <div class="grid">
+      <figure><figcaption>Before</figcaption><img src="before/07-relay-radio.png" alt="Before relay radio"></figure>
+      <figure><figcaption class="after">After</figcaption><img src="after/07-relay-radio.png" alt="After relay radio"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>08 · Hikers' Hanging Bear Bag — Orange Flag Ribbon, Carabiner &amp; Aim HUD</h2>
+    <div class="grid">
+      <figure><figcaption>Before</figcaption><img src="before/08-hikers-bag.png" alt="Before hikers bag"></figure>
+      <figure><figcaption class="after">After</figcaption><img src="after/08-hikers-bag.png" alt="After hikers bag"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>09 · Fuel Depot — Weathered PGB Depot 02 Diesel Pump, Frosted Globe &amp; Live Crank</h2>
+    <div class="grid">
+      <figure><figcaption>Before</figcaption><img src="before/09-fuel-pump.png" alt="Before fuel pump"></figure>
+      <figure><figcaption class="after">After</figcaption><img src="after/09-fuel-pump.png" alt="After fuel pump"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>10 · Clarke's Utility Truck — Chained Toolbox &amp; Alarm Setup</h2>
+    <div class="grid">
+      <figure><figcaption>Before</figcaption><img src="before/10-truck-chain.png" alt="Before truck chain"></figure>
+      <figure><figcaption class="after">After</figcaption><img src="after/10-truck-chain.png" alt="After truck chain"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>11 · Ranger Camp — Forestry SAR Search Log Clipboard</h2>
+    <div class="grid">
+      <figure><figcaption>Before</figcaption><img src="before/11-ranger-log.png" alt="Before ranger log"></figure>
+      <figure><figcaption class="after">After</figcaption><img src="after/11-ranger-log.png" alt="After ranger log"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>12 · Ranger Camp — Riveted Steel Lockbox Keypad &amp; Lid Strip</h2>
+    <div class="grid">
+      <figure><figcaption>Before</figcaption><img src="before/12-ranger-keypad.png" alt="Before ranger keypad"></figure>
+      <figure><figcaption class="after">After</figcaption><img src="after/12-ranger-keypad.png" alt="After ranger keypad"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>13 · Bonus After — Forestry SAR VHF-FM Transceiver Big View</h2>
+    <div class="grid">
+      <figure><figcaption class="after">After</figcaption><img src="after/13-ranger-radio.png" alt="After ranger radio"></figure>
+    </div>
+  </section>
+
+  <section class="pair">
+    <h2>14 · Bonus After — Maya's Recovered Camera Viewfinder Playback</h2>
+    <div class="grid">
+      <figure><figcaption class="after">After</figcaption><img src="after/14-hikers-camera.png" alt="After hikers camera"></figure>
+    </div>
+  </section>
+</body>
+</html>

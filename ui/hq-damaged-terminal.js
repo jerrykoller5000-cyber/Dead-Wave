@@ -1,11 +1,13 @@
 // GP-104: cosmetic damaged terminal. No text, interaction, RNG, physics or damage.
+import { getFobPBR, applyWorldUVByMaterial } from '../world/fob-textures.js';
 export function buildDamagedTerminal(T,doc=document) {
   const group=new T.Group();group.name='hq-damaged-terminal';
-  const steel=new T.MeshStandardMaterial({color:0x424c49,metalness:.55,roughness:.79});
-  const edge=new T.MeshStandardMaterial({color:0x778078,metalness:.6,roughness:.65});
-  const dark=new T.MeshStandardMaterial({color:0x090e0e,roughness:.95});
-  const board=new T.MeshStandardMaterial({color:0x233c2f,roughness:.9});
-  const copper=new T.MeshStandardMaterial({color:0x866041,metalness:.5,roughness:.7});
+  const pbr=getFobPBR(T);
+  const steel=pbr?new T.MeshStandardMaterial(pbr.bunkerSteel.opts({color:0x7e8f8b,normalScale:1.05})):new T.MeshStandardMaterial({color:0x424c49,metalness:.55,roughness:.79});
+  const edge=pbr?new T.MeshStandardMaterial(pbr.armorPlate.opts({color:0xbdc7c0,normalScale:1.05})):new T.MeshStandardMaterial({color:0x778078,metalness:.6,roughness:.65});
+  const dark=pbr?new T.MeshStandardMaterial(pbr.bunkerSteel.opts({color:0x363e40,normalScale:.75})):new T.MeshStandardMaterial({color:0x090e0e,roughness:.95});
+  const board=pbr?new T.MeshStandardMaterial(pbr.etchedPCB.opts({color:0xffffff,normalScale:1.25})):new T.MeshStandardMaterial({color:0x233c2f,roughness:.9});
+  const copper=pbr?new T.MeshStandardMaterial(pbr.bunkerSteel.opts({color:0xc98f5d,normalScale:.85})):new T.MeshStandardMaterial({color:0x866041,metalness:.5,roughness:.7});
   const box=(w,h,d,m,x,y,z)=>{const mesh=new T.Mesh(new T.BoxGeometry(w,h,d),m);mesh.position.set(x,y,z);group.add(mesh);return mesh;};
   box(1.83,1.50,.25,dark,0,0,0);
   box(1.72,1.38,.13,steel,0,0,.10);
@@ -16,17 +18,26 @@ export function buildDamagedTerminal(T,doc=document) {
   // Surviving glass surrounds a jagged hole; all cracks are baked into one transparent texture.
   const cv=doc.createElement('canvas');cv.width=768;cv.height=512;const ctx=cv.getContext('2d');
   if(ctx){
-    ctx.fillStyle='#13292d';ctx.fillRect(0,0,768,512);
-    for(let y=13;y<512;y+=12){ctx.fillStyle='#42606238';ctx.fillRect(0,y,768,2);}
+    const gr=ctx.createLinearGradient(0,0,768,512);gr.addColorStop(0,'#1c383d');gr.addColorStop(.45,'#11262a');gr.addColorStop(1,'#0c1a1d');
+    ctx.fillStyle=gr;ctx.fillRect(0,0,768,512);
+    // Subtle diagonal CRT glass reflection band
+    const sheen=ctx.createLinearGradient(80,0,520,512);sheen.addColorStop(0,'rgba(175,220,228,0)');sheen.addColorStop(.48,'rgba(175,220,228,0.12)');sheen.addColorStop(.55,'rgba(175,220,228,0.03)');sheen.addColorStop(1,'rgba(175,220,228,0)');
+    ctx.fillStyle=sheen;ctx.fillRect(0,0,768,512);
+    for(let y=9;y<512;y+=8){ctx.fillStyle='#4b6d7034';ctx.fillRect(0,y,768,2);}
+    // Soot burn smudge around impact edge
+    const burn=ctx.createRadialGradient(510,335,20,510,335,175);burn.addColorStop(0,'rgba(8,10,10,0.82)');burn.addColorStop(1,'rgba(8,10,10,0)');
+    ctx.fillStyle=burn;ctx.fillRect(0,0,768,512);
     const hole=[[330,114],[389,151],[483,131],[450,225],[563,294],[445,313],[465,396],[347,355],[279,426],[266,313],[188,284],[290,229]];
     ctx.globalCompositeOperation='destination-out';ctx.beginPath();hole.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.fill();ctx.globalCompositeOperation='source-over';
-    const cracks=[[[330,114],[283,59],[312,0]],[[483,131],[612,75],[768,54]],[[450,225],[637,210],[768,239]],[[563,294],[643,393],[727,512]],[[279,426],[175,443],[150,512]],[[188,284],[106,207],[0,178]],[[290,229],[136,104],[85,0]],[[465,396],[524,444],[558,512]]];
+    const cracks=[[[330,114],[283,59],[312,0]],[[483,131],[612,75],[768,54]],[[450,225],[637,210],[768,239]],[[563,294],[643,393],[727,512]],[[279,426],[175,443],[150,512]],[[188,284],[106,207],[0,178]],[[290,229],[136,104],[85,0]],[[465,396],[524,444],[558,512]],[[389,151],[412,72],[448,0]],[[266,313],[124,352],[0,390]]];
     ctx.lineWidth=5;ctx.strokeStyle='#020808';for(const points of cracks){ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.stroke();}
-    ctx.lineWidth=2;ctx.strokeStyle='#96bfc6a0';for(const points of cracks){ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x+3,y+1):ctx.moveTo(x+3,y+1));ctx.stroke();}
-    for(let i=0;i<75;i++){ctx.fillStyle='#00090944';ctx.fillRect((i*137)%768,(i*67)%512,3+i%11,2);}
+    ctx.lineWidth=2.2;ctx.strokeStyle='#bce2e8b8';for(const points of cracks){ctx.beginPath();points.forEach(([x,y],i)=>i?ctx.lineTo(x+2.5,y+1):ctx.moveTo(x+2.5,y+1));ctx.stroke();}
+    // White fractured glass edge bevel around the hole
+    ctx.lineWidth=3;ctx.strokeStyle='rgba(195,232,238,0.58)';ctx.beginPath();hole.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();ctx.stroke();
+    for(let i=0;i<95;i++){ctx.fillStyle='#00090944';ctx.fillRect((i*137)%768,(i*67)%512,3+i%11,2);}
   }
-  const tex=new T.CanvasTexture(cv);tex.colorSpace=T.SRGBColorSpace;
-  const glass=new T.Mesh(new T.PlaneGeometry(1.42,.95),new T.MeshStandardMaterial({map:tex,transparent:true,alphaTest:.1,roughness:.3,metalness:.15,emissiveMap:tex,emissive:0x71aab4,emissiveIntensity:.24}));
+  const tex=new T.CanvasTexture(cv);tex.colorSpace=T.SRGBColorSpace;tex.anisotropy=8;tex.generateMipmaps=true;
+  const glass=new T.Mesh(new T.PlaneGeometry(1.42,.95),new T.MeshStandardMaterial({map:tex,transparent:true,alphaTest:.1,roughness:.18,metalness:.22,emissiveMap:tex,emissive:0x71aab4,emissiveIntensity:.28}));
   glass.name='hq-damaged-screen';glass.position.set(0,.075,.29);glass.rotation.z=-.065;group.add(glass);
   const top=box(1.62,.10,.16,edge,0,.64,.25);top.rotation.z=-.055;
   box(.12,1.16,.16,steel,-.82,.03,.23);
@@ -35,6 +46,7 @@ export function buildDamagedTerminal(T,doc=document) {
   for(const x of [-.76,.76])for(const y of [-.64,.65]){
     const bolt=new T.Mesh(new T.CylinderGeometry(.032,.032,.025,6),dark);bolt.rotation.x=Math.PI/2;bolt.position.set(x,y,.26);group.add(bolt);
   }
+  applyWorldUVByMaterial(group,new Map([[steel,.85],[edge,.75],[dark,.85],[copper,.45]]));
   // Fixed bent cable runs, including an exposed break at the spark origin.
   for(const [points,color] of [
     [[[-.28,-.23,.30],[-.35,-.55,.37],[-.24,-.91,.36],[-.04,-1.0,.34],[.01,-.85,.37]],0x512a22],

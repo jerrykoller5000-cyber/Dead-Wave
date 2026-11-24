@@ -10,11 +10,12 @@ test('bench contact rattles once per jump, rearms on landing, and ignores normal
  tick(0,-200,-640.24);tick(0,-199.8,-640.24);assert.equal(n,2);
  tick(0,-200,-640.24);tick(0,-199,-640.24,{paused:true});tick(0,-199,-640.24,{alive:false});tick(0,-199,-640.24,{inTraining:false});assert.equal(n,2);
 });
-test('control box sits left of the lights in the wall frame and points into the firing range',()=>{
+test('control box stays in its old doorway-wall mount and faces the firing range after the switch moves',()=>{
  const a=rangeConsolePlacement(tg),s=tg.stations.lightSwitch;
  assert(Math.abs(a.z-(-4.6))<1e-9);assert(a.z>s.z-tg.origin.z);assert(a.x> -7.98&&a.x< -7.8);assert.equal(a.yaw,s.yaw);assert.equal(a.nx,1);
- // Left/right follows the wall orientation rather than a fixed world axis.
- const b=rangeConsolePlacement({...tg,stations:{lightSwitch:{x:2,z:-645,yaw:0}}});assert(Math.abs(b.x-.65)<1e-9);assert(b.z> -5);
+ const moved={...tg,stations:{lightSwitch:{x:-2.2,z:-649.2,yaw:0}}};
+ assert.deepEqual(rangeConsolePlacement(moved),a);
+ assert.deepEqual(rangeConsolePlacement({...tg,stations:{}}),a);
 });
 function audioContext(){
  const sources=[],gains=[];let decodes=0;

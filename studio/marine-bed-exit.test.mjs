@@ -26,3 +26,38 @@ test('clamps late/hitched sampling to the final standing pose',()=>{
  assert.deepEqual({...sampleBedExit(50,bed,floor),t:5},sampleBedExit(5,bed,floor));
  assert.equal(sampleBedExit(-3,bed,floor).t,0);
 });
+test('the current player keeps his boot planted through standing and the handoff to gameplay',()=>{
+ const leg={hipY:.785,thigh:.355,shin:.33,ankleZ:.01};
+ for(let frame=225;frame<=300;frame++){
+  const p=sampleBedExit(frame/60,bed,floor,leg), bend=p.thigh+p.knee;
+  const y=p.hip.y-leg.thigh*Math.cos(p.thigh)-leg.shin*Math.cos(bend)-leg.ankleZ*Math.sin(bend);
+  const z=p.hip.z-leg.thigh*Math.sin(p.thigh)-leg.shin*Math.sin(bend)+leg.ankleZ*Math.cos(bend);
+  assert(Math.abs(y-(floor+leg.hipY-leg.thigh-leg.shin))<.0002,'vertical plant at frame '+frame);
+  assert(Math.abs(z-(bed.stand.z+leg.ankleZ))<.0002,'horizontal plant at frame '+frame);
+ }
+ const end=sampleBedExit(5,bed,floor,leg);
+ assert.equal(end.hip.y,floor+leg.hipY);assert.equal(end.knee,0);assert.equal(end.thigh,0);
+});
+
+test('both fitted heel corners clear the mattress through the seated turn',()=>{
+ const pad={x:.98,y:.68,z:0,yaw:Math.PI/2,stand:{x:.60,z:1.30,yaw:0}};
+ const leg={hipY:.785,thigh:.355,shin:.33,ankleZ:.01,recline:.55};
+ let nearest=Infinity;
+ for(let frame=0;frame<=225;frame++){
+  const p=sampleBedExit(frame/60,pad,0,leg),thigh=p.pitch+p.thigh,shin=thigh+p.knee,foot=shin+p.ankle;
+  // Heel corners measured on both fitted boots, in the ankle joint's local frame.
+  const y=p.hip.y-leg.thigh*Math.cos(thigh)-leg.shin*Math.cos(shin)-leg.ankleZ*Math.sin(shin)
+    -.103*Math.cos(foot)+.103*Math.sin(foot);
+  const z=-leg.thigh*Math.sin(thigh)-leg.shin*Math.sin(shin)+leg.ankleZ*Math.cos(shin)
+    -.103*Math.sin(foot)-.103*Math.cos(foot);
+  for(const side of [-1,1])for(const corner of [-.03978,.03978]){
+   const x=side*.1053+corner;
+   const wx=p.hip.x+x*Math.cos(p.yaw)+z*Math.sin(p.yaw);
+   const wz=p.hip.z-x*Math.sin(p.yaw)+z*Math.cos(p.yaw);
+   if(Math.abs(wx)>1 || Math.abs(wz)>.47)continue;
+   nearest=Math.min(nearest,y-pad.y);
+   assert(y>=pad.y-.0002,'heel below mattress at frame '+frame);
+  }
+ }
+ assert(nearest<.002,'his heels take weight on the pad before he swings off it');
+});

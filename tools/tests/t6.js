@@ -80,7 +80,7 @@
   ok(tgt === wall, 'aiming at the wall face targets the wall, not the rail on top (' + (tgt && tgt.type) + ')');
   ok(T.scrapSet(wall).length === 3, 'wall carries platform + railing: set ' + T.scrapSet(wall).length);
   const hint = T.getScrapHint();
-  ok(/X scraps: Wall \+ 2 on it/.test(hint), 'banner: ' + hint);
+  ok(/X scraps: Wall \+ ?2 on it/.test(hint) && /Cash/.test(hint), 'banner: ' + hint);   // CO-1: keyed (build.message.scrapSupported), in Cash
   // GB-63 (P-4): X acts on his own storey only. From the ground the deck overhead is out of reach;
   // standing on the deck, aiming at it targets the platform. (Re-based: this used to be asked from the ground.)
   const aimDeck = () => { const tx = T.gridCentre(pgx + 2), tz = T.gridCentre(z0); T.setAimRay(tx + 0.3, dy + 12, tz - 0.5, -0.3, -12, 0.5); T.updateGhostPreview(); };

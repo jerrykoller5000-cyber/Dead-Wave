@@ -1,5 +1,6 @@
 // GP-121: static checkpoint dressing and ground-following convoy approaches.
 // The route is local to the existing gate (+z inward); no world RNG or terrain edits.
+import { getCordonRoadPBR } from './ground-textures.js';
 export function planConvoyRoute({start,end,height,clear,step=2}) {
   const loX=-56,hiX=56,loZ=Math.min(start.z,end.z)-10,hiZ=Math.max(start.z,end.z)+12;
   const key=(x,z)=>x+','+z,cache=new Map(),nodes=new Map(),open=[];
@@ -116,9 +117,22 @@ export function buildCordonCheckpoint(T,{height,inside,outside,surface=height,do
   };
   makeRoad(inside,false);makeRoad(outside,true);
   const roadGeo=new T.BufferGeometry();roadGeo.setAttribute('position',new T.Float32BufferAttribute(pp,3));roadGeo.setAttribute('color',new T.Float32BufferAttribute(cc,4));roadGeo.setAttribute('uv',new T.Float32BufferAttribute(uv,2));roadGeo.computeVertexNormals();
-  let map=null;
-  if(doc){const cv=doc.createElement('canvas');cv.width=512;cv.height=2048;const ctx=cv.getContext('2d'),im=ctx.createImageData(cv.width,cv.height);let seed=291;
-    for(let y=0;y<cv.height;y++)for(let x=0;x<cv.width;x++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const noise=seed/4294967296,outer=x>=256,u=((x%256)/255)*2-1,wob=.035*Math.sin(y*.041)+.025*Math.sin(y*.127),r=Math.abs(u-wob),rut=Math.exp(-Math.pow((r-.49)/.17,4)),edge=Math.max(0,Math.min(1,(.99-r-noise*.07)/.15));const grain=.84+noise*.26+.04*Math.sin(y*.047+x*.1),base=outer?112-rut*18:122-rut*11,alpha=edge*(outer?.07+rut*.88:.9)*((outer&&y<200)?y/200:1),i=(y*cv.width+x)*4;im.data[i]=base*grain;im.data[i+1]=(base-15)*grain;im.data[i+2]=(base-34)*grain;im.data[i+3]=255*alpha;}
-    ctx.putImageData(im,0,0);map=new T.CanvasTexture(cv);map.colorSpace=T.SRGBColorSpace;map.anisotropy=4;}
-  const road=new T.Mesh(roadGeo,new T.MeshStandardMaterial({map,vertexColors:true,color:map?0xffffff:0x7f6b4e,transparent:true,depthWrite:false,roughness:1,side:T.DoubleSide,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1}));road.name='convoy-approach-tracks';road.receiveShadow=true;root.add(road);root.userData.routes={inside,outside};root.userData.solids=[{x:bx,z:bz,r:1.45,y:by,h:2.75},...[[3.55,7],[3.9,11],[-3.45,12],[3.4,-4],[-3.4,-4]].map(([x,z])=>({x,z,r:.66,y:height(x,z),h:.72}))];return root;
+  const roadPbr = doc ? getCordonRoadPBR(T) : null;
+  const map = roadPbr && roadPbr.map ? roadPbr.map : null;
+  const roadMatOpts = {
+    map,
+    normalMap: roadPbr && roadPbr.normalMap ? roadPbr.normalMap : null,
+    roughnessMap: roadPbr && roadPbr.roughnessMap ? roadPbr.roughnessMap : null,
+    vertexColors: true,
+    color: map ? 0xffffff : 0x7f6b4e,
+    transparent: true,
+    depthWrite: false,
+    roughness: 1,
+    side: T.DoubleSide,
+    polygonOffset: true,
+    polygonOffsetFactor: -1,
+    polygonOffsetUnits: -1,
+  };
+  if (roadMatOpts.normalMap && T.Vector2) roadMatOpts.normalScale = new T.Vector2(1.15, 1.15);
+  const road=new T.Mesh(roadGeo,new T.MeshStandardMaterial(roadMatOpts));road.name='convoy-approach-tracks';road.receiveShadow=true;root.add(road);root.userData.routes={inside,outside};root.userData.solids=[{x:bx,z:bz,r:1.45,y:by,h:2.75},...[[3.55,7],[3.9,11],[-3.45,12],[3.4,-4],[-3.4,-4]].map(([x,z])=>({x,z,r:.66,y:height(x,z),h:.72}))];return root;
 }

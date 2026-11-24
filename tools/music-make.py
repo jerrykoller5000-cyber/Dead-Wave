@@ -17,13 +17,14 @@
 #
 # Runs where F:\Music is (Jerry's PC; the WSL/VM mount). Needs ffmpeg (libvorbis, ebur128) and numpy.
 # Usage: python3 tools/music-make.py --music <F:\Music's mount> [--only <kit name part>] [--dry] [--force] [--budget s]
-import argparse, json, os, re, subprocess, sys
+import argparse, json, os, re, shutil, subprocess, sys
 import numpy as np
 
 SR = 48000
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(REPO, 'assets', 'soundtrack', 'gh')
 MADE = os.path.join(REPO, 'docs', 'audio', 'music', 'made.json')
+FFMPEG = shutil.which('ffmpeg') or (r'C:\Program Files\Win Movie Maker\ffmpeg.exe' if os.path.exists(r'C:\Program Files\Win Movie Maker\ffmpeg.exe') else 'ffmpeg')
 
 FX = re.compile(r'fx|riser|impact|hit|transition|siren|gunshot|alarm|noise|vinyl|downlifter|drop|sweep|glitch|laser|heartbeat|atmosphere|ambience|texture|stab|metallic', re.I)
 def role(name):
@@ -45,12 +46,12 @@ def pack_of(kitpath):
     return ('hs' + (m.group(1) or '').strip()) if m else slug(p.replace('Ghosthack - ', ''))[:12]
 
 def decode(path):
-    r = subprocess.run(['ffmpeg', '-v', 'error', '-i', path, '-f', 'f32le', '-ac', '2', '-ar', str(SR), '-'], capture_output=True)
+    r = subprocess.run([FFMPEG, '-v', 'error', '-i', path, '-f', 'f32le', '-ac', '2', '-ar', str(SR), '-'], capture_output=True)
     if r.returncode: raise RuntimeError('decode ' + path + ': ' + r.stderr.decode()[:300])
     return np.frombuffer(r.stdout, dtype=np.float32).reshape(-1, 2).copy()
 
 def loudness(x):
-    r = subprocess.run(['ffmpeg', '-v', 'info', '-nostats', '-f', 'f32le', '-ar', str(SR), '-ac', '2', '-i', '-', '-af', 'ebur128=peak=true', '-f', 'null', '-'],
+    r = subprocess.run([FFMPEG, '-v', 'info', '-nostats', '-f', 'f32le', '-ar', str(SR), '-ac', '2', '-i', '-', '-af', 'ebur128=peak=true', '-f', 'null', '-'],
                        input=x.astype(np.float32).tobytes(), capture_output=True)
     t = r.stderr.decode(errors='replace')
     i = re.findall(r'I:\s+(-?[\d.]+|-inf) LUFS', t)
@@ -61,7 +62,7 @@ def loudness(x):
 
 def encode(x, path):
     tmp = path + '.part.ogg'
-    r = subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'f32le', '-ar', str(SR), '-ac', '2', '-i', '-', '-c:a', 'libvorbis', '-q:a', '4', tmp],
+    r = subprocess.run([FFMPEG, '-v', 'error', '-y', '-f', 'f32le', '-ar', str(SR), '-ac', '2', '-i', '-', '-c:a', 'libvorbis', '-q:a', '4', tmp],
                        input=np.clip(x, -1, 1).astype(np.float32).tobytes(), capture_output=True)
     if r.returncode: raise RuntimeError('encode ' + path + ': ' + r.stderr.decode()[:300])
     os.replace(tmp, path)
@@ -156,8 +157,31 @@ def main():
         print('made', r['base'], r['bars'], 'bars', r['loop_s'], 's', r['gain_db'], 'dB', r['lufs'], 'LUFS', r['peak_dbfs'], 'dBFS', ','.join(r['files']))
     print(len(kits), 'kits on the sheet')
 
-if __name__ == '__main__' and not any(f in sys.argv for f in ('--manifest', '--places', '--cues')):
+if __name__ == '__main__' and not any(f in sys.argv for f in ('--manifest', '--places', '--cues', '--dayfights')):
     main()
+
+# AH-11: unused Hellshot kits reserved for daylight skirmishes so 8-bit chiptune never interrupts the 1.2 score.
+DAY_FIGHT_KITS = [
+    ('dayfight-1', 'Ghosthack - Hellshot - Argent Metal/Ghosthack - Hellshot - Argent Metal/Construction Kits/Joker 107bpm Fmin', 107, 'chip_skirmish_b'),
+    ('dayfight-2', 'Ghosthack - Hellshot 2 - Argent Metal/Ghosthack - Hellshot 2 - Argent Metal/Construction Kits/Nihility 135bpm A#min', 135, 'chip_skirmish_a'),
+    ('dayfight-3', 'Ghosthack - Hellshot 3 - Argent Metal/Ghosthack - Hellshot 3 - Argent Metal/Construction Kits/Retribution 150bpm F#min', 150, 'chip_fight_1'),
+]
+def dayfights(music, force=False):
+    os.makedirs(OUT, exist_ok=True)
+    made = json.load(open(MADE)) if os.path.exists(MADE) else {'task': 'CL-275', 'kits': {}}
+    made.setdefault('kits', {})
+    for dfid, kp, bpm, _ in DAY_FIGHT_KITS:
+        if not force and kp in made['kits'] and all(os.path.exists(os.path.join(REPO, f)) for f in made['kits'][kp]['files'].values()):
+            print('have', dfid, os.path.basename(kp)); continue
+        r = make_kit(kp, bpm, -16.0, music, False)
+        r['for'] = [dfid]
+        made['kits'][kp] = r
+        tmp = MADE + '.part'
+        json.dump(made, open(tmp, 'w'), indent=1); os.replace(tmp, MADE)
+        print('made', dfid, r['base'], r['bars'], 'bars', r['loop_s'], 's', r['gain_db'], 'dB', r['lufs'], 'LUFS', ','.join(r['files']))
+
+if __name__ == '__main__' and '--dayfights' in sys.argv:
+    dayfights(sys.argv[sys.argv.index('--music') + 1], '--force' in sys.argv)
 
 # --manifest: the score's nights into assets/soundtrack/music.json ("score": the layered suites, their nights, and
 # a gain each so a night's full mix plays as loud as the night it replaces: the old song's loudness and gain, measured).
@@ -181,7 +205,7 @@ def manifest():
         wave.append({'from': n, 'track': tid})
         sec = (m.get('sections') or {}).get(old)
         if sec:
-            rr = subprocess.run(['ffmpeg', '-v', 'info', '-nostats', '-i', os.path.join(REPO, 'assets', 'soundtrack', sec['file']), '-af', 'ebur128', '-f', 'null', '-'], capture_output=True)
+            rr = subprocess.run([FFMPEG, '-v', 'info', '-nostats', '-i', os.path.join(REPO, 'assets', 'soundtrack', sec['file']), '-af', 'ebur128', '-f', 'null', '-'], capture_output=True)
             I = re.findall(r'I:\s+(-?[\d.]+) LUFS', rr.stderr.decode(errors='replace'))
             if I:
                 g = float(m.get('gain', {}).get(old, 1)) * 10 ** ((float(I[-1]) - (-16.0)) / 20)
@@ -204,6 +228,16 @@ def manifest():
         layered[tid] = {'fallback': None, 'kits': kits}
         specials[key] = tid
         m.setdefault('gain', {})[tid] = round(gmed, 3)
+    # AH-11: Day-fight layered Hellshot suites (small, medium, large daytime skirmishes - no 8-bit chiptune in the 1.2 score).
+    day_fight_tracks = []
+    for dfid, kp, bpm, fb in DAY_FIGHT_KITS:
+        r = made.get(kp)
+        if not r: continue
+        tid = 'gh/' + dfid
+        layered[tid] = {'fallback': fb, 'kits': [{'name': r['base'].split('-', 2)[2], 'bpm': r['bpm'], 'barS': round(240.0 / r['bpm'], 6), 'loopS': r['loop_s'],
+                        'files': {l: f.replace('assets/soundtrack/', '') for l, f in r['files'].items()}}]}
+        day_fight_tracks.append(tid)
+        m.setdefault('gain', {})[tid] = round(gmed * 0.9, 3)
     # The Training Ground's motifs (CL-275): each type's kit, played when that type comes out to practise.
     motifs = {}
     for mo in score['moments']:
@@ -218,9 +252,9 @@ def manifest():
         layered[tid] = {'fallback': None, 'kits': kits}
         motifs[kind] = tid
         m.setdefault('gain', {})[tid] = round(gmed, 3)
-    # The calm (CL-275): the places' whole tracks as pools, each at the loudness of the calm song it stands in for (calm_day).
+    # The calm (CL-275, redesigned in AH-11): cohesive Ghosthack Anomaly survival tracks across the valley.
     def lufs_of(fp):
-        rr = subprocess.run(['ffmpeg', '-v', 'info', '-nostats', '-i', fp, '-af', 'ebur128', '-f', 'null', '-'], capture_output=True)
+        rr = subprocess.run([FFMPEG, '-v', 'info', '-nostats', '-i', fp, '-af', 'ebur128', '-f', 'null', '-'], capture_output=True)
         I = re.findall(r'I:\s+(-?[\d.]+) LUFS', rr.stderr.decode(errors='replace'))
         return float(I[-1]) if I else None
     pools = {}
@@ -234,53 +268,72 @@ def manifest():
         for pid, r in placesmade.items():
             tid = 'gh/' + os.path.splitext(os.path.basename(r['file']))[0]
             L = lufs_of(os.path.join(REPO, r['file']))
-            if ref is not None and L is not None: m.setdefault('gain', {})[tid] = round(refg * 10 ** ((ref - L) / 20), 3)
+            if ref is not None and L is not None: m.setdefault('gain', {})[tid] = round(max(0.4, min(1.8, refg * 10 ** ((ref - L) / 20))), 3)
         P = lambda pid: 'gh/gh-' + pid
-        want = {'menu': ['place-menu'], 'dawnprep': ['place-dawn'], 'day': ['place-hq', 'place-menu'], 'dusk': ['place-alarm-build'], 'night': ['place-dusk'],
-                'aftermath': ['place-hq'], 'dawn': ['place-dawn'], 'fallen': ['place-fallen'],
-                'place_graveyard': ['place-graveyard'], 'place_relay': ['place-relay'], 'place_hikers': ['place-hikers']}
+        want = {
+            'menu': ['place-menu'],
+            'dawnprep': ['place-menu', 'place-hq', 'place-wilds'],
+            'day': ['place-hq', 'place-wilds', 'place-menu', 'place-dusk'],
+            'dusk': ['place-dusk', 'place-anomaly'],
+            'night': ['place-dusk', 'place-anomaly'],
+            'aftermath': ['place-hq', 'place-menu'],
+            'dawn': ['place-dawn'],
+            'fallen': ['place-fallen'],
+            'place_graveyard': ['place-graveyard'],
+            'place_relay': ['place-relay'],
+            'place_hikers': ['place-hikers'],
+        }
         for pool, ids in want.items():
             got = [P(i) for i in ids if i in placesmade]
             if got: pools[pool] = got
-    # The cues (CL-275): the old stings' names to the score's, at the old sting's loudness where one can be measured.
+    # The cues (CL-275, audited and replaced by ear in AH-11): tight, grounded Ghosthack cues at consistent loudness.
     stings = {}
     cuesmade = (json.load(open(MADE)).get('cues') or {})
     if cuesmade:
         want = {'clear': 'last-kill', 'night_falls': 'night-fall', 'guardian': 'boss-entrance', 'ember': 'boss-entrance', 'objective': 'discovery',
                 'achievement': 'discovery', 'airdrop': 'discovery', 'poi_cleared': 'mission-done', 'camp': 'mission-done', 'dawn': 'dawn'}
+        ref_cue_fp = os.path.join(REPO, 'assets', 'soundtrack', 'sting_alarm_metal.mp3')
+        ref_cue_lufs = lufs_of(ref_cue_fp) if os.path.exists(ref_cue_fp) else -12.0
         for sting, cue in want.items():
             if cue not in cuesmade: continue
             tid = 'gh/gh-cue-' + cue
             stings[sting] = tid
-            old = (m.get('stings') or {}).get(sting)
-            fp_old = os.path.join(REPO, 'assets', 'soundtrack', (old or '') + '.mp3')
-            if old and os.path.exists(fp_old) and tid not in m.get('gain', {}):
-                Lo, Ln = lufs_of(fp_old), lufs_of(os.path.join(REPO, cuesmade[cue]['file']))
-                if Lo is not None and Ln is not None: m.setdefault('gain', {})[tid] = round(float(m.get('gain', {}).get(old, 1)) * 10 ** ((Lo - Ln) / 20), 3)
-    m['score'] = {'about': 'CL-275 (D-97): the 1.2 score from F:\\Music. Each night a suite of Hellshot kits, three layers each (gh/*.ogg, git-ignored: made on Jerry\'s PC by tools/music-make.py). Opt-in until it covers every moment: ?score=1 or localStorage tt_score=1. A night\'s gain matches the loudness of the song it replaces; fallback is that song (played when the gh files are not on this machine).',
-                  'layered': layered, 'waveByDay': wave, 'specials': specials, 'motifs': motifs, 'pools': pools, 'stings': stings}
+            Ln = lufs_of(os.path.join(REPO, cuesmade[cue]['file']))
+            if Ln is not None:
+                base = 1.85 if cue == 'last-kill' else (1.7 if cue in ('boss-entrance', 'night-fall') else 1.45)
+                m.setdefault('gain', {})[tid] = round(max(0.6, min(2.2, base * 10 ** (((ref_cue_lufs or -12.0) - Ln) / 20))), 3)
+    score_obj = {
+        'about': 'CL-275 (D-97) / AH-11 (Jerry direct music cue & pacing overhaul): cohesive Ghosthack Anomaly world score, layered Hellshot night & day-fight suites, and ear-audited Mystery Nightfall / Anomaly cues.',
+        'layered': layered, 'waveByDay': wave, 'specials': specials, 'motifs': motifs, 'pools': pools, 'stings': stings,
+    }
+    if day_fight_tracks:
+        score_obj['dayFight'] = {'tracks': day_fight_tracks, 'sizes': [1, 5, 11][:len(day_fight_tracks)]}
+    m['score'] = score_obj
     tmp = mpath + '.part'
     with open(tmp, 'w', encoding='utf-8', newline='\n') as f: json.dump(m, f, indent=2, ensure_ascii=False); f.write('\n')
     os.replace(tmp, mpath)
-    print('music.json: score with', len(layered), 'nights')
+    print('music.json: score with', len(layered), 'layered suites,', len(pools), 'pools,', len(stings), 'cues')
 
 if __name__ == '__main__' and '--manifest' in sys.argv:
     manifest()
 
-# --places: the calm moments as whole tracks (CL-275 step 4, part 2): each place's full mix (or the file named here),
-# measured and brought to the moment's target (-18 LUFS, peak at most -1 dBFS), 48 kHz OGG, gh-place-<id>.ogg.
-# The menu (Clear Sky), dawn (Blue Peace), the HQ (Safe Zone), dusk and night (Dark Valley), the fallen (Dark Valley's drone).
+# --places: the calm moments as whole tracks (CL-275, audited & redesigned in AH-11): cohesive Ghosthack Anomaly tracks,
+# measured and brought to -18 LUFS (peak at most -1 dBFS), 48 kHz OGG, gh-place-<id>.ogg.
 PLACE_FILES = {
-    'place-menu': None, 'place-hq': None, 'place-dusk': None,
-    'place-dawn': 'Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Blue Peace/GH_FS III_Songkits_Blue Peace_Cmaj_90bpm.wav',
+    'place-menu': 'Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 05 - Clear Sky - Am 65Bpm/Ghosthack-A_Kit 05_Clear Sky_Am 65Bpm.wav',
+    'place-hq': 'Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 01 - Safe Zone - Am 70Bpm/Ghosthack-A_Kit 01_Safe Zone_Am 70Bpm.wav',
+    'place-wilds': 'Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 04 - The Brain Scorcher/Ghosthack-A_Kit 04_The Brain Scorcher_Em 70Bpm.wav',
+    'place-dusk': 'Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 02 - Dark Valley - Cm 65Bpm/Ghosthack-A_Kit 02_Dark Valley_Cm 65Bpm.wav',
+    'place-anomaly': 'Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 03 - The Anomaly D# 70Bpm/Ghosthack-A_Kit 03_The Anomaly D# 70Bpm.wav',
+    'place-dawn': 'Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 05 - Clear Sky - Am 65Bpm/Ghosthack-A_Kit 05_Clear Sky_Am 65Bpm.wav',
     'place-fallen': 'Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 02 - Dark Valley - Cm 65Bpm/STEMS/WET/Ghosthack-A_Kit 02_Atmos Drone_Cm 65Bpm (WET).wav',
-    # the places he walks into (by distance, the page's state.place) and the last prep before dark
     'place-graveyard': 'Ghosthack - Anomaly/Ghosthack - Anomaly/Granular Underscores/DRY/Ghosthack-A_Alone Fm 65Bpm (DRY).wav',
-    'place-relay': 'Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/Loops/Pulses/Ghosthack-MN_Pulse Loop 80_Abnormality_E.wav',
-    'place-hikers': 'Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Unapreciated/GH_FS III_Songkits_Unapreciated_Cm_140bpm.wav',
-    'place-alarm-build': 'Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Pressure/GH_FS III_Songkits_Pressure_Em_150bpm.wav',
+    'place-relay': 'Ghosthack - Anomaly/Ghosthack - Anomaly/Granular Underscores/DRY/Ghosthack-A_Facility Am 75Bpm (DRY).wav',
+    'place-hikers': 'Ghosthack - Anomaly/Ghosthack - Anomaly/Granular Underscores/DRY/Ghosthack-A_Environmental Problems Am 65Bpm (DRY).wav',
+    'place-alarm-build': 'Ghosthack - Anomaly/Ghosthack - Anomaly/Construction Kits/Kit 03 - The Anomaly D# 70Bpm/Ghosthack-A_Kit 03_The Anomaly D# 70Bpm.wav',
 }
-PLACE_TILE = {'place-relay': 8}   # the relay's pulse is a 4-bar loop: eight in a row (96 s) so the deck isn't restarting it every 12 s
+PLACE_START = {'place-dawn': 27.0}
+PLACE_TILE = {}
 def places(music, force=False):
     score = json.load(open(os.path.join(REPO, 'docs', 'audio', 'music', 'score.json')))
     byid = {m['id']: m for m in score['moments']}
@@ -293,32 +346,41 @@ def places(music, force=False):
             path = next((f['path'] for f in (mo.get('files') or []) if f.get('role') == 'full mix'), None)
         if not path: print('no file for', pid); continue
         fn = 'gh-' + pid + '.ogg'; dst = os.path.join(OUT, fn)
-        if os.path.exists(dst) and not force and pid in made['places']: print('have', pid); continue
+        prev = made['places'].get(pid)
+        if os.path.exists(dst) and not force and prev and prev.get('src') == path and prev.get('start_s', 0) == PLACE_START.get(pid, 0):
+            print('have', pid); continue
         a = decode(os.path.join(music, path))
+        st = PLACE_START.get(pid, 0)
+        if st > 0:
+            a = a[int(st * SR):].copy()
+            fi = min(int(1.5 * SR), len(a) // 4)
+            if fi > 0: a[:fi] *= np.linspace(0, 1, fi, dtype=np.float32)[:, None]
         if pid in PLACE_TILE: a = np.tile(a, (PLACE_TILE[pid], 1))
-        target = float(mo.get('target_lufs', -18)) if mo and pid not in ('place-fallen',) else -18.0
+        target = -18.0
         I, P = loudness(a)
         g_db = target - I
         if P + g_db > -1.0: g_db = -1.0 - P
         encode(a * float(10 ** (g_db / 20)), dst)
-        made['places'][pid] = {'src': path, 'file': 'assets/soundtrack/gh/' + fn, 'seconds': round(len(a) / SR, 2), 'gain_db': round(g_db, 2)}
+        rec = {'src': path, 'file': 'assets/soundtrack/gh/' + fn, 'seconds': round(len(a) / SR, 2), 'gain_db': round(g_db, 2)}
+        if st > 0: rec['start_s'] = st
+        made['places'][pid] = rec
         tmp = MADE + '.part'; json.dump(made, open(tmp, 'w'), indent=1); os.replace(tmp, MADE)
         print('made', fn, round(len(a) / SR, 1), 's', round(g_db, 2), 'dB')
 
 if __name__ == '__main__' and '--places' in sys.argv:
     places(sys.argv[sys.argv.index('--music') + 1], '--force' in sys.argv)
 
-# --cues: the score's short cues (CL-275), each trimmed (max seconds, a fade out), brought to -12 LUFS with the peak at
-# most -1 dBFS, gh-cue-<name>.ogg. They stand in for the old stings (not Jerry's metal stingers: the alarm's and ui/*).
+# --cues: the score's short cues (CL-275, audited and replaced by ear in AH-11), each trimmed cleanly with a smooth tail,
+# brought to -12 LUFS with peak <= -1 dBFS, gh-cue-<name>.ogg. Jerry's alarm metal stinger and ui/* stingers stay untouched.
 CUES = {
-    'discovery': ('cue-discovery', None, 8.0),
-    'mission-done': ('cue-mission-done', None, 11.0),
-    'last-kill': ('cue-last-kill', None, 6.0),
-    'boss-entrance': ('cue-boss-entrance', None, 7.0),
-    'night-fall': ('cue-night-fall', None, 10.0),
-    'dawn': (None, 'Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Construction Kits/Blue Peace/GH_FS III_Songkits_Blue Peace_Cmaj_90bpm.wav', 10.7),
+    'discovery': ('cue-discovery', 'Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Tonal/Ghosthack-MN_Tonal_Endure_C.wav', 3.0),
+    'mission-done': ('cue-mission-done', 'Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Tonal/Ghosthack-MN_Tonal_Equilibrium_D.wav', 3.4),
+    'last-kill': ('cue-last-kill', 'Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Tonal/Ghosthack-MN_Tonal_Hope_C.wav', 5.0),
+    'boss-entrance': ('cue-boss-entrance', 'Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Braams/Ghosthack-MN_Braam_Hostile_C.wav', 3.0),
+    'night-fall': ('cue-night-fall', 'Ghosthack - Mystery Nightfall - Trailer SFX/Ghosthack - Mystery Nightfall - Trailer SFX/One Shots/Drones/Ghosthack-MN_Drone_Scavenge_C.wav', 6.5),
+    'dawn': (None, 'Ghosthack - Cinematic Orchestra Volume 2/Ghosthack - Cinematic Orchestra Volume 2/Melodic One Shots/String Chords/GH_FS III_String Chords_ 4_Am #13.wav', 3.2),
 }
-CUE_START = {'dawn': 8 * 240.0 / 90}   # Blue Peace's first bars are near silence: the dawn phrase starts at bar 8
+CUE_START = {}
 def cues(music, force=False):
     score = json.load(open(os.path.join(REPO, 'docs', 'audio', 'music', 'score.json')))
     byid = {m['id']: m for m in score['moments']}
@@ -327,12 +389,16 @@ def cues(music, force=False):
     for name, (mid, path, secs) in CUES.items():
         if path is None: path = (byid[mid].get('files') or [{}])[0].get('path')
         fn = 'gh-cue-' + name + '.ogg'; dst = os.path.join(OUT, fn)
-        if os.path.exists(dst) and not force and name in made['cues']: print('have', name); continue
+        prev = made['cues'].get(name)
+        if os.path.exists(dst) and not force and prev and prev.get('src') == path and abs(prev.get('seconds', 0) - secs) < 0.6:
+            print('have', name); continue
         a = decode(os.path.join(music, path))
         a = a[int(CUE_START.get(name, 0) * SR):]
         n = min(len(a), int(secs * SR)); a = a[:n].copy()
-        f = min(int(1.5 * SR), n // 3); a[n - f:] *= np.linspace(1, 0, f, dtype=np.float32)[:, None]
-        a[:int(0.004 * SR)] *= np.linspace(0, 1, int(0.004 * SR), dtype=np.float32)[:, None]
+        f = min(int(1.2 * SR), n // 3)
+        if f > 0: a[n - f:] *= np.linspace(1, 0, f, dtype=np.float32)[:, None]
+        fi = min(int(0.015 * SR), n // 10)
+        if fi > 0: a[:fi] *= np.linspace(0, 1, fi, dtype=np.float32)[:, None]
         I, P = loudness(a); g_db = -12.0 - I
         if P + g_db > -1.0: g_db = -1.0 - P
         encode(a * float(10 ** (g_db / 20)), dst)

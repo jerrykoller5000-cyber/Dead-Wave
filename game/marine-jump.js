@@ -12,7 +12,12 @@ export function stepJump(s,dt,{pressed=false,grounded=true,canJump=false,enabled
   if(!canJump){s.prepare=0;return false;}
   s.prepare=Math.max(0,s.prepare-dt);
   if(s.prepare===0){s.buffer=0;s.air=0;s.launches++;return true;}
- }else if(s.buffer>0&&canJump&&s.recover===0){s.prepare=JUMP_FEEL.prepare;s.buffer=0;}
+ }else if(s.buffer>0&&canJump&&s.recover===0){
+  s.buffer=0;
+  // After stepping off a ledge there is no planted pose to load. Use the remaining grace period on the press.
+  if(!grounded){s.air=0;s.launches++;return true;}
+  s.prepare=JUMP_FEEL.prepare;
+ }
  // A fresh press during the landing brace waits for planted feet. Air presses
  // retain the existing short buffer and coyote window instead of auto-hopping.
  if(s.recover===0)s.buffer=Math.max(0,s.buffer-dt);

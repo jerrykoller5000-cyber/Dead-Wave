@@ -1,13 +1,13 @@
 # Claude 9
 
-state: idle
+state: active
 model: Claude Opus 5.5 (claude-opus-5-5)
-task: —
-touching: —
-since: 2026-11-20T22:37Z
-next: CI-1 (06:22Z, CLAUDE DIRECTOR: ACCEPTED) J151 heavy guns (D-179),
+task: CI-3 D-243 player proportions: narrower shoulders/hips, slimmer, bigger head, soft collar, D-239 one long gun + holster (review copy)
+touching: review/D-243/
+since: 2026-11-23T18:39Z
+next: CI-3 D-237 item 4 3P movement overhaul PLAN step
 blocked-on: —
-last-report: handoffs/2026-11-20-claude9-CI-1.md
+last-report: handoffs/2026-11-23-claude9-CI-3-s1t7.md
 
 ## Notes
 - 13 Nov 04:56Z: CI-1 done (J151 notes 56, 55, 38, 36, 35, 33, 50, 52, 51, 60), handoff handoffs/2026-11-13-claude9-CI-1.md, pictures Claude outputs/CI-1/, test tools/tests/tci1.js. Accepted 06:22Z (the updateRoofCutaway line OK'd).
@@ -18,3 +18,11 @@ last-report: handoffs/2026-11-20-claude9-CI-1.md
 - 13 Nov 07:00Z: CI-2 (note 32, chainsaw vibrate) landed and in review: handoffs/2026-11-13-claude9-CI-2.md, Claude outputs/CI-2/, tools/tests/tci2.js. SAW_SHAKE in index.html beside the minigun tremor (decayRecoil); 1P via st.sawShake (x1.8) in game/viewmodel.js (Claude 5's loan, returned, md5 3f65e0ff).
 - 13 Nov 08:31Z: CI-2 accepted 07:05Z. Queue empty; stood by 07:10-08:31Z with nothing new. This session ends here: a fresh Claude 9 picks up from this card (requests claude9, then standby).
 - 20 Nov 22:37Z: CI-1 (D-218 pass 5, colour) AUDIT sent to the Director (review/CI-1-colour/REPORT.md). Card stays open: changes only after pass 2 lands and the Director's LOOK. Next: add ChatGPT's native shots (GP-20164, jobs A-E in review/CI-1-colour/) as an addendum; then the ranked changes by request/loan. Cloud tarballs: _DELETE ME/c9/a-e.tgz (a code, b studio+world, c ui+tools top, d assets small, e intro js/css); cloud camera needs ?__gameTestToken via the slot, soft start ~6 min, ~60-100 s a picture, and the daemon can die quietly (check `camera.mjs status`).
+- 21 Nov 21:55Z: CI-2 (pass 5) view fill LANDED 21:29Z (game/viewmodel.js 3c552298, new game/vm-viewfill.js 9637f17c; backup _DELETE ME/viewmodel.js.61d32111.before-CI-2). Open: ChatGPT GP-20201 gates + gpuMs off/on + look (held: Jerry playing); glove #4a4535 = Claude 2 after CB-372. If red: revert from the backup. Cloud game runs crash (out of memory) - use native via ChatGPT + review/CI-2/inject.mjs. Next: CI-1 ranked list.
+- 21 Nov 23:22Z: CI-3 (D-237 item 4, 3P movement overhaul) PLAN step: review/CI-3/ (PLAN.md, CI-3-look.jpg, CI-3-now.mp4, strips/, rec.js = inspector recorder). LOOK asked of the Director 23:21Z; Claude 6 asked to check rig numbers, Claude 3 FYI. Build waits for the LOOK + Jerry OK; step 1 = ready/aim layer (loans: Claude 2 shell, Claude 5 motion). Cloud inspector recorder works (cloud-recorder.cjs, ~3 s a shot at 720x450). CI-2 glove line landed by Claude 2 23:14Z.
+- 22 Nov 04:05Z: CI-3 step 1 (low ready) review copy: review/CI-3/s1/ (module 6cd06f44 in s1/studio/, hooks make-s1.py -> copy c7b34fe6 on live 7ea63a92). LOOK + update sent to the Director. NOT landed: 5 gate reds open (see handoff 2026-11-22-claude9-CI-3-s1.md). Native gates by ChatGPT: review/GP-20219/native-r1/. Shotgun + uzi out of the layer for now. Claude 3 FYI on proportions: review/CC-368/PROPORTIONS.md (for step 6). Cloud suite works (fakethree, ~150 s a test; heavy ones time out at 180 s).
+- 22 Nov 07:50Z: CI-3 step 1 TUNE 4 (handoffs/2026-11-22-claude9-CI-3-s1t4.md): cloud green but t228 support fist (AK/sniper, open: Director a/b). Copy e8e9f925 on live 00deadb2, module 7838cd08, make-s1 8ea0dc27, tci3 in review/CI-3/s1. Waits: ChatGPT native pass 2 + Director pick. Then Claude 2 lands (test lines: setZoomHeldDbg(true) in t187/t195/t229/tcb334), then step 2.
+- 22 Nov 18:45Z: CI-3 step 1 TUNE 5 (handoffs/2026-11-22-claude9-CI-3-s1t5.md): AK + sniper aimed (pick a); M4/AA-12 support elbow forward at the ready (t228 37/39, 35/38); 4 by-design test copies in review/CI-3/s1/tests use TT.readyDbg.up(true). make-s1 2516c8ab, module ba18d9d3, tci3 e40bf899; cloud all green on the copy. Waits: ChatGPT pass 3 + Director. Step 2 = blades, PLAN only. Cloud test runs: use the cloud's own slot (--agent claude9 --task CI-3).
+- 23 Nov 04:01Z: CI-3 t6: the 61 mm shotgun miss = LIVE idle wrist creep shown by my t187 copy's timing (cloud tcz903c, ChatGPT native 63 mm on live). t187 copy dbcc0cda runs the raised rows at the END (Director OK). Pass 4 GP-20258: all good but tcc341 (pack 8.7, vest 10.5 mm): diagnostic tcz904a-e asked of ChatGPT (LATER). Step 2a blade hang built: review/CI-3/s2-blades/2a/ (LOOK asked). Director: the live 3P shotgun wrist creep + AK stock idle bugs are mine after step 1 lands. Cloud harness notes in handoffs/2026-11-23-claude9-CI-3-s1t6.md.
+- 23 Nov 06:35Z: make-s1 re-based clean (live 127e509a/1d001839). tcz904 (GP-20264) ran the PISTOL: the tcc341 depth is the handgun ready; tcz905a-f asked (likely fix: handguns out). 2b/2c review copy built: review/CI-3/s2-blades/2bc (3P swing along his facing + chest turn + step; cloud gates green, tci3 46/0, NOW red 5). LOOK asked. Handoff handoffs/2026-11-23-claude9-CI-3-s2bc.md.
+- 23 Nov 16:25Z: CI-3 t7: handguns OUT of the ready (GP-20279 tcz905d = live). NEW: M4 ready firing elbow into the vest flank 8-29 mm (tcz905e) -> poleR hook (none set) + native sweep tcz906a-h asked of ChatGPT (LATER). Module 39894499, make-s1 ac194a08, tci3 4e6072b6; s1/2a/2bc apply clean on 22afb368. D-239 back load PLAN review/CI-3/s3-carry/PLAN.md (Director). Handoff handoffs/2026-11-23-claude9-CI-3-s1t7.md.

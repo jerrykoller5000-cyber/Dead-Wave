@@ -1,0 +1,24 @@
+﻿AG-404 native WebGPU pair + gates for CH-3 #2 Armory booth (1920x1080 RTX 5080, 0 page errors, review only).
+Pinned MD5s: live index.html 22afb368 vs copy review/CH-3/booth/index.ch3b.html 4cc9f507.
+
+Draws / geometry (HQ house & booth):
+- HQ house meshes: 120 -> 120 (0 new draws; same house bake).
+- HQ armory booth meshes: 8 -> 8 (0 new draws).
+- HQ armory booth tris: 676 -> 4024 (+3348, matches cloud delta).
+
+Original gates (unchanged, WebGPU, live vs copy, 0 page errors):
+- t336:   27 PASS / 2 FAIL -> 27 PASS / 2 FAIL (fail strings byte-identical to live).
+- tcb339: 15 PASS / 0 FAIL -> 15 PASS / 0 FAIL (all armory rack spots & pegs verified).
+- t182:   36 PASS / 0 FAIL -> 36 PASS / 0 FAIL.
+- t179:   27 PASS / 0 FAIL -> 27 PASS / 0 FAIL.
+
+Visual check (looked at review/CH-3/booth/native/CH-3-booth-native-pair.jpg — Training front C08 ON/OFF, Training wide 5 m ON/OFF, Hatch 1 m left ON/OFF, HQ front Day & Night):
+- Painted slatwall grooves read clearly behind the mesh in all lighting states (replaces the flat black void).
+- Bevelled posts/rails/hatch surround, stand-off brackets, ribbed rubber shelf mat, and rubber pistol-lip strip catch clean highlights with zero seam/clip artefacts.
+- Clipboard mounts flush on the mesh left of the hatch; brass service bell sits cleanly on the hatch counter (verified at 1 m left oblique).
+- Note: HQ Front visual was shot with weapons equipped (rack empty); tcb339 15/0 verified all rack pegs/stored positions on the new back.
+
+Sheet & receipt:
+- review/CH-3/booth/native/CH-3-booth-native-pair.jpg
+- review/CH-3/booth/native/{before,after}/*.png (1920x1080)
+- review/CH-3/booth/native/summary.json

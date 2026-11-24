@@ -244,7 +244,28 @@ export function createMarineTurn({ THREE: T, marine }) {
         f.radius = Math.hypot(f.p.x - center.x, f.p.z - center.z);
         f.angle = Math.atan2(f.p.x - center.x, f.p.z - center.z) - yaw;
         if (ground) f.p.y = ground(f.p.x, f.p.z) + ankleHeight;
-        if (crouch > .5) crouchSole(f.p,f.q,yaw);
+        if (crouch > .5) {
+          crouchSole(f.p, f.q, yaw);
+          if (flex && ground) {
+            // Settle onto a flat boot the ankle can actually reach. With a deep crouch, a foot
+            // inherited from the last walking frame can be too far behind the knee to plant.
+            legs[i].getWorldPosition(hip);
+            local.copy(hip).sub(f.p).applyQuaternion(inverseQ.copy(f.q).invert()).multiplyScalar(1 / sc);
+            const shinAtLimit = a.copy(ankles[i].position).negate().applyAxisAngle(xAxis, -flex[0] - .02);
+            const thigh = knees[i].position.length(), height = local.y - .008 * crouch - shinAtLimit.y;
+            const available = thigh * thigh - height * height - (local.x - shinAtLimit.x) ** 2;
+            const advance = available > 0 ? Math.min(.16, local.z - shinAtLimit.z + Math.sqrt(available)) : 0;
+            if (advance > .001) {
+              b.set(0, 0, advance * sc).applyQuaternion(f.q).add(f.p);
+              // Keep the original support when the proposed plant would cross a tread edge.
+              if (Math.abs(ground(b.x, b.z) - ground(f.p.x, f.p.z)) < .012 * sc) {
+                f.p.copy(b); crouchSole(f.p, f.q, yaw);
+                f.radius = Math.hypot(f.p.x - center.x, f.p.z - center.z);
+                f.angle = Math.atan2(f.p.x - center.x, f.p.z - center.z) - yaw;
+              }
+            }
+          }
+        }
         else if (footing) crouchSole(f.p, f.q, bootYaw(f.q));   // CC-343
         f.height = f.p.y - center.y;
       });

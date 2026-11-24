@@ -1,0 +1,1675 @@
+{
+  "tag": "after",
+  "timestamp": "2026-11-24T08:08:05.102Z",
+  "boot": {
+    "gotoMs": 828,
+    "openingReadyMs": 862,
+    "ttReadyMs": 23930,
+    "titleInteractiveMs": 30178,
+    "trainEntryMs": 27876,
+    "isWebGPU": true,
+    "backendName": "WebGPUBackend",
+    "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5080 (0x00002C02) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "navDCL": 780,
+    "navLoad": 782,
+    "perfMarks": null,
+    "topResources": [
+      {
+        "name": "/assets/intro/caracal.mp4",
+        "dur": 289.8,
+        "size": 15425005
+      },
+      {
+        "name": "/combat/shotgun-loads.js",
+        "dur": 90.5,
+        "size": 4246
+      },
+      {
+        "name": "/game/chainsaw-animation.js",
+        "dur": 89.9,
+        "size": 1810
+      },
+      {
+        "name": "/game/zombie-react.js",
+        "dur": 87.9,
+        "size": 10811
+      },
+      {
+        "name": "/game/zombie-melee.js",
+        "dur": 87.8,
+        "size": 5355
+      },
+      {
+        "name": "/game/shambler-motion.js",
+        "dur": 87,
+        "size": 6744
+      },
+      {
+        "name": "/game/shambler-jaw.js",
+        "dur": 87,
+        "size": 5977
+      },
+      {
+        "name": "/game/shambler-recovery.js",
+        "dur": 86.4,
+        "size": 6275
+      },
+      {
+        "name": "/studio/frag-grenade.js",
+        "dur": 84.9,
+        "size": 7457
+      },
+      {
+        "name": "/studio/weapon-textures.js",
+        "dur": 84.9,
+        "size": 43208
+      },
+      {
+        "name": "/studio/katana.js",
+        "dur": 84.8,
+        "size": 21245
+      },
+      {
+        "name": "/studio/relay-vault-model.js",
+        "dur": 83.6,
+        "size": 22928
+      },
+      {
+        "name": "/core/static-batch.js",
+        "dur": 83.6,
+        "size": 6889
+      },
+      {
+        "name": "/game/utilities.js",
+        "dur": 82.6,
+        "size": 4838
+      },
+      {
+        "name": "/game/story-gates.js",
+        "dur": 81.9,
+        "size": 12983
+      }
+    ],
+    "bootMemory": {
+      "geometries": 3523,
+      "textures": 404
+    },
+    "jsHeapMB": 1163.1,
+    "consoleLogs": [
+      "Grave Shift renderer: WebGPU.",
+      "Grave Shift warm-up: 534 shader variants compiled, 16 bodies pooled, 5 warm frames, lights visible 24/24, shadows true | post 5ms pools 2161ms compile 7608ms warm frame 164ms | load:407 fire-hot:532 fire-cold:532 fire-resources:100/8 fire-pool-falling-leaves:534 fire-leaf-resources:1 fire-clean:534",
+      "Grave Shift load: terrain+water+sky built 0ms | rocks 388ms | trees 1094ms | player+weapons+zombie types 2959ms | foliage scattered 3676ms | POIs+minimap+foliage chunks 5897ms | contact shading + rest of setup 6496ms | post + pools + compile + warm frame 21144ms | ready 21145ms",
+      "Grave Shift first minute: 560 variants after 13 warm frames | load:407 fire-hot:532 fire-cold:532 fire-resources:100/8 fire-pool-falling-leaves:534 fire-leaf-resources:1 fire-clean:534 a-fresh:534 a-flash:544 a-faded:546 a-kill-generic:551 a-kill-melee:555 a-kill-explosive:558 a-fx:560 a-corpse:560",
+      "Grave Shift pre-roll: 659 shader variants compiled after 35 warm frames | load:407 fire-hot:532 fire-cold:532 fire-resources:100/8 fire-pool-falling-leaves:534 fire-leaf-resources:1 fire-clean:534 a-fresh:534 a-flash:544 a-faded:546 a-kill-generic:551 a-kill-melee:555 a-kill-explosive:558 a-fx:560 a-corpse:560 fresh:643 burning:648 flash:648 faded:648 tree-fade:649 kill-explosive:649 kill-chainsaw:649 kill-pellet:649 kill-generic:649 kill-melee:649 kill-explosive:651 kill-chainsaw:652 kill-pellet:652 kill-generic:653 kill-melee:653 kill-explosive:653 kill-chainsaw:653 kill-pellet:653 kill-generic:653 effects:660 corpses:660 corpses2:660",
+      "Grave Shift title: menu up after 35 warm frames, 659 variants | load:407 fire-hot:532 fire-cold:532 fire-resources:100/8 fire-pool-falling-leaves:534 fire-leaf-resources:1 fire-clean:534 a-fresh:534 a-flash:544 a-faded:546 a-kill-generic:551 a-kill-melee:555 a-kill-explosive:558 a-fx:560 a-corpse:560 fresh:643 burning:648 flash:648 faded:648 tree-fade:649 kill-explosive:649 kill-chainsaw:649 kill-pellet:649 kill-generic:649 kill-melee:649 kill-explosive:651 kill-chainsaw:652 kill-pellet:652 kill-generic:653 kill-melee:653 kill-explosive:653 kill-chainsaw:653 kill-pellet:653 kill-generic:653 effects:660 corpses:660 corpses2:660"
+    ],
+    "trainConsoleLogs": []
+  },
+  "sceneAudit": {
+    "totalVisMeshes": 416,
+    "totalVisTris": 396394,
+    "totalVisCasters": 160,
+    "totalVisReceivers": 311,
+    "uniqueMaterials": 292,
+    "uniqueGeometries": 413,
+    "uniqueTextures": 156,
+    "nonTrainingVisMeshes": 101,
+    "nonTrainingVisTris": 155940,
+    "tgDirectChildren": 130,
+    "tgMaterialBreakdown": {
+      "unique": 251,
+      "standard": 209,
+      "physical": 0,
+      "node": 34,
+      "transparentMeshes": 82,
+      "doubleSideMeshes": 15
+    },
+    "lights": [
+      {
+        "type": "HemisphereLight",
+        "name": "",
+        "intensity": 1.15,
+        "castShadow": false,
+        "shadowMap": null,
+        "distance": null,
+        "pos": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "type": "DirectionalLight",
+        "name": "",
+        "intensity": 1.73,
+        "castShadow": true,
+        "shadowMap": [
+          2048,
+          2048
+        ],
+        "distance": null,
+        "pos": [
+          0,
+          -118.6,
+          -616.2
+        ]
+      },
+      {
+        "type": "DirectionalLight",
+        "name": "",
+        "intensity": 0.05,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": null,
+        "pos": [
+          -12,
+          20,
+          -8
+        ]
+      },
+      {
+        "type": "AmbientLight",
+        "name": "",
+        "intensity": 0.04,
+        "castShadow": false,
+        "shadowMap": null,
+        "distance": null,
+        "pos": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 3.5,
+        "pos": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "SpotLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 26,
+        "pos": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 4.5,
+        "pos": [
+          0,
+          -2.2,
+          1.5
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "chapel-light",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 5.5,
+        "pos": [
+          0,
+          1.1,
+          0.1
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 14,
+        "pos": [
+          128,
+          -3,
+          0
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 14,
+        "pos": [
+          22,
+          10.6,
+          -126
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 14,
+        "pos": [
+          -12,
+          4.9,
+          140
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 16,
+        "pos": [
+          -26.1,
+          17.4,
+          -123.9
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 28,
+        "pos": [
+          -153.4,
+          15.1,
+          -4.2
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 8,
+        "pos": [
+          2,
+          -2.4,
+          2
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 8,
+        "pos": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 8,
+        "pos": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 8,
+        "pos": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "light-pool-0",
+        "intensity": 0.9,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 6,
+        "pos": [
+          6.9,
+          -198.2,
+          -646.6
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "light-pool-1",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 6,
+        "pos": [
+          -5.8,
+          -1.4,
+          2.2
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "light-pool-2",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 1,
+        "pos": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "light-pool-3",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 1,
+        "pos": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0.9,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 6,
+        "pos": [
+          0,
+          1.8,
+          0.8
+        ]
+      },
+      {
+        "type": "SpotLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 35,
+        "pos": [
+          0,
+          5.8,
+          8.1
+        ]
+      },
+      {
+        "type": "SpotLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 42,
+        "pos": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 6.5,
+        "pos": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "SpotLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 42,
+        "pos": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 6.5,
+        "pos": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "SpotLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 42,
+        "pos": [
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "",
+        "intensity": 0,
+        "castShadow": false,
+        "shadowMap": [
+          512,
+          512
+        ],
+        "distance": 6.5,
+        "pos": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "topGroups": [
+      {
+        "name": "TRAINING_GROUP",
+        "meshes": 315,
+        "instanced": 168,
+        "tris": 240454,
+        "casters": 129,
+        "uniqueMats": 251
+      },
+      {
+        "name": "Group",
+        "meshes": 97,
+        "instanced": 0,
+        "tris": 150468,
+        "casters": 27,
+        "uniqueMats": 38
+      },
+      {
+        "name": "training-melee-dummy",
+        "meshes": 4,
+        "instanced": 0,
+        "tris": 5472,
+        "casters": 4,
+        "uniqueMats": 3
+      }
+    ],
+    "tgTopByMeshes": [
+      {
+        "name": "training-containment",
+        "meshes": 38,
+        "instanced": 152,
+        "tris": 84512,
+        "casters": 0,
+        "uniqueMats": 32
+      },
+      {
+        "name": "training-cutaway-east",
+        "meshes": 23,
+        "instanced": 0,
+        "tris": 6270,
+        "casters": 10,
+        "uniqueMats": 23
+      },
+      {
+        "name": "training-skullWindow",
+        "meshes": 18,
+        "instanced": 0,
+        "tris": 4040,
+        "casters": 11,
+        "uniqueMats": 13
+      },
+      {
+        "name": "training-cif",
+        "meshes": 17,
+        "instanced": 0,
+        "tris": 11848,
+        "casters": 0,
+        "uniqueMats": 15
+      },
+      {
+        "name": "training-cutaway-rangeSouth",
+        "meshes": 13,
+        "instanced": 0,
+        "tris": 1354,
+        "casters": 6,
+        "uniqueMats": 13
+      },
+      {
+        "name": "training-cutaway-west",
+        "meshes": 12,
+        "instanced": 0,
+        "tris": 3762,
+        "casters": 6,
+        "uniqueMats": 12
+      },
+      {
+        "name": "training-cutaway-south",
+        "meshes": 10,
+        "instanced": 0,
+        "tris": 136,
+        "casters": 4,
+        "uniqueMats": 10
+      },
+      {
+        "name": "training-armory",
+        "meshes": 10,
+        "instanced": 16,
+        "tris": 1036,
+        "casters": 5,
+        "uniqueMats": 9
+      },
+      {
+        "name": "training-gate-frame",
+        "meshes": 9,
+        "instanced": 0,
+        "tris": 1534,
+        "casters": 8,
+        "uniqueMats": 8
+      },
+      {
+        "name": "Group#15",
+        "meshes": 8,
+        "instanced": 0,
+        "tris": 86,
+        "casters": 3,
+        "uniqueMats": 2
+      },
+      {
+        "name": "Group#16",
+        "meshes": 8,
+        "instanced": 0,
+        "tris": 86,
+        "casters": 3,
+        "uniqueMats": 2
+      },
+      {
+        "name": "Group#17",
+        "meshes": 8,
+        "instanced": 0,
+        "tris": 86,
+        "casters": 3,
+        "uniqueMats": 2
+      },
+      {
+        "name": "Group#18",
+        "meshes": 8,
+        "instanced": 0,
+        "tris": 86,
+        "casters": 3,
+        "uniqueMats": 2
+      },
+      {
+        "name": "Group#19",
+        "meshes": 8,
+        "instanced": 0,
+        "tris": 86,
+        "casters": 3,
+        "uniqueMats": 2
+      },
+      {
+        "name": "training-cutaway-north",
+        "meshes": 8,
+        "instanced": 0,
+        "tris": 3448,
+        "casters": 2,
+        "uniqueMats": 8
+      },
+      {
+        "name": "training-hqPanel",
+        "meshes": 8,
+        "instanced": 0,
+        "tris": 746,
+        "casters": 7,
+        "uniqueMats": 8
+      },
+      {
+        "name": "training-firing-bench",
+        "meshes": 6,
+        "instanced": 0,
+        "tris": 6178,
+        "casters": 5,
+        "uniqueMats": 6
+      },
+      {
+        "name": "training-kiosk",
+        "meshes": 6,
+        "instanced": 0,
+        "tris": 3356,
+        "casters": 4,
+        "uniqueMats": 6
+      },
+      {
+        "name": "training-razor-perimeter",
+        "meshes": 6,
+        "instanced": 0,
+        "tris": 21754,
+        "casters": 0,
+        "uniqueMats": 6
+      },
+      {
+        "name": "training-range-console",
+        "meshes": 6,
+        "instanced": 0,
+        "tris": 960,
+        "casters": 5,
+        "uniqueMats": 6
+      },
+      {
+        "name": "training-gate-leaf--1",
+        "meshes": 5,
+        "instanced": 0,
+        "tris": 2358,
+        "casters": 4,
+        "uniqueMats": 5
+      },
+      {
+        "name": "training-security-shutter",
+        "meshes": 4,
+        "instanced": 0,
+        "tris": 852,
+        "casters": 4,
+        "uniqueMats": 4
+      },
+      {
+        "name": "training-gate-leaf-1",
+        "meshes": 4,
+        "instanced": 0,
+        "tris": 2044,
+        "casters": 3,
+        "uniqueMats": 4
+      },
+      {
+        "name": "Group#56",
+        "meshes": 4,
+        "instanced": 0,
+        "tris": 516,
+        "casters": 4,
+        "uniqueMats": 4
+      },
+      {
+        "name": "training-wear-locker-door",
+        "meshes": 3,
+        "instanced": 0,
+        "tris": 26,
+        "casters": 2,
+        "uniqueMats": 3
+      }
+    ],
+    "tgTopByTris": [
+      {
+        "name": "training-containment",
+        "meshes": 38,
+        "tris": 84512,
+        "casters": 0,
+        "uniqueMats": 32
+      },
+      {
+        "name": "training-cutaway-overhead",
+        "meshes": 2,
+        "tris": 33098,
+        "casters": 0,
+        "uniqueMats": 2
+      },
+      {
+        "name": "Mesh#102",
+        "meshes": 1,
+        "tris": 29628,
+        "casters": 1,
+        "uniqueMats": 1
+      },
+      {
+        "name": "training-razor-perimeter",
+        "meshes": 6,
+        "tris": 21754,
+        "casters": 0,
+        "uniqueMats": 6
+      },
+      {
+        "name": "training-cif",
+        "meshes": 17,
+        "tris": 11848,
+        "casters": 0,
+        "uniqueMats": 15
+      },
+      {
+        "name": "training-cutaway-east",
+        "meshes": 23,
+        "tris": 6270,
+        "casters": 10,
+        "uniqueMats": 23
+      },
+      {
+        "name": "training-firing-bench",
+        "meshes": 6,
+        "tris": 6178,
+        "casters": 5,
+        "uniqueMats": 6
+      },
+      {
+        "name": "Mesh#89",
+        "meshes": 1,
+        "tris": 5844,
+        "casters": 1,
+        "uniqueMats": 1
+      },
+      {
+        "name": "training-skullWindow",
+        "meshes": 18,
+        "tris": 4040,
+        "casters": 11,
+        "uniqueMats": 13
+      },
+      {
+        "name": "training-cutaway-west",
+        "meshes": 12,
+        "tris": 3762,
+        "casters": 6,
+        "uniqueMats": 12
+      },
+      {
+        "name": "training-cutaway-north",
+        "meshes": 8,
+        "tris": 3448,
+        "casters": 2,
+        "uniqueMats": 8
+      },
+      {
+        "name": "training-kiosk",
+        "meshes": 6,
+        "tris": 3356,
+        "casters": 4,
+        "uniqueMats": 6
+      },
+      {
+        "name": "Mesh#84",
+        "meshes": 1,
+        "tris": 2924,
+        "casters": 1,
+        "uniqueMats": 1
+      },
+      {
+        "name": "training-gate-leaf--1",
+        "meshes": 5,
+        "tris": 2358,
+        "casters": 4,
+        "uniqueMats": 5
+      },
+      {
+        "name": "Mesh#86",
+        "meshes": 1,
+        "tris": 2232,
+        "casters": 1,
+        "uniqueMats": 1
+      },
+      {
+        "name": "training-gate-leaf-1",
+        "meshes": 4,
+        "tris": 2044,
+        "casters": 3,
+        "uniqueMats": 4
+      },
+      {
+        "name": "Mesh#87",
+        "meshes": 1,
+        "tris": 1728,
+        "casters": 1,
+        "uniqueMats": 1
+      },
+      {
+        "name": "training-gate-frame",
+        "meshes": 9,
+        "tris": 1534,
+        "casters": 8,
+        "uniqueMats": 8
+      },
+      {
+        "name": "training-cutaway-rangeSouth",
+        "meshes": 13,
+        "tris": 1354,
+        "casters": 6,
+        "uniqueMats": 13
+      },
+      {
+        "name": "Mesh#108",
+        "meshes": 1,
+        "tris": 1212,
+        "casters": 0,
+        "uniqueMats": 1
+      }
+    ],
+    "nonTrainingSample": [
+      {
+        "name": "Group",
+        "child": "fitted-pelvis",
+        "tris": 168,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "Mesh",
+        "tris": 348,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "Mesh",
+        "tris": 516,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "boot-shaft",
+        "tris": 312,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "boot-shaft",
+        "tris": 72,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "boot-shaft",
+        "tris": 360,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "boot-shaft",
+        "tris": 12,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "Mesh",
+        "tris": 184,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "Mesh",
+        "tris": 48,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "Mesh",
+        "tris": 348,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "Mesh",
+        "tris": 516,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "boot-shaft",
+        "tris": 312,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "boot-shaft",
+        "tris": 72,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "boot-shaft",
+        "tris": 360,
+        "castShadow": false
+      },
+      {
+        "name": "Group",
+        "child": "boot-shaft",
+        "tris": 12,
+        "castShadow": false
+      }
+    ]
+  },
+  "spots": [
+    {
+      "name": "train-spawn-3p",
+      "frames": 75,
+      "avgMs": 16.89,
+      "fps": 59.2,
+      "p50Ms": 16.5,
+      "p95Ms": 20.7,
+      "worstMs": 52,
+      "callsLast": 3325,
+      "callsDeltaPerFrame": 14,
+      "trisLast": 294311,
+      "geometries": 4450,
+      "textures": 495,
+      "heapMB": 1426.9,
+      "shadowPrune": {
+        "on": true,
+        "cursor": 2820,
+        "passes": 139,
+        "last": 75,
+        "refreshed": 2419
+      },
+      "sunShadow": {
+        "redraws": 21,
+        "moved": 0,
+        "timed": 0,
+        "deep": false,
+        "tick": 1,
+        "every": 900,
+        "move": 16
+      },
+      "shadowAvgMs": 0,
+      "shadowCalls": 0,
+      "bgWarming": false,
+      "topPhases": [
+        {
+          "k": "r:render",
+          "avg": 7.009,
+          "max": 12.6
+        },
+        {
+          "k": "r:matrices",
+          "avg": 0.623,
+          "max": 1.2
+        },
+        {
+          "k": "marine",
+          "avg": 0.385,
+          "max": 28.1
+        },
+        {
+          "k": "effects",
+          "avg": 0.364,
+          "max": 0.8
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.296,
+          "max": 1
+        },
+        {
+          "k": "r:rigSkin",
+          "avg": 0.231,
+          "max": 0.5
+        },
+        {
+          "k": "daynight",
+          "avg": 0.129,
+          "max": 0.5
+        },
+        {
+          "k": "camera",
+          "avg": 0.107,
+          "max": 0.3
+        },
+        {
+          "k": "m:reload+knife",
+          "avg": 0.104,
+          "max": 0.3
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.093,
+          "max": 0.4
+        },
+        {
+          "k": "m:hold",
+          "avg": 0.091,
+          "max": 0.5
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.083,
+          "max": 0.7
+        }
+      ],
+      "spikes": [
+        {
+          "frame": 39,
+          "ms": 43.7,
+          "top": [
+            "marine 28.1",
+            "r:render 12.6",
+            "r:matrices 0.8",
+            "effects 0.4"
+          ],
+          "heapMB": 1440.8,
+          "freedMB": -28
+        }
+      ]
+    },
+    {
+      "name": "train-spawn-1p",
+      "frames": 75,
+      "avgMs": 19.15,
+      "fps": 52.2,
+      "p50Ms": 16.8,
+      "p95Ms": 20.3,
+      "worstMs": 164.5,
+      "callsLast": 5025,
+      "callsDeltaPerFrame": 14,
+      "trisLast": 218793,
+      "geometries": 4453,
+      "textures": 498,
+      "heapMB": 1437,
+      "shadowPrune": {
+        "on": true,
+        "cursor": 4260,
+        "passes": 159,
+        "last": 75,
+        "refreshed": 2432
+      },
+      "sunShadow": {
+        "redraws": 41,
+        "moved": 0,
+        "timed": 0,
+        "deep": false,
+        "tick": 1,
+        "every": 900,
+        "move": 16
+      },
+      "shadowAvgMs": 0,
+      "shadowCalls": 0,
+      "bgWarming": false,
+      "topPhases": [
+        {
+          "k": "r:render",
+          "avg": 6.399,
+          "max": 40.2
+        },
+        {
+          "k": "r:matrices",
+          "avg": 0.713,
+          "max": 1.8
+        },
+        {
+          "k": "r:rigSkin",
+          "avg": 0.387,
+          "max": 11.1
+        },
+        {
+          "k": "effects",
+          "avg": 0.38,
+          "max": 0.7
+        },
+        {
+          "k": "aim+climb",
+          "avg": 0.339,
+          "max": 0.8
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.265,
+          "max": 0.7
+        },
+        {
+          "k": "daynight",
+          "avg": 0.137,
+          "max": 0.3
+        },
+        {
+          "k": "viewmodel",
+          "avg": 0.119,
+          "max": 1.6
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.117,
+          "max": 0.3
+        },
+        {
+          "k": "m:reload+knife",
+          "avg": 0.115,
+          "max": 0.3
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.099,
+          "max": 0.8
+        },
+        {
+          "k": "camera",
+          "avg": 0.072,
+          "max": 0.3
+        }
+      ],
+      "spikes": [
+        {
+          "frame": 26,
+          "ms": 54,
+          "top": [
+            "r:render 40.2",
+            "r:rigSkin 11.1",
+            "r:matrices 0.7",
+            "aim+climb 0.4"
+          ],
+          "heapMB": 1452.2,
+          "freedMB": -23
+        }
+      ]
+    },
+    {
+      "name": "train-armory-3p",
+      "frames": 75,
+      "avgMs": 16.66,
+      "fps": 60,
+      "p50Ms": 16.4,
+      "p95Ms": 20.4,
+      "worstMs": 21.6,
+      "callsLast": 6697,
+      "callsDeltaPerFrame": 14,
+      "trisLast": 140999,
+      "geometries": 4447,
+      "textures": 498,
+      "heapMB": 1429,
+      "shadowPrune": {
+        "on": true,
+        "cursor": 5676,
+        "passes": 179,
+        "last": 75,
+        "refreshed": 2438
+      },
+      "sunShadow": {
+        "redraws": 61,
+        "moved": 0,
+        "timed": 0,
+        "deep": false,
+        "tick": 3,
+        "every": 900,
+        "move": 16
+      },
+      "shadowAvgMs": 0,
+      "shadowCalls": 0,
+      "bgWarming": false,
+      "topPhases": [
+        {
+          "k": "r:render",
+          "avg": 3.92,
+          "max": 7.4
+        },
+        {
+          "k": "r:matrices",
+          "avg": 0.691,
+          "max": 1.6
+        },
+        {
+          "k": "effects",
+          "avg": 0.377,
+          "max": 0.8
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.273,
+          "max": 0.6
+        },
+        {
+          "k": "r:rigSkin",
+          "avg": 0.157,
+          "max": 0.4
+        },
+        {
+          "k": "daynight",
+          "avg": 0.155,
+          "max": 0.4
+        },
+        {
+          "k": "camera",
+          "avg": 0.147,
+          "max": 0.4
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.111,
+          "max": 0.2
+        },
+        {
+          "k": "m:reload+knife",
+          "avg": 0.104,
+          "max": 0.3
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.096,
+          "max": 0.8
+        },
+        {
+          "k": "idle+gear",
+          "avg": 0.071,
+          "max": 0.3
+        },
+        {
+          "k": "aim+climb",
+          "avg": 0.069,
+          "max": 0.3
+        }
+      ],
+      "spikes": []
+    },
+    {
+      "name": "train-crossroom-3p",
+      "frames": 75,
+      "avgMs": 16.94,
+      "fps": 59,
+      "p50Ms": 16.2,
+      "p95Ms": 21.6,
+      "worstMs": 49.8,
+      "callsLast": 8086,
+      "callsDeltaPerFrame": 14,
+      "trisLast": 300343,
+      "geometries": 4445,
+      "textures": 498,
+      "heapMB": 1455.8,
+      "shadowPrune": {
+        "on": true,
+        "cursor": 6852,
+        "passes": 196,
+        "last": 75,
+        "refreshed": 2447
+      },
+      "sunShadow": {
+        "redraws": 78,
+        "moved": 0,
+        "timed": 0,
+        "deep": false,
+        "tick": 3,
+        "every": 900,
+        "move": 16
+      },
+      "shadowAvgMs": 0,
+      "shadowCalls": 0,
+      "bgWarming": false,
+      "topPhases": [
+        {
+          "k": "r:render",
+          "avg": 9.259,
+          "max": 16.9
+        },
+        {
+          "k": "r:matrices",
+          "avg": 0.841,
+          "max": 2.2
+        },
+        {
+          "k": "effects",
+          "avg": 0.405,
+          "max": 0.7
+        },
+        {
+          "k": "marine",
+          "avg": 0.391,
+          "max": 28.3
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.317,
+          "max": 2.4
+        },
+        {
+          "k": "r:rigSkin",
+          "avg": 0.203,
+          "max": 0.5
+        },
+        {
+          "k": "camera",
+          "avg": 0.157,
+          "max": 0.3
+        },
+        {
+          "k": "daynight",
+          "avg": 0.149,
+          "max": 0.4
+        },
+        {
+          "k": "m:reload+knife",
+          "avg": 0.123,
+          "max": 0.4
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.12,
+          "max": 0.3
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.109,
+          "max": 0.8
+        },
+        {
+          "k": "idle+gear",
+          "avg": 0.069,
+          "max": 0.3
+        }
+      ],
+      "spikes": [
+        {
+          "frame": 7,
+          "ms": 45.4,
+          "top": [
+            "marine 28.3",
+            "r:render 14.3",
+            "r:matrices 0.7",
+            "drops+hud 0.5"
+          ],
+          "heapMB": 1470,
+          "freedMB": -26.1
+        }
+      ]
+    },
+    {
+      "name": "train-lightsoff-3p",
+      "frames": 75,
+      "avgMs": 16.66,
+      "fps": 60,
+      "p50Ms": 16.6,
+      "p95Ms": 20.9,
+      "worstMs": 23.5,
+      "callsLast": 9361,
+      "callsDeltaPerFrame": 14,
+      "trisLast": 294357,
+      "geometries": 4446,
+      "textures": 499,
+      "heapMB": 1460.8,
+      "shadowPrune": {
+        "on": true,
+        "cursor": 7944,
+        "passes": 197,
+        "last": 75,
+        "refreshed": 2447
+      },
+      "sunShadow": {
+        "redraws": 79,
+        "moved": 0,
+        "timed": 0,
+        "deep": true,
+        "tick": 89,
+        "every": 900,
+        "move": 16
+      },
+      "shadowAvgMs": 0,
+      "shadowCalls": 0,
+      "bgWarming": false,
+      "topPhases": [
+        {
+          "k": "r:render",
+          "avg": 7.304,
+          "max": 13.6
+        },
+        {
+          "k": "r:matrices",
+          "avg": 0.716,
+          "max": 1.4
+        },
+        {
+          "k": "effects",
+          "avg": 0.379,
+          "max": 0.7
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.268,
+          "max": 0.8
+        },
+        {
+          "k": "r:rigSkin",
+          "avg": 0.185,
+          "max": 0.4
+        },
+        {
+          "k": "daynight",
+          "avg": 0.148,
+          "max": 0.5
+        },
+        {
+          "k": "camera",
+          "avg": 0.123,
+          "max": 0.3
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.116,
+          "max": 0.3
+        },
+        {
+          "k": "m:reload+knife",
+          "avg": 0.113,
+          "max": 0.3
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.095,
+          "max": 0.5
+        },
+        {
+          "k": "aim+climb",
+          "avg": 0.072,
+          "max": 0.2
+        },
+        {
+          "k": "tree+deck coll",
+          "avg": 0.057,
+          "max": 0.2
+        }
+      ],
+      "spikes": []
+    },
+    {
+      "name": "train-10zombies-3p",
+      "frames": 75,
+      "avgMs": 17.07,
+      "fps": 58.6,
+      "p50Ms": 16.7,
+      "p95Ms": 22.8,
+      "worstMs": 25.8,
+      "callsLast": 11436,
+      "callsDeltaPerFrame": 15,
+      "trisLast": 590591,
+      "geometries": 4459,
+      "textures": 502,
+      "heapMB": 1525.7,
+      "shadowPrune": {
+        "on": true,
+        "cursor": 9672,
+        "passes": 256,
+        "last": 81,
+        "refreshed": 2469
+      },
+      "sunShadow": {
+        "redraws": 138,
+        "moved": 0,
+        "timed": 0,
+        "deep": false,
+        "tick": 0,
+        "every": 900,
+        "move": 16
+      },
+      "shadowAvgMs": 0,
+      "shadowCalls": 0,
+      "bgWarming": false,
+      "topPhases": [
+        {
+          "k": "r:render",
+          "avg": 10.263,
+          "max": 16.6
+        },
+        {
+          "k": "r:matrices",
+          "avg": 0.949,
+          "max": 2.8
+        },
+        {
+          "k": "zombies",
+          "avg": 0.727,
+          "max": 4.7
+        },
+        {
+          "k": "effects",
+          "avg": 0.477,
+          "max": 0.9
+        },
+        {
+          "k": "m:pose",
+          "avg": 0.295,
+          "max": 0.8
+        },
+        {
+          "k": "r:rigSkin",
+          "avg": 0.181,
+          "max": 0.5
+        },
+        {
+          "k": "daynight",
+          "avg": 0.121,
+          "max": 0.3
+        },
+        {
+          "k": "camera",
+          "avg": 0.12,
+          "max": 0.4
+        },
+        {
+          "k": "drops+hud",
+          "avg": 0.119,
+          "max": 1.2
+        },
+        {
+          "k": "hud+audio",
+          "avg": 0.107,
+          "max": 0.2
+        },
+        {
+          "k": "m:reload+knife",
+          "avg": 0.105,
+          "max": 0.3
+        },
+        {
+          "k": "aim+climb",
+          "avg": 0.073,
+          "max": 0.2
+        }
+      ],
+      "spikes": []
+    }
+  ],
+  "ablations": null,
+  "pageErrors": []
+}

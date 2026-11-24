@@ -1,0 +1,22 @@
+﻿AG-404 native WebGPU pairs + gates for CH-3 x3 (razor coil, CIF light bar, containment gun bracket), 1920x1080 RTX 5080, 0 page errors, live folder untouched (served via in-memory review server + temp-tree mirror for Node tests).
+
+=== 1) CH-3 #4 Razor coil + fence posts (da70f7d9 vs live 2b1d1690) ===
+- Draws per fence side: west 2 -> 2, south 2 -> 2, east 2 -> 2 (0 new draws).
+- Tris per side: west 7058 -> 8574, south 7960 -> 9472, east 6736 -> 8108.
+- Gates: node --test game/training-perimeter.test.mjs 8/8 PASS (live & temp-mirror copy); t336 27/2 (fail strings byte-identical to live baseline, 0 perimeter/razor mentions).
+- Visual (looked at): smooth 14-side round loops (octagonal kinks gone), wider 2.2 cm blades, post cap plates + top-rail bracket bands clean in both lamps ON and OFF.
+- Sheet & receipt: review/CH-3/razor/native/CH-3-razor-native-pair.jpg, review/CH-3/razor/native/summary.json.
+
+=== 2) CH-3 #5p1 CIF light bar + back board (2dc7d589 vs live 98117f1f) ===
+- Draws: HQ house meshes 120 -> 120, hq-cif meshes 6 -> 6 (0 new draws); hq-cif tris 11848 -> 12032 (+184, matches cloud).
+- Lamp colors: day bayLampMat #ff9d24 -> #ff9d24; night lockdown #ff2a1a -> #ff2a1a (red tube verified).
+- Gate: ui/cif-exterior.browser.mjs requires 'playwright' which is not installed on this PC; ran every exact assertion natively via CDP WebGPU (review/CH-3/cif/native/cdp-gate.json): anchor/front/yaw identical, signs=2, lights=0, sharedLamp=true, sign hook=true, t215 4/0, openCIF/closeCIF PASS, 0 page errors.
+- Visual (looked at): huge upgrade — slim round fluorescent tube in two end sockets with steel reflector & under-lip over painted grooved back board; zero yellow bloom blow-out in day, night lockdown red, and Training lamps OFF.
+- Sheet & receipt: review/CH-3/cif/native/CH-3-cif-native-pair.jpg, review/CH-3/cif/native/summary.json.
+
+=== 3) CH-3 #5p2 Containment gun wall bracket (d617dd32 vs live f9e683d7) ===
+- Draws: containment meshes 32 -> 32 (0 new draws); tris 21128 -> 21328 (+200, matches cloud).
+- Firing: containment start verified in both lamps ON and OFF (started=true, shots=1, inFlight=1; gun pivots cleanly on yoke while wall plate/gussets stay fixed).
+- Gates: node --test game/training-containment.test.mjs 8/8 PASS (live & temp-mirror copy); t336 27/2 (fail strings byte-identical to live baseline, 0 containment mentions).
+- Visual (looked at): lighter grey-green steel (0x56605a) shows chamfered wall plate, hex bolts on round washers, twin triangular gussets, and conduit clamps cleanly in both lamps ON and OFF.
+- Sheet & receipt: review/CH-3/gun/native/CH-3-gun-native-pair.jpg, review/CH-3/gun/native/summary.json.

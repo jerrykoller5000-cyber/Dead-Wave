@@ -5,7 +5,10 @@ import {
   attachZombieAbilityVisuals,
   resetZombieAbilityVisuals,
   updateZombieAbilityVisuals,
-  getZombieAbilityLaunch
+  getZombieAbilityLaunch,
+  getZombieAbilityRock,
+  getZombieAbilityRockRadius,
+  COLOSSUS_ROCK
 } from './zombie-ability-visuals.js';
 
 // The real sculpted zombie uses these shoulder/elbow/palm coordinates. A small
@@ -144,56 +147,91 @@ for (const kind of ['demon', 'colossus']) {
     z.mesh.traverse(node => { node.visible = true; });
     z.partsLost = {}; z.mesh.userData.partsLost = {}; z.alive = true;
     resetZombieAbilityVisuals(z.mesh);
-    assert.equal(extraDraws(z.mesh), 1);
+    assert.equal(extraDraws(z.mesh), kind === 'demon' ? 1 : 2);   // D-244: the colossus idles with sack + rope belt
     if (rig.heldRock) assert.equal(rig.heldRock.visible, false);
   });
 }
 
+// D-244 (Jerry): no back rack or back stones. He pulls rocks (~2x his fist) out of one sack on his right hip and
+// pitches them with the right hand.
+test('the colossus carries one sack and a rope belt, no rack or back stones', () => {
+  const { z, rig, scale } = zombie('colossus', 1.8);
+  const names = []; z.mesh.traverse(node => names.push(node.name));
+  assert(!names.some(name => /rack|carrier|back-stone/.test(name)), 'the old stone rack must be gone: ' + names.join(','));
+  const sack = z.mesh.getObjectByName('colossus-sack');
+  assert(sack && sack.parent === rig.torso, 'the sack is one group on the torso');
+  assert(sack.position.x > 0 && sack.position.z < 0, 'it hangs on his right hip, toward the back');
+  assert(sack.userData.mouth?.isVector3, 'the motion gets the sack mouth');
+  assert.equal(extraDraws(z.mesh), 2, 'sack + belt idle');
+  assert.equal(rig.rockRadius, COLOSSUS_ROCK.radius * scale);
+  assert.equal(getZombieAbilityRockRadius(z), COLOSSUS_ROCK.radius * scale);
+  assert.equal(getZombieAbilityRockRadius(zombie('demon').z), 0);
+  const rock = getZombieAbilityRock(THREE);
+  assert.equal(rock.geometry, rig.heldRock.geometry, 'held and thrown rock share one shape');
+  rock.geometry.computeBoundingSphere();
+  assert(rock.geometry.boundingSphere.radius > .9 && rock.geometry.boundingSphere.radius < 1.35, 'unit-radius rock');
+});
+
 for (const scale of [.75, 1, 1.8]) {
-  test(`colossus stone grab and release keep one continuous launch position at sculpture scale ${scale}`, () => {
-    for (const slot of [0, 1, 2]) {
-      const { z, rig } = zombie('colossus', scale);
-      z.mesh.position.set(8, 3, -5); z.mesh.rotation.set(.08, 1.2, -.04); z.mesh.scale.set(1.04, .96, .99);
+  test(`colossus pitch: the rock shows in the right hand from the sack and launches where the hand was, scale ${scale}`, () => {
+    const { z, rig } = zombie('colossus', scale);
+    z.mesh.position.set(8, 3, -5); z.mesh.rotation.set(.08, 1.2, -.04); z.mesh.scale.set(1.04, .96, .99);
+    legacyPose(rig);
+    updateZombieAbilityVisuals(z, 0, { kind: 'stone', stage: 'windup', progress: .1 });
+    assert.equal(rig.heldRock.visible, false, 'no rock until the hand is in the sack');
+    const mouth = rig.sack.localToWorld(rig.sack.userData.mouth.clone());
+    let nearest = Infinity;
+    for (let frame = 0; frame <= 45; frame++) {
       legacyPose(rig);
-      updateZombieAbilityVisuals(z, 0, { kind: 'stone', stage: 'windup', progress: .1, slot });
-      assert.equal(rig.heldRock.visible, false, 'a stone stays on the back until the hands reach it');
-      assert.equal(rig.backRocks[slot].visible, true);
-      for (let frame = 0; frame <= 30; frame++) {
-        legacyPose(rig);
-        updateZombieAbilityVisuals(z, frame / 30, { kind: 'stone', stage: 'windup', progress: frame / 30, slot });
-        if (frame >= 10) {
-          assert.equal(rig.heldRock.visible, true);
-          assert.equal(rig.backRocks[slot].visible, false, 'a carried stone must disappear from its rack');
-        }
-      }
-      const carried = new THREE.Vector3(), released = new THREE.Vector3();
-      assert.equal(getZombieAbilityLaunch(z, 'stone', carried), true);
-      legacyPose(rig);
-      updateZombieAbilityVisuals(z, 1.01, { kind: 'stone', stage: 'recovery', progress: 0, slot, release: true });
-      assert.equal(getZombieAbilityLaunch(z, 'stone', released), true);
-      pointNear(released, carried);
-      assert.equal(rig.heldRock.visible, false);
+      const progress = frame / 45;
+      updateZombieAbilityVisuals(z, frame / 30, { kind: 'stone', stage: 'windup', progress });
+      const at = rig.heldRock.getWorldPosition(new THREE.Vector3());
+      assert(at.toArray().every(Number.isFinite));
+      if (rig.heldRock.visible && nearest === Infinity) nearest = at.distanceTo(mouth) / scale;
+      if (progress >= .34) assert.equal(rig.heldRock.visible, true, 'the rock stays in the hand to the release');
     }
+    assert(nearest < .35, `the rock first shows at the sack mouth, not in the air (${nearest.toFixed(3)})`);
+    assert.equal(extraDraws(z.mesh), 3, 'throwing adds only the held rock');
+    const carried = new THREE.Vector3(), released = new THREE.Vector3();
+    assert.equal(getZombieAbilityLaunch(z, 'stone', carried), true);
+    const elbow = rig.elbows[1], palm = rig.rockPalm.clone(); elbow.localToWorld(palm);
+    pointNear(carried, palm, 1e-6);
+    legacyPose(rig);
+    updateZombieAbilityVisuals(z, 1.51, { kind: 'stone', stage: 'recovery', progress: 0, release: true });
+    assert.equal(getZombieAbilityLaunch(z, 'stone', released), true);
+    pointNear(released, carried);
+    assert.equal(rig.heldRock.visible, false);
+    assert.equal(extraDraws(z.mesh), 2);
+    for (const p of [.3, .7, 1]) { legacyPose(rig); updateZombieAbilityVisuals(z, 2, { kind: 'stone', stage: 'recovery', progress: p }); }
+    updateZombieAbilityVisuals(z, 3, { stage: 'idle' });
+    assert.equal(extraDraws(z.mesh), 2, 'back to the sack and belt');
   });
 }
 
-test('missing and replenishing stones switch carrier rendering without duplicate idle draws', () => {
-  const { z, rig } = zombie('colossus', 1.8);
-  assert.equal(extraDraws(z.mesh), 1);
-  legacyPose(rig);
-  updateZombieAbilityVisuals(z, 1, { kind: 'stone', stage: 'windup', progress: 1, slot: 1 });
-  assert.equal(extraDraws(z.mesh), 5, 'carrying draws the frame, straps, remaining stock and held stone once');
-  legacyPose(rig);
-  updateZombieAbilityVisuals(z, 1.01, { kind: 'stone', stage: 'recovery', progress: 0, slot: 1, release: true });
-  assert.equal(extraDraws(z.mesh), 4, 'release removes the carried draw');
-  updateZombieAbilityVisuals(z, 7.01, { stage: 'idle' });
-  assert.equal(rig.backRocks[1].visible, false);
-  assert.equal(extraDraws(z.mesh), 4, 'an empty stock slot must not be replaced by the full-stock batch');
-  updateZombieAbilityVisuals(z, 8.01, { stage: 'idle' });
-  assert.equal(rig.backRocks[1].visible, true);
-  assert(rig.backRocks[1].scale.x > 0 && rig.backRocks[1].scale.x < rig.backRocks[0].scale.x);
-  assert.equal(extraDraws(z.mesh), 5, 'a growing replacement keeps individual stock rendering');
-  updateZombieAbilityVisuals(z, 9.01, { stage: 'idle' });
-  assert.equal(extraDraws(z.mesh), 1, 'a replenished idle carrier returns to one batch');
-  assert(rig.backRocks.every(rock => rock.visible));
+test('colossus lifts the full-size rock through its opening before carrying it sideways', () => {
+  const { z, rig } = zombie('colossus', 2.3);
+  const { closure, mouth, rockEntry, rockExit } = rig.sack.userData;
+  assert.equal(closure[0], 1, 'the fabric mouth is folded at rest');
+  const axis = rockExit.clone().sub(rockEntry).normalize();
+  const shape = rig.heldRock.geometry.attributes.position;
+  let radius = 0;
+  const vertex = new THREE.Vector3();
+  for (let i = 0; i < shape.count; i++) {
+    radius = Math.max(radius, vertex.fromBufferAttribute(shape, i).length());
+  }
+  assert(Math.abs(radius * rig.heldRock.scale.x - rig.rockRadius) < 1e-6);
+  let prior = -Infinity;
+  for (const time of [.36, .41, .46, .50, .53]) {
+    updateZombieAbilityVisuals(z, time, {kind:'stone', stage:'windup', progress:time/1.65});
+    assert(rig.heldRock.visible);
+    assert.equal(closure[0], 0, 'the full opening is clear while the rock lifts');
+    const center = rig.sack.worldToLocal(rig.heldRock.getWorldPosition(vertex)).sub(mouth);
+    const rise = center.dot(axis);
+    assert(rise > prior, 'the rock centre rises monotonically through the opening');
+    assert(center.addScaledVector(axis, -rise).length() < .065, 'the rock stays over the opening as it lifts');
+    prior = rise;
+  }
+  assert(prior > COLOSSUS_ROCK.radius, 'the rock clears the lip before moving sideways');
+  updateZombieAbilityVisuals(z, 1.3, {kind:'stone', stage:'windup', progress:1.3/1.65});
+  assert.equal(closure[0], 1, 'the sack folds down for the pitch');
 });

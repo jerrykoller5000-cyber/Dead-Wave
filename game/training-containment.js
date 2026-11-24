@@ -1,5 +1,7 @@
 // GP-19879: training-only death cleanup. These fixtures never join the player's builds.
-import {bakeStatic} from '../world/bake.js';
+import {bakeStatic,foldStatic} from '../world/bake.js';
+import {getTrainingPBR,projectBoxUV} from '../world/training-textures.js';
+import {getWeaponFoldPBR} from '../studio/weapon-textures.js';
 
 export const CONTAINMENT=Object.freeze({perWall:1,height:5.6,gateHeight:9.65,scale:1.55,spinup:.4,interval:1/12,speed:100,hits:3,minSweep:1.6});
 const angle=v=>Math.atan2(Math.sin(v),Math.cos(v));
@@ -35,7 +37,7 @@ export function createContainmentController({room,floorY,getZombies,onHit=()=>{}
    if(!eligible.includes(t.target)||!t.target.alive)t.target=eligible[(i+Math.floor(clock*.7))%eligible.length]||null;
    const z=t.target;if(!z||!belongs(z))continue;
    const p=z.mesh.position,dx=p.x-t.x,dz=p.z-t.z,dy=p.y+Math.max(.15,(z.hitH||1.4)*.5)-t.y;
-   const yaw=Math.atan2(dx,dz),pitch=Math.atan2(-dy,Math.hypot(dx,dz));
+   const yaw=Math.atan2(dx,dz),pitch=Math.atan2(-dy,Math.sqrt(dx*dx+dz*dz));
    t.yaw=angle(t.yaw+angle(yaw-t.yaw)*(1-Math.exp(-14*dt)));t.pitch+=(pitch-t.pitch)*(1-Math.exp(-14*dt));
    if(clock<CONTAINMENT.spinup)continue;
    t.cd-=dt;if(t.cd>0||Math.abs(angle(yaw-t.yaw))>.025||Math.abs(pitch-t.pitch)>.025)continue;
@@ -43,7 +45,8 @@ export function createContainmentController({room,floorY,getZombies,onHit=()=>{}
    t.cd+=CONTAINMENT.interval;t.flash=.065;t.fired++;shots++;
    const cp=Math.cos(t.pitch),dir={x:Math.sin(t.yaw)*cp,y:-Math.sin(t.pitch),z:Math.cos(t.yaw)*cp};
    const muzzle=1.01*CONTAINMENT.scale,origin={x:t.x+dir.x*muzzle,y:t.y+dir.y*muzzle,z:t.z+dir.z*muzzle};
-   const distance=Math.hypot(p.x-origin.x,p.y+Math.max(.15,(z.hitH||1.4)*.5)-origin.y,p.z-origin.z);
+   const dpx=p.x-origin.x,dpy=p.y+Math.max(.15,(z.hitH||1.4)*.5)-origin.y,dpz=p.z-origin.z;
+   const distance=Math.sqrt(dpx*dpx+dpy*dpy+dpz*dpz);
    // A cleanup burst owns its target, rather than feeding ordinary combat rounds through the recovered player.
    const f={origin,dir,target:z,mesh:z.mesh,age:0,duration:Math.max(.03,distance/CONTAINMENT.speed)};flights.push(f);onShot(t,f);
   }
@@ -52,11 +55,15 @@ export function createContainmentController({room,floorY,getZombies,onHit=()=>{}
  return {start,reset,tick,read,turrets,active:()=>active,time:()=>clock,flights:()=>flights};
 }
 
-export function createTrainingContainment(T,tg,{makeGun,getZombies,onHit,onShot}){
- const root=new T.Group();root.name='training-containment';tg.group.add(root);
+ export function createTrainingContainment(T,tg,{makeGun,getZombies,onHit,onShot}){
+ const root=new T.Group();root.name='training-containment';root.matrixAutoUpdate=false;root.updateMatrix();tg.group.add(root);
  const controller=createContainmentController({room:tg.zombieRoom,floorY:tg.floorY,getZombies,onHit,onShot});
  const count=controller.turrets.length,template=makeGun(),barrel=template.userData.barrelAssembly;
  for(const key of ['flash','flashLight','laser'])template.userData[key]?.removeFromParent();
+ // AG-419: normalize template shadow flags (instanced meshes all use castShadow=false, receiveShadow=true)
+ // and fold plain gun/rotor materials into 1 node draw each before instancing (~33 transparent draws -> ~2-4).
+ template.traverse(o=>{if(o.isMesh){o.castShadow=false;o.receiveShadow=true;}});
+ if(T.TSL){const weaponPBR=getWeaponFoldPBR(T,T.TSL);foldStatic(T,T.TSL,barrel,{enter:()=>true,weaponPBR});foldStatic(T,T.TSL,template,{skip:o=>o===barrel,enter:()=>true,weaponPBR});}
  bakeStatic(T,barrel,{enter:()=>true});bakeStatic(T,template,{skip:o=>o===barrel,enter:()=>true});template.updateMatrixWorld(true);
  const inv=new T.Matrix4().copy(template.matrixWorld).invert(),invBarrel=new T.Matrix4().copy(barrel.matrixWorld).invert();
  // GP-19881: each instance follows its own wall cutaway; source gun surfaces stay private.
@@ -73,16 +80,22 @@ export function createTrainingContainment(T,tg,{makeGun,getZombies,onHit,onShot}
   ownedMat.push(mat);fadeMaterials.set(source,mat);
  }return fadeMaterials.get(source);}
  function syncCutaway(){
-  const walls=tg.cutaway?.state()||[];let changed=false;
-  for(const [i,t]of controller.turrets.entries()){const opacity=walls.find(e=>e.side===t.wall)?.opacity??1;if(Math.abs(fadeValues[i]-opacity)>1e-6){fadeValues[i]=opacity;changed=true;}}
+  const walls=tg.cutaway?.state();let changed=false;
+  const turrets=controller.turrets,wLen=walls?walls.length:0;
+  for(let i=0;i<turrets.length;i++){
+   const side=turrets[i].wall;let opacity=1;
+   for(let w=0;w<wLen;w++){if(walls[w].side===side){opacity=walls[w].opacity;break;}}
+   if(Math.abs(fadeValues[i]-opacity)>1e-6){fadeValues[i]=opacity;changed=true;}
+  }
   if(changed)fadeAttribute.needsUpdate=true;
  }
  const parts=[];template.traverse(o=>{if(!o.isMesh||!o.visible)return;let inBarrel=false;for(let n=o;n;n=n.parent)if(n===barrel)inBarrel=true;
-  const mesh=new T.InstancedMesh(fadedGeometry(o.geometry),fadedMaterial(o.material),count);mesh.name='training-containment-'+(inBarrel?'rotor':'gun');mesh.frustumCulled=false;mesh.castShadow=false;mesh.receiveShadow=true;mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);root.add(mesh);
+  const mesh=new T.InstancedMesh(fadedGeometry(o.geometry),fadedMaterial(o.material),count);mesh.name='training-containment-'+(inBarrel?'rotor':'gun');mesh.frustumCulled=false;mesh.castShadow=false;mesh.receiveShadow=true;mesh.matrixAutoUpdate=false;mesh.updateMatrix();mesh.instanceMatrix.setUsage(T.DynamicDrawUsage);root.add(mesh);
   parts.push({mesh,rotor:inBarrel,local:new T.Matrix4().multiplyMatrices(inBarrel?invBarrel:inv,o.matrixWorld)});
  });
- const mat=new T.MeshStandardMaterial({color:0x343a37,roughness:.8,metalness:.6});ownedMat.push(mat);
- function fixture(geo,material,name){ownedGeo.push(geo);geo.setAttribute('containmentOpacity',fadeAttribute);const m=new T.InstancedMesh(geo,fadedMaterial(material),count);m.name=name;m.frustumCulled=false;root.add(m);return m;}
+ const pbr=getTrainingPBR(T);
+ const mat=new T.MeshStandardMaterial(pbr?pbr.steelDark.opts({color:0xa0aba6,normalScale:.85}):{color:0x343a37,roughness:.8,metalness:.6});ownedMat.push(mat);
+ function fixture(geo,material,name){ownedGeo.push(geo);geo.setAttribute('containmentOpacity',fadeAttribute);const m=new T.InstancedMesh(geo,fadedMaterial(material),count);m.name=name;m.frustumCulled=false;m.matrixAutoUpdate=false;m.updateMatrix();root.add(m);return m;}
  // CC-363 (D-218 E3, for Claude 7): a real wall mount, in three rigid sets (metres, the mount's own frame: z out of the
  // wall, the wall face at z -.80, the gun's aim pivot at 0). FIXED: a wall plate flush on the tile with four bolts,
  // a box arm and a diagonal gusset, a cable conduit and junction box, the turntable base. YAW: the turntable ring, a
@@ -93,7 +106,8 @@ export function createTrainingContainment(T,tg,{makeGun,getZombies,onHit,onShot}
  function merged(parts){const pos=[],nor=[];for(const [geo,x,y,z,rx=0,ry=0,rz=0]of parts){const g=geo.index?geo.toNonIndexed():geo;
   g.applyMatrix4(new T.Matrix4().compose(new T.Vector3(x,y,z),new T.Quaternion().setFromEuler(new T.Euler(rx,ry,rz)),new T.Vector3(1,1,1)));
   pos.push(...g.attributes.position.array);nor.push(...g.attributes.normal.array);geo.dispose();if(g!==geo)g.dispose();}
-  const out=new T.BufferGeometry();out.setAttribute('position',new T.Float32BufferAttribute(pos,3));out.setAttribute('normal',new T.Float32BufferAttribute(nor,3));return out;}
+  const out=new T.BufferGeometry();out.setAttribute('position',new T.Float32BufferAttribute(pos,3));out.setAttribute('normal',new T.Float32BufferAttribute(nor,3));
+  return projectBoxUV(out,0.8,0.8);}
  const B=(w,h,d)=>new T.BoxGeometry(w,h,d),C=(r0,r1,h,n=14)=>new T.CylinderGeometry(r0,r1,h,n);
  const brace=Math.hypot(.48,.34),braceTilt=Math.atan2(.34,.48);
  const mountGeo=merged([
@@ -129,7 +143,7 @@ export function createTrainingContainment(T,tg,{makeGun,getZombies,onHit,onShot}
  // the barrel cluster turns on its own bearing: its true place in the gun, not a fixed .27 guess
  const barrelLocal=new T.Matrix4().multiplyMatrices(inv,barrel.matrixWorld),aim=new T.Matrix4();
  const geo=new T.BufferGeometry(),P=new T.Float32BufferAttribute(new Float32Array(256*6),3);P.setUsage(T.DynamicDrawUsage);geo.setAttribute('position',P);geo.setDrawRange(0,0);ownedGeo.push(geo);
- const tracerMat=new T.LineBasicMaterial({color:0xffc87b,transparent:true,opacity:.9,depthWrite:false});ownedMat.push(tracerMat);const tracers=new T.LineSegments(geo,tracerMat);tracers.name='training-containment-tracers';tracers.frustumCulled=false;root.add(tracers);
+ const tracerMat=new T.LineBasicMaterial({color:0xffc87b,transparent:true,opacity:.9,depthWrite:false});ownedMat.push(tracerMat);const tracers=new T.LineSegments(geo,tracerMat);tracers.name='training-containment-tracers';tracers.frustumCulled=false;tracers.matrixAutoUpdate=false;tracers.updateMatrix();root.add(tracers);
  function fixed(mesh,i,t,x,y,z){pos.set(t.x-tg.origin.x,t.y-tg.origin.y,t.z-tg.origin.z);q.setFromAxisAngle(new T.Vector3(0,1,0),t.home);const offset=new T.Vector3(x,y,z).applyQuaternion(q);pos.add(offset);scale.set(1,1,1);m.compose(pos,q,scale);mesh.setMatrixAt(i,m);}
  for(const [i,t]of controller.turrets.entries()){fixed(mount,i,t,0,0,0);fixed(led,i,t,.16,-.95,-.695);}
  function draw(){

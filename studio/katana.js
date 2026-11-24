@@ -8,6 +8,8 @@
 //   makeKatanaModel({ THREE })   a Group: a curved red blade (one vertex-coloured mesh, the edge's hamon lighter), a
 //                                gold habaki and tsuba, a black and red wrapped handle and a gold pommel cap.
 
+import { applyWeaponPBR, projectWeaponUVs } from './weapon-textures.js';
+
 export const KATANA = Object.freeze({
   BLADE_FROM: 0.03, BLADE_TO: 0.66,   // the blade along z
   HANDLE_FROM: -0.235, HANDLE_TO: -0.005,
@@ -20,7 +22,7 @@ export const KATANA = Object.freeze({
 const gripSurfaces = new WeakMap();
 function wrappedGrip(THREE) {
   if (gripSurfaces.has(THREE)) return gripSurfaces.get(THREE);
-  const pos=[], colors=[], indices=[];
+  const pos=[], colors=[], uvs=[], indices=[];
   const rows=72, sides=16, back=KATANA.HANDLE_FROM+0.006, front=-0.024;
   const dark=new THREE.Color(0x221218), red=new THREE.Color(0x911321), tint=new THREE.Color();
   const ridge=t=>Math.max(0,Math.min(1,(0.23-Math.abs(t-Math.round(t)))*11));
@@ -33,6 +35,7 @@ function wrappedGrip(THREE) {
       const sx=Math.sign(x)*Math.pow(Math.abs(x),0.72);
       const sy=Math.sign(y)*Math.pow(Math.abs(y),0.72);
       pos.push(sx*(0.0120+0.0009*relief),sy*(0.0152+0.0011*relief),z);
+      uvs.push((k/sides)*2.0, t*4.5);
       tint.copy(dark).lerp(red,relief*(a>=b?1:0.74));
       colors.push(tint.r,tint.g,tint.b);
       if (j<rows) {
@@ -43,7 +46,7 @@ function wrappedGrip(THREE) {
   }
   for(const [row,z,reverse] of [[0,back,true],[rows,front,false]]) {
     const center=pos.length/3;
-    pos.push(0,0,z); colors.push(dark.r,dark.g,dark.b);
+    pos.push(0,0,z); colors.push(dark.r,dark.g,dark.b); uvs.push(0.5, reverse?0:4.5);
     for(let k=0;k<sides;k++) {
       const a=row*sides+k,b=row*sides+(k+1)%sides;
       indices.push(center,reverse?b:a,reverse?a:b);
@@ -52,6 +55,7 @@ function wrappedGrip(THREE) {
   const geometry=new THREE.BufferGeometry();
   geometry.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));
   geometry.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
+  geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));
   geometry.setIndex(indices); geometry.computeVertexNormals(); gripSurfaces.set(THREE,geometry);
   return geometry;
 }
@@ -59,12 +63,14 @@ function wrappedGrip(THREE) {
 export function makeKatanaModel({ THREE }) {
   const g = new THREE.Group();
   g.name = 'katana';
-  const red = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, metalness: 0.86, roughness: 0.18, emissive: 0x420408, emissiveIntensity: 0.58, side: THREE.DoubleSide });
-  const gold = new THREE.MeshStandardMaterial({ color: 0xd4ad52, metalness: 0.92, roughness: 0.24 });
-  const darkGold = new THREE.MeshStandardMaterial({ color: 0x9a7428, metalness: 0.88, roughness: 0.34 });
-  const skin = new THREE.MeshStandardMaterial({ vertexColors: true, metalness: 0.18, roughness: 0.68 });
-  const iron = new THREE.MeshStandardMaterial({ color: 0x221c20, metalness: 0.78, roughness: 0.36 });
-  const wrap = new THREE.MeshStandardMaterial({ color: 0x7c0d15, metalness: 0.12, roughness: 0.72 });
+  const red = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, metalness: 0.86, roughness: 0.18, emissive: 0x420408, emissiveIntensity: 0.58, side: THREE.DoubleSide }), 'katanaBlade', { useMap: true, useMetalMap: true });
+  red.userData.preserveArtworkUV = true;
+  const gold = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0xd4ad52, metalness: 0.92, roughness: 0.24 }), 'chasedGold', { useMap: true, useMetalMap: true });
+  const darkGold = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x9a7428, metalness: 0.88, roughness: 0.34 }), 'chasedGold', { useMap: true, useMetalMap: true });
+  const skin = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ vertexColors: true, metalness: 0.18, roughness: 0.68 }), 'katanaWrap', { useMap: true });
+  skin.userData.preserveArtworkUV = true;
+  const iron = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x221c20, metalness: 0.78, roughness: 0.36 }), 'machinedSteel', { useMap: true, useMetalMap: true });
+  const wrap = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x7c0d15, metalness: 0.12, roughness: 0.72 }), 'katanaWrap', { useMap: true });
   const crimsonGlow = new THREE.MeshStandardMaterial({ color: 0xd81824, emissive: 0x58040a, emissiveIntensity: 0.65, metalness: 0.6, roughness: 0.25 });
 
   g.add(bladeMesh(THREE, red));
@@ -138,6 +144,7 @@ export function makeKatanaModel({ THREE }) {
   const pommelKnot = new THREE.Mesh(new THREE.TorusGeometry(0.0065, 0.0024, 8, 14), wrap);
   pommelKnot.rotation.y = Math.PI / 2; pommelKnot.position.set(0, 0, KATANA.HANDLE_FROM - 0.013); g.add(pommelKnot);
 
+  projectWeaponUVs(g, { tileMeters: 0.18 });
   g.traverse((m) => { if (m.isMesh) { m.castShadow = true; m.receiveShadow = false; } });
   return g;
 }
@@ -149,7 +156,7 @@ export function makeKatanaModel({ THREE }) {
 function bladeMesh(THREE, mat) {
   const N = 48, { BLADE_FROM: z0, BLADE_TO: z1, WIDTH: W, SORI } = KATANA;
   const zStart = 0.006; // rooted inside the habaki and front seppa
-  const pos = [], col = [], idx = [];
+  const pos = [], col = [], uv = [], idx = [];
   const spineCol = new THREE.Color(0x3b0408);
   const fullerCol = new THREE.Color(0x240104);
   const bodyCol = new THREE.Color(0xb8111b);
@@ -230,6 +237,7 @@ function bladeMesh(THREE, mat) {
     for (let k = 0; k < ring; k++) {
       pos.push(pts[k][0], pts[k][1], z);
       col.push(cols[k].r, cols[k].g, cols[k].b);
+      uv.push((z - z0) * 3.2, (pts[k][1] - bot) / Math.max(0.005, span));
     }
   }
   for (let i = 0; i < N; i++) for (let k = 0; k < ring; k++) {
@@ -240,12 +248,14 @@ function bladeMesh(THREE, mat) {
   const tipI = pos.length / 3;
   pos.push(0, SORI - W * 0.015, z1 + 0.012);
   col.push(edgeCol.r, edgeCol.g, edgeCol.b);
+  uv.push((z1 + 0.012 - z0) * 3.2, 0.5);
   for (let k = 0; k < ring; k++) idx.push(N * ring + k, tipI, N * ring + (k + 1) % ring);
   for (let k = 1; k < ring - 1; k++) idx.push(0, k + 1, k);
 
   const geo = new THREE.BufferGeometry();
   geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
   geo.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
+  geo.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
   geo.setIndex(idx);
   geo.computeVertexNormals();
   const m = new THREE.Mesh(geo, mat);
@@ -265,17 +275,18 @@ export function makeSheathedKatana({ THREE }) {
   });
   g.add(hilt);
 
-  const lacquer = new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, metalness: 0.42, roughness: 0.22 });
-  const gold = new THREE.MeshStandardMaterial({ color: 0xd4ad52, metalness: 0.92, roughness: 0.24 });
-  const darkGold = new THREE.MeshStandardMaterial({ color: 0x9a7428, metalness: 0.88, roughness: 0.34 });
-  const redCord = new THREE.MeshStandardMaterial({ color: 0x860f18, metalness: 0.14, roughness: 0.72 });
-  const crimsonLacquer = new THREE.MeshStandardMaterial({ color: 0x5c0810, metalness: 0.48, roughness: 0.24 });
+  const lacquer = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0xffffff, vertexColors: true, metalness: 0.42, roughness: 0.22 }), 'katanaLacquer', { useMap: true });
+  lacquer.userData.preserveArtworkUV = true;
+  const gold = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0xd4ad52, metalness: 0.92, roughness: 0.24 }), 'chasedGold', { useMap: true, useMetalMap: true });
+  const darkGold = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x9a7428, metalness: 0.88, roughness: 0.34 }), 'chasedGold', { useMap: true, useMetalMap: true });
+  const redCord = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x860f18, metalness: 0.14, roughness: 0.72 }), 'katanaWrap', { useMap: true });
+  const crimsonLacquer = applyWeaponPBR(THREE, new THREE.MeshStandardMaterial({ color: 0x5c0810, metalness: 0.48, roughness: 0.24 }), 'katanaLacquer', { useMap: true });
 
   // Smoothly lofted curved saya body from the front seppa (z = 0.008) to the tip (z = 0.68).
   const { BLADE_FROM: z0, BLADE_TO: z1, SORI } = KATANA;
   const zStart = 0.008, zEnd = z1 + 0.02;
   const N = 36, ring = 10;
-  const pos = [], col = [], idx = [];
+  const pos = [], col = [], uv = [], idx = [];
   const colBlack = new THREE.Color(0x140d10);
   const colCrimson = new THREE.Color(0x4a070d);
   const colRidge = new THREE.Color(0x281216);
@@ -293,6 +304,7 @@ export function makeSheathedKatana({ THREE }) {
       const x = Math.sin(a) * wHalf * (1 + 0.08 * Math.pow(Math.cos(a), 2));
       const y = lift + Math.cos(a) * hHalf;
       pos.push(x, y, z);
+      uv.push(u * 4.0, k / ring);
       const c = (k === 0 || k === 5) ? colRidge : stripe;
       col.push(c.r, c.g, c.b);
     }
@@ -304,12 +316,14 @@ export function makeSheathedKatana({ THREE }) {
   const tipCenter = pos.length / 3;
   const tipLift = SORI * Math.pow((zEnd - z0) / (z1 - z0), 2);
   pos.push(0, tipLift, zEnd + 0.006);
+  uv.push(4.0, 0.5);
   col.push(colBlack.r, colBlack.g, colBlack.b);
   for (let k = 0; k < ring; k++) idx.push(N * ring + k, tipCenter, N * ring + (k + 1) % ring);
 
   const sayaGeo = new THREE.BufferGeometry();
   sayaGeo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
   sayaGeo.setAttribute('color', new THREE.Float32BufferAttribute(col, 3));
+  sayaGeo.setAttribute('uv', new THREE.Float32BufferAttribute(uv, 2));
   sayaGeo.setIndex(idx);
   sayaGeo.computeVertexNormals();
   const sayaMesh = new THREE.Mesh(sayaGeo, lacquer);
@@ -375,6 +389,7 @@ export function makeSheathedKatana({ THREE }) {
   const kojiriTip = new THREE.Mesh(new THREE.SphereGeometry(0.0195, 16, 12), gold);
   kojiriTip.rotation.x = krx; kojiriTip.scale.set(0.45, 0.96, 0.65); kojiriTip.position.set(0, ky + 0.0015, kojiriZ + 0.015); g.add(kojiriTip);
 
+  projectWeaponUVs(g, { tileMeters: 0.18 });
   g.traverse((m) => { if (m.isMesh) { m.castShadow = true; } });
   g.userData.hilt = hilt;
   return g;

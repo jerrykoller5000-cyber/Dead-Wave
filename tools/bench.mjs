@@ -50,7 +50,17 @@
 // --alloc (CL-219): a DevTools allocation-sampling profile over the measured seconds, the garbage included, and the line
 // gets `alloc`: kB a frame allocated, by function (self) and by the function and its two callers (the 25 heaviest
 // each), so the night's garbage collections (the 40-70 ms frames GP-19940 traced) can be traced to who makes garbage.
+// CB-369 (D-216, Claude 2), for tools/strict48.mjs; all off by default, so a plain run is unchanged:
+//   --fixture <file.js>  megaswarm: start a Hunt and run that JavaScript in the page instead of TT.spawnMegaswarm (the strict
+//                        48-near-brute fixture is tools/strict48-fixture.js); its result goes in the line as `fixture`
+//   --page <file>        serve that file as /index.html (a review copy); --map <json> also serves {"/url": "file"} pairs
+//   --window <s>         the measured window: fps, low and last10 over the last <s> one-second windows (default 10)
+//   --vsync off          Chrome without the vsync wait and frame-rate limit: frame times are the frame's own cost, not
+//                        rounded up to the display's 16.7 ms steps (for A/B deltas; the absolute 60 fps bar is read with vsync on)
+//   --out <file>         also write the JSON line (with readyMs, the ready clock) to that file
+//   --cal                the main thread's speed before and after the window (a fixed workload, outside the window)
 import fs from 'node:fs';
+import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { serve } from './serve.mjs';
@@ -109,9 +119,33 @@ if (GFX && !['low', 'medium', 'high', 'max'].includes(GFX)) {
   throw new Error('--gfx needs low, medium, high or max');
 }
 
-const server = await serve(ROOT, 0);
+const FIXTURE = flag('--fixture'), PAGE_FILE = flag('--page'), MAP_FILE = flag('--map'), OUT_FILE = flag('--out');
+const WINDOW = Math.max(1, num('--window', 10) | 0), VSYNC_OFF = flag('--vsync') === 'off';
+if (WINDOW > SECONDS) throw new Error('--window is longer than --seconds');
+async function serveWithSwaps() {
+  const inner = await serve(ROOT, 0);
+  const swaps = new Map();
+  if (PAGE_FILE) swaps.set('/index.html', path.resolve(ROOT, PAGE_FILE));
+  if (MAP_FILE) for (const [u, f] of Object.entries(JSON.parse(fs.readFileSync(path.resolve(ROOT, MAP_FILE), 'utf8')))) swaps.set(u, path.resolve(ROOT, f));
+  if (!swaps.size) return inner;
+  const body = new Map([...swaps].map(([u, f]) => [u, fs.readFileSync(f)]));   // read once: the served bytes cannot change mid-run
+  const type = (u) => u.endsWith('.html') ? 'text/html; charset=utf-8' : u.endsWith('.css') ? 'text/css; charset=utf-8'
+    : u.endsWith('.json') ? 'application/json; charset=utf-8' : 'text/javascript; charset=utf-8';
+  const up = new URL(inner.origin);
+  const proxy = http.createServer((req, res) => {
+    const u = new URL(req.url, 'http://x').pathname;
+    if (req.method === 'GET' && body.has(u)) { res.writeHead(200, { 'Content-Type': type(u), 'Cache-Control': 'no-store' }).end(body.get(u)); return; }
+    const r2 = http.request({ hostname: up.hostname, port: up.port, path: req.url, method: req.method, headers: req.headers }, (r) => { res.writeHead(r.statusCode, r.headers); r.pipe(res); });
+    r2.on('error', (e) => res.writeHead(502).end(String(e)));
+    req.pipe(r2);
+  });
+  await new Promise((r) => proxy.listen(0, '127.0.0.1', r));
+  console.log(`bench: serving ${[...swaps].map(([u, f]) => u + ' <- ' + path.relative(ROOT, f)).join(', ')}`);
+  return { origin: 'http://127.0.0.1:' + proxy.address().port, close: async () => { proxy.close(); await inner.close(); } };
+}
+const server = await serveWithSwaps();
 // CL-223: precise performance.memory, so a spike's freedMB is the heap it really freed (Chrome rounds it otherwise).
-const browser = await launch({ headless: argv.includes('--headless'), args: ['--enable-precise-memory-info'] });
+const browser = await launch({ headless: argv.includes('--headless'), args: ['--enable-precise-memory-info', ...(VSYNC_OFF ? ['--disable-gpu-vsync', '--disable-frame-rate-limit'] : [])] });
 // Real animation frames. The raf=timer mode is clamped to one frame a second in a
 // throttled tab, which left every one-second window empty.
 const url = `${server.origin}/index.html?debug=1${VM_OFF ? '&vm=0' : ''}${EXTRA_QUERY ? '&' + EXTRA_QUERY : ''}${argv.includes('--flight') && argv[argv.indexOf('--flight') + 1] === 'off' ? '&flight=0' : ''}`;
@@ -125,9 +159,10 @@ async function startMatch(page) {
     const play = document.getElementById('modeHunt');
     if (play) play.click();
   })()`);
-  const prep = await page.waitFor(`window.TT.getPhase && window.TT.getPhase() === 'prep'`, { timeout: 30000 });
+  const prep = await page.waitFor(`window.TT.getPhase && window.TT.getPhase() === 'prep'`, { timeout: argv.includes('--headless') ? 300000 : 30000 });
   if (!prep) throw new Error('match never reached prep');
-  const landed = await page.waitFor(`!document.body.classList.contains('deploying')`, { timeout: 180000 });
+  // CB-369: headless (the cloud's software GPU) runs the insertion at a frame or two a second: give it longer there.
+  const landed = await page.waitFor(`!document.body.classList.contains('deploying')`, { timeout: argv.includes('--headless') ? 900000 : 180000 });
   if (!landed) throw new Error('insertion never finished');
 }
 
@@ -521,7 +556,8 @@ try {
     await page.evaluate('new Promise(r => setTimeout(r, 250))');
   }
   const ready = await page.waitFor('!!window.TT && !!window.TT.spawnMegaswarm', { timeout: 180000 });
-  console.log(`bench: ready ${Date.now() - tNav} ms`);
+  const readyMs = Date.now() - tNav;
+  console.log(`bench: ready ${readyMs} ms`);
   if (!ready) throw new Error('TT never appeared');
   await page.waitFor('window.DWOpening.active === false', { timeout: 120000 });
 
@@ -544,7 +580,14 @@ try {
     console.log(`bench: graphics ${applied}`);
   }
 
-  if (SCENARIO === 'megaswarm') {
+  let fixtureOut = null;
+  if (SCENARIO === 'megaswarm' && FIXTURE) {
+    await startMatch(page);
+    const lib = path.join(ROOT, 'tools/tests/lib.js');
+    if (fs.existsSync(lib)) await page.evaluate(fs.readFileSync(lib, 'utf8'));
+    fixtureOut = await page.evaluate(fs.readFileSync(path.resolve(ROOT, FIXTURE), 'utf8'), 180000);
+    console.log(`bench: fixture ${FIXTURE}: ${fixtureOut && fixtureOut.count} placed`);
+  } else if (SCENARIO === 'megaswarm') {
     const made = await page.evaluate(`TT.spawnMegaswarm(${COUNT | 0})`);
     console.log(`bench: spawned ${made}`);
   } else if (SCENARIO === 'day5') {
@@ -759,6 +802,13 @@ try {
     await page.send('HeapProfiler.startSampling', { samplingInterval: 16384, includeObjectsCollectedByMajorGC: true, includeObjectsCollectedByMinorGC: true });
     console.log('bench: allocation sampling on');
   }
+  // --cal (CB-369): how fast this browser's main thread is right now: a fixed matrix workload for 250 ms, before and
+  // after the window (outside it), in multiplies a millisecond. GP-20187's A/A blocks fell in two groups (23 and 27 ms, every
+  // section ~12% apart) with the same code: a speed state per launch. This says which state each block ran in.
+  const CAL = `(() => { const a = new Float64Array(16), b = new Float64Array(16), c = new Float64Array(16); for (let i = 0; i < 16; i++) { a[i] = 1 + i * 1e-3; b[i] = 1 - i * 1e-3; }
+    let n = 0; const t = performance.now(); while (performance.now() - t < 250) { for (let k = 0; k < 200; k++) { for (let r = 0; r < 4; r++) for (let q = 0; q < 4; q++) { let x = 0; for (let j = 0; j < 4; j++) x += a[r * 4 + j] * b[j * 4 + q]; c[r * 4 + q] = x; } a[0] = c[5] * 1e-9 + 1; } n += 200; }
+    return Math.round(n / (performance.now() - t)); })()`;
+  const calBefore = argv.includes('--cal') ? await page.evaluate(CAL) : null;
   await page.evaluate('TT.resetPerf()');
   const t0 = Date.now();
   const windows = [];
@@ -768,9 +818,10 @@ try {
     await new Promise((r) => setTimeout(r, 1000));
   }
   const cpuProfile = CPU_ON ? (await page.send('Profiler.stop', {}, 180000)).profile : null;
+  const calAfter = argv.includes('--cal') ? await page.evaluate(CAL) : null;
   if (cpuProfile && SAVE_CPU) fs.writeFileSync(SAVE_CPU, JSON.stringify({ sync: cpuSync, ft: await page.evaluate('window.__benchFT || {}'), profile: cpuProfile }));
   const allocProfile = ALLOC_ON ? (await page.send('HeapProfiler.stopSampling', {}, 180000)).profile : null;
-  const tail = windows.slice(-10);
+  const tail = windows.slice(-WINDOW);
   const paced = tail.filter((w) => w.fps > 0);
   const use = paced.length ? paced : tail;
   const avg = (key) => use.reduce((sum, w) => sum + (w[key] || 0), 0) / (use.length || 1);
@@ -826,13 +877,13 @@ try {
     // window as fps: tick, outside and the top sections. The whole-run numbers stay beside it.
     let last10 = null;
     const snaps = windows.filter((x) => x.prof);
-    if (snaps.length > 10) {
-      const base = snaps[snaps.length - 11].prof, end = snaps[snaps.length - 1].prof, n = end.frame - base.frame;
+    if (snaps.length > WINDOW) {
+      const base = snaps[snaps.length - WINDOW - 1].prof, end = snaps[snaps.length - 1].prof, n = end.frame - base.frame;
       if (n > 0) {
         const ph = Object.keys(end.t).map((k) => ({ k, avg: ((end.t[k] || 0) - (base.t[k] || 0)) / n })).sort((a, b) => b.avg - a.avg);
         const tick10 = ph.reduce((s, p) => s + p.avg, 0);
         const vm10 = ph.find((p) => p.k === 'viewmodel');
-        last10 = { seconds: 10, frames: n, frameMs: r2(frameMs), tickMs: r2(tick10), outsideMs: r2(frameMs - tick10),
+        last10 = { seconds: WINDOW, frames: n, frameMs: r2(frameMs), tickMs: r2(tick10), outsideMs: r2(frameMs - tick10),
           viewmodelMs: vm10 ? r2(vm10.avg) : null,
           top: ph.slice(0, PROF_ALL ? ph.length : 12).map((p) => ({ k: p.k, avg: r2(p.avg) })) };
       }
@@ -946,6 +997,13 @@ try {
     for (const g of c.groups.slice(0, 15)) console.log(`  ${String(g.nodes).padStart(6)} nodes  ${String(g.count).padStart(4)} x ${g.k}   (${g.auto} auto, ${g.meshes} meshes, ${g.bones} bones)`);
     if (c.draws) { console.log(`draws  ${c.draws.main} a frame by the camera, ${c.draws.shadow} by the shadow pass; by owner:`); for (const g of c.draws.byGroup.slice(0, 15)) console.log(`  ${String(g.n).padStart(6)}  ${g.k}`); }
   }
+  line.readyMs = readyMs;
+  if (calBefore != null) line.cal = { before: calBefore, after: calAfter, mean: Math.round((calBefore + calAfter) / 2) };
+  if (FIXTURE) line.fixture = fixtureOut;
+  if (PAGE_FILE || MAP_FILE) line.served = { page: PAGE_FILE || null, map: MAP_FILE || null };
+  if (VSYNC_OFF || WINDOW !== 10) line.timing = { vsync: VSYNC_OFF ? 'off' : 'on', window: WINDOW };
+  line.pageErrors = (page.errors || []).slice(0, 10);
+  if (OUT_FILE) fs.writeFileSync(path.resolve(OUT_FILE), JSON.stringify(line));
   console.log(JSON.stringify(line));
 } finally {
   await browser.close();

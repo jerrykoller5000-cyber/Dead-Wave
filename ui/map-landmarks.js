@@ -19,16 +19,20 @@ export function mapLandmarks(poi, hq, pit) {
 
 export function createMapLandmarkIntel({radius = 18} = {}) {
   const found = new Set();
+  const foundAt = new Map();
   let version = 0, labelRows = null, labelVersion = -1, labelCache = null;
   return {
-    reset() { found.clear(); version++; },
-    observe(rows, player) {
-      for (const row of rows) if (!found.has(row.id) && Math.hypot(row.x-player.x,row.z-player.z)<=radius) { found.add(row.id); version++; }
+    reset() { found.clear(); foundAt.clear(); version++; },
+    observe(rows, player, nowMs = (typeof performance !== 'undefined' ? performance.now() : 0)) {
+      for (const row of rows) if (!found.has(row.id) && Math.hypot(row.x-player.x,row.z-player.z)<=radius) {
+        found.add(row.id); foundAt.set(row.id, nowMs); version++;
+      }
     },
     labels(rows) {
       if (rows === labelRows && version === labelVersion) return labelCache;
       labelRows = rows; labelVersion = version;
       labelCache = rows.map(row=>({...row, discovered:row.always||found.has(row.id),
+        foundAt:row.always?null:(foundAt.get(row.id) ?? null),
         label:text(row.always||found.has(row.id)?row.key:'map.undiscovered')}));
       return labelCache;
     }
@@ -36,12 +40,19 @@ export function createMapLandmarkIntel({radius = 18} = {}) {
 }
 
 const labelWidths = new Map();
-export function drawMapLandmarks(ctx, rows, toMap, {size, scale = 1, mini = false}) {
+const LANDMARK_FADE_MS = 280;
+export function drawMapLandmarks(ctx, rows, toMap, {size, scale = 1, mini = false, nowMs = (typeof performance !== 'undefined' ? performance.now() : 0)}) {
   ctx.save(); ctx.font = `600 ${Math.max(mini?14:11, 12*scale)}px sans-serif`;
   ctx.textBaseline='middle';ctx.lineJoin='round';ctx.lineWidth=3*scale;ctx.strokeStyle='#101910';
-  const fontHeight=Math.max(mini?14:11,12*scale), used=[];
+  const fontHeight=Math.max(mini?14:11,12*scale), used=[], baseAlpha = ctx.globalAlpha ?? 1;
   for(const row of rows) {
     const p=toMap(row.x,row.z);if(!p)continue;
+    let fade = 1;
+    if (row.discovered && row.foundAt != null && Number.isFinite(nowMs)) {
+      const t = Math.max(0, Math.min(1, (nowMs - row.foundAt) / LANDMARK_FADE_MS));
+      fade = t * t * (3 - 2 * t);
+    }
+    ctx.globalAlpha = baseAlpha * fade;
     ctx.fillStyle=row.discovered?row.color:'#d8dfd5';
     if(row.discovered)ctx.fillRect(p.x-2*scale,p.y-2*scale,4*scale,4*scale);
     const widthKey=ctx.font+'|'+row.label;

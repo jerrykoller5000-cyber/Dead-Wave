@@ -1,8 +1,17 @@
 // GP-179: attack timing and collision math shared by the three new zombie abilities.
 // The legacy combat loop owns meshes, obstruction queries and damage application.
+// Maximum rock radius in model units, shared by the held mesh and projectile collision.
+export const COLOSSUS_ROCK_RADIUS = .215;
+const COLOSSUS_REFERENCE_SCALE = 2.3;
+
 export const ABILITY_CONFIG = Object.freeze({
   demon: Object.freeze({ minDistance: 17, maxDistance: 34, windup: .85, recovery: .45, initialMin: 2, initialMax: 5, cooldownMin: 5.5, cooldownMax: 8.5, castSpacing: 1.2 }),
-  colossus: Object.freeze({ minDistance: 7, maxDistance: 38, windup: 1.65, recovery: .85, initialMin: 4, initialMax: 8, cooldownMin: 8, cooldownMax: 12 }),
+  // D-244: a baseball pitch. Wind-up 1.5 s (reach into the sack, set + knee lift, stride, whip; release = fire), .6 s follow-through.
+  // Throw: fast and nearly flat. A closer target needs an earlier aim lock to have time to sidestep.
+  // the hit sphere is the rock itself (about 2x his fist), so a side step after the lock gets out of its way.
+  // lead (Director 19:04Z): at the lock the aim moves on by lead x the player's velocity x the time left to impact.
+  colossus: Object.freeze({ minDistance: 7, maxDistance: 38, windup: 1.5, recovery: .6, initialMin: 4, initialMax: 8, cooldownMin: 8, cooldownMax: 12,
+    throw: Object.freeze({ speed: 26, minFlight: .28, maxFlight: 1.5, gravity: 4, aimLock: .25, closeAimLock: .75, closeTrackingDistance: 10, fullTrackingDistance: 24, radius: COLOSSUS_ROCK_RADIUS * COLOSSUS_REFERENCE_SCALE, lead: 1, leadMaxSpeed: 14 }) }),
   spitter: Object.freeze({ spacing: .75, life: 6, radius: .65, teleportDistance: 6, maxSamples: 8, maxActive: 96 })
 });
 
@@ -133,6 +142,20 @@ export function sweptSphereHit(start, end, center, radius) {
   if (discriminant < 0) return null;
   const hit = (-b - Math.sqrt(discriminant)) / a;
   return hit >= 0 && hit <= 1 ? hit : null;
+}
+
+// D-244: the pitch's flight time for a horizontal distance (fast, clamped so a point-blank or far throw stays readable).
+export function colossusThrowFlight(distance) {
+  const t = ABILITY_CONFIG.colossus.throw;
+  return clamp((Number.isFinite(distance) && distance > 0 ? distance : 0) / t.speed, t.minFlight, t.maxFlight);
+}
+
+// Hold a longer reaction window close up, where the rock has less time in flight.
+export function colossusAimLock(distance) {
+  const pitch = ABILITY_CONFIG.colossus.throw;
+  const span = pitch.fullTrackingDistance - pitch.closeTrackingDistance;
+  const near = 1 - clamp((distance - pitch.closeTrackingDistance) / span, 0, 1);
+  return pitch.aimLock + (pitch.closeAimLock - pitch.aimLock) * near;
 }
 
 // Raw contact damage is 80% maximum health. The caller applies the existing

@@ -66,6 +66,14 @@ test('v3: nine tags, the husks, the crates, the iron warren\'s breach', () => {
     }
     if (theme === 'iron') { assert.ok(w.group.getObjectByName('iron-wall-cut') && w.group.getObjectByName('hikers-rope') && w.group.getObjectByName('hikers-headlamp')); }
     else assert.ok(!w.group.getObjectByName('iron-wall-cut'));
+    // AG-416: visible loot meshes, interactive props, wall-oriented bolt-holes, and subterranean light palette
+    assert.equal(w.crateMeshes.length, w.points.crates.length, theme + ': every crate has a 3D mesh');
+    assert.equal(w.tagMeshes.length, w.points.tags.length, theme + ': every dog tag has a 3D vignette');
+    assert.ok(w.strongboxMesh && typeof w.strongboxMesh.userData.setOpened === 'function', theme + ': strongbox animates open');
+    assert.ok(w.interactives.length >= 3, theme + ': tactical interactives placed (' + w.interactives.length + ')');
+    assert.ok(w.light && Number.isFinite(w.light.hemiSky) && w.light.fogFar <= 40, theme + ': subterranean lighting config');
+    assert.ok(w.group.getObjectByName('bolt-hole-0'), theme + ': sculpted wall-oriented bolt-hole');
+    if (theme === 'wet') assert.ok(w.waterMesh && w.isWetCell(w.points.set.x, w.points.set.z), 'wet: unified water mesh and wading cells');
     w.dispose();
   }
 });

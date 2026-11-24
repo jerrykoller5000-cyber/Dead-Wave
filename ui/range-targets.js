@@ -78,7 +78,8 @@ export function createRangeTargets(T,tg){
 }
 
 export function rangeConsolePlacement(tg){
- const O=tg.origin,s=tg.stations.lightSwitch,yaw=s.yaw,nx=Math.sin(yaw),nz=Math.cos(yaw);
+ // D-229: the console stays at the old doorway-wall mount after the light switch moves.
+ const O=tg.origin,s={x:O.x-7.98,z:O.z-5.95,yaw:Math.PI/2},yaw=s.yaw,nx=Math.sin(yaw),nz=Math.cos(yaw);
  // Left when facing the switch: opposite the panel's local right axis.
  // The rear mounting straps reach .1255 m behind the root; the switch root is
  // .02 m off the tile wall. This offset seats the straps on that wall exactly.

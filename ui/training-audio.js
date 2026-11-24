@@ -74,7 +74,7 @@ export function createTrainingAudio(ctx,musicOut,fxOut){
     g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.005);g.gain.exponentialRampToValueAtTime(.0001,t+dur);
     o.connect(g);g.connect(fx);oneShots.add(o);o.onended=()=>{oneShots.delete(o);o.disconnect();g.disconnect();};o.start(t);o.stop(t+dur+.01);
   }
-  function cue(kind){
+  function cue(kind,gain=1){
     if(disposed)return;
     if(kind.startsWith('door:')){const [,v,pan]=kind.split(':');door.play(+v,+pan);return;}
     if(kind.startsWith('encounter-prepare:')){encounters.prepare(kind.slice(18));return;}
@@ -86,9 +86,15 @@ export function createTrainingAudio(ctx,musicOut,fxOut){
     }
     const t=ctx.currentTime;if(t-(last.get(kind)??-Infinity)<(kind==='step'?.1:.06))return;last.set(kind,t);
     if(kind==='range-start'){if(!rangeStart.play())tone(2350,.18,.12);}
+    else if(kind==='wave-clear'){
+      // A short rising major triad rings out over the final practice kill.
+      tone(523.25,.17,.11,0,'triangle');
+      tone(659.25,.19,.10,.10,'triangle');
+      tone(783.99,.38,.11,.21,'triangle');
+    }
     else if(kind==='target'){tone(1450,.18,.13);tone(2170,.11,.035);tone(170,.08,.08);}
     else if(kind==='impact'){tone(125,.075,.12,0,'triangle');tone(720,.035,.025);}
-    else if(kind==='step'){tone(95,.07,.07,0,'triangle');tone(420,.03,.025);}
+    else if(kind==='step'){tone(95,.07,.07*gain,0,'triangle');tone(420,.03,.025*gain);}
     else if(kind==='reset'){tone(180,.16,.045,0,'triangle');tone(660,.07,.035,.14);}
     else {const seq=kind==='spawn'?[440,440]:kind==='clear'?[660,440]:kind==='wake'?[440,550,660]:kind==='blackout'?[330,220]:kind==='open'?[550]:[440,660];seq.forEach((f,i)=>tone(f,.12,.06,i*.16));}
   }

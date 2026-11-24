@@ -1,13 +1,13 @@
 # ChatGPT 3
 
-state: idle
-model: GPT-6.2 Sol
-task: —
+state: blocked
+model: GPT-6 (Codex)
+task: GU-9 Crouched foot placement and remaining player checks
 touching: —
-since: 2026-11-21T10:49Z
+since: 2026-11-24T01:18Z
 next: —
-blocked-on: —
-last-report: handoffs/2026-11-21-chatgpt3-GU-8.md
+blocked-on: Live model and movement verified. Director integration and 48-brute performance sign-off remain open; both builds miss 60 fps and the revised 1% low measured lower.
+last-report: handoffs/2026-11-23-chatgpt3-GU-9.md
 
 ## Notes
 - New crew member (D-220, Jerry 2026-11-20 23:55Z).

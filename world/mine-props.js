@@ -1,16 +1,28 @@
 // GP-112: static mine dressing. No world randomness, collision or interaction changes.
+import { getRockTextureLibrary, applyRockPBR } from './rock-textures.js';
+import { buildCompactStoneGeometry, projectStoneBoxUV } from './rock-geometry.js';
+import { getCaveEntrancePBR } from './cave-entrance-textures.js';
 const P={wood:0x69553b,old:0x4f4534,light:0x8a7250,split:0x37352b,iron:0x454b44,rust:0x805437,cut:0xc0c2aa,stone:0x777365,rope:0x4c8390,dark:0x272d28};
 function kit(T,name){
- const g=new T.Group();g.name=name;const parts=[];
- const add=(geo,c,x,y,z,rx=0,ry=0,rz=0)=>{const m=new T.Mesh(geo);m.position.set(x,y,z);m.rotation.set(rx,ry,rz);m.updateMatrix();parts.push({m,c});return m;};
+ const g=new T.Group();g.name=name;const parts=[];let sIdx=0;
+ const add=(geo,c,x,y,z,rx=0,ry=0,rz=0,isStone=false)=>{const m=new T.Mesh(geo);m.position.set(x,y,z);m.rotation.set(rx,ry,rz);m.updateMatrix();parts.push({m,c,isStone});return m;};
  const box=(w,h,d,c,x,y,z,rx=0,ry=0,rz=0)=>add(new T.BoxGeometry(w,h,d),c,x,y,z,rx,ry,rz);
- const bar=(a,b,r,c,sides=6)=>{const v=new T.Vector3(...a),e=new T.Vector3(...b),d=e.clone().sub(v),m=new T.Mesh(new T.CylinderGeometry(r,r,d.length(),sides));m.position.copy(v).add(e).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.normalize());m.updateMatrix();parts.push({m,c});};
- const beam=(a,b,w,d,c)=>{const v=new T.Vector3(...a),e=new T.Vector3(...b),delta=e.clone().sub(v),m=new T.Mesh(new T.BoxGeometry(w,delta.length(),d));m.position.copy(v).add(e).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.normalize());m.updateMatrix();parts.push({m,c});};
+ const bar=(a,b,r,c,sides=6)=>{const v=new T.Vector3(...a),e=new T.Vector3(...b),d=e.clone().sub(v),m=new T.Mesh(new T.CylinderGeometry(r,r,d.length(),sides));m.position.copy(v).add(e).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),d.normalize());m.updateMatrix();parts.push({m,c,isStone:false});};
+ const beam=(a,b,w,d,c)=>{const v=new T.Vector3(...a),e=new T.Vector3(...b),delta=e.clone().sub(v),m=new T.Mesh(new T.BoxGeometry(w,delta.length(),d));m.position.copy(v).add(e).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new T.Vector3(0,1,0),delta.normalize());m.updateMatrix();parts.push({m,c,isStone:false});};
  const ring=(r,t,c,x,y,z,rx=0,ry=0,rz=0,arc=Math.PI*2)=>add(new T.TorusGeometry(r,t,4,16,arc),c,x,y,z,rx,ry,rz);
  const nail=(x,y,z)=>box(.035,.035,.021,P.iron,x,y,z);
- const stone=(x,y,z,w=.4)=>{const geo=new T.DodecahedronGeometry(1,0);geo.scale(w,.12,w*.7);add(geo,P.stone,x,y,z);};
- function finish(seat=true){const p=[],n=[],c=[];for(const {m,c:color}of parts){const geo=m.geometry.index?m.geometry.toNonIndexed():m.geometry.clone();geo.applyMatrix4(m.matrix);geo.computeVertexNormals();const col=new T.Color(color);for(const x of geo.attributes.position.array)p.push(x);for(const x of geo.attributes.normal.array)n.push(x);for(let i=0;i<geo.attributes.position.count;i++)c.push(col.r,col.g,col.b);geo.dispose();m.geometry.dispose();}const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(p,3));geo.setAttribute('normal',new T.Float32BufferAttribute(n,3));geo.setAttribute('color',new T.Float32BufferAttribute(c,3));geo.computeBoundingBox();geo.computeBoundingSphere();const mesh=new T.Mesh(geo,new T.MeshStandardMaterial({vertexColors:true,roughness:.89,metalness:.13}));mesh.name=name+'-details';mesh.castShadow=true;mesh.receiveShadow=true;g.add(mesh);
-  if(seat)g.userData.seatHistoryTerrain=height=>{if(g.userData.terrainSeated)return;g.userData.terrainSeated=true;const c=Math.cos(g.rotation.y),s=Math.sin(g.rotation.y),base=height(g.position.x,g.position.z);const delta=(x,z)=>height(g.position.x+c*x+s*z,g.position.z-s*x+c*z)-base;const a=geo.attributes.position;for(let i=0;i<a.count;i++)a.setY(i,a.getY(i)+delta(a.getX(i),a.getZ(i)));a.needsUpdate=true;geo.computeVertexNormals();geo.computeBoundingBox();geo.computeBoundingSphere();for(const child of g.children)if(child!==mesh)child.position.y+=delta(child.position.x,child.position.z);};return g;}
+ const stone=(x,y,z,w=.4)=>{const geo=buildCompactStoneGeometry(T,{rx:w*1.05,ry:.13,rz:w*.74,detail:1,seed:0x41a3+((sIdx++)*37),style:'ironstone',uvTile:.65});add(geo,P.stone,x,y,z,0,sIdx*.9,0,true);};
+ function finish(seat=true){const p=[],n=[],c=[],sp=[],sn=[],sc=[];for(const {m,c:color,isStone}of parts){const geo=m.geometry.index?m.geometry.toNonIndexed():m.geometry.clone();geo.applyMatrix4(m.matrix);geo.computeVertexNormals();const col=new T.Color(color);const tp=isStone?sp:p,tn=isStone?sn:n,tc=isStone?sc:c;for(const x of geo.attributes.position.array)tp.push(x);for(const x of geo.attributes.normal.array)tn.push(x);for(let i=0;i<geo.attributes.position.count;i++)tc.push(col.r,col.g,col.b);geo.dispose();m.geometry.dispose();}
+  const built=[];
+  const put=(pos,nrm,col,mat,lbl,boxUv)=>{if(!pos.length)return null;const geo=new T.BufferGeometry();geo.setAttribute('position',new T.Float32BufferAttribute(pos,3));geo.setAttribute('normal',new T.Float32BufferAttribute(nrm,3));geo.setAttribute('color',new T.Float32BufferAttribute(col,3));if(boxUv)projectStoneBoxUV(geo,.75);geo.computeBoundingBox();geo.computeBoundingSphere();const mesh=new T.Mesh(geo,mat);mesh.name=lbl;mesh.castShadow=true;mesh.receiveShadow=true;g.add(mesh);built.push(mesh);return mesh;};
+  const cLib=getCaveEntrancePBR(T);
+  const pbrSet=cLib?(name==='mine-bars-cut'?cLib.forgedIron:(name==='hikers-cache'?cLib.tarpCanvas:cLib.creosoteTimber)):null;
+  const dMat=pbrSet&&pbrSet.normalMap
+   ?new T.MeshStandardMaterial({vertexColors:true,normalMap:pbrSet.normalMap,normalScale:new T.Vector2(1.05,1.05),roughnessMap:pbrSet.ormMap,aoMap:pbrSet.ormMap,aoMapIntensity:.65,roughness:1.0,metalness:name==='mine-bars-cut'?.42:.13})
+   :new T.MeshStandardMaterial({vertexColors:true,roughness:.89,metalness:.13});
+  put(p,n,c,dMat,name+'-details',true);
+  if(sp.length){const rLib=getRockTextureLibrary(T);const sMat=new T.MeshStandardMaterial({vertexColors:true,roughness:.92,metalness:.05});if(rLib&&rLib.ironstone)applyRockPBR(sMat,rLib.ironstone,{selfColored:false,normalMul:.95});put(sp,sn,sc,sMat,name+'-stones',true);}
+  if(seat)g.userData.seatHistoryTerrain=height=>{if(g.userData.terrainSeated)return;g.userData.terrainSeated=true;const c=Math.cos(g.rotation.y),s=Math.sin(g.rotation.y),base=height(g.position.x,g.position.z);const delta=(x,z)=>height(g.position.x+c*x+s*z,g.position.z-s*x+c*z)-base;for(const mesh of built){const a=mesh.geometry.attributes.position;for(let i=0;i<a.count;i++)a.setY(i,a.getY(i)+delta(a.getX(i),a.getZ(i)));a.needsUpdate=true;mesh.geometry.computeVertexNormals();mesh.geometry.computeBoundingBox();mesh.geometry.computeBoundingSphere();}for(const child of g.children)if(!built.includes(child))child.position.y+=delta(child.position.x,child.position.z);};return g;}
  return{g,add,box,bar,beam,ring,nail,stone,finish};
 }
 
